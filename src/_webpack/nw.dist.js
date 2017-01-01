@@ -11,3 +11,27 @@ uv: "1.4.0"
 v8: "3.32.7"
 zlib: "1.2.5"
  */
+
+"use strict"
+
+const path = require('path')
+
+let config = require('./_base.js')({
+    distPath: path.resolve(process.cwd(), 'app/dist/'),
+    publicPath: '/app/dist/',
+    target: 'node-webkit',
+    babel: {
+        presets: {
+            env: {
+                targets: {
+                    chrome: 41,
+                    node: 1.2
+                },
+                modules: false
+            }
+        }
+    },
+    plugins: []
+})
+
+module.exports = config

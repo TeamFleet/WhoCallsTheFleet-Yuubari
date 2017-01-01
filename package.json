@@ -118,12 +118,15 @@
     "file-loader": "^0.9.0",
     "json-loader": "^0.5.4",
     "less-loader": "^2.2.3",
+    "nw-dev": "^3.0.1",
     "style-loader": "^0.13.1",
-    "webpack": "^2.2.0-rc.3"
+    "webpack": "^2.2.0-rc.3",
+    "webpack-dev-server": "^2.2.0-rc.0"
   },
   "scripts": {
     "nw-dev": "webpack -d --watch --env.state=nw --env.env=dev",
     "nw-dist": "webpack -p --watch --env.state=nw --env.env=dist",
+    "web-dev": "webpack-dev-server -d --content-base app --watch --inline --watch-poll --host 0.0.0.0 --env.state=nw --env.env=dev",
     "build": "webpack -p"
   }
 }
