@@ -6,6 +6,12 @@ import routes from './_core/routes.js'
 import styles from './main.less'
 
 class Root extends Component {
+    componentWillMount() {
+        // all data binding process
+
+        // after all end, remove .loading from body
+    }
+
     componentDidMount() {
         // setTimeout(() => {
         //     document.body.classList.remove('loading')

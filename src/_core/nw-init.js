@@ -46,6 +46,9 @@ export default (self = window) => {
         self.nw = self.require('nw.gui')
     
     self.nw.win = self.nw.Window.get()
+    self.nw.manifest = global.launcherOptions || localStorage.nwManifest || self.nw.App.manifest
+    if( typeof self.nw.manifest == 'string' )
+        self.nw.manifest = JSON.parse(self.nw.manifest)
 
 
 
@@ -73,13 +76,7 @@ export default (self = window) => {
         process.cwd(),
         path.join(self.nw.App.dataPath, '/Extracted Data/')
     ]
-    let rootscheckentry
-    if (global.launcherOptions)
-        rootscheckentry = global.launcherOptions.main
-    else if (localStorage.nwManifest)
-        rootscheckentry = JSON.parse(localStorage.nwManifest).main
-    else
-        rootscheckentry = self.nw.App.manifest.main
+    let rootscheckentry = self.nw.manifest.main
     rootscheckentry = rootscheckentry.split('://')
     rootscheckentry = rootscheckentry[rootscheckentry.length - 1]
     rootscheck.some((dir) => {
