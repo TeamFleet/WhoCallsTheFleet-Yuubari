@@ -19,7 +19,7 @@ const path = require('path')
 
 let config = require('./_base.js')({
     distPath: path.resolve(process.cwd(), 'app/dist/'),
-    publicPath: '/app/dist/',
+    publicPath: 'dist/',
     target: 'node-webkit',
     babel: {
         presets: {
@@ -32,6 +32,9 @@ let config = require('./_base.js')({
             }
         }
     },
+    browserList: [
+        'Chrome >= 55'
+    ],
     plugins: []
 })
 

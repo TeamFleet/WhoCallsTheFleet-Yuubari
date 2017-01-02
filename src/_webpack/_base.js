@@ -14,6 +14,7 @@ module.exports = (options = {
             }
         }
     },
+    browserList: [],
     plugins: []
 }) => {
     const srcPath = path.resolve(process.cwd(), 'src')
@@ -41,8 +42,8 @@ module.exports = (options = {
                 },
                 {
                     test: /\.(ico|gif|png|jpg|jpeg|svg|webp)$/,
-                    loader: 'file-loader',
                     exclude: /node_modules/,
+                    loader: 'file-loader',
                     options: {
                         name: 'files/[hash].[ext]'
                     }
@@ -50,39 +51,58 @@ module.exports = (options = {
                 {
                     test: /\.js?$|\.jsx$/,
                     exclude: /node_modules/,
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            [
-                                'env', options.babel.presets.env
-                            ],
-                            'react'
-                        ]
-                    }
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: [
+                                    [
+                                        'env', options.babel.presets.env
+                                    ],
+                                    'react'
+                                ]
+                            }
+                        }
+                    ]
                 },
                 {
                     test: /\.css$/,
-                    loader: "style-loader!css-loader",
-                    options: {
-                        camelCase: true,
-                        autoprefixer: {
-                            'browsers': [
-                                'Android >= 2',
-                                'Chrome >= 20',
-                                'Firefox >= 20',
-                                'ie >= 11',
-                                'Edge >= 12',
-                                'iOS >= 5',
-                                'ChromeAndroid >= 20',
-                                'ExplorerMobile >= 11'
-                            ],
-                            add: true
+                    use: [
+                        {
+                            loader: 'style-loader'
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                camelCase: true,
+                                autoprefixer: {
+                                    'browsers': options.browserList,
+                                    add: true
+                                }
+                            }
                         }
-                    }
+                    ]
                 },
                 {
                     test: /\.less$/,
-                    loader: "style-loader!css-loader!less-loader"
+                    use: [
+                        {
+                            loader: 'style-loader'
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                camelCase: true,
+                                autoprefixer: {
+                                    'browsers': options.browserList,
+                                    add: true
+                                }
+                            }
+                        },
+                        {
+                            loader: 'less-loader'
+                        }
+                    ]
                 }
             ],
             noParse: /\.min\./

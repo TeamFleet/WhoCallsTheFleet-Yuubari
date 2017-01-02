@@ -1,5 +1,5 @@
 {
-  "name": "WhoCallsTheFleet",
+  "name": "WhoCallsTheFleet-1.0",
   "main": "app/main.html",
   "version": "1.0.0",
   "description": "An offline guidebook for KanColle. Based on NW.JS",
@@ -27,9 +27,10 @@
   ],
   "debug": true,
   "window": {
+    "frame": true,
+    "toolbar": false,
     "width": 1280,
     "height": 720,
-    "toolbar": false,
     "icon": "./app/appicon.png",
     "position": "center",
     "min_width": 640,
@@ -39,7 +40,6 @@
     "always-on-top": false,
     "fullscreen": false,
     "show_in_taskbar": true,
-    "frame": true,
     "show": false,
     "kiosk": false,
     "transparent": false
@@ -71,13 +71,12 @@
     }
   },
   "nw-packager": {
-    "version": "0.19.4",
+    "version": "0.12.2",
     "platforms": [
-      "win32",
-      "win64",
-      "osx64"
+      "win64"
     ],
     "filesRelative": [
+      "package.json",
       "package.json"
     ],
     "dataVersion": {
@@ -90,7 +89,7 @@
       "pics-ships-extra": "2016.12.23"
     },
     "buildDir": "N:\\nwbuild\\build",
-    "winIco": "./source/appicon.ico",
+    "winIco": "./src/_common/appicon.ico",
     "enableLauncher": true,
     "dataRelative": [
       "app",
@@ -101,8 +100,8 @@
       "pics-ships",
       "pics-ships-extra"
     ],
-    "launcherSplash": "./source/launcher.webp",
-    "macIcns": "./source/appicon.icns"
+    "launcherSplash": "./src/_common/launcher.webp",
+    "macIcns": "./src/_common/appicon.icns"
   },
   "dependencies": {
     "normalize.css": "^5.0.0",
@@ -115,6 +114,7 @@
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.1.4",
     "babel-preset-react": "^6.16.0",
+    "base64-image-loader": "^1.2.0",
     "css-loader": "^0.26.1",
     "file-loader": "^0.9.0",
     "json-loader": "^0.5.4",

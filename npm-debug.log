@@ -1,0 +1,49 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'N:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\Diablohu\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'nw-dist' ]
+2 info using npm@3.9.6
+3 info using node@v6.9.2
+4 verbose run-script [ 'prenw-dist', 'nw-dist', 'postnw-dist' ]
+5 info lifecycle WhoCallsTheFleet-1.0@1.0.0~prenw-dist: WhoCallsTheFleet-1.0@1.0.0
+6 silly lifecycle WhoCallsTheFleet-1.0@1.0.0~prenw-dist: no script for prenw-dist, continuing
+7 info lifecycle WhoCallsTheFleet-1.0@1.0.0~nw-dist: WhoCallsTheFleet-1.0@1.0.0
+8 verbose lifecycle WhoCallsTheFleet-1.0@1.0.0~nw-dist: unsafe-perm in lifecycle true
+9 verbose lifecycle WhoCallsTheFleet-1.0@1.0.0~nw-dist: PATH: C:\Users\Diablohu\AppData\Roaming\npm\node_modules\npm\bin\node-gyp-bin;L:\Projects\WhoCallsTheFleet\app-react\node_modules\.bin;N:\Program Files\nodejs;N:\Program Files (x86)\cmder\bin;N:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu\Scripts;N:\Program Files (x86)\cmder\vendor\conemu-maximus5;N:\Program Files (x86)\cmder\vendor\conemu-maximus5\ConEmu;N:\Program Files\ImageMagick;n:\program files\graphicsmagick;C:\ProgramData\Oracle\Java\javapath;G:\Server\PHP\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;G:\Server\PHP;G:\Server\PHP\ext;E:\Program Files\TortoiseSVN\bin;E:\Program Files\ADT Bundle\sdk\platform-tools;G:\Server\Python27;G:\Server\Python27\Scripts;C:\Program Files (x86)\Windows Live\Shared;L:\Server\MinGW\bin;N:\Program Files\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;N:\Program Files (x86)\SWFTools;N:\Program Files (x86)\Git\cmd;N:\Commands;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Users\Diablohu\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Users\Diablohu\AppData\Roaming\npm;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;N:\Program Files (x86)\cmder;E:\Program Files\TortoiseGit\bin;N:\Program Files\nodejs\;L:\Server\MinGW\bin;C:\Users\Diablohu\AppData\Local\Code\bin;N:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Diablohu\AppData\Roaming\npm;C:\Users\Diablohu\AppData\Local\Microsoft\WindowsApps;C:\Users\Diablohu\AppData\Roaming\npm;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;N:\Program Files (x86)\cmder\
+10 verbose lifecycle WhoCallsTheFleet-1.0@1.0.0~nw-dist: CWD: L:\Projects\WhoCallsTheFleet\app-react
+11 silly lifecycle WhoCallsTheFleet-1.0@1.0.0~nw-dist: Args: [ '/d /s /c',
+11 silly lifecycle   'webpack -p --watch --env.state=nw --env.env=dist' ]
+12 silly lifecycle WhoCallsTheFleet-1.0@1.0.0~nw-dist: Returned: code: 1  signal: null
+13 info lifecycle WhoCallsTheFleet-1.0@1.0.0~nw-dist: Failed to exec nw-dist script
+14 verbose stack Error: WhoCallsTheFleet-1.0@1.0.0 nw-dist: `webpack -p --watch --env.state=nw --env.env=dist`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (C:\Users\Diablohu\AppData\Roaming\npm\node_modules\npm\lib\utils\lifecycle.js:245:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Users\Diablohu\AppData\Roaming\npm\node_modules\npm\lib\utils\spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:877:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+15 verbose pkgid WhoCallsTheFleet-1.0@1.0.0
+16 verbose cwd L:\Projects\WhoCallsTheFleet\app-react
+17 error Windows_NT 10.0.14393
+18 error argv "N:\\Program Files\\nodejs\\node.exe" "C:\\Users\\Diablohu\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run" "nw-dist"
+19 error node v6.9.2
+20 error npm  v3.9.6
+21 error code ELIFECYCLE
+22 error WhoCallsTheFleet-1.0@1.0.0 nw-dist: `webpack -p --watch --env.state=nw --env.env=dist`
+22 error Exit status 1
+23 error Failed at the WhoCallsTheFleet-1.0@1.0.0 nw-dist script 'webpack -p --watch --env.state=nw --env.env=dist'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the WhoCallsTheFleet-1.0 package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     webpack -p --watch --env.state=nw --env.env=dist
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs WhoCallsTheFleet-1.0
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls WhoCallsTheFleet-1.0
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
