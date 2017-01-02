@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { render } from 'react-dom'
+import { Router, hashHistory } from 'react-router'
+import routes from './_core/routes.js'
 
-class App extends React.Component {
+class Root extends Component {
     render() {
         return (
-            <p>
-                Hello React!
-            </p>
+            <Router history={hashHistory} routes={routes} />
         )
     }
 }
 
-render(<App />, document.getElementById('app'))
+render(<Root />, document.getElementById('app'))
