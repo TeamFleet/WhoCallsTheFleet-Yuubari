@@ -24,13 +24,9 @@ function nw_pre13_shim(self = window) {
 
 
 export default (self = window) => {
-    if (self.nwInited)
-        return self.nwInited
-
+    if (!self.require) return self.nwInited
+    if (self.nwInited) return self.nwInited
     self.nwInited = true
-
-    if (!self.require)
-        return self.nwInited
 
     nw_pre13_shim(self)
 
@@ -42,12 +38,11 @@ export default (self = window) => {
 
 
     // nw object
-    if (!self.nw)
-        self.nw = self.require('nw.gui')
-    
+    if (!self.nw) self.nw = self.require('nw.gui')
+
     self.nw.win = self.nw.Window.get()
     self.nw.manifest = global.launcherOptions || localStorage.nwManifest || self.nw.App.manifest
-    if( typeof self.nw.manifest == 'string' )
+    if (typeof self.nw.manifest == 'string')
         self.nw.manifest = JSON.parse(self.nw.manifest)
 
 
@@ -80,8 +75,7 @@ export default (self = window) => {
     rootscheckentry = rootscheckentry.split('://')
     rootscheckentry = rootscheckentry[rootscheckentry.length - 1]
     rootscheck.some((dir) => {
-        if (!dir)
-            return false
+        if (!dir) return false
         try {
             fs.accessSync(
                 path.join(dir, rootscheckentry),
