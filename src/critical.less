@@ -1,0 +1,108 @@
+@import './_core-less/_include.less';
+@import (css) "~normalize.css/normalize.css";
+
+*, *:before, *:after{
+	box-sizing: inherit;
+	transition: @base-transition-timing-function @base-transition-duration;
+	transition-property: 	background-color,
+							background-size,
+							background-position,
+							border,
+							box-shadow,
+							color,
+							opacity,
+							outline,
+							transform;
+}
+
+html, body{
+	height:     100%;
+}
+
+html{
+	font-family: 	@font-family-sans;
+	background: 	@base-background-color;
+	color: 			@base-color;
+	font-size: 		@base-font-size;
+	line-height: 	@base-line-height;
+	box-sizing:  	border-box;
+	user-select: 	none;
+    cursor:         default;
+}
+
+body{
+    position:       relative;
+}
+
+.loading{
+    animation: 	fadein 1s ease-out;
+    @keyframes fadein {
+        0% {
+            opacity:    0;
+        }
+        100% {
+            opacity:    1;
+        }
+    }
+
+    &:before, &:after{
+        content:    "";
+        position:   absolute;
+        top:        50%;
+        left:       50%;
+    }
+    &:before{
+        @width:     143px;
+        @height:    63px;
+        width:      @width;
+        height:     @height;
+        margin:     (0 - @height / 2) auto auto (0 - @width / 2);
+        z-index:    2;
+        background: url("./_common/boat.png") no-repeat 50% 50% / contain;
+		animation: 	bouncing 1.2s ease-out infinite alternate;
+
+        @keyframes bouncing {
+            0% {   
+                transform:	translateY(10px);
+            }
+            100% {
+                transform:	translateY(-10px);
+            }
+        }
+    }
+    &:after{
+        @size:      160px;
+        width:      @size;
+        height:     @size;
+        margin:     (0 - @size / 4) auto auto (0 - @size / 2);
+        z-index:    1;
+        border:     1px solid @theme-grey-500;
+        border-left-width:  2px;
+        border-right-width: 2px;
+        border-bottom-width: 6px;
+        // border-bottom-color: @theme-bluegrey-200;
+        border-radius: 50%;
+        transform:  scale(0);
+		animation: 	rippling 2.4s linear infinite;
+        animation-delay: 2.4s;
+
+        @keyframes rippling {
+            0% {   
+                transform:	scale(0);
+                opacity:    0;
+            }
+            75% {   
+                transform:  scale(1, 0.25);
+                opacity:    1;
+            }
+            100% {
+                transform:	scale(1.25, (0.25 * 1.25));
+                opacity:    0;
+            }
+        }
+    }
+
+    #root{
+        display:    none;
+    }
+}

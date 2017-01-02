@@ -44,7 +44,7 @@ module.exports = (options = {
                     loader: 'file-loader',
                     exclude: /node_modules/,
                     options: {
-                        name: 'dist/[hash].[ext]'
+                        name: 'files/[hash].[ext]'
                     }
                 },
                 {
@@ -62,7 +62,23 @@ module.exports = (options = {
                 },
                 {
                     test: /\.css$/,
-                    loader: "style-loader!css-loader"
+                    loader: "style-loader!css-loader",
+                    options: {
+                        camelCase: true,
+                        autoprefixer: {
+                            'browsers': [
+                                'Android >= 2',
+                                'Chrome >= 20',
+                                'Firefox >= 20',
+                                'ie >= 11',
+                                'Edge >= 12',
+                                'iOS >= 5',
+                                'ChromeAndroid >= 20',
+                                'ExplorerMobile >= 11'
+                            ],
+                            add: true
+                        }
+                    }
                 },
                 {
                     test: /\.less$/,

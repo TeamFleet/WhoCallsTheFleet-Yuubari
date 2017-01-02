@@ -1,6 +1,7 @@
 ((nw) => {
     // nw window is hidden by default
     // do all critical process here before the window is shown later
+    require('./critical.less')
 
     // show and focus window when all critical process finished
     if( nw ){
