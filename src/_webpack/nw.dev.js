@@ -21,20 +21,10 @@ let config = require('./_base.js')({
     distPath: path.resolve(process.cwd(), 'app/dist/'),
     publicPath: 'dist/',
     target: 'node-webkit',
-    babel: {
-        presets: {
-            env: {
-                targets: {
-                    chrome: 55,
-                    node: 7.3
-                },
-                modules: false
-            }
-        }
-    },
     browserList: [
         'Chrome >= 55'
     ],
+    node: 7.3,
     plugins: []
 })
 

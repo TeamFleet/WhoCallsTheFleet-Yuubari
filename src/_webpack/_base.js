@@ -1,23 +1,18 @@
 "use strict"
 
 const path = require('path')
-
-module.exports = (options = {
+const defaults = {
     distPath: path.resolve(process.cwd(), 'app/dist/'),
     publicPath: '/app/dist/',
     target: 'node-webkit',
-    babel: {
-        presets: {
-            env: {
-                targets: {},
-                modules: false
-            }
-        }
-    },
     browserList: [],
+    node: 1.0,
     plugins: []
-}) => {
+}
+
+module.exports = (options = {}) => {
     const srcPath = path.resolve(process.cwd(), 'src')
+    const settings = Object.assign({}, defaults, options)
     return {
         entry: {
             critical: [
@@ -28,18 +23,14 @@ module.exports = (options = {
             ]
         },
         output: {
-            path: options.distPath,
-            publicPath: options.publicPath,
+            path: settings.distPath,
+            publicPath: settings.publicPath,
             filename: '[name].js',
             chunkFilename: '[id].chunk.js'
         },
-        target: options.target,
+        target: settings.target,
         module: {
             rules: [
-                {
-                    test: /\.json$/,
-                    loader: 'json-loader'
-                },
                 {
                     test: /\.(ico|gif|png|jpg|jpeg|svg|webp)$/,
                     exclude: /node_modules/,
@@ -57,7 +48,13 @@ module.exports = (options = {
                             options: {
                                 presets: [
                                     [
-                                        'env', options.babel.presets.env
+                                        'env', {
+                                            targets: {
+                                                browsers: settings.browserList,
+                                                node: settings.node
+                                            },
+                                            modules: false
+                                        }
                                     ],
                                     'react'
                                 ]
@@ -76,7 +73,7 @@ module.exports = (options = {
                             options: {
                                 camelCase: true,
                                 autoprefixer: {
-                                    'browsers': options.browserList,
+                                    'browsers': settings.browserList,
                                     add: true
                                 }
                             }
@@ -94,7 +91,7 @@ module.exports = (options = {
                             options: {
                                 camelCase: true,
                                 autoprefixer: {
-                                    'browsers': options.browserList,
+                                    'browsers': settings.browserList,
                                     add: true
                                 }
                             }
@@ -107,6 +104,6 @@ module.exports = (options = {
             ],
             noParse: /\.min\./
         },
-        plugins: options.plugins
+        plugins: settings.plugins
     }
 }
