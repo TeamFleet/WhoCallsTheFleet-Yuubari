@@ -104,27 +104,28 @@
     "macIcns": "./src/_common/appicon.icns"
   },
   "dependencies": {
+    "kckit": "^0.4.2",
+
     "normalize.css": "^5.0.0",
 
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-router": "^3.0.0"
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2"
   },
   "devDependencies": {
-    "babel-core": "^6.21.0",
+    "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
-    "babel-preset-env": "^1.1.5",
-    "babel-preset-react": "^6.16.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-react": "^6.22.0",
 
     "less": "^2.7.2",
 
-    "webpack": "^2.2.0-rc.3",
-    "webpack-dev-server": "^2.2.0-rc.0",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0",
 
+    "file-loader": "^0.9.0",
     "base64-image-loader": "^1.2.0",
     "css-loader": "^0.26.1",
-    "file-loader": "^0.9.0",
-    "json-loader": "^0.5.4",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
 
