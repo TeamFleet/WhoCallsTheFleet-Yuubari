@@ -56,6 +56,12 @@ a{
 	text-decoration: none;
 }
 
+a, button{
+	&:active{
+		opacity: 	0.5;
+	}
+}
+
 h2, h3, h4, h5, h6{
 	color: 			@base-background-color;
 }
@@ -128,3 +134,23 @@ h2, h3, h4, h5, h6{
 			background:		@scrollbar-thumb-background;
 		}
 	}
+
+
+
+
+body.is-ready{
+	#boat-loader{
+		opacity: 	0;
+	}
+	#root{
+		display: 	block;
+	}
+}
+
+
+
+
+#root{
+	width: 	100%;
+	height: 100%;
+}

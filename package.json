@@ -105,6 +105,7 @@
   },
   "dependencies": {
     "kckit": "^0.4.2",
+    "bind-event": "^1.0.5",
 
     "normalize.css": "^5.0.0",
 
@@ -129,12 +130,14 @@
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
 
+    "html-webpack-plugin": "^2.26.0",
+
     "nw-dev": "^3.0.1"
   },
   "scripts": {
-    "nw-dev": "webpack -d --watch --env.state=nw --env.env=dev",
-    "nw-dist": "webpack -p --watch --env.state=nw --env.env=dist",
-    "web-dev": "webpack-dev-server -d --content-base app --watch --inline --watch-poll --host 0.0.0.0 --env.state=nw --env.env=dev",
+    "nw-dev": "webpack -d --watch --env.target=nw --env.env=dev",
+    "nw-dist": "webpack -p --env.target=nw --env.env=dist",
+    "web-dev": "webpack-dev-server -d --content-base app --watch --inline --watch-poll --host 0.0.0.0 --env.target=nw --env.env=dev",
     "build": "webpack -p"
   }
 }

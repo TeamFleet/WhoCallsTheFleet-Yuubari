@@ -1,16 +1,29 @@
-import nwInit from './_core/nw-init.js'
-import * as nwUltils from './_core/nw-utils.js'
-import nwControls from './_core/nw-controls.js'
+import bindEvent from 'bind-event'
 
 (() => {
-    // nw window is hidden by default
-    // do all critical process here before the window is shown later
     require('./critical.less')
-    nwInit()
-    nwControls()
+
+    if (self.node || self.nw) {
+        require('./nw.js').default()
+    }
 
     // create .boat-loader into body
     // onTransitionEnd for removing .loading class from body
+    document.addEventListener("DOMContentLoaded", function (event) {
+        let boatLoader = document.createElement('div')
+        boatLoader.id = 'boat-loader'
+        document.body.appendChild(boatLoader)
+        // console.log(boatLoader)
+        bindEvent(
+            boatLoader,
+            'transitionend',
+            function (evt) {
+                // console.log(evt, evt.target.style.opacity)
+                if (evt.propertyName == 'opacity' && !evt.target.style.opacity)
+                    evt.target.parentNode.removeChild(evt.target)
+            }
+        )
+    });
 
     // show and focus window
     if (self.nw.win) {

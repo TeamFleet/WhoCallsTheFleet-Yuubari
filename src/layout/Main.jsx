@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
 
+import './Main.less'
+
 class Main extends React.Component {
     render() {
         return (
-            <main>
+            <main id="main">
                 {this.props.children}
             </main>
         )

@@ -24,10 +24,8 @@ let config = require('./_base.js')({
     browserList: [
         'Chrome >= 55'
     ],
-    node: 7.3,
-    plugins: []
+    node: 7.3
 })
 
 config.entry.critical.unshift(path.resolve(process.cwd(), 'node_modules/nw-dev/lib/dev.js'))
-
 module.exports = config

@@ -1,6 +1,9 @@
 "use strict"
 
 const path = require('path')
+
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const defaults = {
     distPath: path.resolve(process.cwd(), 'app/dist/'),
     publicPath: '/app/dist/',
@@ -13,6 +16,22 @@ const defaults = {
 module.exports = (options = {}) => {
     const srcPath = path.resolve(process.cwd(), 'src')
     const settings = Object.assign({}, defaults, options)
+
+    settings.plugins.unshift(
+        new HtmlWebpackPlugin({
+            template: path.join(srcPath, 'app.html'),
+            filename: '../main.html',
+            excludeChunks: [
+                'critical'
+            ],
+            inject: 'body',
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
+        })
+    )
+
     return {
         entry: {
             critical: [

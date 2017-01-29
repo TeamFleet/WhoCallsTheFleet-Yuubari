@@ -16,8 +16,7 @@ let config = require('./_base.js')({
         'ChromeAndroid >= 20',
         'ExplorerMobile >= 11'
     ],
-    node: false,
-    plugins: []
+    node: false
 })
 
 module.exports = config

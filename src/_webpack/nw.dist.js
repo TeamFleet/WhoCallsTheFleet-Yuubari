@@ -23,8 +23,7 @@ let config = require('./_base.js')({
     browserList: [
         'Chrome >= 41'
     ],
-    node: 1.2,
-    plugins: []
+    node: 1.2
 })
 
 module.exports = config

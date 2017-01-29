@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react'
 
-import Header from './Header.jsx'
+import Nav from './Nav.jsx'
 import Main from './Main.jsx'
+
+import './App.less'
 
 class App extends React.Component {
     render() {
         return (
-            <div className="app">
-                <Header />
+            <div id="app">
+                <Nav />
                 <Main>
                     {this.props.children}
                 </Main>

@@ -1,0 +1,63 @@
+@import '../_core-less/_include.less';
+
+#nav{
+    position:   fixed;
+    top:        0;
+    left:       0;
+    width:      @nav-width;
+    height:     100%;
+    background: @theme-bluegrey-900;
+    background: fade(@theme-bluegrey-900, 50%);
+    overflow:   hidden;
+    overflow-y: auto;
+
+    animation:  slidein-from-left .75s ease-out;
+
+    &:after{
+        content:    '';
+        position:   absolute;
+        top:        0;
+        bottom:     0;
+        right:      0;
+        width:      1px;
+        background: @theme-bluegrey-50;
+        background: fade(@theme-bluegrey-50, 10%);
+    }
+
+    .navs{
+        padding:    0 40px;
+        .link{
+            display:    block;
+            color:      @theme-bluegrey-100;
+            font-size:  1rem;
+            line-height:1.35em;
+            padding:    3px 0;
+            position:   relative;
+            margin-top: 4px;
+            &:hover{
+                color:  #fff;
+            }
+            &.on{
+                color:  #fff;
+                cursor: default;
+                pointer-events: none;
+                &:before{
+                    content:    '';
+                    position:   absolute;
+                    top:        50%;
+                    left:       -20px;
+                    width:      8px;
+                    height:     8px;
+                    margin-top: -4px;
+                    background: @theme-bluegrey-100;
+                    border-radius: 50%;
+                    animation:  fadein @base-transition-duration @base-transition-timing-function;
+                }
+            }
+        }
+        .blank{
+            display:    block;
+            height:     15px;
+        }
+    }
+}

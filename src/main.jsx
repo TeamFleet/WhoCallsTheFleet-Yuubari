@@ -13,9 +13,9 @@ class Root extends Component {
     }
 
     componentDidMount() {
-        // setTimeout(() => {
-        //     document.body.classList.remove('loading')
-        // }, 5000)
+        setTimeout(() => {
+            document.body.classList.add('is-ready')
+        }, 2000)
     }
 
     render() {
