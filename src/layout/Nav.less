@@ -2,6 +2,8 @@
 
 #nav{
     position:   fixed;
+    z-index:    5;
+
     top:        0;
     left:       0;
     width:      @nav-width;
@@ -11,7 +13,8 @@
     overflow:   hidden;
     overflow-y: auto;
 
-    animation:  slidein-from-left .75s ease-out;
+    // animation:  slidein-from-left .75s ease-out;
+    transform:  translateX(-100%);
 
     &:after{
         content:    '';
@@ -25,13 +28,13 @@
     }
 
     .navs{
-        padding:    0 40px;
+        padding:    0 20px;
         .link{
             display:    block;
             color:      @theme-bluegrey-100;
             font-size:  1rem;
             line-height:1.35em;
-            padding:    3px 0;
+            padding:    3px 0 3px 20px;
             position:   relative;
             margin-top: 4px;
             &:hover{
@@ -42,13 +45,14 @@
                 cursor: default;
                 pointer-events: none;
                 &:before{
+                    @size:      8px;
                     content:    '';
                     position:   absolute;
                     top:        50%;
-                    left:       -20px;
-                    width:      8px;
-                    height:     8px;
-                    margin-top: -4px;
+                    left:       0;
+                    width:      @size;
+                    height:     @size;
+                    margin-top: (0 - @size / 2);
                     background: @theme-bluegrey-100;
                     border-radius: 50%;
                     animation:  fadein @base-transition-duration @base-transition-timing-function;

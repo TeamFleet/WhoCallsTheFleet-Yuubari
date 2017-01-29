@@ -6,7 +6,9 @@ class Main extends React.Component {
     render() {
         return (
             <main id="main">
-                {this.props.children}
+                <div className="wrapper">
+                    {this.props.children}
+                </div>
             </main>
         )
     }
