@@ -1,17 +1,25 @@
 @import '../_core-less/_include.less';
 
 #main{
-    position:   relative;
-    z-index:    5;
-
-    padding:    10px 30px 30px 30px;
-    background: @theme-bluegrey-900;
-    background: fade(@theme-bluegrey-900, 70%);
-    height:     100%;
-    height:     100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
+    // height:     100%;
+    // height:     100vh;
+    left:       @nav-width;
+    right:      0;
+    // overflow-x: hidden;
+    // overflow-y: auto;
 
     // animation:  slidein-from-right .75s ease-out;
     transform:  translateX(100%);
+
+    & > .background-container{
+        transform:  translateX(-100%);
+        &:before{
+            background: @theme-bluegrey-900;
+            background: fade(@theme-bluegrey-900, 70%);
+        }
+    }
+
+    & > .wrapper{
+        padding:    10px 30px 30px 30px;
+    }
 }

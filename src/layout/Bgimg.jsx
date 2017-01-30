@@ -4,29 +4,33 @@ import './Bgimg.less'
 
 class Bgimg extends React.Component {
     render() {
-        const file = '/bgimgs/bob-1.jpg'
-        const fileBlured = '/bgimgs/blured/bob-1.jpg'
         return (
             <div id="bgimg">
-                <div className="blured nav">
-                    <div className="reverse" style={{
-                        backgroundImage: `url(${fileBlured})`
-                    }}></div>
-                </div>
-                <div className="blured main">
-                    <div className="reverse" style={{
-                        backgroundImage: `url(${fileBlured})`
-                    }}></div>
-                </div>
-                <div className="original" style={{
-                    backgroundImage: `url(${file})`
-                }}></div>
+                <BgContainer bgImg={this.props.bgImg} />
             </div>
         )
     }
 }
-
 Bgimg.propTypes = {
+    bgImg: PropTypes.string
 }
 
-export default Bgimg
+class BgContainer extends React.Component {
+    render() {
+        return (
+            <div className="background-container">
+                <div className="background" style={{
+                    backgroundImage: `url(${this.props.bgImg})`
+                }} />
+            </div>
+        )
+    }
+}
+Bgimg.propTypes = {
+    bgImg: PropTypes.string
+}
+
+export {
+    Bgimg as default,
+    BgContainer
+}

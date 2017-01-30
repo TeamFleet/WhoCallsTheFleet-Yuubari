@@ -12,11 +12,11 @@ class App extends React.Component {
         const fileBlured = '/bgimgs/blured/bob-1.jpg'
         return (
             <div id="app">
-                <Nav />
-                <Main>
+                <Nav bgBlured={fileBlured} />
+                <Main bgBlured={fileBlured}>
                     {this.props.children}
                 </Main>
-                <Bgimg />
+                <Bgimg bgImg={file} />
             </div>
         )
     }

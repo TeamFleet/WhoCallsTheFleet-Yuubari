@@ -1,17 +1,10 @@
 @import '../_core-less/_include.less';
 
 #nav{
-    position:   fixed;
-    z-index:    5;
-
-    top:        0;
     left:       0;
     width:      @nav-width;
-    height:     100%;
-    background: @theme-bluegrey-900;
-    background: fade(@theme-bluegrey-900, 50%);
-    overflow:   hidden;
-    overflow-y: auto;
+    // overflow:   hidden;
+    // overflow-y: auto;
 
     // animation:  slidein-from-left .75s ease-out;
     transform:  translateX(-100%);
@@ -19,12 +12,21 @@
     &:after{
         content:    '';
         position:   absolute;
+        z-index:    6;
         top:        0;
         bottom:     0;
         right:      0;
         width:      1px;
         background: @theme-bluegrey-50;
         background: fade(@theme-bluegrey-50, 10%);
+    }
+
+    & > .background-container{
+        transform:  translateX(100%);
+        &:before{
+            background: @theme-bluegrey-900;
+            background: fade(@theme-bluegrey-900, 50%);
+        }
     }
 
     .navs{
