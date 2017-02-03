@@ -1,0 +1,3 @@
+(() => {
+    window.isDev = true
+})()

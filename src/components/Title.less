@@ -3,9 +3,11 @@
 h1, h2, h3, h4, h5, h6, .title{
     display:    block;
     line-height:1.5em;
+    margin:     1rem 0;
 
     // color:      @theme-bluegrey-50;
-    color:      lighten( @theme-lightblue-50, 15% );
+    // color:      lighten( @theme-bluegrey-50, 15% );
+    color:      #fff;
     font-weight:400;
     position:   relative;
 
@@ -27,16 +29,16 @@ h1, h2, h3, h4, h5, h6, .title{
         ){
             &[data-content]{
                 // text-shadow:    0 0 .5rem @theme-bluegrey-300;
-                text-shadow:    0 0 .2em @theme-lightblue-a400;
+                text-shadow:    0 0 .2em @theme-bluegrey-200;
                 &:before{
                     content:    attr(data-content);
                     position:   absolute;
                     z-index:    2;
                     // color:      @theme-bluegrey-200;
-                    color:      lighten( @theme-lightblue-300, 15% );
+                    color:      lighten( @theme-bluegrey-400, 15% );
                     text-shadow:0 0 1px #000;
-                    mask:       linear-gradient(to bottom, transparent, #fff);
-                    -webkit-mask:linear-gradient(to bottom, transparent, #fff);
+                    mask:       linear-gradient(to bottom, transparent 25%, #fff);
+                    -webkit-mask:linear-gradient(to bottom, transparent 25%, #fff);
                 }
             }
         }
@@ -45,4 +47,20 @@ h1, h2, h3, h4, h5, h6, .title{
 
 h2{
     font-size:  2rem;
+}
+
+h3{
+    font-size:  1.5rem;
+}
+
+h4{
+    font-size:  1.2rem;
+}
+
+h5{
+    font-size:  1.1rem;
+}
+
+h6{
+    font-size:  1rem;
 }

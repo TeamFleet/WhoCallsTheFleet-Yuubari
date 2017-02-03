@@ -6,13 +6,13 @@ import './Title.less'
 
 class Title extends React.Component {
     render() {
-        let props = this.props,
-            {TagName, content} = props
+        let props = Object.assign({}, this.props),
+            {tagName, content} = props
         
-        delete props.TagName
+        delete props.tagName
         delete props.content
 
-        TagName = TagName || 'h2'
+        tagName = tagName || 'h2'
         content = content || this.props.children
         props = filterProps(props)
 
@@ -23,6 +23,8 @@ class Title extends React.Component {
         // if( checkCssProp('background-clip') ){
             
         // }
+
+        const TagName = tagName
 
         return (
             <TagName data-content={content} {...props}>
