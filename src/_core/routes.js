@@ -2,7 +2,6 @@ import { Component } from 'react'
 
 import App from '../layout/App.jsx'
 
-let index = '../pages/Home.jsx'
 let childRoutes = [
     {
         path: 'fleets',
@@ -79,7 +78,7 @@ export default {
     getIndexRoute(partialNextState, callback) {
         require.ensure([], function (require) {
             callback(null, {
-                component: require(index).default
+                component: require('../pages/Home.jsx').default
             })
         })
     },
