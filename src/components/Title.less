@@ -1,0 +1,48 @@
+@import '../_core-less/_include.less';
+
+h1, h2, h3, h4, h5, h6, .title{
+    display:    block;
+    line-height:1.5em;
+
+    // color:      @theme-bluegrey-50;
+    color:      lighten( @theme-lightblue-50, 15% );
+    font-weight:400;
+    position:   relative;
+
+    &.gradient{
+        // @supports (
+        //     (background-clip: text)
+        //     or (-webkit-background-clip: text)
+        // ){
+        //     background: linear-gradient(to bottom, @theme-lightblue-50, @theme-lightblue-300);
+        //     background: linear-gradient(to bottom, @theme-bluegrey-50, @theme-bluegrey-300);
+        //     background-clip: text;
+        //     -webkit-background-clip: text;
+        //     -webkit-text-fill-color: transparent;
+        //     -webkit-font-smoothing: antialiased;
+        // }
+        @supports (
+            (mask: inherit)
+            or (-webkit-mask: inherit)
+        ){
+            &[data-content]{
+                // text-shadow:    0 0 .5rem @theme-bluegrey-300;
+                text-shadow:    0 0 .2em @theme-lightblue-a400;
+                &:before{
+                    content:    attr(data-content);
+                    position:   absolute;
+                    z-index:    2;
+                    // color:      @theme-bluegrey-200;
+                    color:      lighten( @theme-lightblue-300, 15% );
+                    text-shadow:0 0 1px #000;
+                    mask:       linear-gradient(to bottom, transparent, #fff);
+                    -webkit-mask:linear-gradient(to bottom, transparent, #fff);
+                }
+            }
+        }
+    }
+}
+
+h2{
+    font-size:  2rem;
+}
