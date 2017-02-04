@@ -3,7 +3,8 @@ import { render } from 'react-dom'
 import { Router, hashHistory } from 'react-router'
 import routes from './_core/routes.js'
 
-import styles from './main.less'
+import './main.less'
+import './components/_base.less'
 
 class Root extends Component {
     componentWillMount() {

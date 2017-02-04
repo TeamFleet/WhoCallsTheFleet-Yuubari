@@ -13,7 +13,7 @@ class App extends React.Component {
         return (
             <div id="app">
                 <Nav bgBlured={fileBlured} />
-                <Main bgBlured={fileBlured}>
+                <Main bgBlured={fileBlured} location={this.props.location}>
                     {this.props.children}
                 </Main>
                 <Bgimg bgImg={file} />

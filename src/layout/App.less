@@ -34,12 +34,17 @@
         bottom:     0;
         left:       0;
         right:      0;
+    }
+
+    & > .background-container,
+    & > .background-container:before{
         overflow:   hidden;
     }
 
     & > .wrapper{
         z-index:    5;
-        overflow-y: auto;
+        overflow-x: hidden;
+        // overflow-y: auto;
     }
 
     & > .background-container{

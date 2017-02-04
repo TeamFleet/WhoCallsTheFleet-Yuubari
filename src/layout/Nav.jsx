@@ -18,9 +18,12 @@ class Nav extends React.Component {
         ]
 
         routes.childRoutes.forEach(route => {
-            if (route.path.search('/') > -1) return
+            if (route.path === '/') return
 
-            let index = navList.indexOf(route.path)
+            let path = route.path.replace(/^\//, '')
+            if (path.search('/') > -1) return
+
+            let index = navList.indexOf(path)
             if (index > -1) {
                 navList.splice(index, 1, route);
             } else {

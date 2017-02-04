@@ -21,5 +21,40 @@
 
     & > .wrapper{
         padding:    10px 30px 30px 30px;
+        overflow-y: scroll;
+        & > .wrapper-inner{
+            position:   relative;
+        }
+    }
+
+    .main-transition-enter, .main-transition-leave{
+        position:   absolute;
+        top:        0;
+
+        transition-property: opacity, transform;
+    }
+
+    .main-transition-enter {
+        opacity:    0.01;
+        transform:  translateX(-2rem);
+
+        &.main-transition-enter-active {
+            opacity:    1;
+            transform:  none;
+            transition-duration: 200ms;
+            // transition-timing-function: ease-in;
+        }
+    }    
+
+    .main-transition-leave {
+        opacity:    1;
+        transform:  none;
+
+        &.main-transition-leave-active {
+            opacity:    0.01;
+            transform:  translateX(2rem);
+            transition-duration: 200ms;
+            // transition-timing-function: ease-in;
+        }
     }
 }

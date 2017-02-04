@@ -4,7 +4,7 @@ import App from '../layout/App.jsx'
 
 let childRoutes = [
     {
-        path: 'fleets',
+        path: '/fleets',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Fleet/List.jsx').default)
@@ -12,7 +12,7 @@ let childRoutes = [
         }
     },
     {
-        path: 'ships',
+        path: '/ships',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Ship/List.jsx').default)
@@ -20,7 +20,7 @@ let childRoutes = [
         }
     },
     {
-        path: 'equipments',
+        path: '/equipments',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Equipment/List.jsx').default)
@@ -28,7 +28,7 @@ let childRoutes = [
         }
     },
     {
-        path: 'arsenal',
+        path: '/arsenal',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Arsenal/Page.jsx').default)
@@ -36,7 +36,7 @@ let childRoutes = [
         }
     },
     {
-        path: 'entities',
+        path: '/entities',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Entity/List.jsx').default)
@@ -44,7 +44,7 @@ let childRoutes = [
         }
     },
     {
-        path: 'calctp',
+        path: '/calctp',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Calculator/TP.jsx').default)
@@ -52,7 +52,7 @@ let childRoutes = [
         }
     },
     {
-        path: 'donate',
+        path: '/donate',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Donate.jsx').default)
@@ -63,7 +63,7 @@ let childRoutes = [
 
 if (window.isDev)
     childRoutes.push({
-        path: 'dev',
+        path: '/dev',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Dev.jsx').default)

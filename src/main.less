@@ -52,18 +52,35 @@ textarea{
     font-family:    inherit;
 }
 
-a{
-	text-decoration: none;
-}
-
-a, button{
+a, button, .link{
 	&:active{
 		opacity: 	0.5;
 	}
 }
 
-h2, h3, h4, h5, h6{
-	color: 			@base-background-color;
+a{
+	text-decoration: none;
+}
+
+a, .link{
+	color: 		@theme-lightblue-a200;
+	&:hover{
+		color: 	#fff;
+	}
+	// &:active{
+
+	// }
+}
+
+hr, p{
+	margin: 	1.25rem 0;
+}
+
+hr{
+	border: 	0;
+	background: @theme-bluegrey-300;
+    background: fade(@theme-bluegrey-300, 50%);
+	height: 	1.5px;
 }
 
 
