@@ -8,7 +8,8 @@ import './components/_base.less'
 
 class Root extends Component {
     componentWillMount() {
-        // all data binding process
+        // get all background images
+        
 
         // after all end, remove .loading from body
     }

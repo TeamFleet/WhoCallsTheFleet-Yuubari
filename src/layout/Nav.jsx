@@ -6,6 +6,10 @@ import './Nav.less'
 import { BgContainer } from './Bgimg.jsx'
 
 class Nav extends React.Component {
+    openBgControls() {
+        document.body.classList.add('mode-bg')
+    }
+
     render() {
         let navList = [
             'fleets',
@@ -49,12 +53,15 @@ class Nav extends React.Component {
                                             to={route.path}
                                             key={index}
                                             className="link"
-                                            activeClassName="on">{route.path}
+                                            activeClassName="on">{route.title || route.name || route.path}
                                             &nbsp;</Link>
                                     )
                                 }
                             })
                         }
+                    </div>
+                    <div className="controls">
+                        <button type="button" onClick={this.openBgControls}>[PH] BG CONTROLS</button>
                     </div>
                 </div>
                 <BgContainer bgImg={this.props.bgBlured} />

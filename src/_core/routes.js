@@ -5,6 +5,7 @@ import App from '../layout/App.jsx'
 let childRoutes = [
     {
         path: '/fleets',
+        name: 'Fleet Emulator',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Fleet/List.jsx').default)
@@ -13,6 +14,7 @@ let childRoutes = [
     },
     {
         path: '/ships',
+        name: 'Ship-girls',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Ship/List.jsx').default)
@@ -21,6 +23,7 @@ let childRoutes = [
     },
     {
         path: '/equipments',
+        name: 'Equipments',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Equipment/List.jsx').default)
@@ -29,6 +32,7 @@ let childRoutes = [
     },
     {
         path: '/arsenal',
+        name: 'Akashi\'s Arsenal',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Arsenal/Page.jsx').default)
@@ -37,6 +41,7 @@ let childRoutes = [
     },
     {
         path: '/entities',
+        name: 'CV & Illustrators',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Entity/List.jsx').default)
@@ -45,6 +50,7 @@ let childRoutes = [
     },
     {
         path: '/calctp',
+        name: 'Calculator: TP',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Calculator/TP.jsx').default)
@@ -53,6 +59,7 @@ let childRoutes = [
     },
     {
         path: '/donate',
+        name: 'Donate',
         getComponents(nextState, callback) {
             require.ensure([], function (require) {
                 callback(null, require('../pages/Donate.jsx').default)
