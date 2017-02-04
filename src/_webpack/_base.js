@@ -3,6 +3,7 @@
 const path = require('path')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const defaults = {
     distPath: path.resolve(process.cwd(), 'app/dist/'),
@@ -30,6 +31,15 @@ module.exports = (options = {}) => {
                 collapseWhitespace: true
             }
         })
+    )
+
+    settings.plugins.unshift(
+        new CopyWebpackPlugin([
+            {
+                from: path.join(srcPath, '_common/appicon.png'),
+                to: path.join(settings.distPath, '..')
+            }
+        ])
     )
 
     return {

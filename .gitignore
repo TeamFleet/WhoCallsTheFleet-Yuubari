@@ -5,8 +5,7 @@ npm-debug.log
 /node_modules
 /bower_components
 /errorlog.txt
-/app/assets/images/homebg-custom
-/app/dist
+/app
 
 # Windows image file caches
 Thumbs.db

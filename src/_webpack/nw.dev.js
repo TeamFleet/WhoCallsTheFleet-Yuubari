@@ -30,6 +30,4 @@ let config = require('./_base.js')({
 config.entry.critical.unshift(path.resolve(process.cwd(), 'node_modules/nw-dev/lib/dev.js'))
 config.entry.critical.unshift(path.resolve(process.cwd(), 'src/_core/dev.js'))
 
-console.log(config)
-
 module.exports = config
