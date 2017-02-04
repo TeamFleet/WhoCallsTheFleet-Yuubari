@@ -106,6 +106,7 @@
   "dependencies": {
     "kckit": "^0.4.2",
     "bind-event": "^1.0.5",
+    "mkdirp": "^0.5.1",
 
     "normalize.css": "^5.0.0",
 
