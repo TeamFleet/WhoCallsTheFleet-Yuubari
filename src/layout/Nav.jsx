@@ -53,8 +53,7 @@ class Nav extends React.Component {
                                             to={route.path}
                                             key={index}
                                             className="link"
-                                            activeClassName="on">{route.title || route.name || route.path}
-                                            &nbsp;</Link>
+                                            activeClassName="on">{route.title || route.name || route.path}/Link>
                                     )
                                 }
                             })
