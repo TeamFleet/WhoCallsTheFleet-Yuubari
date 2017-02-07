@@ -26,12 +26,6 @@ let config = require('./_base.js')({
     node: 1.2
 })
 
-config.entry.forEach(entry => {
-    if (typeof entry === 'string') {
-        entry = ['babel-polyfill', entry]
-    } else {
-        entry.unshift('babel-polyfill')
-    }
-})
+config.entry.critical.unshift(path.resolve(process.cwd(), 'src/nw.js'))
 
 module.exports = config
