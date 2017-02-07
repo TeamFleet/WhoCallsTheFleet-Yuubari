@@ -1,4 +1,5 @@
 function nw_pre13_shim(self = window) {
+    if (!self) return
     // https://github.com/nwjs/nw.js/blob/nw13/src/resources/nw_pre13_shim.js
     // detect `nw` object of NW13
     if (!(self.nw && self.nw.require)) return;
@@ -13,6 +14,7 @@ function nw_pre13_shim(self = window) {
     self.require.cache = realrequire.cache;
     self.require.extensions = realrequire.extensions;
     self.require.resolve = realrequire.resolve;
+    // self.require.ensure = require('node-ensure');
     // Following items exist when running with `--mixed-context`.
     // Copy them from `nw` to browser context
     if (!self.process) self.process = self.nw.process;
@@ -24,6 +26,7 @@ function nw_pre13_shim(self = window) {
 
 
 export default (self = window) => {
+    if (!self) return
     if (!self.require) return self.nwInited
     if (self.nwInited) return self.nwInited
     self.nwInited = true

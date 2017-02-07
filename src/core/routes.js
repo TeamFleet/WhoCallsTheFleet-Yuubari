@@ -1,19 +1,13 @@
-import App from '../ui/App.jsx'
-
-const _require = require
 const pathPages = '../ui/pages/'
-const requirePage = (callback, file) => {
-    _require.ensure([], function (require) {
-        callback(null, require('../ui/pages/' + file).default)
-    })
-}
+
+console.log(typeof require.ensure)
 
 let childRoutes = [
     {
         path: '/fleets',
         name: 'Fleet Emulator',
         getComponents(nextState, callback) {
-            _require.ensure([], function (require) {
+            require.ensure([], function (require) {
                 callback(null, require(pathPages + 'Fleet/List.jsx').default)
             })
         }
@@ -22,7 +16,7 @@ let childRoutes = [
         path: '/ships',
         name: 'Ship-girls',
         getComponents(nextState, callback) {
-            _require.ensure([], function (require) {
+            require.ensure([], function (require) {
                 callback(null, require(pathPages + 'Ship/List.jsx').default)
             })
         }
@@ -31,7 +25,7 @@ let childRoutes = [
         path: '/equipments',
         name: 'Equipments',
         getComponents(nextState, callback) {
-            _require.ensure([], function (require) {
+            require.ensure([], function (require) {
                 callback(null, require(pathPages + 'Equipment/List.jsx').default)
             })
         }
@@ -40,7 +34,7 @@ let childRoutes = [
         path: '/arsenal',
         name: 'Akashi\'s Arsenal',
         getComponents(nextState, callback) {
-            _require.ensure([], function (require) {
+            require.ensure([], function (require) {
                 callback(null, require(pathPages + 'Arsenal/Page.jsx').default)
             })
         }
@@ -49,7 +43,7 @@ let childRoutes = [
         path: '/entities',
         name: 'CV & Illustrators',
         getComponents(nextState, callback) {
-            _require.ensure([], function (require) {
+            require.ensure([], function (require) {
                 callback(null, require(pathPages + 'Entity/List.jsx').default)
             })
         }
@@ -58,7 +52,7 @@ let childRoutes = [
         path: '/calctp',
         name: 'Calculator: TP',
         getComponents(nextState, callback) {
-            _require.ensure([], function (require) {
+            require.ensure([], function (require) {
                 callback(null, require(pathPages + 'Calculator/TP.jsx').default)
             })
         }
@@ -67,7 +61,7 @@ let childRoutes = [
         path: '/donate',
         name: 'Donate',
         getComponents(nextState, callback) {
-            _require.ensure([], function (require) {
+            require.ensure([], function (require) {
                 callback(null, require(pathPages + 'Donate.jsx').default)
             })
         }
@@ -78,7 +72,7 @@ if (window.isDev)
     childRoutes.push({
         path: '/dev',
         getComponents(nextState, callback) {
-            _require.ensure([], function (require) {
+            require.ensure([], function (require) {
                 callback(null, require(pathPages + 'Dev.jsx').default)
             })
         }
@@ -86,12 +80,12 @@ if (window.isDev)
 
 export default {
     path: '/',
-    component: App,
+    component: require('../ui/App.jsx').default,
 
     getIndexRoute(partialNextState, callback) {
-        _require.ensure([], function (require) {
+        require.ensure([], function (require) {
             callback(null, {
-                component: require(pathPages + 'Home.jsx').default,
+                component: require(pathPages + 'Home.jsx').default
             })
         })
     },

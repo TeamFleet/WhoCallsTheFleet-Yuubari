@@ -1,4 +1,4 @@
-require('./nw-init.js').default(self)
+require('./init.js').default(self)
 
 // Set actual page zoom, 1 = 100%, 0.5 = 50%, 2 = 200%, etc...
 const zoom = (v) => {
@@ -9,7 +9,7 @@ const zoom = (v) => {
     }
 }
 
-((self = window) => {
+((self = self) => {
     if (!self.nw) return false
     Object.defineProperty(self.nw, 'zoom', {
         get: () => zoom(),

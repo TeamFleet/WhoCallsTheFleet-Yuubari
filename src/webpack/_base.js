@@ -69,29 +69,7 @@ module.exports = (options = {}) => {
                     }
                 },
                 {
-                    test: /\.js?$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: 'babel-loader',
-                            options: {
-                                presets: [
-                                    [
-                                        'env', {
-                                            targets: {
-                                                browsers: settings.browserList,
-                                                node: settings.node
-                                            },
-                                            modules: false
-                                        }
-                                    ]
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    test: /\.jsx$/,
+                    test: /\.(jsx|js)$/,
                     exclude: /node_modules/,
                     use: [
                         {

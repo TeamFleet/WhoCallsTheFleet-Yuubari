@@ -1,7 +1,9 @@
 export default (propName) => {
+    if (!window) return propName
+
     if (!window.elementForCheck) window.elementForCheck = document.createElement('a')
 
-    if( typeof window.elementForCheck.style[propName] !== 'undefined' )
+    if (typeof window.elementForCheck.style[propName] !== 'undefined')
         return propName
 
     const prefixes = [
@@ -16,7 +18,7 @@ export default (propName) => {
 
     prefixes.some(prefix => {
         let vendorCheck = prefix + propName
-        if( typeof window.elementForCheck.style[vendorCheck] !== 'undefined' ){
+        if (typeof window.elementForCheck.style[vendorCheck] !== 'undefined') {
             result = vendorCheck
             return vendorCheck
         }

@@ -5,7 +5,7 @@ import bindEvent from 'bind-event'
 
     // create .boat-loader into body
     // onTransitionEnd for removing .loading class from body
-    document.addEventListener("DOMContentLoaded", function (event) {
+    document.addEventListener("DOMContentLoaded", function (/*event*/) {
         let boatLoader = document.createElement('div')
         boatLoader.id = 'boat-loader'
         document.body.appendChild(boatLoader)
