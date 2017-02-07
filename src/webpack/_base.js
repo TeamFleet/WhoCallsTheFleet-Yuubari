@@ -36,7 +36,7 @@ module.exports = (options = {}) => {
     settings.plugins.unshift(
         new CopyWebpackPlugin([
             {
-                from: path.join(srcPath, '_common/appicon.png'),
+                from: path.join(srcPath, 'common/appicon.png'),
                 to: path.join(settings.distPath, '..')
             }
         ])
@@ -47,8 +47,8 @@ module.exports = (options = {}) => {
             critical: [
                 path.join(srcPath, 'critical.js')
             ],
-            main: [
-                path.join(srcPath, 'main.jsx')
+            root: [
+                path.join(srcPath, 'root.jsx')
             ]
         },
         output: {
@@ -69,7 +69,29 @@ module.exports = (options = {}) => {
                     }
                 },
                 {
-                    test: /\.js?$|\.jsx$/,
+                    test: /\.js?$/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                presets: [
+                                    [
+                                        'env', {
+                                            targets: {
+                                                browsers: settings.browserList,
+                                                node: settings.node
+                                            },
+                                            modules: false
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.jsx$/,
                     exclude: /node_modules/,
                     use: [
                         {
@@ -85,6 +107,7 @@ module.exports = (options = {}) => {
                                             modules: false
                                         }
                                     ],
+                                    'stage-0',
                                     'react'
                                 ]
                             }

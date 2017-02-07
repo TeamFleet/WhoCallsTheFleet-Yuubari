@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, hashHistory } from 'react-router'
-import routes from './_core/routes.js'
-
-import './main.less'
-import './components/_base.less'
+import routes from './core/routes.js'
 
 class Root extends Component {
     componentWillMount() {
@@ -53,6 +50,7 @@ class Root extends Component {
     render() {
         // console.log(styles)
         // console.log(require('./main.less'))
+        console.log(routes)
         return (
             <Router history={hashHistory} routes={routes} />
         )

@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react'
 import { Link, IndexLink } from 'react-router'
-import routes from '../_core/routes.js'
+import routes from '../../core/routes.js'
 
 import './Nav.less'
 import { BgContainer } from './Bgimg.jsx'
 
-class Nav extends React.Component {
+export default class extends React.Component {
+    static propTypes = {
+        bgBlured: PropTypes.string
+    }
+
     openBgControls() {
         document.body.classList.add('mode-bg')
     }
@@ -53,7 +57,7 @@ class Nav extends React.Component {
                                             to={route.path}
                                             key={index}
                                             className="link"
-                                            activeClassName="on">{route.title || route.name || route.path}/Link>
+                                            activeClassName="on">{route.title || route.name || route.path}</Link>
                                     )
                                 }
                             })
@@ -68,9 +72,3 @@ class Nav extends React.Component {
         )
     }
 }
-
-Nav.propTypes = {
-    bgBlured: PropTypes.string
-}
-
-export default Nav

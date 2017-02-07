@@ -27,7 +27,8 @@ let config = require('./_base.js')({
     node: 7.3
 })
 
+config.entry.critical.unshift(path.resolve(process.cwd(), 'src/nw.js'))
 config.entry.critical.unshift(path.resolve(process.cwd(), 'node_modules/nw-dev/lib/dev.js'))
-config.entry.critical.unshift(path.resolve(process.cwd(), 'src/_core/dev.js'))
+config.entry.critical.unshift(path.resolve(process.cwd(), 'src/core/dev.js'))
 
 module.exports = config

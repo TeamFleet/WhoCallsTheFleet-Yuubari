@@ -2,10 +2,10 @@ function nw_pre13_shim(self = window) {
     // https://github.com/nwjs/nw.js/blob/nw13/src/resources/nw_pre13_shim.js
     // detect `nw` object of NW13
     if (!(self.nw && self.nw.require)) return;
-    var realrequire = nw.require;
+    var realrequire = self.nw.require;
     self.require = function () {
         if (arguments[0] === 'nw.gui') {
-            return nw;
+            return self.nw;
         } else {
             return realrequire.apply(self, [].slice.call(arguments, 0));
         }

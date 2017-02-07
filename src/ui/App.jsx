@@ -1,12 +1,16 @@
 import React, { PropTypes } from 'react'
 
-import Nav from './Nav.jsx'
-import Main from './Main.jsx'
-import Bgimg from './Bgimg.jsx'
+import Nav from './layout/Nav.jsx'
+import Main from './layout/Main.jsx'
+import Bgimg from './layout/Bgimg.jsx'
 
 import './App.less'
 
-class App extends React.Component {
+export default class extends React.Component {
+    static propTypes = {
+        children: PropTypes.node
+    }
+
     render() {
         const file = '/bgimgs/bob-1.jpg'
         const fileBlured = '/bgimgs/blured/bob-1.jpg'
@@ -21,9 +25,3 @@ class App extends React.Component {
         )
     }
 }
-
-App.propTypes = {
-    children: PropTypes.node
-}
-
-export default App

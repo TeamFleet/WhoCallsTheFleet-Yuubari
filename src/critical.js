@@ -3,10 +3,6 @@ import bindEvent from 'bind-event'
 (() => {
     require('./critical.less')
 
-    if (self.node || self.nw) {
-        require('./nw.js').default()
-    }
-
     // create .boat-loader into body
     // onTransitionEnd for removing .loading class from body
     document.addEventListener("DOMContentLoaded", function (event) {

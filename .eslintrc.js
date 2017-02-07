@@ -7,11 +7,13 @@ module.exports = {
         "jquery": true
     },
     "extends": "eslint:recommended",
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "sourceType": "module"
+        "sourceType": "module",
+        "allowImportExportEverywhere": false
     },
     "rules": {
         "no-const-assign": 1,

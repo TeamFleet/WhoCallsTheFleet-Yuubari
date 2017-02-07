@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Title} from '../../components/_.jsx'
+import {Title} from '../../components/'
 
 export default class extends React.Component {
     render() {

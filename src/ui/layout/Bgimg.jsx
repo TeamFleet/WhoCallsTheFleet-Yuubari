@@ -3,6 +3,10 @@ import React, { PropTypes } from 'react'
 import './Bgimg.less'
 
 class Bgimg extends React.Component {
+    static propTypes = {
+        bgImg: PropTypes.string
+    }
+
     closeBgControls() {
         document.body.classList.add('mode-bg-leaving')
     }
@@ -31,11 +35,11 @@ class Bgimg extends React.Component {
         )
     }
 }
-Bgimg.propTypes = {
-    bgImg: PropTypes.string
-}
 
 class BgContainer extends React.Component {
+    static propTypes = {
+        bgImg: PropTypes.string
+    }
     render() {
         return (
             <div className="background-container">
@@ -45,9 +49,6 @@ class BgContainer extends React.Component {
             </div>
         )
     }
-}
-Bgimg.propTypes = {
-    bgImg: PropTypes.string
 }
 
 class BgList extends React.Component {
