@@ -141,12 +141,13 @@
     "nw-dev": "^3.0.1"
   },
   "scripts": {
-    "nw-dev": "npm run prebuild && webpack -d --watch --env.target=nw --env.env=dev",
-    "nw-dist": "npm run prebuild && webpack -p --env.target=nw --env.env=dist",
+    "nw-dev": "webpack -d --watch --env.target=nw --env.env=dev",
+    "nw-dist": "webpack -p --env.target=nw --env.env=dist",
     "web-dev": "webpack-dev-server -d --content-base app --watch --inline --watch-poll --host 0.0.0.0 --env.target=nw --env.env=dev",
-    "build": "webpack -p",
     "init": "mkdir app",
     "clean": "rm -rf app",
-    "prebuild": "npm run clean && npm run init"
+    "prebuild": "npm run clean && npm run init",
+    "start": "npm run prebuild && npm run nw-dev",
+    "build": "npm run nw-dist"
   }
 }
