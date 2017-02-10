@@ -1,7 +1,3 @@
-const pathPages = '../ui/pages/'
-
-console.log(typeof require.ensure)
-
 let childRoutes = [
     {
         path: '/fleets',

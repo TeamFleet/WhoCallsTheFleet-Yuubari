@@ -1,4 +1,23 @@
+/*
+
+Bgimg
+    BgList
+        BgItem
+
+INIT_BGIMG(list, currentIndex)
+
+ADD_BGIMG(filename)
+
+DELETE_BGIMG(indexCustom)
+
+CHANGE_BGIMG(currentIndex)
+
+ */
+
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+
+import * as bgimgApi from '../../core/api/bgimg.js'
 
 import './Bgimg.less'
 
@@ -23,7 +42,7 @@ class Bgimg extends React.Component {
     render() {
         return (
             <div id="bgimg">
-                <BgContainer bgImg={this.props.bgImg} />
+                <BgContainerOriginal />
                 <div className="controls">
                     <button type="button" className="back" onClick={this.closeBgControls}>[PH] BACK</button>
                     <div className="background-original" style={{
@@ -51,78 +70,59 @@ class BgContainer extends React.Component {
     }
 }
 
+class BgContainerBlured extends React.Component {
+    static propTypes = {
+        bgImg: PropTypes.string
+    }
+    render() {
+        return (
+            <BgContainer bgImg={this.props.bgImg}/>
+        )
+    }
+}
+
+@connect(function mapStateToProps (store) {
+    return {
+        bgImg: store.bgimgState.current.original
+    }
+})
+class BgContainerOriginal extends React.Component {
+    static propTypes = {
+        bgImg: PropTypes.string
+    }
+    render() {
+        console.log(this.props.bgImg)
+        return (
+            <BgContainer bgImg={this.props.bgImg}/>
+        )
+    }
+}
+
+@connect(function mapStateToProps (store) {
+    return {
+        list: store.bgimgState.list
+    }
+})
 class BgList extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-            list: {
-                default: this.getListInitial('default'),
-                custom: this.getListInitial('custom')
-            },
-            index: 0
-        }
-
-        this.countCustom = 0
-    }
-
-    getListInitial(type) {
-        let list = []
-
-        const dir = type == 'custom' ? self.path.bgimgs_custom : self.path.bgimgs
-
-        const parseData = (name, isDefault) => {
-            return {
-                name: (isDefault ? '*' : '') + name,
-                isDefault: isDefault
-            }
-        }
-
-        if (self.nw) {
-            const fs = require('fs')
-            const path = require('path')
-            const getList = (dir) => {
-                return fs.readdirSync(dir)
-                    .filter(function (file) {
-                        return !fs.lstatSync(path.join(dir, file)).isDirectory()
-                    })
-                    .map(function (filename) {
-                        return {
-                            name: filename,
-                            time: fs.statSync(path.join(dir, filename)).mtime.getTime()
-                        };
-                    })
-                    .sort(function (a, b) { return b.time - a.time; })
-                    .map(function (o) { return o.name; })
-            }
-
-            getList(dir)
-                .forEach(function (name) {
-                    list.push(parseData(
-                        name,
-                        type === 'default'
-                    ))
-                })
-        } else {
-
-        }
-
-        return list
+        bgimgApi.initList()
     }
 
     render() {
         return (
             <div className="list">
-                {this.state.list.custom.map((obj, index) => {
+                {this.props.list.custom.map((obj, index) => {
                     return (
-                        <div key={index} className={`background-thumbnail${index === this.state.index ? ' on' : ''}`}>
+                        <div key={index} className={`background-thumbnail${index === this.props.index ? ' on' : ''}`}>
                             {obj.name}
                         </div>
                     )
                 })}
-                {this.state.list.default.map((obj, index) => {
+                {this.props.list.default.map((obj, index) => {
                     return (
-                        <div key={index} className={`background-thumbnail${index === this.state.index ? ' on' : ''}`}>
+                        <div key={index} className={`background-thumbnail${index === this.props.index ? ' on' : ''}`}>
                             {obj.name}
                         </div>
                     )

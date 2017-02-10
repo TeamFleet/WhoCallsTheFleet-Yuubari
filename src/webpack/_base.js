@@ -87,6 +87,9 @@ module.exports = (options = {}) => {
                                     ],
                                     'stage-0',
                                     'react'
+                                ],
+                                'plugins': [
+                                    "transform-decorators-legacy"
                                 ]
                             }
                         }
