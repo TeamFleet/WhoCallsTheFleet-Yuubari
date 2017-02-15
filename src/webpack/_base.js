@@ -36,7 +36,7 @@ module.exports = (options = {}) => {
     settings.plugins.unshift(
         new CopyWebpackPlugin([
             {
-                from: path.join(srcPath, 'common/appicon.png'),
+                from: path.join(srcPath, 'assets/appicon.png'),
                 to: path.join(settings.distPath, '..')
             }
         ])

@@ -1,5 +1,26 @@
-import store from '../store';
-import * as actions from '../actions/bgimg.js'
+import store from '../../core/store.js';
+import * as actions from './actions.js'
+
+const getPath = (filename, type = '') => {
+    if (typeof filename === 'object' && filename.name) filename = filename.name
+
+    const dir = type == 'custom' ? self.path.bgimgs_custom : self.path.bgimgs
+
+    if (self.nw) {
+        const path = require('path')
+        return path.normalize(path.join(dir, type, filename)).split(path.sep).join('/')
+    } else {
+        return dir + '/' + type + '/' + filename
+    }
+}
+
+const getObj = (indexString) => {
+    const [type, index] = indexString.split('-')
+
+    if (typeof index === 'undefined') return {}
+
+    return store.getState().bgimgState.list[type][index]
+}
 
 const getListInitial = (type) => {
     let list = []
@@ -44,27 +65,6 @@ const getListInitial = (type) => {
     return list
 }
 
-const getPath = (filename, type = '') => {
-    if (typeof filename === 'object' && filename.name) filename = filename.name
-
-    const dir = type == 'custom' ? self.path.bgimgs_custom : self.path.bgimgs
-
-    if (self.nw) {
-        const path = require('path')
-        return path.normalize( path.join(dir, type, filename) )
-    } else {
-        return dir + '/' + type + '/' + filename
-    }
-}
-
-const getObj = (indexString) => {
-    const [type, index] = indexString.split('-')
-
-    if (typeof index === 'undefined') return {}
-
-    return store.getState().bgimgState.list[type][index]
-}
-
 
 
 
@@ -74,23 +74,23 @@ export const initList = (currentIndex = 'default-0') => {
     const listCustom = getListInitial('custom')
 
     const [type, index] = currentIndex.split('-')
-    const current = eval('list' + type.substr(0,1).toUpperCase() + type.substr(1) )[index]
+    const current = eval('list' + type.substr(0, 1).toUpperCase() + type.substr(1))[index]
 
     store.dispatch(
-        actions.initBgimg(
-            {
-                list: {
-                    default: listDefault,
-                    custom: listCustom
-                },
-                current: {
-                    index: currentIndex,
-                    original: getPath(current),
-                    blured: getPath(current, 'blured')
-                }
+        actions.init({
+            list: {
+                default: listDefault,
+                custom: listCustom
+            },
+            current: {
+                index: currentIndex,
+                original: getPath(current),
+                blured: getPath(current, 'blured')
             }
-        )
+        })
     )
+
+    console.log(store.getState())
 }
 
 export const add = (filename) => {
@@ -102,5 +102,13 @@ export const remove = (indexCustom) => {
 }
 
 export const change = (currentIndex) => {
+    const currentObj = getObj(currentIndex)
 
+    store.dispatch(
+        actions.change({
+            index: currentIndex,
+            original: getPath(currentObj),
+            blured: getPath(currentObj, 'blured')
+        })
+    )
 }

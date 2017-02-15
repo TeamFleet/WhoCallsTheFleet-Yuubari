@@ -3,7 +3,7 @@ import { Link, IndexLink } from 'react-router'
 import routes from '../../core/routes.js'
 
 import './Nav.less'
-import { BgContainer } from './Bgimg.jsx'
+import { BgContainerBlured } from './Bgimg.jsx'
 
 export default class extends React.Component {
     static propTypes = {
@@ -67,7 +67,7 @@ export default class extends React.Component {
                         <button type="button" onClick={this.openBgControls}>[PH] BG CONTROLS</button>
                     </div>
                 </div>
-                <BgContainer bgImg={this.props.bgBlured} />
+                <BgContainerBlured />
             </nav>
         )
     }

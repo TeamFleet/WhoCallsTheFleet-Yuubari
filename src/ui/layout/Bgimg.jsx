@@ -17,10 +17,15 @@ CHANGE_BGIMG(currentIndex)
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import * as bgimgApi from '../../core/api/bgimg.js'
+import * as bgimgApi from '../../logic/bgimg/api.js'
 
 import './Bgimg.less'
 
+@connect(function mapStateToProps(store) {
+    return {
+        bgImg: store.bgimgState.current.original
+    }
+})
 class Bgimg extends React.Component {
     static propTypes = {
         bgImg: PropTypes.string
@@ -70,18 +75,23 @@ class BgContainer extends React.Component {
     }
 }
 
+@connect(function mapStateToProps(store) {
+    return {
+        bgImgBlured: store.bgimgState.current.blured
+    }
+})
 class BgContainerBlured extends React.Component {
     static propTypes = {
         bgImg: PropTypes.string
     }
     render() {
         return (
-            <BgContainer bgImg={this.props.bgImg}/>
+            <BgContainer bgImg={this.props.bgImgBlured} />
         )
     }
 }
 
-@connect(function mapStateToProps (store) {
+@connect(function mapStateToProps(store) {
     return {
         bgImg: store.bgimgState.current.original
     }
@@ -91,16 +101,16 @@ class BgContainerOriginal extends React.Component {
         bgImg: PropTypes.string
     }
     render() {
-        console.log(this.props.bgImg)
         return (
-            <BgContainer bgImg={this.props.bgImg}/>
+            <BgContainer bgImg={this.props.bgImg} />
         )
     }
 }
 
-@connect(function mapStateToProps (store) {
+@connect(function mapStateToProps(store) {
     return {
-        list: store.bgimgState.list
+        list: store.bgimgState.list,
+        index: store.bgimgState.current.index
     }
 })
 class BgList extends React.Component {
@@ -110,26 +120,45 @@ class BgList extends React.Component {
         bgimgApi.initList()
     }
 
-    render() {
+    change(indexString){
+        bgimgApi.change(indexString)
+    }
+
+    renderList(type) {
         return (
-            <div className="list">
-                {this.props.list.custom.map((obj, index) => {
-                    return (
-                        <div key={index} className={`background-thumbnail${index === this.props.index ? ' on' : ''}`}>
-                            {obj.name}
-                        </div>
-                    )
-                })}
-                {this.props.list.default.map((obj, index) => {
-                    return (
-                        <div key={index} className={`background-thumbnail${index === this.props.index ? ' on' : ''}`}>
-                            {obj.name}
-                        </div>
-                    )
-                })}
+            <div className={`list-${type}`}>
+                {
+                    this.props.list[type].map((obj, index) => {
+                        const _index = type+'-'+index
+                        return (
+                            <div
+                                key={index}
+                                className={`background-thumbnail${_index === this.props.index ? ' on' : ''}`}
+                                onClick={() => this.change(_index)}>
+                                {obj.name}
+                            </div>
+                        )
+                    })
+                }
             </div>
         )
     }
+
+    render() {
+        return (
+            <div className="list">
+                {this.renderList('custom')}
+                {this.renderList('default')}
+            </div>
+        )
+    }
+}
+
+
+export {
+    Bgimg as default,
+    BgContainer,
+    BgContainerBlured
 }
 
 /*
@@ -703,9 +732,3 @@ BgImg.controlsViewingToggle = function () {
     BgImg.controlsEls.body.toggleClass('mod-viewing')
     BgImg.controlsEls.btnViewingToggle.toggleClass('on')
 };
-
-
-export {
-    Bgimg as default,
-    BgContainer
-}

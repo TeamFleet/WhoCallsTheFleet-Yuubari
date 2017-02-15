@@ -12,15 +12,15 @@ export default class extends React.Component {
     }
 
     render() {
-        const file = '/bgimgs/bob-1.jpg'
-        const fileBlured = '/bgimgs/blured/bob-1.jpg'
+        // const file = '/bgimgs/bob-1.jpg'
+        // const fileBlured = '/bgimgs/blured/bob-1.jpg'
         return (
             <div id="app">
-                <Nav bgBlured={fileBlured} />
-                <Main bgBlured={fileBlured} location={this.props.location}>
+                <Nav />
+                <Main location={this.props.location}>
                     {this.props.children}
                 </Main>
-                <Bgimg bgImg={file} />
+                <Bgimg />
             </div>
         )
     }

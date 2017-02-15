@@ -1,4 +1,4 @@
-import * as types from '../actions/types';
+import * as types from '../../core/actions';
 
 const initialState = {
     list: {
@@ -17,7 +17,8 @@ export default function (state = initialState, action) {
     switch (action.type) {
 
         case types.INIT_BGIMG:
-            return Object.assign({}, state, action.state)
+            // return Object.assign({}, state, action.state)
+            return Object.assign({}, initialState, action.state)
 
         case types.ADD_BGIMG:
             // new obj - action.items
@@ -36,7 +37,7 @@ export default function (state = initialState, action) {
 
         case types.CHANGE_BGIMG:
             return Object.assign({}, state, {
-                currentIndex: action.currentIndex
+                current: action.current
             })
 
     }

@@ -2,12 +2,11 @@ import React, { PropTypes } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import './Main.less'
-import { BgContainer } from './Bgimg.jsx'
+import { BgContainerBlured } from './Bgimg.jsx'
 
 export default class extends React.Component {
     static propTypes = {
-        children: PropTypes.node,
-        bgBlured: PropTypes.string
+        children: PropTypes.node
     }
 
     render() {
@@ -26,7 +25,7 @@ export default class extends React.Component {
                         })}
                     </ReactCSSTransitionGroup>
                 </div>
-                <BgContainer bgImg={this.props.bgBlured} />
+                <BgContainerBlured />
             </main>
         )
     }
