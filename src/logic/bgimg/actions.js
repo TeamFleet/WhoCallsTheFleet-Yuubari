@@ -14,26 +14,32 @@ export function init(newState) {
     return {
         type: types.INIT_BGIMG,
         state: newState
-    };
+    }
 }
 
 export function add(state) {
     return {
         type: types.ADD_BGIMG,
         state
-    };
+    }
 }
 
 export function remove(state) {
     return {
         type: types.REMOVE_BGIMG,
         state
-    };
+    }
 }
 
 export function change(dataCurrent) {
     return {
         type: types.CHANGE_BGIMG,
         current: dataCurrent
-    };
+    }
+}
+
+export function initImgLoaded() {
+    return {
+        type: types.INIT_BGIMG_LOADED
+    }
 }

@@ -11,14 +11,14 @@
     left:       0;
     right:      0;
 
-    .background-container{
-        position:   absolute;
-        z-index:    1;
-        left:       0;
-        right:      0;
-        top:        0;
-        bottom:     0;
-    }
+    // .background-container{
+    //     position:   absolute;
+    //     z-index:    1;
+    //     left:       0;
+    //     right:      0;
+    //     top:        0;
+    //     bottom:     0;
+    // }
 
     .controls{
         display:    none;
@@ -27,6 +27,44 @@
             top:        20px;
             left:       20px;
             z-index:    10;
+        }
+    }
+
+    .background-initial{
+        position:   absolute;
+        z-index:    1;
+        top:        0;
+        bottom:     0;
+        left:       0;
+        right:      0;
+        opacity:    .35;
+        transition-duration:    (@base-transition-duration * 2);
+        .item{
+            position:   absolute;
+            top:        0;
+            bottom:     0;
+            left:       0;
+            right:      0;
+            opacity:    0;
+            background: no-repeat 50% 38.2% / cover;
+            z-index:    2;
+            transition-duration:    (@base-transition-duration * 10);
+            transition-delay:       (@base-transition-duration * 2);
+            img{
+                position:   relative;
+                z-index:    -1;
+                left:       -10000%;
+                top:        -10000%;
+            }
+            &.is-loaded{
+                opacity:    1;
+            }
+            &.is-blured{
+                z-index:    1;
+                opacity:    .25;
+                transition-duration:    (@base-transition-duration * 1);
+                transition-delay:       0s;
+            }
         }
     }
 
@@ -71,7 +109,22 @@
 
 
 
+body.is-ready{
+    #bgimg .background-initial{
+        opacity:    1;
+    }
+}
+
+
+
+
 body.is-ready.mode-bg{
+	#nav, #main{
+        &,
+        & > .background-container{
+            transition-delay: 0s;
+        }
+	}
 	#nav{
         transform:  translateX(-100%);
         & > .background-container{
@@ -85,7 +138,7 @@ body.is-ready.mode-bg{
         }
 	}
     #bgimg{
-        .background-container{
+        .background-initial{
             opacity:    0;
             transition-delay: (@base-transition-duration * 2);
             transition-duration: (@base-transition-duration * 4);
@@ -145,7 +198,7 @@ body.is-ready.mode-bg.mode-bg-leaving{
         }
 	}
     #bgimg{
-        .background-container{
+        .background-initial{
             opacity:    1;
             transition-delay: (@base-transition-duration * 2);
             transition-duration: (@base-transition-duration * 3);

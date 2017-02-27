@@ -10,15 +10,17 @@ import store from './core/store.js'
 import * as defaults from './core/defaults.js'
 
 class Root extends Component {
-    componentWillMount() {
-        // console.log(_g)
-    }
+    // componentWillMount() {
+    //     // console.log(_g)
+    // }
 
-    componentDidMount() {
-        setTimeout(() => {
-            document.body.classList.add('is-ready')
-        }, 2000)
-    }
+    // componentDidMount() {
+    //     if (this.props.isBgimgLoaded) {
+    //         // setTimeout(() => {
+    //         document.body.classList.add('is-ready')
+    //         // }, 200000)
+    //     }
+    // }
 
     render() {
         // console.log(styles)

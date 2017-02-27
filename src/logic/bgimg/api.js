@@ -114,3 +114,9 @@ export const change = (currentIndex) => {
         })
     )
 }
+
+export const initImgLoaded = () => {
+    store.dispatch(
+        actions.initImgLoaded()
+    )
+}

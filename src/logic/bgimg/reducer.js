@@ -1,6 +1,7 @@
 import * as types from '../../core/actions';
 
 const initialState = {
+    isLoaded: false,
     list: {
         default: [],
         custom: []
@@ -38,6 +39,11 @@ export default function (state = initialState, action) {
         case types.CHANGE_BGIMG:
             return Object.assign({}, state, {
                 current: action.current
+            })
+        
+        case types.INIT_BGIMG_LOADED:
+            return Object.assign({}, state, {
+                isLoaded: true
             })
 
     }

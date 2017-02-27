@@ -1,19 +1,3 @@
-/*
-
-Bgimg
-    BgList
-        BgItem
-
-INIT_BGIMG(list, currentIndex)
-
-ADD_BGIMG(filename)
-
-DELETE_BGIMG(indexCustom)
-
-CHANGE_BGIMG(currentIndex)
-
- */
-
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
@@ -21,9 +5,15 @@ import * as bgimgApi from '../../logic/bgimg/api.js'
 
 import './Bgimg.less'
 
-@connect(function mapStateToProps(store) {
+
+/*
+BgImg in App, contains:
+ * base bgimg under layer of App view
+ * bgimg controls view
+ */
+@connect(function mapStateToProps(state) {
     return {
-        bgImg: store.bgimgState.current.original
+        bgImg: state.bgimgState.current.original
     }
 })
 class Bgimg extends React.Component {
@@ -47,7 +37,7 @@ class Bgimg extends React.Component {
     render() {
         return (
             <div id="bgimg">
-                <BgContainerOriginal />
+                <BgInitial />
                 <div className="controls">
                     <button type="button" className="back" onClick={this.closeBgControls}>[PH] BACK</button>
                     <div className="background-original" style={{
@@ -60,6 +50,10 @@ class Bgimg extends React.Component {
     }
 }
 
+
+/*
+A standard bgimg container
+ */
 class BgContainer extends React.Component {
     static propTypes = {
         bgImg: PropTypes.string
@@ -75,9 +69,11 @@ class BgContainer extends React.Component {
     }
 }
 
-@connect(function mapStateToProps(store) {
+
+
+@connect(function mapStateToProps(state) {
     return {
-        bgImgBlured: store.bgimgState.current.blured
+        bgImgBlured: state.bgimgState.current.blured
     }
 })
 class BgContainerBlured extends React.Component {
@@ -91,9 +87,11 @@ class BgContainerBlured extends React.Component {
     }
 }
 
-@connect(function mapStateToProps(store) {
+
+
+@connect(function mapStateToProps(state) {
     return {
-        bgImg: store.bgimgState.current.original
+        bgImg: state.bgimgState.current.original
     }
 })
 class BgContainerOriginal extends React.Component {
@@ -107,10 +105,110 @@ class BgContainerOriginal extends React.Component {
     }
 }
 
-@connect(function mapStateToProps(store) {
+
+/*
+base bgimg under layer of App view. animation/transition process
+ 1. blured bgimg load
+    original bgimg load
+ 2. blured bgimg enter on blured img loaded
+    original bgimg enter on original img loaded
+ 4. after original bgimg transition end
+   1. delete blured container element
+   2. dispatch INIT_BGIMG_LOADED
+ */
+@connect(function mapStateToProps(state) {
     return {
-        list: store.bgimgState.list,
-        index: store.bgimgState.current.index
+        bgImg: state.bgimgState.current.original,
+        bgImgBlured: state.bgimgState.current.blured
+    }
+})
+class BgInitial extends React.Component {
+    static propTypes = {
+        bgImg: PropTypes.string,
+        bgImgBlured: PropTypes.string
+    }
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            stylesOriginal: false,
+            stylesBlured: false
+        }
+    }
+
+    closeBgControls() {
+        document.body.classList.add('mode-bg-leaving')
+    }
+
+    originalLoaded(evt) {
+        this.setState({
+            stylesOriginal: {
+                backgroundImage: `url(${this.props.bgImg})`
+            }
+        })
+        evt.target.parentNode.removeChild(evt.target)
+    }
+
+    originalAnimationEnd(evt) {
+        if (evt.nativeEvent.animationName == 'background-original-leave') {
+            setTimeout(() => {
+                document.body.classList.remove('mode-bg-leaving')
+                document.body.classList.remove('mode-bg')
+            }, evt.nativeEvent.elapsedTime * 1000 * 2)
+        }
+    }
+
+    originalTransitionEnd(evt) {
+        if (evt.propertyName == 'opacity') {
+            this.elItemBlured.parentNode.removeChild(this.elItemBlured)
+            bgimgApi.initImgLoaded()
+        }
+    }
+
+    bluredLoaded(evt) {
+        this.setState({
+            stylesBlured: {
+                backgroundImage: `url(${this.props.bgImgBlured})`
+            }
+        })
+        evt.target.parentNode.removeChild(evt.target)
+    }
+
+    bluredTransitionEnd(evt) {
+        if (evt.propertyName == 'opacity' && !evt.target.style.opacity)
+            evt.target.parentNode.removeChild(evt.target)
+    }
+
+    render() {
+        return (
+            <div className="background-initial">
+                <div
+                    className={"item" + (this.state.stylesOriginal ? ' is-loaded' : '')}
+                    style={this.state.stylesOriginal || {}}
+                    onAnimationEnd={this.originalAnimationEnd.bind(this)}
+                    onTransitionEnd={this.originalTransitionEnd.bind(this)}
+                >
+                    <img src={this.props.bgImg} onLoad={this.originalLoaded.bind(this)} />
+                </div>
+
+                <div
+                    className={"item is-blured" + (this.state.stylesBlured ? ' is-loaded' : '')}
+                    style={this.state.stylesBlured || {}}
+                    onTransitionEnd={this.bluredTransitionEnd.bind(this)}
+                    ref={(el) => { this.elItemBlured = el }}
+                >
+                    <img src={this.props.bgImgBlured} onLoad={this.bluredLoaded.bind(this)} />
+                </div>
+            </div>
+        )
+    }
+}
+
+@connect(function mapStateToProps(state) {
+    return {
+        list: state.bgimgState.list,
+        index: state.bgimgState.current.index
     }
 })
 class BgList extends React.Component {
@@ -120,7 +218,7 @@ class BgList extends React.Component {
         bgimgApi.initList()
     }
 
-    change(indexString){
+    change(indexString) {
         bgimgApi.change(indexString)
     }
 
@@ -129,7 +227,7 @@ class BgList extends React.Component {
             <div className={`list-${type}`}>
                 {
                     this.props.list[type].map((obj, index) => {
-                        const _index = type+'-'+index
+                        const _index = type + '-' + index
                         return (
                             <div
                                 key={index}

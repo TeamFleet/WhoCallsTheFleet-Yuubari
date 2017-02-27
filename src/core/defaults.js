@@ -1,4 +1,5 @@
-import KC from 'kckit/src/kckit.js'
+// import KC from 'kckit/src/kckit.js'
+const KC = require('kckit')
 
 
 const getPath = (dir) => {
