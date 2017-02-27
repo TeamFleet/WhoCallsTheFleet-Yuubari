@@ -12,11 +12,9 @@ export default class extends React.Component {
     }
 
     render() {
-        // const file = '/bgimgs/bob-1.jpg'
-        // const fileBlured = '/bgimgs/blured/bob-1.jpg'
         return (
             <div id="app">
-                <Nav />
+                <Nav location={this.props.location} />
                 <Main location={this.props.location}>
                     {this.props.children}
                 </Main>

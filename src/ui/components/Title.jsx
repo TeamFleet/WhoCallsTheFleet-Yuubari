@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import filterProps from '../../core/react/filter-props'
-// import checkCssProp from '../../core/check-css-prop.js'
+// import checkCssProp from 'check-css-prop'
 
 import './Title.less'
 

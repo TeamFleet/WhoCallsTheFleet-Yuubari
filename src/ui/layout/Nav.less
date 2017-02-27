@@ -1,6 +1,8 @@
 @import '../../core-less/_include.less';
 
 #nav{
+    @controls-height:   60px;
+
     left:       0;
     width:      @nav-width;
     // overflow:   hidden;
@@ -31,6 +33,45 @@
 
     & > .wrapper{
         overflow-y: auto;
+        padding-bottom: @controls-height;
+    }
+
+    .logo{
+        @size:      48px;
+
+        height:     90px;
+        position:   relative;
+        border-left:20px solid transparent;
+
+        .btn-back, .btn-home-logo{
+            position:   absolute;
+            top:        50%;
+            margin-top: (0 - @size / 2);
+            height:     @size;
+            width:      @size;
+            text-align: center;
+            background: no-repeat 50% 50% / contain;
+        }
+
+        .btn-back{
+            z-index:    1;
+        }
+
+        .btn-home-logo{
+            z-index:    2;
+            background-image: url('../../assets/appicon.png');
+            transform:  translateX((@size + 15));
+            &.on{
+                pointer-events: none;
+            }
+        }
+
+        .btn-back[disabled]{
+            opacity:    0;
+            & ~ .btn-home-logo{
+                transform:  none;
+            }
+        }
     }
 
     .navs{
@@ -45,6 +86,9 @@
             margin-top: 4px;
             &:hover{
                 color:  #fff;
+            }
+            &:active{
+                color:  fade(#fff, 50%);
             }
             &.on{
                 color:  #fff;
@@ -69,5 +113,13 @@
             display:    block;
             height:     15px;
         }
+    }
+
+    .controls{
+        position:   absolute;
+        bottom:     0;
+        height:     @controls-height;
+        line-height:@controls-height;
+        border-left:20px solid transparent;
     }
 }

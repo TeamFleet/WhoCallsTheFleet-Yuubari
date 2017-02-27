@@ -1,10 +1,12 @@
 import store from '../../core/store.js';
 import * as actions from './actions.js'
 
+import { dir as thePath } from '../../core/defaults.js'
+
 const getPath = (filename, type = '') => {
     if (typeof filename === 'object' && filename.name) filename = filename.name
 
-    const dir = type == 'custom' ? self.path.bgimgs_custom : self.path.bgimgs
+    const dir = type == 'custom' ? thePath.bgimgs_custom : thePath.bgimgs
 
     if (self.nw) {
         const path = require('path')
@@ -25,7 +27,7 @@ const getObj = (indexString) => {
 const getListInitial = (type) => {
     let list = []
 
-    const dir = type == 'custom' ? self.path.bgimgs_custom : self.path.bgimgs
+    const dir = type == 'custom' ? thePath.bgimgs_custom : thePath.bgimgs
 
     const parseData = (name) => {
         return {
