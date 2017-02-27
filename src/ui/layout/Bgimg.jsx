@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+// import { dir } from '../../core/defaults.js'
 import * as bgimgApi from '../../logic/bgimg/api.js'
 
 import './Bgimg.less'
@@ -133,24 +134,22 @@ class BgInitial extends React.Component {
 
         this.state = {
             stylesOriginal: false,
-            stylesBlured: false
+            stylesBlured: false,
+            showBlured: true
         }
     }
 
-    closeBgControls() {
-        document.body.classList.add('mode-bg-leaving')
-    }
-
-    originalLoaded(evt) {
+    originalLoaded() {
+        // console.log('originalLoaded')
         this.setState({
             stylesOriginal: {
                 backgroundImage: `url(${this.props.bgImg})`
             }
         })
-        evt.target.parentNode.removeChild(evt.target)
     }
 
     originalAnimationEnd(evt) {
+        // console.log('originalAnimationEnd')
         if (evt.nativeEvent.animationName == 'background-original-leave') {
             setTimeout(() => {
                 document.body.classList.remove('mode-bg-leaving')
@@ -160,13 +159,18 @@ class BgInitial extends React.Component {
     }
 
     originalTransitionEnd(evt) {
-        if (evt.propertyName == 'opacity') {
-            this.elItemBlured.parentNode.removeChild(this.elItemBlured)
+        // console.log('originalTransitionEnd', evt.target)
+        // console.log('showBlured', this.state.showBlured)
+        if (evt.propertyName == 'opacity' && this.state.showBlured) {
             bgimgApi.initImgLoaded()
+            this.setState({
+                showBlured: false
+            })
         }
     }
 
     bluredLoaded(evt) {
+        // console.log('bluredLoaded')
         this.setState({
             stylesBlured: {
                 backgroundImage: `url(${this.props.bgImgBlured})`
@@ -175,10 +179,12 @@ class BgInitial extends React.Component {
         evt.target.parentNode.removeChild(evt.target)
     }
 
-    bluredTransitionEnd(evt) {
-        if (evt.propertyName == 'opacity' && !evt.target.style.opacity)
-            evt.target.parentNode.removeChild(evt.target)
-    }
+    // bluredTransitionEnd(evt) {
+    // console.log('bluredTransitionEnd', evt.target)
+    // if (evt.propertyName == 'opacity' && !evt.target.style.opacity) {
+    //     evt.target.parentNode.removeChild(evt.target)
+    // }
+    // }
 
     render() {
         return (
@@ -189,17 +195,18 @@ class BgInitial extends React.Component {
                     onAnimationEnd={this.originalAnimationEnd.bind(this)}
                     onTransitionEnd={this.originalTransitionEnd.bind(this)}
                 >
-                    <img src={this.props.bgImg} onLoad={this.originalLoaded.bind(this)} />
+                    {<img src={this.props.bgImg} onLoad={this.originalLoaded.bind(this)} />}
                 </div>
 
-                <div
-                    className={"item is-blured" + (this.state.stylesBlured ? ' is-loaded' : '')}
-                    style={this.state.stylesBlured || {}}
-                    onTransitionEnd={this.bluredTransitionEnd.bind(this)}
-                    ref={(el) => { this.elItemBlured = el }}
-                >
-                    <img src={this.props.bgImgBlured} onLoad={this.bluredLoaded.bind(this)} />
-                </div>
+                {this.showBlured &&
+                    <div
+                        className={"item is-blured" + (this.state.stylesBlured ? ' is-loaded' : '')}
+                        style={this.state.stylesBlured || {}}
+                        ref={(el) => { this.elItemBlured = el }}
+                    >
+                        <img src={this.props.bgImgBlured} onLoad={this.bluredLoaded.bind(this)} />
+                    </div>
+                }
             </div>
         )
     }
@@ -232,9 +239,11 @@ class BgList extends React.Component {
                             <div
                                 key={index}
                                 className={`background-thumbnail${_index === this.props.index ? ' on' : ''}`}
-                                onClick={() => this.change(_index)}>
-                                {obj.name}
-                            </div>
+                                style={{
+                                    backgroundImage: `url(${bgimgApi.getPath(obj.name, 'thumbnail')})`
+                                }}
+                                onClick={() => this.change(_index)}
+                            />
                         )
                     })
                 }
@@ -249,6 +258,7 @@ class BgList extends React.Component {
                 {this.renderList('default')}
             </div>
         )
+        // return <div></div>
     }
 }
 
