@@ -1,7 +1,8 @@
 @import '../../core-less/_include.less';
 
 #bgimg{
-    @list-height: 100px;
+    @size-thumbnail:100px;
+    @list-width:    (@size-thumbnail * 2 + 10 * 3);
 
     position:   fixed;
     z-index:    1;
@@ -49,7 +50,7 @@
             background: no-repeat 50% 38.2% / cover;
             z-index:    2;
             transition-duration:    (@base-transition-duration * 8);
-            transition-delay:       0s;
+            transition-delay:       (@base-transition-duration * 0);
             transition-timing-function: linear;
             img{
                 position:   relative;
@@ -75,10 +76,10 @@
     .background-original{
         position:   absolute;
         z-index:    2;
-        left:       0;
-        right:      0;
+        left:       (@list-width + 20);
+        right:      20px;
         top:        20px;
-        bottom:     (@list-height + 20);
+        bottom:     20px;
         // opacity:    0;
         background: no-repeat 50% 38.2% / contain;
         // transform:  translateY(-4rem);
@@ -87,26 +88,32 @@
     .list{
         position:   absolute;
         z-index:    2;
-        left:       0;
-        right:      0;
+        top:        0;
         bottom:     0;
-        height:     @list-height;
+        left:       0;
+        width:      @list-width;
         background: fade(#fff, 10%);
-        overflow-y: hidden;
-        overflow-x: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
         // transform:  translateY(100%);
         .list-custom, .list-default{
-            display:    flex;
-            flex-flow:  row nowrap;
-            padding:    10px 0;
+            overflow:   hidden;
+            margin-right: 10px;
         }
         .background-thumbnail{
             display:    block;
-            flex:       0 0 (@list-height - 10);
-            height:     (@list-height - 10);
-            margin:     0 10px;
-            border:     1px solid fade(#fff, 20%);
-            background: no-repeat 50% 38.2% / cover;
+            width:      50%;
+            float:      left;
+            padding:    10px 0 0 10px;
+            position:   relative;
+            .ratio{
+                display:    block;
+                position:   relative;
+                border:     1px solid fade(#fff, 20%);
+                background: no-repeat 50% 38.2% / cover;
+                height:     0;
+                padding:    0 0 100% 0;
+            }
         }
     }
 }
@@ -176,7 +183,8 @@ body.is-ready.mode-bg{
             @keyframes background-original-enter{
                 0% {
                     opacity:    0;
-                    transform:  translateY(-4rem);
+                    // transform:  translateY(-4rem);
+                    transform:  translateX(4rem);
                 }
                 100% {
                     opacity:    1;
@@ -192,7 +200,8 @@ body.is-ready.mode-bg{
             animation-name:  background-list-enter;
             @keyframes background-list-enter{
                 0% {
-                    transform:  translateY(100%);
+                    // transform:  translateY(100%);
+                    transform:  translateX(-100%);
                 }
                 100% {
                     transform:  none;
@@ -234,7 +243,8 @@ body.is-ready.mode-bg.mode-bg-leaving{
                 }
                 100% {
                     opacity:    0;
-                    transform:  translateY(-4rem);
+                    // transform:  translateY(-4rem);
+                    transform:  translateX(4rem);
                 }
             }
         }
@@ -245,7 +255,8 @@ body.is-ready.mode-bg.mode-bg-leaving{
                     transform:  none;
                 }
                 100% {
-                    transform:  translateY(100%);
+                    // transform:  translateY(100%);
+                    transform:  translateX(-100%);
                 }
             }
         }

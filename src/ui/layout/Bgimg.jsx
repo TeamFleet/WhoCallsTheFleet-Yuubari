@@ -198,7 +198,7 @@ class BgInitial extends React.Component {
                     {<img src={this.props.bgImg} onLoad={this.originalLoaded.bind(this)} />}
                 </div>
 
-                {this.showBlured &&
+                {this.state.showBlured &&
                     <div
                         className={"item is-blured" + (this.state.stylesBlured ? ' is-loaded' : '')}
                         style={this.state.stylesBlured || {}}
@@ -239,11 +239,15 @@ class BgList extends React.Component {
                             <div
                                 key={index}
                                 className={`background-thumbnail${_index === this.props.index ? ' on' : ''}`}
-                                style={{
-                                    backgroundImage: `url(${bgimgApi.getPath(obj.name, 'thumbnail')})`
-                                }}
                                 onClick={() => this.change(_index)}
-                            />
+                            >
+                                <span
+                                    className="ratio"
+                                    style={{
+                                        backgroundImage: `url(${bgimgApi.getPath(obj.name, 'thumbnail')})`
+                                    }}
+                                />
+                            </div>
                         )
                     })
                 }
