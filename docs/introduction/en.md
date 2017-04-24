@@ -1,3 +1,0 @@
-## Super Project
-
-*need translation*
