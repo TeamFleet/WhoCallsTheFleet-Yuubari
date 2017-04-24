@@ -4,11 +4,11 @@
         "full": "English"
     },
 
+    "title": "Who Calls the Fleet",
+
     "welcome": "Welcome! Current time: ${time}",
 
     "nav": {
-        "home": "Home",
-        "about": "About"
     },
 
     "pageAbout": {

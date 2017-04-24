@@ -1,5 +1,6 @@
-import { getLocaleId, localeId as currentLocaleId } from 'sp-i18n'
-import { name as siteName, origin as siteOrigin, fb_app_id } from 'Config/site.js'
+import translate, { getLocaleId, localeId as currentLocaleId } from 'sp-i18n'
+
+import { origin as siteOrigin } from 'Config/site.js'
 import { availableLocalesFb } from 'Config/i18n.js'
 
 let head
@@ -9,13 +10,13 @@ export default (settings = {}) => {
     let fb_locale
     let fb_app_id = fb_app_id
     let siteOrigin = siteOrigin
+    const siteName = translate('title')
 
     /**
      * 默认选项
      */
     const options = Object.assign({
         uri: '',
-        title: siteName,
         description: '',
         image: null,
 
@@ -26,6 +27,7 @@ export default (settings = {}) => {
     }, settings)
 
     let { uri, title, description, image, state } = options
+    if (!title) title = siteName
 
     const curLocaleId = state.localeId || currentLocaleId
 

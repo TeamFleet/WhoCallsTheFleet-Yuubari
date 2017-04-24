@@ -17,11 +17,11 @@ export default class extends React.Component {
                 <input type="checkbox" id="nav-switch" />
 
                 <div className="wrapper">
-                    <h1><IndexLink to="/">Super Project</IndexLink></h1>
+                    <h1><IndexLink to="/">{translate('title')}</IndexLink></h1>
 
                     <div className="navs">
-                        <IndexLink to="/" activeClassName="on" className="level-1">{translate('nav.home')}</IndexLink>
-                        <Link to="/about" activeClassName="on" className="level-1">{translate('nav.about')}</Link>
+                        <IndexLink to="/" activeClassName="on" className="level-1">testPage1</IndexLink>
+                        <Link to="/about" activeClassName="on" className="level-1">testPage2</Link>
                     </div>
 
                     <div className="language-switch">

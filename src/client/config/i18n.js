@@ -1,6 +1,6 @@
 export const availableLocales = [
     'en',
-    'zh-cn'
+    'zh'
 ]
 
 export const availableLocalesFb = [
