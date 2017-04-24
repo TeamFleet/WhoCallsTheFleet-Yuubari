@@ -1,0 +1,208 @@
+@import './ui/base.less';
+@import (css) "~normalize.css/normalize.css";
+
+*, *:before, *:after{
+	box-sizing: inherit;
+	transition: @base-transition-timing-function @base-transition-duration;
+	transition-property: 	background-color,
+							background-size,
+							background-position,
+							border,
+							box-shadow,
+							color,
+							opacity,
+							outline,
+							transform;
+}
+
+:first-child{
+    margin-top: 0;
+}
+:last-child{
+    margin-bottom: 0;
+}
+
+.through,
+.click-through{
+	pointer-events: none;
+}
+
+.no-animation{
+	animation-name: none !important;
+}
+
+button,
+input,
+optgroup,
+option,
+select,
+textarea{
+    font-family:    inherit;
+}
+
+
+
+
+// Default Styles -------------------------------------------------------------
+
+html, body{
+	height:     100%;
+    // overflow:   hidden;
+}
+
+html{
+	font-family: 	@font-family-sans;
+	background: 	@base-background-color;
+	color: 			@base-color;
+	font-size: 		@root-font-size;
+	line-height: 	@base-line-height;
+	box-sizing:  	border-box;
+	overflow-x: 	hidden;
+	transition: 	none;
+
+	&.is-mobile{
+		user-select: 	none;
+		cursor:         default;
+		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	}
+
+	&.platform-ios{
+		[data-platform]:not([data-platform="ios"]){
+			display: 	none;
+		}
+	}
+
+	&.platform-android{
+		[data-platform]:not([data-platform="android"]){
+			display: 	none;
+		}
+	}
+}
+
+body{
+    position:       relative;
+	font-size: 		@base-font-size;
+	line-height: 	@base-line-height;
+}
+
+:active{
+	transition-duration: (@base-transition-duration / 5);
+}
+
+[disabled],
+.disabled,
+.disable,
+.state-disabled,
+.state-disable,
+[state="disabled"],
+[state="disable"],
+.is-disabled,
+.is-disable{
+    cursor:     	default;
+	pointer-events: none;
+    opacity:    	.5;
+}
+
+a{
+	text-decoration: none;
+}
+
+a, .link{
+	color: 		@base-color-accent;
+	&:hover{
+		color: 	@theme-orange-a700;
+	}
+	&:active{
+		color: 	@theme-orange-400;
+	}
+}
+
+hr, p{
+	margin: 	1.25rem 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+	line-height: 	1.25em;
+	margin-top: 	1.75em;
+	margin-bottom: 	(1.25 * @base-font-size);
+	color: 			@base-color-main;
+}
+
+    h1{
+        font-size:  3rem;
+    }
+
+    h2{
+        font-size:  1.5rem;
+    }
+
+    h3{
+        font-size:  1.125rem;
+    }
+
+    h4{
+        font-size:  1rem;
+        color:      @theme-bluegrey-700;
+    }
+
+    h5{
+        font-size:  @base-font-size;
+        color:      @theme-bluegrey-700;
+    }
+
+blockquote{
+	border-left: 	4px solid @base-border-color;
+	margin-left: 	0;
+	padding: 		2px 0 2px (@base-font-size - 4px);
+	font-style: 	italic;
+	color: 			mix(@theme-bluegrey-200, @theme-bluegrey-300);
+}
+
+code{
+	display: 		inline-block;
+	font-family: 	"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	background: 	#fff;
+	border: 		1px solid mix(@theme-bluegrey-50, @theme-bluegrey-100);
+	padding: 		0 .5em;
+	font-size: 		smaller;
+	line-height: 	1.4em;
+	vertical-align: text-top;
+	border-radius: 	3px;
+	margin-top:		-1px;
+	letter-spacing: .05em;
+}
+
+pre{
+	code{
+		display: 		block;
+		letter-spacing: 0;
+		overflow: 		auto;
+		padding: 		.5em 1em;
+		line-height: 	1.15em;
+	}
+}
+
+
+
+
+
+#root{
+    // display:    none;
+    position:   relative;
+    z-index:    @z-index-app;
+	min-height: 100%;
+	// max-width: 	@screen-max-width;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#main-android-cmpg{
+	width: 		0;
+	height: 	0;
+	display: 	block;
+	position: 	absolute;
+	top: 		-1000px;
+	left: 		-1000px;
+	z-index: 	-1;
+	border: 	0;
+}

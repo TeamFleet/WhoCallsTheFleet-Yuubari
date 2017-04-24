@@ -1,0 +1,179 @@
+@import '../base.less';
+
+.component{
+    position:   fixed;
+    z-index:    2;
+
+    left:       0;
+    top:        0;
+
+    #nav-switch,
+    label[for="nav-switch"]{
+        display:    none;
+    }
+
+    & > .wrapper{
+        position:   fixed;
+        top:        0;
+        left:       0;
+        height:     100%;
+        width:      @nav-width;
+
+        background: @theme-bluegrey-50;
+        border-right: 1px solid mix(@theme-bluegrey-100, @theme-bluegrey-50);
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        padding:    30px 20px;
+        font-size:  14px;
+        color:      @theme-bluegrey-300;
+
+        z-index:    2;
+    }
+
+    a{
+        color:      inherit;
+        &:hover{
+            color:  @theme-bluegrey-500;
+        }
+        &:active{
+            color:  @theme-bluegrey-200;
+        }
+        &.on{
+            color:      @base-color-accent;
+            pointer-events: none;
+        }
+    }
+
+    h1{
+        color:      @theme-bluegrey-400;
+        font-size:  1.5rem;
+        line-height:0.8em;
+        font-weight:lighter;
+        letter-spacing: .2em;
+        font-style: italic;
+        a{
+            color:  inherit;
+        }
+    }
+
+    .navs{
+        margin-top: 50px;
+        .blank{
+            display:    block;
+            height:     10px;
+        }
+        a{
+            display:    block;
+            line-height:1.2em;
+            margin:     5px 0;
+            &:first-child{
+                margin-top:     0;
+            }
+        }
+        .level-1{
+            padding:    .4em 0 .4em 20px;
+            &.on{
+                position:   relative;
+                &:before{
+                    @size:      8px;
+                    content:    "";
+                    position:   absolute;
+                    top:        50%;
+                    left:       0;
+                    margin-top: (0 - @size / 2);
+                    width:      @size;
+                    height:     @size;
+                    background: @base-color-accent;
+                    border-radius: 50%;
+                }
+            }
+        }
+        .level-2{
+            padding:    .2em 0 .2em (20px + @base-font-size);
+        }
+        .subs{
+            display:        block;
+            margin-bottom:  10px;
+        }
+    }
+
+    .language-switch{
+        margin-top:     50px;
+        padding-left:   20px;
+    }
+    .switches{
+        display:    block;
+        overflow:   hidden;
+        .item{
+            @size:      20px;
+
+            display:    block;
+            float:      left;
+            font-size:  12px;
+            width:      @size;
+            line-height:@size;
+            height:     @size;
+            text-align: center;
+            border:     1px solid currentColor;
+            margin:     0 4px 0 0;
+        }
+    }
+
+    @media all and (max-width: @screen-phone) {
+        & > .wrapper{
+            width:      320px;
+            width:      ~"calc(100% - 40px)";
+            max-width:  320px;
+            transform:  translateX(-100%);
+        }
+
+        label[for="nav-switch"]{
+            @size:      30px;
+
+            display:    inline;
+            position:   static;
+
+            &:before{
+                content:    "☰";
+                position:   absolute;
+                z-index:    3;
+                top:        0;
+                left:       0;
+                width:      @size;
+                height:     @size;
+                line-height:@size;
+                text-align: center;
+                // background: #800;
+                color:      @theme-bluegrey-500;
+                font-size:  24px;
+            }
+
+            &:after{
+                content:    "";
+                position:   fixed;
+                z-index:    1;
+                top:        0;
+                left:       0;
+                width:      100%;
+                height:     100%;
+                background: fade(#000, 75%);
+                opacity:    0;
+                pointer-events: none;
+            }
+        }
+
+        #nav-switch:checked{
+            & ~ .wrapper{
+                transform:  none;
+            }
+            & ~ label[for="nav-switch"]{
+                &:after{
+                    opacity:    1;
+                    pointer-events: all;
+                }
+            }
+        }
+    }
+}

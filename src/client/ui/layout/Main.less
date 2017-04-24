@@ -1,0 +1,42 @@
+@import '../base.less';
+
+.component{
+    position:   relative;
+    border:     30px solid transparent;
+
+    & > .wrapper{
+        
+    }
+
+    .main-transition-enter, .main-transition-leave{
+        position:   absolute;
+        top:        0;
+        width:      100%;
+
+        transition-property: opacity, transform;
+    }
+
+    .main-transition-enter {
+        opacity:    0.01;
+        transform:  translateX(-2rem);
+
+        &.main-transition-enter-active {
+            opacity:    1;
+            transform:  none;
+            transition-duration: 200ms;
+            // transition-timing-function: ease-in;
+        }
+    }    
+
+    .main-transition-leave {
+        opacity:    1;
+        transform:  none;
+
+        &.main-transition-leave-active {
+            opacity:    0.01;
+            transform:  translateX(2rem);
+            transition-duration: 200ms;
+            // transition-timing-function: ease-in;
+        }
+    }
+}

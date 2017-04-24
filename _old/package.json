@@ -1,0 +1,158 @@
+{
+  "name": "WhoCallsTheFleet-dev",
+  "main": "app/main.html",
+  "version": "1.0.0",
+  "description": "An offline guidebook for KanColle. Based on NW.JS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Diablohu/WhoCallsTheFleet"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/Diablohu/WhoCallsTheFleet"
+    }
+  ],
+  "author": {
+    "name": "Diablohu",
+    "email": "diablohudream@gmail.com"
+  },
+  "readmeFilename": "README.md",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/cthackers/adm-zip/master/MIT-LICENSE.txt"
+    }
+  ],
+  "debug": true,
+  "window": {
+    "frame": true,
+    "toolbar": false,
+    "width": 1280,
+    "height": 720,
+    "icon": "./app/appicon.png",
+    "position": "center",
+    "min_width": 640,
+    "min_height": 480,
+    "as_desktop": false,
+    "resizable": true,
+    "always-on-top": false,
+    "fullscreen": false,
+    "show_in_taskbar": true,
+    "show": false,
+    "kiosk": false,
+    "transparent": false
+  },
+  "platformOverrides": {
+    "win": {
+      "debug": false,
+      "window": {
+        "frame": false
+      }
+    },
+    "win32": {
+      "debug": false,
+      "window": {
+        "frame": false
+      }
+    },
+    "osx": {
+      "debug": false,
+      "window": {
+        "frame": true
+      }
+    },
+    "linux": {
+      "debug": false,
+      "window": {
+        "frame": true
+      }
+    }
+  },
+  "nw-packager": {
+    "version": "0.12.2",
+    "platforms": [
+      "win64"
+    ],
+    "filesRelative": [
+      "package.json"
+    ],
+    "dataVersion": {
+      "app": "1.0.0.0-alpha1",
+      "app-db": "2016.12.29",
+      "bgimgs": "1.18.6.0",
+      "pics": "2016.12.29",
+      "pics-enemies": "1.18.6.0",
+      "pics-ships": "1.18.6.0",
+      "pics-ships-extra": "2016.12.23"
+    },
+    "buildDir": "N:\\nwbuild\\build",
+    "winIco": "./src/_common/appicon.ico",
+    "enableLauncher": true,
+    "dataRelative": [
+      "app",
+      "app-db",
+      "bgimgs",
+      "pics",
+      "pics-enemies",
+      "pics-ships",
+      "pics-ships-extra"
+    ],
+    "launcherSplash": "./src/_common/launcher.webp",
+    "macIcns": "./src/_common/appicon.icns"
+  },
+  "dependencies": {
+    "kckit": "^0.4.2",
+    "bind-event": "^1.0.5",
+    "check-css-prop": "^1.0.1",
+
+    "mkdirp": "^0.5.1",
+
+    "normalize.css": "^5.0.0",
+
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-redux": "^5.0.2",
+
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-plugin-transform-decorators-legacy": "latest",
+
+    "babel-eslint": "^7.1.1",
+
+    "less": "^2.7.2",
+
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0",
+
+    "file-loader": "^0.10.0",
+    "base64-image-loader": "^1.2.0",
+    "css-loader": "^0.26.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+
+    "html-webpack-plugin": "^2.26.0",
+    "copy-webpack-plugin": "^4.0.1",
+
+    "nw-dev": "^3.0.1"
+  },
+  "scripts": {
+    "nw-dev": "webpack -d --watch --env.target=nw --env.env=dev",
+    "nw-dist": "webpack -p --env.target=nw --env.env=dist",
+    "web-dev": "webpack-dev-server -d --content-base app --watch --inline --watch-poll --host 0.0.0.0 --env.target=nw --env.env=dev",
+    "init": "mkdir app",
+    "clean": "rm -rf app",
+    "prebuild": "npm run clean && npm run init",
+    "start": "npm run prebuild && npm run nw-dev",
+    "build": "npm run nw-dist"
+  }
+}

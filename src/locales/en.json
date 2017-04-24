@@ -1,0 +1,17 @@
+{
+    "name": {
+        "short": "EN",
+        "full": "English"
+    },
+
+    "welcome": "Welcome! Current time: ${time}",
+
+    "nav": {
+        "home": "Home",
+        "about": "About"
+    },
+
+    "pageAbout": {
+        "test": "This is test line #1."
+    }
+}

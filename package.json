@@ -1,158 +1,212 @@
 {
-  "name": "WhoCallsTheFleet-dev",
-  "main": "app/main.html",
-  "version": "1.0.0",
-  "description": "An offline guidebook for KanColle. Based on NW.JS",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Diablohu/WhoCallsTheFleet"
-  },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/Diablohu/WhoCallsTheFleet"
+    "name": "whocallsthefleet-yuubari",
+    "main": "dist-app/main.html",
+
+    "version": "1.0.0",
+
+    "description": "Yuubari (Beta) Channel for Who Calls the Fleet (https://yuubari.fleet.moe)",
+    "author": {
+        "name": "Diablohu",
+        "email": "diablohudream@gmail.com",
+        "url": "http://diablohu.com"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Diablohu/WhoCallsTheFleet"
+    },
+
+    "scripts": {
+        "start": "npm run build && node ./dist-web/server --cport 8081 --sport 8080",
+        "start:pm2": "npm run build && pm2 restart pm2.json --only fleet-dev-start",
+        "start:dev": "npm run pm2:dev",
+        "deploy": "node ./deploy",
+
+
+        "build": "npm run dist",
+        "build:app": "",
+
+
+        "clean:dist": "rimraf ./dist-web",
+        "copy:public": "copyfiles ./public/**/* ./dist-web",
+
+
+        "dev:client": "node ./webpack/enter --stage client --env dev --cport 3002",
+        "dev:server": "node ./webpack/enter --stage server --env dev --cport 3002",
+        "dev:run": "node ./dist-web/server --cport 3002 --sport 3000",
+
+
+        "dist:server": "node ./webpack/enter --stage server --env dist",
+        "dist:client": "node ./webpack/enter --stage client --env dist",
+        "dist:run": "npm run dist:server && npm run dev:run",
+        "dist": "npm run clean:dist && npm run dist:client && npm run dist:server && npm run copy:public",
+
+
+        "pm2:dev:client": "pm2 restart pm2.json --only fleet-dev-client",
+        "pm2:dev:server": "pm2 restart pm2.json --only fleet-dev-server",
+        "pm2:dev:run": "pm2 restart pm2.json --only fleet-dev-run --watch",
+        "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
+        "pm2:clean": "pm2 delete fleet-dev-client fleet-dev-server fleet-dev-run",
+        "pm2:clean:log": ""
+    },
+
+    "window": {
+        "frame": true,
+        "toolbar": false,
+        "width": 1280,
+        "height": 720,
+        "icon": "./app/appicon.png",
+        "position": "center",
+        "min_width": 640,
+        "min_height": 480,
+        "as_desktop": false,
+        "resizable": true,
+        "always-on-top": false,
+        "fullscreen": false,
+        "show_in_taskbar": true,
+        "show": false,
+        "kiosk": false,
+        "transparent": false
+    },
+    "platformOverrides": {
+        "win": {
+            "debug": false,
+            "window": {
+                "frame": false
+            }
+        },
+        "win32": {
+            "debug": false,
+            "window": {
+                "frame": false
+            }
+        },
+        "osx": {
+            "debug": false,
+            "window": {
+                "frame": true
+            }
+        },
+        "linux": {
+            "debug": false,
+            "window": {
+                "frame": true
+            }
+        }
+    },
+
+    "dependencies": {
+        "react-motion": "^0.4.7",
+        "normalize.css": "^6.0.0",
+        "kckit": "^0.6.3"
+    },
+    "devDependencies": {
+        "sp-base": "^2.0.0",
+        "sp-react-isomorphic": "^1.12.4",
+        "sp-css-import": "^1.1.0",
+        "sp-css-loader": "^1.1.3",
+        "sp-model": "^1.0.0",
+        "sp-mongo": "^1.1.0",
+        "sp-api": "^1.1.1",
+        "sp-upload": "^1.1.3",
+        "sp-cms": "^1.0.0",
+        "sp-auth": "^1.2.1",
+        "sp-koa-views": "^1.0.0",
+        "sp-i18n": "^1.1.2",
+        "sp-ui-pagecontainer": "^1.0.4",
+        "sp-pwa": "^1.3.0",
+
+
+        "react": "^15.5.4",
+        "react-dom": "^15.5.4",
+        "react-router": "^3.0.0",
+        "react-addons-css-transition-group": "^15.5.2",
+        "react-portal": "^3.0.0",
+
+
+        "redux": "^3.6.0",
+        "redux-thunk": "^2.2.0",
+        "react-redux": "^5.0.3",
+        "react-router-redux": "^4.0.7",
+
+
+        "koa": "^2.1.0",
+        "koa-body": "^2.0.0",
+        "koa-compress": "^2.0.0",
+        "koa-convert": "^1.2.0",
+        "koa-html-minifier": "^1.0.1",
+        "koa-json": "^1.1.1",
+        "koa-log4": "^2.1.0",
+        "koa-multer": "^1.0.0",
+        "koa-onerror": "^3.1.0",
+        "koa-response-time": "^2.0.0",
+        "koa-router": "^7.0.0",
+        "koa-static": "^3.0.0",
+        "koa-compose": "^3.2.1",
+        "koa-helmet": "^3.1.0",
+
+
+        "mongodb": "^2.2.16",
+
+
+        "babel-core": "^6.24.1",
+        "babel-polyfill": "^6.23.0",
+        "babel-preset-env": "^1.4.0",
+        "babel-preset-react": "^6.24.1",
+        "babel-preset-stage-0": "^6.24.1",
+        "babel-plugin-transform-decorators-legacy": "^1.3.4",
+
+
+        "webpack": "^2.4.1",
+        "webpack-dev-server": "^2.4.4",
+        "webpack-dashboard": "^0.3.0",
+        "webpack-dev-middleware": "^1.10.1",
+        "webpack-hot-middleware": "^2.17.1",
+
+
+        "babel-loader": "^7.0.0",
+        "file-loader": "^0.11.1",
+        "url-loader": "^0.5.8",
+        "react-hot-loader": "^3.0.0-beta.6",
+        "postcss-loader": "^1.3.3",
+        "css-loader": "^0.28.0",
+        "less-loader": "^4.0.3",
+        "sass-loader": "^6.0.3",
+        "style-loader": "^0.16.1",
+        "html-loader": "^0.4.5",
+        "raw-loader": "^0.5.1",
+        "copy-webpack-plugin": "^4.0.1",
+
+
+        "eslint": "^3.17.1",
+        "eslint-plugin-react": "^6.10.0",
+        "babel-eslint": "^7.1.1",
+
+
+        "less": "^2.7.2",
+        "autoprefixer": "^6.7.7",
+        "postcss-pxtorem": "^4.0.0",
+
+
+        "underscore": "1.8.3",
+        "bind-event": "^1.0.5",
+        "check-css-prop": "^1.0.1",
+        "es5-shim": "^4.5.9",
+
+
+        "debug": "^2.6.1",
+        "md5": "^2.2.1",
+        "sha1": "^1.1.1",
+        "node-native-zip": "^1.1.0",
+        "isomorphic-fetch": "^2.2.1",
+        "ejs": "2.5.6",
+        "yargs": "^7.0.2",
+        "is_js": "^0.9.0",
+        "dotenv": "^4.0.0",
+        "rimraf": "^2.5.4",
+        "copyfiles": "^1.0.0",
+        "classlist-polyfill": "^1.0.3",
+        "simple-git": "^1.68.0",
+        "npm-run-script": "^0.0.4"
     }
-  ],
-  "author": {
-    "name": "Diablohu",
-    "email": "diablohudream@gmail.com"
-  },
-  "readmeFilename": "README.md",
-  "license": "MIT",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://raw.github.com/cthackers/adm-zip/master/MIT-LICENSE.txt"
-    }
-  ],
-  "debug": true,
-  "window": {
-    "frame": true,
-    "toolbar": false,
-    "width": 1280,
-    "height": 720,
-    "icon": "./app/appicon.png",
-    "position": "center",
-    "min_width": 640,
-    "min_height": 480,
-    "as_desktop": false,
-    "resizable": true,
-    "always-on-top": false,
-    "fullscreen": false,
-    "show_in_taskbar": true,
-    "show": false,
-    "kiosk": false,
-    "transparent": false
-  },
-  "platformOverrides": {
-    "win": {
-      "debug": false,
-      "window": {
-        "frame": false
-      }
-    },
-    "win32": {
-      "debug": false,
-      "window": {
-        "frame": false
-      }
-    },
-    "osx": {
-      "debug": false,
-      "window": {
-        "frame": true
-      }
-    },
-    "linux": {
-      "debug": false,
-      "window": {
-        "frame": true
-      }
-    }
-  },
-  "nw-packager": {
-    "version": "0.12.2",
-    "platforms": [
-      "win64"
-    ],
-    "filesRelative": [
-      "package.json"
-    ],
-    "dataVersion": {
-      "app": "1.0.0.0-alpha1",
-      "app-db": "2016.12.29",
-      "bgimgs": "1.18.6.0",
-      "pics": "2016.12.29",
-      "pics-enemies": "1.18.6.0",
-      "pics-ships": "1.18.6.0",
-      "pics-ships-extra": "2016.12.23"
-    },
-    "buildDir": "N:\\nwbuild\\build",
-    "winIco": "./src/_common/appicon.ico",
-    "enableLauncher": true,
-    "dataRelative": [
-      "app",
-      "app-db",
-      "bgimgs",
-      "pics",
-      "pics-enemies",
-      "pics-ships",
-      "pics-ships-extra"
-    ],
-    "launcherSplash": "./src/_common/launcher.webp",
-    "macIcns": "./src/_common/appicon.icns"
-  },
-  "dependencies": {
-    "kckit": "^0.4.2",
-    "bind-event": "^1.0.5",
-    "check-css-prop": "^1.0.1",
-
-    "mkdirp": "^0.5.1",
-
-    "normalize.css": "^5.0.0",
-
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-router": "^3.0.2",
-    "react-addons-css-transition-group": "^15.4.2",
-    "react-redux": "^5.0.2",
-
-    "redux": "^3.6.0"
-  },
-  "devDependencies": {
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
-    "babel-preset-env": "^1.1.8",
-    "babel-preset-react": "^6.22.0",
-    "babel-preset-stage-0": "^6.22.0",
-    "babel-plugin-transform-decorators-legacy": "latest",
-
-    "babel-eslint": "^7.1.1",
-
-    "less": "^2.7.2",
-
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0",
-
-    "file-loader": "^0.10.0",
-    "base64-image-loader": "^1.2.0",
-    "css-loader": "^0.26.1",
-    "less-loader": "^2.2.3",
-    "style-loader": "^0.13.1",
-
-    "html-webpack-plugin": "^2.26.0",
-    "copy-webpack-plugin": "^4.0.1",
-
-    "nw-dev": "^3.0.1"
-  },
-  "scripts": {
-    "nw-dev": "webpack -d --watch --env.target=nw --env.env=dev",
-    "nw-dist": "webpack -p --env.target=nw --env.env=dist",
-    "web-dev": "webpack-dev-server -d --content-base app --watch --inline --watch-poll --host 0.0.0.0 --env.target=nw --env.env=dev",
-    "init": "mkdir app",
-    "clean": "rm -rf app",
-    "prebuild": "npm run clean && npm run init",
-    "start": "npm run prebuild && npm run nw-dev",
-    "build": "npm run nw-dist"
-  }
 }
