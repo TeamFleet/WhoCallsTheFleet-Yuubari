@@ -57,8 +57,8 @@
             max_memory_restart: "300M",
             instances: 1,
             exec_mode: "cluster",
-            out_file: "logs/dev/fleet-dev-start.log",
-            error_file: "logs/dev/fleet-dev-start-error.log",
+            out_file: "logs/dev/fleet-yuubari.log",
+            error_file: "logs/dev/fleet-yuubari-error.log",
             env: {
                 SPORT: "8080",
                 CPORT: "8081"

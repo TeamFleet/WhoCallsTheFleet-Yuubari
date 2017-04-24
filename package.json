@@ -18,7 +18,7 @@
 
     "scripts": {
         "start": "npm run build && node ./dist-web/server --cport 8081 --sport 8080",
-        "start:pm2": "npm run build && pm2 restart pm2.json --only fleet-dev-start",
+        "start:pm2": "npm run build && pm2 restart pm2.json --only fleet-yuubari",
         "start:dev": "npm run pm2:dev",
         "deploy": "node ./deploy",
 
