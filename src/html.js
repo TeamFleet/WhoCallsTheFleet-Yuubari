@@ -44,7 +44,6 @@ export const template = `
 
         <script>//inject_critical</script>
         <script>//inject_pwa</script>
-        <script>//inject_test</script>
     </head>
     <body>
         <div id="root">
@@ -54,16 +53,4 @@ export const template = `
         <script>//inject_js</script>
     </body>
     </html>
-
-
-    <!-- 百度统计 -->    
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?5a9f1c9e9dadf260593960308dfebe3f";
-    var s = document.getElementsByTagName("script")[0]; 
-    s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
 `

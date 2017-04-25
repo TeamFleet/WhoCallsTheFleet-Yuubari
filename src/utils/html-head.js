@@ -62,7 +62,7 @@ export default (settings = {}) => {
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: siteName },
         { property: 'og:image', content: image },
-
+        /*
         // For FaceBook App
         { property: 'al:ios:url', content: siteOrigin + uri },
         { property: 'al:ios:app_store_id', content: '543577420' },
@@ -89,6 +89,7 @@ export default (settings = {}) => {
         { name: 'twitter:app:name:googleplay', content: siteName },
         { name: 'twitter:app:id:googleplay', content: 'com.roidapp.photogrid' },
         { name: 'twitter:app:url:googleplay', content: 'cmpg://photogrid.cmcm.com/' + uri }
+        */
     ]
 
     if (fb_locale)

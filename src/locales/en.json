@@ -6,12 +6,6 @@
 
     "title": "Who Calls the Fleet",
 
-    "welcome": "Welcome! Current time: ${time}",
-
     "nav": {
-    },
-
-    "pageAbout": {
-        "test": "This is test line #1."
     }
 }
