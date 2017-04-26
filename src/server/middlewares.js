@@ -44,7 +44,7 @@ export default function mountMiddlewares(app, opt) {
 
     // ---------------------------------------------------------------------------------------------------
 
-    // ejs 模板引擎
+    // ejs 模板引擎 TODO: 移动到www 子app下
     const views = require('sp-koa-views')
     app.use(views(__dirname + '/views', {
         extension: 'ejs'
@@ -54,7 +54,16 @@ export default function mountMiddlewares(app, opt) {
 
     // 静态文件服务（TODO:后续可优化使用Nginx代理）
     const koaStatic = require('koa-static')
-    app.use(convert(koaStatic(process.cwd() + '/' + opt.isomorphicOptions.distPathName + '/public')))
+    const rootPath = process.cwd() + '/' + opt.isomorphicOptions.distPathName + '/public'
+    const option = {
+        maxage: 0,
+        hidden: true,
+        index: 'index.html',
+        defer: false,
+        gzip: true,
+        extensions: false
+    }
+    app.use(convert(koaStatic(rootPath, option)))
 
     // ---------------------------------------------------------------------------------------------------
 
