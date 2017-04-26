@@ -74,7 +74,7 @@ app.use(async function composeSubapp(ctx) {
         // 一般类型网站
         case '127':
         case 'www':
-        case 'super':
+        case 'yuubari':
             app = require('./app-www')
             app.use(isomorphic(isomorphicOptions))
             await compose(app.middleware)(ctx)
