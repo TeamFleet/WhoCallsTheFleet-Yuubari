@@ -1,3 +1,5 @@
+import bindEvent from 'bind-event'
+
 (() => {
     if (self && self.isCriticalInit) return true
 
@@ -17,9 +19,22 @@
     require('./critical.g.less')
 
     document.addEventListener("DOMContentLoaded", function () {
+        let boatLoader = document.createElement('div')
         let tagHtml = document.getElementsByTagName('html')
         self.isMobile = false
         let platform = 'not-specified'
+
+        boatLoader.id = 'boat-loader'
+        document.body.appendChild(boatLoader)
+        bindEvent(
+            boatLoader,
+            'transitionend',
+            function (evt) {
+                // console.log(evt, evt.target.style.opacity)
+                if (evt.propertyName == 'opacity' && !evt.target.style.opacity)
+                    evt.target.parentNode.removeChild(evt.target)
+            }
+        )
 
         if (tagHtml && tagHtml.length) {
             tagHtml = tagHtml[0]
@@ -50,6 +65,12 @@
             }
         }
     })
+
+    // [nw.js] show and focus window
+    if (self.nw && self.nw.win) {
+        self.nw.win.show()
+        self.nw.win.focus()
+    }
 
     self.isCriticalInit = true
 })()
