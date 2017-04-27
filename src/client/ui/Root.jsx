@@ -1,15 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { ImportStyle } from 'sp-css-import'
 import htmlHead from 'Utils/html-head.js'
 
-import { ImportStyle } from 'sp-css-import'
 import style from './Root.less'
+import './Root.g.less'
 
 import Main from './layout/Main.jsx'
 import Nav from './layout/Nav.jsx'
+import Bgimg from './layout/Bging.jsx'
 
-@connect()
+@connect(state => ({
+    isMainBgimgLoaded: state.bgimg.isMainLoaded
+}))
 @ImportStyle(style)
 export default class extends React.Component {
     /*
@@ -26,25 +29,13 @@ export default class extends React.Component {
 
     // 仅针对 __SERVER__
     static htmlExtends(ext, store) {
-        const state = store.getState()
-
         const head = htmlHead({
-            state: state
+            state: store.getState()
         })
 
         ext.meta = ext.meta.concat(head.meta)
         ext.title = head.title
     }
-
-    // CLIENT 端第一次渲染时执行(仅一次)
-    // 可在此时执行针对 CLIENT 端的初始化操作，如初始化微信SDK
-    // componentDidMount() {
-    // }
-
-    // 通常 router 更变(访问新的URL)后会触发这一事件
-    // 可在此时执行如 Google Analytics 之类的操作
-    // componentDidUpdate() {
-    // }
 
     appReady(timeout = 0) {
         if (__CLIENT__ && !this.isAppReady) {
@@ -57,7 +48,8 @@ export default class extends React.Component {
     }
 
     render() {
-        if (__CLIENT__) this.appReady(100)
+        // if (__CLIENT__) this.appReady(100)
+        if (this.props.isMainBgimgLoaded) this.appReady()
 
         return (
             <div id="app" className={this.props.className}>
@@ -65,6 +57,7 @@ export default class extends React.Component {
                 <Main location={this.props.location}>
                     {this.props.children}
                 </Main>
+                <Bgimg />
             </div>
         )
     }

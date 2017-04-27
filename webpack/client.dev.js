@@ -30,7 +30,8 @@ module.exports = (appPath, port) => {
                 '__DEV__': false
             }),
             new webpack.NoEmitOnErrorsPlugin(),
-            ...common.plugins
+            ...common.plugins,
+            ...require('./client-plugins.js')(appPath)
         ],
         resolve: common.resolve
     }

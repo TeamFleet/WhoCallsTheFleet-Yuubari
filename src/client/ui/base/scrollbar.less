@@ -1,0 +1,69 @@
+@import '../base.less';
+
+::-webkit-scrollbar{
+    width:      @scrollbar-width;
+    // height:     @scrollbar-width;
+}
+::-webkit-scrollbar-button{
+    //display:	none;
+    // width: 		1px;
+    height: 	1px;
+    border: 	0;
+    margin: 	0;
+    padding: 	0;
+    background: transparent;
+}
+::-webkit-scrollbar-track{
+    //background:	rgba(0, 0, 0, .5);
+    //@scrollbar-track-mask-image:	~"url(data:image/gif;base64,R0lGODlhAQABAPAAAAAAAP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==)";
+    //@scrollbar-track-mask-image:	linear-gradient(to bottom, #000, #000);
+    //@scrollbar-track-mask-size:		~"2px calc(100% - 4px)";
+    //@scrollbar-track-mask-position:	50% 50%;
+    //.mask-image(~"@{scrollbar-track-mask-image}");
+    //.mask-size(~"@{scrollbar-track-mask-size}");
+    //.mask-position(~"@{scrollbar-track-mask-position}");
+    //.mask-repeat(no-repeat);
+    @scrollbar-track-background:	linear-gradient(
+                                        to right,
+                                        transparent 3px,
+                                        rgba(0, 0, 0, .225) 3px,
+                                        rgba(0, 0, 0, .225) ~"calc(100% - 3px)",
+                                        transparent ~"calc(100% - 3px)"
+                                    );
+    background:		@scrollbar-track-background;
+    border-radius:	32px;
+    overflow:		hidden;
+    &:hover{
+        @scrollbar-track-background-hover:	linear-gradient(
+                                                to right,
+                                                transparent 2px,
+                                                rgba(0, 0, 0, .375) 2px,
+                                                rgba(0, 0, 0, .375) ~"calc(100% - 2px)",
+                                                transparent ~"calc(100% - 2px)"
+                                            );
+        background:		@scrollbar-track-background-hover;
+    }
+}
+::-webkit-scrollbar-thumb{
+    //background:	#fff;
+    @scrollbar-thumb-background:	linear-gradient(
+                                        to right,
+                                        transparent 2px,
+                                        rgba(255, 255, 255, .425) 2px,
+                                        rgba(255, 255, 255, .425) ~"calc(100% - 2px)",
+                                        transparent ~"calc(100% - 2px)"
+                                    );
+    background:		@scrollbar-thumb-background;
+    border-radius:	32px;
+    overflow:		hidden;
+    &:hover{
+        @scrollbar-thumb-background:	linear-gradient(
+                                            to right,
+                                            transparent 2px,
+                                            rgba(255, 255, 255, .625) 2px,
+                                            rgba(255, 255, 255, .625) ~"calc(100% - 2px)",
+                                            transparent ~"calc(100% - 2px)"
+                                        );
+        background:		@scrollbar-thumb-background;
+    }
+}

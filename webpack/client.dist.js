@@ -3,7 +3,6 @@ const path = require('path')
 const webpack = require('webpack')
 const common = require('./common')
 
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const pwaCreatePlugin = require('sp-pwa')
 
 module.exports = (appPath) => {
@@ -45,12 +44,8 @@ module.exports = (appPath) => {
                 comments: false,
                 sourceMap: true
             }),
-            new CopyWebpackPlugin([
-                {
-                    from: path.resolve(appPath, './src/client/assets/favicon-32.ico'),
-                    to: '../favicon.ico'
-                }
-            ]),
+
+            ...require('./client-plugins.js')(appPath),
 
             // 打包入 PWA 支持
             // 采用默认 Service Worker 文件

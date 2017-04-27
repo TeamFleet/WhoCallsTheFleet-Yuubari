@@ -1,0 +1,69 @@
+@import '../base.less';
+
+#nav, #main{
+	position:   absolute;
+    z-index:    5;
+    top:        0;
+    bottom:     0;
+    overflow:   hidden;
+
+    &,
+    & > .background-container{
+        transition-duration: .75s;
+        transition-timing-function: ease-out;
+        transition-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000);
+    }
+
+    & > .wrapper,
+    & > .background-container,
+    & > .background-container:before{
+        position:   absolute;
+        z-index:    5;
+        top:        0;
+        bottom:     0;
+        left:       0;
+        right:      0;
+    }
+
+    & > .background-container,
+    & > .background-container:before{
+        overflow:   hidden;
+    }
+
+    & > .wrapper{
+        z-index:    5;
+        overflow-x: hidden;
+        // overflow-y: auto;
+    }
+
+    & > .background-container{
+        z-index:    1;
+        // background: no-repeat 50% 38.2% / cover;
+        // background-attachment: fixed;
+    }
+
+    & > .background-container:before{
+        content:    "";
+        z-index:    5;
+    }
+}
+
+
+
+
+
+body.is-ready{
+	#boat-loader{
+		opacity: 	0;
+	}
+	// #root{
+	// 	display: 	block;
+	// }
+	#nav, #main{
+        &,
+        & > .background-container{
+		    transform: 	none;
+        	transition-delay:    (@base-transition-duration * 3);
+        }
+	}
+}
