@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
 const path = require('path')
 const appPath = process.cwd()
+const pathBgimgs = path.resolve(appPath, './src/client/assets/bgimgs')
 
 // 执行顺序，从右到左
 const rules = [{
@@ -137,6 +138,13 @@ const plugins = [
                 ]
             }
         }
+    }),
+    new webpack.DefinePlugin({
+        '__BGIMG_LIST__': JSON.stringify(
+            fs.readdirSync(pathBgimgs).filter(
+                file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory()
+            )
+        )
     })
 ]
 

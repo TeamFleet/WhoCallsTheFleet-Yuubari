@@ -1,11 +1,7 @@
-const fs = require('fs')
 const path = require('path')
-const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = (appPath) => {
-    const pathBgimgs = path.resolve(appPath, './src/client/assets/bgimgs')
-
     return [
         new CopyWebpackPlugin([
             {
@@ -13,16 +9,9 @@ module.exports = (appPath) => {
                 to: '../favicon.ico'
             },
             {
-                from: pathBgimgs,
+                from: path.resolve(appPath, './src/client/assets/bgimgs'),
                 to: '_bgimgs'
             }
-        ]),
-        new webpack.DefinePlugin({
-            '__BGIMG_LIST__': JSON.stringify(
-                fs.readdirSync(pathBgimgs).filter(
-                    file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory()
-                )
-            )
-        })
+        ])
     ]
 }

@@ -12,12 +12,12 @@ const initialState = {
         default: [],
         custom: []
     },
-    current: null,
-    currentIndex: 'default-0',
-    currentPath: {
-        original: '',
-        blured: ''
-    }
+    // current: null,
+    // currentIndex: 'default-0',
+    // currentPath: {
+    //     original: '',
+    //     blured: ''
+    // }
 }
 
 export default function (state = initialState, action) {
@@ -42,10 +42,11 @@ export default function (state = initialState, action) {
             })
 
         case CHANGE_BGIMG:
+            action.changeToObj.active()
             return Object.assign({}, state, {
-                current: action.current
+                current: action.changeToObj
             })
-        
+
         case LOADED_MAIN_BGIMG:
             return Object.assign({}, state, {
                 isMainLoaded: true

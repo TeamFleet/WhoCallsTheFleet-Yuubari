@@ -7,19 +7,39 @@ import * as bgimgApi from '../../logic/bgimg/api.js'
 
 import style from './Bgimg.less'
 
+const getStyles = (bgObj, type = '') => {
+    if (bgObj && bgObj.getPath)
+        return {
+            backgroundImage: bgObj && `url(${bgObj.getPath(type)})`,
+            backgroundPosition: bgObj && bgObj.position
+        }
+    return {}
+}
+
 /* Bgimg
  * main background image beneath App view
  * bgimg controls UI
  */
-@connect(state => ({
-    bgImg: state.bgimg.currentPath.original
-}))
+@connect(state => {
+    return {
+        currentBgPath: __SERVER__
+            ? __PUBLIC__ + `/_bgimgs/${__BGIMG_LIST__[0]}`
+            : state.bgimg.current && state.bgimg.current.getPath(),
+    }
+})
 @ImportStyle(style)
 class Bgimg extends React.Component {
     constructor(props) {
         super(props)
-        this.props.dispatch(bgimgApi.initList())
+
+        if (__CLIENT__)
+            this.props.dispatch(bgimgApi.initList(
+                __CLIENT__
+                    ? 'default-' + Math.floor(Math.random() * self.__BGIMG_LIST__.length)
+                    : 'default-0'
+            ))
     }
+
     closeControls() {
         document.body.classList.add('mode-bg-leaving')
     }
@@ -42,7 +62,7 @@ class Bgimg extends React.Component {
                     <div
                         className="background-original"
                         style={{
-                            backgroundImage: `url(${this.props.bgImg})`
+                            backgroundImage: `url(${this.props.currentBgPath})`,
                         }}
                         onAnimationEnd={this.originalAnimationEnd.bind(this)}
                     />
@@ -62,37 +82,31 @@ class BgContainer extends React.Component {
             <div className="background-container">
                 <div
                     className="background"
-                    style={{
-                        backgroundImage: `url(${this.props.bgImg})`
-                    }}
+                    style={getStyles(this.props.bg || this.props.bgObj || this.props.backgroundObj, this.props.type)}
                 />
             </div>
         )
     }
 }
 
-
-
 @connect(state => ({
-    bgImgBlured: state.bgimg.currentPath.blured
+    currentBg: state.bgimg.current
 }))
 class BgContainerBlured extends React.Component {
     render() {
         return (
-            <BgContainer bgImg={this.props.bgImgBlured} />
+            <BgContainer bg={this.props.currentBg} type="blured" />
         )
     }
 }
 
-
-
 @connect(state => ({
-    bgImg: state.bgimg.currentPath.original
+    currentBg: state.bgimg.current
 }))
 class BgContainerOriginal extends React.Component {
     render() {
         return (
-            <BgContainer bgImg={this.props.bgImg} />
+            <BgContainer bg={this.props.currentBg} />
         )
     }
 }
@@ -108,8 +122,9 @@ class BgContainerOriginal extends React.Component {
    2. dispatch LOADED_MAIN_BGIMG
  */
 @connect(state => ({
-    bgImg: state.bgimg.currentPath.original,
-    bgImgBlured: state.bgimg.currentPath.blured
+    currentBg: state.bgimg.current,
+    bgImg: state.bgimg.current ? state.bgimg.current.getPath() : undefined,
+    bgImgBlured: state.bgimg.current ? state.bgimg.current.getPath('blured') : undefined
 }))
 class BgMain extends React.Component {
     constructor(props) {
@@ -125,9 +140,7 @@ class BgMain extends React.Component {
     originalLoaded() {
         // console.log('originalLoaded')
         this.setState({
-            stylesOriginal: {
-                backgroundImage: `url(${this.props.bgImg})`
-            }
+            stylesOriginal: getStyles(this.props.currentBg)
         })
     }
 
@@ -155,9 +168,7 @@ class BgMain extends React.Component {
     bluredLoaded(evt) {
         // console.log('bluredLoaded')
         this.setState({
-            stylesBlured: {
-                backgroundImage: `url(${this.props.bgImgBlured})`
-            }
+            stylesBlured: getStyles(this.props.currentBg, 'blured')
         })
         evt.target.parentNode.removeChild(evt.target)
     }
@@ -197,11 +208,11 @@ class BgMain extends React.Component {
 
 @connect(state => ({
     list: state.bgimg.list,
-    index: state.bgimg.currentIndex
+    index: state.bgimg.current && state.bgimg.current.index
 }))
 class BgList extends React.Component {
-    change(indexString) {
-        bgimgApi.change(indexString)
+    change(obj) {
+        this.props.dispatch(bgimgApi.change(obj))
     }
 
     renderList(type) {
@@ -209,12 +220,11 @@ class BgList extends React.Component {
             <div className={`list-${type}`}>
                 {
                     this.props.list[type].map((obj, index) => {
-                        const _index = type + '-' + index
                         return (
                             <div
                                 key={index}
-                                className={`background-thumbnail${_index === this.props.index ? ' on' : ''}`}
-                                onClick={() => this.change(_index)}
+                                className={`background-thumbnail${obj.index === this.props.index ? ' on' : ''}`}
+                                onClick={() => this.change(obj)}
                             >
                                 <span
                                     className="ratio"

@@ -1,52 +1,5 @@
 import * as actions from './actions.js'
-
-export class BgimgObject {
-    constructor(data) {
-        if (typeof data === 'string') {
-            // 提供文件名
-            // 島田フミカネ-1.jpg
-            // しずまよしのり-5.50,38.jpg
-            let filename = data.split('.')
-            filename.pop()
-            filename = filename.join('.')
-            const segs = filename.split('.')
-
-            data = {
-                filename: filename
-            }
-
-            if (segs.length > 1){
-                this.filenameOriginal = filename
-                data.filename = segs[0]
-                data.origin = segs[1].split(',').join('% ') + '%'
-            }
-
-            if (filename.indexOf('-') > -1)
-                data.author = filename.split('-')[0]
-        }
-
-        this.filename = data.filename || ''
-        this.origin = data.origin || '50% 38.2%'
-        if (this.author) this.author = data.author
-    }
-
-    getPath(type = "") {
-        if (typeof type !== 'string') type = ''
-        const prop = '_path' + type
-        if (!this[prop]) {
-            this[prop] = __PUBLIC__ + `/_bgimgs/${type ? (type + '/') : ''}${type ? this.filename : (this.filenameOriginal || this.filename)}.jpg`
-        }
-        return this[prop]
-    }
-
-    active() {
-
-    }
-
-    remove() {
-
-    }
-}
+import Background from './class.js'
 
 const getObj = (indexString) => {
     /*
@@ -61,8 +14,10 @@ const getObj = (indexString) => {
 const getListInitial = (type) => {
     let list = []
 
-    if (__CLIENT__ && type === 'default' && Array.isArray(self.__BGIMG_LIST__))
-        list = self.__BGIMG_LIST__.map(filename => new BgimgObject(filename))
+    if (type === 'default') {
+        const __list = (__CLIENT__ ? self.__BGIMG_LIST__ : __BGIMG_LIST__) || []
+        list = __list.map((filename, index) => new Background(filename, type + '-' + index))
+    }
 
     /*
     const dir = type == 'custom' ? thePath.bgimgs_custom : thePath.bgimgs
@@ -116,10 +71,10 @@ export const initList = (currentIndex = 'default-0') => {
 
     const [type, index] = currentIndex.split('-')
     const current = eval('list' + type.substr(0, 1).toUpperCase() + type.substr(1))[index]
-    const currentPath = current ? {
-        original: current.getPath(),
-        blured: current.getPath('blured')
-    } : {}
+    // const currentPath = current ? {
+    //     original: current.getPath(),
+    //     blured: current.getPath('blured')
+    // } : {}
 
     return (dispatch) => {
         dispatch(
@@ -128,9 +83,9 @@ export const initList = (currentIndex = 'default-0') => {
                     default: listDefault,
                     custom: listCustom
                 },
-                current,
-                currentIndex,
-                currentPath
+                current//,
+                // currentIndex,
+                // currentPath
             })
         )
     }
@@ -144,18 +99,12 @@ export const remove = (indexCustom) => {
 
 }
 
-export const change = (currentIndex) => {
-    /*
-    const currentObj = getObj(currentIndex)
-
-    store.dispatch(
-        actions.change({
-            index: currentIndex,
-            original: getPath(currentObj),
-            blured: getPath(currentObj, 'blured')
-        })
-    )
-    */
+export const change = (obj) => {
+    return (dispatch) => {
+        dispatch(
+            actions.change(obj)
+        )
+    }
 }
 
 export const mainImgLoaded = () => (dispatch) => dispatch(

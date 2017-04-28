@@ -27,10 +27,10 @@ export function remove(state) {
     }
 }
 
-export function change(dataCurrent) {
+export function change(changeToObj) {
     return {
         type: CHANGE_BGIMG,
-        current: dataCurrent
+        changeToObj
     }
 }
 

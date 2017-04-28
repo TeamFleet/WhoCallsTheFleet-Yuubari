@@ -2,34 +2,38 @@ const path = require('path')
 const webpack = require('webpack')
 const common = require('./common')
 
-module.exports = (appPath, clientDevPort) => ({
-    target: 'async-node',
-    node: {
-        __dirname: true
-    },
-    watch: true,
-    entry: [
-        'webpack/hot/poll?1000',
-        path.resolve(appPath, './src/server')
-    ],
-    output: {
-        filename: 'index.js',
-        chunkFilename: 'chunk.[name].[chunkhash].js',
-        path: appPath + '/dist-web/server',
-        publicPath: `http://localhost:${clientDevPort}/dist/`
-    },
-    module: {
-        rules: [...common.rules]
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            '__CLIENT__': false,
-            '__SERVER__': true,
-            '__DEV__': true
-        }),
-        new webpack.HotModuleReplacementPlugin({ quiet: true }),
-        ...common.plugins
-    ],
-    externals: common.filterExternalsModules(),
-    resolve: common.resolve
-})
+module.exports = (appPath, clientDevPort) => {
+    const publicPath = `http://localhost:${clientDevPort}/dist`
+    return {
+        target: 'async-node',
+        node: {
+            __dirname: true
+        },
+        watch: true,
+        entry: [
+            'webpack/hot/poll?1000',
+            path.resolve(appPath, './src/server')
+        ],
+        output: {
+            filename: 'index.js',
+            chunkFilename: 'chunk.[name].[chunkhash].js',
+            path: appPath + '/dist-web/server',
+            publicPath: publicPath + '/'
+        },
+        module: {
+            rules: [...common.rules]
+        },
+        plugins: [
+            new webpack.DefinePlugin({
+                '__CLIENT__': false,
+                '__SERVER__': true,
+                '__DEV__': true,
+                '__PUBLIC__': JSON.stringify(publicPath)
+            }),
+            new webpack.HotModuleReplacementPlugin({ quiet: true }),
+            ...common.plugins
+        ],
+        externals: common.filterExternalsModules(),
+        resolve: common.resolve
+    }
+}
