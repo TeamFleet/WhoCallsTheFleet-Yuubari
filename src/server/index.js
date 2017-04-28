@@ -28,7 +28,7 @@ const isomorphicOptions = {
 
     // 对HTML基础模板的自定义注入
     injection: {
-        // js: (args) => `<script src="${args.path}/client.js"></script>`,
+        js: (args) => `<script async src="${args.path}/${getInjectionJsFilename('client', args.distPathName)}"></script>`,
         manifest: () => `<link rel="manifest" href="/manifest-${currentLocaleId}.json">`,
         critical: (args) => `<script src="${args.path}/${getInjectionJsFilename('critical', args.distPathName)}"></script>`,
         critical_extra_old_ie_filename: (args) => `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${args.path}/${getInjectionJsFilename('critical-extra-old-ie', args.distPathName)}"</script>`

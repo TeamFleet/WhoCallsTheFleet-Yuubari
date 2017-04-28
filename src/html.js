@@ -43,7 +43,6 @@ export const template = `
         <script>var __SERVICE_WORKER_FILENAME__ = "<script>//inject_pwa_filename</script>"</script>
 
         <script>//inject_critical</script>
-        <script>//inject_pwa</script>
     </head>
     <body>
         <div id="root">

@@ -133,6 +133,7 @@ class BgMain extends React.Component {
         this.state = {
             stylesOriginal: false,
             stylesBlured: false,
+            showOriginal: false,
             showBlured: true
         }
     }
@@ -173,6 +174,14 @@ class BgMain extends React.Component {
         evt.target.parentNode.removeChild(evt.target)
     }
 
+    bluredTransitionEnd(evt) {
+        if (evt.propertyName == 'opacity' && !this.state.showOriginal) {
+            this.setState({
+                showOriginal: true
+            })
+        }
+    }
+
     // bluredTransitionEnd(evt) {
     // console.log('bluredTransitionEnd', evt.target)
     // if (evt.propertyName == 'opacity' && !evt.target.style.opacity) {
@@ -183,20 +192,22 @@ class BgMain extends React.Component {
     render() {
         return (
             <div className="background-main">
-                <div
-                    className={"item" + (this.state.stylesOriginal ? ' is-loaded' : '')}
-                    style={this.state.stylesOriginal || {}}
-                    onAnimationEnd={this.originalAnimationEnd.bind(this)}
-                    onTransitionEnd={this.originalTransitionEnd.bind(this)}
-                >
-                    <img src={this.props.bgImg} onLoad={this.originalLoaded.bind(this)} />
-                </div>
+                {this.state.showOriginal &&
+                    <div
+                        className={"item" + (this.state.stylesOriginal ? ' is-loaded' : '')}
+                        style={this.state.stylesOriginal || {}}
+                        onAnimationEnd={this.originalAnimationEnd.bind(this)}
+                        onTransitionEnd={this.originalTransitionEnd.bind(this)}
+                    >
+                        <img src={this.props.bgImg} onLoad={this.originalLoaded.bind(this)} />
+                    </div>
+                }
 
                 {this.state.showBlured &&
                     <div
                         className={"item is-blured" + (this.state.stylesBlured ? ' is-loaded' : '')}
                         style={this.state.stylesBlured || {}}
-                        ref={(el) => { this.elItemBlured = el }}
+                        onTransitionEnd={this.bluredTransitionEnd.bind(this)}
                     >
                         <img src={this.props.bgImgBlured} onLoad={this.bluredLoaded.bind(this)} />
                     </div>

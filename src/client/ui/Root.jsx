@@ -39,6 +39,20 @@ export default class extends React.Component {
     appReady(timeout = 0) {
         if (__CLIENT__ && !this.isAppReady) {
             this.isAppReady = true
+
+            if ('serviceWorker' in navigator) {
+                // console.log('Service Worker SUPPORTED')
+                navigator.serviceWorker.register(self.__SERVICE_WORKER_FILENAME__, {
+                    scope: '/'
+                }).then((reg) => {
+                    // console.log('Service Worker register', reg)
+                }).catch((err) => {
+                    console.log('Service Worker SUPPORTED. ERROR', err)
+                })
+            } else {
+                console.log('Service Worker NOT-SUPPORTED')
+            }
+
             setTimeout(() => {
                 console.log('appReady')
                 document.body.classList.add('is-ready')
