@@ -1,109 +1,133 @@
 @import '../base.less';
 
 .component{
-    position:   fixed;
-    z-index:    2;
+    @controls-height:   60px;
 
     left:       0;
-    top:        0;
+    width:      @nav-width;
+    // overflow:   hidden;
+    // overflow-y: auto;
 
-    #nav-switch,
-    label[for="nav-switch"]{
-        display:    none;
+    // animation:  slidein-from-left .75s ease-out;
+    transform:  translateX(-100%);
+
+    &:after{
+        content:    '';
+        position:   absolute;
+        z-index:    6;
+        top:        0;
+        bottom:     0;
+        right:      0;
+        width:      1px;
+        background: @theme-bluegrey-50;
+        background: fade(@theme-bluegrey-50, 10%);
+    }
+
+    & > .background-container{
+        transform:  translateX(100%);
+        &:before{
+            background: @theme-bluegrey-900;
+            background: fade(@theme-bluegrey-900, 50%);
+        }
     }
 
     & > .wrapper{
-        position:   fixed;
-        top:        0;
-        left:       0;
-        height:     100%;
-        width:      @nav-width;
-
-        background: @theme-bluegrey-50;
-        border-right: 1px solid mix(@theme-bluegrey-100, @theme-bluegrey-50);
-
-        overflow-x: hidden;
         overflow-y: auto;
-
-        padding:    30px 20px;
-        font-size:  14px;
-        color:      @theme-bluegrey-300;
-
-        z-index:    2;
+        padding-bottom: @controls-height;
     }
 
-    a{
-        color:      inherit;
-        &:hover{
-            color:  @theme-bluegrey-500;
-        }
-        &:active{
-            color:  @theme-bluegrey-200;
-        }
-        &.on{
-            color:      @base-color-accent;
-            pointer-events: none;
-        }
-    }
+    .logo{
+        @size:      48px;
 
-    h1{
-        color:      @theme-bluegrey-400;
-        font-size:  1.5rem;
-        line-height:0.8em;
-        font-weight:lighter;
-        letter-spacing: .2em;
-        font-style: italic;
-        a{
-            color:  inherit;
+        height:     90px;
+        position:   relative;
+        border-left:20px solid transparent;
+
+        .btn-back, .btn-home-logo{
+            position:   absolute;
+            top:        50%;
+            margin-top: (0 - @size / 2);
+            height:     @size;
+            width:      @size;
+            text-align: center;
+            background: no-repeat 50% 50% / contain;
+        }
+
+        .btn-back{
+            z-index:    1;
+        }
+
+        .btn-home-logo{
+            z-index:    2;
+            background-image: url('../../assets/appicon.png');
+            transform:  translateX((@size + 15));
+            &.on{
+                pointer-events: none;
+            }
+        }
+
+        .btn-back[disabled]{
+            opacity:    0;
+            & ~ .btn-home-logo{
+                transform:  none;
+            }
         }
     }
 
     .navs{
-        margin-top: 50px;
-        .blank{
+        padding:    0 20px;
+        .link{
             display:    block;
-            height:     10px;
-        }
-        a{
-            display:    block;
-            line-height:1.2em;
-            margin:     5px 0;
-            &:first-child{
-                margin-top:     0;
+            color:      @theme-bluegrey-100;
+            font-size:  14px;
+            line-height:1.35em;
+            padding:    3px 0 3px 20px;
+            position:   relative;
+            margin-top: 4px;
+            &:hover{
+                color:  #fff;
             }
-        }
-        .level-1{
-            padding:    .4em 0 .4em 20px;
+            &:active{
+                color:  fade(#fff, 50%);
+            }
             &.on{
-                position:   relative;
+                color:  #fff;
+                cursor: default;
+                pointer-events: none;
                 &:before{
                     @size:      8px;
-                    content:    "";
+                    content:    '';
                     position:   absolute;
                     top:        50%;
                     left:       0;
-                    margin-top: (0 - @size / 2);
                     width:      @size;
                     height:     @size;
-                    background: @base-color-accent;
+                    margin-top: (0 - @size / 2);
+                    background: @theme-bluegrey-100;
                     border-radius: 50%;
+                    animation:  fadein @base-transition-duration @base-transition-timing-function;
                 }
             }
         }
-        .level-2{
-            padding:    .2em 0 .2em (20px + @base-font-size);
+        .blank{
+            display:    block;
+            height:     15px;
         }
-        .subs{
-            display:        block;
-            margin-bottom:  10px;
-        }
+    }
+
+    .controls{
+        position:   absolute;
+        bottom:     0;
+        height:     @controls-height;
+        line-height:@controls-height;
+        border-left:20px solid transparent;
     }
 
     .language-switch{
         margin-top:     50px;
         padding-left:   20px;
     }
-    .switches{
+    .language-switch-container{
         display:    block;
         overflow:   hidden;
         .item{
@@ -122,58 +146,5 @@
     }
 
     @media all and (max-width: @screen-phone) {
-        & > .wrapper{
-            width:      320px;
-            width:      ~"calc(100% - 40px)";
-            max-width:  320px;
-            transform:  translateX(-100%);
-        }
-
-        label[for="nav-switch"]{
-            @size:      30px;
-
-            display:    inline;
-            position:   static;
-
-            &:before{
-                content:    "☰";
-                position:   absolute;
-                z-index:    3;
-                top:        0;
-                left:       0;
-                width:      @size;
-                height:     @size;
-                line-height:@size;
-                text-align: center;
-                // background: #800;
-                color:      @theme-bluegrey-500;
-                font-size:  24px;
-            }
-
-            &:after{
-                content:    "";
-                position:   fixed;
-                z-index:    1;
-                top:        0;
-                left:       0;
-                width:      100%;
-                height:     100%;
-                background: fade(#000, 75%);
-                opacity:    0;
-                pointer-events: none;
-            }
-        }
-
-        #nav-switch:checked{
-            & ~ .wrapper{
-                transform:  none;
-            }
-            & ~ label[for="nav-switch"]{
-                &:after{
-                    opacity:    1;
-                    pointer-events: all;
-                }
-            }
-        }
     }
 }

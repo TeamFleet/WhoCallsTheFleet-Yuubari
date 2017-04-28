@@ -12,8 +12,9 @@ const initialState = {
         default: [],
         custom: []
     },
-    current: {
-        index: 'default-0',
+    current: null,
+    currentIndex: 'default-0',
+    currentPath: {
         original: '',
         blured: ''
     }
@@ -32,8 +33,8 @@ export default function (state = initialState, action) {
             return Object.assign({}, state, {
                 list: Object.assign({}, state.list, {
                     custom: state.list.custom.concat(action.items)
-                }),
-                current: Object.assign({}, state.current, {})
+                })//,
+                // current: Object.assign({}, state.current, {})
             })
 
         case REMOVE_BGIMG:

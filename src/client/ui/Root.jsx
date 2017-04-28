@@ -7,7 +7,7 @@ import style from './Root.less'
 
 import Main from './layout/Main.jsx'
 import Nav from './layout/Nav.jsx'
-import Bgimg from './layout/Bging.jsx'
+import Bgimg from './layout/Bgimg.jsx'
 
 @connect(state => ({
     isMainBgimgLoaded: state.bgimg.isMainLoaded

@@ -1,7 +1,5 @@
 import * as actions from './actions.js'
 
-// import { dir as thePath } from '../../core/defaults.js'
-
 export class BgimgObject {
     constructor(data) {
         if (typeof data === 'string') {
@@ -17,8 +15,11 @@ export class BgimgObject {
                 filename: filename
             }
 
-            if (segs.length > 1)
+            if (segs.length > 1){
+                this.filenameOriginal = filename
+                data.filename = segs[0]
                 data.origin = segs[1].split(',').join('% ') + '%'
+            }
 
             if (filename.indexOf('-') > -1)
                 data.author = filename.split('-')[0]
@@ -30,9 +31,10 @@ export class BgimgObject {
     }
 
     getPath(type = "") {
+        if (typeof type !== 'string') type = ''
         const prop = '_path' + type
         if (!this[prop]) {
-            this[prop] = ''
+            this[prop] = __PUBLIC__ + `/bgimgs/${type ? (type + '/') : ''}${type ? this.filename : (this.filenameOriginal || this.filename)}.jpg`
         }
         return this[prop]
     }
@@ -44,21 +46,6 @@ export class BgimgObject {
     remove() {
 
     }
-}
-
-export const getPath = (filename, type = '') => {
-    /*
-    if (typeof filename === 'object' && filename.name) filename = filename.name
-
-    const dir = type == 'custom' ? thePath.bgimgs_custom : thePath.bgimgs
-
-    if (self.nw) {
-        const path = require('path')
-        return path.normalize(path.join(dir, type, filename)).split(path.sep).join('/')
-    } else {
-        return dir + '/' + type + '/' + filename
-    }
-    */
 }
 
 const getObj = (indexString) => {
@@ -74,7 +61,7 @@ const getObj = (indexString) => {
 const getListInitial = (type) => {
     let list = []
 
-    if (type === 'default' && Array.isArray(self.__BGIMG_LIST__))
+    if (__CLIENT__ && type === 'default' && Array.isArray(self.__BGIMG_LIST__))
         list = self.__BGIMG_LIST__.map(filename => new BgimgObject(filename))
 
     /*
@@ -129,6 +116,10 @@ export const initList = (currentIndex = 'default-0') => {
 
     const [type, index] = currentIndex.split('-')
     const current = eval('list' + type.substr(0, 1).toUpperCase() + type.substr(1))[index]
+    const currentPath = current ? {
+        original: current.getPath(),
+        blured: current.getPath('blured')
+    } : {}
 
     return (dispatch) => {
         dispatch(
@@ -137,11 +128,9 @@ export const initList = (currentIndex = 'default-0') => {
                     default: listDefault,
                     custom: listCustom
                 },
-                current: {
-                    index: currentIndex,
-                    original: getPath(current),
-                    blured: getPath(current, 'blured')
-                }
+                current,
+                currentIndex,
+                currentPath
             })
         )
     }

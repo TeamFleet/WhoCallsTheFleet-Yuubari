@@ -3,6 +3,7 @@ const common = require('./common')
 
 module.exports = (appPath, port) => {
     const entries = require('./client-entries.js')(appPath)
+    const publicPath = `http://localhost:${port}/dist`
 
     return {
         target: 'web',
@@ -12,7 +13,7 @@ module.exports = (appPath, port) => {
             filename: '[name].js',
             chunkFilename: 'chunk.[name].[chunkhash].js',
             path: appPath + '/dist-web/public/client',
-            publicPath: 'http://localhost:' + port + '/dist/'
+            publicPath: publicPath + '/'
         },
         module: {
             rules: [...common.rules]
@@ -27,7 +28,8 @@ module.exports = (appPath, port) => {
             new webpack.DefinePlugin({
                 '__CLIENT__': true,
                 '__SERVER__': false,
-                '__DEV__': false
+                '__DEV__': true,
+                '__PUBLIC__': JSON.stringify(publicPath)
             }),
             new webpack.NoEmitOnErrorsPlugin(),
             ...common.plugins,

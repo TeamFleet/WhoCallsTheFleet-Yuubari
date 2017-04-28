@@ -8,6 +8,7 @@ const pwaCreatePlugin = require('sp-pwa')
 module.exports = (appPath) => {
     const entries = require('./client-entries.js')(appPath)
     const outputPath = path.normalize(appPath + '/dist-web/public/client')
+    const publicPath = '/client'
 
     return {
         target: 'web',
@@ -17,7 +18,7 @@ module.exports = (appPath) => {
             filename: '[name].[chunkhash].js',
             chunkFilename: 'chunk.[name].[chunkhash].js',
             path: outputPath,
-            publicPath: '/client/' // TODO 改成静态第三方URL用于CDN部署 http://localhost:3000/
+            publicPath: publicPath + '/' // TODO 改成静态第三方URL用于CDN部署 http://localhost:3000/
         },
         module: {
             rules: [...common.rules]
@@ -32,7 +33,8 @@ module.exports = (appPath) => {
             new webpack.DefinePlugin({
                 '__CLIENT__': true,
                 '__SERVER__': false,
-                '__DEV__': false
+                '__DEV__': false,
+                '__PUBLIC__': JSON.stringify(publicPath)
             }),
             new webpack.NoEmitOnErrorsPlugin(),
             ...common.plugins,

@@ -12,7 +12,7 @@ import style from './Bgimg.less'
  * bgimg controls UI
  */
 @connect(state => ({
-    bgImg: state.bgimg.current.original
+    bgImg: state.bgimg.currentPath.original
 }))
 @ImportStyle(style)
 class Bgimg extends React.Component {
@@ -36,7 +36,7 @@ class Bgimg extends React.Component {
     render() {
         return (
             <div id="bgimg" className={this.props.className}>
-                <BgInitial />
+                <BgMain />
                 <div className="controls">
                     <button type="button" className="back" onClick={this.closeControls}>[PH] BACK</button>
                     <div
@@ -74,7 +74,7 @@ class BgContainer extends React.Component {
 
 
 @connect(state => ({
-    bgImgBlured: state.bgimg.current.blured
+    bgImgBlured: state.bgimg.currentPath.blured
 }))
 class BgContainerBlured extends React.Component {
     render() {
@@ -87,7 +87,7 @@ class BgContainerBlured extends React.Component {
 
 
 @connect(state => ({
-    bgImg: state.bgimg.current.original
+    bgImg: state.bgimg.currentPath.original
 }))
 class BgContainerOriginal extends React.Component {
     render() {
@@ -108,10 +108,10 @@ class BgContainerOriginal extends React.Component {
    2. dispatch LOADED_MAIN_BGIMG
  */
 @connect(state => ({
-    bgImg: state.bgimg.current.original,
-    bgImgBlured: state.bgimg.current.blured
+    bgImg: state.bgimg.currentPath.original,
+    bgImgBlured: state.bgimg.currentPath.blured
 }))
-class BgInitial extends React.Component {
+class BgMain extends React.Component {
     constructor(props) {
         super(props)
 
@@ -171,7 +171,7 @@ class BgInitial extends React.Component {
 
     render() {
         return (
-            <div className="background-initial">
+            <div className="background-main">
                 <div
                     className={"item" + (this.state.stylesOriginal ? ' is-loaded' : '')}
                     style={this.state.stylesOriginal || {}}
@@ -197,7 +197,7 @@ class BgInitial extends React.Component {
 
 @connect(state => ({
     list: state.bgimg.list,
-    index: state.bgimg.current.index
+    index: state.bgimg.currentIndex
 }))
 class BgList extends React.Component {
     change(indexString) {
@@ -219,7 +219,7 @@ class BgList extends React.Component {
                                 <span
                                     className="ratio"
                                     style={{
-                                        backgroundImage: `url(${bgimgApi.getPath(obj.name, 'thumbnail')})`
+                                        backgroundImage: `url(${obj.getPath('thumbnail')})`
                                     }}
                                 />
                             </div>
