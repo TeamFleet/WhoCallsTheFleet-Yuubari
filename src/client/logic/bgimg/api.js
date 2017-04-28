@@ -34,7 +34,7 @@ export class BgimgObject {
         if (typeof type !== 'string') type = ''
         const prop = '_path' + type
         if (!this[prop]) {
-            this[prop] = __PUBLIC__ + `/bgimgs/${type ? (type + '/') : ''}${type ? this.filename : (this.filenameOriginal || this.filename)}.jpg`
+            this[prop] = __PUBLIC__ + `/_bgimgs/${type ? (type + '/') : ''}${type ? this.filename : (this.filenameOriginal || this.filename)}.jpg`
         }
         return this[prop]
     }

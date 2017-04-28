@@ -14,7 +14,7 @@ module.exports = (appPath) => {
             },
             {
                 from: pathBgimgs,
-                to: 'bgimgs'
+                to: '_bgimgs'
             }
         ]),
         new webpack.DefinePlugin({

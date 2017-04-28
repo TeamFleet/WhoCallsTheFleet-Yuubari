@@ -51,7 +51,12 @@ module.exports = (appPath) => {
 
             // 打包入 PWA 支持
             // 采用默认 Service Worker 文件
-            pwaCreatePlugin(outputPath)
+            pwaCreatePlugin(outputPath, undefined, undefined, {
+                ignore: [
+                    '/**/_*/',
+                    '/**/_*/**/*'
+                ]
+            })
 
             // 自指定 Service Worker 文件
             // pwaCreatePlugin(outputPath, path.normalize(appPath + '/src/client/custom-service-worker.js'))
