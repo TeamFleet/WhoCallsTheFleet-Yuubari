@@ -167,8 +167,8 @@
 
 
         "webpack": "^2.4.1",
-        "webpack-dev-server": "^2.4.4",
-        "webpack-dashboard": "^0.3.0",
+        "webpack-dev-server": "^2.4.5",
+        "webpack-dashboard": "^0.4.0",
         "webpack-dev-middleware": "^1.10.1",
         "webpack-hot-middleware": "^2.17.1",
 
@@ -194,7 +194,7 @@
 
         "less": "^2.7.2",
         "autoprefixer": "^6.7.7",
-        "postcss-pxtorem": "^4.0.0",
+        "postcss-pxtorem": "^4.0.1",
 
 
         "underscore": "1.8.3",
@@ -203,7 +203,7 @@
         "es5-shim": "^4.5.9",
 
 
-        "debug": "^2.6.1",
+        "debug": "^2.6.6",
         "md5": "^2.2.1",
         "sha1": "^1.1.1",
         "node-native-zip": "^1.1.0",

@@ -4,7 +4,6 @@ import { ImportStyle } from 'sp-css-import'
 import htmlHead from 'Utils/html-head.js'
 
 import style from './Root.less'
-import './Root.g.less'
 
 import Main from './layout/Main.jsx'
 import Nav from './layout/Nav.jsx'
