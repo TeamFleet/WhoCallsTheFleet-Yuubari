@@ -4,7 +4,6 @@ import { Link, IndexLink } from 'react-router'
 import translate from 'sp-i18n'
 import routes from '../../router'
 
-import { BgContainerBlured } from './Bgimg.jsx'
 import LangSwitch from '../components/LangSwitch.jsx'
 
 import { ImportStyle } from 'sp-css-import'
@@ -77,8 +76,6 @@ export default class extends React.Component {
                 </div>
 
                 <label htmlFor="nav-switch" className="label"></label>
-
-                <BgContainerBlured />
             </nav>
         )
     }

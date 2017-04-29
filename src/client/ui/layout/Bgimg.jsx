@@ -20,13 +20,9 @@ const getStyles = (bgObj, type = '') => {
  * main background image beneath App view
  * bgimg controls UI
  */
-@connect(state => {
-    return {
-        currentBgPath: __SERVER__
-            ? __PUBLIC__ + `/_bgimgs/${__BGIMG_LIST__[0]}`
-            : state.bgimg.current && state.bgimg.current.getPath(),
-    }
-})
+@connect(state => ({
+    currentBgPath: __CLIENT__ && state.bgimg.current && state.bgimg.current.getPath(),
+}))
 @ImportStyle(style)
 class Bgimg extends React.Component {
     constructor(props) {
@@ -54,6 +50,7 @@ class Bgimg extends React.Component {
     }
 
     render() {
+        if (__SERVER__) return null
         return (
             <div id="bgimg" className={this.props.className}>
                 <BgMain />
@@ -122,10 +119,58 @@ class BgContainerOriginal extends React.Component {
    2. dispatch LOADED_MAIN_BGIMG
  */
 @connect(state => ({
-    currentBg: state.bgimg.current,
-    bgImg: state.bgimg.current ? state.bgimg.current.getPath() : undefined,
-    bgImgBlured: state.bgimg.current ? state.bgimg.current.getPath('blured') : undefined
+    currentBg: state.bgimg.current
 }))
+class BgMain extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            styles: false
+        }
+    }
+
+    onLoad() {
+        console.log('background-main loaded')
+        this.setState({
+            styles: getStyles(this.props.currentBg, 'blured')
+        })
+    }
+
+    onAnimationEnd(evt) {
+        // console.log('originalAnimationEnd')
+        if (evt.nativeEvent.animationName == 'background-original-leave') {
+            setTimeout(() => {
+                document.body.classList.remove('mode-bg-leaving')
+                document.body.classList.remove('mode-bg')
+            }, evt.nativeEvent.elapsedTime * 1000 * 2)
+        }
+    }
+
+    onTransitionEnd(evt) {
+        // console.log('originalTransitionEnd', evt.target)
+        // console.log('showBlured', this.state.showBlured)
+        if (evt.propertyName == 'opacity') {
+            this.props.dispatch(bgimgApi.mainImgLoaded())
+        }
+    }
+
+    render() {
+        return (
+            <div className="background-main">
+                <div
+                    className={"item" + (this.state.styles ? ' is-loaded' : '')}
+                    style={this.state.styles || {}}
+                    onAnimationEnd={this.onAnimationEnd.bind(this)}
+                    onTransitionEnd={this.onTransitionEnd.bind(this)}
+                >
+                    <img src={this.props.currentBg.getPath('blured')} onLoad={this.onLoad.bind(this)} />
+                </div>
+            </div>
+        )
+    }
+}
+/* rev:1
 class BgMain extends React.Component {
     constructor(props) {
         super(props)
@@ -216,6 +261,7 @@ class BgMain extends React.Component {
         )
     }
 }
+*/
 
 @connect(state => ({
     list: state.bgimg.list,

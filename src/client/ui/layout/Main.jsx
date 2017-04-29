@@ -4,8 +4,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { ImportStyle } from 'sp-css-import'
 import style from './Main.less'
 
-import { BgContainerBlured } from './Bgimg.jsx'
-
 // @connect(mapStateToProps, mapDispatchToProps)
 @ImportStyle(style)
 export default class extends React.Component {
@@ -24,7 +22,6 @@ export default class extends React.Component {
                         })}
                     </ReactCSSTransitionGroup>
                 </div>
-                <BgContainerBlured />
             </main>
         )
     }

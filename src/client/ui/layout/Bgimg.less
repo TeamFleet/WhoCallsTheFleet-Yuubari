@@ -39,7 +39,7 @@
         left:       0;
         right:      0;
         opacity:    .25;
-        transition-duration:    (@base-transition-duration * 2);
+        transition-duration:    (@base-transition-duration * 4);
         .item{
             position:   absolute;
             top:        0;
@@ -49,8 +49,10 @@
             opacity:    0;
             background: no-repeat 50% 38.2% / cover;
             z-index:    2;
-            transition-duration:    (@base-transition-duration * 8);
-            transition-delay:       (@base-transition-duration * 0);
+            // transition-duration:    (@base-transition-duration * 8);
+            // transition-delay:       (@base-transition-duration * 0);
+            transition-duration:    (@base-transition-duration * 4);
+            transition-delay:       0s;
             transition-timing-function: linear;
             transition-property:    opacity, transform;
             img{
@@ -62,15 +64,15 @@
             &.is-loaded{
                 opacity:    1;
             }
-            &.is-blured{
-                z-index:    1;
-                opacity:    .1;
-                transition-duration:    (@base-transition-duration * 4);
-                transition-delay:       0s;
-                &.is-loaded{
-                    opacity:    1;
-                }
-            }
+            // &.is-blured{
+            //     z-index:    1;
+            //     opacity:    .1;
+            //     transition-duration:    (@base-transition-duration * 4);
+            //     transition-delay:       0s;
+            //     &.is-loaded{
+            //         opacity:    1;
+            //     }
+            // }
         }
     }
 

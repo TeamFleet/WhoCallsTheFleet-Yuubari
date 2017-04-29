@@ -48,4 +48,5 @@ dist-web
 .vscode
 /.cmder
 /_.bat
+/_.cmd
 .eslintrc.full

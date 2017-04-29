@@ -11,6 +11,13 @@
     // animation:  slidein-from-right .75s ease-out;
     transform:  translateX(100%);
 
+    &:after{
+        @color:     desaturate(@theme-bluegrey-900, 10%);
+        background: @color;
+        background: fade(@color, 70%);
+    }
+
+    /*
     & > .background-container{
         transform:  translateX(-100%);
         &:before{
@@ -18,6 +25,7 @@
             background: fade(@theme-bluegrey-900, 70%);
         }
     }
+    */
 
     & > .wrapper{
         padding:    10px 30px 30px 30px;

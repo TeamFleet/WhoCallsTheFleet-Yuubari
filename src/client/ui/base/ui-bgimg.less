@@ -1,5 +1,6 @@
 @import '../base.less';
 
+/*
 .background-container{
     position:   relative;
     transition-property: opacity, transform;
@@ -14,6 +15,7 @@
         // animation:  fadein 0.75s ease-out;
     }
 }
+*/
 
 
 
@@ -29,26 +31,29 @@ body.is-ready{
 
 body.is-ready.mode-bg{
 	#nav, #main{
+        transition-delay: 0s;
+        /*
         &,
         & > .background-container{
             transition-delay: 0s;
         }
+        */
 	}
 	#nav{
         transform:  translateX(-100%);
-        & > .background-container{
-		    transform:  translateX(100%);
-        }
+        // & > .background-container{
+		//     transform:  translateX(100%);
+        // }
 	}
 	#main{
         transform:  translateX(100%);
-        & > .background-container{
-		    transform:  translateX(-100%);
-        }
+        // & > .background-container{
+		//     transform:  translateX(-100%);
+        // }
 	}
     #bgimg{
         .background-main{
-            opacity:    0;
+            opacity:    0.25;
             transition-delay: (@base-transition-duration * 2);
             transition-duration: (@base-transition-duration * 4);
         }
@@ -102,11 +107,15 @@ body.is-ready.mode-bg{
 
 body.is-ready.mode-bg.mode-bg-leaving{
 	#nav, #main{
+        transform: 	none;
+        transition-delay: (@base-transition-duration * 4);
+        /*
         &,
         & > .background-container{
 		    transform: 	none;
             transition-delay: (@base-transition-duration * 4);
         }
+        */
 	}
     #bgimg{
         .background-main{
