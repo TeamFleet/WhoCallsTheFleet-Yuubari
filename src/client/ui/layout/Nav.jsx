@@ -1,17 +1,20 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 
 import translate from 'sp-i18n'
 import routes from '../../router'
+import { enterBackground as appModeEnterBackground } from '../../logic/app-mode/api.js'
 
 import LangSwitch from '../components/LangSwitch.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './Nav.less'
 
+@connect()
 @ImportStyle(style)
 export default class extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -24,8 +27,9 @@ export default class extends React.Component {
             history.back()
     }
 
-    openBgControls() {
-        document.body.classList.add('mode-bg')
+    enterAppModeBackground() {
+        this.props.dispatch(appModeEnterBackground())
+        // document.body.classList.add('mode-bg')
     }
 
     componentWillReceiveProps(nextProps) {
@@ -71,7 +75,7 @@ export default class extends React.Component {
                     </div>
 
                     <div className="controls">
-                        <button type="button" onClick={this.openBgControls}>[PH] BG CONTROLS</button>
+                        <button type="button" onClick={this.enterAppModeBackground.bind(this)}>[PH] BG CONTROLS</button>
                     </div>
                 </div>
 

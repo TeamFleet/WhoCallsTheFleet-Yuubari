@@ -13,7 +13,7 @@ import clientRouter from './router'
 
 // 其他引用，仅针对本项目案例
 import { onRouterChange } from './ui/layout/Nav.jsx'
-import bgimgReducer from './logic/bgimg/reducer.js'
+import reducers from './redux/reducers.js'
 
 
 
@@ -31,7 +31,9 @@ redux.use(routerMiddleware(browserHistory))
 redux.reducer.use('routing', routerReducer)
 redux.reducer.use('localeId', i18nReducerLocaleId)
 redux.reducer.use('locales', i18nReducerLocales)
-redux.reducer.use('bgimg', bgimgReducer)
+reducers.forEach(arr => {
+    redux.reducer.use(arr[0], arr[1])
+})
 
 // 设定项目所用的 react-router
 router.use({

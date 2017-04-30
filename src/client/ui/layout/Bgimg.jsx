@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { ImportStyle } from 'sp-css-import'
 
 // import { dir } from '../../core/defaults.js'
+import { leave as appModeLeave } from '../../logic/app-mode/api.js'
 import * as bgimgApi from '../../logic/bgimg/api.js'
 
 import style from './Bgimg.less'
@@ -36,17 +37,9 @@ class Bgimg extends React.Component {
             ))
     }
 
-    closeControls() {
-        document.body.classList.add('mode-bg-leaving')
-    }
-
-    originalAnimationEnd(evt) {
-        if (evt.nativeEvent.animationName == 'background-original-leave') {
-            setTimeout(() => {
-                document.body.classList.remove('mode-bg-leaving')
-                document.body.classList.remove('mode-bg')
-            }, evt.nativeEvent.elapsedTime * 1000 * 2)
-        }
+    leaveAppModeBackground() {
+        this.props.dispatch(appModeLeave())
+        // document.body.classList.add('mode-bg-leaving')
     }
 
     render() {
@@ -55,13 +48,12 @@ class Bgimg extends React.Component {
             <div id="bgimg" className={this.props.className}>
                 <BgMain />
                 <div className="controls">
-                    <button type="button" className="back" onClick={this.closeControls}>[PH] BACK</button>
+                    <button type="button" className="back" onClick={this.leaveAppModeBackground.bind(this)}>[PH] BACK</button>
                     <div
                         className="background-original"
                         style={{
                             backgroundImage: `url(${this.props.currentBgPath})`,
                         }}
-                        onAnimationEnd={this.originalAnimationEnd.bind(this)}
                     />
                     <BgList />
                 </div>
@@ -131,20 +123,9 @@ class BgMain extends React.Component {
     }
 
     onLoad() {
-        console.log('background-main loaded')
         this.setState({
             styles: getStyles(this.props.currentBg, 'blured')
         })
-    }
-
-    onAnimationEnd(evt) {
-        // console.log('originalAnimationEnd')
-        if (evt.nativeEvent.animationName == 'background-original-leave') {
-            setTimeout(() => {
-                document.body.classList.remove('mode-bg-leaving')
-                document.body.classList.remove('mode-bg')
-            }, evt.nativeEvent.elapsedTime * 1000 * 2)
-        }
     }
 
     onTransitionEnd(evt) {
@@ -161,7 +142,6 @@ class BgMain extends React.Component {
                 <div
                     className={"item" + (this.state.styles ? ' is-loaded' : '')}
                     style={this.state.styles || {}}
-                    onAnimationEnd={this.onAnimationEnd.bind(this)}
                     onTransitionEnd={this.onTransitionEnd.bind(this)}
                 >
                     <img src={this.props.currentBg.getPath('blured')} onLoad={this.onLoad.bind(this)} />

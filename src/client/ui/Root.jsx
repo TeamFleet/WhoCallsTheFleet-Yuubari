@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { ImportStyle } from 'sp-css-import'
 import htmlHead from 'Utils/html-head.js'
 
+import modeBackgroundOnAnimationEnd from '../logic/app-mode/mode-background.js'
+
 import style from './Root.less'
 
 import Main from './layout/Main.jsx'
@@ -10,7 +12,8 @@ import Nav from './layout/Nav.jsx'
 import Bgimg from './layout/Bgimg.jsx'
 
 @connect(state => ({
-    isMainBgimgLoaded: state.bgimg.isMainLoaded
+    isMainBgimgLoaded: state.bgimg.isMainLoaded,
+    appMode: state.appMode
 }))
 @ImportStyle(style)
 export default class extends React.Component {
@@ -60,12 +63,27 @@ export default class extends React.Component {
         }
     }
 
+    get className() {
+        return this.props.className
+            + (this.isAppReady && this.props.appMode.mode
+                ? (' is-mode-' + this.props.appMode.mode
+                    + (this.props.appMode.leaving ? (' is-mode-' + this.props.appMode.mode + '-leaving') : '')
+                )
+                : ''
+            )
+    }
+
+    onAnimationEnd(evt) {
+        const action = modeBackgroundOnAnimationEnd(evt.nativeEvent)
+        if (action) this.props.dispatch(action)
+    }
+
     render() {
         // if (__CLIENT__) this.appReady(100)
         if (this.props.isMainBgimgLoaded) this.appReady()
 
         return (
-            <div id="app" className={this.props.className}>
+            <div id="app" className={this.className} onAnimationEnd={this.onAnimationEnd.bind(this)}>
                 <Nav location={this.props.location} />
                 <Main location={this.props.location}>
                     {this.props.children}
