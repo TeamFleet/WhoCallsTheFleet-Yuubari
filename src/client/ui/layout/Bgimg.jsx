@@ -118,6 +118,72 @@ class BgMain extends React.Component {
         super(props)
 
         this.state = {
+            stylesOriginal: false,
+            showOriginal: false,
+            showBlured: true
+        }
+    }
+
+    originalLoaded() {
+        // console.log('originalLoaded')
+        this.setState({
+            stylesOriginal: getStyles(this.props.currentBg)
+        })
+    }
+
+    originalTransitionEnd(evt) {
+        // console.log('originalTransitionEnd', evt.target)
+        // console.log('showBlured', this.state.showBlured)
+        if (evt.propertyName == 'opacity' && this.state.showBlured) {
+            this.props.dispatch(bgimgApi.mainImgLoaded())
+        }
+    }
+
+    bluredLoaded(evt) {
+        // console.log('bluredLoaded')
+        this.setState({
+            stylesBlured: getStyles(this.props.currentBg, 'blured')
+        })
+    }
+
+    bluredTransitionEnd(evt) {
+        if (evt.propertyName == 'opacity' && !this.state.showOriginal) {
+            this.setState({
+                showOriginal: true
+            })
+        }
+    }
+
+    render() {
+        return (
+            <div className="background-main">
+                {this.state.showOriginal &&
+                    <div
+                        className={"item item-original" + (this.state.stylesOriginal ? ' is-loaded' : '')}
+                        style={this.state.stylesOriginal || {}}
+                        onTransitionEnd={this.originalTransitionEnd.bind(this)}
+                    >
+                        <img src={this.props.currentBg.getPath()} onLoad={this.originalLoaded.bind(this)} />
+                    </div>
+                }
+
+                <div
+                    className={"item item-blured" + (this.state.stylesBlured ? ' is-loaded' : '')}
+                    style={this.state.stylesBlured || {}}
+                    onTransitionEnd={this.bluredTransitionEnd.bind(this)}
+                >
+                    <img src={this.props.currentBg.getPath('blured')} onLoad={this.bluredLoaded.bind(this)} />
+                </div>
+            </div>
+        )
+    }
+}
+/* only original
+class BgMain extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
             styles: false
         }
     }
@@ -150,6 +216,7 @@ class BgMain extends React.Component {
         )
     }
 }
+*/
 /* rev:1
 class BgMain extends React.Component {
     constructor(props) {

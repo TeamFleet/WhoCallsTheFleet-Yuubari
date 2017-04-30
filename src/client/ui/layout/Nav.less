@@ -23,21 +23,22 @@
         background: fade(@theme-bluegrey-50, 10%);
     }
 
-    &:after{
-        @color:     desaturate(@theme-bluegrey-900, 10%);
-        background: @color;
-        background: fade(@color, 50%);
-    }
+    // &:after{
+    //     @color:     desaturate(@theme-bluegrey-900, 10%);
+    //     background: @color;
+    //     background: fade(@color, 50%);
+    // }
 
-    /*
     & > .background-container{
         transform:  translateX(100%);
         &:before{
             background: @theme-bluegrey-900;
             background: fade(@theme-bluegrey-900, 50%);
         }
+        .background{
+            right:  auto;
+        }
     }
-    */
 
     & > .wrapper{
         overflow-y: auto;

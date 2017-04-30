@@ -7,6 +7,7 @@ import routes from '../../router'
 import { enterBackground as appModeEnterBackground } from '../../logic/app-mode/api.js'
 
 import LangSwitch from '../components/LangSwitch.jsx'
+import { BgContainerBlured } from './Bgimg.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './Nav.less'
@@ -80,6 +81,8 @@ export default class extends React.Component {
                 </div>
 
                 <label htmlFor="nav-switch" className="label"></label>
+
+                <BgContainerBlured />
             </nav>
         )
     }
