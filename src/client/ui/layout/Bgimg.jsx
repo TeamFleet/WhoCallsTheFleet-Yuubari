@@ -23,6 +23,7 @@ const getStyles = (bgObj, type = '') => {
  */
 @connect(state => ({
     currentBgPath: __CLIENT__ && state.bgimg.current && state.bgimg.current.getPath(),
+    isAppModeBackground: (state.appMode.mode == 'background')
 }))
 @ImportStyle(style)
 class Bgimg extends React.Component {
@@ -47,16 +48,18 @@ class Bgimg extends React.Component {
         return (
             <div id="bgimg" className={this.props.className}>
                 <BgMain />
-                <div className="controls">
-                    <button type="button" className="back" onClick={this.leaveAppModeBackground.bind(this)}>[PH] BACK</button>
-                    <div
-                        className="background-original"
-                        style={{
-                            backgroundImage: `url(${this.props.currentBgPath})`,
-                        }}
-                    />
-                    <BgList />
-                </div>
+                {this.props.isAppModeBackground && (
+                    <div className="controls">
+                        <button type="button" className="back" onClick={this.leaveAppModeBackground.bind(this)}>[PH] BACK</button>
+                        <div
+                            className="background-original"
+                            style={{
+                                backgroundImage: `url(${this.props.currentBgPath})`,
+                            }}
+                        />
+                        <BgList />
+                    </div>)
+                }
             </div>
         )
     }
