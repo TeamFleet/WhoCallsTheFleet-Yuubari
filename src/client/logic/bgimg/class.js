@@ -31,11 +31,20 @@ export default class Background {
         if (index) this.index = index
     }
 
+    get ext() {
+        if (__SERVER__) return '.jpg'
+        if (typeof this._ext === 'undefined') {
+            if (self._html.classList.contains('webp')) this._ext = '.webp'
+            else this._ext = '.jpg'
+        }
+        return this._ext
+    }
+
     getPath(type = "") {
         if (typeof type !== 'string') type = ''
         const prop = '_path' + type
         if (!this[prop]) {
-            this[prop] = __PUBLIC__ + `/_bgimgs/${type ? (type + '/') : ''}${type ? this.filename : (this.filenameOriginal || this.filename)}.jpg`
+            this[prop] = __PUBLIC__ + `/_bgimgs/${type ? (type + '/') : ''}${type ? this.filename : (this.filenameOriginal || this.filename)}${type === 'thumbnail' ? '.jpg' : this.ext}`
         }
         return this[prop]
     }

@@ -80,6 +80,15 @@ import Background from './logic/bgimg/class.js'
                 tagHtml.classList.add('platform-' + platform)
             }
         }
+
+        // WebP Support
+        const webP = new Image();
+        webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+        webP.onload = webP.onerror = function () {
+            if (webP.height === 2) tagHtml.classList.add('webp')
+        }
+
+        self._html = tagHtml
     })
 
     // [nw.js] show and focus window

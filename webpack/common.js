@@ -2,6 +2,7 @@ const fs = require('fs')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
+// const glob = require("glob")
 const path = require('path')
 const appPath = process.cwd()
 const pathBgimgs = path.resolve(appPath, './src/client/assets/bgimgs')
@@ -127,8 +128,9 @@ const plugins = [
     }),
     new webpack.DefinePlugin({
         '__BGIMG_LIST__': JSON.stringify(
+            // glob.sync(path.resolve(pathBgimgs, '*.jpg'))
             fs.readdirSync(pathBgimgs).filter(
-                file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory()
+                file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory() && path.extname(path.resolve(pathBgimgs, file)) === '.jpg'
             )
         )
     })
