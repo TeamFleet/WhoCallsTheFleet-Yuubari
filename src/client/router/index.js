@@ -15,7 +15,7 @@ export default {
             name: 'home',
             getComponent: (nextState, cb) => {
                 require.ensure([], (require) => {
-                    if (routeCheck(nextState)) cb(null, require('UI/pages/Home').default)
+                    if (routeCheck(nextState)) cb(null, require('UI/pages/home').default)
                 }, 'home')
             },
             isIndex: true
@@ -29,7 +29,7 @@ export default {
             name: 'about',
             getComponent: (nextState, cb) => {
                 require.ensure([], (require) => {
-                    if (routeCheck(nextState)) cb(null, require('UI/pages/About').default)
+                    if (routeCheck(nextState)) cb(null, require('UI/pages/about').default)
                 }, 'about')
             }
         }
