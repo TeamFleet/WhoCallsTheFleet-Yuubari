@@ -89,24 +89,10 @@ const rules = [{
         loader: 'babel-loader'
     }]
 }, {
-    test: /\.md$/,
-    include: [
-        path.resolve(appPath, "docs")
-    ],
-    use: [
-        // {
-        //     loader: "html-loader"
-        // },
-        // {
-        //     loader: "markdown-loader",
-        //     options: {
-        //         /* your options here */
-        //     }
-        // }
-        {
-            loader: 'raw-loader'
-        }
-    ]
+    test: /\.nedb$/,
+    use: [{
+        loader: 'raw-loader'
+    }]
 }]
 
 // 执行顺序，？

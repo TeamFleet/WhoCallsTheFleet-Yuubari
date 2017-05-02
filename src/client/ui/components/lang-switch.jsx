@@ -5,7 +5,7 @@ import translate, { localeId } from 'sp-i18n'
 import { availableLocales } from 'Config/i18n'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './LangSwitch.less'
+import style from './lang-switch.less'
 
 @connect((state, ownProps) => {
     return {

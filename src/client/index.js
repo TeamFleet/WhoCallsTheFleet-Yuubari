@@ -12,7 +12,7 @@ import { availableLocales } from 'Config/i18n'
 import clientRouter from './router'
 
 // 其他引用，仅针对本项目案例
-import { onRouterChange } from './ui/layout/Nav.jsx'
+import { onRouterChange } from './ui/layout/nav.jsx'
 import reducers from './redux/reducers.js'
 
 

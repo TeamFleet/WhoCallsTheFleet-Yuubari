@@ -2,9 +2,9 @@ import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './Main.less'
+import style from './main.less'
 
-import { BgContainerBlured } from './Bgimg.jsx'
+import { BgContainerBlured } from './bgimg.jsx'
 
 // @connect(mapStateToProps, mapDispatchToProps)
 @ImportStyle(style)

@@ -6,7 +6,7 @@ import { ImportStyle } from 'sp-css-import'
 import { leave as appModeLeave } from '../../logic/app-mode/api.js'
 import * as bgimgApi from '../../logic/bgimg/api.js'
 
-import style from './Bgimg.less'
+import style from './bgimg.less'
 
 const getStyles = (bgObj, type = '') => {
     if (bgObj && bgObj.getPath)

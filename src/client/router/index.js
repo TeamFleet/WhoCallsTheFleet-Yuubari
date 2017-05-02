@@ -1,26 +1,35 @@
 import Root from 'UI/Root.jsx'
 
+import tools from './tools.js'
+import data from './data.js'
+
+export const routeCheck = (nextState) => __SERVER__ ? true : (nextState.location.pathname === location.pathname)
+
 export default {
     path: '',
     component: Root,
     name: 'page-app',
-    childRoutes: [        
+    childRoutes: [
         {
             path: 'home',
             name: 'home',
             getComponent: (nextState, cb) => {
                 require.ensure([], (require) => {
-                    cb(null, require('UI/pages/Home').default)
+                    if (routeCheck(nextState)) cb(null, require('UI/pages/Home').default)
                 }, 'home')
             },
             isIndex: true
         },
+
+        ...tools,
+        ...data,
+
         {
             path: 'about',
             name: 'about',
             getComponent: (nextState, cb) => {
                 require.ensure([], (require) => {
-                    cb(null, require('UI/pages/About').default)
+                    if (routeCheck(nextState)) cb(null, require('UI/pages/About').default)
                 }, 'about')
             }
         }

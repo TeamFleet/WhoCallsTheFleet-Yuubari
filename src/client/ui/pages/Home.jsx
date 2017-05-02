@@ -5,7 +5,7 @@ import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './Home.less'
+import style from './home.less'
 
 @connect(mapStateToProps)
 @ImportStyle(style)

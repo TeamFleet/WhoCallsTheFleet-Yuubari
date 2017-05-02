@@ -3,14 +3,26 @@ import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 
 import translate from 'sp-i18n'
-import routes from '../../router'
 import { enterBackground as appModeEnterBackground } from '../../logic/app-mode/api.js'
 
-import LangSwitch from '../components/LangSwitch.jsx'
-import { BgContainerBlured } from './Bgimg.jsx'
+import LangSwitch from '../components/lang-switch.jsx'
+import { BgContainerBlured } from './bgimg.jsx'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './Nav.less'
+import style from './nav.less'
+
+const navs = [
+    undefined,
+    'fleets',
+    'calctp',
+    undefined,
+    'ships',
+    'equipments',
+    'arsenal',
+    'entities',
+    undefined,
+    'about'
+]
 
 @connect()
 @ImportStyle(style)
@@ -40,15 +52,16 @@ export default class extends React.Component {
     }
 
     renderItem(route, index) {
-        if (route === '') {
+        if (typeof route === 'undefined') {
             return <s className="blank" key={index}></s>
         } else {
             return (
                 <Link
-                    to={route.path}
+                    to={'/' + route}
                     key={index}
                     className="link"
-                    activeClassName="on">{route.title || route.name || route.path}</Link>
+                    activeClassName="on"
+                >{translate('nav.' + route)}</Link>
             )
         }
     }
@@ -65,9 +78,8 @@ export default class extends React.Component {
                     </div>
 
                     <div className="navs">
-                        <IndexLink to="/" activeClassName="on" className="link">testPage1</IndexLink>
-                        <s className="blank"></s>
-                        <Link to="/about" activeClassName="on" className="link">testPage2</Link>
+                        <IndexLink to="/" activeClassName="on" className="link">{translate('nav.home')}</IndexLink>
+                        {navs.map(this.renderItem)}
                     </div>
 
                     <div className="language-switch">

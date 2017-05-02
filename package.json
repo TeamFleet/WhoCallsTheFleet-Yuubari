@@ -105,6 +105,8 @@
 
 
     "dependencies": {
+        "whocallsthefleet-database": "latest",
+
         "normalize.css": "^6.0.0",
         "kckit": "^0.6.3"
     },

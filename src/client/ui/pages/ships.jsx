@@ -1,20 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './about.less'
+import style from './ships.less'
 
-@connect(mapStateToProps)
+@connect()
 @ImportStyle(style)
-export default class About extends React.Component {
+export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
             state: store.getState(),
-            title: translate('nav.about') + ' - ' + translate('title')
+            title: translate('ships.title') + ' - ' + translate('title')
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -26,12 +27,15 @@ export default class About extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <h2>About page</h2>
+                <h2>{translate('ships.title')}</h2>
+                <ul>
+                    {[1,11,300].map((id,index) => (
+                        <li key={index}>
+                            <Link to={'/ships/' + id}>{id}</Link>
+                        </li>
+                    ))}
+                </ul>
             </PageContainer>
         )
     }
 }
-
-const mapStateToProps = (state, ownProps) => ({
-    prop: state.prop
-})

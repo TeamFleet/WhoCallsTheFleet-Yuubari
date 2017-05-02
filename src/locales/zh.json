@@ -7,5 +7,13 @@
     "title": "是谁呼叫舰队",
 
     "nav": {
+        "home": "首页",
+        "fleets": "舰队模拟",
+        "calctp": "TP计算",
+        "ships": "舰娘",
+        "equipments": "装备",
+        "arsenal": "改修",
+        "entities": "声优&画师",
+        "about": "关于"
     }
 }

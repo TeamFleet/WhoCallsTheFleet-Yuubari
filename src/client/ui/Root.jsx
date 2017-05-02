@@ -7,9 +7,9 @@ import modeBackgroundOnAnimationEnd from '../logic/app-mode/mode-background.js'
 
 import style from './Root.less'
 
-import Main from './layout/Main.jsx'
-import Nav from './layout/Nav.jsx'
-import Bgimg from './layout/Bgimg.jsx'
+import Main from './layout/main.jsx'
+import Nav from './layout/nav.jsx'
+import Bgimg from './layout/bgimg.jsx'
 
 @connect(state => ({
     isMainBgimgLoaded: state.bgimg.isMainLoaded,
@@ -76,6 +76,10 @@ export default class extends React.Component {
     onAnimationEnd(evt) {
         const action = modeBackgroundOnAnimationEnd(evt.nativeEvent)
         if (action) this.props.dispatch(action)
+    }
+
+    componentWillMount() {
+        console.log('root componentWillMount')
     }
 
     render() {

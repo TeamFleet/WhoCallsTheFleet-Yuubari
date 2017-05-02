@@ -7,5 +7,13 @@
     "title": "Who Calls the Fleet",
 
     "nav": {
+        "home": "Home",
+        "fleets": "Fleet Builder",
+        "calctp": "TP Calculator",
+        "ships": "Ships",
+        "equipments": "Equipments",
+        "arsenal": "Akashi's Arsenal",
+        "entities": "CV & Illustrators",
+        "about": "About"
     }
 }
