@@ -20,10 +20,15 @@ const run = () => {
                     .filter(line => typeof line !== 'undefined' && line)
                     .map(line => {
                         const json = JSON.parse(line)
-                        delete(json.picture)
+                        delete (json.picture)
                         return JSON.stringify(json)
                     })
-                    .join("\r")
+                    .join("\n") + "\r"
+                // fs.writeFile(
+                //     path.resolve(topath, file + '.test'),
+                //     content,
+                //     'utf-8'
+                // )
                 break
         }
         fs.writeFile(

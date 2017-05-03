@@ -41,6 +41,9 @@ node_modules/
 dist-app
 dist-web
 
+# builds
+/src/client/logic/database/db
+
 
 # Personal code
 

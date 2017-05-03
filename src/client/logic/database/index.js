@@ -15,20 +15,24 @@ let isInit
 let raw
 let db = {}
 
-// const requireDb = (name) => require(`./db/${name}.nedb`)
+const requireDb = (name) => require(`./db/${name}.nedb`)
 
 export const init = () => {
     if (isInit) return
 
     raw = {
-        ships: require('./db/ships.nedb'),
-        ship_namesuffix: require('./db/ship_namesuffix.nedb'),
+        ships: requireDb('ships'),
+        ship_types: requireDb('ship_types'),
+        ship_classes: requireDb('ship_classes'),
+        ship_namesuffix: requireDb('ship_namesuffix'),
+        ship_series: requireDb('ship_series'),
 
-        equipments: require('./db/items.nedb'),
+        equipments: requireDb('items'),
+        equipment_types: requireDb('item_types'),
 
-        // entities: require('./db/entities.nedb'),
+        entities: requireDb('entities'),
 
-        consumables: require('./db/consumables.nedb')
+        consumables: requireDb('consumables')
     }
 
     for (let type in raw) {
