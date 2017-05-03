@@ -4,6 +4,7 @@ import { ImportStyle } from 'sp-css-import'
 import htmlHead from 'Utils/html-head.js'
 
 import modeBackgroundOnAnimationEnd from '../logic/app-mode/mode-background.js'
+import {init as dbInit} from '../logic/database'
 
 import style from './Root.less'
 
@@ -76,6 +77,10 @@ export default class extends React.Component {
     onAnimationEnd(evt) {
         const action = modeBackgroundOnAnimationEnd(evt.nativeEvent)
         if (action) this.props.dispatch(action)
+    }
+
+    componentWillMount() {
+        dbInit()
     }
 
     render() {

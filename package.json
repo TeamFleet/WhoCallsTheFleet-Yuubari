@@ -26,7 +26,8 @@
         "deploy": "node ./deploy",
 
 
-        "build": "npm run dist",
+        "prebuild": "npm run clean:dist && node ./compress_database.js",
+        "build": "npm run dist:client && npm run dist:server && npm run copy:public",
         "build:app": "",
 
 
@@ -34,7 +35,7 @@
         "copy:public": "copyfiles ./public/**/* ./dist-web",
 
 
-        "dev:client": "node ./webpack/enter --stage client --env dev --cport 3002",
+        "dev:client": "node ./compress_database.js && node ./webpack/enter --stage client --env dev --cport 3002",
         "dev:server": "node ./webpack/enter --stage server --env dev --cport 3002",
         "dev:run": "node ./dist-web/server --cport 3002 --sport 3000",
 
@@ -42,7 +43,7 @@
         "dist:server": "node ./webpack/enter --stage server --env dist",
         "dist:client": "node ./webpack/enter --stage client --env dist",
         "dist:run": "npm run dist:server && npm run dev:run",
-        "dist": "npm run clean:dist && npm run dist:client && npm run dist:server && npm run copy:public",
+        "dist": "npm run build",
 
 
         "pm2:dev:client": "pm2 restart pm2.json --only fleet-dev-client",
@@ -108,8 +109,12 @@
         "whocallsthefleet-database": "latest",
         "whocallsthefleet-backgrounds": "latest",
 
+        "kckit": "^1.0.6",
+
         "normalize.css": "^6.0.0",
-        "kckit": "^0.6.3"
+        
+        "lz-string": "^1.4.4",
+        "fs-extra": "^3.0.0"
     },
     "devDependencies": {
         "sp-base": "^2.0.0",

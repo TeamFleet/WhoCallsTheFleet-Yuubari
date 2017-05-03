@@ -11,7 +11,7 @@ import style from './ship.less'
 
 @connect()
 @ImportStyle(style)
-export default class About extends React.Component {
+export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
             state: store.getState(),
@@ -22,13 +22,20 @@ export default class About extends React.Component {
         ext.title = head.title
     }
 
+    get data() {
+        if (!this._data && this.props.params.id)
+            this._data = db.ships[this.props.params.id]
+        return this._data || {}
+    }
+
     render() {
+        if (__CLIENT__) console.log(this.data)
         return (
             <PageContainer
                 className={this.props.className}
             >
-                <h2>SHIP: {this.props.routeParams.id}</h2>
-                {JSON.stringify(db.ships[this.props.routeParams.id])}
+                <h2>{this.data._name}</h2>
+                <p><i>{translate('under_construction')}...</i></p>
             </PageContainer>
         )
     }

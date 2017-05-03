@@ -1,5 +1,4 @@
 import bindEvent from 'bind-event'
-import Background from './logic/bgimg/class.js'
 
 (() => {
     if (self && self.isCriticalInit) return true
@@ -21,18 +20,6 @@ import Background from './logic/bgimg/class.js'
 
     // 内置背景图列表
     self.__BGIMG_LIST__ = __BGIMG_LIST__
-
-    // 处理服务器返回的背景图数据
-    // if (self.__REDUX_STATE__.bgimg) {
-    //     if (self.__REDUX_STATE__.bgimg.current)
-    //         self.__REDUX_STATE__.bgimg.current = new Background(self.__REDUX_STATE__.bgimg.current)
-
-    //     if (self.__REDUX_STATE__.bgimg.list)
-    //         for (let i in self.__REDUX_STATE__.bgimg.list)
-    //             self.__REDUX_STATE__.bgimg.list[i].forEach((item, index) => {
-    //                 self.__REDUX_STATE__.bgimg.list[i][index] = new Background(item)
-    //             })
-    // }
 
     document.addEventListener("DOMContentLoaded", function () {
         let boatLoader = document.createElement('div')
