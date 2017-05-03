@@ -5,9 +5,15 @@ import { Link } from 'react-router'
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
+import db from '../../logic/database'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './ships.less'
+
+let ships = []
+for (let id in db.ships) {
+    ships[id] = db.ships[id]
+}
 
 @connect()
 @ImportStyle(style)
@@ -29,9 +35,9 @@ export default class extends React.Component {
             >
                 <h2>{translate('ships.title')}</h2>
                 <ul>
-                    {[1,11,300].map((id,index) => (
+                    {ships.filter(ship => typeof ship !== 'undefined').map((ship, index) => (
                         <li key={index}>
-                            <Link to={'/ships/' + id}>{id}</Link>
+                            <Link to={'/ships/' + ship.id}>{ship.id}</Link>
                         </li>
                     ))}
                 </ul>

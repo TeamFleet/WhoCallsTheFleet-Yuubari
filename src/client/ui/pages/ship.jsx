@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
+import db from '../../logic/database'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './ship.less'
@@ -27,6 +28,7 @@ export default class About extends React.Component {
                 className={this.props.className}
             >
                 <h2>SHIP: {this.props.routeParams.id}</h2>
+                {JSON.stringify(db.ships[this.props.routeParams.id])}
             </PageContainer>
         )
     }

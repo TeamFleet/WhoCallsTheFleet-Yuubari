@@ -5,7 +5,8 @@ const pxtorem = require('postcss-pxtorem')
 // const glob = require("glob")
 const path = require('path')
 const appPath = process.cwd()
-const pathBgimgs = path.resolve(appPath, './src/client/assets/bgimgs')
+// const pathBgimgs = path.resolve(appPath, './src/client/assets/bgimgs')
+const pathBgimgs = path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output')
 
 // 执行顺序，从右到左
 const rules = [{

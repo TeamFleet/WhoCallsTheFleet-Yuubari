@@ -9,7 +9,7 @@ module.exports = (appPath) => {
                 to: '../favicon.ico'
             },
             {
-                from: path.resolve(appPath, './src/client/assets/bgimgs'),
+                from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
                 to: '_bgimgs'
             }
         ])

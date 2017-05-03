@@ -78,10 +78,6 @@ export default class extends React.Component {
         if (action) this.props.dispatch(action)
     }
 
-    componentWillMount() {
-        console.log('root componentWillMount')
-    }
-
     render() {
         // if (__CLIENT__) this.appReady(100)
         if (this.props.isMainBgimgLoaded) this.appReady()
