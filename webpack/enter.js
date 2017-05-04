@@ -96,7 +96,7 @@ const run = (config) => {
 
         process.env.NODE_ENV = 'production'
 
-        let wcd = require('./client.dist')(appPath)
+        let wcd = require('./client.dist')(appPath, env)
         Object.assign(wcd, config.client.dist)
 
         const compiler = webpack(wcd)

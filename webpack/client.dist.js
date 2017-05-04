@@ -14,7 +14,7 @@ const parseRouter = (router, urlParent = '/') => {
 }
 // parseRouter(require('../src/client/router').default)
 
-module.exports = (appPath) => {
+module.exports = (appPath, env) => {
     const entries = require('./client-entries.js')(appPath)
     const outputPath = path.normalize(appPath + '/dist-web/public/client')
     const publicPath = '/client'
@@ -53,7 +53,7 @@ module.exports = (appPath) => {
                 },
                 beautify: false,
                 comments: false,
-                sourceMap: false
+                sourceMap: (env === 'dist' ? true : false)
             }),
 
             ...require('./client-plugins.js')(appPath),
