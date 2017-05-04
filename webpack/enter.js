@@ -92,7 +92,7 @@ const run = (config) => {
     }
 
     // 客户端打包
-    if (stage === 'client' && env === 'dist') {
+    if (stage === 'client' && (env === 'dist' || env === 'prod')) {
 
         process.env.NODE_ENV = 'production'
 
