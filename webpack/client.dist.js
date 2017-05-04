@@ -5,6 +5,15 @@ const common = require('./common')
 
 const pwaCreatePlugin = require('sp-pwa')
 
+let routes = []
+const parseRouter = (router, urlParent = '/') => {
+    router.forEach(route => {
+        if (Array.isArray(route)) return parseRouter(route, urlParent + router.path)
+        routes.push(urlParent + router.path)
+    })
+}
+// parseRouter(require('../src/client/router').default)
+
 module.exports = (appPath) => {
     const entries = require('./client-entries.js')(appPath)
     const outputPath = path.normalize(appPath + '/dist-web/public/client')
@@ -44,19 +53,27 @@ module.exports = (appPath) => {
                 },
                 beautify: false,
                 comments: false,
-                sourceMap: true
+                sourceMap: false
             }),
 
             ...require('./client-plugins.js')(appPath),
 
             // 打包入 PWA 支持
             // 采用默认 Service Worker 文件
-            pwaCreatePlugin(outputPath, undefined, undefined, {
-                ignore: [
-                    '/**/_*/',
-                    '/**/_*/**/*'
+            pwaCreatePlugin(
+                outputPath,
+                undefined,
+                undefined,
+                {
+                    ignore: [
+                        '/**/_*/',
+                        '/**/_*/**/*'
+                    ]
+                },
+                [
+                    '/ships'
                 ]
-            })
+            )
 
             // 自指定 Service Worker 文件
             // pwaCreatePlugin(outputPath, path.normalize(appPath + '/src/client/custom-service-worker.js'))
