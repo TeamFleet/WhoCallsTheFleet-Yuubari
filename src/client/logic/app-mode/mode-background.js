@@ -4,6 +4,8 @@ export default (evt) => {
     if (!evt) return
     if (evt && evt.nativeEvent) evt = evt.nativeEvent
 
+    // console.log(evt.animationName)
+
     switch (evt.animationName) {
         case 'app-mode-background-list-enter':
             return animationEnd()

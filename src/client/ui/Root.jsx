@@ -68,6 +68,7 @@ export default class extends React.Component {
         return this.props.className
             + (this.isAppReady && this.props.appMode.mode
                 ? (' is-mode-' + this.props.appMode.mode
+                    + (!this.props.appMode.leaving && this.props.appMode.animation ? (' is-mode-' + this.props.appMode.mode + '-entering') : '')
                     + (this.props.appMode.leaving ? (' is-mode-' + this.props.appMode.mode + '-leaving') : '')
                 )
                 : ''

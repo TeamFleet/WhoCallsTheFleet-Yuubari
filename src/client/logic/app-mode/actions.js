@@ -11,11 +11,12 @@ export function reset() {
     }
 }
 
-export function enter(mode, ...args) {
+export function enter(mode, scrollY, ...args) {
     if (!mode) return reset()
     let action = {
         type: ENTER_APPMODE,
         state: {
+            scrollY,
             mode
         }
     }

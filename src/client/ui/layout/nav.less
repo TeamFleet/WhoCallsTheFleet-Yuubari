@@ -3,8 +3,26 @@
 .component{
     @controls-height:   60px;
 
+    position:   fixed;
+    z-index:    3;
     left:       0;
+    top:        0;
+    height:     100%;
     width:      @nav-width;
+
+    & > .wrapper{
+        // overflow-y: auto;
+        padding-bottom: @controls-height;
+        // top:        0;
+        // left:       0;
+        // height:     100%;
+        width:      100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        // z-index:    2;
+    }
+
+    // left:       0;
     // overflow:   hidden;
     // overflow-y: auto;
 
@@ -29,7 +47,7 @@
     //     background: fade(@color, 50%);
     // }
 
-    & > .background-container{
+    .background-container{
         transform:  translateX(100%);
         &:before{
             background: @theme-bluegrey-900;
@@ -38,11 +56,6 @@
         .background{
             right:  auto;
         }
-    }
-
-    & > .wrapper{
-        overflow-y: auto;
-        padding-bottom: @controls-height;
     }
 
     .logo{

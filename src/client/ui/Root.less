@@ -1,31 +1,47 @@
 @import './base.less';
 
 .component{
-    position:   absolute;
-    z-index:    1;
-    width:      100%;
-    height:     100%;
-    // padding-left: @nav-width;
+    // position:   absolute;
+    // z-index:    1;
+    // width:      100%;
+    // height:     100%;
     overflow:   hidden;
+    height:     100%;
+    width:      100%;
+    position:   absolute;
+    padding:    0 0 0 @nav-width;
+}
+
+body.is-ready .component{
+    overflow:   visible;
+    height:     auto;
+    width:      auto;
+    position:   relative;
+    &.is-mode-background:not(.is-mode-background-entering){
+        overflow:   hidden;
+        height:     100%;
+        width:      100%;
+        position:   absolute;
+    }
 }
 
 .component.is-mode-background{
-	#nav, #main{
+	#nav, #main, #bgimg .background-main-blured{
         // transition-delay: 0s;
         &,
-        & > .background-container{
+        .background-container{
             transition-delay: 0s;
         }
 	}
 	#nav{
         transform:  translateX(-100%);
-        & > .background-container{
+        .background-container{
 		    transform:  translateX(100%);
         }
 	}
-	#main{
+	#main, #bgimg .background-main-blured{
         transform:  translateX(100%);
-        & > .background-container{
+        .background-container{
 		    transform:  translateX(-100%);
         }
 	}
@@ -85,11 +101,11 @@
     }
 }
 .component.is-mode-background.is-mode-background-leaving{
-	#nav, #main{
+	#nav, #main, #bgimg .background-main-blured{
         // transform: 	none;
         // transition-delay: (@base-transition-duration * 4);
         &,
-        & > .background-container{
+        .background-container{
 		    transform: 	none;
             transition-delay: (@base-transition-duration * 4);
         }

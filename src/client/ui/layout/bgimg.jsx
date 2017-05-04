@@ -48,6 +48,9 @@ class Bgimg extends React.Component {
         return (
             <div id="bgimg" className={this.props.className}>
                 <BgMain />
+                <div className="background-main-blured">
+                    <BgContainerBlured />
+                </div>
                 {this.props.isAppModeBackground && (
                     <div className="controls">
                         <button type="button" className="back" onClick={this.leaveAppModeBackground.bind(this)}>[PH] BACK</button>

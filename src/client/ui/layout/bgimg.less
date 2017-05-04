@@ -75,9 +75,31 @@
         }
     }
 
-    .background-original{
+
+    .background-main-blured{
         position:   absolute;
         z-index:    2;
+        top:        0;
+        bottom:     0;
+        left:       @nav-width;
+        right:      0;
+        transform:  translateX(100%);
+
+        .background-container{
+            transform:  translateX(-100%);
+            &:before{
+                background: @theme-bluegrey-900;
+                background: fade(@theme-bluegrey-900, 70%);
+            }
+            .background{
+                left:   auto;
+            }
+        }
+    }
+
+    .background-original{
+        position:   absolute;
+        z-index:    5;
         left:       (@list-width + 20);
         right:      20px;
         top:        20px;

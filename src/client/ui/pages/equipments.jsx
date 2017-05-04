@@ -14,7 +14,7 @@ export default class About extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
             state: store.getState(),
-            title: translate('equipments.title') + ' - ' + translate('title')
+            title: translate('nav.equipments') + ' - ' + translate('title')
         })
 
         ext.meta = ext.meta.concat(head.meta)

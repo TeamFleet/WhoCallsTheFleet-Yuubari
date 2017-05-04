@@ -18,7 +18,7 @@ export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
             state: store.getState(),
-            title: translate('ships.title') + ' - ' + translate('title')
+            title: translate('nav.ships') + ' - ' + translate('title')
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -26,16 +26,14 @@ export default class extends React.Component {
     }
 
     componentWillMount() {
-        if (__CLIENT__) console.log('ships', db)
         if (!shipsByOrder.length) {
             for (let id in db.ships) {
                 shipsByOrder[id] = db.ships[id]
             }
         }
-}
-    
+    }
+
     render() {
-        if (__CLIENT__) console.log(db)
         return (
             <PageContainer
                 className={this.props.className}
