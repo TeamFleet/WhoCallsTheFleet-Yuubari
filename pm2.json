@@ -60,7 +60,6 @@
             out_file: "logs/dev/fleet-yuubari.log",
             error_file: "logs/dev/fleet-yuubari-error.log",
             env: {
-                WEBPACK_ENV: "prod",
                 SPORT: "8080",
                 CPORT: "8081"
             }

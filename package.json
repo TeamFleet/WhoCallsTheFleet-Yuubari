@@ -21,21 +21,22 @@
 
     "scripts": {
         "start": "npm run build && node ./dist-web/server --cport 8081 --sport 8080",
-        "start:pm2": "npm run build && pm2 restart pm2.json --only fleet-yuubari",
+        "start:pm2": "npm run build && npm run clean:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
         "start:dev": "npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
 
 
-        "prebuild": "npm run clean:dist && node ./compress_database.js",
+        "prebuild": "npm run clean:dist && node ./scripts/compress_database.js",
         "build": "npm run dist:client && npm run dist:server && npm run copy:public",
         "build:app": "",
 
 
         "clean:dist": "rimraf ./dist-web",
+        "clean:sourcemap": "node ./scripts/clean_sourcemap",
         "copy:public": "copyfiles ./public/**/* ./dist-web",
 
 
-        "dev:client": "node ./compress_database.js && node ./webpack/enter --stage client --env dev --cport 3002",
+        "dev:client": "node ./scripts/compress_database.js && node ./webpack/enter --stage client --env dev --cport 3002",
         "dev:server": "node ./webpack/enter --stage server --env dev --cport 3002",
         "dev:run": "node ./dist-web/server --cport 3002 --sport 3000",
 
@@ -114,7 +115,8 @@
         "normalize.css": "^7.0.0",
         
         "lz-string": "^1.4.4",
-        "fs-extra": "^3.0.0"
+        "fs-extra": "^3.0.0",
+        "glob": "^7.1.1"
     },
     "devDependencies": {
         "sp-base": "^2.0.0",
