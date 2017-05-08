@@ -13,6 +13,7 @@ import clientRouter from './router'
 
 // 其他引用，仅针对本项目案例
 import { onRouterChange } from './ui/layout/nav.jsx'
+import { update as rtLocationUpdate } from './logic/location/api.js'
 import reducers from './redux/reducers.js'
 
 
@@ -69,10 +70,15 @@ if (__SERVER__) {
 
 //
 if (__CLIENT__) {
-    run()
+    const store = run()
 
     // 客户端注册多语言
     i18nRegister(__REDUX_STATE__)
+
+    store.dispatch(rtLocationUpdate({
+        pathname: location.pathname
+    }))
+    browserHistory.listen(location => store.dispatch(rtLocationUpdate(location)))
 }
 
 //
