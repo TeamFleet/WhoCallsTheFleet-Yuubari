@@ -120,6 +120,10 @@
         overflow-y: auto;
         overflow-x: hidden;
         // transform:  translateY(100%);
+        .platform-mobile({
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        });
         .list-custom, .list-default{
             overflow:   hidden;
             margin-right: 10px;

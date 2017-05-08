@@ -24,7 +24,9 @@ const navs = [
     'about'
 ]
 
-@connect()
+@connect(state => ({
+    realtimeLocation: state.location
+}))
 @ImportStyle(style)
 export default class extends React.Component {
     constructor(props) {
@@ -51,6 +53,11 @@ export default class extends React.Component {
         })
     }
 
+    get isLoading() {
+        if (typeof this.props.realtimeLocation.pathname === 'undefined') return false
+        return (this.props.realtimeLocation.pathname !== this.props.location.pathname)
+    }
+
     renderItem(route, index) {
         if (typeof route === 'undefined') {
             return <s className="blank" key={index}></s>
@@ -68,7 +75,7 @@ export default class extends React.Component {
 
     render() {
         return (
-            <nav id="nav" className={this.props.className}>
+            <nav id="nav" className={this.props.className + (this.isLoading ? ' is-loading' : '')}>
                 <input type="checkbox" id="nav-switch" />
 
                 <div className="wrapper">

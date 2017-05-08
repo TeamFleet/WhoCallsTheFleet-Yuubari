@@ -69,7 +69,11 @@ if (__SERVER__) {
 
 //
 if (__CLIENT__) {
-    run()
+    const store = run({
+        browserHistoryOnUpdate: (location) => {
+            console.log('browserHistory update', location)
+        }
+    })
 
     // 客户端注册多语言
     i18nRegister(__REDUX_STATE__)

@@ -12,10 +12,12 @@
 
     & > .wrapper{
         // overflow-y: auto;
+        position:   absolute;
+        z-index:    5;
         padding-bottom: @controls-height;
-        // top:        0;
-        // left:       0;
-        // height:     100%;
+        top:        0;
+        left:       0;
+        height:     100%;
         width:      100%;
         overflow-x: hidden;
         overflow-y: auto;
@@ -165,6 +167,54 @@
             border:     1px solid currentColor;
             margin:     0 4px 0 0;
         }
+    }
+
+    &.is-loading{
+        .btn-home-logo{
+            animation:  opacity-pulse 2s ease-in-out infinite;
+            @keyframes  opacity-pulse{
+                0%, 5%{
+                    opacity:    1;
+                }
+                50%{
+                    opacity:    0;
+                }
+                95%, 100%{
+                    opacity:    1;
+                }
+            }
+        }
+        // &:after{
+        //     content:    "";
+        //     position:   absolute;
+        //     z-index:    10;
+        //     pointer-events: none;
+        //     right:      0;
+        //     top:        0;
+        //     background: radial-gradient(ellipse farthest-side at 100% 50%, fade(@theme-bluegrey-50, 90%), transparent);
+        //     height:     33.3333%;
+        //     width:      10px;
+        //     opacity:    0;
+        //     animation:  nav-ray-moving 4s linear infinite;
+        //     @keyframes  nav-ray-moving{
+        //         0%, 10%{
+        //             opacity:    1;
+        //             transform:  translate(100%, 0%);
+        //         }
+        //         30%{
+        //             opacity:    1;
+        //             transform:  translate(0%, 50%);
+        //         }
+        //         50%{
+        //             opacity:    1;
+        //             transform:  translate(0%, 100%);
+        //         }
+        //         90%, 100%{
+        //             opacity:    0;
+        //             transform:  translate(100%, 200%);
+        //         }
+        //     }
+        // }
     }
 
     @media all and (max-width: @screen-phone) {
