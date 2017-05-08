@@ -2,18 +2,17 @@ import { app, run } from 'sp-base/server'
 import { router as reactRouter, createConfigureStore } from '../client'
 import { template } from '../html'
 import mountMiddlewares from './middlewares'
-import isomorphic, { getInjectionJsFilename } from 'sp-react-isomorphic'
+import isomorphic from 'sp-react-isomorphic'
 import is from 'is_js'
-import { localeId as currentLocaleId } from 'sp-i18n'
 
 
-// 项目配置 -----------------------------------------------------------------------
+// 同构配置 -----------------------------------------------------------------------
 
-// 打包结果目标目录
-const distPathName = 'dist-web'
+import isomorphicSettings from '../client/config/isomorphic'
 
 // 同构配置
-const isomorphicOptions = {
+const isomorphicOptions = Object.assign({
+
     // react-router 配置对象
     routes: reactRouter.get(),
 
@@ -24,18 +23,16 @@ const isomorphicOptions = {
     template: template,
 
     // 打包结果目标目录，如果为空默认为 /dist
-    distPathName: distPathName,
+    // distPathName: '/dist',
 
     // 对HTML基础模板的自定义注入
+    // 例如：<script>//inject_critical</script>  替换为 critical
     injection: {
-        js: (args) => `<script async src="${args.path}/${getInjectionJsFilename('client', args.distPathName)}"></script>`,
-        manifest: () => `<link rel="manifest" href="/manifest-${currentLocaleId}.json">`,
-        critical: (args) => `<script src="${args.path}/${getInjectionJsFilename('critical', args.distPathName)}"></script>`,
-        critical_extra_old_ie_filename: (args) => `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${args.path}/${getInjectionJsFilename('critical-extra-old-ie', args.distPathName)}"</script>`
+        // js: (args) => `<script src="${args.path}/client.js"></script>`,
     }
-}
+}, isomorphicSettings)
 
-// 项目配置 - 结束 ------------------------------------------------------------------
+// 同构配置 - 结束 ------------------------------------------------------------------
 
 
 // 挂载中间件

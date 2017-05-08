@@ -25,7 +25,7 @@ const navs = [
 ]
 
 @connect(state => ({
-    rtLocation: state.location
+    realtimeLocation: state.location
 }))
 @ImportStyle(style)
 export default class extends React.Component {
@@ -54,7 +54,8 @@ export default class extends React.Component {
     }
 
     get isLoading() {
-        return (this.props.rtLocation.pathname !== this.props.location.pathname)
+        if (typeof this.props.realtimeLocation.pathname === 'undefined') return false
+        return (this.props.realtimeLocation.pathname !== this.props.location.pathname)
     }
 
     renderItem(route, index) {
