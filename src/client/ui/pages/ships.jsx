@@ -6,6 +6,7 @@ import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
 import db from '../../logic/database'
+import shipList from '../../logic/database/list-ships.js'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './ships.less'
@@ -38,7 +39,34 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <h2>{translate('ships.title')}</h2>
+                {shipList.map((collection, index) => (
+                    <div key={index}>
+                        <h3>{collection.name.zh_cn}</h3>
+                        {collection.list.map((type, index2) => (
+                            <div key={index + '-' + index2}>
+                                <h5>[{db.shipTypes[type.type].code}] {db.shipTypes[type.type].full_zh}</h5>
+                                <ul>
+                                    {type.ships.map((ship, index3) => (
+                                        <li key={index + '-' + index2 + '-' + index3}>
+                                            <Link to={'/ships/' + ship.id}>
+                                                [{ship.id}] {ship._name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div></div>
+                            </div>
+                        ))}
+                        {index < shipList.length - 1 ? (<hr />) : null}
+                        {index < shipList.length - 1 ? (<div></div>) : null}
+                    </div>
+                ))}
+            </PageContainer>
+        )
+    }
+}
+/*
+
                 <ul>
                     {shipsByOrder.filter(ship => typeof ship !== 'undefined').map((ship, index) => (
                         <li key={index}>
@@ -48,7 +76,4 @@ export default class extends React.Component {
                         </li>
                     ))}
                 </ul>
-            </PageContainer>
-        )
-    }
-}
+                */

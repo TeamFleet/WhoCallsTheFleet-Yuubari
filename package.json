@@ -26,7 +26,7 @@
         "deploy": "git pull && node ./deploy",
 
 
-        "prebuild": "npm run clean:dist && node ./scripts/compress_database.js",
+        "prebuild": "npm run clean:dist && node ./scripts/database.js",
         "build": "npm run dist:client && npm run dist:server && npm run copy:public",
         "build:app": "",
 
@@ -36,7 +36,7 @@
         "copy:public": "copyfiles ./public/**/* ./dist-web",
 
 
-        "dev:client": "node ./scripts/compress_database.js && node ./webpack/enter --stage client --env dev --cport 3002",
+        "dev:client": "node ./scripts/database.js && node ./webpack/enter --stage client --env dev --cport 3002",
         "dev:server": "node ./webpack/enter --stage server --env dev --cport 3002",
         "dev:run": "node ./dist-web/server --cport 3002 --sport 3000",
 
@@ -107,16 +107,17 @@
 
 
     "dependencies": {
-        "whocallsthefleet-database": "1.0.3",
+        "whocallsthefleet-database": "1.0.5",
         "whocallsthefleet-backgrounds": "1.0.0",
 
-        "kckit": "^1.0.6",
+        "kckit": "^1.1.1",
 
         "normalize.css": "^7.0.0",
         
         "lz-string": "^1.4.4",
         "fs-extra": "^3.0.1",
-        "glob": "^7.1.1"
+        "glob": "^7.1.1",
+        "nedb-promise": "^2.0.1"
     },
     "devDependencies": {
         "sp-base": "^2.1.0",

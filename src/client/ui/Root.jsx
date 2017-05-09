@@ -12,6 +12,8 @@ import Main from './layout/main.jsx'
 import Nav from './layout/nav.jsx'
 import Bgimg from './layout/bgimg.jsx'
 
+dbInit()
+
 @connect(state => ({
     isMainBgimgLoaded: state.bgimg.isMainLoaded,
     appMode: state.appMode
@@ -80,9 +82,9 @@ export default class extends React.Component {
         if (action) this.props.dispatch(action)
     }
 
-    componentWillMount() {
-        dbInit()
-    }
+    // componentWillMount() {
+    //     dbInit()
+    // }
 
     render() {
         // if (__CLIENT__) this.appReady(100)

@@ -1,6 +1,6 @@
 import { localeId } from 'sp-i18n'
 
-const LZString = require('lz-string')
+const LZString = __CLIENT__ && require('lz-string')
 
 const {
     register,
@@ -15,20 +15,24 @@ let isInit
 let raw
 let db = {}
 
-const requireDb = (name) => require(`./db/${name}.nedb`)
+const requireDb = (name) => {
+    if (__SERVER__) return require(`whocallsthefleet-database/db/${name}.nedb`)
+    let compressed = require(`./db/${name}.nedb`)
+    return LZString.decompressFromEncodedURIComponent(compressed)
+}
 
 export const init = () => {
     if (isInit) return
 
     raw = {
         ships: requireDb('ships'),
-        ship_types: requireDb('ship_types'),
-        ship_classes: requireDb('ship_classes'),
-        ship_namesuffix: requireDb('ship_namesuffix'),
-        ship_series: requireDb('ship_series'),
+        shipTypes: requireDb('ship_types'),
+        shipClasses: requireDb('ship_classes'),
+        shipNamesuffix: requireDb('ship_namesuffix'),
+        shipSeries: requireDb('ship_series'),
 
         equipments: requireDb('items'),
-        equipment_types: requireDb('item_types'),
+        equipmentTypes: requireDb('item_types'),
 
         entities: requireDb('entities'),
 
@@ -43,20 +47,19 @@ export const init = () => {
             case 'entities': Class = Entity; break;
             case 'consumables': Class = Consumable; break;
         }
-        LZString.decompressFromEncodedURIComponent(raw[type])
-            .split(/\r?\n/).forEach(item => {
-                if (!item) return
-                if (typeof db[type] === 'undefined') db[type] = {}
+        raw[type].split(/\r?\n/).forEach(item => {
+            if (!item) return
+            if (typeof db[type] === 'undefined') db[type] = {}
 
-                const obj = JSON.parse(item)
-                const id = obj.id ? parseInt(obj.id) : obj._id
+            const obj = JSON.parse(item)
+            const id = obj.id ? parseInt(obj.id) : obj._id
 
-                if (Class) {
-                    db[type][id] = new Class(obj)
-                } else {
-                    db[type][id] = obj
-                }
-            })
+            if (Class) {
+                db[type][id] = new Class(obj)
+            } else {
+                db[type][id] = obj
+            }
+        })
     }
 
     let locale = localeId
