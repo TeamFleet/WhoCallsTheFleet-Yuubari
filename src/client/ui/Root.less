@@ -26,25 +26,6 @@ body.is-ready .component{
 }
 
 .component.is-mode-background{
-	#nav, #main, #bgimg .background-main-blured{
-        // transition-delay: 0s;
-        &,
-        .background-container{
-            transition-delay: 0s;
-        }
-	}
-	#nav{
-        transform:  translateX(-100%);
-        .background-container{
-		    transform:  translateX(100%);
-        }
-	}
-	#main, #bgimg .background-main-blured{
-        transform:  translateX(100%);
-        .background-container{
-		    transform:  translateX(-100%);
-        }
-	}
     #bgimg{
         .background-main{
             opacity:    0.25;
@@ -101,15 +82,6 @@ body.is-ready .component{
     }
 }
 .component.is-mode-background.is-mode-background-leaving{
-	#nav, #main, #bgimg .background-main-blured{
-        // transform: 	none;
-        // transition-delay: (@base-transition-duration * 4);
-        &,
-        .background-container{
-		    transform: 	none;
-            transition-delay: (@base-transition-duration * 4);
-        }
-	}
     #bgimg{
         .background-main{
             opacity:    1;

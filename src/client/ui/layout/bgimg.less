@@ -40,6 +40,9 @@
         right:      0;
         opacity:    .25;
         transition-duration:    (@base-transition-duration * 4);
+        .is-ready({
+            opacity:    1;
+        });
         .item{
             position:   absolute;
             top:        0;
@@ -81,19 +84,81 @@
         z-index:    2;
         top:        0;
         bottom:     0;
-        left:       @nav-width;
+        // left:       @nav-width;
+        left:       0;
         right:      0;
-        transform:  translateX(100%);
+        overflow:   hidden;
 
         .background-container{
+            .mainframe();
+
+            &,
+            &:before,
+            .background{
+                position:   absolute;
+                top:        0;
+                bottom:     0;
+                overflow:   hidden;
+            }
+            .background{
+                left:       0;
+                right:      0;
+                z-index:    1;
+                transition: inherit;
+            }
+            &:before{
+                content:    "";
+                z-index:    2;
+                left:       0;
+                right:      0;
+            }
+            .is-ready({
+                .background{
+                    transform:  none;
+                }
+            });
+            .is-mode-background-leaving({
+                .background{
+                    transform:  none;
+                }
+            });
+        }
+
+        .nav{
+            left:       0;
+            width:      @nav-width;
             transform:  translateX(-100%);
+            &:before{
+                background: @theme-bluegrey-900;
+                background: fade(@theme-bluegrey-900, 50%);
+            }
+            .background{
+                transform:  translateX(100%);
+            }
+            .is-mode-background({
+                transform:  translateX(-100%);
+                .background{
+                    transform:  translateX(100%);
+                }
+            });
+        }
+        .main{
+            left:       @nav-width;
+            right:      0;
+            transform:  translateX(100%);
             &:before{
                 background: @theme-bluegrey-900;
                 background: fade(@theme-bluegrey-900, 70%);
             }
             .background{
-                left:   auto;
+                transform:  translateX(-100%);
             }
+            .is-mode-background({
+                transform:  translateX(100%);
+                .background{
+                    transform:  translateX(-100%);
+                }
+            });
         }
     }
 
@@ -143,14 +208,5 @@
                 padding:    0 0 100% 0;
             }
         }
-    }
-}
-
-
-
-
-body.is-ready .component{
-    .background-main{
-        opacity:    1;
     }
 }

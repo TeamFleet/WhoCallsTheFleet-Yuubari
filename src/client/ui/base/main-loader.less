@@ -23,7 +23,7 @@
         @height:    63px;
         width:      @width;
         height:     @height;
-        max-height: 25vmin;
+        max-height: 20vmin;
         margin:     (0 - @height / 2) auto auto (0 - @width / 2);
         z-index:    2;
         // background: url("./_common/boat.png") no-repeat 50% 50% / contain;
@@ -44,10 +44,10 @@
         @size:      200px;
         width:      @size;
         height:     @size;
-        max-width:  unit((@size / 63px) * 25,vmin);
-        max-height: unit((@size / 63px) * 25,vmin);
+        max-width:  unit((@size / 63px) * 17.5,vmin);
+        max-height: unit((@size / 63px) * 17.5,vmin);
         // margin:     (0 - @size / 3.5) auto auto (0 - @size / 2);
-        margin:     (0 - @size / 3.5) auto auto auto;
+        // margin:     (0 - @size / 3.5) auto auto auto;
         z-index:    1;
         border:     1px solid @theme-grey-500;
         border-left-width:  2px;
@@ -55,25 +55,25 @@
         border-bottom-width: 6px;
         // border-bottom-color: @theme-bluegrey-200;
         border-radius: 50%;
-        transform:  translateX(-50%) scale(0);
+        transform:  translate(-50%, -28.57%) scale(0);
 		animation: 	rippling 2.4s linear infinite;
         // animation-delay: 2.4s;
 
         @keyframes rippling {
             0% {   
-                transform:	translateX(-50%) scale(0.5, (0.25 * 0.5));
+                transform:	translate(-50%, -28.57%) scale(0.5, (0.25 * 0.5));
                 opacity:    0;
             }
             40% {   
-                transform:  translateX(-50%) scale(1, 0.25);
+                transform:  translate(-50%, -28.57%) scale(1, 0.25);
                 opacity:    1;
             }
             65% {
-                transform:	translateX(-50%) scale(1.25, (0.25 * 1.25));
+                transform:	translate(-50%, -28.57%) scale(1.25, (0.25 * 1.25));
                 opacity:    0;
             }
             100% {
-                transform:	translateX(-50%) scale(1.25, (0.25 * 1.25));
+                transform:	translate(-50%, -28.57%) scale(1.25, (0.25 * 1.25));
                 opacity:    0;
             }
         }

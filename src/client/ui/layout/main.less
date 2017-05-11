@@ -1,12 +1,18 @@
 @import '../base.less';
 
 .component{
+
+    .mainframe();
+
     position:       relative;
     z-index:        2;
     min-height:     100vh;
 
     // animation:  slidein-from-right .75s ease-out;
     transform:      translateX(100%);
+    .is-mode-background({
+        transform:  translateX(100%);
+    });
 
     & > .wrapper{
         position:   relative;

@@ -49,7 +49,8 @@ class Bgimg extends React.Component {
             <div id="bgimg" className={this.props.className}>
                 <BgMain />
                 <div className="background-main-blured">
-                    <BgContainerBlured />
+                    <BgContainerBlured className="nav" />
+                    <BgContainerBlured className="main" />
                 </div>
                 {this.props.isAppModeBackground && (
                     <div className="controls">
@@ -74,7 +75,7 @@ class Bgimg extends React.Component {
 class BgContainer extends React.Component {
     render() {
         return (
-            <div className="background-container">
+            <div className={"background-container" + (this.props.className ? ' ' + this.props.className : '')}>
                 <div
                     className="background"
                     style={getStyles(this.props.bg || this.props.bgObj || this.props.backgroundObj, this.props.type)}
@@ -90,7 +91,7 @@ class BgContainer extends React.Component {
 class BgContainerBlured extends React.Component {
     render() {
         return (
-            <BgContainer bg={this.props.currentBg} type="blured" />
+            <BgContainer className={this.props.className} bg={this.props.currentBg} type="blured" />
         )
     }
 }

@@ -6,7 +6,6 @@ import translate from 'sp-i18n'
 import { enterBackground as appModeEnterBackground } from '../../logic/app-mode/api.js'
 
 import LangSwitch from '../components/lang-switch.jsx'
-import { BgContainerBlured } from './bgimg.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './nav.less'
@@ -73,6 +72,17 @@ export default class extends React.Component {
         }
     }
 
+    share() {
+        if (!__CLIENT__) return
+        if (!navigator.share) return
+        navigator.share({
+            title: document.title,
+            text: "Hello World",
+            url: window.location.href
+        }).then(() => console.log('Successful share'))
+            .catch(error => console.log('Error sharing:', error));
+    }
+
     render() {
         return (
             <nav id="nav" className={this.props.className + (this.isLoading ? ' is-loading' : '')}>
@@ -95,13 +105,12 @@ export default class extends React.Component {
                     </div>
 
                     <div className="controls">
-                        <button type="button" onClick={this.enterAppModeBackground.bind(this)}>[PH] BG CONTROLS</button>
+                        <button type="button" onClick={this.enterAppModeBackground.bind(this)}>BG</button>&nbsp;
+                        <button type="button" onClick={this.share}>SHARE</button>
                     </div>
                 </div>
 
                 <label htmlFor="nav-switch" className="label"></label>
-
-                <BgContainerBlured />
             </nav>
         )
     }

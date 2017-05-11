@@ -3,6 +3,8 @@
 .component{
     @controls-height:   60px;
 
+    .mainframe();
+
     position:   fixed;
     z-index:    3;
     left:       0;
@@ -10,8 +12,12 @@
     height:     100%;
     width:      @nav-width;
 
+    transform:  translateX(-100%);
+    .is-mode-background({
+        transform:  translateX(-100%);
+    });
+
     & > .wrapper{
-        // overflow-y: auto;
         position:   absolute;
         z-index:    5;
         padding-bottom: @controls-height;
@@ -21,15 +27,7 @@
         width:      100%;
         overflow-x: hidden;
         overflow-y: auto;
-        // z-index:    2;
     }
-
-    // left:       0;
-    // overflow:   hidden;
-    // overflow-y: auto;
-
-    // animation:  slidein-from-left .75s ease-out;
-    transform:  translateX(-100%);
 
     &:before{
         content:    '';
@@ -41,23 +39,6 @@
         width:      1px;
         background: @theme-bluegrey-50;
         background: fade(@theme-bluegrey-50, 10%);
-    }
-
-    // &:after{
-    //     @color:     desaturate(@theme-bluegrey-900, 10%);
-    //     background: @color;
-    //     background: fade(@color, 50%);
-    // }
-
-    .background-container{
-        transform:  translateX(100%);
-        &:before{
-            background: @theme-bluegrey-900;
-            background: fade(@theme-bluegrey-900, 50%);
-        }
-        .background{
-            right:  auto;
-        }
     }
 
     .logo{
@@ -103,7 +84,6 @@
         .link{
             display:    block;
             color:      @theme-bluegrey-100;
-            // font-size:  16px;
             line-height:1.35em;
             padding:    3px 0 3px 20px;
             position:   relative;
