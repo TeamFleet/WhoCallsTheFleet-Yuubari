@@ -14,7 +14,7 @@ import clientRouter from './router'
 // 其他引用，仅针对本项目案例
 import { onRouterChange } from './ui/layout/nav.jsx'
 import reducers from './redux/reducers.js'
-import {init as dbInit} from './logic/database'
+import { init as dbInit } from './logic/database'
 
 
 
@@ -78,10 +78,9 @@ if (__CLIENT__) {
 
     // 客户端注册多语言
     i18nRegister(__REDUX_STATE__)
-
-    // 注册db
-    dbInit()
 }
+
+dbInit()
 
 //
 export {
