@@ -48,11 +48,9 @@ class Bgimg extends React.Component {
         return (
             <div id="bgimg" className={this.props.className}>
                 <BgMain />
-                <div className="background-main-blured nav">
-                    <BgContainerBlured />
-                </div>
-                <div className="background-main-blured main">
-                    <BgContainerBlured />
+                <div className="background-main-blured">
+                    <BgContainerBlured className="nav" />
+                    <BgContainerBlured className="main" />
                 </div>
                 {this.props.isAppModeBackground && (
                     <div className="controls">

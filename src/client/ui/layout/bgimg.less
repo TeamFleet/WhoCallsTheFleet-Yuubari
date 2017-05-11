@@ -84,12 +84,13 @@
         z-index:    2;
         top:        0;
         bottom:     0;
+        // left:       @nav-width;
+        left:       0;
+        right:      0;
         overflow:   hidden;
 
         .background-container{
             .mainframe();
-            left:   0;
-            right:  0;
 
             &,
             &:before,
@@ -101,8 +102,9 @@
             }
             .background{
                 z-index:    1;
+                width:      100vw;
                 transition: inherit;
-                width:      100%;
+                background-attachment: initial;
             }
             &:before{
                 content:    "";
@@ -122,49 +124,45 @@
             });
         }
 
-        &.nav{
+        .nav{
             left:       0;
             width:      @nav-width;
-            .background-container{
+            transform:  translateX(-100%);
+            &:before{
+                background: @theme-bluegrey-900;
+                background: fade(@theme-bluegrey-900, 50%);
+            }
+            .background{
+                left:       0;
+                right:      auto;
+                transform:  translateX(100%);
+            }
+            .is-mode-background({
                 transform:  translateX(-100%);
-                &:before{
-                    background: @theme-bluegrey-900;
-                    background: fade(@theme-bluegrey-900, 50%);
-                }
                 .background{
-                    left:       0;
-                    right:      auto;
                     transform:  translateX(100%);
                 }
-                .is-mode-background({
-                    transform:  translateX(-100%);
-                    .background{
-                        transform:  translateX(100%);
-                    }
-                });
-            }
+            });
         }
-        &.main{
+        .main{
             left:       @nav-width;
             right:      0;
-            .background-container{
+            transform:  translateX(100%);
+            &:before{
+                background: @theme-bluegrey-900;
+                background: fade(@theme-bluegrey-900, 70%);
+            }
+            .background{
+                left:       auto;
+                right:      0;
+                transform:  translateX(-100%);
+            }
+            .is-mode-background({
                 transform:  translateX(100%);
-                &:before{
-                    background: @theme-bluegrey-900;
-                    background: fade(@theme-bluegrey-900, 70%);
-                }
                 .background{
-                    left:       auto;
-                    right:      0;
                     transform:  translateX(-100%);
                 }
-                .is-mode-background({
-                    transform:  translateX(100%);
-                    .background{
-                        transform:  translateX(-100%);
-                    }
-                });
-            }
+            });
         }
     }
 
