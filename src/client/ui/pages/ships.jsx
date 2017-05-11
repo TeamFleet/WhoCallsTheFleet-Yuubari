@@ -53,7 +53,7 @@ export default class extends React.Component {
                                                     <Link to={'/ships/' + ship.id}>
                                                         [{ship.id}] {ship._name}
                                                     </Link>
-                                                    {index4 < ships.length - 1 ? " | " : null}
+                                                    {index4 < ships.length - 1 ? "　|　" : null}
                                                 </span>
                                             ))}
                                         </li>
