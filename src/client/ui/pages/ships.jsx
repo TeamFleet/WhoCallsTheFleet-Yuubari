@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
-import db from '../../logic/database'
+import db, { locale as dbLocaleId } from '../../logic/database'
 import shipList from '../../logic/database/list-ships.js'
 
 import { ImportStyle } from 'sp-css-import'
@@ -41,10 +41,10 @@ export default class extends React.Component {
             >
                 {shipList.map((collection, index) => (
                     <div key={index}>
-                        <h3>{collection.name.zh_cn}</h3>
+                        <h3>{collection.name[dbLocaleId]}</h3>
                         {collection.list.map((type, index2) => (
                             <div key={index + '-' + index2}>
-                                {type.type ? (<h5>[{ db.shipTypes[type.type].code }] {db.shipTypes[type.type].full_zh}</h5>) : (<h5>--</h5>)}
+                                {type.type ? (<h5>[{db.shipTypes[type.type].code}] {db.shipTypes[type.type].full_zh}</h5>) : (<h5>--</h5>)}
                                 <ul>
                                     {type.ships.map((ships, index3) => (
                                         <li key={index + '-' + index2 + '-' + index3}>

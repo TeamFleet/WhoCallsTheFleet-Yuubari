@@ -14,6 +14,7 @@ const {
 let isInit
 let raw
 let db = {}
+export let locale
 
 const requireDb = (name) => {
     if (__SERVER__) return require(`whocallsthefleet-database/db/${name}.nedb`)
@@ -62,8 +63,9 @@ export const init = () => {
         })
     }
 
-    let locale = localeId
+    locale = localeId
     if (/^zh/.test(locale)) locale = 'zh_cn'
+    else if (/^en/.test(locale)) locale = 'en_us'
     // else if (/^ja/.test(locale)) locale = 'ja_jp'
     else locale = 'ja_jp'
 
