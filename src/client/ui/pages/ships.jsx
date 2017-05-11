@@ -46,11 +46,16 @@ export default class extends React.Component {
                             <div key={index + '-' + index2}>
                                 <h5>[{db.shipTypes[type.type].code}] {db.shipTypes[type.type].full_zh}</h5>
                                 <ul>
-                                    {type.ships.map((ship, index3) => (
+                                    {type.ships.map((ships, index3) => (
                                         <li key={index + '-' + index2 + '-' + index3}>
-                                            <Link to={'/ships/' + ship.id}>
-                                                [{ship.id}] {ship._name}
-                                            </Link>
+                                            {ships.map((ship, index4) => (
+                                                <span key={index + '-' + index2 + '-' + index3 + '-' + index4}>
+                                                    <Link to={'/ships/' + ship.id}>
+                                                        [{ship.id}] {ship._name}
+                                                    </Link>
+                                                    {index4 < ships.length - 1 ? " | " : null}
+                                                </span>
+                                            ))}
                                         </li>
                                     ))}
                                 </ul>
