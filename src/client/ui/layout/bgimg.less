@@ -80,18 +80,18 @@
 
 
     .background-main-blured{
+        .mainframe();
         position:   absolute;
         z-index:    2;
         top:        0;
         bottom:     0;
-        // left:       @nav-width;
-        left:       0;
-        right:      0;
         overflow:   hidden;
 
         .background-container{
-            .mainframe();
-
+            transition: inherit;
+            left:       0;
+            right:      0;
+            
             &,
             &:before,
             .background{
@@ -103,7 +103,6 @@
             .background{
                 z-index:    1;
                 width:      100vw;
-                transition: inherit;
                 background-attachment: initial;
             }
             &:before{
@@ -112,57 +111,75 @@
                 left:       0;
                 right:      0;
             }
-            .is-ready({
-                .background{
-                    transform:  none;
-                }
-            });
-            .is-mode-background-leaving({
-                .background{
-                    transform:  none;
-                }
-            });
         }
 
-        .nav{
+        &.nav{
             left:       0;
             width:      @nav-width;
             transform:  translateX(-100%);
-            &:before{
-                background: @theme-bluegrey-900;
-                background: fade(@theme-bluegrey-900, 50%);
-            }
-            .background{
-                left:       0;
-                right:      auto;
-                transform:  translateX(100%);
-            }
+            // .is-ready({
+            //     transform:  none;
+            // });
             .is-mode-background({
                 transform:  translateX(-100%);
-                .background{
-                    transform:  translateX(100%);
-                }
             });
+            .is-mode-background-leaving({
+                transform:  none;
+            });
+            .background-container{
+                transform:  translateX(100%);
+                &:before{
+                    background: @theme-bluegrey-900;
+                    background: fade(@theme-bluegrey-900, 50%);
+                }
+                .background{
+                    left:   0;
+                    right:  auto;
+                }
+                .is-ready({
+                    transform:  none;
+                });
+                .is-mode-background({
+                    transform:  translateX(100%);
+                });
+                .is-mode-background-leaving({
+                    transform:  none;
+                });
+            }
         }
-        .main{
+        &.main{
             left:       @nav-width;
             right:      0;
             transform:  translateX(100%);
-            &:before{
-                background: @theme-bluegrey-900;
-                background: fade(@theme-bluegrey-900, 70%);
-            }
-            .background{
-                left:       auto;
-                right:      0;
-                transform:  translateX(-100%);
-            }
+            // .is-ready({
+            //     transform:  none;
+            // });
             .is-mode-background({
                 transform:  translateX(100%);
-                .background{
-                    transform:  translateX(-100%);
-                }
             });
+            .is-mode-background-leaving({
+                transform:  none;
+            });
+            .background-container{
+                transform:  translateX(-100%);
+                &:before{
+                    background: @theme-bluegrey-900;
+                    background: fade(@theme-bluegrey-900, 70%);
+                }
+                .background{
+                    left:   auto;
+                    right:  0;
+                }
+                .is-ready({
+                    transform:  none;
+                });
+                .is-mode-background({
+                    transform:  translateX(-100%);
+                });
+                .is-mode-background-leaving({
+                    transform:  none;
+                });
+            }
         }
     }
 
