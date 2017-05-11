@@ -44,7 +44,7 @@ export default class extends React.Component {
                         <h3>{collection.name.zh_cn}</h3>
                         {collection.list.map((type, index2) => (
                             <div key={index + '-' + index2}>
-                                <h5>[{db.shipTypes[type.type].code}] {db.shipTypes[type.type].full_zh}</h5>
+                                {type.type ? (<h5>[{ db.shipTypes[type.type].code }] {db.shipTypes[type.type].full_zh}</h5>) : (<h5>--</h5>)}
                                 <ul>
                                     {type.ships.map((ships, index3) => (
                                         <li key={index + '-' + index2 + '-' + index3}>

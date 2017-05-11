@@ -165,6 +165,18 @@ const run = async () => {
         await appendCollection(index, collection.name, collection.types)
         resolve()
     })))
+    // 其他舰娘
+    let shipsRemains = await db.ships
+        .cfind({
+            type: { $nin: shipTypesAppended }
+        })
+        .exec()
+    if (Array.isArray(shipsRemains) && shipsRemains.length) {
+        shipCollections[shipCollections.length - 1].list.push({
+            type: null,
+            ships: [shipsRemains]
+        })
+    }
     shipCollections.forEach((collection, indexCollection) => {
         shipCollectionsPretty[indexCollection] = {
             name: collection.name.ja_jp,
@@ -182,8 +194,6 @@ const run = async () => {
             })
         })
     })
-    // 其他舰娘
-    // ...
     fs.writeFile(
         path.resolve(topath, 'ship_collections.json'),
         // LZString.compressToEncodedURIComponent(shipCollections),
