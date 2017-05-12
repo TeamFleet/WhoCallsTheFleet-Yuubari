@@ -5,17 +5,9 @@ import { ImportStyle } from 'sp-css-import'
 // import { dir } from '../../core/defaults.js'
 import { leave as appModeLeave } from '../../logic/app-mode/api.js'
 import * as bgimgApi from '../../logic/bgimg/api.js'
+import getStyles from 'Utils/background-styles.js'
 
 import style from './bgimg.less'
-
-const getStyles = (bgObj, type = '') => {
-    if (bgObj && bgObj.getPath)
-        return {
-            backgroundImage: bgObj && `url(${bgObj.getPath(type)})`,
-            backgroundPosition: bgObj && bgObj.position
-        }
-    return {}
-}
 
 /* Bgimg
  * main background image beneath App view
@@ -134,7 +126,9 @@ class BgMain extends React.Component {
     }
 
     originalLoaded() {
+        if (this.isOriginalLoaded) return
         // console.log('originalLoaded')
+        this.isOriginalLoaded = true
         this.setState({
             stylesOriginal: getStyles(this.props.currentBg)
         })
@@ -148,7 +142,7 @@ class BgMain extends React.Component {
         }
     }
 
-    bluredLoaded(evt) {
+    bluredLoaded(/*evt*/) {
         // console.log('bluredLoaded')
         this.setState({
             stylesBlured: getStyles(this.props.currentBg, 'blured')
@@ -160,6 +154,10 @@ class BgMain extends React.Component {
             this.setState({
                 showOriginal: true
             })
+            setTimeout(() => {
+                const event = new Event('load', { bubbles: true })
+                this._original.dispatchEvent(event)
+            }, 2000)
         }
     }
 
@@ -172,7 +170,12 @@ class BgMain extends React.Component {
                         style={this.state.stylesOriginal || {}}
                         onTransitionEnd={this.originalTransitionEnd.bind(this)}
                     >
-                        <img src={this.props.currentBg.getPath()} onLoad={this.originalLoaded.bind(this)} />
+                        <img
+                            src={this.props.currentBg.getPath()}
+                            onLoad={this.originalLoaded.bind(this)}
+                            onError={this.originalLoaded.bind(this)}
+                            ref={(c) => this._original = c}
+                        />
                     </div>
                 }
 
@@ -181,7 +184,11 @@ class BgMain extends React.Component {
                     style={this.state.stylesBlured || {}}
                     onTransitionEnd={this.bluredTransitionEnd.bind(this)}
                 >
-                    <img src={this.props.currentBg.getPath('blured')} onLoad={this.bluredLoaded.bind(this)} />
+                    <img
+                        src={this.props.currentBg.getPath('blured')}
+                        onLoad={this.bluredLoaded.bind(this)}
+                        onError={this.bluredLoaded.bind(this)}
+                    />
                 </div>
             </div>
         )

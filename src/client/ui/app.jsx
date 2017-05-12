@@ -8,6 +8,7 @@ import modeBackgroundOnAnimationEnd from '../logic/app-mode/mode-background.js'
 import style from './app.less'
 
 import Main from './layout/main.jsx'
+import MainMask from './layout/main-mask.jsx'
 import Nav from './layout/nav.jsx'
 import Bgimg from './layout/bgimg.jsx'
 
@@ -91,6 +92,7 @@ export default class extends React.Component {
                 <Main location={this.props.location}>
                     {this.props.children}
                 </Main>
+                <MainMask />
                 <Bgimg />
             </div>
         )

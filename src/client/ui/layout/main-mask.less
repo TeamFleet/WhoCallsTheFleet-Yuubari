@@ -1,0 +1,93 @@
+@import '../base.less';
+
+.component{
+    .mainframe();
+    position:   fixed;
+    z-index:    3;
+    top:        0;
+    left:       @nav-width;
+    right:      0;
+    overflow:   visible;
+
+    transform:  translateX(100%);
+    // .is-ready({
+    //     transform:  none;
+    // });
+    .is-mode-background({
+        transform:  translateX(100%);
+    });
+    .is-mode-background-leaving({
+        transform:  none;
+    });
+
+    .background-container{
+        transition: inherit;
+        left:       0;
+        right:      0;
+        transform:  translateX(-100%);
+        
+        &,
+        &:before,
+        .background{
+            position:   absolute;
+            top:        0;
+            bottom:     0;
+            overflow:   hidden;
+        }
+        .background{
+            z-index:    1;
+            width:      100vw;
+            height:     100vh;
+            background-attachment: initial;
+            left:   auto;
+            right:  0;
+        }
+        &:before{
+            content:    "";
+            z-index:    2;
+            left:       0;
+            right:      0;
+            background: @base-main-background;
+        }
+        .is-ready({
+            transform:  none;
+        });
+        .is-mode-background({
+            transform:  translateX(-100%);
+        });
+        .is-mode-background-leaving({
+            transform:  none;
+        });
+    }
+
+    .screen-tablet({
+        top:        @nav-height-tablet;
+        left:       0;
+        transform:  translate(0%, calc(~"100vh - @{nav-height-tablet}"));
+        .is-mode-background({
+            transform:  translate(0%, calc(~"100vh - @{nav-height-tablet}"));
+        });
+        .background-container{
+            transform:  translate(0%, calc(~"-100vh + @{nav-height-tablet}"));
+            .background{
+                top:    (0 - @nav-height-tablet);
+            }
+            .is-mode-background({
+                transform:  translate(0%, calc(~"-100vh + @{nav-height-tablet}"));
+            });
+        }
+    });
+
+    .screen-phone({
+        top:        @nav-height-phone;
+        .background-container{
+            .background{
+                top:    (0 - @nav-height-phone);
+            }
+        }
+    });
+
+    .fadeout{
+        animation:  fadeout @duration-main-transition ease-out;
+    }
+}

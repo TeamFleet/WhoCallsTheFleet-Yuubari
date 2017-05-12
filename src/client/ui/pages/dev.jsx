@@ -3,9 +3,15 @@ import { connect } from 'react-redux'
 
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
+import Background from '../components/background.jsx'
+import DevHeader from '../components/dev/header.jsx'
+
+import { ImportStyle } from 'sp-css-import'
+import style from './dev.less'
 
 @connect()
-export default class Home extends React.Component {
+@ImportStyle(style)
+export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
             store,
@@ -19,6 +25,8 @@ export default class Home extends React.Component {
     render() {
         return (
             <PageContainer className={this.props.className}>
+                <DevHeader />
+
                 <h1>Qui est in parvis malis.</h1>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Res enim concurrent contrariae. Quodsi ipsam honestatem undique pertectam atque absolutam. <i>Minime vero istorum quidem, inquit.</i> Vitae autem degendae ratio maxime quidem illis placuit quieta. </p>

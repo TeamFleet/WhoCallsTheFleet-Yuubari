@@ -1,0 +1,21 @@
+@import '../base.less';
+
+.component{
+    position:   absolute;
+    overflow:   hidden;
+    left:       @main-margin;
+    right:      @main-margin;
+
+    border-bottom:  1px solid fade(@theme-bluegrey-300, 50%);
+    
+    transition: inherit;
+
+    opacity:    0;
+    animation: 	fadein @duration-main-transition ease-out;
+    animation-fill-mode: both;
+
+    .background-container{
+        z-index:    -2;
+        right:      (0 - @main-margin) !important;
+    }
+}

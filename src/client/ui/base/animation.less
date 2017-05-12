@@ -9,6 +9,17 @@
     }
 }
 
+@keyframes fadein-from-left {
+    0% {
+        transform:  translateX(-2rem);
+        opacity:    0;
+    }
+    100% {
+        transform:  none;
+        opacity:    1;
+    }
+}
+
 @keyframes slidein-from-left {
     0% {
         transform:  translateX(-100%);
@@ -24,5 +35,25 @@
     }
     100% {
         transform:  none;
+    }
+}
+
+@keyframes fadeout {
+    0% {
+        opacity:    1;
+    }
+    100% {
+        opacity:    0;
+    }
+}
+
+@keyframes fadeout-to-right {
+    0% {
+        transform:  none;
+        opacity:    1;
+    }
+    100% {
+        transform:  translateX(2rem);
+        opacity:    0;
     }
 }

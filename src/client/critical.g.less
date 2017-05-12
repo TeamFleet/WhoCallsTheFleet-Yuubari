@@ -142,29 +142,29 @@ h1, h2, h3, h4, h5, h6{
 
     h1{
         font-size:  3rem;
-		letter-spacing: .1em;
+		// letter-spacing: .1em;
     }
 
     h2{
         // font-size:  1.5rem;
-        font-size:  30px;
-		letter-spacing: .1em;
+        font-size:  unit(30 / @root-font-size, rem);
+		// letter-spacing: .1em;
     }
 
     h3{
         // font-size:  1.125rem;
-        font-size:  20px;
+        font-size:  unit(20 / @root-font-size, rem);;
 		letter-spacing: .1em;
     }
 
     h4{
         // font-size:  1rem;
-        font-size:  17px;
+        font-size:  unit(16 / @root-font-size, rem);;
         // color:      @theme-bluegrey-700;
     }
 
     h5{
-        font-size:  14px;
+        font-size:  unit(14 / @root-font-size, rem);;
         // font-size:  @base-font-size;
         // color:      @theme-bluegrey-700;
     }

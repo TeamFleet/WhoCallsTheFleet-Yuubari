@@ -1,7 +1,7 @@
 @import '../base.less';
 
 .component{
-    @transition-duration:   200ms;
+    @transition-duration:   @duration-main-transition;
     @transition-duration-enter: @transition-duration;
     @transition-duration-leave: @transition-duration;
 
@@ -26,10 +26,10 @@
     & > .wrapper{
         position:   relative;
         z-index:    5;
-        border-top:     10px solid transparent;
-        border-right:   30px solid transparent;
-        border-bottom:  30px solid transparent;
-        border-left:    30px solid transparent;
+        border-top:     @main-margin-top solid transparent;
+        border-right:   @main-margin solid transparent;
+        border-bottom:  @main-margin solid transparent;
+        border-left:    @main-margin solid transparent;
     }
 
     .main-transition-enter, .main-transition-leave{
