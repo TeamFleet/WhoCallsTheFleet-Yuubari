@@ -30,7 +30,8 @@ if (__DEV__)
     ])
 
 @connect(state => ({
-    realtimeLocation: state.location
+    realtimeLocation: state.location,
+    pageTitle: state.pageTitle
 }))
 @ImportStyle(style)
 export default class extends React.Component {
@@ -113,6 +114,10 @@ export default class extends React.Component {
                     <div className="controls">
                         <button type="button" onClick={this.enterAppModeBackground.bind(this)}>BG</button>
                     </div>
+                </div>
+
+                <div className="titlebar">
+                    {this.props.pageTitle}
                 </div>
 
                 <label htmlFor="nav-switch" className="label"></label>

@@ -13,8 +13,8 @@ import style from './fleets.less'
 export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
-            state: store.getState(),
-            title: translate('nav.fleets') + ' - ' + translate('title')
+            store,
+            title: translate('nav.fleets')
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -26,7 +26,7 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <h2>{translate('fleet.title')}</h2>
+                <p><i>{translate('under_construction')}...</i></p>
             </PageContainer>
         )
     }

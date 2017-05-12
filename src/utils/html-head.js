@@ -3,13 +3,15 @@ import translate, { getLocaleId, localeId as currentLocaleId } from 'sp-i18n'
 import { origin as siteOrigin } from 'Config/site.js'
 import { availableLocalesFb } from 'Config/i18n.js'
 
+import { update as updatePageTitle } from '../client/logic/page-title/api.js'
+
 let head
 
 export default (settings = {}) => {
 
     let fb_locale
     let fb_app_id = fb_app_id
-    let siteOrigin = siteOrigin
+    let dispatch
     const siteName = translate('title')
 
     /**
@@ -26,6 +28,11 @@ export default (settings = {}) => {
         "currentOrigin": siteOrigin
     }, settings)
 
+    if (options.store) {
+        options.state = options.store.getState()
+        dispatch = options.store.dispatch
+    }
+
     let { uri, title, description, image, state } = options
     if (!title) title = siteName
 
@@ -40,7 +47,10 @@ export default (settings = {}) => {
     }
 
     if (uri.substr(0, 1) == '/') uri = uri.substr(1)
-    if (title) title = title.replace(/\n/g, '')
+    if (title) {
+        if (dispatch) dispatch(updatePageTitle(title))
+        title = title.replace(/\n/g, '') + ' - ' + translate('title')
+    }
     if (description) description = description.replace(/\n/g, '')
 
     if (state.server) options.currentOrigin = state.server.origin || options.currentOrigin

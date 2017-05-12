@@ -146,6 +146,9 @@
                     transform:  none;
                 });
             }
+            .screen-tablet({
+                display:    none;
+            });
         }
         &.main{
             left:       @nav-width;
@@ -180,6 +183,19 @@
                     transform:  none;
                 });
             }
+            .screen-tablet({
+                left:       0;
+                transform:  translate(0%, 100%);
+                .is-mode-background({
+                    transform:  translate(0%, 100%);
+                });
+                .background-container{
+                    transform:  translate(0%, -100%);
+                    .is-mode-background({
+                        transform:  translate(0%, -100%);
+                    });
+                }
+            });
         }
     }
 

@@ -13,8 +13,8 @@ import style from './entity-list.less'
 export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
-            state: store.getState(),
-            title: translate('nav.entities') + ' - ' + translate('title')
+            store,
+            title: translate('nav.entities')
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -26,7 +26,7 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <h2>{translate('entities.title')}</h2>
+                <p><i>{translate('under_construction')}...</i></p>
             </PageContainer>
         )
     }

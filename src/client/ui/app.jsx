@@ -31,6 +31,8 @@ export default class extends React.Component {
 
     // 仅针对 __SERVER__
     static htmlExtends(ext, store) {
+        if (__SERVER__) require('../logic/database/index.js').init()
+
         const head = htmlHead({
             state: store.getState()
         })

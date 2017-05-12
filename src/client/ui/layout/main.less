@@ -1,17 +1,26 @@
 @import '../base.less';
 
 .component{
+    @transition-duration:   200ms;
+    @transition-duration-enter: @transition-duration;
+    @transition-duration-leave: @transition-duration;
 
     .mainframe();
 
     position:       relative;
     z-index:        2;
-    min-height:     100vh;
+    // min-height:     100vh;
 
     // animation:  slidein-from-right .75s ease-out;
-    transform:      translateX(100%);
+    transform:      translate(100%, 0%);
     .is-mode-background({
-        transform:  translateX(100%);
+        transform:  translate(100%, 0%);
+    });
+    .screen-tablet({
+        transform:      translate(0%, 100vh);
+        .is-mode-background({
+            transform:  translate(0%, 100vh);
+        });
     });
 
     & > .wrapper{
@@ -26,6 +35,7 @@
     .main-transition-enter, .main-transition-leave{
         position:   absolute;
         top:        0;
+        width:      100%;
 
         transition-property: opacity, transform;
     }
@@ -37,7 +47,7 @@
         &.main-transition-enter-active {
             opacity:    1;
             transform:  none;
-            transition-duration: 200ms;
+            transition-duration: @transition-duration-enter;
             // transition-timing-function: ease-in;
         }
     }    
@@ -49,7 +59,7 @@
         &.main-transition-leave-active {
             opacity:    0.01;
             transform:  translateX(2rem);
-            transition-duration: 200ms;
+            transition-duration: @transition-duration-leave;
             // transition-timing-function: ease-in;
         }
     }

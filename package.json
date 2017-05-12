@@ -133,7 +133,7 @@
         "sp-auth": "^1.2.1",
         "sp-koa-views": "^1.0.0",
         "sp-i18n": "^1.1.2",
-        "sp-ui-pagecontainer": "^1.0.4",
+        "sp-ui-pagecontainer": "^1.1.0",
         "sp-pwa": "^1.6.0",
 
 

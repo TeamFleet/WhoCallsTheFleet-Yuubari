@@ -2,9 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import PageContainer from 'sp-ui-pagecontainer'
+import htmlHead from 'Utils/html-head.js'
 
 @connect()
 export default class Home extends React.Component {
+    static htmlExtends(ext, store) {
+        const head = htmlHead({
+            store,
+            title: 'DevZone'
+        })
+
+        ext.meta = ext.meta.concat(head.meta)
+        ext.title = head.title
+    }
 
     render() {
         return (

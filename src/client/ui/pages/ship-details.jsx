@@ -14,8 +14,8 @@ import style from './ship-details.less'
 export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
-            state: store.getState(),
-            title: translate('ships.title') + ' - ' + translate('title')
+            store,
+            title: db.ships[store.getState().routing.locationBeforeTransitions.pathname.split('/').reverse()[0]]._name
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -29,7 +29,7 @@ export default class extends React.Component {
     }
 
     render() {
-        if (__CLIENT__) console.log(this.data)
+        if (__CLIENT__) console.log('thisShip', this.data)
         return (
             <PageContainer
                 className={this.props.className}

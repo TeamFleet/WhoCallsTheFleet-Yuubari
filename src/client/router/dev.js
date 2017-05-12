@@ -1,6 +1,6 @@
 import {routeCheck} from './'
 
-export default __DEV__ ? [{
+export default [{
     path: 'dev',
     name: 'dev',
     getComponent: (nextState, cb) => {
@@ -8,4 +8,4 @@ export default __DEV__ ? [{
             if (routeCheck(nextState)) cb(null, require('UI/pages/dev.jsx').default)
         }, 'dev')
     }
-}] : []
+}]

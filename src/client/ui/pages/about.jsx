@@ -8,13 +8,13 @@ import htmlHead from 'Utils/html-head.js'
 import { ImportStyle } from 'sp-css-import'
 import style from './about.less'
 
-@connect(mapStateToProps)
+@connect()
 @ImportStyle(style)
 export default class About extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
-            state: store.getState(),
-            title: translate('nav.about') + ' - ' + translate('title')
+            store,
+            title: translate('nav.about')
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -26,12 +26,8 @@ export default class About extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <h2>About page</h2>
+                <p><i>{translate('under_construction')}...</i></p>
             </PageContainer>
         )
     }
 }
-
-const mapStateToProps = (state, ownProps) => ({
-    prop: state.prop
-})

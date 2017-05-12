@@ -16,8 +16,8 @@ import style from './ship-list.less'
 export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
-            state: store.getState(),
-            title: translate('nav.ships') + ' - ' + translate('title')
+            store,
+            title: translate('nav.ships')
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -29,6 +29,8 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
+                <p><i>{translate('under_construction')}...</i></p>
+                <hr/>
                 {shipList.map((collection, index) => (
                     <div key={index}>
                         <h3>{collection.name[dbLocaleId]}</h3>

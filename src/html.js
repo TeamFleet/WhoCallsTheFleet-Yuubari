@@ -16,9 +16,9 @@ export const template = `
         <meta name="HandheldFriendly" content="true">
         <meta name="mobile-web-app-capable" content="yes">
 
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <link rel="icon" href="icon-128.png" type="image/png" sizes="128x128">
-        <link rel="icon" href="icon-256.png" type="image/png" sizes="256x256">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/icon-128.png" type="image/png" sizes="128x128">
+        <link rel="icon" href="/icon-256.png" type="image/png" sizes="256x256">
         <script>//inject_manifest</script>
 
         <meta name="theme-color" content="#263238" />

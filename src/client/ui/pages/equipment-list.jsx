@@ -13,8 +13,8 @@ import style from './equipment-list.less'
 export default class About extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
-            state: store.getState(),
-            title: translate('nav.equipments') + ' - ' + translate('title')
+            store,
+            title: translate('nav.equipments')
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -26,7 +26,7 @@ export default class About extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <h2>{translate('equipments.title')}</h2>
+                <p><i>{translate('under_construction')}...</i></p>
             </PageContainer>
         )
     }

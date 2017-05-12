@@ -5,7 +5,11 @@ import { routerReducer } from 'react-router-redux'
 import { redux, createConfigureStore, router, run } from 'sp-base/client'
 
 // 引用：多语言相关
-import { reducerLocaleId as i18nReducerLocaleId, reducerLocales as i18nReducerLocales, register as i18nRegister } from 'sp-i18n'
+import {
+    reducerLocaleId as i18nReducerLocaleId,
+    reducerLocales as i18nReducerLocales,
+    register as i18nRegister
+} from 'sp-i18n'
 import { availableLocales } from 'Config/i18n'
 
 // 引用：router
@@ -78,9 +82,8 @@ if (__CLIENT__) {
 
     // 客户端注册多语言
     i18nRegister(__REDUX_STATE__)
+    dbInit()
 }
-
-dbInit()
 
 //
 export {
