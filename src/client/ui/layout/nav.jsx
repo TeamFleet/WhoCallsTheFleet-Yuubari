@@ -10,7 +10,7 @@ import LangSwitch from '../components/lang-switch.jsx'
 import { ImportStyle } from 'sp-css-import'
 import style from './nav.less'
 
-const navs = [
+let navs = [
     undefined,
     'fleets',
     'calctp',
@@ -22,6 +22,12 @@ const navs = [
     undefined,
     'about'
 ]
+
+if (__DEV__)
+    navs = navs.concat([
+        undefined,
+        'dev'
+    ])
 
 @connect(state => ({
     realtimeLocation: state.location

@@ -2,6 +2,7 @@ import Root from 'UI/app.jsx'
 
 import tools from './tools.js'
 import data from './data.js'
+import dev from './dev.js'
 
 export const routeCheck = (nextState) => __SERVER__ ? true : (nextState.location.pathname === location.pathname)
 
@@ -32,6 +33,8 @@ export default {
                     if (routeCheck(nextState)) cb(null, require('UI/pages/about').default)
                 }, 'about')
             }
-        }
+        },
+
+        ...dev
     ]
 }

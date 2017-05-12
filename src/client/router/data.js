@@ -5,7 +5,7 @@ export default [{
     name: 'ships',
     getComponent: (nextState, cb) => {
         require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('UI/pages/ships').default)
+            if (routeCheck(nextState)) cb(null, require('UI/pages/ship-list').default)
         }, 'ships')
     }
 }, {
@@ -13,7 +13,7 @@ export default [{
     name: 'equipments',
     getComponent: (nextState, cb) => {
         require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('UI/pages/equipments').default)
+            if (routeCheck(nextState)) cb(null, require('UI/pages/equipment-list').default)
         }, 'equipments')
     }
 }, {
@@ -29,7 +29,7 @@ export default [{
     name: 'entities',
     getComponent: (nextState, cb) => {
         require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('UI/pages/entities.jsx').default)
+            if (routeCheck(nextState)) cb(null, require('UI/pages/entity-list.jsx').default)
         }, 'entities')
     }
 },
@@ -40,7 +40,7 @@ export default [{
     name: 'thisShip',
     getComponent: (nextState, cb) => {
         require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('UI/pages/ship').default)
+            if (routeCheck(nextState)) cb(null, require('UI/pages/ship-details').default)
         }, 'thisShip')
     }
 }

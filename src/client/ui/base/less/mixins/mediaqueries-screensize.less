@@ -1,0 +1,25 @@
+@import '../variables.less';
+
+.screen-t1( @rules ){
+    @media all and (max-width: @screen-t1){
+        &{
+            @rules();
+        }
+    }
+}
+
+.screen-tablet( @rules ){
+    @media all and (max-width: @screen-tablet){
+        &{
+            @rules();
+        }
+    }
+}
+
+.screen-phone( @rules ){
+    @media all and (max-width: @screen-phone){
+        &{
+            @rules();
+        }
+    }
+}

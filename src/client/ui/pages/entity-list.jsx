@@ -6,15 +6,15 @@ import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './equipments.less'
+import style from './entity-list.less'
 
 @connect()
 @ImportStyle(style)
-export default class About extends React.Component {
+export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
             state: store.getState(),
-            title: translate('nav.equipments') + ' - ' + translate('title')
+            title: translate('nav.entities') + ' - ' + translate('title')
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -26,7 +26,7 @@ export default class About extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <h2>{translate('equipments.title')}</h2>
+                <h2>{translate('entities.title')}</h2>
             </PageContainer>
         )
     }

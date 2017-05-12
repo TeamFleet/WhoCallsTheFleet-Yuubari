@@ -9,9 +9,7 @@ import db, { locale as dbLocaleId } from '../../logic/database'
 import shipList from '../../logic/database/list-ships.js'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './ships.less'
-
-let shipsByOrder = []
+import style from './ship-list.less'
 
 @connect()
 @ImportStyle(style)
@@ -24,14 +22,6 @@ export default class extends React.Component {
 
         ext.meta = ext.meta.concat(head.meta)
         ext.title = head.title
-    }
-
-    componentWillMount() {
-        if (!shipsByOrder.length) {
-            for (let id in db.ships) {
-                shipsByOrder[id] = db.ships[id]
-            }
-        }
     }
 
     render() {
@@ -70,15 +60,3 @@ export default class extends React.Component {
         )
     }
 }
-/*
-
-                <ul>
-                    {shipsByOrder.filter(ship => typeof ship !== 'undefined').map((ship, index) => (
-                        <li key={index}>
-                            <Link to={'/ships/' + ship.id}>
-                                [{ship.id}] {ship._name}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-                */

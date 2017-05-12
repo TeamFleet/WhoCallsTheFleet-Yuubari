@@ -7,7 +7,7 @@ import htmlHead from 'Utils/html-head.js'
 import db from '../../logic/database'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './ship.less'
+import style from './ship-details.less'
 
 @connect()
 @ImportStyle(style)

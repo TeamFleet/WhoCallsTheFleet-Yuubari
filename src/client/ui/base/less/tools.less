@@ -179,11 +179,14 @@
         @rules();
     }
 }
+
 .platform-mobile( @rules ){
     html.is-mobile &{
         @rules();
     }
 }
+
+@import './mixins/mediaqueries-screensize.less';
 
 .is-ready( @rules ){
     body.is-ready &{

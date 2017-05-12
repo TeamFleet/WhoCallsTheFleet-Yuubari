@@ -99,11 +99,18 @@ html{
 			display: 	none;
 		}
 	}
+
+    .screen-t1({
+        font-size: 		(@root-font-size * (14 / @base-font-size));
+    });
+    .screen-phone({
+        font-size: 		(@root-font-size * (16 / @base-font-size));
+    });
 }
 
 body{
     position:       relative;
-	font-size: 		@base-font-size;
+	font-size: 		unit(@base-font-size / @root-font-size, rem);
 	line-height: 	@base-line-height;
 	// margin: 		0;
 }
