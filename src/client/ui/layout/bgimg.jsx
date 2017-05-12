@@ -7,6 +7,8 @@ import { leave as appModeLeave } from '../../logic/app-mode/api.js'
 import * as bgimgApi from '../../logic/bgimg/api.js'
 import getStyles from 'Utils/background-styles.js'
 
+import Background from '../components/background.jsx'
+
 import style from './bgimg.less'
 
 /* Bgimg
@@ -18,7 +20,7 @@ import style from './bgimg.less'
     isAppModeBackground: (state.appMode.mode == 'background')
 }))
 @ImportStyle(style)
-class Bgimg extends React.Component {
+export default class Bgimg extends React.Component {
     constructor(props) {
         super(props)
 
@@ -41,10 +43,10 @@ class Bgimg extends React.Component {
             <div id="bgimg" className={this.props.className}>
                 <BgMain />
                 <div className="background-main-blured nav">
-                    <BgContainerBlured />
+                    <Background type="blured" />
                 </div>
                 <div className="background-main-blured main">
-                    <BgContainerBlured />
+                    <Background type="blured" />
                 </div>
                 {this.props.isAppModeBackground && (
                     <div className="controls">
@@ -59,44 +61,6 @@ class Bgimg extends React.Component {
                     </div>)
                 }
             </div>
-        )
-    }
-}
-
-
-/* A standard bgimg container
- */
-class BgContainer extends React.Component {
-    render() {
-        return (
-            <div className={"background-container" + (this.props.className ? ' ' + this.props.className : '')}>
-                <div
-                    className="background"
-                    style={getStyles(this.props.bg || this.props.bgObj || this.props.backgroundObj, this.props.type)}
-                />
-            </div>
-        )
-    }
-}
-
-@connect(state => ({
-    currentBg: state.bgimg.current
-}))
-class BgContainerBlured extends React.Component {
-    render() {
-        return (
-            <BgContainer className={this.props.className} bg={this.props.currentBg} type="blured" />
-        )
-    }
-}
-
-@connect(state => ({
-    currentBg: state.bgimg.current
-}))
-class BgContainerOriginal extends React.Component {
-    render() {
-        return (
-            <BgContainer bg={this.props.currentBg} />
         )
     }
 }
@@ -123,6 +87,9 @@ class BgMain extends React.Component {
             showOriginal: false,
             showBlured: true
         }
+    }
+    componentWillReceiveProps() {
+        this.isOriginalLoaded = false;
     }
 
     originalLoaded() {
@@ -369,11 +336,4 @@ class BgList extends React.Component {
         )
         // return <div></div>
     }
-}
-
-
-export {
-    Bgimg as default,
-    BgContainer,
-    BgContainerBlured
 }
