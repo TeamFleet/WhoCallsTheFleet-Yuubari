@@ -1,4 +1,4 @@
-import Root from 'UI/Root.jsx'
+import Root from 'UI/app.jsx'
 
 import tools from './tools.js'
 import data from './data.js'

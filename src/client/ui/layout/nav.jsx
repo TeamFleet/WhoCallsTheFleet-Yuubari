@@ -105,8 +105,7 @@ export default class extends React.Component {
                     </div>
 
                     <div className="controls">
-                        <button type="button" onClick={this.enterAppModeBackground.bind(this)}>BG</button>&nbsp;
-                        <button type="button" onClick={this.share}>SHARE</button>
+                        <button type="button" onClick={this.enterAppModeBackground.bind(this)}>BG</button>
                     </div>
                 </div>
 

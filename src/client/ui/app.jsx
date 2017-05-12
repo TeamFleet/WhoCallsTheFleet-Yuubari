@@ -5,7 +5,7 @@ import htmlHead from 'Utils/html-head.js'
 
 import modeBackgroundOnAnimationEnd from '../logic/app-mode/mode-background.js'
 
-import style from './Root.less'
+import style from './app.less'
 
 import Main from './layout/main.jsx'
 import Nav from './layout/nav.jsx'
