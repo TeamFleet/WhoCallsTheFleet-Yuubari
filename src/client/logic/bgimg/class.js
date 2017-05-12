@@ -34,7 +34,7 @@ export default class Background {
     get ext() {
         if (__SERVER__) return '.jpg'
         if (typeof this._ext === 'undefined') {
-            if (self._html.classList.contains('webp')) this._ext = '.webp'
+            if (self._html && self._html.classList.contains('webp')) this._ext = '.webp'
             else this._ext = '.jpg'
         }
         return this._ext

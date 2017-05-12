@@ -97,12 +97,16 @@
             .background{
                 position:   absolute;
                 top:        0;
-                bottom:     0;
                 overflow:   hidden;
+            }
+            &,
+            &:before{
+                bottom:     0;
             }
             .background{
                 z-index:    1;
                 width:      100vw;
+                height:     100vh;
                 background-attachment: initial;
             }
             &:before{
