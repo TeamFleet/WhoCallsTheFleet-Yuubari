@@ -9,6 +9,8 @@ import style from './main-header.less'
 @ImportStyle(style)
 export default class extends React.Component {
     render() {
+        if (__SERVER__) return null
+
         return (
             <MainHeaderPortal>
                 <div className={this.props.className + " main-header"}>
@@ -26,21 +28,26 @@ class MainHeaderPortal extends React.Component {
     }
 
     renderPortal(props = this.props) {
-        let children = props.children;
-        // https://gist.github.com/jimfb/d99e0678e9da715ccf6454961ef04d1b
-        if (typeof props.children.type === 'function') {
-            children = React.cloneElement(props.children, { closePortal: this.closePortal });
+        if (!this.parent) {
+            this.parent = document.getElementById('main-mask')
         }
 
         if (!this.node) {
-            this.node = document.getElementById('main-mask')
+            this.node = document.createElement('div');
+            this.node.className = 'wrapper'
+            this.parent.appendChild(this.node);
+        }
+
+        let children = props.children;
+        // https://gist.github.com/jimfb/d99e0678e9da715ccf6454961ef04d1b
+        if (typeof props.children.type === 'function') {
+            children = React.cloneElement(props.children)
         }
 
         this.portal = ReactDOM.unstable_renderSubtreeIntoContainer(
             this,
             children,
-            this.node,
-            this.props.onUpdate
+            this.node
         )
     }
 

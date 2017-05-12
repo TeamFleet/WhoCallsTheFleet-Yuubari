@@ -10,16 +10,16 @@ import style from './main-mask.less'
 }))
 @ImportStyle(style)
 export default class extends React.Component {
-    componentWillReceiveProps(newProps) {
-        if (newProps.realtimeLocation) {
-            this.el.childNodes.forEach(node => {
-                node.classList.add('fadeout')
-            })
-            // while (this.el.firstChild) {
-            //     this.el.removeChild(this.el.firstChild);
-            // }
-        }
-    }
+    // componentWillReceiveProps(newProps) {
+    //     if (newProps.realtimeLocation) {
+    //         this.el.childNodes.forEach(node => {
+    //             node.classList.add('fadeout')
+    //         })
+    //         while (this.el.firstChild) {
+    //             this.el.removeChild(this.el.firstChild);
+    //         }
+    //     }
+    // }
 
     onAnimationEnd(evt) {
         if (!evt) return
@@ -30,6 +30,11 @@ export default class extends React.Component {
     }
 
     render() {
+        if (this.el)
+            this.el.childNodes.forEach(node => {
+                if (!node.classList.contains('is-entering'))
+                    node.classList.add('fadeout')
+            })
         return (
             <div
                 id="main-mask"
