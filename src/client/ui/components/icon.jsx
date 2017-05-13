@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './Icon.less'
+import style from './icon.less'
 
 @ImportStyle(style)
 export default class extends React.Component {
