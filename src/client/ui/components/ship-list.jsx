@@ -7,6 +7,7 @@ import db, { locale as dbLocaleId } from '../../logic/database'
 import shipListFilter from '../../logic/database/list-ships-filter.js'
 
 import MainHeader from './main-header.jsx'
+import Icon from './icon.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './ship-list/main.less'
@@ -49,9 +50,9 @@ export default class extends React.Component {
         }
     }
 
-    renderCollection(collection) {
+    renderCollection(collection, index) {
         return (
-            <div>
+            <div key={index}>
                 {collection.list.map((type, index2) => (
                     <div key={index2}>
                         {type.type ? (<h5>[{db.shipTypes[type.type].code}] {db.shipTypes[type.type].full_zh}</h5>) : (<h5>--</h5>)}
@@ -78,7 +79,7 @@ export default class extends React.Component {
         if (!this.state.collectionFilterd || !this.state.collectionFilterd.length) return null
         return (
             <ul>
-                <p>{translate('ship_list.filter_results_count', {count: this.state.collectionFilterd.length})}</p>
+                <p>{translate('ship_list.filter_results_count', { count: this.state.collectionFilterd.length })}</p>
                 {this.state.collectionFilterd.map((ship, index) => (
                     <li key={index}>
                         <Ship ship={ship} />
@@ -177,12 +178,12 @@ class ShipListTabItem extends React.Component {
 
     render() {
         return (
-            <span
+            <a href="javascript:;"
                 onClick={this.onClick.bind(this)}
                 className={'item' + this.props.className}
             >
                 {this.props.children}
-            </span>
+            </a>
         )
     }
 }
@@ -196,6 +197,7 @@ class ShipListFilter extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
+                <Icon icon="search" />
                 <input type="text" onInput={this.filterOnInput.bind(this)} />
             </div>
         )

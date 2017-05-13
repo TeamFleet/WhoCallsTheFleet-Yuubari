@@ -95,7 +95,12 @@ const rules = [{
     use: [{
         loader: 'raw-loader'
     }]
-}]
+}/*, {
+    test: /\.svg$/,
+    use: [{
+        loader: 'svg-inline-loader'
+    }]
+}*/]
 
 // 执行顺序，？
 const plugins = [

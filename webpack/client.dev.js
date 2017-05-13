@@ -1,5 +1,7 @@
 const webpack = require('webpack')
 const common = require('./common')
+const fs = require('fs')
+const path = require('path')
 
 module.exports = (appPath, port) => {
     const entries = require('./client-entries.js')(appPath)
@@ -29,7 +31,8 @@ module.exports = (appPath, port) => {
                 '__CLIENT__': true,
                 '__SERVER__': false,
                 '__DEV__': true,
-                '__PUBLIC__': JSON.stringify(publicPath)
+                '__PUBLIC__': JSON.stringify(publicPath),
+                '__ICONSVG__': JSON.stringify(fs.readFileSync(path.resolve(appPath, './src/client/assets/symbols/symbol-defs.svg'), 'utf8'))
             }),
             new webpack.NoEmitOnErrorsPlugin(),
             ...common.plugins,

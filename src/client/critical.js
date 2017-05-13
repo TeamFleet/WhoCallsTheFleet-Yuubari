@@ -68,11 +68,19 @@ import bindEvent from 'bind-event'
             }
         }
 
-        // WebP Support
+        // 检查 WebP 支持
         const webP = new Image();
         webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
         webP.onload = webP.onerror = function () {
             if (webP.height === 2) tagHtml.classList.add('webp')
+        }
+
+        // 开发模式: 插入SVG图标库
+        if (__DEV__) {
+            let div = document.createElement("div");
+            div.className = 'hide';
+            div.innerHTML = __ICONSVG__
+            document.body.insertBefore(div, document.body.childNodes[0])
         }
 
         self._html = tagHtml

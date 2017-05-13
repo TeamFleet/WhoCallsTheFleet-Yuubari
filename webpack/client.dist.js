@@ -43,7 +43,8 @@ module.exports = (appPath, env) => {
                 '__CLIENT__': true,
                 '__SERVER__': false,
                 '__DEV__': false,
-                '__PUBLIC__': JSON.stringify(publicPath)
+                '__PUBLIC__': JSON.stringify(publicPath),
+                '__ICONSVG__': false
             }),
             new webpack.NoEmitOnErrorsPlugin(),
             ...common.plugins,

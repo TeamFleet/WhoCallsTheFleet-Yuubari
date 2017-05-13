@@ -84,12 +84,12 @@ class BgMain extends React.Component {
 
         this.state = {
             stylesOriginal: false,
-            showOriginal: false,
-            showBlured: true
+            showOriginal: false
         }
     }
     componentWillReceiveProps() {
-        this.isOriginalLoaded = false;
+        this.isOriginalLoaded = false
+        this.isOriginalTransitionEnd = false
     }
 
     originalLoaded() {
@@ -99,25 +99,33 @@ class BgMain extends React.Component {
         this.setState({
             stylesOriginal: getStyles(this.props.currentBg)
         })
+        setTimeout(() => {
+            if(!this.isOriginalTransitionEnd)
+                this.originalTransitionEnd(undefined, true)
+        }, 2000)
     }
 
-    originalTransitionEnd(evt) {
-        // console.log('originalTransitionEnd', evt.target)
-        // console.log('showBlured', this.state.showBlured)
-        if (evt.propertyName == 'opacity' && this.state.showBlured) {
+    originalTransitionEnd(evt, isForce) {
+        if (isForce || evt.propertyName == 'opacity') {
+            this.isOriginalTransitionEnd = true
             this.props.dispatch(bgimgApi.mainImgLoaded())
         }
     }
 
     bluredLoaded(/*evt*/) {
-        // console.log('bluredLoaded')
+        // if (__DEV__) console.log('[BgMain] bluredLoaded')
         this.setState({
             stylesBlured: getStyles(this.props.currentBg, 'blured')
         })
+        setTimeout(() => {
+            if(!this.state.showOriginal)
+                this.bluredTransitionEnd(undefined, true)
+        }, 2000)
     }
 
-    bluredTransitionEnd(evt) {
-        if (evt.propertyName == 'opacity' && !this.state.showOriginal) {
+    bluredTransitionEnd(evt, isForce) {
+        // if (__DEV__) console.log('[BgMain] bluredTransitionEnd')
+        if (!this.state.showOriginal && (isForce || evt.propertyName == 'opacity')) {
             this.setState({
                 showOriginal: true
             })
@@ -129,6 +137,7 @@ class BgMain extends React.Component {
     }
 
     render() {
+        // if (__DEV__) console.log('[BgMain] state.showOriginal', this.state.showOriginal)
         return (
             <div className="background-main">
                 {this.state.showOriginal &&
