@@ -11,6 +11,8 @@ import ShipList from '../components/ship-list.jsx'
 import { ImportStyle } from 'sp-css-import'
 import style from './ship-list.less'
 
+if (__CLIENT__) self.__pageShipListLastCollection = 0
+
 @connect()
 @ImportStyle(style)
 export default class extends React.Component {
@@ -24,13 +26,22 @@ export default class extends React.Component {
         ext.title = head.title
     }
 
+    onCollectionChange(evt, to) {
+        self.__pageShipListLastCollection = to
+    }
+
     render() {
         return (
             <PageContainer
                 className={this.props.className}
             >
                 <p><i>{translate('under_construction')}...</i></p>
-                <ShipList />
+                <ShipList
+                    collection={__CLIENT__ ? self.__pageShipListLastCollection : null}
+                    callbacks={{
+                        onCollectionChange: this.onCollectionChange.bind(this)
+                    }}
+                />
             </PageContainer>
         )
     }

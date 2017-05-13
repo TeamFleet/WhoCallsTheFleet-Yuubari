@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 import translate from 'sp-i18n'
 import db, { locale as dbLocaleId } from '../../logic/database'
-import shipList from '../../logic/database/list-ships.js'
+import shipListFilter from '../../logic/database/list-ships-filter.js'
 
 import MainHeader from './main-header.jsx'
 
@@ -18,14 +18,35 @@ export default class extends React.Component {
         super(props)
 
         this.state = {
-            collection: 0
+            collection: this.props.collection || 0
         }
+
+        // this.lastCollection
     }
 
-    changeCollection(to) {
+    onCollectionChange(evt, to) {
         this.setState({
             collection: to
         })
+        if (this.props.callbacks && typeof this.props.callbacks.onCollectionChange === 'function')
+            this.props.callbacks.onCollectionChange(evt, to)
+    }
+
+    onFilterInput(evt) {
+        let result = shipListFilter(evt.target.value)
+
+        if (result.length > 0) {
+            if (this.state.collection > 0) this.lastCollection = this.state.collection
+            this.setState({
+                collection: -1,
+                collectionFilterd: result
+            })
+        } else if (evt.target.value === "") {
+            this.setState({
+                collection: this.lastCollection || 0,
+                collectionFilterd: null
+            })
+        }
     }
 
     renderCollection(collection) {
@@ -39,9 +60,7 @@ export default class extends React.Component {
                                 <li key={index2 + '-' + index3}>
                                     {ships.map((ship, index4) => (
                                         <span key={index2 + '-' + index3 + '-' + index4}>
-                                            <Link to={'/ships/' + ship.id}>
-                                                [{ship.id}] {ship._name}
-                                            </Link>
+                                            <Ship ship={ship} />
                                             {index4 < ships.length - 1 ? "　|　" : null}
                                         </span>
                                     ))}
@@ -55,20 +74,45 @@ export default class extends React.Component {
         )
     }
 
+    renderFilteredResult() {
+        if (!this.state.collectionFilterd || !this.state.collectionFilterd.length) return null
+        return (
+            <ul>
+                {this.state.collectionFilterd.map((ship, index) => (
+                    <li key={index}>
+                        <Ship ship={ship} />
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+
     render() {
         return (
             <div className={this.props.className}>
                 {__CLIENT__ && <ShipListHeader
                     callbacks={{
-                        changeCollection: this.changeCollection.bind(this)
+                        onCollectionChange: this.onCollectionChange.bind(this),
+                        onFilterInput: this.onFilterInput.bind(this)
                     }}
                     collection={this.state.collection}
                 />}
 
-                {__CLIENT__ && this.renderCollection(shipList[this.state.collection])}
-                {__SERVER__ && shipList.map(this.renderCollection)}
+                {__CLIENT__ && this.state.collection > -1 && this.renderCollection(db.shipCollections[this.state.collection])}
+                {__CLIENT__ && this.state.collection < 0 && this.renderFilteredResult()}
+                {__SERVER__ && db.shipCollections.map(this.renderCollection)}
 
             </div>
+        )
+    }
+}
+
+class Ship extends React.Component {
+    render() {
+        return (
+            <Link to={'/ships/' + this.props.ship.id}>
+                [{this.props.ship.id}] {this.props.ship._name}
+            </Link>
         )
     }
 }
@@ -80,6 +124,7 @@ class ShipListHeader extends React.Component {
         return (
             <MainHeader>
                 <div className={this.props.className}>
+                    <ShipListFilter callbacks={this.props.callbacks} />
                     <ShipListTabs collection={this.props.collection} callbacks={this.props.callbacks} />
                 </div>
             </MainHeader>
@@ -90,27 +135,15 @@ class ShipListHeader extends React.Component {
 import styleHeaderTabs from './ship-list/header-tabs.less'
 @ImportStyle(styleHeaderTabs)
 class ShipListTabs extends React.Component {
-    // constructor(props){
-    //     super(props)
-    //     this.state = {
-    //         collection: this.props.collection
-    //     }
-    // }
-    // componentWillReceiveProps(newProps) {
-    //     this.setState({
-    //         collection: newProps.collection
-    //     })
-    // }
     onSelectChange(evt) {
-        // console.log(evt.target.value)
-        this.props.callbacks.changeCollection(parseInt(evt.target.value))
+        this.props.callbacks.onCollectionChange(evt, parseInt(evt.target.value))
     }
     render() {
         return (
             <div className={this.props.className}>
                 <label className="select">
                     <select className="select-select" onChange={this.onSelectChange.bind(this)} value={this.props.collection}>
-                        {shipList.map((collection, index) => (
+                        {db.shipCollections.map((collection, index) => (
                             <option
                                 key={index}
                                 value={index}
@@ -119,9 +152,9 @@ class ShipListTabs extends React.Component {
                             </option>
                         ))}
                     </select>
-                    {shipList[this.props.collection].name[dbLocaleId]}
+                    {this.props.collection > -1 && db.shipCollections[this.props.collection].name[dbLocaleId]}
                 </label>
-                {shipList.map((collection, index) => (
+                {db.shipCollections.map((collection, index) => (
                     <ShipListTabItem
                         key={index}
                         className={this.props.collection === index ? ' on' : ''}
@@ -137,8 +170,8 @@ class ShipListTabs extends React.Component {
 }
 
 class ShipListTabItem extends React.Component {
-    onClick() {
-        this.props.callbacks.changeCollection(this.props.collection)
+    onClick(evt) {
+        this.props.callbacks.onCollectionChange(evt, this.props.collection)
     }
 
     render() {
@@ -149,6 +182,21 @@ class ShipListTabItem extends React.Component {
             >
                 {this.props.children}
             </span>
+        )
+    }
+}
+
+import styleHeaderFilter from './ship-list/filter.less'
+@ImportStyle(styleHeaderFilter)
+class ShipListFilter extends React.Component {
+    filterOnInput(evt) {
+        this.props.callbacks.onFilterInput(evt)
+    }
+    render() {
+        return (
+            <div className={this.props.className}>
+                <input type="text" onInput={this.filterOnInput.bind(this)} />
+            </div>
         )
     }
 }

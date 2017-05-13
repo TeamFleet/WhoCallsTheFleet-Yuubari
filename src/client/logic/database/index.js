@@ -1,5 +1,7 @@
 import { localeId } from 'sp-i18n'
 
+import shipCollections from './db/ship_collections.json'
+
 const LZString = __CLIENT__ && require('lz-string')
 
 const {
@@ -75,6 +77,21 @@ export const init = () => {
                 }
             })
         }
+
+        // shipCollections
+        shipCollections.forEach(collection => {
+            collection.list.forEach(type => {
+                type.ships.forEach((arrShips, index) => {
+                    type.ships[index] = arrShips.map(shipId => {
+                        db.ships[shipId].type_display = type.type
+                        return db.ships[shipId]
+                    })
+                })
+            })
+        })
+        db.shipCollections = shipCollections
+
+        if (__CLIENT__) console.log('database init', db)
 
         objInit.db = db
         needInit = true
