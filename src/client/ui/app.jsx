@@ -4,6 +4,7 @@ import { ImportStyle } from 'sp-css-import'
 import htmlHead from 'Utils/html-head.js'
 
 import modeBackgroundOnAnimationEnd from '../logic/app-mode/mode-background.js'
+import { swipedFromLeftEdge } from '../logic/side-menu/api.js'
 
 import style from './app.less'
 
@@ -11,6 +12,8 @@ import Main from './layout/main.jsx'
 import MainMask from './layout/main-mask.jsx'
 import Nav from './layout/nav.jsx'
 import Bgimg from './layout/bgimg.jsx'
+
+let startSwipeAtLeftBorder = false
 
 @connect(state => ({
     isMainBgimgLoaded: state.bgimg.isMainLoaded,
@@ -82,12 +85,59 @@ export default class extends React.Component {
         if (action) this.props.dispatch(action)
     }
 
+    onTouchStart(evt) {
+        if (evt.nativeEvent.touches[0].pageX < 15)
+            startSwipeAtLeftBorder = {
+                x: evt.nativeEvent.touches[0].screenX,
+                y: evt.nativeEvent.touches[0].screenY,
+                timestamp: (new Date()).valueOf()
+            }
+        else
+            startSwipeAtLeftBorder = false
+    }
+
+    onTouchMove(evt) {
+        if (startSwipeAtLeftBorder) {
+            const deltaX = evt.nativeEvent.touches[0].screenX - startSwipeAtLeftBorder.x
+            const deltaY = evt.nativeEvent.touches[0].screenY - startSwipeAtLeftBorder.y
+            const elapseTime = (new Date()).valueOf() - startSwipeAtLeftBorder.timestamp
+
+            if (elapseTime > 200) {
+                startSwipeAtLeftBorder = false
+                return
+            }
+
+            if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) > 10) {
+                if (deltaX > 10 && deltaX >= Math.abs(deltaY) * 2 && deltaX / elapseTime > (10 / 200)) {
+                    this.props.dispatch(swipedFromLeftEdge())
+                }
+                startSwipeAtLeftBorder = false
+            }
+        }
+    }
+
+    onTouchEnd() {
+        if (startSwipeAtLeftBorder) startSwipeAtLeftBorder = false
+    }
+
+    onTouchCancel() {
+        if (startSwipeAtLeftBorder) startSwipeAtLeftBorder = false
+    }
+
     render() {
         // if (__CLIENT__) this.appReady(100)
         if (this.props.isMainBgimgLoaded) this.appReady()
 
         return (
-            <div id="app" className={this.className} onAnimationEnd={this.onAnimationEnd.bind(this)}>
+            <div
+                id="app"
+                className={this.className}
+                onAnimationEnd={this.onAnimationEnd.bind(this)}
+                onTouchStart={this.onTouchStart.bind(this)}
+                onTouchMove={this.onTouchMove.bind(this)}
+                onTouchEnd={this.onTouchEnd.bind(this)}
+                onTouchCancel={this.onTouchCancel.bind(this)}
+            >
                 <Nav location={this.props.location} />
                 <Main location={this.props.location}>
                     {this.props.children}

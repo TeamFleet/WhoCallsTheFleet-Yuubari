@@ -15,6 +15,8 @@ const initialState = {
 
 export default function (state = initialState, action) {
 
+    let newState
+
     switch (action.type) {
 
         case RESET_APPMODE:
@@ -40,7 +42,7 @@ export default function (state = initialState, action) {
 
         case APPMODE_ANIMATION_END:
             if (!state.animation) return state
-            let newState = { ...state }
+            newState = { ...state }
             delete newState.animation
             return newState
 

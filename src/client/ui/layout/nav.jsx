@@ -31,7 +31,8 @@ if (__DEV__)
 
 @connect(state => ({
     realtimeLocation: state.location,
-    pageTitle: state.pageTitle
+    pageTitle: state.pageTitle,
+    timeSwipedFromLeftEdge: state.timeSwipedFromLeftEdge
 }))
 @ImportStyle(style)
 export default class extends React.Component {
@@ -57,6 +58,10 @@ export default class extends React.Component {
         this.setState({
             showBackButton: nextProps.location !== this.props.location
         })
+
+        if( nextProps.timeSwipedFromLeftEdge !== this.props.timeSwipedFromLeftEdge ){
+            this._navSwitch.checked = true
+        }
     }
 
     get isLoading() {
@@ -79,21 +84,21 @@ export default class extends React.Component {
         }
     }
 
-    share() {
-        if (!__CLIENT__) return
-        if (!navigator.share) return
-        navigator.share({
-            title: document.title,
-            text: "Hello World",
-            url: window.location.href
-        }).then(() => console.log('Successful share'))
-            .catch(error => console.log('Error sharing:', error));
-    }
+    // share() {
+    //     if (!__CLIENT__) return
+    //     if (!navigator.share) return
+    //     navigator.share({
+    //         title: document.title,
+    //         text: "Hello World",
+    //         url: window.location.href
+    //     }).then(() => console.log('Successful share'))
+    //         .catch(error => console.log('Error sharing:', error));
+    // }
 
     render() {
         return (
             <nav id="nav" className={this.props.className + (this.isLoading ? ' is-loading' : '')}>
-                <input type="checkbox" id="nav-switch" />
+                <input type="checkbox" id="nav-switch" ref={(c) => this._navSwitch = c} />
 
                 <div className="wrapper">
                     <div className="logo">
@@ -112,7 +117,7 @@ export default class extends React.Component {
                     </div>
 
                     <div className="controls">
-                        <button type="button" onClick={this.enterAppModeBackground.bind(this)}>BG</button>
+                        <button type="button" onClick={this.enterAppModeBackground.bind(this)}>[PH] BG</button>
                     </div>
                 </div>
 

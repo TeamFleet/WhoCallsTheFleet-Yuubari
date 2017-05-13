@@ -18,3 +18,6 @@ export const LOCATION_UPDATE = 'LOCATION_UPDATE'
 
 // page-title
 export const UPDATE_PAGE_TITLE = 'UPDATE_PAGE_TITLE'
+
+// side-menu
+export const SWIPED_FROM_LEFT_EDGE = 'SWIPED_FROM_LEFT_EDGE'
