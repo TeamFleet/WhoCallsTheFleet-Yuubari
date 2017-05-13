@@ -65,6 +65,9 @@ export default class extends React.Component {
             setTimeout(() => {
                 console.log('appReady')
                 document.body.classList.add('is-ready')
+                setTimeout(() => {
+                    this.isAppReadyFull = true
+                }, 1000)
             }, timeout)
         }
     }
@@ -86,7 +89,7 @@ export default class extends React.Component {
     }
 
     onTouchStart(evt) {
-        if (this.isAppReady && evt.nativeEvent.touches[0].pageX < 15)
+        if (this.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 15)
             startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
                 y: evt.nativeEvent.touches[0].screenY,
