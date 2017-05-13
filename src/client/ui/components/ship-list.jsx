@@ -78,6 +78,7 @@ export default class extends React.Component {
         if (!this.state.collectionFilterd || !this.state.collectionFilterd.length) return null
         return (
             <ul>
+                <p>{translate('ship_list.filter_results_count', {count: this.state.collectionFilterd.length})}</p>
                 {this.state.collectionFilterd.map((ship, index) => (
                     <li key={index}>
                         <Ship ship={ship} />

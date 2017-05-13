@@ -16,5 +16,9 @@
         "arsenal": "改修",
         "entities": "声优&画师",
         "about": "关于"
+    },
+
+    "ship_list": {
+        "filter_results_count": "已找到 ${count} 条结果..."
     }
 }

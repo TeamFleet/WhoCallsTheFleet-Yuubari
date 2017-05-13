@@ -16,5 +16,9 @@
         "arsenal": "Akashi's Arsenal",
         "entities": "CV & Illustrators",
         "about": "About"
+    },
+
+    "ship_list": {
+        "filter_results_count": "Found ${count} items..."
     }
 }
