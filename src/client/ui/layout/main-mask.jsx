@@ -25,16 +25,19 @@ export default class extends React.Component {
         if (!evt) return
         if (evt && evt.nativeEvent) evt = evt.nativeEvent
 
-        if(evt.animationName === 'fadeout')
+        if (evt.animationName === 'fadeout')
             evt.target.parentNode.removeChild(evt.target)
     }
 
     render() {
         if (this.el)
-            this.el.childNodes.forEach(node => {
-                if (!node.classList.contains('is-entering'))
-                    node.classList.add('fadeout')
-            })
+            for (let i = 0; i < this.el.childNodes.length; ++i) {
+                this.el.childNodes[i].classList.add('fadeout')
+            }
+        // this.el.childNodes.forEach(node => {
+        //     if (!node.classList.contains('is-entering'))
+        //         node.classList.add('fadeout')
+        // })
         return (
             <div
                 id="main-mask"
