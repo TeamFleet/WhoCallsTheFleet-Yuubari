@@ -108,7 +108,7 @@ export default class extends React.Component {
             }
 
             if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) > 10) {
-                if (deltaX > 10 && deltaX >= Math.abs(deltaY) * 2 && deltaX / elapseTime > (10 / 200)) {
+                if (deltaX > 10 && deltaX >= Math.abs(deltaY) && deltaX / elapseTime > (10 / 200)) {
                     this.props.dispatch(swipedFromLeftEdge())
                 }
                 startSwipeAtLeftBorder = false
