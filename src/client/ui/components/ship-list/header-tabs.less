@@ -5,6 +5,7 @@
         display:    none;
         position:   relative;
         overflow:   hidden;
+        padding:    0 0 0 @gutter;
         .select-select{
             position:   absolute;
             top:        -2rem;
@@ -37,6 +38,7 @@
         height:     (@height - 1);
         color:      fade(@base-color, 50%);
         border-bottom:  2px solid transparent;
+        margin-left:    @gutter;
         &:hover{
             // color:  @base-color;
             color:  #fff;
@@ -44,9 +46,9 @@
         &:active{
             color:  fade(#fff, 50%);
         }
-        & + .item{
-            margin-left:    @gutter;
-        }
+        // & + .item{
+        //     margin-left:    @gutter;
+        // }
         &.on{
             color:  #fff;
             border-bottom-color: @base-color;
@@ -54,11 +56,21 @@
     }
 
     .screen-phone({
+        border-left:    1px solid @base-border-color;
+        height:         (@height-phone - 2);
         .select{
             display:    block;
         }
         .item{
             display:    none;
         }
+    });
+}
+
+.is-filtering .component{
+    transform:  translateX((@width-filter-focus - @width-filter));
+    opacity:    0;
+    .screen-phone({
+        transform:  none;
     });
 }

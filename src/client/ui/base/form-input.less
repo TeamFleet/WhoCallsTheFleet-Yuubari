@@ -1,0 +1,52 @@
+@import '../base.less';
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+input[type="month"],
+input[type="year"],
+input[type="time"],
+input[type="search"],
+textarea{
+    background: fade(@theme-bluegrey-200, 10%);
+    border:     1px solid fade(@theme-bluegrey-300, 35%);
+
+    color:      @theme-bluegrey-100;
+    font:       inherit;
+
+    line-height:    1.5em;
+    border-radius:  3px;
+
+    &:hover,
+    &:focus{
+        background-color:   fade(@theme-bluegrey-200, 15%);
+    }
+
+    &:focus{
+        border-color:   @base-color-accent;
+        outline:        0;
+        box-shadow:     0 0 5px fade(@base-color-accent, 50%);
+    }
+
+    .placeholder() {
+        color:    @base-color;
+        opacity:  0.75;
+        font-size:unit((15 / 16), em);
+    }
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        .placeholder();
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        .placeholder();
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        .placeholder();
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        .placeholder();
+    }
+    &::-ms-input-placeholder { /* Microsoft Edge */
+        .placeholder();
+    }
+}

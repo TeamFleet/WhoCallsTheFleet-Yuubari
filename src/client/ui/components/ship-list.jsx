@@ -19,7 +19,8 @@ export default class extends React.Component {
         super(props)
 
         this.state = {
-            collection: this.props.collection || 0
+            collection: this.props.collection || 0,
+            filtering: false
         }
 
         // this.lastCollection
@@ -48,6 +49,22 @@ export default class extends React.Component {
                 collectionFilterd: null
             })
         }
+    }
+
+    enterFilter() {
+        if (!this.state.filtering)
+            this.setState({
+                filtering: true
+            })
+        // console.log('entering filter mode')
+    }
+
+    leaveFilter() {
+        if (this.state.filtering)
+            this.setState({
+                filtering: false
+            })
+        // console.log('leaving filter mode')
     }
 
     renderCollection(collection, index) {
@@ -79,7 +96,7 @@ export default class extends React.Component {
         if (!this.state.collectionFilterd || !this.state.collectionFilterd.length) return null
         return (
             <ul>
-                <p>{translate('ship_list.filter_results_count', { count: this.state.collectionFilterd.length })}</p>
+                <p>{translate('ship_list.filter.results_count', { count: this.state.collectionFilterd.length })}</p>
                 {this.state.collectionFilterd.map((ship, index) => (
                     <li key={index}>
                         <Ship ship={ship} />
@@ -95,9 +112,12 @@ export default class extends React.Component {
                 {__CLIENT__ && <ShipListHeader
                     callbacks={{
                         onCollectionChange: this.onCollectionChange.bind(this),
-                        onFilterInput: this.onFilterInput.bind(this)
+                        onFilterInput: this.onFilterInput.bind(this),
+                        enterFilter: this.enterFilter.bind(this),
+                        leaveFilter: this.leaveFilter.bind(this)
                     }}
                     collection={this.state.collection}
+                    filtering={this.state.filtering}
                 />}
 
                 {__CLIENT__ && this.state.collection > -1 && this.renderCollection(db.shipCollections[this.state.collection])}
@@ -125,7 +145,7 @@ class ShipListHeader extends React.Component {
     render() {
         return (
             <MainHeader>
-                <div className={this.props.className}>
+                <div className={this.props.className + (this.props.filtering ? ' is-filtering' : '')}>
                     <ShipListFilter callbacks={this.props.callbacks} />
                     <ShipListTabs collection={this.props.collection} callbacks={this.props.callbacks} />
                 </div>
@@ -191,14 +211,31 @@ class ShipListTabItem extends React.Component {
 import styleHeaderFilter from './ship-list/filter.less'
 @ImportStyle(styleHeaderFilter)
 class ShipListFilter extends React.Component {
-    filterOnInput(evt) {
+    onInput(evt) {
         this.props.callbacks.onFilterInput(evt)
     }
+
+    onFocus() {
+        this.props.callbacks.enterFilter()
+    }
+
+    onBlur(evt) {
+        if (evt.target.value === '')
+            this.props.callbacks.leaveFilter()
+    }
+
     render() {
         return (
             <div className={this.props.className}>
-                <Icon icon="search" />
-                <input type="text" onInput={this.filterOnInput.bind(this)} />
+                <Icon className="icon" icon="search" />
+                <input
+                    className="input"
+                    type="text"
+                    placeholder={translate('ship_list.filter.placeholder')}
+                    onInput={this.onInput.bind(this)}
+                    onFocus={this.onFocus.bind(this)}
+                    onBlur={this.onBlur.bind(this)}
+                />
             </div>
         )
     }

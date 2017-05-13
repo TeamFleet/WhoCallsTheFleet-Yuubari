@@ -8,10 +8,15 @@
     height:         @height;
     line-height:    @height;
 
+    padding-left:   @width-filter;
+
     .screen-tablet({
         font-size:  14px;
     });
     .screen-phone({
-        font-size:  16px;
+        font-size:      16px;
+        padding-left:   50%;
+        height:         @height-phone;
+        line-height:    @height-phone;
     });
 }

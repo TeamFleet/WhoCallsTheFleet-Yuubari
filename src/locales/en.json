@@ -19,6 +19,9 @@
     },
 
     "ship_list": {
-        "filter_results_count": "Found ${count} items..."
+        "filter": {
+            "placeholder": "Search for name...",
+            "results_count": "Found ${count} items..."
+        }
     }
 }

@@ -35,7 +35,6 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <p><i>{translate('under_construction')}...</i></p>
                 <ShipList
                     collection={__CLIENT__ ? self.__pageShipListLastCollection : null}
                     callbacks={{

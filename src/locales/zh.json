@@ -19,6 +19,9 @@
     },
 
     "ship_list": {
-        "filter_results_count": "已找到 ${count} 条结果..."
+        "filter": {
+            "placeholder": "搜索舰名...",
+            "results_count": "已找到 ${count} 条结果..."
+        }
     }
 }
