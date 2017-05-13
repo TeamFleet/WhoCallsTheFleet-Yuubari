@@ -1,0 +1,17 @@
+@import './_.less';
+
+.component{
+    position:       relative;
+    z-index:        5;
+
+    // padding:        @margin 0;
+    height:         @height;
+    line-height:    @height;
+
+    .screen-tablet({
+        font-size:  14px;
+    });
+    .screen-phone({
+        font-size:  16px;
+    });
+}

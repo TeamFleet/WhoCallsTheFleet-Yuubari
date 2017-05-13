@@ -13,6 +13,15 @@
     animation: 	fadein @duration-main-transition ease-out;
     animation-fill-mode: both;
 
+    .screen-tablet({
+        padding-left:   @main-margin-tablet;
+        padding-right:  @main-margin-tablet;
+    });
+    .screen-phone({
+        padding-left:   @main-margin-phone;
+        padding-right:  @main-margin-phone;
+    });
+
     .background-container{
         z-index:    -2;
         // right:      (0 - @main-margin) !important;
@@ -26,5 +35,13 @@
         background: fade(@theme-bluegrey-300, 50%);
         left:       @main-margin;
         right:      @main-margin;
+        .screen-tablet({
+            left:   @main-margin-tablet;
+            right:  @main-margin-tablet;
+        });
+        .screen-phone({
+            left:   @main-margin-phone;
+            right:  @main-margin-phone;
+        });
     }
 }

@@ -30,6 +30,14 @@
         border-right:   @main-margin solid transparent;
         border-bottom:  @main-margin solid transparent;
         border-left:    @main-margin solid transparent;
+        .screen-tablet({
+            border-left-width:  @main-margin-tablet;
+            border-right-width: @main-margin-tablet;
+        });
+        .screen-phone({
+            border-left-width:  @main-margin-phone;
+            border-right-width: @main-margin-phone;
+        });
     }
 
     .main-transition-enter, .main-transition-leave{

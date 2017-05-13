@@ -1,0 +1,62 @@
+@import './_.less';
+
+.component{
+    .select{
+        display:    none;
+        position:   relative;
+        overflow:   hidden;
+        .select-select{
+            position:   absolute;
+            top:        -2rem;
+            bottom:     0;
+            left:       0;
+            right:      0;
+            border:     0;
+            appearance: none;
+            opacity:    0;
+            z-index:    2;
+            width:      100%;
+            display:    block;
+        }
+        &:after{
+            @size:      6px;
+            position:   absolute;
+            content:    "";
+            top:        50%;
+            width:      0;
+            height:     0;
+            border:     @size solid transparent;
+            border-top-color:   currentcolor;
+            margin-top: (0 - @size / 3 * 2);
+            margin-left:.5em;
+        }
+    }
+    .item{
+        display:    inline-block;
+        height:     (@height - 1);
+        color:      fade(@base-color, 50%);
+        border-bottom:  2px solid transparent;
+        &:hover{
+            color:  @base-color;
+        }
+        &:active{
+            color:  fade(@base-color, 75%);
+        }
+        & + .item{
+            margin-left:    @gutter;
+        }
+        &.on{
+            color:  #fff;
+            border-bottom-color: @base-color;
+        }
+    }
+
+    .screen-phone({
+        .select{
+            display:    block;
+        }
+        .item{
+            display:    none;
+        }
+    });
+}

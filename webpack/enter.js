@@ -73,7 +73,7 @@ const run = (config) => {
         const compiler = webpack(wcd)
         const dashboard = new Dashboard()
 
-        compiler.apply(new DashboardPlugin(dashboard.setData))
+        // compiler.apply(new DashboardPlugin(dashboard.setData))
 
         // more config
         // http://webpack.github.io/docs/webpack-dev-server.html
