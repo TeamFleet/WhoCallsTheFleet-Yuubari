@@ -91,7 +91,7 @@ export const init = () => {
         })
         db.shipCollections = shipCollections
 
-        if (__CLIENT__) console.log('database init', db)
+        if (__CLIENT__ && __DEV__) console.log('database init', db)
 
         objInit.db = db
         needInit = true

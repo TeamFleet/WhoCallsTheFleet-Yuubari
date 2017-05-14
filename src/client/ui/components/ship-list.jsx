@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import translate from 'sp-i18n'
 import db, { locale as dbLocaleId } from '../../logic/database'
 import shipListFilter from '../../logic/database/list-ships-filter.js'
+import pref from '../../logic/preferences'
 
 import MainHeader from './main-header.jsx'
 import Icon from './icon.jsx'
@@ -80,22 +81,10 @@ export default class extends React.Component {
             <div key={index}>
                 {collection.list.map((type, index2) => (
                     <div key={index2}>
-                        {type.type && (!type.class || !index2) ? (<h5>{db.shipTypes[type.type].full_zh} [{db.shipTypes[type.type].code}]</h5>) : null}
-                        {!type.type && (<h5>--</h5>)}
-                        {type.class && (<h6>{translate("shipclass", {class:db.shipClasses[type.class].name_zh})}</h6>)}
-                        <ul>
-                            {type.ships.map((ships, index3) => (
-                                <li key={index2 + '-' + index3}>
-                                    {ships.map((ship, index4) => (
-                                        <span key={index2 + '-' + index3 + '-' + index4}>
-                                            <Ship ship={ship} />
-                                            {index4 < ships.length - 1 ? "　|　" : null}
-                                        </span>
-                                    ))}
-                                </li>
-                            ))}
-                        </ul>
-                        <div></div>
+                        {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
+                        {!type.type && (<Title />)}
+                        {type.class && (<SubTitle class={type.class} />)}
+                        <ShipList ships={type.ships} />
                     </div>
                 ))}
             </div>
@@ -105,18 +94,14 @@ export default class extends React.Component {
     renderFilteredResult() {
         if (!this.state.filteredResult || !this.state.filteredResult.length) return null
         return (
-            <ul>
+            <div>
                 <p>{
                     this.state.filteredResultRealtimeCount
                         ? translate('ship_list.filter.results_count', { count: this.state.filteredResultRealtimeCount })
                         : translate('ship_list.filter.no_result')
                 }</p>
-                {this.state.filteredResult.map((ship, index) => (
-                    <li key={index}>
-                        <Ship ship={ship} />
-                    </li>
-                ))}
-            </ul>
+                {<ShipList ships={this.state.filteredResult} />}
+            </div>
         )
     }
 
@@ -143,10 +128,71 @@ export default class extends React.Component {
     }
 }
 
+import styleTitle from './ship-list/title.less'
+@ImportStyle(styleTitle)
+class Title extends React.Component {
+    render() {
+        if(this.props.type){
+            const type = db.shipTypes[this.props.type]
+            return (
+                <h4 className={this.props.className}>
+                    {type.full_zh}
+                    {type.code && (<small className="code">[{type.code}]</small>)}
+                </h4>
+            )
+        } else
+            return (
+                <h4 className={this.props.className}>--</h4>
+            )
+    }
+}
+
+import styleSubTitle from './ship-list/title-sub.less'
+@ImportStyle(styleSubTitle)
+class SubTitle extends React.Component {
+    render() {
+        return (
+            <h5 className={this.props.className}>
+                {translate("shipclass", { class: db.shipClasses[this.props.class].name_zh })}
+            </h5>
+        )
+    }
+}
+
+import styleList from './ship-list/list.less'
+@ImportStyle(styleList)
+class ShipList extends React.Component {
+    // getList() {
+    //     let list = []
+    // }
+    insertPlaceHolders() {
+        let i = 0;
+        let arr = []
+        while (i++ < 10) arr.push(<span className="item placeholder" key={i}></span>)
+        return arr
+    }
+
+    render() {
+        return (
+            <div className={this.props.className}>
+                {this.props.ships.map((ships, index) => {
+                    if(Array.isArray(ships))
+                        return ships.map((ship, index2) => {
+                            if (index2 < ships.length - 1 && !pref.shipListShowAllShips) return null
+                            return (<Ship className="item" ship={ship} key={index + '-' + index2} />)
+                        })
+                    return (<Ship className="item" ship={ships} key={index} />)
+                })}
+                {this.insertPlaceHolders()}
+            </div>
+        )
+    }
+}
+
 class Ship extends React.Component {
     render() {
         return (
-            <Link to={'/ships/' + this.props.ship.id}>
+            <Link className={this.props.className} to={'/ships/' + this.props.ship.id}>
                 [{this.props.ship.id}] {this.props.ship._name}
             </Link>
         )

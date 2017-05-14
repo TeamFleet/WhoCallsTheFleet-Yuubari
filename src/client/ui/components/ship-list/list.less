@@ -1,0 +1,22 @@
+@import './_.less';
+
+.component{
+    display:    flex;
+    flex-flow:  row wrap;
+    margin-right:-10px;
+    padding:    5px 0 25px 0;
+
+    .item{
+        flex:   1 0 200px;
+        height: 40px;
+        margin: 10px 10px 0 0;
+       
+        display:    inline-block;
+        background: rgba(0,0,0,5%);
+
+        &.placeholder{
+            margin-top: auto;
+            height:     0;
+        }
+    }
+}
