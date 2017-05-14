@@ -108,7 +108,7 @@
 
     "dependencies": {
         "whocallsthefleet-database": "1.0.7",
-        "whocallsthefleet-backgrounds": "1.0.0",
+        "whocallsthefleet-backgrounds": "1.1.0",
 
         "kckit": "^1.1.1",
 
