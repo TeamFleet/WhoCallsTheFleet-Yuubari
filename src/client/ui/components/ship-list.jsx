@@ -105,6 +105,11 @@ export default class extends React.Component {
         )
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if( prevState.collection !== this.state.collection )
+            window.scrollTo(undefined, 0)
+    }
+
     render() {
         return (
             <div className={this.props.className}>
@@ -172,8 +177,8 @@ class ShipList extends React.Component {
         return arr
     }
 
-    checkLastRemodelLoop(ships, index){
-        while(ships[index].remodel && ships[index].remodel.next_loop)
+    checkLastRemodelLoop(ships, index) {
+        while (ships[index].remodel && ships[index].remodel.next_loop)
             index++
         return index === ships.length - 1
     }
