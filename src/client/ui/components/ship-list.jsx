@@ -84,7 +84,7 @@ export default class extends React.Component {
                         {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
                         {!type.type && (<Title />)}
                         {type.class && (<SubTitle class={type.class} />)}
-                        <ShipList ships={type.ships} />
+                        <ShipList ships={type.ships} showAll={!type.type} />
                     </div>
                 ))}
             </div>
@@ -172,13 +172,24 @@ class ShipList extends React.Component {
         return arr
     }
 
+    checkLastRemodelLoop(ships, index){
+        while(ships[index].remodel && ships[index].remodel.next_loop)
+            index++
+        return index === ships.length - 1
+    }
+
     render() {
         return (
             <div className={this.props.className}>
                 {this.props.ships.map((ships, index) => {
                     if (Array.isArray(ships))
                         return ships.map((ship, index2) => {
-                            if (index2 < ships.length - 1 && !pref.shipListShowAllShips) return null
+                            if (!this.props.showAll
+                                && !pref.shipListShowAllShips
+                                && index2 < ships.length - 1
+                                && !this.checkLastRemodelLoop(ships, index2)
+                            )
+                                return null
                             return (<Ship className="item" ship={ship} key={index + '-' + index2} />)
                         })
                     return (<Ship className="item" ship={ships} key={index} />)
