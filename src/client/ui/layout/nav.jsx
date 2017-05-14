@@ -56,9 +56,9 @@ export default class extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            showBackButton: nextProps.location !== this.props.location
-        })
+        // this.setState({
+        //     showBackButton: nextProps.location !== this.props.location
+        // })
 
         if( nextProps.timeSwipedFromLeftEdge !== this.props.timeSwipedFromLeftEdge ){
             this._navSwitch.checked = true
