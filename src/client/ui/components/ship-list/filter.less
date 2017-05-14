@@ -11,13 +11,17 @@
 
     transition-property:    width;
 
-    .icon{
+    .icon-search{
         position:   absolute;
         top:        50%;
         margin-top: -8px;
         pointer-events: none;
 
         margin-left:    8px;
+    }
+
+    .close{
+        display:        none;
     }
 
     .input{
@@ -51,5 +55,21 @@
     width:      @width-filter-focus;
     .screen-phone({
         width:  100%;
+        .close{
+            @size:      40px;
+            display:    block;
+            position:   absolute;
+            top:        50%;
+            right:      8px;
+            margin-top: (0 - @size / 2);
+            z-index:    10;
+            appearance: none;
+            height:     @size;
+            width:      @size;
+            padding:    ((@size - 16px) / 2);
+            background: transparent;
+            border:     0;
+            color:      inherit;
+        }
     });
 }

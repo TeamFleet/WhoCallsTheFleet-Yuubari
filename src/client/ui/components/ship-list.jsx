@@ -132,7 +132,7 @@ import styleTitle from './ship-list/title.less'
 @ImportStyle(styleTitle)
 class Title extends React.Component {
     render() {
-        if(this.props.type){
+        if (this.props.type) {
             const type = db.shipTypes[this.props.type]
             return (
                 <h4 className={this.props.className}>
@@ -176,7 +176,7 @@ class ShipList extends React.Component {
         return (
             <div className={this.props.className}>
                 {this.props.ships.map((ships, index) => {
-                    if(Array.isArray(ships))
+                    if (Array.isArray(ships))
                         return ships.map((ship, index2) => {
                             if (index2 < ships.length - 1 && !pref.shipListShowAllShips) return null
                             return (<Ship className="item" ship={ship} key={index + '-' + index2} />)
@@ -284,10 +284,18 @@ class ShipListFilter extends React.Component {
             this.props.callbacks.leaveFilter()
     }
 
+    onCloseClick(evt) {
+        this.el.value = ""
+        this.el.dispatchEvent(new Event('input', { bubbles: true }))
+        this.el.dispatchEvent(new Event('blur', { bubbles: true }))
+        // evt.currentTarget.dispatchEvent(new Event('blur', { bubbles: true }))
+    }
+
     render() {
         return (
             <div className={this.props.className}>
-                <Icon className="icon" icon="search" />
+                <Icon className="icon-search" icon="search" />
+                <button className="close" onClick={this.onCloseClick.bind(this)}><Icon className="icon-close" icon="cross" /></button>
                 <input
                     className="input"
                     type="text"
@@ -295,6 +303,7 @@ class ShipListFilter extends React.Component {
                     onInput={this.onInput.bind(this)}
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
+                    ref={(c) => this.el = c}
                 />
             </div>
         )
