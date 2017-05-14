@@ -47,7 +47,7 @@
         "dist": "npm run build",
 
 
-        "pm2:dev:client": "pm2 restart pm2.json --only fleet-dev-client",
+        "pm2:dev:client": "node ./scripts/database.js && pm2 restart pm2.json --only fleet-dev-client",
         "pm2:dev:server": "pm2 restart pm2.json --only fleet-dev-server",
         "pm2:dev:run": "pm2 restart pm2.json --only fleet-dev-run --watch",
         "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
@@ -107,7 +107,7 @@
 
 
     "dependencies": {
-        "whocallsthefleet-database": "1.0.6",
+        "whocallsthefleet-database": "1.0.7",
         "whocallsthefleet-backgrounds": "1.0.0",
 
         "kckit": "^1.1.1",

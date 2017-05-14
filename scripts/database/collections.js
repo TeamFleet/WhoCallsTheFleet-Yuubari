@@ -9,6 +9,7 @@ let shipCollectionsPretty = []
 let shipSeriesInCollection = []
 let shipTypesAppended = []
 let shipSeries = {}
+let shipClassInited = {}
 
 const appendCollection = async (index, name, types, expandClass) => {
     const initSublist = (type, index, subIndex) => {
@@ -49,16 +50,34 @@ const appendCollection = async (index, name, types, expandClass) => {
                 thisSubIndex = subIndex
             }
         }
-        // console.log(name.zh_cn, type, expandClass)
+
+        // console.log(name.zh_cn, type, expandClass, index, thisSubIndex)
 
         let ships = await db.ships.cfind({ type: type })
             .sort({ 'class': 1, 'class_no': 1, 'time_created': 1, 'name.suffix': 1, series: 1, suffix: 1, id: 1 })
             .exec()
 
+        if (!shipClassInited[index]) shipClassInited[index] = []
+        // if (expandClass) thisSubIndex = -1
+
         // console.log(ships.map(ship => ship.id))
         ships.forEach(ship => {
             const series = ship.series
             let listSeries
+
+            if (expandClass && shipClassInited[index].indexOf(ship.class) < 0) {
+                // console.log(ship.class)
+                thisSubIndex = shipClassInited[index].length
+                // thisSubIndex++
+                // classIndex[ship.class_no] = thisSubIndex
+                shipCollections[index].list[thisSubIndex] = {
+                    type: type,
+                    class: ship.class,
+                    ships: []
+                }
+                shipSeriesInCollection[index][thisSubIndex] = {}
+                shipClassInited[index].push(ship.class)
+            }
 
             if (typeof shipSeriesInCollection[index][thisSubIndex][series] === 'undefined') {
                 const i = shipCollections[index].list[thisSubIndex].ships.length
@@ -103,7 +122,7 @@ module.exports = async (dbpath, topath) => {
         .sort({ id: 1 })
         .projection({ name: 1, types: 1, _id: 0 })
         .exec()
-    
+
     // 载入所有shipSeries数据，生成简易表
     let series = await db.shipSeries.cfind({}).exec()
     series.forEach(doc => {
@@ -149,6 +168,7 @@ module.exports = async (dbpath, topath) => {
                 type: shipType.type,
                 ships: []
             }
+            if (shipType.class) shipCollectionsPretty[indexCollection].list[indexShipType].class = shipType.class
             shipType.ships.forEach((series, indexSeries) => {
                 shipCollectionsPretty[indexCollection].list[indexShipType].ships[indexSeries]
                     = series.filter(ship => ship ? true : false).map(ship => `${ship.name.ja_jp} (ID: ${ship.id}, Suffix: ${ship.name.suffix}, Series: ${ship.series})`)

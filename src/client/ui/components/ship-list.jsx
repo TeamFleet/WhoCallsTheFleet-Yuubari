@@ -20,7 +20,9 @@ export default class extends React.Component {
 
         this.state = {
             collection: this.props.collection || 0,
-            filtering: false
+            filtering: false,
+            filteredResult: null,
+            filteredResultRealtimeCount: 0
         }
 
         // this.lastCollection
@@ -41,12 +43,18 @@ export default class extends React.Component {
             if (this.state.collection > 0) this.lastCollection = this.state.collection
             this.setState({
                 collection: -1,
-                collectionFilterd: result
+                filteredResult: result,
+                filteredResultRealtimeCount: result.length
             })
         } else if (evt.target.value === "") {
             this.setState({
                 collection: this.lastCollection || 0,
-                collectionFilterd: null
+                filteredResult: null,
+                filteredResultRealtimeCount: 0
+            })
+        } else {
+            this.setState({
+                filteredResultRealtimeCount: result.length
             })
         }
     }
@@ -72,7 +80,9 @@ export default class extends React.Component {
             <div key={index}>
                 {collection.list.map((type, index2) => (
                     <div key={index2}>
-                        {type.type ? (<h5>[{db.shipTypes[type.type].code}] {db.shipTypes[type.type].full_zh}</h5>) : (<h5>--</h5>)}
+                        {type.type && (!type.class || !index2) ? (<h5>{db.shipTypes[type.type].full_zh} [{db.shipTypes[type.type].code}]</h5>) : null}
+                        {!type.type && (<h5>--</h5>)}
+                        {type.class && (<h6>{translate("shipclass", {class:db.shipClasses[type.class].name_zh})}</h6>)}
                         <ul>
                             {type.ships.map((ships, index3) => (
                                 <li key={index2 + '-' + index3}>
@@ -93,11 +103,15 @@ export default class extends React.Component {
     }
 
     renderFilteredResult() {
-        if (!this.state.collectionFilterd || !this.state.collectionFilterd.length) return null
+        if (!this.state.filteredResult || !this.state.filteredResult.length) return null
         return (
             <ul>
-                <p>{translate('ship_list.filter.results_count', { count: this.state.collectionFilterd.length })}</p>
-                {this.state.collectionFilterd.map((ship, index) => (
+                <p>{
+                    this.state.filteredResultRealtimeCount
+                        ? translate('ship_list.filter.results_count', { count: this.state.filteredResultRealtimeCount })
+                        : translate('ship_list.filter.no_result')
+                }</p>
+                {this.state.filteredResult.map((ship, index) => (
                     <li key={index}>
                         <Ship ship={ship} />
                     </li>

@@ -7,6 +7,8 @@
     "title": "Who Calls the Fleet",
     "under_construction": "Under Construction",
 
+    "shipclass": "${class} Class",
+
     "nav": {
         "home": "Home",
         "fleets": "Fleet Builder",
@@ -20,8 +22,9 @@
 
     "ship_list": {
         "filter": {
-            "placeholder": "Search for name...",
-            "results_count": "Found ${count} items..."
+            "placeholder": "Filter by name...",
+            "results_count": "Found ${count} ships...",
+            "no_result": "No ships found. Showing previous results..."
         }
     }
 }

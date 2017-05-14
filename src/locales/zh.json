@@ -7,6 +7,8 @@
     "title": "是谁呼叫舰队",
     "under_construction": "建设中",
 
+    "shipclass": "${class}级",
+
     "nav": {
         "home": "首页",
         "fleets": "舰队模拟",
@@ -21,7 +23,8 @@
     "ship_list": {
         "filter": {
             "placeholder": "搜索舰名...",
-            "results_count": "已找到 ${count} 条结果..."
+            "results_count": "已找到 ${count} 条结果...",
+            "no_result": "未找到任何结果。显示上次结果..."
         }
     }
 }
