@@ -34,8 +34,6 @@ export default (settings = {}) => {
     }
 
     let { uri, title, description, image, state } = options
-    if (!title) title = siteName
-
     const curLocaleId = state.localeId || currentLocaleId
 
     if (typeof uri === 'object') {
@@ -49,7 +47,10 @@ export default (settings = {}) => {
     if (uri.substr(0, 1) == '/') uri = uri.substr(1)
     if (title) {
         if (dispatch) dispatch(updatePageTitle(title))
-        title = title.replace(/\n/g, '') + ' - ' + translate('title')
+        if( title !== siteName )
+            title = title.replace(/\n/g, '') + ' - ' + siteName
+    } else {
+        title = siteName
     }
     if (description) description = description.replace(/\n/g, '')
 

@@ -40,16 +40,32 @@
         overflow-y: auto;
     }
 
-    &:before{
+    &:before, &:after{
         content:    '';
         position:   absolute;
-        z-index:    6;
         top:        0;
         bottom:     0;
         right:      0;
+        pointer-events: none;
+    }
+    &:before{
+        z-index:    10;
         width:      1px;
         background: @theme-bluegrey-50;
         background: fade(@theme-bluegrey-50, 10%);
+    }
+    &:after{
+        z-index:    9;
+        width:      15px;
+        background: ease-out-sine-gradient(to left, fade(#000, 20%), fade(#000, 0%));
+        opacity:    0;
+        transition: inherit;
+        .is-ready({
+            opacity:    1;
+        });
+        .is-mode-background({
+            opacity:    0;
+        });
     }
 
     .logo{

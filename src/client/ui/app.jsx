@@ -89,7 +89,7 @@ export default class extends React.Component {
     }
 
     onTouchStart(evt) {
-        if (this.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 15)
+        if (this.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
             startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
                 y: evt.nativeEvent.touches[0].screenY,

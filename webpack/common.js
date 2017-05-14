@@ -108,7 +108,8 @@ const plugins = [
     new webpack.LoaderOptionsPlugin({
         options: {
             postcss: function () {
-                return [
+                return [                    
+                    require('postcss-easing-gradients'),
                     // https://github.com/postcss/postcss-import
                     // postcssImport({
                     //     addDependencyTo: webpack

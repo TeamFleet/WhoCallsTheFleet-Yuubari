@@ -113,6 +113,7 @@
         "kckit": "^1.1.1",
 
         "normalize.css": "^7.0.0",
+        "postcss-easing-gradients": "^1.2.3",
         
         "lz-string": "^1.4.4",
         "fs-extra": "^3.0.1",
