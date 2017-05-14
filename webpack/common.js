@@ -1,9 +1,10 @@
-const fs = require('fs')
+const fs = require('fs-extra')
+const path = require('path')
+
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
 // const glob = require("glob")
-const path = require('path')
 const appPath = process.cwd()
 // const pathBgimgs = path.resolve(appPath, './src/client/assets/bgimgs')
 const pathBgimgs = path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output')
@@ -133,6 +134,9 @@ const plugins = [
         }
     }),
     new webpack.DefinePlugin({
+        '__CHANNEL__': JSON.stringify(
+            /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'
+        ),
         '__BGIMG_LIST__': JSON.stringify(
             // glob.sync(path.resolve(pathBgimgs, '*.jpg'))
             fs.readdirSync(pathBgimgs).filter(

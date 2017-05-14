@@ -96,6 +96,9 @@ export default class extends React.Component {
     // }
 
     render() {
+        const logoStyles = __CHANNEL__ === 'yuubari' ? {
+            backgroundImage: `url(${require('Assets/logos/yuubari/128.png')})`
+        } : undefined
         return (
             <nav id="nav" className={this.props.className + (this.isLoading ? ' is-loading' : '')}>
                 <input type="checkbox" id="nav-switch" ref={(c) => this._navSwitch = c} />
@@ -103,7 +106,7 @@ export default class extends React.Component {
                 <div className="wrapper">
                     <div className="logo">
                         <button type="button" className="btn-back" disabled={!this.state.showBackButton} onClick={this.historyBack} />
-                        <IndexLink to="/" className="btn-home-logo" activeClassName="on" />
+                        <IndexLink to="/" className="btn-home-logo" activeClassName="on" style={logoStyles} />
                     </div>
 
                     <div className="navs">

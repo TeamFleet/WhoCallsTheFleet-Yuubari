@@ -33,7 +33,7 @@
 
         "clean:dist": "rimraf ./dist-web",
         "clean:sourcemap": "node ./scripts/clean_sourcemap",
-        "copy:public": "copyfiles ./public/**/* ./dist-web",
+        "copy:public": "node ./scripts/copyfiles",
 
 
         "dev:client": "node ./scripts/database.js && node ./webpack/enter --stage client --env dev --cport 3002",

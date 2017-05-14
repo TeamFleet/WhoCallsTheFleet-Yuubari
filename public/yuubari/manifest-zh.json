@@ -1,12 +1,7 @@
 {
-    "short_name": "The Fleet",
-    "name": "Who Calls the Fleet (Yuubari)",
+    "short_name": "呼叫舰队",
+    "name": "是谁呼叫舰队 (Yuubari)",
     "icons": [
-        {
-            "src": "icon-256.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        },
         {
             "src": "icon-128.png",
             "sizes": "128x128",
