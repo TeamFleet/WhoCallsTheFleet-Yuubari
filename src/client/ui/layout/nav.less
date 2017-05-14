@@ -2,6 +2,7 @@
 
 .component{
     @controls-height:   60px;
+    @button-menu-size:  20px;
 
     .mainframe();
 
@@ -264,19 +265,34 @@
             display:    inline;
             position:   static;
 
-            &:before{
-                content:    "☰";
+            // &:before{
+            //     content:    "☰";
+            //     position:   absolute;
+            //     z-index:    5;
+            //     top:        0;
+            //     left:       14px;
+            //     width:      @size;
+            //     height:     @nav-height-tablet;
+            //     line-height:@nav-height-tablet;
+            //     text-align: center;
+            //     // background: #800;
+            //     color:      inherit;
+            //     font-size:  24px;
+            // }
+            .icon{
+                display:    block;
                 position:   absolute;
                 z-index:    5;
                 top:        0;
                 left:       14px;
                 width:      @size;
                 height:     @nav-height-tablet;
-                line-height:@nav-height-tablet;
                 text-align: center;
-                // background: #800;
-                color:      inherit;
-                font-size:  24px;
+                padding-top:((@nav-height-tablet - @button-menu-size) / 2);
+                .icon-menu{
+                    width:  @button-menu-size;
+                    height: @button-menu-size;
+                }
             }
 
             &:after{
@@ -315,10 +331,11 @@
         }
 
         label[for="nav-switch"]{
-            &:before{
+            // &:before{
+            .icon{
                 left:       5px;
                 height:     @nav-height-phone;
-                line-height:@nav-height-phone;
+                padding-top:((@nav-height-phone - @button-menu-size) / 2);
             }
         }
     });

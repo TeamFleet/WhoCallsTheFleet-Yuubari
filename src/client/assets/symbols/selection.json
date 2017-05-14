@@ -66,6 +66,38 @@
     {
       "icon": {
         "paths": [
+          "M64 192h896v128h-896v-128z",
+          "M64 448h896v128h-896v-128z",
+          "M64 704h896v128h-896v-128z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "menu",
+          "list",
+          "options",
+          "lines",
+          "hamburger"
+        ],
+        "defaultCode": 60529,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "order": 6,
+        "prevSize": 16,
+        "ligatures": "menu7, list5",
+        "name": "menu",
+        "id": 881
+      },
+      "setIdx": 0,
+      "setId": 0,
+      "iconIdx": 881
+    },
+    {
+      "icon": {
+        "paths": [
           "M893.254 221.254l-90.508-90.508-290.746 290.744-290.746-290.744-90.508 90.506 290.746 290.748-290.746 290.746 90.508 90.508 290.746-290.746 290.746 290.746 90.508-90.51-290.744-290.744z"
         ],
         "attrs": [],

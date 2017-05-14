@@ -6,6 +6,7 @@ import translate from 'sp-i18n'
 import { enterBackground as appModeEnterBackground } from '../../logic/app-mode/api.js'
 
 import LangSwitch from '../components/lang-switch.jsx'
+import Icon from '../components/icon.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './nav.less'
@@ -128,7 +129,9 @@ export default class extends React.Component {
                     {this.props.pageTitle}
                 </div>
 
-                <label htmlFor="nav-switch" className="label"></label>
+                <label htmlFor="nav-switch" className="label">
+                    <div className="icon"><Icon className="icon-menu" icon="menu" /></div>
+                </label>
             </nav>
         )
     }
