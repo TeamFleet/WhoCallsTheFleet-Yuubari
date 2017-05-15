@@ -2,7 +2,26 @@ import React from 'react'
 import { Link } from 'react-router'
 import db from 'Logic/database'
 
+import { ImportStyle } from 'sp-css-import'
+import style from './link-ship.less'
+
+@ImportStyle(style)
 export default class LinkShip extends React.Component {
+    renderAvatar() {
+        return (
+            <img className="avatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAAoCAQAAADTJTkTAAAATElEQVR42u3QMQEAAAgDoC2Z/VsZwscDItBMOKhAgQIFCkSgQIECEShQoEAEChQoEIECBQpEoECBAhEoUKBABAoUKBCBAgUKRKDAHxY6hwoBYQTrnwAAAABJRU5ErkJggg==" />
+        )
+    }
+
+    renderName() {
+        return (
+            <span className="name">
+                {this.props.ship.getNameNoSuffix()}
+                {this.props.ship.name.suffix && (<small className="name-suffix">{this.props.ship.getSuffix()}</small>)}
+            </span>
+        )
+    }
+
     render() {
         if (typeof this.props.ship === 'string')
             this.props.ship = parseInt(this.props.ship)
@@ -11,7 +30,8 @@ export default class LinkShip extends React.Component {
 
         return (
             <Link className={this.props.className} to={'/ships/' + this.props.ship.id}>
-                [{this.props.ship.id}] {this.props.ship._name}
+                {this.renderName()}
+                {this.renderAvatar()}
             </Link>
         )
     }

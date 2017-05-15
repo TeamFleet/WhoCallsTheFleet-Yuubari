@@ -1,0 +1,43 @@
+@import '../base.less';
+
+.component{
+    display:    inline-block;
+    position:   relative;
+    overflow:   hidden;
+
+    vertical-align:	middle;
+
+	&:after{
+		content:		"";
+		display:		inline-block;
+		vertical-align:	middle;
+		width:			0;
+		height:			100%;
+		overflow:		hidden;
+	}
+
+    .avatar{
+        display:    block;
+        position:   absolute;
+        z-index:    1;
+
+        top:        0;
+        left:       -10px;
+        height:     100%;
+    }
+
+    .name{
+        display:    inline-block;
+        position:   relative;
+        z-index:    2;
+        line-height:1.1em;
+        vertical-align:	middle;
+        transition: none;
+    }
+        .name-suffix{
+            display:    block;
+            line-height:1.1em;
+            margin-top: .2em;
+            transition: inherit;
+        }
+}
