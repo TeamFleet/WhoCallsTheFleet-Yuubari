@@ -26,5 +26,9 @@
             "results_count": "Found ${count} ships...",
             "no_result": "No ships found. Showing previous results..."
         }
+    },
+
+    "ship_details": {
+        "slot_and_equipments": "Slot & Equipments"
     }
 }

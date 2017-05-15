@@ -110,7 +110,7 @@
         "whocallsthefleet-database": "1.0.7",
         "whocallsthefleet-backgrounds": "1.1.0",
 
-        "kckit": "^1.1.1",
+        "kckit": "^1.1.2",
 
         "normalize.css": "^7.0.0",
         "postcss-easing-gradients": "^1.2.3",

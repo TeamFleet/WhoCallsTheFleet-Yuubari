@@ -26,5 +26,9 @@
             "results_count": "已找到 ${count} 条结果...",
             "no_result": "未找到任何结果。显示上次结果..."
         }
+    },
+
+    "ship_details": {
+        "slot_and_equipments": "初始装备 & 搭载量"
     }
 }
