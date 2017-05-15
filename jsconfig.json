@@ -6,7 +6,16 @@
         "module": "es6",
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
-        "jsx": "react"
+        "jsx": "react",
+        "baseUrl": ".",
+        "paths": {
+            "Config/*": ["./src/client/config/*"],
+            "Locales/*": ["./src/locales/*"],
+            "Utils/*": ["./src/utils/*"],
+            "Assets/*": ["./src/client/assets/*"],
+            "UI/*": ["./src/client/ui/*"],
+            "Logic/*": ["./src/client/logic/*"]
+        }
     },
     "exclude": [
         "dist",
