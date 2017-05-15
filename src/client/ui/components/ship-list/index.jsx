@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 import translate from 'sp-i18n'
 import db from '../../../logic/database'
@@ -77,8 +78,12 @@ export default class ShipList extends React.Component {
     }
 
     renderCollection(collection, index) {
+        if (typeof index !== 'undefined')
+            index = index + '-'
+        else
+            index = ''
         return collection.list.map((type, index2) => (
-            <div key={index2}>
+            <div key={index + index2}>
                 {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
                 {!type.type && (<Title />)}
                 {type.class && (<SubTitle class={type.class} />)}
@@ -120,9 +125,19 @@ export default class ShipList extends React.Component {
                     filtering={this.state.filtering}
                 />}
 
-                {__CLIENT__ && this.state.collection > -1 && this.renderCollection(db.shipCollections[this.state.collection])}
-                {__CLIENT__ && this.state.collection < 0 && this.renderFilteredResult()}
-                {__SERVER__ && db.shipCollections.map(this.renderCollection)}
+                <CSSTransitionGroup
+                    component="div"
+                    className="transition-group"
+                    transitionName="transition"
+                    transitionLeave={false}
+                    transitionEnterTimeout={200}
+                >
+
+                    {__CLIENT__ && this.state.collection > -1 && this.renderCollection(db.shipCollections[this.state.collection], 'c-' + this.state.collection)}
+                    {__CLIENT__ && this.state.collection < 0 && this.renderFilteredResult()}
+                    {__SERVER__ && db.shipCollections.map(this.renderCollection)}
+
+                </CSSTransitionGroup>
 
             </div>
         )

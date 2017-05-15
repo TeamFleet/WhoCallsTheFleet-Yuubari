@@ -178,13 +178,13 @@ module.exports = async (dbpath, topath) => {
     })
 
     // 写入文件
-    fs.writeFile(
+    fs.writeFileSync(
         path.resolve(topath, 'ship_collections.json'),
         // LZString.compressToEncodedURIComponent(shipCollections),
         JSON.stringify(shipCollections),
         'utf-8'
     )
-    fs.writeFile(
+    fs.writeFileSync(
         path.resolve(topath, 'ship_collections_pretty.json'),
         // LZString.compressToEncodedURIComponent(shipCollections),
         jsonPretty(shipCollectionsPretty),

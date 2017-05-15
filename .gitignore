@@ -53,3 +53,4 @@ dist-web
 /_.bat
 /_.cmd
 .eslintrc.full
+/game_data
