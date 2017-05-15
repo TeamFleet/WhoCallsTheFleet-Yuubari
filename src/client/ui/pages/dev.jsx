@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
-import Background from '../components/background.jsx'
-import DevHeader from '../components/dev/header.jsx'
+import DevHeader from 'UI/components/dev/header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './dev.less'

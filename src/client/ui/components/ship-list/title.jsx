@@ -1,6 +1,6 @@
 import React from 'react'
 
-import db from '../../../logic/database'
+import db from 'Logic/database'
 
 import { ImportStyle } from 'sp-css-import'
 import styleTitle from './title.less'

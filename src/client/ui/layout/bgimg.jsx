@@ -2,12 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ImportStyle } from 'sp-css-import'
 
-// import { dir } from '../../core/defaults.js'
-import { leave as appModeLeave } from '../../logic/app-mode/api.js'
-import * as bgimgApi from '../../logic/bgimg/api.js'
+import { leave as appModeLeave } from 'Logic/app-mode/api.js'
+import * as bgimgApi from 'Logic/bgimg/api.js'
 import getStyles from 'Utils/background-styles.js'
 
-import Background from '../components/background.jsx'
+import Background from 'UI/components/background.jsx'
 
 import style from './bgimg.less'
 

@@ -158,7 +158,7 @@ const resolve = {
         Utils: path.resolve(appPath, './src/utils'),
         Assets: path.resolve(appPath, './src/client/assets'),
         UI: path.resolve(appPath, './src/client/ui'),
-        Docs: path.resolve(appPath, './docs')
+        Logic: path.resolve(appPath, './src/client/logic')
     },
     extensions: ['.js', '.jsx', '.json', '.css', '.less']
 }

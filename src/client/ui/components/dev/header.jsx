@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MainHeader from '../main-header.jsx'
+import MainHeader from 'UI/components/main-header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './header.less'

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import translate from 'sp-i18n'
-import db from '../../../logic/database'
+import db from 'Logic/database'
 
 import { ImportStyle } from 'sp-css-import'
 import styleSubTitle from './title-sub.less'

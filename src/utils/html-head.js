@@ -3,7 +3,7 @@ import translate, { getLocaleId, localeId as currentLocaleId } from 'sp-i18n'
 import { origin as siteOrigin } from 'Config/site.js'
 import { availableLocalesFb } from 'Config/i18n.js'
 
-import { update as updatePageTitle } from '../client/logic/page-title/api.js'
+import { update as updatePageTitle } from 'Logic/page-title/api.js'
 
 let head
 

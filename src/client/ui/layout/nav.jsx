@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 
 import translate from 'sp-i18n'
-import { enterBackground as appModeEnterBackground } from '../../logic/app-mode/api.js'
+import { enterBackground as appModeEnterBackground } from 'Logic/app-mode/api.js'
 
-import LangSwitch from '../components/lang-switch.jsx'
-import Icon from '../components/icon.jsx'
+import LangSwitch from 'UI/components/lang-switch.jsx'
+import Icon from 'UI/components/icon.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './nav.less'

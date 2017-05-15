@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import db from '../../logic/database'
+import db from 'Logic/database'
 
 export default class LinkShip extends React.Component {
     render() {

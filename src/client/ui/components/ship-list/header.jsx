@@ -1,10 +1,10 @@
 import React from 'react'
 
 import translate from 'sp-i18n'
-import db, { locale as dbLocaleId } from '../../../logic/database'
+import db, { locale as dbLocaleId } from 'Logic/database'
 
-import MainHeader from '../main-header.jsx'
-import Icon from '../icon.jsx'
+import MainHeader from 'UI/components/main-header.jsx'
+import Icon from 'UI/components/icon.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import styleHeader from './header.less'

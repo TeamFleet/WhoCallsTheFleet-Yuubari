@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 import translate from 'sp-i18n'
-import db from '../../../logic/database'
-import shipListFilter from '../../../logic/database/list-ships-filter.js'
+import db from 'Logic/database'
+import shipListFilter from 'Logic/database/list-ships-filter.js'
 
 import Title from './title.jsx'
 import SubTitle from './title-sub.jsx'

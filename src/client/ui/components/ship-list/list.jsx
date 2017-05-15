@@ -1,8 +1,8 @@
 import React from 'react'
 
-import pref from '../../../logic/preferences'
+import pref from 'Logic/preferences'
 
-import LinkShip from '../link-ship.jsx'
+import LinkShip from 'UI/components/link-ship.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import styleList from './list.less'

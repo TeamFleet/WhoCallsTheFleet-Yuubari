@@ -1,14 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
-import db from '../../logic/database'
+import db from 'Logic/database'
+
+import Link from 'UI/components/link.jsx'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './ship-details.less'
+import style from './details.less'
 
 @connect()
 @ImportStyle(style)

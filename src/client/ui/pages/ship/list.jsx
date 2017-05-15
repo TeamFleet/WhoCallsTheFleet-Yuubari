@@ -1,15 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
 
-import ShipList from '../components/ship-list.jsx'
+import ShipList from 'UI/components/ship-list.jsx'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './ship-list.less'
+import style from './list.less'
 
 if (__CLIENT__) self.__pageShipListLastCollection = 0
 
