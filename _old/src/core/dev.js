@@ -1,3 +1,0 @@
-(() => {
-    self.isDev = true
-})()
