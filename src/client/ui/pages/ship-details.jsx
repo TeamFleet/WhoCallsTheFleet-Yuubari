@@ -43,6 +43,9 @@ export default class extends React.Component {
                                 }}><i>
                                     {i == 0 && "-"}
                                     {i > 0 && serieses[i-1].next_lvl}
+                                    {i > 0 && serieses[i-1].next_blueprint === 'on' && <small><br/>+ Blueprint</small>}
+                                    {i > 0 && serieses[i-1].next_catapult === 'on' && <small><br/>+ Catapult</small>}
+                                    {i > 0 && serieses[i-1].next_loop === 'on' && ' (Switchable)'}
                                 </i></th>
                                 <td>
                                     {this.data.id === series.id && db.ships[series.id]._name}
