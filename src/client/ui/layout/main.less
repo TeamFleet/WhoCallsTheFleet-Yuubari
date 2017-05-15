@@ -1,12 +1,13 @@
 @import '../base.less';
 
 .component{
-    @transition-duration:   @duration-main-transition;
+    @transition-duration:   (@duration-main-transition);
     @transition-duration-enter: @transition-duration;
     @transition-duration-leave: @transition-duration;
 
     .mainframe();
-
+    overflow:       visible;
+    // overflow-x:     hidden;
     position:       relative;
     z-index:        2;
     // min-height:     100vh;
