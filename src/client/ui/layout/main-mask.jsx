@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './main-mask.less'
