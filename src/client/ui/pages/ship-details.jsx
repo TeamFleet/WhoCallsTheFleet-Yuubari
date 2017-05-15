@@ -31,7 +31,6 @@ export default class extends React.Component {
 
     renderSeries() {
         const serieses = this.data._series
-        console.log(serieses)
         return (
             <div>
                 <table>
