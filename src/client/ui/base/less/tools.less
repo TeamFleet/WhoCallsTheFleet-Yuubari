@@ -84,7 +84,7 @@
     @position:      relative;
     @box-shadow:    @card-box-shadow;
     @border-width:  1px;
-    @border-color:  @base-border-color
+    @border-color:  @color-border
 ){    
     .clearfix();
     .card-container-shadow(@box-shadow);
@@ -110,7 +110,7 @@
     border:         1px solid @_border-color;
 }
 .text-container(){
-    .text-container-sizing(@base-border-color);
+    .text-container-sizing(@color-border);
     border-radius:  @base-border-radius;
     // font-family:    inherit;
 }
@@ -120,9 +120,9 @@
 
 
 .overlay(){
-    //background:     @base-background-color;
+    //background:     @color-background;
     background: 	#fff;
-    border:         1px solid @base-border-color;
+    border:         1px solid @color-border;
     //.theme(border-color, 500);
     overflow:       hidden;
     overflow-y:     auto;
