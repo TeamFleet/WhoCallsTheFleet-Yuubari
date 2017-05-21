@@ -79,12 +79,13 @@ const rules = [{
             loader: 'sass-loader'
         }
     ]
-}, {
+}/*, {
     test: /\.png$/,
     loader: 'url-loader?limit=1&name=assets/[hash:5].[ext]'
-}, {
-    test: /\.(ico|gif|jpg|jpeg|svg|webp)$/,
-    loader: 'file-loader?context=static&name=assets/[hash:5].[ext]',
+}*/, {
+    test: /\.(ico|gif|jpg|jpeg|png|svg|webp)$/,
+    // loader: 'file-loader?context=static&name=assets/[hash:5].[ext]',
+    loader: 'file-loader?context=static&name=assets/[hash:32].[ext]',
     exclude: /node_modules/
 }, {
     test: /\.(js|jsx)$/,

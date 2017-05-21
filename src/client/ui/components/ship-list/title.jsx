@@ -1,6 +1,6 @@
 import React from 'react'
 
-import db from 'Logic/database'
+import db, { locale as dbLocaleId } from 'Logic/database'
 
 import { ImportStyle } from 'sp-css-import'
 import styleTitle from './title.less'
@@ -12,7 +12,7 @@ export default class ShipListTitle extends React.Component {
             const type = db.shipTypes[this.props.type]
             return (
                 <h4 className={this.props.className}>
-                    {type.full_zh}
+                    {type.name[dbLocaleId] || type.name.ja_jp}
                     {type.code && (<small className="code">[{type.code}]</small>)}
                 </h4>
             )
