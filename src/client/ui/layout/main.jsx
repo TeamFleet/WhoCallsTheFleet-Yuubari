@@ -14,7 +14,13 @@ export default class extends React.Component {
 
         switch (evt.nativeEvent.animationName) {
             case 'main-transition-enter':
-                evt.target.setAttribute('style', `margin-top:${0 - lastScroll.get()}px`)
+                var target = evt.target
+                var y = lastScroll.get()
+                target.setAttribute('style', `margin-top:${0 - y}px`)
+                setTimeout(() => {
+                    window.scrollTo(undefined, y)
+                    target.removeAttribute('style')
+                }, 200)
                 break
             case 'main-transition-leave':
                 // evt.target.setAttribute('data-last-scroll-y', window.scrollY)
@@ -24,24 +30,12 @@ export default class extends React.Component {
                 break
         }
     }
-    onAnimationEnd(evt) {
-        switch (evt.nativeEvent.animationName) {
-            case 'main-transition-enter':
-                window.scrollTo(undefined, lastScroll.get())
-                evt.target.removeAttribute('style')
-                break
-            case 'main-transition-leave':
-                evt.target.removeAttribute('style')
-                break
-        }
-    }
     render() {
         return (
             <main
                 id="main"
                 className={this.props.className}
                 onAnimationStart={this.onAnimationStart.bind(this)}
-                onAnimationEnd={this.onAnimationEnd.bind(this)}
             >
                 <CSSTransitionGroup
                     component="div"

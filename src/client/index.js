@@ -52,7 +52,7 @@ let isGAInit = false
 // 定制 react-router
 router.ext({
     onUpdate: () => {
-        if (__DEV__) console.log('router onUpdate', self.__LATHPATHNAME__, location.pathname)
+        // if (__DEV__) console.log('router onUpdate', self.__LATHPATHNAME__, location.pathname)
 
         if (self.__LATHPATHNAME__)
             lastScroll.set(self.__LATHPATHNAME__, window.scrollY)
