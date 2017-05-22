@@ -19,6 +19,7 @@ import clientRouter from './router'
 import { onRouterChange } from './ui/layout/nav.jsx'
 import reducers from './redux/reducers.js'
 import { init as dbInit } from './logic/database'
+import lastScroll from 'Utils/last-scroll.js'
 
 
 
@@ -51,6 +52,10 @@ let isGAInit = false
 // 定制 react-router
 router.ext({
     onUpdate: () => {
+        // if (__DEV__) console.log('router onUpdate', self.__LATHPATHNAME__, location.pathname)
+
+        if (self.__LATHPATHNAME__)
+            lastScroll.set(self.__LATHPATHNAME__, window.scrollY)
 
         // 统计代码第一次默认走html引入js
         if (isGAInit) {
@@ -59,6 +64,8 @@ router.ext({
         isGAInit = true
 
         /***/ onRouterChange()
+
+        self.__LATHPATHNAME__ = location.pathname
     }
 })
 
@@ -82,6 +89,7 @@ if (__CLIENT__) {
 
     // 客户端注册多语言
     i18nRegister(__REDUX_STATE__)
+
 }
 
 dbInit()

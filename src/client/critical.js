@@ -76,12 +76,25 @@ import bindEvent from 'bind-event'
         }
 
         // 开发模式: 插入SVG图标库
-        if (__DEV__) {
-            let div = document.createElement("div");
-            div.className = 'hide';
-            div.innerHTML = __ICONSVG__
-            document.body.insertBefore(div, document.body.childNodes[0])
+        // if (__DEV__) {
+        //     let div = document.createElement("div");
+        //     div.className = 'hide';
+        //     div.innerHTML = __ICONSVG__
+        //     document.body.insertBefore(div, document.body.childNodes[0])
+        // }
+
+        // online / offline
+        function doOnline() {
+            // console.log('online')
+            tagHtml.classList.remove('is-offline')
         }
+        function doOffline() {
+            // console.log('offline')
+            tagHtml.classList.add('is-offline')
+        }
+        window.addEventListener('online', doOnline)
+        window.addEventListener('offline', doOffline)
+        if (navigator.onLine === false) doOffline()
 
         self._html = tagHtml
     })
@@ -91,6 +104,8 @@ import bindEvent from 'bind-event'
         self.nw.win.show()
         self.nw.win.focus()
     }
+
+    // self.__LATHPATHNAME__
 
     self.isCriticalInit = true
 })()

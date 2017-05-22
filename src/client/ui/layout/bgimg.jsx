@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
+
+import Cookies from 'js-cookie'
 
 import { leave as appModeLeave } from 'Logic/app-mode/api.js'
 import * as bgimgApi from 'Logic/bgimg/api.js'
@@ -8,7 +9,12 @@ import getStyles from 'Utils/background-styles.js'
 
 import Background from 'UI/components/background.jsx'
 
+import { ImportStyle } from 'sp-css-import'
 import style from './bgimg.less'
+
+const setCookieSessionBackgroundIndex = index => {
+    Cookies.set('session_background_index', index)
+}
 
 /* Bgimg
  * main background image beneath App view
@@ -23,12 +29,17 @@ export default class Bgimg extends React.Component {
     constructor(props) {
         super(props)
 
-        if (__CLIENT__)
-            this.props.dispatch(bgimgApi.initList(
-                __CLIENT__
-                    ? 'default-' + Math.floor(Math.random() * self.__BGIMG_LIST__.length)
-                    : 'default-0'
-            ))
+        if (__CLIENT__) {
+            // 确定初始背景图
+            if (__CLIENT__) {
+                const initialIndex = Cookies.get('session_background_index') || ('default-' + Math.floor(Math.random() * self.__BGIMG_LIST__.length))
+                this.props.dispatch(bgimgApi.initList(initialIndex))
+                setCookieSessionBackgroundIndex(initialIndex)
+            }
+            if (__SERVER__) {
+                this.props.dispatch(bgimgApi.initList('default-0'))
+            }
+        }
     }
 
     leaveAppModeBackground() {
@@ -99,7 +110,7 @@ class BgMain extends React.Component {
             stylesOriginal: getStyles(this.props.currentBg)
         })
         setTimeout(() => {
-            if(!this.isOriginalTransitionEnd)
+            if (!this.isOriginalTransitionEnd)
                 this.originalTransitionEnd(undefined, true)
         }, 2000)
     }
@@ -117,7 +128,7 @@ class BgMain extends React.Component {
             stylesBlured: getStyles(this.props.currentBg, 'blured')
         })
         setTimeout(() => {
-            if(!this.state.showOriginal)
+            if (!this.state.showOriginal)
                 this.bluredTransitionEnd(undefined, true)
         }, 2000)
     }
@@ -307,6 +318,7 @@ class BgMain extends React.Component {
 }))
 class BgList extends React.Component {
     change(obj) {
+        setCookieSessionBackgroundIndex(obj.index)
         this.props.dispatch(bgimgApi.change(obj))
     }
 

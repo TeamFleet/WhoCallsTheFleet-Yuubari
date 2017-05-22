@@ -109,7 +109,7 @@ const plugins = [
     new webpack.LoaderOptionsPlugin({
         options: {
             postcss: function () {
-                return [                    
+                return [
                     require('postcss-easing-gradients'),
                     // https://github.com/postcss/postcss-import
                     // postcssImport({
@@ -144,7 +144,8 @@ const plugins = [
             fs.readdirSync(pathBgimgs).filter(
                 file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory() && path.extname(path.resolve(pathBgimgs, file)) === '.jpg'
             )
-        )
+        ),
+        '__ICONSVG__': JSON.stringify(fs.readFileSync(path.resolve(appPath, './src/client/assets/symbols/symbol-defs.svg'), 'utf8'))
     })
 ]
 
