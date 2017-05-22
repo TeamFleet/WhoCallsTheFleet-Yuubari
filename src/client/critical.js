@@ -76,12 +76,12 @@ import bindEvent from 'bind-event'
         }
 
         // 开发模式: 插入SVG图标库
-        if (__DEV__) {
-            let div = document.createElement("div");
-            div.className = 'hide';
-            div.innerHTML = __ICONSVG__
-            document.body.insertBefore(div, document.body.childNodes[0])
-        }
+        // if (__DEV__) {
+        //     let div = document.createElement("div");
+        //     div.className = 'hide';
+        //     div.innerHTML = __ICONSVG__
+        //     document.body.insertBefore(div, document.body.childNodes[0])
+        // }
 
         self._html = tagHtml
     })

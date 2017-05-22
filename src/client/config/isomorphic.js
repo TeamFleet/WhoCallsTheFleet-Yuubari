@@ -11,8 +11,10 @@ export default {
     // 对HTML基础模板的自定义注入
     // 例如：<script>//inject_critical</script>  替换为 critical
     injection: {
-        js: (args) => `<script async src="${args.path}/${getInjectionJsFilename('client')}"></script>`,
         manifest: () => `<link rel="manifest" href="/manifest-${currentLocaleId}.json">`,
+        svg: () => `<div class="hide">${__ICONSVG__}</div>`,
+
+        js: (args) => `<script async src="${args.path}/${getInjectionJsFilename('client')}"></script>`,
         critical: (args) => `<script src="${args.path}/${getInjectionJsFilename('critical')}"></script>`,
         critical_extra_old_ie_filename: (args) => `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${args.path}/${getInjectionJsFilename('critical-extra-old-ie')}"</script>`
     }
