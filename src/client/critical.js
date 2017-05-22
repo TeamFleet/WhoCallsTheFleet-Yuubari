@@ -83,6 +83,19 @@ import bindEvent from 'bind-event'
         //     document.body.insertBefore(div, document.body.childNodes[0])
         // }
 
+        // online / offline
+        function doOnline() {
+            // console.log('online')
+            tagHtml.classList.remove('is-offline')
+        }
+        function doOffline() {
+            // console.log('offline')
+            tagHtml.classList.add('is-offline')
+        }
+        window.addEventListener('online', doOnline)
+        window.addEventListener('offline', doOffline)
+        if (navigator.onLine === false) doOffline()
+
         self._html = tagHtml
     })
 
