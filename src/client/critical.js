@@ -105,5 +105,7 @@ import bindEvent from 'bind-event'
         self.nw.win.focus()
     }
 
+    // self.__LATHPATHNAME__
+
     self.isCriticalInit = true
 })()

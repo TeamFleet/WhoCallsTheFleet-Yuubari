@@ -1,7 +1,7 @@
 @import '../base.less';
 
 .component{
-    @transition-duration:   (@duration-main-transition);
+    @transition-duration:   (@duration-main-transition * 1);
     @transition-duration-enter: @transition-duration;
     @transition-duration-leave: @transition-duration;
 
@@ -42,11 +42,15 @@
     }
 
     .main-transition-enter, .main-transition-leave{
-        position:   absolute;
         top:        0;
         width:      100%;
 
-        transition-property: opacity, transform;
+        // transition-property: opacity, transform;
+        transition:     none;
+        pointer-events: none;
+        animation-duration: @transition-duration-enter;
+        animation-timing-function: @base-transition-timing-function;
+        animation-fill-mode: forwards;
     }
 
     .main-transition-enter {
@@ -54,9 +58,10 @@
         transform:  translateX(-2rem);
 
         &.main-transition-enter-active {
-            opacity:    1;
-            transform:  none;
-            transition-duration: @transition-duration-enter;
+            animation-name: main-transition-enter;
+            // opacity:    1;
+            // transform:  none;
+            // transition-duration: @transition-duration-enter;
             // transition-timing-function: ease-in;
         }
     }    
@@ -64,12 +69,37 @@
     .main-transition-leave {
         opacity:    1;
         transform:  none;
+        position:   absolute;
+        margin-bottom:  @main-margin;
 
         &.main-transition-leave-active {
-            opacity:    0.01;
-            transform:  translateX(2rem);
-            transition-duration: @transition-duration-leave;
+            animation-name: main-transition-leave;
+            // opacity:    0.01;
+            // transform:  translateX(2rem);
+            // transition-duration: @transition-duration-leave;
             // transition-timing-function: ease-in;
         }
+    }
+}
+
+@keyframes main-transition-enter {
+    0% {
+        opacity:    0.01;
+        transform:  translateX(-2rem);
+    }
+    100% {
+        opacity:    1;
+        transform:  none;
+    }
+}
+
+@keyframes main-transition-leave {
+    0% {
+        opacity:    1;
+        transform:  none;
+    }
+    100% {
+        opacity:    0.01;
+        transform:  translateX(2rem);
     }
 }
