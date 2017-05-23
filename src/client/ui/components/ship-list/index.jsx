@@ -22,9 +22,11 @@ export default class ShipList extends React.Component {
 
         this.state = {
             collection: this.props.collection || 0,
+
             filtering: false,
-            filteredResult: null,
-            filteredResultRealtimeCount: 0
+            filteredResult: undefined,
+            // filteredResultRealtimeCount: 0,
+            filteredResultText: undefined
         }
 
         // this.lastCollection
@@ -39,24 +41,44 @@ export default class ShipList extends React.Component {
     }
 
     onFilterInput(evt) {
-        let result = shipListFilter(evt.target.value)
+        const value = typeof evt === 'string' ? evt : evt.target.value
+        let result = shipListFilter(value)
 
-        if (result.length > 0) {
+        if (result.length > 100) {
+            if (this.state.collection > 0) this.lastCollection = this.state.collection
+            this.setState({
+                collection: -1,
+                filteredResult: result.slice(0,100),
+                // filteredResultRealtimeCount: 100,
+                filteredResultText: translate('ship_list.filter.results_count_too_many', { count: result.length })
+            })
+        } else if (result.length > 0) {
             if (this.state.collection > 0) this.lastCollection = this.state.collection
             this.setState({
                 collection: -1,
                 filteredResult: result,
-                filteredResultRealtimeCount: result.length
+                // filteredResultRealtimeCount: result.length,
+                filteredResultText: translate('ship_list.filter.results_count', { count: result.length })
             })
-        } else if (evt.target.value === "") {
+        } else if (value === "") {
             this.setState({
                 collection: this.lastCollection || 0,
-                filteredResult: null,
-                filteredResultRealtimeCount: 0
+                filteredResult: undefined,
+                // filteredResultRealtimeCount: 0,
+                filteredResultText: undefined
+            })
+        } else if (!this.state.filteredResult || !this.state.filteredResult.length) {
+            if (this.state.collection > 0) this.lastCollection = this.state.collection
+            this.setState({
+                collection: -1,
+                filteredResult: result,
+                // filteredResultRealtimeCount: result.length,
+                filteredResultText: translate('ship_list.filter.no_result')
             })
         } else {
             this.setState({
-                filteredResultRealtimeCount: result.length
+                // filteredResultRealtimeCount: result.length,
+                filteredResultText: translate('ship_list.filter.no_result_show_previous')
             })
         }
     }
@@ -93,14 +115,10 @@ export default class ShipList extends React.Component {
     }
 
     renderFilteredResult() {
-        if (!this.state.filteredResult || !this.state.filteredResult.length) return null
+        if (typeof this.state.filteredResult === 'undefined') return null
         return (
-            <div>
-                <p>{
-                    this.state.filteredResultRealtimeCount
-                        ? translate('ship_list.filter.results_count', { count: this.state.filteredResultRealtimeCount })
-                        : translate('ship_list.filter.no_result')
-                }</p>
+            <div className="results">
+                <p className="results-text">{this.state.filteredResultText}</p>
                 {<List ships={this.state.filteredResult} />}
             </div>
         )

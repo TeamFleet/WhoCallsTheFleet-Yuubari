@@ -24,7 +24,9 @@
         "filter": {
             "placeholder": "Filter by name...",
             "results_count": "Found ${count} ships...",
-            "no_result": "No ships found. Showing previous results..."
+            "results_count_too_many": "Found ${count} ships. Too many results. Only showing first 100 results...",
+            "no_result": "No ships found. Please try other inputs...",
+            "no_result_show_previous": "No ships found. Showing previous results..."
         }
     },
 

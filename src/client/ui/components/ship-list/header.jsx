@@ -81,7 +81,11 @@ import styleHeaderFilter from './header-filter.less'
 @ImportStyle(styleHeaderFilter)
 class Filter extends React.Component {
     onInput(evt) {
-        this.props.callbacks.onFilterInput(evt)
+        if (typeof this.debounceInput !== 'undefined') clearTimeout(this.debounceInput)
+        let value = evt.target.value
+        this.debounceInput = setTimeout(() => {
+            this.props.callbacks.onFilterInput(value)
+        }, 200)
     }
 
     onFocus() {

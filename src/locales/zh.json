@@ -24,7 +24,9 @@
         "filter": {
             "placeholder": "搜索舰名...",
             "results_count": "已找到 ${count} 条结果...",
-            "no_result": "未找到任何结果。显示上次结果..."
+            "results_count_too_many": "已找到 ${count} 条结果。条目过多，仅显示 100 条...",
+            "no_result": "未找到任何结果。请尝试输入其他内容...",
+            "no_result_show_previous": "未找到任何结果。显示上次结果..."
         }
     },
 
