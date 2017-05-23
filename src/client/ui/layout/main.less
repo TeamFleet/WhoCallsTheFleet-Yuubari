@@ -42,9 +42,6 @@
     }
 
     .main-transition-enter, .main-transition-leave{
-        top:        0;
-        width:      100%;
-
         // transition-property: opacity, transform;
         transition:     none;
         pointer-events: none;
@@ -67,9 +64,11 @@
     }    
 
     .main-transition-leave {
+        position:   absolute;
+        top:        0;
+        width:      100%;
         opacity:    1;
         transform:  none;
-        position:   absolute;
         margin-bottom:  @main-margin;
 
         &.main-transition-leave-active {

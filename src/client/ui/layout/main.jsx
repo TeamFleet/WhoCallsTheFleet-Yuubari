@@ -1,35 +1,47 @@
 import React from 'react'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
-import lastScroll from 'Utils/last-scroll.js'
+// import lastScroll from 'Utils/last-scroll.js'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './main.less'
 
-// @connect(mapStateToProps, mapDispatchToProps)
+let action
+let lastScrollY = 0
+let pathnameLastScrollY = {}
+
+// @connect(state => {
+//     console.log('state', state)
+//     return {}
+// })
 @ImportStyle(style)
 export default class extends React.Component {
     onAnimationStart(evt) {
-        // if (__DEV__) console.log('onAnimationStart', evt.target, evt.nativeEvent.animationName)
-
         switch (evt.nativeEvent.animationName) {
-            case 'main-transition-enter':
-                var target = evt.target
-                var y = lastScroll.get()
-                target.setAttribute('style', `margin-top:${0 - y}px`)
-                setTimeout(() => {
-                    window.scrollTo(undefined, y)
-                    target.removeAttribute('style')
-                }, 200)
-                break
+            // case 'main-transition-enter':
+            //     break
             case 'main-transition-leave':
-                // evt.target.setAttribute('data-last-scroll-y', window.scrollY)
-                evt.target.setAttribute('style', `margin-top:${0 - window.scrollY}px`)
-                // evt.target.setAttribute('data-style-margin-top', `${0 - window.scrollY}px`)
-                window.scrollTo(undefined, 0)
+                if (action === 'PUSH') {
+                    evt.target.setAttribute('style', `margin-top:${0 - window.scrollY}px`)
+                    window.scrollTo(undefined, 0)
+                }
                 break
         }
     }
+
+    componentWillUpdate(nextProps) {
+        action = nextProps.location.action
+        lastScrollY = window.scrollY
+        pathnameLastScrollY[this.props.location.pathname] = window.scrollY
+    }
+
+    componentDidUpdate() {
+        if(action === 'POP' && typeof pathnameLastScrollY[this.props.location.pathname] !== 'undefined'){
+            window.scrollTo(undefined, pathnameLastScrollY[this.props.location.pathname])
+            delete pathnameLastScrollY[this.props.location.pathname]
+        }
+    }
+
     render() {
         return (
             <main
@@ -43,11 +55,32 @@ export default class extends React.Component {
                     transitionName="main-transition"
                     transitionEnterTimeout={200}
                     transitionLeaveTimeout={200}>
-                    {this.props.children && React.cloneElement(this.props.children, {
-                        key: this.props.location.pathname
-                    })}
+                    {this.props.children && (
+                        <MainBody
+                            key={this.props.location.pathname}
+                            location={this.props.location}
+                        >
+                            {this.props.children}
+                        </MainBody>
+                    )}
                 </CSSTransitionGroup>
             </main>
+        )
+    }
+}
+
+class MainBody extends React.Component {
+    render() {
+        return (
+            <div style={
+                __CLIENT__ && action === 'POP' && this.props.location.pathname !== location.pathname
+                    ? {
+                        marginTop: `${pathnameLastScrollY[location.pathname] - lastScrollY}px`
+                    }
+                    : null
+            }>
+                {this.props.children}
+            </div>
         )
     }
 }

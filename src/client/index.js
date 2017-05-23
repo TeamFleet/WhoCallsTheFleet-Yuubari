@@ -19,7 +19,7 @@ import clientRouter from './router'
 import { onRouterChange } from './ui/layout/nav.jsx'
 import reducers from './redux/reducers.js'
 import { init as dbInit } from './logic/database'
-import lastScroll from 'Utils/last-scroll.js'
+// import lastScroll from 'Utils/last-scroll.js'
 
 
 
@@ -54,8 +54,8 @@ router.ext({
     onUpdate: () => {
         // if (__DEV__) console.log('router onUpdate', self.__LATHPATHNAME__, location.pathname)
 
-        if (self.__LATHPATHNAME__)
-            lastScroll.set(self.__LATHPATHNAME__, window.scrollY)
+        // if (self.__LATHPATHNAME__)
+        //     lastScroll.set(self.__LATHPATHNAME__, window.scrollY)
 
         // 统计代码第一次默认走html引入js
         if (isGAInit) {
@@ -81,7 +81,7 @@ if (__SERVER__) {
 
 //
 if (__CLIENT__) {
-    const store = run({
+    run({
         browserHistoryOnUpdate: (location) => {
             if (__DEV__) console.log('browserHistory update', location)
         }
