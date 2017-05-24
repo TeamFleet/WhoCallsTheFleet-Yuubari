@@ -121,6 +121,25 @@ export default class ShipList extends React.Component {
         return this.onEnterCompare()
     }
 
+    onCompareSelect(evt, ship, isRemove) {
+        let comparing = this.state.comparing ? [...this.state.comparing] : []
+        const index = comparing.indexOf(ship)
+
+        if (index < 0 && !isRemove) {
+            comparing.push(ship)
+            this.setState({
+                comparing: comparing
+            })
+        } else if (index > -1 && isRemove) {
+            comparing.splice(index, 1)
+            this.setState({
+                comparing: comparing
+            })
+        }
+
+        console.log('comparing', comparing)
+    }
+
     renderCollection(collection, index) {
         if (typeof index !== 'undefined')
             index = index + '-'
@@ -135,6 +154,8 @@ export default class ShipList extends React.Component {
                     ships={type.ships}
                     showHidden={!type.type}
                     isModeCompare={this.state.isModeCompare}
+                    onCompareSelect={this.onCompareSelect.bind(this)}
+                    comparing={this.state.comparing}
                 />
             </div>
         ))
@@ -145,7 +166,12 @@ export default class ShipList extends React.Component {
         return (
             <div className="results">
                 <p className="results-text">{this.state.filteredResultText}</p>
-                {<List ships={this.state.filteredResult} isModeCompare={this.state.isModeCompare} />}
+                {<List
+                    ships={this.state.filteredResult}
+                    isModeCompare={this.state.isModeCompare}
+                    onCompareSelect={this.onCompareSelect.bind(this)}
+                    comparing={this.state.comparing}
+                />}
             </div>
         )
     }

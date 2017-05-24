@@ -27,10 +27,12 @@ export default class ShipListList extends React.Component {
 
     renderItem(ship, index) {
         return (
-            <LinkShip
-                className="item"
+            <Link
                 ship={ship}
                 key={index}
+                isModeCompare={this.props.isModeCompare}
+                onCompareSelect={this.props.onCompareSelect}
+                comparing={this.props.comparing}
             />
         )
     }
@@ -53,6 +55,53 @@ export default class ShipListList extends React.Component {
                 })}
                 {this.insertPlaceHolders()}
             </div>
+        )
+    }
+}
+
+class Link extends React.Component {
+    onClick(evt, isSelected) {
+        if (this.props.isModeCompare) {
+            evt.preventDefault()
+            if (typeof this.props.onCompareSelect !== 'undefined')
+                this.props.onCompareSelect(evt, this.props.ship, isSelected)
+        }
+    }
+
+    shouldComponentUpdate(nextProps, /*nextState*/) {
+        if (this.props.ship !== nextProps.ship) return true
+        if (this.props.isModeCompare !== nextProps.isModeCompare) return true
+
+        if (!this.props.comparing && nextProps.comparing) return true
+        if (this.props.comparing && !nextProps.comparing) return true
+        if (!this.props.comparing && !nextProps.comparing) return false
+
+        if (this.props.comparing.indexOf(this.props.ship) !== !nextProps.comparing.indexOf(this.props.ship)) return true
+        else
+            return false
+
+        // return false
+    }
+
+    render() {
+        const isSelected = (__CLIENT__ && this.props.comparing && this.props.comparing.indexOf(this.props.ship) > -1) ? true : false
+        // const className =
+        //     "item"
+        //     + (this.props.isModeCompare ? ' is-compare' : '')
+        //     + (isSelected ? ' is-selected' : '')
+        // console.log(this.props.ship._name, className)
+        return (
+            <LinkShip
+                className={
+                    "item"
+                    + (this.props.isModeCompare ? ' is-compare' : '')
+                    + (isSelected ? ' is-selected' : '')
+                }
+                ship={this.props.ship}
+                onClick={(evt) => this.onClick(evt, isSelected)}
+            >
+                {this.props.isModeCompare && 'COMPARE'}
+            </LinkShip>
         )
     }
 }

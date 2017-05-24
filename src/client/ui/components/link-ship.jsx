@@ -29,9 +29,14 @@ export default class LinkShip extends React.Component {
             this.props.ship = db.ships[this.props.ship]
 
         return (
-            <Link className={this.props.className} to={'/ships/' + this.props.ship.id}>
+            <Link
+                className={this.props.className}
+                to={'/ships/' + this.props.ship.id}
+                onClick={this.props.onClick}
+            >
                 {this.renderName()}
                 {this.renderAvatar()}
+                {this.props.children}
             </Link>
         )
     }
