@@ -40,6 +40,7 @@ const filter = (options = {}) => {
 
     db.shipCollections.forEach(collection => {
         collection.list.forEach(type => {
+            if (!type.type) return
             type.ships.forEach(ships => {
                 ships.forEach(ship => {
                     for (let i in ship.name) {

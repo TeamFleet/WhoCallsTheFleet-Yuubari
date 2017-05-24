@@ -131,7 +131,11 @@ export default class ShipList extends React.Component {
                 {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
                 {!type.type && (<Title />)}
                 {type.class && (<SubTitle class={type.class} />)}
-                <List ships={type.ships} showAll={!type.type} isModeCompare={this.state.isModeCompare} />
+                <List
+                    ships={type.ships}
+                    showHidden={!type.type}
+                    isModeCompare={this.state.isModeCompare}
+                />
             </div>
         ))
     }

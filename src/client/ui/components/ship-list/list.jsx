@@ -25,21 +25,31 @@ export default class ShipListList extends React.Component {
         return index === ships.length - 1
     }
 
+    renderItem(ship, index) {
+        return (
+            <LinkShip
+                className="item"
+                ship={ship}
+                key={index}
+            />
+        )
+    }
+
     render() {
         return (
             <div className={this.props.className}>
                 {this.props.ships.map((ships, index) => {
                     if (Array.isArray(ships))
                         return ships.map((ship, index2) => {
-                            if (!this.props.showAll
+                            if (!this.props.showHidden
                                 && !pref.shipListShowAllShips
                                 && index2 < ships.length - 1
                                 && !this.checkLastRemodelLoop(ships, index2)
                             )
                                 return null
-                            return (<LinkShip className="item" ship={ship} key={index + '-' + index2} />)
+                            return this.renderItem(ship, index + '-' + index2)
                         })
-                    return (<LinkShip className="item" ship={ships} key={index} />)
+                    return this.renderItem(ships, index)
                 })}
                 {this.insertPlaceHolders()}
             </div>
