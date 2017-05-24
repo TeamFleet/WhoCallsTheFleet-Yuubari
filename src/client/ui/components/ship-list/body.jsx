@@ -14,6 +14,8 @@ import Header from './header.jsx'
 import { ImportStyle } from 'sp-css-import'
 import style from './body.less'
 
+const filterMax = 100
+
 @connect()
 @ImportStyle(style)
 export default class ShipList extends React.Component {
@@ -47,12 +49,12 @@ export default class ShipList extends React.Component {
         const value = typeof evt === 'string' ? evt : evt.target.value
         let result = shipListFilter(value)
 
-        if (result.length > 100) {
+        if (result.length > filterMax) {
             if (this.state.collection > 0) this.lastCollection = this.state.collection
             this.setState({
                 collection: -1,
-                filteredResult: result.slice(0, 100),
-                filteredResultText: translate('ship_list.filter.results_count_too_many', { count: result.length })
+                filteredResult: result.slice(0, filterMax),
+                filteredResultText: translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterMax })
             })
         } else if (result.length > 0) {
             if (this.state.collection > 0) this.lastCollection = this.state.collection

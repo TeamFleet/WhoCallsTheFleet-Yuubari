@@ -93,7 +93,7 @@ class Filter extends React.Component {
         let value = evt.target.value
         this.debounceInput = setTimeout(() => {
             this.props.onFilterInput(value)
-        }, 200)
+        }, 100)
     }
 
     onFocus() {
