@@ -15,8 +15,16 @@
     });
     .screen-phone({
         font-size:      16px;
-        padding-left:   50%;
+        // padding-left:   50%;
         height:         @height-phone;
         line-height:    @height-phone;
+        padding-left:   0;
+        display:        flex;
+        flex-flow:      row nowrap;
+        &:before{
+            content:    "";
+            display:    block;
+            flex:       1 1 50%;
+        }
     });
 }

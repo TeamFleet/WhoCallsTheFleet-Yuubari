@@ -12,7 +12,7 @@ import List from './list.jsx'
 import Header from './header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './index.less'
+import style from './body.less'
 
 @connect()
 @ImportStyle(style)
@@ -23,21 +23,24 @@ export default class ShipList extends React.Component {
         this.state = {
             collection: this.props.collection || 0,
 
-            filtering: false,
+            isModeFilter: false,
             filteredResult: undefined,
-            // filteredResultRealtimeCount: 0,
-            filteredResultText: undefined
+            filteredResultText: undefined,
+
+            isModeCompare: false,
+            comparing: null
         }
 
         // this.lastCollection
     }
 
     onCollectionChange(evt, to) {
+        if (typeof to === 'undefined') to = parseInt(evt.target.value)
         this.setState({
             collection: to
         })
-        if (this.props.callbacks && typeof this.props.callbacks.onCollectionChange === 'function')
-            this.props.callbacks.onCollectionChange(evt, to)
+        if (typeof this.props.onCollectionChange === 'function')
+            this.props.onCollectionChange(evt, to)
     }
 
     onFilterInput(evt) {
@@ -48,8 +51,7 @@ export default class ShipList extends React.Component {
             if (this.state.collection > 0) this.lastCollection = this.state.collection
             this.setState({
                 collection: -1,
-                filteredResult: result.slice(0,100),
-                // filteredResultRealtimeCount: 100,
+                filteredResult: result.slice(0, 100),
                 filteredResultText: translate('ship_list.filter.results_count_too_many', { count: result.length })
             })
         } else if (result.length > 0) {
@@ -57,14 +59,12 @@ export default class ShipList extends React.Component {
             this.setState({
                 collection: -1,
                 filteredResult: result,
-                // filteredResultRealtimeCount: result.length,
                 filteredResultText: translate('ship_list.filter.results_count', { count: result.length })
             })
         } else if (value === "") {
             this.setState({
                 collection: this.lastCollection || 0,
                 filteredResult: undefined,
-                // filteredResultRealtimeCount: 0,
                 filteredResultText: undefined
             })
         } else if (!this.state.filteredResult || !this.state.filteredResult.length) {
@@ -72,31 +72,51 @@ export default class ShipList extends React.Component {
             this.setState({
                 collection: -1,
                 filteredResult: result,
-                // filteredResultRealtimeCount: result.length,
                 filteredResultText: translate('ship_list.filter.no_result')
             })
         } else {
             this.setState({
-                // filteredResultRealtimeCount: result.length,
                 filteredResultText: translate('ship_list.filter.no_result_show_previous')
             })
         }
     }
 
-    enterFilter() {
-        if (!this.state.filtering)
+    onEnterFilter() {
+        if (!this.state.isModeFilter)
             this.setState({
-                filtering: true
+                isModeFilter: true
             })
         // console.log('entering filter mode')
     }
 
-    leaveFilter() {
-        if (this.state.filtering)
+    onLeaveFilter() {
+        if (this.state.isModeFilter)
             this.setState({
-                filtering: false
+                isModeFilter: false
             })
         // console.log('leaving filter mode')
+    }
+
+    onEnterCompare() {
+        if (!this.state.isModeCompare)
+            this.setState({
+                isModeCompare: true
+            })
+        // console.log('entering compare mode')
+    }
+
+    onLeaveCompare() {
+        if (this.state.isModeCompare)
+            this.setState({
+                isModeCompare: false
+            })
+        // console.log('leaving compare mode')
+    }
+
+    toggleCompare() {
+        if (this.state.isModeCompare)
+            return this.onLeaveCompare()
+        return this.onEnterCompare()
     }
 
     renderCollection(collection, index) {
@@ -109,7 +129,7 @@ export default class ShipList extends React.Component {
                 {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
                 {!type.type && (<Title />)}
                 {type.class && (<SubTitle class={type.class} />)}
-                <List ships={type.ships} showAll={!type.type} />
+                <List ships={type.ships} showAll={!type.type} isModeCompare={this.state.isModeCompare} />
             </div>
         ))
     }
@@ -119,9 +139,35 @@ export default class ShipList extends React.Component {
         return (
             <div className="results">
                 <p className="results-text">{this.state.filteredResultText}</p>
-                {<List ships={this.state.filteredResult} />}
+                {<List ships={this.state.filteredResult} isModeCompare={this.state.isModeCompare} />}
             </div>
         )
+    }
+
+    getExtraButtons() {
+        if (__SERVER__) return null
+
+        let buttons = []
+        if (this.props.extraButton) buttons = [this.props.extraButton]
+        if (this.props.extraButtons) buttons = this.props.extraButtons
+
+        if (!buttons.length) return null
+        return buttons.map((button, index) => {
+            switch (button) {
+                case 'compare':
+                    return (
+                        <span
+                            className={"link item" + (this.state.isModeCompare ? ' on' : '')}
+                            key={index}
+                            onClick={this.toggleCompare.bind(this)}
+                        >
+                            COMPARE
+                        </span>
+                    )
+                default:
+                    return button
+            }
+        })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -133,14 +179,13 @@ export default class ShipList extends React.Component {
         return (
             <div className={this.props.className}>
                 {__CLIENT__ && <Header
-                    callbacks={{
-                        onCollectionChange: this.onCollectionChange.bind(this),
-                        onFilterInput: this.onFilterInput.bind(this),
-                        enterFilter: this.enterFilter.bind(this),
-                        leaveFilter: this.leaveFilter.bind(this)
-                    }}
+                    onCollectionChange={this.onCollectionChange.bind(this)}
+                    onFilterInput={this.onFilterInput.bind(this)}
+                    onEnterFilter={this.onEnterFilter.bind(this)}
+                    onLeaveFilter={this.onLeaveFilter.bind(this)}
                     collection={this.state.collection}
-                    filtering={this.state.filtering}
+                    isModeFilter={this.state.isModeFilter}
+                    extraButtons={this.getExtraButtons()}
                 />}
 
                 <CSSTransitionGroup
@@ -153,7 +198,7 @@ export default class ShipList extends React.Component {
 
                     {__CLIENT__ && this.state.collection > -1 && this.renderCollection(db.shipCollections[this.state.collection], 'c-' + this.state.collection)}
                     {__CLIENT__ && this.state.collection < 0 && this.renderFilteredResult()}
-                    {__SERVER__ && db.shipCollections.map(this.renderCollection)}
+                    {__SERVER__ && db.shipCollections.map(this.renderCollection.bind(this))}
 
                 </CSSTransitionGroup>
 

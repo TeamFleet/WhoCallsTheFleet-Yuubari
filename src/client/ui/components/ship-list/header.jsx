@@ -14,9 +14,17 @@ export default class ShipListHeader extends React.Component {
     render() {
         return (
             <MainHeader>
-                <div className={this.props.className + (this.props.filtering ? ' is-filtering' : '')}>
-                    <Filter callbacks={this.props.callbacks} />
-                    <Tabs collection={this.props.collection} callbacks={this.props.callbacks} />
+                <div className={this.props.className + (this.props.isModeFilter ? ' is-filtering' : '')}>
+                    <Filter
+                        onFilterInput={this.props.onFilterInput}
+                        onEnterFilter={this.props.onEnterFilter}
+                        onLeaveFilter={this.props.onLeaveFilter}
+                    />
+                    <Tabs
+                        collection={this.props.collection}
+                        onCollectionChange={this.props.onCollectionChange}
+                    />
+                    {this.props.extraButtons && <ExtraButtons>{this.props.extraButtons}</ExtraButtons>}
                 </div>
             </MainHeader>
         )
@@ -27,7 +35,7 @@ import styleHeaderTabs from './header-tabs.less'
 @ImportStyle(styleHeaderTabs)
 class Tabs extends React.Component {
     onSelectChange(evt) {
-        this.props.callbacks.onCollectionChange(evt, parseInt(evt.target.value))
+        this.props.onCollectionChange(evt, parseInt(evt.target.value))
     }
     render() {
         return (
@@ -50,7 +58,7 @@ class Tabs extends React.Component {
                         key={index}
                         className={this.props.collection === index ? ' on' : ''}
                         collection={index}
-                        callbacks={this.props.callbacks}
+                        onCollectionChange={this.props.onCollectionChange}
                     >
                         {collection.name[dbLocaleId]}
                     </TabItem>
@@ -62,17 +70,17 @@ class Tabs extends React.Component {
 
 class TabItem extends React.Component {
     onClick(evt) {
-        this.props.callbacks.onCollectionChange(evt, this.props.collection)
+        this.props.onCollectionChange(evt, this.props.collection)
     }
 
     render() {
         return (
-            <a href="javascript:;"
+            <span
                 onClick={this.onClick.bind(this)}
-                className={'item' + this.props.className}
+                className={'link item' + this.props.className}
             >
                 {this.props.children}
-            </a>
+            </span>
         )
     }
 }
@@ -84,17 +92,17 @@ class Filter extends React.Component {
         if (typeof this.debounceInput !== 'undefined') clearTimeout(this.debounceInput)
         let value = evt.target.value
         this.debounceInput = setTimeout(() => {
-            this.props.callbacks.onFilterInput(value)
+            this.props.onFilterInput(value)
         }, 200)
     }
 
     onFocus() {
-        this.props.callbacks.enterFilter()
+        this.props.onEnterFilter()
     }
 
     onBlur(evt) {
         if (evt.target.value === '')
-            this.props.callbacks.leaveFilter()
+            this.props.onLeaveFilter()
     }
 
     onCloseClick(/*evt*/) {
@@ -118,6 +126,18 @@ class Filter extends React.Component {
                     onBlur={this.onBlur.bind(this)}
                     ref={(c) => this.el = c}
                 />
+            </div>
+        )
+    }
+}
+
+import styleHeaderExtraButtons from './header-extra-buttons.less'
+@ImportStyle(styleHeaderExtraButtons)
+class ExtraButtons extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className}>
+                {this.props.children}
             </div>
         )
     }

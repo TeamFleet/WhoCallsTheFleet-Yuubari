@@ -36,9 +36,8 @@ export default class extends React.Component {
             >
                 <ShipList
                     collection={__CLIENT__ ? self.__pageShipListLastCollection : null}
-                    callbacks={{
-                        onCollectionChange: this.onCollectionChange.bind(this)
-                    }}
+                    onCollectionChange={this.onCollectionChange.bind(this)}
+                    extraButton='compare'
                 />
             </PageContainer>
         )
