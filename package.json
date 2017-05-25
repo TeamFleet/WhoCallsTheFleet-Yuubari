@@ -127,7 +127,7 @@
     "devDependencies": {
         "sp-base": "^2.3.0",
         "sp-react-isomorphic": "^1.13.0",
-        "sp-css-import": "^1.4.0",
+        "sp-css-import": "^1.5.0",
         "sp-css-loader": "^1.1.3",
         "sp-model": "^1.0.0",
         "sp-mongo": "^1.1.0",

@@ -1,7 +1,37 @@
 @import './_.less';
 
 .component{
+    .header{
+        font-size:  14px;
+        position:   absolute;
+        top:        @height;
+        // bottom:     (0 - @height-compare-thead);
+        left:       0;
+        right:      0;
+        height:     0;
+        line-height:@height-compare-thead;
+        background: fade(@theme-bluegrey-900, 10%);
+        border:     1px solid fade(@color-border, 20%);
+        border-top: 0;
+        box-shadow: inset 0 0 (@height-compare-thead / 2) fade(@theme-bluegrey-900, 75%);
+        transition-property: height;
+        .screen-phone({
+            top:    @height-phone;
+        });
+    }
 }
 
 .is-compare .component{
+    .header{
+        will-change:height;
+        height:     @height-compare-thead;
+        transform:  translateY(-1px);
+    }
+}
+
+.is-compare.is-compare-leaving .component{
+    .header{
+        height:     0;
+        // transform:  none;
+    }
 }

@@ -195,10 +195,11 @@ class Compare extends React.Component {
         return (
             <div className={this.props.className}>
                 <div className="options">
-                    options
                 </div>
                 <div className="header">
-                    header
+                    {this.props.compareState === 'selecting' && <div className="selecting">
+                        selecting ({this.props.compareList.length})
+                    </div>}
                 </div>
             </div>
         )

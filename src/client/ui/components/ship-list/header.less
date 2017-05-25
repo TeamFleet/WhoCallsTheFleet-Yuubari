@@ -50,9 +50,27 @@
     // padding-bottom: @height-compare-thead;
     animation:  ship-list-header-compare-enter @base-transition-duration @base-transition-timing-function;
     animation-fill-mode: forwards;
+    will-change:padding-bottom;
     &.is-compare-leaving{
         animation-name: ship-list-header-compare-leave;
     }
+    // &:before{
+    //     content:    "";
+    //     position:   absolute;
+    //     bottom:     -1px;
+    //     height:     1px;
+    //     background: @color-border;
+    //     left:       @main-margin;
+    //     right:      @main-margin;
+    //     .screen-tablet({
+    //         left:   @main-margin-tablet;
+    //         right:  @main-margin-tablet;
+    //     });
+    //     .screen-phone({
+    //         left:   @main-margin-phone;
+    //         right:  @main-margin-phone;
+    //     });
+    // }
 }
 
 .component.is-compare-comparing{
@@ -67,13 +85,13 @@
         padding-bottom: 0;
     }
     100% {
-        padding-bottom: @height-compare-thead;
+        padding-bottom: (@height-compare-thead + 1);
     }
 }
 
 @keyframes ship-list-header-compare-leave {
     0% {
-        padding-bottom: @height-compare-thead;
+        padding-bottom: (@height-compare-thead + 1);
     }
     100% {
         padding-bottom: 0;

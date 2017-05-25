@@ -30,7 +30,7 @@ export default class ShipListList extends React.Component {
             <Link
                 ship={ship}
                 key={index}
-                
+
                 isModeCompare={this.props.isModeCompare}
                 onCompareSelect={this.props.onCompareSelect}
                 compareList={this.props.compareList}
@@ -73,10 +73,6 @@ class Link extends React.Component {
         if (this.props.ship !== nextProps.ship) return true
         if (this.props.isModeCompare !== nextProps.isModeCompare) return true
 
-        if (!this.props.compareList && nextProps.compareList) return true
-        if (this.props.compareList && !nextProps.compareList) return true
-        if (!this.props.compareList && !nextProps.compareList) return false
-
         if (this.props.compareList.indexOf(this.props.ship) !== !nextProps.compareList.indexOf(this.props.ship)) return true
         else
             return false
@@ -85,7 +81,7 @@ class Link extends React.Component {
     }
 
     render() {
-        const isSelected = (__CLIENT__ && this.props.compareList && this.props.compareList.indexOf(this.props.ship) > -1) ? true : false
+        const isSelected = (__CLIENT__ && this.props.compareList.indexOf(this.props.ship) > -1) ? true : false
         // const className =
         //     "item"
         //     + (this.props.isModeCompare ? ' is-compare' : '')

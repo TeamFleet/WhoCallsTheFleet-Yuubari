@@ -31,7 +31,7 @@ export default class ShipList extends React.Component {
 
             isModeCompare: false,
             compareState: 'selecting', // selecting || comparing
-            compareList: null
+            compareList: __SERVER__ ? null : []
         }
 
         // this.lastCollection
@@ -130,7 +130,7 @@ export default class ShipList extends React.Component {
     }
 
     onCompareSelect(evt, ship, isRemove) {
-        let compareList = this.state.compareList ? [...this.state.compareList] : []
+        let compareList = [...this.state.compareList]
         const index = compareList.indexOf(ship)
 
         if (index < 0 && !isRemove) {
@@ -150,7 +150,7 @@ export default class ShipList extends React.Component {
 
     onResetCompareSelect() {
         this.setState({
-            compareList: null
+            compareList: []
         })
     }
 
