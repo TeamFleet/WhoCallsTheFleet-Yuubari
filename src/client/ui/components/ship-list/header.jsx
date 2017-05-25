@@ -2,6 +2,7 @@ import React from 'react'
 
 import translate from 'sp-i18n'
 import db, { locale as dbLocaleId } from 'Logic/database'
+import bindEvent from 'bind-event'
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Icon from 'UI/components/icon.jsx'
@@ -11,20 +12,64 @@ import styleHeader from './header.less'
 
 @ImportStyle(styleHeader)
 export default class ShipListHeader extends React.Component {
+    componentWillUpdate(newProps) {
+        const mainheader = this._wrapper.offsetParent
+
+        if (newProps.isModeFilter)
+            mainheader.classList.add('is-filtering')
+        else
+            mainheader.classList.remove('is-filtering')
+
+        if (newProps.isModeCompare) {
+            mainheader.classList.remove('is-compare-leaving')
+            mainheader.classList.add('is-compare')
+            mainheader.setAttribute('data-compare-state', this.props.compareState)
+        } else {
+            mainheader.classList.add('is-compare-leaving')
+            // mainheader.classList.remove('is-compare')
+            // mainheader.removeAttribute('data-compare-state')
+        }
+    }
+
+    componentDidMount() {
+        bindEvent(
+            this._wrapper.offsetParent,
+            'animationend',
+            function (evt) {
+                if (evt.animationName === 'ship-list-header-compare-leave') {
+                    evt.target.classList.remove('is-compare')
+                    evt.target.classList.remove('is-compare-leaving')
+                    evt.target.removeAttribute('data-compare-state')
+                }
+            }
+        )
+    }
+
     render() {
         return (
-            <MainHeader>
-                <div className={this.props.className + (this.props.isModeFilter ? ' is-filtering' : '')}>
-                    <Filter
-                        onFilterInput={this.props.onFilterInput}
-                        onEnterFilter={this.props.onEnterFilter}
-                        onLeaveFilter={this.props.onLeaveFilter}
-                    />
-                    <Tabs
-                        collection={this.props.collection}
-                        onCollectionChange={this.props.onCollectionChange}
-                    />
-                    {this.props.extraButtons && <ExtraButtons>{this.props.extraButtons}</ExtraButtons>}
+            <MainHeader className={this.props.className}>
+                <div className="wrapper" ref={el => this._wrapper = el}>
+                    <div className="body">
+                        <Filter
+                            onFilterInput={this.props.onFilterInput}
+                            onEnterFilter={this.props.onEnterFilter}
+                            onLeaveFilter={this.props.onLeaveFilter}
+                        />
+                        <Tabs
+                            collection={this.props.collection}
+                            onCollectionChange={this.props.onCollectionChange}
+                        />
+                        {this.props.extraButtons && <ExtraButtons>{this.props.extraButtons}</ExtraButtons>}
+                    </div>
+                    {typeof this.props.isModeCompare !== 'undefined' &&
+                        <Compare
+                            isModeCompare={this.props.isModeCompare}
+                            compareList={this.props.compareList}
+                            compareState={this.props.compareState}
+                            onUpdateCompareState={this.props.onUpdateCompareState}
+                            onResetCompareSelect={this.props.onResetCompareSelect}
+                        />
+                    }
                 </div>
             </MainHeader>
         )
@@ -138,6 +183,23 @@ class ExtraButtons extends React.Component {
         return (
             <div className={this.props.className}>
                 {this.props.children}
+            </div>
+        )
+    }
+}
+
+import styleHeaderCompare from './header-compare.less'
+@ImportStyle(styleHeaderCompare)
+class Compare extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className}>
+                <div className="options">
+                    options
+                </div>
+                <div className="header">
+                    header
+                </div>
             </div>
         )
     }

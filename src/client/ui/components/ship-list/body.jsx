@@ -30,7 +30,8 @@ export default class ShipList extends React.Component {
             filteredResultText: undefined,
 
             isModeCompare: false,
-            comparing: null
+            compareState: 'selecting', // selecting || comparing
+            compareList: null
         }
 
         // this.lastCollection
@@ -121,59 +122,36 @@ export default class ShipList extends React.Component {
         return this.onEnterCompare()
     }
 
+    onUpdateCompareState(evt, newState) {
+        if (typeof evt === 'string') return this.onUpdateCompareState(undefined, evt)
+        this.setState({
+            compareState: newState
+        })
+    }
+
     onCompareSelect(evt, ship, isRemove) {
-        let comparing = this.state.comparing ? [...this.state.comparing] : []
-        const index = comparing.indexOf(ship)
+        let compareList = this.state.compareList ? [...this.state.compareList] : []
+        const index = compareList.indexOf(ship)
 
         if (index < 0 && !isRemove) {
-            comparing.push(ship)
+            compareList.push(ship)
             this.setState({
-                comparing: comparing
+                compareList
             })
         } else if (index > -1 && isRemove) {
-            comparing.splice(index, 1)
+            compareList.splice(index, 1)
             this.setState({
-                comparing: comparing
+                compareList
             })
         }
 
-        console.log('comparing', comparing)
+        // console.log('compareList', compareList)
     }
 
-    renderCollection(collection, index) {
-        if (typeof index !== 'undefined')
-            index = index + '-'
-        else
-            index = ''
-        return collection.list.map((type, index2) => (
-            <div key={index + index2}>
-                {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
-                {!type.type && (<Title />)}
-                {type.class && (<SubTitle class={type.class} />)}
-                <List
-                    ships={type.ships}
-                    showHidden={!type.type}
-                    isModeCompare={this.state.isModeCompare}
-                    onCompareSelect={this.onCompareSelect.bind(this)}
-                    comparing={this.state.comparing}
-                />
-            </div>
-        ))
-    }
-
-    renderFilteredResult() {
-        if (typeof this.state.filteredResult === 'undefined') return null
-        return (
-            <div className="results">
-                <p className="results-text">{this.state.filteredResultText}</p>
-                {<List
-                    ships={this.state.filteredResult}
-                    isModeCompare={this.state.isModeCompare}
-                    onCompareSelect={this.onCompareSelect.bind(this)}
-                    comparing={this.state.comparing}
-                />}
-            </div>
-        )
+    onResetCompareSelect() {
+        this.setState({
+            compareList: null
+        })
     }
 
     getExtraButtons() {
@@ -202,6 +180,57 @@ export default class ShipList extends React.Component {
         })
     }
 
+    renderCollection(collection, index) {
+        if (typeof index !== 'undefined')
+            index = index + '-'
+        else
+            index = ''
+        return collection.list.map((type, index2) => (
+            <div key={index + index2}>
+                {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
+                {!type.type && (<Title />)}
+                {type.class && (<SubTitle class={type.class} />)}
+                <List
+                    ships={type.ships}
+                    showHidden={!type.type}
+
+                    isModeCompare={this.state.isModeCompare}
+                    onCompareSelect={this.onCompareSelect.bind(this)}
+                    compareList={this.state.compareList}
+                />
+            </div>
+        ))
+    }
+
+    renderFilteredResult() {
+        if (typeof this.state.filteredResult === 'undefined') return null
+        return (
+            <div className="results">
+                <p className="results-text">{this.state.filteredResultText}</p>
+                {<List
+                    ships={this.state.filteredResult}
+                    isModeCompare={this.state.isModeCompare}
+
+                    onCompareSelect={this.onCompareSelect.bind(this)}
+                    compareList={this.state.compareList}
+                />}
+            </div>
+        )
+    }
+
+    renderBody() {
+        if (this.state.isModeCompare && this.state.compareState === 'comparing') {
+            return 'COMPARING'
+        } else {
+            if (__CLIENT__ && this.state.collection > -1)
+                return this.renderCollection(db.shipCollections[this.state.collection], 'c-' + this.state.collection)
+            else if (__CLIENT__ && this.state.collection < 0)
+                return this.renderFilteredResult()
+            else if (__SERVER__)
+                return db.shipCollections.map(this.renderCollection.bind(this))
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevState.collection !== this.state.collection)
             window.scrollTo(undefined, 0)
@@ -209,14 +238,25 @@ export default class ShipList extends React.Component {
 
     render() {
         return (
-            <div className={this.props.className}>
+            <div className={
+                this.props.className
+                + (this.state.isModeCompare ? ` is-compare is-compare-${this.state.compareState}` : '')
+            }>
                 {__CLIENT__ && <Header
+                    collection={this.state.collection}
                     onCollectionChange={this.onCollectionChange.bind(this)}
+
+                    isModeFilter={this.state.isModeFilter}
                     onFilterInput={this.onFilterInput.bind(this)}
                     onEnterFilter={this.onEnterFilter.bind(this)}
                     onLeaveFilter={this.onLeaveFilter.bind(this)}
-                    collection={this.state.collection}
-                    isModeFilter={this.state.isModeFilter}
+
+                    isModeCompare={this.state.isModeCompare}
+                    compareList={this.state.compareList}
+                    compareState={this.state.compareState}
+                    onUpdateCompareState={this.onUpdateCompareState.bind(this)}
+                    onResetCompareSelect={this.onResetCompareSelect.bind(this)}
+
                     extraButtons={this.getExtraButtons()}
                 />}
 
@@ -227,11 +267,7 @@ export default class ShipList extends React.Component {
                     transitionLeave={false}
                     transitionEnterTimeout={200}
                 >
-
-                    {__CLIENT__ && this.state.collection > -1 && this.renderCollection(db.shipCollections[this.state.collection], 'c-' + this.state.collection)}
-                    {__CLIENT__ && this.state.collection < 0 && this.renderFilteredResult()}
-                    {__SERVER__ && db.shipCollections.map(this.renderCollection.bind(this))}
-
+                    {this.renderBody()}
                 </CSSTransitionGroup>
 
             </div>
