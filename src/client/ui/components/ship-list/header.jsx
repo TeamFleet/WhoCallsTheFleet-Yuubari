@@ -47,7 +47,9 @@ export default class ShipListHeader extends React.Component {
 
     render() {
         return (
-            <MainHeader className={this.props.className}>
+            <MainHeader className={
+                this.props.className
+            }>
                 <div className="wrapper" ref={el => this._wrapper = el}>
                     <div className="body">
                         <Filter

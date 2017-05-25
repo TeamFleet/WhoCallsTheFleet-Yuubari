@@ -28,7 +28,6 @@ export default class LinkShip extends React.Component {
         if (typeof this.props.ship === 'number')
             this.props.ship = db.ships[this.props.ship]
 
-        console.log(this.props.className)
         return (
             <Link
                 className={this.props.className}
