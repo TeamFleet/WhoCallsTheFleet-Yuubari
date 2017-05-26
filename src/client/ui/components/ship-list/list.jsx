@@ -97,7 +97,7 @@ class Link extends React.Component {
                 ship={this.props.ship}
                 onClick={(evt) => this.onClick(evt, isSelected)}
             >
-                {this.props.isModeCompare && 'COMPARE'}
+                {this.props.isModeCompare && 'C'}
             </LinkShip>
         )
     }

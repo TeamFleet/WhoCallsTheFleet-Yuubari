@@ -16,15 +16,13 @@ import style from './body.less'
 
 const filterMax = 100
 
-@connect()
+@connect((state, ownProps) => state.shipList[ownProps.id])
 @ImportStyle(style)
 export default class ShipList extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            collection: this.props.collection || 0,
-
             isModeFilter: false,
             filteredResult: undefined,
             filteredResultText: undefined,
@@ -37,28 +35,28 @@ export default class ShipList extends React.Component {
         // this.lastCollection
     }
 
-    onCollectionChange(evt, to) {
-        if (typeof to === 'undefined') to = parseInt(evt.target.value)
-        this.setState({
-            collection: to
-        })
-        if (typeof this.props.onCollectionChange === 'function')
-            this.props.onCollectionChange(evt, to)
-    }
+    // onCollectionChange(evt, to) {
+    //     if (typeof to === 'undefined') to = parseInt(evt.target.value)
+    //     this.setState({
+    //         collection: to
+    //     })
+    //     if (typeof this.props.onCollectionChange === 'function')
+    //         this.props.onCollectionChange(evt, to)
+    // }
 
     onFilterInput(evt) {
         const value = typeof evt === 'string' ? evt : evt.target.value
         let result = shipListFilter(value)
 
         if (result.length > filterMax) {
-            if (this.state.collection > 0) this.lastCollection = this.state.collection
+            if (this.props.collection > 0) this.lastCollection = this.props.collection
             this.setState({
                 collection: -1,
                 filteredResult: result.slice(0, filterMax),
                 filteredResultText: translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterMax })
             })
         } else if (result.length > 0) {
-            if (this.state.collection > 0) this.lastCollection = this.state.collection
+            if (this.props.collection > 0) this.lastCollection = this.props.collection
             this.setState({
                 collection: -1,
                 filteredResult: result,
@@ -71,7 +69,7 @@ export default class ShipList extends React.Component {
                 filteredResultText: undefined
             })
         } else if (!this.state.filteredResult || !this.state.filteredResult.length) {
-            if (this.state.collection > 0) this.lastCollection = this.state.collection
+            if (this.props.collection > 0) this.lastCollection = this.props.collection
             this.setState({
                 collection: -1,
                 filteredResult: result,
@@ -191,6 +189,7 @@ export default class ShipList extends React.Component {
                 {!type.type && (<Title />)}
                 {type.class && (<SubTitle class={type.class} />)}
                 <List
+                    id={this.props.id}
                     ships={type.ships}
                     showHidden={!type.type}
 
@@ -208,6 +207,7 @@ export default class ShipList extends React.Component {
             <div className="results">
                 <p className="results-text">{this.state.filteredResultText}</p>
                 {<List
+                    id={this.props.id}
                     ships={this.state.filteredResult}
                     isModeCompare={this.state.isModeCompare}
 
@@ -222,9 +222,9 @@ export default class ShipList extends React.Component {
         if (this.state.isModeCompare && this.state.compareState === 'comparing') {
             return 'COMPARING'
         } else {
-            if (__CLIENT__ && this.state.collection > -1)
-                return this.renderCollection(db.shipCollections[this.state.collection], 'c-' + this.state.collection)
-            else if (__CLIENT__ && this.state.collection < 0)
+            if (__CLIENT__ && this.props.collection > -1)
+                return this.renderCollection(db.shipCollections[this.props.collection], 'c-' + this.props.collection)
+            else if (__CLIENT__ && this.props.collection < 0)
                 return this.renderFilteredResult()
             else if (__SERVER__)
                 return db.shipCollections.map(this.renderCollection.bind(this))
@@ -243,8 +243,7 @@ export default class ShipList extends React.Component {
                 + (this.state.isModeCompare ? ` is-compare is-compare-${this.state.compareState}` : '')
             }>
                 {__CLIENT__ && <Header
-                    collection={this.state.collection}
-                    onCollectionChange={this.onCollectionChange.bind(this)}
+                    id={this.props.id}
 
                     isModeFilter={this.state.isModeFilter}
                     onFilterInput={this.onFilterInput.bind(this)}

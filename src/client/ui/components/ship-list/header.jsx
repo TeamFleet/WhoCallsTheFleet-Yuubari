@@ -1,8 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
 import db, { locale as dbLocaleId } from 'Logic/database'
 import bindEvent from 'bind-event'
+import { changeCollection } from 'Logic/ship-list/api.js'
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Icon from 'UI/components/icon.jsx'
@@ -53,18 +55,20 @@ export default class ShipListHeader extends React.Component {
                 <div className="wrapper" ref={el => this._wrapper = el}>
                     <div className="body">
                         <Filter
+                            id={this.props.id}
                             onFilterInput={this.props.onFilterInput}
                             onEnterFilter={this.props.onEnterFilter}
                             onLeaveFilter={this.props.onLeaveFilter}
                         />
                         <Tabs
+                            id={this.props.id}
                             collection={this.props.collection}
-                            onCollectionChange={this.props.onCollectionChange}
                         />
                         {this.props.extraButtons && <ExtraButtons>{this.props.extraButtons}</ExtraButtons>}
                     </div>
                     {typeof this.props.isModeCompare !== 'undefined' &&
                         <Compare
+                            id={this.props.id}
                             isModeCompare={this.props.isModeCompare}
                             compareList={this.props.compareList}
                             compareState={this.props.compareState}
@@ -79,10 +83,20 @@ export default class ShipListHeader extends React.Component {
 }
 
 import styleHeaderTabs from './header-tabs.less'
+@connect((state, ownProps) => ({
+    collection: state.shipList[ownProps.id].collection
+}))
 @ImportStyle(styleHeaderTabs)
 class Tabs extends React.Component {
+    onTabClick(collection) {
+        this.props.dispatch(
+            changeCollection(this.props.id, collection)
+        )
+    }
     onSelectChange(evt) {
-        this.props.onCollectionChange(evt, parseInt(evt.target.value))
+        this.props.dispatch(
+            changeCollection(this.props.id, parseInt(evt.target.value))
+        )
     }
     render() {
         return (
@@ -101,36 +115,33 @@ class Tabs extends React.Component {
                     {this.props.collection > -1 && db.shipCollections[this.props.collection].name[dbLocaleId]}
                 </label>
                 {db.shipCollections.map((collection, index) => (
-                    <TabItem
+                    <span
                         key={index}
-                        className={this.props.collection === index ? ' on' : ''}
-                        collection={index}
-                        onCollectionChange={this.props.onCollectionChange}
+                        className={'link item' + (this.props.collection === index ? ' on' : '')}
+                        onClick={() => {
+                            this.onTabClick(index)
+                        }}
                     >
                         {collection.name[dbLocaleId]}
-                    </TabItem>
+                    </span>
                 ))}
             </div>
         )
     }
 }
 
-class TabItem extends React.Component {
-    onClick(evt) {
-        this.props.onCollectionChange(evt, this.props.collection)
-    }
-
-    render() {
-        return (
-            <span
-                onClick={this.onClick.bind(this)}
-                className={'link item' + this.props.className}
-            >
-                {this.props.children}
-            </span>
-        )
-    }
-}
+// class TabItem extends React.Component {
+//     render() {
+//         return (
+//             <span
+//                 onClick={this.props.onClick}
+//                 className={'link item' + this.props.className}
+//             >
+//                 {this.props.children}
+//             </span>
+//         )
+//     }
+// }
 
 import styleHeaderFilter from './header-filter.less'
 @ImportStyle(styleHeaderFilter)
@@ -201,7 +212,7 @@ class Compare extends React.Component {
                 <div className="header">
                     {this.props.compareState === 'selecting' && <div className="selecting">
                         <div className="wrapper">
-                            {translate("ship_list.compare.selected", {count: this.props.compareList.length})}
+                            {translate("ship_list.compare.selected", { count: this.props.compareList.length })}
                         </div>
                     </div>}
                 </div>

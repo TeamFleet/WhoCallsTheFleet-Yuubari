@@ -3,11 +3,13 @@
 .component{
     display:    inline-block;
     position:   relative;
-    overflow:   hidden;
+    // overflow:   hidden;
+
+    padding-left:   90px;
 
     vertical-align:	middle;
 
-	&:after{
+	&:before{
 		content:		"";
 		display:		inline-block;
 		vertical-align:	middle;
@@ -16,14 +18,29 @@
 		overflow:		hidden;
 	}
 
+    &:after{
+        content:    "";
+        position:   absolute;
+        z-index:    -2;
+        top:        0;
+        bottom:     0;
+        left:       10px;
+        right:      0;
+        border-radius: 0 3px 3px 0;
+    }
+
     .avatar{
         display:    block;
         position:   absolute;
-        z-index:    1;
+        z-index:    -1;
 
         top:        0;
-        left:       -10px;
+        // left:       -10px;
+        left:       -55px;
         height:     100%;
+        width:      auto;
+
+        pointer-events: none;
     }
 
     .name{
@@ -40,4 +57,10 @@
             margin-top: .2em;
             transition: inherit;
         }
+    
+    &:hover{
+        &:after{
+            background: fade(#000, 15%);
+        }
+    }
 }
