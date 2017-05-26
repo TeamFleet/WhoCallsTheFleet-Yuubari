@@ -3,6 +3,7 @@
 .component{
     display:    inline-block;
     position:   relative;
+    color:      #fff;
     // overflow:   hidden;
 
     padding-left:   92px;
@@ -26,7 +27,7 @@
         bottom:     0;
         left:       10px;
         right:      0;
-        border-radius: 0 3px 3px 0;
+        border-radius: 0 5px 5px 0;
     }
 
     .avatar{
@@ -50,17 +51,32 @@
         line-height:1.1em;
         vertical-align:	middle;
         transition: none;
+        // font-weight:700;
     }
         .name-suffix{
             display:    block;
             line-height:1.1em;
             margin-top: .2em;
-            transition: inherit;
+            margin-left:4px;
+            // transition: inherit;
+            font-weight:400;
+            color:      @color-base;
+            font-size:  12px;
         }
     
     &:hover{
         &:after{
             background: fade(#000, 15%);
+        }
+        .name-suffix{
+            color:      inherit;
+        }
+    }
+    
+    &:active{
+        .name-suffix{
+            color:      inherit;
+            transition: inherit;
         }
     }
 }

@@ -52,7 +52,7 @@
 
     .main-transition-enter {
         opacity:    0.01;
-        transform:  translateX(-2rem);
+        // transform:  translateX(-2rem);
 
         &.main-transition-enter-active {
             animation-name: main-transition-enter;
@@ -68,7 +68,7 @@
         top:        0;
         width:      100%;
         opacity:    1;
-        transform:  none;
+        // transform:  none;
         margin-bottom:  @main-margin;
 
         &.main-transition-leave-active {
@@ -84,21 +84,21 @@
 @keyframes main-transition-enter {
     0% {
         opacity:    0.01;
-        transform:  translateX(-2rem);
+        // transform:  translateX(-2rem);
     }
     100% {
         opacity:    1;
-        transform:  none;
+        // transform:  none;
     }
 }
 
 @keyframes main-transition-leave {
     0% {
         opacity:    1;
-        transform:  none;
+        // transform:  none;
     }
     100% {
         opacity:    0.01;
-        transform:  translateX(2rem);
+        // transform:  translateX(2rem);
     }
 }
