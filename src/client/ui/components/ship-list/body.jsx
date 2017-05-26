@@ -24,79 +24,12 @@ export default class ShipList extends React.Component {
         super(props)
 
         this.state = {
-            isModeFilter: false,
-            filteredResult: undefined,
-            filteredResultText: undefined,
-
             isModeCompare: false,
             compareState: 'selecting', // selecting || comparing
             compareList: __SERVER__ ? null : []
         }
 
         // this.lastCollection
-    }
-
-    // onCollectionChange(evt, to) {
-    //     if (typeof to === 'undefined') to = parseInt(evt.target.value)
-    //     this.setState({
-    //         collection: to
-    //     })
-    //     if (typeof this.props.onCollectionChange === 'function')
-    //         this.props.onCollectionChange(evt, to)
-    // }
-
-    onFilterInput(evt) {
-        const value = typeof evt === 'string' ? evt : evt.target.value
-        let result = shipListFilter(value)
-
-        if (result.length > filterMax) {
-            if (this.props.collection > 0) this.lastCollection = this.props.collection
-            this.setState({
-                collection: -1,
-                filteredResult: result.slice(0, filterMax),
-                filteredResultText: translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterMax })
-            })
-        } else if (result.length > 0) {
-            if (this.props.collection > 0) this.lastCollection = this.props.collection
-            this.setState({
-                collection: -1,
-                filteredResult: result,
-                filteredResultText: translate('ship_list.filter.results_count', { count: result.length })
-            })
-        } else if (value === "") {
-            this.setState({
-                collection: this.lastCollection || 0,
-                filteredResult: undefined,
-                filteredResultText: undefined
-            })
-        } else if (!this.state.filteredResult || !this.state.filteredResult.length) {
-            if (this.props.collection > 0) this.lastCollection = this.props.collection
-            this.setState({
-                collection: -1,
-                filteredResult: result,
-                filteredResultText: translate('ship_list.filter.no_result')
-            })
-        } else {
-            this.setState({
-                filteredResultText: translate('ship_list.filter.no_result_show_previous')
-            })
-        }
-    }
-
-    onEnterFilter() {
-        if (!this.state.isModeFilter)
-            this.setState({
-                isModeFilter: true
-            })
-        // console.log('entering filter mode')
-    }
-
-    onLeaveFilter() {
-        if (this.state.isModeFilter)
-            this.setState({
-                isModeFilter: false
-            })
-        // console.log('leaving filter mode')
     }
 
     onEnterCompare() {
@@ -203,15 +136,31 @@ export default class ShipList extends React.Component {
     }
 
     renderFilteredResult() {
-        if (typeof this.state.filteredResult === 'undefined') return null
+        console.log('filterInput', this.props.filterInput)
+        let result = shipListFilter(this.props.filterInput)
+        let filteredResultText
+
+        if (result.length > filterMax) {
+            this.filteredResult = result.slice(0, filterMax)
+            filteredResultText = translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterMax })
+        } else if (result.length > 0) {
+            this.filteredResult = result
+            filteredResultText = translate('ship_list.filter.results_count', { count: result.length })
+        } else if (!this.filteredResult || !this.filteredResult.length) {
+            this.filteredResult = result
+            filteredResultText = translate('ship_list.filter.no_result')
+        } else {
+            filteredResultText = translate('ship_list.filter.no_result_show_previous')
+        }
+
         return (
             <div className="results">
-                <p className="results-text">{this.state.filteredResultText}</p>
+                <p className="results-text">{filteredResultText}</p>
                 {<List
                     id={this.props.id}
-                    ships={this.state.filteredResult}
-                    isModeCompare={this.state.isModeCompare}
+                    ships={this.filteredResult}
 
+                    isModeCompare={this.state.isModeCompare}
                     onCompareSelect={this.onCompareSelect.bind(this)}
                     compareList={this.state.compareList}
                 />}
@@ -222,13 +171,15 @@ export default class ShipList extends React.Component {
     renderBody() {
         if (this.state.isModeCompare && this.state.compareState === 'comparing') {
             return 'COMPARING'
-        } else {
-            if (__CLIENT__ && this.props.collection > -1)
-                return this.renderCollection(db.shipCollections[this.props.collection], 'c-' + this.props.collection)
-            else if (__CLIENT__ && this.props.collection < 0)
+        } else if (__CLIENT__) {
+            if (this.props.isModeFilter && typeof this.props.filterInput !== 'undefined' && this.props.filterInput !== "")
                 return this.renderFilteredResult()
-            else if (__SERVER__)
-                return db.shipCollections.map(this.renderCollection.bind(this))
+            else{
+                this.filteredResult = undefined
+                return this.renderCollection(db.shipCollections[this.props.collection], 'c-' + this.props.collection)
+            }
+        } else {
+            return db.shipCollections.map(this.renderCollection.bind(this))
         }
     }
 
@@ -250,11 +201,6 @@ export default class ShipList extends React.Component {
             }>
                 {__CLIENT__ && <Header
                     id={this.props.id}
-
-                    isModeFilter={this.state.isModeFilter}
-                    onFilterInput={this.onFilterInput.bind(this)}
-                    onEnterFilter={this.onEnterFilter.bind(this)}
-                    onLeaveFilter={this.onLeaveFilter.bind(this)}
 
                     isModeCompare={this.state.isModeCompare}
                     compareList={this.state.compareList}

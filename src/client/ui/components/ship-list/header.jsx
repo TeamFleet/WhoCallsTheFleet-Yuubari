@@ -4,7 +4,12 @@ import { connect } from 'react-redux'
 import translate from 'sp-i18n'
 import db, { locale as dbLocaleId } from 'Logic/database'
 import bindEvent from 'bind-event'
-import { changeCollection } from 'Logic/ship-list/api.js'
+import {
+    changeCollection,
+    filterEnter,
+    filterLeave,
+    filterInput
+} from 'Logic/ship-list/api.js'
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Icon from 'UI/components/icon.jsx'
@@ -12,15 +17,11 @@ import Icon from 'UI/components/icon.jsx'
 import { ImportStyle } from 'sp-css-import'
 import styleHeader from './header.less'
 
+@connect((state, ownProps) => state.shipList[ownProps.id])
 @ImportStyle(styleHeader)
 export default class ShipListHeader extends React.Component {
     componentWillUpdate(newProps) {
         const mainheader = this._wrapper.offsetParent
-
-        if (newProps.isModeFilter)
-            mainheader.classList.add('is-filtering')
-        else
-            mainheader.classList.remove('is-filtering')
 
         if (newProps.isModeCompare) {
             mainheader.classList.remove('is-compare-leaving')
@@ -51,18 +52,12 @@ export default class ShipListHeader extends React.Component {
         return (
             <MainHeader className={
                 this.props.className
+                + (this.props.isModeFilter ? ' is-filtering' : '')
             }>
                 <div className="wrapper" ref={el => this._wrapper = el}>
                     <div className="body">
-                        <Filter
-                            id={this.props.id}
-                            onFilterInput={this.props.onFilterInput}
-                            onEnterFilter={this.props.onEnterFilter}
-                            onLeaveFilter={this.props.onLeaveFilter}
-                        />
-                        <Tabs
-                            id={this.props.id}
-                        />
+                        <Filter id={this.props.id} />
+                        <Tabs id={this.props.id} />
                         {this.props.extraButtons && <ExtraButtons>{this.props.extraButtons}</ExtraButtons>}
                     </div>
                     {typeof this.props.isModeCompare !== 'undefined' &&
@@ -143,23 +138,30 @@ class Tabs extends React.Component {
 // }
 
 import styleHeaderFilter from './header-filter.less'
+@connect()
 @ImportStyle(styleHeaderFilter)
 class Filter extends React.Component {
     onInput(evt) {
         if (typeof this.debounceInput !== 'undefined') clearTimeout(this.debounceInput)
         let value = evt.target.value
         this.debounceInput = setTimeout(() => {
-            this.props.onFilterInput(value)
+            this.props.dispatch(
+                filterInput(this.props.id, value)
+            )
         }, 100)
     }
 
     onFocus() {
-        this.props.onEnterFilter()
+        this.props.dispatch(
+            filterEnter(this.props.id)
+        )
     }
 
     onBlur(evt) {
         if (evt.target.value === '')
-            this.props.onLeaveFilter()
+            this.props.dispatch(
+                filterLeave(this.props.id)
+            )
     }
 
     onCloseClick(/*evt*/) {
