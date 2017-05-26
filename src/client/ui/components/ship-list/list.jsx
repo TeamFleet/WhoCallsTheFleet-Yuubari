@@ -81,7 +81,7 @@ class Link extends React.Component {
     }
 
     render() {
-        const isSelected = (__CLIENT__ && this.props.compareList.indexOf(this.props.ship) > -1) ? true : false
+        const isSelected = (__CLIENT__ && this.props.isModeCompare && this.props.compareList.indexOf(this.props.ship) > -1) ? true : false
         // const className =
         //     "item"
         //     + (this.props.isModeCompare ? ' is-compare' : '')

@@ -7,6 +7,9 @@
     "title": "是谁呼叫舰队",
     "under_construction": "建设中",
 
+    "cancel": "取消",
+    "ok": "确认",
+
     "shipclass": "${class}级",
 
     "nav": {
@@ -27,6 +30,12 @@
             "results_count_too_many": "已找到 ${count} 条结果。条目过多，仅显示 ${showing} 条...",
             "no_result": "未找到任何结果。请尝试输入其他内容...",
             "no_result_show_previous": "未找到任何结果。显示上次结果..."
+        },
+        "compare": {
+            "button": "属性对比",
+            "selected": "已选择: ${count}",
+            "start": "开始对比",
+            "reset": "重置选择"
         }
     },
 

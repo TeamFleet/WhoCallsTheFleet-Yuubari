@@ -200,7 +200,9 @@ class Compare extends React.Component {
                 </div>
                 <div className="header">
                     {this.props.compareState === 'selecting' && <div className="selecting">
-                        selecting ({this.props.compareList.length})
+                        <div className="wrapper">
+                            {translate("ship_list.compare.selected", {count: this.props.compareList.length})}
+                        </div>
                     </div>}
                 </div>
             </div>

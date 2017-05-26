@@ -7,6 +7,9 @@
     "title": "Who Calls the Fleet",
     "under_construction": "Under Construction",
 
+    "cancel": "Cancel",
+    "ok": "OK",
+
     "shipclass": "${class} Class",
 
     "nav": {
@@ -27,6 +30,12 @@
             "results_count_too_many": "Found ${count} ships. Too many results. Only showing first ${showing} results...",
             "no_result": "No ships found. Please try other inputs...",
             "no_result_show_previous": "No ships found. Showing previous results..."
+        },
+        "compare": {
+            "button": "Compare Stat",
+            "selected": "Selected: ${count}",
+            "start": "Start Compare",
+            "reset": "Reset Selection"
         }
     },
 

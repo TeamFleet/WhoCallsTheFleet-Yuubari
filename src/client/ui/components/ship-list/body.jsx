@@ -171,7 +171,7 @@ export default class ShipList extends React.Component {
                             key={index}
                             onClick={this.toggleCompare.bind(this)}
                         >
-                            COMPARE
+                            {translate("ship_list.compare.button")}
                         </span>
                     )
                 default:
