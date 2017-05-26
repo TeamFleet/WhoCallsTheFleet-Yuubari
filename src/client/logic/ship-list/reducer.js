@@ -9,9 +9,9 @@ import {
 
     SHIPLIST_COMPARE_ENTER,
     SHIPLIST_COMPARE_LEAVE,
+    SHIPLIST_COMPARE_RESET,
     SHIPLIST_COMPARE_CHANGE_STATE,
     SHIPLIST_COMPARE_UPDATE_LIST,
-    SHIPLIST_COMPARE_RESET_LIST,
     SHIPLIST_COMPARE_ADD,
     SHIPLIST_COMPARE_REMOVE
 } from '../../redux/action-types.js'
@@ -23,9 +23,9 @@ const initialStateSingle = {
     isModeFilter: false,
     filterInput: undefined,
 
-    isModeCompare: false,
-    compareState: 'selection', // selecting || comparing
-    compareList: __SERVER__ ? null : []
+    isModeCompare: undefined,
+    compareState: 'selecting', // selecting || comparing
+    compareList: []
 }
 
 const updateState = (fullState, id, state) =>
@@ -73,6 +73,13 @@ export default function (state = initialState, action) {
                 isModeCompare: false
             })
 
+        case SHIPLIST_COMPARE_RESET:
+            return updateState(state, action.id, {
+                isModeCompare: undefined,
+                compareState: 'selecting',
+                compareList: []
+            })
+
         case SHIPLIST_COMPARE_CHANGE_STATE:
             return updateState(state, action.id, {
                 compareState: action.state
@@ -81,11 +88,6 @@ export default function (state = initialState, action) {
         case SHIPLIST_COMPARE_UPDATE_LIST:
             return updateState(state, action.id, {
                 compareList: action.list
-            })
-
-        case SHIPLIST_COMPARE_RESET_LIST:
-            return updateState(state, action.id, {
-                compareList: __SERVER__ ? null : []
             })
 
         case SHIPLIST_COMPARE_ADD: {
@@ -102,8 +104,10 @@ export default function (state = initialState, action) {
             const list = state[action.id].compareList
             const index = list.indexOf(action.item)
             if (index > -1) {
+                let newList = [...list]
+                newList.splice(index, 1)
                 return updateState(state, action.id, {
-                    compareList: [...list].splice(index, 1)
+                    compareList: newList
                 })
             }
         }

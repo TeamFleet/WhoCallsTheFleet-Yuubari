@@ -7,7 +7,10 @@ import db from 'Logic/database'
 import shipListFilter from 'Logic/database/list-ships-filter.js'
 import {
     init as shipListInit,
-    filterLeave
+    filterLeave,
+    compareEnter,
+    compareLeave,
+    compareReset
 } from 'Logic/ship-list/api.js'
 
 import Title from './title.jsx'
@@ -26,70 +29,10 @@ const filterMax = 100
 }))
 @ImportStyle(style)
 export default class ShipList extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            isModeCompare: false,
-            compareState: 'selecting', // selecting || comparing
-            compareList: __SERVER__ ? null : []
-        }
-
-        // this.lastCollection
-    }
-
-    onEnterCompare() {
-        if (!this.state.isModeCompare)
-            this.setState({
-                isModeCompare: true
-            })
-        // console.log('entering compare mode')
-    }
-
-    onLeaveCompare() {
-        if (this.state.isModeCompare)
-            this.setState({
-                isModeCompare: false
-            })
-        // console.log('leaving compare mode')
-    }
-
     toggleCompare() {
-        if (this.state.isModeCompare)
-            return this.onLeaveCompare()
-        return this.onEnterCompare()
-    }
-
-    onUpdateCompareState(evt, newState) {
-        if (typeof evt === 'string') return this.onUpdateCompareState(undefined, evt)
-        this.setState({
-            compareState: newState
-        })
-    }
-
-    onCompareSelect(evt, ship, isRemove) {
-        let compareList = [...this.state.compareList]
-        const index = compareList.indexOf(ship)
-
-        if (index < 0 && !isRemove) {
-            compareList.push(ship)
-            this.setState({
-                compareList
-            })
-        } else if (index > -1 && isRemove) {
-            compareList.splice(index, 1)
-            this.setState({
-                compareList
-            })
-        }
-
-        // console.log('compareList', compareList)
-    }
-
-    onResetCompareSelect() {
-        this.setState({
-            compareList: []
-        })
+        if (this.props.isModeCompare)
+            return this.props.dispatch(compareLeave(this.props.id))
+        return this.props.dispatch(compareEnter(this.props.id))
     }
 
     getExtraButtons() {
@@ -105,7 +48,7 @@ export default class ShipList extends React.Component {
                 case 'compare':
                     return (
                         <span
-                            className={"link item" + (this.state.isModeCompare ? ' on' : '')}
+                            className={"link item" + (this.props.isModeCompare ? ' on' : '')}
                             key={index}
                             onClick={this.toggleCompare.bind(this)}
                         >
@@ -132,10 +75,6 @@ export default class ShipList extends React.Component {
                     id={this.props.id}
                     ships={type.ships}
                     showHidden={!type.type}
-
-                    isModeCompare={this.state.isModeCompare}
-                    onCompareSelect={this.onCompareSelect.bind(this)}
-                    compareList={this.state.compareList}
                 />
             </div>
         ))
@@ -164,17 +103,13 @@ export default class ShipList extends React.Component {
                 {<List
                     id={this.props.id}
                     ships={this.filteredResult}
-
-                    isModeCompare={this.state.isModeCompare}
-                    onCompareSelect={this.onCompareSelect.bind(this)}
-                    compareList={this.state.compareList}
                 />}
             </div>
         )
     }
 
     renderBody() {
-        if (this.state.isModeCompare && this.state.compareState === 'comparing') {
+        if (this.props.isModeCompare && this.props.compareState === 'comparing') {
             return 'COMPARING'
         } else if (__CLIENT__) {
             if (this.props.isModeFilter && typeof this.props.filterInput !== 'undefined' && this.props.filterInput !== "")
@@ -202,6 +137,14 @@ export default class ShipList extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        if (!__CLIENT__) return
+        if (typeof this.props.isModeCompare !== 'undefined' || this.props.compareList.length)
+            this.props.dispatch(
+                compareReset(this.props.id)
+            )
+    }
+
     render() {
         if (typeof this.props.collection === 'undefined') {
             this.props.dispatch(
@@ -213,17 +156,10 @@ export default class ShipList extends React.Component {
         return (
             <div className={
                 this.props.className
-                + (this.state.isModeCompare ? ` is-compare is-compare-${this.state.compareState}` : '')
+                + (this.props.isModeCompare ? ` is-compare is-compare-${this.props.compareState}` : '')
             }>
                 {__CLIENT__ && <Header
                     id={this.props.id}
-
-                    isModeCompare={this.state.isModeCompare}
-                    compareList={this.state.compareList}
-                    compareState={this.state.compareState}
-                    onUpdateCompareState={this.onUpdateCompareState.bind(this)}
-                    onResetCompareSelect={this.onResetCompareSelect.bind(this)}
-
                     extraButtons={this.getExtraButtons()}
                 />}
 

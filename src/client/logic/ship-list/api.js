@@ -42,6 +42,12 @@ export const compareLeave = (id) => (dispatch) => {
     )
 }
 
+export const compareReset = (id) => (dispatch) => {
+    dispatch(
+        actions.compareReset(id)
+    )
+}
+
 export const compareChangeState = (id, state) => (dispatch) => {
     dispatch(
         actions.compareChangeState(id, state)
@@ -51,12 +57,6 @@ export const compareChangeState = (id, state) => (dispatch) => {
 export const compareUpdateList = (id, list) => (dispatch) => {
     dispatch(
         actions.compareUpdateList(id, list)
-    )
-}
-
-export const compareResetList = (id) => (dispatch) => {
-    dispatch(
-        actions.compareResetList(id)
     )
 }
 

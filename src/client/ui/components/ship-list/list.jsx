@@ -1,6 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import pref from 'Logic/preferences'
+import {
+    compareAdd,
+    compareRemove
+} from 'Logic/ship-list/api.js'
 
 import LinkShip from 'UI/components/link-ship.jsx'
 
@@ -28,12 +33,11 @@ export default class ShipListList extends React.Component {
     renderItem(ship, index) {
         return (
             <Link
+                shipListId={this.props.id}
                 ship={ship}
                 key={index}
 
-                isModeCompare={this.props.isModeCompare}
                 onCompareSelect={this.props.onCompareSelect}
-                compareList={this.props.compareList}
             />
         )
     }
@@ -60,12 +64,19 @@ export default class ShipListList extends React.Component {
     }
 }
 
+@connect((state, ownProps) => ({
+    isModeCompare: state.shipList[ownProps.shipListId].isModeCompare,
+    compareList: state.shipList[ownProps.shipListId].compareList
+}))
 class Link extends React.Component {
     onClick(evt, isSelected) {
         if (this.props.isModeCompare) {
             evt.preventDefault()
-            if (typeof this.props.onCompareSelect !== 'undefined')
-                this.props.onCompareSelect(evt, this.props.ship, isSelected)
+            if (isSelected) {
+                this.props.dispatch(compareRemove(this.props.shipListId, this.props.ship))
+            } else {
+                this.props.dispatch(compareAdd(this.props.shipListId, this.props.ship))
+            }
         }
     }
 

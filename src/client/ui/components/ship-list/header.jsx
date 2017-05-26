@@ -63,9 +63,6 @@ export default class ShipListHeader extends React.Component {
                     {typeof this.props.isModeCompare !== 'undefined' &&
                         <Compare
                             id={this.props.id}
-                            isModeCompare={this.props.isModeCompare}
-                            compareList={this.props.compareList}
-                            compareState={this.props.compareState}
                             onUpdateCompareState={this.props.onUpdateCompareState}
                             onResetCompareSelect={this.props.onResetCompareSelect}
                         />
@@ -208,6 +205,11 @@ class ExtraButtons extends React.Component {
 }
 
 import styleHeaderCompare from './header-compare.less'
+@connect((state, ownProps) => ({
+    isModeCompare: state.shipList[ownProps.id].isModeCompare,
+    compareState: state.shipList[ownProps.id].compareState,
+    compareList: state.shipList[ownProps.id].compareList
+}))
 @ImportStyle(styleHeaderCompare)
 class Compare extends React.Component {
     render() {
