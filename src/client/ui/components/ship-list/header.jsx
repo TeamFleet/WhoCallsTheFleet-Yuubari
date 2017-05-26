@@ -62,7 +62,6 @@ export default class ShipListHeader extends React.Component {
                         />
                         <Tabs
                             id={this.props.id}
-                            collection={this.props.collection}
                         />
                         {this.props.extraButtons && <ExtraButtons>{this.props.extraButtons}</ExtraButtons>}
                     </div>
