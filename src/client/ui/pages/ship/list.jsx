@@ -22,6 +22,7 @@ export default class extends React.Component {
             dispatch(shipListInit(shipListId))
         ]
     }
+
     static htmlExtends(ext, store) {
         const head = htmlHead({
             store,

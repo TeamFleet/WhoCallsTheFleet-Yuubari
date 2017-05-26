@@ -5,6 +5,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import translate from 'sp-i18n'
 import db from 'Logic/database'
 import shipListFilter from 'Logic/database/list-ships-filter.js'
+import { init as shipListInit } from 'Logic/ship-list/api.js'
 
 import Title from './title.jsx'
 import SubTitle from './title-sub.jsx'
@@ -16,7 +17,7 @@ import style from './body.less'
 
 const filterMax = 100
 
-@connect((state, ownProps) => state.shipList[ownProps.id])
+@connect((state, ownProps) => state.shipList[ownProps.id] || {})
 @ImportStyle(style)
 export default class ShipList extends React.Component {
     constructor(props) {
@@ -231,12 +232,17 @@ export default class ShipList extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.collection !== this.state.collection)
+    componentDidUpdate(prevProps/*, prevState*/) {
+        if (prevProps.collection !== this.props.collection)
             window.scrollTo(undefined, 0)
     }
 
     render() {
+        if (typeof this.props.collection === 'undefined') {
+            this.props.dispatch(shipListInit(this.props.id))
+            return null
+        }
+
         return (
             <div className={
                 this.props.className
