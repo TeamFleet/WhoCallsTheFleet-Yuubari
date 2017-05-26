@@ -5,7 +5,10 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import translate from 'sp-i18n'
 import db from 'Logic/database'
 import shipListFilter from 'Logic/database/list-ships-filter.js'
-import { init as shipListInit } from 'Logic/ship-list/api.js'
+import {
+    init as shipListInit,
+    filterLeave
+} from 'Logic/ship-list/api.js'
 
 import Title from './title.jsx'
 import SubTitle from './title-sub.jsx'
@@ -17,7 +20,10 @@ import style from './body.less'
 
 const filterMax = 100
 
-@connect((state, ownProps) => state.shipList[ownProps.id] || {})
+@connect((state, ownProps) => ({
+    ...state.shipList[ownProps.id],
+    location: state.location
+}))
 @ImportStyle(style)
 export default class ShipList extends React.Component {
     constructor(props) {
@@ -136,7 +142,6 @@ export default class ShipList extends React.Component {
     }
 
     renderFilteredResult() {
-        console.log('filterInput', this.props.filterInput)
         let result = shipListFilter(this.props.filterInput)
         let filteredResultText
 
@@ -174,7 +179,7 @@ export default class ShipList extends React.Component {
         } else if (__CLIENT__) {
             if (this.props.isModeFilter && typeof this.props.filterInput !== 'undefined' && this.props.filterInput !== "")
                 return this.renderFilteredResult()
-            else{
+            else {
                 this.filteredResult = undefined
                 return this.renderCollection(db.shipCollections[this.props.collection], 'c-' + this.props.collection)
             }
@@ -188,9 +193,20 @@ export default class ShipList extends React.Component {
             window.scrollTo(undefined, 0)
     }
 
+    componentWillMount() {
+        if (this.props.location && this.props.location.action === 'PUSH') {
+            if (this.props.isModeFilter || typeof this.props.filterInput !== 'undefined')
+                this.props.dispatch(
+                    filterLeave(this.props.id)
+                )
+        }
+    }
+
     render() {
         if (typeof this.props.collection === 'undefined') {
-            this.props.dispatch(shipListInit(this.props.id))
+            this.props.dispatch(
+                shipListInit(this.props.id)
+            )
             return null
         }
 

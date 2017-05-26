@@ -138,7 +138,9 @@ class Tabs extends React.Component {
 // }
 
 import styleHeaderFilter from './header-filter.less'
-@connect()
+@connect((state, ownProps) => ({
+    filterInput: state.shipList[ownProps.id].filterInput
+}))
 @ImportStyle(styleHeaderFilter)
 class Filter extends React.Component {
     onInput(evt) {
@@ -172,6 +174,8 @@ class Filter extends React.Component {
     }
 
     render() {
+        if (typeof this.defaultInput === 'undefined')
+            this.defaultInput = this.props.filterInput
         return (
             <div className={this.props.className}>
                 <Icon className="icon-search" icon="search" />
@@ -183,6 +187,7 @@ class Filter extends React.Component {
                     onInput={this.onInput.bind(this)}
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
+                    defaultValue={this.defaultInput}
                     ref={(c) => this.el = c}
                 />
             </div>

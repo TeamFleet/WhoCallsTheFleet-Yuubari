@@ -54,7 +54,8 @@ export default function (state = initialState, action) {
 
         case SHIPLIST_FILTER_LEAVE:
             return updateState(state, action.id, {
-                isModeFilter: false
+                isModeFilter: false,
+                filterInput: undefined
             })
 
         case SHIPLIST_FILTER_INPUT:

@@ -15,10 +15,13 @@ import Bgimg from './layout/bgimg.jsx'
 
 let startSwipeAtLeftBorder = false
 
-@connect(state => ({
-    isMainBgimgLoaded: state.bgimg.isMainLoaded,
-    appMode: state.appMode
-}))
+@connect(state => {
+    // console.log(state)
+    return {
+        isMainBgimgLoaded: state.bgimg.isMainLoaded,
+        appMode: state.appMode
+    }
+})
 @ImportStyle(style)
 export default class extends React.Component {
     /*
