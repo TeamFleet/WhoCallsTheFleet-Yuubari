@@ -37,14 +37,22 @@
     .screen-phone({
         top:    0;
         bottom: 0;
-        width:  50%;
+        width:  58%;
         transition-property:none;
+        left:   (0 - @main-margin-phone);
+        .icon-search{
+            margin-left:18px;
+        }
         .input{
+            // padding-left:60px;
+            padding-left:40px;
             height:     100%;
             height:     (@height-phone - 2);
+            line-height:@height-phone;
             border:     0;
             background: transparent;
             border-radius:  0;
+            vertical-align: top;
             &:focus{
                 box-shadow: none;
             }
@@ -56,7 +64,9 @@
     width:      @width-filter-focus;
     z-index:    10;
     .screen-phone({
-        width:  100%;
+        // width:  100%;
+        width:  auto;
+        right:  (0 - @main-margin-phone);
         .close{
             @size:      40px;
             display:    block;

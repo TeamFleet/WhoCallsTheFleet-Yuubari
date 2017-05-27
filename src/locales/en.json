@@ -32,7 +32,7 @@
             "no_result_show_previous": "No ships found. Showing previous results..."
         },
         "compare": {
-            "button": "Compare Stat",
+            "button": "Compare",
             "selected": "Selected: ${count}",
             "start": "Start Compare",
             "reset": "Reset Selection"

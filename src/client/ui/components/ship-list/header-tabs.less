@@ -6,7 +6,7 @@
         display:    none;
         position:   relative;
         overflow:   hidden;
-        padding:    0 0 0 @gutter;
+        padding:    0 8px 0 @gutter;
         .select-select{
             position:   absolute;
             top:        -2rem;
@@ -21,7 +21,7 @@
             display:    block;
         }
         &:after{
-            @size:      6px;
+            @size:      4px;
             position:   absolute;
             content:    "";
             top:        50%;
@@ -29,8 +29,8 @@
             height:     0;
             border:     @size solid transparent;
             border-top-color:   currentcolor;
-            margin-top: (0 - @size / 3 * 2);
-            margin-left:.5em;
+            margin-top: (0 - @size / 2);
+            margin-left:4px;
         }
     }
 
@@ -58,10 +58,16 @@
         }
     }
 
+    .screen-tablet({
+        .item{
+            margin-left:1.5vw;
+        }
+    });
+
     .screen-phone({
         // border-left:    1px solid @color-border;
         height:         (@height-phone - 2);
-        flex:           1 1 50%;
+        flex:           1 1 42%;
         &:before{
             content:    "";
             position:   absolute;
@@ -73,6 +79,7 @@
         }
         .select{
             display:    block;
+            padding-left:   @main-margin-phone;
         }
         .item{
             display:    none;

@@ -43,6 +43,16 @@
             width:      1px;
             background: scrim-gradient(to bottom, fade(@color-border, 0%), @color-border);
         }
+        .item{
+            margin-left:@main-margin-phone;
+            color:      @color-base;
+            &:hover{
+                color:  inherit;
+            }
+            &.on{
+                color:  #fff;
+            }
+        }
     });
 }
 

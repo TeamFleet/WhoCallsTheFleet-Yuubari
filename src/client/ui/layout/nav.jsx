@@ -27,7 +27,8 @@ let navs = [
 if (__DEV__)
     navs = navs.concat([
         undefined,
-        'dev'
+        'dev-ipsum',
+        'dev-components'
     ])
 
 @connect(state => ({

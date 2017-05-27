@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
-import DevHeader from 'UI/components/dev/header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './dev.less'
+import style from './LoremIpsum.less'
 
 @connect()
 @ImportStyle(style)
@@ -14,7 +13,7 @@ export default class extends React.Component {
     static htmlExtends(ext, store) {
         const head = htmlHead({
             store,
-            title: 'DevZone'
+            title: 'Dev (lorem ipsum)'
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -24,8 +23,6 @@ export default class extends React.Component {
     render() {
         return (
             <PageContainer className={this.props.className}>
-                <DevHeader />
-
                 <h1>Qui est in parvis malis.</h1>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Res enim concurrent contrariae. Quodsi ipsam honestatem undique pertectam atque absolutam. <i>Minime vero istorum quidem, inquit.</i> Vitae autem degendae ratio maxime quidem illis placuit quieta. </p>

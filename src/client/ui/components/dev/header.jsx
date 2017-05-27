@@ -11,7 +11,7 @@ export default class extends React.Component {
         return (
             <MainHeader>
                 <div className={this.props.className}>
-                    <h2>THIS IS A MASK!</h2>
+                    <h2>UI/components/main-header</h2>
                 </div>
             </MainHeader>
         )
