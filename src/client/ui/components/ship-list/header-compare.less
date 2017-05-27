@@ -3,34 +3,32 @@
 .component{
     .header{
         display:    none;
+        position:   absolute;
+        .main-sizing-position-reset();
+        .main-sizing-padding();
 
         font-size:  14px;
-        position:   absolute;
         z-index:    1;
         top:        @height;
-        // bottom:     (0 - @height-compare-thead);
-        left:       0;
-        right:      0;
         height:     @height-compare-thead;
         line-height:@height-compare-thead;
-        // transition-property: height;
-        pointer-events: none;
-        // transform:  translateY(-100%);
-
-        // background: fade(@theme-bluegrey-900, 10%);
-        // background: fade(@theme-bluegrey-900, 50%);
-        // border:     1px solid fade(@color-border, 20%);
-        // border-top: 0;
-        // box-shadow: inset 0 0 (@height-compare-thead / 2) fade(@theme-bluegrey-900, 75%);
+        
+        border-bottom:  1px solid @color-border;
 
         .screen-phone({
             top:    @height-phone;
         });
 
-        // .wrapper{
-        //     opacity:    0;
-        //     transform:  translateY(50%);
-        // }
+        &:after{
+            content:    "";
+            background: fade(@theme-bluegrey-900, 35%);
+            position:   absolute;
+            top:        0;
+            bottom:     0;
+            left:       0;
+            right:      0;
+            z-index:    -1;
+        }
     }
 }
 
@@ -38,11 +36,14 @@
     .header{
         display:    block;
         // will-change:height;
-        transform:  translateY(0);
-        pointer-events: all;
-        border-bottom:  1px solid @color-border;
+        transform:  translateY(-1px);
+        // pointer-events: all;
+        // background-color: @color-border;
         animation:  ship-list-header-compare-header-enter @base-transition-duration @base-transition-timing-function;
         // animation-fill-mode: forwards;
+        &:after{
+            animation:  ship-list-header-compare-header-background-enter @base-transition-duration @base-transition-timing-function;
+        }
         .wrapper{
             // opacity:    1;
             // transform:  translateY(0);
@@ -55,7 +56,12 @@
     .header{
         // height:     0;
         // transform:  none;
+        pointer-events: none;
         transform:  translateY(-100%);
+        &:after{
+            opacity:    0;
+            transform:  translateY(100%);
+        }
         .wrapper{
             opacity:    0;
             transform:  translateY(50%);
@@ -68,6 +74,17 @@
         transform:  translateY(-100%);
     }
     100% {
+        transform:  translateY(-1px);
+    }
+}
+
+@keyframes ship-list-header-compare-header-background-enter {
+    0% {
+        opacity:    0;
+        transform:  translateY(100%);
+    }
+    100% {
+        opacity:    1;
         transform:  translateY(0);
     }
 }

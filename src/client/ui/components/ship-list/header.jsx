@@ -20,12 +20,24 @@ import styleHeader from './header.less'
 @connect((state, ownProps) => state.shipList[ownProps.id])
 @ImportStyle(styleHeader)
 export default class ShipListHeader extends React.Component {
+    constructor() {
+        super()
+
+        this.state = {
+            isClassCompare: false
+        }
+    }
+
     componentWillUpdate(newProps) {
         const mainheader = this._wrapper.offsetParent
 
         if (newProps.isModeCompare) {
+            if (!this.state.isClassCompare)
+                this.setState({
+                    isClassCompare: true
+                })
             mainheader.classList.remove('is-compare-leaving')
-            mainheader.classList.add('is-compare')
+            // mainheader.classList.add('is-compare')
             mainheader.setAttribute('data-compare-state', this.props.compareState)
         } else {
             mainheader.classList.add('is-compare-leaving')
@@ -38,9 +50,13 @@ export default class ShipListHeader extends React.Component {
         bindEvent(
             this._wrapper.offsetParent,
             'animationend',
-            function (evt) {
+            (evt) => {
                 if (evt.animationName === 'ship-list-header-compare-leave') {
-                    evt.target.classList.remove('is-compare')
+                    if (this.state.isClassCompare)
+                        this.setState({
+                            isClassCompare: false
+                        })
+                    // evt.target.classList.remove('is-compare')
                     evt.target.classList.remove('is-compare-leaving')
                     evt.target.removeAttribute('data-compare-state')
                 }
@@ -53,6 +69,7 @@ export default class ShipListHeader extends React.Component {
             <MainHeader className={
                 this.props.className
                 + (this.props.isModeFilter ? ' is-filtering' : '')
+                + (this.state.isClassCompare ? ' is-compare' : '')
             }>
                 <div className="wrapper" ref={el => this._wrapper = el}>
                     <div className="body">

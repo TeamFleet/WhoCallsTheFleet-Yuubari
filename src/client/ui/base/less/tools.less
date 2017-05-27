@@ -23,6 +23,32 @@
 }
 
 
+.main-sizing-padding(){
+    padding-left:   @main-margin;
+    padding-right:  @main-margin;
+    .screen-tablet({
+        padding-left:   @main-margin-tablet;
+        padding-right:  @main-margin-tablet;
+    });
+    .screen-phone({
+        padding-left:   @main-margin-phone;
+        padding-right:  @main-margin-phone;
+    });
+}
+.main-sizing-position-reset(){
+    left:   (0 - @main-margin);
+    right:  (0 - @main-margin);
+    .screen-tablet({
+        left:   (0 - @main-margin-tablet);
+        right:  (0 - @main-margin-tablet);
+    });
+    .screen-phone({
+        left:   (0 - @main-margin-phone);
+        right:  (0 - @main-margin-phone);
+    });
+}
+
+
 .clearfix(){
     &:extend(.clearfix all);
 }

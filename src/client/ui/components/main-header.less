@@ -9,6 +9,8 @@
     
     transition: inherit;
 
+    box-shadow: 0 10px 20px -10px fade(#000, 20%);
+
     // opacity:    0;
     // animation: 	fadein @duration-main-transition ease-out;
     // animation-fill-mode: both;
@@ -33,15 +35,17 @@
         bottom:     1px;
         height:     1px;
         background: @color-border;
-        left:       @main-margin;
-        right:      @main-margin;
-        .screen-tablet({
-            left:   @main-margin-tablet;
-            right:  @main-margin-tablet;
-        });
-        .screen-phone({
-            left:   @main-margin-phone;
-            right:  @main-margin-phone;
-        });
+        left:       0;
+        right:      0;
+        // left:       @main-margin;
+        // right:      @main-margin;
+        // .screen-tablet({
+        //     left:   @main-margin-tablet;
+        //     right:  @main-margin-tablet;
+        // });
+        // .screen-phone({
+        //     left:   @main-margin-phone;
+        //     right:  @main-margin-phone;
+        // });
     }
 }
