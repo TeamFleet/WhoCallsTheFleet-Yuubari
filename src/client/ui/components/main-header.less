@@ -10,6 +10,10 @@
     transition: inherit;
 
     box-shadow: 0 10px 20px -10px fade(#000, 20%);
+    
+    @supports(backdrop-filter: blur(20px)) {
+        box-shadow: 0 10px 20px -10px fade(#000, 30%);
+    }
 
     // opacity:    0;
     // animation: 	fadein @duration-main-transition ease-out;

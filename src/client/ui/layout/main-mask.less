@@ -64,6 +64,14 @@
         .is-mode-background-leaving({
             transform:  none;
         });
+
+        @supports(backdrop-filter: blur(20px)) {
+            opacity: .5;
+            backdrop-filter: blur(20px) brightness(0.8);
+            // .background, &:before{
+            //     display:    none;
+            // }
+        }
     }
 
     .screen-t1({
