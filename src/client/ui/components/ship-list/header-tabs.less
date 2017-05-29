@@ -9,8 +9,9 @@
         padding:    0 8px 0 @gutter;
         .select-select{
             position:   absolute;
-            top:        -2rem;
+            // top:        -2rem;
             bottom:     0;
+            height:     100%;
             left:       0;
             right:      0;
             border:     0;
@@ -19,6 +20,7 @@
             z-index:    2;
             width:      100%;
             display:    block;
+            box-sizing: content-box;
         }
         &:after{
             @size:      4px;
