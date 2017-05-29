@@ -37,22 +37,29 @@
     .screen-phone({
         top:    0;
         bottom: 0;
-        width:  58%;
+        width:  calc(~"(100% - @{main-margin-phone} * 2) * 0.58");
         transition-property:none;
-        left:   (0 - @main-margin-phone);
+        left:       (0 - @main-margin-phone);
+        height:     (@height-phone - 2);
+        overflow:   hidden;
         .icon-search{
             margin-left:18px;
+            margin-top: -7px;
         }
         .input{
             // padding-left:60px;
             padding-left:40px;
-            height:     100%;
-            height:     (@height-phone - 2);
-            line-height:@height-phone;
+            // height:     100%;
+            // height:     (@height-phone - 2);
+            // line-height:@height-phone;
+            height:     @height-phone;
             border:     0;
             background: transparent;
             border-radius:  0;
             vertical-align: top;
+            &:hover:not(:focus){
+                background: inherit;
+            }
             &:focus{
                 box-shadow: none;
             }
