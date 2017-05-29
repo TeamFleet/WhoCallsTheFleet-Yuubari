@@ -14,7 +14,12 @@ export default class LinkShip extends React.Component {
         //     <img className="avatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAAoCAQAAADTJTkTAAAATElEQVR42u3QMQEAAAgDoC2Z/VsZwscDItBMOKhAgQIFCkSgQIECEShQoEAEChQoEIECBQpEoECBAhEoUKBABAoUKBCBAgUKRKDAHxY6hwoBYQTrnwAAAABJRU5ErkJggg==" />
         // )
         return (
-            <img className="avatar" src={require(`Assets/dev/ship-avatar.${ext}`)} />
+            <span
+                className="avatar"
+                style={{
+                    backgroundImage: 'url(' + require(`Assets/dev/ship-avatar.${ext}`) + ')'
+                }}
+            />
         )
     }
 

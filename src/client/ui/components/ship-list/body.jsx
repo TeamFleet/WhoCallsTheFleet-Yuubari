@@ -67,7 +67,13 @@ export default class ShipList extends React.Component {
         else
             index = ''
         return collection.list.map((type, index2) => (
-            <div key={index + index2}>
+            <div
+                key={index + index2}
+                className={
+                    index2 === 0 ? 'first' :
+                        (index2 === collection.list.length - 1 ? 'last' : '')
+                }
+            >
                 {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
                 {!type.type && (<Title />)}
                 {type.class && (<SubTitle class={type.class} />)}

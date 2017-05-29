@@ -6,6 +6,7 @@
     @transition-delay:      (@transition-duration / 3);
 
     padding-top:    @height;
+    margin-bottom:  -30px;
     .screen-phone({
         padding-top:@height-phone;
     });
@@ -37,6 +38,10 @@
                 transition-delay:   (@transition-delay * @i);
                 .delays(@n, (@i + 1));
             }
+        }
+
+        &.results{
+            transform:  none;
         }
     }
 
