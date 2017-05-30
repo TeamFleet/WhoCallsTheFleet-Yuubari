@@ -21,19 +21,19 @@
 
     "scripts": {
         "start": "npm run build && node ./dist-web/server --cport 8081 --sport 8080",
-        "start:pm2": "npm run build && npm run clean:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
+        "start:pm2": "npm run build && npm run clean:web:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
         "start:dev": "npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
 
 
-        "prebuild": "npm run clean:dist && node ./scripts/database.js",
-        "build": "npm run dist:client && npm run dist:server && npm run copy:public",
+        "prebuild": "npm run clean:web && node ./scripts/database.js",
+        "build": "npm run dist:client && npm run dist:server && npm run copy:web",
         "build:app": "",
 
 
-        "clean:dist": "rimraf ./dist-web",
-        "clean:sourcemap": "node ./scripts/clean_sourcemap",
-        "copy:public": "node ./scripts/copyfiles",
+        "clean:web": "node ./scripts/clean-web",
+        "clean:web:sourcemap": "node ./scripts/clean-web-sourcemap",
+        "copy:web": "node ./scripts/copyfiles-web",
 
 
         "dev:client": "node ./scripts/database.js && node ./webpack/enter --stage client --env dev --cport 3002",
