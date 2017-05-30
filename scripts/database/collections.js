@@ -142,9 +142,10 @@ module.exports = async (dbpath, topath) => {
         })
         .exec()
     if (Array.isArray(shipsRemains) && shipsRemains.length) {
+        // console.log(shipsRemains, shipsRemains.map(ship => [ship]))
         shipCollections[shipCollections.length - 1].list.push({
             type: null,
-            ships: [shipsRemains]
+            ships: shipsRemains.map(ship => [ship])
         })
     }
 

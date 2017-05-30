@@ -6,7 +6,7 @@
     @transition-delay:      (@transition-duration / 3);
 
     padding-top:    @height;
-    margin-bottom:  -30px;
+    // margin-bottom:  -30px;
     .screen-phone({
         padding-top:@height-phone;
     });
@@ -16,7 +16,7 @@
     }
 
     .transition-enter {
-        opacity:    0.01;
+        opacity:    0.01 !important;
         transform:  translateY(-1rem);
         transition-property: opacity, transform;
 
@@ -26,7 +26,7 @@
         });
 
         &.transition-enter-active {
-            opacity:    1;
+            opacity:    1 !important;
             transform:  none;
             transition-duration: @transition-duration-enter;
             // transition-timing-function: ease-in;
@@ -52,6 +52,15 @@
         // });
         transform:  translateY(@height-compare-thead);
         margin-bottom:  @height-compare-thead;
+    }
+
+    &.is-compare-selecting{
+        .is-unselectable{
+            opacity:    .35;
+            pointer-events: none;
+            z-index:    -1;
+            position:   relative;
+        }
     }
 
     // .transition-enter

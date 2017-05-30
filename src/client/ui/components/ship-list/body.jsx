@@ -72,15 +72,15 @@ export default class ShipList extends React.Component {
                 className={
                     index2 === 0 ? 'first' :
                         (index2 === collection.list.length - 1 ? 'last' : '')
+                    + (!type.type ? ' is-unselectable' : '')
                 }
             >
                 {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
                 {!type.type && (<Title />)}
-                {type.class && (<SubTitle class={type.class} />)}
+                {type.class && (<Title class={type.class} />)}
                 <List
                     id={this.props.id}
                     ships={type.ships}
-                    showHidden={!type.type}
                 />
             </div>
         ))

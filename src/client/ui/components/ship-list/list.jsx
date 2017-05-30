@@ -43,19 +43,21 @@ export default class ShipListList extends React.Component {
     }
 
     render() {
+        // console.log(this.props.ships)
         return (
             <div className={this.props.className}>
                 {this.props.ships.map((ships, index) => {
                     if (Array.isArray(ships))
                         return ships.map((ship, index2) => {
-                            if (!this.props.showHidden
-                                && !pref.shipListShowAllShips
+                            if (!pref.shipListShowAllShips
                                 && index2 < ships.length - 1
                                 && !this.checkLastRemodelLoop(ships, index2)
                             )
                                 return null
                             return this.renderItem(ship, index + '-' + index2)
                         })
+                    
+                    // 搜索结果：第一级为Ship
                     return this.renderItem(ships, index)
                 })}
                 {this.insertPlaceHolders()}
@@ -108,7 +110,6 @@ class Link extends React.Component {
                 ship={this.props.ship}
                 onClick={(evt) => this.onClick(evt, isSelected)}
             >
-                {this.props.isModeCompare && 'C'}
             </LinkShip>
         )
     }

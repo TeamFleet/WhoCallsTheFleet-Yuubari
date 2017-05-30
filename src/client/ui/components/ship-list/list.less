@@ -22,7 +22,8 @@
             // background: @color-accent;
             color:      #fff;
             &:after{
-                background: @color-accent;
+                border:     1px solid @color-accent;
+                background: fade(@color-accent, 50%);
             }
             .name-suffix{
                 color:      inherit;
@@ -37,3 +38,11 @@
         padding-bottom: 0;
     }
 }
+
+// .is-compare-selecting{
+//     .component .item{
+//         .avatar{
+//             transform:  translateX(10px);
+//         }
+//     }
+// }
