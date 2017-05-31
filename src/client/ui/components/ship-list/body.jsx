@@ -14,14 +14,13 @@ import {
 } from 'Logic/ship-list/api.js'
 
 import Title from './title.jsx'
-import SubTitle from './title-sub.jsx'
 import List from './list.jsx'
 import Header from './header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './body.less'
 
-const filterMax = 100
+const filterSelectMax = 100
 
 @connect((state, ownProps) => ({
     ...state.shipList[ownProps.id],
@@ -75,9 +74,9 @@ export default class ShipList extends React.Component {
                     + (!type.type ? ' is-unselectable' : '')
                 }
             >
-                {type.type && (!type.class || !index2) ? (<Title type={type.type} />) : null}
+                {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={type.ships} />) : null}
                 {!type.type && (<Title />)}
-                {type.class && (<Title class={type.class} />)}
+                {type.class && (<Title class={type.class} id={this.props.id} ships={type.ships} />)}
                 <List
                     id={this.props.id}
                     ships={type.ships}
@@ -90,9 +89,9 @@ export default class ShipList extends React.Component {
         let result = shipListFilter(this.props.filterInput)
         let filteredResultText
 
-        if (result.length > filterMax) {
-            this.filteredResult = result.slice(0, filterMax)
-            filteredResultText = translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterMax })
+        if (result.length > filterSelectMax) {
+            this.filteredResult = result.slice(0, filterSelectMax)
+            filteredResultText = translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterSelectMax })
         } else if (result.length > 0) {
             this.filteredResult = result
             filteredResultText = translate('ship_list.filter.results_count', { count: result.length })
