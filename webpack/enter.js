@@ -71,14 +71,15 @@ const run = (config) => {
         Object.assign(wcd, config.client.dev)
 
         const compiler = webpack(wcd)
-        const dashboard = new Dashboard()
+        // const dashboard = new Dashboard()
 
         // compiler.apply(new DashboardPlugin(dashboard.setData))
 
         // more config
         // http://webpack.github.io/docs/webpack-dev-server.html
         const server = new WebpackDevServer(compiler, {
-            quiet: true,
+            // quiet: true,
+            quiet: false,
             hot: true,
             inline: true,
             contentBase: './',
