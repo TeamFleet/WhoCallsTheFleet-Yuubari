@@ -97,9 +97,20 @@ class BgMain extends React.Component {
             showOriginal: false
         }
     }
+
     componentWillReceiveProps() {
         this.isOriginalLoaded = false
         this.isOriginalTransitionEnd = false
+    }
+
+    componentDidMount() {
+        if(!this.isBluredLoaded){
+            setTimeout(() => {
+                if(!this.isBluredLoaded){
+                    this.bluredLoaded(undefined, true)
+                }
+            }, 2000)
+        }
     }
 
     originalLoaded() {
@@ -122,8 +133,9 @@ class BgMain extends React.Component {
         }
     }
 
-    bluredLoaded(/*evt*/) {
+    bluredLoaded(evt, isForce) {
         // if (__DEV__) console.log('[BgMain] bluredLoaded')
+        this.isBluredLoaded = true
         this.setState({
             stylesBlured: getStyles(this.props.currentBg, 'blured')
         })
@@ -142,7 +154,7 @@ class BgMain extends React.Component {
             setTimeout(() => {
                 const event = new Event('load', { bubbles: true })
                 this._original.dispatchEvent(event)
-            }, 2000)
+            }, 1000)
         }
     }
 

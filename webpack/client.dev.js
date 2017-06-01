@@ -2,7 +2,6 @@ const webpack = require('webpack')
 const common = require('./common')
 const fs = require('fs')
 const path = require('path')
-const fileUrl = require('file-url')
 
 module.exports = async (appPath, port) => {
     const entries = require('./client-entries.js')(appPath)

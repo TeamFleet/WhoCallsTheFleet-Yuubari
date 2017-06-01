@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const common = require('./common')
-const fileUrl = require('file-url')
 
 module.exports = (appPath, clientDevPort) => {
     const publicPath = `http://localhost:${clientDevPort}/dist`
