@@ -94,16 +94,55 @@
         .btn-home-logo{
             z-index:    2;
             background-image: url('../../assets/appicon.png');
-            transform:  translateX((@size + 15));
+            color:      transparent;
+            overflow:   hidden;
+            &:hover{
+                filter: brightness(1.2);
+            }
+            &:active{
+                filter: brightness(0.8);
+            }
             &.on{
                 pointer-events: none;
             }
         }
 
-        .btn-back[disabled]{
-            opacity:    0;
+        .channel{
+            position:   absolute;
+            top:        50%;
+            left:       (@size + 10px);
+            margin-top: (0 - @size * 0.55);
+            height:     @size;
+            line-height:@size;
+            font-style: italic;
+            font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+            font-size:  1.4rem;
+            transform:  skewY(-5deg);
+        }
+            .channel-yuubari{
+                color:  hsl(26, 93%, 80%);
+                text-shadow: 0 0 2px fade(#000, 75%);
+                &:after{
+                    content:    'Beta';
+                    position:   absolute;
+                    right:      0;
+                    bottom:     0;
+                    line-height:1em;
+                    font-size:  14px;
+                    opacity:    .85;
+                }
+            }
+
+        .btn-back{
             & ~ .btn-home-logo{
-                transform:  none;
+                transform:  translateX((@size + 15));
+            }
+
+            &[disabled]{
+                opacity:    0;
+                & ~ .btn-home-logo{
+                    transform:  none;
+                }
             }
         }
     }

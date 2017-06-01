@@ -42,6 +42,7 @@ module.exports = async (appPath, env) => {
             new webpack.DefinePlugin({
                 '__CLIENT__': true,
                 '__SERVER__': false,
+                '__APP__': false,
                 '__DEV__': false,
                 '__PUBLIC__': JSON.stringify(publicPath)
             }),

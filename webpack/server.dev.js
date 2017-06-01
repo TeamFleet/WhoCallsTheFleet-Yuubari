@@ -27,6 +27,7 @@ module.exports = (appPath, clientDevPort) => {
             new webpack.DefinePlugin({
                 '__CLIENT__': false,
                 '__SERVER__': true,
+                '__APP__': false,
                 '__DEV__': true,
                 '__PUBLIC__': JSON.stringify(publicPath)
             }),

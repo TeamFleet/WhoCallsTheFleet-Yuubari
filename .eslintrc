@@ -37,8 +37,12 @@
         "__DEV__": false,
         "__CLIENT__": false,
         "__SERVER__": false,
+        "__APP__": false,
         "__REDUX_STATE__": false,
         "__PUBLIC__": false,
+        "__CHANNEL__": false,
+        "__BGIMG_LIST__": false,
+        "__ICONSVG__": false,
         "_hmt": false
     },
     "settings": {
@@ -63,7 +67,12 @@
         "no-empty-pattern": 2,
         "no-mixed-spaces-and-tabs": 0,
         "no-octal": 2,
-        "no-redeclare": [2, { "builtinGlobals": true }],
+        "no-redeclare": [
+            2,
+            {
+                "builtinGlobals": true
+            }
+        ],
         "no-self-assign": 2,
         "no-this-before-super": 1,
         "no-undef": 1,
