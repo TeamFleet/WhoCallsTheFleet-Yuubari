@@ -26,9 +26,9 @@ export default class LinkShip extends React.Component {
         return (
             <span
                 className="avatar"
-                style={__CLIENT__ ? {
+                style={{
                     backgroundImage: `url(${getPic('ships', this.props.ship.id, '0-2')})`
-                } : {}}
+                }}
             />
         )
     }
