@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const common = require('./common')
 const fs = require('fs')
 const path = require('path')
+const fileUrl = require('file-url')
 
 module.exports = async (appPath, port) => {
     const entries = require('./client-entries.js')(appPath)
@@ -35,7 +36,7 @@ module.exports = async (appPath, port) => {
             }),
             new webpack.NoEmitOnErrorsPlugin(),
             ...common.plugins,
-            ...await require('./client-plugins.js')(appPath)
+            ...await require('./client-plugins.js')(appPath, true)
         ],
         resolve: common.resolve
     }

@@ -38,6 +38,7 @@
         "__CLIENT__": false,
         "__SERVER__": false,
         "__REDUX_STATE__": false,
+        "__PUBLIC__": false,
         "_hmt": false
     },
     "settings": {

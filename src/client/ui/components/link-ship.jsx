@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
+
 import db from 'Logic/database'
+import getPic from 'Utils/get-pic.js'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './link-ship.less'
@@ -13,11 +15,19 @@ export default class LinkShip extends React.Component {
         // return (
         //     <img className="avatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAAoCAQAAADTJTkTAAAATElEQVR42u3QMQEAAAgDoC2Z/VsZwscDItBMOKhAgQIFCkSgQIECEShQoEAEChQoEIECBQpEoECBAhEoUKBABAoUKBCBAgUKRKDAHxY6hwoBYQTrnwAAAABJRU5ErkJggg==" />
         // )
+        // return (
+        //     <span
+        //         className="avatar"
+        //         style={{
+        //             backgroundImage: 'url(' + require(`Assets/dev/ship-avatar.${ext}`) + ')'
+        //         }}
+        //     />
+        // )
         return (
             <span
                 className="avatar"
                 style={{
-                    backgroundImage: 'url(' + require(`Assets/dev/ship-avatar.${ext}`) + ')'
+                    backgroundImage: `url(${getPic('ships', this.props.ship.id, '0-2')})`
                 }}
             />
         )

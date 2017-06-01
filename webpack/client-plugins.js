@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const channel = /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'
 
-module.exports = async (appPath) => [
+module.exports = async (appPath, isDev) => [
     new CopyWebpackPlugin([
         {
             from: path.resolve(appPath, `./src/client/assets/logos/${channel}/32.ico`),
@@ -15,7 +15,7 @@ module.exports = async (appPath) => [
             from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
             to: '_bgimgs'
         },
-        ...await getPics(appPath)
+        ...await getPics(appPath, isDev)
         // ...await asyncTest(appPath)
     ])
 ]
@@ -34,7 +34,7 @@ const asyncTest = async (appPath) => {
 }
 
 
-const getPics = async (appPath = process.cwd()) => {
+const getPics = async (appPath = process.cwd(), isDev) => {
 
     const dirPics = path.resolve(appPath, './src/client/assets/pics/')
     const dirTo = '_pics'
@@ -80,7 +80,7 @@ const getPics = async (appPath = process.cwd()) => {
     const checkDo = async (type, id, listBasename) => {
         for (let file of await readdir(path.join(dirPics, type, id))) {
             if (typeof listBasename === 'undefined' || listBasename.indexOf(path.basename(file, path.extname(file))) > -1) {
-                if (!fs.existsSync(path.join(dirTarget, type, id, file)))
+                if (!isDev && !fs.existsSync(path.join(dirTarget, type, id, file)))
                     resultAdd(type, id, file)
             }
         }
