@@ -53,7 +53,7 @@ const factoryConfig = (config) => {
     return config
 }
 
-const run = (config) => {
+const run = async (config) => {
 
     // 程序启动路径，作为查找文件的基础
     let appPath = process.cwd()
@@ -67,7 +67,7 @@ const run = (config) => {
     // 客户端开发模式
     if (stage === 'client' && env === 'dev') {
 
-        let wcd = require('./client.dev')(appPath, CLIENT_DEV_PORT)
+        let wcd = await require('./client.dev')(appPath, CLIENT_DEV_PORT)
         Object.assign(wcd, config.client.dev)
 
         const compiler = webpack(wcd)
@@ -97,7 +97,7 @@ const run = (config) => {
 
         process.env.NODE_ENV = 'production'
 
-        let wcd = require('./client.dist')(appPath, env)
+        let wcd = await require('./client.dist')(appPath, env)
         Object.assign(wcd, config.client.dist)
 
         const compiler = webpack(wcd)

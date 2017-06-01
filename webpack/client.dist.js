@@ -14,7 +14,7 @@ const parseRouter = (router, urlParent = '/') => {
 }
 // parseRouter(require('../src/client/router').default)
 
-module.exports = (appPath, env) => {
+module.exports = async (appPath, env) => {
     const entries = require('./client-entries.js')(appPath)
     const outputPath = path.normalize(appPath + '/dist-web/public/client')
     const publicPath = '/client'
@@ -56,7 +56,7 @@ module.exports = (appPath, env) => {
                 sourceMap: (env === 'dist' ? true : false)
             }),
 
-            ...require('./client-plugins.js')(appPath),
+            ...await require('./client-plugins.js')(appPath),
 
             // 打包入 PWA 支持
             // 采用默认 Service Worker 文件

@@ -1,38 +1,7 @@
+// rimraf ./dist-web
 const fs = require('fs-extra')
 const path = require('path')
 const glob = require('glob')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-
-const channel = /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'
-
-module.exports = async (appPath) => [
-    new CopyWebpackPlugin([
-        {
-            from: path.resolve(appPath, `./src/client/assets/logos/${channel}/32.ico`),
-            to: '../favicon.ico'
-        },
-        {
-            from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
-            to: '_bgimgs'
-        },
-        ...await getPics(appPath)
-        // ...await asyncTest(appPath)
-    ])
-]
-
-const asyncTest = async (appPath) => {
-    return await new Promise(resolve => {
-        setTimeout(() => {
-            console.log('alalala')
-            resolve(
-                [{
-                    from: path.resolve(appPath, `./src/client/assets/akashi.png`),
-                }]
-            )
-        }, 10000)
-    })
-}
-
 
 const getPics = async (appPath = process.cwd()) => {
 
@@ -87,7 +56,7 @@ const getPics = async (appPath = process.cwd()) => {
     }
 
     const resultAdd = (type, id, file) => {
-        // console.log(type, id, file)
+        console.log(type, id, file)
         results.push({
             context: path.resolve(dirPics),
             from: `${type}/${id}/${file}`,
@@ -137,3 +106,12 @@ const getPics = async (appPath = process.cwd()) => {
 
     return results
 }
+
+const run = async () => {
+    const results = await getPics()
+
+    console.log(results)
+    console.log('___________')
+}
+
+run()

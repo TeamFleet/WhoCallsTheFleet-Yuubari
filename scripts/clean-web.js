@@ -5,12 +5,13 @@ const glob = require('glob')
 
 const run = async () => {
     const dirDistWeb = path.join(__dirname, '../dist-web')
+    const dirNamePics = '_pics'
 
     if (!fs.existsSync(dirDistWeb)) return
 
     const fileList = await new Promise((resolve, reject) => {
         glob(
-            path.join(dirDistWeb, '**/!(pics)/!(pics)'),
+            path.join(dirDistWeb, '**/*'),
             {},
             (err, files) => {
                 if (err) reject(err)
@@ -20,6 +21,12 @@ const run = async () => {
     })
 
     for (let file of fileList) {
+        if (file.indexOf(`public/client/${dirNamePics}/`) > -1) continue
+        if (file.indexOf(`public${path.sep}client${path.sep}${dirNamePics}${path.sep}`) > -1) continue
+        if (/\/public\/client\/_pics$/.test(file)) continue
+        if (/\/public\/client$/.test(file)) continue
+        if (/\/public$/.test(file)) continue
+
         await new Promise((resolve, reject) => {
             fs.remove(file, err => {
                 if (err) reject(err)
