@@ -130,6 +130,11 @@ export default class extends React.Component {
         if (startSwipeAtLeftBorder) startSwipeAtLeftBorder = false
     }
 
+    componentWillMount() {
+        if (__CLIENT__ && self._html)
+            self._html.classList.add('is-react-ready')
+    }
+
     render() {
         // if (__CLIENT__) this.appReady(100)
         if (this.props.isMainBgimgLoaded) this.appReady()

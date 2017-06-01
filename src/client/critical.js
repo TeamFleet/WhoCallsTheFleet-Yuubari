@@ -96,6 +96,9 @@ import bindEvent from 'bind-event'
         window.addEventListener('offline', doOffline)
         if (navigator.onLine === false) doOffline()
 
+        if (__CLIENT__)
+            tagHtml.classList.add('is-webapp')
+
         self._html = tagHtml
     })
 

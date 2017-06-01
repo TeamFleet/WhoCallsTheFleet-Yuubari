@@ -89,7 +89,6 @@ if (__CLIENT__) {
 
     // 客户端注册多语言
     i18nRegister(__REDUX_STATE__)
-
 }
 
 dbInit()
