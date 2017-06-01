@@ -8,7 +8,8 @@ import {
     changeCollection,
     filterEnter,
     filterLeave,
-    filterInput
+    filterInput,
+    compareChangeState
 } from 'Logic/ship-list/api.js'
 
 import MainHeader from 'UI/components/main-header.jsx'
@@ -38,7 +39,7 @@ export default class ShipListHeader extends React.Component {
                 })
             mainheader.classList.remove('is-compare-leaving')
             // mainheader.classList.add('is-compare')
-            mainheader.setAttribute('data-compare-state', this.props.compareState)
+            mainheader.setAttribute('data-compare-state', newProps.compareState)
         } else {
             mainheader.classList.add('is-compare-leaving')
             // mainheader.classList.remove('is-compare')
@@ -223,13 +224,19 @@ class ExtraButtons extends React.Component {
 
 import styleHeaderCompare from './header-compare.less'
 @connect((state, ownProps) => ({
-    isModeCompare: state.shipList[ownProps.id].isModeCompare,
+    // isModeCompare: state.shipList[ownProps.id].isModeCompare,
     compareState: state.shipList[ownProps.id].compareState,
-    compareList: state.shipList[ownProps.id].compareList
+    count: state.shipList[ownProps.id].compareList.length
 }))
 @ImportStyle(styleHeaderCompare)
 class Compare extends React.Component {
+    compareStart() {
+        this.props.dispatch(
+            compareChangeState(this.props.id, 'comparing')
+        )
+    }
     render() {
+                            // {translate("ship_list.compare.selected", { count: this.props.compareList.length })}
         return (
             <div className={this.props.className}>
                 <div className="options">
@@ -237,7 +244,9 @@ class Compare extends React.Component {
                 <div className="header">
                     {this.props.compareState === 'selecting' && <div className="selecting">
                         <div className="wrapper">
-                            {translate("ship_list.compare.selected", { count: this.props.compareList.length })}
+                            <button type="button" className="btn-start-compare" onClick={this.compareStart.bind(this)}>
+                                START COMPARE ({this.props.count})
+                            </button>
                         </div>
                     </div>}
                 </div>

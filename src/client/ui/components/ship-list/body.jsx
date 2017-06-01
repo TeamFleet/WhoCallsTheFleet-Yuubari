@@ -115,7 +115,7 @@ export default class ShipList extends React.Component {
 
     renderBody() {
         if (this.props.isModeCompare && this.props.compareState === 'comparing') {
-            return 'COMPARING'
+            return <span>COMPARING</span>
         } else if (__CLIENT__) {
             if (this.props.isModeFilter && typeof this.props.filterInput !== 'undefined' && this.props.filterInput !== "")
                 return this.renderFilteredResult()

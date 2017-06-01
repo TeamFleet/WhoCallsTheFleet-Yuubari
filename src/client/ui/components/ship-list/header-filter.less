@@ -9,7 +9,7 @@
     will-change:    width;
     z-index:        2;
 
-    transition-property:    width;
+    transition-property:    transform, width;
 
     .icon-search{
         position:   absolute;
@@ -38,7 +38,7 @@
         top:    0;
         bottom: 0;
         width:  calc(~"(100% - @{main-margin-phone} * 2) * 0.58");
-        transition-property:none;
+        transition-property:transform;
         left:       (0 - @main-margin-phone);
         height:     (@height-phone - 2);
         overflow:   hidden;
@@ -91,4 +91,8 @@
             color:      inherit;
         }
     });
+}
+
+.is-compare[data-compare-state="comparing"] .component{
+    transform:  translateY(-100%)
 }

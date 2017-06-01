@@ -32,7 +32,7 @@
             height:     0;
             border:     @size solid transparent;
             border-top-color:   currentcolor;
-            margin-top: (0 - @size / 2);
+            margin-top: (0 - @size / 3 * 2);
             margin-left:4px;
         }
     }
@@ -97,4 +97,8 @@
     .screen-phone({
         transform:  none;
     });
+}
+
+.is-compare[data-compare-state="comparing"] .component{
+    transform:  translateY(-100%)
 }
