@@ -58,8 +58,8 @@ router.ext({
         //     lastScroll.set(self.__LATHPATHNAME__, window.scrollY)
 
         // 统计代码第一次默认走html引入js
-        if (isGAInit) {
-
+        if (typeof ga !== 'undefined' && isGAInit) {
+            ga('send', 'pageview')
         }
         isGAInit = true
 
