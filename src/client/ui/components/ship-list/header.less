@@ -26,8 +26,10 @@
         height:         @height-phone;
         line-height:    @height-phone;
     });
+}
 
-    & > .body{
+.component{
+    .body{
         position:   relative;
         z-index:    2;
         height:     @height;
@@ -73,10 +75,10 @@
     // }
 }
 
-.component.is-compare-comparing{
-    & > .wrapper{
+.component.is-compare[data-compare-state="comparing"]{
+    .body{
+        transform:  translateY(-50%);
         opacity:    0;
-        transform:  translateY(-100%);
     }
 }
 

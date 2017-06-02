@@ -9,6 +9,9 @@ import {
     filterEnter,
     filterLeave,
     filterInput,
+    compareEnter,
+    // compareLeave,
+    compareReset,
     compareChangeState
 } from 'Logic/ship-list/api.js'
 
@@ -65,6 +68,31 @@ export default class ShipListHeader extends React.Component {
         )
     }
 
+    renderExtraButtons() {
+        if (!Array.isArray(this.props.extraButtons)) return null
+        return this.props.extraButtons.map((button, index) => {
+            switch (button) {
+                case 'compare':
+                    return (
+                        <span
+                            className={"link item btn-toggle" + (this.props.isModeCompare ? ' on' : '')}
+                            key={index}
+                            onClick={() => {
+                                if (this.props.isModeCompare)
+                                    return this.props.dispatch(compareReset(this.props.id))
+                                return this.props.dispatch(compareEnter(this.props.id))
+                            }}
+                        >
+                            {translate("ship_list.compare.button")}
+                            <Icon className="icon-close" icon="cross" />
+                        </span>
+                    )
+                default:
+                    return button
+            }
+        })
+    }
+
     render() {
         return (
             <MainHeader className={
@@ -76,15 +104,10 @@ export default class ShipListHeader extends React.Component {
                     <div className="body">
                         <Filter id={this.props.id} />
                         <Tabs id={this.props.id} />
-                        {this.props.extraButtons && <ExtraButtons>{this.props.extraButtons}</ExtraButtons>}
+                        {this.props.extraButtons && <ExtraButtons>{this.renderExtraButtons()}</ExtraButtons>}
                     </div>
-                    {typeof this.props.isModeCompare !== 'undefined' &&
-                        <Compare
-                            id={this.props.id}
-                            onUpdateCompareState={this.props.onUpdateCompareState}
-                            onResetCompareSelect={this.props.onResetCompareSelect}
-                        />
-                    }
+                    {this.props.isModeCompare && this.props.compareState === 'comparing' && <CompareControls />}
+                    {typeof this.props.isModeCompare !== 'undefined' && <Compare id={this.props.id} />}
                 </div>
             </MainHeader>
         )
@@ -235,21 +258,45 @@ class Compare extends React.Component {
             compareChangeState(this.props.id, 'comparing')
         )
     }
+    compareReset() {
+        this.props.dispatch(
+            compareReset(this.props.id, 'comparing')
+        )
+    }
     render() {
-                            // {translate("ship_list.compare.selected", { count: this.props.compareList.length })}
+        // <button
+        //     type="button"
+        //     className="btn-reset"
+        //     onClick={this.compareReset.bind(this)}
+        // >
+        //     <Icon className="icon-close" icon="cross" />
+        // </button>
+        // {translate("ship_list.compare.selected", { count: this.props.compareList.length })}
         return (
             <div className={this.props.className}>
-                <div className="options">
-                </div>
-                <div className="header">
-                    {this.props.compareState === 'selecting' && <div className="selecting">
-                        <div className="wrapper">
-                            <button type="button" className="btn-start-compare" onClick={this.compareStart.bind(this)}>
-                                START COMPARE ({this.props.count})
+                {this.props.compareState === 'selecting' && <div className="selecting">
+                    <div className="wrapper">
+                        <button
+                            type="button"
+                            className="btn-start-compare"
+                            disabled={!this.props.count}
+                            onClick={this.compareStart.bind(this)}
+                        >
+                            START COMPARE ({this.props.count})
                             </button>
-                        </div>
-                    </div>}
-                </div>
+                    </div>
+                </div>}
+            </div>
+        )
+    }
+}
+
+@connect()
+class CompareControls extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className}>
+                CONTROLS
             </div>
         )
     }

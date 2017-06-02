@@ -29,6 +29,24 @@
         });
     }
 
+        .btn-toggle{
+            position:   relative;
+            .icon-close{
+                position:   absolute;
+                opacity:    0;
+                top:        50%;
+                left:       50%;
+                margin:     (0 - @icon-size / 2) auto auto (0 - @icon-size / 2);
+                fill:       #fff;
+            }
+            &.on{
+                color:      transparent;
+                .icon-close{
+                    opacity:1;
+                }
+            }
+        }
+
     .screen-phone({
         position:       relative;
         height:         (@height-phone - 2);

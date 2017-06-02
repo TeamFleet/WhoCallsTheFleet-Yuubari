@@ -8,8 +8,6 @@ import shipListFilter from 'Logic/database/list-ships-filter.js'
 import {
     init as shipListInit,
     filterLeave,
-    compareEnter,
-    compareLeave,
     compareReset
 } from 'Logic/ship-list/api.js'
 
@@ -28,12 +26,6 @@ const filterSelectMax = 100
 }))
 @ImportStyle(style)
 export default class ShipList extends React.Component {
-    toggleCompare() {
-        if (this.props.isModeCompare)
-            return this.props.dispatch(compareLeave(this.props.id))
-        return this.props.dispatch(compareEnter(this.props.id))
-    }
-
     getExtraButtons() {
         if (__SERVER__) return null
 
@@ -42,22 +34,8 @@ export default class ShipList extends React.Component {
         if (this.props.extraButtons) buttons = this.props.extraButtons
 
         if (!buttons.length) return null
-        return buttons.map((button, index) => {
-            switch (button) {
-                case 'compare':
-                    return (
-                        <span
-                            className={"link item" + (this.props.isModeCompare ? ' on' : '')}
-                            key={index}
-                            onClick={this.toggleCompare.bind(this)}
-                        >
-                            {translate("ship_list.compare.button")}
-                        </span>
-                    )
-                default:
-                    return button
-            }
-        })
+
+        return buttons
     }
 
     renderCollection(collection, index) {
