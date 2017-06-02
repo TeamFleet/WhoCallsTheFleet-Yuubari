@@ -15,35 +15,9 @@ html:not(.is-mobile){
         background: transparent;
     }
     ::-webkit-scrollbar-track{
-        //background:	rgba(0, 0, 0, .5);
-        //@scrollbar-track-mask-image:	~"url(data:image/gif;base64,R0lGODlhAQABAPAAAAAAAP///yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==)";
-        //@scrollbar-track-mask-image:	linear-gradient(to bottom, #000, #000);
-        //@scrollbar-track-mask-size:		~"2px calc(100% - 4px)";
-        //@scrollbar-track-mask-position:	50% 50%;
-        //.mask-image(~"@{scrollbar-track-mask-image}");
-        //.mask-size(~"@{scrollbar-track-mask-size}");
-        //.mask-position(~"@{scrollbar-track-mask-position}");
-        //.mask-repeat(no-repeat);
-        @scrollbar-track-background:	linear-gradient(
-                                            to right,
-                                            transparent 3px,
-                                            rgba(0, 0, 0, .225) 3px,
-                                            rgba(0, 0, 0, .225) ~"calc(100% - 3px)",
-                                            transparent ~"calc(100% - 3px)"
-                                        );
-        background:		@scrollbar-track-background;
         border-radius:	32px;
         overflow:		hidden;
-        &:hover{
-            @scrollbar-track-background-hover:	linear-gradient(
-                                                    to right,
-                                                    transparent 2px,
-                                                    rgba(0, 0, 0, .375) 2px,
-                                                    rgba(0, 0, 0, .375) ~"calc(100% - 2px)",
-                                                    transparent ~"calc(100% - 2px)"
-                                                );
-            background:		@scrollbar-track-background-hover;
-        }
+        background:     @color-background;
     }
     ::-webkit-scrollbar-thumb{
         //background:	#fff;
@@ -66,6 +40,29 @@ html:not(.is-mobile){
                                                 transparent ~"calc(100% - 2px)"
                                             );
             background:		@scrollbar-thumb-background;
+        }
+    }
+}
+
+html:not(.is-mobile) body{
+    ::-webkit-scrollbar-track{
+        @scrollbar-track-background:	linear-gradient(
+                                            to right,
+                                            transparent 3px,
+                                            rgba(0, 0, 0, .1) 3px,
+                                            rgba(0, 0, 0, .1) ~"calc(100% - 3px)",
+                                            transparent ~"calc(100% - 3px)"
+                                        );
+        background:		@scrollbar-track-background;
+        &:hover{
+            @scrollbar-track-background-hover:	linear-gradient(
+                                                    to right,
+                                                    transparent 2px,
+                                                    rgba(0, 0, 0, .2) 2px,
+                                                    rgba(0, 0, 0, .2) ~"calc(100% - 2px)",
+                                                    transparent ~"calc(100% - 2px)"
+                                                );
+            background:		@scrollbar-track-background-hover;
         }
     }
 }
