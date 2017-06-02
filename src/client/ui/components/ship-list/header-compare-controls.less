@@ -5,4 +5,22 @@
     top:        0;
     bottom:     0;
     height:     100%;
+    display:    none;
+}
+
+.is-compare.is-compare-leaving .component,
+.is-compare[data-compare-state="selecting"] .component{
+    display:    block;
+    transform:  translateY(2rem);
+    opacity:    0;
+    z-index:    -1;
+    pointer-events: none;
+}
+
+.is-compare[data-compare-state="comparing"] .component{
+    display:    block;
+    transform:  none;
+    opacity:    1;
+    z-index:    5;
+    pointer-events: all;
 }

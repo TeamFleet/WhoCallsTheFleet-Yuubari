@@ -8,12 +8,18 @@ import style from './main-header.less'
 
 @ImportStyle(style)
 export default class extends React.Component {
+    getProps() {
+        let props = {...this.props}
+        delete props.className
+
+        return props
+    }
     render() {
         if (__SERVER__) return null
 
         return (
             <MainHeaderPortal>
-                <div className={this.props.className + " main-header"}>
+                <div className={this.props.className + " main-header"} {...this.getProps()}>
                     {this.props.children}
                     <Background type="blured" />
                 </div>

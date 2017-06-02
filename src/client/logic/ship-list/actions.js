@@ -13,7 +13,8 @@ import {
     SHIPLIST_COMPARE_CHANGE_STATE,
     SHIPLIST_COMPARE_UPDATE_LIST,
     SHIPLIST_COMPARE_ADD,
-    SHIPLIST_COMPARE_REMOVE
+    SHIPLIST_COMPARE_REMOVE,
+    SHIPLIST_COMPARE_SORT
 } from '../../redux/action-types.js'
 
 export const init = (id, initialState = {}) => ({
@@ -49,14 +50,16 @@ export const compareEnter = (id) => ({
     id
 })
 
-export const compareLeave = (id) => ({
+export const compareLeave = (id, remove) => ({
     type: SHIPLIST_COMPARE_LEAVE,
-    id
+    id,
+    remove
 })
 
-export const compareReset = (id) => ({
+export const compareReset = (id, remove) => ({
     type: SHIPLIST_COMPARE_RESET,
-    id
+    id,
+    remove
 })
 
 export const compareChangeState = (id, state) => ({
@@ -81,4 +84,10 @@ export const compareRemove = (id, item) => ({
     type: SHIPLIST_COMPARE_REMOVE,
     id,
     item
+})
+
+export const compareSort = (sorttype, order) => ({
+    type: SHIPLIST_COMPARE_SORT,
+    sorttype,
+    order
 })

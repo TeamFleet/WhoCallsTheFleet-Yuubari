@@ -10,9 +10,10 @@ import {
     filterLeave,
     filterInput,
     compareEnter,
-    // compareLeave,
+    compareLeave,
     compareReset,
-    compareChangeState
+    compareChangeState,
+    compareSort
 } from 'Logic/ship-list/api.js'
 
 import MainHeader from 'UI/components/main-header.jsx'
@@ -32,23 +33,23 @@ export default class ShipListHeader extends React.Component {
         }
     }
 
-    componentWillUpdate(newProps) {
-        const mainheader = this._wrapper.offsetParent
+    // componentWillUpdate(newProps) {
+    //     const mainheader = this._wrapper.offsetParent
 
-        if (newProps.isModeCompare) {
-            if (!this.state.isClassCompare)
-                this.setState({
-                    isClassCompare: true
-                })
-            mainheader.classList.remove('is-compare-leaving')
-            // mainheader.classList.add('is-compare')
-            mainheader.setAttribute('data-compare-state', newProps.compareState)
-        } else {
-            mainheader.classList.add('is-compare-leaving')
-            // mainheader.classList.remove('is-compare')
-            // mainheader.removeAttribute('data-compare-state')
-        }
-    }
+    //     if (newProps.isModeCompare) {
+    //         // if (!this.state.isClassCompare)
+    //         //     this.setState({
+    //         //         isClassCompare: true
+    //         //     })
+    //         // mainheader.classList.remove('is-compare-leaving')
+    //         // mainheader.classList.add('is-compare')
+    //         mainheader.setAttribute('data-compare-state', newProps.compareState)
+    //     } else {
+    //         // mainheader.classList.add('is-compare-leaving')
+    //         // mainheader.classList.remove('is-compare')
+    //         // mainheader.removeAttribute('data-compare-state')
+    //     }
+    // }
 
     componentDidMount() {
         bindEvent(
@@ -56,13 +57,16 @@ export default class ShipListHeader extends React.Component {
             'animationend',
             (evt) => {
                 if (evt.animationName === 'ship-list-header-compare-leave') {
-                    if (this.state.isClassCompare)
-                        this.setState({
-                            isClassCompare: false
-                        })
+                    // if (this.state.isClassCompare)
+                    //     this.setState({
+                    //         isClassCompare: false
+                    //     })
                     // evt.target.classList.remove('is-compare')
-                    evt.target.classList.remove('is-compare-leaving')
-                    evt.target.removeAttribute('data-compare-state')
+                    // evt.target.classList.remove('is-compare-leaving')
+                    // evt.target.removeAttribute('data-compare-state')
+                    this.props.dispatch(
+                        compareLeave(this.props.id, true)
+                    )
                 }
             }
         )
@@ -95,10 +99,15 @@ export default class ShipListHeader extends React.Component {
 
     render() {
         return (
-            <MainHeader className={
+            <MainHeader data-compare-state={
+                typeof this.props.isModeCompare !== 'undefined'
+                    ? this.props.compareState
+                    : null
+            } className={
                 this.props.className
                 + (this.props.isModeFilter ? ' is-filtering' : '')
-                + (this.state.isClassCompare ? ' is-compare' : '')
+                + (typeof this.props.isModeCompare !== 'undefined' ? ' is-compare' : '')
+                + (this.props.isModeCompare === false ? ' is-compare-leaving' : '')
             }>
                 <div className="wrapper" ref={el => this._wrapper = el}>
                     <div className="body">
@@ -106,7 +115,7 @@ export default class ShipListHeader extends React.Component {
                         <Tabs id={this.props.id} />
                         {this.props.extraButtons && <ExtraButtons>{this.renderExtraButtons()}</ExtraButtons>}
                     </div>
-                    {this.props.isModeCompare && this.props.compareState === 'comparing' && <CompareControls />}
+                    {typeof this.props.isModeCompare !== 'undefined' && <CompareControls id={this.props.id} />}
                     {typeof this.props.isModeCompare !== 'undefined' && <Compare id={this.props.id} />}
                 </div>
             </MainHeader>
@@ -260,7 +269,7 @@ class Compare extends React.Component {
     }
     compareReset() {
         this.props.dispatch(
-            compareReset(this.props.id, 'comparing')
+            compareReset(this.props.id)
         )
     }
     render() {
@@ -274,7 +283,7 @@ class Compare extends React.Component {
         // {translate("ship_list.compare.selected", { count: this.props.compareList.length })}
         return (
             <div className={this.props.className}>
-                {this.props.compareState === 'selecting' && <div className="selecting">
+                <div className="selecting">
                     <div className="wrapper">
                         <button
                             type="button"
@@ -283,22 +292,60 @@ class Compare extends React.Component {
                             onClick={this.compareStart.bind(this)}
                         >
                             START COMPARE ({this.props.count})
-                            </button>
+                        </button>
                     </div>
-                </div>}
+                </div>
             </div>
         )
     }
 }
 
 import styleHeaderCompareControls from './header-compare-controls.less'
-@connect()
+@connect((state, ownProps) => ({
+    compareSortType: state.shipList[ownProps.id].compareSort[0]
+}))
 @ImportStyle(styleHeaderCompareControls)
 class CompareControls extends React.Component {
+    compareReset() {
+        this.props.dispatch(
+            compareReset(this.props.id)
+        )
+    }
+    compareContinue() {
+        this.props.dispatch(
+            compareChangeState(this.props.id, 'selecting')
+        )
+    }
+    compareResetSort() {
+        this.props.dispatch(
+            compareSort(false)
+        )
+    }
     render() {
         return (
             <div className={this.props.className}>
-                CONTROLS
+                <button
+                    type="button"
+                    className="btn-reset"
+                    onClick={this.compareReset.bind(this)}
+                >
+                    RESET
+                </button>
+                <button
+                    type="button"
+                    className="btn-continue"
+                    onClick={this.compareContinue.bind(this)}
+                >
+                    CONTINUE (LEAVE)
+                </button>
+                <button
+                    type="button"
+                    className="btn-resort"
+                    disabled={!this.props.compareSortType}
+                    onClick={this.compareResetSort.bind(this)}
+                >
+                    RESET SORT
+                </button>
             </div>
         )
     }

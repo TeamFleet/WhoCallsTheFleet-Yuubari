@@ -34,14 +34,11 @@
     .selecting, .comparing{
         position:   relative;
         height:     100%;
+        z-index:    -1;
+        pointer-events: none;
     }
 
-    // .selecting{
-    //     border-right: @size-btn-reset solid transparent;
-    // }
-
         .btn-start-compare{
-        // .btn-start-compare, .btn-reset{
             appearance:     none;
             text-align:     center;
             border:         0;
@@ -62,8 +59,6 @@
                     opacity:    1;
                 }
             }
-        // }
-        // .btn-start-compare{
             width:      100%;
             position:   relative;
             color:      inherit;
@@ -71,19 +66,6 @@
                 background: ease-out-sine-gradient(to bottom, transparent, fade(@color-accent, 25%));
             }
         }
-        // .btn-reset{
-        //     position:   absolute;
-        //     top:        0;
-        //     right:      (0 - @size-btn-reset);
-        //     width:      @size-btn-reset;
-        //     color:      @theme-red-100;
-        //     &:after{
-        //         background: ease-out-sine-gradient(to bottom, transparent, fade(@theme-red-a200, 50%));
-        //     }
-        //     .icon-close{
-        //         vertical-align: sub;
-        //     }
-        // }
 
     .comparing{
 
@@ -112,6 +94,28 @@
     .wrapper{
         opacity:    0;
         transform:  translateY(75%);
+    }
+}
+
+.is-compare[data-compare-state="selecting"] .component{
+    .selecting{
+        pointer-events: all;
+        z-index:    1;
+    }
+    .comparing{
+        // transform:  translateY(2rem);
+        opacity:    0;
+    }
+}
+
+.is-compare[data-compare-state="comparing"] .component{
+    .selecting{
+        // transform:  translateY(-2rem);
+        opacity:    0;
+    }
+    .comparing{
+        pointer-events: all;
+        z-index:    1;
     }
 }
 

@@ -13,7 +13,8 @@ import {
     SHIPLIST_COMPARE_CHANGE_STATE,
     SHIPLIST_COMPARE_UPDATE_LIST,
     SHIPLIST_COMPARE_ADD,
-    SHIPLIST_COMPARE_REMOVE
+    SHIPLIST_COMPARE_REMOVE,
+    SHIPLIST_COMPARE_SORT
 } from '../../redux/action-types.js'
 
 const initialState = {}
@@ -25,7 +26,8 @@ const initialStateSingle = {
 
     isModeCompare: undefined,
     compareState: 'selecting', // selecting || comparing
-    compareList: []
+    compareList: [],
+    compareSort: [undefined, 'desc']
 }
 
 const updateState = (fullState, id, state) =>
@@ -70,12 +72,12 @@ export default function (state = initialState, action) {
 
         case SHIPLIST_COMPARE_LEAVE:
             return updateState(state, action.id, {
-                isModeCompare: false
+                isModeCompare: action.remove ? undefined : false
             })
 
         case SHIPLIST_COMPARE_RESET:
             return updateState(state, action.id, {
-                isModeCompare: undefined,
+                isModeCompare: action.remove ? undefined : false,
                 compareState: 'selecting',
                 compareList: []
             })
@@ -110,6 +112,27 @@ export default function (state = initialState, action) {
                     compareList: newList
                 })
             }
+        }
+
+        case SHIPLIST_COMPARE_SORT: {
+            if (!action.sorttype)
+                return updateState(state, action.id, {
+                    compareSort: [...initialStateSingle.compareSort]
+                })
+            else if (!action.order && state[action.id].compareSort[0] === action.sorttype)
+                return updateState(state, action.id, {
+                    compareSort: [
+                        action.sorttype,
+                        state[action.id].compareSort[1] === 'desc' ? 'asc' : 'desc'
+                    ]
+                })
+            else
+                return updateState(state, action.id, {
+                    compareSort: [
+                        action.sorttype,
+                        action.order || initialStateSingle.compareSort[1]
+                    ]
+                })
         }
 
     }

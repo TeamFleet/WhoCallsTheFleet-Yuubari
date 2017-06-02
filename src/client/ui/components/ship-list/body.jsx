@@ -14,6 +14,7 @@ import {
 import Title from './title.jsx'
 import List from './list.jsx'
 import Header from './header.jsx'
+import TableBody from './table-body.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './body.less'
@@ -49,7 +50,7 @@ export default class ShipList extends React.Component {
                 className={
                     index2 === 0 ? 'first' :
                         (index2 === collection.list.length - 1 ? 'last' : '')
-                    + (!type.type ? ' is-unselectable' : '')
+                        + (!type.type ? ' is-unselectable' : '')
                 }
             >
                 {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={type.ships} />) : null}
@@ -93,7 +94,7 @@ export default class ShipList extends React.Component {
 
     renderBody() {
         if (this.props.isModeCompare && this.props.compareState === 'comparing') {
-            return <span>COMPARING</span>
+            return <TableBody id={this.props.id} ships={this.props.compareList} />
         } else if (__CLIENT__) {
             if (this.props.isModeFilter && typeof this.props.filterInput !== 'undefined' && this.props.filterInput !== "")
                 return this.renderFilteredResult()
@@ -117,16 +118,20 @@ export default class ShipList extends React.Component {
                 this.props.dispatch(
                     filterLeave(this.props.id)
                 )
+            if (typeof this.props.isModeCompare !== 'undefined' || this.props.compareList.length)
+                this.props.dispatch(
+                    compareReset(this.props.id, true)
+                )
         }
     }
 
-    componentWillUnmount() {
-        if (!__CLIENT__) return
-        if (typeof this.props.isModeCompare !== 'undefined' || this.props.compareList.length)
-            this.props.dispatch(
-                compareReset(this.props.id)
-            )
-    }
+    // componentWillUnmount() {
+    //     if (!__CLIENT__) return
+    //     if (typeof this.props.isModeCompare !== 'undefined' || this.props.compareList.length)
+    //         this.props.dispatch(
+    //             compareReset(this.props.id, true)
+    //         )
+    // }
 
     render() {
         if (typeof this.props.collection === 'undefined') {

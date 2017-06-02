@@ -36,15 +36,15 @@ export const compareEnter = (id) => (dispatch) => {
     )
 }
 
-export const compareLeave = (id) => (dispatch) => {
+export const compareLeave = (id, remove = false) => (dispatch) => {
     dispatch(
-        actions.compareLeave(id)
+        actions.compareLeave(id, remove)
     )
 }
 
-export const compareReset = (id) => (dispatch) => {
+export const compareReset = (id, remove = false) => (dispatch) => {
     dispatch(
-        actions.compareReset(id)
+        actions.compareReset(id, remove)
     )
 }
 
@@ -69,5 +69,11 @@ export const compareAdd = (id, item) => (dispatch) => {
 export const compareRemove = (id, item) => (dispatch) => {
     dispatch(
         actions.compareRemove(id, item)
+    )
+}
+
+export const compareSort = (sorttype, order) => (dispatch) => {
+    dispatch(
+        actions.compareSort(sorttype, order)
     )
 }
