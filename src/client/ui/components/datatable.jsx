@@ -4,12 +4,13 @@ import { ImportStyle } from 'sp-css-import'
 import style from './datatable.less'
 
 @ImportStyle(style)
-export default class extends React.Component {
+export default class DataTable extends React.Component {
     renderHeader() {
         if(!this.props.headers) return null
         const TagName = this.props.tag || 'thead'
         return (
             <TagName className="header">
+                {this.renderRow(this.props.headers)}
             </TagName>
         )
     }
@@ -24,7 +25,7 @@ export default class extends React.Component {
         )
     }
 
-    renderRow(data, index) {
+    renderRow(data, index = 0) {
         const TagName = this.props.tag || 'tr'
         const TagNameCell = this.props.tag || 'td'
         return (

@@ -12,7 +12,7 @@ import style from './table-body.less'
     sortType: state.shipList[ownProps.id].compareSort[0],
     sortOrder: state.shipList[ownProps.id].compareSort[1]
 }))
-export default class extends React.Component {
+export default class ShipListTableBody extends React.Component {
     getData() {
         if (!Array.isArray(this.props.ships)) return []
         console.log(this.props.ships)
@@ -23,22 +23,22 @@ export default class extends React.Component {
             ship.getAttribute('torpedo'),
             ship.getAttribute('fire') + ship.getAttribute('torpedo'),
             ship.getAttribute('aa'),
-            ship.getAttribute('asw'),
+            ship.getAttribute('asw', 99),
             ship.getAttribute('hp'),
             ship.getAttribute('armor'),
-            ship.getAttribute('evasion'),
+            ship.getAttribute('evasion', 99),
             ship.getAttribute('carry'),
             ship.getAttribute('speed'),
             ship.getAttribute('range'),
-            ship.getAttribute('los'),
-            `${ship.getAttribute('luck')} (${ship.stat.luck_max})`,
-            ship.consum.fuel,
-            ship.consum.ammo
+            ship.getAttribute('los', 99),
+            (<span>{ship.getAttribute('luck')}<sup>{ship.stat.luck_max}</sup></span>),
+            (0 - ship.consum.fuel),
+            (0 - ship.consum.ammo)
         ])
     }
     render() {
         return (
-            <DataTable className={this.props.className} tag="div" data={this.getData()} />
+            <DataTable className={this.props.className + ' comparetable'} tag="div" data={this.getData()} />
         )
     }
 }

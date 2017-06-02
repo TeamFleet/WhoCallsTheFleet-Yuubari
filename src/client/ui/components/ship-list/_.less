@@ -11,3 +11,19 @@
 
 @width-filter:      9em;
 @width-filter-focus:20em;
+
+.table() {
+    .cell{
+        flex:   1 0 30px;
+        &:first-of-type{
+            flex:       5 0 @size-ship-link;
+            text-align: left;
+            z-index:    -1;
+            pointer-events: none;
+        }
+        &:nth-child(n+2){
+            text-align: center;
+            font-size:  14px;
+        }
+    }
+}

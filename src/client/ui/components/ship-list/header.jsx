@@ -18,6 +18,7 @@ import {
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Icon from 'UI/components/icon.jsx'
+import TableHeader from './table-header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import styleHeader from './header.less'
@@ -293,6 +294,11 @@ class Compare extends React.Component {
                         >
                             START COMPARE ({this.props.count})
                         </button>
+                    </div>
+                </div>
+                <div className="comparing">
+                    <div className="wrapper">
+                        <TableHeader id={this.props.id} />
                     </div>
                 </div>
             </div>
