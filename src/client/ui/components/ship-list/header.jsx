@@ -245,13 +245,13 @@ class ExtraButtons extends React.Component {
     }
 }
 
-import styleHeaderCompare from './header-compare.less'
+import styleHeaderCompareHeader from './header-compare-header.less'
 @connect((state, ownProps) => ({
     // isModeCompare: state.shipList[ownProps.id].isModeCompare,
     compareState: state.shipList[ownProps.id].compareState,
     count: state.shipList[ownProps.id].compareList.length
 }))
-@ImportStyle(styleHeaderCompare)
+@ImportStyle(styleHeaderCompareHeader)
 class Compare extends React.Component {
     compareStart() {
         this.props.dispatch(
@@ -291,7 +291,9 @@ class Compare extends React.Component {
     }
 }
 
+import styleHeaderCompareControls from './header-compare-controls.less'
 @connect()
+@ImportStyle(styleHeaderCompareControls)
 class CompareControls extends React.Component {
     render() {
         return (
