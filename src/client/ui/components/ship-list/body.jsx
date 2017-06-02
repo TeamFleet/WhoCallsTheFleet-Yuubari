@@ -118,7 +118,7 @@ export default class ShipList extends React.Component {
                 this.props.dispatch(
                     filterLeave(this.props.id)
                 )
-            if (typeof this.props.isModeCompare !== 'undefined' || this.props.compareList.length)
+            if (typeof this.props.isModeCompare !== 'undefined' || (this.props.compareList && this.props.compareList.length))
                 this.props.dispatch(
                     compareReset(this.props.id, true)
                 )
