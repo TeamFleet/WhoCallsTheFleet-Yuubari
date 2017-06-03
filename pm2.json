@@ -3,65 +3,65 @@
      * Application configuration section
      * http://pm2.keymetrics.io/docs/usage/application-declaration/
      */
-    apps: [
+    "apps": [
 
         // client dev
         {
-            name: "fleet-dev-client",
-            script: "webpack/enter.js",
-            max_memory_restart: "1G",
-            out_file: "logs/dev/fleet-dev-client-out.log",
-            error_file: "logs/dev/fleet-dev-client-error.log",
-            env: {
-                WEBPACK_STAGE: "client",
-                WEBPACK_ENV: "dev",
-                CPORT: "3002"
+            "name": "fleet-dev-client",
+            "script": "webpack/enter.js",
+            "max_memory_restart": "1G",
+            "out_file": "logs/dev/fleet-dev-client-out.log",
+            "error_file": "logs/dev/fleet-dev-client-error.log",
+            "env": {
+                "WEBPACK_STAGE": "client",
+                "WEBPACK_ENV": "dev",
+                "CPORT": "3002"
             }
         },
 
         // server dev
         {
-            name: "fleet-dev-server",
-            script: "webpack/enter.js",
-            max_memory_restart: "300M",
-            out_file: "logs/dev/fleet-dev-server-out.log",
-            error_file: "logs/dev/fleet-dev-server-error.log",
-            env: {
-                WEBPACK_STAGE: "server",
-                WEBPACK_ENV: "dev",
-                SPORT: "3000",
-                CPORT: "3002"
+            "name": "fleet-dev-server",
+            "script": "webpack/enter.js",
+            "max_memory_restart": "1G",
+            "out_file": "logs/dev/fleet-dev-server-out.log",
+            "error_file": "logs/dev/fleet-dev-server-error.log",
+            "env": {
+                "WEBPACK_STAGE": "server",
+                "WEBPACK_ENV": "dev",
+                "SPORT": "3000",
+                "CPORT": "3002"
             }
         },
 
         // server dev run
         {
-            name: "fleet-dev-run",
-            script: "dist-web/server/index.js",
-            max_memory_restart: "300M",
-            out_file: "logs/dev/fleet-dev-run.log",
-            error_file: "logs/dev/fleet-dev-run-error.log",
-            watch: [ // 监控变化的目录，一旦变化，自动重启
+            "name": "fleet-dev-run",
+            "script": "dist-web/server/index.js",
+            "max_memory_restart": "300M",
+            "out_file": "logs/dev/fleet-dev-run.log",
+            "error_file": "logs/dev/fleet-dev-run-error.log",
+            "watch": [ // 监控变化的目录，一旦变化，自动重启
                 "dist-web"
             ],
-            env: {
-                SPORT: "3000",
-                CPORT: "3002"
+            "env": {
+                "SPORT": "3000",
+                "CPORT": "3002"
             }
         },
 
         // online
         {
-            name: "fleet-yuubari",
-            script: "dist-web/server/index.js",
-            max_memory_restart: "300M",
-            instances: 1,
-            exec_mode: "cluster",
-            out_file: "logs/dev/fleet-yuubari.log",
-            error_file: "logs/dev/fleet-yuubari-error.log",
-            env: {
-                SPORT: "8080",
-                CPORT: "8081"
+            "name": "fleet-yuubari",
+            "script": "dist-web/server/index.js",
+            "max_memory_restart": "300M",
+            "instances": 1,
+            "exec_mode": "cluster",
+            "out_file": "logs/dev/fleet-yuubari.log",
+            "error_file": "logs/dev/fleet-yuubari-error.log",
+            "env": {
+                "SPORT": "8080",
+                "CPORT": "8081"
             }
         }
     ]
