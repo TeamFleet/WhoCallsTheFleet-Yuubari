@@ -1,7 +1,13 @@
 @import './_.less';
 
 .component{
+    .main-sizing-padding();
+
     &.flex{
         .table();
+
+        .row{
+            height:     @height-compare-thead;
+        }
     }
 }

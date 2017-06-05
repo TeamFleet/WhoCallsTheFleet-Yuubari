@@ -21,7 +21,7 @@ export default class ShipListTableBody extends React.Component {
 
             ship.getAttribute('fire'),
             ship.getAttribute('torpedo'),
-            ship.getAttribute('fire') + ship.getAttribute('torpedo'),
+            ship.getAttribute('night'),
             ship.getAttribute('aa'),
             ship.getAttribute('asw', 99),
             ship.getAttribute('hp'),

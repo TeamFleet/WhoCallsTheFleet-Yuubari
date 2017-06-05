@@ -7,7 +7,7 @@ import getPic from 'Utils/get-pic.js'
 import { ImportStyle } from 'sp-css-import'
 import style from './link-ship.less'
 
-const ext = __CLIENT__ && self._html && self._html.classList.contains('webp') ? 'webp' : 'png'
+// const ext = __CLIENT__ && self._html && self._html.classList.contains('webp') ? 'webp' : 'png'
 
 @ImportStyle(style)
 export default class LinkShip extends React.Component {

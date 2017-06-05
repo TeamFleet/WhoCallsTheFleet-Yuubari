@@ -12,6 +12,26 @@
 
     "shipclass": "${class} Class",
 
+    "stat": {
+        "fire": "FP",
+        "torpedo": "TPD",
+        "night": "Night",
+        "aa": "AA",
+        "asw": "ASW",
+        "hp": "HP",
+        "armor": "Armor",
+        "evasion": "EVS",
+        "carry": "Carry",
+        "speed": "Speed",
+        "range": "Range",
+        "los": "LOS",
+        "luck": "Luck",
+        "consum": {
+            "fuel": "Fuel",
+            "ammo": "Ammo"
+        }
+    },
+
     "nav": {
         "home": "Home",
         "fleets": "Fleet Builder",

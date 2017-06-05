@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import translate from 'sp-i18n'
 import DataTable from '../datatable.jsx'
 
 import { ImportStyle } from 'sp-css-import'
@@ -20,6 +21,7 @@ const headers = [
     'speed',
     'range',
     'los',
+    'luck',
     'consum.fuel',
     'consum.ammo'
 ]
@@ -35,8 +37,8 @@ export default class ShipListTableHeader extends React.Component {
     }
     getHeaders() {
         return headers.map((stat, index) => (
-            <span key={index} onClick={() => {this.sort(stat)}}>
-                {stat}
+            <span key={index} onClick={() => { this.sort(stat) }}>
+                {stat && translate('stat.' + stat)}
             </span>
         ))
     }

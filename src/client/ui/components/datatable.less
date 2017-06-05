@@ -1,6 +1,9 @@
 @import '../base.less';
 
 .component{
+    .row + .row{
+        border-top: 1px solid @color-border;
+    }
 }
 
 .component.flex{
@@ -9,6 +12,7 @@
         display:    flex;
         flex-flow:  row nowrap;
         width:      100%;
+        align-items:center;
     }
     .cell{
         display:    block;

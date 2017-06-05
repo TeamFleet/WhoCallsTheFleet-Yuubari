@@ -12,6 +12,26 @@
 
     "shipclass": "${class}级",
 
+    "stat": {
+        "fire": "火力",
+        "torpedo": "雷装",
+        "night": "夜战",
+        "aa": "对空",
+        "asw": "对潜",
+        "hp": "耐久",
+        "armor": "装甲",
+        "evasion": "回避",
+        "carry": "搭载",
+        "speed": "航速",
+        "range": "射程",
+        "los": "索敌",
+        "luck": "运",
+        "consum": {
+            "fuel": "燃耗",
+            "ammo": "弹耗"
+        }
+    },
+
     "nav": {
         "home": "首页",
         "fleets": "舰队模拟",
