@@ -80,8 +80,9 @@ export default function (state = initialState, action) {
         case SHIPLIST_COMPARE_RESET:
             return updateState(state, action.id, {
                 isModeCompare: action.remove ? undefined : false,
-                compareState: 'selecting',
-                compareList: []
+                compareState: initialStateSingle.compareState,
+                compareList: [],
+                compareSort: [...initialStateSingle.compareSort]
             })
 
         case SHIPLIST_COMPARE_CHANGE_STATE:

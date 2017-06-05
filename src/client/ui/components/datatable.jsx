@@ -26,7 +26,11 @@ export default class DataTable extends React.Component {
         const TagName = this.props.tag || 'tbody'
         return (
             <TagName className="body">
-                {this.props.data.map(this.renderRow.bind(this))}
+                {this.props.data.map((row, index) => {
+                    if (typeof row === 'object' && row.cells)
+                        return this.renderRow(row.cells, row.key || index)
+                    return this.renderRow(row, index)
+                })}
             </TagName>
         )
     }

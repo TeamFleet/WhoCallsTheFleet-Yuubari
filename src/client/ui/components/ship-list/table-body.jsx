@@ -28,6 +28,14 @@ const stats = [
     'ammo'
 ]
 
+const extractValue = (obj) => {
+    if (typeof obj[1] === 'object' && typeof obj[1].value === 'number')
+        return obj[1].value
+    if (typeof obj[0] === 'number')
+        return obj[0]
+    return -1000
+}
+
 @ImportStyle(style)
 @connect((state, ownProps) => ({
     sortType: state.shipList[ownProps.id].compareSort[0],
@@ -58,11 +66,7 @@ export default class ShipListTableBody extends React.Component {
             })
         })
 
-        if (this.props.sortType) {
-
-        }
-
-        return this.props.ships.map(ship => {
+        let results = this.props.ships.map(ship => {
             let cells = [
                 <LinkShip ship={ship} />
             ]
@@ -71,6 +75,7 @@ export default class ShipListTableBody extends React.Component {
                 const value = ship.getAttribute(stat, 99)
                 let content = value
                 let className = ''
+                let trueValue
                 if (value === false) {
                     className = 'empty'
                     content = '-'
@@ -79,9 +84,12 @@ export default class ShipListTableBody extends React.Component {
                     content = '?'
                 } else {
                     if (stat === 'luck') {
-                        content = (<span className="stat-luck">{ship.getAttribute('luck')}<sup>{ship.stat.luck_max}</sup></span>)
+                        trueValue = ship.getAttribute('luck')
+                        content = (<span className="stat-luck">{trueValue}<sup>{ship.stat.luck_max}</sup></span>)
                     } else if (stat === 'fuel' || stat === 'ammo') {
                         content = 0 - content
+                    } else if (stat === 'range' || stat === 'speed') {
+                        trueValue = ship.stat[stat]
                     }
                     if (statSort[stat] && statSort[stat].length > 1) {
                         if (statSort[stat][0] === value) {
@@ -94,20 +102,47 @@ export default class ShipListTableBody extends React.Component {
                 cells.push([
                     content,
                     {
-                        className: className
+                        className: className,
+                        value: trueValue
                     }
                 ])
             })
-            // console.log(cells)
 
-            return cells
+            return {
+                key: ship.id,
+                cells
+            }
         })
+
+        if (this.props.sortType) {
+            // console.log(this.props.sortType, this.props.sortOrder)
+            const index = stats.indexOf(this.props.sortType) + 1
+            results.sort((shipA, shipB) => {
+                const valueA = extractValue(shipA.cells[index])
+                const valueB = extractValue(shipB.cells[index])
+                if (this.props.sortOrder === 'desc')
+                    return valueB - valueA
+                return valueA - valueB
+            })
+        }
+
+        return results
     }
 
     onScroll(evt) {
+        this.scrollLeft = evt.target.scrollLeft
+        this.scrolling = true
+        setTimeout(() => {
+            this.scrolling = false
+        })
         this.props.dispatch(
-            compareScroll(this.props.id, evt.target.scrollLeft)
+            compareScroll(this.props.id, this.scrollLeft)
         )
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (this.scrolling && nextProps.scrollLeft === this.scrollLeft) return false
+        return true
     }
 
     render() {

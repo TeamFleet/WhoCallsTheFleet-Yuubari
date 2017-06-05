@@ -33,9 +33,12 @@
 
     .selecting, .comparing{
         position:   relative;
-        height:     100%;
         z-index:    -1;
         pointer-events: none;
+    }
+
+    .selecting{
+        height:     100%;
     }
 
         .btn-start-compare{
@@ -70,7 +73,7 @@
     .comparing{
         position:   absolute;
         top:        0;
-        bottom:     0;
+        bottom:     -1px;
         left:       0;
         right:      0;
         overflow:   hidden;

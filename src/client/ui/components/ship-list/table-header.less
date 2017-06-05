@@ -5,14 +5,31 @@
     padding-right:  @main-margin;
     height:         (@height-compare-thead + 20);
 
+    // ******************************************
+
+    &.flex{
+        .table();
+
+        // .row{
+        //     height:     @height-compare-thead;
+        // }
+
+        .cell{
+            height:     @height-compare-thead;
+            line-height:@height-compare-thead;
+        }
+    }
+
+    // ******************************************
+
     .screen-max({
         padding-left:    (@main-margin - 10px);
         padding-right:   (@main-margin - 10px);
     });
 
     .screen-t1({
-        padding-left:    (@main-margin - 20px);
-        padding-right:   (@main-margin - 20px);
+        padding-left:    (@main-margin - 30px);
+        padding-right:   (@main-margin - 25px);
     });
 
     .screen-tablet({
@@ -25,11 +42,57 @@
         padding-right:   0;
     });
 
-    &.flex{
-        .table();
+    // ******************************************
 
-        .row{
-            height:     @height-compare-thead;
+    // .row{
+    //     position:   relative;
+    // }
+    .btn-sort{
+        display:    block;
+        position:   relative;
+        height:     100%;
+    }
+
+    .is-sorting-asc, .is-sorting-desc{
+        color:      #fff;
+        &:before, &:after{
+            content:    '';
+            position:   absolute;
+            transition: none;
+        }
+
+        &:before{
+            left:       0;
+            right:      0;
+            height:     2px;
+            background: @color-base;
+        }
+
+        &:after{
+            @size:      8px;
+            border:     @size solid transparent;
+            margin-left:(0 - @size);
+            left:       50%;
+        }
+    }
+
+    .is-sorting-asc{
+        &:before{
+            bottom:     0;
+        }
+        &:after{
+            bottom:     0;
+            border-bottom-color:   @color-base;
+        }
+    }
+
+    .is-sorting-desc{
+        &:before{
+            top:        0;
+        }
+        &:after{
+            top:        0;
+            border-top-color:   @color-base;
         }
     }
 }

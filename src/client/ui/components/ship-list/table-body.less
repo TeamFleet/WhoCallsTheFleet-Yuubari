@@ -8,8 +8,29 @@
         .row{
             padding:    5px 0;
             height:     (@ship-link-height + 10);
+            .cell{
+                &:nth-child(n+2){
+                    line-height:1.2em;
+                }
+            }
+        }
+        .row + .row{
+            .screen-tablet({
+                border-top-color:   transparent;
+                &:after{
+                    content:    "";
+                    position:   absolute;
+                    height:     1px;
+                    background: @color-border;
+                    left:       (0 - @main-margin-tablet);
+                    right:      (0 - @main-margin-tablet);
+                    margin-top: (0 - @ship-link-height / 2 - 5);
+                }
+            });
         }
     }
+
+    // ******************************************
 
     .screen-max({
         margin-left:    -10px;
@@ -17,8 +38,8 @@
     });
 
     .screen-t1({
-        margin-left:    -20px;
-        margin-right:   -20px;
+        margin-left:    -30px;
+        margin-right:   -25px;
     });
 
     .screen-tablet({
@@ -31,16 +52,30 @@
         margin-right:   (0 - @main-margin-phone);
     });
 
+    // ******************************************
+
     sup{
-        padding-left: .25em;
+        padding-left: .1rem;
         position:   absolute;
         top:        auto;
-        margin-top: .25em;
+        margin-top: .15rem;
+        .screen-t1({
+            font-size: 12px;
+            transform: scale((10 / 12));
+            transform-origin: 0% 100%;
+        });
     }
 
     .stat-luck{
         padding-right: 1em;
     }
+
+    .empty{
+        font-size:  12px;
+        color:      @color-fade;
+    }
+
+    // ******************************************
 
     .top-first, .top-second{
         &:before{
@@ -60,17 +95,15 @@
         color:      #fff;
         &:before{
             background:     fade(#fff, 20%);
+            border:         1px solid fade(#fff, 15%);
         }
     }
 
     .top-second{
+        color:      #fff;
         &:before{
             background:     fade(#fff, 7.5%);
+            border:         1px solid fade(#fff, 10%);
         }
-    }
-
-    .empty{
-        font-size:  12px;
-        color:      @color-fade;
     }
 }

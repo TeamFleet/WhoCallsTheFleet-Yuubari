@@ -264,6 +264,8 @@ import styleHeaderCompareHeader from './header-compare-header.less'
 @ImportStyle(styleHeaderCompareHeader)
 class Compare extends React.Component {
     compareStart() {
+        if (__CLIENT__)
+            window.scrollTo(undefined, 0)
         this.props.dispatch(
             compareChangeState(this.props.id, 'comparing')
         )
@@ -313,18 +315,22 @@ import styleHeaderCompareControls from './header-compare-controls.less'
 @ImportStyle(styleHeaderCompareControls)
 class CompareControls extends React.Component {
     compareReset() {
+        if (__CLIENT__)
+            window.scrollTo(undefined, 0)
         this.props.dispatch(
             compareReset(this.props.id)
         )
     }
     compareContinue() {
+        if (__CLIENT__)
+            window.scrollTo(undefined, 0)
         this.props.dispatch(
             compareChangeState(this.props.id, 'selecting')
         )
     }
     compareResetSort() {
         this.props.dispatch(
-            compareSort(false)
+            compareSort(this.props.id, false)
         )
     }
     render() {
