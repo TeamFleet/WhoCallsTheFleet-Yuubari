@@ -5,6 +5,12 @@ import style from './datatable.less'
 
 @ImportStyle(style)
 export default class DataTable extends React.Component {
+    componentDidUpdate(prevProps) {
+        if (typeof this.props.scrollLeft === 'undefined' || prevProps.scrollLeft == this.props.scrollLeft)
+            return
+        if (this._table) this._table.scrollLeft = this.props.scrollLeft
+    }
+
     renderHeader() {
         if (!this.props.headers) return null
         const TagName = this.props.tag || 'thead'
@@ -58,11 +64,16 @@ export default class DataTable extends React.Component {
 
     render() {
         const TagName = this.props.tag || 'table'
+
         return (
-            <TagName className={
-                this.props.className +
-                (TagName !== 'table' ? ' flex' : '')
-            }>
+            <TagName
+                className={
+                    this.props.className +
+                    (TagName !== 'table' ? ' flex' : '')
+                }
+                onScroll={this.props.onScroll}
+                ref={el => this._table = el}
+            >
                 {this.renderHeader()}
                 {this.renderBody()}
             </TagName>

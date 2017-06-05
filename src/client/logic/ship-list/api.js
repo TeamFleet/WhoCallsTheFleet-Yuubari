@@ -72,8 +72,14 @@ export const compareRemove = (id, item) => (dispatch) => {
     )
 }
 
-export const compareSort = (sorttype, order) => (dispatch) => {
+export const compareSort = (id, sorttype, order) => (dispatch) => {
     dispatch(
-        actions.compareSort(sorttype, order)
+        actions.compareSort(id, sorttype, order)
+    )
+}
+
+export const compareScroll = (id, scrollLeft) => (dispatch) => {
+    dispatch(
+        actions.compareScroll(id, scrollLeft)
     )
 }

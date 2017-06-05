@@ -14,7 +14,8 @@ import {
     SHIPLIST_COMPARE_UPDATE_LIST,
     SHIPLIST_COMPARE_ADD,
     SHIPLIST_COMPARE_REMOVE,
-    SHIPLIST_COMPARE_SORT
+    SHIPLIST_COMPARE_SORT,
+    SHIPLIST_COMPARE_SCROLL
 } from '../../redux/action-types.js'
 
 export const init = (id, initialState = {}) => ({
@@ -86,8 +87,15 @@ export const compareRemove = (id, item) => ({
     item
 })
 
-export const compareSort = (sorttype, order) => ({
+export const compareSort = (id, sorttype, order) => ({
     type: SHIPLIST_COMPARE_SORT,
+    id,
     sorttype,
     order
+})
+
+export const compareScroll = (id, scrollLeft) => ({
+    type: SHIPLIST_COMPARE_SCROLL,
+    id,
+    scrollLeft
 })

@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 
 import LinkShip from '../link-ship.jsx'
 import DataTable from '../datatable.jsx'
+import {
+    compareScroll
+} from 'Logic/ship-list/api.js'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './table-body.less'
@@ -28,36 +31,30 @@ const stats = [
 @ImportStyle(style)
 @connect((state, ownProps) => ({
     sortType: state.shipList[ownProps.id].compareSort[0],
-    sortOrder: state.shipList[ownProps.id].compareSort[1]
+    sortOrder: state.shipList[ownProps.id].compareSort[1],
+    scrollLeft: state.shipList[ownProps.id].compareScrollLeft
 }))
 export default class ShipListTableBody extends React.Component {
     getData() {
         if (!Array.isArray(this.props.ships)) return []
-        console.log(this.props.ships)
+        // console.log(this.props.ships)
 
-        let statTop = {}
+        let statSort = {}
 
-        this.props.ships.forEach(ship => {
-            stats.forEach(stat => {
-                if (stat === 'speed' || stat === 'range') return
-                if (!statTop[stat]) statTop[stat] = []
+        stats.forEach(stat => {
+            if (stat === 'speed' || stat === 'range') return
+            if (!statSort[stat]) statSort[stat] = []
 
+            this.props.ships.forEach(ship => {
                 const value = ship.getAttribute(stat, 99) || -1
-                if (statTop[stat].indexOf(value) > -1) return
+                if (statSort[stat].indexOf(value) > -1) return
+                statSort[stat].push(value)
+            })
 
-                let insertIndex = statTop[stat].length
-                statTop[stat].forEach((current, index) => {
-                    if (stat === 'fuel' || stat === 'ammo') {
-                        if (value < current)
-                            insertIndex = index
-                    } else {
-                        if (value > current)
-                            insertIndex = index
-                    }
-                })
-
-                statTop[stat].splice(insertIndex, 0, value)
-                // statTop[stat] = statTop[stat].slice(0, 2)
+            statSort[stat].sort((a, b) => {
+                if (stat === 'fuel' || stat === 'ammo')
+                    return a - b
+                return b - a
             })
         })
 
@@ -86,10 +83,10 @@ export default class ShipListTableBody extends React.Component {
                     } else if (stat === 'fuel' || stat === 'ammo') {
                         content = 0 - content
                     }
-                    if (statTop[stat] && statTop[stat].length > 1) {
-                        if (statTop[stat][0] === value) {
+                    if (statSort[stat] && statSort[stat].length > 1) {
+                        if (statSort[stat][0] === value) {
                             className = 'top-first'
-                        } else if (statTop[stat].length > 3 && statTop[stat][1] === value) {
+                        } else if (statSort[stat].length > 3 && statSort[stat][1] === value) {
                             className = 'top-second'
                         }
                     }
@@ -101,14 +98,27 @@ export default class ShipListTableBody extends React.Component {
                     }
                 ])
             })
-            console.log(cells)
+            // console.log(cells)
 
             return cells
         })
     }
+
+    onScroll(evt) {
+        this.props.dispatch(
+            compareScroll(this.props.id, evt.target.scrollLeft)
+        )
+    }
+
     render() {
         return (
-            <DataTable className={this.props.className + ' comparetable'} tag="div" data={this.getData()} />
+            <DataTable
+                className={this.props.className + ' comparetable'}
+                tag="div"
+                data={this.getData()}
+                onScroll={this.onScroll.bind(this)}
+                scrollLeft={this.props.scrollLeft}
+            />
         )
     }
 }

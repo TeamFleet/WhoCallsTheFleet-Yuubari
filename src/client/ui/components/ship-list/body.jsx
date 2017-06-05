@@ -10,6 +10,7 @@ import {
     filterLeave,
     compareReset
 } from 'Logic/ship-list/api.js'
+import pref from 'Logic/preferences'
 
 import Title from './title.jsx'
 import List from './list.jsx'
@@ -20,6 +21,33 @@ import { ImportStyle } from 'sp-css-import'
 import style from './body.less'
 
 const filterSelectMax = 100
+
+const getShipList = (list) => {
+    let result = []
+
+    const checkLastRemodelLoop = (ships, index) => {
+        while (ships[index].remodel && ships[index].remodel.next_loop)
+            index++
+        return index === ships.length - 1
+    }
+
+    list.forEach(ships => {
+        if (Array.isArray(ships))
+            return ships.forEach((ship, index2) => {
+                if (!pref.shipListShowAllShips
+                    && index2 < ships.length - 1
+                    && !checkLastRemodelLoop(ships, index2)
+                )
+                    return null
+                result.push(ship)
+            })
+
+        // 搜索结果：第一级为Ship
+        result.push(ships)
+    })
+
+    return result
+}
 
 @connect((state, ownProps) => ({
     ...state.shipList[ownProps.id],
@@ -44,24 +72,27 @@ export default class ShipList extends React.Component {
             index = index + '-'
         else
             index = ''
-        return collection.list.map((type, index2) => (
-            <div
-                key={index + index2}
-                className={
-                    index2 === 0 ? 'first' :
-                        (index2 === collection.list.length - 1 ? 'last' : '')
-                        + (!type.type ? ' is-unselectable' : '')
-                }
-            >
-                {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={type.ships} />) : null}
-                {!type.type && (<Title />)}
-                {type.class && (<Title class={type.class} id={this.props.id} ships={type.ships} />)}
-                <List
-                    id={this.props.id}
-                    ships={type.ships}
-                />
-            </div>
-        ))
+        return collection.list.map((type, index2) => {
+            const list = getShipList(type.ships)
+            return (
+                <div
+                    key={index + index2}
+                    className={
+                        index2 === 0 ? 'first' :
+                            (index2 === collection.list.length - 1 ? 'last' : '')
+                            + (!type.type ? ' is-unselectable' : '')
+                    }
+                >
+                    {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={list} />) : null}
+                    {!type.type && (<Title />)}
+                    {type.class && (<Title class={type.class} id={this.props.id} ships={list} />)}
+                    <List
+                        id={this.props.id}
+                        ships={list}
+                    />
+                </div>
+            )
+        })
     }
 
     renderFilteredResult() {
@@ -124,14 +155,6 @@ export default class ShipList extends React.Component {
                 )
         }
     }
-
-    // componentWillUnmount() {
-    //     if (!__CLIENT__) return
-    //     if (typeof this.props.isModeCompare !== 'undefined' || this.props.compareList.length)
-    //         this.props.dispatch(
-    //             compareReset(this.props.id, true)
-    //         )
-    // }
 
     render() {
         if (typeof this.props.collection === 'undefined') {

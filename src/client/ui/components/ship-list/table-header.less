@@ -1,7 +1,29 @@
 @import './_.less';
 
 .component{
-    .main-sizing-padding();
+    padding-left:   @main-margin;
+    padding-right:  @main-margin;
+    height:         (@height-compare-thead + 20);
+
+    .screen-max({
+        padding-left:    (@main-margin - 10px);
+        padding-right:   (@main-margin - 10px);
+    });
+
+    .screen-t1({
+        padding-left:    (@main-margin - 20px);
+        padding-right:   (@main-margin - 20px);
+    });
+
+    .screen-tablet({
+        padding-left:    0;
+        padding-right:   0;
+    });
+
+    .screen-phone({
+        padding-left:    0;
+        padding-right:   0;
+    });
 
     &.flex{
         .table();

@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
 import DataTable from '../datatable.jsx'
+import {
+    compareScroll
+} from 'Logic/ship-list/api.js'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './table-header.less'
@@ -29,12 +32,14 @@ const headers = [
 @ImportStyle(style)
 @connect((state, ownProps) => ({
     sortType: state.shipList[ownProps.id].compareSort[0],
-    sortOrder: state.shipList[ownProps.id].compareSort[1]
+    sortOrder: state.shipList[ownProps.id].compareSort[1],
+    scrollLeft: state.shipList[ownProps.id].compareScrollLeft
 }))
 export default class ShipListTableHeader extends React.Component {
     sort(type) {
         console.log(type)
     }
+
     getHeaders() {
         return headers.map((stat, index) => (
             <span key={index} onClick={() => { this.sort(stat) }}>
@@ -42,9 +47,22 @@ export default class ShipListTableHeader extends React.Component {
             </span>
         ))
     }
+
+    onScroll(evt) {
+        this.props.dispatch(
+            compareScroll(this.props.id, evt.target.scrollLeft)
+        )
+    }
+
     render() {
         return (
-            <DataTable className={this.props.className + ' comparetable'} tag="div" headers={this.getHeaders()} />
+            <DataTable
+                className={this.props.className + ' comparetable'}
+                tag="div"
+                headers={this.getHeaders()}
+                onScroll={this.onScroll.bind(this)}
+                scrollLeft={this.props.scrollLeft}
+            />
         )
     }
 }

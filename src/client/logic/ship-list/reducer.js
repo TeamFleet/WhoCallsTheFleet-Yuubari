@@ -14,7 +14,8 @@ import {
     SHIPLIST_COMPARE_UPDATE_LIST,
     SHIPLIST_COMPARE_ADD,
     SHIPLIST_COMPARE_REMOVE,
-    SHIPLIST_COMPARE_SORT
+    SHIPLIST_COMPARE_SORT,
+    SHIPLIST_COMPARE_SCROLL
 } from '../../redux/action-types.js'
 
 const initialState = {}
@@ -27,7 +28,8 @@ const initialStateSingle = {
     isModeCompare: undefined,
     compareState: 'selecting', // selecting || comparing
     compareList: [],
-    compareSort: [undefined, 'desc']
+    compareSort: [undefined, 'desc'],
+    compareScrollLeft: 0
 }
 
 const updateState = (fullState, id, state) =>
@@ -94,23 +96,42 @@ export default function (state = initialState, action) {
 
         case SHIPLIST_COMPARE_ADD: {
             const list = state[action.id].compareList
-            const index = list.indexOf(action.item)
-            if (index < 0) {
-                return updateState(state, action.id, {
-                    compareList: list.concat(action.item)
-                })
+            if (Array.isArray(action.item)) {
+                let insert = action.item.filter(item => list.indexOf(item) < 0)
+                if (insert.length) {
+                    return updateState(state, action.id, {
+                        compareList: list.concat(insert)
+                    })
+                }
+            } else {
+                const index = list.indexOf(action.item)
+                if (index < 0) {
+                    return updateState(state, action.id, {
+                        compareList: list.concat(action.item)
+                    })
+                }
             }
         }
 
         case SHIPLIST_COMPARE_REMOVE: {
             const list = state[action.id].compareList
-            const index = list.indexOf(action.item)
-            if (index > -1) {
+            if (Array.isArray(action.item)) {
                 let newList = [...list]
-                newList.splice(index, 1)
+                action.item.forEach(item => {
+                    newList.splice(newList.indexOf(item), 1)
+                })
                 return updateState(state, action.id, {
                     compareList: newList
                 })
+            } else {
+                const index = list.indexOf(action.item)
+                if (index > -1) {
+                    let newList = [...list]
+                    newList.splice(index, 1)
+                    return updateState(state, action.id, {
+                        compareList: newList
+                    })
+                }
             }
         }
 
@@ -133,6 +154,12 @@ export default function (state = initialState, action) {
                         action.order || initialStateSingle.compareSort[1]
                     ]
                 })
+        }
+
+        case SHIPLIST_COMPARE_SCROLL: {
+            return updateState(state, action.id, {
+                compareScrollLeft: action.scrollLeft
+            })
         }
 
     }
