@@ -11,6 +11,7 @@ export default {
     // 对HTML基础模板的自定义注入
     // 例如：<script>//inject_critical</script>  替换为 critical
     injection: {
+        htmlattr: () => ` data-locale="${currentLocaleId}"`,
         manifest: () => `<link rel="manifest" href="/manifest-${currentLocaleId}.json">`,
         svg: () => `<div class="hide">${__ICONSVG__}</div>`,
 

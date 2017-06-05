@@ -1,6 +1,6 @@
 export const template = `
     <!DOCTYPE html>
-    <html>
+    <html<script>//inject_htmlattr</script>>
     <head>
         <title><script>//inject_title</script></title>
 
