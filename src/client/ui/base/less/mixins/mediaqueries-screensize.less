@@ -2,6 +2,14 @@
 @import '../tools.less';
 @import '../variables.less';
 
+.screen-max( @rules ){
+    @media all and (max-width: @layout-width-max){
+        &{
+            @rules();
+        }
+    }
+}
+
 .screen-t1( @rules ){
     @media all and (max-width: @screen-t1){
         &{

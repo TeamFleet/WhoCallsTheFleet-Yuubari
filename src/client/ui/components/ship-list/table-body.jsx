@@ -7,6 +7,24 @@ import DataTable from '../datatable.jsx'
 import { ImportStyle } from 'sp-css-import'
 import style from './table-body.less'
 
+const stats = [
+    'fire',
+    'torpedo',
+    'night',
+    'aa',
+    'asw',
+    'hp',
+    'armor',
+    'evasion',
+    'carry',
+    'speed',
+    'range',
+    'los',
+    'luck',
+    'fuel',
+    'ammo'
+]
+
 @ImportStyle(style)
 @connect((state, ownProps) => ({
     sortType: state.shipList[ownProps.id].compareSort[0],
@@ -16,25 +34,77 @@ export default class ShipListTableBody extends React.Component {
     getData() {
         if (!Array.isArray(this.props.ships)) return []
         console.log(this.props.ships)
-        return this.props.ships.map(ship => [
-            <LinkShip ship={ship} />,
 
-            ship.getAttribute('fire'),
-            ship.getAttribute('torpedo'),
-            ship.getAttribute('night'),
-            ship.getAttribute('aa'),
-            ship.getAttribute('asw', 99),
-            ship.getAttribute('hp'),
-            ship.getAttribute('armor'),
-            ship.getAttribute('evasion', 99),
-            ship.getAttribute('carry'),
-            ship.getAttribute('speed'),
-            ship.getAttribute('range'),
-            ship.getAttribute('los', 99),
-            (<span>{ship.getAttribute('luck')}<sup>{ship.stat.luck_max}</sup></span>),
-            (0 - ship.consum.fuel),
-            (0 - ship.consum.ammo)
-        ])
+        let statTop = {}
+
+        this.props.ships.forEach(ship => {
+            stats.forEach(stat => {
+                if (stat === 'speed' || stat === 'range') return
+                if (!statTop[stat]) statTop[stat] = []
+
+                const value = ship.getAttribute(stat, 99) || -1
+                if (statTop[stat].indexOf(value) > -1) return
+
+                let insertIndex = statTop[stat].length
+                statTop[stat].forEach((current, index) => {
+                    if (stat === 'fuel' || stat === 'ammo') {
+                        if (value < current)
+                            insertIndex = index
+                    } else {
+                        if (value > current)
+                            insertIndex = index
+                    }
+                })
+
+                statTop[stat].splice(insertIndex, 0, value)
+                // statTop[stat] = statTop[stat].slice(0, 2)
+            })
+        })
+
+        if (this.props.sortType) {
+
+        }
+
+        return this.props.ships.map(ship => {
+            let cells = [
+                <LinkShip ship={ship} />
+            ]
+
+            stats.forEach(stat => {
+                const value = ship.getAttribute(stat, 99)
+                let content = value
+                let className = ''
+                if (value === false) {
+                    className = 'empty'
+                    content = '-'
+                } else if (value === undefined) {
+                    className = 'undefined'
+                    content = '?'
+                } else {
+                    if (stat === 'luck') {
+                        content = (<span className="stat-luck">{ship.getAttribute('luck')}<sup>{ship.stat.luck_max}</sup></span>)
+                    } else if (stat === 'fuel' || stat === 'ammo') {
+                        content = 0 - content
+                    }
+                    if (statTop[stat] && statTop[stat].length > 1) {
+                        if (statTop[stat][0] === value) {
+                            className = 'top-first'
+                        } else if (statTop[stat].length > 3 && statTop[stat][1] === value) {
+                            className = 'top-second'
+                        }
+                    }
+                }
+                cells.push([
+                    content,
+                    {
+                        className: className
+                    }
+                ])
+            })
+            console.log(cells)
+
+            return cells
+        })
     }
     render() {
         return (

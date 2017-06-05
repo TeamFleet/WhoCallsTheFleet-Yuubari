@@ -4,13 +4,44 @@
     &.flex{
         .table();
         .row{
-            padding:5px 0;
+            padding:    5px 0;
+            height:     (@ship-link-height + 10);
         }
         sup{
             padding-left: .25em;
             position:   absolute;
             top:        auto;
             margin-top: .25em;
+        }
+        .stat-luck{
+            padding-right: 1em;
+        }
+
+        .top-first, .top-second{
+            &:before{
+                @height:    (@ship-link-height + 2);
+                content:    "";
+                position:   absolute;
+                top:        50%;
+                margin-top: (0 - @height / 2);
+                height:     @height;
+                z-index:    -1;
+                left:       1px;
+                right:      1px;
+            }
+        }
+
+        .top-first{
+            color:      #fff;
+            &:before{
+                background:     fade(#fff, 20%);
+            }
+        }
+
+        .top-second{
+            &:before{
+                background:     fade(#fff, 7.5%);
+            }
         }
     }
 }
