@@ -17,7 +17,7 @@
         .cell{
             flex:   1 0 40px;
             &:first-of-type{
-                flex:       5 0 (@ship-link-width - 10);
+                flex:       5 0 @ship-link-width;
                 text-align: left;
                 z-index:    -1;
                 pointer-events: none;
@@ -26,6 +26,9 @@
                 text-align: center;
                 font-size:  14px;
                 line-height:1.2em;
+                .locale("en", {
+                    font-size:  12px;
+                });
             }
         }
     }
