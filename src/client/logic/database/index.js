@@ -6,11 +6,7 @@ const LZString = __CLIENT__ && require('lz-string')
 
 const {
     register,
-
-    Ship,
-    Equipment,
-    Entity,
-    Consumable
+    parseRaw
 } = require('kckit')
 
 let isInitDb
@@ -40,7 +36,7 @@ export const init = () => {
     }
 
     if (!isInitDb) {
-        let raw = {
+        parseRaw({
             ships: requireDb('ships'),
             shipTypes: requireDb('ship_types'),
             shipClasses: requireDb('ship_classes'),
@@ -53,30 +49,7 @@ export const init = () => {
             entities: requireDb('entities'),
 
             consumables: requireDb('consumables')
-        }
-
-        for (let type in raw) {
-            let Class
-            switch (type) {
-                case 'ships': Class = Ship; break;
-                case 'equipments': Class = Equipment; break;
-                case 'entities': Class = Entity; break;
-                case 'consumables': Class = Consumable; break;
-            }
-            raw[type].split(/\r?\n/).forEach(item => {
-                if (!item) return
-                if (typeof db[type] === 'undefined') db[type] = {}
-
-                const obj = JSON.parse(item)
-                const id = obj.id ? parseInt(obj.id) : obj._id
-
-                if (Class) {
-                    db[type][id] = new Class(obj)
-                } else {
-                    db[type][id] = obj
-                }
-            })
-        }
+        }, db)
 
         // shipCollections
         shipCollections.forEach(collection => {
@@ -101,6 +74,7 @@ export const init = () => {
 
     if (needInit)
         register(objInit)
+
 }
 
 export default db
