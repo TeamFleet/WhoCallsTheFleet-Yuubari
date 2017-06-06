@@ -44,22 +44,32 @@ export default class ShipListTableHeader extends React.Component {
                 type
             )
         )
+        this.props.dispatch(
+            compareScroll(this.props.id, 0)
+        )
     }
 
     getHeaders() {
         return headers.map((stat, index) => {
             const type = stat.replace(/^consum\./, '')
-            return (
-                <span
-                    key={index}
-                    onClick={() => { this.sort(type) }}
-                    className={'btn-sort' +
-                        (this.props.sortType === type ? ` is-sorting-${this.props.sortOrder}` : '')
-                    }
-                >
-                    {stat && translate('stat.' + stat)}
-                </span>
-            )
+            return [
+                stat ? translate('stat.' + stat) : null,
+                {
+                    className: 'btn-sort' + (this.props.sortType === type ? ` is-sorting is-sorting-${this.props.sortOrder}` : ''),
+                    onClick: () => { this.sort(type) }
+                }
+            ]
+            // return (
+            //     <span
+            //         key={index}
+            //         onClick={() => { this.sort(type) }}
+            //         className={'btn-sort' +
+            //             (this.props.sortType === type ? ` is-sorting-${this.props.sortOrder}` : '')
+            //         }
+            //     >
+            //         {stat && translate('stat.' + stat)}
+            //     </span>
+            // )
         })
     }
 

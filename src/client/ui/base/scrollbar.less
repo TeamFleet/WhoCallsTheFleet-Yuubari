@@ -3,66 +3,124 @@
 html:not(.is-mobile){
     ::-webkit-scrollbar{
         width:      @scrollbar-width;
-        // height:     @scrollbar-width;
+        height:     @scrollbar-width;
     }
+    // ::-webkit-scrollbar:vertical{
+    //     width:      @scrollbar-width;
+    // }
+    // ::-webkit-scrollbar:horizontal{
+    //     height:     @scrollbar-width;
+    // }
+
+    // ******************************************
+    
     ::-webkit-scrollbar-button{
-        //display:	none;
-        // width: 		1px;
-        height: 	1px;
         border: 	0;
         margin: 	0;
         padding: 	0;
         background: transparent;
     }
+    ::-webkit-scrollbar-button:vertical{
+        height:     4px;
+    }
+    ::-webkit-scrollbar-button:horizontal{
+        width: 	    4px;
+    }
+    
+    // ******************************************
+
     ::-webkit-scrollbar-track{
         border-radius:	32px;
         overflow:		hidden;
         background:     @color-background;
     }
+    
+    // ******************************************
+    
     ::-webkit-scrollbar-thumb{
-        //background:	#fff;
-        @scrollbar-thumb-background:	linear-gradient(
-                                            to right,
-                                            transparent 2px,
-                                            rgba(255, 255, 255, .425) 2px,
-                                            rgba(255, 255, 255, .425) ~"calc(100% - 2px)",
-                                            transparent ~"calc(100% - 2px)"
-                                        );
-        background:		@scrollbar-thumb-background;
         border-radius:	32px;
         overflow:		hidden;
+    }
+    ::-webkit-scrollbar-thumb:vertical{
+        background:		linear-gradient(
+                            to right,
+                            transparent 2px,
+                            rgba(255, 255, 255, .425) 2px,
+                            rgba(255, 255, 255, .425) ~"calc(100% - 2px)",
+                            transparent ~"calc(100% - 2px)"
+                        );
         &:hover{
-            @scrollbar-thumb-background:	linear-gradient(
-                                                to right,
-                                                transparent 2px,
-                                                rgba(255, 255, 255, .625) 2px,
-                                                rgba(255, 255, 255, .625) ~"calc(100% - 2px)",
-                                                transparent ~"calc(100% - 2px)"
-                                            );
-            background:		@scrollbar-thumb-background;
+            background:	linear-gradient(
+                            to right,
+                            transparent 2px,
+                            rgba(255, 255, 255, .625) 2px,
+                            rgba(255, 255, 255, .625) ~"calc(100% - 2px)",
+                            transparent ~"calc(100% - 2px)"
+                        );
+        }
+    }
+    ::-webkit-scrollbar-thumb:horizontal{
+        background:		linear-gradient(
+                            to bottom,
+                            transparent 2px,
+                            rgba(255, 255, 255, .425) 2px,
+                            rgba(255, 255, 255, .425) ~"calc(100% - 2px)",
+                            transparent ~"calc(100% - 2px)"
+                        );
+        &:hover{
+            background:	linear-gradient(
+                            to bottom,
+                            transparent 2px,
+                            rgba(255, 255, 255, .625) 2px,
+                            rgba(255, 255, 255, .625) ~"calc(100% - 2px)",
+                            transparent ~"calc(100% - 2px)"
+                        );
         }
     }
 }
 
 html:not(.is-mobile) body{
-    ::-webkit-scrollbar-track{
-        @scrollbar-track-background:	linear-gradient(
-                                            to right,
-                                            transparent 3px,
-                                            rgba(0, 0, 0, .1) 3px,
-                                            rgba(0, 0, 0, .1) ~"calc(100% - 3px)",
-                                            transparent ~"calc(100% - 3px)"
-                                        );
-        background:		@scrollbar-track-background;
+    ::-webkit-scrollbar-button:vertical{
+        height:     0;
+    }
+    ::-webkit-scrollbar-button:horizontal{
+        width: 	    0;
+    }
+
+    ::-webkit-scrollbar-track:vertical{
+        background:		linear-gradient(
+                            to right,
+                            transparent 3px,
+                            rgba(0, 0, 0, .1) 3px,
+                            rgba(0, 0, 0, .1) ~"calc(100% - 3px)",
+                            transparent ~"calc(100% - 3px)"
+                        );
         &:hover{
-            @scrollbar-track-background-hover:	linear-gradient(
-                                                    to right,
-                                                    transparent 2px,
-                                                    rgba(0, 0, 0, .2) 2px,
-                                                    rgba(0, 0, 0, .2) ~"calc(100% - 2px)",
-                                                    transparent ~"calc(100% - 2px)"
-                                                );
-            background:		@scrollbar-track-background-hover;
+            background:	linear-gradient(
+                            to right,
+                            transparent 2px,
+                            rgba(0, 0, 0, .2) 2px,
+                            rgba(0, 0, 0, .2) ~"calc(100% - 2px)",
+                            transparent ~"calc(100% - 2px)"
+                        );
+        }
+    }
+    ::-webkit-scrollbar-track:horizontal{
+        background:		linear-gradient(
+                            to bottom,
+                            transparent 3px,
+                            rgba(0, 0, 0, .1) 3px,
+                            rgba(0, 0, 0, .1) ~"calc(100% - 3px)",
+                            transparent ~"calc(100% - 3px)"
+                        );
+        &:hover{
+            background: linear-gradient(
+                            to bottom,
+                            transparent 2px,
+                            rgba(0, 0, 0, .2) 2px,
+                            rgba(0, 0, 0, .2) ~"calc(100% - 2px)",
+                            transparent ~"calc(100% - 2px)"
+                        );
         }
     }
 }

@@ -78,6 +78,7 @@ export default class ShipListTableBody extends React.Component {
                 let content = value
                 let className = ''
                 let trueValue
+
                 if (value === false) {
                     className = 'empty'
                     content = '-'
@@ -101,6 +102,10 @@ export default class ShipListTableBody extends React.Component {
                         }
                     }
                 }
+
+                if (this.props.sortType === stat)
+                    className += ' is-sorting'
+
                 cells.push([
                     content,
                     {
@@ -144,6 +149,7 @@ export default class ShipListTableBody extends React.Component {
 
     shouldComponentUpdate(nextProps) {
         if (this.scrolling && nextProps.scrollLeft === this.scrollLeft) return false
+        // console.log(nextProps.scrollLeft, this.scrollLeft, this.props.scrollLeft)
         return true
     }
 

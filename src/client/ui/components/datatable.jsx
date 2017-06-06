@@ -6,9 +6,10 @@ import style from './datatable.less'
 @ImportStyle(style)
 export default class DataTable extends React.Component {
     componentDidUpdate(prevProps) {
-        if (typeof this.props.scrollLeft === 'undefined' || prevProps.scrollLeft == this.props.scrollLeft)
+        // console.log(prevProps.scrollLeft, this.props.scrollLeft, this._table, this._table.scrollLeft)
+        if (!this._table || typeof this.props.scrollLeft === 'undefined' || this._table.scrollLeft === this.props.scrollLeft)
             return
-        if (this._table) this._table.scrollLeft = this.props.scrollLeft
+        this._table.scrollLeft = this.props.scrollLeft
     }
 
     renderHeader() {
