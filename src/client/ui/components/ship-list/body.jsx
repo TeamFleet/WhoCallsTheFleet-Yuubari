@@ -124,7 +124,7 @@ export default class ShipList extends React.Component {
     }
 
     renderBody() {
-        console.log(db)
+        // console.log(db)
         if (this.props.isModeCompare && this.props.compareState === 'comparing') {
             return <TableBody id={this.props.id} ships={this.props.compareList} />
         } else if (__CLIENT__) {

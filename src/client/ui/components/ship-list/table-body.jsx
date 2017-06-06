@@ -31,6 +31,8 @@ const stats = [
 const extractValue = (obj) => {
     if (typeof obj[1] === 'object' && typeof obj[1].value === 'number')
         return obj[1].value
+    if (obj[0] === '?')
+        return -1
     if (typeof obj[0] === 'number')
         return obj[0]
     return -1000
