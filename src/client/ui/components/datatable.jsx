@@ -29,17 +29,17 @@ export default class DataTable extends React.Component {
             <TagName className="body">
                 {this.props.data.map((row, index) => {
                     if (typeof row === 'object' && row.cells)
-                        return this.renderRow(row.cells, row.key || index)
+                        return this.renderRow(row.cells, row.key || index, row.props)
                     return this.renderRow(row, index)
                 })}
             </TagName>
         )
     }
 
-    renderRow(data, index = 0) {
+    renderRow(data, index = 0, props = {}) {
         const TagName = this.props.tag || 'tr'
         return (
-            <TagName className="row" key={index}>
+            <TagName className="row" key={index} {...props}>
                 {data.map((children, index2) => this.renderCell(children, index, index2))}
             </TagName>
         )
