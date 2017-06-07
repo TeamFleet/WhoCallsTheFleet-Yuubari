@@ -18,6 +18,8 @@ import {
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Icon from 'UI/components/icon.jsx'
+import Button from 'UI/components/button.jsx'
+import ButtonGroup from 'UI/components/button-group.jsx'
 import TableHeader from './table-header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
@@ -336,28 +338,27 @@ class CompareControls extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
-                <button
-                    type="button"
-                    className="btn-reset"
-                    onClick={this.compareReset.bind(this)}
-                >
-                    RESET
-                </button>
-                <button
-                    type="button"
-                    className="btn-continue"
-                    onClick={this.compareContinue.bind(this)}
-                >
-                    CONTINUE (LEAVE)
-                </button>
-                <button
-                    type="button"
-                    className="btn-resort"
-                    disabled={!this.props.compareSortType}
-                    onClick={this.compareResetSort.bind(this)}
-                >
-                    RESET SORT
-                </button>
+                <ButtonGroup className="controls">
+                    <Button
+                        className="btn-reset"
+                        onClick={this.compareReset.bind(this)}
+                    >
+                        RESET
+                    </Button>
+                    <Button
+                        className="btn-continue"
+                        onClick={this.compareContinue.bind(this)}
+                    >
+                        CONTINUE (LEAVE)
+                    </Button>
+                    <Button
+                        className="btn-resort"
+                        disabled={!this.props.compareSortType}
+                        onClick={this.compareResetSort.bind(this)}
+                    >
+                        RESET SORT
+                    </Button>
+                </ButtonGroup>
             </div>
         )
     }
