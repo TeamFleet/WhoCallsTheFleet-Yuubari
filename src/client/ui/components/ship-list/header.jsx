@@ -339,25 +339,33 @@ class CompareControls extends React.Component {
         return (
             <div className={this.props.className}>
                 <ButtonGroup className="controls">
-                    <Button
-                        className="btn-reset"
+                    <button
+                        type="button"
+                        className="link btn-reset"
                         onClick={this.compareReset.bind(this)}
                     >
+                        <Icon icon="puzzle2" />
                         RESET
-                    </Button>
-                    <Button
-                        className="btn-continue"
+                    </button>
+                    <button
+                        type="button"
+                        className="link btn-continue"
                         onClick={this.compareContinue.bind(this)}
                     >
+                        <Icon icon="puzzle" />
                         CONTINUE (LEAVE)
-                    </Button>
-                    <Button
-                        className="btn-resort"
+                    </button>
+                    <button
+                        type="button"
+                        className="link btn-resort"
                         disabled={!this.props.compareSortType}
                         onClick={this.compareResetSort.bind(this)}
                     >
-                        RESET SORT
-                    </Button>
+                        {!this.props.compareSortType && <Icon icon="sort-amount-desc" />}
+                        {!this.props.compareSortType && "SORT"}
+                        {this.props.compareSortType && <Icon icon="paragraph-left" />}
+                        {this.props.compareSortType && "Reset Sort"}
+                    </button>
                 </ButtonGroup>
             </div>
         )
