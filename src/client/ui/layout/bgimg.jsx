@@ -104,9 +104,10 @@ class BgMain extends React.Component {
     }
 
     componentDidMount() {
-        if(!this.isBluredLoaded){
+        if (__DEV__) this.props.dispatch(bgimgApi.mainImgLoaded())
+        if (!this.isBluredLoaded) {
             setTimeout(() => {
-                if(!this.isBluredLoaded){
+                if (!this.isBluredLoaded) {
                     this.bluredLoaded(undefined, true)
                 }
             }, 2000)
