@@ -28,7 +28,8 @@ if (__DEV__)
     navs = navs.concat([
         undefined,
         'dev-ipsum',
-        'dev-components'
+        'dev-components',
+        'dev-icons'
     ])
 
 @connect(state => ({

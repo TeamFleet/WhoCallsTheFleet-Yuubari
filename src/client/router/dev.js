@@ -16,4 +16,12 @@ export default [{
             if (routeCheck(nextState)) cb(null, require('UI/pages/dev/components.jsx').default)
         }, 'dev-components')
     }
+}, {
+    path: 'dev-icons',
+    name: 'dev-icons',
+    getComponent: (nextState, cb) => {
+        require.ensure([], (require) => {
+            if (routeCheck(nextState)) cb(null, require('UI/pages/dev/icons.jsx').default)
+        }, 'dev-icons')
+    }
 }]
