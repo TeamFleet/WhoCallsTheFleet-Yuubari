@@ -13,7 +13,7 @@
 @width-filter-focus:20em;
 
 .table() {
-    overflow-x: hidden;
+    overflow-x: visible;
     .screen-tablet({
         overflow-x: auto;
     });
@@ -31,9 +31,9 @@
         .cell{
             flex:   1 0 40px;
             &:first-of-type{
-                flex:       5 0 (@ship-link-width + 5);
+                flex:       5 0 (@ship-link-width + 0);
                 // padding-right:10px;
-                padding-left:5px;
+                // padding-left:5px;
                 text-align: left;
                 z-index:    -1;
                 pointer-events: none;
@@ -42,8 +42,8 @@
                 //     flex-basis: ( @ship-link-width * 14 / 16 );
                 // });
                 .screen-tablet({
-                    padding-left:   0;
-                    flex-basis:     @ship-link-width;
+                    // padding-left:   0;
+                    // flex-basis:     @ship-link-width;
                     order:          1;
                 });
             }
