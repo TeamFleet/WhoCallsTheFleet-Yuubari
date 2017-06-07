@@ -8,16 +8,16 @@
         .row{
             padding:    5px 0;
             height:     (@ship-link-height + 10);
-            &:before{
-                transition: none;
-            }
+            // &:before{
+            //     transition: none;
+            // }
             .cell{
                 &:nth-child(n+2){
                     line-height:1.2em;
                 }
             }
             &:hover{
-                background:     linear-gradient(to right, transparent, fade(#fff, 10%) 30px);
+                background:     linear-gradient(to right, transparent, fade(#fff, 10%) 150px);
                 .screen-tablet({
                     background: none;
                     &:before{
@@ -28,7 +28,7 @@
                         left:       (0 - @main-margin-tablet);
                         right:      (0 - @main-margin-tablet);
                         margin-top: -1px;
-                        z-index:    -1;
+                        z-index:    -2;
                     }
                 });
             }
