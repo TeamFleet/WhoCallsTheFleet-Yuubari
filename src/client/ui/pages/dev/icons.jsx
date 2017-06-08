@@ -25,10 +25,6 @@ export default class extends React.Component {
 
     constructor() {
         super()
-
-        this.state = {
-            iconSize: 32
-        }
     }
 
     getIcons() {
@@ -56,7 +52,7 @@ export default class extends React.Component {
                 </MainHeader>
                 <div className="icon-sample-group">
                     {this.getIcons().map((icon, index) => (
-                        <IconSample icon={icon} key={index} size={this.state.iconSize} />
+                        <IconSample icon={icon} key={index} />
                     ))}
                 </div>
             </PageContainer>
@@ -68,10 +64,8 @@ class IconSample extends React.Component {
     render() {
         return (
             <div className="icon-sample">
-                <Icon icon={this.props.icon} className="icon" style={{
-                    width: this.props.size + 'px',
-                    height: this.props.size + 'px'
-                }} />
+                <Icon icon={this.props.icon} className="icon" />
+                <input type="text" value={this.props.icon} readOnly />
             </div>
         )
     }

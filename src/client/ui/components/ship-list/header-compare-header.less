@@ -13,7 +13,7 @@
     top:        @height;
     height:     @height-compare-thead;
     line-height:@height-compare-thead;
-    
+
     border-bottom:  1px solid @color-border;
 
     .screen-phone({
@@ -22,7 +22,8 @@
 
     &:after{
         content:    "";
-        background: fade(@theme-bluegrey-900, 35%);
+        // background: fade(@theme-bluegrey-900, 35%);
+        background: fade(#000, 20%);
         position:   absolute;
         top:        0;
         bottom:     0;
@@ -48,6 +49,7 @@
             background:     none transparent;
             height:         @height-compare-thead;
             line-height:    @height-compare-thead;
+            // background:     fade(@color-accent, 15%);
             &:after{
                 position:   absolute;
                 content:    "";
@@ -56,8 +58,10 @@
                 left:       0;
                 right:      0;
                 opacity:    .5;
+                transition: inherit;
             }
-            &:not([disabled]):hover{
+            &:hover{
+                // background-color: fade(@color-accent, 25%);
                 &:after{
                     opacity:    1;
                 }
@@ -66,7 +70,22 @@
             position:   relative;
             color:      inherit;
             &:after{
-                background: ease-out-sine-gradient(to bottom, transparent, fade(@color-accent, 25%));
+                background: ease-out-sine-gradient(to bottom, transparent, fade(@color-accent, 35%));
+            }
+            &:focus{
+                outline:    0;
+            }
+            &:active{
+                color:      @theme-bluegrey-400;
+                box-shadow: inset 0 3px 5px 1px fade(#000, 30%);
+                // background-color: fade(#000, 10%);
+                &:after{
+                    opacity:    0;
+                }
+            }
+            &:focus:not(:active){
+                outline:    2px @color-accent;
+                box-shadow: 0 0 5px fade(@color-accent, 50%);
             }
             .sku-webapp({
                 cursor:     pointer;

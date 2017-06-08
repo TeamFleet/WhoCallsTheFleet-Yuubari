@@ -17,14 +17,14 @@
                 }
             }
             &:hover{
-                background:     linear-gradient(to right, transparent, fade(#fff, 10%) 150px);
+                background:     linear-gradient(to right, transparent, fade(#fff, 7.5%) 150px);
                 .screen-tablet({
                     background: none;
                     &:before{
                         content:    "";
                         position:   absolute;
                         height:     (@ship-link-height + 10 - 2);
-                        background: linear-gradient(to bottom, transparent, transparent 2px, fade(#fff, 10%) 2px);
+                        background: linear-gradient(to bottom, transparent, transparent 2px, fade(#fff, 7.5%) 2px);
                         left:       (0 - @main-margin-tablet);
                         right:      (0 - @main-margin-tablet);
                         margin-top: -1px;
@@ -50,7 +50,7 @@
                 }
                 &:hover:before{
                     height:     (@ship-link-height + 10 - 2);
-                    background: linear-gradient(to bottom, @color-border, @color-border 1px, transparent 1px, transparent 2px, fade(#fff, 10%) 2px);
+                    background: linear-gradient(to bottom, @color-border, @color-border 1px, transparent 1px, transparent 2px, fade(#fff, 7.5%) 2px);
                     margin-top: -1px;
                 }
             });

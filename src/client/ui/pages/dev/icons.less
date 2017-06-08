@@ -3,13 +3,35 @@
 .component{
     padding-top:    100px;
 
+    @icon-size:     32px;
+    @item-width:    (@icon-size + 100px);
+    @item-height:   (@icon-size + 10px);
+
     .icon-sample-group{
-        display:    flex;
-        flex-flow:  row wrap;
+        display:    grid;
+        grid-template-columns:  repeat(auto-fit, minmax(@item-width, 1fr));
+        grid-column-gap:        20px;
+        grid-row-gap:           10px;
     }
 
     .icon-sample{
-        flex:       0 0 auto;
-        padding:    1em;
+        height:         @item-height;
+        display:        flex;
+        flex-flow:      row nowrap;
+        align-items:    center;
+
+        .icon{
+            flex:       0 0 @icon-size;
+            width:      @icon-size;
+            height:     @icon-size;
+        }
+
+        input{
+            flex:       1 0 auto;
+            font-size:  12px;
+            width:      0;
+            margin:     0 0 0 8px;
+            padding:    .2em .35em;
+        }
     }
 }

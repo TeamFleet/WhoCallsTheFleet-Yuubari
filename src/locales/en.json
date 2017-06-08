@@ -53,9 +53,12 @@
         },
         "compare": {
             "button": "Compare",
-            "selected": "Selected: ${count}",
-            "start": "Start Compare",
-            "reset": "Reset Selection"
+            "wait_for_selection": "Select ship to start...",
+            "selected_to_start": "Selected (${count}). Click to compare...",
+            "quit": "Quit",
+            "continue": "Modify Selection",
+            "click_to_sort": "Click header to sort",
+            "reset_sort": "Reset Sort"
         }
     },
 

@@ -53,9 +53,12 @@
         },
         "compare": {
             "button": "属性对比",
-            "selected": "已选择: ${count}",
-            "start": "开始对比",
-            "reset": "重置选择"
+            "wait_for_selection": "选择舰娘以开始对比...",
+            "selected_to_start": "已选择（${count}）。点击开始对比...",
+            "quit": "结束对比",
+            "continue": "修改选择",
+            "click_to_sort": "点击表头以排序",
+            "reset_sort": "重置排序"
         }
     },
 

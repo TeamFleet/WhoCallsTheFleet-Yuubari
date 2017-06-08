@@ -18,8 +18,8 @@ import {
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Icon from 'UI/components/icon.jsx'
-import Button from 'UI/components/button.jsx'
-import ButtonGroup from 'UI/components/button-group.jsx'
+// import Button from 'UI/components/button.jsx'
+// import ButtonGroup from 'UI/components/button-group.jsx'
 import TableHeader from './table-header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
@@ -296,7 +296,10 @@ class Compare extends React.Component {
                             disabled={!this.props.count}
                             onClick={this.compareStart.bind(this)}
                         >
-                            START COMPARE ({this.props.count})
+                            {this.props.count
+                                ? translate("ship_list.compare.selected_to_start", { count: this.props.count })
+                                : translate("ship_list.compare.wait_for_selection")
+                            }
                         </button>
                     </div>
                 </div>
@@ -338,35 +341,35 @@ class CompareControls extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
-                <ButtonGroup className="controls">
+                <div className="group">
                     <button
                         type="button"
-                        className="link btn-reset"
+                        className="btn btn-reset"
                         onClick={this.compareReset.bind(this)}
                     >
-                        <Icon icon="puzzle2" />
-                        RESET
+                        <Icon className="icon" icon="puzzle2" />
+                        {translate("ship_list.compare.quit")}
                     </button>
                     <button
                         type="button"
-                        className="link btn-continue"
+                        className="btn btn-continue"
                         onClick={this.compareContinue.bind(this)}
                     >
-                        <Icon icon="puzzle" />
-                        CONTINUE (LEAVE)
+                        <Icon className="icon" icon="puzzle" />
+                        {translate("ship_list.compare.continue")}
                     </button>
                     <button
                         type="button"
-                        className="link btn-resort"
+                        className="btn btn-resort"
                         disabled={!this.props.compareSortType}
                         onClick={this.compareResetSort.bind(this)}
                     >
-                        {!this.props.compareSortType && <Icon icon="sort-amount-desc" />}
-                        {!this.props.compareSortType && "SORT"}
-                        {this.props.compareSortType && <Icon icon="paragraph-left" />}
-                        {this.props.compareSortType && "Reset Sort"}
+                        {!this.props.compareSortType && <Icon className="icon" icon="sort-amount-desc" />}
+                        {!this.props.compareSortType && translate("ship_list.compare.click_to_sort")}
+                        {this.props.compareSortType && <Icon className="icon" icon="paragraph-left" />}
+                        {this.props.compareSortType && translate("ship_list.compare.reset_sort")}
                     </button>
-                </ButtonGroup>
+                </div>
             </div>
         )
     }
