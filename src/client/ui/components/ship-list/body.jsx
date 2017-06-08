@@ -72,8 +72,15 @@ export default class ShipList extends React.Component {
             index = index + '-'
         else
             index = ''
+        let listType
         return collection.list.map((type, index2) => {
             const list = getShipList(type.ships)
+            if (type.type && type.class && typeof listType === 'undefined') {
+                listType = []
+                collection.list.forEach(type => {
+                    listType = listType.concat(getShipList(type.ships))
+                })
+            }
             return (
                 <div
                     key={index + index2}
@@ -83,7 +90,7 @@ export default class ShipList extends React.Component {
                             + (!type.type ? ' is-unselectable' : '')
                     }
                 >
-                    {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={list} />) : null}
+                    {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={listType || list} />) : null}
                     {!type.type && (<Title />)}
                     {type.class && (<Title class={type.class} id={this.props.id} ships={list} />)}
                     <List
@@ -132,6 +139,7 @@ export default class ShipList extends React.Component {
                 return this.renderFilteredResult()
             else {
                 this.filteredResult = undefined
+                // if (__DEV__) console.log(db.shipCollections[this.props.collection])
                 return this.renderCollection(db.shipCollections[this.props.collection], 'c-' + this.props.collection)
             }
         } else {

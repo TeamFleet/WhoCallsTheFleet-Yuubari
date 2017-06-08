@@ -7,11 +7,10 @@ import {
     compareAdd,
     compareRemove
 } from 'Logic/ship-list/api.js'
+import Icon from 'UI/components/icon.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import styleTitle from './title.less'
-
-// indeterminate
 
 const getChecked = (ownList, selectedList) => {
     let matched = 0
@@ -56,11 +55,20 @@ export default class ShipListTitle extends React.Component {
                 )
         }
     }
+
+    renderCheckmark() {
+        if (typeof this.props.checked === 'undefined') return null
+        return (
+            <Icon className="icon" icon="checkbox-checked" />
+        )
+    }
+
     render() {
         if (this.props.type) {
             const type = db.shipTypes[this.props.type]
             return (
                 <h4 className={this.props.className} data-checked={this.props.checked} onClick={this.toggle.bind(this)}>
+                    {this.renderCheckmark()}
                     {type.name[dbLocaleId] || type.name.ja_jp}
                     {type.code && (<small className="code">[{type.code}]</small>)}
                 </h4>
@@ -68,6 +76,7 @@ export default class ShipListTitle extends React.Component {
         } else if (this.props.class) {
             return (
                 <h5 className={this.props.className + ' is-sub'} data-checked={this.props.checked} onClick={this.toggle.bind(this)}>
+                    {this.renderCheckmark()}
                     {translate("shipclass", {
                         class: db.shipClasses[this.props.class].name[dbLocaleId] || db.shipClasses[this.props.class].name.ja_jp
                     })}
