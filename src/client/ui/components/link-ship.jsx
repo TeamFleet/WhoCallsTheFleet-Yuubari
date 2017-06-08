@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 import db from 'Logic/database'
 import getPic from 'Utils/get-pic.js'
 
+import Icon from 'UI/components/icon.jsx'
+
 import { ImportStyle } from 'sp-css-import'
 import style from './link-ship.less'
 
@@ -54,6 +56,7 @@ export default class LinkShip extends React.Component {
                 to={'/ships/' + this.props.ship.id}
                 onClick={this.props.onClick}
             >
+                {this.props.hasExtraIllust && <Icon className="icon-has-extra-illust" icon="hanger" />}
                 {this.renderName()}
                 {this.renderAvatar()}
                 {this.props.children}

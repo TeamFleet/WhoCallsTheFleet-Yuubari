@@ -70,6 +70,13 @@ class Link extends React.Component {
         // return false
     }
 
+    hasExtraIllust() {
+        let thisShip = this.props.ship
+        while (thisShip.illust_same_as_prev && thisShip.remodel && thisShip.remodel.prev)
+            thisShip = thisShip.remodel.prev
+        return Array.isArray(thisShip.illust_extra)
+    }
+
     render() {
         const isSelected = (__CLIENT__ && this.props.isModeCompare && this.props.compareList.indexOf(this.props.ship) > -1) ? true : false
         // const className =
@@ -86,6 +93,7 @@ class Link extends React.Component {
                 }
                 ship={this.props.ship}
                 onClick={(evt) => this.onClick(evt, isSelected)}
+                hasExtraIllust={this.hasExtraIllust()}
             >
             </LinkShip>
         )

@@ -9,7 +9,7 @@
     min-width:  @ship-link-width;
     height:     @ship-link-height;
 
-    padding-left:   85px;
+    padding-left:   87px;
 
     vertical-align:	middle;
 
@@ -57,12 +57,12 @@
         vertical-align:	middle;
         transition: none;
         // font-weight:700;
-        margin-right: -5px;
+        margin-right: -2px;
     }
         .name-suffix{
             display:    block;
-            line-height:1.1em;
-            margin-top: .2em;
+            line-height:1.05em;
+            margin-top: .15em;
             margin-left:4px;
             // transition: inherit;
             font-weight:400;
@@ -84,6 +84,19 @@
             color:      inherit;
             transition: inherit;
         }
+    }
+
+    .icon-has-extra-illust{
+        @size:      20px;
+        position:   absolute;
+        width:      @size;
+        height:     @size;
+        fill:       #fff;
+        transform:  rotate(15deg);
+        top:        50%;
+        left:       70px;
+        z-index:    10;
+        margin-top: (0 - @size / 2 - 3);
     }
 }
 
