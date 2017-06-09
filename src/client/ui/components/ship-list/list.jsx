@@ -5,6 +5,7 @@ import {
     compareAdd,
     compareRemove
 } from 'Logic/ship-list/api.js'
+import getShip from 'Utils/get-ship.js'
 
 import LinkShip from 'UI/components/link-ship.jsx'
 
@@ -22,7 +23,7 @@ export default class ShipListList extends React.Component {
 
     renderItem(ship, index) {
         return (
-            <Link
+            <ThisLink
                 shipListId={this.props.id}
                 ship={ship}
                 key={index}
@@ -47,7 +48,7 @@ export default class ShipListList extends React.Component {
     isModeCompare: state.shipList[ownProps.shipListId].isModeCompare,
     compareList: state.shipList[ownProps.shipListId].compareList
 }))
-class Link extends React.Component {
+class ThisLink extends React.Component {
     onClick(evt, isSelected) {
         if (this.props.isModeCompare) {
             evt.preventDefault()
@@ -73,7 +74,7 @@ class Link extends React.Component {
     hasExtraIllust() {
         let thisShip = this.props.ship
         while (thisShip.illust_same_as_prev && thisShip.remodel && thisShip.remodel.prev)
-            thisShip = thisShip.remodel.prev
+            thisShip = getShip(thisShip.remodel.prev)
         return Array.isArray(thisShip.illust_extra)
     }
 
