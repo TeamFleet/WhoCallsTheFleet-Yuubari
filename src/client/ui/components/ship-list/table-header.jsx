@@ -8,6 +8,8 @@ import {
     compareSort
 } from 'Logic/ship-list/api.js'
 
+// import IconStat from 'UI/components/icon-stat.jsx'
+
 import { ImportStyle } from 'sp-css-import'
 import style from './table-header.less'
 
@@ -50,26 +52,18 @@ export default class ShipListTableHeader extends React.Component {
     }
 
     getHeaders() {
-        return headers.map((stat, index) => {
+        return headers.map(stat => {
             const type = stat.replace(/^consum\./, '')
             return [
-                stat ? translate('stat.' + stat) : null,
+                stat
+                    ? translate('stat.' + stat)
+                    // ? (<IconStat className="icon" stat={stat} />)
+                    : null,
                 {
                     className: 'btn-sort' + (this.props.sortType === type ? ` is-sorting is-sorting-${this.props.sortOrder}` : ''),
                     onClick: () => { this.sort(type) }
                 }
             ]
-            // return (
-            //     <span
-            //         key={index}
-            //         onClick={() => { this.sort(type) }}
-            //         className={'btn-sort' +
-            //             (this.props.sortType === type ? ` is-sorting-${this.props.sortOrder}` : '')
-            //         }
-            //     >
-            //         {stat && translate('stat.' + stat)}
-            //     </span>
-            // )
         })
     }
 

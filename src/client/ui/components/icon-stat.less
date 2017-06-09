@@ -1,0 +1,21 @@
+@import '../base.less';
+
+@size:      18px;
+@count:     20;
+
+.component{
+    width:      @size;
+    height:     @size;
+    display:    inline-block;
+
+    background:     url('../../assets/stats.png') no-repeat 50% @size / cover;
+
+    .stats(@n, @i: 0) when (@i =< @n) {
+        &[data-stat="@{i}"]{
+            // background-position: 50% percentage(0 - @i / @count);
+            background-position: 50% percentage(@i / (@count - 1));
+        }
+        .stats(@n, (@i + 1));
+    }
+    .stats(@count);
+}

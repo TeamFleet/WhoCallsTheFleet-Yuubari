@@ -1,8 +1,6 @@
 @import './_.less';
 
 .component{
-    padding-left:   @main-margin;
-    padding-right:  @main-margin;
     height:         (@height-compare-thead + 20);
 
     // ******************************************
@@ -17,39 +15,62 @@
         .cell{
             height:     @height-compare-thead;
             line-height:@height-compare-thead;
+            &:hover{
+                background:     fade(#fff, 10%);
+            }
         }
+
+        .row .cell{
+            &:nth-child(n+2){
+                .screen-max({
+                    font-size:  13px;
+                    .locale-en({
+                        font-size:  12px;
+                        // font-family:@font-famliy-serif-number;
+                    });
+                });
+            }
+        }
+
+        // ******************************************
+
+        padding-left:       (@main-margin + 0);
+        padding-right:      @main-margin;
+        margin-left:        auto;
+
+        .screen-max({
+            padding-left:    (@main-margin - 15px);
+            padding-right:   (@main-margin - 15px);
+        });
+
+        .screen-t1({
+            padding-left:    (@main-margin - 30px);
+            padding-right:   (@main-margin - 25px);
+        });
+
+        .screen-tablet({
+            padding-left:    0;
+            padding-right:   0;
+            .cell.is-sorting{
+                order:      2;
+            }
+        });
+
+        .screen-phone({
+            padding-left:    0;
+            padding-right:   0;
+        });
     }
-
-    // ******************************************
-
-    .screen-max({
-        padding-left:    (@main-margin - 10px);
-        padding-right:   (@main-margin - 10px);
-    });
-
-    .screen-t1({
-        padding-left:    (@main-margin - 30px);
-        padding-right:   (@main-margin - 25px);
-    });
-
-    .screen-tablet({
-        padding-left:    0;
-        padding-right:   0;
-        .cell.is-sorting{
-            order:      2;
-        }
-    });
-
-    .screen-phone({
-        padding-left:    0;
-        padding-right:   0;
-    });
 
     // ******************************************
 
     // .row{
     //     position:   relative;
     // }
+    .icon{
+        vertical-align: middle;
+    }
+
     .btn-sort{
         display:    block;
         position:   relative;

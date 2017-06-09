@@ -77,14 +77,14 @@ export default class ShipListTableBody extends React.Component {
             stats.forEach(stat => {
                 const value = ship.getAttribute(stat, 99)
                 let content = value
-                let className = ''
+                let className = 'stat-' + stat
                 let trueValue
 
                 if (value === false) {
-                    className = 'empty'
+                    className += ' empty'
                     content = '-'
                 } else if (value === undefined) {
-                    className = 'undefined'
+                    className += ' undefined'
                     content = '?'
                 } else {
                     if (stat === 'luck') {
@@ -97,9 +97,9 @@ export default class ShipListTableBody extends React.Component {
                     }
                     if (statSort[stat] && statSort[stat].length > 1) {
                         if (statSort[stat][0] === value) {
-                            className = 'top-first'
+                            className += ' top-first'
                         } else if (statSort[stat].length > 3 && statSort[stat][1] === value) {
-                            className = 'top-second'
+                            className += ' top-second'
                         }
                     }
                 }

@@ -1,9 +1,14 @@
 @import '../base.less';
 
 .component{
-    .row + .row{
-        border-top: 1px solid @color-border;
-    }
+    overflow-y:     hidden;
+    // .row + .row{
+        // border-top: 1px solid @color-border;
+    // }
+    // .row{
+    //     position:   relative;
+    // }
+    
     .cell{
         position:   relative;
     }
@@ -11,6 +16,24 @@
     .empty{
         font-size:  12px;
         color:      @color-fade;
+    }
+
+    .body{
+        // overflow:   hidden;
+        // margin-top:     -1px;
+        .row{
+            border-top: 1px solid @color-border;
+        }
+        .cell:hover:after{
+            content:    "";
+            background: fade(#fff, 7.5%);
+            position:   absolute;
+            top:        -100vh;
+            bottom:     -100vh;
+            left:       0;
+            right:      0;
+            z-index:    -1;
+        }
     }
 }
 
