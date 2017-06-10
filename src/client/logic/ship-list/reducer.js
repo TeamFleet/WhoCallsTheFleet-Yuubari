@@ -28,7 +28,7 @@ const initialStateSingle = {
     isModeCompare: undefined,
     compareState: 'selecting', // selecting || comparing
     compareList: [],
-    compareSort: [undefined, 'desc'],
+    compareSort: ['fire', 'desc'],
     compareScrollLeft: 0
 }
 

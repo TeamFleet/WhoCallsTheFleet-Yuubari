@@ -13,12 +13,23 @@
         height:     (@height - 1);
         margin-left:    @gutter;
         border-bottom:  2px solid transparent;
+        .icon{
+            fill:   @color-fade;
+            vertical-align: text-top;
+            margin-right: 4px;
+        }
         &:hover{
             // color:  @color-base;
             color:  #fff;
+            .icon{
+                fill:   #fff;
+            }
         }
         &:active{
             color:  @color-active;
+            .icon{
+                fill:   @color-active;
+            }
         }
         &.on{
             color:  #fff;
@@ -29,7 +40,7 @@
         });
     }
 
-        .btn-toggle{
+        .btn-toggle-compare{
             position:   relative;
             .icon-close{
                 position:   absolute;
@@ -41,6 +52,9 @@
             }
             &.on{
                 color:      transparent;
+                .icon{
+                    fill:   transparent;
+                }
                 .icon-close{
                     opacity:1;
                 }
@@ -64,16 +78,28 @@
         .item{
             margin-left:@main-margin-phone;
             color:      @color-base;
+            .icon{
+                fill:   @color-base;
+            }
             &:hover{
                 color:  inherit;
+                .icon{
+                    fill:   @color-base;
+                }
             }
             &.on{
                 color:  #fff;
+                .icon{
+                    fill:   #fff;
+                }
             }
         }
-        .btn-toggle{
+        .btn-toggle-compare{
             &.on{
                 color:      transparent;
+                .icon{
+                    fill:   transparent;
+                }
             }
         }
     });

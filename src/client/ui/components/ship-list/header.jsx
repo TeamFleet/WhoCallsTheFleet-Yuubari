@@ -13,7 +13,7 @@ import {
     compareLeave,
     compareReset,
     compareChangeState,
-    compareSort
+    // compareSort
 } from 'Logic/ship-list/api.js'
 
 import MainHeader from 'UI/components/main-header.jsx'
@@ -82,7 +82,7 @@ export default class ShipListHeader extends React.Component {
                 case 'compare':
                     return (
                         <span
-                            className={"link item btn-toggle" + (this.props.isModeCompare ? ' on' : '')}
+                            className={"link item btn-toggle-compare" + (this.props.isModeCompare ? ' on' : '')}
                             key={index}
                             onClick={() => {
                                 if (this.props.isModeCompare)
@@ -90,6 +90,7 @@ export default class ShipListHeader extends React.Component {
                                 return this.props.dispatch(compareEnter(this.props.id))
                             }}
                         >
+                            <Icon className="icon icon-compare" icon="paragraph-left" />
                             {translate("ship_list.compare.button")}
                             <Icon className="icon-close" icon="cross" />
                         </span>
@@ -326,18 +327,18 @@ class CompareControls extends React.Component {
             compareReset(this.props.id)
         )
     }
-    compareContinue() {
+    compareAddRemove() {
         if (__CLIENT__)
             window.scrollTo(undefined, 0)
         this.props.dispatch(
             compareChangeState(this.props.id, 'selecting')
         )
     }
-    compareResetSort() {
-        this.props.dispatch(
-            compareSort(this.props.id, false)
-        )
-    }
+    // compareResetSort() {
+    //     this.props.dispatch(
+    //         compareSort(this.props.id, false)
+    //     )
+    // }
     render() {
         return (
             <div className={this.props.className}>
@@ -352,12 +353,16 @@ class CompareControls extends React.Component {
                     </button>
                     <button
                         type="button"
-                        className="btn btn-continue"
-                        onClick={this.compareContinue.bind(this)}
+                        className="btn btn-modify"
+                        onClick={this.compareAddRemove.bind(this)}
                     >
                         <Icon className="icon" icon="puzzle" />
-                        {translate("ship_list.compare.continue")}
+                        {translate("ship_list.compare.add_remove")}
                     </button>
+                </div>
+            </div>
+        )
+        /* button: sort tip / reset sort
                     <button
                         type="button"
                         className="btn btn-resort"
@@ -369,8 +374,6 @@ class CompareControls extends React.Component {
                         {this.props.compareSortType && <Icon className="icon" icon="paragraph-left" />}
                         {this.props.compareSortType && translate("ship_list.compare.reset_sort")}
                     </button>
-                </div>
-            </div>
-        )
+        */
     }
 }

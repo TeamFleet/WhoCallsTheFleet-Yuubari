@@ -52,13 +52,11 @@
             "no_result_show_previous": "未找到任何结果。显示上次结果..."
         },
         "compare": {
-            "button": "属性对比",
+            "button": "对比",
             "wait_for_selection": "选择舰娘以开始对比...",
             "selected_to_start": "已选择（${count}）。点击开始对比...",
             "quit": "结束对比",
-            "continue": "修改选择",
-            "click_to_sort": "点击表头以排序",
-            "reset_sort": "重置排序"
+            "add_remove": "修改选择"
         }
     },
 
