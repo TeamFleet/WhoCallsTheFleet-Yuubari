@@ -25,7 +25,7 @@
     &:after{
         content:    "";
         position:   absolute;
-        z-index:    -2;
+        z-index:    -10;
         top:        0;
         bottom:     0;
         left:       20px;
@@ -36,7 +36,7 @@
     .avatar{
         display:    block;
         position:   absolute;
-        z-index:    -1;
+        z-index:    -2;
 
         top:        0;
         // left:       -10px;
@@ -96,7 +96,22 @@
         top:        50%;
         left:       70px;
         z-index:    10;
-        margin-top: (0 - @size / 2 - 3);
+        margin-top: (0 - @size / 2);
+    }
+
+    .flag-navy{
+        @width:     20px;
+        @height:    20px;
+        position:   absolute;
+        width:      @width;
+        height:     @height;
+        top:        50%;
+        left:       65px;
+        margin-top: (0 - @height / 2 - 12);
+        z-index:    -1;
+        // background-color: red;
+        transform:  rotate(10deg);
+        filter:     drop-shadow(-1px 1px 1px fade(#000, 75%));
     }
 }
 

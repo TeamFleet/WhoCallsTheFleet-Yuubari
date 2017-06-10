@@ -5,6 +5,7 @@ import getShip from 'Utils/get-ship.js'
 import getPic from 'Utils/get-pic.js'
 
 import Icon from 'UI/components/icon.jsx'
+import FlagNavy from 'UI/components/flag-navy.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './link-ship.less'
@@ -43,6 +44,7 @@ export default class LinkShip extends React.Component {
                 {this.props.hasExtraIllust && <Icon className="icon-has-extra-illust" icon="hanger" />}
                 {this.renderName()}
                 {this.renderAvatar()}
+                {this.ship.navy !== 'ijn' && <FlagNavy className="flag-navy" navy={this.ship.navy} />}
                 {this.props.children}
             </Link>
         )

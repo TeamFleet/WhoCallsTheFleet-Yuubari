@@ -95,6 +95,7 @@ class ThisLink extends React.Component {
                 ship={this.props.ship}
                 onClick={(evt) => this.onClick(evt, isSelected)}
                 hasExtraIllust={this.hasExtraIllust()}
+                navy={true}
             >
             </LinkShip>
         )
