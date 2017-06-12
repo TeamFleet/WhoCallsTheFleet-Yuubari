@@ -8,6 +8,8 @@ import db from 'Logic/database'
 
 import Link from 'UI/components/link.jsx'
 
+import Header from './details/components/header.jsx'
+
 import { ImportStyle } from 'sp-css-import'
 import style from './details.less'
 
@@ -24,14 +26,14 @@ export default class extends React.Component {
         ext.title = head.title
     }
 
-    get data() {
+    get ship() {
         if (!this._data && this.props.params.id)
             this._data = db.ships[this.props.params.id]
         return this._data || {}
     }
 
     renderSeries() {
-        const serieses = this.data._series
+        const serieses = this.ship._series
         return (
             <div>
                 <table>
@@ -48,8 +50,8 @@ export default class extends React.Component {
                                     {i > 0 && serieses[i-1].next_loop === 'on' && ' (Switchable)'}
                                 </i></th>
                                 <td>
-                                    {this.data.id === series.id && db.ships[series.id]._name}
-                                    {this.data.id !== series.id && <Link to={`/ships/${series.id}`}>
+                                    {this.ship.id === series.id && db.ships[series.id]._name}
+                                    {this.ship.id !== series.id && <Link to={`/ships/${series.id}`}>
                                         {db.ships[series.id]._name}
                                     </Link>}
                                 </td>
@@ -65,8 +67,8 @@ export default class extends React.Component {
         let i = 0
         let renderArr = []
         while(i < 4){
-            const slot = this.data.slot[i]
-            const equipmentId = typeof slot !== 'undefined' ? this.data.equip[i] : undefined
+            const slot = this.ship.slot[i]
+            const equipmentId = typeof slot !== 'undefined' ? this.ship.equip[i] : undefined
             renderArr.push(
                 <tr key={i}>
                     <th style={{
@@ -97,12 +99,13 @@ export default class extends React.Component {
     }
 
     render() {
-        if (__CLIENT__ && __DEV__) console.log('thisShip', this.data)
+        if (__CLIENT__ && __DEV__) console.log('thisShip', this.ship)
         return (
             <PageContainer
                 className={this.props.className}
             >
-                <h2>{this.data._name}</h2>
+                <Header ship={this.ship} />
+
                 <p><i>{translate('under_construction')}...</i></p>
 
                 {this.renderSeries()}

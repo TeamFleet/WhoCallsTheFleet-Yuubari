@@ -11,7 +11,6 @@ import ShipList from 'UI/components/ship-list.jsx'
 import { ImportStyle } from 'sp-css-import'
 import style from './list.less'
 
-// if (__CLIENT__) self.__pageShipListLastCollection = 0
 const shipListId = 'pageShipList'
 
 @connect()
@@ -32,10 +31,6 @@ export default class extends React.Component {
         ext.meta = ext.meta.concat(head.meta)
         ext.title = head.title
     }
-
-    // onCollectionChange(evt, to) {
-    //     self.__pageShipListLastCollection = to
-    // }
 
     render() {
         return (
