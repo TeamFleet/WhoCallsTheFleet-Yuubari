@@ -171,7 +171,7 @@
         "koa-helmet": "^3.2.0",
 
 
-        "mongodb": "^2.2.27",
+        "mongodb": "^2.2.28",
 
 
         "babel-core": "^6.25.0",
@@ -202,7 +202,7 @@
         "copy-webpack-plugin": "^4.0.1",
 
 
-        "eslint": "^3.17.1",
+        "eslint": "^4.0.0",
         "eslint-plugin-react": "^7.0.1",
         "babel-eslint": "^7.1.1",
 
