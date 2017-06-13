@@ -1,0 +1,67 @@
+{
+    "name": {
+        "short": "日",
+        "full": "日本語"
+    },
+
+    "title": "Who Calls the Fleet",
+    "under_construction": "工事中",
+
+    "cancel": "キャンセル",
+    "ok": "OK",
+
+    "shipclass": "${class}型",
+    "shipclass_number": "${class}型 ${number} 番艦",
+
+    "stat": {
+        "fire": "火力",
+        "torpedo": "雷装",
+        "night": "夜戦",
+        "aa": "対空",
+        "asw": "対潜",
+        "hp": "耐久",
+        "armor": "装甲",
+        "evasion": "回避",
+        "carry": "搭載",
+        "speed": "速力",
+        "range": "射程",
+        "los": "索敵",
+        "luck": "運",
+        "consum": {
+            "fuel": "燃費",
+            "ammo": "弾費"
+        }
+    },
+
+    "nav": {
+        "home": "ホーム",
+        "fleets": "艦隊ビルダー",
+        "calctp": "TPカルキュレーター",
+        "ships": "艦娘",
+        "equipments": "装備",
+        "arsenal": "明石の改修工廠",
+        "entities": "CV・イラストレーター",
+        "about": "アバウト"
+    },
+
+    "ship_list": {
+        "filter": {
+            "placeholder": "Filter by name...",
+            "results_count": "Found ${count} ships...",
+            "results_count_too_many": "Found ${count} ships. Too many results. Only showing first ${showing} results...",
+            "no_result": "No ships found. Please try other inputs...",
+            "no_result_show_previous": "No ships found. Showing previous results..."
+        },
+        "compare": {
+            "button": "Comp",
+            "wait_for_selection": "Select ship to start...",
+            "selected_to_start": "Selected (${count}). Click to compare...",
+            "quit": "終了",
+            "add_remove": "追加/削除"
+        }
+    },
+
+    "ship_details": {
+        "slot_and_equipments": "艦載・初期装備"
+    }
+}

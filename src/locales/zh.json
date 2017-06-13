@@ -11,6 +11,7 @@
     "ok": "确认",
 
     "shipclass": "${class}级",
+    "shipclass_number": "${class}级 ${number} 号舰",
 
     "stat": {
         "fire": "火力",

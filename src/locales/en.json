@@ -11,6 +11,7 @@
     "ok": "OK",
 
     "shipclass": "${class} Class",
+    "shipclass_number": "${class} Class (#${number})",
 
     "stat": {
         "fire": "FP",

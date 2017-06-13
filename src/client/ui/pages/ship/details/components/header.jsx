@@ -17,14 +17,19 @@ export default class ShipDetailsHeader extends React.Component {
         return (
             <div className={this.props.className}>
                 <div className="infos">
-                    {localeId !== 'ja' && <span className="shipname-ja">{this.props.ship.getName(undefined, 'ja_jp')}</span>}
                     <Title tag="h1" className="shipname">{this.props.ship._name}</Title>
-                    <div className="sub">
-                        <span>No.{this.props.ship.no}</span>
-                        {this.props.ship.class && translate("shipclass", { class: this.props.ship._class })}
-                        {this.props.ship.class_no && `${this.props.ship.class_no}号舰`}
-                        {this.props.ship.class && this.props.ship.type && ` / ${this.props.ship._type}`}
-                    </div>
+                    <span className="shipname-ja">
+                        {localeId === 'ja'
+                            ? ""
+                            : this.props.ship.getName(undefined, 'ja_jp')
+                        }
+                    </span>
+                    <span>No.{this.props.ship.getNo()}</span>
+                    {this.props.ship.class_no
+                        ? translate("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
+                        : translate("shipclass", { class: this.props.ship._class })
+                    }
+                    {this.props.ship.class && this.props.ship.type && ` / ${this.props.ship._type}`}
                 </div>
                 <div className="tabs">
                 </div>
