@@ -43,7 +43,8 @@
         // color:      fade(@color-base, 50%);
         color:      @color-fade;
         border-bottom:  2px solid transparent;
-        margin-left:    @gutter;
+        margin-left:@gutter;
+        position:   relative;
         &:hover{
             // color:  @color-base;
             color:  #fff;
@@ -58,6 +59,7 @@
             color:  #fff;
             border-bottom-color: @color-base;
             pointer-events: none;
+            z-index: -1;
         }
     }
 
