@@ -31,22 +31,45 @@ export default class extends React.Component {
         ext.title = head.title
     }
 
+    constructor(props) {
+        super()
+
+        this.state = {
+            tab: __CLIENT__ && props.params && props.params.tab ? props.params.tab : tabsAvailable[0]
+        }
+    }
+
     get ship() {
         if (!this._data && this.props.params.id)
             this._data = db.ships[this.props.params.id]
         return this._data || {}
     }
 
+    onTabChange(newTab) {
+        if (newTab !== this.state.tab)
+            this.setState({
+                tab: newTab
+            })
+    }
+
     render() {
         if (__CLIENT__ && __DEV__) console.log('thisShip', this.ship)
         return (
-            <PageContainer
-                className={this.props.className}
-            >
-                <Header ship={this.ship} tabs={tabsAvailable} />
-                {React.cloneElement(this.props.children, {
-                    ship: this.ship
-                })}
+            <PageContainer className={this.props.className}>
+                <Header
+                    ship={this.ship}
+                    tabs={tabsAvailable}
+                    onTabChange={__CLIENT__ && this.onTabChange.bind(this)}
+                    currentTab={__CLIENT__ && this.state.tab}
+                />
+                {__CLIENT__
+                    ? React.createElement(require(`./details/${this.state.tab}.jsx`).default, {
+                        ship: this.ship
+                    })
+                    : React.cloneElement(this.props.children, {
+                        ship: this.ship
+                    })
+                }
             </PageContainer>
         )
     }

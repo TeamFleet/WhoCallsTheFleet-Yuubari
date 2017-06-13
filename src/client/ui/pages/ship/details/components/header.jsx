@@ -1,6 +1,7 @@
 import React from 'react'
 // import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
+import classNames from 'classNames'
 
 import translate, { localeId } from 'sp-i18n'
 // import db from 'Logic/database'
@@ -14,17 +15,38 @@ import styles from './header.less'
 @ImportStyle(styles)
 export default class ShipDetailsHeader extends React.Component {
     renderTab(tab, index) {
-        const Tag = index ? Link : IndexLink
-        return (
-            <Tag
-                to={`/ships/${this.props.ship.id}${index ? `/${tab}` : ''}`}
-                className="tab"
-                activeClassName="on"
-                key={index}
-            >
-                {translate("ship_details.tabs." + tab)}
-            </Tag>
-        )
+        const url = `/ships/${this.props.ship.id}${index ? `/${tab}` : ''}`
+        if (this.props.onTabChange && this.props.currentTab) {
+            return (
+                <a
+                    href={url}
+                    className={classNames([
+                        'tab', {
+                            'on': tab === this.props.currentTab
+                        }
+                    ])}
+                    key={index}
+                    onClick={evt => {
+                        this.props.onTabChange(tab)
+                        evt.preventDefault()
+                    }}
+                >
+                    {translate("ship_details.tabs." + tab)}
+                </a>
+            )
+        } else {
+            const Tag = index ? Link : IndexLink
+            return (
+                <Tag
+                    to={url}
+                    className="tab"
+                    activeClassName="on"
+                    key={index}
+                >
+                    {translate("ship_details.tabs." + tab)}
+                </Tag>
+            )
+        }
     }
 
     render() {
