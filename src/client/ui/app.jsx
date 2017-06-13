@@ -75,7 +75,7 @@ export default class extends React.Component {
         }
     }
 
-    getClassName() {
+    get className() {
         return this.props.className
             + (this.isAppReady && this.props.appMode.mode
                 ? (' is-mode-' + this.props.appMode.mode
@@ -142,7 +142,7 @@ export default class extends React.Component {
         return (
             <div
                 id="app"
-                className={this.getClassName()}
+                className={this.className}
                 onAnimationEnd={this.onAnimationEnd.bind(this)}
                 onTouchStart={this.onTouchStart.bind(this)}
                 onTouchMove={this.onTouchMove.bind(this)}
