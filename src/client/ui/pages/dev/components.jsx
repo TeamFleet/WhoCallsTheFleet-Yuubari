@@ -48,12 +48,12 @@ class SamplesButton extends React.Component {
                     <Button tag="span">Custom tag name</Button>
                 </p>
                 <h4>Colors</h4>
+                <p>
                     <Button>Default color</Button>
                     <Button color="primary">Primary</Button>
                     <Button color="success">Success</Button>
                     <Button color="warning">Warning</Button>
                     <Button color="danger">Danger</Button>
-                <p>
                 </p>
                 <h4>Sizes</h4>
                 <p>

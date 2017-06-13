@@ -9,7 +9,7 @@ import style from './main-header.less'
 @ImportStyle(style)
 export default class extends React.Component {
     getProps() {
-        let props = {...this.props}
+        let props = { ...this.props }
         delete props.className
 
         return props
@@ -19,7 +19,7 @@ export default class extends React.Component {
 
         return (
             <MainHeaderPortal>
-                <div className={this.props.className + " main-header"} {...this.getProps()}>
+                <div className={this.props.className + " main-header"} {...this.getProps() }>
                     {this.props.children}
                     <Background type="blured" />
                 </div>

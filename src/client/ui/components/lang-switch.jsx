@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classNames'
 
 import translate, { localeId } from 'sp-i18n'
 import { availableLocales } from 'Config/i18n'
@@ -38,7 +39,12 @@ export default class extends React.Component {
         return (
             <a
                 href={this.currentUrl(thisLocaleId)}
-                className={'item' + (localeId === thisLocaleId ? ' on' : '')}
+                className={classNames([
+                    'item',
+                    {
+                        'on': localeId === thisLocaleId
+                    }
+                ])}
                 data-lang={thisLocaleId}
                 key={index}
             >

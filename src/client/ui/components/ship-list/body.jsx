@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import classNames from 'classNames'
 
 import translate from 'sp-i18n'
 import db from 'Logic/database'
@@ -84,11 +85,11 @@ export default class ShipList extends React.Component {
             return (
                 <div
                     key={index + index2}
-                    className={
-                        index2 === 0 ? 'first' :
-                            (index2 === collection.list.length - 1 ? 'last' : '')
-                            + (!type.type ? ' is-unselectable' : '')
-                    }
+                    className={classNames({
+                        'first': index2 === 0,
+                        'last': index2 === collection.list.length - 1,
+                        'is-unselectable': !type.type
+                    })}
                 >
                     {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={listType || list} />) : null}
                     {!type.type && (<Title />)}

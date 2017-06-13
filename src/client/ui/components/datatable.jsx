@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classNames'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './datatable.less'
@@ -72,10 +73,12 @@ export default class DataTable extends React.Component {
 
         return (
             <TagName
-                className={
-                    this.props.className +
-                    (TagName !== 'table' ? ' flex' : '')
-                }
+                className={classNames([
+                    this.props.className,
+                    {
+                        'flex': TagName !== 'table'
+                    }
+                ])}
                 onScroll={this.props.onScroll}
                 ref={el => this._table = el}
             >

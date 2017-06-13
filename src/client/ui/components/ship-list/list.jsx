@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classNames'
 
 import {
     compareAdd,
@@ -87,11 +88,13 @@ class ThisLink extends React.Component {
         // console.log(this.props.ship._name, className)
         return (
             <LinkShip
-                className={
-                    "item"
-                    + (this.props.isModeCompare ? ' is-compare' : '')
-                    + (isSelected ? ' is-selected' : '')
-                }
+                className={classNames([
+                    'item',
+                    {
+                        'is-compare': this.props.isModeCompare,
+                        'is-selected': isSelected
+                    }
+                ])}
                 ship={this.props.ship}
                 onClick={(evt) => this.onClick(evt, isSelected)}
                 hasExtraIllust={this.hasExtraIllust()}
