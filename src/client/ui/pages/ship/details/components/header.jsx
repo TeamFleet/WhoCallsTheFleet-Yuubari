@@ -1,7 +1,7 @@
 import React from 'react'
 // import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
-import classNames from 'classNames'
+import classNames from 'Utils/classnames'
 
 import translate, { localeId } from 'sp-i18n'
 // import db from 'Logic/database'

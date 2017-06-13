@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import classNames from 'classNames'
 
 import translate from 'sp-i18n'
 import db, { locale as dbLocaleId } from 'Logic/database'
@@ -16,6 +15,7 @@ import {
     compareChangeState,
     // compareSort
 } from 'Logic/ship-list/api.js'
+import classNames from 'Utils/classnames'
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Icon from 'UI/components/icon.jsx'
@@ -108,14 +108,14 @@ export default class ShipListHeader extends React.Component {
                 typeof this.props.isModeCompare !== 'undefined'
                     ? this.props.compareState
                     : null
-            } className={classNames([
+            } className={classNames(
                 this.props.className,
                 {
                     'is-filtering': this.props.isModeFilter,
                     'is-compare': typeof this.props.isModeCompare !== 'undefined',
                     'is-compare-leaving': this.props.isModeCompare === false
                 }
-            ])}>
+            )}>
                 <div className="wrapper" ref={el => this._wrapper = el}>
                     <div className="body">
                         <Filter id={this.props.id} />

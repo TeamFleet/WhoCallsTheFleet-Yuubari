@@ -114,8 +114,7 @@
 
         "normalize.css": "^7.0.0",
         "postcss-easing-gradients": "^1.2.3",
-        
-        "classnames": "^2.2.5",
+
         "lz-string": "^1.4.4",
         "js-cookie": "^2.1.4",
         "localforage": "^1.5.0",
