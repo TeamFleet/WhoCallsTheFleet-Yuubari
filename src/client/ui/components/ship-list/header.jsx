@@ -15,7 +15,7 @@ import {
     compareChangeState,
     // compareSort
 } from 'Logic/ship-list/api.js'
-import classNames from 'Utils/classnames'
+import classNames from 'classnames'
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Icon from 'UI/components/icon.jsx'

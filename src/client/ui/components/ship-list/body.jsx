@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import classNames from 'classnames'
 
 import translate from 'sp-i18n'
 import db from 'Logic/database'
@@ -11,7 +12,6 @@ import {
     compareReset
 } from 'Logic/ship-list/api.js'
 import pref from 'Logic/preferences'
-import classNames from 'Utils/classnames'
 
 import Title from './title.jsx'
 import List from './list.jsx'
@@ -76,14 +76,12 @@ export default class ShipList extends React.Component {
         let listType
         return collection.list.map((type, index2) => {
             const list = getShipList(type.ships)
-
             if (type.type && type.class && typeof listType === 'undefined') {
                 listType = []
                 collection.list.forEach(type => {
                     listType = listType.concat(getShipList(type.ships))
                 })
             }
-
             return (
                 <div
                     key={index + index2}
