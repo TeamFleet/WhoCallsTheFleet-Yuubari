@@ -62,6 +62,12 @@
     },
 
     "ship_details": {
+        "tabs": {
+            "infos": "信息 & 图鉴",
+            "equipable": "可装备...",
+            "voicelines": "语音 & 台词",
+            "availability": "获取方式"
+        },
         "slot_and_equipments": "初始装备 & 搭载量"
     }
 }

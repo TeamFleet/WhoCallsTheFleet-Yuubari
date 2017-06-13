@@ -57,7 +57,7 @@ export default class extends React.Component {
                     transitionLeaveTimeout={200}>
                     {this.props.children && (
                         <MainBody
-                            key={this.props.location.pathname}
+                            key={this.props.location.pathname.split('/').slice(0, 3).join('/')}
                             location={this.props.location}
                         >
                             {this.props.children}

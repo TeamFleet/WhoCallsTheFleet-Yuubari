@@ -1,8 +1,99 @@
-@import '../../../../base.less';
+@import '_.less';
 
 .component{
-    .shipname{
-        font-size:  30px;
-        font-weight:400;
+    .infos{
+        overflow:   hidden;
+        margin:     0 0 20px 0;
+        color:      @color-fade;
+        font-size:  14px;
+        line-height:(@title-height / 2);
+        .screen-tablet({
+            display:    none;
+        });
     }
+        .shipname{
+            display:    block;
+            float:      left;
+
+            color:      #fff;
+
+            font-size:  30px;
+            font-weight:400;
+            line-height:@title-height;
+
+            padding:        0 20px 0 0;
+            margin:         0 20px 0 0;
+            border-right:   1px solid @color-border;
+        }
+        .shipname-ja{
+            height:     20px;
+            display:    block;
+        }
+        .shipclassnumber{
+            display:    inline-block;
+            margin:     0 8px 4px 0;
+            background: @color-fade;
+            color:      @color-background-main;
+            line-height:16px;
+            height:     16px;
+            font-size:  12px;
+            padding:    0 5px;
+            border-radius: 2px;
+            vertical-align: text-top;
+        }
+        .shipname-ja ~ .shipclassnumber{
+            // margin-top: 0;
+            margin-bottom: 0;
+        }
+    
+    .tabs{
+        clear:      both;
+        line-height:@tab-height;
+        height:     @tab-height;
+        font-size:  16px;
+        overflow:   hidden;
+        .main-sizing-position-reset-margin();
+        & > .wrapper{
+            height:     (@tab-height + 20);
+            display:    flex;
+            flex-flow:  row nowrap;
+            overflow:   hidden;
+            overflow-x: auto;
+            position:   relative;
+            .main-sizing-padding();
+            &:after{
+                content:    "";
+                flex:       none;
+                width:      @main-margin;
+                .screen-tablet({
+                    width:  @main-margin-tablet;
+                });
+                .screen-phone({
+                    width:  @main-margin-phone;
+                });
+            }
+        }
+    }
+        .tab{
+            flex:       none;
+            display:    inline-block;
+            height:     (@tab-height - 1);
+            color:      @color-fade;
+            border-bottom:  2px solid transparent;
+            margin-right:   2em;
+            &:last-child{
+                margin-right:   0;
+            }
+            &:hover{
+                color:  #fff;
+            }
+            &:active{
+                color:  @color-active;
+            }
+            &.on{
+                color:  #fff;
+                border-bottom-color: @color-base;
+                pointer-events: none;
+            }
+        }
 }

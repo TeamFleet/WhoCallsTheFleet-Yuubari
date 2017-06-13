@@ -42,7 +42,24 @@ export default [{
         require.ensure([], (require) => {
             if (routeCheck(nextState)) cb(null, require('UI/pages/ship/details').default)
         }, 'thisShip')
-    }
+    },
+    childRoutes: [{
+        path: 'infos',
+        name: 'infos',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('UI/pages/ship/details/infos').default)
+            })
+        },
+        isIndex: true
+    }, {
+        path: ':tab',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('UI/pages/ship/details/' + nextState.params.tab).default)
+            })
+        }
+    }]
 }, {
     path: 'equipments/:id',
     name: 'thisEquipment',

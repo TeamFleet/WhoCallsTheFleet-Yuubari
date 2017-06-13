@@ -1,6 +1,6 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { Link, IndexLink } from 'react-router'
 
 import translate, { localeId } from 'sp-i18n'
 // import db from 'Logic/database'
@@ -13,26 +13,42 @@ import styles from './header.less'
 // @connect()
 @ImportStyle(styles)
 export default class ShipDetailsHeader extends React.Component {
+    renderTab(tab, index) {
+        const Tag = index ? Link : IndexLink
+        return (
+            <Tag
+                to={`/ships/${this.props.ship.id}${index ? `/${tab}` : ''}`}
+                className="tab"
+                activeClassName="on"
+                key={index}
+            >
+                {translate("ship_details.tabs." + tab)}
+            </Tag>
+        )
+    }
+
     render() {
         return (
             <div className={this.props.className}>
+
                 <div className="infos">
                     <Title tag="h1" className="shipname">{this.props.ship._name}</Title>
-                    <span className="shipname-ja">
-                        {localeId === 'ja'
-                            ? ""
-                            : this.props.ship.getName(undefined, 'ja_jp')
-                        }
-                    </span>
-                    <span>No.{this.props.ship.getNo()}</span>
+                    {localeId !== 'ja' && <span className="shipname-ja">{this.props.ship.getName(undefined, 'ja_jp')}</span>}
+                    <span className="shipclassnumber">No.{this.props.ship.getNo()}</span>
+                    {localeId === 'ja' && <br />}
                     {this.props.ship.class_no
                         ? translate("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
                         : translate("shipclass", { class: this.props.ship._class })
                     }
                     {this.props.ship.class && this.props.ship.type && ` / ${this.props.ship._type}`}
                 </div>
-                <div className="tabs">
-                </div>
+
+                {this.props.tabs && <div className="tabs">
+                    <div className="wrapper">
+                        {this.props.tabs.map(this.renderTab.bind(this))}
+                    </div>
+                </div>}
+
             </div>
         )
     }
