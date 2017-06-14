@@ -82,9 +82,9 @@ if (__SERVER__) {
 //
 if (__CLIENT__) {
     run({
-        browserHistoryOnUpdate: (location) => {
-            if (__DEV__) console.log('browserHistory update', location)
-        }
+        // browserHistoryOnUpdate: (location) => {
+        //     if (__DEV__) console.log('browserHistory update', location)
+        // }
     })
 
     // 客户端注册多语言
