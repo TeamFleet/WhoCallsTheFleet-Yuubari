@@ -1,4 +1,8 @@
-@import '../../base.less';
+@import './details/_.less';
 
 .component{
+    padding-top:    (@title-height + @title-margin-bottom + @tab-height + @main-margin-top);
+    .screen-tablet({
+        padding-top:@tab-height;
+    });
 }

@@ -37,37 +37,12 @@ export default class ShipListHeader extends React.Component {
         }
     }
 
-    // componentWillUpdate(newProps) {
-    //     const mainheader = this._wrapper.offsetParent
-
-    //     if (newProps.isModeCompare) {
-    //         // if (!this.state.isClassCompare)
-    //         //     this.setState({
-    //         //         isClassCompare: true
-    //         //     })
-    //         // mainheader.classList.remove('is-compare-leaving')
-    //         // mainheader.classList.add('is-compare')
-    //         mainheader.setAttribute('data-compare-state', newProps.compareState)
-    //     } else {
-    //         // mainheader.classList.add('is-compare-leaving')
-    //         // mainheader.classList.remove('is-compare')
-    //         // mainheader.removeAttribute('data-compare-state')
-    //     }
-    // }
-
     componentDidMount() {
         bindEvent(
             this._wrapper.offsetParent,
             'animationend',
             (evt) => {
                 if (evt.animationName === 'ship-list-header-compare-leave') {
-                    // if (this.state.isClassCompare)
-                    //     this.setState({
-                    //         isClassCompare: false
-                    //     })
-                    // evt.target.classList.remove('is-compare')
-                    // evt.target.classList.remove('is-compare-leaving')
-                    // evt.target.removeAttribute('data-compare-state')
                     this.props.dispatch(
                         compareLeave(this.props.id, true)
                     )

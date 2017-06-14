@@ -53,7 +53,7 @@
             "no_result_show_previous": "No ships found. Showing previous results..."
         },
         "compare": {
-            "button": "Comp",
+            "button": "Compare",
             "wait_for_selection": "Select ship to start...",
             "selected_to_start": "Selected (${count}). Click to compare...",
             "quit": "終了",

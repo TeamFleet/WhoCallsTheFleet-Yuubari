@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import translate, { localeId } from 'sp-i18n'
 // import db from 'Logic/database'
 
+import MainHeader from 'UI/components/main-header.jsx'
 import Title from 'UI/components/title.jsx'
 
 import { ImportStyle } from 'sp-css-import'
@@ -50,8 +51,15 @@ export default class ShipDetailsHeader extends React.Component {
     }
 
     render() {
+        const isPortal = (this.props.onTabChange && this.props.currentTab)
+        const Component = isPortal ? MainHeader : 'div'
+
         return (
-            <div className={this.props.className}>
+            <Component className={classNames([
+                this.props.className, {
+                    'is-portal': isPortal
+                }
+            ])}>
 
                 <div className="infos">
                     <Title tag="h1" className="shipname">{this.props.ship._name}</Title>
@@ -71,7 +79,7 @@ export default class ShipDetailsHeader extends React.Component {
                     </div>
                 </div>}
 
-            </div>
+            </Component>
         )
     }
 }
