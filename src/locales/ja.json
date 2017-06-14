@@ -57,10 +57,10 @@
             "no_result_show_previous": "No ships found. Showing previous results..."
         },
         "compare": {
-            "button": "Compare",
-            "wait_for_selection": "Select ship to start...",
-            "selected_to_start": "Selected (${count}). Click to compare...",
-            "quit": "終了",
+            "button": "比較",
+            "wait_for_selection": "チェック艦娘の詳細を比較する...",
+            "selected_to_start": "最近チェックした艦娘: ${count} 件、比較スタートを！",
+            "quit": "戻る",
             "add_remove": "追加/削除"
         }
     },
