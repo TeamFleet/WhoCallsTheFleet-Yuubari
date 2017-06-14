@@ -5,8 +5,11 @@
     },
 
     "title": "Who Calls the Fleet",
-    "under_construction": "Under Construction",
+    "translators": [
+        "Diablohu"
+    ],
 
+    "under_construction": "Under Construction",
     "cancel": "Cancel",
     "ok": "OK",
 

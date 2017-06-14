@@ -5,8 +5,11 @@
     },
 
     "title": "是谁呼叫舰队",
-    "under_construction": "建设中",
+    "translators": [
+        "Diablohu"
+    ],
 
+    "under_construction": "建设中",
     "cancel": "取消",
     "ok": "确认",
 

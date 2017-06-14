@@ -5,8 +5,12 @@
     },
 
     "title": "Who Calls the Fleet",
-    "under_construction": "工事中",
+    "translators": [
+        "taurus911",
+        "Diablohu"
+    ],
 
+    "under_construction": "工事中",
     "cancel": "キャンセル",
     "ok": "OK",
 
