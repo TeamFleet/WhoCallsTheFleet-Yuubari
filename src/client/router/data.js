@@ -43,7 +43,11 @@ export default [{
             if (routeCheck(nextState)) cb(null, require('UI/pages/ship/details').default)
         }, 'thisShip')
     },
-    childRoutes: [
+    childRoutes: __CLIENT__ ? [
+        {
+            path: ':tab'
+        }
+    ] : [
         {
             path: 'infos',
             name: 'infos',

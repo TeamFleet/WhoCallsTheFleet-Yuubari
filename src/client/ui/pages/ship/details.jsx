@@ -18,6 +18,13 @@ const tabsAvailable = [
     'availability'
 ]
 
+const contentComponents = {}
+
+if (__CLIENT__)
+    tabsAvailable.forEach(tab => {
+        contentComponents[tab] = require(`./details/${tab}.jsx`).default
+    })
+
 @connect()
 @ImportStyle(style)
 export default class extends React.Component {
@@ -63,7 +70,7 @@ export default class extends React.Component {
                     currentTab={__CLIENT__ && this.state.tab}
                 />
                 {__CLIENT__
-                    ? React.createElement(require(`./details/${this.state.tab}.jsx`).default, {
+                    ? React.createElement(contentComponents[this.state.tab], {
                         ship: this.ship
                     })
                     : React.cloneElement(this.props.children, {
