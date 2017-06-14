@@ -129,7 +129,8 @@ export default class extends React.Component {
                 </div>
 
                 <div className="titlebar">
-                    {this.props.pageTitle}
+                    {this.props.pageTitle.sub && <span className="sub">{this.props.pageTitle.sub}</span>}
+                    <span className="main">{this.props.pageTitle.main}</span>
                 </div>
 
                 <label htmlFor="nav-switch" className="label">

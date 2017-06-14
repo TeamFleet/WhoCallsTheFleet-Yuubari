@@ -291,6 +291,24 @@
             // background: @theme-lightblue-700;
             background: @color-theme;
             box-shadow: 0 0 15px fade(#000, 40%);
+            .sub, .main{
+                display:    block;
+                transition-property: none;
+            }
+            .sub{
+                font-size:  12px;
+                position:   absolute;
+                top:        50%;
+                line-height:20px;
+                transform-origin:   0% 100%;
+                transform:  scale((10 / 12));
+                animation:  fadein @base-transition-duration @base-transition-timing-function;
+                // color:      fade(#fff, 50%);
+            }
+            .sub ~ .main{
+                transform:  translateY(-7px);
+                transition-property: transform;
+            }
         }
 
         & > .wrapper{

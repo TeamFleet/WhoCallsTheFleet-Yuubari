@@ -14,8 +14,8 @@ import style from './details.less'
 const tabsAvailable = [
     'infos',
     'equipable',
-    'voicelines',
-    'availability'
+    // 'voicelines',
+    // 'availability'
 ]
 
 const contentComponents = {}
@@ -29,9 +29,14 @@ if (__CLIENT__)
 @ImportStyle(style)
 export default class extends React.Component {
     static htmlExtends(ext, store) {
+        const ship = db.ships[store.getState().routing.locationBeforeTransitions.pathname.split('/')[2]]
         const head = htmlHead({
             store,
-            title: db.ships[store.getState().routing.locationBeforeTransitions.pathname.split('/')[2]]._name
+            title: ship._name,
+            subtitle: (ship.class_no
+                ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
+                : translate("shipclass", { class: ship._class }))
+            + (ship.class && ship.type && ` / ${ship._type}`)
         })
 
         ext.meta = ext.meta.concat(head.meta)

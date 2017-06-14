@@ -33,7 +33,7 @@ export default (settings = {}) => {
         dispatch = options.store.dispatch
     }
 
-    let { uri, title, description, image, state } = options
+    let { uri, title, subtitle, description, image, state } = options
     const curLocaleId = state.localeId || currentLocaleId
 
     if (typeof uri === 'object') {
@@ -46,8 +46,15 @@ export default (settings = {}) => {
 
     if (uri.substr(0, 1) == '/') uri = uri.substr(1)
     if (title) {
-        if (dispatch) dispatch(updatePageTitle(title))
-        if( title !== siteName )
+        if (dispatch) {
+            if (typeof subtitle !== 'undefined')
+                dispatch(updatePageTitle({
+                    main: title,
+                    sub: subtitle
+                }))
+            else dispatch(updatePageTitle(title))
+        }
+        if (title !== siteName)
             title = title.replace(/\n/g, '') + ' - ' + siteName
     } else {
         title = siteName
