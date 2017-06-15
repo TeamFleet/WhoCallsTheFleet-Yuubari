@@ -66,12 +66,12 @@
     },
 
     "ship_details": {
-        "tabs": {
-            "infos": "情報・絵",
-            "equipable": "装備可能...",
-            "voicelines": "ボイス・ライン",
-            "availability": "入手情報"
-        },
-        "slot_and_equipments": "艦載・初期装備"
+        "infos": "情報・絵",
+        "equipable": "装備可能...",
+        "voicelines": "ボイス・ライン",
+        "availability": "入手情報",
+        "capabilities": "機能・特徴",
+        "remodels": "改造チャート",
+        "slot_equipments": "搭載・初期装備"
     }
 }

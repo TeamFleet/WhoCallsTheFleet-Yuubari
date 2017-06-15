@@ -65,12 +65,12 @@
     },
 
     "ship_details": {
-        "tabs": {
-            "infos": "信息 & 图鉴",
-            "equipable": "可装备...",
-            "voicelines": "语音 & 台词",
-            "availability": "获取方式"
-        },
-        "slot_and_equipments": "初始装备 & 搭载量"
+        "infos": "信息 & 图鉴",
+        "equipable": "可装备...",
+        "voicelines": "语音 & 台词",
+        "availability": "获取方式",
+        "capabilities": "功能 & 作战能力",
+        "remodels": "改造路线",
+        "slot_equipments": "搭载量 & 初始装备"
     }
 }

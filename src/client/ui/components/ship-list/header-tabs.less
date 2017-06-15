@@ -38,29 +38,9 @@
     }
 
     .item{
-        display:    inline-block;
+        .element-tab();
         height:     (@height - 1);
-        // color:      fade(@color-base, 50%);
-        color:      @color-fade;
-        border-bottom:  2px solid transparent;
         margin-left:@gutter;
-        position:   relative;
-        &:hover{
-            // color:  @color-base;
-            color:  #fff;
-        }
-        &:active{
-            color:  @color-active;
-        }
-        // & + .item{
-        //     margin-left:    @gutter;
-        // }
-        &.on{
-            color:  #fff;
-            border-bottom-color: @color-base;
-            pointer-events: none;
-            z-index: -1;
-        }
     }
 
     .screen-max({

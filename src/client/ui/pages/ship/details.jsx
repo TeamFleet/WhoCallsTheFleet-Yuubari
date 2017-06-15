@@ -13,6 +13,7 @@ import style from './details.less'
 
 const tabsAvailable = [
     'infos',
+    'capabilities',
     'equipable',
     // 'voicelines',
     // 'availability'

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+import ComponentContainer from './components/component-container.jsx'
+
 import translate from 'sp-i18n'
 import db from 'Logic/database'
 
@@ -19,7 +21,7 @@ export default class ShipDetailsContentInfos extends React.Component {
     renderSeries() {
         const serieses = this.ship._series
         return (
-            <div>
+            <ComponentContainer title={translate("ship_details.remodels")}>
                 <table>
                     <tbody>
                         {serieses.map((series, i) => (
@@ -43,7 +45,7 @@ export default class ShipDetailsContentInfos extends React.Component {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </ComponentContainer>
         )
     }
 
@@ -71,22 +73,19 @@ export default class ShipDetailsContentInfos extends React.Component {
             i++
         }
         return (
-            <div>
-                <h4>{translate('ship_details.slot_and_equipments')}</h4>
+            <ComponentContainer title={translate("ship_details.slot_equipments")}>
                 <table>
                     <tbody>
                         {renderArr}
                     </tbody>
                 </table>
-            </div>
+            </ComponentContainer>
         )
     }
 
     render() {
         return (
             <div className={this.props.className}>
-                <p><i>{translate('under_construction')}...</i></p>
-
                 {this.renderSeries()}
                 {this.renderSlotEquipments()}
             </div>

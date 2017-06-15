@@ -1,7 +1,7 @@
 @import './details/_.less';
 
 .component{
-    padding-top:    (@title-height + @title-margin-bottom + @tab-height + @main-margin-top);
+    padding-top:    (@title-height + @title-margin-bottom + @tab-height + @main-margin-top - @component-gutter-vertical + 15);
     .screen-tablet({
         padding-top:@tab-height;
     });

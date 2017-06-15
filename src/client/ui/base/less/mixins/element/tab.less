@@ -1,0 +1,24 @@
+@import '../../../../base.less';
+
+.element-tab() {
+    display:    inline-block;
+    color:      @color-fade;
+    position:   relative;
+    border-bottom:  2px solid transparent;
+
+    &:hover{
+        color:  #fff;
+    }
+
+    &:active{
+        color:  @color-active;
+    }
+    
+    &.on{
+        color:  #fff;
+        z-index: -1;
+        // border-bottom-color: @color-base;
+        border-bottom-color: @color-accent;
+        pointer-events: none;
+    }
+}

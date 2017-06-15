@@ -32,7 +32,7 @@ export default class ShipDetailsHeader extends React.Component {
                         evt.preventDefault()
                     }}
                 >
-                    {translate("ship_details.tabs." + tab)}
+                    {translate("ship_details." + tab)}
                 </a>
             )
         } else {
@@ -44,7 +44,7 @@ export default class ShipDetailsHeader extends React.Component {
                     activeClassName="on"
                     key={index}
                 >
-                    {translate("ship_details.tabs." + tab)}
+                    {translate("ship_details." + tab)}
                 </Tag>
             )
         }

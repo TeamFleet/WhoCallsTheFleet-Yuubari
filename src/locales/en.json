@@ -65,12 +65,12 @@
     },
 
     "ship_details": {
-        "tabs": {
-            "infos": "Infos & Illustrations",
-            "equipable": "Equipable...",
-            "voicelines": "Voices & Lines",
-            "availability": "Availability"
-        },
-        "slot_and_equipments": "Slot & Equipments"
+        "infos": "Infos & Illustrations",
+        "equipable": "Equipable...",
+        "voicelines": "Voices & Lines",
+        "availability": "Availability",
+        "capabilities": "Capabilities & Features",
+        "remodels": "Remodels",
+        "slot_equipments": "Slot & Stock Equipments"
     }
 }
