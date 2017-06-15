@@ -100,12 +100,13 @@
             margin-left:    @switchable-gutter;
         }
             .icon-switchable{
-                @size:      20px;
-                @color:     @theme-yellow-a100;
+                @size:      24px;
+                // @color:     @theme-yellow-a100;
+                @color:     @color-accent;
                 fill:       @color;
                 position:   absolute;
                 top:        50%;
-                left:       (0 - @size - (@switchable-gutter - @size) / 2 );
+                left:       (0 - @size - (@switchable-gutter - @size) / 2 - 5 );
                 width:      @size;
                 height:     @size;
                 margin-top: (0 - @size / 2);

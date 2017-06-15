@@ -21,17 +21,24 @@
         align-items:    center;
 
         .icon{
+            order:      1;
             flex:       0 0 @icon-size;
             width:      @icon-size;
             height:     @icon-size;
         }
 
         input{
+            order:      2;
             flex:       1 0 auto;
             font-size:  12px;
             width:      0;
             margin:     0 0 0 8px;
             padding:    .2em .35em;
+        }
+
+        input:focus ~ .icon{
+            fill:       @color-accent;
+            filter:     drop-shadow(0 0 5px #000);
         }
     }
 }
