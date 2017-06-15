@@ -12,6 +12,10 @@ import style from './link-ship.less'
 
 @ImportStyle(style)
 export default class LinkShip extends React.Component {
+    checkShow(type) {
+        return (this.props[type] || typeof this.props[type] === 'undefined')
+    }
+
     renderAvatar() {
         return (
             <span
@@ -41,10 +45,10 @@ export default class LinkShip extends React.Component {
                 to={'/ships/' + this.ship.id}
                 onClick={this.props.onClick}
             >
-                {this.props.hasExtraIllust && <Icon className="icon-has-extra-illust" icon="hanger" />}
-                {this.renderName()}
-                {this.renderAvatar()}
-                {this.ship.navy !== 'ijn' && <FlagNavy className="flag-navy" navy={this.ship.navy} />}
+                {this.props.extraIllust && this.ship.hasExtraIllust() && <Icon className="icon-has-extra-illust" icon="hanger" />}
+                {this.checkShow('name') && this.renderName()}
+                {this.checkShow('pic') && this.renderAvatar()}
+                {this.checkShow('navy') && this.ship.navy !== 'ijn' && <FlagNavy className="flag-navy" navy={this.ship.navy} />}
                 {this.props.children}
             </Link>
         )

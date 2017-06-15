@@ -3,16 +3,14 @@ import { Link } from 'react-router'
 
 export default class extends React.Component {
     render() {
-        // props.href.match(/^(https?:)?\/\//)
-        //     ? (props.href.indexOf('://') < 0
-        //         ? <a href={props.href}>{props.children}</a>
-        //         : <a href={props.href} target="_blank">{props.children}</a>
-        //     )
-        //     : <Link to={props.href}>{props.children}</Link>
+        const to = this.props.to || this.props.href || ''
         return (
-            <Link className={this.props.className} to={this.props.to}>
-                {this.props.children}
-            </Link>
+            to.match(/^(https?:)?\/\//)
+                ? (to.indexOf('://') < 0
+                    ? <a className={this.props.className} href={to}>{this.props.children}</a>
+                    : <a className={this.props.className} href={to} target="_blank">{this.props.children}</a>
+                )
+                : <Link className={this.props.className} to={to}>{this.props.children}</Link>
         )
     }
 }

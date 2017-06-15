@@ -52,9 +52,9 @@
         "filter": {
             "placeholder": "艦娘検索...",
             "results_count": "该当件数 ${count} 件...",
-            "results_count_too_many": "Found ${count} ships. Too many results. Only showing first ${showing} results...",
-            "no_result": "No ships found. Please try other inputs...",
-            "no_result_show_previous": "No ships found. Showing previous results..."
+            "results_count_too_many": "[NT] Found ${count} ships. Too many results. Only showing first ${showing} results...",
+            "no_result": "[NT] No ships found. Please try other inputs...",
+            "no_result_show_previous": "[NT] No ships found. Showing previous results..."
         },
         "compare": {
             "button": "比較",
@@ -71,7 +71,8 @@
         "voicelines": "ボイス・ライン",
         "availability": "入手情報",
         "capabilities": "機能・特徴",
-        "remodels": "改造チャート",
+        "remodels": "改造",
+        "quickfacts": "ヒント",
         "slot_equipments": "搭載・初期装備"
     }
 }

@@ -1,4 +1,137 @@
 @import '../_.less';
 
 .component{
+    .container{
+        display:    flex;
+        flex-flow:  row nowrap;
+        margin-top: -10px;
+    }
+    .item{
+        flex:       0 1 160px;
+        display:    block;
+        position:   relative;
+        // height:     @ship-link-height;
+        min-width:  0;
+        padding:    0;
+        &:before{
+            display:    none;
+        }
+        &:after{
+            display:    none;
+        }
+        .lvl{
+            @height:    25px;
+            line-height:@height;
+            // font-size:  14px;
+            display:    block;
+            position:   absolute;
+            top:        (0 - @height);
+            left:       0;
+            color:      #fff;
+            &:before{
+                content:    "Lv.";
+                color:      @color-base;
+                font-size:  12px;
+                padding-right: .25em;
+            }
+            .icon{
+                display:    block;
+                width:      22px;
+                height:     22px;
+                background: no-repeat 50% 50% / contain;
+                float:      right;
+                margin-left:2px;
+                &.icon-blueprint{
+                    background-image: url('../../../../../assets/icons/blueprint.png')
+                }
+                &.icon-catapult{
+                    background-image: url('../../../../../assets/icons/catapult.png')
+                }
+                &:last-of-type{
+                    margin-left: 8px;
+                }
+            }
+        }
+        .pic{
+            display:    block;
+            position:   absolute;
+            z-index:    -5;
+            top:        0;
+            bottom:     0;
+            left:       0;
+            right:      0;
+            opacity:    .5;
+            background: no-repeat 100% 50% / cover;
+            overflow:   hidden;
+        }
+        .icon-has-extra-illust, .flag-navy{
+            left:       auto;
+            right:      10px;
+            opacity:    .5;
+        }
+
+        &.is-need-blueprint{
+            .lvl{
+                color:      @theme-red-100;
+                &:before{
+                    color:  fade(@theme-red-100, 50%);
+                }
+            }
+        }
+        &.is-need-catapult{
+            .lvl{
+                color:      @theme-lime-a100;
+                &:before{
+                    color:  fade(@theme-lime-a100, 65%);
+                }
+            }
+        }
+        &.is-need-blueprint.is-need-catapult{
+            .lvl{
+                color:      @theme-amber-a100;
+                &:before{
+                    color:  fade(@theme-amber-200, 60%);
+                }
+            }
+        }
+
+        @switchable-gutter: 30px;
+        &.is-switchable{
+            margin-left:    @switchable-gutter;
+        }
+            .icon-switchable{
+                @size:      20px;
+                @color:     @theme-yellow-a100;
+                fill:       @color;
+                position:   absolute;
+                top:        50%;
+                left:       (0 - @size - (@switchable-gutter - @size) / 2 );
+                width:      @size;
+                height:     @size;
+                margin-top: (0 - @size / 2);
+                filter:     drop-shadow(0 0 5px @color);
+                overflow:   visible;
+            }
+
+        &:hover, &.on{
+            // .lvl{
+            //     color:      #fff;
+            //     &:before{
+            //         color:      @color-base;
+            //     }
+            // }
+            .pic, .icon-has-extra-illust, .flag-navy{
+                opacity:    1;
+            }
+        }
+
+        &:hover{
+
+        }
+
+        &.on{
+            z-index:    -1;
+            pointer-events: none;
+        }
+    }
 }

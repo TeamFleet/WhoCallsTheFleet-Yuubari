@@ -1,6 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router'
+import classNames from 'classnames'
 
+import LinkShip from 'UI/components/link-ship.jsx'
+import Icon from 'UI/components/icon'
 import ComponentContainer from '../layout/component-container.jsx'
 
 import translate from 'sp-i18n'
@@ -16,36 +18,40 @@ export default class ShipDetailsComponentRemodels extends React.Component {
     renderSeries(current, index, series) {
         const ship = getShip(current.id)
         return (
-            <tr key={index}>
-                <th style={{
-                    textAlign: 'right'
-                }}><i>
-                        {index == 0 && "-"}
-                        {index > 0 && series[index - 1].next_lvl}
-                        {index > 0 && series[index - 1].next_blueprint === 'on' && <small><br />+ Blueprint</small>}
-                        {index > 0 && series[index - 1].next_catapult === 'on' && <small><br />+ Catapult</small>}
-                        {index > 0 && series[index - 1].next_loop === 'on' && ' (Switchable)'}
-                    </i></th>
-                <td>
-                    {this.props.ship.id === current.id && ship._name}
-                    {this.props.ship.id !== current.id && <Link to={`/ships/${current.id}`}>
-                        {ship._name}
-                    </Link>}
-                    <img src={getPic('ship', ship.getPic('0-1'))} />
-                </td>
-            </tr>
+            <LinkShip
+                className={classNames(['item', {
+                    'on': current.id === this.props.ship.id,
+                    'is-switchable': index > 0 && series[index - 1].next_loop === 'on',
+                    'is-need-blueprint': index > 0 && series[index - 1].next_blueprint === 'on',
+                    'is-need-catapult': index > 0 && series[index - 1].next_catapult === 'on'
+                }])}
+                key={index}
+                // to={`/ships/${current.id}`}
+                ship={ship}
+                navy={true}
+                name={false}
+                pic={false}
+                extraIllust={true}
+            >
+                {index > 0 && <span className="lvl">
+                    {series[index - 1].next_lvl}
+                    {series[index - 1].next_catapult === 'on' && <span className="icon icon-catapult" />}
+                    {series[index - 1].next_blueprint === 'on' && <span className="icon icon-blueprint" />}
+                </span>}
+                <span className="pic" style={{
+                    backgroundImage: `url(${getPic('ship', ship.getPic('0-1'))})`
+                }} />
+                {index > 0 && series[index - 1].next_loop === 'on' && <Icon icon="puzzle" className="icon-switchable" />}
+            </LinkShip>
         )
     }
 
     render() {
-        const serieses = this.props.ship._series
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.remodels")}>
-                <table>
-                    <tbody>
-                        {serieses.map(this.renderSeries.bind(this))}
-                    </tbody>
-                </table>
+                <div className="container">
+                    {this.props.ship._series.map(this.renderSeries.bind(this))}
+                </div>
             </ComponentContainer>
         )
     }
