@@ -6,7 +6,7 @@ import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from 'Utils/html-head.js'
 import db from 'Logic/database'
 
-import Header from './details/components/header.jsx'
+import Header from './details/layout/header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './details.less'

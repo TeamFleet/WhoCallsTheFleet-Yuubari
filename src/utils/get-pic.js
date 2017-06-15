@@ -3,6 +3,13 @@ import db from 'Logic/database'
 const ext = __CLIENT__ && self._html && self._html.classList.contains('webp') ? '.webp' : '.png'
 
 const getUri = (type, id, file) => {
+    if (typeof id !== 'undefined' && typeof file === 'undefined') {
+        const arr = id.split('/')
+        if (arr.length > 1)
+            return getUri(type, arr[0], arr[1].split('.')[0])
+        return ''
+    }
+
     switch (type) {
         case 'ship':
         case 'ships':
