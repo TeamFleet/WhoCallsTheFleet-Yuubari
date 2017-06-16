@@ -13,7 +13,7 @@ export default {
     injection: {
         htmlattr: () => ` data-locale="${currentLocaleId}"`,
         manifest: () => `<link rel="manifest" href="/manifest-${currentLocaleId}.json">`,
-        svg: () => `<div class="hide">${__ICONSVG__}</div>`,
+        svg_symbols: () => `<div class="hide">${__ICONSVG__}</div>`,
 
         js: (args) => `<script async src="${args.path}/${getInjectionJsFilename('client')}"></script>`,
         critical: (args) => `<script src="${args.path}/${getInjectionJsFilename('critical')}"></script>`,

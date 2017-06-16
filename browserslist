@@ -6,8 +6,8 @@
 >= 5%
 
 # IE / Edge
-not Explorer
-not ExplorerMobile
+not Explorer <= 11
+not ExplorerMobile <= 11
 Edge >= 14
 
 # Chrome

@@ -48,7 +48,7 @@ export const template = `
         <div id="root">
             <div><script>//inject_html</script></div>
         </div>
-        <script>//inject_svg</script>
+        <script>//inject_svg_symbols</script>
         <script>//inject_redux_state</script>
         <script>//inject_js</script>
 
