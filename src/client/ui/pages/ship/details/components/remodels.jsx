@@ -41,7 +41,7 @@ export default class ShipDetailsComponentRemodels extends React.Component {
                 <span className="pic" style={{
                     backgroundImage: `url(${getPic('ship', ship.getPic('0-1'))})`
                 }} />
-                {index > 0 && series[index - 1].next_loop === 'on' && <Icon icon="puzzle" className="icon-switchable" />}
+                {index > 0 && series[index - 1].next_loop === 'on' && <Icon icon="loop" className="icon-switchable" />}
             </LinkShip>
         )
     }

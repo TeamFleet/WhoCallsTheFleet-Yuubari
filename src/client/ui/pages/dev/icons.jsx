@@ -63,10 +63,10 @@ export default class extends React.Component {
 class IconSample extends React.Component {
     render() {
         return (
-            <div className="icon-sample">
-                <Icon icon={this.props.icon} className="icon" />
+            <label className="icon-sample">
                 <input type="text" value={this.props.icon} readOnly />
-            </div>
+                <Icon icon={this.props.icon} className="icon" />
+            </label>
         )
     }
 }
