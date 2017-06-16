@@ -3,18 +3,24 @@
 #
 # https://github.com/ai/browserslist
 
-> 0.01%
+>= 5%
 
-Explorer >= 11
-ie >= 11
-Edge >= 12
-ExplorerMobile >= 11
+# IE / Edge
+not Explorer
+not ExplorerMobile
+Edge >= 14
 
-Chrome >= 20
-ChromeAndroid >= 20
+# Chrome
+Chrome >= 49
+ChromeAndroid >= 59
 
-ff >= 20
+# Firefox
+Firefox >= 50
+FirefoxAndroid >= 53
 
-iOS >= 7
+# Safari
+Safari >= 9
 
-Android >= 2
+# Systems
+iOS >= 8
+Android >= 4.4
