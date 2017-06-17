@@ -151,7 +151,7 @@
         "prop-types": "^15.5.10",
 
 
-        "redux": "^3.6.0",
+        "redux": "^3.7.0",
         "redux-thunk": "^2.2.0",
         "react-redux": "^5.0.5",
         "react-router-redux": "^4.0.8",
@@ -167,7 +167,7 @@
         "koa-multer": "^1.0.0",
         "koa-onerror": "^3.1.0",
         "koa-response-time": "^2.0.0",
-        "koa-router": "^7.2.0",
+        "koa-router": "^7.2.1",
         "koa-static": "^3.0.0",
         "koa-compose": "^3.2.1",
         "koa-helmet": "^3.2.0",

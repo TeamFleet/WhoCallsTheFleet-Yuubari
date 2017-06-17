@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import checkCssProp from 'check-css-prop'
+
 import Background from './background.jsx'
 
 import { ImportStyle } from 'sp-css-import'
@@ -14,15 +16,20 @@ export default class extends React.Component {
 
         return props
     }
+    renderContent() {
+        return (
+            <div className={this.props.className + " main-header"} {...this.getProps() }>
+                {this.props.children}
+                {__CLIENT__ && <Background type="blured" />}
+            </div>
+        )
+    }
     render() {
-        if (__SERVER__) return null
+        if (__SERVER__) return this.renderContent()
 
         return (
             <MainHeaderPortal>
-                <div className={this.props.className + " main-header"} {...this.getProps() }>
-                    {this.props.children}
-                    <Background type="blured" />
-                </div>
+                {this.renderContent()}
             </MainHeaderPortal>
         )
     }
