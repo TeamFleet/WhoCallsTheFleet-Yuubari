@@ -1,6 +1,9 @@
 @import '../_.less';
 
 .component{
+    @color-switchable:  @color-fade;
+                // @color:     @theme-yellow-a100;
+                // @color:     @color-accent;
     .container{
         display:    flex;
         flex-flow:  row nowrap;
@@ -63,6 +66,10 @@
             opacity:    .5;
             background: no-repeat 100% 50% / cover;
             overflow:   hidden;
+            @supports (mask-position: 0% 0%) {
+                background-position:    0% 50%;
+                mask:   linear-gradient(to left, transparent, transparent 10px, #000 60px, #000) repeat-y 0% 0%;
+            }
         }
         .icon-has-extra-illust, .flag-navy{
             left:       auto;
@@ -101,8 +108,7 @@
         }
             .icon-switchable{
                 @size:      24px;
-                // @color:     @theme-yellow-a100;
-                @color:     @color-accent;
+                @color:     @color-switchable;
                 fill:       @color;
                 position:   absolute;
                 top:        50%;
@@ -112,6 +118,7 @@
                 margin-top: (0 - @size / 2);
                 filter:     drop-shadow(0 0 5px @color);
                 overflow:   visible;
+                z-index:    -1;
             }
 
         &:hover, &.on{
@@ -135,4 +142,67 @@
             pointer-events: none;
         }
     }
+
+    .screen-phone({
+        @left-space:    100px;
+        .container{
+            flex-flow:  column wrap;
+            margin-top: -50px;
+            border-left:@left-space solid transparent;
+        }
+        .item{
+            @size-ratio:0.8;
+            flex:       0 0 (@ship-link-height * @size-ratio);
+            width:      (@ship-link-width * @size-ratio);
+            margin-top: 10px;
+            .lvl{
+                display:    block;
+                position:   absolute;
+                width:      @left-space;
+                height:     100%;
+                left:       (0 - @left-space);
+                top:        0;
+                text-align: right;
+                line-height:(@ship-link-height * @size-ratio);
+                padding:    0 10px 0 0;
+                font-size:  14px;
+                .icon{
+                    margin-top:     5px;
+                }
+            }
+            @switchable-gutter: 30px;
+            &.is-switchable{
+                margin-top:     (10px + @switchable-gutter);
+                margin-left:    0;
+            }
+                .icon-switchable{
+                    @size:      24px;
+                    top:        (0 - @size - (@switchable-gutter - @size) / 2 - 5);
+                    left:       0;
+                    margin:     0;
+                    transform:  rotate(90deg);
+                }
+
+            &.is-has-icon{
+                .lvl{
+                    line-height:1em;
+                    .icon{
+                        @size:      18px;
+                        position:   absolute;
+                        width:      @size;
+                        height:     @size;
+                        right:      10px;
+                        bottom:     0;
+                        .icons(@n, @i: 1) when (@i =< @n) {
+                            & + .icon {
+                                right:  ((@size + 2px) * @i + 10px);
+                                .icons(@n, (@i + 1));
+                            }
+                        }
+                        .icons(5);
+                    }
+                }
+            }
+        }
+    });
 }
