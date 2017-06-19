@@ -71,6 +71,7 @@
         "availability": "Availability",
         "capabilities": "Capabilities & Features",
         "remodels": "Remodels",
+        "remodel_initial": "Initial",
         "quickfacts": "Quick Facts",
         "slot_equipments": "Slot & Stock Equipments"
     }

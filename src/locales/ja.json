@@ -71,7 +71,8 @@
         "voicelines": "ボイス・ライン",
         "availability": "入手情報",
         "capabilities": "機能・特徴",
-        "remodels": "改造",
+        "remodels": "改造チャート",
+        "remodel_initial": "初期",
         "quickfacts": "ヒント",
         "slot_equipments": "搭載・初期装備"
     }

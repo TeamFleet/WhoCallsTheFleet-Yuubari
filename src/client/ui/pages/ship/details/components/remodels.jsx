@@ -39,11 +39,13 @@ export default class ShipDetailsComponentRemodels extends React.Component {
                 pic={false}
                 extraIllust={true}
             >
-                {index > 0 && <span className="lvl">
-                    {series[index - 1].next_lvl}
-                    {series[index - 1].next_catapult === 'on' && <span className="icon icon-catapult" />}
-                    {series[index - 1].next_blueprint === 'on' && <span className="icon icon-blueprint" />}
-                </span>}
+                <span className={classNames(['lvl', {
+                    'is-initial': index <= 0
+                }])}>
+                    {index > 0 ? series[index - 1].next_lvl : translate('ship_details.remodel_initial')}
+                    {index > 0 && series[index - 1].next_catapult === 'on' && <span className="icon icon-catapult" />}
+                    {index > 0 && series[index - 1].next_blueprint === 'on' && <span className="icon icon-blueprint" />}
+                </span>
                 <span className="pic" style={{
                     backgroundImage: `url(${getPic(ship, checkCssProp('mask') ? '0' : '0-1')})`
                 }} />
