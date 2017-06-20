@@ -21,6 +21,9 @@
     .shipinfo{
         flex:   1 0 100%;
     }
+        .shipinfo-facts{
+            margin-right:   -5vw;
+        }
 
     .screen-t1({
         .shipinfo-remodels{
@@ -39,15 +42,18 @@
             display:    none;
         }
         .shipinfo-remodels{
-            margin-right:@main-margin-tablet;
+            margin-right:(@main-margin-top + 10);
+        }
+        .shipinfo-facts{
+            margin-right:0;
         }
     });
 
-    .screen-phone({
-        .shipinfo-remodels{
-            margin-right:@main-margin-phone;
-        }
-    });
+    // .screen-phone({
+    //     .shipinfo-remodels{
+    //         margin-right:(@main-margin-phone + 10);
+    //     }
+    // });
 
     .screen-phone-small({
         .shipinfo-remodels{
