@@ -33,3 +33,11 @@
         }
     }
 }
+
+.screen-phone-small( @rules ){
+    @media all and (max-width: @screen-phone-small){
+        &{
+            @rules();
+        }
+    }
+}

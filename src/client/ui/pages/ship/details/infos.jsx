@@ -8,18 +8,18 @@ import SlotEquipments from './components/slot-equipments.jsx'
 import translate from 'sp-i18n'
 import db from 'Logic/database'
 
-// import { ImportStyle } from 'sp-css-import'
-// import styles from './header.less'
+import { ImportStyle } from 'sp-css-import'
+import styles from './infos.less'
 
 // @connect()
-// @ImportStyle(styles)
+@ImportStyle(styles)
 export default class ShipDetailsContentInfos extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
-                <Remodels ship={this.props.ship} />
-                <QuickFacts ship={this.props.ship} />
-                <SlotEquipments ship={this.props.ship} />
+                <Remodels ship={this.props.ship} className="shipinfo shipinfo-remodels" />
+                <QuickFacts ship={this.props.ship} className="shipinfo shipinfo-facts" />
+                <SlotEquipments ship={this.props.ship} className="shipinfo shipinfo-equipments" />
             </div>
         )
     }

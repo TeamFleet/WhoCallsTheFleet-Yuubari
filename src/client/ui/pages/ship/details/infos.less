@@ -1,0 +1,61 @@
+@import './_.less';
+
+.component{
+    @width-illust:  unit(340 / 1280 * 100, vw);
+
+    display:        flex;
+    flex-flow:      row wrap;
+    align-content:  space-between;
+
+    min-height:     calc(~"100vh - @{title-height} - @{tab-height} - @{title-margin-bottom} - @{main-margin-top} - @{main-margin-top} - @{main-margin-top}");
+
+    padding-right:  @width-illust;
+
+    &:after{
+        content:    "";
+        flex:       none;
+        width:      100%;
+        height:     5vh;
+    }
+
+    .shipinfo{
+        flex:   1 0 100%;
+    }
+
+    .screen-t1({
+        .shipinfo-remodels{
+            flex:   0;
+            margin-right:@main-margin;
+        }
+        .shipinfo-facts{
+            flex:   1 1 auto;
+        }
+    });
+
+    .screen-tablet({
+        align-content:  flex-start;
+        padding-right:  0;
+        &:after{
+            display:    none;
+        }
+        .shipinfo-remodels{
+            margin-right:@main-margin-tablet;
+        }
+    });
+
+    .screen-phone({
+        .shipinfo-remodels{
+            margin-right:@main-margin-phone;
+        }
+    });
+
+    .screen-phone-small({
+        .shipinfo-remodels{
+            flex:   1 0 100%;
+            margin-right:0;
+        }
+        .shipinfo-facts{
+            flex:   1 0 100%;
+        }
+    });
+}
