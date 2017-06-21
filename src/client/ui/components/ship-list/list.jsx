@@ -8,7 +8,7 @@ import {
 } from 'Logic/ship-list/api.js'
 import getShip from 'Utils/get-ship.js'
 
-import LinkShip from 'UI/components/link-ship.jsx'
+import LinkShip from 'UI/components/link/ship.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import styleList from './list.less'

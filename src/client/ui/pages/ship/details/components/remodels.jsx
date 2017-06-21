@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import checkCssProp from 'check-css-prop'
 
-import LinkShip from 'UI/components/link-ship.jsx'
+import LinkShip from 'UI/components/link/ship.jsx'
 import Icon from 'UI/components/icon'
 import ComponentContainer from '../commons/component-container.jsx'
 

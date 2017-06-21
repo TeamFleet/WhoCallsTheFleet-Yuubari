@@ -9,8 +9,8 @@ export default class ShipDetailsStat extends React.Component {
     render() {
         return (
             <dl className={this.props.className}>
-                {this.props.title && <dt className="title">{this.props.title}</dt>}
-                <dd className="body">
+                {this.props.title && <dt className="type">{this.props.title}</dt>}
+                <dd className="value">
                     {this.props.children}
                 </dd>
             </dl>

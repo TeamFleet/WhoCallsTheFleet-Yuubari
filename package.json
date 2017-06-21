@@ -157,7 +157,7 @@
         "react-router-redux": "^4.0.8",
 
 
-        "koa": "^2.2.0",
+        "koa": "^2.3.0",
         "koa-body": "^2.1.0",
         "koa-compress": "^2.0.0",
         "koa-convert": "^1.2.0",
@@ -185,13 +185,13 @@
 
 
         "webpack": "^3.0.0",
-        "webpack-dev-server": "^2.4.5",
+        "webpack-dev-server": "^2.5.0",
         "webpack-dashboard": "^0.4.0",
         "webpack-dev-middleware": "^1.10.1",
         "webpack-hot-middleware": "^2.17.1",
 
 
-        "babel-loader": "^7.0.0",
+        "babel-loader": "^7.1.0",
         "file-loader": "^0.11.2",
         "url-loader": "^0.5.9",
         "react-hot-loader": "^3.0.0-beta.6",

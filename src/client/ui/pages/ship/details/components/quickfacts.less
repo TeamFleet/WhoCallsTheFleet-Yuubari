@@ -1,4 +1,43 @@
 @import '../_.less';
 
 .component{
+    overflow:   hidden;
+    margin-right:   (0 - @main-margin);
+
+    .item{
+        padding:    3px 0 2px 0;
+        float:      left;
+        margin-right:@main-margin;
+        .type{
+            float:      none;
+            font-size:  14px;
+            line-height:20px;
+        }
+        .value{
+            margin-top: -5px;
+        }
+    }
+
+    .flag-navy/*, .pic*/{
+        vertical-align: sub;
+        width:      20px;
+        height:     20px;
+        display:    inline-block;
+        // float:      left;
+        margin-right:6px;
+    }
+
+    // .pic{
+    //     background: fade(#000, 10%) no-repeat 50% 38.2% / cover;
+    //     border:     1px solid @color-fade;
+    //     border-radius: 50%;
+    // }
+
+    .screen-t1({
+        margin-right:   auto;
+        .item{
+            float:      none;
+            margin:     0;
+        }
+    });
 }

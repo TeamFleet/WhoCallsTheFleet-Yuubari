@@ -74,5 +74,13 @@ export default [{
             if (routeCheck(nextState)) cb(null, require('UI/pages/equipment/details').default)
         }, 'thisEquipment')
     }
+}, {
+    path: 'entities/:id',
+    name: 'thisEntity',
+    getComponent: (nextState, cb) => {
+        require.ensure([], (require) => {
+            if (routeCheck(nextState)) cb(null, require('UI/pages/entity/details').default)
+        }, 'thisEntity')
+    }
 }
 ]

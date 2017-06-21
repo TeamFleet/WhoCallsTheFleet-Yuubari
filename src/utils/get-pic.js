@@ -1,5 +1,7 @@
 import db from 'Logic/database'
+
 import Ship from 'kckit/src/class/ship.js'
+import Entity from 'kckit/src/class/entity.js'
 
 const ext = __CLIENT__ && self._html && self._html.classList.contains('webp') ? '.webp' : '.png'
 
@@ -7,6 +9,8 @@ const getUri = (type, id, file) => {
     if (typeof type === 'object') {
         if (type instanceof Ship)
             return getUri('ship', type.id, id)
+        if (type instanceof Entity)
+            return getUri('entity', type.id, id)
     }
 
     if (typeof id !== 'undefined' && typeof file === 'undefined') {

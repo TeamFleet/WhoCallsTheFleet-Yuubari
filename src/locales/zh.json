@@ -70,9 +70,15 @@
         "voicelines": "语音 & 台词",
         "availability": "获取方式",
         "capabilities": "功能 & 作战能力",
+
         "remodels": "改造系谱",
         "remodel_initial": "初始",
+
         "quickfacts": "小知识",
+        "navy": "军籍",
+        "cv": "声优",
+        "illustrator": "画师",
+
         "slot_equipments": "搭载量 & 初始装备"
     }
 }

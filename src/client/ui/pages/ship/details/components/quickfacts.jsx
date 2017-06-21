@@ -1,6 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router'
 
+import getPic from 'Utils/get-pic'
+
+import Link from 'UI/components/link'
+// import Icon from 'UI/components/icon'
+import FlagNavy from 'UI/components/flag-navy'
 import ComponentContainer from '../commons/component-container.jsx'
 import Stat from '../commons/stat.jsx'
 
@@ -15,25 +19,29 @@ import styles from './quickfacts.less'
 export default class ShipDetailsComponentSlotEquipments extends React.Component {
     render() {
         const ship = this.props.ship
+
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.quickfacts")}>
                 <Stat
                     className="item"
                     title={translate("ship_details.navy")}
                 >
-                    [{ship.navy.toUpperCase()}] {ship._navyName}
+                    <FlagNavy className="flag-navy" navy={ship.navy} />
+                    {ship._navyName}
                 </Stat>
                 <Stat
                     className="item"
                     title={translate("ship_details.cv")}
                 >
-                    [{ship.rels.cv}] {ship._cv}
+                    <Link to={`/entities/${ship.getRel('cv')}`}>
+                        {ship._cv}
+                    </Link>
                 </Stat>
                 <Stat
                     className="item"
                     title={translate("ship_details.illustrator")}
                 >
-                    [{ship.rels.illustrator}] {ship._illustrator}
+                    <Link to={`/entities/${ship.getRel('illustrator')}`}>{ship._illustrator}</Link>
                 </Stat>
             </ComponentContainer>
         )

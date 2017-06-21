@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 
-import LinkShip from '../link-ship.jsx'
+import LinkShip from '../link/ship.jsx'
 import DataTable from '../datatable.jsx'
 import {
     compareScroll

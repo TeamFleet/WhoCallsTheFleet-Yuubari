@@ -70,9 +70,15 @@
         "voicelines": "Voices & Lines",
         "availability": "Availability",
         "capabilities": "Capabilities & Features",
+
         "remodels": "Remodels",
         "remodel_initial": "Initial",
+
         "quickfacts": "Quick Facts",
+        "navy": "Navy",
+        "cv": "CV",
+        "illustrator": "Artist",
+
         "slot_equipments": "Slot & Stock Equipments"
     }
 }
