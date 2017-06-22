@@ -7,9 +7,10 @@ import styles from './stat.less'
 @ImportStyle(styles)
 export default class ShipDetailsStat extends React.Component {
     render() {
+        const type = this.props.type || this.props.title
         return (
             <dl className={this.props.className}>
-                {this.props.title && <dt className="type">{this.props.title}</dt>}
+                {type && <dt className="type">{type}</dt>}
                 <dd className="value">
                     {this.props.children}
                 </dd>

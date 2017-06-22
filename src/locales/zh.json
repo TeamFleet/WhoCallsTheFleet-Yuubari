@@ -79,6 +79,8 @@
         "cv": "声优",
         "illustrator": "画师",
 
+        "stats": "基础属性",
+
         "slot_equipments": "搭载量 & 初始装备"
     }
 }

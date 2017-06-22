@@ -79,6 +79,8 @@
         "cv": "CV",
         "illustrator": "Artist",
 
+        "stats": "Statistics",
+
         "slot_equipments": "Slot & Stock Equipments"
     }
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 
 import Remodels from './components/remodels.jsx'
 import QuickFacts from './components/quickfacts.jsx'
+import Stats from './components/stats.jsx'
 import SlotEquipments from './components/slot-equipments.jsx'
 
 import translate from 'sp-i18n'
@@ -19,6 +20,7 @@ export default class ShipDetailsContentInfos extends React.Component {
             <div className={this.props.className}>
                 <Remodels ship={this.props.ship} className="shipinfo shipinfo-remodels" />
                 <QuickFacts ship={this.props.ship} className="shipinfo shipinfo-facts" />
+                <Stats ship={this.props.ship} className="shipinfo shipinfo-stats" />
                 <SlotEquipments ship={this.props.ship} className="shipinfo shipinfo-equipments" />
             </div>
         )
