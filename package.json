@@ -210,7 +210,7 @@
 
 
         "less": "^2.7.2",
-        "cssnano": "^4.0.0-rc.0",
+        "cssnano": "^4.0.0-rc.1",
         "autoprefixer": "^7.1.1",
         "postcss-pxtorem": "^4.0.1",
 
