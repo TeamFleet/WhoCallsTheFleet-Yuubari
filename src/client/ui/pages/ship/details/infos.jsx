@@ -5,6 +5,7 @@ import Remodels from './components/remodels.jsx'
 import QuickFacts from './components/quickfacts.jsx'
 import Stats from './components/stats.jsx'
 import SlotEquipments from './components/slot-equipments.jsx'
+import Illust from './components/illust.jsx'
 
 import translate from 'sp-i18n'
 import db from 'Logic/database'
@@ -22,6 +23,7 @@ export default class ShipDetailsContentInfos extends React.Component {
                 <Stats ship={this.props.ship} className="shipinfo shipinfo-stats" />
                 <SlotEquipments ship={this.props.ship} className="shipinfo shipinfo-equipments" />
                 <Remodels ship={this.props.ship} className="shipinfo shipinfo-remodels" />
+                <Illust ship={this.props.ship} className="shipinfo shipinfo-illust" />
             </div>
         )
     }
