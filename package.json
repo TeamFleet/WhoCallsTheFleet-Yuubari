@@ -107,7 +107,7 @@
 
 
     "dependencies": {
-        "whocallsthefleet-database": "2017.6.23",
+        "whocallsthefleet-database": "2017.6.24",
         "whocallsthefleet-backgrounds": "1.2.0",
 
         "kckit": "^1.6.4",
