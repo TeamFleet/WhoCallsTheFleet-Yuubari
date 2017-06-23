@@ -10,7 +10,7 @@
     }
 
     .lv{
-        margin:     0 .5em 10px 1em;
+        margin:     0 .5em @component-title-margin-bottom 1em;
         position:   relative;
         flex:       0 0 auto;
         width:      3em;
@@ -27,6 +27,7 @@
             opacity:    0;
             width:      2.5em;
             text-align: center;
+            -moz-appearance: textfield;
             &::-webkit-inner-spin-button, 
             &::-webkit-outer-spin-button { 
                 -webkit-appearance: none; 
@@ -55,7 +56,7 @@
         flex:       1;
         background: none transparent;
         border:     0;
-        margin-bottom: 10px;
+        margin-bottom: @component-title-margin-bottom;
         @color-track:   @color-border;
         min-width:  0;
         max-width:  155px;
@@ -127,6 +128,27 @@
     }
 
     .stats{
-        flex:   1 0 100%;
+        flex:       1 0 100%;
+        overflow:   hidden;
+        position:   relative;
     }
+        .stat{
+            float:      left;
+            width:      25%;
+            line-height:20px;
+            &:nth-child(4n + 4){
+                margin-bottom:  20px;
+                &:after{
+                    clear:      both;
+                    content:    "";
+                    display:    block;
+                    height:     1px;
+                    background: @color-border;
+                    width:      100%;
+                    left:       0;
+                    margin:     30px 0 0 0;
+                    position:   absolute;
+                }
+            }
+        }
 }

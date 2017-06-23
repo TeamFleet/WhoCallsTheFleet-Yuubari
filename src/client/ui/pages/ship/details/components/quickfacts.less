@@ -2,19 +2,25 @@
 
 .component{
     overflow:   hidden;
+    margin-top:     (0 - @component-title-margin-bottom);
     margin-right:   (0 - @main-margin);
+
+    // & > h2.title{
+    //     margin-bottom:  0
+    // }
 
     .item{
         float:      left;
-        margin-right:@main-margin;
+        margin-top:     @component-title-margin-bottom;
+        margin-right:   @main-margin;
         .type{
             float:      none;
             font-size:  14px;
             line-height:20px;
         }
-        .value{
-            margin-top: -5px;
-        }
+        // .value{
+        //     margin-top: -5px;
+        // }
     }
 
     .flag-navy/*, .pic*/{
@@ -32,12 +38,12 @@
     //     border-radius: 50%;
     // }
 
-    .screen-t1({
-        margin-right:   auto;
-        .item{
-            float:      none;
-            margin:     0;
-            padding:    0 0 5px 0;
-        }
-    });
+    // .screen-t1({
+    //     margin-right:   auto;
+    //     .item{
+    //         float:      none;
+    //         margin:     0;
+    //         padding:    0 0 5px 0;
+    //     }
+    // });
 }

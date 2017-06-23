@@ -19,9 +19,9 @@ import styles from './quickfacts.less'
 export default class ShipDetailsComponentSlotEquipments extends React.Component {
     render() {
         const ship = this.props.ship
-
+        //title={translate("ship_details.quickfacts")}
         return (
-            <ComponentContainer className={this.props.className} title={translate("ship_details.quickfacts")}>
+            <ComponentContainer className={this.props.className}>
                 <Stat
                     className="item"
                     title={translate("ship_details.navy")}

@@ -77,7 +77,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
     }
     renderStat(stat, index) {
         return (
-            <Stat type={translate(`stat.${stat}`)} key={index}>
+            <Stat type={translate(`stat.${stat}`)} key={index} className="stat" stat={stat}>
                 {/^consum\./.test(stat)
                     ? 0 - this.props.ship.getAttribute(stat, this.state.lv)
                     : getValue(this.props.ship.getAttribute(stat, this.state.lv))
