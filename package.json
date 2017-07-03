@@ -119,6 +119,7 @@
         "lz-string": "^1.4.4",
         "js-cookie": "^2.1.4",
         "localforage": "^1.5.0",
+        "metas": "^1.0.1",
 
         "fs-extra": "^3.0.1",
         "glob": "^7.1.2",

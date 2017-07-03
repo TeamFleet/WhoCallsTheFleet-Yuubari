@@ -33,11 +33,11 @@ export const template = `
 
         <meta name="copyright" content="Copyright (c) 2017 fleet.moe">
 
-        <script>//inject_component_styles</script>
-
         <!--INJECT_META_START-->
         <script>//inject_meta</script>
         <!--INJECT_META_END-->
+
+        <script>//inject_component_styles</script>
 
         <script>//inject_critical_extra_old_ie_filename</script>
         <script>var __SERVICE_WORKER_FILENAME__ = "<script>//inject_pwa_filename</script>"</script>

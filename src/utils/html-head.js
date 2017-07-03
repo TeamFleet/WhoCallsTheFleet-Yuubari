@@ -1,3 +1,5 @@
+import metas from 'metas'
+
 import translate, { getLocaleId, localeId as currentLocaleId } from 'sp-i18n'
 
 import { origin as siteOrigin } from 'Config/site.js'
@@ -42,6 +44,8 @@ export default (settings = {}) => {
 
         uri = pathname
         fb_locale = query.fb_locale
+    } else if (typeof location !== 'undefined') {
+        uri = location.pathname
     }
 
     if (uri.substr(0, 1) == '/') uri = uri.substr(1)
@@ -65,6 +69,21 @@ export default (settings = {}) => {
 
     if (options.currentOrigin) options.currentOrigin = options.currentOrigin + '/'
 
+    const meta = metas({
+        title,
+        description,
+        image,
+        url: options.currentOrigin + uri,
+        type: "website",
+        locale: curLocaleId,
+
+        siteName,
+
+        twitter: {
+            siteCreator: "Diablohu"
+        }
+    }, true)
+    /*
     const meta = [
         // Schema.org markup for Google+
         { itemprop: 'name', content: title },
@@ -80,7 +99,7 @@ export default (settings = {}) => {
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: siteName },
         { property: 'og:image', content: image },
-        /*
+
         // For FaceBook App
         { property: 'al:ios:url', content: siteOrigin + uri },
         { property: 'al:ios:app_store_id', content: '543577420' },
@@ -107,11 +126,11 @@ export default (settings = {}) => {
         { name: 'twitter:app:name:googleplay', content: siteName },
         { name: 'twitter:app:id:googleplay', content: 'com.roidapp.photogrid' },
         { name: 'twitter:app:url:googleplay', content: 'cmpg://photogrid.cmcm.com/' + uri }
-        */
     ]
+    */
 
     if (fb_locale)
-        fb_locale = fb_locale.replace(/\-/g, '_')
+        fb_locale = fb_locale.replace(/-/g, '_')
     else {
         availableLocalesFb.some(locale => {
             if (curLocaleId == getLocaleId(locale))
@@ -122,7 +141,7 @@ export default (settings = {}) => {
 
     if (fb_locale) {
         const localeId = getLocaleId(fb_locale)
-        const fb_locale_parsed = fb_locale.replace(/\_/g, '-').toLowerCase()
+        const fb_locale_parsed = fb_locale.replace(/_/g, '-').toLowerCase()
         const seg = fb_locale_parsed.split('-')
 
         // console.log(availableLocalesFb, localeId, fb_locale, seg)
@@ -167,11 +186,11 @@ export default (settings = {}) => {
             return str
         })
         str = str.join('')
-        const match = /(\<\!\-\-INJECT_META_START\-\-\>)(.+)(\<\!\-\-INJECT_META_END\-\-\>)/g.exec(head.innerHTML)
+        const match = /(<!--INJECT_META_START-->)(.+)(<!--INJECT_META_END-->)/g.exec(head.innerHTML)
 
         if (match && match.length > 3) {
             if (str !== match[2]) {
-                head.innerHTML = head.innerHTML.replace(/\<\!\-\-INJECT_META_START\-\-\>(.+)\<\!\-\-INJECT_META_END\-\-\>/g, '<!--INJECT_META_START-->' + str + '<!--INJECT_META_END-->')
+                head.innerHTML = head.innerHTML.replace(/<!--INJECT_META_START-->(.+)<!--INJECT_META_END-->/g, '<!--INJECT_META_START-->' + str + '<!--INJECT_META_END-->')
                 // console.log('head meta updated')
             } else {
                 // console.log('head meta not change, do not update')
