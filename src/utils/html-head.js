@@ -72,7 +72,7 @@ export default (settings = {}) => {
     const meta = metas({
         title,
         description,
-        image,
+        image: image || (options.currentOrigin + 'launcher.jpg'),
         url: options.currentOrigin + uri,
         type: "website",
         locale: curLocaleId,
@@ -80,6 +80,7 @@ export default (settings = {}) => {
         siteName,
 
         twitter: {
+            card: "summary",
             siteCreator: "Diablohu"
         }
     }, true)
