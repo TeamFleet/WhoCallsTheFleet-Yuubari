@@ -16,8 +16,10 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         super(props)
 
         this.pics = []
-        const ids = ['_'].concat(props.ship._extraIllust)
         const illustIds = [8, 9]
+        let ids = ['_']
+        if(Array.isArray(props.ship._extraIllust))
+            ids = ids.concat(props.ship._extraIllust)
         ids.forEach(id => {
             illustIds.forEach(illustId => {
                 this.pics.push(
