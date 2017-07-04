@@ -42,6 +42,12 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
             lvInput: 99
         }
     }
+    setLv(lv) {
+        if (lv != this.state.lv)
+            this.setState({
+                lv: lv
+            })
+    }
     onInputChange(evt) {
         const newLv = Math.min(Math.max(evt.target.value, this.props.ship._minLv), maxShipLv)
         if (newLv != this.state.lv)
@@ -56,8 +62,8 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         else if (evt.target.value > maxShipLv)
             evt.target.value = maxShipLv
     }
-    onInputKeyDown(evt){
-        switch(evt.nativeEvent.keyCode){
+    onInputKeyDown(evt) {
+        switch (evt.nativeEvent.keyCode) {
             case 27: // esc
             case 13: // enter
                 evt.target.blur()
@@ -102,14 +108,25 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     />
                     <span className="lv-text">{this.state.lv}</span>
                 </span>
-                <input
-                    type="range"
-                    className="lv-slider"
-                    value={this.state.lv}
-                    min="1"
-                    max={maxShipLv}
-                    onChange={this.onRangeChange.bind(this)}
-                />
+                <span className="slider">
+                    <input
+                        type="range"
+                        className="lv-slider"
+                        value={this.state.lv}
+                        min="1"
+                        max={maxShipLv}
+                        onChange={this.onRangeChange.bind(this)}
+                    />
+                    <span className="current" style={{
+                        left: (this.props.ship._minLv / maxShipLv * 100) + '%',
+                        right: ((maxShipLv - this.state.lv) / maxShipLv * 100) + '%'
+                    }} />
+                    <span className="tick tick-minlv" style={{
+                        left: (this.props.ship._minLv / maxShipLv * 100) + '%'
+                    }} onClick={() => this.setLv(this.props.ship._minLv)} />
+                    <span className="tick tick-99" onClick={() => this.setLv(99)} />
+                    <span className="tick tick-maxlv" onClick={() => this.setLv(maxShipLv)} />
+                </span>
                 <div className="stats">
                     {stats.map(this.renderStat.bind(this))}
                 </div>
