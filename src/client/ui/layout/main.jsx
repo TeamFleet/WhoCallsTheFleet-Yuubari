@@ -21,6 +21,7 @@ export default class extends React.Component {
             // case 'main-transition-enter':
             //     break
             case 'main-transition-leave':
+                // console.log('main-transition-leave', action)
                 if (action === 'PUSH') {
                     evt.target.setAttribute('style', `margin-top:${0 - window.scrollY}px`)
                     window.scrollTo(undefined, 0)
@@ -53,8 +54,8 @@ export default class extends React.Component {
                     component="div"
                     className="wrapper"
                     transitionName="main-transition"
-                    transitionEnterTimeout={200}
-                    transitionLeaveTimeout={200}>
+                    transitionEnterTimeout={250}
+                    transitionLeaveTimeout={250}>
                     {this.props.children && (
                         <MainBody
                             key={this.props.location.pathname.split('/').slice(0, 3).join('/')}
