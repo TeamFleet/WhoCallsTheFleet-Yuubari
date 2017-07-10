@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Swiper = typeof window !== 'undefined' && require('swiper')
-require('swiper/dist/css/swiper.min.css')
+typeof window !== 'undefined' && require('swiper/dist/css/swiper.min.css')
 
 import { ImportStyle } from 'sp-css-import'
 import style from './styles.less'
