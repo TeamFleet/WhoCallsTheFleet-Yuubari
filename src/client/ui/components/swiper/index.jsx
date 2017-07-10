@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Swiper = __CLIENT__ && require('swiper')
-require('swiper/src/less/swiper.less')
+const Swiper = typeof window !== 'undefined' && require('swiper')
+require('swiper/dist/css/swiper.min.css')
 
 import { ImportStyle } from 'sp-css-import'
 import style from './styles.less'
@@ -28,7 +28,7 @@ export default class extends React.Component {
                 if (typeof props[key] === 'boolean') delete props[key]
             })
 
-            if (this.props.pagination === true){
+            if (this.props.pagination === true) {
                 props.pagination = '.swiper-pagination'
                 props.paginationClickable = true
             }
