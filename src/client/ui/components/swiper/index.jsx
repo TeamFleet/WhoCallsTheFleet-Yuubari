@@ -1,13 +1,14 @@
 import React from 'react'
+
 const Swiper = __CLIENT__ && require('swiper')
-if (__CLIENT__) require('swiper/dist/css/swiper.css')
+require('swiper/src/less/swiper.less')
 
 import { ImportStyle } from 'sp-css-import'
 import style from './styles.less'
 
 const defaults = {
-    speed: 400,
-    spaceBetween: 100
+    // speed: 400,
+    // spaceBetween: 100
 }
 
 @ImportStyle(style)
@@ -20,13 +21,17 @@ export default class extends React.Component {
             delete props.slides;
 
             [
-                'pagination',
                 'prevButton',
                 'nextButton',
                 'scrollbar'
             ].forEach(key => {
                 if (typeof props[key] === 'boolean') delete props[key]
             })
+
+            if (this.props.pagination === true){
+                props.pagination = '.swiper-pagination'
+                props.paginationClickable = true
+            }
 
             this.illusts = new Swiper(
                 this._container,
