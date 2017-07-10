@@ -13,16 +13,28 @@ const rules = [{
     loader: 'json-loader'
 }, {
     test: /\.css$/,
-    exclude: /\.g\.css$/,
+    exclude: [/\.g\.css$/, /node_modules/],
     loader: 'sp-css-loader?length=4&mode=replace!postcss-loader'
 }, {
     test: /\.less$/,
-    exclude: /\.g\.less$/,
+    exclude: [/\.g\.less$/, /node_modules/],
     loader: 'sp-css-loader?length=4&mode=replace!postcss-loader!less-loader'
 }, {
     test: /\.scss$/,
-    exclude: /\.g\.scss$/,
+    exclude: [/\.g\.scss$/, /node_modules/],
     loader: 'sp-css-loader?length=4&mode=replace!postcss-loader!sass-loader'
+}, {
+    test: /\.css$/,
+    include: /node_modules/,
+    loader: 'style-loader!postcss-loader'
+}, {
+    test: /\.less$/,
+    include: /node_modules/,
+    loader: 'style-loader!postcss-loader!less-loader'
+}, {
+    test: /\.scss$/,
+    include: /node_modules/,
+    loader: 'style-loader!postcss-loader!sass-loader'
 }, {
     test: /\.g\.css$/,
     loader: 'style-loader!postcss-loader'

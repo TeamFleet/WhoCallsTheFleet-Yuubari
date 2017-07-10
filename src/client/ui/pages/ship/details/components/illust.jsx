@@ -1,7 +1,7 @@
 import React from 'react'
-// import swiper from 'swiper'
 
 import ComponentContainer from '../commons/component-container.jsx'
+import Swiper from 'UI/components/swiper'
 
 import getPic from 'Utils/get-pic.js'
 import translate from 'sp-i18n'
@@ -18,7 +18,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         this.pics = []
         const illustIds = [8, 9]
         let ids = ['_']
-        if(Array.isArray(props.ship._extraIllust))
+        if (Array.isArray(props.ship._extraIllust))
             ids = ids.concat(props.ship._extraIllust)
         ids.forEach(id => {
             illustIds.forEach(illustId => {
@@ -28,10 +28,26 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
             })
         })
     }
+
+    componentDidMount() {
+        if (__CLIENT__) {
+            const Swiper = require('swiper')
+            this.illusts = new Swiper(this._container, {
+                speed: 400,
+                spaceBetween: 100
+            });
+        }
+    }
+
     render() {
         return (
             <ComponentContainer className={this.props.className}>
-                {this.pics.map((url, index) => <img key={index} src={url} />)}
+                <Swiper
+                    slides={this.pics.map(url => <img src={url} />)}
+                    pagination={true}
+                    prevButton={true}
+                    nextButton={true}
+                />
             </ComponentContainer>
         )
     }
