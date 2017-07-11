@@ -44,9 +44,27 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
             <ComponentContainer className={this.props.className}>
                 <Swiper
                     slides={this.pics.map(url => <img src={url} />)}
+
+                    slidesPerView={2}
+                    slidesPerGroup={2}
+
                     pagination={true}
+
                     prevButton={true}
                     nextButton={true}
+
+                    mousewheelControl={true}
+
+                    breakpoints={{
+                        850: {
+                            slidesPerView: 2,
+                            slidesPerGroup: 2
+                        },
+                        1440: {
+                            slidesPerView: 1,
+                            slidesPerGroup: 1
+                        }
+                    }}
                 />
             </ComponentContainer>
         )

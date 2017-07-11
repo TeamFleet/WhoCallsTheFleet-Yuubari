@@ -16,7 +16,8 @@
         content:    "";
         flex:       none;
         width:      100%;
-        height:     5vh;
+        // height:     5vh;
+        height:     0;
         order:      100;
     }
 
@@ -71,6 +72,7 @@
             height:     calc(~"100vh - 300px");
             width:      auto;
             order:      1;
+            .main-sizing-position-reset-margin();
         }
     }
 
@@ -105,13 +107,13 @@
     });
 
     @media all and (min-width: (@layout-width-max + 1)){
-        padding-right:  calc(~"100% - 787px");
+        padding-right:  50%;
         .shipinfo-illust{
-            width:      calc(~"100% - 787px");
+            width:      50%;
         }
     }
 
-    @media only screen and (min-width: (@screen-tablet + 1)) and (orientation: portrait){
+    @media only screen and (min-width: @screen-tablet) and (orientation: portrait){
         .portrait()
     }
 }

@@ -20,6 +20,20 @@ export default class extends React.Component {
             delete props.children
             delete props.slides;
 
+            if (this.props.pagination === true) {
+                props.pagination = '.swiper-pagination'
+                props.paginationClickable = true
+            }
+
+            [
+                'prevButton',
+                'nextButton',
+            ].forEach(key => {
+                if (this.props[key] === true) {
+                    props[key] = this['_' + key]
+                }
+            });
+
             [
                 'prevButton',
                 'nextButton',
@@ -27,11 +41,6 @@ export default class extends React.Component {
             ].forEach(key => {
                 if (typeof props[key] === 'boolean') delete props[key]
             })
-
-            if (this.props.pagination === true) {
-                props.pagination = '.swiper-pagination'
-                props.paginationClickable = true
-            }
 
             this.illusts = new Swiper(
                 this._container,
@@ -47,8 +56,8 @@ export default class extends React.Component {
                     {this.props.slides.map((el, index) => <div className="swiper-slide" key={index}>{el}</div>)}
                 </div>
                 {this.props.pagination && <div className="swiper-pagination"></div>}
-                {this.props.prevButton && <div className="swiper-button-prev"></div>}
-                {this.props.nextButton && <div className="swiper-button-next"></div>}
+                {this.props.prevButton && <div className="swiper-button-prev" ref={el => this._prevButton = el}></div>}
+                {this.props.nextButton && <div className="swiper-button-next" ref={el => this._nextButton = el}></div>}
                 {this.props.scrollbar && <div class="swiper-scrollbar"></div>}
             </div>
         )
