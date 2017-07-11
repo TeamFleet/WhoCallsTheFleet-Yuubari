@@ -56,6 +56,10 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     mousewheelControl={true}
 
                     breakpoints={{
+                        480: {
+                            slidesPerView: 1,
+                            slidesPerGroup: 1
+                        },
                         850: {
                             slidesPerView: 2,
                             slidesPerGroup: 2
