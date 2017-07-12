@@ -23,6 +23,7 @@ export default class ShipDetailsStat extends React.Component {
                 {type && <dt className="type">{type}</dt>}
                 <dd className="value">
                     {this.props.children}
+                    {this.props.max && <sup className="value-max">{this.props.max}</sup>}
                 </dd>
             </Component>
         )

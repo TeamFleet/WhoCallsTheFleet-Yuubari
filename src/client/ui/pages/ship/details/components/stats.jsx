@@ -12,14 +12,14 @@ import { ImportStyle } from 'sp-css-import'
 import styles from './stats.less'
 
 const stats = [
-    'hp',
-    'armor',
-    'evasion',
-    'carry',
     'fire',
     'torpedo',
     'aa',
     'asw',
+    'hp',
+    'armor',
+    'evasion',
+    'carry',
     'speed',
     'range',
     'los',
@@ -91,6 +91,7 @@ export default class ShipDetailsComponentStats extends React.Component {
                     }])
                 }
                 stat={stat.replace('consum.', '')}
+                max={stat === 'luck' && this.props.ship.stat.luck_max}
             >
                 {isConsume
                     ? 0 - this.props.ship.getAttribute(stat, this.state.lv)

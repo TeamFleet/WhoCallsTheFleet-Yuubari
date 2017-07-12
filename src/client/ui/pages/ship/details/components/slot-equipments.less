@@ -1,4 +1,29 @@
 @import '../_.less';
 
 .component{
+    @slot-size:     22px;
+    margin-top:     -4px;
+    .item{
+        display:    block;
+        margin:     0;
+        padding:    0;
+        overflow:   hidden;
+        margin-top: 4px;
+    }
+    .slot{
+        float:      left;
+        width:      @slot-size;
+        height:     @slot-size;
+        line-height:@slot-size;
+        font-size:  14px;
+        text-align: center;
+        display:    block;
+        color:      fade(#000, 50%);
+        background: @color-base;
+        border-radius: 50%;
+    }
+    .equipment{
+        line-height:18px;
+        padding:    ((@slot-size - 18px) / 2) 0;
+    }
 }

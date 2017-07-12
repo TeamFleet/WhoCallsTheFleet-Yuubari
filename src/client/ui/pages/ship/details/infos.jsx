@@ -27,8 +27,6 @@ export default class ShipDetailsContentInfos extends React.Component {
                 <SlotEquipments ship={this.props.ship} className="shipinfo shipinfo-equipments" />
                 <Modernization ship={this.props.ship} className="shipinfo shipinfo-modernization" />
                 <Dismantle ship={this.props.ship} className="shipinfo shipinfo-dismantle" />
-                {/* 合成提供属性 */}
-                {/* 分解获得资源 */}
                 <Remodels ship={this.props.ship} className="shipinfo shipinfo-remodels" />
             </div>
         )

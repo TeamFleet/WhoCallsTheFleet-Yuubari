@@ -19,11 +19,15 @@
         color:      @color-base;
         margin-right: 6px;
     }
+
+    .value-max{
+        margin-left:    .25em;
+    }
     
     &.is-consume{
         color:  @theme-red-a100;
         .type{
-            color:  @theme-red-100;
+            color:  fade(@theme-red-100, 75%);
         }
     }
 

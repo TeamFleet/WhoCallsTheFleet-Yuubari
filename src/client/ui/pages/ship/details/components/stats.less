@@ -185,28 +185,33 @@
         flex:       1 0 100%;
         overflow:   hidden;
         position:   relative;
+        margin-top: -4px;
     }
         .stat{
             float:      left;
-            width:      50%;
+            width:      25%;
+            margin-top: 4px;
             // line-height:@staticon-size;
             // padding:    ((22px - @staticon-size) / 2) 0;
             .type{
                 font-size:  14px;
             }
-            &:nth-child(4n + 4){
-                margin-bottom:  18px;
-                &:after{
-                    clear:      both;
-                    content:    "";
-                    display:    block;
-                    height:     1px;
-                    background: @color-border;
-                    width:      100%;
-                    left:       0;
-                    margin:     28px 0 0 0;
-                    position:   absolute;
-                }
-            }
+            // &:nth-child(2n + 2){
+            //     margin-bottom:  18px;
+            //     &:after{
+            //         clear:      both;
+            //         content:    "";
+            //         display:    block;
+            //         height:     1px;
+            //         background: @color-border;
+            //         width:      100%;
+            //         left:       0;
+            //         margin:     28px 0 0 0;
+            //         position:   absolute;
+            //     }
+            // }
+            .screen-phone({
+                width:  50%;
+            });
         }
 }
