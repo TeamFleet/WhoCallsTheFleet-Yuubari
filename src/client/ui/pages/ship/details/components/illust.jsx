@@ -60,7 +60,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                             slidesPerView: 1,
                             slidesPerGroup: 1
                         },
-                        850: {
+                        1024: {
                             slidesPerView: 2,
                             slidesPerGroup: 2
                         },

@@ -35,7 +35,10 @@ export default class extends React.Component {
     render() {
         const TagName = this.props.tag || 'span'
         return (
-            <TagName className={this.props.className} data-stat={stats.indexOf(this.props.stat)}>
+            <TagName
+                className={this.props.className}
+                data-stat={stats.indexOf(this.props.stat)}
+            >
                 {this.props.children}
             </TagName>
         )

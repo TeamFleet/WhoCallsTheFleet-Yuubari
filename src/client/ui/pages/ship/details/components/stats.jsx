@@ -43,10 +43,12 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         }
     }
     setLv(lv) {
-        if (lv != this.state.lv)
+        if (lv != this.state.lv){
             this.setState({
                 lv: lv
             })
+            this._input.value = lv
+        }
     }
     onInputChange(evt) {
         const newLv = Math.min(Math.max(evt.target.value, this.props.ship._minLv), maxShipLv)

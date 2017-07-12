@@ -1,21 +1,41 @@
 @import '../base.less';
 
-@size:      18px;
+@size:      @staticon-size;
 @count:     20;
 
 .component{
-    width:      @size;
-    height:     @size;
-    display:    inline-block;
+    &:before{
+        content:    "";
+        float:      left;
+        margin:     0 4px 0 0;
+    }
 
-    background:     url('../../assets/stats.png') no-repeat 0% @size / cover;
+    &:before,
+    &:empty{
+        width:      @size;
+        height:     @size;
+        display:    inline-block;
+
+        background:     url('../../assets/stats.png') no-repeat 0% @size / cover;
+    }
 
     .stats(@n, @i: 0) when (@i =< @n) {
-        &[data-stat="@{i}"]{
+        &[data-stat="@{i}"]:before{
             // background-position: 50% percentage(0 - @i / @count);
             background-position: 0% percentage(@i / (@count - 1));
         }
         .stats(@n, (@i + 1));
     }
     .stats(@count);
+
+    &:empty{
+        .stats-empty(@n, @i: 0) when (@i =< @n) {
+            &[data-stat="@{i}"]{
+                // background-position: 50% percentage(0 - @i / @count);
+                background-position: 0% percentage(@i / (@count - 1));
+            }
+            .stats-empty(@n, (@i + 1));
+        }
+        .stats-empty(@count);
+    }
 }
