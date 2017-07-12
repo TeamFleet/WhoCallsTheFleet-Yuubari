@@ -82,6 +82,10 @@
 
         "stats": "ステータス",
 
-        "slot_equipments": "搭載・初期装備"
+        "slot_equipments": "搭載・初期装備",
+
+        "modernization": "近代化改修強化値",
+
+        "dismantle": "解体"
     }
 }

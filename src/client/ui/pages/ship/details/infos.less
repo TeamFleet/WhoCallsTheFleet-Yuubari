@@ -32,6 +32,10 @@
             height:     100%;
             width:      @width-illust;
             // background: rgba(0,0,0, .1);
+            .screen-t0({
+                margin-left:   (0 - @main-margin);
+                margin-right:  (0 - @main-margin);
+            });
             .screen-tablet({
                 .main-sizing-position-reset-tablet-margin()
             });
@@ -45,6 +49,12 @@
         }
         .shipinfo-equipments{
             flex-basis:     40%;
+        }
+        .shipinfo-modernization{
+            flex-basis:     (55px * 5 + 5);
+        }
+        .shipinfo-dismantle{
+            flex-basis:     (55px * 4);
         }
 
     // .screen-t1({
@@ -84,7 +94,7 @@
     }
 
     // .screen-tablet({
-    .screen-t1({
+    .screen-t0({
         .portrait();
         // .shipinfo-remodels{
         //     margin-right:(@main-margin-top + 10);

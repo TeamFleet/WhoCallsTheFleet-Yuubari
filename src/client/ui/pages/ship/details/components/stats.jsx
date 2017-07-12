@@ -1,8 +1,10 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import ComponentContainer from '../commons/component-container.jsx'
 import Stat from '../commons/stat.jsx'
 import { maxShipLv } from 'kckit/src/variables'
+import getValue from 'Utils/get-value'
 
 import translate from 'sp-i18n'
 
@@ -26,15 +28,9 @@ const stats = [
     'consum.ammo'
 ]
 
-const getValue = (value) => {
-    if (value === false) return '-'
-    if (value === undefined) return '?'
-    return value
-}
-
 // @connect()
 @ImportStyle(styles)
-export default class ShipDetailsComponentSlotEquipments extends React.Component {
+export default class ShipDetailsComponentStats extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -43,7 +39,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         }
     }
     setLv(lv) {
-        if (lv != this.state.lv){
+        if (lv != this.state.lv) {
             this.setState({
                 lv: lv
             })
@@ -84,9 +80,19 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         this._input.value = newLv
     }
     renderStat(stat, index) {
+        const isConsume = stat.includes('consum.')
         return (
-            <Stat type={translate(`stat.${stat}`)} key={index} className="stat" stat={stat}>
-                {/^consum\./.test(stat)
+            <Stat
+                type={translate(`stat.${stat}`)}
+                key={index}
+                className={
+                    classNames(["stat", {
+                        "is-consume": isConsume
+                    }])
+                }
+                stat={stat.replace('consum.', '')}
+            >
+                {isConsume
                     ? 0 - this.props.ship.getAttribute(stat, this.state.lv)
                     : getValue(this.props.ship.getAttribute(stat, this.state.lv))
                 }

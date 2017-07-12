@@ -6,6 +6,8 @@
     padding:    0;
     color:      #fff;
     overflow:   hidden;
+    line-height:@staticon-size;
+    padding:    ((22px - @staticon-size) / 2) 0;
 
     .type, .value{
         display:    block;
@@ -16,5 +18,16 @@
     .type{
         color:      @color-base;
         margin-right: 6px;
+    }
+    
+    &.is-consume{
+        color:  @theme-red-a100;
+        .type{
+            color:  @theme-red-100;
+        }
+    }
+
+    &.disabled{
+        opacity:    .25;
     }
 }

@@ -10,6 +10,14 @@
     }
 }
 
+.screen-t0( @rules ){
+    @media all and (max-width: @screen-t0){
+        &{
+            @rules();
+        }
+    }
+}
+
 .screen-t1( @rules ){
     @media all and (max-width: @screen-t1){
         &{

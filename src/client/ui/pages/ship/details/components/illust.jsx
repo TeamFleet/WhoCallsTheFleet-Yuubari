@@ -47,6 +47,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
 
                     slidesPerView={2}
                     slidesPerGroup={2}
+                    spaceBetween={10}
 
                     pagination={true}
 
@@ -58,15 +59,18 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     breakpoints={{
                         480: {
                             slidesPerView: 1,
-                            slidesPerGroup: 1
+                            slidesPerGroup: 1,
+                            spaceBetween: 10
                         },
-                        1024: {
+                        1152: {
                             slidesPerView: 2,
-                            slidesPerGroup: 2
+                            slidesPerGroup: 2,
+                            spaceBetween: 20
                         },
                         1440: {
                             slidesPerView: 1,
-                            slidesPerGroup: 1
+                            slidesPerGroup: 1,
+                            spaceBetween: 10
                         }
                     }}
                 />

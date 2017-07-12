@@ -81,6 +81,10 @@
 
         "stats": "Statistics",
 
-        "slot_equipments": "Slot & Stock Equip."
+        "slot_equipments": "Slot & Stock Equip.",
+
+        "modernization": "Modernization",
+
+        "dismantle": "Dismantle"
     }
 }

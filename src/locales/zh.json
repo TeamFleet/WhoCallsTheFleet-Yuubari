@@ -81,6 +81,10 @@
 
         "stats": "基础属性",
 
-        "slot_equipments": "搭载量 & 初始装备"
+        "slot_equipments": "搭载量 & 初始装备",
+
+        "modernization": "合成提供属性",
+
+        "dismantle": "解体获得资源"
     }
 }
