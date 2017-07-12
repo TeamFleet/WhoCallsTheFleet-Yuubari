@@ -19,11 +19,13 @@ export default class ShipDetailsContentInfos extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
+                <Illust ship={this.props.ship} className="shipinfo shipinfo-illust" />
                 <QuickFacts ship={this.props.ship} className="shipinfo shipinfo-facts" />
                 <Stats ship={this.props.ship} className="shipinfo shipinfo-stats" />
                 <SlotEquipments ship={this.props.ship} className="shipinfo shipinfo-equipments" />
+                {/* 合成提供属性 */}
+                {/* 分解获得资源 */}
                 <Remodels ship={this.props.ship} className="shipinfo shipinfo-remodels" />
-                <Illust ship={this.props.ship} className="shipinfo shipinfo-illust" />
             </div>
         )
     }

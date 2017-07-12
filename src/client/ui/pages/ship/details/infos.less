@@ -24,13 +24,6 @@
     .shipinfo{
         flex:   1 0 100%;
     }
-        .shipinfo-stats{
-            flex-basis:     60%;
-            border-right:   (@main-margin-top + 10) solid transparent;
-        }
-        .shipinfo-equipments{
-            flex-basis:     40%;
-        }
         .shipinfo-illust{
             flex:       none;
             position:   absolute;
@@ -45,6 +38,13 @@
             .screen-phone({
                 .main-sizing-position-reset-phone-margin()
             });
+        }
+        .shipinfo-stats{
+            flex-basis:     60%;
+            border-right:   (@main-margin-top + 10) solid transparent;
+        }
+        .shipinfo-equipments{
+            flex-basis:     40%;
         }
 
     // .screen-t1({
@@ -63,26 +63,29 @@
         &:after{
             display:    none;
         }
-        .shipinfo{
-            order:      10;
-        }
-        .shipinfo-facts{
-            order:      2;
-        }
+        // .shipinfo{
+        //     order:      10;
+        // }
         .shipinfo-illust{
             flex:       1 0 100%;
             position:   relative;
             top:        auto;
             right:      auto;
             // height:     auto;
-            height:     calc(~"100vh - 300px");
+            height:     calc(~"100vh - 200px");
+            min-height: 400px;
+            max-height: 600px;
             width:      auto;
-            order:      1;
+            // order:      1;
         }
+        // .shipinfo-facts{
+        //     order:      2;
+        // }
     }
 
-    .screen-tablet({
-        .portrait()
+    // .screen-tablet({
+    .screen-t1({
+        .portrait();
         // .shipinfo-remodels{
         //     margin-right:(@main-margin-top + 10);
         // }
@@ -94,7 +97,18 @@
     //     }
     // });
 
-    .screen-phone-small({
+    .screen-tablet({
+        .shipinfo-facts{
+            display:    flex;
+            flex-flow:  row nowrap;
+            .item{
+                float:  none;
+                flex:   1 0 auto;
+            }
+        }
+    });
+
+    .screen-phone({
         // .shipinfo-remodels{
         //     flex:   1 0 100%;
         //     margin-right:0;
@@ -111,6 +125,15 @@
         }
     });
 
+    .screen-phone-small({
+        .shipinfo-facts{
+            display:    block;
+            .item{
+                float:  none;
+            }
+        }
+    });
+
     @media all and (min-width: (@layout-width-max + 1)){
         padding-right:  50%;
         .shipinfo-illust{
@@ -118,7 +141,7 @@
         }
     }
 
-    @media only screen and (min-width: @screen-tablet) and (orientation: portrait){
-        .portrait()
-    }
+    // @media only screen and (min-width: @screen-tablet) and (orientation: portrait){
+    //     .portrait()
+    // }
 }
