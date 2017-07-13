@@ -29,6 +29,9 @@
     .stats(@count);
 
     &:empty{
+        &:before{
+            display: none;
+        }
         .stats-empty(@n, @i: 0) when (@i =< @n) {
             &[data-stat="@{i}"]{
                 // background-position: 50% percentage(0 - @i / @count);

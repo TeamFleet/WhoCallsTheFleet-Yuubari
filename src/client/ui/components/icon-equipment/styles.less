@@ -1,0 +1,41 @@
+@import '../../base.less';
+
+@size:      @equipmenticon-size;
+@count:     unit(1512 / @equipmenticon-size);
+
+.component{
+    &:before{
+        content:    "";
+        float:      left;
+        margin:     0 4px 0 0;
+    }
+
+    &:before,
+    &:empty{
+        width:      @size;
+        height:     @size;
+        display:    inline-block;
+        background: url('../../../assets/equiptypeicon.png') no-repeat 0% @size / cover;
+    }
+
+    .icons(@n, @i: 0) when (@i =< @n) {
+        &[data-icon="@{i}"]:before{
+            background-position: 0% percentage((@i - 1) / (@count - 1));
+        }
+        .icons(@n, (@i + 1));
+    }
+    .icons(@count);
+
+    &:empty{
+        &:before{
+            display: none;
+        }
+        .icons-empty(@n, @i: 0) when (@i =< @n) {
+            &[data-icon="@{i}"]{
+                background-position: 0% percentage((@i - 1) / (@count - 1));
+            }
+            .icons-empty(@n, (@i + 1));
+        }
+        .icons-empty(@count);
+    }
+}

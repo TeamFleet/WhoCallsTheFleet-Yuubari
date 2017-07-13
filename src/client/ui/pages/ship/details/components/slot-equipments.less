@@ -2,6 +2,8 @@
 
 .component{
     @slot-size:     22px;
+    @line-height:   18px;
+    @icon-size:     30px;
     margin-top:     -4px;
     .item{
         display:    block;
@@ -9,6 +11,9 @@
         padding:    0;
         overflow:   hidden;
         margin-top: 4px;
+        &.disabled{
+            opacity:.25;
+        }
     }
     .slot{
         float:      left;
@@ -18,12 +23,25 @@
         font-size:  14px;
         text-align: center;
         display:    block;
-        color:      fade(#000, 50%);
+        color:      fade(@color-background, 50%);
+        font-weight:600;
         background: @color-base;
-        border-radius: 50%;
+        border-radius: 50% 0 0 50%;
     }
     .equipment{
-        line-height:18px;
-        padding:    ((@slot-size - 18px) / 2) 0;
+        line-height:@line-height;
+        padding:    ((@slot-size - @line-height) / 2) 0 ((@slot-size - @line-height) / 2) (@icon-size + 4);
+        margin:     0;
+        display:    inline-block;
+        position:   relative;
+        .icon{
+            width:      @icon-size;
+            height:     @icon-size;
+            position:   absolute;
+            top:        ((@line-height - @icon-size) / 2);
+            left:       0;
+            background-color: @color-theme;
+            border-radius: 50%;
+        }
     }
 }
