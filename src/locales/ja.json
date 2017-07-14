@@ -83,6 +83,8 @@
         "stats": "ステータス",
 
         "slot_equipments": "搭載・初期装備",
+        "emptyslot": "未装備",
+        "noslot": "装備不可",
 
         "modernization": "近代化改修強化値",
 

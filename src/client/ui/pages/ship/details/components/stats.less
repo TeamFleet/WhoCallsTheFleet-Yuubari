@@ -4,6 +4,7 @@
     @maxlv:     155;
     @slider-track-height:   2px;
     @slider-tick-size:      6px;
+    @gutter:    12px;
 
     display:    flex;
     flex-flow:  row wrap;
@@ -185,12 +186,12 @@
         flex:       1 0 100%;
         overflow:   hidden;
         position:   relative;
-        margin-top: -4px;
+        margin-top: (0 - @gutter);
     }
         .stat{
             float:      left;
             width:      25%;
-            margin-top: 4px;
+            margin-top: @gutter;
             // line-height:@staticon-size;
             // padding:    ((22px - @staticon-size) / 2) 0;
             .type{

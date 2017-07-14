@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import classNames from 'classnames'
 
 import ComponentContainer from '../commons/component-container.jsx'
 import IconEquipment from 'UI/components/icon-equipment'
@@ -28,9 +29,14 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
             const slot = this.props.ship.slot[index]
             const hasSlot = typeof slot !== 'undefined'
             const equipmentId = hasSlot ? this.props.ship.equip[index] : undefined
-            const equipment = db.equipments[equipmentId]
+            const equipment = equipmentId && db.equipments[equipmentId]
             renderArr.push(
-                <dl key={index} className={"item" + (!hasSlot ? ' disabled' : '')}>
+                <dl key={index} className={classNames([
+                    'item', {
+                        disabled: !hasSlot,
+                        "is-empty": !equipmentId
+                    }
+                ])} className={"item" + (!hasSlot ? ' disabled' : '')}>
                     <dt className="slot">{hasSlot ? slot : "-"}</dt>
                     <dd className="equipment">
                         {equipmentId &&
@@ -39,6 +45,14 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                                 {equipment._name}
                             </Link>
                         }
+                        {!equipmentId && hasSlot && <span>
+                            <IconEquipment className="icon" />
+                            {translate("ship_details.emptyslot")}
+                        </span>}
+                        {!equipmentId && !hasSlot && <span>
+                            <IconEquipment className="icon" />
+                            {translate("ship_details.noslot")}
+                        </span>}
                     </dd>
                 </dl>
             )

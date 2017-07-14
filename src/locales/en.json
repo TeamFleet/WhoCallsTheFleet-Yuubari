@@ -82,6 +82,8 @@
         "stats": "Statistics",
 
         "slot_equipments": "Slot & Stock Equip.",
+        "emptyslot": "Empty slot",
+        "noslot": "Locked",
 
         "modernization": "Modernization",
 
