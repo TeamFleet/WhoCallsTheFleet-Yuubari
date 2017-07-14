@@ -5,7 +5,7 @@ import Entity from 'kckit/src/class/entity.js'
 
 const ext = __CLIENT__ && self._html && self._html.classList.contains('webp') ? '.webp' : '.png'
 
-const getUri = (type, id, file) => {
+const getUri = (type, id, file, revision) => {
     if (typeof type === 'object') {
         if (type instanceof Ship)
             return getUri('ship', type.id, id)
@@ -20,6 +20,11 @@ const getUri = (type, id, file) => {
         return ''
     }
 
+    if (revision)
+        revision = "?" + revision
+    else
+        revision = ''
+
     switch (type) {
         case 'ship':
         case 'ships':
@@ -27,19 +32,19 @@ const getUri = (type, id, file) => {
 
         case 'ship-extra':
         case 'ships-extra':
-            return `ships-extra/${id}/${file}${ext}`
+            return `ships-extra/${id}/${file}${ext}${revision}`
 
         case 'equipment':
         case 'equipments':
-            return `equipments/${id}/${file}${ext}`
+            return `equipments/${id}/${file}${ext}${revision}`
 
         case 'entity':
         case 'entities':
-            return `entities/${id}/${file}${ext}`
+            return `entities/${id}/${file}${ext}${revision}`
 
         case 'enemy':
         case 'enemies':
-            return `enemies/${id}/${file}${ext}`
+            return `enemies/${id}/${file}${ext}${revision}`
     }
 }
 
