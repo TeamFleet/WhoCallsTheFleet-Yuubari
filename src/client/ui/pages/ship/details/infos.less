@@ -1,7 +1,8 @@
 @import './_.less';
 
 .component{
-    @width-illust:  unit(340 / 1280 * 100, vw);
+    @width-illust:  unit((340 + @main-margin) / 1280 * 100, vw);
+    @padding-right: unit(340 / 1280 * 100, vw);
 
     display:        flex;
     flex-flow:      row wrap;
@@ -10,7 +11,7 @@
 
     min-height:     calc(~"100vh - @{title-height} - @{tab-height} - @{title-margin-bottom} - @{main-margin-top} - @{main-margin-top} - @{main-margin-top}");
 
-    padding-right:  @width-illust;
+    padding-right:  @padding-right;
 
     &:after{
         content:    "";
@@ -32,6 +33,8 @@
             height:     100%;
             width:      @width-illust;
             // background: rgba(0,0,0, .1);
+            margin-right:  (0 - @main-margin);
+            mask:       linear-gradient(to right, transparent, #000 20px);
             .screen-t0({
                 margin-left:   (0 - @main-margin);
                 margin-right:  (0 - @main-margin);
