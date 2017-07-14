@@ -26,7 +26,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     className="item"
                     title={translate("ship_details.navy")}
                 >
-                    <FlagNavy className="flag-navy" navy={ship.navy} />
+                    <FlagNavy className="flag-navy" navy={ship._navy} />
                     {ship._navyName}
                 </Stat>
                 <Stat
