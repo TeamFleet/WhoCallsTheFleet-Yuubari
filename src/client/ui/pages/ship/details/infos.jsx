@@ -25,8 +25,10 @@ export default class ShipDetailsContentInfos extends React.Component {
                 <QuickFacts ship={this.props.ship} className="shipinfo shipinfo-facts" />
                 <Stats ship={this.props.ship} className="shipinfo shipinfo-stats" />
                 <SlotEquipments ship={this.props.ship} className="shipinfo shipinfo-equipments" />
-                <Modernization ship={this.props.ship} className="shipinfo shipinfo-modernization" />
-                <Dismantle ship={this.props.ship} className="shipinfo shipinfo-dismantle" />
+                <div className="shipinfo shipinfo-misc">
+                    <Modernization ship={this.props.ship} className="shipinfo shipinfo-modernization" />
+                    <Dismantle ship={this.props.ship} className="shipinfo shipinfo-dismantle" />
+                </div>
                 <Remodels ship={this.props.ship} className="shipinfo shipinfo-remodels" />
             </div>
         )

@@ -43,15 +43,22 @@
                 .main-sizing-position-reset-phone-margin()
             });
         }
-        .shipinfo-stats{
-            flex-basis:     60%;
-            border-right:   (@main-margin-top + 10) solid transparent;
+        // .shipinfo-stats{
+        //     flex-basis:     60%;
+        //     border-right:   (@main-margin-top + 10) solid transparent;
+        // }
+        // .shipinfo-equipments{
+        //     flex-basis:     40%;
+        // }
+        .shipinfo-equipments,
+        .shipinfo-misc{
+            flex-basis:     50%;
         }
-        .shipinfo-equipments{
-            flex-basis:     40%;
+        .shipinfo-misc{
+            min-width:      (60px * 4);
         }
         .shipinfo-modernization{
-            flex-basis:     (60px * 5);
+            flex-basis:     (60px * 4);
         }
         .shipinfo-dismantle{
             flex-basis:     (60px * 4);
@@ -119,6 +126,10 @@
     });
 
     .screen-phone({
+        .shipinfo-equipments,
+        .shipinfo-misc{
+            flex-basis:     100%;
+        }
         // .shipinfo-remodels{
         //     flex:   1 0 100%;
         //     margin-right:0;
