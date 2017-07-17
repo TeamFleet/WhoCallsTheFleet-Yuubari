@@ -68,7 +68,11 @@ const plugins = [
                 file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory() && path.extname(path.resolve(pathBgimgs, file)) === '.jpg'
             )
         ),
-        '__ICONSVG__': JSON.stringify(fs.readFileSync(path.resolve(appPath, './src/client/assets/symbols/symbol-defs.svg'), 'utf8'))
+        '__ICONSVG__': JSON.stringify(
+            fs.readFileSync(
+                path.resolve(appPath, './src/client/assets/symbols/symbol-defs.svg'), 'utf8'
+            ).replace(/<title>(.+?)<\/title>/g, '')
+        )
     })
 ]
 

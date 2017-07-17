@@ -43,6 +43,9 @@ export const init = () => {
             shipNamesuffix: requireDb('ship_namesuffix'),
             shipSeries: requireDb('ship_series'),
 
+            exillusts: requireDb('exillusts'),
+            exillustTypes: requireDb('exillust_types'),
+
             equipments: requireDb('items'),
             equipmentTypes: requireDb('item_types'),
 

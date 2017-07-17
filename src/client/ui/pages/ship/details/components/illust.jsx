@@ -3,11 +3,18 @@ import React from 'react'
 import ComponentContainer from '../commons/component-container.jsx'
 import Swiper from 'UI/components/swiper'
 
+import db from 'Logic/database'
 import getPic from 'Utils/get-pic.js'
-import translate from 'sp-i18n'
+// import translate from 'sp-i18n'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './illust.less'
+
+const getExtraIllustPic = (ship, id, illustId) => {
+    if (Array.isArray(db.exillusts[id].exclude) && db.exillusts[id].exclude.includes(illustId))
+        return getPic(ship, illustId)
+    return getPic('ship-extra', id, illustId)
+}
 
 // @connect()
 @ImportStyle(styles)
@@ -15,15 +22,28 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
     constructor(props) {
         super(props)
 
+        this.state = {
+            swiperIndex: 0
+        }
+
+        // console.log(db.exillusts, db.exillustTypes)
+
         this.pics = []
+        this.extraIllusts = props.ship._extraIllust
         const illustIds = [8, 9]
         let ids = ['_']
-        if (Array.isArray(props.ship._extraIllust))
-            ids = ids.concat(props.ship._extraIllust)
+
+        if (Array.isArray(this.extraIllusts))
+            ids = ids.concat(
+                this.extraIllusts.sort((a, b) =>
+                    db.exillustTypes[db.exillusts[a].type].sort - db.exillustTypes[db.exillusts[b].type].sort
+                )
+            )
+
         ids.forEach(id => {
             illustIds.forEach(illustId => {
                 this.pics.push(
-                    id === '_' ? getPic(props.ship, illustId) : getPic('ship-extra', id, illustId)
+                    id === '_' ? getPic(props.ship, illustId) : getExtraIllustPic(props.ship, id, illustId)
                 )
             })
         })
@@ -39,9 +59,25 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         }
     }
 
+    onSlideChangeEnd(swiper) {
+        this.setState({
+            swiperIndex: swiper.realIndex
+        })
+        // console.log(swiper.activeIndex, swiper.realIndex)
+    }
+
     render() {
+        const currentExtraIllustId = this.extraIllusts && this.extraIllusts[Math.floor((this.state.swiperIndex - 2) / 2)]
         return (
             <ComponentContainer className={this.props.className}>
+                {currentExtraIllustId
+                    && db.exillusts[currentExtraIllustId]
+                    && db.exillusts[currentExtraIllustId].type
+                    &&
+                    (<div className="illust-name">
+                        {db.exillustTypes[db.exillusts[currentExtraIllustId].type]._name}
+                    </div>)
+                }
                 <Swiper
                     slides={this.pics.map(url => <img src={url} />)}
 
@@ -54,6 +90,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     prevButton={true}
                     nextButton={true}
 
+                    grabCursor={true}
                     mousewheelControl={true}
 
                     breakpoints={{
@@ -70,6 +107,8 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                             slidesPerGroup: 1
                         }
                     }}
+
+                    onSlideChangeEnd={this.onSlideChangeEnd.bind(this)}
                 />
             </ComponentContainer>
         )

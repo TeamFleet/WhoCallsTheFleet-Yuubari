@@ -34,7 +34,9 @@
             width:      @width-illust;
             // background: rgba(0,0,0, .1);
             margin-right:  (0 - @main-margin);
-            mask:       linear-gradient(to right, transparent, #000 20px);
+            .swiper-container{
+                mask:   linear-gradient(to right, transparent, #000 20px);
+            }
             .screen-t0({
                 margin-left:   (0 - @main-margin);
                 margin-right:  (0 - @main-margin);
@@ -97,7 +99,9 @@
             max-height: 600px;
             width:      auto;
             // order:      1;
-            mask:       none;
+            .swiper-container{
+                mask:   none;
+            }
         }
         // .shipinfo-facts{
         //     order:      2;
