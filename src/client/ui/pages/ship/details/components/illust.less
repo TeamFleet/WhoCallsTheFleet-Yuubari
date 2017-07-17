@@ -13,10 +13,29 @@
     }
 
     .illust-name{
+        display:    block;
         position:   absolute;
         top:        20px;
         left:       20px;
         z-index:    2;
+
+        &.transition-enter, &.transition-exit {
+            transition-property: opacity;
+        }
+
+        &.transition-enter {
+            opacity:    0.01;
+            &.transition-enter-active {
+                opacity:    1;
+            }
+        }
+
+        &.transition-exit {
+            opacity:    1;
+            &.transition-exit-active {
+                opacity:    0.01;
+            }
+        }
     }
 
     .swiper-slide{

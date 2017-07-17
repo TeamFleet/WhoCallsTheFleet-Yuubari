@@ -3,7 +3,7 @@
 .component{
     @transition-duration:   (@duration-main-transition * 1);
     @transition-duration-enter: @transition-duration;
-    @transition-duration-leave: @transition-duration;
+    @transition-duration-exit: @transition-duration;
 
     .mainframe();
     overflow:       visible;
@@ -41,7 +41,7 @@
         });
     }
 
-    .main-transition-enter, .main-transition-leave{
+    .main-transition-enter, .main-transition-exit{
         // transition-property: opacity, transform;
         transition:     none;
         pointer-events: none;
@@ -63,7 +63,7 @@
         }
     }    
 
-    .main-transition-leave {
+    .main-transition-exit {
         position:   absolute;
         top:        0;
         width:      100%;
@@ -71,11 +71,11 @@
         // transform:  none;
         margin-bottom:  @main-margin;
 
-        &.main-transition-leave-active {
-            animation-name: main-transition-leave;
+        &.main-transition-exit-active {
+            animation-name: main-transition-exit;
             // opacity:    0.01;
             // transform:  translateX(2rem);
-            // transition-duration: @transition-duration-leave;
+            // transition-duration: @transition-duration-exit;
             // transition-timing-function: ease-in;
         }
     }
@@ -92,7 +92,7 @@
     }
 }
 
-@keyframes main-transition-leave {
+@keyframes main-transition-exit {
     0% {
         opacity:    1;
         // transform:  none;

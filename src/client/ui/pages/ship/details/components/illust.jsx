@@ -1,4 +1,6 @@
 import React from 'react'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
+import CSSTransition from 'react-transition-group/CSSTransition'
 
 import ComponentContainer from '../commons/component-container.jsx'
 import Swiper from 'UI/components/swiper'
@@ -70,14 +72,24 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         const currentExtraIllustId = this.extraIllusts && this.extraIllusts[Math.floor((this.state.swiperIndex - 2) / 2)]
         return (
             <ComponentContainer className={this.props.className}>
-                {currentExtraIllustId
-                    && db.exillusts[currentExtraIllustId]
-                    && db.exillusts[currentExtraIllustId].type
-                    &&
-                    (<div className="illust-name">
-                        {db.exillustTypes[db.exillusts[currentExtraIllustId].type]._name}
-                    </div>)
-                }
+                {__CLIENT__ && (
+                    <TransitionGroup component="div" appear={true}>
+                        {currentExtraIllustId
+                            && db.exillusts[currentExtraIllustId]
+                            && db.exillusts[currentExtraIllustId].type
+                            &&
+                            (
+                                <CSSTransition
+                                    key={db.exillusts[currentExtraIllustId].type}
+                                    classNames="transition"
+                                    timeout={200}
+                                >
+                                    <span className="illust-name">{db.exillustTypes[db.exillusts[currentExtraIllustId].type]._name}</span>
+                                </CSSTransition>
+                            )
+                        }
+                    </TransitionGroup>
+                )}
                 <Swiper
                     slides={this.pics.map(url => <img src={url} />)}
 

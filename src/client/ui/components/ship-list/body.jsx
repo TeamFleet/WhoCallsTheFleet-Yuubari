@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
+import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
 
 import translate from 'sp-i18n'
@@ -83,22 +84,23 @@ export default class ShipList extends React.Component {
                 })
             }
             return (
-                <div
-                    key={index + index2}
-                    className={classNames({
-                        'first': index2 === 0,
-                        'last': index2 === collection.list.length - 1,
-                        'is-unselectable': !type.type
-                    })}
-                >
-                    {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={listType || list} />) : null}
-                    {!type.type && (<Title />)}
-                    {type.class && (<Title class={type.class} id={this.props.id} ships={list} />)}
-                    <List
-                        id={this.props.id}
-                        ships={list}
-                    />
-                </div>
+                <CSSTransitionComponent key={index + index2}>
+                    <div
+                        className={classNames({
+                            'first': index2 === 0,
+                            'last': index2 === collection.list.length - 1,
+                            'is-unselectable': !type.type
+                        })}
+                    >
+                        {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={listType || list} />) : null}
+                        {!type.type && (<Title />)}
+                        {type.class && (<Title class={type.class} id={this.props.id} ships={list} />)}
+                        <List
+                            id={this.props.id}
+                            ships={list}
+                        />
+                    </div>
+                </CSSTransitionComponent>
             )
         })
     }
@@ -121,13 +123,15 @@ export default class ShipList extends React.Component {
         }
 
         return (
-            <div className="results">
-                <p className="results-text">{filteredResultText}</p>
-                {<List
-                    id={this.props.id}
-                    ships={this.filteredResult}
-                />}
-            </div>
+            <CSSTransitionComponent key="results">
+                <div className="results">
+                    <p className="results-text">{filteredResultText}</p>
+                    {<List
+                        id={this.props.id}
+                        ships={this.filteredResult}
+                    />}
+                </div>
+            </CSSTransitionComponent>
         )
     }
 
@@ -184,17 +188,25 @@ export default class ShipList extends React.Component {
                     extraButtons={this.getExtraButtons()}
                 />}
 
-                <CSSTransitionGroup
+                <TransitionGroup
                     component="div"
-                    className="transition-group"
-                    transitionName="transition"
-                    transitionLeave={false}
-                    transitionEnterTimeout={200}
+                    className="wrapper"
                 >
                     {this.renderBody()}
-                </CSSTransitionGroup>
+                </TransitionGroup>
 
             </div>
         )
     }
 }
+
+const CSSTransitionComponent = (props) => (
+    <CSSTransition
+        {...props}
+        classNames="transition"
+        timeout={{
+            enter: 200
+        }}
+        exit={false}
+    />
+);

@@ -1,5 +1,6 @@
 import React from 'react'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
+import CSSTransition from 'react-transition-group/CSSTransition'
 
 // import lastScroll from 'Utils/last-scroll.js'
 
@@ -16,17 +17,28 @@ let pathnameLastScrollY = {}
 // })
 @ImportStyle(style)
 export default class extends React.Component {
-    onAnimationStart(evt) {
-        switch (evt.nativeEvent.animationName) {
-            // case 'main-transition-enter':
-            //     break
-            case 'main-transition-leave':
-                // console.log('main-transition-leave', action)
-                if (action === 'PUSH') {
-                    evt.target.setAttribute('style', `margin-top:${0 - window.scrollY}px`)
-                    window.scrollTo(undefined, 0)
-                }
-                break
+    // onAnimationStart(evt) {
+    //     switch (evt.nativeEvent.animationName) {
+    //         case 'main-transition-enter':
+    //             if (action === 'PUSH') {
+    //                 window.scrollTo(undefined, 0)
+    //             }
+    //             break
+    //         case 'main-transition-exit':
+    //             // console.log('main-transition-leave', action)
+    //             if (action === 'PUSH') {
+    //                 evt.target.setAttribute('style', `margin-top:${0 - window.scrollY}px`)
+    //                 // window.scrollTo(undefined, 0)
+    //             }
+    //             break
+    //     }
+    // }
+
+    onExit(dom) {
+        // console.log('onExit', dom)
+        if (action === 'PUSH') {
+            dom.setAttribute('style', `margin-top:${0 - window.scrollY}px`)
+            window.scrollTo(undefined, 0)
         }
     }
 
@@ -37,7 +49,7 @@ export default class extends React.Component {
     }
 
     componentDidUpdate() {
-        if(action === 'POP' && typeof pathnameLastScrollY[this.props.location.pathname] !== 'undefined'){
+        if (action === 'POP' && typeof pathnameLastScrollY[this.props.location.pathname] !== 'undefined') {
             window.scrollTo(undefined, pathnameLastScrollY[this.props.location.pathname])
             delete pathnameLastScrollY[this.props.location.pathname]
         }
@@ -48,23 +60,26 @@ export default class extends React.Component {
             <main
                 id="main"
                 className={this.props.className}
-                onAnimationStart={this.onAnimationStart.bind(this)}
             >
-                <CSSTransitionGroup
+                <TransitionGroup
                     component="div"
                     className="wrapper"
-                    transitionName="main-transition"
-                    transitionEnterTimeout={250}
-                    transitionLeaveTimeout={250}>
+                >
                     {this.props.children && (
-                        <MainBody
+                        <CSSTransition
                             key={this.props.location.pathname.split('/').slice(0, 3).join('/')}
-                            location={this.props.location}
+                            classNames="main-transition"
+                            timeout={250}
+                            onExit={this.onExit.bind(this)}
                         >
-                            {this.props.children}
-                        </MainBody>
+                            <MainBody
+                                location={this.props.location}
+                            >
+                                {this.props.children}
+                            </MainBody>
+                        </CSSTransition>
                     )}
-                </CSSTransitionGroup>
+                </TransitionGroup>
             </main>
         )
     }
@@ -72,11 +87,12 @@ export default class extends React.Component {
 
 class MainBody extends React.Component {
     render() {
+        const marginTop = __CLIENT__ && action === 'POP' ? pathnameLastScrollY[location.pathname] - lastScrollY : NaN
         return (
             <div style={
                 __CLIENT__ && action === 'POP' && this.props.location.pathname !== location.pathname
                     ? {
-                        marginTop: `${pathnameLastScrollY[location.pathname] - lastScrollY}px`
+                        marginTop: isNaN(marginTop) ? undefined : `${marginTop}px`
                     }
                     : null
             }>
