@@ -14,34 +14,18 @@
         max-height: 100%;
     }
 
-    .illust-name{
-        display:    block;
-        position:   absolute;
-        top:        20px;
-        left:       20px;
-        z-index:    2;
-
-        &.transition-enter, &.transition-exit {
-            transition-property: opacity;
-        }
-
-        &.transition-enter {
-            opacity:    0.01;
-            &.transition-enter-active {
-                opacity:    1;
-            }
-        }
-
-        &.transition-exit {
-            opacity:    1;
-            &.transition-exit-active {
-                opacity:    0.01;
-            }
-        }
+    .swiper-container{
+        display:    flex;
+        flex-flow:  column nowrap;
+        justify-content: flex-end;
     }
 
-    .swiper-container{
-        padding-bottom: 60px;
+    .swiper-wrapper{
+        // position:   absolute;
+        flex:       1;
+        // padding-bottom: 60px;
+        height:     auto;
+        order:      1;
     }
     .swiper-slide{
         text-align: center;
@@ -64,15 +48,18 @@
         }
     }
     .swiper-controls{
-        position:   absolute;
-        bottom:     0;
-        left:       0;
-        right:      0;
+        // position:   absolute;
+        // bottom:     0;
+        // left:       0;
+        // right:      0;
+        order:      3;
+        flex:       0 0 auto;
         display:    flex;
         flex-flow:  row nowrap;
         align-items:center;
         justify-content: center;
-        border-bottom:  20px solid transparent;
+        border-top:     20px solid transparent;
+        border-bottom:  10px solid transparent;
         border-left:    20px solid transparent;
         border-right:   20px solid transparent;
         line-height: @swiper-bullet-size;
@@ -141,6 +128,56 @@
             }
             &:hover .icon{
                 fill:   @color-base;
+            }
+        }
+
+    .illust-name-container{
+        flex:       0;
+        order:      2;
+        position:   relative;
+        bottom:     -15px;
+    }
+        .illust-name{
+            @height:    22px;
+            display:    block;
+            position:   absolute;
+            left:       50%;
+            bottom:     0;
+            z-index:    2;
+            transform:  translateX(-50%);
+            font-size:  14px;
+            line-height:16px;
+            // background: fade(@color-background-main, 85%);
+            // background: fade(#000, 35%);
+            // background: fade(@color-theme, 50%);
+            background: @color-fade;
+            border-radius: (@height / 2);
+            padding:    ((@height - 16px) / 2) .75em;
+            // color:      @color-background-main;
+            color:      @color-background;
+            // border:     1px solid @color-theme;
+            // border:     1px solid @color-base;
+
+            small{
+                padding-left:   .5em;
+            }
+
+            &.transition-enter, &.transition-exit {
+                transition-property: opacity;
+            }
+
+            &.transition-enter {
+                opacity:    0.01;
+                &.transition-enter-active {
+                    opacity:    1;
+                }
+            }
+
+            &.transition-exit {
+                opacity:    1;
+                &.transition-exit-active {
+                    opacity:    0.01;
+                }
             }
         }
 }

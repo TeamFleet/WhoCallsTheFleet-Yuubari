@@ -37,11 +37,16 @@ export default class extends React.Component {
             [
                 'prevButton',
                 'nextButton',
-                'scrollbar',
-                'controlsWrapper'
+                'scrollbar'
             ].forEach(key => {
                 if (typeof props[key] === 'boolean') delete props[key]
-            })
+            });
+
+            [
+                'controlsWrapper'
+            ].forEach(key => {
+                delete props[key]
+            });
 
             this.illusts = new Swiper(
                 this._container,
@@ -84,6 +89,7 @@ export default class extends React.Component {
                     {this.props.pagination === true && <div className="swiper-pagination"></div>}
                     {this.renderButtonPrev()}
                     {this.renderButtonNext()}
+                    {React.isValidElement(this.props.controlsWrapper) && this.props.controlsWrapper}
                 </div>}
 
                 {!this.props.controlsWrapper && this.props.pagination === true && <div className="swiper-pagination"></div>}

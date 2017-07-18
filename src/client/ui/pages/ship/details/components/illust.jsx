@@ -69,28 +69,26 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         // console.log(swiper.activeIndex, swiper.realIndex)
     }
 
+    renderExillustName(type) {
+        const time = db.exillustTypes[type]._time
+        return (
+            <CSSTransition
+                key={type}
+                classNames="transition"
+                timeout={200}
+            >
+                <span className="illust-name">
+                    {db.exillustTypes[type]._name}
+                    {time && <small>({time})</small>}
+                </span>
+            </CSSTransition>
+        )
+    }
+
     render() {
         const currentExtraIllustId = this.extraIllusts && this.extraIllusts[Math.floor((this.state.swiperIndex - 2) / 2)]
         return (
             <ComponentContainer className={this.props.className}>
-                {__CLIENT__ && (
-                    <TransitionGroup component="div" appear={true}>
-                        {currentExtraIllustId
-                            && db.exillusts[currentExtraIllustId]
-                            && db.exillusts[currentExtraIllustId].type
-                            &&
-                            (
-                                <CSSTransition
-                                    key={db.exillusts[currentExtraIllustId].type}
-                                    classNames="transition"
-                                    timeout={200}
-                                >
-                                    <span className="illust-name">{db.exillustTypes[db.exillusts[currentExtraIllustId].type]._name}</span>
-                                </CSSTransition>
-                            )
-                        }
-                    </TransitionGroup>
-                )}
                 <Swiper
                     slides={this.pics.map(url => <img data-src={url} className="swiper-lazy" />)}
 
@@ -102,8 +100,8 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
 
                     pagination={true}
 
-                    prevButton={<Icon className="icon" icon="loop"/>}
-                    nextButton={<Icon className="icon" icon="search"/>}
+                    prevButton={<Icon className="icon" icon="loop" />}
+                    nextButton={<Icon className="icon" icon="search" />}
 
                     grabCursor={true}
                     mousewheelControl={true}
@@ -129,7 +127,17 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     }}
 
                     onSlideChangeEnd={this.onSlideChangeEnd.bind(this)}
-                />
+                >
+                    {__CLIENT__ && (
+                        <TransitionGroup component="div" className="illust-name-container" appear={true}>
+                            {currentExtraIllustId
+                                && db.exillusts[currentExtraIllustId]
+                                && db.exillusts[currentExtraIllustId].type
+                                && this.renderExillustName(db.exillusts[currentExtraIllustId].type)
+                            }
+                        </TransitionGroup>
+                    )}
+                </Swiper>
             </ComponentContainer>
         )
     }
