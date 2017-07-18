@@ -142,22 +142,18 @@
     }
         .illust-name{
             @height:    22px;
+            .style-badge();
             display:    block;
             position:   absolute;
             left:       50%;
             bottom:     0;
             z-index:    2;
-            transform:  translateX(-50%);
+            transform:  translate(-50%, 0%);
             font-size:  14px;
             line-height:16px;
-            // background: fade(@color-background-main, 85%);
-            // background: fade(#000, 35%);
-            // background: fade(@color-theme, 50%);
-            background: @color-fade;
             border-radius: (@height / 2);
             padding:    ((@height - 16px) / 2) .75em;
             // color:      @color-background-main;
-            color:      @color-background;
             // border:     1px solid @color-theme;
             // border:     1px solid @color-base;
 
@@ -166,20 +162,25 @@
             }
 
             &.transition-enter, &.transition-exit {
-                transition-property: opacity;
+                transition-property: opacity, transform;
+                // transition-duration: 2s;
             }
 
             &.transition-enter {
                 opacity:    0.01;
+                transform:  translate(-50%, 20px) scale(0.25, 0.75);
                 &.transition-enter-active {
                     opacity:    1;
+                    transform:  translate(-50%, 0%);
                 }
             }
 
             &.transition-exit {
                 opacity:    1;
+                // transform:  translate(-50%, 0%);
                 &.transition-exit-active {
                     opacity:    0.01;
+                    // transform:  translate(-50%, -20px) perspective(80px) rotateX(50deg) scale(0.25, 0.75);
                 }
             }
         }

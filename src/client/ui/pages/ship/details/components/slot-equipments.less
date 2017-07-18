@@ -21,6 +21,7 @@
         }
     }
         .slot{
+            .style-badge();
             position:   absolute;
             top:        50%;
             left:       0;
@@ -31,13 +32,10 @@
             font-size:  14px;
             text-align: center;
             display:    inline-block;
-            // color:      fade(@color-background, 50%);
-            // color:      fade(@color-background, 75%);
-            color:      @color-background;
             // font-weight:600;
             padding:    0 0 0 4px;
             // background: @color-fade;
-            // border-radius: (@slot-size / 2) 0 0 (@slot-size / 2);
+            border-radius: (@slot-size / 2) 0 0 (@slot-size / 2);
             border-right: 10px solid transparent;
             z-index:    2;
         }
@@ -52,7 +50,7 @@
             @color2:    fade(@color-theme, 50%);
             @position1: (@slot-size + @icon-size / 2);
             @position2: (@slot-size + @icon-size) * 2;
-            background: linear-gradient(to right, @color-fade, @color-fade @position1, @color2 @position1);
+            background: linear-gradient(to right, transparent, transparent @position1, @color2 @position1);
             border-radius: (@slot-size / 2);
             // border-radius: (@slot-size / 2) 0 0 (@slot-size / 2);
             // min-width:  @position2;

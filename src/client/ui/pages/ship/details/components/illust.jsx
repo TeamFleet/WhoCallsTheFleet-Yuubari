@@ -104,8 +104,8 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
 
                     pagination={true}
 
-                    prevButton={<Icon className="icon" icon="loop" />}
-                    nextButton={<Icon className="icon" icon="search" />}
+                    prevButton={<Icon className="icon" icon="arrow-left3" />}
+                    nextButton={<Icon className="icon" icon="arrow-right3" />}
 
                     grabCursor={true}
                     mousewheelControl={true}

@@ -247,6 +247,118 @@
     {
       "icon": {
         "paths": [
+          "M0 672l96 96 416-416 416 416 96-96-511.998-512-512.002 512z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "arrow-up",
+          "up",
+          "top"
+        ],
+        "defaultCode": 60857,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "order": 25,
+        "prevSize": 32,
+        "ligatures": "arrow-up3, up3",
+        "name": "arrow-up3",
+        "id": 1209
+      },
+      "setIdx": 1,
+      "setId": 0,
+      "iconIdx": 1209
+    },
+    {
+      "icon": {
+        "paths": [
+          "M352 0l-96 96 416 416-416 416 96 96 512-511.998-512-512.002z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "arrow-right",
+          "right",
+          "next"
+        ],
+        "defaultCode": 60861,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "order": 24,
+        "prevSize": 32,
+        "ligatures": "arrow-right3, right5",
+        "name": "arrow-right3",
+        "id": 1213
+      },
+      "setIdx": 1,
+      "setId": 0,
+      "iconIdx": 1213
+    },
+    {
+      "icon": {
+        "paths": [
+          "M1024 352l-96-96-416 416-416-416-96 96 511.998 512 512.002-512z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "arrow-down",
+          "down",
+          "buttom"
+        ],
+        "defaultCode": 60865,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "order": 23,
+        "prevSize": 32,
+        "ligatures": "arrow-down3, down3",
+        "name": "arrow-down3",
+        "id": 1217
+      },
+      "setIdx": 1,
+      "setId": 0,
+      "iconIdx": 1217
+    },
+    {
+      "icon": {
+        "paths": [
+          "M672 1024l96-96-416-416 416-416-96-96-512 511.998 512 512.002z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "arrow-left",
+          "left",
+          "previous"
+        ],
+        "defaultCode": 60869,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "order": 22,
+        "prevSize": 32,
+        "ligatures": "arrow-left3, left6",
+        "name": "arrow-left3",
+        "id": 1221
+      },
+      "setIdx": 1,
+      "setId": 0,
+      "iconIdx": 1221
+    },
+    {
+      "icon": {
+        "paths": [
           "M320 768v-768h-128v768h-160l224 224 224-224h-160z",
           "M448 0h576v128h-576v-128z",
           "M448 192h448v128h-448v-128z",
