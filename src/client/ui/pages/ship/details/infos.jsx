@@ -21,7 +21,12 @@ export default class ShipDetailsContentInfos extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
-                <Illust ship={this.props.ship} className="shipinfo shipinfo-illust" />
+                <Illust
+                    ship={this.props.ship}
+                    className="shipinfo shipinfo-illust"
+                    defaultIndex={this.props.illustIndex}
+                    onIndexChange={this.props.onIllustChange}
+                />
                 <QuickFacts ship={this.props.ship} className="shipinfo shipinfo-facts" />
                 <Stats ship={this.props.ship} className="shipinfo shipinfo-stats" />
                 <SlotEquipments ship={this.props.ship} className="shipinfo shipinfo-equipments" />

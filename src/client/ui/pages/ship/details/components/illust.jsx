@@ -26,7 +26,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         super(props)
 
         this.state = {
-            swiperIndex: 0
+            swiperIndex: this.props.defaultIndex || 0
         }
 
         // console.log(db.exillusts, db.exillustTypes)
@@ -66,6 +66,8 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         this.setState({
             swiperIndex: swiper.realIndex
         })
+        if (typeof this.props.onIndexChange === 'function')
+            this.props.onIndexChange(swiper.realIndex)
         // console.log(swiper.activeIndex, swiper.realIndex)
     }
 
@@ -91,6 +93,8 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
             <ComponentContainer className={this.props.className}>
                 <Swiper
                     slides={this.pics.map(url => <img data-src={url} className="swiper-lazy" />)}
+
+                    initialSlide={this.props.defaultIndex || 0}
 
                     slidesPerView={2}
                     slidesPerGroup={2}

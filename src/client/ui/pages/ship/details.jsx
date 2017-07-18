@@ -26,6 +26,10 @@ if (__CLIENT__)
         contentComponents[tab] = require(`./details/${tab}.jsx`).default
     })
 
+const sessionVars = {
+    illustIndex: 0
+}
+
 @connect()
 @ImportStyle(style)
 export default class extends React.Component {
@@ -77,7 +81,9 @@ export default class extends React.Component {
                 />
                 {__CLIENT__
                     ? React.createElement(contentComponents[this.state.tab], {
-                        ship: this.ship
+                        ship: this.ship,
+                        illustIndex: sessionVars.illustIndex,
+                        onIllustChange: index => {sessionVars.illustIndex = index}
                     })
                     : React.cloneElement(this.props.children, {
                         ship: this.ship
