@@ -2,6 +2,7 @@
 
 .component{
     @swiper-bullet-size:    20px;
+    @swiper-button-size:    (@swiper-bullet-size - 2);
 
     position:   relative;
     overflow:   auto;
@@ -70,12 +71,12 @@
         }
         .swiper-button-prev,
         .swiper-button-next{
-            flex:   0 0 30px;
+            flex:   0 0 (@swiper-button-size + 8);
             position: relative;
             top:    0;
             margin: 0;
             left:   0;
-            height:     @swiper-bullet-size;
+            height: @swiper-button-size;
         }
         .swiper-button-prev{
             order:  1;
@@ -122,8 +123,8 @@
         .swiper-button-prev,
         .swiper-button-next{
             .icon{
-                width:  @swiper-bullet-size;
-                height: @swiper-bullet-size;
+                width:  @swiper-button-size;
+                height: @swiper-button-size;
                 fill:   @color-fade;
             }
             &:hover .icon{
@@ -142,7 +143,7 @@
     }
         .illust-name{
             @height:    22px;
-            .style-badge();
+            .style-badge-hollow();
             display:    block;
             position:   absolute;
             left:       50%;
@@ -151,8 +152,8 @@
             transform:  translate(-50%, 0%);
             font-size:  14px;
             line-height:16px;
-            border-radius: (@height / 2);
-            padding:    ((@height - 16px) / 2) .75em;
+            border-radius: ((@height + 0) / 2);
+            padding:    ((@height - 16px - 2) / 2) .75em;
             // color:      @color-background-main;
             // border:     1px solid @color-theme;
             // border:     1px solid @color-base;

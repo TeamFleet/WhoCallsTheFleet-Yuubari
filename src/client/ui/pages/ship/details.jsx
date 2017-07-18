@@ -26,9 +26,10 @@ if (__CLIENT__)
         contentComponents[tab] = require(`./details/${tab}.jsx`).default
     })
 
-const sessionVars = {
+const sessionVarsDefaults = {
     illustIndex: 0
 }
+const sessionVars = {}
 
 @connect()
 @ImportStyle(style)
@@ -69,8 +70,15 @@ export default class extends React.Component {
             })
     }
 
+    // componentWillUnmount() {
+    //     delete sessionVars[this.ship.id]
+    // }
+
     render() {
-        if (__CLIENT__ && __DEV__) console.log('thisShip', this.ship)
+        if (__CLIENT__ && __DEV__)
+            console.log('thisShip', this.ship)
+        if (__CLIENT__ && typeof sessionVars[this.ship.id] === 'undefined')
+            sessionVars[this.ship.id] = Object.assign({}, sessionVarsDefaults)
         return (
             <PageContainer className={this.props.className}>
                 <Header
@@ -82,8 +90,8 @@ export default class extends React.Component {
                 {__CLIENT__
                     ? React.createElement(contentComponents[this.state.tab], {
                         ship: this.ship,
-                        illustIndex: sessionVars.illustIndex,
-                        onIllustChange: index => {sessionVars.illustIndex = index}
+                        illustIndex: sessionVars[this.ship.id].illustIndex,
+                        onIllustChange: index => { sessionVars[this.ship.id].illustIndex = index }
                     })
                     : React.cloneElement(this.props.children, {
                         ship: this.ship
