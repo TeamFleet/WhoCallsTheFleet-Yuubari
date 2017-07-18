@@ -4,6 +4,7 @@ import CSSTransition from 'react-transition-group/CSSTransition'
 
 import ComponentContainer from '../commons/component-container.jsx'
 import Swiper from 'UI/components/swiper'
+import Icon from 'UI/components/icon'
 
 import db from 'Logic/database'
 import getPic from 'Utils/get-pic.js'
@@ -91,19 +92,26 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     </TransitionGroup>
                 )}
                 <Swiper
-                    slides={this.pics.map(url => <img src={url} />)}
+                    slides={this.pics.map(url => <img data-src={url} className="swiper-lazy" />)}
 
                     slidesPerView={2}
                     slidesPerGroup={2}
                     spaceBetween={10}
 
+                    controlsWrapper={true}
+
                     pagination={true}
 
-                    prevButton={true}
-                    nextButton={true}
+                    prevButton={<Icon className="icon" icon="loop"/>}
+                    nextButton={<Icon className="icon" icon="search"/>}
 
                     grabCursor={true}
                     mousewheelControl={true}
+
+                    preloadImages={false}
+                    lazyLoading={true}
+                    lazyLoadingInPrevNext={true}
+                    lazyLoadingInPrevNextAmount={2}
 
                     breakpoints={{
                         480: {
