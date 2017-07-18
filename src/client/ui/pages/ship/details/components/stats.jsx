@@ -5,6 +5,7 @@ import ComponentContainer from '../commons/component-container.jsx'
 import Stat from '../commons/stat.jsx'
 import { maxShipLv } from 'kckit/src/variables'
 import getValue from 'Utils/get-value'
+import prefs from 'Logic/preferences'
 
 import translate from 'sp-i18n'
 
@@ -31,11 +32,13 @@ const stats = [
 // @connect()
 @ImportStyle(styles)
 export default class ShipDetailsComponentStats extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
+
+        const defaultLv = Math.max(prefs.shipDetailsStatLevel || 99, props.ship._minLv)
         this.state = {
-            lv: 99,
-            lvInput: 99
+            lv: defaultLv,
+            lvInput: defaultLv
         }
     }
     setLv(lv) {
@@ -44,14 +47,17 @@ export default class ShipDetailsComponentStats extends React.Component {
                 lv: lv
             })
             this._input.value = lv
+            this.onLevelChange(lv)
         }
     }
     onInputChange(evt) {
         const newLv = Math.min(Math.max(evt.target.value, this.props.ship._minLv), maxShipLv)
-        if (newLv != this.state.lv)
+        if (newLv != this.state.lv){
             this.setState({
                 lv: newLv
             })
+            this.onLevelChange(newLv)
+        }
         evt.target.value = evt.target.value
     }
     onInputBlur(evt) {
@@ -73,12 +79,18 @@ export default class ShipDetailsComponentStats extends React.Component {
             evt.target.value = this.props.ship._minLv
             newLv = this.props.ship._minLv
         }
-        if (newLv != this.state.lv)
+        if (newLv != this.state.lv){
             this.setState({
                 lv: newLv
             })
+            this.onLevelChange(newLv)
+        }
         this._input.value = newLv
     }
+    onLevelChange(newLv) {
+        prefs.shipDetailsStatLevel = newLv
+    }
+
     renderStat(stat, index) {
         const isConsume = stat.includes('consum.')
         return (

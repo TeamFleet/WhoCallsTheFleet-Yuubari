@@ -19,6 +19,7 @@ import clientRouter from './router'
 import { onRouterChange } from './ui/layout/nav.jsx'
 import reducers from './redux/reducers.js'
 import { init as dbInit } from './logic/database'
+import prefs from 'Logic/preferences'
 // import lastScroll from 'Utils/last-scroll.js'
 
 
@@ -81,14 +82,16 @@ if (__SERVER__) {
 
 //
 if (__CLIENT__) {
-    run({
-        // browserHistoryOnUpdate: (location) => {
-        //     if (__DEV__) console.log('browserHistory update', location)
-        // }
-    })
+    prefs.init().then(() => {
+        run({
+            // browserHistoryOnUpdate: (location) => {
+            //     if (__DEV__) console.log('browserHistory update', location)
+            // }
+        })
 
-    // 客户端注册多语言
-    i18nRegister(__REDUX_STATE__)
+        // 客户端注册多语言
+        i18nRegister(__REDUX_STATE__)
+    })
 }
 
 dbInit()
