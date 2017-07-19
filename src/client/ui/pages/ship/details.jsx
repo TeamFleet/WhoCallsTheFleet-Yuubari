@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+// import TransitionGroup from 'react-transition-group/TransitionGroup'
+// import CSSTransition from 'react-transition-group/CSSTransition'
 
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
@@ -99,5 +101,37 @@ export default class extends React.Component {
                 }
             </PageContainer>
         )
+        // return (
+        //     <TransitionGroup
+        //         component={PageContainer}
+        //         className={this.props.className}
+        //         id="page-container-body"
+        //     >
+        //         <Header
+        //             ship={this.ship}
+        //             tabs={tabsAvailable}
+        //             onTabChange={__CLIENT__ && this.onTabChange.bind(this)}
+        //             currentTab={__CLIENT__ && this.state.tab}
+        //         />
+        //         {__CLIENT__
+        //             ? (
+        //                 <CSSTransition
+        //                     key={this.state.tab}
+        //                     classNames="ship-details-transition"
+        //                     timeout={200}
+        //                 >
+        //                     {React.createElement(contentComponents[this.state.tab], {
+        //                         ship: this.ship,
+        //                         illustIndex: sessionVars[this.ship.id].illustIndex,
+        //                         onIllustChange: index => { sessionVars[this.ship.id].illustIndex = index }
+        //                     })}
+        //                 </CSSTransition>
+        //             )
+        //             : React.cloneElement(this.props.children, {
+        //                 ship: this.ship
+        //             })
+        //         }
+        //     </TransitionGroup>
+        // )
     }
 }
