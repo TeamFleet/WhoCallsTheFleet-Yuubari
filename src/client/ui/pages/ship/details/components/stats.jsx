@@ -29,6 +29,8 @@ const stats = [
     'consum.ammo'
 ]
 
+const percentage = (number, max) => (number / max * 100) + '%'
+
 // @connect()
 @ImportStyle(styles)
 export default class ShipDetailsComponentStats extends React.Component {
@@ -52,7 +54,7 @@ export default class ShipDetailsComponentStats extends React.Component {
     }
     onInputChange(evt) {
         const newLv = Math.min(Math.max(evt.target.value, this.props.ship._minLv), maxShipLv)
-        if (newLv != this.state.lv){
+        if (newLv != this.state.lv) {
             this.setState({
                 lv: newLv
             })
@@ -79,7 +81,7 @@ export default class ShipDetailsComponentStats extends React.Component {
             evt.target.value = this.props.ship._minLv
             newLv = this.props.ship._minLv
         }
-        if (newLv != this.state.lv){
+        if (newLv != this.state.lv) {
             this.setState({
                 lv: newLv
             })
@@ -112,6 +114,25 @@ export default class ShipDetailsComponentStats extends React.Component {
             </Stat>
         )
     }
+    renderTick(level, classNameSuffix) {
+        return (
+            <span
+                className={classNames([
+                    'tick',
+                    `tick-${classNameSuffix || level}`, {
+                        'tick-align-left': level > 70 && level < 99,
+                        'tick-highlight': this.state.lv > level
+                    }
+                ])}
+                data-level={level}
+                style={{
+                    // left: (level / (maxShipLv + 5) * 100) + '%'
+                    left: percentage(level + 5, maxShipLv + 10)
+                }}
+                onClick={() => this.setLv(level)}
+            />
+        )
+    }
     render() {
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.stats")}>
@@ -139,14 +160,17 @@ export default class ShipDetailsComponentStats extends React.Component {
                         onChange={this.onRangeChange.bind(this)}
                     />
                     <span className="current" style={{
-                        left: (this.props.ship._minLv / maxShipLv * 100) + '%',
-                        right: ((maxShipLv - this.state.lv) / maxShipLv * 100) + '%'
+                        // left: (this.props.ship._minLv / maxShipLv * 100) + '%',
+                        // right: ((maxShipLv - this.state.lv) / maxShipLv * 100) + '%'
+                        left: percentage(
+                            this.props.ship._minLv <= 1 ? 0 : this.props.ship._minLv + 5,
+                            maxShipLv + 10
+                        ),
+                        right: percentage(maxShipLv - this.state.lv + 5, maxShipLv + 10)
                     }} />
-                    <span className="tick tick-minlv" style={{
-                        left: (this.props.ship._minLv / maxShipLv * 100) + '%'
-                    }} onClick={() => this.setLv(this.props.ship._minLv)} />
-                    <span className="tick tick-99" onClick={() => this.setLv(99)} />
-                    <span className="tick tick-maxlv" onClick={() => this.setLv(maxShipLv)} />
+                    {this.renderTick(this.props.ship._minLv, 'minlv')}
+                    {this.renderTick(99)}
+                    {this.renderTick(maxShipLv, 'maxlv')}
                 </span>
                 <div className="stats">
                     {stats.map(this.renderStat.bind(this))}
