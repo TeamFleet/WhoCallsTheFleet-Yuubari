@@ -72,6 +72,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
     }
 
     renderExillustName(type) {
+        const name = db.exillustTypes[type]._name
         const time = db.exillustTypes[type]._time
         return (
             <CSSTransition
@@ -80,8 +81,8 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                 timeout={200}
             >
                 <span className="illust-name">
-                    {db.exillustTypes[type]._name}
-                    {time && <small>({time})</small>}
+                    {name}
+                    {time && time != name && <small>({time})</small>}
                 </span>
             </CSSTransition>
         )
