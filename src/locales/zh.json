@@ -95,6 +95,12 @@
 
         "dismantle": "解体获得资源",
 
-        "aaci": "特殊对空迎击 (AACI)"
+        "aaci": "特殊对空迎击 (AACI)",
+        "aaci_req": {
+            "ship": "该舰娘",
+            "class": "该舰级",
+            "type": "该舰种"
+        },
+        "aaci_unable": "无法施展该能力"
     }
 }

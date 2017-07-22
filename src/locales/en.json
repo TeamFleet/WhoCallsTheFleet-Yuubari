@@ -95,6 +95,12 @@
 
         "dismantle": "Dismantle",
 
-        "aaci": "Anti-Air Cut-In (AACI)"
+        "aaci": "Anti-Air Cut-In (AACI)",
+        "aaci_req": {
+            "ship": "This Ship",
+            "class": "This Ship Class",
+            "type": "This Ship Type"
+        },
+        "aaci_unable": "Unable to perform"
     }
 }
