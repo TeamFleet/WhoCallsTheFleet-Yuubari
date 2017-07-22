@@ -1,0 +1,37 @@
+@import '../_.less';
+
+.component {
+    .item{
+        display:    flex;
+        flex-flow:  row nowrap;
+        line-height:@equipmenticon-size;
+        height:     @equipmenticon-size;
+        font-size:  14px;
+        border-top: 1px solid @color-border;
+        margin:     0;
+        padding:    5px 0;
+        box-sizing: content-box;
+        dt, dd{
+            margin:     0;
+            padding:    0;
+        }
+        .id{
+            flex:   0 0 1.5em;
+        }
+        .icons{
+            flex:   1 0 (@equipmenticon-size * 4);
+        }
+        .fixed, .modifier{
+            flex:   1;
+        }
+        // &:nth-child(odd){
+        //     background:     fade(#000, 5%);
+        // }
+    }
+    .header{
+        color:      @color-fade;
+        border-top: 0;
+        padding:    0;
+        margin-top: (0 - @title-height);
+    }
+}

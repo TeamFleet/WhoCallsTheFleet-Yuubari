@@ -36,6 +36,12 @@
         }
     },
 
+    "aaci": {
+        "fixed_shoot_down_bonus": "固定额外击坠数",
+        "fixed": "固定",
+        "modifier": "系数"
+    },
+
     "nav": {
         "home": "首页",
         "fleets": "舰队模拟",
@@ -87,6 +93,8 @@
 
         "modernization": "合成提供属性",
 
-        "dismantle": "解体获得资源"
+        "dismantle": "解体获得资源",
+
+        "aaci": "特殊对空迎击 (AACI)"
     }
 }

@@ -37,6 +37,12 @@
         }
     },
 
+    "aaci": {
+        "fixed_shoot_down_bonus": "固定撃墜数ボーナス",
+        "fixed": "固定",
+        "modifier": "補正"
+    },
+
     "nav": {
         "home": "ホーム",
         "fleets": "艦隊ビルダー",
@@ -88,6 +94,8 @@
 
         "modernization": "近代化改修強化値",
 
-        "dismantle": "解体"
+        "dismantle": "解体",
+
+        "aaci": "対空カットイン射撃"
     }
 }

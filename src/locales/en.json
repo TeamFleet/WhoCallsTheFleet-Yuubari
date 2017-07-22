@@ -47,6 +47,12 @@
         "about": "About"
     },
 
+    "aaci": {
+        "fixed_shoot_down_bonus": "Fixed shoot down bonus",
+        "fixed": "Fixed",
+        "modifier": "Modifier"
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "Filter by name...",
@@ -87,6 +93,8 @@
 
         "modernization": "Modernization",
 
-        "dismantle": "Dismantle"
+        "dismantle": "Dismantle",
+
+        "aaci": "Anti-Air Cut-In (AACI)"
     }
 }

@@ -4,6 +4,8 @@
 @count:     unit(1584 / @equipmenticon-size);
 
 .component{
+    position:   relative;
+
     &:before{
         content:    "";
         float:      left;
@@ -38,4 +40,40 @@
         }
         .icons-empty(@count);
     }
+
+    &[data-suffix]:after{
+        content:    "";
+        position:   absolute;
+        bottom:     0;
+        right:      0;
+        display:    block;
+        font-size:  12px;
+        line-height:1.2em;
+        text-align: center;
+        z-index:    2;
+    }
+        &[data-suffix="AA"]:after{
+            content:    attr(data-suffix);
+            padding:    0 .25em;
+            background: fade(@theme-green-500, 50%);
+            border:     1px solid @theme-green-a200;
+            color:      @theme-green-a100;
+            border-radius: (1.1em / 2);
+            // background:     url('../../../assets/stats.png') no-repeat 0% 31.57894737% / cover;
+            transform:  scale((10 / 12));
+            transform-origin: 100% 100%;
+        }
+        &[data-suffix="+"]:after,
+        &[data-suffix="-"]:after{
+            @size:      14px;
+            width:      @size;
+            height:     @size;
+            bottom:     0;
+        }
+        &[data-suffix="+"]:after{
+            background: url('../../../assets/symbols-other/arrow-up-buff.svg') no-repeat 50% 50% / cover;
+        }
+        &[data-suffix="-"]:after{
+            background: url('../../../assets/symbols-other/arrow-down-debuff.svg') no-repeat 50% 50% / cover;
+        }
 }
