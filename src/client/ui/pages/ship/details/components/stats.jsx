@@ -95,22 +95,23 @@ export default class ShipDetailsComponentStats extends React.Component {
 
     renderStat(stat, index) {
         const isConsume = stat.includes('consum.')
+        const value = isConsume
+            ? 0 - this.props.ship.getAttribute(stat, this.state.lv)
+            : getValue(this.props.ship.getAttribute(stat, this.state.lv))
         return (
             <Stat
                 type={translate(`stat.${stat}`)}
                 key={index}
                 className={
                     classNames(["stat", {
-                        "is-consume": isConsume
+                        "is-consume": isConsume,
+                        'disabled': value === '-'
                     }])
                 }
                 stat={stat.replace('consum.', '')}
                 max={stat === 'luck' && this.props.ship.stat.luck_max}
             >
-                {isConsume
-                    ? 0 - this.props.ship.getAttribute(stat, this.state.lv)
-                    : getValue(this.props.ship.getAttribute(stat, this.state.lv))
-                }
+                {value}
             </Stat>
         )
     }
