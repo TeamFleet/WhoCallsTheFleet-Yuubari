@@ -38,7 +38,8 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                     let equipmentRequired = []
                     if (OASW.shipWithEquipments && OASW.shipWithEquipments.hasStat) {
                         for (let stat in OASW.shipWithEquipments.hasStat) {
-                            statsWithEquipments.push([stat, OASW.shipWithEquipments.hasStat[stat]])
+                            if (this.props.ship.getAttribute(stat, this.props.ship_minLv) < OASW.shipWithEquipments.hasStat[stat])
+                                statsWithEquipments.push([stat, OASW.shipWithEquipments.hasStat[stat]])
                         }
                     }
                     if (OASW.equipments) {
@@ -58,9 +59,9 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                                     type: db.equipmentTypes[type]._name
                                 })}
                             </li>)}
-                            <li>{translate("require.min_possible_level", {
+                            {OASW.minLv && <li>{translate("require.min_possible_level", {
                                 level: OASW.minLv || this.props.ship._minLv
-                            })}</li>
+                            })}</li>}
                         </ul>
                     )
                 })}
