@@ -6,6 +6,8 @@ import AACI from './components/aaci.jsx'
 import OASWCalculator from './components/oasw-calculator.jsx'
 import SpeedUpCalculator from './components/speedup-calculator.jsx'
 
+// import CenterContainer from 'UI/containers/center'
+
 // import translate from 'sp-i18n'
 // import db from 'Logic/database'
 

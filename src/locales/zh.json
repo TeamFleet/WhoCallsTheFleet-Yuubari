@@ -140,7 +140,7 @@
         "tp_bonus": "运输作战TP加成：+${bonus}",
         "expedition_bonus": "远征收益加成：+${bonus}",
         "expedition_bonus_daihatsu_description": "算作${daihatsu}。",
-        "expedition_bonus_daihatsu_description2": "因此${ship}携带3栏${daihatsu}即可达到额外收益上限。",
+        "expedition_bonus_daihatsu_description2": "因此携带3栏${daihatsu}即可达到额外收益上限。",
 
         "oasw_calculator": "先制对潜攻击计算器",
         "oasw_unable": "无法施展该能力",
