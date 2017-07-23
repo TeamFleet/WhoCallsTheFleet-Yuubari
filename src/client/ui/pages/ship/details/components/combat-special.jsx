@@ -71,13 +71,15 @@ export default class ShipDetailsSpecialCombat extends React.Component {
     renderOTS() {
         const otsTable = checkOTS(this.props.ship.id) || []
         const canOTS = (Array.isArray(otsTable) && otsTable.length) ? true : false
+        const canAlways = canOTS && this.props.ship.isType('ss') && this.props.ship._minLv >= 10
         return (
             <Special
                 title={translate("combat_phases.ots")}
-                level={canOTS ? 1 : 0}
+                level={canOTS ? (canAlways ? 2 : 1) : 0}
             >
-                {canOTS && otsTable.length > 1 && translate("ship_details.meet_one_requirements_below")}
-                {canOTS && otsTable.map((OTS, index) => {
+                {canOTS && canAlways && translate("ship_details.can_always_perform")}
+                {canOTS && !canAlways && otsTable.length > 1 && translate("ship_details.meet_one_requirements_below")}
+                {canOTS && !canAlways && otsTable.map((OTS, index) => {
                     let equipmentRequired = []
                     if (OTS.equipments) {
                         equipmentRequired = getEquipmentTypesFromCondition(OTS.equipments)
