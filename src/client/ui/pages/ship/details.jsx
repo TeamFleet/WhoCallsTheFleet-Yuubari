@@ -66,10 +66,12 @@ export default class extends React.Component {
     }
 
     onTabChange(newTab) {
-        if (newTab !== this.state.tab)
+        if (newTab !== this.state.tab){
             this.setState({
                 tab: newTab
             })
+            window.scrollTo(undefined, 0)
+        }
     }
 
     // componentWillUnmount() {
