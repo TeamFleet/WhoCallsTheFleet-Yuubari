@@ -131,8 +131,8 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                 >
                     {canAACI && translate("ship_details.see_below_for_required_equipment_types")}
                 </Special>
-                {this.renderOASW()}
-                {this.renderOTS()}
+                {this.props.ship.getAttribute('asw', 99) !== false && this.renderOASW()}
+                {this.props.ship.getAttribute('torpedo', 99) !== false && this.renderOTS()}
                 {isCarrier && <Special
                     title={translate("combat_phases.night")}
                     level={canNight ? 2 : 0}
