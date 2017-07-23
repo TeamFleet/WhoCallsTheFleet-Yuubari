@@ -131,10 +131,10 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                 </Special>
                 {this.renderOASW()}
                 {this.renderOTS()}
-                <Special
+                {this.props.ship.isType('carrier') && <Special
                     title={translate("combat_phases.night")}
                     level={canNight ? 2 : 0}
-                />
+                />}
             </ComponentContainer>
         )
     }
