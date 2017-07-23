@@ -1,0 +1,80 @@
+@import '../_.less';
+
+.component{
+    @size-indicator:16px;
+
+    font-size:  16px;
+    line-height:16px;
+    display:    block;
+    margin:     20px 0;
+    padding:    ((@size-indicator - 16) / 2) 0 0 (@size-indicator + 10);
+    position:   relative;
+    min-height: @size-indicator;
+    &:first-child{
+        margin-top:     0;
+    }
+    &:last-child{
+        margin-bottom:  0;
+    }
+
+    .des{
+        display:    block;
+        margin-top: 5px;
+        font-size:  14px;
+        line-height:18px;
+        .requirement{
+            margin: 5px 0 0 0;
+            padding:0;
+            li{
+                margin: 0 0 0 1.5em;
+            }
+            &:first-of-type:last-of-type{
+                li{
+                    margin-left: 0;
+                    list-style: none;
+                }
+            }
+        }
+    }
+
+    &:before{
+        content:    "";
+        display:    block;
+        position:   absolute;
+        top:        0;
+        left:       0;
+        width:      @size-indicator;
+        height:     @size-indicator;
+        background: currentColor;
+        border-radius: 50%;
+    }
+
+    .icon{
+        position:   absolute;
+        top:        0;
+        left:       0;
+        width:      @size-indicator;
+        height:     @size-indicator;
+    }
+
+    &[data-level="0"]{
+        color:      @color-fade;
+        &:before{
+            display:    none;
+        }
+    }
+
+    &[data-level="1"]{
+        color:      #fff;
+        &:before{
+            background: @color-accent;
+        }
+    }
+
+    &[data-level="2"]{
+        color:      #fff;
+        &:before{
+            background: @theme-green-a200;
+        }
+    }
+}

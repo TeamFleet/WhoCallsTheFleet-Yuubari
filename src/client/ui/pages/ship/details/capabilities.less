@@ -1,0 +1,30 @@
+@import './_.less';
+
+.component{
+    display:        flex;
+    flex-flow:      row wrap;
+    margin-right:   -40px;
+    // align-content:  space-between;
+    .screen-phone({
+        display:    block;
+    });
+
+    .shipinfo{
+        flex:       1 0 33.3333%;
+        min-width:  320px;
+        border-right: 40px solid transparent;
+        .screen-phone({
+            min-width:  0;
+        });
+    }
+        .shipinfo-combat,
+        .shipinfo-special{
+            flex-basis:     50%;
+        }
+        // .shipinfo-special,
+        // .shipinfo-aaci,
+        // .shipinfo-oasw,
+        // .shipinfo-speedup{
+        //     flex-basis:     33.3333%;
+        // }
+}

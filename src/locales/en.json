@@ -12,6 +12,14 @@
     "under_construction": "Under Construction",
     "cancel": "Cancel",
     "ok": "OK",
+    "none": "None",
+
+    "require": {
+        "level": "Require level: ${level}",
+        "min_possible_level": "Minimum possible level: ${level}",
+        "equipment_type": "Require equipment type: ${type}",
+        "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)"
+    },
 
     "shipclass": "${class} Class",
     "shipclass_number": "${class} Class (#${number})",
@@ -36,6 +44,10 @@
         }
     },
 
+    "equipment_types": {
+        "jet": "Jets"
+    },
+
     "nav": {
         "home": "Home",
         "fleets": "Fleet Builder",
@@ -47,7 +59,23 @@
         "about": "About"
     },
 
+    "combat_phases": {
+        "preemptive": "Preemptive",
+        "detection": "Detection",
+        "jetLBAS": "Jet Assault (LBAS)",
+        "jet": "Jet Assault",
+        "lbas": "LBAS",
+        "aerial": "Aerial Combat",
+        "support": "Support Expedition",
+        "oasw": "Opening Anti-Submarine Warfare",
+        "ots": "Opening Torpedo Salvo",
+        "day": "Day Combat",
+        "torpedo": "Torpedo Salvo",
+        "night": "Night Battle"
+    },
+
     "aaci": {
+        "title": "Anti-Air Cut-In (AACI)",
         "fixed_shoot_down_bonus": "Fixed shoot down bonus",
         "fixed": "Fixed",
         "modifier": "Modifier"
@@ -101,6 +129,22 @@
             "class": "This Ship Class",
             "type": "This Ship Type"
         },
-        "aaci_unable": "Unable to perform"
+        "aaci_unable": "Unable to perform",
+
+        "combat_special": "Special Combat Capabilities",
+        "can_always_perform": "Can always perform",
+        "see_below_for_required_equipment_types": "See below for required equipment types",
+        "meet_one_requirements_below": "Meet one of the requirements below",
+
+        "other_special": "Other Special Capabilities",
+        "tp_bonus": "Transport phase TP bonus: +${bonus}",
+        "expedition_bonus": "Expedition income bonus: +${bonus}",
+        "expedition_bonus_daihatsu_description": "Count as a ${daihatsu}.",
+        "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
+
+        "oasw_calculator": "OASW Calculator",
+        "oasw_unable": "Unable to perform",
+
+        "speedup_calculator": "Speed-up Calculator"
     }
 }

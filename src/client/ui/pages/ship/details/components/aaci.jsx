@@ -5,6 +5,7 @@ import checkAACI from 'kckit/src/check/aaci'
 import ComponentContainer from '../commons/component-container.jsx'
 import IconEquipment from 'UI/components/icon-equipment'
 import Icon from 'UI/components/icon'
+import Special from '../commons/special.jsx'
 
 import translate from 'sp-i18n'
 
@@ -43,10 +44,10 @@ export default class ShipDetailsAACI extends React.Component {
         if (__DEV__) console.log('thisShip > AACI', aaciTypes)
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.aaci")}>
-                {!ableToAACI && <div className="unable disabled">
-                    <Icon className="icon" icon="cross" />
-                    {translate("ship_details.aaci_unable")}
-                </div>}
+                {!ableToAACI && <Special
+                    title={translate("ship_details.aaci_unable")}
+                    level={0}
+                />}
                 {ableToAACI && <dl className="item header">
                     <dt className="id" />
                     <dd className="icons" />

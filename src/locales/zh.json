@@ -12,6 +12,14 @@
     "under_construction": "建设中",
     "cancel": "取消",
     "ok": "确认",
+    "none": "无",
+
+    "require": {
+        "level": "需要等级：${level}",
+        "min_possible_level": "可能的最低等级：${level}",
+        "equipment_type": "需要装备类型：${type}",
+        "ship_stat_with_equipments": "需要${stat}属性：${value} (计算装备)"
+    },
 
     "shipclass": "${class}级",
     "shipclass_number": "${class}级 ${number} 号舰",
@@ -36,7 +44,27 @@
         }
     },
 
+    "equipment_types": {
+        "jet": "喷气机"
+    },
+
+    "combat_phases": {
+        "preemptive": "开幕",
+        "detection": "索敌",
+        "jetLBAS": "基地航空队喷气机突袭",
+        "jet": "喷气机突袭",
+        "lbas": "基地航空队空战",
+        "aerial": "空战",
+        "support": "支援舰队攻击",
+        "oasw": "先制对潜攻击",
+        "ots": "先制雷击",
+        "day": "昼炮雷击战",
+        "torpedo": "雷击战",
+        "night": "夜战"
+    },
+
     "aaci": {
+        "title": "特殊对空迎击 (AACI)",
         "fixed_shoot_down_bonus": "固定额外击坠数",
         "fixed": "固定",
         "modifier": "系数"
@@ -101,6 +129,22 @@
             "class": "该舰级",
             "type": "该舰种"
         },
-        "aaci_unable": "无法施展该能力"
+        "aaci_unable": "无法施展该能力",
+
+        "combat_special": "特殊作战能力",
+        "can_always_perform": "无条件",
+        "see_below_for_required_equipment_types": "所需装备类型见下表",
+        "meet_one_requirements_below": "需要满足以下需求之一",
+
+        "other_special": "其他特殊能力",
+        "tp_bonus": "运输作战TP加成：+${bonus}",
+        "expedition_bonus": "远征收益加成：+${bonus}",
+        "expedition_bonus_daihatsu_description": "算作${daihatsu}。",
+        "expedition_bonus_daihatsu_description2": "因此${ship}携带3栏${daihatsu}即可达到额外收益上限。",
+
+        "oasw_calculator": "先制对潜攻击计算器",
+        "oasw_unable": "无法施展该能力",
+
+        "speedup_calculator": "航速提升计算器"
     }
 }

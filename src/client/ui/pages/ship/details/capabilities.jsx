@@ -1,24 +1,29 @@
 import React from 'react'
 
-import ComponentContainer from './commons/component-container.jsx'
-
+import CombatSpecial from './components/combat-special.jsx'
+import OtherSpecial from './components/other-special.jsx'
 import AACI from './components/aaci.jsx'
+import OASWCalculator from './components/oasw-calculator.jsx'
+import SpeedUpCalculator from './components/speedup-calculator.jsx'
 
-import translate from 'sp-i18n'
+// import translate from 'sp-i18n'
 // import db from 'Logic/database'
 
-// import { ImportStyle } from 'sp-css-import'
-// import styles from './header.less'
+import { ImportStyle } from 'sp-css-import'
+import styles from './capabilities.less'
 
 // @connect()
-// @ImportStyle(styles)
+@ImportStyle(styles)
 export default class ShipDetailsContentCapabilities extends React.Component {
     render() {
         return (
-            <ComponentContainer>
-                <p><i>{translate('under_construction')}...</i></p>
+            <div className={this.props.className}>
+                <CombatSpecial ship={this.props.ship} className="shipinfo shipinfo-combat" />
+                <OtherSpecial ship={this.props.ship} className="shipinfo shipinfo-special" />
                 <AACI ship={this.props.ship} className="shipinfo shipinfo-aaci" />
-            </ComponentContainer>
+                <SpeedUpCalculator ship={this.props.ship} className="shipinfo shipinfo-speedup" />
+                <OASWCalculator ship={this.props.ship} className="shipinfo shipinfo-oasw" />
+            </div>
         )
     }
 }

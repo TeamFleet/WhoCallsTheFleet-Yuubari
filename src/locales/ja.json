@@ -13,6 +13,14 @@
     "under_construction": "工事中",
     "cancel": "キャンセル",
     "ok": "OK",
+    "none": "None",
+
+    "require": {
+        "level": "Require level: ${level}",
+        "min_possible_level": "Minimum possible level: ${level}",
+        "equipment_type": "Require equipment type: ${type}",
+        "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)"
+    },
 
     "shipclass": "${class}型",
     "shipclass_number": "${class}型 ${number} 番艦",
@@ -37,7 +45,27 @@
         }
     },
 
+    "equipment_types": {
+        "jet": "噴式機"
+    },
+
+    "combat_phases": {
+        "preemptive": "開幕",
+        "detection": "索敵",
+        "jetLBAS": "基地航空隊噴式強襲",
+        "jet": "噴式強襲",
+        "lbas": "基地航空隊航空戦",
+        "aerial": "航空戦",
+        "support": "支援艦隊攻撃",
+        "oasw": "先制対潜攻撃",
+        "ots": "開幕雷撃",
+        "day": "昼砲雷撃戦",
+        "torpedo": "雷撃戦",
+        "night": "夜戦"
+    },
+
     "aaci": {
+        "title": "対空カットイン射撃",
         "fixed_shoot_down_bonus": "固定撃墜数ボーナス",
         "fixed": "固定",
         "modifier": "補正"
@@ -102,6 +130,22 @@
             "class": "本艦型",
             "type": "本艦種"
         },
-        "aaci_unable": "実行することができません"
+        "aaci_unable": "実行することができません",
+
+        "combat_special": "Special Combat Capabilities",
+        "can_always_perform": "Can always perform",
+        "see_below_for_required_equipment_types": "See below for required equipment types",
+        "meet_one_requirements_below": "Meet one of the requirements below",
+
+        "other_special": "Other Special Capabilities",
+        "tp_bonus": "Transport phase TP bonus: +${bonus}",
+        "expedition_bonus": "Expedition income bonus: +${bonus}",
+        "expedition_bonus_daihatsu_description": "Count as a ${daihatsu}.",
+        "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
+
+        "oasw_calculator": "先制対潜攻撃カルキュレーター",
+        "oasw_unable": "実行することができません",
+
+        "speedup_calculator": "速力カルキュレーター"
     }
 }
