@@ -100,6 +100,8 @@ export default class ShipDetailsSpecialCombat extends React.Component {
         )
     }
     render() {
+        const isCarrier = this.props.ship.isType('carrier')
+
         const aaciTypes = checkAACI(this.props.ship.id)
 
         const canJetAssault = checkShip(this.props.ship, {
@@ -111,18 +113,18 @@ export default class ShipDetailsSpecialCombat extends React.Component {
             ]
         })
         const canAACI = (Array.isArray(aaciTypes) && aaciTypes.length) ? true : false
-        const canNight = this.props.ship.isType('carrier') ? (this.props.ship.additional_night_shelling ? true : false) : true
+        const canNight = isCarrier ? (this.props.ship.additional_night_shelling ? true : false) : true
 
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.combat_special")}>
-                <Special
+                {isCarrier && <Special
                     title={translate("combat_phases.jet")}
                     level={canJetAssault ? 1 : 0}
                 >
                     {canJetAssault && translate("require.equipment_type", {
                         type: translate("equipment_types.jet")
                     })}
-                </Special>
+                </Special>}
                 <Special
                     title={translate("aaci.title")}
                     level={canAACI ? 1 : 0}
@@ -131,7 +133,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                 </Special>
                 {this.renderOASW()}
                 {this.renderOTS()}
-                {this.props.ship.isType('carrier') && <Special
+                {isCarrier && <Special
                     title={translate("combat_phases.night")}
                     level={canNight ? 2 : 0}
                 />}
