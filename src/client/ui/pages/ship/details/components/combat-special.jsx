@@ -1,10 +1,11 @@
 import React from 'react'
 // import classNames from 'classnames'
 
-import checkShip from 'kckit/src/check/ship'
-import checkAACI from 'kckit/src/check/aaci'
-import checkOASW from 'kckit/src/check/oasw'
-import checkOTS from 'kckit/src/check/ots'
+import kckit from 'kckit'
+const checkShip = kckit.check.ship
+const checkAACI = kckit.check.aaci
+const checkOASW = kckit.check.oasw
+const checkOTS = kckit.check.ots
 
 import db from 'Logic/database'
 import getEquipmentTypesFromCondition from 'Utils/get-equipment-types-from-condition'

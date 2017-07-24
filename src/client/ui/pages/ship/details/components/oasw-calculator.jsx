@@ -1,6 +1,7 @@
 import React from 'react'
 
-import checkOASW from 'kckit/src/check/oasw'
+import kckit from 'kckit'
+const checkOASW = kckit.check.oasw
 
 import db from 'Logic/database'
 
@@ -21,6 +22,7 @@ export default class ShipDetailsCalculatorOASW extends React.Component {
         const canAlways = oaswTable.some(OASW =>
             (!OASW.equipments && !OASW.shipWithEquipments && !OASW.minLv)
         )
+        if (__DEV__) console.log('thisShip > OASW', oaswTable)
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.oasw_calculator")}>
                 {!canOASW && <Special
