@@ -11,6 +11,7 @@ import getEquipmentTypesFromCondition from 'Utils/get-equipment-types-from-condi
 
 import ComponentContainer from '../commons/component-container.jsx'
 import Special from '../commons/special.jsx'
+import IconEquipment from 'UI/components/icon-equipment'
 
 import translate from 'sp-i18n'
 
@@ -55,9 +56,10 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                                 })}
                             </li>)}
                             {equipmentRequired.map((type, indexType) => <li key={`${index}-${indexType}`} data-type={type}>
-                                {translate("require.equipment_type", {
-                                    type: db.equipmentTypes[type]._name
-                                })}
+                                {translate("require.equipment_type", { type: "" })}
+                                <IconEquipment className="equipment" icon={db.equipmentTypes[type].icon}>
+                                    {db.equipmentTypes[type]._name}
+                                </IconEquipment>
                             </li>)}
                             {OASW.minLv && <li>{translate("require.min_possible_level", {
                                 level: OASW.minLv || this.props.ship._minLv
@@ -88,9 +90,10 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                         <ul key={index} className="requirement">
                             {otsTable.length > 1 && (`#${index + 1}`)}
                             {equipmentRequired.map((type, indexType) => <li key={`${index}-${indexType}`} data-type={type}>
-                                {translate("require.equipment_type", {
-                                    type: db.equipmentTypes[type]._name
-                                })}
+                                {translate("require.equipment_type", { type: "" })}
+                                <IconEquipment className="equipment" icon={db.equipmentTypes[type].icon}>
+                                    {db.equipmentTypes[type]._name}
+                                </IconEquipment>
                             </li>)}
                             {OTS.ship && OTS.ship.minLevel && <li>{translate("require.level", {
                                 level: OTS.ship.minLevel

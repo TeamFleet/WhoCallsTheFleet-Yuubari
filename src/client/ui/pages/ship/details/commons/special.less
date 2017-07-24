@@ -2,6 +2,7 @@
 
 .component{
     @size-indicator:16px;
+    @size-equipment-icon:26px;
 
     font-size:  16px;
     line-height:16px;
@@ -55,6 +56,19 @@
         left:       0;
         width:      @size-indicator;
         height:     @size-indicator;
+    }
+
+    .equipment{
+        padding-left:   (@size-equipment-icon - 4);
+        &:before{
+            position:   absolute;
+            float:      none;
+            width:      @size-equipment-icon;
+            height:     @size-equipment-icon;
+            left:       -4px;
+            top:        50%;
+            margin-top: (0 - @size-equipment-icon / 2);
+        }
     }
 
     &[data-level="0"]{
