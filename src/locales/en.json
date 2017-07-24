@@ -17,6 +17,7 @@
     "require": {
         "level": "Require level: ${level}",
         "min_possible_level": "Minimum possible level: ${level}",
+        "equipment": "Require equipment: ${type}",
         "equipment_type": "Require equipment type: ${type}",
         "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)"
     },

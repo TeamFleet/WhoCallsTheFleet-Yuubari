@@ -43,9 +43,10 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                                 statsWithEquipments.push([stat, OASW.shipWithEquipments.hasStat[stat]])
                         }
                     }
-                    if (OASW.equipments) {
+                    if (OASW.equipments)
                         equipmentRequired = getEquipmentTypesFromCondition(OASW.equipments)
-                    }
+                    if (OASW.equipments.hasNameOf === '九三一空')
+                        equipmentRequired.push('九三一空')
                     return (
                         <ul key={index} className="requirement">
                             {oaswTable.length > 1 && (`#${index + 1}`)}
@@ -55,12 +56,22 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                                     value: stat[1]
                                 })}
                             </li>)}
-                            {equipmentRequired.map((type, indexType) => <li key={`${index}-${indexType}`} data-type={type}>
-                                {translate("require.equipment_type", { type: "" })}
-                                <IconEquipment className="equipment" icon={db.equipmentTypes[type].icon}>
-                                    {db.equipmentTypes[type]._name}
-                                </IconEquipment>
-                            </li>)}
+                            {equipmentRequired.map((type, indexType) => {
+                                if (type === '九三一空')
+                                    return (<li key={`${index}-${indexType}`}>
+                                        {translate("require.equipment", { type: "" })}
+                                        <IconEquipment className="equipment" icon={8}>
+                                            九三一空
+                                        </IconEquipment>
+                                    </li>)
+                                else
+                                    return (<li key={`${index}-${indexType}`}>
+                                        {translate("require.equipment_type", { type: "" })}
+                                        <IconEquipment className="equipment" icon={db.equipmentTypes[type].icon}>
+                                            {db.equipmentTypes[type]._name}
+                                        </IconEquipment>
+                                    </li>)
+                            })}
                             {OASW.minLv && <li>{translate("require.min_possible_level", {
                                 level: OASW.minLv || this.props.ship._minLv
                             })}</li>}
