@@ -8,14 +8,15 @@
     .equipment{
         height:         @equipmenticon-size;
         padding:        5px (@input-width + @input-button-width * 2 + 20) 5px (@equipmenticon-size + 0);
-        border-bottom:  1px solid transparent;
+        // border-bottom:  1px solid transparent;
+        border-bottom:  1px solid @color-border;
         box-sizing:     content-box;
         overflow:       hidden;
         font-size:      14px;
         position:       relative;
-        &:last-child{
-            border-bottom-color: @color-border;
-        }
+        // &:last-child{
+        //     border-bottom-color: @color-border;
+        // }
         .link{
             height:     36px;
             display:    flex;
