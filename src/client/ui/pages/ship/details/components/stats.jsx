@@ -1,9 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
 
+import kckit from 'kckit'
+const maxShipLv = kckit.vars.maxShipLv
+
 import ComponentContainer from '../commons/component-container.jsx'
 import Stat from '../commons/stat.jsx'
-import { maxShipLv } from 'kckit/src/variables'
 import getValue from 'Utils/get-value'
 import prefs from 'Logic/preferences'
 

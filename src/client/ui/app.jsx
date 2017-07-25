@@ -137,6 +137,12 @@ export default class extends React.Component {
 
     render() {
         // if (__CLIENT__) this.appReady(100)
+        // if (__SERVER__) {
+        //     return null
+        //     await new Promise(resolve => {
+        //         setTimeout(resolve, 100)
+        //     })
+        // }
         if (this.props.isMainBgimgLoaded) this.appReady()
 
         return (

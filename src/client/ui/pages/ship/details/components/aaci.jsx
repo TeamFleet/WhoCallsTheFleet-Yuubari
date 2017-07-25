@@ -1,6 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
-import checkAACI from 'kckit/src/check/aaci'
+
+import kckit from 'kckit'
+const checkAACI = kckit.check.aaci
 
 import ComponentContainer from '../commons/component-container.jsx'
 import IconEquipment from 'UI/components/icon-equipment'
