@@ -1,0 +1,130 @@
+@import "../../base.less";
+
+.component{
+    @input-width:       30px;
+    @input-height:      30px;
+    @input-button-width:20px;
+
+    .equipment{
+        height:         @equipmenticon-size;
+        padding:        5px (@input-width + @input-button-width * 2 + 20) 5px (@equipmenticon-size + 0);
+        border-bottom:  1px solid transparent;
+        box-sizing:     content-box;
+        overflow:       hidden;
+        font-size:      14px;
+        position:       relative;
+        &:last-child{
+            border-bottom-color: @color-border;
+        }
+        .link{
+            height:     36px;
+            display:    flex;
+            flex-flow:  column nowrap;
+            justify-content: center;
+            line-height:1.2em;
+            width:      auto;
+        }
+        .icon, .input{
+            position:   absolute;
+            top:        50%;
+        }
+        .icon{
+            height:     @equipmenticon-size;
+            width:      @equipmenticon-size;
+            left:       0;
+            margin-top: (0 - @equipmenticon-size / 2);
+        }
+        .input{
+            right:      0;
+            width:      (@input-width + @input-button-width * 2);
+            height:     @input-height;
+            margin-top: (0 - @input-height / 2);
+            padding:    0 @input-button-width;
+            box-sizing: border-box;
+            input, .btn{
+                display:    block;
+                height:     @input-height;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            input{
+                display:    block;
+                width:      100%;
+                border-radius: 0;
+                line-height:(@input-height - 2);
+                border-left-width: 0;
+                border-right-width: 0;
+                &:focus{
+                    border-left-width: 1px;
+                    border-right-width: 1px;
+                }
+                &::-webkit-inner-spin-button, 
+                &::-webkit-outer-spin-button { 
+                    -webkit-appearance: none; 
+                    margin: 0; 
+                }
+                &::inner-spin-button, 
+                &::outer-spin-button { 
+                    appearance: none; 
+                    margin: 0; 
+                }
+            }
+            .btn{
+                .style-input();
+                appearance: none;
+                position:   absolute;
+                top:        0;
+                width:      @input-button-width;
+                padding:    0;
+                line-height:(@input-height - 2);
+            }
+            .btn-minus{
+                left:       0;
+                border-radius: 3px 0 0 3px;
+            }
+            .btn-plus{
+                right:      0;
+                border-radius: 0 3px 3px 0;
+            }
+        }
+        &[data-equipment-id="33"]{
+            display:    flex;
+            flex-flow:  row nowrap;
+            padding-right:  0;
+            .link{
+                flex:   1;
+            }
+            .note{
+                flex:       0;
+                text-align: right;
+                white-space:nowrap;
+                color:      @color-fade;
+                font-size:  12px;
+                line-height:(@equipmenticon-size / 2);
+            }
+        }
+    }
+
+    .area-result{
+        line-height:    (@equipmenticon-size - 2);
+        overflow:       hidden;
+        .base, .result{
+            float:      left;
+            width:      50%;
+            font-size:  14px;
+            padding-top:2px;
+            [data-speed-id]{
+                font-size:      @base-font-size;
+            }
+        }
+        .base{
+            text-align:     right;
+            padding-right:  .75em;
+            border-right:   1px solid @color-border;
+        }
+        .result{
+            text-align:     left;
+            padding-left:   .75em;
+        }
+    }
+}

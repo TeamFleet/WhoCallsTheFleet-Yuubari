@@ -82,6 +82,14 @@
         "about": "关于"
     },
 
+    "speed_calculator": {
+        "title": "航速提升计算器",
+        "equipment_33_note_1": "必须至少装备 1 个",
+        "equipment_33_note_2": "可放入补强增设栏位中",
+        "base_speed": "基础航速：",
+        "result": "结果："
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "搜索舰名...",
@@ -144,8 +152,6 @@
         "expedition_bonus_daihatsu_description2": "因此携带3栏${daihatsu}即可达到额外收益上限。",
 
         "oasw_calculator": "先制对潜攻击计算器",
-        "oasw_unable": "无法施展该能力",
-
-        "speedup_calculator": "航速提升计算器"
+        "oasw_unable": "无法施展该能力"
     }
 }

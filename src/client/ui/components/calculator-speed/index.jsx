@@ -18,34 +18,53 @@ const maxSlotCount = 4
 @ImportStyle(styles)
 export default class CalculatorSpeed extends React.Component {
     constructor(props) {
+        if (__DEV__) console.log('thisShip > Speed', { speed: props.ship.stat.speed, rule: props.ship.getSpeedRule() })
         super(props)
         this.state = {
             [33]: 1, // 改良型艦本式タービン
             [34]: 0, // 強化型艦本式缶
             [87]: 0, // 新型高温高圧缶
+            speedId: props.ship.stat.speed,
             speed: props.ship.getSpeed()
         }
+        this.inputs = {}
     }
 
     update(id, count) {
         if (this.state[id] !== count) {
-            this.setState({
-                [id]: count
-            })
-            calculateSpeed(
-                this.props.ship,
-                Array(Math.min(maxSlotCount, this.state[87])).fill(87)
-                    .concat(Array(Math.min(this.state[34], maxSlotCount - Math.min(maxSlotCount, this.state[87]))).fill(34))
-                    .concat(Array(Math.max(maxSlotCount - this.state[34] - this.state[87], 0)))
+            // this.setState({
+            //     [id]: count,
+            //     speed: kckit.get.speed(result)
+            // })
+            this.setState((prevState, props) => {
+                // const newState = { ...prevState }
+                prevState[id] = count
+                const equipments = Array(Math.min(maxSlotCount, prevState[87])).fill(87)
+                    .concat(Array(Math.min(prevState[34], maxSlotCount - Math.min(maxSlotCount, prevState[87]))).fill(34))
+                    .concat(Array(Math.max(maxSlotCount - prevState[34] - prevState[87], 0)))
                     .concat(33)
-            )
+                const result = calculateSpeed(props.ship, equipments)
+                if (__DEV__) console.log(equipments, result)
+                return {
+                    [id]: count,
+                    speedId: result,
+                    speed: kckit.get.speed(result)
+                }
+            })
         }
+    }
+
+    onBtnClick(evt, id, delta) {
+        const newValue = parseInt(this.inputs[id].value) + delta
+        this.inputs[id].value = newValue
+        this.update(id, newValue)
+        evt.target.blur()
     }
 
     renderEquipment(id) {
         const equipment = db.equipments[id]
         return (
-            <div className="equipment">
+            <div className="equipment" data-equipment-id={id}>
                 <Link className="link" to={`/equipments/${id}`}>
                     <IconEquipment className="icon" icon={equipment._icon} />
                     {equipment._name}
@@ -55,22 +74,60 @@ export default class CalculatorSpeed extends React.Component {
         )
     }
     renderInput(id) {
+        if (id === 33) {
+            return (
+                <div className="note">
+                    {translate("speed_calculator.equipment_33_note_1")}
+                    <br />
+                    {translate("speed_calculator.equipment_33_note_2")}
+                </div>
+            )
+        }
         return (
-            <label className={classNames(['input', {
-                'disabled': id === 33
-            }])}>
-                <input type="number" onChange={evt => this.update(id, evt.target.value)} defaultValue={this.state[id]} />
-            </label>
+            <div className="input">
+                <button
+                    type="button"
+                    className="btn btn-minus"
+                    disabled={this.state[id] <= 0}
+                    onClick={evt => this.onBtnClick(evt, id, -1)}
+                >-</button>
+                <input
+                    type="number"
+                    min="0"
+                    max="4"
+                    ref={el => this.inputs[id] = el}
+                    onChange={evt => this.update(id, evt.target.value)}
+                    defaultValue={this.state[id]}
+                />
+                <button
+                    type="button"
+                    className="btn btn-plus"
+                    disabled={this.state[id] >= 4}
+                    onClick={evt => this.onBtnClick(evt, id, 1)}
+                >+</button>
+            </div>
         )
     }
     render() {
-        if (__DEV__) console.log('thisShip > Speed', { speed: this.props.ship.stat.speed, rule: this.props.ship.getSpeedRule() })
         return (
-            <div className={this.props.className} title={translate("ship_details.speedup_calculator")}>
-                {this.renderEquipment(33)}
-                {this.renderEquipment(34)}
-                {this.renderEquipment(87)}
-                {this.state.speed}
+            <div className={this.props.className}>
+                <div className="area-requirement">
+                    {this.renderEquipment(33)}
+                </div>
+                <div className="area-configurable">
+                    {this.renderEquipment(34)}
+                    {this.renderEquipment(87)}
+                </div>
+                <div className="area-result">
+                    <div className="base">
+                        {translate("speed_calculator.base_speed")}
+                        <strong data-speed-id={this.props.ship.stat.speed}>{this.props.ship.getSpeed()}</strong>
+                    </div>
+                    <div className="result">
+                        {translate("speed_calculator.result")}
+                        <strong data-speed-id={this.state.speedId}>{this.state.speed}</strong>
+                    </div>
+                </div>
             </div>
         )
     }

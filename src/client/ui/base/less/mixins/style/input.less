@@ -1,0 +1,17 @@
+.style-input() {
+    background: fade(@theme-bluegrey-200, 10%);
+    border:     1px solid fade(@theme-bluegrey-300, 25%);
+    color:      @theme-bluegrey-100;
+    font:       inherit;
+
+    &:hover,
+    &:focus{
+        background-color:   fade(@theme-bluegrey-200, 15%);
+    }
+
+    &:focus{
+        border-color:   @color-accent;
+        outline:        0;
+        box-shadow:     0 0 5px fade(@color-accent, 50%);
+    }
+}

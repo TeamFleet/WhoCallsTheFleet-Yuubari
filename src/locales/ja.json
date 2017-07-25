@@ -83,6 +83,14 @@
         "about": "アバウト"
     },
 
+    "speed_calculator": {
+        "title": "速力カルキュレーター",
+        "equipment_33_note_1": "At least equip one.",
+        "equipment_33_note_2": "Can equipped in ex-slot.",
+        "base_speed": "Base speed: ",
+        "result": "Result: "
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "艦娘検索...",
@@ -145,8 +153,6 @@
         "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
 
         "oasw_calculator": "先制対潜攻撃カルキュレーター",
-        "oasw_unable": "実行することができません",
-
-        "speedup_calculator": "速力カルキュレーター"
+        "oasw_unable": "実行することができません"
     }
 }

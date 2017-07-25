@@ -82,6 +82,14 @@
         "modifier": "Modifier"
     },
 
+    "speed_calculator": {
+        "title": "Speed-Up Calculator",
+        "equipment_33_note_1": "Req. at least one.",
+        "equipment_33_note_2": "Can equipped in ex-slot.",
+        "base_speed": "Base Speed: ",
+        "result": "Result: "
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "Filter by name...",
@@ -144,8 +152,6 @@
         "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
 
         "oasw_calculator": "OASW Calculator",
-        "oasw_unable": "Unable to perform",
-
-        "speedup_calculator": "Speed-up Calculator"
+        "oasw_unable": "Unable to perform"
     }
 }
