@@ -17,10 +17,8 @@ import translate from 'sp-i18n'
 export default class ShipDetailsCalculatorOASW extends React.Component {
     render() {
         const oaswTable = checkOASW(this.props.ship.id) || []
-        const canOASW = (Array.isArray(oaswTable) && oaswTable.length) ? true : false
-        const canAlways = oaswTable.some(OASW =>
-            (!OASW.equipments && !OASW.shipWithEquipments && !OASW.minLv)
-        )
+        const canAlways = oaswTable === true
+        const canOASW = canAlways || (Array.isArray(oaswTable) && oaswTable.length) ? true : false
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.oasw_calculator")}>
                 {!canOASW && <Special

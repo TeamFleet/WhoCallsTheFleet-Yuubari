@@ -23,10 +23,8 @@ import translate from 'sp-i18n'
 export default class ShipDetailsSpecialCombat extends React.Component {
     renderOASW() {
         const oaswTable = checkOASW(this.props.ship.id) || []
-        const canOASW = (Array.isArray(oaswTable) && oaswTable.length) ? true : false
-        const canAlways = oaswTable.some(OASW =>
-            (!OASW.equipments && !OASW.shipWithEquipments && !OASW.minLv)
-        )
+        const canAlways = oaswTable === true
+        const canOASW = canAlways || (Array.isArray(oaswTable) && oaswTable.length) ? true : false
         return (
             <Special
                 title={translate("combat_phases.oasw")}
@@ -72,8 +70,8 @@ export default class ShipDetailsSpecialCombat extends React.Component {
     }
     renderOTS() {
         const otsTable = checkOTS(this.props.ship.id) || []
-        const canOTS = (Array.isArray(otsTable) && otsTable.length) ? true : false
-        const canAlways = canOTS && this.props.ship.isType('ss') && this.props.ship._minLv >= 10
+        const canAlways = otsTable === true
+        const canOTS = canAlways || (Array.isArray(otsTable) && otsTable.length) ? true : false
         return (
             <Special
                 title={translate("combat_phases.ots")}
