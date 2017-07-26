@@ -6,6 +6,7 @@ import db from 'Logic/database'
 
 import Link from 'UI/components/link'
 import IconEquipment from 'UI/components/icon-equipment'
+import InputNumber from '../input-number'
 
 import translate from 'sp-i18n'
 
@@ -30,20 +31,8 @@ export default class CalculatorSpeed extends React.Component {
         this.inputs = {}
     }
 
-    update(id, count, el) {
-        if (el) {
-            const max = el.getAttribute('max')
-            const min = el.getAttribute('min')
-            if (typeof max !== 'undefined' && count > parseInt(max))
-                return
-            if (typeof min !== 'undefined' && count < parseInt(min))
-                return
-        }
+    update(id, count) {
         if (this.state[id] !== count) {
-            // this.setState({
-            //     [id]: count,
-            //     speed: kckit.get.speed(result)
-            // })
             this.setState((prevState, props) => {
                 // const newState = { ...prevState }
                 prevState[id] = count
@@ -60,27 +49,6 @@ export default class CalculatorSpeed extends React.Component {
                 }
             })
         }
-    }
-
-    onInputBlur(evt, id) {
-        const el = evt.target
-        const max = el.getAttribute('max')
-        const min = el.getAttribute('min')
-        if (typeof max !== 'undefined' && el.value > parseInt(max)) {
-            el.value = max
-            this.update(id, max)
-        }
-        if (typeof min !== 'undefined' && el.value < parseInt(min)) {
-            el.value = min
-            this.update(id, min)
-        }
-    }
-
-    onBtnClick(evt, id, delta) {
-        const newValue = parseInt(this.inputs[id].value) + delta
-        this.inputs[id].value = newValue
-        this.update(id, newValue)
-        evt.target.blur()
     }
 
     renderEquipment(id) {
@@ -106,29 +74,14 @@ export default class CalculatorSpeed extends React.Component {
             )
         }
         return (
-            <div className="input">
-                <button
-                    type="button"
-                    className="btn btn-minus"
-                    disabled={this.state[id] <= 0}
-                    onClick={evt => this.onBtnClick(evt, id, -1)}
-                >-</button>
-                <input
-                    type="number"
-                    min="0"
-                    max="4"
-                    ref={el => this.inputs[id] = el}
-                    onChange={evt => this.update(id, evt.target.value, evt.target)}
-                    onBlur={evt => this.onInputBlur(evt, id)}
-                    defaultValue={this.state[id]}
-                />
-                <button
-                    type="button"
-                    className="btn btn-plus"
-                    disabled={this.state[id] >= 4}
-                    onClick={evt => this.onBtnClick(evt, id, 1)}
-                >+</button>
-            </div>
+            <InputNumber
+                className="input"
+
+                defaultValue={this.state[id]}
+                min={0}
+                max={maxSlotCount}
+                onUpdate={newValue => this.update(id, newValue)}
+            />
         )
     }
     render() {

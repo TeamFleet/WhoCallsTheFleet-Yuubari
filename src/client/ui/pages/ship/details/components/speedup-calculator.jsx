@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ComponentContainer from '../commons/component-container.jsx'
-import CalculatorSpeed from 'UI/components/calculator-speed'
+import CalculatorSpeed from 'UI/components/calculator/speed'
 
 import translate from 'sp-i18n'
 
