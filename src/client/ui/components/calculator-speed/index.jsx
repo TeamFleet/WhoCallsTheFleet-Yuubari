@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 
 import kckit from 'kckit'
 import db from 'Logic/database'
@@ -12,7 +12,7 @@ import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 import styles from './styles.less'
 
-const calculateSpeed = kckit.calculate.speed
+const calculateSpeed = kckit.calculate.ship.speed
 const maxSlotCount = 4
 
 @ImportStyle(styles)

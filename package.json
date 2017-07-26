@@ -22,7 +22,7 @@
     "scripts": {
         "start": "npm run build && node ./dist-web/server --cport 8081 --sport 8080",
         "start:pm2": "npm run build && npm run clean:web:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
-        "start:dev": "npm run pm2:dev",
+        "dev": "npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
 
 
@@ -110,7 +110,7 @@
         "whocallsthefleet-database": "2017.7.24",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "kckit": "^1.10.12",
+        "kckit": "^1.11.0",
 
         "normalize.css": "^7.0.0",
         
