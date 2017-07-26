@@ -30,7 +30,15 @@ export default class CalculatorSpeed extends React.Component {
         this.inputs = {}
     }
 
-    update(id, count) {
+    update(id, count, el) {
+        if (el) {
+            const max = el.getAttribute('max')
+            const min = el.getAttribute('min')
+            if (typeof max !== 'undefined' && count > parseInt(max))
+                return
+            if (typeof min !== 'undefined' && count < parseInt(min))
+                return
+        }
         if (this.state[id] !== count) {
             // this.setState({
             //     [id]: count,
@@ -51,6 +59,20 @@ export default class CalculatorSpeed extends React.Component {
                     speed: kckit.get.speed(result)
                 }
             })
+        }
+    }
+
+    onInputBlur(evt, id) {
+        const el = evt.target
+        const max = el.getAttribute('max')
+        const min = el.getAttribute('min')
+        if (typeof max !== 'undefined' && el.value > parseInt(max)) {
+            el.value = max
+            this.update(id, max)
+        }
+        if (typeof min !== 'undefined' && el.value < parseInt(min)) {
+            el.value = min
+            this.update(id, min)
         }
     }
 
@@ -96,7 +118,8 @@ export default class CalculatorSpeed extends React.Component {
                     min="0"
                     max="4"
                     ref={el => this.inputs[id] = el}
-                    onChange={evt => this.update(id, evt.target.value)}
+                    onChange={evt => this.update(id, evt.target.value, evt.target)}
+                    onBlur={evt => this.onInputBlur(evt, id)}
                     defaultValue={this.state[id]}
                 />
                 <button

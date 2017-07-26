@@ -76,4 +76,16 @@
         &[data-suffix="-"]:after{
             background: url('../../../assets/symbols-other/arrow-up-nobuff.svg') no-repeat 50% 50% / cover;
         }
+        &[data-icon="16"][data-suffix="+"]:after,
+        &[data-icon="16"][data-suffix="-"]:after{
+            @size:      28px;
+            width:      @size;
+            height:     @size;
+            right:      -5px;
+            bottom:     -5px;
+            background: url('../../../assets/equiptypeicon.png') no-repeat 0% percentage((30 - 1) / (@count - 1)) / cover;
+        }
+        &[data-icon="16"][data-suffix="-"]:after{
+            filter:     saturate(0%);
+        }
 }
