@@ -145,6 +145,10 @@
         "can_always_perform": "Can always perform",
         "see_below_for_required_equipment_types": "See below for required equipment types",
         "meet_one_requirements_below": "Meet one of the requirements below",
+        "light_attack_carrier_asw_title": "Will attack surface ships prioritised",
+        "light_attack_carrier_asw_note": "Even if can attack submarines and there's submarine exist.",
+        "range_different_title": "Range: ${range}",
+        "range_different_note": "Other ships in the same type have range: ${range}",
 
         "other_special": "Other Special Capabilities",
         "tp_bonus": "Transport phase TP bonus: +${bonus}",

@@ -114,6 +114,25 @@ export default class ShipDetailsSpecialCombat extends React.Component {
             </Special>
         )
     }
+    renderRangeDifferent() {
+        const pair = [
+            ['BB', 3],
+            ['CV', 1],
+            ['CL', 2]
+        ].filter(arr => (
+            this.props.ship.isType(arr[0]) && this.props.ship.stat.range != arr[1]
+        ))
+        if (Array.isArray(pair) && pair.length)
+            return (
+                <Special
+                    title={translate("ship_details.range_different_title", { range: this.props.ship._range })}
+                    level={this.props.ship.stat.range > pair[0][1] ? 2 : 1}
+                >
+                    {translate("ship_details.range_different_note", { range: kckit.get.range(pair[0][1]) })}
+                </Special>
+            )
+        return null
+    }
     render() {
         const isBattleship = this.props.ship.isType('battleship')
         const isCarrier = this.props.ship.isType('carrier')
@@ -142,18 +161,32 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                         type: translate("equipment_types.jet")
                     })}
                 </Special>}
+
                 <Special
                     title={translate("aaci.title")}
                     level={canAACI ? 1 : 0}
                 >
                     {canAACI && translate("ship_details.see_below_for_required_equipment_types")}
                 </Special>
+
+                {this.renderRangeDifferent()}
+
                 {this.props.ship.getAttribute('asw', 99) !== false && this.renderOASW()}
+
                 {statTorpedo99 !== false && this.renderOTS()}
+
                 {isBattleship && statTorpedo99 !== false && <Special
                     title={translate("combat_phases.torpedo")}
                     level={2}
                 />}
+
+                {this.props.ship.type === 30 && <Special
+                    title={translate("ship_details.light_attack_carrier_asw_title")}
+                    level={2}
+                >
+                    {translate("ship_details.light_attack_carrier_asw_note")}
+                </Special>}
+
                 {isCarrier && <Special
                     title={translate("combat_phases.night")}
                     level={this.props.ship.additional_night_shelling ? 2 : 0}

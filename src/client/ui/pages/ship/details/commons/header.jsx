@@ -4,7 +4,7 @@ import { Link, IndexLink } from 'react-router'
 import classNames from 'classnames'
 
 import translate, { localeId } from 'sp-i18n'
-// import db from 'Logic/database'
+import db from 'Logic/database'
 
 import MainHeader from 'UI/components/main-header.jsx'
 import Title from 'UI/components/title.jsx'
@@ -50,6 +50,14 @@ export default class ShipDetailsHeader extends React.Component {
         }
     }
 
+    getShipType() {
+        if (this.props.ship.type && this.props.ship.type_display && this.props.ship.type !== this.props.ship.type_display)
+            return db.shipTypes[this.props.ship.type_display]._name + ' (' + this.props.ship._type + ')'
+        if (this.props.ship.type)
+            return this.props.ship._type
+        return ''
+    }
+
     render() {
         const isPortal = (this.props.onTabChange && this.props.currentTab)
         const Component = isPortal ? MainHeader : 'div'
@@ -70,7 +78,7 @@ export default class ShipDetailsHeader extends React.Component {
                         ? translate("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
                         : translate("shipclass", { class: this.props.ship._class })
                     }
-                    {this.props.ship.class && this.props.ship.type && ` / ${this.props.ship._type}`}
+                    {this.props.ship.class && this.props.ship.type && ` / ${this.getShipType()}`}
                 </div>
 
                 {this.props.tabs && <div className="tabs">

@@ -33,6 +33,16 @@ const sessionVarsDefaults = {
 }
 const sessionVars = {}
 
+const getShipType = ship => {
+    // if (ship.type && ship.type_display && ship.type !== ship.type_display)
+    //     return db.shipTypes[ship.type_display]._name + ' (' + ship._type + ')'
+    if (ship.type_display)
+        return db.shipTypes[ship.type_display]._name
+    if (ship.type)
+        return ship._type
+    return ''
+}
+
 @connect()
 @ImportStyle(style)
 export default class extends React.Component {
@@ -44,7 +54,7 @@ export default class extends React.Component {
             subtitle: (ship.class_no
                 ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
                 : translate("shipclass", { class: ship._class }))
-            + (ship.class && ship.type && ` / ${ship._type}`)
+            + (ship.class && ship.type && ` / ${getShipType(ship)}`)
         })
 
         ext.meta = ext.meta.concat(head.meta)
@@ -66,7 +76,7 @@ export default class extends React.Component {
     }
 
     onTabChange(newTab) {
-        if (newTab !== this.state.tab){
+        if (newTab !== this.state.tab) {
             this.setState({
                 tab: newTab
             })
