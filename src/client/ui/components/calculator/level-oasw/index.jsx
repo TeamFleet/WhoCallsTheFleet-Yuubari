@@ -192,7 +192,9 @@ export default class CalculatorLevelOASW extends React.Component {
         //         {group.map(this.renderEquipment.bind(this))}
         //     </div>
         // ))
-        return <div className="area-equipment-group">
+        return <div className={classNames(["area-equipment-group", {
+            'is-half': this.equipmentList.length > 4
+        }])}>
             {this.equipmentList.map(this.renderEquipment.bind(this))}
         </div>
     }
