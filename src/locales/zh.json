@@ -10,6 +10,7 @@
     ],
 
     "under_construction": "建设中",
+    "no_javascript_warning": "本应用需要开启 JavaScript 功能。",
     "cancel": "取消",
     "ok": "确认",
     "none": "无",
@@ -87,7 +88,15 @@
         "equipment_33_note_1": "必须至少装备 1 个",
         "equipment_33_note_2": "可放入补强增设栏位中",
         "base_speed": "基础航速：",
-        "result": "结果："
+        "result": "计算结果："
+    },
+
+    "oasw_calculator": {
+        "title": "先制对潜攻击等级计算器",
+        "unable": "无法施展该能力",
+        "always": "可无条件施展",
+        "no_result": "未配置需要的装备",
+        "result": "需要等级："
     },
 
     "ship_list": {
@@ -141,7 +150,7 @@
         "aaci_unable": "无法施展该能力",
 
         "combat_special": "特殊作战能力",
-        "can_always_perform": "无条件",
+        "can_always_perform": "可无条件施展",
         "see_below_for_required_equipment_types": "所需装备类型见下表",
         "meet_one_requirements_below": "需要满足以下需求之一",
         "light_attack_carrier_asw_title": "优先攻击水面舰",
@@ -153,9 +162,6 @@
         "tp_bonus": "运输作战TP加成：+${bonus}",
         "expedition_bonus": "远征收益加成：+${bonus}",
         "expedition_bonus_daihatsu_description": "算作${daihatsu}。",
-        "expedition_bonus_daihatsu_description2": "因此携带3栏${daihatsu}即可达到额外收益上限。",
-
-        "oasw_calculator": "先制对潜攻击计算器",
-        "oasw_unable": "无法施展该能力"
+        "expedition_bonus_daihatsu_description2": "因此携带3栏${daihatsu}即可达到额外收益上限。"
     }
 }

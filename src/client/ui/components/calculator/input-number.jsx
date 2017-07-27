@@ -6,7 +6,7 @@ import styles from './input-number.less'
 const getValue = prop => typeof prop !== 'undefined' && !isNaN(prop) ? parseInt(prop) : undefined
 
 @ImportStyle(styles)
-export default class CalculatorSpeed extends React.Component {
+export default class CalculatorInputNumber extends React.Component {
     constructor(props) {
         super(props)
 

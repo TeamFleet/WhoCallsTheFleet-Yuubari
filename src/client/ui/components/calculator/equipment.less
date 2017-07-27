@@ -1,0 +1,83 @@
+@import "./_.less";
+
+.component{
+    height:         (@equipmenticon-size + 5 + 5);
+    padding:        5px (@equipment-padding-right) 5px (@equipmenticon-size + 0);
+    // border-bottom:  1px solid transparent;
+    border-bottom:  1px solid @color-border;
+    // box-sizing:     content-box;
+    overflow:       hidden;
+    font-size:      14px;
+    position:       relative;
+    // &:last-child{
+    //     border-bottom-color: @color-border;
+    // }
+    .equipment{
+        height:     36px;
+        line-height:1.2em;
+        display:    block;
+        // vertical-align: middle;
+        .name{
+            display:    inline-block;
+            max-width:  100%;
+            max-height: 100%;
+            vertical-align: middle;
+        }
+        &:after{
+            content:    "";
+            display:    inline-block;
+            vertical-align: middle;
+            width:      0;
+            height:     100%;
+            overflow:   hidden;
+        }
+    }
+    .icon, .input{
+        position:   absolute;
+        top:        50%;
+    }
+    .icon{
+        height:     @equipmenticon-size;
+        width:      @equipmenticon-size;
+        left:       0;
+        margin-top: (0 - @equipmenticon-size / 2);
+    }
+    .input{
+        right:      0;
+    }
+
+    &.has-note{
+        display:    flex;
+        flex-flow:  row nowrap;
+        padding-right:  0;
+        .equipment{
+            flex:   1;
+        }
+        .note{
+            flex:       0;
+            text-align: right;
+            white-space:nowrap;
+            color:      @color-fade;
+            font-size:  12px;
+            line-height:(@equipmenticon-size / 2);
+            padding-left: 1em;
+        }
+    }
+
+    &.is-required{
+        // background: ease-out-sine-gradient(to right, fade(#fff, 20%), fade(#fff, 0%) 50px);
+        background: linear-gradient(to right, fade(#fff, 20%), fade(#fff, 0%) 50px);
+        .icon-required{
+            @size:      16px;
+            position:   absolute;
+            z-index:    5;
+            top:        2px;
+            left:       2px;
+            width:      @size;
+            height:     @size;
+            fill:       @color-base;
+            // stroke-width: 1px;
+            // stroke-color: #000;
+        }
+    }
+}

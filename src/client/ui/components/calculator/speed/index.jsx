@@ -1,11 +1,9 @@
 import React from 'react'
-// import classNames from 'classnames'
+import classNames from 'classnames'
 
 import kckit from 'kckit'
-import db from 'Logic/database'
 
-import Link from 'UI/components/link'
-import IconEquipment from 'UI/components/icon-equipment'
+import Equipment from '../equipment'
 import InputNumber from '../input-number'
 
 import translate from 'sp-i18n'
@@ -31,7 +29,6 @@ export default class CalculatorSpeed extends React.Component {
         }
 
         this.slotsCount = props.ship.slot.length
-        this.inputs = {}
     }
 
     update(id, count) {
@@ -60,15 +57,16 @@ export default class CalculatorSpeed extends React.Component {
     // }
 
     renderEquipment(id) {
-        const equipment = db.equipments[id]
         return (
-            <div className="equipment" data-equipment-id={id}>
-                <Link className="link" to={`/equipments/${id}`}>
-                    <IconEquipment className="icon" icon={equipment._icon} />
-                    {equipment._name}
-                </Link>
-                {this.renderInput(id)}
-            </div>
+            <Equipment
+                equipment={id}
+                className={classNames({
+                    'has-note': id === 33
+                })}
+                componentInput={
+                    this.renderInput(id)
+                }
+            />
         )
     }
     renderInput(id) {
@@ -93,6 +91,7 @@ export default class CalculatorSpeed extends React.Component {
         )
     }
     render() {
+        if(__SERVER__) return <div>{translate("no_javascript_warning")}</div>
         return (
             <div className={this.props.className}>
                 <div className="area-requirement">

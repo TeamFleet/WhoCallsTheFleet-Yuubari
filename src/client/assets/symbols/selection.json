@@ -29,9 +29,9 @@
         "prevSize": 32,
         "name": "loop"
       },
-      "setIdx": 0,
+      "setIdx": 1,
       "setId": 1,
-      "iconIdx": 0
+      "iconIdx": 2
     },
     {
       "icon": {
@@ -56,7 +56,7 @@
         "name": "hanger",
         "id": 533
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 533
     },
@@ -86,7 +86,7 @@
         "name": "search",
         "id": 566
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 566
     },
@@ -118,7 +118,7 @@
         "name": "cog",
         "id": 607
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 607
     },
@@ -148,7 +148,7 @@
         "name": "puzzle",
         "id": 799
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 799
     },
@@ -178,7 +178,7 @@
         "name": "puzzle2",
         "id": 800
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 800
     },
@@ -210,9 +210,36 @@
         "name": "menu",
         "id": 881
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 881
+    },
+    {
+      "icon": {
+        "paths": [
+          "M1009.956 915.76v0l-437.074-871.112c-16.742-29.766-38.812-44.648-60.882-44.648s-44.14 14.882-60.884 44.648l-437.074 871.112c-33.486 59.532-5 108.24 63.304 108.24h869.308c68.302 0 96.792-48.708 63.302-108.24zM512 896c-35.346 0-64-28.654-64-64s28.654-64 64-64c35.348 0 64 28.652 64 64s-28.652 64-64 64zM576 640c0 35.346-28.654 64-64 64s-64-28.654-64-64v-192c0-35.346 28.654-64 64-64s64 28.654 64 64v192z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "warning",
+          "sign"
+        ],
+        "defaultCode": 60752,
+        "grid": 16
+      },
+      "attrs": [],
+      "properties": {
+        "order": 27,
+        "prevSize": 32,
+        "ligatures": "warning2, sign2",
+        "name": "warning2",
+        "id": 1104
+      },
+      "setIdx": 2,
+      "setId": 0,
+      "iconIdx": 1104
     },
     {
       "icon": {
@@ -240,7 +267,7 @@
         "name": "cross",
         "id": 1133
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 1133
     },
@@ -268,7 +295,7 @@
         "name": "arrow-up3",
         "id": 1209
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 1209
     },
@@ -296,7 +323,7 @@
         "name": "arrow-right3",
         "id": 1213
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 1213
     },
@@ -324,7 +351,7 @@
         "name": "arrow-down3",
         "id": 1217
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 1217
     },
@@ -352,7 +379,7 @@
         "name": "arrow-left3",
         "id": 1221
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 1221
     },
@@ -383,7 +410,7 @@
         "name": "sort-amount-desc",
         "id": 1361
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 1361
     },
@@ -413,7 +440,7 @@
         "name": "checkbox-checked",
         "id": 1390
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 1390
     },
@@ -442,7 +469,7 @@
         "name": "paragraph-left",
         "id": 1473
       },
-      "setIdx": 1,
+      "setIdx": 2,
       "setId": 0,
       "iconIdx": 1473
     }
@@ -481,6 +508,7 @@
     "quickUsageToken": {
       "WhoCallsTheFleet-v1": "MTEzYTIwZjhmZWZkNDZkMDk0YTRmYzJiZDkyMWRhMTgjMSMxNDk0NjkzMjIyIyMj"
     },
-    "gridSize": 16
+    "gridSize": 16,
+    "showGrid": false
   }
 }

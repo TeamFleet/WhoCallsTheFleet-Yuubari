@@ -11,6 +11,7 @@
     ],
 
     "under_construction": "工事中",
+    "no_javascript_warning": "This app requires JavaScript enabled.",
     "cancel": "キャンセル",
     "ok": "OK",
     "none": "None",
@@ -91,6 +92,14 @@
         "result": "Result: "
     },
 
+    "oasw_calculator": {
+        "title": "先制対潜攻撃レベル―カルキュレーター",
+        "unable": "実行することができません",
+        "always": "Can always perform",
+        "no_result": "Required equipment missing",
+        "result": "Required level: "
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "艦娘検索...",
@@ -154,9 +163,6 @@
         "tp_bonus": "Transport phase TP bonus: +${bonus}",
         "expedition_bonus": "Expedition income bonus: +${bonus}",
         "expedition_bonus_daihatsu_description": "Count as a ${daihatsu}.",
-        "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
-
-        "oasw_calculator": "先制対潜攻撃カルキュレーター",
-        "oasw_unable": "実行することができません"
+        "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus."
     }
 }

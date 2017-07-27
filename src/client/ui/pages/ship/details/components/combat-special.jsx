@@ -42,10 +42,11 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                                 statsWithEquipments.push([stat, OASW.shipWithEquipments.hasStat[stat]])
                         }
                     }
-                    if (OASW.equipments)
+                    if (OASW.equipments) {
                         equipmentRequired = getEquipmentTypesFromCondition(OASW.equipments)
-                    if (OASW.equipments.hasNameOf === '九三一空')
-                        equipmentRequired.push('九三一空')
+                        if (OASW.equipments.hasNameOf === '九三一空')
+                            equipmentRequired.push('九三一空')
+                    }
                     return (
                         <ul key={index} className="requirement">
                             {oaswTable.length > 1 && (`#${index + 1}`)}

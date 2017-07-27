@@ -1,61 +1,6 @@
-@import "../../../base.less";
+@import "../_.less";
 
 .component{
-    @input-width:       30px;
-    @input-height:      30px;
-    @input-button-width:20px;
-
-    .equipment{
-        height:         @equipmenticon-size;
-        padding:        5px (@input-width + @input-button-width * 2 + 20) 5px (@equipmenticon-size + 0);
-        // border-bottom:  1px solid transparent;
-        border-bottom:  1px solid @color-border;
-        box-sizing:     content-box;
-        overflow:       hidden;
-        font-size:      14px;
-        position:       relative;
-        // &:last-child{
-        //     border-bottom-color: @color-border;
-        // }
-        .link{
-            height:     36px;
-            display:    flex;
-            flex-flow:  column nowrap;
-            justify-content: center;
-            line-height:1.2em;
-            width:      auto;
-        }
-        .icon, .input{
-            position:   absolute;
-            top:        50%;
-        }
-        .icon{
-            height:     @equipmenticon-size;
-            width:      @equipmenticon-size;
-            left:       0;
-            margin-top: (0 - @equipmenticon-size / 2);
-        }
-        .input{
-            right:      0;
-        }
-        &[data-equipment-id="33"]{
-            display:    flex;
-            flex-flow:  row nowrap;
-            padding-right:  0;
-            .link{
-                flex:   1;
-            }
-            .note{
-                flex:       0;
-                text-align: right;
-                white-space:nowrap;
-                color:      @color-fade;
-                font-size:  12px;
-                line-height:(@equipmenticon-size / 2);
-            }
-        }
-    }
-
     .area-result{
         line-height:    (@equipmenticon-size - 2);
         overflow:       hidden;

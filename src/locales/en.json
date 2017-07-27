@@ -10,6 +10,7 @@
     ],
 
     "under_construction": "Under Construction",
+    "no_javascript_warning": "This app requires JavaScript enabled.",
     "cancel": "Cancel",
     "ok": "OK",
     "none": "None",
@@ -90,6 +91,14 @@
         "result": "Result: "
     },
 
+    "oasw_calculator": {
+        "title": "OASW Level Calculator",
+        "unable": "Unable to perform",
+        "always": "Can always perform",
+        "no_result": "Required equipment missing",
+        "result": "Required level: "
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "Filter by name...",
@@ -153,9 +162,6 @@
         "tp_bonus": "Transport phase TP bonus: +${bonus}",
         "expedition_bonus": "Expedition income bonus: +${bonus}",
         "expedition_bonus_daihatsu_description": "Count as a ${daihatsu}.",
-        "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
-
-        "oasw_calculator": "OASW Calculator",
-        "oasw_unable": "Unable to perform"
+        "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus."
     }
 }
