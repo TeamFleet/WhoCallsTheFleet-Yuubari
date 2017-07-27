@@ -54,6 +54,12 @@ const rules = [{
 }, {
     test: /\.nedb$/,
     loader: 'raw-loader'
+}, {
+    test: /\.md$/,
+    include: [
+        path.resolve(appPath, "docs")
+    ],
+    loader: 'raw-loader'
 }]
 
 // 执行顺序，？
@@ -87,7 +93,8 @@ const resolve = {
         Utils: path.resolve(appPath, './src/utils'),
         Assets: path.resolve(appPath, './src/client/assets'),
         UI: path.resolve(appPath, './src/client/ui'),
-        Logic: path.resolve(appPath, './src/client/logic')
+        Logic: path.resolve(appPath, './src/client/logic'),
+        Docs: path.resolve(appPath, './docs')
     },
     extensions: ['.js', '.jsx', '.json', '.css', '.less']
 }
