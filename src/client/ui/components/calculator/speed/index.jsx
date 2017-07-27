@@ -14,6 +14,7 @@ import { ImportStyle } from 'sp-css-import'
 import styles from './styles.less'
 
 const calculateSpeed = kckit.calculate.ship.speed
+const maxSlots = 4
 
 @ImportStyle(styles)
 export default class CalculatorSpeed extends React.Component {
@@ -38,9 +39,9 @@ export default class CalculatorSpeed extends React.Component {
             this.setState((prevState, props) => {
                 // const newState = { ...prevState }
                 prevState[id] = count
-                const equipments = Array(Math.min(this.slotsCount, prevState[87])).fill(87)
-                    .concat(Array(Math.min(prevState[34], this.slotsCount - Math.min(this.slotsCount, prevState[87]))).fill(34))
-                    .concat(Array(Math.max(this.slotsCount - prevState[34] - prevState[87], 0)))
+                const equipments = Array(Math.min(maxSlots, prevState[87])).fill(87)
+                    .concat(Array(Math.min(prevState[34], maxSlots - Math.min(maxSlots, prevState[87]))).fill(34))
+                    .concat(Array(Math.max(maxSlots - prevState[34] - prevState[87], 0)))
                     .concat(33)
                 const result = calculateSpeed(props.ship, equipments)
                 if (__DEV__) console.log(equipments, result)
