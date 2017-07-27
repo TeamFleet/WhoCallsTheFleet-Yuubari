@@ -14,13 +14,13 @@ import { ImportStyle } from 'sp-css-import'
 import styles from './styles.less'
 
 const calculateSpeed = kckit.calculate.ship.speed
-const maxSlotCount = 4
 
 @ImportStyle(styles)
 export default class CalculatorSpeed extends React.Component {
     constructor(props) {
         if (__DEV__) console.log('thisShip > Speed', { speed: props.ship.stat.speed, rule: props.ship.getSpeedRule() })
         super(props)
+
         this.state = {
             [33]: 1, // 改良型艦本式タービン
             [34]: 0, // 強化型艦本式缶
@@ -28,6 +28,8 @@ export default class CalculatorSpeed extends React.Component {
             speedId: props.ship.stat.speed,
             speed: props.ship.getSpeed()
         }
+
+        this.slotsCount = props.ship.slot.length
         this.inputs = {}
     }
 
@@ -36,9 +38,9 @@ export default class CalculatorSpeed extends React.Component {
             this.setState((prevState, props) => {
                 // const newState = { ...prevState }
                 prevState[id] = count
-                const equipments = Array(Math.min(maxSlotCount, prevState[87])).fill(87)
-                    .concat(Array(Math.min(prevState[34], maxSlotCount - Math.min(maxSlotCount, prevState[87]))).fill(34))
-                    .concat(Array(Math.max(maxSlotCount - prevState[34] - prevState[87], 0)))
+                const equipments = Array(Math.min(this.slotsCount, prevState[87])).fill(87)
+                    .concat(Array(Math.min(prevState[34], this.slotsCount - Math.min(this.slotsCount, prevState[87]))).fill(34))
+                    .concat(Array(Math.max(this.slotsCount - prevState[34] - prevState[87], 0)))
                     .concat(33)
                 const result = calculateSpeed(props.ship, equipments)
                 if (__DEV__) console.log(equipments, result)
@@ -50,6 +52,11 @@ export default class CalculatorSpeed extends React.Component {
             })
         }
     }
+
+    // getSlotsRemain(curID) {
+    //     const countOther = (curID === 34 ? this.state[87] : this.state[34])
+    //     return this.slotsCount - countOther + (countOther ? 1 : 0)
+    // }
 
     renderEquipment(id) {
         const equipment = db.equipments[id]
@@ -79,7 +86,7 @@ export default class CalculatorSpeed extends React.Component {
 
                 defaultValue={this.state[id]}
                 min={0}
-                max={maxSlotCount}
+                max={/*this.getSlotsRemain(id)*/this.slotsCount}
                 onUpdate={newValue => this.update(id, newValue)}
             />
         )

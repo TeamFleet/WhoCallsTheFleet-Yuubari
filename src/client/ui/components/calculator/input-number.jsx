@@ -21,7 +21,7 @@ export default class CalculatorSpeed extends React.Component {
         this.setState({
             value: el.value
         }, () => {
-            this.onUpdate(el.value)
+            this.onUpdate(parseInt(el.value))
         })
     }
     onUpdate(newValue) {
@@ -48,6 +48,17 @@ export default class CalculatorSpeed extends React.Component {
         this.update()
         evt.target.blur()
     }
+
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.max !== this.props.max) {
+    //         console.log(nextProps.max)
+    //         this.max = getValue(nextProps.max)
+    //         if (typeof this.max !== 'undefined' && this.input > this.max)
+    //             this.input = this.max
+    //         this.update()
+    //     }
+    // }
+
     render() {
         return (
             <div className={this.props.className}>
