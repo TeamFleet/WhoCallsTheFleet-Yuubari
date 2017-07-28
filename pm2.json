@@ -59,7 +59,8 @@
             "error_file": "logs/dev/fleet-yuubari-error.log",
             "env": {
                 "SERVER_PORT": "8080",
-                "DEFAULT_SUB_APP_KEY": "yuubari"
+                "DEFAULT_SUB_APP_KEY": "yuubari",
+                "DEFAULT_DOMAIN": "yuubari.fleet.moe"
             }
         }
     ]
