@@ -3,13 +3,14 @@
 .component{
     overflow:   hidden;
     .area-equipment-group.is-half{
-        margin-left: -1px;
+        margin-left: -2px;
         margin-right: -10px;
         display:    flex;
         flex-flow:  row wrap;
         [data-equipment-id]{
             flex:   1 0 220px;
             border-left: 1px solid @color-border;
+            padding-left: (@equipment-padding-left + 1);
             padding-right: (@equipment-padding-right + 10);
             .input{
                 right:  10px;
