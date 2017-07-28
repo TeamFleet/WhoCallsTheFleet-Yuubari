@@ -15,6 +15,7 @@ server.app.use(responseTime())
 // server.addSubApp('www', require('../apps/www'))
 // server.addSubApp('react', require('../apps/react/server').default)
 server.addSubApp('localhost', require('../app/server').default)
+server.addSubApp('yuubari', require('../app/server').default)
 
 server.mountSwitchSubAppMiddleware(serverConfig.DEFAULT_DOMAIN)
 
