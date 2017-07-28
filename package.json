@@ -129,6 +129,7 @@
         "request": "^2.81.0",
         "nedb-promise": "^2.0.1",
         "copy-webpack-plugin": "^4.0.1",
+        "simple-git": "^1.74.1",
 
         "jest": "^20.0.4"
     },
