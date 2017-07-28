@@ -20,39 +20,31 @@
 
 
     "scripts": {
-        "start": "npm run build && node ./dist-web/server --cport 8081 --sport 8080",
+        "start": "npm run build && npm run pord:run",
         "start:pm2": "npm run build && npm run clean:web:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
+        "prebuild": "npm run clean:web && node ./scripts/database.js",
+        "build": "npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web",
+        "build:app": "",
         "dev": "npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
 
-
-        "prebuild": "npm run clean:web && node ./scripts/database.js",
-        "build": "npm run dist:client && npm run dist:server && npm run copy:web",
-        "build:app": "",
-
-
+        
         "clean:web": "node ./scripts/clean-web",
         "clean:web:sourcemap": "node ./scripts/clean-web-sourcemap",
         "copy:web": "node ./scripts/copyfiles-web",
 
 
-        "dev:client": "node ./scripts/database.js && node ./webpack/enter --stage client --env dev --cport 3002",
-        "dev:server": "node ./webpack/enter --stage server --env dev --cport 3002",
-        "dev:run": "node ./dist-web/server --cport 3002 --sport 3000",
-
-
-        "dist:server": "node ./webpack/enter --stage server --env dist",
-        "dist:client": "node ./webpack/enter --stage client --env dist",
-        "dist:run": "npm run dist:server && npm run dev:run",
-        "dist": "npm run build",
-
-
-        "pm2:dev:client": "node ./scripts/database.js && pm2 restart pm2.json --only fleet-dev-client",
+        "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
+        "pm2:dev:client": "pm2 restart pm2.json --only fleet-dev-client",
         "pm2:dev:server": "pm2 restart pm2.json --only fleet-dev-server",
         "pm2:dev:run": "pm2 restart pm2.json --only fleet-dev-run --watch",
-        "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
-        "pm2:clean": "pm2 delete fleet-dev-client fleet-dev-server fleet-dev-run",
-        "pm2:clean:log": ""
+
+
+        "dev:bundle:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=client WEBPACK_DEV_SERVER_PORT=3001 node ./src/webpack/enter",
+        "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./src/webpack/enter",
+        "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./src/webpack/enter",
+        "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./src/webpack/enter",
+        "pord:run": "cross-env DEFAULT_SUB_APP_KEY=localhost SERVER_PORT=8080 node ./dist-web/server"
     },
 
 
@@ -107,17 +99,18 @@
 
 
     "dependencies": {
+        "kckit": "^1.11.1",
         "whocallsthefleet-database": "2017.7.29",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "kckit": "^1.11.1",
-
-        "normalize.css": "^7.0.0",
+        "super-project": "^1.3.2",
         
         "react-portal": "^3.1.0",
         "react-transition-group": "^2.1.0",
         "react-markdown": "^2.5.0",
         
+        "bind-event": "^1.0.5",
+        "check-css-prop": "^1.0.1",
         "classnames": "^2.2.5",
         "lz-string": "^1.4.4",
         "js-cookie": "^2.1.4",
@@ -125,123 +118,20 @@
         "metas": "^1.0.1",
         "swiper": "^3.4.2",
 
+        "normalize.css": "^7.0.0",
+        "postcss-easing-gradients": "^1.2.3",
+        "postcss-pxtorem": "^4.0.1",
+        "cssnano": "^4.0.0-rc.1",
+
         "fs-extra": "^3.0.1",
         "glob": "^7.1.2",
         "json-pretty": "^0.0.1",
         "request": "^2.81.0",
         "nedb-promise": "^2.0.1",
-
-        "jest": "^20.0.4",
-
-        "postcss-easing-gradients": "^1.2.3",
-        "postcss-pxtorem": "^4.0.1"
-    },
-    "devDependencies": {
-        "sp-base": "^2.3.0",
-        "sp-react-isomorphic": "^1.14.0",
-        "sp-css-import": "^1.5.1",
-        "sp-css-loader": "^1.1.3",
-        "sp-model": "^1.0.0",
-        "sp-mongo": "^1.1.0",
-        "sp-api": "^1.1.1",
-        "sp-upload": "^1.1.3",
-        "sp-cms": "^1.0.0",
-        "sp-auth": "^1.2.1",
-        "sp-koa-views": "^1.0.0",
-        "sp-i18n": "^1.4.0",
-        "sp-ui-pagecontainer": "^1.4.0",
-        "sp-pwa": "^1.6.2",
-
-
-        "react": "^15.6.1",
-        "react-dom": "^15.6.1",
-        "react-router": "^3.0.0",
-        "prop-types": "^15.5.10",
-
-
-        "redux": "^3.7.1",
-        "redux-thunk": "^2.2.0",
-        "react-redux": "^5.0.5",
-        "react-router-redux": "^4.0.8",
-
-
-        "koa": "^2.3.0",
-        "koa-body": "^2.3.0",
-        "koa-compress": "^2.0.0",
-        "koa-convert": "^1.2.0",
-        "koa-html-minifier": "^1.0.1",
-        "koa-json": "^1.1.1",
-        "koa-log4": "^2.1.0",
-        "koa-multer": "^1.0.0",
-        "koa-onerror": "^3.1.0",
-        "koa-response-time": "^2.0.0",
-        "koa-router": "^7.2.1",
-        "koa-static": "^3.0.0",
-        "koa-compose": "^3.2.1",
-        "koa-helmet": "^3.2.0",
-
-
-        "mongodb": "^2.2.29",
-
-
-        "babel-core": "^6.25.0",
-        "babel-polyfill": "^6.23.0",
-        "babel-preset-env": "^1.5.2",
-        "babel-preset-react": "^6.24.1",
-        "babel-preset-stage-0": "^6.24.1",
-        "babel-plugin-transform-decorators-legacy": "^1.3.4",
-
-
-        "webpack": "^3.0.0",
-        "webpack-dev-server": "^2.5.0",
-        "webpack-dashboard": "^0.4.0",
-        "webpack-dev-middleware": "^1.11.0",
-        "webpack-hot-middleware": "^2.18.1",
-
-
-        "babel-loader": "^7.1.1",
-        "file-loader": "^0.11.2",
-        "url-loader": "^0.5.9",
-        "react-hot-loader": "^3.0.0-beta.6",
-        "postcss-loader": "~2.0.6",
-        "less-loader": "^4.0.4",
-        "sass-loader": "^6.0.6",
-        "style-loader": "^0.18.2",
-        "html-loader": "^0.4.5",
-        "raw-loader": "^0.5.1",
         "copy-webpack-plugin": "^4.0.1",
 
-
-        "eslint": "^4.1.1",
-        "eslint-plugin-react": "^7.1.0",
-        "babel-eslint": "^7.1.1",
-
-
-        "less": "^2.7.2",
-        "cssnano": "^4.0.0-rc.1",
-        "autoprefixer": "^7.1.1",
-
-
-        "underscore": "1.8.3",
-        "bind-event": "^1.0.5",
-        "check-css-prop": "^1.0.1",
-        "es5-shim": "^4.5.9",
-
-
-        "debug": "^2.6.8",
-        "md5": "^2.2.1",
-        "sha1": "^1.1.1",
-        "node-native-zip": "^1.1.0",
-        "isomorphic-fetch": "^2.2.1",
-        "ejs": "2.5.6",
-        "yargs": "^8.0.2",
-        "is_js": "^0.9.0",
-        "dotenv": "^4.0.0",
-        "rimraf": "^2.5.4",
-        "copyfiles": "^1.0.0",
-        "classlist-polyfill": "^1.0.3",
-        "simple-git": "^1.73.0",
-        "npm-run-script": "^0.0.4",
-        "xmlify": "^1.1.0"
+        "jest": "^20.0.4"
+    },
+    "devDependencies": {
     }
 }
