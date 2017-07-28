@@ -37,9 +37,11 @@ export default class ShipDetailsComponentModernization extends React.Component {
         )
     }
     render() {
+        const hasModernization = Array.isArray(this.props.ship.modernization)
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.modernization")}>
-                {stats.map(this.renderItem.bind(this))}
+                {!hasModernization && translate("none")}
+                {hasModernization && stats.map(this.renderItem.bind(this))}
                 {this.props.ship.id === 163 && this.renderItem('luck', undefined, 1.2)}
                 {this.props.ship.id === 402 && this.renderItem('luck', undefined, 1.6)}
             </ComponentContainer>

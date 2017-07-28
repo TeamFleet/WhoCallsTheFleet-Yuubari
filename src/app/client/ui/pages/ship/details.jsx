@@ -97,7 +97,7 @@ export default class extends React.Component {
             <PageContainer className={this.props.className}>
                 <Header
                     ship={this.ship}
-                    tabs={tabsAvailable}
+                    tabs={this.ship.type_display ? tabsAvailable : [tabsAvailable[0]]}
                     onTabChange={__CLIENT__ && this.onTabChange.bind(this)}
                     currentTab={__CLIENT__ && this.state.tab}
                 />

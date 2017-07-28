@@ -37,9 +37,11 @@ export default class ShipDetailsComponentDismantle extends React.Component {
         )
     }
     render() {
+        const hasDismantle = Array.isArray(this.props.ship.scrap)
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.dismantle")}>
-                {resources.map(this.renderItem.bind(this))}
+                {!hasDismantle && translate("none")}
+                {hasDismantle && resources.map(this.renderItem.bind(this))}
             </ComponentContainer>
         )
     }

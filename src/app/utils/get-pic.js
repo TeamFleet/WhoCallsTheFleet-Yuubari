@@ -53,7 +53,7 @@ export default (type, id, file) => {
 
     return (__DEV__
         // ? 'https://yuubari.fleet.moe/client'
-        ? '/client'
+        ? '/app'
         : __PUBLIC__
     ) + '/_pics/' + getUri(type, id, file)
 }
