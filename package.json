@@ -25,7 +25,7 @@
         "prebuild": "npm run clean:web && node ./scripts/database.js",
         "build": "npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web",
         "build:app": "",
-        "dev": "npm run pm2:dev",
+        "dev": "node ./scripts/database.js && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
 
         

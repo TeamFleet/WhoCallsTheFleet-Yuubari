@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
-import db, { locale as dbLocaleId } from '@appLogic/database'
+import db from '@appLogic/database'
 import bindEvent from 'bind-event'
 import {
     changeCollection,
@@ -131,11 +131,11 @@ class Tabs extends React.Component {
                                 key={index}
                                 value={index}
                             >
-                                {collection.name[dbLocaleId]}
+                                {collection.name}
                             </option>
                         ))}
                     </select>
-                    {this.props.collection > -1 && db.shipCollections[this.props.collection].name[dbLocaleId]}
+                    {this.props.collection > -1 && db.shipCollections[this.props.collection].name}
                 </label>
                 {db.shipCollections.map((collection, index) => (
                     <span
@@ -145,7 +145,7 @@ class Tabs extends React.Component {
                             this.onTabClick(index)
                         }}
                     >
-                        {collection.name[dbLocaleId]}
+                        {collection.name}
                     </span>
                 ))}
             </div>

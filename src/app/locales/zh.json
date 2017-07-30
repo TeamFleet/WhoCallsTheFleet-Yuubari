@@ -25,6 +25,7 @@
 
     "shipclass": "${class}级",
     "shipclass_number": "${class}级 ${number} 号舰",
+    "other_ships_of_type": "其他${type}",
 
     "stat": {
         "fire": "火力",
@@ -156,12 +157,15 @@
         "light_attack_carrier_asw_title": "优先攻击水面舰",
         "light_attack_carrier_asw_note": "即使可以攻击潜艇而且敌方存在潜艇",
         "range_different_title": "射程：${range}",
-        "range_different_note": "其他同类型舰娘的射程：${range}",
+        "range_different_note": "其他${type}的射程：${range}",
 
         "other_special": "其他特殊能力",
         "tp_bonus": "运输作战TP加成：+${bonus}",
         "expedition_bonus": "远征收益加成：+${bonus}",
         "expedition_bonus_daihatsu_description": "算作${daihatsu}。",
-        "expedition_bonus_daihatsu_description2": "因此携带3栏${daihatsu}即可达到额外收益上限。"
+        "expedition_bonus_daihatsu_description2": "因此携带3栏${daihatsu}即可达到额外收益上限。",
+
+        "equipable_exslot": "可装备于补强增设栏位",
+        "equipable_exslot_and": "以及……"
     }
 }

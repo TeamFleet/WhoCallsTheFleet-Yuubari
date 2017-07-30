@@ -2,10 +2,8 @@ const LZString = require('lz-string')
 const path = require('path')
 const fs = require('fs-extra')
 
-const createCollections = require('./database/collections.js')
-
 const dbpath = path.resolve(process.cwd(), 'node_modules', 'whocallsthefleet-database', 'db')
-const topath = path.resolve(process.cwd(), 'src', 'client', 'logic', 'database', 'db')
+const topath = path.resolve(process.cwd(), 'src', 'app', 'client', 'logic', 'database', 'db')
 
 const run = async () => {
     console.log('compressing database...')
@@ -44,7 +42,8 @@ const run = async () => {
     console.log('COMPLETE: compressing database')
 
     console.log('')
-    createCollections(dbpath, topath)
+    await require('./database/ship-collections.js')(dbpath, topath)
+    await require('./database/equipment-collections.js')(dbpath, topath)
 }
 
 run()

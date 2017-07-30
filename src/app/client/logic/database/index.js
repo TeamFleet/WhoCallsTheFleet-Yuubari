@@ -1,6 +1,7 @@
 import { localeId } from 'sp-i18n'
 
 import shipCollections from './db/ship_collections.json'
+import equipmentCollections from './db/equipment_collections.json'
 
 const LZString = __CLIENT__ && require('lz-string')
 
@@ -55,17 +56,46 @@ export const init = () => {
         }, db)
 
         // shipCollections
+        db.shipsSpecial = {}
+        let shipIndex = 0
         shipCollections.forEach(collection => {
-            collection.list.forEach(type => {
-                type.ships.forEach((arrShips, index) => {
-                    type.ships[index] = arrShips.map(shipId => {
-                        db.ships[shipId].type_display = type.type
-                        return db.ships[shipId]
+            collection.name = collection.name[locale]
+            collection.list.forEach(list => {
+                list.ships.forEach((arrShips, index) => {
+                    list.ships[index] = arrShips.map(shipId => {
+                        const ship = db.ships[shipId]
+                        Object.assign(ship, {
+                            type_display: list.type,
+                            order: shipIndex++
+                        })
+                        if (Array.isArray(ship.additional_item_types) && ship.additional_item_types.length) {
+                            if (!db.shipsSpecial[list.type]) db.shipsSpecial[list.type] = []
+                            db.shipsSpecial[list.type].push(shipId)
+                        }
+                        return ship
                     })
                 })
             })
         })
         db.shipCollections = shipCollections
+
+        let equipmentTypeIndex = 0
+        let equipmentIndex = 0
+        equipmentCollections.forEach(collection => {
+            collection.name = collection.name[locale]
+            collection.list.forEach(list => {
+                Object.assign(db.equipmentTypes[list.type], {
+                    order: equipmentTypeIndex++
+                })
+                list.equipments = list.equipments.map(equipmentId => {
+                    Object.assign(db.equipments[equipmentId], {
+                        order: equipmentIndex++
+                    })
+                    return db.equipments[equipmentId]
+                })
+            })
+        })
+        db.equipmentCollections = equipmentCollections
 
         if (__CLIENT__ && __DEV__) console.log('database init', db)
 

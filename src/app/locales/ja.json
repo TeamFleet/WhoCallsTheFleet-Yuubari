@@ -26,6 +26,7 @@
 
     "shipclass": "${class}型",
     "shipclass_number": "${class}型 ${number} 番艦",
+    "other_ships_of_type": "Other ${type}s",
 
     "stat": {
         "fire": "火力",
@@ -157,12 +158,15 @@
         "light_attack_carrier_asw_title": "Will attack surface ships prioritised",
         "light_attack_carrier_asw_note": "Even if can attack submarines and there's submarine exist.",
         "range_different_title": "Range: ${range}",
-        "range_different_note": "Other ships in the same type have range: ${range}",
+        "range_different_note": "Other ${type}s have range: ${range}",
 
         "other_special": "Other Special Capabilities",
         "tp_bonus": "Transport phase TP bonus: +${bonus}",
         "expedition_bonus": "Expedition income bonus: +${bonus}",
         "expedition_bonus_daihatsu_description": "Count as a ${daihatsu}.",
-        "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus."
+        "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
+
+        "equipable_exslot": "Equipable in Ex-Slot",
+        "equipable_exslot_and": "And..."
     }
 }

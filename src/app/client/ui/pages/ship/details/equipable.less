@@ -1,0 +1,45 @@
+@import './_.less';
+
+.component{
+    .collection{
+        display:    flex;
+        flex-flow:  row wrap;
+        overflow:   hidden;
+        position:   relative;
+        // border-top: 0;
+        // padding-top:@component-gutter-vertical;
+        // &:before{
+        //     content:    "";
+        //     width:      100%;
+        //     border-top: 1px solid @color-border;
+        //     margin-top: (0 - @component-gutter-vertical);
+        // }
+        & > .title,
+        .noflex{
+            flex:   none;
+            width:  100%;
+        }
+        .item{
+            flex:   1 0 250px;
+            // margin-top:     -1px;
+            &.placeholder{
+                height:     0;
+                overflow:   hidden;
+            }
+            // &.hascontent{
+            //     border-top: 1px solid @color-border;
+            // }
+            // &.hascontent + .placeholder{
+            //     &:before{
+            //         content:    "";
+            //         border-top: 1px solid @color-border;
+            //         position:   absolute;
+            //         width:      100%;
+            //     }
+            // }
+        }
+        .and{
+            margin:     .5em 0;
+        }
+    }
+}

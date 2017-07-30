@@ -129,7 +129,10 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                     title={translate("ship_details.range_different_title", { range: this.props.ship._range })}
                     level={this.props.ship.stat.range > pair[0][1] ? 2 : 1}
                 >
-                    {translate("ship_details.range_different_note", { range: kckit.get.range(pair[0][1]) })}
+                    {translate("ship_details.range_different_note", {
+                        range: kckit.get.range(pair[0][1]),
+                        type: db.shipTypes[this.props.ship.type_display]._name
+                    })}
                 </Special>
             )
         return null

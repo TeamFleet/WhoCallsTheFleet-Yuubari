@@ -1,0 +1,195 @@
+@import '../_.less';
+
+.component{
+    @color-on:              @theme-green-a100;
+    @color-on-background:   @theme-green-900;
+    @color-on-border:       @theme-green-700;
+
+    @color-off:             @color-fade;
+    @color-off-background:  fade(@theme-bluegrey-900, 50%);
+    @color-off-border:      @color-border;
+
+    padding:        5px 0 5px (@equipmenticon-size - 10);
+
+    &:before{
+        position:   absolute;
+        top:        5px;
+        left:       0;
+        z-index:    5;
+    }
+    &:after{
+        content:    "";
+        position:   absolute;
+        z-index:    4;
+        top:        5px;
+        left:       0;
+        width:      @equipmenticon-size;
+        height:     @equipmenticon-size;
+        border:     1px solid transparent;
+        border-radius: 50%;
+    }
+
+    .name{
+        @height:    (@equipmenticon-size - 8);
+        display:    inline-block;
+        height:     @height;
+        margin:     ((@equipmenticon-size - @height) / 2) 0 ((@equipmenticon-size - @height) / 2) -10px;
+        line-height:1.1em;
+        position:   relative;
+        z-index:    1;
+        padding:    0 12px 0 25px;
+        border-radius:  0 (@height / 2) (@height / 2) 0;
+        transition-property: none;
+        &:after{
+            content:    "";
+            display:    inline-block;
+            vertical-align: middle;
+            width:      0;
+            height:     100%;
+            overflow:   hidden;
+        }
+    }
+        .name-wrapper{
+            display:    inline-block;
+            max-width:  100%;
+            max-height: 100%;
+            vertical-align: middle;
+            transition-property: none;
+        }
+
+    .other{
+        @height:    20px;
+        .style-badge-mono();
+        display:    inline-block;
+        line-height:@height;
+        font-size:  14px;
+        border-radius: ((@height + 2) / 2);
+        padding:    0 8px;
+        margin-bottom:  2px;
+        position:   relative;
+        &:before, &:after{
+            content:    "";
+            position:   absolute;
+        }
+        &:before{
+            top:        -2px;
+            bottom:     -3px;
+            left:       -12px;
+            border-left:2px solid @color-border;
+        }
+        &:after{
+            top:        50%;
+            width:      10px;
+            left:       -10px;
+            margin-top: -1px;
+            border-top: 2px solid @color-border;
+        }
+        .avatar{
+            display:    block;
+            float:      left;
+            width:      (@height + 10 + 2);
+            height:     (@height + 2);
+            overflow:   hidden;
+            margin:     -1px 5px -1px -9px;
+            border-radius: ((@height + 2) / 2);
+            background-size: cover;
+            background-position: 60% 0%;
+        }
+        &.on{
+            color:              @color-on;
+            border-color:       @color-on-border;
+            background-color:   @color-on-border;
+        }
+        &.off{
+            color:              @color-off;
+            border-color:       @color-off-border;
+            background-color:   @color-off-background;
+        }
+    }
+    a.other.on{
+        &:hover{
+            color:              #fff;
+            border-color:       @theme-green-500;
+            background-color:   @theme-green-500;
+        }
+        &:active{
+            color:              @color-on;
+            border-color:       @color-on-border;
+            background-color:   @theme-green-900;
+        }
+    }
+
+    .block{
+        display:    block;
+        &:last-of-type{
+            margin-bottom:  3px;
+            .other{
+                &:before{
+                    bottom:     50%;
+                    margin-bottom: -1px;
+                    width:      12px;
+                    border-bottom: 2px solid @color-border;
+                    border-radius: 0 0 0 5px;
+                }
+                &:after{
+                    content:    initial;
+                }
+            }
+        }
+    }
+
+    &.on{
+        // background:     fade(@theme-green-500, 10%);
+        // color:          @color-fade;
+        .name{
+            color:              @color-on;
+            background-color:   @color-on-border;
+        }
+        &:after{
+            background:     @color-on-background;
+            border-color:   @color-on-border;
+        }
+    }
+
+    &.off{
+        // background:     fade(#000, 10%);
+        // color:          @color-fade;
+        .name{
+            color:              @color-off;
+            background-color:   @color-off-background;
+        }
+        &:before{
+            opacity:        .5;
+        }
+        &:after{
+            border-color:   @color-off-border;
+            background:     @theme-bluegrey-900;
+        }
+    }
+
+    &.is-exslot{
+        padding-top:    0;
+        padding-bottom: 0;
+
+        &:before{
+            top:        0;
+        }
+        &:after{
+            content:    initial;
+        }
+    }
+
+    &.equipment{
+        position:   relative;
+        .equipment-wrapper{
+            position:   static;
+            transition-property: none;
+            &:before{
+                position:   absolute;
+                top:        0;
+                left:       0;
+                z-index:    5;
+            }
+        }
+    }
+}
