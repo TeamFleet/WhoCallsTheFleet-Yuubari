@@ -204,7 +204,7 @@ export default class CalculatorLevelOASW extends React.Component {
                 <Icon className="icon-missing" icon="warning2" />
                 {translate("oasw_calculator.no_result")}
             </strong>
-        if (!this.state.result || this.state.result > kckit.vars.maxShipLv)
+        if (!this.state.result || this.state.result > kckit.maxShipLv)
             return <strong>--</strong>
         return <strong className={classNames({
             'is-below-100': this.state.result < 100,

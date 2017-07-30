@@ -1,8 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import kckit from 'kckit'
-const maxShipLv = kckit.vars.maxShipLv
+import { maxShipLv } from 'kckit'
 
 import ComponentContainer from '../commons/component-container.jsx'
 import Stat from '../commons/stat.jsx'
