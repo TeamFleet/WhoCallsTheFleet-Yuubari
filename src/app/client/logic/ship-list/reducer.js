@@ -1,5 +1,6 @@
 import {
     SHIPLIST_INIT,
+    SHIPLIST_RESET,
 
     SHIPLIST_CHANGE_COLLECTION,
 
@@ -43,8 +44,24 @@ export default function (state = initialState, action) {
 
         case SHIPLIST_INIT:
             return Object.assign({}, state, {
-                [action.id]: Object.assign({}, initialStateSingle, action.initialState)
+                [action.id]: Object.assign(
+                    {},
+                    initialStateSingle,
+                    action.initialState,
+                    action.initialState ? {
+                        initialState: Object.assign({}, action.initialState)
+                    } : {}
+                )
             })
+
+        case SHIPLIST_RESET:
+            if (state[action.id])
+                return updateState(
+                    state,
+                    action.id,
+                    action.initialState || state[action.id].initialState || initialStateSingle
+                )
+            return state
 
         case SHIPLIST_CHANGE_COLLECTION:
             return updateState(state, action.id, {

@@ -1,5 +1,6 @@
 import {
     SHIPLIST_INIT,
+    SHIPLIST_RESET,
 
     SHIPLIST_CHANGE_COLLECTION,
 
@@ -18,8 +19,14 @@ import {
     SHIPLIST_COMPARE_SCROLL
 } from '../../redux/action-types.js'
 
-export const init = (id, initialState = {}) => ({
+export const init = (id, initialState) => ({
     type: SHIPLIST_INIT,
+    id,
+    initialState
+})
+
+export const reset = (id, initialState) => ({
+    type: SHIPLIST_RESET,
     id,
     initialState
 })

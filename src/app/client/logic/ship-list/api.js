@@ -1,8 +1,14 @@
 import * as actions from './actions.js'
 
-export const init = (id, initialState = {}) => (dispatch) => {
+export const init = (id, initialState) => (dispatch) => {
     dispatch(
         actions.init(id, initialState)
+    )
+}
+
+export const reset = (id, initialState) => (dispatch) => {
+    dispatch(
+        actions.reset(id, initialState)
     )
 }
 

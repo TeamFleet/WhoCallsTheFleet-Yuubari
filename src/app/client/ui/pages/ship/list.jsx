@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from '@appUtils/html-head.js'
-import { init as shipListInit } from '@appLogic/ship-list/api.js'
+import {
+    init as shipListInit,
+    reset as shipListReset
+} from '@appLogic/ship-list/api.js'
 
 import ShipList from '@appUI/components/ship-list.jsx'
 
@@ -30,6 +33,11 @@ export default class extends React.Component {
 
         ext.metas = ext.metas.concat(head.meta)
         ext.title = head.title
+    }
+
+    componentWillMount() {
+        if (this.props.location.action === 'PUSH')
+            this.props.dispatch(shipListReset(shipListId))
     }
 
     render() {
