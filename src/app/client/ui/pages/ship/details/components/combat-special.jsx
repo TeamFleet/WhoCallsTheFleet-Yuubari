@@ -176,13 +176,13 @@ export default class ShipDetailsSpecialCombat extends React.Component {
 
                 {this.renderRangeDifferent()}
 
-                {statASW99 && this.renderOASW()}
-                {statASW99 === undefined && this.renderOASW()}
-
-                {statTorpedo99 !== false && <Special
-                    title={translate("combat_phases.ots")}
+                {statASW99 !== false && statASW99 !== undefined && this.renderOASW()}
+                {statASW99 === undefined && <Special
+                    title={translate("combat_phases.oasw")}
                     level={-1}
                 />}
+
+                {statTorpedo99 !== false && this.renderOTS()}
 
                 {isBattleship && statTorpedo99 !== false && <Special
                     title={translate("combat_phases.torpedo")}
