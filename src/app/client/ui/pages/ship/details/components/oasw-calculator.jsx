@@ -19,6 +19,13 @@ export default class ShipDetailsCalculatorOASW extends React.Component {
                     className="calculator"
                     ship={this.props.ship}
 
+                    componentUnknown={
+                        <Special
+                            className="special"
+                            title={translate("oasw_calculator.unknown")}
+                            level={-1}
+                        />
+                    }
                     componentUnable={
                         <Special
                             className="special"

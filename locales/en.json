@@ -95,6 +95,7 @@
     "oasw_calculator": {
         "title": "OASW Level Calculator",
         "unable": "Unable to perform",
+        "unknown": "ASW stat growth unknown",
         "always": "Can always perform",
         "no_result": "Required equipment missing",
         "result": "Required level: "

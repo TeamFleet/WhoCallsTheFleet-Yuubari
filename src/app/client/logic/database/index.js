@@ -108,7 +108,7 @@ export const init = () => {
     if (needInit)
         register(objInit)
 
-    if (__DEV__) console.log('KCKit', require('kckit'))
+    if (__CLIENT__ && __DEV__) console.log('KCKit', require('kckit'))
 }
 
 export default db

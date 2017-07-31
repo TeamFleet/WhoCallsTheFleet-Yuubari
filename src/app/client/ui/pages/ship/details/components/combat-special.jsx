@@ -141,6 +141,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
         const isBattleship = this.props.ship.isType('battleship')
         const isCarrier = this.props.ship.isType('carrier')
 
+        const statASW99 = this.props.ship.getAttribute('asw', 99)
         const statTorpedo99 = this.props.ship.getAttribute('torpedo', 99)
 
         const aaciTypes = checkAACI(this.props.ship.id)
@@ -175,9 +176,13 @@ export default class ShipDetailsSpecialCombat extends React.Component {
 
                 {this.renderRangeDifferent()}
 
-                {this.props.ship.getAttribute('asw', 99) !== false && this.renderOASW()}
+                {statASW99 && this.renderOASW()}
+                {statASW99 === undefined && this.renderOASW()}
 
-                {statTorpedo99 !== false && this.renderOTS()}
+                {statTorpedo99 !== false && <Special
+                    title={translate("combat_phases.ots")}
+                    level={-1}
+                />}
 
                 {isBattleship && statTorpedo99 !== false && <Special
                     title={translate("combat_phases.torpedo")}

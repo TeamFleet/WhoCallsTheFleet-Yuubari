@@ -14,6 +14,7 @@ export default class ShipDetailsSpecial extends React.Component {
                 className={this.props.className}
                 data-level={this.props.level || 0}
             >
+                {this.props.level === -1 && <Icon className="icon" icon="question6" />}
                 {this.props.level === 0 && <Icon className="icon" icon="cross" />}
                 {this.props.title}
                 {this.props.children && <span className="des">

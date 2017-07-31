@@ -48,6 +48,7 @@ export default class CalculatorLevelOASW extends React.Component {
         this.oaswTable = kckit.check.oasw(props.ship.id) || []
         this.canAlways = this.oaswTable === true
         this.canOASW = this.canAlways || (Array.isArray(this.oaswTable) && this.oaswTable.length) ? true : false
+        this.statUnknown = props.ship.getAttribute('asw', 99) === undefined
 
         // 确定计算器显示的装备列表
         this.equipmentList = []
@@ -218,8 +219,9 @@ export default class CalculatorLevelOASW extends React.Component {
                 'is-unable': !this.canOASW,
                 'is-always': this.canOASW && this.canAlways
             }])}>
-                {!this.canOASW && this.props.componentUnable}
-                {this.canOASW && this.canAlways && this.props.componentAlways}
+                {this.statUnknown && this.props.componentUnknown}
+                {!this.statUnknown && !this.canOASW && this.props.componentUnable}
+                {!this.statUnknown && this.canOASW && this.canAlways && this.props.componentAlways}
 
                 {this.canOASW && !this.canAlways && this.renderEquipmentGroup()}
                 {this.canOASW && !this.canAlways && <div className="area-result">

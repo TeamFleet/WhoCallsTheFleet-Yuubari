@@ -95,6 +95,7 @@
     "oasw_calculator": {
         "title": "先制对潜攻击等级计算器",
         "unable": "无法施展该能力",
+        "unknown": "对潜属性成长未知",
         "always": "可无条件施展",
         "no_result": "未配置需要的装备",
         "result": "需要等级："

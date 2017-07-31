@@ -96,6 +96,7 @@
     "oasw_calculator": {
         "title": "先制対潜攻撃レベル―カルキュレーター",
         "unable": "実行することができません",
+        "unknown": "ASW stat growth unknown",
         "always": "Can always perform",
         "no_result": "Required equipment missing",
         "result": "Required level: "

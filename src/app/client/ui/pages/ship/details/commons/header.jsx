@@ -17,18 +17,18 @@ import styles from './header.less'
 export default class ShipDetailsHeader extends React.Component {
     renderTab(tab, index) {
         const url = `/ships/${this.props.ship.id}${index ? `/${tab}` : ''}`
-        if (this.props.onTabChange && this.props.currentTab) {
+        if (this.props.onTabChange) {
             return (
                 <a
                     href={url}
                     className={classNames([
                         'tab', {
-                            'on': tab === this.props.currentTab
+                            'on': index === this.props.currentTabIndex
                         }
                     ])}
                     key={index}
                     onClick={evt => {
-                        this.props.onTabChange(tab)
+                        this.props.onTabChange(tab, index)
                         evt.preventDefault()
                     }}
                 >
@@ -59,7 +59,7 @@ export default class ShipDetailsHeader extends React.Component {
     }
 
     render() {
-        const isPortal = (this.props.onTabChange && this.props.currentTab)
+        const isPortal = (this.props.onTabChange ? true : false)
         const Component = isPortal ? MainHeader : 'div'
 
         return (
