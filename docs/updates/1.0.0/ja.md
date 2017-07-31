@@ -1,3 +1,7 @@
+## Help us for Japanese language support!
+
+If you want help us for Japanese translation, you can submit your changes [HERE](https://github.com/Diablohu/WhoCallsTheFleet-Yuubari/tree/master/locales/ja.json)
+
 ## New Features & Major Changes
 
 **General**
@@ -27,6 +31,51 @@
   * OASW Calculator
 * New: Tab for equipable types.
 
-**Akashi's Arsenal**
+## TODOs
 
-* New: Filter for screw number in weekday view.
+**In Development**
+
+* Pages
+  * Home
+  * Fleet Builder
+  * TP Calculator
+  * Equipment List
+  * Equipment Details
+  * Akashi's Arsenal
+  * CV & Illustrator List
+  * CV & Illustrator Details
+  * About
+* Frame
+  * Navigation
+    * Language Switch
+    * Button for Background view
+  * Background View
+    * UI optimization
+    * Download for original image
+    * Upload custom image
+  * For small screens eg. phones
+    * Indicator: Page loading
+
+**Planned Changes**
+
+* Fleet Builder
+  * UI overhaul
+    * Make ex-slot more readable
+    * Add more stat / calculation (eg. AACI, ASW)
+    * Add quick check for equipment set (eg. AACI, Night battle)
+  * Folder for List view
+  * API for importing build and full documents support
+* Akashi's Arsenal
+  * New: Filter for screw number in weekday view.
+
+## On the Horizon
+
+* Data stores on the cloud
+* Ship Details
+  * New tab: Voicelines
+  * New tab: Availability
+* Equipment Details
+  * New data (or tab?): Availability
+* New category: Expeditions
+* New category: Sorties
+* New category: Juckbox

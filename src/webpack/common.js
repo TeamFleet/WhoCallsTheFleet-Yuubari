@@ -85,10 +85,11 @@ const resolve = {
     ],
     alias: {
         Apps: path.resolve(appPath, './src/apps'),
+        Locales: path.resolve(appPath, './locales'),
 
         "@app": path.resolve(appPath, './src/app'),
         "@appConfig": path.resolve(appPath, './src/app/config'),
-        "@appLocales": path.resolve(appPath, './src/app/locales'),
+        "@appLocales": path.resolve(appPath, './locales'),
         "@appUtils": path.resolve(appPath, './src/app/utils'),
         "@appAssets": path.resolve(appPath, './src/app/client/assets'),
         "@appUI": path.resolve(appPath, './src/app/client/ui'),
