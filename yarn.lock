@@ -288,7 +288,7 @@ async@^2.1.2, async@^2.1.5:
   dependencies:
     lodash "^4.14.0"
 
-async@^2.1.4:
+async@^2.1.4, async@^2.4.1:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/async/-/async-2.5.0.tgz#843190fd6b7357a0b9e1c956edddd5ec8462b54d"
   dependencies:
@@ -2744,6 +2744,15 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
+extract-text-webpack-plugin@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/extract-text-webpack-plugin/-/extract-text-webpack-plugin-3.0.0.tgz#90caa7907bc449f335005e3ac7532b41b00de612"
+  dependencies:
+    async "^2.4.1"
+    loader-utils "^1.1.0"
+    schema-utils "^0.3.0"
+    webpack-sources "^1.0.1"
+
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
@@ -4180,9 +4189,9 @@ jsx-ast-utils@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.4.1.tgz#3867213e8dd79bf1e8f2300c0cfc1efb182c0df1"
 
-kckit@^1.12.0:
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.12.0.tgz#252893ba3b9d363c6ac532e8f600748eb1706b5f"
+kckit@^1.12.3:
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.12.3.tgz#f4ce3190c8d20bd3b2b77dc41af2f98e845c702c"
   dependencies:
     camelcase "^4.1.0"
 
@@ -7641,9 +7650,9 @@ whocallsthefleet-backgrounds@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.2.0.tgz#07047acd36ad3a1bd093b7f79cb1e1c32cd3918a"
 
-whocallsthefleet-database@2017.7.30:
-  version "2017.7.30"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-2017.7.30.tgz#9e72404bdd3ac92037061efb97d233876e4857d6"
+whocallsthefleet-database@2017.7.31:
+  version "2017.7.31"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-2017.7.31.tgz#0d096c4bd68e3906e99e65a00fa86f44ab05bfe4"
 
 wide-align@^1.1.0:
   version "1.1.2"

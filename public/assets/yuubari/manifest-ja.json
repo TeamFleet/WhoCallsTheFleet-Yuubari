@@ -1,0 +1,14 @@
+{
+    "short_name": "The Fleet",
+    "name": "Who Calls the Fleet (Yuubari)",
+    "icons": [
+        {
+            "src": "icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/?utm_source=web_app_manifest",
+    "display": "standalone",
+    "orientation": "portrait"
+}

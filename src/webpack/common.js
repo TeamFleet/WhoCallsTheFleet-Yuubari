@@ -2,64 +2,107 @@ const fs = require('fs-extra')
 const path = require('path')
 const webpack = require('webpack')
 const appPath = process.cwd()
+// const ExtractTextPlugin = require("extract-text-webpack-plugin")
+// const env = process.env.WEBPACK_BUILD_ENV || 'dev'
 
+// const extractCriticalCSS = new ExtractTextPlugin('[name].[chunkhash].css');
 const pathBgimgs = path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output')
 
 // 执行顺序，从右到左
-const rules = [{
-    test: /\.json$/,
-    loader: 'json-loader'
-}, {
-    test: /\.css$/,
-    exclude: [/\.g\.css$/, /node_modules/],
-    loader: 'sp-css-loader?length=4&mode=replace!postcss-loader'
-}, {
-    test: /\.less$/,
-    exclude: [/\.g\.less$/, /node_modules/],
-    loader: 'sp-css-loader?length=4&mode=replace!postcss-loader!less-loader'
-}, {
-    test: /\.scss$/,
-    exclude: [/\.g\.scss$/, /node_modules/],
-    loader: 'sp-css-loader?length=4&mode=replace!postcss-loader!sass-loader'
-}, {
-    test: /\.css$/,
-    include: /node_modules/,
-    loader: 'style-loader!postcss-loader'
-}, {
-    test: /\.less$/,
-    include: /node_modules/,
-    loader: 'style-loader!postcss-loader!less-loader'
-}, {
-    test: /\.scss$/,
-    include: /node_modules/,
-    loader: 'style-loader!postcss-loader!sass-loader'
-}, {
-    test: /\.g\.css$/,
-    loader: 'style-loader!postcss-loader'
-}, {
-    test: /\.g\.less$/,
-    loader: 'style-loader!postcss-loader!less-loader'
-}, {
-    test: /\.g\.scss$/,
-    loader: 'style-loader!postcss-loader!sass-loader'
-}, {
-    test: /\.(ico|gif|jpg|jpeg|png|svg|webp)$/,
-    loader: 'file-loader?context=static&name=assets/[hash:32].[ext]',
-    exclude: /node_modules/
-}, {
-    test: /\.(js|jsx)$/,
-    loader: 'babel-loader'
-}, {
-    test: /\.nedb$/,
-    loader: 'raw-loader'
-}, {
-    test: /\.md$/,
-    include: [/docs/],
-    loader: 'raw-loader'
-}]
+const rules = [
+    {
+        test: /\.json$/,
+        loader: 'json-loader'
+    },
+
+    // CSS - general
+    {
+        test: /\.css$/,
+        exclude: [/\.g\.css$/, /node_modules/],
+        loader: 'sp-css-loader?length=4&mode=replace!postcss-loader'
+    }, {
+        test: /\.less$/,
+        exclude: [/\.g\.less$/, /node_modules/],
+        loader: 'sp-css-loader?length=4&mode=replace!postcss-loader!less-loader'
+    }, {
+        test: /\.scss$/,
+        exclude: [/\.g\.scss$/, /node_modules/],
+        loader: 'sp-css-loader?length=4&mode=replace!postcss-loader!sass-loader'
+    },
+
+    // CSS - in node_modules
+    {
+        test: /\.css$/,
+        include: /node_modules/,
+        loader: 'style-loader!postcss-loader'
+    }, {
+        test: /\.less$/,
+        include: /node_modules/,
+        loader: 'style-loader!postcss-loader!less-loader'
+    }, {
+        test: /\.scss$/,
+        include: /node_modules/,
+        loader: 'style-loader!postcss-loader!sass-loader'
+    },
+
+    // CSS - critical
+    // {
+    //     test: env === 'dist' ? /critical\.g\.css$/ : /^IMPOSSIBLE$/,
+    //     use: extractCriticalCSS.extract({
+    //         fallback: "style-loader",
+    //         use: ["css-loader", "postcss-loader"]
+    //     })
+    // }, {
+    //     test: env === 'dist' ?/critical\.g\.less$/ : /^IMPOSSIBLE$/,
+    //     use: extractCriticalCSS.extract({
+    //         fallback: "style-loader",
+    //         use: ["css-loader", "postcss-loader", "less-loader"]
+    //     })
+    // }, {
+    //     test: env === 'dist' ?/critical\.g\.scss$/ : /^IMPOSSIBLE$/,
+    //     use: extractCriticalCSS.extract({
+    //         fallback: "style-loader",
+    //         use: ["css-loader", "postcss-loader", "sass-loader"]
+    //     })
+    // },
+
+    // CSS - other global
+    {
+        test: /\.g\.css$/,
+        // exclude: env === 'dist' ?/critical\.g\.css$/ : undefined,
+        loader: 'style-loader!postcss-loader'
+    }, {
+        test: /\.g\.less$/,
+        // exclude: env === 'dist' ?/critical\.g\.less$/ : undefined,
+        loader: 'style-loader!postcss-loader!less-loader'
+    }, {
+        test: /\.g\.scss$/,
+        // exclude: env === 'dist' ?/critical\.g\.scss$/ : undefined,
+        loader: 'style-loader!postcss-loader!sass-loader'
+    },
+
+    //
+
+    {
+        test: /\.(ico|gif|jpg|jpeg|png|svg|webp)$/,
+        loader: 'file-loader?context=static&name=assets/[hash:32].[ext]',
+        exclude: /node_modules/
+    }, {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader'
+    }, {
+        test: /\.nedb$/,
+        loader: 'raw-loader'
+    }, {
+        test: /\.md$/,
+        include: [/docs/],
+        loader: 'raw-loader'
+    }
+]
 
 // 执行顺序，？
 const plugins = [
+    // extractCriticalCSS,
     new webpack.DefinePlugin({
         '__CHANNEL__': JSON.stringify(
             /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'

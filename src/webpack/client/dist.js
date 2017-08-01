@@ -45,7 +45,8 @@ const getConfig = async (appPath, type) => {
             ...common.plugins,
             new webpack.optimize.UglifyJsPlugin({
                 compress: {
-                    warnings: false
+                    warnings: false,
+                    drop_console: true
                 },
                 beautify: false,
                 comments: false,

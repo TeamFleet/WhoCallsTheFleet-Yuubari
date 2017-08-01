@@ -65,11 +65,12 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
     // 对HTML基础模板的自定义注入
     // 例如：<script>//inject_critical</script>  替换为 critical
     inject: {
-        htmlattr: () => ` data-locale="${currentLocaleId}"`,
+        htmlattr: () => ` data-locale="${currentLocaleId}" lang="${currentLocaleId}"`,
         manifest: () => `<link rel="manifest" href="/manifest-${currentLocaleId}.json">`,
         svg_symbols: `<div class="hide">${__ICONSVG__}</div>`,
 
         critical: `<script src="${getFile('critical.js')}"></script>`,
+        // critical_css: `<link rel="stylesheet" type="text/css" href="${getFile('critical.css')}" />`,
         critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
         js: (() => ([
             getFile('client.js')

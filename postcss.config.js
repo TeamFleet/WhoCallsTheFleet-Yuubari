@@ -12,7 +12,7 @@ module.exports = {
                 discardComments: {
                     removeAll: true
                 },
-                camelCase: true,
+                camelCase: true
             }]
         })
     ]

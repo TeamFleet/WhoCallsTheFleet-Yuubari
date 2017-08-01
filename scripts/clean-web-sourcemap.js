@@ -17,7 +17,18 @@ const run = () => {
         // fs.removeSync(file)
         fs.writeFileSync(
             file,
-            fs.readFileSync(file, 'utf-8').replace(/\r?\n\/\/\# sourceMappingURL=.+$/, ''),
+            fs.readFileSync(file, 'utf-8').replace(/\r?\n\/\/# sourceMappingURL=.+$/, ''),
+            'utf-8'
+        )
+        console.log('  > modified: ' + file)
+    })
+
+    // modify css files
+    glob.sync(path.resolve(distpath, '**', '*.css')).forEach(file => {
+        // fs.removeSync(file)
+        fs.writeFileSync(
+            file,
+            fs.readFileSync(file, 'utf-8').replace(/\r?\n\/\*# sourceMappingURL=.+$/, ''),
             'utf-8'
         )
         console.log('  > modified: ' + file)
