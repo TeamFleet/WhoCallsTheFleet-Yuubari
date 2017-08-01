@@ -124,6 +124,7 @@ export default class PageShipDetails extends React.Component {
         // console.log(this.props.tabIndex, this.props.illustIndex)
 
         const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
+        const tabIndex = __CLIENT__ ? (isLocationPUSH ? 0 : this.props.tabIndex) : undefined
 
         if (typeof this.props.tabIndex === 'undefined') {
             this.props.dispatch(
@@ -143,10 +144,10 @@ export default class PageShipDetails extends React.Component {
                     ship={this.ship}
                     tabs={this.ship.type_display ? tabsAvailable : [tabsAvailable[0]]}
                     onTabChange={__CLIENT__ && this.onTabChange.bind(this)}
-                    currentTabIndex={__CLIENT__ ? (isLocationPUSH ? 0 : this.props.tabIndex) : undefined}
+                    currentTabIndex={tabIndex}
                 />
                 {__CLIENT__ &&
-                    React.createElement(contentComponents[this.props.tabIndex], {
+                    React.createElement(contentComponents[tabIndex], {
                         ship: this.ship,
                         illustIndex: isLocationPUSH ? 0 : this.props.illustIndex,
                         onIllustChange: this.onIllustChange.bind(this)
