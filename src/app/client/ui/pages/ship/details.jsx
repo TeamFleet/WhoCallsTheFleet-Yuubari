@@ -141,7 +141,8 @@ export default class PageShipDetails extends React.Component {
 
 
 @connect((state, ownProps) => ({
-    ...state.shipDetails[ownProps.ship.id]
+    // ...state.shipDetails[ownProps.ship.id]
+    tabIndex: state.shipDetails[ownProps.ship.id] ? state.shipDetails[ownProps.ship.id].tabIndex : undefined
 }))
 class PageShipDetailsBody extends React.Component {
     onIllustChange(newIllustIndex) {
@@ -162,7 +163,7 @@ class PageShipDetailsBody extends React.Component {
     render() {
         // const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
 
-        if (__CLIENT__)
+        if (__CLIENT__ && typeof this.props.tabIndex !== 'undefined')
             return React.createElement(contentComponents[this.props.tabIndex], {
                 ship: this.props.ship,
                 illustIndex: this.props.illustIndex,
