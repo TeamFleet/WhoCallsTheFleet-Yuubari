@@ -9,8 +9,8 @@ import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 import {
     init as shipDetailsInit,
-    // reset as shipDetailsReset,
-    changeTab as shipDetailsChangeTab,
+    reset as shipDetailsReset,
+    // changeTab as shipDetailsChangeTab,
     changeIllust as shipDetailsChangeIllust
 } from '@appLogic/ship-details/api.js'
 
@@ -90,41 +90,26 @@ export default class PageShipDetails extends React.Component {
         return this._data || {}
     }
 
-    onTabChange(newTab, newTabIndex) {
+    onTabChange(/*newTab, newTabIndex*/) {
         // if (newTabIndex !== this.props.tabIndex) {
         // console.log(newTabIndex, this.props.tabIndex)
-        this.props.dispatch(
-            shipDetailsChangeTab(this.props.params.id, newTabIndex)
-        )
+        // this.props.dispatch(
+        //     shipDetailsChangeTab(this.props.params.id, newTabIndex)
+        // )
         window.scrollTo(undefined, 0)
         // }
     }
 
-    onIllustChange(newIllustIndex) {
-        this.illustIndex = newIllustIndex
-        // if (newIllustIndex !== this.props.illustIndex) {
-        //     this.props.dispatch(
-        //         shipDetailsChangeIllust(this.props.params.id, newIllustIndex)
-        //     )
-        // }
-    }
-
-    // componentWillMount() {
-    //     if (this.props.location.action === 'PUSH' && typeof this.props.tabIndex !== 'undefined')
-    //         this.props.dispatch(shipDetailsReset(this.props.params.id))
-    // }
-
-    componentWillUnmount() {
-        this.props.dispatch(
-            shipDetailsChangeIllust(this.props.params.id, this.illustIndex)
-        )
+    componentWillMount() {
+        if (this.props.location.action === 'PUSH' && typeof this.props.tabIndex !== 'undefined')
+            this.props.dispatch(shipDetailsReset(this.props.params.id))
     }
 
     render() {
         // console.log(this.props.tabIndex, this.props.illustIndex)
 
-        const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
-        const tabIndex = __CLIENT__ ? (isLocationPUSH ? 0 : this.props.tabIndex) : undefined
+        // const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
+        // const tabIndex = __CLIENT__ ? (isLocationPUSH ? 0 : this.props.tabIndex) : undefined
 
         if (typeof this.props.tabIndex === 'undefined') {
             this.props.dispatch(
@@ -136,29 +121,57 @@ export default class PageShipDetails extends React.Component {
         }
 
         if (__CLIENT__ && __DEV__)
-            console.log('thisShip', this.ship)
+            console.log('thisShip', this.ship, this.props.tabIndex)
 
         return (
             <PageContainer className={this.props.className}>
                 <Header
                     ship={this.ship}
                     tabs={this.ship.type_display ? tabsAvailable : [tabsAvailable[0]]}
-                    onTabChange={__CLIENT__ && this.onTabChange.bind(this)}
-                    currentTabIndex={tabIndex}
+                    onTabChange={__CLIENT__ ? this.onTabChange.bind(this) : undefined}
                 />
-                {__CLIENT__ &&
-                    React.createElement(contentComponents[tabIndex], {
-                        ship: this.ship,
-                        illustIndex: isLocationPUSH ? 0 : this.props.illustIndex,
-                        onIllustChange: this.onIllustChange.bind(this)
-                    })
-                }
-                {__SERVER__ &&
-                    React.cloneElement(this.props.children, {
-                        ship: this.ship
-                    })
-                }
+                <PageShipDetailsBody ship={this.ship}>
+                    {this.props.children}
+                </PageShipDetailsBody>
             </PageContainer>
         )
+    }
+}
+
+
+
+@connect((state, ownProps) => ({
+    ...state.shipDetails[ownProps.ship.id]
+}))
+class PageShipDetailsBody extends React.Component {
+    onIllustChange(newIllustIndex) {
+        this.illustIndex = newIllustIndex
+        // if (newIllustIndex !== this.props.illustIndex) {
+        //     this.props.dispatch(
+        //         shipDetailsChangeIllust(this.props.ship.id, newIllustIndex)
+        //     )
+        // }
+    }
+
+    componentWillUnmount() {
+        this.props.dispatch(
+            shipDetailsChangeIllust(this.props.ship.id, this.illustIndex)
+        )
+    }
+
+    render() {
+        // const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
+
+        if (__CLIENT__)
+            return React.createElement(contentComponents[this.props.tabIndex], {
+                ship: this.props.ship,
+                illustIndex: this.props.illustIndex,
+                onIllustChange: this.onIllustChange.bind(this)
+            })
+
+        if (__SERVER__)
+            return React.cloneElement(this.props.children, {
+                ship: this.props.ship
+            })
     }
 }

@@ -182,6 +182,10 @@ export default class ShipList extends React.Component {
             return null
         }
 
+        if (__CLIENT__ && __DEV__) {
+            console.log('shipList', this.props)
+        }
+
         return (
             <div className={
                 this.props.className

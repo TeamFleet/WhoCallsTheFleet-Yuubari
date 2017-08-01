@@ -1,10 +1,13 @@
 import React from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import classNames from 'classnames'
 
 import translate, { localeId } from 'sp-i18n'
 import db from '@appLogic/database'
+import {
+    changeTab as shipDetailsChangeTab
+} from '@appLogic/ship-details/api'
 
 import MainHeader from '@appUI/components/main-header.jsx'
 import Title from '@appUI/components/title.jsx'
@@ -12,27 +15,30 @@ import Title from '@appUI/components/title.jsx'
 import { ImportStyle } from 'sp-css-import'
 import styles from './header.less'
 
-// @connect()
+@connect((state, ownProps) => ({
+    ...state.shipDetails[ownProps.ship.id]
+}))
 @ImportStyle(styles)
 export default class ShipDetailsHeader extends React.Component {
-    renderTab(tab, index) {
-        const url = `/ships/${this.props.ship.id}${index ? `/${tab}` : ''}`
+    renderTab(tabName, index) {
+        const url = `/ships/${this.props.ship.id}${index ? `/${tabName}` : ''}`
         if (this.props.onTabChange) {
             return (
                 <a
                     href={url}
                     className={classNames([
                         'tab', {
-                            'on': index === this.props.currentTabIndex
+                            'on': index === this.props.tabIndex
                         }
                     ])}
                     key={index}
                     onClick={evt => {
-                        this.props.onTabChange(tab, index)
+                        // this.props.onTabChange(tabName, index)
+                        this.props.dispatch(shipDetailsChangeTab(this.props.ship.id, index))
                         evt.preventDefault()
                     }}
                 >
-                    {translate("ship_details." + tab)}
+                    {translate("ship_details." + tabName)}
                 </a>
             )
         } else {
@@ -44,7 +50,7 @@ export default class ShipDetailsHeader extends React.Component {
                     activeClassName="on"
                     key={index}
                 >
-                    {translate("ship_details." + tab)}
+                    {translate("ship_details." + tabName)}
                 </Tag>
             )
         }
@@ -59,7 +65,7 @@ export default class ShipDetailsHeader extends React.Component {
     }
 
     render() {
-        const isPortal = (this.props.onTabChange ? true : false)
+        const isPortal = __CLIENT__
         const Component = isPortal ? MainHeader : 'div'
 
         return (
