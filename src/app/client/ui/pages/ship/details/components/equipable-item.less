@@ -9,7 +9,8 @@
     @color-off-background:  fade(@theme-bluegrey-900, 50%);
     @color-off-border:      @color-border;
 
-    padding:        5px 0 5px (@equipmenticon-size - 10);
+    @padding-left:  (@equipmenticon-size - 10);
+    padding:        5px 0 5px @padding-left;
 
     &:before{
         position:   absolute;
@@ -72,8 +73,8 @@
             position:   absolute;
         }
         &:before{
-            top:        -2px;
-            bottom:     -3px;
+            top:        -4px;
+            bottom:     -4px;
             left:       -12px;
             border-left:2px solid @color-border;
         }
@@ -87,13 +88,20 @@
         .avatar{
             display:    block;
             float:      left;
-            width:      (@height + 10 + 2);
             height:     (@height + 2);
             overflow:   hidden;
-            margin:     -1px 5px -1px -9px;
             border-radius: ((@height + 2) / 2);
             background-size: cover;
+            z-index:    -1;
+            width:      (@height + 10 + 2);
+            margin:     -1px 5px -1px -9px;
             background-position: 60% 0%;
+            // width:      (@height + 10 + 8);
+            // margin:     -1px 5px -1px -9px;
+            // background-position: 70% 0%;
+            // width:      55px;
+            // margin:     -1px -12px -1px -9px;
+            // background-position: 100% 0%;
         }
         &.on{
             color:              @color-on;
@@ -121,6 +129,9 @@
 
     .block{
         display:    block;
+        overflow:   hidden;
+        padding-left: @padding-left;
+        margin-left: (0 - @padding-left);
         &:last-of-type{
             margin-bottom:  3px;
             .other{

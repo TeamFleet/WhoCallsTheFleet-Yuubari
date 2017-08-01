@@ -9,7 +9,7 @@ import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 import {
     init as shipDetailsInit,
-    reset as shipDetailsReset,
+    // reset as shipDetailsReset,
     changeTab as shipDetailsChangeTab,
     changeIllust as shipDetailsChangeIllust
 } from '@appLogic/ship-details/api.js'
@@ -91,13 +91,13 @@ export default class PageShipDetails extends React.Component {
     }
 
     onTabChange(newTab, newTabIndex) {
-        if (newTabIndex !== this.props.tabIndex) {
-            // console.log(newTabIndex, this.props.tabIndex)
-            this.props.dispatch(
-                shipDetailsChangeTab(this.props.params.id, newTabIndex)
-            )
-            window.scrollTo(undefined, 0)
-        }
+        // if (newTabIndex !== this.props.tabIndex) {
+        // console.log(newTabIndex, this.props.tabIndex)
+        this.props.dispatch(
+            shipDetailsChangeTab(this.props.params.id, newTabIndex)
+        )
+        window.scrollTo(undefined, 0)
+        // }
     }
 
     onIllustChange(newIllustIndex) {
@@ -109,10 +109,10 @@ export default class PageShipDetails extends React.Component {
         // }
     }
 
-    componentWillMount() {
-        if (this.props.location.action === 'PUSH' && typeof this.props.tabIndex !== 'undefined')
-            this.props.dispatch(shipDetailsReset(this.props.params.id))
-    }
+    // componentWillMount() {
+    //     if (this.props.location.action === 'PUSH' && typeof this.props.tabIndex !== 'undefined')
+    //         this.props.dispatch(shipDetailsReset(this.props.params.id))
+    // }
 
     componentWillUnmount() {
         this.props.dispatch(
@@ -122,6 +122,8 @@ export default class PageShipDetails extends React.Component {
 
     render() {
         // console.log(this.props.tabIndex, this.props.illustIndex)
+
+        const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
 
         if (typeof this.props.tabIndex === 'undefined') {
             this.props.dispatch(
@@ -141,12 +143,12 @@ export default class PageShipDetails extends React.Component {
                     ship={this.ship}
                     tabs={this.ship.type_display ? tabsAvailable : [tabsAvailable[0]]}
                     onTabChange={__CLIENT__ && this.onTabChange.bind(this)}
-                    currentTabIndex={__CLIENT__ && this.props.tabIndex}
+                    currentTabIndex={__CLIENT__ ? (isLocationPUSH ? 0 : this.props.tabIndex) : undefined}
                 />
                 {__CLIENT__ &&
                     React.createElement(contentComponents[this.props.tabIndex], {
                         ship: this.ship,
-                        illustIndex: this.props.location.action === 'PUSH' ? 0 : this.props.illustIndex,
+                        illustIndex: isLocationPUSH ? 0 : this.props.illustIndex,
                         onIllustChange: this.onIllustChange.bind(this)
                     })
                 }
