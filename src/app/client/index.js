@@ -30,6 +30,10 @@ const reactApp = new ReactApp({ rootDom: 'root' })
 
 //
 
+if (__DEV__) console.log('client.js')
+
+//
+
 reactApp.redux.middleware.use(thunk)
 reactApp.redux.middleware.use(routerMiddleware(browserHistory))
 

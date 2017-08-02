@@ -1,5 +1,7 @@
 import bindEvent from 'bind-event'
 
+if (__DEV__) console.log('critical.js')
+
 // console.log('aaaaaaaaaaaa')
 // if (self && self.isCriticalInit) return true
 

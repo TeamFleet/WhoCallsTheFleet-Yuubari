@@ -71,7 +71,7 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
         manifest: () => `<link rel="manifest" href="/manifest-${currentLocaleId}.json">`,
         svg_symbols: `<div class="hide">${__ICONSVG__}</div>`,
 
-        critical: `<script src="${getFile('critical.js')}"></script>`,
+        critical: `<script src="${getFile('critical.js')}" defer></script>`,
         critical_css: (() => {
             // console.log(path.join(rootPath, getFile('critical.css')))
             if (__DEV__) return ''

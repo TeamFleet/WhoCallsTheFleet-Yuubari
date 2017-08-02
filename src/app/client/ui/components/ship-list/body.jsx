@@ -76,7 +76,7 @@ export default class ShipList extends React.Component {
             // return null
         }
 
-        return <ShipListBody id={this.props.id} />
+        return <ShipListBody { ...this.props } />
     }
 }
 
@@ -205,7 +205,7 @@ class ShipListBody extends React.Component {
 
     render() {
         if (__CLIENT__ && __DEV__) {
-        // if (__DEV__) {
+            // if (__DEV__) {
             console.log('shipList', this.props)
         }
 
