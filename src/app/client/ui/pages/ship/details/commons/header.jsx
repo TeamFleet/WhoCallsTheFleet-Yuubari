@@ -33,7 +33,7 @@ export default class ShipDetailsHeader extends React.Component {
                     ])}
                     key={index}
                     onClick={evt => {
-                        // this.props.onTabChange(tabName, index)
+                        this.props.onTabChange(tabName, index)
                         this.props.dispatch(shipDetailsChangeTab(this.props.ship.id, index))
                         evt.preventDefault()
                     }}
