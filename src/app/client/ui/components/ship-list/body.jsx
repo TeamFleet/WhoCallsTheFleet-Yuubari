@@ -9,10 +9,12 @@ import db from '@appLogic/database'
 import shipListFilter from '@appLogic/database/list-ships-filter.js'
 import {
     init as shipListInit,
-    filterLeave,
-    compareReset
+    reset as shipListReset,
+    // filterLeave,
+    // compareReset
 } from '@appLogic/ship-list/api.js'
 import pref from '@appLogic/preferences'
+import { REALTIME_LOCATION_REDUCER_NAME } from '@app/client/redux/realtime-location'
 
 import Title from './title.jsx'
 import List from './list.jsx'
@@ -52,11 +54,35 @@ const getShipList = (list) => {
 }
 
 @connect((state, ownProps) => ({
+    // ...state.shipList[ownProps.id],
+    isInit: state.shipList[ownProps.id] ? true : false,
+    location: state[REALTIME_LOCATION_REDUCER_NAME]
+}))
+// @ImportStyle(style)
+export default class ShipList extends React.Component {
+    componentWillMount() {
+        if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
+            this.props.dispatch(shipListReset(this.props.id))
+    }
+
+    render() {
+        if (typeof this.props.collection === 'undefined') {
+            this.props.dispatch(
+                shipListInit(this.props.id)
+            )
+            // return null
+        }
+
+        return <ShipListBody id={this.props.id} />
+    }
+}
+
+@connect((state, ownProps) => ({
     ...state.shipList[ownProps.id],
-    location: state.location
+    // location: state.location
 }))
 @ImportStyle(style)
-export default class ShipList extends React.Component {
+class ShipListBody extends React.Component {
     getExtraButtons() {
         if (__SERVER__) return null
 
@@ -161,28 +187,22 @@ export default class ShipList extends React.Component {
             window.scrollTo(undefined, 0)
     }
 
-    componentWillMount() {
-        if (this.props.location && this.props.location.action === 'PUSH') {
-            if (this.props.isModeFilter || typeof this.props.filterInput !== 'undefined')
-                this.props.dispatch(
-                    filterLeave(this.props.id)
-                )
-            if (typeof this.props.isModeCompare !== 'undefined' || (this.props.compareList && this.props.compareList.length))
-                this.props.dispatch(
-                    compareReset(this.props.id, true)
-                )
-        }
-    }
+    // componentWillMount() {
+    //     if (this.props.location && this.props.location.action === 'PUSH') {
+    //         if (this.props.isModeFilter || typeof this.props.filterInput !== 'undefined')
+    //             this.props.dispatch(
+    //                 filterLeave(this.props.id)
+    //             )
+    //         if (typeof this.props.isModeCompare !== 'undefined' || (this.props.compareList && this.props.compareList.length))
+    //             this.props.dispatch(
+    //                 compareReset(this.props.id, true)
+    //             )
+    //     }
+    // }
 
     render() {
-        if (typeof this.props.collection === 'undefined') {
-            this.props.dispatch(
-                shipListInit(this.props.id)
-            )
-            return null
-        }
-
         if (__CLIENT__ && __DEV__) {
+        // if (__DEV__) {
             console.log('shipList', this.props)
         }
 

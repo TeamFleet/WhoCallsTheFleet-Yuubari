@@ -4,27 +4,18 @@ import { connect } from 'react-redux'
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from '@appUtils/html-head.js'
-import {
-    init as shipListInit,
-    reset as shipListReset
-} from '@appLogic/ship-list/api.js'
+// import {
+//     reset as shipListReset
+// } from '@appLogic/ship-list/api.js'
 
-import ShipList from '@appUI/components/ship-list.jsx'
+import ShipList from '@appUI/components/ship-list'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './list.less'
 
-const shipListId = 'pageShipList'
-
 @connect()
 @ImportStyle(style)
 export default class extends React.Component {
-    static onServerRenderStoreExtend(store) {
-        return [
-            store.dispatch(shipListInit(shipListId))
-        ]
-    }
-
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
             store,
@@ -35,30 +26,19 @@ export default class extends React.Component {
         ext.title = head.title
     }
 
-    componentWillMount() {
-        if (this.props.location.action === 'PUSH')
-            this.props.dispatch(shipListReset(shipListId))
-    }
+    // componentWillMount() {
+    //     if (this.props.location.action === 'PUSH')
+    //         this.props.dispatch(shipListReset(shipListId))
+    // }
 
     render() {
         return (
-            <PageContainer
-                className={this.props.className}
-            >
+            <PageContainer className={this.props.className} >
                 <ShipList
-                    id={shipListId}
+                    id="pageShipList"
                     extraButton='compare'
                 />
             </PageContainer>
         )
     }
 }
-
-/*
-                <ShipList
-                    id={shipListId}
-                    collection={__CLIENT__ ? self.__pageShipListLastCollection : null}
-                    onCollectionChange={this.onCollectionChange.bind(this)}
-                    extraButton='compare'
-                />
-*/

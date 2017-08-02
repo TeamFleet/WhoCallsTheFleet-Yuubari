@@ -145,6 +145,7 @@ export default class extends React.Component {
         //         setTimeout(resolve, 100)
         //     })
         // }
+        // if (__DEV__) console.log('app - render')
         if (this.props.isMainBgimgLoaded) this.appReady()
 
         return (

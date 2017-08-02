@@ -4,6 +4,7 @@ import pageTitleReducer from '@appLogic/page-title/reducer'
 import sideMenuReducer from '@appLogic/side-menu/reducer'
 import shipListReducer from '@appLogic/ship-list/reducer'
 import shipDetailsReducer from '@appLogic/ship-details/reducer'
+import equipmentListReducer from '@appLogic/equipment-list/reducer'
 
 export default [
     ['appMode', appModeReducer],
@@ -11,5 +12,6 @@ export default [
     ['pageTitle', pageTitleReducer],
     ['timeSwipedFromLeftEdge', sideMenuReducer],
     ['shipList', shipListReducer],
-    ['shipDetails', shipDetailsReducer]
+    ['shipDetails', shipDetailsReducer],
+    ['equipmentDetails', equipmentListReducer]
 ]
