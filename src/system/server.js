@@ -10,6 +10,14 @@ const server = new AppContainer()
 server.app.keys = ['super-project-key']
 server.app.use(responseTime())
 
+/* Gzip */
+server.app.use(require('koa-compress')())
+const convert = require('koa-convert')
+const minifyHtml = require('koa-html-minifier')({
+    collapseWhitespace: true
+})
+server.app.use(convert(minifyHtml))
+
 /* 挂载子应用 */
 
 // server.addSubApp('www', require('../apps/www'))
