@@ -2,10 +2,10 @@ const fs = require('fs-extra')
 const path = require('path')
 const webpack = require('webpack')
 const appPath = process.cwd()
-// const ExtractTextPlugin = require("extract-text-webpack-plugin")
-// const env = process.env.WEBPACK_BUILD_ENV || 'dev'
+const env = process.env.WEBPACK_BUILD_ENV || 'dev'
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-// const extractCriticalCSS = new ExtractTextPlugin('[name].[chunkhash].css');
+const extractCriticalCSS = new ExtractTextPlugin('[name].[chunkhash].css');
 const pathBgimgs = path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output')
 
 // 执行顺序，从右到左
@@ -46,38 +46,38 @@ const rules = [
     },
 
     // CSS - critical
-    // {
-    //     test: env === 'dist' ? /critical\.g\.css$/ : /^IMPOSSIBLE$/,
-    //     use: extractCriticalCSS.extract({
-    //         fallback: "style-loader",
-    //         use: ["css-loader", "postcss-loader"]
-    //     })
-    // }, {
-    //     test: env === 'dist' ?/critical\.g\.less$/ : /^IMPOSSIBLE$/,
-    //     use: extractCriticalCSS.extract({
-    //         fallback: "style-loader",
-    //         use: ["css-loader", "postcss-loader", "less-loader"]
-    //     })
-    // }, {
-    //     test: env === 'dist' ?/critical\.g\.scss$/ : /^IMPOSSIBLE$/,
-    //     use: extractCriticalCSS.extract({
-    //         fallback: "style-loader",
-    //         use: ["css-loader", "postcss-loader", "sass-loader"]
-    //     })
-    // },
+    {
+        test: env === 'dist' ? /critical\.g\.css$/ : /^IMPOSSIBLE$/,
+        use: extractCriticalCSS.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "postcss-loader"]
+        })
+    }, {
+        test: env === 'dist' ? /critical\.g\.less$/ : /^IMPOSSIBLE$/,
+        use: extractCriticalCSS.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "postcss-loader", "less-loader"]
+        })
+    }, {
+        test: env === 'dist' ? /critical\.g\.scss$/ : /^IMPOSSIBLE$/,
+        use: extractCriticalCSS.extract({
+            fallback: "style-loader",
+            use: ["css-loader", "postcss-loader", "sass-loader"]
+        })
+    },
 
     // CSS - other global
     {
         test: /\.g\.css$/,
-        // exclude: env === 'dist' ?/critical\.g\.css$/ : undefined,
+        exclude: env === 'dist' ?/critical\.g\.css$/ : undefined,
         loader: 'style-loader!postcss-loader'
     }, {
         test: /\.g\.less$/,
-        // exclude: env === 'dist' ?/critical\.g\.less$/ : undefined,
+        exclude: env === 'dist' ?/critical\.g\.less$/ : undefined,
         loader: 'style-loader!postcss-loader!less-loader'
     }, {
         test: /\.g\.scss$/,
-        // exclude: env === 'dist' ?/critical\.g\.scss$/ : undefined,
+        exclude: env === 'dist' ?/critical\.g\.scss$/ : undefined,
         loader: 'style-loader!postcss-loader!sass-loader'
     },
 
@@ -102,7 +102,8 @@ const rules = [
 
 // 执行顺序，？
 const plugins = [
-    // extractCriticalCSS,
+    extractCriticalCSS,
+
     new webpack.DefinePlugin({
         '__CHANNEL__': JSON.stringify(
             /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'

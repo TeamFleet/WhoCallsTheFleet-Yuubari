@@ -22,16 +22,16 @@ require('./critical.g.less')
 self.__BGIMG_LIST__ = __BGIMG_LIST__
 
 document.addEventListener("DOMContentLoaded", function () {
-    let boatLoader = document.createElement('div')
+    // let boatLoader = document.createElement('div')
     let tagHtml = document.getElementsByTagName('html')
     self.isMobile = false
     let platform = 'not-specified'
 
-    boatLoader.id = 'boat-loader'
-    document.body.appendChild(boatLoader)
+    // boatLoader.id = 'boat-loader'
+    // document.body.appendChild(boatLoader)
     bindEvent(
-        boatLoader,
-        // document.getElementById('boat-loader'),
+        // boatLoader,
+        document.getElementById('boat-loader'),
         'transitionend',
         function (evt) {
             // console.log(evt, evt.target.style.opacity)

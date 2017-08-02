@@ -17,6 +17,8 @@ const distPathname = 'dist-web'
 
 // 
 
+const fs = require('fs')
+const path = require('path')
 const Koa = require('koa')
 const app = new Koa()
 
@@ -70,7 +72,17 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
         svg_symbols: `<div class="hide">${__ICONSVG__}</div>`,
 
         critical: `<script src="${getFile('critical.js')}"></script>`,
-        // critical_css: `<link rel="stylesheet" type="text/css" href="${getFile('critical.css')}" />`,
+        critical_css: (() => {
+            console.log(path.join(rootPath, getFile('critical.css')))
+            if (__DEV__) return ''
+            else //return `<link rel="stylesheet" type="text/css" href="${getFile('critical.css')}" />`
+                return `<style type="text/css">${
+                    fs.readFileSync(
+                        path.join(rootPath, getFile('critical.css')),
+                        'utf-8'
+                    )
+                }</style>`
+        })(),
         critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
         js: (() => ([
             getFile('client.js')
