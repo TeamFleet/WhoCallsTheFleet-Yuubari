@@ -1,21 +1,6 @@
-@import '../_.less';
+@import './equipable.less';
 
 .component{
-    @color-on:              @theme-green-a100;
-    @color-on-background:   darken(@theme-green-900, 10%);
-    @color-on-border:       @theme-green-700;
-
-    @color-off:             @color-fade;
-    @color-off-background:  fade(@theme-bluegrey-900, 50%);
-    @color-off-border:      @color-border;
-
-    // @color-special:              lighten(@theme-yellow-a100, 10%);
-    // @color-special-background:   darken(@theme-amber-900, 20%);
-    // @color-special-border:       @theme-amber-800;
-    @color-special:              lighten(@theme-lightblue-a100, 15%);
-    @color-special-background:   darken(@theme-lightblue-900, 10%);
-    @color-special-border:       @theme-lightblue-800;
-
     @padding-left:  (@equipmenticon-size - 10);
     padding:        5px 0 5px @padding-left;
 

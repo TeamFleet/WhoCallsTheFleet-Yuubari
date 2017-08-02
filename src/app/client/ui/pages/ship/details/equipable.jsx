@@ -95,25 +95,23 @@ export default class ShipDetailsContentEquipable extends React.Component {
         return (
             <div className={this.props.className}>
                 <ComponentContainer
-                    className="collection"
-                    title={translate("ship_details.equipable_legend")}
+                    className="legends"
                 >
-                    <ShipDetailsContentEquipableItem
-                        className="item is-legend off"
+                    <ShipDetailsContentEquipableLegend
+                        className="item off"
                         text={translate("ship_details.equipable_legend_no")}
                     />
-                    <ShipDetailsContentEquipableItem
-                        className="item is-legend on"
+                    <ShipDetailsContentEquipableLegend
+                        className="item on"
                         text={translate("ship_details.equipable_legend_yes")}
                     />
                     {this.props.ship && !this.props.ship.isType('AV') &&
-                        <ShipDetailsContentEquipableItem
-                            className="item is-legend on is-special"
+                        <ShipDetailsContentEquipableLegend
+                            className="item on is-special"
                             text={translate("ship_details.equipable_legend_yes")}
                             textSmall={translate("ship_details.equipable_legend_yes_extra", { type: db.shipTypes[this.props.ship.type_display]._name })}
                         />
                     }
-                    {this.insertPlaceHolders()}
                 </ComponentContainer>
                 {db.equipmentCollections.map(this.renderCollection.bind(this))}
                 {this.renderExSolot()}
@@ -126,18 +124,6 @@ import stylesItem from './components/equipable-item.less'
 @ImportStyle(stylesItem)
 class ShipDetailsContentEquipableItem extends React.Component {
     render() {
-        if (this.props.text)
-            return (
-                <IconEquipment className={this.props.className} >
-                    <span className="name">
-                        <span className="name-wrapper">
-                            {this.props.text}
-                            {this.props.textSmall && <small>{this.props.textSmall}</small>}
-                        </span>
-                    </span>
-                </IconEquipment>
-            )
-
         if (this.props.equipment)
             return (
                 <Link className={this.props.className + ' equipment'} to={getLink('equipment', this.props.equipment.id)}>
@@ -208,6 +194,21 @@ class ShipDetailsContentEquipableItem extends React.Component {
                     </span>
                 }
             </IconEquipment>
+        )
+    }
+}
+
+import stylesLegend from './components/equipable-legend.less'
+@ImportStyle(stylesLegend)
+class ShipDetailsContentEquipableLegend extends React.Component {
+    render() {
+        return (
+            <span className={this.props.className} >
+                <span className="wrapper">
+                    {this.props.text}
+                    {this.props.textSmall && <small>{this.props.textSmall}</small>}
+                </span>
+            </span>
         )
     }
 }
