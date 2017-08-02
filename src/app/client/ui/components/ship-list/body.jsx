@@ -9,12 +9,12 @@ import db from '@appLogic/database'
 import shipListFilter from '@appLogic/database/list-ships-filter.js'
 import {
     init as shipListInit,
-    reset as shipListReset,
+    // reset as shipListReset,
     // filterLeave,
     // compareReset
 } from '@appLogic/ship-list/api.js'
 import pref from '@appLogic/preferences'
-import { REALTIME_LOCATION_REDUCER_NAME } from '@app/client/redux/realtime-location'
+// import { REALTIME_LOCATION_REDUCER_NAME } from '@app/client/redux/realtime-location'
 
 import Title from './title.jsx'
 import List from './list.jsx'

@@ -10,7 +10,7 @@ import {
     init as listInit,
     reset as listReset
 } from '@appLogic/equipment-list/api.js'
-import { REALTIME_LOCATION_REDUCER_NAME } from '@app/client/redux/realtime-location'
+// import { REALTIME_LOCATION_REDUCER_NAME } from '@app/client/redux/realtime-location'
 
 import Title from './title.jsx'
 // import List from './list.jsx'
@@ -23,29 +23,29 @@ import style from './body.less'
 @connect((state, ownProps) => ({
     // ...state.shipList[ownProps.id],
     isInit: state.equipmentList[ownProps.id] ? true : false,
-    location: state[REALTIME_LOCATION_REDUCER_NAME]
+    // location: state[REALTIME_LOCATION_REDUCER_NAME]
 }))
 // @ImportStyle(style)
 export default class EquipmentList extends React.Component {
-    componentWillMount() {
-        if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
-            this.props.dispatch(listReset(this.props.id))
-    }
+    // componentWillMount() {
+    //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
+    //         this.props.dispatch(listReset(this.props.id))
+    // }
 
     render() {
-        if (typeof this.props.collection === 'undefined') {
+        if (typeof this.props.isInit === 'undefined') {
             this.props.dispatch(
                 listInit(this.props.id)
             )
             // return null
         }
 
-        return <EquipmentListBody id={this.props.id} />
+        return <EquipmentListBody { ...this.props } />
     }
 }
 
 @connect((state, ownProps) => ({
-    ...state.shipList[ownProps.id],
+    ...state.equipmentList[ownProps.id],
     // location: state.location
 }))
 @ImportStyle(style)
