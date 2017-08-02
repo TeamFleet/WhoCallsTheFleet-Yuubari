@@ -73,7 +73,7 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
 
         critical: `<script src="${getFile('critical.js')}"></script>`,
         critical_css: (() => {
-            console.log(path.join(rootPath, getFile('critical.css')))
+            // console.log(path.join(rootPath, getFile('critical.css')))
             if (__DEV__) return ''
             else //return `<link rel="stylesheet" type="text/css" href="${getFile('critical.css')}" />`
                 return `<style type="text/css">${
