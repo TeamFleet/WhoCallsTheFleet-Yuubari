@@ -41,6 +41,13 @@ const factoryConfig = (config) => {
     return config
 }
 
+const extendConfig = (config, obj) => {
+    if (Array.isArray(config))
+        config = config.map(thisConfig => Object.assign(thisConfig, obj))
+    else
+        Object.assign(config, obj)
+}
+
 const run = async (config) => {
 
     // 配置非空处理
@@ -53,7 +60,7 @@ const run = async (config) => {
     if (stage === 'client' && env === 'dev') {
 
         let wcd = await require('./client/dev')(appRunPath, CLIENT_DEV_PORT)
-        // Object.assign(wcd, config.client.dev)
+        extendConfig(wcd, config.client.dev)
 
         const compiler = webpack(wcd)
         // const dashboard = new Dashboard()
@@ -82,10 +89,7 @@ const run = async (config) => {
         process.env.NODE_ENV = 'production'
 
         let wcd = await require('./client/dist')(appRunPath)
-        if (Array.isArray(wcd))
-            wcd = wcd.map(thisConfig => Object.assign(thisConfig, config.client.dist))
-        else
-            Object.assign(wcd, config.client.dist)
+        extendConfig(wcd, config.client.dist)
 
         const compiler = webpack(wcd)
         compiler.run((err, stats) => {
@@ -102,7 +106,7 @@ const run = async (config) => {
     if (stage === 'server' && env === 'dev') {
 
         let wsd = require('./server/dev')(appRunPath, CLIENT_DEV_PORT)
-        Object.assign(wsd, config.server.dev)
+        extendConfig(wsd, config.server.dev)
 
         webpack(wsd, (err, stats) => {
             if (err) console.log(`webpack dev error: ${err}`)
@@ -120,7 +124,7 @@ const run = async (config) => {
         process.env.NODE_ENV = 'production'
 
         let wsd = require('./server/dist')(appRunPath)
-        Object.assign(wsd, config.server.dist)
+        extendConfig(wsd, config.server.dist)
 
         webpack(wsd, (err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)
