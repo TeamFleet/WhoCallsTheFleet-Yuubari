@@ -167,6 +167,10 @@
         "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
 
         "equipable_exslot": "Equipable in Ex-Slot",
-        "equipable_exslot_and": "And..."
+        "equipable_exslot_and": "And...",
+        "equipable_legend": "Legend",
+        "equipable_legend_no": "Not equipable",
+        "equipable_legend_yes": "Equipable",
+        "equipable_legend_yes_extra": "No for other ${type}s"
     }
 }

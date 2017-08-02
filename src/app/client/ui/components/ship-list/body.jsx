@@ -55,18 +55,21 @@ const getShipList = (list) => {
 
 @connect((state, ownProps) => ({
     // ...state.shipList[ownProps.id],
-    isInit: state.shipList[ownProps.id] ? true : false,
-    location: state[REALTIME_LOCATION_REDUCER_NAME]
+    isInit: (typeof state.shipList[ownProps.id] !== 'undefined'),
+    // location: state[REALTIME_LOCATION_REDUCER_NAME]
 }))
+// @connect()
 // @ImportStyle(style)
 export default class ShipList extends React.Component {
-    componentWillMount() {
-        if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
-            this.props.dispatch(shipListReset(this.props.id))
-    }
+    // componentWillMount() {
+    //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH'){
+    //         console.log('reset')
+    //         this.props.dispatch(shipListReset(this.props.id))
+    //     }
+    // }
 
     render() {
-        if (typeof this.props.collection === 'undefined') {
+        if (!this.props.isInit) {
             this.props.dispatch(
                 shipListInit(this.props.id)
             )

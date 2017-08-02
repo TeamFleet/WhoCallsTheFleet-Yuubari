@@ -94,6 +94,27 @@ export default class ShipDetailsContentEquipable extends React.Component {
         if (__DEV__) console.log('thisShip equipable', this.props.ship.getEquipmentTypes())
         return (
             <div className={this.props.className}>
+                <ComponentContainer
+                    className="collection"
+                    title={translate("ship_details.equipable_legend")}
+                >
+                    <ShipDetailsContentEquipableItem
+                        className="item is-legend off"
+                        text={translate("ship_details.equipable_legend_no")}
+                    />
+                    <ShipDetailsContentEquipableItem
+                        className="item is-legend on"
+                        text={translate("ship_details.equipable_legend_yes")}
+                    />
+                    {this.props.ship && !this.props.ship.isType('AV') &&
+                        <ShipDetailsContentEquipableItem
+                            className="item is-legend on is-special"
+                            text={translate("ship_details.equipable_legend_yes")}
+                            textSmall={translate("ship_details.equipable_legend_yes_extra", { type: db.shipTypes[this.props.ship.type_display]._name })}
+                        />
+                    }
+                    {this.insertPlaceHolders()}
+                </ComponentContainer>
                 {db.equipmentCollections.map(this.renderCollection.bind(this))}
                 {this.renderExSolot()}
             </div>
@@ -105,6 +126,18 @@ import stylesItem from './components/equipable-item.less'
 @ImportStyle(stylesItem)
 class ShipDetailsContentEquipableItem extends React.Component {
     render() {
+        if (this.props.text)
+            return (
+                <IconEquipment className={this.props.className} >
+                    <span className="name">
+                        <span className="name-wrapper">
+                            {this.props.text}
+                            {this.props.textSmall && <small>{this.props.textSmall}</small>}
+                        </span>
+                    </span>
+                </IconEquipment>
+            )
+
         if (this.props.equipment)
             return (
                 <Link className={this.props.className + ' equipment'} to={getLink('equipment', this.props.equipment.id)}>
@@ -121,6 +154,7 @@ class ShipDetailsContentEquipableItem extends React.Component {
                 </Link>
             )
 
+        const isNotAV = this.props.ship && !this.props.ship.isType('AV')
         const canEquip = this.props.ship ? this.props.ship.canEquip(this.props.type.id) : undefined
         const canEquipShipType = this.props.ship ? this.props.type.equipable_on_type.includes(this.props.ship.type_display) : undefined
         // const remodels = this.props.ship.getSeriesData()
@@ -138,7 +172,8 @@ class ShipDetailsContentEquipableItem extends React.Component {
             <IconEquipment
                 className={classNames([this.props.className, {
                     'on': canEquip === true,
-                    'off': canEquip === false
+                    'off': canEquip === false,
+                    'is-special': isNotAV && canEquip && !canEquipShipType
                 }])}
                 icon={this.props.type.icon}
             >

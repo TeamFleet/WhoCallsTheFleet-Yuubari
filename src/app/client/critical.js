@@ -23,6 +23,7 @@ self.__BGIMG_LIST__ = __BGIMG_LIST__
 
 document.addEventListener("DOMContentLoaded", function () {
     // let boatLoader = document.createElement('div')
+    const boatLoader = document.getElementById('boat-loader')
     let tagHtml = document.getElementsByTagName('html')
     self.isMobile = false
     let platform = 'not-specified'
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // document.body.appendChild(boatLoader)
     bindEvent(
         // boatLoader,
-        document.getElementById('boat-loader'),
+        boatLoader,
         'transitionend',
         function (evt) {
             // console.log(evt, evt.target.style.opacity)

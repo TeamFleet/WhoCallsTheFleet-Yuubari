@@ -2,12 +2,19 @@
 
 .component{
     @color-on:              @theme-green-a100;
-    @color-on-background:   @theme-green-900;
+    @color-on-background:   darken(@theme-green-900, 10%);
     @color-on-border:       @theme-green-700;
 
     @color-off:             @color-fade;
     @color-off-background:  fade(@theme-bluegrey-900, 50%);
     @color-off-border:      @color-border;
+
+    // @color-special:              lighten(@theme-yellow-a100, 10%);
+    // @color-special-background:   darken(@theme-amber-900, 20%);
+    // @color-special-border:       @theme-amber-800;
+    @color-special:              lighten(@theme-lightblue-a100, 15%);
+    @color-special-background:   darken(@theme-lightblue-900, 10%);
+    @color-special-border:       @theme-lightblue-800;
 
     @padding-left:  (@equipmenticon-size - 10);
     padding:        5px 0 5px @padding-left;
@@ -35,7 +42,7 @@
         display:    inline-block;
         height:     @height;
         margin:     ((@equipmenticon-size - @height) / 2) 0 ((@equipmenticon-size - @height) / 2) -10px;
-        line-height:1.1em;
+        line-height:1.05em;
         position:   relative;
         z-index:    1;
         padding:    0 12px 0 25px;
@@ -56,6 +63,10 @@
             max-height: 100%;
             vertical-align: middle;
             transition-property: none;
+            small{
+                display:    block;
+                font-size:  12px;
+            }
         }
 
     .other{
@@ -178,6 +189,17 @@
         }
     }
 
+    &.is-special{
+        .name{
+            color:              @color-special;
+            background-color:   @color-special-border;
+        }
+        &:after{
+            background:     @color-special-background;
+            border-color:   @color-special-border;
+        }
+    }
+
     &.is-exslot{
         padding-top:    0;
         padding-bottom: 0;
@@ -188,6 +210,10 @@
         &:after{
             content:    initial;
         }
+    }
+
+    &.is-legend{
+        font-size:  14px;
     }
 
     &.equipment{

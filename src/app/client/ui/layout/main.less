@@ -10,7 +10,7 @@
     // overflow-x:     hidden;
     position:       relative;
     z-index:        2;
-    // min-height:     100vh;
+    min-height:     100vh;
 
     // animation:  slidein-from-right .75s ease-out;
     transform:      translate(100%, 0%);
@@ -19,6 +19,7 @@
     });
     .screen-tablet({
         transform:      translate(0%, 100vh);
+        min-height:     0;
         .is-mode-background({
             transform:  translate(0%, 100vh);
         });
