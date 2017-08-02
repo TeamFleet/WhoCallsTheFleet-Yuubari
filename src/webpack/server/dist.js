@@ -4,6 +4,7 @@ const common = require('../common')
 
 const getConfig = (appPath, type) => {
     // const publicPath = '/client'
+    const typeName = type ? type : 'default'
     const publicPath = `/${typeName}`
 
     return {
