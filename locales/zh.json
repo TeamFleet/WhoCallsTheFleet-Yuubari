@@ -168,6 +168,7 @@
 
         "equipable_exslot": "可装备于补强增设栏位",
         "equipable_exslot_and": "以及……",
+        "equipable_legend": "图例",
         "equipable_legend_no": "不可装备",
         "equipable_legend_yes": "可装备",
         "equipable_legend_yes_extra": "其他${type}不可"
