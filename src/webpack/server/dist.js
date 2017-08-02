@@ -2,8 +2,9 @@ const path = require('path')
 const webpack = require('webpack')
 const common = require('../common')
 
-module.exports = (appPath) => {
-    const publicPath = '/client'
+const getConfig = (appPath, type) => {
+    // const publicPath = '/client'
+    const publicPath = `/${typeName}`
 
     return {
         target: 'async-node',
@@ -37,3 +38,7 @@ module.exports = (appPath) => {
         resolve: common.resolve
     }
 }
+
+module.exports = (appPath) => [
+    getConfig(appPath, 'app')
+]
