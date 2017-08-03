@@ -11,7 +11,7 @@ import {
     init as shipDetailsInit,
     reset as shipDetailsReset,
     // changeTab as shipDetailsChangeTab,
-    changeIllust as shipDetailsChangeIllust
+    // changeIllust as shipDetailsChangeIllust
 } from '@appLogic/ship-details/api.js'
 
 import Header from './details/commons/header.jsx'
@@ -145,20 +145,20 @@ export default class PageShipDetails extends React.Component {
     tabIndex: state.shipDetails[ownProps.ship.id] ? state.shipDetails[ownProps.ship.id].tabIndex : undefined
 }))
 class PageShipDetailsBody extends React.Component {
-    onIllustChange(newIllustIndex) {
-        this.illustIndex = newIllustIndex
-        // if (newIllustIndex !== this.props.illustIndex) {
-        //     this.props.dispatch(
-        //         shipDetailsChangeIllust(this.props.ship.id, newIllustIndex)
-        //     )
-        // }
-    }
+    // onIllustChange(newIllustIndex) {
+    //     this.illustIndex = newIllustIndex
+    //     if (newIllustIndex !== this.props.illustIndex) {
+    //         this.props.dispatch(
+    //             shipDetailsChangeIllust(this.props.ship.id, newIllustIndex)
+    //         )
+    //     }
+    // }
 
-    componentWillUnmount() {
-        this.props.dispatch(
-            shipDetailsChangeIllust(this.props.ship.id, this.illustIndex)
-        )
-    }
+    // componentWillUnmount() {
+    //     this.props.dispatch(
+    //         shipDetailsChangeIllust(this.props.ship.id, this.illustIndex)
+    //     )
+    // }
 
     render() {
         // const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
@@ -166,8 +166,8 @@ class PageShipDetailsBody extends React.Component {
         if (__CLIENT__ && typeof this.props.tabIndex !== 'undefined')
             return React.createElement(contentComponents[this.props.tabIndex], {
                 ship: this.props.ship,
-                illustIndex: this.props.illustIndex,
-                onIllustChange: this.onIllustChange.bind(this)
+                // illustIndex: this.props.illustIndex,
+                // onIllustChange: this.onIllustChange.bind(this)
             })
 
         if (__SERVER__)

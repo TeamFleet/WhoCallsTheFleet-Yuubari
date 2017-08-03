@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 
@@ -8,6 +9,12 @@ import Icon from '@appUI/components/icon'
 
 import db from '@appLogic/database'
 import getPic from '@appUtils/get-pic.js'
+import {
+    // init as shipDetailsInit,
+    // reset as shipDetailsReset,
+    // changeTab as shipDetailsChangeTab,
+    changeIllust as shipDetailsChangeIllust
+} from '@appLogic/ship-details/api.js'
 // import translate from 'sp-i18n'
 
 import { ImportStyle } from 'sp-css-import'
@@ -20,6 +27,10 @@ const getExtraIllustPic = (ship, id, illustId) => {
 }
 
 // @connect()
+@connect((state, ownProps) => ({
+    // ...state.shipDetails[ownProps.ship.id]
+    defaulIndex: state.shipDetails[ownProps.ship.id] ? state.shipDetails[ownProps.ship.id].illustIndex : undefined
+}))
 @ImportStyle(styles)
 export default class ShipDetailsComponentSlotEquipments extends React.Component {
     constructor(props) {
@@ -85,6 +96,12 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     {time && time != name && <small>({time})</small>}
                 </span>
             </CSSTransition>
+        )
+    }
+
+    componentWillUnmount() {
+        this.props.dispatch(
+            shipDetailsChangeIllust(this.props.ship.id, this.state.swiperIndex)
         )
     }
 
