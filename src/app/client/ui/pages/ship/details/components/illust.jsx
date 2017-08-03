@@ -29,7 +29,7 @@ const getExtraIllustPic = (ship, id, illustId) => {
 // @connect()
 @connect((state, ownProps) => ({
     // ...state.shipDetails[ownProps.ship.id]
-    defaulIndex: state.shipDetails[ownProps.ship.id] ? state.shipDetails[ownProps.ship.id].illustIndex : undefined
+    defaultIndex: state.shipDetails[ownProps.ship.id] ? state.shipDetails[ownProps.ship.id].illustIndex : undefined
 }))
 @ImportStyle(styles)
 export default class ShipDetailsComponentSlotEquipments extends React.Component {
