@@ -1,0 +1,42 @@
+@import './_.less';
+
+.component{
+    @transition-duration:   (@duration-main-transition / 3 * 2);
+    @transition-duration-enter: @transition-duration;
+    @transition-delay:      (@transition-duration / 3);
+
+    padding-top:    @header-height;
+    .screen-phone({
+        padding-top:@header-height-phone;
+    });
+
+    .transition-enter {
+        opacity:    0.01 !important;
+        transform:  translateY(-1rem);
+        transition-property: opacity, transform;
+
+        .screen-phone({
+            //transform:  none;
+            transition-property: none;
+        });
+
+        &.transition-enter-active {
+            opacity:    1 !important;
+            transform:  none;
+            transition-duration: @transition-duration-enter;
+            // transition-timing-function: ease-in;
+        }
+
+        .delays(10);
+        .delays(@n, @i: 1) when (@i =< @n) {
+            & + .transition-enter {
+                transition-delay:   (@transition-delay * @i);
+                .delays(@n, (@i + 1));
+            }
+        }
+
+        &.results{
+            transform:  none;
+        }
+    }
+}

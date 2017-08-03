@@ -1,0 +1,103 @@
+@import './_.less';
+
+#main-mask .component{
+    &:after{
+        top:        (@header-height - 2);
+        bottom:     auto;
+        .screen-phone({
+            top:    (@header-height-phone - 2);
+        });
+    }
+}
+
+.component > .wrapper{
+    position:       relative;
+    z-index:        5;
+
+    // padding:        @margin 0;
+    height:         @header-height;
+    line-height:    @header-height;
+
+    .screen-tablet({
+        font-size:      14px;
+    });
+    .screen-phone({
+        font-size:      14px;
+        height:         @header-height-phone;
+        line-height:    @header-height-phone;
+    });
+}
+
+.component{
+    .body{
+        position:   relative;
+        z-index:    2;
+        height:     @header-height;
+        padding-left:   @width-filter;
+        .screen-phone({
+            height:         @header-height-phone;
+            padding-left:   0;
+            display:        flex;
+            flex-flow:      row nowrap;
+            &:before{
+                content:    "";
+                display:    block;
+                flex:       1 1 58%;
+            }
+        });
+    }
+}
+
+.component.is-compare{
+    // padding-bottom: @height-compare-thead;
+    animation:  ship-list-header-compare-enter @base-transition-duration @base-transition-timing-function;
+    animation-fill-mode: forwards;
+    will-change:padding-bottom;
+    &.is-compare-leaving{
+        animation-name: ship-list-header-compare-leave;
+    }
+    // &:before{
+    //     content:    "";
+    //     position:   absolute;
+    //     bottom:     -1px;
+    //     height:     1px;
+    //     background: @color-border;
+    //     left:       @main-margin;
+    //     right:      @main-margin;
+    //     .screen-tablet({
+    //         left:   @main-margin-tablet;
+    //         right:  @main-margin-tablet;
+    //     });
+    //     .screen-phone({
+    //         left:   @main-margin-phone;
+    //         right:  @main-margin-phone;
+    //     });
+    // }
+}
+
+.component.is-compare[data-compare-state="comparing"]{
+    .body{
+        transform:  translateY(-2rem);
+        opacity:    0;
+        z-index:    -1;
+        pointer-events: none;
+    }
+}
+
+@keyframes ship-list-header-compare-enter {
+    0% {
+        padding-bottom: 0;
+    }
+    100% {
+        padding-bottom: (@header-height-thead + 0);
+    }
+}
+
+@keyframes ship-list-header-compare-leave {
+    0% {
+        padding-bottom: (@header-height-thead + 0);
+    }
+    100% {
+        padding-bottom: 0;
+    }
+}

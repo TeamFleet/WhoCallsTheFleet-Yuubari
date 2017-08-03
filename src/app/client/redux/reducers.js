@@ -9,9 +9,12 @@ import equipmentListReducer from '@appLogic/equipment-list/reducer'
 export default [
     ['appMode', appModeReducer],
     ['bgimg', bgimgReducer],
-    ['pageTitle', pageTitleReducer],
     ['timeSwipedFromLeftEdge', sideMenuReducer],
+
+    ['pageTitle', pageTitleReducer],
+
     ['shipList', shipListReducer],
     ['shipDetails', shipDetailsReducer],
-    ['equipmentDetails', equipmentListReducer]
+
+    ['equipmentList', equipmentListReducer]
 ]

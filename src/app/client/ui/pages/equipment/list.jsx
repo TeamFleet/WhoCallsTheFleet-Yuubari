@@ -7,11 +7,20 @@ import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
+import {
+    reset as equipmentListReset
+} from '@appLogic/equipment-list/api.js'
+
+import EquipmentList from '@appUI/components/equipment-list'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './list.less'
 
-@connect()
+const equipmentListId = 'pageEquipmentList'
+
+@connect(state => ({
+    isEquipmentListInit: (typeof state.equipmentList[equipmentListId] !== 'undefined')
+}))
 @ImportStyle(style)
 export default class About extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
@@ -24,8 +33,18 @@ export default class About extends React.Component {
         ext.title = head.title
     }
 
+    componentWillMount() {
+        if (this.props.isEquipmentListInit && this.props.location.action === 'PUSH')
+            this.props.dispatch(equipmentListReset(equipmentListId))
+    }
+
     render() {
         if (__DEV__) console.log('Equipment Collections', db.equipmentCollections)
+        return (
+            <PageContainer className={this.props.className} >
+                <EquipmentList id={equipmentListId} />
+            </PageContainer>
+        )
         return (
             <PageContainer
                 className={this.props.className}
@@ -48,8 +67,8 @@ export default class About extends React.Component {
                                 </ul>
                             </div>
                         ))}
-                        <hr/>
-                        <br/>
+                        <hr />
+                        <br />
                     </div>
                 ))}
             </PageContainer>

@@ -1,0 +1,45 @@
+@import './_.less';
+
+.component{
+    position:   relative;
+    z-index:    2;
+
+    .item{
+        .style-tab();
+        height:     (@header-height-tabs - 1);
+        margin-left:@gutter;
+    }
+
+    .screen-max({
+        .item{
+            margin-left:1.25vw;
+        }
+    });
+    .screen-tablet({
+        .item{
+            margin-left:1vw;
+        }
+    });
+
+    .screen-phone({
+        // border-left:    1px solid @color-border;
+        height:         (@header-height-tabs-phone - 2);
+        flex:           1 1 42%;
+        &:before{
+            content:    "";
+            position:   absolute;
+            top:        0;
+            bottom:     0;
+            left:       0;
+            width:      1px;
+            background: scrim-gradient(to bottom, fade(@color-border, 0%), @color-border);
+        }
+        .select{
+            display:    block;
+            padding-left:   @main-margin-phone;
+        }
+        .item{
+            display:    none;
+        }
+    });
+}

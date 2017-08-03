@@ -15,9 +15,7 @@ import Title from '@appUI/components/title.jsx'
 import { ImportStyle } from 'sp-css-import'
 import styles from './header.less'
 
-@connect((state, ownProps) => ({
-    ...state.shipDetails[ownProps.ship.id]
-}))
+@connect((state, ownProps) => state.shipDetails[ownProps.ship.id])
 @ImportStyle(styles)
 export default class ShipDetailsHeader extends React.Component {
     renderTab(tabName, index) {
