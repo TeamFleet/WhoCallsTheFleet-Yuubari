@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Link from '@appUI/components/link'
+// import Link from '@appUI/components/link'
 
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
@@ -45,33 +45,33 @@ export default class About extends React.Component {
                 <EquipmentList id={equipmentListId} />
             </PageContainer>
         )
-        return (
-            <PageContainer
-                className={this.props.className}
-            >
-                <p><i>{translate('under_construction')}...</i></p>
-                {db.equipmentCollections.map((collection, collectionIndex) => (
-                    <div key={collectionIndex}>
-                        <h3>{collection.name}</h3>
-                        {collection.list.map((list, listIndex) => (
-                            <div key={`${collectionIndex}-${listIndex}`}>
-                                <h5>{db.equipmentTypes[list.type]._name}</h5>
-                                <ul>
-                                    {list.equipments.map((equipment, equipmentIndex) => (
-                                        <li key={`${collectionIndex}-${listIndex}-${equipmentIndex}`}>
-                                            <Link to={`/equipments/${equipment.id}`}>
-                                                {equipment._name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                        <hr />
-                        <br />
-                    </div>
-                ))}
-            </PageContainer>
-        )
+        // return (
+        //     <PageContainer
+        //         className={this.props.className}
+        //     >
+        //         <p><i>{translate('under_construction')}...</i></p>
+        //         {db.equipmentCollections.map((collection, collectionIndex) => (
+        //             <div key={collectionIndex}>
+        //                 <h3>{collection.name}</h3>
+        //                 {collection.list.map((list, listIndex) => (
+        //                     <div key={`${collectionIndex}-${listIndex}`}>
+        //                         <h5>{db.equipmentTypes[list.type]._name}</h5>
+        //                         <ul>
+        //                             {list.equipments.map((equipment, equipmentIndex) => (
+        //                                 <li key={`${collectionIndex}-${listIndex}-${equipmentIndex}`}>
+        //                                     <Link to={`/equipments/${equipment.id}`}>
+        //                                         {equipment._name}
+        //                                     </Link>
+        //                                 </li>
+        //                             ))}
+        //                         </ul>
+        //                     </div>
+        //                 ))}
+        //                 <hr />
+        //                 <br />
+        //             </div>
+        //         ))}
+        //     </PageContainer>
+        // )
     }
 }

@@ -12,10 +12,11 @@ import {
 } from '@appLogic/equipment-list/api.js'
 // import { REALTIME_LOCATION_REDUCER_NAME } from '@app/client/redux/realtime-location'
 
-// import Title from './title.jsx'
+import Title from './title.jsx'
 // import List from './list.jsx'
 import Header from './header.jsx'
 // import TableBody from './table-body.jsx'
+import Link from '@appUI/components/link'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './body.less'
@@ -66,8 +67,14 @@ class EquipmentListBody extends React.Component {
                             'last': typeIndex === collection.list.length - 1
                         })}
                     >
-                        <h2>{type.type}</h2>
-                        <div>{JSON.stringify(type.equipments)}</div>
+                        <Title id={this.props.id} type={type.type} />
+                        <div>
+                            {type.equipments.map(equipment => (
+                                <div key={equipment.id}>
+                                    <Link to={`/equipments/${equipment.id}`}>{equipment._name}</Link>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </CSSTransitionComponent>
             )
