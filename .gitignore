@@ -42,7 +42,7 @@ dist-app
 dist-web
 
 # builds
-/src/client/logic/database/db
+/src/app/client/logic/database/db
 
 
 # Personal code
