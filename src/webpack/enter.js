@@ -71,6 +71,7 @@ const run = async (config) => {
         // http://webpack.github.io/docs/webpack-dev-server.html
         const server = new WebpackDevServer(compiler, {
             quiet: true,
+            stats: { colors: true },
             hot: true,
             inline: true,
             contentBase: './',
