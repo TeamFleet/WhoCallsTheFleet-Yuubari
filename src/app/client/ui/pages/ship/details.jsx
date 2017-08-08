@@ -34,6 +34,17 @@ if (__CLIENT__)
         contentComponents[index] = require(`./details/${tab}.jsx`).default
     })
 
+const extracFromState = (state) => {
+    const pathname = state.routing.locationBeforeTransitions.pathname
+    const segs = pathname.split('/')
+    const indexShips = segs.indexOf('ships')
+
+    return {
+        id: parseInt(segs[indexShips + 1]),
+        tab: segs[indexShips + 2] || tabsAvailable[0]
+    }
+}
+
 const getShipType = ship => {
     // if (ship.type && ship.type_display && ship.type !== ship.type_display)
     //     return db.shipTypes[ship.type_display]._name + ' (' + ship._type + ')'
@@ -44,6 +55,29 @@ const getShipType = ship => {
     return ''
 }
 
+const getDescription = ship => {
+    const getShipType = () => {
+        if (ship.type && ship.type_display && ship.type !== ship.type_display)
+            return db.shipTypes[ship.type_display]._name + ' (' + ship._type + ')'
+        if (ship.type)
+            return ship._type
+        return ''
+    }
+    return ship._name
+        // 舰级 & 舰种
+        + `, ${ship.class_no
+            ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
+            : translate("shipclass", { class: ship._class })}`
+        // 类型
+        + `${ship.class && ship.type ? `, ${getShipType()}` : ''}`
+        // 军籍
+        + ` | ${translate("ship_details.navy")}: ${ship._navyName}`
+        // CV
+        + `, ${translate("ship_details.cv")}: ${ship._cv}`
+        // 画师
+        + `, ${translate("ship_details.illustrator")}: ${ship._illustrator}`
+}
+
 @connect((state, ownProps) => state.shipDetails[ownProps.params.id])
 @ImportStyle(style)
 export default class PageShipDetails extends React.Component {
@@ -52,11 +86,7 @@ export default class PageShipDetails extends React.Component {
         const dispatch = store.dispatch
         const preprocessTasks = []
 
-        const pathname = state.routing.locationBeforeTransitions.pathname
-        const segs = pathname.split('/')
-        const indexShips = segs.indexOf('ships')
-        const id = parseInt(segs[indexShips + 1])
-        const tab = segs[indexShips + 2] || tabsAvailable[0]
+        const { id, tab } = extracFromState(state)
 
         preprocessTasks.push(
             dispatch(
@@ -68,18 +98,21 @@ export default class PageShipDetails extends React.Component {
         return preprocessTasks
     }
     static onServerRenderHtmlExtend(ext, store) {
-        const ship = db.ships[store.getState().routing.locationBeforeTransitions.pathname.split('/')[2]]
+        const { id/*, tab*/ } = extracFromState(store.getState())
+
+        const ship = db.ships[id]
         const head = htmlHead({
             store,
             title: ship._name,
             subtitle: (ship.class_no
                 ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
                 : translate("shipclass", { class: ship._class }))
-            + (ship.class && ship.type && ` / ${getShipType(ship)}`)
+            + (ship.class && ship.type && ` / ${getShipType(ship)} `),
+            description: getDescription(ship)
         })
 
         ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
+        ext.title = head.title// + translate("ship_details." + tab)
     }
 
     get ship() {

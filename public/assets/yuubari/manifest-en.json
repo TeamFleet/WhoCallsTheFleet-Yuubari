@@ -1,7 +1,12 @@
 {
-    "short_name": "The Fleet",
-    "name": "Who Calls the Fleet (Yuubari)",
+    "short_name": "The Fleet (DEV)",
+    "name": "Who Calls the Fleet (DEV)",
     "icons": [
+        {
+            "src": "icon-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
         {
             "src": "icon-128.png",
             "sizes": "128x128",

@@ -1,13 +1,21 @@
 {
-    "short_name": "呼叫舰队",
-    "name": "是谁呼叫舰队 (Yuubari)",
+    "short_name": "呼叫舰队-DEV",
+    "name": "是谁呼叫舰队 (DEV)",
     "icons": [
+        {
+            "src": "icon-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
         {
             "src": "icon-128.png",
             "sizes": "128x128",
             "type": "image/png"
         }
     ],
+    "background_color": "#212121",
+    "theme_color": "#263238",
+
     "start_url": "/?utm_source=web_app_manifest",
     "display": "standalone",
     "orientation": "portrait"

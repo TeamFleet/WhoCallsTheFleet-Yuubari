@@ -73,11 +73,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 检查 WebP 支持
-    const webP = new Image();
-    webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
-    webP.onload = webP.onerror = function () {
-        if (webP.height === 2) tagHtml.classList.add('webp')
+    const canUseWebP = () => {
+        var elem = document.createElement('canvas');
+
+        if (elem.getContext && elem.getContext('2d')) {
+            // was able or not to get WebP representation
+            return elem.toDataURL('image/webp').indexOf('data:image/webp') == 0;
+        }
+        else {
+            // very old browser like IE 8, canvas not supported
+            return false;
+        }
     }
+    // const webP = new Image();
+    // webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+    // webP.onload = webP.onerror = function () {
+    //     if (webP.height === 2) tagHtml.classList.add('webp')
+    // }
+    if (canUseWebP()) tagHtml.classList.add('webp')
 
     // 开发模式: 插入SVG图标库
     // if (__DEV__) {

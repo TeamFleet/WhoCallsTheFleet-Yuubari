@@ -14,7 +14,7 @@ export default (settings = {}) => {
     let fb_locale
     let fb_app_id = fb_app_id
     let dispatch
-    const siteName = translate('title')
+    const siteName = translate('title') + (__DEV__ ? ' (DEV)' : '')
 
     /**
      * 默认选项
