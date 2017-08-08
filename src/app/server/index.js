@@ -68,7 +68,11 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
     // 例如：<script>//inject_critical</script>  替换为 critical
     inject: {
         htmlattr: () => ` data-locale="${currentLocaleId}" lang="${currentLocaleId}"`,
-        manifest: () => `<link rel="manifest" href="/manifest-${currentLocaleId}.json">`,
+        manifest: () => {
+            const filename = `manifest-${currentLocaleId}.json`
+            const { mtime } = __DEV__ ? '' : fs.statSync(path.join(rootPath, filename))
+            return `<link rel="manifest" href="/${filename}?${mtime ? mtime.valueOf() : ''}">`
+        },
         svg_symbols: `<div class="hide">${__ICONSVG__}</div>`,
 
         critical: `<script src="${getFile('critical.js')}"></script>`,
@@ -80,8 +84,7 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
                     fs.readFileSync(
                         path.join(rootPath, getFile('critical.css')),
                         'utf-8'
-                    )
-                }</style>`
+                    )}</style>`
         })(),
         critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
         js: (() => ([
