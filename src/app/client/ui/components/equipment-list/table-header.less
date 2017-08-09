@@ -1,0 +1,64 @@
+@import './_.less';
+
+.component{
+    height:         @header-height-thead;
+
+    // ******************************************
+
+    &.flex{
+        .table();
+
+        // .row{
+        //     height:     @header-height-thead;
+        // }
+
+        .cell{
+            height:     @header-height-thead;
+            line-height:@header-height-thead;
+        }
+
+        // .row .cell{
+        //     &:nth-child(n+2){
+        //         .screen-max({
+        //             font-size:  13px;
+        //             .locale-en({
+        //                 font-size:  12px;
+        //                 // font-family:@font-famliy-serif-number;
+        //             });
+        //         });
+        //     }
+        // }
+
+        // ******************************************
+
+        margin-left:        auto;
+        .main-sizing-position-reset-margin();
+        padding-left:       0;
+        padding-right:      1em;
+
+        // .screen-max({
+        //     padding-left:    (@main-margin - 15px);
+        //     padding-right:   (@main-margin - 15px);
+        // });
+
+        // .screen-t1({
+        //     padding-left:    (@main-margin - 30px);
+        //     padding-right:   (@main-margin - 25px);
+        // });
+
+        // .screen-tablet({
+        //     padding-left:    0;
+        //     padding-right:   0;
+        //     .cell.is-sorting{
+        //         order:      2;
+        //     }
+        // });
+
+        // .screen-phone({
+        //     padding-left:    0;
+        //     padding-right:   0;
+        // });
+    }
+
+    // ******************************************
+}

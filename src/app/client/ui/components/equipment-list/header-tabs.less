@@ -1,45 +1,90 @@
 @import './_.less';
 
 .component{
+    @size-icon: 24px;
+    @count:     unit(192 / @size-icon);
+
     position:   relative;
     z-index:    2;
+    overflow:   hidden;
+    margin-left:(0 - @gutter);
+    margin-left:(0 - 2vw);
+    margin-bottom:  -1px;
 
     .item{
         .style-tab();
-        height:     (@header-height-tabs - 1);
+        height:     (@header-height-tabs + 1);
         margin-left:@gutter;
-    }
+        margin-left:2vw;
+        float:      left;
+        position:   relative;
+        line-height:1.2em;
+        display:    flex;
+        flex-flow:  row nowrap;
+        align-items:center;
+        padding-left:   (@size-icon + 4);
 
-    .screen-max({
-        .item{
-            margin-left:1.25vw;
-        }
-    });
-    .screen-tablet({
-        .item{
-            margin-left:1vw;
-        }
-    });
-
-    .screen-phone({
-        // border-left:    1px solid @color-border;
-        height:         (@header-height-tabs-phone - 2);
-        flex:           1 1 42%;
         &:before{
             content:    "";
+            background: url("../../../assets/equipment-catagories.png") no-repeat 50% 0% / cover;
+            width:      @size-icon;
+            height:     @size-icon;
             position:   absolute;
-            top:        0;
-            bottom:     0;
+            top:        50%;
             left:       0;
-            width:      1px;
-            background: scrim-gradient(to bottom, fade(@color-border, 0%), @color-border);
+            margin-top: (0 - @size-icon / 2);
+            opacity:    0.4;
         }
-        .select{
-            display:    block;
-            padding-left:   @main-margin-phone;
+
+        &:after{
+            content:    ~"@{count}";
         }
+
+        &.on, &:hover{
+            &:before{
+                opacity:    1;
+            }
+        }
+
+        &:active{
+            &:before{
+                opacity:    .4;
+            }
+        }
+
+        .loop-icon-position(@n, @i: 1) when (@i =< @n) {
+            &[data-tab-index="@{i}"]:before {
+                background-position: 50% percentage((@i - 1) / (@count - 1));
+            }
+            .loop-icon-position(@n, (@i + 1));
+        }
+        .loop-icon-position(@count);
+    }
+
+    .screen-t1({
+        font-size:      14px;
+        margin-left:    (0 - @gutter);
         .item{
-            display:    none;
+            margin-left:    @gutter;
+        }
+    });
+
+    .screen-tablet({
+        display:    flex;
+        flex-flow:  row nowrap;
+        margin:     0;
+        .item{
+            margin:     0;
+            float:      none;
+            flex:       1;
+            padding:    0;
+            &:before{
+                left:       50%;
+                margin-left:(0 - @size-icon / 2);
+            }
+            .name{
+                display:    none;
+            }
         }
     });
 }

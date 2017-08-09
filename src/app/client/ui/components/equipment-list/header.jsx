@@ -13,7 +13,7 @@ import MainHeader from '@appUI/components/main-header.jsx'
 // import Icon from '@appUI/components/icon.jsx'
 // import Button from '@appUI/components/button.jsx'
 // import ButtonGroup from '@appUI/components/button-group.jsx'
-// import TableHeader from './table-header.jsx'
+import TableHeader from './table-header.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import styleHeader from './header.less'
@@ -24,12 +24,8 @@ export default class EquipmentListHeader extends React.Component {
     render() {
         return (
             <MainHeader className={this.props.className}>
-                <div className="wrapper" ref={el => this._wrapper = el}>
-                    <div className="body">
-                        <Tabs id={this.props.id} />
-                    </div>
-                    {/* <TableHeader id={this.props.id} /> */}
-                </div>
+                <Tabs id={this.props.id} />
+                <TableHeader id={this.props.id} />
             </MainHeader>
         )
     }
@@ -53,11 +49,16 @@ class Tabs extends React.Component {
                     <span
                         key={index}
                         className={'link item' + (this.props.collection === index ? ' on' : '')}
+                        data-tab-index={index + 1}
                         onClick={() => {
                             this.onTabClick(index)
                         }}
                     >
-                        {collection.name}
+                        <span className="name"
+                            dangerouslySetInnerHTML={{
+                                __html: collection.name.split('&').join('<br>')
+                            }}
+                        />
                     </span>
                 ))}
             </div>
