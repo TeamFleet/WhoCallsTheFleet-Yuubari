@@ -33,8 +33,6 @@
 
         margin-left:        auto;
         .main-sizing-position-reset-margin();
-        padding-left:       0;
-        padding-right:      1em;
 
         // .screen-max({
         //     padding-left:    (@main-margin - 15px);
@@ -58,6 +56,12 @@
         //     padding-left:    0;
         //     padding-right:   0;
         // });
+
+        .screen-phone({
+            .row .cell[data-stat]{
+                transform:  rotate(-30deg);
+            }
+        });
     }
 
     // ******************************************

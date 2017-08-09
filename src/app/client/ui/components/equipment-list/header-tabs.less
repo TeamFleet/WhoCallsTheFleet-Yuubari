@@ -52,6 +52,10 @@
             }
         }
 
+        .name{
+            transition:     none;
+        }
+
         .loop-icon-position(@n, @i: 1) when (@i =< @n) {
             &[data-tab-index="@{i}"]:before {
                 background-position: 50% percentage((@i - 1) / (@count - 1));

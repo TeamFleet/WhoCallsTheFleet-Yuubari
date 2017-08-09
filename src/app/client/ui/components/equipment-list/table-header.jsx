@@ -17,19 +17,17 @@ const headers = [
     '',
     'fire',
     'torpedo',
-    'night',
     'aa',
     'asw',
-    'hp',
+    'bomb',
+    'hit',
     'armor',
     'evasion',
-    'carry',
-    'speed',
-    'range',
     'los',
-    'luck',
-    'consum.fuel',
-    'consum.ammo'
+    'range',
+
+    'equipment.craftable',
+    'equipment.improvable'
 ]
 
 @ImportStyle(style)
@@ -91,7 +89,13 @@ export default class ShipListTableHeader extends React.Component {
             <DataTable
                 className={this.props.className}
                 tag="div"
-                headers={headers.map(stat => stat ? translate('stat.' + stat) : null)}
+                headers={headers.map(stat => ([
+                    stat ? translate('stat.' + stat) : null,
+                    {
+                        className: !stat ? 'cell-name' : undefined,
+                        "data-stat": stat.replace(/^equipment\./, '') || undefined
+                    }
+                ]))}
             />
         )
     }

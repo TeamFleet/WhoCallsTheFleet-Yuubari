@@ -41,9 +41,15 @@
         "range": "Range",
         "los": "LOS",
         "luck": "Luck",
+        "bomb": "Bomb",
+        "hit": "Hit",
         "consum": {
             "fuel": "Fuel",
             "ammo": "Ammo"
+        },
+        "equipment": {
+            "craftable": "Craft",
+            "improvable": "Improve"
         }
     },
 

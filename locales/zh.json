@@ -41,9 +41,15 @@
         "range": "射程",
         "los": "索敌",
         "luck": "运",
+        "bomb": "爆装",
+        "hit": "命中",
         "consum": {
             "fuel": "燃耗",
             "ammo": "弹耗"
+        },
+        "equipment": {
+            "craftable": "开发",
+            "improvable": "改修"
         }
     },
 
