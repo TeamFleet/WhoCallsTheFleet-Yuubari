@@ -41,9 +41,6 @@ node_modules/
 dist-app
 dist-web
 
-# builds
-/src/app/client/logic/database/db
-
 
 # Personal code
 
@@ -54,3 +51,4 @@ dist-web
 /_.cmd
 .eslintrc.full
 /game_data
+/src/app/client/logic/database/db
