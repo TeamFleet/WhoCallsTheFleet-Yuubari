@@ -1,4 +1,4 @@
-export const I18N_INIT = 'I18N_INIT'
+// export const I18N_INIT = 'I18N_INIT'
 
 // app-mode
 export const RESET_APPMODE = 'RESET_APPMODE'
