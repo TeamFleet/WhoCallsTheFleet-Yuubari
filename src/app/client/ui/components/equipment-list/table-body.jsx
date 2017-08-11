@@ -65,12 +65,11 @@ export default class EquipmentListTableBody extends React.Component {
                         trueValue = 0
                         className += ' empty'
                     }
-                } else if (value === false || value === 0) {
+                } else if (value < 0) {
+                    className += ' negative'
+                } else if (!value) {
                     className += ' empty'
                     content = '-'
-                } else if (value === undefined || value === -1) {
-                    className += ' undefined'
-                    content = '?'
                 } else {
                     if (stat === 'range' || stat === 'speed') {
                         trueValue = value
