@@ -70,16 +70,19 @@
             font-size:  unit(12 / 16, em);
         }
     
-    &:hover{
+    .is-hover({
         &:after{
             background: fade(#000, 15%);
         }
         .name-suffix{
             color:      inherit;
         }
-    }
+    });
     
     &:active{
+        &:after{
+            background: fade(#000, 15%);
+        }
         .name-suffix{
             color:      inherit;
             transition: inherit;

@@ -33,8 +33,14 @@
             border-bottom-left-radius: 0;
         }
 
-        &:hover, &:active{
+        .style-hover() {
             z-index:    1;
+        }
+        .is-hover({
+            .style-hover();
+        });
+        &:active{
+            .style-hover();
         }
         &:focus{
             z-index:    5;

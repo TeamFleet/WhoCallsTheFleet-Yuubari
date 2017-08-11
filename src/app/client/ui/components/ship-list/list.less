@@ -30,6 +30,15 @@
                 color:      inherit;
                 transition: inherit;
             }
+            .is-hover({
+                &:after{
+                    background: fade(@color-accent, 50%);
+                }
+            }; {
+                &:after{
+                    background: fade(@color-accent, 35%);
+                }
+            })
         }
     }
 }

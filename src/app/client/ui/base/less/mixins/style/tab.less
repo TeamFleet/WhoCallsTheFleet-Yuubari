@@ -6,9 +6,12 @@
     position:   relative;
     border-bottom:  2px solid transparent;
 
-    &:hover{
+    .is-hover({
         color:  #fff;
-    }
+        &:active{
+            color:  @color-active;
+        }
+    });
 
     &:active{
         color:  @color-active;

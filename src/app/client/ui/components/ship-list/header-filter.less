@@ -57,9 +57,11 @@
             background: transparent;
             border-radius:  0;
             vertical-align: top;
-            &:hover:not(:focus){
-                background: inherit;
-            }
+            .is-hover({
+                &:not(:focus){
+                    background: inherit;
+                }
+            });
             &:focus{
                 box-shadow: none;
             }

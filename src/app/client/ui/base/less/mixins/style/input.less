@@ -4,10 +4,16 @@
     color:      @theme-bluegrey-100;
     font:       inherit;
 
-    &:hover,
-    &:focus{
+    .hover() {
         background-color:   fade(@theme-bluegrey-200, 15%);
     }
+
+    &:focus{
+        .hover();
+    }
+    .is-hover({
+        .hover();
+    });
 
     &:focus{
         border-color:   @color-accent;

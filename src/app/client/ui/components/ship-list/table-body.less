@@ -16,14 +16,14 @@
                     });
                 }
             }
-            &:hover{
+            .is-hover({
                 background:     linear-gradient(to right, transparent, fade(#fff, 7.5%) 150px);
-            }
+            });
             .screen-tablet({
                 border-top-color:   transparent;
-                &:hover{
+                .is-hover({
                     background: none;
-                }
+                });
                 &:before{
                     content:    "";
                     position:   absolute;
@@ -36,11 +36,13 @@
                     transition: none;
                     z-index:    -1;
                 }
-                &:hover:before{
-                    height:     (@ship-link-height + 10px);
-                    background: linear-gradient(to bottom, @color-border, @color-border 1px, transparent 1px, transparent 2px, fade(#fff, 7.5%) 2px);
-                    margin-top: -1px;
-                }
+                .is-hover({
+                    &:before{
+                        height:     (@ship-link-height + 10px);
+                        background: linear-gradient(to bottom, @color-border, @color-border 1px, transparent 1px, transparent 2px, fade(#fff, 7.5%) 2px);
+                        margin-top: -1px;
+                    }
+                });
             });
             .sku-webapp({
                 cursor:     pointer;
@@ -83,11 +85,11 @@
         .screen-phone({
             margin-left:    (0 - @main-margin-phone);
             margin-right:   (0 - @main-margin-phone);
-            .body{
-                .cell:hover:after{
-                    display: none;
-                }
-            }
+            // .body{
+            //     .cell:hover:after{
+            //         display: none;
+            //     }
+            // }
         });
     }
 
@@ -144,20 +146,19 @@
     // ******************************************
 
     .body{
-        .cell.stat-fire:hover:after{
-            background-color:	hsla(6, 85%, 40%, .20);
+        .stat-color(@stat, @color){
+            .cell.stat-@{stat}{
+                .is-hover({
+                    &:after{
+                        background-color:	@color;
+                    }
+                });
+            }
         }
-        .cell.stat-torpedo:hover:after{
-            background-color:	hsla(207, 85%, 40%, .20);
-        }
-        .cell.stat-night:hover:after{
-            background-color:	fade(mix(hsl(6, 85%, 40%), hsl(207, 85%, 40%)), 40%);
-        }
-        .cell.stat-aa:hover:after{
-            background-color:	hsla(26, 85%, 40%, .20);
-        }
-        .cell.stat-armor:hover:after{
-            background-color:	hsla(39, 85%, 40%, .20);
-        }
+        .stat-color(fire, hsla(6, 85%, 40%, .20));
+        .stat-color(torpedo, hsla(207, 85%, 40%, .20));
+        .stat-color(night, fade(mix(hsl(6, 85%, 40%), hsl(207, 85%, 40%)), 40%));
+        .stat-color(aa, hsla(26, 85%, 40%, .20));
+        .stat-color(armor, hsla(39, 85%, 40%, .20));
     }
 }

@@ -107,21 +107,29 @@
                 transform:  scale(unit(8 / @swiper-bullet-size));
                 border-radius: 50%;
             }
-            &:hover:before{
-                background: @color-base;
-            }
+            .is-hover({
+                &:before{
+                    background: @color-base;
+                }
+            }; {
+                &:before{
+                    background: @color-border;
+                }
+            });
         }
             .swiper-pagination-bullet-active{
                 z-index:    -1;
                 pointer-events: none;
-            }
-            .swiper-pagination-bullet-active:before{
-                transform:  scale(unit(16 / @swiper-bullet-size));
-                background: fade(@color-accent, 35%);
-                border:     2px solid @color-accent;
-            }
-            .swiper-pagination-bullet-active:hover:before{
-                background: fade(@color-accent, 35%);
+                &:before{
+                    transform:  scale(unit(16 / @swiper-bullet-size));
+                    background: fade(@color-accent, 35%);
+                    border:     2px solid @color-accent;
+                }
+                .is-hover({
+                    &:before{
+                        background: fade(@color-accent, 35%);
+                    }
+                });
             }
         .swiper-button-prev,
         .swiper-button-next{
@@ -130,9 +138,15 @@
                 height: @swiper-button-size;
                 fill:   @color-fade;
             }
-            &:hover .icon{
-                fill:   @color-base;
-            }
+            .is-hover({
+                .icon{
+                    fill:   @color-base;
+                }
+            }; {
+                .icon{
+                    fill:   @color-border;
+                }
+            });
         }
         .swiper-lazy-loaded{
             animation:  fadein @base-transition-duration @base-transition-timing-function;

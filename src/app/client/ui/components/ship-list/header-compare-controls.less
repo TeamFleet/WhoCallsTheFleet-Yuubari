@@ -37,12 +37,18 @@
             vertical-align: text-top;
             fill:   @color-base;
         }
-        &:hover{
+        .is-hover({
             color:  #fff;
             .icon{
                 fill:   #fff;
             }
-        }
+            &:active{
+                color:  @color-active;
+                .icon{
+                    fill:   @color-active;
+                }
+            }
+        });
         &:active{
             color:  @color-active;
             .icon{

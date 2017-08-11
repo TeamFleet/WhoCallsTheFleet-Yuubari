@@ -96,9 +96,12 @@
             background-image: url('../../assets/appicon.png');
             color:      transparent;
             overflow:   hidden;
-            &:hover{
+            .is-hover({
                 filter: brightness(1.2);
-            }
+                &:active{
+                    filter: brightness(0.8);
+                }
+            });
             &:active{
                 filter: brightness(0.8);
             }
@@ -156,9 +159,12 @@
             padding:    3px 0 3px 20px;
             position:   relative;
             margin-top: 4px;
-            &:hover{
+            .is-hover({
                 color:  #fff;
-            }
+                &:active{
+                    color:  @color-active;
+                }
+            });
             &:active{
                 color:  @color-active;
             }

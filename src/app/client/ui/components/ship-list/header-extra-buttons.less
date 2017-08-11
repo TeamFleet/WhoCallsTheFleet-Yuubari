@@ -18,13 +18,19 @@
             vertical-align: text-top;
             margin-right: 4px;
         }
-        &:hover{
+        .is-hover({
             // color:  @color-base;
             color:  #fff;
             .icon{
                 fill:   #fff;
             }
-        }
+            &:active{
+                color:  @color-active;
+                .icon{
+                    fill:   @color-active;
+                }
+            }
+        });
         &:active{
             color:  @color-active;
             .icon{
@@ -58,8 +64,15 @@
                 .icon-close{
                     opacity:1;
                 }
+                .is-hover({
+                    color:  transparent;
+                    .icon{
+                        fill:   transparent;
+                    }
+                });
             }
         }
+
 
     .screen-phone({
         position:       relative;
@@ -81,10 +94,22 @@
             .icon{
                 fill:   @color-base;
             }
-            &:hover{
-                color:  inherit;
+            .is-hover({
+                color:  #fff;
                 .icon{
-                    fill:   @color-base;
+                    fill:   #fff;
+                }
+                &:active{
+                    color:  @color-active;
+                    .icon{
+                        fill:   @color-active;
+                    }
+                }
+            });
+            &:active{
+                color:  @color-active;
+                .icon{
+                    fill:   @color-active;
                 }
             }
             &.on{
@@ -94,14 +119,20 @@
                 }
             }
         }
-        .btn-toggle-compare{
-            &.on{
-                color:      transparent;
-                .icon{
-                    fill:   transparent;
+            .btn-toggle-compare{
+                &.on{
+                    color:      transparent;
+                    .icon{
+                        fill:   transparent;
+                    }
+                    .is-hover({
+                        color:  transparent;
+                        .icon{
+                            fill:   transparent;
+                        }
+                    });
                 }
             }
-        }
     });
 }
 

@@ -221,9 +221,11 @@
                 transition: none;
                 border-radius: 1px;
             }
-            &:hover:before{
-                color:      @color-base;
-            }
+            .is-hover({
+                &:before{
+                    color:      @color-base;
+                }
+            });
         }
             // .tick-minlv{
             //     margin-left: (0 - @slider-tick-size / 2);

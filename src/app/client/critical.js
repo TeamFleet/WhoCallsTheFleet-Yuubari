@@ -118,19 +118,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 利用 pointer event 判断当前是否为 hover
     if (window.PointerEvent) {
+        tagHtml.classList.add('is-hover')
         document.body.addEventListener("pointerenter", (evt) => {
             if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
                 tagHtml.classList.add('is-hover')
+            else
+                tagHtml.classList.remove('is-hover')
         });
         document.body.addEventListener("pointerleave", () => {
-            // if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
             tagHtml.classList.remove('is-hover')
         });
-        // this.container.addEventListener("pointerout", (evt) => {
-        //     if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
-        //         if (evt.target.classList.contains('item'))
-        //             evt.target.classList.add('is-hover')
-        // });
+    } else {
+        document.body.addEventListener("mouseenter", () => {
+            tagHtml.classList.add('is-hover')
+        });
+        document.body.addEventListener("mouseleave", () => {
+            tagHtml.classList.remove('is-hover')
+        });
     }
 
     self._html = tagHtml

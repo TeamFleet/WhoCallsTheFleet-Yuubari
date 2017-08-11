@@ -24,15 +24,19 @@
         .row{
             border-top: 1px solid @color-border;
         }
-        .cell:hover:after{
-            content:    "";
-            background: fade(#fff, 7.5%);
-            position:   absolute;
-            top:        -100vh;
-            bottom:     -100vh;
-            left:       0;
-            right:      0;
-            z-index:    -1;
+        .cell{
+            .is-hover({
+                &:after{
+                    content:    "";
+                    background: fade(#fff, 7.5%);
+                    position:   absolute;
+                    top:        -100vh;
+                    bottom:     -100vh;
+                    left:       0;
+                    right:      0;
+                    z-index:    -1;
+                }
+            });
         }
     }
 }

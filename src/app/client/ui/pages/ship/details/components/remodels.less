@@ -147,8 +147,8 @@
                 overflow:   visible;
                 z-index:    -1;
             }
-
-        &:hover, &.on{
+        
+        .style-hover() {
             // .lvl{
             //     color:      #fff;
             //     &:before{
@@ -158,6 +158,15 @@
             .lvl, .pic, .icon-has-extra-illust, .flag-navy{
                 opacity:    1;
             }
+        }
+
+        .is-hover({
+            .style-hover();
+        }; {
+            opacity:    .5;
+        }; true);
+        &.on, &:active{
+            .style-hover();
         }
 
         // &:hover{

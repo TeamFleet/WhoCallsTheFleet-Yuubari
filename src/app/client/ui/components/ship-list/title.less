@@ -35,9 +35,12 @@
         .sku-webapp({
             cursor:     pointer;
         });
-        &:hover{
+        .is-hover({
             color:      @color-accent;
-        }
+            &:active{
+                color:      @color-active;
+            }
+        });
         &:active{
             color:      @color-active;
         }
@@ -78,9 +81,11 @@
             fill:       @color-accent;
         }
 
-        &:hover:before{
-            border-color: @color-accent;
-        }
+        .is-hover({
+            &:before{
+                border-color: @color-accent;
+            }
+        });
         &[data-checked="true"] .icon{
             opacity:    1;
         }

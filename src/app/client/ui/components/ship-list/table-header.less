@@ -15,7 +15,10 @@
         .cell{
             height:     @height-compare-thead;
             line-height:@height-compare-thead;
-            &:hover{
+            .is-hover({
+                background:     fade(#fff, 10%);
+            });
+            &:active{
                 background:     fade(#fff, 10%);
             }
         }
@@ -75,7 +78,10 @@
         display:    block;
         position:   relative;
         height:     100%;
-        &:hover{
+        .is-hover({
+            color:  #fff;
+        });
+        &:active{
             color:  #fff;
         }
         .sku-webapp({

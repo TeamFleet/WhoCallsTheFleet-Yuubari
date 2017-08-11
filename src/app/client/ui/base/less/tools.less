@@ -234,14 +234,6 @@
     }
 }
 
-@import './mixins/mediaqueries-screensize.less';
-@import './mixins/locale.less';
-@import './mixins/sku.less';
-
-@import './mixins/style/badge.less';
-@import './mixins/style/input.less';
-@import './mixins/style/tab.less';
-
 .is-ready( @rules ){
     body.is-ready &{
         @rules();
@@ -258,3 +250,36 @@
         @rules();
     }
 }
+
+.is-hover( @rules ) {
+    html.is-hover &:hover{
+        @rules();
+    }
+}
+
+.is-hover( @rulesHover ; @rulesActive ) {
+    html.is-hover &:hover{
+        @rulesHover();
+    }
+    &:active,
+    html.is-hover &:hover:active{
+        @rulesActive();
+    }
+}
+
+.is-hover( @rulesHover ; @rulesActive; @isActiveDiff ) {
+    html.is-hover &:hover{
+        @rulesHover();
+    }
+    html.is-hover &:hover:active{
+        @rulesActive();
+    }
+}
+
+@import './mixins/mediaqueries-screensize.less';
+@import './mixins/locale.less';
+@import './mixins/sku.less';
+
+@import './mixins/style/badge.less';
+@import './mixins/style/input.less';
+@import './mixins/style/tab.less';

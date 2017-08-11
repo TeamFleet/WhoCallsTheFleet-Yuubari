@@ -40,10 +40,21 @@
             content:    ~"@{count}";
         }
 
-        &.on, &:hover{
+        .style-hover(){
             &:before{
                 opacity:    1;
             }
+        }
+        .is-hover({
+            .style-hover();
+            &:active{
+                &:before{
+                    opacity:    .4;
+                }
+            }
+        });
+        &.on{
+            .style-hover();
         }
 
         &:active{
