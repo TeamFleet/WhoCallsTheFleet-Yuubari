@@ -28,6 +28,21 @@ export default class LinkShip extends React.Component {
     render() {
         this.ship = getShip(this.props.ship)
 
+        // const props = { ...this.props };
+        // [
+        //     'className',
+        //     'children',
+        //     'onClick',
+        //     'id',
+        //     'ship',
+        //     'extraIllust',
+        //     'navy',
+        //     'name',
+        //     'pic'
+        // ].forEach(key => delete props[key])
+
+        // console.log(props)
+
         return (
             <Link
                 className={this.props.className}

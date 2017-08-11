@@ -116,6 +116,23 @@ document.addEventListener("DOMContentLoaded", function () {
     if (__CLIENT__)
         tagHtml.classList.add('is-webapp')
 
+    // 利用 pointer event 判断当前是否为 hover
+    if (window.PointerEvent) {
+        document.body.addEventListener("pointerenter", (evt) => {
+            if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
+                tagHtml.classList.add('is-hover')
+        });
+        document.body.addEventListener("pointerleave", () => {
+            // if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
+            tagHtml.classList.remove('is-hover')
+        });
+        // this.container.addEventListener("pointerout", (evt) => {
+        //     if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
+        //         if (evt.target.classList.contains('item'))
+        //             evt.target.classList.add('is-hover')
+        // });
+    }
+
     self._html = tagHtml
 })
 

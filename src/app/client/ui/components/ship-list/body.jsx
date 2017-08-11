@@ -204,6 +204,19 @@ class ShipListBody extends React.Component {
     //     }
     // }
 
+    // componentDidMount() {
+    //     this.container.addEventListener("pointerover", (evt) => {
+    //         if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
+    //             if (evt.target.classList.contains('item'))
+    //                 evt.target.classList.add('is-hover')
+    //     });
+    //     this.container.addEventListener("pointerout", (evt) => {
+    //         if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
+    //             if (evt.target.classList.contains('item'))
+    //                 evt.target.classList.remove('is-hover')
+    //     });
+    // }
+
     render() {
         if (__CLIENT__ && __DEV__) {
             // if (__DEV__) {

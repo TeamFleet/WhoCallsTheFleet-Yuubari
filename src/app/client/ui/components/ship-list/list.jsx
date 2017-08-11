@@ -88,12 +88,14 @@ class ThisLink extends React.Component {
                         'is-selected': isSelected
                     }
                 ])}
+                
                 ship={this.props.ship}
-                onClick={(evt) => this.onClick(evt, isSelected)}
                 navy={true}
                 name={true}
                 pic={true}
                 extraIllust={true}
+
+                onClick={(evt) => this.onClick(evt, isSelected)}
             >
             </LinkShip>
         )
