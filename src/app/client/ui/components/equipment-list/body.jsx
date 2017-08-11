@@ -15,8 +15,7 @@ import {
 import Title from './title.jsx'
 // import List from './list.jsx'
 import Header from './header.jsx'
-// import TableBody from './table-body.jsx'
-import Link from '@appUI/components/link'
+import TableBody from './table-body.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './body.less'
@@ -38,7 +37,7 @@ export default class EquipmentList extends React.Component {
             this.props.dispatch(
                 listInit(this.props.id)
             )
-            // return null
+            if (__CLIENT__) return null
         }
 
         return <EquipmentListBody { ...this.props } />
@@ -61,20 +60,12 @@ class EquipmentListBody extends React.Component {
         return collection.list.map((type, typeIndex) => {
             return (
                 <CSSTransitionComponent key={index + typeIndex}>
-                    <div
-                        className={classNames({
-                            'first': typeIndex === 0,
-                            'last': typeIndex === collection.list.length - 1
-                        })}
-                    >
+                    <div className={classNames({
+                        'first': typeIndex === 0,
+                        'last': typeIndex === collection.list.length - 1
+                    })} >
                         <Title id={this.props.id} type={type.type} />
-                        <div>
-                            {type.equipments.map(equipment => (
-                                <div key={equipment.id}>
-                                    <Link to={`/equipments/${equipment.id}`}>{equipment._name}</Link>
-                                </div>
-                            ))}
-                        </div>
+                        <TableBody id={this.props.id} equipments={type.equipments} />
                     </div>
                 </CSSTransitionComponent>
             )
@@ -133,6 +124,23 @@ class EquipmentListBody extends React.Component {
                     {this.renderBody()}
                 </TransitionGroup>
 
+            </div>
+        )
+    }
+}
+
+// @connect((state, ownProps) => ({
+//     ...state.equipmentList[ownProps.id],
+//     // location: state.location
+// }))
+// @connect()
+// @ImportStyle(style)
+class EquipmentListBodyList extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className}>
+                <Title id={this.props.id} type={this.props.type} />
+                {this.props.children}
             </div>
         )
     }

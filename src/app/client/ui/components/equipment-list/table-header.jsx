@@ -31,11 +31,12 @@ const headers = [
 ]
 
 @ImportStyle(style)
-// @connect((state, ownProps) => ({
-//     sortType: state.shipList[ownProps.id].compareSort[0],
-//     sortOrder: state.shipList[ownProps.id].compareSort[1],
-//     scrollLeft: state.shipList[ownProps.id].compareScrollLeft
-// }))
+@connect((state, ownProps) => ({
+    collection: state.equipmentList[ownProps.id].collection
+    //     sortType: state.shipList[ownProps.id].compareSort[0],
+    //     sortOrder: state.shipList[ownProps.id].compareSort[1],
+    //     scrollLeft: state.shipList[ownProps.id].compareScrollLeft
+}))
 export default class ShipListTableHeader extends React.Component {
     // sort(type) {
     //     this.props.dispatch(
@@ -49,22 +50,22 @@ export default class ShipListTableHeader extends React.Component {
     //     )
     // }
 
-    getHeaders() {
-        // return headers.map(stat => {
-        //     const type = stat.replace(/^consum\./, '')
-        //     return stat ? translate('stat.' + stat) : null
-        //     return [
-        //         stat
-        //             ? translate('stat.' + stat)
-        //             // ? (<IconStat className="icon" stat={stat} />)
-        //             : null,
-        //         {
-        //             className: 'btn-sort' + (this.props.sortType === type ? ` is-sorting is-sorting-${this.props.sortOrder}` : ''),
-        //             onClick: () => { this.sort(type) }
-        //         }
-        //     ]
-        // })
-    }
+    // getHeaders() {
+    //     return headers.map(stat => {
+    //         const type = stat.replace(/^consum\./, '')
+    //         return stat ? translate('stat.' + stat) : null
+    //         return [
+    //             stat
+    //                 ? translate('stat.' + stat)
+    //                 // ? (<IconStat className="icon" stat={stat} />)
+    //                 : null,
+    //             {
+    //                 className: 'btn-sort' + (this.props.sortType === type ? ` is-sorting is-sorting-${this.props.sortOrder}` : ''),
+    //                 onClick: () => { this.sort(type) }
+    //             }
+    //         ]
+    //     })
+    // }
 
     // onScroll(evt) {
     //     this.scrollLeft = evt.target.scrollLeft
@@ -82,6 +83,18 @@ export default class ShipListTableHeader extends React.Component {
     //     return true
     // }
 
+    getHeader(stat) {
+        if (this.props.collection === 2 && stat === 'range')
+            stat = 'radius'
+        return [
+            stat ? translate('stat.' + stat) : null,
+            {
+                className: !stat ? 'cell-name' : undefined,
+                "data-stat": stat.replace(/^equipment\./, '') || undefined
+            }
+        ]
+    }
+
     render() {
         // onScroll={this.onScroll.bind(this)}
         // scrollLeft={this.props.scrollLeft}
@@ -89,13 +102,7 @@ export default class ShipListTableHeader extends React.Component {
             <DataTable
                 className={this.props.className}
                 tag="div"
-                headers={headers.map(stat => ([
-                    stat ? translate('stat.' + stat) : null,
-                    {
-                        className: !stat ? 'cell-name' : undefined,
-                        "data-stat": stat.replace(/^equipment\./, '') || undefined
-                    }
-                ]))}
+                headers={headers.map(this.getHeader.bind(this))}
             />
         )
     }

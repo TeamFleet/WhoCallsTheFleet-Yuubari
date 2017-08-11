@@ -1,0 +1,68 @@
+@import './_.less';
+
+.component{
+    // margin-top:     -21px;
+    border-bottom:  1px solid @color-border;
+
+    &.flex{
+        .table();
+        .row{
+            // padding:    5px 0;
+            // height:     (@ship-link-height + 0);
+            .is-hover({
+                background:     fade(#fff, 7.5%);
+            });
+            .sku-webapp({
+                cursor:     pointer;
+            });
+            .cell{
+                padding:    5px 0;
+                display:    flex;
+                flex-flow:  column wrap;
+                justify-content: center;
+                line-height:(25px - 5 - 5 - 1);
+                .screen-max({
+                    font-size:  13px;
+                });
+            }
+            .cell-name{
+                padding-left:   (@equipmenticon-size + 4);
+                .screen-tablet({
+                    padding-left:   @main-margin-tablet;
+                });
+                .screen-phone({
+                    .dont-break-out();
+                    padding-left:   unit(@main-margin-phone * 100 / @screen-phone, vw);
+                });
+            }
+            .cell[data-stat]{
+                .screen-phone({
+                    border-left:1px solid @color-border;
+                });
+            }
+        }
+    }
+
+    // ******************************************
+
+    .body{
+        .stat-color(@stat, @color){
+            .cell.stat-@{stat}{
+                .is-hover({
+                    &:after{
+                        background-color:	@color;
+                    }
+                });
+            }
+        }
+        .stat-color(fire, hsla(6, 85%, 40%, .20));
+        .stat-color(torpedo, hsla(207, 85%, 40%, .20));
+        .stat-color(night, fade(mix(hsl(6, 85%, 40%), hsl(207, 85%, 40%)), 40%));
+        .stat-color(aa, hsla(26, 85%, 40%, .20));
+        .stat-color(armor, hsla(39, 85%, 40%, .20));
+    }
+}
+
+.last .component{
+    border-bottom: 0;
+}

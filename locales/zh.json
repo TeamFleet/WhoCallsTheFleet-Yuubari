@@ -43,6 +43,7 @@
         "luck": "运",
         "bomb": "爆装",
         "hit": "命中",
+        "radius": "航程",
         "consum": {
             "fuel": "燃耗",
             "ammo": "弹耗"

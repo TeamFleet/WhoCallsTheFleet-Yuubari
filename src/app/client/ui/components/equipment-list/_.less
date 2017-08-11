@@ -11,32 +11,46 @@
 @header-height-phone:   (@header-height-tabs-phone + @header-height-thead);
 
 .table() {
-    overflow-x: visible;
-    .screen-tablet({
-        overflow-x: hidden;
-    });
+    overflow-x: hidden;
 
     padding-left:       0;
-    padding-right:      1em;
+    // .main-sizing-position-reset-margin();
+    .screen-t1({
+        margin-left:    (0 - @main-margin);
+        margin-right:   (0 - @main-margin / 2);
+    });
     .screen-tablet({
-        padding-right:  .5em;
+        .main-sizing-position-reset-tablet-margin();
     });
     .screen-phone({
-        padding-right:  8px;
+        .main-sizing-position-reset-phone-margin();
     });
 
     .row{
-        // .screen-tablet({
-        //     &:after{
-        //         flex:       0 0 10px;
-        //         content:    "";
-        //         order:      100;
-        //         height:     1px;
-        //     }
-        // });
+        // &:after{
+        //     flex:       0 0 1em;
+        //     content:    "";
+        //     order:      100;
+        //     height:     1px;
+        // }
+        .screen-tablet({
+            &:after{
+                // flex-basis: .5em;
+                flex:       0 0 .5em;
+                content:    "";
+                order:      100;
+                height:     1px;
+            }
+        });
+        .screen-phone({
+            &:after{
+                flex-basis: 8px;
+            }
+        });
 
         .cell{
-            flex:   1 0 40px;
+            flex:       1 0 40px;
+            font-size:  14px;
             &.cell-name{    
                 flex:       7.5 0 150px;
                 text-align: left;
@@ -45,7 +59,6 @@
             }
             &[data-stat]{
                 text-align: center;
-                font-size:  14px;
             }
             .screen-phone({
                 &.cell-name{
@@ -56,7 +69,7 @@
                     font-size:  12px;
                     // flex:       0 0 2em;
                     flex-basis: 2em;
-                    white-space:nowrap;
+                    // white-space:nowrap;
                     width:      2em;
                     // transform:  rotate(-30deg);
                 }
