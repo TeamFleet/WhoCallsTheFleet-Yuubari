@@ -31,18 +31,18 @@
                     background: @color-border;
                     left:       (0 - @main-margin-tablet);
                     right:      (0 - @main-margin-tablet);
-                    margin-top: (0 - @ship-link-height / 2 - 6);
+                    // margin-top: (0 - @ship-link-height / 2 - 6); 
                     // top:        -1px;
                     transition: none;
                     z-index:    -1;
                 }
-                .is-hover({
-                    &:before{
-                        height:     (@ship-link-height + 10px);
-                        background: linear-gradient(to bottom, @color-border, @color-border 1px, transparent 1px, transparent 2px, fade(#fff, 7.5%) 2px);
-                        margin-top: -1px;
-                    }
-                });
+                // .is-hover({
+                //     &:before{
+                //         height:     (@ship-link-height + 10px);
+                //         background: linear-gradient(to bottom, @color-border, @color-border 1px, transparent 1px, transparent 2px, fade(#fff, 7.5%) 2px);
+                //         margin-top: -1px;
+                //     }
+                // });
             });
             .sku-webapp({
                 cursor:     pointer;

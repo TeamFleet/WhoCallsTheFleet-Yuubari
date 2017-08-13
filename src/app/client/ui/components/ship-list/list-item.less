@@ -1,0 +1,60 @@
+@import './_.less';
+
+.component{
+    .checkbox{
+        display:    block;
+        position:   absolute;
+        border-radius: 2px;
+        border:     1px solid @color-base;
+        top:        50%;
+        width:      @size-checkbox;
+        height:     @size-checkbox;
+        margin-top: (0 - @size-checkbox / 2 - 1px);
+        left:       (0 - @size-checkbox);
+        opacity:    0;
+        z-index:    50;
+    }
+
+    &.is-compare,
+    &.is-selected{
+        .checkbox{
+            opacity:    0;
+        }
+        .is-hover({
+            .checkbox{
+                opacity:    0;
+            }
+        });
+    }
+
+    &.is-selected{
+        // background: @color-accent;
+        color:      #fff;
+        &:after{
+            border:     1px solid @color-accent;
+            background: fade(@color-accent, 50%);
+        }
+        .name-suffix{
+            color:      inherit;
+            transition: inherit;
+        }
+        .is-hover({
+            &:after{
+                background: fade(@color-accent, 50%);
+            }
+        }; {
+            &:after{
+                background: fade(@color-accent, 35%);
+            }
+        });
+    }
+
+    .is-hover({
+        .checkbox{
+            opacity:    1;
+            &:hover{
+                border-color:   @color-accent;
+            }
+        }
+    });
+}

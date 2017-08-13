@@ -11,34 +11,10 @@
 
     .item{
         flex:   1 0 @ship-link-width;
-        // height: 40px;
         margin: 10px 10px 0 0;
-
         &.placeholder{
             margin-top: auto;
             height:     0;
-        }
-
-        &.is-selected{
-            // background: @color-accent;
-            color:      #fff;
-            &:after{
-                border:     1px solid @color-accent;
-                background: fade(@color-accent, 50%);
-            }
-            .name-suffix{
-                color:      inherit;
-                transition: inherit;
-            }
-            .is-hover({
-                &:after{
-                    background: fade(@color-accent, 50%);
-                }
-            }; {
-                &:after{
-                    background: fade(@color-accent, 35%);
-                }
-            })
         }
     }
 }
