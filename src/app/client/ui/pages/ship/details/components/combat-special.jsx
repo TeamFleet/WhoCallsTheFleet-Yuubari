@@ -16,6 +16,13 @@ import IconEquipment from '@appUI/components/icon-equipment'
 
 import translate from 'sp-i18n'
 
+const shipTypeRangeNormal = [
+    ['BB', 3],
+    ['CV', 1],
+    ['CL', 2],
+    ['CA', 2]
+]
+
 // import { ImportStyle } from 'sp-css-import'
 // import styles from './combat-special.less'
 
@@ -116,11 +123,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
         )
     }
     renderRangeDifferent() {
-        const pair = [
-            ['BB', 3],
-            ['CV', 1],
-            ['CL', 2]
-        ].filter(arr => (
+        const pair = shipTypeRangeNormal.filter(arr => (
             this.props.ship.isType(arr[0]) && this.props.ship.stat.range != arr[1]
         ))
         if (Array.isArray(pair) && pair.length)
