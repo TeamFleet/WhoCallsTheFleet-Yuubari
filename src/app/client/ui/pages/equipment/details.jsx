@@ -73,7 +73,7 @@ export default class extends React.Component {
         const head = htmlHead({
             store,
             title: equipment._name,
-            subtitle: (equipment.type ? ` / ${equipment._type} ` : ''),
+            subtitle: (equipment.type ? equipment._type : ''),
             description: getDescription(equipment)
         })
 
