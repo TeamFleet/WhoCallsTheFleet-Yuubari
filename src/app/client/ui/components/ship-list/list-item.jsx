@@ -9,6 +9,7 @@ import {
 } from '@appLogic/ship-list/api.js'
 
 import LinkShip from '@appUI/components/link/ship.jsx'
+import Icon from '@appUI/components/icon.jsx'
 
 import { ImportStyle } from 'sp-css-import'
 import styleItem from './list-item.less'
@@ -74,8 +75,18 @@ export default class ShipListItem extends React.Component {
 
                 onClick={(evt) => this.onClick(evt, isSelected)}
             >
-                <span className="checkbox" onClick={this.onClickCheckbox.bind(this)} />
+                <span className="checkbox" onClick={this.onClickCheckbox.bind(this)}>
+                    <ShipListItemCheckbox isSelected={isSelected}/>
+                </span>
             </LinkShip>
         )
+    }
+}
+
+class ShipListItemCheckbox extends React.Component {
+    render() {
+        if (this.props.isSelected)
+            return <Icon className="icon" icon="checkbox-checked" />
+        return null
     }
 }
