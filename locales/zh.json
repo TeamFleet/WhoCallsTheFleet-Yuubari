@@ -178,5 +178,11 @@
         "equipable_legend_no": "不可装备",
         "equipable_legend_yes": "可装备",
         "equipable_legend_yes_extra": "其他${type}不可"
+    },
+    
+    "equipment_details": {
+        "infos": "信息",
+        "refittable": "可装备于...",
+        "availability": "获取方式"
     }
 }

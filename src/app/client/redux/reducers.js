@@ -5,6 +5,7 @@ import sideMenuReducer from '@appLogic/side-menu/reducer'
 import shipListReducer from '@appLogic/ship-list/reducer'
 import shipDetailsReducer from '@appLogic/ship-details/reducer'
 import equipmentListReducer from '@appLogic/equipment-list/reducer'
+import equipmentDetailsReducer from '@appLogic/equipment-details/reducer'
 
 export default [
     ['appMode', appModeReducer],
@@ -16,5 +17,6 @@ export default [
     ['shipList', shipListReducer],
     ['shipDetails', shipDetailsReducer],
 
-    ['equipmentList', equipmentListReducer]
+    ['equipmentList', equipmentListReducer],
+    ['equipmentDetails', equipmentDetailsReducer]
 ]

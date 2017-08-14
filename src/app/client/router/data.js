@@ -73,7 +73,30 @@ export default [{
         require.ensure([], (require) => {
             if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details').default)
         }, 'thisEquipment')
-    }
+    },
+    childRoutes: __CLIENT__ ? [
+        {
+            path: ':tab'
+        }
+    ] : [
+        {
+            path: 'infos',
+            name: 'infos',
+            getComponent: (nextState, cb) => {
+                require.ensure([], (require) => {
+                    if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details/infos').default)
+                })
+            },
+            isIndex: true
+        }, {
+            path: ':tab',
+            getComponent: (nextState, cb) => {
+                require.ensure([], (require) => {
+                    if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details/' + nextState.params.tab).default)
+                })
+            }
+        }
+    ]
 }, {
     path: 'entities/:id',
     name: 'thisEntity',

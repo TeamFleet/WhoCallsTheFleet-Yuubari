@@ -179,5 +179,11 @@
         "equipable_legend_no": "Not equipable",
         "equipable_legend_yes": "Equipable",
         "equipable_legend_yes_extra": "No for other ${type}s"
+    },
+    
+    "equipment_details": {
+        "infos": "情報",
+        "refittable": "装備可能艦...",
+        "availability": "入手情報"
     }
 }

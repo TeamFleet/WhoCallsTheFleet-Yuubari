@@ -178,5 +178,11 @@
         "equipable_legend_no": "Not equipable",
         "equipable_legend_yes": "Equipable",
         "equipable_legend_yes_extra": "No for other ${type}s"
+    },
+
+    "equipment_details": {
+        "infos": "Infos",
+        "refittable": "Refittable...",
+        "availability": "Availability"
     }
 }
