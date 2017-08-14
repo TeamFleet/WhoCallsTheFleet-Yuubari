@@ -51,6 +51,7 @@ export default class ShipListItem extends React.Component {
 
     render() {
         const isSelected = (__CLIENT__ && this.props.isModeCompare && this.props.compareList.indexOf(this.props.ship) > -1) ? true : false
+        const showCheckbox = __CLIENT__
         // const className =
         //     "item"
         //     + (this.props.isModeCompare ? ' is-compare' : '')
@@ -75,9 +76,9 @@ export default class ShipListItem extends React.Component {
 
                 onClick={(evt) => this.onClick(evt, isSelected)}
             >
-                <span className="checkbox" onClick={this.onClickCheckbox.bind(this)}>
-                    <ShipListItemCheckbox isSelected={isSelected}/>
-                </span>
+                {showCheckbox && <span className="checkbox" onClick={this.onClickCheckbox.bind(this)}>
+                    <ShipListItemCheckbox isSelected={isSelected} />
+                </span>}
             </LinkShip>
         )
     }
