@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import classNames from 'classnames'
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import IconEquipment from '@appUI/components/icon-equipment'
 
 import translate from 'sp-i18n'

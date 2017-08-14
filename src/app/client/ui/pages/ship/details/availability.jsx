@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ComponentContainer from './commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 
 import translate from 'sp-i18n'
 // import db from '@appLogic/database'

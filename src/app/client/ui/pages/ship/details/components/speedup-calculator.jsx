@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import CalculatorSpeed from '@appUI/components/calculator/speed'
 
 import translate from 'sp-i18n'

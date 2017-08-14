@@ -2,7 +2,7 @@ import React from 'react'
 
 import db from '@appLogic/database'
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import Special from '../commons/special.jsx'
 
 import translate from 'sp-i18n'

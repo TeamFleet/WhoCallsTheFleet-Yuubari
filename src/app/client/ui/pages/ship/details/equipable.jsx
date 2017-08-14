@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import ComponentContainer from './commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import IconEquipment from '@appUI/components/icon-equipment'
 import Link from '@appUI/components/link'
 

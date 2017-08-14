@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import { maxShipLv } from 'kckit'
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '../commons/stat.jsx'
 import getValue from '@appUtils/get-value'
 import prefs from '@appLogic/preferences'

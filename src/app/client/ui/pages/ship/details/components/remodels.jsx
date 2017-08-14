@@ -4,7 +4,7 @@ import checkCssProp from 'check-css-prop'
 
 import LinkShip from '@appUI/components/link/ship.jsx'
 import Icon from '@appUI/components/icon'
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 
 import translate from 'sp-i18n'
 import getShip from '@appUtils/get-ship.js'

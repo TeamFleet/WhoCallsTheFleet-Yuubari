@@ -3,11 +3,11 @@ import React from 'react'
 import Title from '@appUI/components/title.jsx'
 
 import { ImportStyle } from 'sp-css-import'
-import styles from './component-container.less'
+import styles from './styles.less'
 
 // @connect()
 @ImportStyle(styles)
-export default class ShipDetailsComponentContainer extends React.Component {
+export default class InfosComponentContainer extends React.Component {
     render() {
         return (
             <div className={this.props.className}>

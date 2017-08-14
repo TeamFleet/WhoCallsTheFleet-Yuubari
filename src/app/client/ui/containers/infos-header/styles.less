@@ -1,0 +1,73 @@
+@import "../../base.less";
+
+.component{
+    .infos{
+        overflow:   hidden;
+        margin:     0 0 @infos-title-margin-bottom 0;
+        color:      @color-fade;
+        font-size:  14px;
+        line-height:(@infos-title-height / 2);
+        .screen-tablet({
+            display:    none;
+        });
+    }
+        .title{
+            display:    block;
+            float:      left;
+
+            color:      #fff;
+
+            font-size:  30px;
+            font-weight:400;
+            line-height:@infos-title-height;
+
+            padding:        0 20px 0 0;
+            margin:         0 20px 0 0;
+            border-right:   1px solid @color-border;
+        }
+    
+    .tabs{
+        clear:      both;
+        line-height:@infos-tab-height;
+        height:     @infos-tab-height;
+        font-size:  16px;
+        overflow:   hidden;
+        .main-sizing-position-reset-margin();
+        & > .wrapper{
+            height:     (@infos-tab-height + 20);
+            display:    flex;
+            flex-flow:  row nowrap;
+            overflow:   hidden;
+            overflow-x: auto;
+            position:   relative;
+            .main-sizing-padding();
+            &:after{
+                content:    "";
+                flex:       none;
+                width:      @main-margin;
+                .screen-tablet({
+                    width:  @main-margin-tablet;
+                });
+                .screen-phone({
+                    width:  @main-margin-phone;
+                });
+            }
+        }
+    }
+        .tab{            
+            .style-tab();
+            flex:       none;
+            height:     (@infos-tab-height - 1);
+            margin-right:   2em;
+            &:last-child{
+                margin-right:   0;
+            }
+        }
+}
+
+.component.is-portal {
+    padding-top:    @main-margin-top;
+    .screen-tablet({
+        padding-top:0;
+    });
+}

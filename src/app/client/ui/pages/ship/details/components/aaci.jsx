@@ -4,9 +4,9 @@ import classNames from 'classnames'
 import kckit from 'kckit'
 const checkAACI = kckit.check.aaci
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import IconEquipment from '@appUI/components/icon-equipment'
-import Icon from '@appUI/components/icon'
+// import Icon from '@appUI/components/icon'
 import Special from '../commons/special.jsx'
 
 import translate from 'sp-i18n'

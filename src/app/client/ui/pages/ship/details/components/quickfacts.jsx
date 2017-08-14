@@ -5,7 +5,7 @@ import getPic from '@appUtils/get-pic'
 import Link from '@appUI/components/link'
 // import Icon from '@appUI/components/icon'
 import FlagNavy from '@appUI/components/flag-navy'
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '../commons/stat.jsx'
 
 import translate from 'sp-i18n'

@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '../commons/stat.jsx'
 import getValue from '@appUtils/get-value'
 

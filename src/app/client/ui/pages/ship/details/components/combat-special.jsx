@@ -10,7 +10,7 @@ const checkOTS = kckit.check.ots
 import db from '@appLogic/database'
 import getEquipmentTypesFromCondition from '@appUtils/get-equipment-types-from-condition'
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import Special from '../commons/special.jsx'
 import IconEquipment from '@appUI/components/icon-equipment'
 

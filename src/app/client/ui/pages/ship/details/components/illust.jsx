@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import Swiper from '@appUI/components/swiper'
 import Icon from '@appUI/components/icon'
 

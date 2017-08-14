@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ComponentContainer from '../commons/component-container.jsx'
+import ComponentContainer from '@appUI/containers/infos-component'
 import Special from '../commons/special.jsx'
 import CalculatorLevelOASW from '@appUI/components/calculator/level-oasw'
 
