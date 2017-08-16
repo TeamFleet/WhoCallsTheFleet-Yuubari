@@ -18,6 +18,10 @@
         opacity:    0;
         background: fade(#000, 35%);
         border-radius: 3px;
+        @supports ( pointer-events: none ) {
+            z-index:    100;
+            pointer-events: none;
+        }
         &:after, .icon{
             position:   absolute;
             top:        0;
@@ -53,7 +57,9 @@
     }
     .checkbox-show() {
         .checkbox{
+            opacity:    1;
             z-index:    100;
+            pointer-events: all;
             &:hover{
                 opacity:    1;
                 &:after{
@@ -95,15 +101,9 @@
 
     &.is-compare,
     &.is-selected{
-        .checkbox{
-            opacity:    1;
-        }
         .checkbox-show();
     }
     .is-hover({
-        .checkbox{
-            opacity:    1;
-        }
         .checkbox-show();
     });
 }
