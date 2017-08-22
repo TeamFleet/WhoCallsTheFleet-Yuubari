@@ -4244,9 +4244,9 @@ jsx-ast-utils@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.4.1.tgz#3867213e8dd79bf1e8f2300c0cfc1efb182c0df1"
 
-kckit@^1.12.5:
-  version "1.12.5"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.12.5.tgz#6a09e71f9d7ecdba027a77228992d64ffbaa6383"
+kckit@^1.12.7:
+  version "1.12.7"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.12.7.tgz#d7b9ca08835651dfb002ab01bab4fd37e43ca169"
   dependencies:
     camelcase "^4.1.0"
 
@@ -7093,9 +7093,9 @@ stylehacks@^4.0.0-rc.2:
     postcss "^6.0.0"
     postcss-selector-parser "^3.0.0-rc.0"
 
-super-project@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/super-project/-/super-project-1.4.1.tgz#87d37e2761df069d4262043e63c56a8fcbf6a470"
+super-project@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/super-project/-/super-project-1.4.4.tgz#c758fcda308ca497f8e50c035e645839c2f2809c"
   dependencies:
     autoprefixer "^7.1.2"
     babel-core "^6.25.0"
@@ -7746,9 +7746,9 @@ whocallsthefleet-backgrounds@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.2.0.tgz#07047acd36ad3a1bd093b7f79cb1e1c32cd3918a"
 
-whocallsthefleet-database@2017.8.11:
-  version "2017.8.11"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-2017.8.11.tgz#90d0653723268f4fc30389ffb37226c0a480dc46"
+whocallsthefleet-database@2017.8.20:
+  version "2017.8.20"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-2017.8.20.tgz#23cc8bcdf4a3059fd8348a175ef443781884dbcc"
 
 wide-align@^1.1.0:
   version "1.1.2"
