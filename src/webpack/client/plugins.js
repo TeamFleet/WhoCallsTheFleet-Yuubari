@@ -61,7 +61,9 @@ const asyncTest = async (appPath) => {
 
 const getPics = async (appPath = process.cwd(), isDev) => {
 
-    const dirPics = path.resolve(appPath, './src/app/client/assets/pics/')
+    // TODO: check version to overwrite
+
+    const dirPics = path.resolve(appPath, './pics/')
     const dirTo = '_pics'
     const dirTarget = path.resolve(appPath, './dist-web/public/app/' + dirTo)
 
