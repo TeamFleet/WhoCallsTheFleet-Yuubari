@@ -48,7 +48,7 @@ export const template = `
         <script>//inject_critical</script>
 
         <div id="root">
-            <div><script>//inject_react</script></div>
+            <script>//inject_react</script>
         </div>
         <script>//inject_svg_symbols</script>
         <script>//inject_redux</script>
