@@ -39,7 +39,6 @@ If you want help us for Japanese translation, you can submit your changes [HERE]
   * Home
   * Fleet Builder
   * TP Calculator
-  * Equipment List
   * Equipment Details
   * Akashi's Arsenal
   * CV & Illustrator List
