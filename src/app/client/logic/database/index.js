@@ -68,8 +68,11 @@ export const init = () => {
                             type_display: list.type,
                             order: shipIndex++
                         })
-                        if (Array.isArray(ship.additional_item_types) && ship.additional_item_types.length) {
-                            if (!db.shipsSpecial[list.type]) db.shipsSpecial[list.type] = []
+                        if (!db.shipsSpecial[list.type]) db.shipsSpecial[list.type] = []
+                        if (!db.shipsSpecial[list.type].includes(shipId) && (
+                            (Array.isArray(ship.additional_item_types) && ship.additional_item_types.length)
+                            || (Array.isArray(ship.additional_disable_item_types) && ship.additional_disable_item_types.length))
+                        ) {
                             db.shipsSpecial[list.type].push(shipId)
                         }
                         return ship

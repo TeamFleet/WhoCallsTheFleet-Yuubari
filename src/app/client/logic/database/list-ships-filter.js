@@ -42,14 +42,24 @@ const filter = (options = {}) => {
         collection.list.forEach(type => {
             if (!type.type) return
             type.ships.forEach(ships => {
-                ships.forEach(ship => {
+                // ships.forEach(ship => {
+                //     for (let i in ship.name) {
+                //         if (i === 'suffix') return
+                //         if (result.indexOf(ship) > -1) return
+                //         if (ship.name[i].toLowerCase().indexOf(options.name) > -1)
+                //             result.push(ship)
+                //     }
+                // })
+                if (ships.some(ship => {
                     for (let i in ship.name) {
-                        if (i === 'suffix') return
-                        if (result.indexOf(ship) > -1) return
+                        if (i === 'suffix') return false
+                        if (result.indexOf(ship) > -1) return false
                         if (ship.name[i].toLowerCase().indexOf(options.name) > -1)
-                            result.push(ship)
+                            return true
                     }
-                })
+                })) {
+                    result.push(...ships)
+                }
             })
         })
     })
