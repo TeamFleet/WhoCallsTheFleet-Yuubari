@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 // import classNames from 'classnames'
 
 // import {
@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 // } from '@appLogic/ship-list/api.js'
 // import getShip from '@appUtils/get-ship.js'
 
+import ListShips from '@appUI/components/list/ships'
 // import LinkShip from '@appUI/components/link/ship.jsx'
 import ListItem from './list-item'
 
@@ -16,13 +17,6 @@ import styleList from './list.less'
 
 @ImportStyle(styleList)
 export default class ShipListList extends React.Component {
-    insertPlaceHolders() {
-        let i = 0;
-        let arr = []
-        while (i++ < 10) arr.push(<span className="item placeholder" key={i}></span>)
-        return arr
-    }
-
     renderItem(ship, index) {
         return (
             <ListItem
@@ -38,10 +32,9 @@ export default class ShipListList extends React.Component {
     render() {
         // console.log(this.props.ships)
         return (
-            <div className={this.props.className}>
+            <ListShips className={this.props.className}>
                 {this.props.ships.map(this.renderItem.bind(this))}
-                {this.insertPlaceHolders()}
-            </div>
+            </ListShips>
         )
     }
 }

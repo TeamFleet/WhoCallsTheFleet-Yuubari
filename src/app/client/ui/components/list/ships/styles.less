@@ -1,0 +1,18 @@
+@import "../../../base.less";
+
+.component{
+    display:    flex;
+    flex-flow:  row wrap;
+    margin-right:-10px;
+    padding:    0 0 30px 0;
+    clear:      both;
+
+    .item{
+        flex:   1 0 @ship-link-width;
+        margin: 10px 10px 0 0;
+        &.placeholder{
+            margin-top: auto;
+            height:     0;
+        }
+    }
+}

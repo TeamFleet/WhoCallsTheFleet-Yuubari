@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from './_normal.jsx'
 
+import db from '@appLogic/database'
+
 import getShip from '@appUtils/get-ship.js'
 import getPic from '@appUtils/get-pic.js'
 
@@ -17,6 +19,19 @@ export default class LinkShip extends React.Component {
     }
 
     renderName() {
+        if (this.props.type) {
+            const type = (this.ship.type && this.ship.type_display && this.ship.type !== this.ship.type_display)
+                ? this.ship.type_display
+                : this.ship.type
+            return (
+                <span>
+                    <small className="name-type">
+                        {db.shipTypes[type]._name}
+                    </small>
+                    {this.ship._name}
+                </span>
+            )
+        }
         return (
             <span>
                 {this.ship.getNameNoSuffix()}
