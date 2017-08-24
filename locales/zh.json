@@ -183,6 +183,9 @@
     "equipment_details": {
         "infos": "信息",
         "refittable": "可装备于...",
-        "availability": "获取方式"
+        "availability": "获取方式",
+        
+        "stocked": "初始装备于...",
+        "stocked_list_empty": "暂无初始配置该装备的舰娘..."
     }
 }

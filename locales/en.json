@@ -183,6 +183,9 @@
     "equipment_details": {
         "infos": "Infos",
         "refittable": "Refittable...",
-        "availability": "Availability"
+        "availability": "Availability",
+
+        "stocked": "Stock-equipped...",
+        "stocked_list_empty": "There's no ship that stock-equip this equipment..."
     }
 }

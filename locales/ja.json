@@ -184,6 +184,9 @@
     "equipment_details": {
         "infos": "情報",
         "refittable": "装備可能艦...",
-        "availability": "入手情報"
+        "availability": "入手情報",
+
+        "stocked": "初期装備の艦娘...",
+        "stocked_list_empty": "There's no ship that stock-equip this equipment..."
     }
 }

@@ -16,7 +16,7 @@ export default class EquipmentDetailsComponentStocked extends React.Component {
             <ComponentContainer className={this.props.className} title={translate("equipment_details.stocked")}>
                 <ListShips
                     list={this.props.equipment.default_equipped_on || []}
-                    empty={translate("equipment_details.暂无初始配置该装备的舰娘")}
+                    empty={translate("equipment_details.stocked_list_empty")}
 
                     navy={true}
                 />
