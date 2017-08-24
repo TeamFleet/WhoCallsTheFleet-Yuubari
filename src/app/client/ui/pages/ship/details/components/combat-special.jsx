@@ -11,7 +11,7 @@ import db from '@appLogic/database'
 import getEquipmentTypesFromCondition from '@appUtils/get-equipment-types-from-condition'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import Special from '../commons/special.jsx'
+import Bullet from '@appUI/components/bullet'
 import IconEquipment from '@appUI/components/icon-equipment'
 
 import translate from 'sp-i18n'
@@ -34,7 +34,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
         const canAlways = oaswTable === true
         const canOASW = canAlways || (Array.isArray(oaswTable) && oaswTable.length) ? true : false
         return (
-            <Special
+            <Bullet
                 title={translate("combat_phases.oasw")}
                 level={canOASW ? (canAlways ? 2 : 1) : 0}
             >
@@ -85,7 +85,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                         </ul>
                     )
                 })}
-            </Special>
+            </Bullet>
         )
     }
     renderOTS() {
@@ -93,7 +93,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
         const canAlways = otsTable === true
         const canOTS = canAlways || (Array.isArray(otsTable) && otsTable.length) ? true : false
         return (
-            <Special
+            <Bullet
                 title={translate("combat_phases.ots")}
                 level={canOTS ? (canAlways ? 2 : 1) : 0}
             >
@@ -119,7 +119,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                         </ul>
                     )
                 })}
-            </Special>
+            </Bullet>
         )
     }
     renderRangeDifferent() {
@@ -128,7 +128,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
         ))
         if (Array.isArray(pair) && pair.length)
             return (
-                <Special
+                <Bullet
                     title={translate("ship_details.range_different_title", { range: this.props.ship._range })}
                     level={this.props.ship.stat.range > pair[0][1] ? 2 : 1}
                 >
@@ -136,7 +136,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                         range: kckit.get.range(pair[0][1]),
                         type: db.shipTypes[this.props.ship.type_display]._name
                     })}
-                </Special>
+                </Bullet>
             )
         return null
     }
@@ -161,45 +161,45 @@ export default class ShipDetailsSpecialCombat extends React.Component {
 
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.combat_special")}>
-                {isCarrier && <Special
+                {isCarrier && <Bullet
                     title={translate("combat_phases.jet")}
                     level={canJetAssault ? 1 : 0}
                 >
                     {canJetAssault && translate("require.equipment_type", {
                         type: translate("equipment_types.jet")
                     })}
-                </Special>}
+                </Bullet>}
 
-                <Special
+                <Bullet
                     title={translate("aaci.title")}
                     level={canAACI ? 1 : 0}
                 >
                     {canAACI && translate("ship_details.see_below_for_required_equipment_types")}
-                </Special>
+                </Bullet>
 
                 {this.renderRangeDifferent()}
 
                 {statASW99 !== false && statASW99 !== undefined && this.renderOASW()}
-                {statASW99 === undefined && <Special
+                {statASW99 === undefined && <Bullet
                     title={translate("combat_phases.oasw")}
                     level={-1}
                 />}
 
                 {statTorpedo99 !== false && this.renderOTS()}
 
-                {isBattleship && statTorpedo99 !== false && <Special
+                {isBattleship && statTorpedo99 !== false && <Bullet
                     title={translate("combat_phases.torpedo")}
                     level={2}
                 />}
 
-                {this.props.ship.type === 30 && <Special
+                {this.props.ship.type === 30 && <Bullet
                     title={translate("ship_details.light_attack_carrier_asw_title")}
                     level={2}
                 >
                     {translate("ship_details.light_attack_carrier_asw_note")}
-                </Special>}
+                </Bullet>}
 
-                {isCarrier && <Special
+                {isCarrier && <Bullet
                     title={translate("combat_phases.night")}
                     level={this.props.ship.additional_night_shelling ? 2 : 0}
                 />}

@@ -3,7 +3,7 @@ import React from 'react'
 import db from '@appLogic/database'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import Special from '../commons/special.jsx'
+import Bullet from '@appUI/components/bullet'
 
 import translate from 'sp-i18n'
 
@@ -16,13 +16,13 @@ export default class ShipDetailsSpecialOther extends React.Component {
     render() {
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.other_special")}>
-                {this.props.ship.tp && <Special
+                {this.props.ship.tp && <Bullet
                     title={translate("ship_details.tp_bonus", {
                         bonus: this.props.ship.tp
                     })}
                     level={2}
                 />}
-                {this.props.ship.tp >= 8 && <Special
+                {this.props.ship.tp >= 8 && <Bullet
                     title={translate("ship_details.expedition_bonus", {
                         bonus: '5%'
                     })}
@@ -35,8 +35,8 @@ export default class ShipDetailsSpecialOther extends React.Component {
                     {translate("ship_details.expedition_bonus_daihatsu_description2", {
                         daihatsu: db.equipments[68]._name
                     })}
-                </Special>}
-                {!this.props.ship.tp && <Special
+                </Bullet>}
+                {!this.props.ship.tp && <Bullet
                     title={translate("none")}
                     level={0}
                 />}

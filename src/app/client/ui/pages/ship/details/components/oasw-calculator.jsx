@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import Special from '../commons/special.jsx'
+import Bullet from '@appUI/components/bullet'
 import CalculatorLevelOASW from '@appUI/components/calculator/level-oasw'
 
 import translate from 'sp-i18n'
@@ -20,21 +20,21 @@ export default class ShipDetailsCalculatorOASW extends React.Component {
                     ship={this.props.ship}
 
                     componentUnknown={
-                        <Special
+                        <Bullet
                             className="special"
                             title={translate("oasw_calculator.unknown")}
                             level={-1}
                         />
                     }
                     componentUnable={
-                        <Special
+                        <Bullet
                             className="special"
                             title={translate("oasw_calculator.unable")}
                             level={0}
                         />
                     }
                     componentAlways={
-                        <Special
+                        <Bullet
                             className="special"
                             title={translate("oasw_calculator.always")}
                             level={2}
