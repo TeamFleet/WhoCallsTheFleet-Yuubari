@@ -34,7 +34,7 @@ export default class ListShips extends React.Component {
                         {...props}
                     />
                 ))}
-                {!hasItem && this.props.empty}
+                {!hasItem && <span className="list-empty">{this.props.empty}</span>}
 
                 {this.props.children}
 
