@@ -5,11 +5,11 @@ import ListShips from '@appUI/components/list/ships'
 
 import translate from 'sp-i18n'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './stocked.less'
+// import { ImportStyle } from 'sp-css-import'
+// import styles from './styles.less'
 
 // @connect()
-@ImportStyle(styles)
+// @ImportStyle(styles)
 export default class EquipmentDetailsComponentStocked extends React.Component {
     render() {
         return (
