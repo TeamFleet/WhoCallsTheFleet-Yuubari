@@ -84,7 +84,7 @@ export default class ShipList extends React.Component {
 //     ...state.shipList[ownProps.id],
 //     // location: state.location
 // }))
-@connect((state, ownProps) => state.shipList[ownProps.id])
+@connect((state, ownProps) => state.shipList[ownProps.id] || {})
 @ImportStyle(style)
 class ShipListBody extends React.Component {
     getExtraButtons() {

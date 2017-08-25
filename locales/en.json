@@ -194,7 +194,7 @@
         "facts_rankupgradable": "Rank-upgradable",
         "facts_unrankupgradable": "Un-rank-upgradable",
 
-        "stocked": "Stock-equipped...",
+        "stocked": "Stock-equipped on...",
         "stocked_list_empty": "There's no ship that stock-equip this equipment..."
     }
 }

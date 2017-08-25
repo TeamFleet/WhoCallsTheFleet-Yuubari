@@ -13,7 +13,7 @@ import Header from '@appUI/containers/infos-header'
 import { ImportStyle } from 'sp-css-import'
 import styles from './header.less'
 
-@connect((state, ownProps) => state.shipDetails[ownProps.ship.id])
+@connect((state, ownProps) => state.shipDetails[ownProps.ship.id] || {})
 @ImportStyle(styles)
 export default class ShipDetailsHeader extends React.Component {
     onTabChange(tabId, tabIndex) {
@@ -39,6 +39,7 @@ export default class ShipDetailsHeader extends React.Component {
     }
 
     render() {
+        if (!this.props.ship) return null
         return (
             <Header
                 className={this.props.className}

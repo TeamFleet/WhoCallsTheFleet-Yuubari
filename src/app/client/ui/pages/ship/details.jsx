@@ -101,15 +101,18 @@ export default class PageShipDetails extends React.Component {
         const { id/*, tab*/ } = extracFromState(store.getState())
 
         const ship = db.ships[id]
-        const head = htmlHead({
-            store,
-            title: ship._name,
-            subtitle: (ship.class_no
+        const obj = {
+            store
+        }
+        if (ship) {
+            obj.title = ship._name
+            obj.subtitle = (ship.class_no
                 ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
                 : translate("shipclass", { class: ship._class }))
-            + (ship.class && ship.type && ` / ${getShipType(ship)} `),
-            description: getDescription(ship)
-        })
+                + (ship.class && ship.type && ` / ${getShipType(ship)} `)
+            obj.description = getDescription(ship)
+        }
+        const head = htmlHead(obj)
 
         ext.metas = ext.metas.concat(head.meta)
         ext.title = head.title// + translate("ship_details." + tab)
@@ -118,7 +121,7 @@ export default class PageShipDetails extends React.Component {
     get ship() {
         if (!this._data && this.props.params.id)
             this._data = db.ships[this.props.params.id]
-        return this._data || {}
+        return this._data || undefined
     }
 
     onTabChange(/*newTab, newTabIndex*/) {
@@ -150,6 +153,8 @@ export default class PageShipDetails extends React.Component {
             )
             if (__CLIENT__) return null
         }
+
+        if (!this.ship) return null
 
         if (__CLIENT__ && __DEV__)
             console.log('thisShip', this.ship, this.props.tabIndex)

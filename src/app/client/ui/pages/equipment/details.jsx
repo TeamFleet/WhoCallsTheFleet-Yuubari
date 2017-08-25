@@ -70,12 +70,15 @@ export default class extends React.Component {
         const { id/*, tab*/ } = extracFromState(store.getState())
 
         const equipment = db.equipments[id]
-        const head = htmlHead({
-            store,
-            title: equipment._name,
-            subtitle: (equipment.type ? equipment._type : ''),
-            description: getDescription(equipment)
-        })
+        const obj = {
+            store
+        }
+        if (equipment) {
+            obj.title = equipment._name
+            obj.subtitle = equipment.type ? equipment._type : ''
+            obj.description = getDescription(equipment)
+        }
+        const head = htmlHead(obj)
 
         ext.metas = ext.metas.concat(head.meta)
         ext.title = head.title// + translate("ship_details." + tab)
@@ -84,7 +87,7 @@ export default class extends React.Component {
     get equipment() {
         if (!this._data && this.props.params.id)
             this._data = db.equipments[this.props.params.id]
-        return this._data || {}
+        return this._data || undefined
     }
 
     onTabChange(/*newTab, newTabIndex*/) {
@@ -111,6 +114,8 @@ export default class extends React.Component {
             )
             if (__CLIENT__) return null
         }
+
+        if (!this.equipment) return null
 
         if (__CLIENT__ && __DEV__)
             console.log('thisEquipment', this.equipment, this.props.tabIndex)

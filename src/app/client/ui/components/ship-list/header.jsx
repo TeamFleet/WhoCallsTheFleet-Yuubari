@@ -26,7 +26,7 @@ import TableHeader from './table-header.jsx'
 import { ImportStyle } from 'sp-css-import'
 import styleHeader from './header.less'
 
-@connect((state, ownProps) => state.shipList[ownProps.id])
+@connect((state, ownProps) => state.shipList[ownProps.id] || {})
 @ImportStyle(styleHeader)
 export default class ShipListHeader extends React.Component {
     constructor() {

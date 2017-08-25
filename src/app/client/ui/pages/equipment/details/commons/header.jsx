@@ -13,7 +13,7 @@ import Header from '@appUI/containers/infos-header'
 import { ImportStyle } from 'sp-css-import'
 import styles from './header.less'
 
-@connect((state, ownProps) => state.equipmentDetails[ownProps.equipment.id])
+@connect((state, ownProps) => state.equipmentDetails[ownProps.equipment.id] || {})
 @ImportStyle(styles)
 export default class EquipmentDetailsHeader extends React.Component {
     onTabChange(tabId, tabIndex) {
@@ -31,6 +31,8 @@ export default class EquipmentDetailsHeader extends React.Component {
     }
 
     render() {
+        if (!this.props.equipment) return null
+
         return (
             <Header
                 className={this.props.className}
