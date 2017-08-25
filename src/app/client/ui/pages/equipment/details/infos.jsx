@@ -3,11 +3,11 @@ import React from 'react'
 import Facts from './components/facts'
 import Stocked from './components/stocked'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './infos.less'
+// import { ImportStyle } from 'sp-css-import'
+// import styles from './infos.less'
 
 // @connect()
-@ImportStyle(styles)
+// @ImportStyle(styles)
 export default class EquipmentDetailsContentInfos extends React.Component {
     render() {
         return (

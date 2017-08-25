@@ -186,6 +186,15 @@
         "refittable": "装備可能艦...",
         "availability": "入手情報",
 
+        "facts_craftable": "開発可能",
+        "facts_uncraftable": "開発不可",
+        "facts_improvable": "改修可能",
+        "facts_unimprovable": "改修不可",
+        "facts_upgradable": "更新可能",
+        "facts_unupgradable": "更新不可",
+        "facts_rankupgradable": "熟練度が上が可能",
+        "facts_unrankupgradable": "熟練度が上がらない",
+
         "stocked": "初期装備の艦娘...",
         "stocked_list_empty": "There's no ship that stock-equip this equipment..."
     }

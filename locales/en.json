@@ -185,6 +185,15 @@
         "refittable": "Refittable...",
         "availability": "Availability",
 
+        "facts_craftable": "Craftable",
+        "facts_uncraftable": "Uncraftable",
+        "facts_improvable": "Improvable",
+        "facts_unimprovable": "Unimprovable",
+        "facts_upgradable": "Upgradable",
+        "facts_unupgradable": "Unupgradable",
+        "facts_rankupgradable": "Rank-upgradable",
+        "facts_unrankupgradable": "Un-rank-upgradable",
+
         "stocked": "Stock-equipped...",
         "stocked_list_empty": "There's no ship that stock-equip this equipment..."
     }

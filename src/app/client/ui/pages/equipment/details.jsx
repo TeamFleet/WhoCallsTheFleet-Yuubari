@@ -47,7 +47,7 @@ const getDescription = equipment => {
         + `${equipment.type ? `, ${equipment._type}` : ''}`
 }
 
-@connect((state, ownProps) => state.equipmentDetails[ownProps.params.id])
+@connect((state, ownProps) => state.equipmentDetails[ownProps.params.id] || {})
 @ImportStyle(style)
 export default class extends React.Component {
     static onServerRenderStoreExtend(store) {

@@ -78,7 +78,7 @@ const getDescription = ship => {
         + `, ${translate("ship_details.illustrator")}: ${ship._illustrator}`
 }
 
-@connect((state, ownProps) => state.shipDetails[ownProps.params.id])
+@connect((state, ownProps) => state.shipDetails[ownProps.params.id] || {})
 @ImportStyle(style)
 export default class PageShipDetails extends React.Component {
     static onServerRenderStoreExtend(store) {
