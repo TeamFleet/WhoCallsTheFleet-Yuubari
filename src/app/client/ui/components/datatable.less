@@ -1,5 +1,18 @@
 @import '../base.less';
 
+.hover() {
+    &:after{
+        content:    "";
+        background: fade(#fff, 7.5%);
+        position:   absolute;
+        top:        -100vh;
+        bottom:     -100vh;
+        left:       0;
+        right:      0;
+        z-index:    -1;
+    }
+}
+
 .component{
     overflow-y:     hidden;
     // .row + .row{
@@ -26,18 +39,15 @@
         }
         .cell{
             .is-hover({
-                &:after{
-                    content:    "";
-                    background: fade(#fff, 7.5%);
-                    position:   absolute;
-                    top:        -100vh;
-                    bottom:     -100vh;
-                    left:       0;
-                    right:      0;
-                    z-index:    -1;
-                }
+                .hover();
             });
         }
+    }
+}
+
+html.is-hover .component{
+    .body .row:first-child .cell.is-hover{
+        .hover();
     }
 }
 

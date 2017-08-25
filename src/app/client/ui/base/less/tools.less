@@ -293,6 +293,12 @@
     }
 }
 
+.is-hover-nopseudo( @rulesHover ) {
+    html.is-hover{
+        @rulesHover();
+    }
+}
+
 @import './mixins/mediaqueries-screensize.less';
 @import './mixins/locale.less';
 @import './mixins/sku.less';

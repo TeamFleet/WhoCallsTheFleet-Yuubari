@@ -48,6 +48,11 @@ export default class EquipmentList extends React.Component {
 //     ...state.equipmentList[ownProps.id],
 //     // location: state.location
 // }))
+// @connect((state, ownProps) => {
+//     const obj = state.equipmentList[ownProps.id] || {}
+//     delete obj.column
+//     return obj
+// })
 @connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
 @ImportStyle(style)
 class EquipmentListBody extends React.Component {
@@ -70,26 +75,6 @@ class EquipmentListBody extends React.Component {
                 </CSSTransitionComponent>
             )
         })
-        // return collection.list.map((type, typeIndex) => {
-        //     return (
-        //         <CSSTransitionComponent key={index + typeIndex}>
-        //             <Title id={this.props.id} type={type.type} />
-        //             <TableBody id={this.props.id} equipments={type.equipments} />
-        //             {/* <div
-        //                 className={classNames({
-        //                     'first': typeIndex === 0,
-        //                     'last': typeIndex === collection.list.length - 1
-        //                 })}
-        //             >
-        //                 <Title type={type.type} id={this.props.id} />
-        //                 <List
-        //                     id={this.props.id}
-        //                     equipments={type.equipments}
-        //                 />
-        //             </div> */}
-        //         </CSSTransitionComponent>
-        //     )
-        // })
     }
 
     renderBody() {

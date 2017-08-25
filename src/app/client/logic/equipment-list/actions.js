@@ -3,6 +3,7 @@ import {
     EQUIPMENTLIST_RESET,
 
     EQUIPMENTLIST_CHANGE_COLLECTION,
+    EQUIPMENTLIST_HIGHLIGHT_COLUMN,
 
     EQUIPMENTLIST_SCROLL
 } from '../../redux/action-types.js'
@@ -23,6 +24,12 @@ export const changeCollection = (id, collection) => ({
     type: EQUIPMENTLIST_CHANGE_COLLECTION,
     id,
     collection
+})
+
+export const highlightColumn = (id, column) => ({
+    type: EQUIPMENTLIST_HIGHLIGHT_COLUMN,
+    id,
+    column
 })
 
 export const scroll = (id, scrollLeft) => ({

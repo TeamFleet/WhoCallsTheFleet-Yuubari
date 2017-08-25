@@ -18,6 +18,12 @@ export const changeCollection = (id, collection) => (dispatch) => {
     )
 }
 
+export const highlightColumn = (id, column) => (dispatch) => {
+    dispatch(
+        actions.highlightColumn(id, column)
+    )
+}
+
 export const scroll = (id, scrollLeft) => (dispatch) => {
     dispatch(
         actions.scroll(id, scrollLeft)

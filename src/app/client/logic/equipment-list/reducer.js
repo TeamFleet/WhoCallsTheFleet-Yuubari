@@ -3,13 +3,15 @@ import {
     EQUIPMENTLIST_RESET,
 
     EQUIPMENTLIST_CHANGE_COLLECTION,
+    EQUIPMENTLIST_HIGHLIGHT_COLUMN,
 
     EQUIPMENTLIST_SCROLL
 } from '../../redux/action-types.js'
 
 const initialState = {}
 const initialStateSingle = {
-    collection: 0
+    collection: 0,
+    // column: undefined
 }
 
 const updateState = (fullState, id, state) =>
@@ -46,6 +48,12 @@ export default function (state = initialState, action) {
             return updateState(state, action.id, {
                 collection: action.collection
             })
+
+        case EQUIPMENTLIST_HIGHLIGHT_COLUMN: {
+            return updateState(state, action.id, {
+                column: action.column
+            })
+        }
 
         case EQUIPMENTLIST_SCROLL: {
             return updateState(state, action.id, {

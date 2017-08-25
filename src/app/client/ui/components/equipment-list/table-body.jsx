@@ -8,7 +8,7 @@ import DataTable from '../datatable.jsx'
 import Link from '@appUI/components/link'
 import { get } from 'kckit'
 // import {
-//     compareScroll
+//     highlightColumn
 // } from '@appLogic/equipment-list/api.js'
 
 import { ImportStyle } from 'sp-css-import'
@@ -31,7 +31,8 @@ const stats = [
 ]
 
 @connect((state, ownProps) => ({
-    collection: state.equipmentList[ownProps.id].collection
+    collection: state.equipmentList[ownProps.id].collection,
+    // columnHighlight: state.equipmentList[ownProps.id].column
 }))
 @ImportStyle(style)
 export default class EquipmentListTableBody extends React.Component {
@@ -39,7 +40,7 @@ export default class EquipmentListTableBody extends React.Component {
         if (!Array.isArray(this.props.equipments)) return []
         // console.log(this.props.equipments)
 
-        let results = this.props.equipments.map(equipment => {
+        let results = this.props.equipments.map((equipment, index) => {
             let cells = [
                 [<Link to={getLink('equipment', equipment.id)}>{equipment._name}</Link>, {
                     className: 'cell-name'
@@ -80,12 +81,25 @@ export default class EquipmentListTableBody extends React.Component {
                 if (this.props.sortType === stat)
                     className += ' is-sorting'
 
+                if (!index && this.props.columnHighlight === stat)
+                    className += ' is-hover'
+
                 cells.push([
                     content,
                     {
                         className: className,
                         "data-stat": stat.replace(/^equipment\./, '') || undefined,
-                        value: trueValue
+                        value: trueValue,
+                        // onMouseEnter: () => {
+                        //     this.props.dispatch(
+                        //         highlightColumn(this.props.id, stat)
+                        //     )
+                        // },
+                        // onMouseLeave: () => {
+                        //     this.props.dispatch(
+                        //         highlightColumn(this.props.id, undefined)
+                        //     )
+                        // }
                     }
                 ])
             })
@@ -106,6 +120,7 @@ export default class EquipmentListTableBody extends React.Component {
     }
 
     render() {
+        // console.log(this.props.columnHighlight)
         return (
             <DataTable
                 className={this.props.className}
