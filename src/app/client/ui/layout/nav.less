@@ -300,6 +300,7 @@
             .sub, .main{
                 display:    block;
                 transition-property: none;
+                .ellipsis();
             }
             .sub{
                 font-size:  12px;
@@ -396,7 +397,7 @@
 
         .titlebar{
             line-height:@nav-height-phone;
-            padding:    0 0 0 60px;
+            padding:    0 0 0 54px;
         }
 
         label[for="nav-switch"]{
@@ -408,4 +409,10 @@
             }
         }
     });
+    
+    // .screen-phone-small({
+    //     .titlebar{
+    //         padding-left: 50px;
+    //     }
+    // });
 }
