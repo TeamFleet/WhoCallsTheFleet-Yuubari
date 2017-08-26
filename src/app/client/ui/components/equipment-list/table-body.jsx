@@ -7,9 +7,9 @@ import getLink from '@appUtils/get-link'
 import DataTable from '../datatable.jsx'
 import Link from '@appUI/components/link'
 import { get } from 'kckit'
-// import {
-//     highlightColumn
-// } from '@appLogic/equipment-list/api.js'
+import {
+    highlightColumn
+} from '@appLogic/equipment-list/api.js'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './table-body.less'
@@ -81,8 +81,8 @@ export default class EquipmentListTableBody extends React.Component {
                 if (this.props.sortType === stat)
                     className += ' is-sorting'
 
-                if (!index && this.props.columnHighlight === stat)
-                    className += ' is-hover'
+                // if (!index && this.props.columnHighlight === stat)
+                //     className += ' is-hover'
 
                 cells.push([
                     content,
@@ -90,16 +90,16 @@ export default class EquipmentListTableBody extends React.Component {
                         className: className,
                         "data-stat": stat.replace(/^equipment\./, '') || undefined,
                         value: trueValue,
-                        // onMouseEnter: () => {
-                        //     this.props.dispatch(
-                        //         highlightColumn(this.props.id, stat)
-                        //     )
-                        // },
-                        // onMouseLeave: () => {
-                        //     this.props.dispatch(
-                        //         highlightColumn(this.props.id, undefined)
-                        //     )
-                        // }
+                        onMouseEnter: () => {
+                            this.props.dispatch(
+                                highlightColumn(this.props.id, stat)
+                            )
+                        },
+                        onMouseLeave: () => {
+                            this.props.dispatch(
+                                highlightColumn(this.props.id, undefined)
+                            )
+                        }
                     }
                 ])
             })

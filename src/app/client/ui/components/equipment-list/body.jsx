@@ -48,12 +48,12 @@ export default class EquipmentList extends React.Component {
 //     ...state.equipmentList[ownProps.id],
 //     // location: state.location
 // }))
-// @connect((state, ownProps) => {
-//     const obj = state.equipmentList[ownProps.id] || {}
-//     delete obj.column
-//     return obj
-// })
-@connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
+@connect((state, ownProps) => {
+    const obj = { ...state.equipmentList[ownProps.id] } || {}
+    delete obj.column
+    return obj
+})
+// @connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
 @ImportStyle(style)
 class EquipmentListBody extends React.Component {
 
