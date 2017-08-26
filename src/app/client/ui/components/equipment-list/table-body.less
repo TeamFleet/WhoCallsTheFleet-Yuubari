@@ -10,7 +10,7 @@
             // padding:    5px 0;
             // height:     (@ship-link-height + 0);
             .is-hover({
-                background:     fade(#fff, 7.5%);
+                background:     @color-table-highlight;
             });
             .sku-webapp({
                 cursor:     pointer;
@@ -71,11 +71,11 @@
                 });
             }
         }
-        .stat-color(fire, hsla(6, 85%, 40%, .20));
-        .stat-color(torpedo, hsla(207, 85%, 40%, .20));
-        .stat-color(night, fade(mix(hsl(6, 85%, 40%), hsl(207, 85%, 40%)), 40%));
-        .stat-color(aa, hsla(26, 85%, 40%, .20));
-        .stat-color(armor, hsla(39, 85%, 40%, .20));
+        .stat-color(fire, fade(@color-stat-fire, 20%));
+        .stat-color(torpedo, fade(@color-stat-torpedo, 20%));
+        .stat-color(night, fade(@color-stat-night, 40%));
+        .stat-color(aa, fade(@color-stat-aa, 20%));
+        .stat-color(armor, fade(@color-stat-armor, 20%));
     }
 }
 

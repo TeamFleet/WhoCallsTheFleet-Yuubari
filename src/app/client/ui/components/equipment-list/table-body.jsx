@@ -40,7 +40,7 @@ export default class EquipmentListTableBody extends React.Component {
         if (!Array.isArray(this.props.equipments)) return []
         // console.log(this.props.equipments)
 
-        let results = this.props.equipments.map((equipment, index) => {
+        let results = this.props.equipments.map(equipment => {
             let cells = [
                 [<Link to={getLink('equipment', equipment.id)}>{equipment._name}</Link>, {
                     className: 'cell-name'
@@ -91,11 +91,14 @@ export default class EquipmentListTableBody extends React.Component {
                         "data-stat": stat.replace(/^equipment\./, '') || undefined,
                         value: trueValue,
                         onMouseEnter: () => {
+                            // this.getContainer(evt.target).setAttribute('data-highlighting', indexStat)
                             this.props.dispatch(
+                                // highlightColumn(this.props.id, indexStat)
                                 highlightColumn(this.props.id, stat)
                             )
                         },
                         onMouseLeave: () => {
+                            // this.getContainer(evt.target).removeAttribute('data-highlighting')
                             this.props.dispatch(
                                 highlightColumn(this.props.id, undefined)
                             )
@@ -118,6 +121,16 @@ export default class EquipmentListTableBody extends React.Component {
 
         return results
     }
+
+    // getContainer(target) {
+    //     if (!this._container) {
+    //         while (!target.dataset.equipmentlistId) {
+    //             target = target.parentNode
+    //         }
+    //         this._container = target
+    //     }
+    //     return this._container
+    // }
 
     render() {
         // console.log(this.props.columnHighlight)

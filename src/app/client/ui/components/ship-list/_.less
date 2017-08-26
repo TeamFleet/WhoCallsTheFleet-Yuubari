@@ -43,6 +43,9 @@
                 .screen-tablet({
                     order:          1;
                 });
+                @supports (pointer-events: none) {
+                    z-index: initial;
+                }
             }
             &:nth-child(n+2){
                 text-align: center;

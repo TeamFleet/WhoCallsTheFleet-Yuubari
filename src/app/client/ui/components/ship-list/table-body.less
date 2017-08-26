@@ -17,7 +17,7 @@
                 }
             }
             .is-hover({
-                background:     linear-gradient(to right, transparent, fade(#fff, 7.5%) 150px);
+                background:     linear-gradient(to right, transparent, @color-table-highlight 150px);
             });
             .screen-tablet({
                 border-top-color:   transparent;
@@ -155,10 +155,10 @@
                 });
             }
         }
-        .stat-color(fire, hsla(6, 85%, 40%, .20));
-        .stat-color(torpedo, hsla(207, 85%, 40%, .20));
-        .stat-color(night, fade(mix(hsl(6, 85%, 40%), hsl(207, 85%, 40%)), 40%));
-        .stat-color(aa, hsla(26, 85%, 40%, .20));
-        .stat-color(armor, hsla(39, 85%, 40%, .20));
+        .stat-color(fire, fade(@color-stat-fire, 20%));
+        .stat-color(torpedo, fade(@color-stat-torpedo, 20%));
+        .stat-color(night, fade(@color-stat-night, 40%));
+        .stat-color(aa, fade(@color-stat-aa, 20%));
+        .stat-color(armor, fade(@color-stat-armor, 20%));
     }
 }

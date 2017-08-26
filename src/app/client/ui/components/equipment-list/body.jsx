@@ -99,7 +99,9 @@ class EquipmentListBody extends React.Component {
         }
 
         return (
-            <div className={this.props.className}>
+            <div className={this.props.className}
+                data-equipmentlist-id={this.props.id}
+            >
                 {__CLIENT__ && <Header id={this.props.id} />}
 
                 <TransitionGroup
@@ -120,16 +122,16 @@ class EquipmentListBody extends React.Component {
 // }))
 // @connect()
 // @ImportStyle(style)
-class EquipmentListBodyList extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                <Title id={this.props.id} type={this.props.type} />
-                {this.props.children}
-            </div>
-        )
-    }
-}
+// class EquipmentListBodyList extends React.Component {
+//     render() {
+//         return (
+//             <div className={this.props.className}>
+//                 <Title id={this.props.id} type={this.props.type} />
+//                 {this.props.children}
+//             </div>
+//         )
+//     }
+// }
 
 const CSSTransitionComponent = (props) => (
     <CSSTransition

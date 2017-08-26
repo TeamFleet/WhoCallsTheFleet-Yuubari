@@ -3,13 +3,7 @@
 .hover() {
     &:after{
         content:    "";
-        background: fade(#fff, 7.5%);
-        position:   absolute;
-        top:        -100vh;
-        bottom:     -100vh;
-        left:       0;
-        right:      0;
-        z-index:    -1;
+        .style-table-highlight();
     }
 }
 
@@ -45,11 +39,11 @@
     }
 }
 
-html.is-hover .component{
-    .body .row:first-child .cell.is-hover{
-        .hover();
-    }
-}
+// html.is-hover .component{
+//     .body .row:first-child .cell.is-hover{
+//         .hover();
+//     }
+// }
 
 .component.flex{
     display:    block;

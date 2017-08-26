@@ -16,7 +16,9 @@
             height:     @header-height-thead;
             line-height:@header-height-thead;
             &.is-highlight{
-                background: fade(#fff, 10%);
+                .is-hover-nopseudo({
+                    background: fade(#fff, 10%);
+                });
             }
         }
 
