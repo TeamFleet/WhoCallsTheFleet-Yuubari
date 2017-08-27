@@ -194,6 +194,14 @@
         "facts_unupgradable": "更新不可",
         "facts_rankupgradable": "熟練度が上が可能",
         "facts_unrankupgradable": "熟練度が上がらない",
+        
+        "scrap": "廢棄",
+
+        "improvements": "Improvement Options",
+
+        "required_for_improvements": "Required for other Improvements",
+
+        "upgrade_from": "Can be upgraded from...",
 
         "stocked": "初期装備の艦娘...",
         "stocked_list_empty": "There's no ship that stock-equip this equipment..."

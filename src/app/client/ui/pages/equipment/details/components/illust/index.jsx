@@ -2,18 +2,19 @@ import React from 'react'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 
-import translate from 'sp-i18n'
+// import translate from 'sp-i18n'
+import getPic from '@appUtils/get-pic.js'
 
 // import { ImportStyle } from 'sp-css-import'
 // import styles from './styles.less'
 
 // @connect()
 // @ImportStyle(styles)
-export default class EquipmentDetailsComponentStats extends React.Component {
+export default class EquipmentDetailsComponentIllust extends React.Component {
     render() {
         return (
             <ComponentContainer className={this.props.className}>
-                {translate('under_construction')}
+                <img className="illust" src={getPic('equipment', this.props.equipment.id, 'card')} />
             </ComponentContainer>
         )
     }

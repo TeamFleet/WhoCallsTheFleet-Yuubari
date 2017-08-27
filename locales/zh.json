@@ -194,7 +194,15 @@
         "facts_rankupgradable": "可提升熟练度",
         "facts_unrankupgradable": "不可提升熟练度",
         
-        "stocked": "初始装备于...",
+        "scrap": "废弃获得资源",
+
+        "improvements": "改修选项",
+
+        "required_for_improvements": "可用于改修其他装备",
+
+        "upgrade_from": "可由以下装备升级获得",
+        
+        "stocked": "初始装备于以下舰娘",
         "stocked_list_empty": "暂无初始配置该装备的舰娘..."
     }
 }

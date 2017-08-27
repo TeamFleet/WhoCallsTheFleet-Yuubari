@@ -6,10 +6,10 @@ import Link from '@appUI/components/link'
 // import Icon from '@appUI/components/icon'
 import FlagNavy from '@appUI/components/flag-navy'
 import ComponentContainer from '@appUI/containers/infos-component'
-import Stat from '../commons/stat.jsx'
+import Stat from '@appUI/components/stat'
 
 import translate from 'sp-i18n'
-import db from '@appLogic/database'
+// import db from '@appLogic/database'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './quickfacts.less'

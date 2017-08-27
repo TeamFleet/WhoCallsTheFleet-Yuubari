@@ -37,7 +37,7 @@ export default class extends React.Component {
         return (
             <TagName
                 className={this.props.className}
-                data-stat={stats.indexOf(this.props.stat)}
+                data-stat={stats.indexOf(this.props.stat === 'distance' ? 'range' : this.props.stat)}
             >
                 {this.props.children}
             </TagName>

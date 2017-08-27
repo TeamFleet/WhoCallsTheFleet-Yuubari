@@ -2,20 +2,14 @@ import React from 'react'
 import classNames from 'classnames'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import Stat from '../commons/stat.jsx'
+import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
+import resources from '@appData/resources'
 
 import translate from 'sp-i18n'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './modernization.less'
-
-const resources = [
-    'fuel',
-    'ammo',
-    'steel',
-    'bauxite'
-]
 
 // @connect()
 @ImportStyle(styles)

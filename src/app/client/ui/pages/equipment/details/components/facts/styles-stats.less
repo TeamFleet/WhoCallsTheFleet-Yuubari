@@ -1,0 +1,28 @@
+@import "./_.less";
+
+.component{
+    @gutter:    10px;
+    
+    // margin-top: (0 - @gutter);
+
+    .item{
+        margin-bottom: @gutter;
+        width:      100px;
+        // width:      20%;
+        .type{
+            font-size:  14px;
+        }
+        .screen-max({
+            width:  20%;
+        });
+        .screen-phone({
+            width:  33.3333%;
+        });
+        .screen-phone-small({
+            width:  50%;
+        });
+        // &.disabled{
+        //     opacity:    .4;
+        // }
+    }
+}

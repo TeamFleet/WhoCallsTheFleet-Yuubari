@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { maxShipLv } from 'kckit'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import Stat from '../commons/stat.jsx'
+import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
 import prefs from '@appLogic/preferences'
 
@@ -105,7 +105,7 @@ export default class ShipDetailsComponentStats extends React.Component {
                 key={index}
                 className={
                     classNames(["stat", {
-                        "is-consume": isConsume,
+                        "is-negative": isConsume,
                         'disabled': value === '-'
                     }])
                 }

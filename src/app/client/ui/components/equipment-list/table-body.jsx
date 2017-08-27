@@ -10,22 +10,13 @@ import { get } from 'kckit'
 import {
     highlightColumn
 } from '@appLogic/equipment-list/api.js'
+import arrStats from '@appData/equipment-stats'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './table-body.less'
 
 const stats = [
-    'fire',
-    'torpedo',
-    'aa',
-    'asw',
-    'bomb',
-    'hit',
-    'armor',
-    'evasion',
-    'los',
-    'range',
-
+    ...arrStats,
     'equipment.craftable',
     'equipment.improvable'
 ]

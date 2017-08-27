@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 import translate from 'sp-i18n'
 import DataTable from '../datatable.jsx'
+import arrStats from '@appData/equipment-stats'
 // import {
 //     compareScroll,
 //     compareSort
@@ -16,17 +17,7 @@ import style from './table-header.less'
 
 const headers = [
     '',
-    'fire',
-    'torpedo',
-    'aa',
-    'asw',
-    'bomb',
-    'hit',
-    'armor',
-    'evasion',
-    'los',
-    'range',
-
+    ...arrStats,
     'equipment.craftable',
     'equipment.improvable'
 ]

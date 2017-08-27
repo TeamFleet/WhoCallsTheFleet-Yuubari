@@ -194,6 +194,14 @@
         "facts_rankupgradable": "Rank-upgradable",
         "facts_unrankupgradable": "Un-rank-upgradable",
 
+        "scrap": "Scrap Value",
+
+        "improvements": "Improvement Options",
+
+        "required_for_improvements": "Required for other Improvements",
+
+        "upgrade_from": "Can be upgraded from...",
+
         "stocked": "Stock-equipped on...",
         "stocked_list_empty": "There's no ship that stock-equip this equipment..."
     }

@@ -1,4 +1,4 @@
-@import '../_.less';
+@import "../../base.less";
 
 .component{
     display:    block;
@@ -24,7 +24,7 @@
         margin-left:    .25em;
     }
     
-    &.is-consume{
+    &.is-negative{
         color:  @theme-red-a100;
         .type{
             color:  fade(@theme-red-100, 75%);
@@ -32,6 +32,6 @@
     }
 
     &.disabled{
-        opacity:    .25;
+        opacity:    .4;
     }
 }

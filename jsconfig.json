@@ -16,6 +16,7 @@
             "@appConfig/*": ["./src/app/config"],
             "@appLocales/*": ["./locales"],
             "@appUtils/*": ["./src/app/utils"],
+            "@appData/*": ["./src/app/data"],
             "@appAssets/*": ["./src/app/client/assets"],
             "@appUI/*": ["./src/app/client/ui"],
             "@appLogic/*": ["./src/app/client/logic"],

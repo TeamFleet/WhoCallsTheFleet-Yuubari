@@ -1,10 +1,16 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
 
+import arrStats from '@appData/equipment-stats'
+import arrResources from '@appData/resources'
 import getEquipment from '@appUtils/get-equipment'
 import equipmentTypes from 'kckit/src/types/equipments'
+import Stat from '@appUI/components/stat'
+import getValue from '@appUtils/get-value'
+import { get } from 'kckit'
 
 import translate from 'sp-i18n'
 
@@ -20,6 +26,32 @@ import styles from './styles.less'
 @ImportStyle(styles)
 export default class EquipmentDetailsComponentFacts extends React.Component {
     render() {
+        return (
+            <ComponentContainer className={this.props.className}>
+                <EquipmentDetailsComponentFactsFacts equipment={this.props.equipment} />
+                <EquipmentDetailsComponentFactsStats equipment={this.props.equipment} />
+                <EquipmentDetailsComponentFactsScrap equipment={this.props.equipment} />
+            </ComponentContainer>
+        )
+    }
+}
+
+import stylesContainer from './styles-container.less'
+@ImportStyle(stylesContainer)
+class EquipmentDetailsComponentFactsContainer extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className}>
+                {this.props.children}
+            </div>
+        )
+    }
+}
+
+import stylesFacts from './styles-facts.less'
+@ImportStyle(stylesFacts)
+class EquipmentDetailsComponentFactsFacts extends React.Component {
+    render() {
         const equipment = getEquipment(this.props.equipment)
 
         const arr = [
@@ -34,7 +66,7 @@ export default class EquipmentDetailsComponentFacts extends React.Component {
             )
 
         return (
-            <ComponentContainer className={this.props.className}>
+            <EquipmentDetailsComponentFactsContainer className={this.props.className}>
                 {arr.map(pair => (
                     <Bullet
                         className="item"
@@ -43,7 +75,68 @@ export default class EquipmentDetailsComponentFacts extends React.Component {
                         key={pair[0]}
                     />
                 ))}
-            </ComponentContainer>
+            </EquipmentDetailsComponentFactsContainer>
+        )
+    }
+}
+
+import stylesStats from './styles-stats.less'
+@ImportStyle(stylesStats)
+class EquipmentDetailsComponentFactsStats extends React.Component {
+    render() {
+        const stats = [...arrStats]
+        if (equipmentTypes.Aircrafts.includes(this.props.equipment.type))
+            stats.push('distance')
+
+        return (
+            <EquipmentDetailsComponentFactsContainer className={this.props.className}>
+                {stats.map(stat => {
+                    const value = stat === 'range'
+                        ? get.range(this.props.equipment.stat[stat])
+                        : getValue(this.props.equipment.stat[stat])
+                    {/* if (!value) return null */}
+                    return (<Stat
+                        type={translate(`stat.${stat}`)}
+                        key={stat}
+                        className={
+                            classNames(["item", {
+                                "is-negative": (value < 0),
+                                'disabled': !value
+                            }])
+                        }
+                        stat={stat}
+                    >
+                        {`${value > 0 && stat !== 'range' && stat !== 'distance' ? '+' : ''}${!value ? '-' : value}`}
+                    </Stat>)
+                })}
+            </EquipmentDetailsComponentFactsContainer>
+        )
+    }
+}
+
+import stylesScrap from './styles-scrap.less'
+@ImportStyle(stylesScrap)
+class EquipmentDetailsComponentFactsScrap extends React.Component {
+    render() {
+        return (
+            <EquipmentDetailsComponentFactsContainer className={this.props.className}>
+                {arrResources.map((resource, index) => {
+                    const value = getValue(this.props.equipment.dismantle[index])
+                    return (
+                        <Stat
+                            className={
+                                classNames(['item', {
+                                    disabled: !value
+                                }])
+                            }
+                            key={index}
+                            stat={resource}
+                        >
+                            +{value}
+                        </Stat>
+                    )
+                })}
+            </EquipmentDetailsComponentFactsContainer>
         )
     }
 }

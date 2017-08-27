@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import Stat from '../commons/stat.jsx'
+import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
 
 import translate from 'sp-i18n'

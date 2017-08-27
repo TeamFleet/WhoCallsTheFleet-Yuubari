@@ -135,6 +135,7 @@ const resolve = {
         "@appConfig": path.resolve(appPath, './src/app/config'),
         "@appLocales": path.resolve(appPath, './locales'),
         "@appUtils": path.resolve(appPath, './src/app/utils'),
+        "@appData": path.resolve(appPath, './src/app/data'),
         "@appAssets": path.resolve(appPath, './src/app/client/assets'),
         "@appUI": path.resolve(appPath, './src/app/client/ui'),
         "@appLogic": path.resolve(appPath, './src/app/client/logic'),
