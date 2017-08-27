@@ -3,10 +3,17 @@
 .component{
     overflow:       hidden;
     margin-right:   -20px;
-    margin-top:     20px;
 
     .item{
         padding-right: 20px;
         float:  left;
+    }
+
+    .title{
+        font-size:  14px;
+    }
+
+    & + & {
+        margin-top:  20px;
     }
 }

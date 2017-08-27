@@ -5,7 +5,7 @@ import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
 
 import arrStats from '@appData/equipment-stats'
-import arrResources from '@appData/resources'
+// import arrResources from '@appData/resources'
 import getEquipment from '@appUtils/get-equipment'
 import equipmentTypes from 'kckit/src/types/equipments'
 import Stat from '@appUI/components/stat'
@@ -30,7 +30,7 @@ export default class EquipmentDetailsComponentFacts extends React.Component {
             <ComponentContainer className={this.props.className}>
                 <EquipmentDetailsComponentFactsFacts equipment={this.props.equipment} />
                 <EquipmentDetailsComponentFactsStats equipment={this.props.equipment} />
-                <EquipmentDetailsComponentFactsScrap equipment={this.props.equipment} />
+                {/* <EquipmentDetailsComponentFactsScrap equipment={this.props.equipment} /> */}
             </ComponentContainer>
         )
     }
@@ -94,7 +94,7 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
                     const value = stat === 'range'
                         ? get.range(this.props.equipment.stat[stat])
                         : getValue(this.props.equipment.stat[stat])
-                    {/* if (!value) return null */}
+                    {/* if (!value) return null */ }
                     return (<Stat
                         type={translate(`stat.${stat}`)}
                         key={stat}
@@ -114,29 +114,31 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
     }
 }
 
-import stylesScrap from './styles-scrap.less'
-@ImportStyle(stylesScrap)
-class EquipmentDetailsComponentFactsScrap extends React.Component {
-    render() {
-        return (
-            <EquipmentDetailsComponentFactsContainer className={this.props.className}>
-                {arrResources.map((resource, index) => {
-                    const value = getValue(this.props.equipment.dismantle[index])
-                    return (
-                        <Stat
-                            className={
-                                classNames(['item', {
-                                    disabled: !value
-                                }])
-                            }
-                            key={index}
-                            stat={resource}
-                        >
-                            +{value}
-                        </Stat>
-                    )
-                })}
-            </EquipmentDetailsComponentFactsContainer>
-        )
-    }
-}
+// import stylesScrap from './styles-scrap.less'
+// @ImportStyle(stylesScrap)
+// class EquipmentDetailsComponentFactsScrap extends React.Component {
+//     render() {
+//         return (
+//             <ComponentContainer className={this.props.className} title={translate("equipment_details.scrap")}>
+//                 <EquipmentDetailsComponentFactsContainer className={this.props.className}>
+//                     {arrResources.map((resource, index) => {
+//                         const value = getValue(this.props.equipment.dismantle[index])
+//                         return (
+//                             <Stat
+//                                 className={
+//                                     classNames(['item', {
+//                                         disabled: !value
+//                                     }])
+//                                 }
+//                                 key={index}
+//                                 stat={resource}
+//                             >
+//                                 {value}
+//                             </Stat>
+//                         )
+//                     })}
+//                 </EquipmentDetailsComponentFactsContainer>
+//             </ComponentContainer>
+//         )
+//     }
+// }

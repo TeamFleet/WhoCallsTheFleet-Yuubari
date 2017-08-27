@@ -27,6 +27,17 @@
         .stats(@n, (@i + 1));
     }
     .stats(@count);
+    
+    .resource(@resource){
+        &[data-resource="@{resource}"]{
+            @key: "color-@{resource}";
+            color:  @@key;
+        }
+    }
+    .resource(fuel);
+    .resource(ammo);
+    .resource(steel);
+    .resource(bauxite);
 
     &:empty{
         &:before{

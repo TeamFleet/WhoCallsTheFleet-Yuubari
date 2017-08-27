@@ -26,7 +26,7 @@ export default class ShipDetailsComponentDismantle extends React.Component {
                 key={index}
                 stat={stat}
             >
-                +{value}
+                {value}
             </Stat>
         )
     }
