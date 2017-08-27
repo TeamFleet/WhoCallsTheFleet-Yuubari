@@ -19,6 +19,7 @@ export default class Stat extends React.Component {
         if (this.props.stat) {
             componentProps.tag = "dl"
             componentProps.stat = this.props.stat
+            componentProps.disableResourceColor = this.props.disableResourceColor
         }
 
         if (typeof this.props.value !== 'undefined' && this.props.value < 0) {

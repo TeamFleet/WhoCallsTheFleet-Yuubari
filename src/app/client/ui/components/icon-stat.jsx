@@ -35,7 +35,7 @@ const stats = [
 export default class extends React.Component {
     render() {
         const TagName = this.props.tag || 'span'
-        const isResource = arrResources.includes(this.props.stat)
+        const isResource = !this.props.disableResourceColor && arrResources.includes(this.props.stat)
         return (
             <TagName
                 className={this.props.className}

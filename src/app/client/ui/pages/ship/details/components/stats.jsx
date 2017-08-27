@@ -106,11 +106,13 @@ export default class ShipDetailsComponentStats extends React.Component {
                 className={
                     classNames(["stat", {
                         "is-negative": isConsume,
+                        "is-positive": !isConsume && value !== '-' && value !== '?' && !!(value),
                         'disabled': value === '-'
                     }])
                 }
                 stat={stat.replace('consum.', '')}
                 max={stat === 'luck' && this.props.ship.stat.luck_max}
+                disableResourceColor={true}
             >
                 {value}
             </Stat>

@@ -101,6 +101,7 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
                         className={
                             classNames(["item", {
                                 "is-negative": (value < 0),
+                                "is-positive": (value > 0 && stat !== 'range' && stat !== 'distance'),
                                 'disabled': !value
                             }])
                         }
