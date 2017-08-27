@@ -43,7 +43,7 @@
         "luck": "Luck",
         "bomb": "Bomb",
         "hit": "Hit",
-        "radius": "Radius",
+        "distance": "Radius",
         "consum": {
             "fuel": "Fuel",
             "ammo": "Ammo"

@@ -40,16 +40,16 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     <dt className="slot">{hasSlot ? slot : "-"}</dt>
                     <dd className="equipment">
                         {equipmentId &&
-                            <Link to={`/equipments/${equipmentId}`}>
+                            <Link to={`/equipments/${equipmentId}`} className="equipment-name">
                                 <IconEquipment className="icon" type={equipment.type} />
                                 {equipment._name}
                             </Link>
                         }
-                        {!equipmentId && hasSlot && <span>
+                        {!equipmentId && hasSlot && <span className="equipment-name">
                             <IconEquipment className="icon" />
                             {translate("ship_details.emptyslot")}
                         </span>}
-                        {!equipmentId && !hasSlot && <span>
+                        {!equipmentId && !hasSlot && <span className="equipment-name">
                             <IconEquipment className="icon" />
                             {translate("ship_details.noslot")}
                         </span>}

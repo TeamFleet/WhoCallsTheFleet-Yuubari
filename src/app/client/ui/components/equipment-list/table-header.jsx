@@ -41,15 +41,14 @@ const headers = [
 }))
 export default class ShipListTableHeader extends React.Component {
     getHeader(stat) {
-        const isHighlight = this.props.columnHighlight === stat
         if (this.props.collection === 2 && stat === 'range')
-            stat = 'radius'
+            stat = 'distance'
         return [
             stat ? translate('stat.' + stat) : null,
             {
                 className: classNames({
                     'cell-name': (!stat),
-                    'is-highlight': isHighlight
+                    'is-highlight': this.props.columnHighlight === stat
                 }),
                 "data-stat": stat.replace(/^equipment\./, '') || undefined
             }

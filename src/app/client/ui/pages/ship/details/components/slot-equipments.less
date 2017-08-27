@@ -1,10 +1,11 @@
 @import '../_.less';
+@import './equipable.less';
 
 .component{
     @slot-size:     22px;
     @line-height:   18px;
     @icon-size:     32px;
-    @gutter:        14px;
+    @gutter:        12px;
 
     // margin-top:     (0 - @gutter);
 
@@ -47,15 +48,16 @@
             display:    inline-block;
             // position:   relative;
             // z-index:    1;
-            @color2:    fade(@color-theme, 50%);
-            @position1: (@slot-size + @icon-size / 2);
-            @position2: (@slot-size + @icon-size) * 2;
-            background: linear-gradient(to right, transparent, transparent @position1, @color2 @position1);
-            border-radius: (@slot-size / 2);
+            // @color2:    fade(@color-theme, 50%);
+            // @position1: (@slot-size + @icon-size / 2);
+            // @position2: (@slot-size + @icon-size) * 2;
+            // background: linear-gradient(to right, transparent, transparent @position1, @color2 @position1);
+            // border-radius: (@slot-size / 2);
             // border-radius: (@slot-size / 2) 0 0 (@slot-size / 2);
             // min-width:  @position2;
             padding-right:  .75em;
             font-size:      14px;
+            position:   relative;
             .icon{
                 width:      @icon-size;
                 height:     @icon-size;
@@ -68,6 +70,32 @@
                 border-radius: 50%;
                 border:     1px solid @color-fade;
                 z-index:    10;
+            }
+        }
+        .equipment-name{
+            &:after{
+                content:    "";
+                position:   absolute;
+                z-index:    -2;
+                top:        -1px;
+                bottom:     -1px;
+                left:       (@slot-size + @icon-size / 2);
+                right:      0;
+                background: fade(@color-theme, 50%);
+                border:     1px solid fade(@color-fade, 25%);
+                border-radius: (@slot-size / 2);
+            }
+        }
+        a.equipment-name{
+            &:hover{
+                &:after{
+                    background-color:   @color-special-border;
+                    border-color:       @color-special-border;
+                }
+                .icon{
+                    background-color:   @color-special-background;
+                    border-color:       @color-special-border;
+                }
             }
         }
 }
