@@ -12,9 +12,12 @@ import translate from 'sp-i18n'
 // @ImportStyle(styles)
 export default class EquipmentDetailsComponentRequiredForImprovements extends React.Component {
     render() {
+        const list = this.props.equipment.upgrade_for || []
+        const hasItem = !!(list.length)
         return (
             <ComponentContainer className={this.props.className} title={translate("equipment_details.required_for_improvements")}>
-                <ListEquipments list={this.props.equipment.upgrade_for || []} />
+                {hasItem && <ListEquipments list={list} />}
+                {!hasItem && <span className="disabled">{translate("none")}</span>}
             </ComponentContainer>
         )
     }
