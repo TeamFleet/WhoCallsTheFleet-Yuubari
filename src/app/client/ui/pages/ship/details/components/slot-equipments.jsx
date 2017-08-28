@@ -41,7 +41,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     <dd className="equipment">
                         {equipmentId &&
                             <Link to={`/equipments/${equipmentId}`} className="equipment-name">
-                                <IconEquipment className="icon" type={equipment.type} />
+                                <IconEquipment className="icon" icon={equipment._icon} />
                                 {equipment._name}
                             </Link>
                         }

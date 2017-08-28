@@ -6,8 +6,8 @@ import Bullet from '@appUI/components/bullet'
 
 import arrStats from '@appData/equipment-stats'
 // import arrResources from '@appData/resources'
-import getEquipment from '@appUtils/get-equipment'
-import equipmentTypes from 'kckit/src/types/equipments'
+// import getEquipment from '@appUtils/get-equipment'
+// import equipmentTypes from 'kckit/src/types/equipments'
 import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
 import { get } from 'kckit'
@@ -52,7 +52,8 @@ import stylesFacts from './styles-facts.less'
 @ImportStyle(stylesFacts)
 class EquipmentDetailsComponentFactsFacts extends React.Component {
     render() {
-        const equipment = getEquipment(this.props.equipment)
+        // const equipment = getEquipment(this.props.equipment)
+        const { equipment, className } = this.props
 
         const arr = [
             ['craftable', !!(equipment.craftable)],
@@ -60,13 +61,13 @@ class EquipmentDetailsComponentFactsFacts extends React.Component {
             ['upgradable', (Array.isArray(equipment.upgrade_to) && equipment.upgrade_to.length)]
         ]
 
-        if (equipmentTypes.Aircrafts.includes(equipment.type))
+        if (equipment.isType('Aircraft'))
             arr.push(
                 ['rankupgradable', equipment.rankupgradable]
             )
 
         return (
-            <EquipmentDetailsComponentFactsContainer className={this.props.className}>
+            <EquipmentDetailsComponentFactsContainer className={className}>
                 {arr.map(pair => (
                     <Bullet
                         className="item"
@@ -84,16 +85,18 @@ import stylesStats from './styles-stats.less'
 @ImportStyle(stylesStats)
 class EquipmentDetailsComponentFactsStats extends React.Component {
     render() {
+        const { equipment, className } = this.props
         const stats = [...arrStats]
-        if (equipmentTypes.Aircrafts.includes(this.props.equipment.type))
+
+        if (equipment.isType('Aircraft'))
             stats.push('distance')
 
         return (
-            <EquipmentDetailsComponentFactsContainer className={this.props.className}>
+            <EquipmentDetailsComponentFactsContainer className={className}>
                 {stats.map(stat => {
                     const value = stat === 'range'
-                        ? get.range(this.props.equipment.stat[stat])
-                        : getValue(this.props.equipment.stat[stat])
+                        ? get.range(equipment.stat[stat])
+                        : getValue(equipment.stat[stat])
                     {/* if (!value) return null */ }
                     return (<Stat
                         type={translate(`stat.${stat}`)}

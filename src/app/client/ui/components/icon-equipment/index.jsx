@@ -1,6 +1,7 @@
 import React from 'react'
 
 import db from '@appLogic/database'
+import getEquipment from '@appUtils/get-equipment'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './styles.less'
@@ -8,18 +9,32 @@ import style from './styles.less'
 @ImportStyle(style)
 export default class IconEquipment extends React.Component {
     render() {
-        const TagName = this.props.tag || 'span'
-        let icon = this.props.icon
-        if (typeof icon === 'undefined' && typeof this.props.type !== 'undefined')
-            icon = db.equipmentTypes[this.props.type].icon
+        const {
+            className,
+            tag,
+            icon,
+            type,
+            equipment
+        } = this.props
 
-        const iconID = parseInt(icon)
+        const TagName = tag || 'span'
+        let _icon = icon
+
+        if (typeof _icon === 'undefined') {
+            if (equipment) {
+                _icon = getEquipment(equipment)._icon
+            } else if (type) {
+                _icon = db.equipmentTypes[type].icon
+            }
+        }
+
+        const iconID = parseInt(_icon)
 
         return (
             <TagName
-                className={this.props.className}
+                className={className}
                 data-icon={iconID}
-                data-suffix={(''+icon).replace(iconID, '').toUpperCase() || undefined}
+                data-suffix={('' + _icon).replace(iconID, '').toUpperCase() || undefined}
             >
                 {this.props.children}
             </TagName>
