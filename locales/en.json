@@ -44,6 +44,8 @@
         "bomb": "Bomb",
         "hit": "Hit",
         "distance": "Radius",
+        "antibomber": "Anti-B",
+        "interception": "Intercpt",
         "consum": {
             "fuel": "Fuel",
             "ammo": "Ammo"

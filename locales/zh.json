@@ -44,6 +44,8 @@
         "bomb": "爆装",
         "hit": "命中",
         "distance": "航程",
+        "antibomber": "对爆",
+        "interception": "迎击",
         "consum": {
             "fuel": "燃耗",
             "ammo": "弹耗"

@@ -87,6 +87,7 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
     render() {
         const { equipment, className } = this.props
         const stats = [...arrStats]
+        const isInterceptor = equipment.isType('Interceptor')
 
         if (equipment.isType('Aircraft'))
             stats.push('distance')
@@ -97,6 +98,14 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
                     const value = stat === 'range'
                         ? get.range(equipment.stat[stat])
                         : getValue(equipment.stat[stat])
+
+                    if (isInterceptor) {
+                        if (stat === 'hit')
+                            stat = 'antibomber'
+                        else if (stat === 'evasion')
+                            stat = 'interception'
+                    }
+
                     {/* if (!value) return null */ }
                     return (<Stat
                         type={translate(`stat.${stat}`)}

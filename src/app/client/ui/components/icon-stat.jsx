@@ -36,10 +36,24 @@ export default class extends React.Component {
     render() {
         const TagName = this.props.tag || 'span'
         const isResource = !this.props.disableResourceColor && arrResources.includes(this.props.stat)
+
+        let stat = this.props.stat
+        switch (stat) {
+            case 'distance':
+                stat = 'range'
+                break
+            case 'antibomber':
+                stat = 'hit'
+                break
+            case 'interception':
+                stat = 'evasion'
+                break
+        }
+
         return (
             <TagName
                 className={this.props.className}
-                data-stat={stats.indexOf(this.props.stat === 'distance' ? 'range' : this.props.stat)}
+                data-stat={stats.indexOf(stat)}
                 data-resource={isResource ? this.props.stat : undefined}
             >
                 {this.props.children}
