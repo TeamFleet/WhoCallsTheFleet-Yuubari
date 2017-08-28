@@ -1,6 +1,7 @@
 import React from 'react'
 
 import ComponentContainer from '@appUI/containers/infos-component'
+import ListEquipments from '@appUI/components/list/equipments'
 
 import translate from 'sp-i18n'
 
@@ -13,7 +14,7 @@ export default class EquipmentDetailsComponentRequiredForImprovements extends Re
     render() {
         return (
             <ComponentContainer className={this.props.className} title={translate("equipment_details.required_for_improvements")}>
-                {translate('under_construction')}
+                <ListEquipments list={this.props.equipment.upgrade_for || []} />
             </ComponentContainer>
         )
     }
