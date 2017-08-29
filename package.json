@@ -130,7 +130,7 @@
         "json-pretty": "^0.0.1",
         "request": "^2.81.0",
         "nedb-promise": "^2.0.1",
-        "simple-git": "^1.75.0",
+        "simple-git": "^1.76.0",
         "npm-run-script": "^0.0.4",
 
         "copy-webpack-plugin": "^4.0.1",
