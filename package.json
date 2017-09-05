@@ -24,7 +24,7 @@
         "start:pm2": "npm run build && npm run clean:web:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
         "prebuild": "node ./scripts/database.js && node ./scripts/less-variables",
         "build": "npm run clean:web && npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web",
-        "build:app": "",
+        "build:spa": "rimraf ./dist-app && npm run copy:spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./src/webpack/enter",
         "dev": "npm run prebuild && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
 
@@ -32,6 +32,7 @@
         "clean:web": "node ./scripts/clean-web",
         "clean:web:sourcemap": "node ./scripts/clean-web-sourcemap",
         "copy:web": "node ./scripts/copyfiles-web",
+        "copy:spa": "node ./scripts/copyfiles-spa",
 
 
         "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
@@ -135,6 +136,7 @@
         "image-size": "^0.6.1",
 
         "copy-webpack-plugin": "^4.0.1",
+        "html-webpack-plugin": "^2.30.1",
         "extract-text-webpack-plugin": "^3.0.0",
 
         "jest": "^20.0.4"

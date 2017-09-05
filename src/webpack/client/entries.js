@@ -23,7 +23,7 @@ module.exports = (appPath, type) => {
                     path.resolve(appPath, `./src/app/client/critical`)
                 ],
                 client: [
-                    path.resolve(appPath, `./src/app/client`)
+                    process.env.WEBPACK_BUILD_ENV === 'spa' ? path.resolve(appPath, `./src/app/client/spa`) : path.resolve(appPath, `./src/app/client`)
                 ]
             }
         }

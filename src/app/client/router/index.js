@@ -7,7 +7,7 @@ import dev from './dev.js'
 export const routeCheck = (nextState) => __SERVER__ ? true : (nextState.location.pathname === location.pathname)
 
 export default {
-    path: '',
+    path: __SPA__ ? '/' : '',
     component: Root,
     name: 'page-app',
     childRoutes: [

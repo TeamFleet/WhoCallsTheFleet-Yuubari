@@ -103,6 +103,25 @@ const run = async (config) => {
         })
     }
 
+    // 客户端打包: SPA
+    if (stage === 'client' && env === 'spa') {
+
+        process.env.NODE_ENV = 'production'
+
+        let wcd = require('./client/spa')(appRunPath)
+        extendConfig(wcd, config.client.dist)
+
+        const compiler = webpack(wcd)
+        compiler.run((err, stats) => {
+            if (err) console.log(`webpack dist error: ${err}`)
+
+            console.log(stats.toString({
+                chunks: false, // Makes the build much quieter
+                colors: true
+            }))
+        })
+    }
+
     // 服务端开发环境
     if (stage === 'server' && env === 'dev') {
 
