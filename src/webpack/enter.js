@@ -108,7 +108,7 @@ const run = async (config) => {
 
         process.env.NODE_ENV = 'production'
 
-        let wcd = require('./client/spa')(appRunPath)
+        let wcd = await require('./client/spa')(appRunPath)
         extendConfig(wcd, config.client.dist)
 
         const compiler = webpack(wcd)

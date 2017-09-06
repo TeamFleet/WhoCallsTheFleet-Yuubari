@@ -1,5 +1,5 @@
-// const fs = require('fs-extra')
-// const path = require('path')
+const fs = require('fs-extra')
+const path = require('path')
 // const packageJson = fs.readJSONSync(path.resolve(process.cwd(), 'package.json'))
 
 // if (/^yuubari/i.test(packageJson.description)) {

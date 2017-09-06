@@ -12,6 +12,8 @@ import arrReducers from './redux/reducers.js'
 import routes from './router';
 import { ImportStyleRoot } from 'sp-css-import'
 import { onRouterChange } from '@appUI/layout/nav.jsx'
+import { init as dbInit } from '@appLogic/database'
+import prefs from '@appLogic/preferences'
 
 
 
@@ -60,6 +62,7 @@ const routerConfig = {
     routes,
     onUpdate: () => {
         onRouterChange()
+        self.__LATHPATHNAME__ = location.pathname
     }
 }
 
@@ -81,11 +84,15 @@ class AppWrapper extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <Provider store={store} >
-        <AppWrapper>
-            <Router {...routerConfig} />
-        </AppWrapper>
-    </Provider>,
-    document.getElementById('root')
-)
+dbInit()
+
+prefs.init().then(() => {
+    ReactDOM.render(
+        <Provider store={store} >
+            <AppWrapper>
+                <Router {...routerConfig} />
+            </AppWrapper>
+        </Provider>,
+        document.getElementById('root')
+    )
+})

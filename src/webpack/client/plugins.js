@@ -6,20 +6,24 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const channel = /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'
 
-module.exports = async (appPath, type, isDev) => {
+module.exports = async (appPath, type, isDev, isSPA) => {
+    const arr = [
+        {
+            from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
+            to: '_bgimgs'
+        }
+    ]
+
+    if (!isSPA) {
+        arr.push({
+            from: path.resolve(appPath, `./src/app/client/assets/logos/${channel}/32.ico`),
+            to: '../favicon.ico'
+        })
+        arr.push(...await getPics(appPath, isDev))
+    }
+
     const plugins = [
-        new CopyWebpackPlugin([
-            {
-                from: path.resolve(appPath, `./src/app/client/assets/logos/${channel}/32.ico`),
-                to: '../favicon.ico'
-            },
-            {
-                from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
-                to: '_bgimgs'
-            },
-            ...await getPics(appPath, isDev)
-            // ...await asyncTest(appPath)
-        ])
+        new CopyWebpackPlugin(arr)
     ]
     // switch (type) {
     //     case 'app': {

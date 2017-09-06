@@ -20,7 +20,7 @@ const times = n => f => {
 // const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const pwaCreatePlugin = require('sp-pwa')
 
-const getConfig = (appPath, type) => {
+const getConfig = async (appPath, type) => {
 
     const entries = require('./entries.js')(appPath, type)
     const typeName = type ? type : 'default'
@@ -67,6 +67,8 @@ const getConfig = (appPath, type) => {
             //     comments: false,
             //     sourceMap: false
             // }),
+            ...await require('./plugins.js')(appPath, type, false, true),
+
             new HtmlWebpackPlugin({
                 title: 'WhoCallsTheFleet',
                 filename: htmlFileName,
@@ -166,6 +168,6 @@ const getConfig = (appPath, type) => {
     return config
 }
 
-module.exports = (appPath) => [
-    getConfig(appPath, 'app')
+module.exports = async (appPath) => [
+    await getConfig(appPath, 'app')
 ]
