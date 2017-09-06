@@ -74,14 +74,18 @@ if (__DEV__) console.log('router', routerConfig)
 class AppWrapper extends React.Component {
     render() {
         return (
-            <Provider store={store} >
-                <Router {...routerConfig} />
-            </Provider>
+            <div id="app-wrapper">
+                {this.props.children}
+            </div>
         )
     }
 }
 
 ReactDOM.render(
-    <AppWrapper />,
+    <Provider store={store} >
+        <AppWrapper>
+            <Router {...routerConfig} />
+        </AppWrapper>
+    </Provider>,
     document.getElementById('root')
 )

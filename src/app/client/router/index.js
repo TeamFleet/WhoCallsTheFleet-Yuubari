@@ -4,7 +4,7 @@ import tools from './tools.js'
 import data from './data.js'
 import dev from './dev.js'
 
-export const routeCheck = (nextState) => __SERVER__ ? true : (nextState.location.pathname === location.pathname)
+export const routeCheck = (nextState) => (__SERVER__ || __SPA__) ? true : (nextState.location.pathname === location.pathname)
 
 export default {
     path: __SPA__ ? '/' : '',
