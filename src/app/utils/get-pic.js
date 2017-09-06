@@ -51,9 +51,14 @@ const getUri = (type, id, file, revision) => {
 export default (type, id, file) => {
     if (__SERVER__) return ''
 
-    return (__DEV__
-        // ? 'https://yuubari.fleet.moe/client'
-        ? '/app'
-        : __PUBLIC__
-    ) + '/_pics/' + getUri(type, id, file)
+    // ? 'https://yuubari.fleet.moe/client'
+    const base = __SPA__ ? '' : (
+        __DEV__
+            ? '/app'
+            : __PUBLIC__
+    )
+
+    const folder = __SPA__ ? '../pics/' : '/_pics/'
+
+    return base + folder + getUri(type, id, file)
 }

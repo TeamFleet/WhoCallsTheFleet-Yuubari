@@ -7,7 +7,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { reducerLocaleId as i18nReducerLocaleId, reducerLocales as i18nReducerLocales, registerNonIsomorphic as i18nRegister } from 'sp-i18n'
 import { availableLocales } from '@appConfig/i18n'
-import { reducer as realtimeLocationReducer, REALTIME_LOCATION_REDUCER_NAME } from './redux/realtime-location'
+import { reducer as realtimeLocationReducer, REALTIME_LOCATION_REDUCER_NAME, actionUpdate } from './redux/realtime-location'
 import arrReducers from './redux/reducers.js'
 import routes from './router';
 import { ImportStyleRoot } from 'sp-css-import'
@@ -62,6 +62,7 @@ const routerConfig = {
     routes,
     onUpdate: () => {
         onRouterChange()
+        store.dispatch(actionUpdate(location))
         self.__LATHPATHNAME__ = location.pathname
     }
 }
