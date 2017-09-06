@@ -138,6 +138,7 @@
         "copy-webpack-plugin": "^4.0.1",
         "html-webpack-plugin": "^2.30.1",
         "extract-text-webpack-plugin": "^3.0.0",
+        "on-build-webpack": "^0.1.0",
 
         "jest": "^21.0.1"
     },

@@ -34,7 +34,7 @@
 
     <meta name="copyright" content="Copyright (c) 2017 fleet.moe">
 
-    <script type="text/javascript" src="<%= htmlWebpackPlugin.options.src_critical %>"></script>
+    <script type="text/javascript" src="{{ SRC:critical }}"></script>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
     <script type="text/javascript">
         var __REDUX_STATE__ = {};
     </script>
-    <script type="text/javascript" src="<%= htmlWebpackPlugin.options.src_client %>" defer></script>
+    <script type="text/javascript" src="{{ SRC:client }}" defer></script>
 </body>
 
 </html>

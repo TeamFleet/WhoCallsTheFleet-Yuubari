@@ -1,9 +1,21 @@
 const path = require('path')
-// const fs = require('fs-extra')
+const fs = require('fs-extra')
 
 const webpack = require('webpack')
 const common = require('../common')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const WebpackOnBuildPlugin = require('on-build-webpack')
+
+// const jsonPretty = require('json-pretty')
+
+const times = n => f => {
+    let iter = i => {
+        if (i === n) return
+        f(i)
+        iter(i + 1)
+    }
+    return iter(0)
+}
 
 // const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const pwaCreatePlugin = require('sp-pwa')
@@ -12,11 +24,14 @@ const getConfig = (appPath, type) => {
 
     const entries = require('./entries.js')(appPath, type)
     const typeName = type ? type : 'default'
-    const outputPath = path.resolve(appPath, `dist-app/${typeName}/includes`)
+    // const outputPath = path.resolve(appPath, `dist-app/${typeName}/includes`)
+    const outputPath = path.resolve(appPath, `dist-app/includes`)
     const publicPath = `includes/`
+    const htmlFileName = '../index.html'
 
     let config = {
-        target: 'electron-main',
+        // target: 'electron-main',
+        target: "web",
         devtool: 'source-map',
         entry: entries,
         output: {
@@ -54,11 +69,94 @@ const getConfig = (appPath, type) => {
             // }),
             new HtmlWebpackPlugin({
                 title: 'WhoCallsTheFleet',
-                filename: '../index.html',
+                filename: htmlFileName,
                 template: path.resolve(appPath, `./src/app/html.ejs`),
-                src_critical: () => {
-                    return 'null'
+                inject: false
+            }),
+            new WebpackOnBuildPlugin(function (stats) {
+                // After webpack build...
+                // create(parseOptions(...args))
+                // console.log('')
+                // console.log('----------------------------------------')
+                // console.log('')
+
+                const chunks = {}
+                const outputPath = stats.compilation.outputOptions.path
+                const publicPath = stats.compilation.outputOptions.publicPath
+
+                const log = (obj, spaceCount = 1, deep = 2) => {
+                    if (typeof obj === 'object') {
+                        let spaces = ''
+                        times(spaceCount)(() => {
+                            spaces += '    '
+                        })
+                        for (let key in obj) {
+                            console.log(spaces + key)
+                            if (spaceCount < deep)
+                                log(obj[key], spaceCount + 1, deep)
+                        }
+                    }
                 }
+
+                // log(stats)
+
+                // for (let key in stats) {
+                //     console.log(key)
+                //     obj[key] = stats[key]
+                // }
+                // console.log(stats.compilation.namedChunks)
+
+                // log(stats.compilation.chunks, undefined, 2)
+
+                for (let id in stats.compilation.chunks) {
+                    const o = stats.compilation.chunks[id]
+                    chunks[o.name] = o.files
+                    // console.log(
+                    //     o.id,
+                    //     // o.ids,
+                    //     o.name,
+                    //     // o.chunks,
+                    //     o.files
+                    //     // o.hash,
+                    //     // o.renderedHash
+                    // )
+                }
+
+                // console.log(chunks)
+                // console.log(outputPath)
+
+                fs.writeFileSync(
+                    path.resolve(outputPath, htmlFileName),
+                    fs.readFileSync(
+                        path.resolve(outputPath, htmlFileName),
+                        'utf-8'
+                    ).replace(/\{\{[ ]*SRC:(.+?)[ ]*\}\}/g, (match, ...parts) => {
+                        // console.log(match, parts)
+                        return publicPath + chunks[parts[0]][0]
+                    }),
+                    'utf-8'
+                )
+
+                // id
+                // ids
+                // debugId
+                // name
+                // _modules
+                // entrypoints
+                // chunks
+                // parents
+                // blocks
+                // origins
+                // files
+                // rendered
+                // entryModule
+                // hash
+                // renderedHash
+
+                // console.log('')
+                // console.log('----------------------------------------')
+                // console.log('')
+
             })
         ],
         resolve: common.resolve
