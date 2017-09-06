@@ -102,7 +102,7 @@
 
 
     "dependencies": {
-        "kckit": "^1.13.0",
+        "kckit": "^1.13.1",
         "whocallsthefleet-database": "2017.8.30",
         "whocallsthefleet-backgrounds": "1.2.0",
 
@@ -131,7 +131,7 @@
         "json-pretty": "^0.0.1",
         "request": "^2.81.0",
         "nedb-promise": "^2.0.1",
-        "simple-git": "^1.76.0",
+        "simple-git": "^1.77.0",
         "npm-run-script": "^0.0.4",
         "image-size": "^0.6.1",
 
@@ -139,7 +139,7 @@
         "html-webpack-plugin": "^2.30.1",
         "extract-text-webpack-plugin": "^3.0.0",
 
-        "jest": "^20.0.4"
+        "jest": "^21.0.1"
     },
     "devDependencies": {
     }

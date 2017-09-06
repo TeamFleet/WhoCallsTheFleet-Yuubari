@@ -108,7 +108,7 @@ export default class extends React.Component {
 
                 <div className="wrapper">
                     <div className="logo">
-                        {__APP__ && <button type="button" className="btn-back" disabled={!this.state.showBackButton} onClick={this.historyBack} />}
+                        {__SPA__ && <button type="button" className="btn-back" disabled={!this.state.showBackButton} onClick={this.historyBack} />}
                         <IndexLink to="/" className="btn-home-logo" activeClassName="on" style={logoStyles}>{translate('title')}</IndexLink>
                         {__CHANNEL__ === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
                     </div>
