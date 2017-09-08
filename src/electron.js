@@ -53,6 +53,9 @@ function createWindow() {
         slashes: true
     }))
 
+    // disable menubar for Windows / Linux
+    mainWindow.setMenu(null)
+
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 
