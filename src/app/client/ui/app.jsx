@@ -162,7 +162,7 @@ export default class extends React.Component {
                 <Main location={this.props.location}>
                     {this.props.children}
                 </Main>
-                <MainMask location={this.props.location} />
+                <MainMask pathname={this.props.location.pathname} />
                 <Bgimg />
             </div>
         )

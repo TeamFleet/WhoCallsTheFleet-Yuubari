@@ -1,12 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './main-mask.less'
 
-@connect(/*state => ({
-    realtimeLocation: state.location
-})*/)
+// @connect(/*state => ({
+//     realtimeLocation: state.location
+// })*/)
 @ImportStyle(style)
 export default class extends React.Component {
     // componentWillReceiveProps(newProps) {
@@ -24,11 +24,18 @@ export default class extends React.Component {
         if (!evt) return
         if (evt && evt.nativeEvent) evt = evt.nativeEvent
 
-        if (evt.animationName === 'fadeout')
+        if (evt.animationName === 'fadeout') {
             evt.target.parentNode.removeChild(evt.target)
+        }
+    }
+
+    shouldComponentUpdate(nextProps/*, nextState*/) {
+        if(nextProps.pathname === this.props.pathname) return false
+        return true
     }
 
     render() {
+        console.log('#main-mask - render()', this.props.pathname)
         if (this.el)
             for (let i = 0; i < this.el.childNodes.length; ++i) {
                 this.el.childNodes[i].classList.add('fadeout')
