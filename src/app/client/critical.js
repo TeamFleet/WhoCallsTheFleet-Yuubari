@@ -116,6 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (__CLIENT__)
         tagHtml.classList.add('is-webapp')
 
+    if (__DEV__)
+        tagHtml.classList.add('is-dev')
+
     // 利用 pointer event 判断当前是否为 hover
     if (window.PointerEvent) {
         tagHtml.classList.add('is-hover')
