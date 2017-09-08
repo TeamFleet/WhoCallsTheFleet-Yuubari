@@ -85,6 +85,10 @@ const getConfig = async (appPath, type) => {
                 const chunks = {}
                 const outputPath = stats.compilation.outputOptions.path
                 const publicPath = stats.compilation.outputOptions.publicPath
+                let html = fs.readFileSync(
+                    path.resolve(outputPath, htmlFileName),
+                    'utf-8'
+                )
 
                 const log = (obj, spaceCount = 1, deep = 2) => {
                     if (typeof obj === 'object') {
@@ -127,17 +131,10 @@ const getConfig = async (appPath, type) => {
                 // console.log(chunks)
                 // console.log(outputPath)
 
-                fs.writeFileSync(
-                    path.resolve(outputPath, htmlFileName),
-                    fs.readFileSync(
-                        path.resolve(outputPath, htmlFileName),
-                        'utf-8'
-                    ).replace(/\{\{[ ]*SRC:(.+?)[ ]*\}\}/g, (match, ...parts) => {
-                        // console.log(match, parts)
-                        return publicPath + chunks[parts[0]][0]
-                    }),
-                    'utf-8'
-                )
+                html = html.replace(/\{\{[ ]*SRC:(.+?)[ ]*\}\}/g, (match, ...parts) => {
+                    // console.log(match, parts)
+                    return publicPath + chunks[parts[0]][0]
+                })
 
                 // id
                 // ids
@@ -154,6 +151,22 @@ const getConfig = async (appPath, type) => {
                 // entryModule
                 // hash
                 // renderedHash
+
+                // SVG Symbols
+                html = html.replace(
+                    /\{\{[ ]*SVG_SYMBOLS[ ]*\}\}/g,
+                    fs.readFileSync(
+                        path.resolve(appPath, './src/app/client/assets/symbols/symbol-defs.svg'), 'utf8'
+                    ).replace(/<title>(.+?)<\/title>/g, '')
+                )
+
+                // write file
+
+                fs.writeFileSync(
+                    path.resolve(outputPath, htmlFileName),
+                    html,
+                    'utf-8'
+                )
 
                 // console.log('')
                 // console.log('----------------------------------------')

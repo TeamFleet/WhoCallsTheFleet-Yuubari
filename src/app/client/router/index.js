@@ -10,17 +10,26 @@ export default {
     path: __SPA__ ? '/' : '',
     component: Root,
     name: 'page-app',
+
+    indexRoute: {
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/home').default)
+            }, 'home')
+        }
+    },
+
     childRoutes: [
-        {
-            path: 'home',
-            name: 'home',
-            getComponent: (nextState, cb) => {
-                require.ensure([], (require) => {
-                    if (routeCheck(nextState)) cb(null, require('@appUI/pages/home').default)
-                }, 'home')
-            },
-            isIndex: true
-        },
+        // {
+        //     path: 'home',
+        //     name: 'home',
+        //     getComponent: (nextState, cb) => {
+        //         require.ensure([], (require) => {
+        //             if (routeCheck(nextState)) cb(null, require('@appUI/pages/home').default)
+        //         }, 'home')
+        //     },
+        //     isIndex: true
+        // },
 
         ...tools,
         ...data,

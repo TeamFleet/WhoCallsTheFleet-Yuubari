@@ -35,7 +35,7 @@ export default class extends React.Component {
     }
 
     render() {
-        console.log('#main-mask - render()', this.props.pathname)
+        // console.log('#main-mask - render()', this.props.pathname)
         if (this.el)
             for (let i = 0; i < this.el.childNodes.length; ++i) {
                 this.el.childNodes[i].classList.add('fadeout')
