@@ -11,9 +11,10 @@ import {
 import arrStats from '@appData/equipment-stats'
 import routerPush from '@appUtils/router-push'
 import getLink from '@appUtils/get-link'
+// import DataTableFlex, { Row, Cell } from '@appUI/components/datatable-flex'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './table-body.less'
+// import style from './table-body.less'
 
 const stats = [
     ...arrStats,
@@ -25,7 +26,7 @@ const stats = [
     collection: state.equipmentList[ownProps.id].collection,
     // columnHighlight: state.equipmentList[ownProps.id].column
 }))
-@ImportStyle(style)
+@ImportStyle(require('./table-body.less'))
 export default class EquipmentListTableBody extends React.Component {
     getData() {
         if (!Array.isArray(this.props.equipments)) return []
@@ -133,4 +134,98 @@ export default class EquipmentListTableBody extends React.Component {
             />
         )
     }
+
+    /*
+    getList() {
+        return this.props.equipments
+    }
+
+    renderRow(equipment) {
+        return (
+            <Row
+                className="row"
+                key={equipment.id}
+                onClick={() => {
+                    if (__CLIENT__)
+                        routerPush(getLink('equipment', equipment.id));
+                }}
+            >
+                <Cell className="cell cell-name">
+                    <Link to={getLink('equipment', equipment.id)}>{equipment._name}</Link>
+                </Cell>
+                {stats.map(stat => this.renderCellStat(equipment, stat))}
+            </Row>
+        )
+    }
+
+    renderCellStat(equipment, stat) {
+        if (this.props.collection === 2 && stat === 'range')
+            stat = 'distance'
+
+        const value = equipment.stat[stat]
+        let content = value
+        let className = 'cell stat-' + stat
+        let trueValue
+
+        if (stat.indexOf('equipment.') > -1) {
+            const type = stat.substr('equipment.'.length)
+            if (equipment[type]) {
+                content = '✓'
+                trueValue = 1
+            } else {
+                content = '-'
+                trueValue = 0
+                className += ' empty'
+            }
+        } else if (value < 0) {
+            className += ' negative'
+        } else if (!value) {
+            className += ' empty'
+            content = '-'
+        } else {
+            if (stat === 'range' || stat === 'speed') {
+                trueValue = value
+                content = get[stat](trueValue)
+            }
+        }
+
+        if (this.props.sortType === stat)
+            className += ' is-sorting'
+
+        // if (!index && this.props.columnHighlight === stat)
+        //     className += ' is-hover'
+
+        return (
+            <Cell
+                key={stat}
+                className={className}
+                data-stat={stat.replace(/^equipment\./, '') || undefined}
+                value={trueValue}
+                onMouseEnter={() => {
+                    // this.getContainer(evt.target).setAttribute('data-highlighting', indexStat)
+                    this.props.dispatch(
+                        // highlightColumn(this.props.id, indexStat)
+                        highlightColumn(this.props.id, stat)
+                    )
+                }}
+                onMouseLeave={() => {
+                    // this.getContainer(evt.target).removeAttribute('data-highlighting')
+                    this.props.dispatch(
+                        highlightColumn(this.props.id, undefined)
+                    )
+                }}
+            >
+                {content}
+            </Cell>
+        )
+    }
+
+    render() {
+        return (
+            <DataTableFlex className={this.props.className}>
+                {this.getList().map(this.renderRow.bind(this))}
+            </DataTableFlex>
+        )
+    }
+    */
 }

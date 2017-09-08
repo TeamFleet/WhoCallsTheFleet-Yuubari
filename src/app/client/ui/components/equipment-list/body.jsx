@@ -18,7 +18,7 @@ import Header from './header.jsx'
 import TableBody from './table-body.jsx'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './body.less'
+// import style from './body.less'
 
 @connect((state, ownProps) => ({
     // ...state.shipList[ownProps.id],
@@ -54,7 +54,7 @@ export default class EquipmentList extends React.Component {
     return obj
 })
 // @connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
-@ImportStyle(style)
+@ImportStyle(require('./body.less'))
 class EquipmentListBody extends React.Component {
 
     renderCollection(collection, index) {
@@ -96,6 +96,10 @@ class EquipmentListBody extends React.Component {
         if (__CLIENT__ && __DEV__) {
             // if (__DEV__) {
             console.log('equipmentList', this.props)
+            const t0 = performance.now()
+            setTimeout(() => {
+                console.log("Rendering equipment-list took " + (performance.now() - t0) + " milliseconds.")
+            })
         }
 
         return (
