@@ -140,6 +140,26 @@ a, .link{
 	.sku-webapp({
 		cursor:     pointer;
 	});
+
+	&.color-base{
+		color: 	@color-base;
+		&:hover{
+			color: 	#fff;
+		}
+		&:active{
+			color:  fade(#fff, 50%);
+		}
+	}
+
+	&.color-alt{
+		color: 	@color-main;
+		&:hover{
+			color: 	@color-accent;
+		}
+		&:active{
+			color:  fade(#fff, 50%);
+		}
+	}
 }
 .link{
 	cursor: 	pointer;

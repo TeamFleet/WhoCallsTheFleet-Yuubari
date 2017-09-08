@@ -1,6 +1,9 @@
 import React from 'react'
 
 import ComponentContainer from '@appUI/containers/infos-component'
+import { DayAndShip } from '@appUI/components/improvement'
+import Bullet from '@appUI/components/bullet'
+import LinkEquipment from '@appUI/components/link/equipment'
 
 import translate from 'sp-i18n'
 
@@ -27,9 +30,23 @@ export default class EquipmentDetailsComponentImprovements extends React.Compone
 class EquipmentDetailsComponentImprovementsImprovement extends React.Component {
     render() {
         const { className, data } = this.props
-        const upgrade = data[0]
+        const { upgrade, req, resource } = data
         return (
             <div className={className}>
+                <Bullet
+                    className="upgradability"
+                    title={upgrade ? translate(`equipment_details.upgrade_to`) : translate(`equipment_details.facts_unupgradable`)}
+                    level={upgrade ? 2 : 0}
+                >
+                    {upgrade && <LinkEquipment
+                        equipment={upgrade[0]}
+                        className="equipment color-alt"
+                    />}
+                    {upgrade && !!(upgrade[1]) && <span className="default-star">
+                        +{upgrade[1]}
+                    </span>}
+                </Bullet>
+                <DayAndShip className="dayships" data={req} />
                 {JSON.stringify(this.props.data)}
             </div>
         )

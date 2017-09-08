@@ -23,7 +23,7 @@ export default class ListShips extends React.Component {
                     <LinkEquipment
                         equipment={equipment}
                         key={equipment.id}
-                        className="item"
+                        className="item color-alt"
                         {...props}
                     />
                 ))}

@@ -78,15 +78,25 @@
         }
     
     .is-hover({
+        color:  @color-accent;
         &:after{
             background: fade(#000, 15%);
         }
         .name-suffix{
-            color:      inherit;
+            color:      @theme-lightblue-500;
+        }
+        // .name-suffix{
+        //     color:      @color-main;
+        // }
+    }; {
+        color:  fade(#fff, 50%);
+        .name-suffix{
+            color:      fade(#fff, 50%);
         }
     });
     
     &:active{
+        // color:  fade(#fff, 50%);
         &:after{
             background: fade(#000, 15%);
         }

@@ -15,6 +15,16 @@
     "ok": "OK",
     "none": "None",
 
+    "day_abbr": {
+        "Sunday": "S",
+        "Monday": "M",
+        "Tuesday": "Tu",
+        "Wednesday": "W",
+        "Thurday": "Th",
+        "Friday": "F",
+        "Saturday": "S"
+    },
+
     "require": {
         "level": "Require level: ${level}",
         "min_possible_level": "Minimum possible level: ${level}",
@@ -26,6 +36,7 @@
     "shipclass": "${class} Class",
     "shipclass_number": "${class} Class (#${number})",
     "other_ships_of_type": "Other ${type}s",
+    "shipname_dash_none": " ",
 
     "stat": {
         "fire": "FP",
@@ -60,15 +71,8 @@
         "jet": "Jets"
     },
 
-    "nav": {
-        "home": "Home",
-        "fleets": "Fleet Builder",
-        "calctp": "TP Calculator",
-        "ships": "Ships",
-        "equipments": "Equipments",
-        "arsenal": "Akashi's Arsenal",
-        "entities": "CV & Illustrators",
-        "about": "About"
+    "improvement": {
+        "any_2nd_ship": "Any 2nd Ship"
     },
 
     "combat_phases": {
@@ -91,6 +95,17 @@
         "fixed_shoot_down_bonus": "Fixed shoot down bonus",
         "fixed": "Fixed",
         "modifier": "Modifier"
+    },
+
+    "nav": {
+        "home": "Home",
+        "fleets": "Fleet Builder",
+        "calctp": "TP Calculator",
+        "ships": "Ships",
+        "equipments": "Equipments",
+        "arsenal": "Akashi's Arsenal",
+        "entities": "CV & Illustrators",
+        "about": "About"
     },
 
     "speed_calculator": {
@@ -202,6 +217,7 @@
 
         "required_for_improvements": "Required for other Improvements",
 
+        "upgrade_to": "Upgrade to",
         "upgrade_from": "Can be upgraded from...",
 
         "stocked": "Stock-equipped on...",

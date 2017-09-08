@@ -16,6 +16,16 @@
     "ok": "OK",
     "none": "None",
 
+    "day_abbr": {
+        "Sunday": "日",
+        "Monday": "月",
+        "Tuesday": "火",
+        "Wednesday": "水",
+        "Thurday": "木",
+        "Friday": "金",
+        "Saturday": "土"
+    },
+
     "require": {
         "level": "Require level: ${level}",
         "min_possible_level": "Minimum possible level: ${level}",
@@ -27,6 +37,7 @@
     "shipclass": "${class}型",
     "shipclass_number": "${class}型 ${number} 番艦",
     "other_ships_of_type": "Other ${type}s",
+    "shipname_dash_none": "",
 
     "stat": {
         "fire": "火力",
@@ -59,6 +70,10 @@
 
     "equipment_types": {
         "jet": "噴式機"
+    },
+
+    "improvement": {
+        "any_2nd_ship": "任意二番艦"
     },
 
     "combat_phases": {
@@ -203,6 +218,7 @@
 
         "required_for_improvements": "Required for other Improvements",
 
+        "upgrade_to": "Upgrade to",
         "upgrade_from": "Can be upgraded from...",
 
         "stocked": "初期装備の艦娘...",

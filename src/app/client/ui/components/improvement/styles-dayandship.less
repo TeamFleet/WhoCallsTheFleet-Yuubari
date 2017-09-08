@@ -1,0 +1,70 @@
+@import './_.less';
+
+.component{
+    @height:        20px;
+    @line-height:   16px;
+    @border-radius: 5px;
+
+    font-size:  14px;
+    line-height:@line-height;
+
+    .item{
+        margin-bottom:  1px;
+        padding-left:   ((@height + 1) * 7 + 6);
+        padding-top:    ((@height - @line-height) / 2);
+        padding-bottom: ((@height - @line-height) / 2);
+        position:       relative;
+        &:last-child{
+            margin-bottom:  0;
+        }
+    }
+
+    .days{
+        overflow:   hidden;
+        position:   absolute;
+        left:       0;
+        top:        0;
+    }
+        .day{
+            display:    block;
+            float:      left;
+            height:     @height;
+            width:      @height;
+            line-height:@height;
+            text-align: center;
+            font-size:  12px;
+            margin-right: 1px;
+            background: @color-border;
+            color:      @color-fade;
+            &.on{
+                background: @theme-green-700;
+                color:      @theme-green-a100;
+            }
+            &:first-child{
+                border-top-left-radius: @border-radius;
+                border-bottom-left-radius: @border-radius;
+            }
+            &:last-child{
+                border-top-right-radius: @border-radius;
+                border-bottom-right-radius: @border-radius;
+            }
+        }
+    
+    .ships{
+        margin-right:   -12px;
+    }
+        .ship{
+            margin-right:   12px;
+            &:after{
+                content:    '/';
+                display:    inline-block;
+                margin:     0 5px;
+                z-index:    -1;
+                position:   absolute;
+                color:      @color-base;
+            }
+            &:last-child:after{
+                content:    initial;
+            }
+        }
+}

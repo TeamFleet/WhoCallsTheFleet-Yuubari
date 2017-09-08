@@ -15,6 +15,16 @@
     "ok": "确认",
     "none": "无",
 
+    "day_abbr": {
+        "Sunday": "日",
+        "Monday": "一",
+        "Tuesday": "二",
+        "Wednesday": "三",
+        "Thurday": "四",
+        "Friday": "五",
+        "Saturday": "六"
+    },
+
     "require": {
         "level": "需要等级：${level}",
         "min_possible_level": "可能的最低等级：${level}",
@@ -26,6 +36,7 @@
     "shipclass": "${class}级",
     "shipclass_number": "${class}级 ${number} 号舰",
     "other_ships_of_type": "其他${type}",
+    "shipname_dash_none": "",
 
     "stat": {
         "fire": "火力",
@@ -58,6 +69,10 @@
 
     "equipment_types": {
         "jet": "喷气机"
+    },
+
+    "improvement": {
+        "any_2nd_ship": "任意秘书舰"
     },
 
     "combat_phases": {
@@ -202,6 +217,7 @@
 
         "required_for_improvements": "可用于改修其他装备",
 
+        "upgrade_to": "可升级为",
         "upgrade_from": "可由以下装备升级获得",
         
         "stocked": "初始装备于以下舰娘",
