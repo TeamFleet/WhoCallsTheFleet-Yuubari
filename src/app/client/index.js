@@ -18,7 +18,7 @@ import {
 import { availableLocales } from '@appConfig/i18n'
 
 // 其他引用，仅针对本项目案例
-import { onRouterChange } from '@appUI/layout/nav.jsx'
+import { onRouterChange } from '@appUI/layout/nav'
 import reducers from './redux/reducers.js'
 import { init as dbInit } from '@appLogic/database'
 import prefs from '@appLogic/preferences'

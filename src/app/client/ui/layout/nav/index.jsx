@@ -34,7 +34,7 @@ if (__DEV__)
 
 @connect(state => ({
     realtimeLocation: state.realtimeLocation,
-    pageTitle: state.pageTitle,
+    // pageTitle: state.pageTitle,
     timeSwipedFromLeftEdge: state.timeSwipedFromLeftEdge
 }))
 @ImportStyle(style)
@@ -62,7 +62,7 @@ export default class extends React.Component {
         //     showBackButton: nextProps.location !== this.props.location
         // })
 
-        if( nextProps.timeSwipedFromLeftEdge !== this.props.timeSwipedFromLeftEdge ){
+        if (nextProps.timeSwipedFromLeftEdge !== this.props.timeSwipedFromLeftEdge) {
             this._navSwitch.checked = true
         }
     }
@@ -128,10 +128,7 @@ export default class extends React.Component {
                     </div>
                 </div>
 
-                <div className="titlebar">
-                    {this.props.pageTitle.sub && <span className="sub">{this.props.pageTitle.sub}</span>}
-                    <span className="main">{this.props.pageTitle.main}</span>
-                </div>
+                <AppBar />
 
                 <label htmlFor="nav-switch" className="label">
                     <div className="icon"><Icon className="icon-menu" icon="menu" /></div>
@@ -141,9 +138,46 @@ export default class extends React.Component {
     }
 }
 
+
+
+
+
 let elNavSwitch
 export const onRouterChange = () => {
     if (typeof document === 'undefined') return
     if (!elNavSwitch) elNavSwitch = document.getElementById('nav-switch')
     elNavSwitch.checked = false
+}
+
+
+
+
+
+import stylesAppBar from './styles-appbar.less'
+@connect(state => ({
+    pageTitle: state.pageTitle
+}))
+@ImportStyle(stylesAppBar)
+class AppBar extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className}>
+                {this.props.pageTitle.sub && <span className="sub">{this.props.pageTitle.sub}</span>}
+                <span className="main">{this.props.pageTitle.main}</span>
+                <span className="buttons">
+                    {__CLIENT__ && navigator.share && (
+                        <Icon icon="question6" onClick={() => {
+                            navigator.share({
+                                title: 'Web Fundamentals',
+                                text: 'Check out Web Fundamentals—it rocks!',
+                                url: location.href,
+                            })
+                                .then(() => console.log('Successful share'))
+                                .catch((error) => console.log('Error sharing', error));
+                        }} />
+                    )}
+                </span>
+            </div>
+        )
+    }
 }

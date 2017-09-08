@@ -1,9 +1,6 @@
-@import '../base.less';
+@import './_.less';
 
 .component{
-    @controls-height:   60px;
-    @button-menu-size:  20px;
-
     .mainframe();
 
     position:   fixed;
@@ -12,6 +9,7 @@
     top:        0;
     height:     100%;
     width:      @nav-width;
+    transition-property: transform;
 
     transform:  translate(-100%, 0%);
     .is-mode-background({
@@ -25,7 +23,7 @@
     });
 
     #nav-switch,
-    .titlebar,
+    // .appbar,
     label[for="nav-switch"]{
         display:    none;
     }
@@ -93,7 +91,7 @@
 
         .btn-home-logo{
             z-index:    2;
-            background-image: url('../../assets/appicon.png');
+            background-image: url('../../../assets/appicon.png');
             color:      transparent;
             overflow:   hidden;
             .is-hover({
@@ -282,42 +280,6 @@
         overflow:   visible;
         color:      #fff;
 
-        .titlebar{
-            display:    block;
-            position:   absolute;
-            top:        0;
-            left:       0;
-            width:      100%;
-            height:     100%;
-            z-index:    100;
-            background: #000;
-            line-height:@nav-height-tablet;
-            padding:    0 0 0 72px;
-            z-index:    1;
-            // background: @theme-lightblue-700;
-            background: @color-theme;
-            box-shadow: 0 0 15px fade(#000, 40%);
-            .sub, .main{
-                display:    block;
-                transition-property: none;
-                .ellipsis();
-            }
-            .sub{
-                font-size:  12px;
-                position:   absolute;
-                top:        50%;
-                line-height:20px;
-                transform-origin:   0% 50%;
-                transform:  scale((10 / 12));
-                animation:  fadein @base-transition-duration @base-transition-timing-function;
-                // color:      fade(#fff, 50%);
-            }
-            .sub ~ .main{
-                transform:  translateY(-7px);
-                transition-property: transform;
-            }
-        }
-
         & > .wrapper{
             width:      320px;
             width:      ~"calc(100% - 60px)";
@@ -395,11 +357,6 @@
     .screen-phone({
         height:     @nav-height-phone;
 
-        .titlebar{
-            line-height:@nav-height-phone;
-            padding:    0 0 0 54px;
-        }
-
         label[for="nav-switch"]{
             // &:before{
             .icon{
@@ -411,7 +368,7 @@
     });
     
     // .screen-phone-small({
-    //     .titlebar{
+    //     .appbar{
     //         padding-left: 50px;
     //     }
     // });

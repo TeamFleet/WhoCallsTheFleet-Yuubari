@@ -8,10 +8,10 @@ import { swipedFromLeftEdge } from '@appLogic/side-menu/api.js'
 
 import style from './app.less'
 
-import Main from './layout/main.jsx'
-import MainMask from './layout/main-mask.jsx'
-import Nav from './layout/nav.jsx'
-import Bgimg from './layout/bgimg.jsx'
+import Main from './layout/main'
+import MainMask from './layout/main-mask'
+import Nav from './layout/nav'
+import Bgimg from './layout/bgimg'
 
 let startSwipeAtLeftBorder = false
 
