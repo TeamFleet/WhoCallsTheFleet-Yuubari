@@ -1,0 +1,24 @@
+@import './_.less';
+
+.component {
+    margin-top:     50px;
+    padding-left:   20px;
+
+    .container{
+        display:    block;
+        overflow:   hidden;
+        .item{
+            @size:      20px;
+
+            display:    block;
+            float:      left;
+            font-size:  12px;
+            width:      @size;
+            line-height:@size;
+            height:     @size;
+            text-align: center;
+            border:     1px solid currentColor;
+            margin:     0 4px 0 0;
+        }
+    }
+}

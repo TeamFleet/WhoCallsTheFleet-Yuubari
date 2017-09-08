@@ -118,10 +118,7 @@ export default class extends React.Component {
                         {navs.map(this.renderItem)}
                     </div>
 
-                    <div className="language-switch">
-                        <span className="title">{translate('nav.languageSwitch')}</span>
-                        <LangSwitch className="language-switch-container" />
-                    </div>
+                    <LanguageSwitch />
 
                     <div className="controls">
                         <button type="button" onClick={this.enterAppModeBackground.bind(this)}>[PH] BG</button>
@@ -147,6 +144,23 @@ export const onRouterChange = () => {
     if (typeof document === 'undefined') return
     if (!elNavSwitch) elNavSwitch = document.getElementById('nav-switch')
     elNavSwitch.checked = false
+}
+
+
+
+
+
+import stylesLanguageSwitch from './styles-language-switch.less'
+@ImportStyle(stylesLanguageSwitch)
+class LanguageSwitch extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className}>
+                <span className="title">{translate('nav.languageSwitch')}</span>
+                <LangSwitch className="container" />
+            </div>
+        )
+    }
 }
 
 
