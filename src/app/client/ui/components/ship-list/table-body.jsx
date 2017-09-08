@@ -1,12 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+// import { browserHistory } from '@app/client/router/history'
 
 import LinkShip from '../link/ship.jsx'
 import DataTable from '../datatable.jsx'
 import {
     compareScroll
 } from '@appLogic/ship-list/api.js'
+import routerPush from '@appUtils/router-push'
+import getLink from '@appUtils/get-link'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './table-body.less'
@@ -122,7 +124,8 @@ export default class ShipListTableBody extends React.Component {
                 props: {
                     onClick: () => {
                         if (__CLIENT__)
-                            browserHistory.push(location.pathname + '/' + ship.id);
+                            // browserHistory.push(location.pathname + '/' + ship.id);
+                            routerPush(getLink('ship', ship.id));
                     }
                 }
             }

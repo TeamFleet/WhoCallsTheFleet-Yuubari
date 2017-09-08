@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
-
-import getLink from '@appUtils/get-link'
+// import { browserHistory } from 'react-router'
 
 import DataTable from '../datatable.jsx'
 import Link from '@appUI/components/link'
@@ -11,6 +9,8 @@ import {
     highlightColumn
 } from '@appLogic/equipment-list/api.js'
 import arrStats from '@appData/equipment-stats'
+import routerPush from '@appUtils/router-push'
+import getLink from '@appUtils/get-link'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './table-body.less'
@@ -104,7 +104,7 @@ export default class EquipmentListTableBody extends React.Component {
                 props: {
                     onClick: () => {
                         if (__CLIENT__)
-                            browserHistory.push(location.pathname + '/' + equipment.id);
+                            routerPush(getLink('equipment', equipment.id));
                     }
                 }
             }

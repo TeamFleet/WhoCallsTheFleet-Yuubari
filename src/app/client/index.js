@@ -36,6 +36,7 @@ if (__DEV__) console.log('client.js')
 
 reactApp.redux.middleware.use(thunk)
 reactApp.redux.middleware.use(routerMiddleware(browserHistory))
+if (__CLIENT__) self.routerHistory = browserHistory
 
 // 
 

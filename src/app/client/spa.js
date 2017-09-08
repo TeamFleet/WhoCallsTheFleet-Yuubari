@@ -66,6 +66,7 @@ const routerConfig = {
         self.__LATHPATHNAME__ = location.pathname
     }
 }
+if (__CLIENT__) self.routerHistory = hashHistory
 
 // hashHistory.listen(location => {
 //     store.dispatch(realtimeLocationUpdate(location))
