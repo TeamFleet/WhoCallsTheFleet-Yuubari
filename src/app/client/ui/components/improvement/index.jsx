@@ -190,3 +190,15 @@ export class Resources extends React.Component {
         )
     }
 }
+
+@ImportStyle(require('./styles-star.less'))
+export class Star extends React.Component {
+    render() {
+        const { className, star, ...props } = this.props
+        return (
+            <span className={className} {...props}>
+                +{star}
+            </span>
+        )
+    }
+}

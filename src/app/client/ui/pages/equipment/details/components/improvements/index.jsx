@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import { DayAndShip, Resources } from '@appUI/components/improvement'
+import { DayAndShip, Resources, Star } from '@appUI/components/improvement'
 import Bullet from '@appUI/components/bullet'
 import LinkEquipment from '@appUI/components/link/equipment'
 
@@ -43,9 +43,7 @@ class EquipmentDetailsComponentImprovementsImprovement extends React.Component {
                         equipment={upgrade[0]}
                         className="equipment color-alt"
                     />}
-                    {upgrade && !!(upgrade[1]) && <span className="default-star">
-                        +{upgrade[1]}
-                    </span>}
+                    {upgrade && !!(upgrade[1]) && <Star className="default-star" star={upgrade[1]} />}
                 </Bullet>
                 <DayAndShip className="dayships" data={req} />
                 <Resources className="resources" data={resource} upgradable={upgradable} />

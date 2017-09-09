@@ -221,6 +221,10 @@ class ShipListBody extends React.Component {
         if (__CLIENT__ && __DEV__) {
             // if (__DEV__) {
             console.log('shipList', this.props)
+            const t0 = performance.now()
+            setTimeout(() => {
+                console.log("Rendering ship-list took " + (performance.now() - t0) + " milliseconds.")
+            })
         }
 
         return (

@@ -1,0 +1,16 @@
+@import "./_.less";
+
+.component{
+    color:          @color-improvement-star;
+    display:        inline-block;
+    padding-left:   16px;
+    font-size:      14px;
+    vertical-align: bottom;
+    &:before{
+        content:    "★";
+        font-size:  18px;
+        position:   absolute;
+        margin-left:-16px;
+        margin-top: -1px;
+    }
+}
