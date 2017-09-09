@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
+// import PageContainer from 'sp-ui-pagecontainer'
+import InfosPageContainer from '@appUI/containers/infos-pagecontainer'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 import {
@@ -14,8 +15,8 @@ import {
 
 import Header from './details/commons/header.jsx'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './details.less'
+// import { ImportStyle } from 'sp-css-import'
+// import style from './details.less'
 
 const tabsAvailable = [
     'infos',
@@ -48,7 +49,7 @@ const getDescription = equipment => {
 }
 
 @connect((state, ownProps) => state.equipmentDetails[ownProps.params.id] || {})
-@ImportStyle(style)
+// @ImportStyle(style)
 export default class extends React.Component {
     static onServerRenderStoreExtend(store) {
         const state = store.getState()
@@ -121,7 +122,7 @@ export default class extends React.Component {
             console.log('thisEquipment', this.equipment, this.props.tabIndex)
 
         return (
-            <PageContainer className={this.props.className}>
+            <InfosPageContainer className={this.props.className}>
                 <Header
                     equipment={this.equipment}
                     tabs={tabsAvailable}
@@ -130,7 +131,7 @@ export default class extends React.Component {
                 <PageEquipmentDetailsBody equipment={this.equipment}>
                     {this.props.children}
                 </PageEquipmentDetailsBody>
-            </PageContainer>
+            </InfosPageContainer>
         )
     }
 }

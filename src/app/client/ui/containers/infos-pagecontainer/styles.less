@@ -1,0 +1,14 @@
+@import "../../base.less";
+
+.component{
+    @default:       (@infos-title-height + @infos-title-margin-bottom + @infos-tab-height + @main-margin-top - @infos-component-gutter-vertical + 10);
+
+    padding-top:    @default;
+    .screen-tablet({
+        padding-top:(@infos-tab-height - @infos-component-gutter-vertical);
+    });
+
+    @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
+        padding-top:    (@default - 5 - 10 - 5);
+    }
+}

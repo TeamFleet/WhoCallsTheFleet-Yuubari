@@ -10,6 +10,9 @@
         .screen-tablet({
             display:    none;
         });
+        @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
+            margin-bottom:  (@infos-title-margin-bottom - 10);
+        }
     }
         .title{
             display:    block;
@@ -33,6 +36,10 @@
         font-size:  16px;
         overflow:   hidden;
         .main-sizing-position-reset-margin();
+        @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
+            line-height:(@infos-tab-height - 5);
+            height:     (@infos-tab-height - 5);
+        }
         & > .wrapper{
             height:     (@infos-tab-height + 20);
             display:    flex;
@@ -62,7 +69,11 @@
             &:last-child{
                 margin-right:   0;
             }
+            @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
+                height:     (@infos-tab-height - 1 - 5);
+            }
         }
+
 }
 
 .component.is-portal {
@@ -70,4 +81,7 @@
     .screen-tablet({
         padding-top:0;
     });
+    @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
+        padding-top:    (@main-margin-top - 5);
+    }
 }

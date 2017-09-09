@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 // import CSSTransition from 'react-transition-group/CSSTransition'
 
 import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
+// import PageContainer from 'sp-ui-pagecontainer'
+import InfosPageContainer from '@appUI/containers/infos-pagecontainer'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 import {
@@ -16,8 +17,8 @@ import {
 
 import Header from './details/commons/header.jsx'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './details.less'
+// import { ImportStyle } from 'sp-css-import'
+// import style from './details.less'
 
 const tabsAvailable = [
     'infos',
@@ -79,7 +80,7 @@ const getDescription = ship => {
 }
 
 @connect((state, ownProps) => state.shipDetails[ownProps.params.id] || {})
-@ImportStyle(style)
+// @ImportStyle(style)
 export default class PageShipDetails extends React.Component {
     static onServerRenderStoreExtend(store) {
         const state = store.getState()
@@ -160,7 +161,7 @@ export default class PageShipDetails extends React.Component {
             console.log('thisShip', this.ship, this.props.tabIndex)
 
         return (
-            <PageContainer className={this.props.className}>
+            <InfosPageContainer className={this.props.className}>
                 <Header
                     ship={this.ship}
                     tabs={this.ship.type_display ? tabsAvailable : [tabsAvailable[0]]}
@@ -169,7 +170,7 @@ export default class PageShipDetails extends React.Component {
                 <PageShipDetailsBody ship={this.ship}>
                     {this.props.children}
                 </PageShipDetailsBody>
-            </PageContainer>
+            </InfosPageContainer>
         )
     }
 }
