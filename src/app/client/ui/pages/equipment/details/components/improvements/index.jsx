@@ -1,25 +1,25 @@
 import React from 'react'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import { DayAndShip } from '@appUI/components/improvement'
+import { DayAndShip, Resources } from '@appUI/components/improvement'
 import Bullet from '@appUI/components/bullet'
 import LinkEquipment from '@appUI/components/link/equipment'
 
 import translate from 'sp-i18n'
 
-// import { ImportStyle } from 'sp-css-import'
-// import styles from './styles.less'
+import { ImportStyle } from 'sp-css-import'
 
 // @connect()
-// @ImportStyle(styles)
+@ImportStyle(require('./styles.less'))
 export default class EquipmentDetailsComponentImprovements extends React.Component {
     render() {
         const list = this.props.equipment.improvement || []
         const hasItem = !!(list.length)
+        const upgradable = (Array.isArray(this.props.equipment.upgrade_to) && this.props.equipment.upgrade_to.length)
         return (
             <ComponentContainer className={this.props.className} title={translate("equipment_details.improvements")}>
                 {hasItem && list.map((data, index) => (
-                    <EquipmentDetailsComponentImprovementsImprovement data={data} key={index} />
+                    <EquipmentDetailsComponentImprovementsImprovement data={data} key={index} upgradable={upgradable} />
                 ))}
                 {!hasItem && <span className="disabled">{translate("none")}</span>}
             </ComponentContainer>
@@ -27,9 +27,10 @@ export default class EquipmentDetailsComponentImprovements extends React.Compone
     }
 }
 
+@ImportStyle(require('./styles-improvement.less'))
 class EquipmentDetailsComponentImprovementsImprovement extends React.Component {
     render() {
-        const { className, data } = this.props
+        const { className, data, upgradable } = this.props
         const { upgrade, req, resource } = data
         return (
             <div className={className}>
@@ -47,7 +48,7 @@ class EquipmentDetailsComponentImprovementsImprovement extends React.Component {
                     </span>}
                 </Bullet>
                 <DayAndShip className="dayships" data={req} />
-                {JSON.stringify(this.props.data)}
+                <Resources className="resources" data={resource} upgradable={upgradable} />
             </div>
         )
     }

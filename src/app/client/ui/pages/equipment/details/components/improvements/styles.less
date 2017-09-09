@@ -1,4 +1,12 @@
 @import "../../_.less";
 
 .component{
+    display:    flex;
+    flex-flow:  row wrap;
+
+    & > h2.title{
+        flex:   none;
+        width:  100%;
+        margin-bottom:  (@infos-component-title-margin-bottom - 25);
+    }
 }

@@ -72,7 +72,9 @@
     },
 
     "improvement": {
-        "any_2nd_ship": "任意秘书舰"
+        "any_2nd_ship": "任意秘书舰",
+        "resources": "资材消耗",
+        "upgrading": "升级"
     },
 
     "combat_phases": {

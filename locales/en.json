@@ -72,7 +72,9 @@
     },
 
     "improvement": {
-        "any_2nd_ship": "Any 2nd Ship"
+        "any_2nd_ship": "Any 2nd Ship",
+        "resources": "Resources",
+        "upgrading": "Upgrading"
     },
 
     "combat_phases": {

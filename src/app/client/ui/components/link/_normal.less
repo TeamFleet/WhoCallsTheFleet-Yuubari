@@ -4,6 +4,7 @@
     display:    inline-block;
     position:   relative;
     color:      @color-main;
+    // color:      @color-alt;
     // overflow:   hidden;
 
     min-width:  @ship-link-width;
@@ -68,7 +69,7 @@
         }
         .name-type{
             margin-bottom: .15em;
-            // color:      @color-base;
+            // color:      @color-alt;
             transition:     none;
         }
         .name-suffix{
@@ -82,6 +83,9 @@
         &:after{
             background: fade(#000, 15%);
         }
+        // .name-type{
+        //     color:      inherit;
+        // }
         .name-suffix{
             color:      @theme-lightblue-500;
         }
@@ -90,6 +94,9 @@
         // }
     }; {
         color:  fade(#fff, 50%);
+        // .name-type{
+        //     color:      inherit;
+        // }
         .name-suffix{
             color:      fade(#fff, 50%);
         }

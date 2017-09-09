@@ -73,7 +73,9 @@
     },
 
     "improvement": {
-        "any_2nd_ship": "任意二番艦"
+        "any_2nd_ship": "任意二番艦",
+        "resources": "必要資材",
+        "upgrading": "更新"
     },
 
     "combat_phases": {

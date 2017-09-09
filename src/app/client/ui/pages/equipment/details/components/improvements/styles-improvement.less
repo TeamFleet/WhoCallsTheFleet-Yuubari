@@ -1,0 +1,33 @@
+@import "../../_.less";
+
+.component{
+    margin-top:     30px;
+    flex:           1 0 500px;
+    .upgradability{
+        margin:     0;
+        .des{
+            display:    inline-block;
+            margin:     0;
+            font-size:  inherit;
+        }
+        .equipment{
+            @line-height:   16px;
+            @icon-size:     34px;
+            padding-left:   (@line-height + 6);
+            margin-left:    18px;
+            .icon{
+                &:empty, &:before{
+                    width:      @icon-size;
+                    height:     @icon-size;
+                    top:        ((@line-height - @icon-size) / 2);
+                    left:       ((@line-height - @icon-size) / 2);
+                }
+            }
+        }
+    }
+    .dayships,
+    .resources{
+        border-left:    25px solid transparent;
+        border-top:     10px solid transparent;
+    }
+}
