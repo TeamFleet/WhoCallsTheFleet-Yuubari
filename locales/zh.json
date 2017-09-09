@@ -105,14 +105,14 @@
         "calctp": "TP计算",
         "ships": "舰娘",
         "equipments": "装备",
-        "arsenal": "改修",
+        "arsenal": "改修工厂",
         "entities": "声优&画师",
         "about": "关于"
     },
 
     "speed_calculator": {
         "title": "航速提升计算器",
-        "equipment_33_note_1": "必须至少装备 1 个",
+        "equipment_33_note_1": "需要至少装备 1 个",
         "equipment_33_note_2": "可放入补强增设栏位中",
         "base_speed": "基础航速：",
         "result": "计算结果："

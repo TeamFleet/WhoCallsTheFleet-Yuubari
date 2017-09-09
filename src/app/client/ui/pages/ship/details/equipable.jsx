@@ -105,13 +105,11 @@ export default class ShipDetailsContentEquipable extends React.Component {
                         className="item on"
                         text={translate("ship_details.equipable_legend_yes")}
                     />
-                    {this.props.ship && !this.props.ship.isType('AV') &&
-                        <ShipDetailsContentEquipableLegend
-                            className="item on is-special"
-                            text={translate("ship_details.equipable_legend_yes")}
-                            textSmall={translate("ship_details.equipable_legend_yes_extra", { type: db.shipTypes[this.props.ship.type_display]._name })}
-                        />
-                    }
+                    <ShipDetailsContentEquipableLegend
+                        className="item on is-special"
+                        text={translate("ship_details.equipable_legend_yes")}
+                        textSmall={translate("ship_details.equipable_legend_yes_extra", { type: db.shipTypes[this.props.ship.type_display]._name })}
+                    />
                 </ComponentContainer>
                 {db.equipmentCollections.map(this.renderCollection.bind(this))}
                 {this.renderExSolot()}
@@ -140,7 +138,7 @@ class ShipDetailsContentEquipableItem extends React.Component {
                 </Link>
             )
 
-        const isNotAV = this.props.ship && !this.props.ship.isType('AV')
+        // const isNotAV = this.props.ship && !this.props.ship.isType('AV')
         const canEquip = this.props.ship ? this.props.ship.canEquip(this.props.type.id) : undefined
         const canEquipShipType = this.props.ship ? this.props.type.equipable_on_type.includes(this.props.ship.type_display) : undefined
         // const remodels = this.props.ship.getSeriesData()
@@ -159,7 +157,7 @@ class ShipDetailsContentEquipableItem extends React.Component {
                 className={classNames([this.props.className, {
                     'on': canEquip === true,
                     'off': canEquip === false,
-                    'is-special': isNotAV && canEquip && !canEquipShipType
+                    'is-special': /*isNotAV && */canEquip && !canEquipShipType
                 }])}
                 icon={this.props.type.icon}
             >
