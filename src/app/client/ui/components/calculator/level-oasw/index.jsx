@@ -37,7 +37,16 @@ const requiredEquipmentSamples = {
     hasNameOf九三一空: [
         82,
         83
-    ]
+    ],
+    hasAircraftHasStat_asw_1: [
+        'aircraft',
+        70
+    ],
+    hasTorpedoBomberHasStat_asw_7: [
+        82,
+        83,
+        244
+    ],
 }
 
 @ImportStyle(styles)
@@ -58,6 +67,15 @@ export default class CalculatorLevelOASW extends React.Component {
             this.oaswTable.forEach(OASW => {
                 if (OASW.equipments)
                     for (let req in OASW.equipments) {
+                        let hasStat
+                        if (typeof OASW.equipments[req] === 'object' && OASW.equipments[req].hasStat) {
+                            const obj = OASW.equipments[req].hasStat
+                            req += 'HasStat'
+                            for (let stat in obj) {
+                                req += `_${stat}_${obj[stat]}`
+                                hasStat = [stat, obj[stat]]
+                            }
+                        }
                         const value = requiredEquipmentSamples[req]
                         if (typeof value === 'string') {
                             // this.equipmentGroupList.push(equipmentSamples[req])
@@ -67,6 +85,9 @@ export default class CalculatorLevelOASW extends React.Component {
                             if (value[0] === 'any') {
                                 // this.equipmentGroupList.push([value[1]])
                                 this.equipmentList.push(value[1])
+                                this.isAny.push(value[1])
+                            } else if (typeof value[0] === 'string') {
+                                this.equipmentList.push([value[0], value[1], hasStat])
                                 this.isAny.push(value[1])
                             } else {
                                 // this.equipmentGroupList.push(value)
@@ -85,7 +106,11 @@ export default class CalculatorLevelOASW extends React.Component {
                     }
             })
         }
-        this.isRequired = [...this.equipmentList]
+        this.isRequired = this.equipmentList.map(equipmentID => {
+            if (Array.isArray(equipmentID))
+                return equipmentID[1]
+            return equipmentID
+        })
         for (let type in samples) {
             // this.equipmentGroupList.push(samples[type])
             this.equipmentList = this.equipmentList.concat(samples[type])
@@ -102,6 +127,7 @@ export default class CalculatorLevelOASW extends React.Component {
         //     return (Array.isArray(group) && group.length)
         // })
         this.equipmentList = this.equipmentList.filter(equipmentID => {
+            if (Array.isArray(equipmentID)) return true
             const equipment = kckit.get.equipment(equipmentID)
             if (!equipment) return false
             return props.ship.canEquip(equipment.type)
@@ -115,6 +141,10 @@ export default class CalculatorLevelOASW extends React.Component {
         //     })
         // })
         this.equipmentList.forEach(equipmentID => {
+            if (Array.isArray(equipmentID)) {
+                defaultState[equipmentID[1]] = 0
+                return
+            }
             defaultState[equipmentID] = 0
         })
 
@@ -155,19 +185,32 @@ export default class CalculatorLevelOASW extends React.Component {
         }
     }
 
-    renderEquipment(id, key) {
+    renderEquipment(id, index, arr) {
         let displayName
-        if (this.isAny.includes(id)) {
+        if (Array.isArray(id)) {
+            if (Array.isArray(id[2]))
+                displayName = translate(`equipment_types.${id[0]}`)
+                    + ' ('
+                    + translate('require.has_stat', {
+                        stat: translate(`stat.${id[2][0]}`),
+                        value: id[2][1]
+                    })
+                    + ')'
+            else
+                displayName = translate(`equipment_types.${id[0]}`)
+            id = id[1]
+        } else if (this.isAny.includes(id)) {
             displayName = db.equipmentTypes[kckit.get.equipment(id).type]._name
         }
         return (
             <Equipment
                 equipment={id}
-                key={key}
+                key={index}
                 displayName={displayName}
                 isNotLink={typeof displayName !== 'undefined'}
                 className={classNames({
-                    'is-required': !this.state.meetEquipmentsRequirement && this.isRequired.includes(id)
+                    'is-required': !this.state.meetEquipmentsRequirement && this.isRequired.includes(id),
+                    'is-expand': (!index && arr.length % 2)
                 })}
                 componentInput={
                     this.renderInput(id)

@@ -31,7 +31,9 @@
         "min_possible_level": "Minimum possible level: ${level}",
         "equipment": "Require equipment: ${type}",
         "equipment_type": "Require equipment type: ${type}",
-        "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)"
+        "equipment_has_stat": "Require equipment: ${type} (${stat} at least ${value})",
+        "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)",
+        "has_stat": "${stat} at least ${value}"
     },
 
     "shipclass": "${class}型",
@@ -69,6 +71,7 @@
     },
 
     "equipment_types": {
+        "aircraft": "Aircraft",
         "jet": "噴式機"
     },
 

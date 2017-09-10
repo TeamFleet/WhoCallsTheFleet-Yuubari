@@ -30,7 +30,9 @@
         "min_possible_level": "可能的最低等级：${level}",
         "equipment": "需要装备：${type}",
         "equipment_type": "需要装备类型：${type}",
-        "ship_stat_with_equipments": "需要${stat}属性：${value} (计算装备)"
+        "equipment_has_stat": "需要装备：${type} (${stat}至少为${value})",
+        "ship_stat_with_equipments": "需要${stat}属性：${value} (计算装备)",
+        "has_stat": "${stat}至少为${value}"
     },
 
     "shipclass": "${class}级",
@@ -68,6 +70,7 @@
     },
 
     "equipment_types": {
+        "aircraft": "飞行器",
         "jet": "喷气机"
     },
 

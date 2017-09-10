@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 // import classNames from 'classnames'
 
 import kckit from 'kckit'
@@ -26,7 +27,9 @@ const shipTypeRangeNormal = [
 // import { ImportStyle } from 'sp-css-import'
 // import styles from './combat-special.less'
 
-// @connect()
+@connect(state => ({
+    locales_equipment_types: state.locales.equipment_types
+}))
 // @ImportStyle(styles)
 export default class ShipDetailsSpecialCombat extends React.Component {
     renderOASW() {
@@ -50,7 +53,31 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                         }
                     }
                     if (OASW.equipments) {
-                        equipmentRequired = getEquipmentTypesFromCondition(OASW.equipments)
+                        const equipments = Object.assign({}, OASW.equipments)
+                        for (let condition in equipments) {
+                            if (typeof equipments[condition] === 'object' && equipments[condition].hasStat) {
+                                let stat = []
+                                for (let key in equipments[condition].hasStat) {
+                                    stat[0] = key
+                                    stat[1] = equipments[condition].hasStat[key]
+                                }
+                                if (condition.substr(0, 3) === 'has' && this.props.locales_equipment_types[condition.substr(3).toLocaleLowerCase()]) {
+                                    equipmentRequired.push([
+                                        translate(`equipment_types.${condition.substr(3).toLocaleLowerCase()}`),
+                                        stat
+                                    ])
+                                } else {
+                                    equipmentRequired.push([
+                                        getEquipmentTypesFromCondition({
+                                            [condition]: true
+                                        })[0],
+                                        stat
+                                    ])
+                                }
+                                delete equipments[condition]
+                            }
+                        }
+                        equipmentRequired = equipmentRequired.concat(getEquipmentTypesFromCondition(equipments))
                         if (OASW.equipments.hasNameOf === '九三一空')
                             equipmentRequired.push('九三一空')
                     }
@@ -71,6 +98,22 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                                             九三一空
                                         </IconEquipment>
                                     </li>)
+                                else if (Array.isArray(type)) {
+                                    console.log(type)
+                                    return (<li key={`${index}-${indexType}`}>
+                                        {translate("require.equipment", { type: "" })}
+                                        {typeof type[0] === 'number' && (
+                                            <IconEquipment className="equipment" icon={db.equipmentTypes[type[0]].icon}>
+                                                {db.equipmentTypes[type[0]]._name}
+                                            </IconEquipment>
+                                        )}
+                                        {typeof type[0] === 'string' && type[0]}
+                                        {' (' + translate("require.has_stat", {
+                                            stat: translate(`stat.${type[1][0]}`),
+                                            value: type[1][1]
+                                        }) + ')'}
+                                    </li>)
+                                }
                                 else
                                     return (<li key={`${index}-${indexType}`}>
                                         {translate("require.equipment_type", { type: "" })}

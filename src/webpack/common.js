@@ -19,15 +19,15 @@ const rules = [
     {
         test: /\.css$/,
         exclude: [/\.g\.css$/, /node_modules/],
-        loader: 'sp-css-loader?length=4&mode=replace!postcss-loader'
+        loader: 'sp-css-loader?length=8&mode=replace!postcss-loader'
     }, {
         test: /\.less$/,
         exclude: [/\.g\.less$/, /node_modules/],
-        loader: 'sp-css-loader?length=4&mode=replace!postcss-loader!less-loader'
+        loader: 'sp-css-loader?length=8&mode=replace!postcss-loader!less-loader'
     }, {
         test: /\.scss$/,
         exclude: [/\.g\.scss$/, /node_modules/],
-        loader: 'sp-css-loader?length=4&mode=replace!postcss-loader!sass-loader'
+        loader: 'sp-css-loader?length=8&mode=replace!postcss-loader!sass-loader'
     },
 
     // CSS - in node_modules
