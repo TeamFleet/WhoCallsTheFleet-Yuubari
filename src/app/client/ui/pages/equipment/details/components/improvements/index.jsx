@@ -1,6 +1,7 @@
 import React from 'react'
 
 import ComponentContainer from '@appUI/containers/infos-component'
+import { placeholders } from '@appUI/containers/flex'
 import { DayAndShip, Resources, Star } from '@appUI/components/improvement'
 import Bullet from '@appUI/components/bullet'
 import LinkEquipment from '@appUI/components/link/equipment'
@@ -19,8 +20,9 @@ export default class EquipmentDetailsComponentImprovements extends React.Compone
         return (
             <ComponentContainer className={this.props.className} title={translate("equipment_details.improvements")}>
                 {hasItem && list.map((data, index) => (
-                    <EquipmentDetailsComponentImprovementsImprovement data={data} key={index} upgradable={upgradable} />
+                    <EquipmentDetailsComponentImprovementsImprovement data={data} key={index} upgradable={upgradable} className="flex-item" />
                 ))}
+                {hasItem && placeholders}
                 {!hasItem && <span className="disabled">{translate("none")}</span>}
             </ComponentContainer>
         )
@@ -36,9 +38,11 @@ class EquipmentDetailsComponentImprovementsImprovement extends React.Component {
             <div className={className}>
                 <Bullet
                     className="upgradability"
-                    title={upgrade ? translate(`equipment_details.upgrade_to`) : translate(`equipment_details.facts_unupgradable`)}
                     level={upgrade ? 2 : 0}
                 >
+                    <span className="subtitle">
+                        {upgrade ? translate(`equipment_details.upgrade_to`) : translate(`equipment_details.facts_unupgradable`)}
+                    </span>
                     {upgrade && <LinkEquipment
                         equipment={upgrade[0]}
                         className="equipment color-alt"

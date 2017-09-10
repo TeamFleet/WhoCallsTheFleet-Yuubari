@@ -7,18 +7,10 @@ import IconEquipment from '@appUI/components/icon-equipment'
 
 import translate from 'sp-i18n'
 import db from '@appLogic/database'
+import times from '@appUtils/times'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './slot-equipments.less'
-
-const times = n => f => {
-    let iter = i => {
-        if (i === n) return
-        f(i)
-        iter(i + 1)
-    }
-    return iter(0)
-}
 
 // @connect()
 @ImportStyle(styles)

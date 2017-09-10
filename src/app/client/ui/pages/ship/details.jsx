@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
 // import PageContainer from 'sp-ui-pagecontainer'
-import InfosPageContainer from '@appUI/containers/infos-pagecontainer'
+import InfosPageContainer from '@appUI/containers/infos-page'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 import {

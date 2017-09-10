@@ -161,11 +161,11 @@ export class Resources extends React.Component {
         }
 
         return (
-            <p className="category">
+            <div className="category">
                 <span className="category-title">{title}</span>
                 {resources}
                 {equipments}
-            </p>
+            </div>
         )
     }
 

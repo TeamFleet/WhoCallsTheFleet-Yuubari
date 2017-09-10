@@ -3,6 +3,7 @@
 .component{
     display:    flex;
     flex-flow:  row wrap;
+    margin-right: -20px;
 
     & > h2.title{
         flex:   none;
@@ -12,5 +13,14 @@
 
     & > .disabled{
         margin-top:     25px;
+    }
+
+    & > .flex-item{
+        flex:           1 1 500px;
+        &.placeholder{
+            margin-top: auto;
+            margin-bottom: auto;
+            height:     0;
+        }
     }
 }
