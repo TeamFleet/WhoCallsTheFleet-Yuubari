@@ -3,28 +3,33 @@ import Link from './_normal.jsx'
 
 import getEntity from '@appUtils/get-entity.js'
 import getPic from '@appUtils/get-pic.js'
+import getLink from '@appUtils/get-link.js'
 
 import { ImportStyle } from 'sp-css-import'
-import style from './entity.less'
 
-@ImportStyle(style)
+const checkShow = value => (value || typeof value === 'undefined')
+
+@ImportStyle(require('./entity.less'))
 export default class LinkEntity extends React.Component {
-    checkShow(type) {
-        return (this.props[type] || typeof this.props[type] === 'undefined')
-    }
-
     render() {
-        this.entity = getEntity(this.props.entity || this.props.id)
+        const {
+            entity, id,
+            pic,
+            name,
+            children,
+            ...props
+        } = this.props
+
+        this.entity = getEntity(entity || id)
 
         return (
             <Link
-                className={this.props.className}
-                to={'/entities/' + this.entity.id}
-                onClick={this.props.onClick}
-                pic={this.checkShow('pic') ? getPic(this.entity, '0-2') : null}
-                name={this.checkShow('name') ? this.entity._name : null}
+                to={getLink('entity', this.entity.id)}
+                pic={checkShow(pic) ? getPic(this.entity, '0-2') : null}
+                name={checkShow(name) ? this.entity._name : null}
+                {...props}
             >
-                {this.props.children}
+                {children}
             </Link>
         )
     }

@@ -20,21 +20,28 @@ export default class LinkTypeNormal extends React.Component {
     }
 
     render() {
-        const pic = this.props.pic || this.props.avatar || this.props.image || this.props.src || this.props.picture || this.props.img
-        const name = this.props.name || this.props.title || this.props.text || null
+        const {
+            pic, avatar, image, src, picture, img,
+            name, title, text,
+            to, href, link,
+            ...props
+        } = this.props
+
+        const thisPic = pic || avatar || image || src || picture || img
+        const thisName = name || title || text || null
+
         return (
             <Link
-                className={this.props.className}
-                to={this.props.to || this.props.href || this.props.link}
-                onClick={this.props.onClick}
+                to={to || href || link}
+                {...props}
             >
-                {pic && <span
+                {thisPic && <span
                     className="pic"
                     style={{
-                        backgroundImage: `url(${pic})`
+                        backgroundImage: `url(${thisPic})`
                     }}
                 />}
-                {name && this.renderName(name)}
+                {thisName && this.renderName(thisName)}
                 {this.props.children}
             </Link>
         )

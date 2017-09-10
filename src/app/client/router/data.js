@@ -29,7 +29,7 @@ export default [{
     name: 'entities',
     getComponent: (nextState, cb) => {
         require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/entity-list.jsx').default)
+            if (routeCheck(nextState)) cb(null, require('@appUI/pages/entity/list').default)
         }, 'entities')
     }
 },
