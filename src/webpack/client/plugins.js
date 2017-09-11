@@ -11,7 +11,7 @@ module.exports = async (appPath, type, isDev, isSPA) => {
 
     if (isSPA) {
         arr.push({
-            content: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
+            context: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
             from: '**/*',
             to: '_bgimgs'
         })
