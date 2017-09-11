@@ -143,10 +143,12 @@
         "on-build-webpack": "^0.1.0"
     },
     "devDependencies": {
-        "electron": "~1.7.6",
-        "asar": "^0.13.0",
         "glob": "^7.1.2",
         "jsonfile": "^3.0.1",
+        
+        "electron": "~1.7.6",
+        "electron-packager": "^9.0.1",
+        "asar": "^0.13.0",
 
         "jest": "^21.0.1"
     }
