@@ -11,8 +11,13 @@ module.exports = async (appPath, type, isDev, isSPA) => {
 
     if (isSPA) {
         arr.push({
-            from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
+            content: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
+            from: '**/*',
             to: '_bgimgs'
+        })
+        arr.push({
+            from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output/thumbnail'),
+            to: '_bgimgs/thumbnail'
         })
     } else {
         arr.push({
