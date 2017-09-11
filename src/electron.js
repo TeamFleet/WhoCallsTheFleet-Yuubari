@@ -18,7 +18,7 @@ const isMac = /^darwin/.test(platform)
 // const packagejson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'))
 // const channel = /^yuubari/i.test(packagejson.description) ? 'yuubari' : 'stable'
 
-const isDist = !fs.existsSync('index.html')
+const isDist = fs.existsSync('index.html')
 const pathApp = isDist
     ? path.resolve(__dirname)
     : path.join(__dirname, '../dist-app/')
@@ -60,7 +60,8 @@ function createWindow() {
     }))
 
     // disable menubar for Windows / Linux
-    mainWindow.setMenu(null)
+    if (isDist)
+        mainWindow.setMenu(null)
 
     // Open the DevTools.
     if (!isDist) {

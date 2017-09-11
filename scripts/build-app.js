@@ -6,21 +6,21 @@ const fs = require('fs-extra')
 const path = require('path')
 const glob = require('glob')
 // const asar = require('asar')
-const packager = require('electron-packager')
-const npmRunScript = require('npm-run-script')
+// const packager = require('electron-packager')
+// const npmRunScript = require('npm-run-script')
 
 const run = async (src) => {
     console.log('')
-    console.log('packaging app...')
+    console.log('building app...')
 
-    const dirPackage = 'electron'
+    const dirPackage = 'app-electron'
 
     const pathRoot = path.resolve(__dirname, '../')
     const pathApp = path.resolve(pathRoot, './dist-app')
     const pathPics = path.resolve(pathRoot, './dist-web/public/app/_pics')
     const pathPackage = path.resolve(pathRoot, `../${dirPackage}/src`)
 
-    const dest = path.resolve(pathRoot, 'app.asar')
+    // const dest = path.resolve(pathRoot, 'app.asar')
 
     // determine src path
     // if (!src) src = path.resolve(pathPackage, './WhoCallsTheFleet')
@@ -39,7 +39,7 @@ const run = async (src) => {
 
     // copy pics to src directory
     console.log(`> copying pics to source directory...`)
-    await new Promise((resolve, rejct) => glob(
+    await new Promise((resolve, reject) => glob(
         path.resolve(pathPics, '**/*.webp'),
         {},
         (err, files) => {
@@ -166,7 +166,7 @@ const run = async (src) => {
     // })
     // console.log(`  > complete!`)
 
-    console.log('> packaging app complete!')
+    console.log('> building app complete!')
     console.log('')
 }
 
