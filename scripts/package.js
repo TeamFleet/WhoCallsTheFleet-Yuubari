@@ -13,7 +13,7 @@ const run = async (src) => {
 
     const pathRoot = path.resolve(__dirname, '../')
     const pathApp = path.resolve(pathRoot, 'dist-app')
-    const pathPics = path.resolve(pathRoot, 'pics')
+    const pathPics = path.resolve(pathRoot, 'dist-web/public/app/_pics')
 
     const dest = path.resolve(pathRoot, 'app.asar')
 
