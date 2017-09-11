@@ -26,9 +26,9 @@
         "prebuild": "node ./scripts/database.js && node ./scripts/less-variables",
         "build": "npm run clean:web && npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web",
         "build:spa": "rimraf ./dist-app && npm run copy:spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./src/webpack/enter",
-        "build:app": "node ./scripts/build-app",
         "dev": "npm run prebuild && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
+        "package": "node ./scripts/package",
 
         
         "clean:web": "node ./scripts/clean-web",
@@ -144,6 +144,9 @@
     },
     "devDependencies": {
         "electron": "~1.7.6",
+        "asar": "^0.13.0",
+        "glob": "^7.1.2",
+        "jsonfile": "^3.0.1",
 
         "jest": "^21.0.1"
     }

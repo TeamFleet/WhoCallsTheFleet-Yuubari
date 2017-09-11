@@ -15,13 +15,14 @@ const isMac = /^darwin/.test(platform)
 
 // --------------------------------------------------
 
-const packagejson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'))
-const channel = /^yuubari/i.test(packagejson.description) ? 'yuubari' : 'stable'
+// const packagejson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'))
+// const channel = /^yuubari/i.test(packagejson.description) ? 'yuubari' : 'stable'
 
 const pathApp = fs.existsSync('index.html')
     ? path.join(__dirname)
     : path.join(__dirname, '../dist-app/')
 const pathAssets = path.join(pathApp, 'assets')
+const isDev = !fs.existsSync('index.html')
 
 // --------------------------------------------------
 
@@ -71,6 +72,8 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null
     })
+
+    global.__path_pics = isDev ? '../pics/' : 'pics/';
 }
 
 // This method will be called when Electron has finished

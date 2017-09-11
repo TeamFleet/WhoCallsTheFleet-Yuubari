@@ -58,7 +58,10 @@ export default (type, id, file) => {
             : __PUBLIC__
     )
 
-    const folder = __SPA__ ? '../pics/' : '/_pics/'
+    // const folder = __SPA__ ? '../pics/' : '/_pics/'
+    const folder = __SPA__
+        ? require('electron').remote.getGlobal('__path_pics')
+        : '/_pics/'
 
     return base + folder + getUri(type, id, file)
 }

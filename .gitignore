@@ -39,7 +39,9 @@ jspm_packages
 node_modules/
 *.log
 dist-app
+dist-app-package
 dist-web
+/app.asar
 
 
 # Personal code

@@ -28,15 +28,15 @@ module.exports = async (appPath, type, isDev, isSPA) => {
             const pathAssets = path.join(appPath, './src/app/client/assets/')
             arr.push({
                 from: path.resolve(pathAssets, 'appicon.ico'),
-                to: '../assets'
+                to: 'assets'
             })
             arr.push({
                 from: path.resolve(pathAssets, 'appicon.icns'),
-                to: '../assets'
+                to: 'assets'
             })
             arr.push({
                 from: path.resolve(pathAssets, `logos/${channel}/128.png`),
-                to: '../assets/appicon.png'
+                to: 'assets/appicon.png'
             })
         }
     } else {

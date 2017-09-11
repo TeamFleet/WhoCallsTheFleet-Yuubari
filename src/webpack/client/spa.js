@@ -25,14 +25,14 @@ const getConfig = async (appPath, type) => {
     const entries = require('./entries.js')(appPath, type)
     const typeName = type ? type : 'default'
     // const outputPath = path.resolve(appPath, `dist-app/${typeName}/includes`)
-    const outputPath = path.resolve(appPath, `dist-app/includes`)
-    const publicPath = `includes/`
-    const htmlFileName = '../index.html'
+    const outputPath = path.resolve(appPath, `dist-app`)
+    const publicPath = `./`
+    const htmlFileName = 'index.html'
 
     let config = {
-        // target: 'electron-main',
-        target: "web",
-        devtool: 'source-map',
+        target: 'electron-main',
+        // target: "web",
+        // devtool: 'source-map',
         entry: entries,
         output: {
             filename: `[name].[chunkhash].js`,
