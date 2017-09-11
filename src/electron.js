@@ -18,7 +18,7 @@ const isMac = /^darwin/.test(platform)
 // const packagejson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'))
 // const channel = /^yuubari/i.test(packagejson.description) ? 'yuubari' : 'stable'
 
-const isDist = fs.existsSync('index.html')
+const isDist = fs.existsSync(path.resolve(__dirname, 'index.html'))
 const pathApp = isDist
     ? path.resolve(__dirname)
     : path.join(__dirname, '../dist-app/')
