@@ -13,12 +13,12 @@ const run = async (src) => {
     console.log('')
     console.log('packaging app...')
 
-    const dirPackage = 'dist-app-package'
+    const dirPackage = 'electron'
 
     const pathRoot = path.resolve(__dirname, '../')
     const pathApp = path.resolve(pathRoot, './dist-app')
     const pathPics = path.resolve(pathRoot, './dist-web/public/app/_pics')
-    const pathPackage = path.resolve(pathRoot, `./${dirPackage}`)
+    const pathPackage = path.resolve(pathRoot, `../${dirPackage}`)
 
     const dest = path.resolve(pathRoot, 'app.asar')
 
@@ -122,32 +122,33 @@ const run = async (src) => {
     // })
 
     // bundling
-    console.log(`> bundling...`)
-    const pathAssets = path.resolve(pathPackage, 'assets')
-    const packagerDefaults = {
-        dir: pathPackage,
-        quiet: true,
-        // asar: true,
-        arch: "x64",
-        // out: pathPackage
-    }
-    const packagerDo = async (options = {}) => {
-        const settings = Object.assign({}, packagerDefaults, options)
-        console.log(`  > building: ${settings.platform}-${settings.arch}`)
-        // console.log(settings)
-        await packager(settings)
-            .catch(err => console.log(err))
-        console.log(`    > built: ${settings.platform}-${settings.arch}`)
-    }
-    await packagerDo({
-        platform: 'win32',
-        icon: path.join(pathAssets, `appicon.ico`)
-    })
+    // console.log(`> bundling...`)
+    // const pathAssets = path.resolve(pathPackage, 'assets')
+    // const packagerDefaults = {
+    //     dir: pathPackage,
+    //     name: "WhoCallsTheFleet",
+    //     quiet: true,
+    //     // asar: true,
+    //     arch: "x64",
+    //     // out: pathPackage
+    // }
+    // const packagerDo = async (options = {}) => {
+    //     const settings = Object.assign({}, packagerDefaults, options)
+    //     console.log(`  > building: ${settings.platform}-${settings.arch}`)
+    //     // console.log(settings)
+    //     await packager(settings)
+    //         .catch(err => console.log(err))
+    //     console.log(`    > built: ${settings.platform}-${settings.arch}`)
+    // }
+    // await packagerDo({
+    //     platform: 'win32',
+    //     icon: path.join(pathAssets, `appicon.ico`)
+    // })
     // await packagerDo({
     //     platform: 'darwin',
     //     icon: path.join(pathAssets, `appicon.icns`)
     // })
-    console.log(`  > complete!`)
+    // console.log(`  > complete!`)
 
     console.log('> packaging app complete!')
     console.log('')
