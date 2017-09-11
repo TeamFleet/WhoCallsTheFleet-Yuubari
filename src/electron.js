@@ -18,11 +18,11 @@ const isMac = /^darwin/.test(platform)
 // const packagejson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'))
 // const channel = /^yuubari/i.test(packagejson.description) ? 'yuubari' : 'stable'
 
-const pathApp = fs.existsSync('index.html')
-    ? path.join(__dirname)
+const isDist = !fs.existsSync('index.html')
+const pathApp = isDist
+    ? path.resolve(__dirname)
     : path.join(__dirname, '../dist-app/')
 const pathAssets = path.join(pathApp, 'assets')
-const isDev = !fs.existsSync('index.html')
 
 // --------------------------------------------------
 
@@ -63,7 +63,9 @@ function createWindow() {
     mainWindow.setMenu(null)
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    if (!isDist) {
+        mainWindow.webContents.openDevTools()
+    }
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -73,7 +75,7 @@ function createWindow() {
         mainWindow = null
     })
 
-    global.__path_pics = isDev ? '../pics/' : 'pics/';
+    global.__path_pics = isDist ? 'pics/' : '../pics/'
 }
 
 // This method will be called when Electron has finished
