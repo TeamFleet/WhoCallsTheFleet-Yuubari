@@ -12,7 +12,7 @@ module.exports = async (appPath, type, isDev, isSPA) => {
     if (isSPA) {
         arr.push({
             context: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
-            from: '**/*',
+            from: '**/*.webp',
             to: '_bgimgs'
         })
         arr.push({
