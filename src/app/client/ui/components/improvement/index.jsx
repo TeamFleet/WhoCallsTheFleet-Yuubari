@@ -4,6 +4,7 @@ import Link from '@appUI/components/link'
 import Stat from '@appUI/components/stat'
 import LinkEquipment from '@appUI/components/link/equipment'
 
+import getDateTimezone from '@appUtils/get-date-timezone'
 import getLink from '@appUtils/get-link'
 import getShip from '@appUtils/get-ship'
 import arrResources from '@appData/resources'
@@ -62,7 +63,7 @@ export class DayAndShip extends React.Component {
             ]
 
         return (
-            <div className={this.props.className}>
+            <div className={this.props.className} data-day={getDateTimezone(9).getDay()}>
                 {data.map(this.renderItem.bind(this))}
             </div>
         )

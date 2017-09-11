@@ -7,6 +7,7 @@
 
     font-size:  14px;
     line-height:@line-height;
+    position:   relative;
 
     .item{
         margin-bottom:  1px;
@@ -67,4 +68,80 @@
                 content:    initial;
             }
         }
+
+    &[data-day]{
+        // &:after{
+        //     content:    "";
+        //     position:   absolute;
+        //     top:        -3px;
+        //     bottom:     -3px;
+        //     left:       -3px;
+        //     width:      (@height + 6);
+        //     z-index:    5;
+        //     // background: fade(#fff, 10%);
+        //     border:     1px solid fade(@color-positive, 50%);
+        //     border-radius: @border-radius;
+        // }
+        // @size:      1px;
+        // @offset:    (0 - @size - 1);
+        // &:before, &:after{
+        //     content:    "";
+        //     position:   absolute;
+        //     width:      @height;
+        //     left:       0;
+        //     height:     @size;
+        //     // background: @color-fade;
+        //     background: @color-positive;
+        //     z-index:    5;
+        // }
+        // &:before{
+        //     top:        @offset;
+        // }
+        // &:after{
+        //     bottom:     @offset;
+        // }
+        @size:      4px;
+        @offset:    (0 - @size - 2px);
+        // @color:     @color-base;
+        @color:     @color-fade;
+        // @color:     @color-positive;
+        // @color:     @theme-green-700;
+        // @color:     @theme-green-a100;
+        &:before, &:after{
+            content:    "";
+            position:   absolute;
+            overflow:   hidden;
+            width:      0;
+            height:     0;
+            left:       (@height / 2);
+            z-index:    5;
+            border:     @size solid transparent;
+            margin-left:(0 - @size);
+        }
+        &:before{
+            top:        @offset;
+            border-top-color:   @color;
+        }
+        &:after{
+            bottom:     @offset;
+            border-bottom-color:@color;
+        }
+    }
+    .day(@n, @i: 1) when (@i =< @n) {
+        // &[data-day="@{i}"]:after {
+        //     left:       (-3px + (@height + 1) * @i);
+        // }
+        // &[data-day="@{i}"]{
+        //     &:before, &:after{
+        //         left:   (@height + 1) * @i;
+        //     }
+        // }
+        &[data-day="@{i}"]{
+            &:before, &:after{
+                left:   (@height + 1) * @i + @height / 2;
+            }
+        }
+        .day(@n, (@i + 1));
+    }
+    .day(7);
 }
