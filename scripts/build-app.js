@@ -7,7 +7,7 @@ const path = require('path')
 const glob = require('glob')
 // const asar = require('asar')
 // const packager = require('electron-packager')
-// const npmRunScript = require('npm-run-script')
+const npmRunScript = require('npm-run-script')
 
 const run = async (src) => {
     console.log('')
@@ -16,7 +16,7 @@ const run = async (src) => {
     const dirPackage = 'app-electron'
 
     const pathRoot = path.resolve(__dirname, '../')
-    const pathApp = path.resolve(pathRoot, './dist-app')
+    // const pathApp = path.resolve(pathRoot, './dist-app')
     const pathPics = path.resolve(pathRoot, './dist-web/public/app/_pics')
     const pathPackage = path.resolve(pathRoot, `../${dirPackage}/src`)
 
@@ -33,12 +33,31 @@ const run = async (src) => {
     console.log(`> package directory make sure empty...`)
 
     // copy files to src directory
-    console.log(`> copying files to source directory...`)
-    await fs.copy(pathApp, src)
+    // console.log(`> copying files to source directory...`)
+    // await fs.copy(pathApp, src)
+    // console.log(`  > complete!`)
+
+    // build app into src directory
+    console.log(`> building app into src directory`)
+    const env = `cross-env WEBPACK_BUILD_ENV=app WEBPACK_STAGE_MODE=client WEBPACK_OUTPUT_PATH=${src}`
+    const cmd = `${env} npm run copy:spa && ${env} node ./src/webpack/enter`
+    await new Promise((resolve, reject) => {
+        const child = npmRunScript(cmd, {
+            stdio: 'ignore' // quiet
+        });
+        child.once('error', (error) => {
+            process.exit(1);
+            reject(error);
+        });
+        child.once('exit', (exitCode) => {
+            // process.exit(exitCode);
+            resolve();
+        });
+    })
     console.log(`  > complete!`)
 
     // copy pics to src directory
-    console.log(`> copying pics to source directory...`)
+    console.log(`> copying pics to src directory...`)
     await new Promise((resolve, reject) => glob(
         path.resolve(pathPics, '**/*.webp'),
         {},
@@ -104,7 +123,9 @@ const run = async (src) => {
                 "url": "http://diablohu.com"
             },
             "license": "MIT",
-        })
+        }), {
+            spaces: 4
+        }
     )
     console.log(`  > complete!`)
 

@@ -69,15 +69,15 @@ const rules = [
     // CSS - other global
     {
         test: /\.g\.css$/,
-        exclude: env === 'dist' ?/critical\.g\.css$/ : undefined,
+        exclude: env === 'dist' ? /critical\.g\.css$/ : undefined,
         loader: 'style-loader!postcss-loader'
     }, {
         test: /\.g\.less$/,
-        exclude: env === 'dist' ?/critical\.g\.less$/ : undefined,
+        exclude: env === 'dist' ? /critical\.g\.less$/ : undefined,
         loader: 'style-loader!postcss-loader!less-loader'
     }, {
         test: /\.g\.scss$/,
-        exclude: env === 'dist' ?/critical\.g\.scss$/ : undefined,
+        exclude: env === 'dist' ? /critical\.g\.scss$/ : undefined,
         loader: 'style-loader!postcss-loader!sass-loader'
     },
 
@@ -106,7 +106,13 @@ const plugins = [
 
     new webpack.DefinePlugin({
         '__CHANNEL__': JSON.stringify(
-            /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'
+            process.env.WEBPACK_BUILD_ENV === 'app'
+                ? 'stable'
+                : (
+                    /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description)
+                        ? 'yuubari'
+                        : 'stable'
+                )
         ),
         '__BGIMG_LIST__': JSON.stringify(
             // glob.sync(path.resolve(pathBgimgs, '*.jpg'))

@@ -25,7 +25,7 @@ const getConfig = async (appPath, type) => {
     const entries = require('./entries.js')(appPath, type)
     const typeName = type ? type : 'default'
     // const outputPath = path.resolve(appPath, `dist-app/${typeName}/includes`)
-    const outputPath = path.resolve(appPath, `dist-app`)
+    const outputPath = process.env.WEBPACK_OUTPUT_PATH || path.resolve(appPath, `dist-app`)
     const publicPath = `./`
     const htmlFileName = 'index.html'
 

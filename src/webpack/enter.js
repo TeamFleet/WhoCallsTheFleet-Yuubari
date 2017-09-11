@@ -4,6 +4,7 @@ const WebpackDevServer = require('webpack-dev-server')
 const Dashboard = require('webpack-dashboard')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 
+
 // 客户端开发环境webpack-dev-server端口号
 const CLIENT_DEV_PORT = process.env.WEBPACK_DEV_SERVER_PORT
 
@@ -104,7 +105,7 @@ const run = async (config) => {
     }
 
     // 客户端打包: SPA
-    if (stage === 'client' && env === 'spa') {
+    if (stage === 'client' && (env === 'spa' || env === 'app')) {
 
         process.env.NODE_ENV = 'production'
 

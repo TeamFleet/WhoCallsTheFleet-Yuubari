@@ -1,3 +1,5 @@
+console.log('SPA initialing...')
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -97,4 +99,6 @@ prefs.init().then(() => {
         </Provider>,
         document.getElementById('root')
     )
+
+    console.log('SPA inited')
 })

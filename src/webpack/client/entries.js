@@ -2,6 +2,7 @@ const path = require('path')
 const config = require('../../config/webpack')
 
 module.exports = (appPath, type) => {
+    const isSPA = process.env.WEBPACK_BUILD_ENV === 'spa' || process.env.WEBPACK_BUILD_ENV === 'app'
     switch (type) {
         /*case 'portals':
             return {
@@ -23,7 +24,7 @@ module.exports = (appPath, type) => {
                     path.resolve(appPath, `./src/app/client/critical`)
                 ],
                 client: [
-                    process.env.WEBPACK_BUILD_ENV === 'spa' ? path.resolve(appPath, `./src/app/client/spa`) : path.resolve(appPath, `./src/app/client`)
+                    isSPA ? path.resolve(appPath, `./src/app/client/spa`) : path.resolve(appPath, `./src/app/client`)
                 ]
             }
         }
