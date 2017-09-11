@@ -5,31 +5,36 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
-const fs = require('fs-extra')
+const fs = require('fs')
 const url = require('url')
-
-const pathRoot = path.join(__dirname, '../')
-const pathApp = path.join(pathRoot, 'dist-app/')
-const pathSrc = path.join(pathRoot, 'src/')
-const pathAssets = path.join(pathSrc, 'app/client/assets/')
-
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
 
 const os = require('os')
 const platform = os.platform()
 const isWindows = /^win/.test(platform)
 const isMac = /^darwin/.test(platform)
 
-const channel = /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'
+// --------------------------------------------------
+
+const packagejson = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'))
+const channel = /^yuubari/i.test(packagejson.description) ? 'yuubari' : 'stable'
+
+const pathApp = fs.existsSync('index.html')
+    ? path.join(__dirname)
+    : path.join(__dirname, '../dist-app/')
+const pathAssets = path.join(pathApp, 'assets')
+
+// --------------------------------------------------
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow
 
 const getAppIcon = () => {
     if (isWindows)
         return path.join(pathAssets, `appicon.ico`)
     if (isMac)
         return path.join(pathAssets, `appicon.icns`)
-    return path.join(pathAssets, `/logos/${channel}/128.png`)
+    return path.join(pathAssets, `appicon.png`)
 }
 
 function createWindow() {

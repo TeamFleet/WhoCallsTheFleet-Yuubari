@@ -4,6 +4,11 @@ const path = require('path')
 // const glob = require('glob')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const os = require('os')
+const platform = os.platform()
+const isWindows = /^win/.test(platform)
+const isMac = /^darwin/.test(platform)
+
 const channel = /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description) ? 'yuubari' : 'stable'
 
 module.exports = async (appPath, type, isDev, isSPA) => {
@@ -19,6 +24,21 @@ module.exports = async (appPath, type, isDev, isSPA) => {
             from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output/thumbnail'),
             to: '_bgimgs/thumbnail'
         })
+        if (type === 'app') {
+            const pathAssets = path.join(appPath, './src/app/client/assets/')
+            arr.push({
+                from: path.resolve(pathAssets, 'appicon.ico'),
+                to: '../assets'
+            })
+            arr.push({
+                from: path.resolve(pathAssets, 'appicon.icns'),
+                to: '../assets'
+            })
+            arr.push({
+                from: path.resolve(pathAssets, `logos/${channel}/128.png`),
+                to: '../assets/appicon.png'
+            })
+        }
     } else {
         arr.push({
             from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
