@@ -49,7 +49,7 @@ function createWindow() {
 
         icon: getAppIcon(),
 
-        backgroundColor: '#263238'
+        backgroundColor: '#212121'
     })
 
     // and load the index.html of the app.
@@ -60,8 +60,8 @@ function createWindow() {
     }))
 
     // disable menubar for Windows / Linux
-    // if (isDist)
-    //     mainWindow.setMenu(null)
+    if (isDist)
+        mainWindow.setMenu(null)
 
     // Open the DevTools.
     if (!isDist) {
