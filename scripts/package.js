@@ -18,7 +18,7 @@ const run = async (src) => {
     const pathRoot = path.resolve(__dirname, '../')
     const pathApp = path.resolve(pathRoot, './dist-app')
     const pathPics = path.resolve(pathRoot, './dist-web/public/app/_pics')
-    const pathPackage = path.resolve(pathRoot, `../${dirPackage}`)
+    const pathPackage = path.resolve(pathRoot, `../${dirPackage}/src`)
 
     const dest = path.resolve(pathRoot, 'app.asar')
 
@@ -65,31 +65,47 @@ const run = async (src) => {
 
     // copy startup js to src
     console.log(`> creating & copying other files`)
-    await fs.copy(path.resolve(pathRoot, 'src/electron.js'), path.resolve(pathPackage, 'main.js'))
-    await fs.writeJson(path.resolve(pathPackage, 'package.json'), {
-        "name": "whocallsthefleet",
-        "version": fs.readJSONSync(path.resolve(pathRoot, 'package.json')).version,
-        "main": "main.js",
-        "description": "Who Calls the Fleet (http://fleet.moe)",
-        "author": {
-            "name": "Diablohu",
-            "email": "diablohudream@gmail.com",
-            "url": "http://diablohu.com"
-        },
-        "license": "MIT",
-        "repository": {
-            "type": "git",
-            "url": "https://github.com/Diablohu/WhoCallsTheFleet"
-        },
-        "scripts": {
-            "start": "node ./main"
-        },
-        "dependencies": {
-        },
-        "devDependencies": {
-            "electron": "1.7.6"
-        }
-    })
+    await fs.copy(path.resolve(pathRoot, 'src/electron.js'), path.resolve(pathPackage, 'index.js'))
+    // await fs.writeJson(path.resolve(pathPackage, 'package.json'), {
+    //     "name": "whocallsthefleet",
+    //     "version": fs.readJSONSync(path.resolve(pathRoot, 'package.json')).version,
+    //     "main": "main.js",
+    //     "description": "Who Calls the Fleet (http://fleet.moe)",
+    //     "author": {
+    //         "name": "Diablohu",
+    //         "email": "diablohudream@gmail.com",
+    //         "url": "http://diablohu.com"
+    //     },
+    //     "license": "MIT",
+    //     // "repository": {
+    //     //     "type": "git",
+    //     //     "url": "https://github.com/Diablohu/WhoCallsTheFleet"
+    //     // },
+    //     "scripts": {
+    //         "start": "node ./main"
+    //     },
+    //     "dependencies": {
+    //     },
+    //     "devDependencies": {
+    //         "electron": "1.7.6"
+    //     }
+    // })
+    const pathPackageJson = path.resolve(pathPackage, '../package.json')
+    const targetpackagejson = await fs.readJson(pathPackageJson)
+    await fs.writeJson(
+        pathPackageJson,
+        Object.assign(targetpackagejson, {
+            "name": "whocallsthefleet",
+            "version": fs.readJSONSync(path.resolve(pathRoot, 'package.json')).version,
+            "description": "Who Calls the Fleet (http://fleet.moe)",
+            "author": {
+                "name": "Diablohu",
+                "email": "diablohudream@gmail.com",
+                "url": "http://diablohu.com"
+            },
+            "license": "MIT",
+        })
+    )
     console.log(`  > complete!`)
 
     // installing node packages
