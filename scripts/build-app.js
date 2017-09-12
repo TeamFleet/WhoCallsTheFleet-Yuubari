@@ -5,14 +5,41 @@
 const fs = require('fs-extra')
 const path = require('path')
 const glob = require('glob')
+const ora = require('ora')
 // const asar = require('asar')
 // const packager = require('electron-packager')
 const npmRunScript = require('npm-run-script')
 
+const symbols = {
+    complete: '√'
+}
+
+const spinner = (options = {}) => {
+    const waiting = ora(
+        Object.assign(
+            {
+                spinner: 'dots',
+                color: 'cyan'
+            },
+            typeof options === 'string' ? {
+                text: options
+            } : options
+        )
+    ).start()
+    waiting.finish = (options = {}) => {
+        waiting.color = 'green'
+        waiting.stopAndPersist(Object.assign({
+            symbol: symbols.complete
+        }, options))
+    }
+    return waiting
+}
+
 const run = async (src) => {
     console.log('')
-    console.log('building app...')
+    console.log('Building app...')
 
+    let waiting
     const dirPackage = 'app-electron'
 
     const pathRoot = path.resolve(__dirname, '../')
@@ -26,11 +53,12 @@ const run = async (src) => {
     // if (!src) src = path.resolve(pathPackage, './WhoCallsTheFleet')
     if (!src) src = pathPackage
     src = path.resolve(src)
-    console.log(`> source: ${src}`)
+    console.log(`${symbols.complete} Target directory: ${src}`)
 
     // make sure and empty package directory
+    waiting = spinner(`Making sure that target directory empty`)
     await fs.emptyDir(pathPackage)
-    console.log(`> package directory make sure empty...`)
+    waiting.finish()
 
     // copy files to src directory
     // console.log(`> copying files to source directory...`)
@@ -38,7 +66,7 @@ const run = async (src) => {
     // console.log(`  > complete!`)
 
     // build app into src directory
-    console.log(`> building app into src directory`)
+    waiting = spinner(`Building app into target directory`)
     const env = `cross-env WEBPACK_BUILD_ENV=app WEBPACK_STAGE_MODE=client WEBPACK_OUTPUT_PATH=${src}`
     const cmd = `${env} npm run copy:spa && ${env} node ./src/webpack/enter`
     await new Promise((resolve, reject) => {
@@ -54,10 +82,10 @@ const run = async (src) => {
             resolve();
         });
     })
-    console.log(`  > complete!`)
+    waiting.finish()
 
     // copy pics to src directory
-    console.log(`> copying pics to src directory...`)
+    waiting = spinner(`Copying pics to target directory`)
     await new Promise((resolve, reject) => glob(
         path.resolve(pathPics, '**/*.webp'),
         {},
@@ -76,14 +104,14 @@ const run = async (src) => {
         })
         chain = chain.then(() => resolve(files.length))
             .catch(err => reject(err))
-    })).then(count => {
-        console.log(`  > copied ${count} files!`)
-    })
+    }))/*.then(count => {
+        console.log(`  > Copied ${count} files!`)
+    })*/
     // console.log(pics)
-    console.log(`  > complete!`)
+    waiting.finish()
 
     // copy startup js to src
-    console.log(`> creating & copying other files`)
+    waiting = spinner(`Creating & copying other files`)
     await fs.copy(path.resolve(pathRoot, 'src/electron.js'), path.resolve(pathPackage, 'index.js'))
     // await fs.writeJson(path.resolve(pathPackage, 'package.json'), {
     //     "name": "whocallsthefleet",
@@ -127,7 +155,7 @@ const run = async (src) => {
             spaces: 4
         }
     )
-    console.log(`  > complete!`)
+    waiting.finish()
 
     // installing node packages
     // console.log(`> installing npm packages...`)
@@ -187,7 +215,7 @@ const run = async (src) => {
     // })
     // console.log(`  > complete!`)
 
-    console.log('> building app complete!')
+    console.log(`${symbols.complete} Building app complete!`)
     console.log('')
 }
 
