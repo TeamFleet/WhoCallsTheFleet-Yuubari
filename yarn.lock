@@ -8277,9 +8277,9 @@ whocallsthefleet-backgrounds@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.2.0.tgz#07047acd36ad3a1bd093b7f79cb1e1c32cd3918a"
 
-whocallsthefleet-database@2017.9.10:
-  version "2017.9.10"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-2017.9.10.tgz#b420266d18db82210b19f83c3a3a3b3b14767526"
+whocallsthefleet-database@2017.9.12-1:
+  version "2017.9.12-1"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-2017.9.12-1.tgz#35d28d58dd4cf8a8c88dfcf25938f31ae9ea17ac"
 
 wide-align@^1.1.0:
   version "1.1.2"
