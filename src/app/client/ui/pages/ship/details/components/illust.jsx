@@ -21,7 +21,7 @@ import { ImportStyle } from 'sp-css-import'
 import styles from './illust.less'
 
 const getExtraIllustPic = (ship, id, illustId) => {
-    if (Array.isArray(db.exillusts[id].exclude) && db.exillusts[id].exclude.includes(illustId))
+    if (db.exillusts[id] && Array.isArray(db.exillusts[id].exclude) && db.exillusts[id].exclude.includes(illustId))
         return getPic(ship, illustId)
     return getPic('ship-extra', id, illustId)
 }
