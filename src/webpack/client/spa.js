@@ -178,6 +178,20 @@ const getConfig = async (appPath, type) => {
         // externals: ['react'] // 尝试把react单独已js引用到html中，看看是否可以减小体积
     }
 
+    if (process.env.WEBPACK_BUILD_ENV === 'app') {
+        config.plugins.push(
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false,
+                    drop_console: true
+                },
+                beautify: false,
+                comments: false,
+                sourceMap: false
+            })
+        )
+    }
+
     return config
 }
 
