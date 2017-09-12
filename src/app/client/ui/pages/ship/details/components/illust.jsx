@@ -49,9 +49,11 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
 
         if (Array.isArray(this.extraIllusts))
             ids = ids.concat(
-                this.extraIllusts.sort((a, b) =>
-                    db.exillustTypes[db.exillusts[a].type].sort - db.exillustTypes[db.exillusts[b].type].sort
-                )
+                this.extraIllusts.sort((a, b) => {
+                    if (!db.exillusts[a]) return 1
+                    if (!db.exillusts[b]) return -1
+                    return db.exillustTypes[db.exillusts[a].type].sort - db.exillustTypes[db.exillusts[b].type].sort
+                })
             )
 
         ids.forEach(id => {
