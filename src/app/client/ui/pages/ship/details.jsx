@@ -59,7 +59,8 @@ const getShipType = ship => {
 const getDescription = ship => {
     const getShipType = () => {
         if (ship.type && ship.type_display && ship.type !== ship.type_display)
-            return db.shipTypes[ship.type_display]._name + ' (' + ship._type + ')'
+            // return db.shipTypes[ship.type_display]._name + ' (' + ship._type + ')'
+            return db.shipTypes[ship.type_display]._name
         if (ship.type)
             return ship._type
         return ''
@@ -107,10 +108,11 @@ export default class PageShipDetails extends React.Component {
         }
         if (ship) {
             obj.title = ship._name
-            obj.subtitle = (ship.class_no
-                ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
-                : translate("shipclass", { class: ship._class }))
-                + (ship.class && ship.type && ` / ${getShipType(ship)} `)
+            obj.subtitle = getShipType(ship)
+                + (ship.class || ship.class_no ? ' / ' : '')
+                + (ship.class_no
+                    ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
+                    : translate("shipclass", { class: ship._class }))
             obj.description = getDescription(ship)
         }
         const head = htmlHead(obj)

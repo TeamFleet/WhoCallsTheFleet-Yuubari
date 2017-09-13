@@ -49,6 +49,7 @@ const run = async (src) => {
     const pathPackage = path.resolve(pathRoot, `./dist-app-package/src`)
     const pathPackageJSON = path.resolve(pathPackage, 'package.json')
     const pathPackageAssets = path.resolve(pathPackage, 'assets')
+    const pathPackageOut = path.resolve(pathPackage, `../out`)
 
     // const dest = path.resolve(pathRoot, 'app.asar')
 
@@ -204,8 +205,11 @@ const run = async (src) => {
         quiet: true,
         // asar: true,
         arch: "x64",
-        out: path.resolve(pathPackage, '../')
+        out: pathPackageOut
     }
+    waiting = spinner(`Clearing packaging output directory`)
+    await fs.emptyDir(pathPackageOut)
+    waiting.finish()
     const packagerDo = async (options = {}) => {
         const settings = Object.assign({}, packagerDefaults, options)
         waiting = spinner(`Packaging ${settings.platform}-${settings.arch}`)

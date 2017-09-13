@@ -7,7 +7,7 @@ import { routerReducer } from 'react-router-redux'
 
 import clientRouter from './router'
 import { ReactApp } from 'super-project/ReactApp'
-import { reducer as realtimeLocationReducer, REALTIME_LOCATION_REDUCER_NAME, actionUpdate } from './redux/realtime-location'
+import { reducer as realtimeLocationReducer, REALTIME_LOCATION_REDUCER_NAME, actionUpdate } from 'sp-isomorphic-utils/realtime-location'
 
 // 引用：多语言相关
 import {

@@ -14,7 +14,7 @@ import {
     // compareReset
 } from '@appLogic/ship-list/api.js'
 import pref from '@appLogic/preferences'
-// import { REALTIME_LOCATION_REDUCER_NAME } from '@app/client/redux/realtime-location'
+// import { REALTIME_LOCATION_REDUCER_NAME } from 'sp-isomorphic-utils/realtime-location'
 
 import Title from './title.jsx'
 import List from './list.jsx'

@@ -10,7 +10,7 @@ import {
     init as listInit,
     // reset as listReset
 } from '@appLogic/equipment-list/api.js'
-// import { REALTIME_LOCATION_REDUCER_NAME } from '@app/client/redux/realtime-location'
+// import { REALTIME_LOCATION_REDUCER_NAME } from 'sp-isomorphic-utils/realtime-location'
 
 import Title from './title.jsx'
 // import List from './list.jsx'
