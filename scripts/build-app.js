@@ -258,8 +258,15 @@ const run = async (src) => {
         waiting = spinner(`Making APPX for UWP`)
         const sign = require('electron-windows-store/lib/sign')
         const publisher = 'CN=43EB8253-2612-4378-9B96-6A35957E0E07'
+        const windowsKit = 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64'
         let devCert
-        sign.makeCert({ publisherName: publisher, certFilePath: path.resolve(pathPackage, `../cert`) })
+        sign.makeCert({
+            publisherName: publisher,
+            certFilePath: path.resolve(pathPackage, `../cert`),
+            program: {
+                windowsKit
+            }
+        })
             .then(pfxFile => {
                 devCert = pfxFile
             })
