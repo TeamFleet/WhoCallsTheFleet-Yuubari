@@ -7,7 +7,7 @@ const path = require('path')
 const glob = require('glob')
 const ora = require('ora')
 // const asar = require('asar')
-// const packager = require('electron-packager')
+const packager = require('electron-packager')
 const npmRunScript = require('npm-run-script')
 
 const symbols = {
@@ -40,12 +40,14 @@ const run = async (src) => {
     console.log('Building app...')
 
     let waiting
-    const dirPackage = 'app-electron'
+    // const dirPackage = 'app-electron'
 
     const pathRoot = path.resolve(__dirname, '../')
     // const pathApp = path.resolve(pathRoot, './dist-app')
     const pathPics = path.resolve(pathRoot, './dist-web/public/app/_pics')
-    const pathPackage = path.resolve(pathRoot, `../${dirPackage}/src`)
+    // const pathPackage = path.resolve(pathRoot, `../${dirPackage}/src`)
+    const pathPackage = path.resolve(pathRoot, `./dist-app-package/pkg/src`)
+    const pathPackageJSON = path.resolve(pathPackage, '../package.json')
 
     // const dest = path.resolve(pathRoot, 'app.asar')
 
@@ -137,20 +139,25 @@ const run = async (src) => {
     //         "electron": "1.7.6"
     //     }
     // })
-    const pathPackageJson = path.resolve(pathPackage, '../package.json')
-    const targetpackagejson = await fs.readJson(pathPackageJson)
+    const targetPackageJSON = await fs.readJson(pathPackageJSON) || {}
     await fs.writeJson(
-        pathPackageJson,
-        Object.assign(targetpackagejson, {
+        pathPackageJSON,
+        Object.assign(targetPackageJSON, {
             "name": "whocallsthefleet",
+            "productName": "WhoCallsTheFleet",
             "version": fs.readJSONSync(path.resolve(pathRoot, 'package.json')).version,
             "description": "Who Calls the Fleet (http://fleet.moe)",
+            "main": "src/index.js",
             "author": {
                 "name": "Diablohu",
                 "email": "diablohudream@gmail.com",
                 "url": "http://diablohu.com"
             },
             "license": "MIT",
+            "repository": {
+                "type": "git",
+                "url": "https://github.com/TeamFleet/WhoCallsTheFleet-app"
+            },
         }), {
             spaces: 4
         }
@@ -178,42 +185,42 @@ const run = async (src) => {
     // console.log(`  > complete!`)
 
     // packaging
-    // console.log(`> packaging...`)
+    // waiting = spinner(`Packaging`)
     // await new Promise((resolve, reject) => {
     //     asar.createPackage(src, dest, () => {
     //         console.log(`  > complete! ${dest}`)
     //         resolve()
     //     })
     // })
+    // waiting.finish()
 
-    // bundling
-    // console.log(`> bundling...`)
-    // const pathAssets = path.resolve(pathPackage, 'assets')
-    // const packagerDefaults = {
-    //     dir: pathPackage,
-    //     name: "WhoCallsTheFleet",
-    //     quiet: true,
-    //     // asar: true,
-    //     arch: "x64",
-    //     // out: pathPackage
-    // }
-    // const packagerDo = async (options = {}) => {
-    //     const settings = Object.assign({}, packagerDefaults, options)
-    //     console.log(`  > building: ${settings.platform}-${settings.arch}`)
-    //     // console.log(settings)
-    //     await packager(settings)
-    //         .catch(err => console.log(err))
-    //     console.log(`    > built: ${settings.platform}-${settings.arch}`)
-    // }
-    // await packagerDo({
-    //     platform: 'win32',
-    //     icon: path.join(pathAssets, `appicon.ico`)
-    // })
+    // packaging
+    const pathAssets = path.resolve(pathPackage, 'assets')
+    const packagerDefaults = {
+        dir: pathPackage,
+        name: "WhoCallsTheFleet",
+        quiet: true,
+        // asar: true,
+        arch: "x64",
+        // out: pathPackage
+    }
+    const packagerDo = async (options = {}) => {
+        const settings = Object.assign({}, packagerDefaults, options)
+        waiting = spinner(`Packaging ${settings.platform}-${settings.arch}`)
+        // console.log(settings)
+        await packager(settings)
+            .catch(err => console.log(err))
+        // console.log(`    > built: ${settings.platform}-${settings.arch}`)
+        waiting.finish()
+    }
+    await packagerDo({
+        platform: 'win32',
+        icon: path.join(pathAssets, `appicon.ico`)
+    })
     // await packagerDo({
     //     platform: 'darwin',
     //     icon: path.join(pathAssets, `appicon.icns`)
     // })
-    // console.log(`  > complete!`)
 
     console.log(`${symbols.complete} Building app complete!`)
     console.log('')
