@@ -258,19 +258,23 @@ const run = async (src) => {
         waiting = spinner(`Making APPX for UWP`)
         const sign = require('electron-windows-store/lib/sign')
         const publisher = 'CN=43EB8253-2612-4378-9B96-6A35957E0E07'
+        const publisherId = publisher.split('=')[1]
         const windowsKit = 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64'
-        let devCert
-        sign.makeCert({
-            publisherName: publisher,
-            certFilePath: path.resolve(pathPackage, `../cert`),
-            program: {
-                windowsKit
-            }
-        })
-            .then(pfxFile => {
-                devCert = pfxFile
+        const certFilePath = path.join(process.env.APPDATA, 'electron-windows-store', publisherId)
+        let devCert = path.resolve(certFilePath, `${publisherId}.pfx`)
+        if (!fs.existsSync(devCert)) {
+            await sign.makeCert({
+                publisherName: publisher,
+                certFilePath,
+                program: {
+                    windowsKit
+                }
             })
-        convertToWindowsStore({
+                .then(pfxFile => {
+                    devCert = pfxFile
+                })
+        }
+        await convertToWindowsStore({
             // containerVirtualization: false,
             inputDirectory: path.resolve(pathPackageOut, `${packageName}-win32-x64`),
             outputDirectory: path.resolve(pathPackageOut, `${packageName}-appx`),
@@ -293,9 +297,9 @@ const run = async (src) => {
             // manifest: 'C:\\AppXManifest.xml',
             // deploy: false,
 
-            publisher: 'CN=43EB8253-2612-4378-9B96-6A35957E0E07',
-            windowsKit: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64',
-            devCert: devCert,
+            publisher,
+            windowsKit,
+            devCert,
             // desktopConverter: 'C:\\desktop-converter-tools',
             // expandedBaseImage: 'C:\\base-image.wim',
             // makeappxParams: ['/l'],
