@@ -260,6 +260,7 @@ const run = async (src) => {
         const publisher = 'CN=43EB8253-2612-4378-9B96-6A35957E0E07'
         const publisherId = publisher.split('=')[1]
         const windowsKit = 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64'
+        // get sign file
         const certFilePath = path.join(process.env.APPDATA, 'electron-windows-store', publisherId)
         let devCert = path.resolve(certFilePath, `${publisherId}.pfx`)
         if (!fs.existsSync(devCert)) {
@@ -311,6 +312,7 @@ const run = async (src) => {
         waiting.finish()
     }
 
+    console.log(`${symbols.complete} Making distribution packages!`)
     console.log('')
 }
 
