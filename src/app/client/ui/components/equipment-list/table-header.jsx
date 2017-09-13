@@ -4,7 +4,8 @@ import classNames from 'classnames'
 
 import translate from 'sp-i18n'
 import DataTable from '../datatable.jsx'
-import arrStats from '@appData/equipment-stats'
+// import arrStats from '@appData/equipment-stats'
+import { stats } from './table-body'
 // import {
 //     compareScroll,
 //     compareSort
@@ -17,9 +18,7 @@ import style from './table-header.less'
 
 const headers = [
     '',
-    ...arrStats,
-    'equipment.craftable',
-    'equipment.improvable'
+    ...stats
 ]
 
 @ImportStyle(style)
@@ -28,7 +27,7 @@ const headers = [
     //     sortType: state.shipList[ownProps.id].compareSort[0],
     //     sortOrder: state.shipList[ownProps.id].compareSort[1],
     //     scrollLeft: state.shipList[ownProps.id].compareScrollLeft
-    columnHighlight: state.equipmentList[ownProps.id].column
+    // columnHighlight: state.equipmentList[ownProps.id].column
 }))
 export default class ShipListTableHeader extends React.Component {
     getHeader(stat) {
@@ -39,7 +38,7 @@ export default class ShipListTableHeader extends React.Component {
             {
                 className: classNames({
                     'cell-name': (!stat),
-                    'is-highlight': this.props.columnHighlight === stat
+                    // 'is-highlight': this.props.columnHighlight === stat
                 }),
                 "data-stat": stat.replace(/^equipment\./, '') || undefined
             }

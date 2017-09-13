@@ -74,7 +74,7 @@
         }
         .stat-color(fire, fade(@color-stat-fire, 20%));
         .stat-color(torpedo, fade(@color-stat-torpedo, 20%));
-        .stat-color(night, fade(@color-stat-night, 40%));
+        // .stat-color(night, fade(@color-stat-night, 40%));
         .stat-color(aa, fade(@color-stat-aa, 20%));
         .stat-color(armor, fade(@color-stat-armor, 20%));
     }
@@ -83,3 +83,32 @@
 .last .component{
     border-bottom: 0;
 }
+
+.stat-highlight-loop(@n, @i: 0) when (@i =< @n) {
+    @nth: (@i + 2);
+    [data-highlight-index="@{i}"] ~ .wrapper .component:not(:hover) .row:first-child .cell:nth-child(@{nth}){
+        .is-hover-nopseudo({
+            &:after{
+                content:    "";
+                .style-table-highlight();
+            }
+        });
+    }
+    .stat-highlight-loop(@n, (@i + 1));
+}
+.stat-highlight-loop(@equipment-list-stat-count);
+
+.stat-highlight-color(@stat, @color){
+    [data-highlight-stat="@{stat}"] ~ .wrapper .component:not(:hover) .row:first-child .cell[data-stat="@{stat}"]{
+        .is-hover-nopseudo({
+            &:after{
+                background-color:	@color;
+            }
+        });
+    }
+}
+.stat-highlight-color(fire, fade(@color-stat-fire, 20%));
+.stat-highlight-color(torpedo, fade(@color-stat-torpedo, 20%));
+// .stat-highlight-color(night, fade(@color-stat-night, 40%));
+.stat-highlight-color(aa, fade(@color-stat-aa, 20%));
+.stat-highlight-color(armor, fade(@color-stat-armor, 20%));

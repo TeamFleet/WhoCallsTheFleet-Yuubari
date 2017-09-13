@@ -50,7 +50,8 @@ export default class EquipmentList extends React.Component {
 // }))
 @connect((state, ownProps) => {
     const obj = { ...state.equipmentList[ownProps.id] } || {}
-    delete obj.column
+    delete obj.highlightingIndex
+    delete obj.highlightingStat
     return obj
 })
 // @connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
@@ -108,6 +109,8 @@ class EquipmentListBody extends React.Component {
             >
                 {__CLIENT__ && <Header id={this.props.id} />}
 
+                <EquipmentListBodyDataHost id={this.props.id} />
+
                 <TransitionGroup
                     component="div"
                     className="wrapper"
@@ -116,6 +119,23 @@ class EquipmentListBody extends React.Component {
                 </TransitionGroup>
 
             </div>
+        )
+    }
+}
+
+@connect((state, ownProps) => ({
+    highlightingIndex: state.equipmentList[ownProps.id].highlightingIndex,
+    highlightingStat: state.equipmentList[ownProps.id].highlightingStat
+}))
+@ImportStyle(require('./body-datahost.less'))
+class EquipmentListBodyDataHost extends React.Component {
+    render() {
+        return (
+            <div
+                className={this.props.className}
+                data-highlight-index={this.props.highlightingIndex}
+                data-highlight-stat={this.props.highlightingStat}
+            />
         )
     }
 }

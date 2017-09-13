@@ -18,9 +18,9 @@ export const changeCollection = (id, collection) => (dispatch) => {
     )
 }
 
-export const highlightColumn = (id, column) => (dispatch) => {
+export const highlightColumn = (id, index, stat) => (dispatch) => {
     dispatch(
-        actions.highlightColumn(id, column)
+        actions.highlightColumn(id, index, stat)
     )
 }
 

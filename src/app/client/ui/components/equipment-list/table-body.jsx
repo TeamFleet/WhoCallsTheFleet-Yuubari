@@ -16,7 +16,7 @@ import getLink from '@appUtils/get-link'
 import { ImportStyle } from 'sp-css-import'
 // import style from './table-body.less'
 
-const stats = [
+export const stats = [
     ...arrStats,
     'equipment.craftable',
     'equipment.improvable'
@@ -39,7 +39,7 @@ export default class EquipmentListTableBody extends React.Component {
                 }]
             ]
 
-            stats.forEach(stat => {
+            stats.forEach((stat, indexStat) => {
                 if (this.props.collection === 2 && stat === 'range')
                     stat = 'distance'
 
@@ -85,14 +85,15 @@ export default class EquipmentListTableBody extends React.Component {
                         onMouseEnter: () => {
                             // this.getContainer(evt.target).setAttribute('data-highlighting', indexStat)
                             this.props.dispatch(
+                                highlightColumn(this.props.id, indexStat, stat)
                                 // highlightColumn(this.props.id, indexStat)
-                                highlightColumn(this.props.id, stat)
+                                // highlightColumn(this.props.id, stat)
                             )
                         },
                         onMouseLeave: () => {
                             // this.getContainer(evt.target).removeAttribute('data-highlighting')
                             this.props.dispatch(
-                                highlightColumn(this.props.id, undefined)
+                                highlightColumn(this.props.id, undefined, undefined)
                             )
                         }
                     }
