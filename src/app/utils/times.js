@@ -1,4 +1,4 @@
-export default n => f => {
+module.exports = n => f => {
     let iter = i => {
         if (i === n) return
         f(i)

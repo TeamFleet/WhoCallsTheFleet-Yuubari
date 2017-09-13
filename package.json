@@ -149,6 +149,7 @@
 
         "electron": "~1.7.6",
         "electron-packager": "^9.0.1",
+        "electron-windows-store": "^0.11.0",
 
         "jest": "^21.0.2"
     }

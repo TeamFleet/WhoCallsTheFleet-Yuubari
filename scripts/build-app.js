@@ -7,9 +7,23 @@ const path = require('path')
 const glob = require('glob')
 const ora = require('ora')
 // const asar = require('asar')
-const packager = require('electron-packager')
 const npmRunScript = require('npm-run-script')
 
+const times = require('../src/app/utils/times')
+
+const packager = require('electron-packager')
+const convertToWindowsStore = require('electron-windows-store')
+
+// --------------------------------------------------
+
+const os = require('os')
+const platform = os.platform()
+const isWindows = /^win/.test(platform)
+const isMac = /^darwin/.test(platform)
+
+// --------------------------------------------------
+
+const packageName = 'WhoCallsTheFleet'
 const symbols = {
     complete: '√'
 }
@@ -35,6 +49,8 @@ const spinner = (options = {}) => {
     return waiting
 }
 
+// --------------------------------------------------
+
 const run = async (src) => {
     console.log('')
     console.log('Building app...')
@@ -50,6 +66,8 @@ const run = async (src) => {
     const pathPackageJSON = path.resolve(pathPackage, 'package.json')
     const pathPackageAssets = path.resolve(pathPackage, 'assets')
     const pathPackageOut = path.resolve(pathPackage, `../out`)
+
+    const packageJSON = fs.readJSONSync(path.resolve(pathRoot, 'package.json'))
 
     // const dest = path.resolve(pathRoot, 'app.asar')
 
@@ -147,9 +165,9 @@ const run = async (src) => {
     await fs.writeJson(
         pathPackageJSON,
         Object.assign(targetPackageJSON, {
-            "name": "whocallsthefleet",
-            "productName": "WhoCallsTheFleet",
-            "version": fs.readJSONSync(path.resolve(pathRoot, 'package.json')).version,
+            "name": packageName.toLocaleLowerCase(),
+            "productName": packageName,
+            "version": packageJSON.version,
             "description": "Who Calls the Fleet (http://fleet.moe)",
             "main": "index.js",
             "author": {
@@ -198,10 +216,17 @@ const run = async (src) => {
     // })
     // waiting.finish()
 
+    console.log(`${symbols.complete} Building app complete!`)
+    console.log('')
+
+    // --------------------------------------------------
+
+    console.log(`Making distribution packages...`)
+
     // packaging
     const packagerDefaults = {
         dir: pathPackage,
-        name: "WhoCallsTheFleet",
+        name: packageName,
         quiet: true,
         // asar: true,
         arch: "x64",
@@ -228,7 +253,46 @@ const run = async (src) => {
     //     icon: path.join(pathPackageAssets, `appicon.icns`)
     // })
 
-    console.log(`${symbols.complete} Building app complete!`)
+    // windows store
+    if (isWindows) {
+        waiting = spinner(`Making APPX for UWP`)
+        convertToWindowsStore({
+            // containerVirtualization: false,
+            inputDirectory: path.resolve(pathPackageOut, `${packageName}-win32-x64`),
+            outputDirectory: path.resolve(pathPackageOut, `${packageName}-appx`),
+            flatten: true,
+
+            packageVersion: (() => {
+                const split = packageJSON.version.split('.')
+                if (split.length < 4)
+                    times(4 - split.length)(() => {
+                        split.push('0')
+                    })
+                return split.join('.')
+            })(),
+            packageName: `${packageName}`,
+            packageDisplayName: packageName,
+            packageDescription: packageJSON.description,
+            packageExecutable: `app/${packageName}.exe`,
+
+            // assets: 'C:\\assets\\',
+            // manifest: 'C:\\AppXManifest.xml',
+            // deploy: false,
+
+            publisher: 'CN=43EB8253-2612-4378-9B96-6A35957E0E07',
+            windowsKit: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64',
+            // devCert: 'C:\\devcert.pfx',
+            // desktopConverter: 'C:\\desktop-converter-tools',
+            // expandedBaseImage: 'C:\\base-image.wim',
+            // makeappxParams: ['/l'],
+            // signtoolParams: ['/p'],
+            // makePri: true,
+            // createConfigParams: ['/a'],
+            // createPriParams: ['/b'],
+        })
+        waiting.finish()
+    }
+
     console.log('')
 }
 
