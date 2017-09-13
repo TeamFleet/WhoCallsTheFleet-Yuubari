@@ -9,12 +9,16 @@
 
     .item{
         display:    inline-block;
-        color:      @color-fade;
+        // color:      @color-fade;
+        // color:      inherit;
+        color:      @color-base-dimmed;
         height:     (@height - 1);
         margin-left:    @gutter;
         border-bottom:  2px solid transparent;
         .icon{
-            fill:   @color-fade;
+            // fill:   @color-fade;
+            // fill:   @color-base;
+            fill:   @color-base-dimmed;
             vertical-align: text-top;
             margin-right: 4px;
         }
@@ -39,7 +43,8 @@
         }
         &.on{
             color:  #fff;
-            border-bottom-color: @color-base;
+            // border-bottom-color: @color-base;
+            border-bottom-color: @color-base-dimmed;
         }
         .screen-phone({
             height:         (@height-phone - 1);
@@ -90,9 +95,11 @@
         }
         .item{
             margin-left:@main-margin-phone;
-            color:      @color-base;
+            // color:      @color-base;
+            color:      @color-base-dimmed;
             .icon{
-                fill:   @color-base;
+                // fill:   @color-base;
+                fill:   @color-base-dimmed;
             }
             .is-hover({
                 color:  #fff;
