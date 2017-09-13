@@ -151,6 +151,8 @@
         "electron-packager": "^9.0.1",
         "electron-windows-store": "^0.11.0",
 
+        "node-windows": "^0.1.14",
+
         "jest": "^21.0.2"
     }
 }

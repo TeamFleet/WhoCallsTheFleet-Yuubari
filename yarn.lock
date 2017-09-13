@@ -5594,6 +5594,13 @@ node-pre-gyp@^0.6.36:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
+node-windows@^0.1.14:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/node-windows/-/node-windows-0.1.14.tgz#31bb0503da3bc637f2bfaa8b266640a2e92d891f"
+  dependencies:
+    optimist "~0.6.0"
+    xml "0.0.12"
+
 noms@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/noms/-/noms-0.0.0.tgz#da8ebd9f3af9d6760919b27d9cdc8092a7332859"
@@ -5798,7 +5805,7 @@ opn@4.0.2:
     object-assign "^4.0.1"
     pinkie-promise "^2.0.0"
 
-optimist@^0.6.1:
+optimist@^0.6.1, optimist@~0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
   dependencies:
@@ -8694,6 +8701,10 @@ xml-char-classes@^1.0.0:
 xml-name-validator@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
+
+xml@0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/xml/-/xml-0.0.12.tgz#f08b347109912be00285785f46f15ad8e50a5f67"
 
 xmlbuilder@8.2.2:
   version "8.2.2"
