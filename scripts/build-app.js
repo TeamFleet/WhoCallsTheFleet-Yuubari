@@ -46,8 +46,9 @@ const run = async (src) => {
     // const pathApp = path.resolve(pathRoot, './dist-app')
     const pathPics = path.resolve(pathRoot, './dist-web/public/app/_pics')
     // const pathPackage = path.resolve(pathRoot, `../${dirPackage}/src`)
-    const pathPackage = path.resolve(pathRoot, `./dist-app-package/pkg/src`)
-    const pathPackageJSON = path.resolve(pathPackage, '../package.json')
+    const pathPackage = path.resolve(pathRoot, `./dist-app-package/src`)
+    const pathPackageJSON = path.resolve(pathPackage, 'package.json')
+    const pathPackageAssets = path.resolve(pathPackage, 'assets')
 
     // const dest = path.resolve(pathRoot, 'app.asar')
 
@@ -139,7 +140,9 @@ const run = async (src) => {
     //         "electron": "1.7.6"
     //     }
     // })
-    const targetPackageJSON = await fs.readJson(pathPackageJSON) || {}
+    const targetPackageJSON = await fs.existsSync(pathPackageJSON)
+        ? fs.readJson(pathPackageJSON)
+        : {}
     await fs.writeJson(
         pathPackageJSON,
         Object.assign(targetPackageJSON, {
@@ -147,7 +150,7 @@ const run = async (src) => {
             "productName": "WhoCallsTheFleet",
             "version": fs.readJSONSync(path.resolve(pathRoot, 'package.json')).version,
             "description": "Who Calls the Fleet (http://fleet.moe)",
-            "main": "src/index.js",
+            "main": "index.js",
             "author": {
                 "name": "Diablohu",
                 "email": "diablohudream@gmail.com",
@@ -195,14 +198,13 @@ const run = async (src) => {
     // waiting.finish()
 
     // packaging
-    const pathAssets = path.resolve(pathPackage, 'assets')
     const packagerDefaults = {
         dir: pathPackage,
         name: "WhoCallsTheFleet",
         quiet: true,
         // asar: true,
         arch: "x64",
-        // out: pathPackage
+        out: path.resolve(pathPackage, '../')
     }
     const packagerDo = async (options = {}) => {
         const settings = Object.assign({}, packagerDefaults, options)
@@ -215,11 +217,11 @@ const run = async (src) => {
     }
     await packagerDo({
         platform: 'win32',
-        icon: path.join(pathAssets, `appicon.ico`)
+        icon: path.join(pathPackageAssets, `appicon.ico`)
     })
     // await packagerDo({
     //     platform: 'darwin',
-    //     icon: path.join(pathAssets, `appicon.icns`)
+    //     icon: path.join(pathPackageAssets, `appicon.icns`)
     // })
 
     console.log(`${symbols.complete} Building app complete!`)
