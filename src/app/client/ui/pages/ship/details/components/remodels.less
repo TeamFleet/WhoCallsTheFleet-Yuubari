@@ -16,7 +16,7 @@
         display:    block;
         position:   relative;
         // height:     @ship-link-height;
-        min-width:  0;
+        // min-width:  0;
         padding:    0;
         margin-right:   10px;
         &:before/*, &:after*/{
@@ -37,9 +37,9 @@
         // &:after{
         //     z-index:    -10;
         // }
-        &:after{
-            display:    none;
-        }
+        // &:after{
+        //     display:    none;
+        // }
         .lvl{
             @height:    25px;
             line-height:@height;
@@ -49,7 +49,7 @@
             top:        (0 - @height);
             left:       0;
             color:      #fff;
-            opacity:    .5;
+            // opacity:    .5;
             &:before{
                 content:    "Lv.";
                 // color:      @color-base;
@@ -83,6 +83,36 @@
                 }
             }
         }
+        .ship{
+            min-width:  0;
+            width:      100%;
+            z-index:    20;
+            opacity:    .5;
+            &:after{
+                display:    none;
+            }
+            .style-hover() {
+                // .lvl{
+                //     color:      #fff;
+                //     &:before{
+                //         color:      @color-base;
+                //     }
+                // }
+                // .lvl, .pic, .icon-has-extra-illust, .flag-navy{
+                //     opacity:    1;
+                // }
+                opacity:    1;
+            }
+    
+            .is-hover({
+                .style-hover();
+            }; {
+                // opacity:    .5;
+                .ship{
+                    opacity:    .5;
+                }
+            }; true);
+        }
         .pic{
             display:    block;
             position:   absolute;
@@ -92,7 +122,7 @@
             left:       0;
             right:      0;
             // width:      @ship-link-width;
-            opacity:    .5;
+            // opacity:    .5;
             background: no-repeat 100% 50% / cover;
             overflow:   hidden;
             @supports (mask-position: 0% 0%) {
@@ -103,7 +133,7 @@
         .icon-has-extra-illust, .flag-navy{
             left:       auto;
             right:      0;
-            opacity:    .5;
+            // opacity:    .5;
             z-index:    50;
         }
 
@@ -150,25 +180,10 @@
                 z-index:    -1;
             }
         
-        .style-hover() {
-            // .lvl{
-            //     color:      #fff;
-            //     &:before{
-            //         color:      @color-base;
-            //     }
-            // }
-            .lvl, .pic, .icon-has-extra-illust, .flag-navy{
+        &.on{
+            .ship{
                 opacity:    1;
             }
-        }
-
-        .is-hover({
-            .style-hover();
-        }; {
-            opacity:    .5;
-        }; true);
-        &.on, &:active{
-            .style-hover();
         }
 
         // &:hover{
@@ -234,6 +249,10 @@
                 &.is-initial{
                     display:    block;
                 }
+            }
+            .ship{
+                position:   absolute;
+                height:     100%;
             }
             .pic{
                 width:  100%;

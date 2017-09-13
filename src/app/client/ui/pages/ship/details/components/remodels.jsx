@@ -23,7 +23,7 @@ export default class ShipDetailsComponentRemodels extends React.Component {
             || series[index - 1].next_catapult === 'on'
         )
         return (
-            <LinkShip
+            <span
                 className={classNames(['item', {
                     'on': current.id === this.props.ship.id,
                     'is-has-icon': hasIcon,
@@ -32,12 +32,6 @@ export default class ShipDetailsComponentRemodels extends React.Component {
                     'is-need-catapult': index > 0 && series[index - 1].next_catapult === 'on'
                 }])}
                 key={index}
-                // to={`/ships/${current.id}`}
-                ship={ship}
-                navy={true}
-                name={false}
-                pic={false}
-                extraIllust={true}
             >
                 <span className={classNames(['lvl', {
                     'is-initial': index <= 0
@@ -46,11 +40,21 @@ export default class ShipDetailsComponentRemodels extends React.Component {
                     {index > 0 && series[index - 1].next_catapult === 'on' && <span className="icon icon-catapult" />}
                     {index > 0 && series[index - 1].next_blueprint === 'on' && <span className="icon icon-blueprint" />}
                 </span>
-                <span className="pic" style={{
-                    backgroundImage: `url(${getPic(ship, checkCssProp('mask') ? '0' : '0-1')})`
-                }} />
-                {index > 0 && series[index - 1].next_loop === 'on' && <Icon icon="loop" className="icon-switchable" />}
-            </LinkShip>
+                <LinkShip
+                    className="ship"
+                    // to={`/ships/${current.id}`}
+                    ship={ship}
+                    navy={true}
+                    name={false}
+                    pic={false}
+                    extraIllust={true}
+                >
+                    <span className="pic" style={{
+                        backgroundImage: `url(${getPic(ship, checkCssProp('mask') ? '0' : '0-1')})`
+                    }} />
+                    {index > 0 && series[index - 1].next_loop === 'on' && <Icon icon="loop" className="icon-switchable" />}
+                </LinkShip>
+            </span>
         )
     }
 
