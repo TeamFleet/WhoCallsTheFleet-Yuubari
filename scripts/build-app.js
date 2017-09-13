@@ -256,6 +256,13 @@ const run = async (src) => {
     // windows store
     if (isWindows) {
         waiting = spinner(`Making APPX for UWP`)
+        const sign = require('electron-windows-store/lib/sign')
+        const publisher = 'CN=43EB8253-2612-4378-9B96-6A35957E0E07'
+        let devCert
+        sign.makeCert({ publisherName: publisher, certFilePath: path.resolve(pathPackage, `../cert`) })
+            .then(pfxFile => {
+                devCert = pfxFile
+            })
         convertToWindowsStore({
             // containerVirtualization: false,
             inputDirectory: path.resolve(pathPackageOut, `${packageName}-win32-x64`),
@@ -281,7 +288,7 @@ const run = async (src) => {
 
             publisher: 'CN=43EB8253-2612-4378-9B96-6A35957E0E07',
             windowsKit: 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64',
-            // devCert: 'C:\\devcert.pfx',
+            devCert: devCert,
             // desktopConverter: 'C:\\desktop-converter-tools',
             // expandedBaseImage: 'C:\\base-image.wim',
             // makeappxParams: ['/l'],
