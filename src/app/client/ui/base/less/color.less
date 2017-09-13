@@ -4,7 +4,7 @@
 @color-base:            lighten(mix(@theme-bluegrey-200, @theme-lightblue-200, 85%), 5%);
 // @color-fade:            desaturate(mix(@color-base, @theme-bluegrey-600), 3.5%);
 // @color-base-dimmed:     mix(@theme-bluegrey-200, @theme-lightblue-200, 85%);
-@color-base-dimmed:     darken(mix(@theme-bluegrey-200, @theme-lightblue-200, 85%), 5%);
+@color-base-dimmed:     fade(desaturate(darken(mix(@theme-bluegrey-200, @theme-lightblue-200, 85%), 5%), 5%), 90%);
 @color-fade:            fade(@color-base, 55%);
 @color-fade-2:          fade(#fff, 50%);
 // @color-main:            hsl(210, 7%, 89%);

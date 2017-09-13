@@ -38,7 +38,7 @@ export default class InfosHeader extends React.Component {
                     ])}
                     key={tabIndex}
                     onClick={evt => {
-                        if(typeof this.props.onTabChange === 'function'){
+                        if (typeof this.props.onTabChange === 'function') {
                             evt.preventDefault()
                             this.props.onTabChange(tabId, tabIndex)
                         }
@@ -66,21 +66,34 @@ export default class InfosHeader extends React.Component {
         const isPortal = __CLIENT__
         const Component = isPortal ? MainHeader : 'div'
 
+        const {
+            className,
+            title,
+            subtitle,
+            tabs,
+            children,
+            ...props
+        } = this.props
+
         return (
             <Component className={classNames([
-                this.props.className, {
-                    'is-portal': isPortal
+                className, {
+                    'is-portal': isPortal,
+                    'has-subtitle': subtitle
                 }
-            ])}>
+            ])} {...props}>
 
                 <div className="infos">
-                    {this.props.title && <Title tag="h1" className="title">{this.props.title}</Title>}
-                    {this.props.children}
+                    {title && <Title tag="h1" className="title">
+                        {subtitle && <span className="subtitle">{subtitle}</span>}
+                        {title}
+                    </Title>}
+                    {children}
                 </div>
 
-                {this.props.tabs && <div className="tabs">
+                {tabs && <div className="tabs">
                     <div className="wrapper">
-                        {this.props.tabs.map(this.renderTab.bind(this))}
+                        {tabs.map(this.renderTab.bind(this))}
                     </div>
                 </div>}
 

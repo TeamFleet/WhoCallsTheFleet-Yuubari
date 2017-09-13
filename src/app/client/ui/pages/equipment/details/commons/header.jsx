@@ -37,15 +37,15 @@ export default class EquipmentDetailsHeader extends React.Component {
             <Header
                 className={this.props.className}
                 title={this.props.equipment._name}
+                subtitle={this.props.equipment._type}
                 tabs={this.getTabs()}
                 urlBase={getLink('equipment', this.props.equipment.id)}
                 currentIndex={this.props.tabIndex}
                 onTabChange={this.onTabChange.bind(this)}
             >
-                {localeId !== 'ja' && <span className="name-ja">{this.props.equipment.getName(undefined, 'ja_jp')}</span>}
                 <span className="number">No.{this.props.equipment.id}</span>
                 {localeId === 'ja' && <br />}
-                {this.props.equipment._type}
+                {localeId !== 'ja' && <span className="name-ja">{this.props.equipment.getName(undefined, 'ja_jp')}</span>}
             </Header>
         )
     }

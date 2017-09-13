@@ -24,7 +24,8 @@ export default class ShipDetailsHeader extends React.Component {
 
     getShipType() {
         if (this.props.ship.type && this.props.ship.type_display && this.props.ship.type !== this.props.ship.type_display)
-            return db.shipTypes[this.props.ship.type_display]._name + ' (' + this.props.ship._type + ')'
+            // return db.shipTypes[this.props.ship.type_display]._name + ' (' + this.props.ship._type + ')'
+            return db.shipTypes[this.props.ship.type_display]._name
         if (this.props.ship.type)
             return this.props.ship._type
         return ''
@@ -44,19 +45,20 @@ export default class ShipDetailsHeader extends React.Component {
             <Header
                 className={this.props.className}
                 title={this.props.ship._name}
+                subtitle={this.getShipType()}
                 tabs={this.getTabs()}
                 urlBase={getLink('ship', this.props.ship.id)}
                 currentIndex={this.props.tabIndex}
                 onTabChange={this.onTabChange.bind(this)}
             >
-                {localeId !== 'ja' && <span className="shipname-ja">{this.props.ship.getName(undefined, 'ja_jp')}</span>}
                 <span className="shipclassnumber">No.{this.props.ship.getNo()}</span>
                 {localeId === 'ja' && <br />}
                 {this.props.ship.class_no
                     ? translate("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
                     : translate("shipclass", { class: this.props.ship._class })
                 }
-                {this.props.ship.class && this.props.ship.type && ` / ${this.getShipType()}`}
+                {localeId !== 'ja' && <span className="shipname-ja">{this.props.ship.getName(undefined, 'ja_jp')}</span>}
+                {/* this.props.ship.class && this.props.ship.type && ` / ${this.getShipType()}` */}
             </Header>
         )
     }

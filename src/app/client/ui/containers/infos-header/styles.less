@@ -1,18 +1,26 @@
 @import "../../base.less";
 
 .component{
+    @line-height-subtitle:  16px;
+    @offset-subtitle:       0;
+    @offset-title-height:   6px;
+    @offset-title-height-2: 4px;
+
     .infos{
-        overflow:   hidden;
-        margin:     0 0 @infos-title-margin-bottom 0;
-        // color:      @color-fade;
-        color:      @color-base-dimmed;
+        // overflow:   hidden;
+        margin:     0 0 (@infos-title-margin-bottom - @offset-title-height) 0;
+        color:      @color-fade;
+        // color:      @color-base-dimmed;
         font-size:  14px;
-        line-height:(@infos-title-height / 2);
+        line-height:((@infos-title-height + @offset-title-height) / 2);
+        // padding-top:(@offset-title-height / 2);
+        // padding-bottom:(@offset-title-height / 2);
+        position:   relative;
         .screen-tablet({
             display:    none;
         });
         @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
-            margin-bottom:  (@infos-title-margin-bottom - 10);
+            margin-bottom:  (@infos-title-margin-bottom - 10 - @offset-title-height + @offset-title-height-2);
         }
     }
         .title{
@@ -21,13 +29,39 @@
 
             color:      #fff;
 
-            font-size:  30px;
+            font-size:  26px;
             font-weight:400;
-            line-height:@infos-title-height;
+            line-height:(@infos-title-height + @offset-title-height);
+            height:     (@infos-title-height + @offset-title-height);
+            overflow:   hidden;
 
             padding:        0 20px 0 0;
+            // margin:         (0 - @offset-title-height / 2) 20px 0 0;
             margin:         0 20px 0 0;
             border-right:   1px solid @color-border;
+        }
+        .subtitle{
+            // position:   absolute;
+            display:    block;
+            // left:       0;
+            // top:        (2px - @offset-subtitle);
+            margin-top: 2px;
+            margin-bottom: 4px;
+            // margin-bottom: (@line-height-subtitle - @offset-subtitle + 2 - 12);
+            // color:      #fff;
+            font-size:  12px;
+            line-height:1em;
+            @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
+                margin-top: 0;
+                margin-bottom: 4px;
+            }
+        }
+        &.has-subtitle{
+            .title{
+                line-height:(@infos-title-height + @offset-title-height - @line-height-subtitle + @offset-subtitle - 2);
+                // padding-top:(@line-height-subtitle - @offset-subtitle + 2);
+                font-size:  26px;
+            }
         }
     
     .tabs{
@@ -38,8 +72,8 @@
         overflow:   hidden;
         .main-sizing-position-reset-margin();
         @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
-            line-height:(@infos-tab-height - 8);
-            height:     (@infos-tab-height - 8);
+            line-height:(@infos-tab-height - 8 - @offset-title-height-2);
+            height:     (@infos-tab-height - 8 - @offset-title-height-2);
         }
         & > .wrapper{
             height:     (@infos-tab-height + 20);
@@ -71,7 +105,7 @@
                 margin-right:   0;
             }
             @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
-                height:     (@infos-tab-height - 1 - 8);
+                height:     (@infos-tab-height - 1 - 8- @offset-title-height-2);
             }
         }
 
