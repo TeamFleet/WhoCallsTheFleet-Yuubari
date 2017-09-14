@@ -1,5 +1,32 @@
-@import "../../_.less";
+@import "./_.less";
 
 .component{
-    
+    @height:        26px;
+    @line-height:   18px;
+
+    display:    inline-block;
+
+    padding:    ((@height - 2 - @line-height) / 2) .75em;
+    // border-radius: (@height / 2);
+    line-height:@line-height;
+    text-align: center;
+
+    color:      @color-badge-off;
+    background: @color-badge-off-background;
+    border:     1px solid @color-badge-off-border;
+
+    small{
+        display:    inline-block;
+        vertical-align: middle;
+        // margin-left:    .5em;
+        line-height:    1em;
+        position:   relative;
+        top:        -1px;
+    }
+
+    &.on{
+        color:      @color-badge-on;
+        background-color:   @color-badge-on-border;
+        border-color:       @color-badge-on-border;
+    }
 }

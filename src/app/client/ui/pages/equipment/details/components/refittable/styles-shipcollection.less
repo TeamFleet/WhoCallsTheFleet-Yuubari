@@ -1,0 +1,18 @@
+@import "./_.less";
+
+.component{
+    .types{
+        margin-bottom:  (0 - @shiptypebadge-gutter);
+        margin-right:   (0 - @shiptypebadge-gutter);
+        display:    flex;
+        flex-flow:  row wrap;
+        align-items:baseline;
+        .item{
+            flex:   1 0 (@ship-link-width + 20);
+            margin: 0 @shiptypebadge-gutter @shiptypebadge-gutter 0;
+            &.placeholder{
+                margin-bottom:  0;
+            }
+        }
+    }
+}
