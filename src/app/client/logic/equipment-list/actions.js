@@ -26,10 +26,10 @@ export const changeCollection = (id, collection) => ({
     collection
 })
 
-export const highlightColumn = (id, column) => ({
+export const highlightColumn = (id, index, stat) => ({
     type: EQUIPMENTLIST_HIGHLIGHT_COLUMN,
     id,
-    column
+    index, stat
 })
 
 export const scroll = (id, scrollLeft) => ({

@@ -5,49 +5,34 @@
 const fs = require('fs-extra')
 const path = require('path')
 const glob = require('glob')
-const ora = require('ora')
 // const asar = require('asar')
 const npmRunScript = require('npm-run-script')
 
-const times = require('../src/app/utils/times')
+const spinner = require('./build-app/spinner')
 
 const packager = require('electron-packager')
-const convertToWindowsStore = require('electron-windows-store')
+// const elevate = require('node-windows').elevate
 
 // --------------------------------------------------
 
-const os = require('os')
-const platform = os.platform()
-const isWindows = /^win/.test(platform)
-const isMac = /^darwin/.test(platform)
+const {
+    packageName,
+    isWindows, isMac,
+    packageJSON,
+    channel,
+    symbols
+} = require('./build-app/variables')
 
 // --------------------------------------------------
 
-const packageName = 'WhoCallsTheFleet'
-const symbols = {
-    complete: '√'
-}
-
-const spinner = (options = {}) => {
-    const waiting = ora(
-        Object.assign(
-            {
-                spinner: 'dots',
-                color: 'cyan'
-            },
-            typeof options === 'string' ? {
-                text: options
-            } : options
-        )
-    ).start()
-    waiting.finish = (options = {}) => {
-        waiting.color = 'green'
-        waiting.stopAndPersist(Object.assign({
-            symbol: symbols.complete
-        }, options))
-    }
-    return waiting
-}
+const {
+    pathRoot,
+    pathPics,
+    pathPackage,
+    pathPackageJSON,
+    pathPackageAssets,
+    pathPackageOut
+} = require('./build-app/dir')
 
 // --------------------------------------------------
 
@@ -56,18 +41,6 @@ const run = async (src) => {
     console.log('Building app...')
 
     let waiting
-    // const dirPackage = 'app-electron'
-
-    const pathRoot = path.resolve(__dirname, '../')
-    // const pathApp = path.resolve(pathRoot, './dist-app')
-    const pathPics = path.resolve(pathRoot, './dist-web/public/app/_pics')
-    // const pathPackage = path.resolve(pathRoot, `../${dirPackage}/src`)
-    const pathPackage = path.resolve(pathRoot, `./dist-app-package/src`)
-    const pathPackageJSON = path.resolve(pathPackage, 'package.json')
-    const pathPackageAssets = path.resolve(pathPackage, 'assets')
-    const pathPackageOut = path.resolve(pathPackage, `../out`)
-
-    const packageJSON = fs.readJSONSync(path.resolve(pathRoot, 'package.json'))
 
     // const dest = path.resolve(pathRoot, 'app.asar')
 
@@ -76,6 +49,8 @@ const run = async (src) => {
     if (!src) src = pathPackage
     src = path.resolve(src)
     console.log(`${symbols.complete} Target directory: ${src}`)
+
+    // --------------------------------------------------
 
     // make sure and empty package directory
     waiting = spinner(`Making sure that target directory empty`)
@@ -254,63 +229,9 @@ const run = async (src) => {
     // })
 
     // windows store
-    if (isWindows) {
-        waiting = spinner(`Making APPX for UWP`)
-        const sign = require('electron-windows-store/lib/sign')
-        const publisher = 'CN=43EB8253-2612-4378-9B96-6A35957E0E07'
-        const publisherId = publisher.split('=')[1]
-        const windowsKit = 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64'
-        // get sign file
-        const certFilePath = path.join(process.env.APPDATA, 'electron-windows-store', publisherId)
-        let devCert = path.resolve(certFilePath, `${publisherId}.pfx`)
-        if (!fs.existsSync(devCert)) {
-            await sign.makeCert({
-                publisherName: publisher,
-                certFilePath,
-                program: {
-                    windowsKit
-                }
-            })
-                .then(pfxFile => {
-                    devCert = pfxFile
-                })
-        }
-        await convertToWindowsStore({
-            // containerVirtualization: false,
-            inputDirectory: path.resolve(pathPackageOut, `${packageName}-win32-x64`),
-            outputDirectory: path.resolve(pathPackageOut, `${packageName}-appx`),
-            flatten: true,
+    if (isWindows) await require('./build-app/build-uwp')
 
-            packageVersion: (() => {
-                const split = packageJSON.version.split('.')
-                if (split.length < 4)
-                    times(4 - split.length)(() => {
-                        split.push('0')
-                    })
-                return split.join('.')
-            })(),
-            packageName: `${packageName}`,
-            packageDisplayName: packageName,
-            packageDescription: packageJSON.description,
-            packageExecutable: `app/${packageName}.exe`,
-
-            // assets: 'C:\\assets\\',
-            // manifest: 'C:\\AppXManifest.xml',
-            // deploy: false,
-
-            publisher,
-            windowsKit,
-            devCert,
-            // desktopConverter: 'C:\\desktop-converter-tools',
-            // expandedBaseImage: 'C:\\base-image.wim',
-            // makeappxParams: ['/l'],
-            // signtoolParams: ['/p'],
-            // makePri: true,
-            // createConfigParams: ['/a'],
-            // createPriParams: ['/b'],
-        })
-        waiting.finish()
-    }
+    // --------------------------------------------------
 
     console.log(`${symbols.complete} Making distribution packages!`)
     console.log('')

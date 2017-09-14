@@ -11,7 +11,8 @@ import {
 const initialState = {}
 const initialStateSingle = {
     collection: 0,
-    // column: undefined
+    // highlightingIndex: undefined,
+    // highlightingStat: undefined,
 }
 
 const updateState = (fullState, id, state) =>
@@ -51,7 +52,8 @@ export default function (state = initialState, action) {
 
         case EQUIPMENTLIST_HIGHLIGHT_COLUMN: {
             return updateState(state, action.id, {
-                column: action.column
+                highlightingIndex: action.index,
+                highlightingStat: action.stat
             })
         }
 

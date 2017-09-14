@@ -68,6 +68,16 @@ export default class DataTable extends React.Component {
     }
 
     render() {
+        // const {
+        //     tag,
+        //     className,
+        //     headers,
+        //     data,
+        //     scrollLeft,
+        //     children,
+        //     ...props
+        // } = this.props
+
         const TagName = this.props.tag || 'table'
 
         return (

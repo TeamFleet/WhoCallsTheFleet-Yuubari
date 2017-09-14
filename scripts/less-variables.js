@@ -30,6 +30,17 @@ const run = async () => {
         )
     }
 
+    // equipment list stat columns count
+    {
+        const stats = require(
+            path.resolve(process.cwd(), 'src/app/data/', 'equipment-stats')
+        )
+        content = content.replace(
+            /@equipment-list-stat-count:([ \t]*)([0-9]+);/g,
+            `@equipment-list-stat-count:$1${parseInt(stats.length + 2)};`
+        )
+    }
+
     await new Promise((resolve, reject) => {
         fs.writeFile(
             pathfile,
