@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 
@@ -7,8 +8,7 @@ const {
     equipmentTypes,
     shipCollections,
     shipTypes,
-    ships,
-    shipsSpecial
+    ships
 } = db
 
 import translate from 'sp-i18n'
@@ -71,17 +71,16 @@ class ShipCollection extends React.Component {
             ...props
         } = this.props
 
+        const cachedTypes = []
+        // const cachedShips = []
+
         const extraShips = []
-        const cached = []
         const types = data.list.map(thisType => {
             const id = thisType.type
             if (!id) return
-            if (cached.includes(id)) return
-            cached.push[id]
+            if (cachedTypes.includes(id)) return
+            cachedTypes.push(id)
 
-            // extraShips = thisType.ships.filter(ship => (
-            //     availableExtraShips.includes(ship.id)
-            // ))
             thisType.ships.forEach(series => {
                 series.forEach(ship => {
                     if (availableExtraShips.includes(ship.id))
@@ -94,14 +93,52 @@ class ShipCollection extends React.Component {
                 code: shipTypes[id].code,
                 on: availableShipTypes.includes(id)
             }
-        })
+        }).filter(obj => obj)
 
         return (
             <div className={className} {...props}>
                 <h2>{data.name}</h2>
-                <p>{JSON.stringify(types)}</p>
-                <p>{extraShips.map(ship => ship._name).join(' / ')}</p>
+                <div className="types">
+                    {types.map((obj, index) => (
+                        <ShipTypeTag
+                            name={obj.name}
+                            code={obj.code}
+                            on={obj.on}
+                            key={index}
+                        />
+                    ))}
+                </div>
+                {!!(extraShips.length) && <div className="extra-ships">
+                    {extraShips.map((ship, index) => (
+                        <ShipExtra ship={ship} key={index} />
+                    ))}
+                </div>}
             </div>
+        )
+    }
+}
+
+@ImportStyle(require('./styles-shiptypetag.less'))
+class ShipTypeTag extends React.Component {
+    render() {
+        return (
+            <span className={classNames({
+                [this.props.className]: true,
+                'on': this.props.on
+            })}>
+                {this.props.name}
+                <small className="code">[{this.props.code}]</small>
+            </span>
+        )
+    }
+}
+
+class ShipExtra extends React.Component {
+    render() {
+        return (
+            <span>
+                {this.props.ship._name}
+            </span>
         )
     }
 }
