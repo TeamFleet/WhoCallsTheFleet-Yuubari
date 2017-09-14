@@ -29,7 +29,7 @@ export default class EquipmentDetailsComponentRefittable extends React.Component
             equipable_extra_ship: availableExtraShips = [],
         } = type
 
-        if (__DEV__) {
+        if (__DEV__ && __CLIENT__) {
             console.table({
                 typeName,
                 // type,
