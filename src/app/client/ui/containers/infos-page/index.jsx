@@ -14,7 +14,7 @@ export default class InfosPageContainer extends React.Component {
             children,
             ...props
         } = this.props
-        console.log(this.props)
+        
         return (
             <PageContainer className={classNames({
                 [className]: true,
