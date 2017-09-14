@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import classNames from 'classnames'
 
@@ -79,7 +79,9 @@ export default class InfosHeader extends React.Component {
             <Component className={classNames([
                 className, {
                     'is-portal': isPortal,
-                    'has-subtitle': subtitle
+                    'has-subtitle': !!(subtitle),
+                    'has-tabs': !!(tabs),
+                    'has-only-title': !(children)
                 }
             ])} {...props}>
 
@@ -96,6 +98,8 @@ export default class InfosHeader extends React.Component {
                         {tabs.map(this.renderTab.bind(this))}
                     </div>
                 </div>}
+
+                {!tabs && <div className="tabs-placeholder" />}
 
             </Component>
         )

@@ -9,12 +9,14 @@
     .infos{
         // overflow:   hidden;
         margin:     0 0 (@infos-title-margin-bottom - @offset-title-height) 0;
+        // margin:     0 0 @main-margin-top 0;
         color:      @color-fade;
         // color:      @color-base-dimmed;
         font-size:  14px;
         line-height:((@infos-title-height + @offset-title-height) / 2);
         // padding-top:(@offset-title-height / 2);
         // padding-bottom:(@offset-title-height / 2);
+        min-height: (@infos-title-height + @offset-title-height);
         position:   relative;
         .screen-tablet({
             display:    none;
@@ -63,6 +65,9 @@
                 font-size:  26px;
             }
         }
+        &.has-only-title .title{
+            border-right:   0;
+        }
     
     .tabs{
         clear:      both;
@@ -70,10 +75,12 @@
         height:     @infos-tab-height;
         font-size:  16px;
         overflow:   hidden;
+        // margin-top: (0 - @main-margin-top + (@infos-title-margin-bottom - @offset-title-height));
         .main-sizing-position-reset-margin();
         @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max){
             line-height:(@infos-tab-height - 8 - @offset-title-height-2);
             height:     (@infos-tab-height - 8 - @offset-title-height-2);
+            // margin-top: (0 - @main-margin-top + (@infos-title-margin-bottom - 10 - @offset-title-height + @offset-title-height-2));
         }
         & > .wrapper{
             height:     (@infos-tab-height + 20);
@@ -109,6 +116,12 @@
             }
         }
 
+    .tabs-placeholder{
+        height:     @main-margin-top - (@infos-title-margin-bottom - @offset-title-height);
+        .screen-tablet({
+            display:    none;
+        });
+    }
 }
 
 .component.is-portal {

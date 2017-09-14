@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from '@appUtils/html-head.js'
+import Header from './details/commons/header.jsx'
+import InfosPageContainer from '@appUI/containers/infos-page'
+import ComponentContainer from '@appUI/containers/infos-component'
 import db from '@appLogic/database'
 
 import { ImportStyle } from 'sp-css-import'
@@ -31,12 +34,17 @@ export default class extends React.Component {
     render() {
         if (__CLIENT__ && __DEV__) console.log('thisEntity', this.data)
         return (
-            <PageContainer
+            <InfosPageContainer
                 className={this.props.className}
+                has-tabs={false}
             >
-                <h2>{this.data._name}</h2>
-                <p><i>{translate('under_construction')}...</i></p>
-            </PageContainer>
+                <Header
+                    entity={this.data}
+                />
+                <ComponentContainer>
+                    <p><i>{translate('under_construction')}...</i></p>
+                </ComponentContainer>
+            </InfosPageContainer>
         )
     }
 }
