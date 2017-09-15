@@ -82,6 +82,7 @@ export const init = () => {
         })
         db.shipCollections = shipCollections
 
+        // equipment collections
         let equipmentTypeIndex = 0
         let equipmentIndex = 0
         equipmentCollections.forEach(collection => {
@@ -99,6 +100,19 @@ export const init = () => {
             })
         })
         db.equipmentCollections = equipmentCollections
+
+        // equipment types
+        db.equipmentTypesExclude = []
+        const cache = []
+        for (let id in db.equipmentTypes) {
+            const type = db.equipmentTypes[id]
+            if (type.id === 59) continue
+            if (cache.includes(type.id_ingame)) {
+                db.equipmentTypesExclude.push(type.id)
+            } else {
+                cache.push(type.id_ingame)
+            }
+        }
 
         if (__CLIENT__ && __DEV__) console.log('database init', db)
 

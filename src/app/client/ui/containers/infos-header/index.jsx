@@ -73,7 +73,13 @@ export default class InfosHeader extends React.Component {
             tabs,
             children,
             ...props
-        } = this.props
+        } = this.props;
+
+        [
+            'urlBase',
+            'currentIndex',
+            'onTabChange'
+        ].forEach(key => delete props[key])
 
         return (
             <Component className={classNames([

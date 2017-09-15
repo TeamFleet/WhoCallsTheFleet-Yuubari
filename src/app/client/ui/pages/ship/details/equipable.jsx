@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import ComponentContainer from '@appUI/containers/infos-component'
 import IconEquipment from '@appUI/components/icon-equipment'
 import Link from '@appUI/components/link'
+import LinkMini from '@appUI/components/link-mini'
 
 import getPic from '@appUtils/get-pic'
 import getLink from '@appUtils/get-link'
@@ -13,18 +14,19 @@ import db from '@appLogic/database'
 import { ImportStyle } from 'sp-css-import'
 import styles from './equipable.less'
 
-const equipmentTypeIdExclude = [
-    2,  // 小口径高角主炮
-    3,  // 小口径高角主炮 (AAFD)
-    8,  // 高角副炮
-    9,  // 高角副炮 (AAFD)
-    16, // 夜侦
-    56, // 喷气机
-    53, // 陆攻
-    54, // 局战
-    59, // 陆战
-    30, // 机枪 (CD)
-]
+const { equipmentTypesExclude } = db
+// const equipmentTypeIdExclude = [
+//     2,  // 小口径高角主炮
+//     3,  // 小口径高角主炮 (AAFD)
+//     8,  // 高角副炮
+//     9,  // 高角副炮 (AAFD)
+//     16, // 夜侦
+//     56, // 喷气机
+//     53, // 陆攻
+//     54, // 局战
+//     59, // 陆战
+//     30, // 机枪 (CD)
+// ]
 
 // @connect()
 @ImportStyle(styles)
@@ -44,7 +46,7 @@ export default class ShipDetailsContentEquipable extends React.Component {
                 title={collection.name}
             >
                 {collection.list
-                    .filter(list => !equipmentTypeIdExclude.includes(list.type))
+                    .filter(list => !equipmentTypesExclude.includes(list.type))
                     .map((list, listIndex) => (
                         <ShipDetailsContentEquipableItem
                             className="item"
@@ -64,7 +66,7 @@ export default class ShipDetailsContentEquipable extends React.Component {
                 title={translate("ship_details.equipable_exslot")}
             >
                 {this.props.ship.getExSlotEquipmentTypes()
-                    .filter(typeID => !equipmentTypeIdExclude.includes(typeID) && this.props.ship.canEquip(typeID))
+                    .filter(typeID => !equipmentTypesExclude.includes(typeID) && this.props.ship.canEquip(typeID))
                     .sort((a, b) => db.equipmentTypes[a].order - db.equipmentTypes[b].order)
                     .map((typeID, index) => (
                         <ShipDetailsContentEquipableItem
@@ -170,25 +172,20 @@ class ShipDetailsContentEquipableItem extends React.Component {
                 {specialList.length > 0 &&
                     specialList.map((shipId, index) => (
                         <span className="block" key={index}>
-                            <Link className="other on ship" to={getLink('ship', shipId)}>
-                                <span className="avatar" style={{
-                                    backgroundImage: `url(${getPic('ship', shipId, '0-2')})`
-                                }} />
-                                {db.ships[shipId]._name}
-                            </Link>
+                            <LinkMini className="other on ship" ship={shipId} />
                         </span>
                     ))
                 }
                 {canEquip !== canEquipShipType &&
                     <span className="block">
-                        <span className={classNames(['other', {
+                        <LinkMini className={classNames(['other', {
                             'on': canEquipShipType,
                             'off': !canEquipShipType
                         }])}>
                             {translate("other_ships_of_type", {
                                 type: db.shipTypes[this.props.ship.type_display]._name
                             })}
-                        </span>
+                        </LinkMini>
                     </span>
                 }
             </IconEquipment>

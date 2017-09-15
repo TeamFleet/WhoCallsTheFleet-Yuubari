@@ -40,6 +40,7 @@
     "shipclass_number": "${class}型 ${number} 番艦",
     "other_ships_of_type": "Other ${type}s",
     "shipname_dash_none": "",
+    "exslot": "補強増設スロットへ",
 
     "stat": {
         "fire": "火力",
@@ -227,6 +228,12 @@
         "upgrade_from": "Can be upgraded from...",
 
         "stocked": "初期装備の艦娘...",
-        "stocked_list_empty": "There's no ship that stock-equip this equipment..."
+        "stocked_list_empty": "There's no ship that stock-equip this equipment...",
+
+        "refittable_legend_no": "Not refittable",
+        "refittable_legend_yes": "Refittable",
+        "can_equip_in_ex_slot": "Can be equipped in ex-slot",
+        "cannot_equip_in_ex_slot_but_ex_ships": "Cannot be equipped in ex-slot for most ships but following ships...",
+        "cannot_equip_in_ex_slot": "Cannot be equipped in ex-slot"
     }
 }

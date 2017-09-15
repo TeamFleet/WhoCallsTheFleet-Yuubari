@@ -1,0 +1,64 @@
+@import "../../base.less";
+
+.component{
+    @height:    20px;
+    .style-badge-mono();
+
+    display:    inline-block;
+    line-height:@height;
+    font-size:  14px;
+    border-radius: ((@height + 2) / 2);
+    padding:    0 8px;
+    position:   relative;
+
+    // color:              @color-badge-off;
+    // border-color:       @color-badge-off-border;
+    // background-color:   @color-badge-off-background;
+
+    .avatar{
+        display:    block;
+        float:      left;
+        height:     (@height + 2);
+        overflow:   hidden;
+        border-radius: ((@height + 2) / 2);
+        background-size: cover;
+        z-index:    -1;
+        width:      (@height + 10 + 2);
+        margin:     -1px 5px -1px -9px;
+        background-position: 60% 0%;
+        // width:      (@height + 10 + 8);
+        // margin:     -1px 5px -1px -9px;
+        // background-position: 70% 0%;
+        // width:      55px;
+        // margin:     -1px -12px -1px -9px;
+        // background-position: 100% 0%;
+    }
+}
+
+a.component,
+.component.link{
+    color: 	        @color-alt;
+    border-color:   @color-border;
+    &:hover{
+        color: 	@color-accent;
+    }
+    &:active{
+        color:  fade(#fff, 50%);
+    }
+}
+
+// a.component,
+// .component.link{
+//     color:              @color-badge-on;
+//     border-color:       @color-badge-on-border;
+//     background-color:   @color-badge-on-border;
+//     .is-hover({
+//         color:              #fff;
+//         border-color:       @theme-green-500;
+//         background-color:   @theme-green-500;
+//     }; {
+//         color:              @color-badge-on;
+//         border-color:       @color-badge-on-border;
+//         background-color:   @theme-green-900;
+//     });
+// }

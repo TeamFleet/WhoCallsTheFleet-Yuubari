@@ -39,6 +39,7 @@
     "shipclass_number": "${class} Class (#${number})",
     "other_ships_of_type": "Other ${type}s",
     "shipname_dash_none": " ",
+    "exslot": "Expansion Slot",
 
     "stat": {
         "fire": "FP",
@@ -226,6 +227,12 @@
         "upgrade_from": "Can be upgraded from...",
 
         "stocked": "Stock-equipped on...",
-        "stocked_list_empty": "There's no ship that stock-equip this equipment..."
+        "stocked_list_empty": "There's no ship that stock-equip this equipment...",
+
+        "refittable_legend_no": "Not refittable",
+        "refittable_legend_yes": "Refittable",
+        "can_equip_in_ex_slot": "Can be equipped in ex-slot",
+        "cannot_equip_in_ex_slot_but_ex_ships": "Cannot be equipped in ex-slot for most ships but following ships...",
+        "cannot_equip_in_ex_slot": "Cannot be equipped in ex-slot"
     }
 }

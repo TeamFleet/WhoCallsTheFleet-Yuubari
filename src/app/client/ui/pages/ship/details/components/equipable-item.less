@@ -55,15 +55,7 @@
         }
 
     .other{
-        @height:    20px;
-        .style-badge-mono();
-        display:    inline-block;
-        line-height:@height;
-        font-size:  14px;
-        border-radius: ((@height + 2) / 2);
-        padding:    0 8px;
         margin-bottom:  2px;
-        position:   relative;
         &:before, &:after{
             content:    "";
             position:   absolute;
@@ -80,24 +72,6 @@
             left:       -10px;
             margin-top: -1px;
             border-top: 2px solid @color-border;
-        }
-        .avatar{
-            display:    block;
-            float:      left;
-            height:     (@height + 2);
-            overflow:   hidden;
-            border-radius: ((@height + 2) / 2);
-            background-size: cover;
-            z-index:    -1;
-            width:      (@height + 10 + 2);
-            margin:     -1px 5px -1px -9px;
-            background-position: 60% 0%;
-            // width:      (@height + 10 + 8);
-            // margin:     -1px 5px -1px -9px;
-            // background-position: 70% 0%;
-            // width:      55px;
-            // margin:     -1px -12px -1px -9px;
-            // background-position: 100% 0%;
         }
         &.on{
             color:              @color-on;

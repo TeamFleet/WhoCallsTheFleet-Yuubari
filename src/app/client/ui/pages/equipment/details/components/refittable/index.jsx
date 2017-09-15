@@ -2,15 +2,17 @@ import React from 'react'
 import classNames from 'classnames'
 
 import ComponentContainer from '@appUI/containers/infos-component'
-import ListShips from '@appUI/components/list/ships'
-import times from '@appUtils/times'
+import Bullet from '@appUI/components/bullet'
+// import ListShips from '@appUI/components/list/ships'
+import LinkMini from '@appUI/components/link-mini'
+// import times from '@appUtils/times'
 
 import { db } from 'kckit'
 const {
     equipmentTypes,
     shipCollections,
     shipTypes,
-    ships
+    // ships
 } = db
 
 import translate from 'sp-i18n'
@@ -44,6 +46,8 @@ export default class EquipmentDetailsComponentRefittable extends React.Component
 
         return (
             <ComponentContainer className={this.props.className}>
+                <Legends />
+
                 {shipCollections.map((shipCollection, index) => (
                     <ShipCollection
                         data={shipCollection}
@@ -53,12 +57,29 @@ export default class EquipmentDetailsComponentRefittable extends React.Component
                     />
                 ))}
 
-                <h2>ExSlot</h2>
-                <p>{translate('under_construction')}</p>
-
-                <h2>ExSlot SHIPS</h2>
-                <p>{translate('under_construction')}</p>
+                <ExSlot
+                    isEquipableExSlot={this.props.equipment.isEquipableExSlot()}
+                    listExSlotShips={this.props.equipment.exslot_on_ship}
+                />
             </ComponentContainer>
+        )
+    }
+}
+
+@ImportStyle(require('./styles-shipcollection.less'))
+class Legends extends React.Component {
+    render() {
+        return (
+            <div className={this.props.className + ' legends'}>
+                <div className="list types">
+                    <LinkMini className="item off">
+                        {translate("equipment_details.refittable_legend_no")}
+                    </LinkMini>
+                    <LinkMini className="item on">
+                        {translate("equipment_details.refittable_legend_yes")}
+                    </LinkMini>
+                </div>
+            </div>
         )
     }
 }
@@ -111,10 +132,10 @@ class ShipCollection extends React.Component {
             return true
         })
 
-        const placeholders = []
-        times(10)(index => placeholders.push(
-            <span className="item placeholder" key={index}></span>
-        ))
+        // const placeholders = []
+        // times(10)(index => placeholders.push(
+        //     <span className="item placeholder" key={index}></span>
+        // ))
 
         return (
             <ComponentContainer
@@ -122,7 +143,7 @@ class ShipCollection extends React.Component {
                 title={data.name}
                 {...props}
             >
-                <div className="types">
+                <div className="list types">
                     {types.map((obj, index) => (
                         <ShipTypeTag
                             name={obj.name}
@@ -131,14 +152,14 @@ class ShipCollection extends React.Component {
                             key={index}
                         />
                     ))}
-                    {placeholders}
                 </div>
-                {!!(extraShips.length) &&
-                    <ListShips
-                        list={extraShips}
-                        navy={true}
-                    />
-                }
+                {!!(extraShips.length) && (
+                    <div className="list ships">
+                        {extraShips.map(ship => (
+                            <LinkMini className="item ship" ship={ship} key={ship.id} />
+                        ))}
+                    </div>
+                )}
             </ComponentContainer>
         )
     }
@@ -148,13 +169,71 @@ class ShipCollection extends React.Component {
 class ShipTypeTag extends React.Component {
     render() {
         return (
-            <span className={classNames({
+            <LinkMini className={classNames({
                 [this.props.className]: true,
                 'item': true,
-                'on': this.props.on
+                'on': !!(this.props.on),
+                'off': !this.props.on
             })}>
                 {this.props.name} <small className="code">[{this.props.code}]</small>
-            </span>
+            </LinkMini>
+        )
+        // return (
+        //     <span className={classNames({
+        //         [this.props.className]: true,
+        //         'item': true,
+        //         'on': this.props.on
+        //     })}>
+        //         {this.props.name} <small className="code">[{this.props.code}]</small>
+        //     </span>
+        // )
+    }
+}
+
+@ImportStyle(require('./styles-shipcollection.less'))
+class ExSlot extends React.Component {
+    render() {
+        const {
+            className,
+            isEquipableExSlot,
+            listExSlotShips,
+            ...props
+        } = this.props
+
+        const list = listExSlotShips || []
+
+        return (
+            <ComponentContainer
+                className={className + ' exslot'}
+                title={translate('exslot')}
+                {...props}
+            >
+                {!!(isEquipableExSlot) && <Bullet
+                    className="bullet"
+                    title={translate(`equipment_details.can_equip_in_ex_slot`)}
+                    level={2}
+                />}
+
+                {!(isEquipableExSlot) && !!(list.length) && <Bullet
+                    className="bullet"
+                    title={translate(`equipment_details.cannot_equip_in_ex_slot_but_ex_ships`)}
+                    level={1}
+                />}
+
+                {!(isEquipableExSlot) && !(list.length) && <Bullet
+                    className="bullet"
+                    title={translate(`equipment_details.cannot_equip_in_ex_slot`)}
+                    level={0}
+                />}
+
+                {!!(list.length) && (
+                    <div className="list ships">
+                        {list.map(shipId => (
+                            <LinkMini className="item" ship={shipId} key={shipId} />
+                        ))}
+                    </div>
+                )}
+            </ComponentContainer>
         )
     }
 }

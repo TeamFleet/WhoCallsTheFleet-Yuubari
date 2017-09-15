@@ -131,9 +131,14 @@ a{
 
 a, .link{
 	color: 		@color-accent;
-	&:hover{
+	.is-hover({
 		color: 	#fff;
-	}
+	}; {
+		color:  fade(#fff, 50%);
+	});
+	// &:hover{
+	// 	color: 	#fff;
+	// }
 	&:active{
 		color:  fade(#fff, 50%);
 	}
@@ -144,9 +149,14 @@ a, .link{
 	&.color-base{
 		// color: 	@color-base;
 		color: 	@color-base-dimmed;
-		&:hover{
+		.is-hover({
 			color: 	#fff;
-		}
+		}; {
+			color:  fade(#fff, 50%);
+		});
+		// &:hover{
+		// 	color: 	#fff;
+		// }
 		&:active{
 			color:  fade(#fff, 50%);
 		}
@@ -154,9 +164,14 @@ a, .link{
 
 	&.color-alt{
 		color: 	@color-alt;
-		&:hover{
+		.is-hover({
 			color: 	@color-accent;
-		}
+		}; {
+			color:  fade(#fff, 50%);
+		});
+		// &:hover{
+		// 	color: 	@color-accent;
+		// }
 		&:active{
 			color:  fade(#fff, 50%);
 		}

@@ -39,6 +39,7 @@
     "shipclass_number": "${class}级 ${number} 号舰",
     "other_ships_of_type": "其他${type}",
     "shipname_dash_none": "",
+    "exslot": "补强增设栏位",
 
     "stat": {
         "fire": "火力",
@@ -226,6 +227,12 @@
         "upgrade_from": "可由以下装备升级获得",
         
         "stocked": "初始装备于以下舰娘",
-        "stocked_list_empty": "暂无初始配置该装备的舰娘..."
+        "stocked_list_empty": "暂无初始配置该装备的舰娘...",
+
+        "refittable_legend_no": "不可装备",
+        "refittable_legend_yes": "可装备",
+        "can_equip_in_ex_slot": "可装备于补强增设栏位",
+        "cannot_equip_in_ex_slot_but_ex_ships": "不可装备于大多数舰娘的补强增设栏位，但以下舰娘例外……",
+        "cannot_equip_in_ex_slot": "不可装备于补强增设栏位"
     }
 }
