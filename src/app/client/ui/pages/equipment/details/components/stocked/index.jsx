@@ -17,6 +17,7 @@ export default class EquipmentDetailsComponentStocked extends React.Component {
                 <ListShips
                     list={this.props.equipment.default_equipped_on || []}
                     empty={translate("equipment_details.stocked_list_empty")}
+                    sort={true}
 
                     navy={true}
                 />
