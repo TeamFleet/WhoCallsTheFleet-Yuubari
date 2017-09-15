@@ -45,8 +45,24 @@ const run = async () => {
     const publisherId = publisher.split('=')[1]
     const windowsKit = 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64'
     const certFilePath = path.join(process.env.APPDATA, 'electron-windows-store', publisherId)
+
+    // determine build number & version
     const build = await fs.readFile(fileBuild, 'utf-8')
     const buildNumber = parseInt(build) + 1
+    const version = (() => {
+        const split = packageJSON.version.split('.')
+        if (split.length < 4)
+            times(4 - split.length)(() => {
+                split.push(buildNumber)
+            })
+        return split.join('.')
+    })()
+    const fileManifest = path.normalize(path.join(pathRoot, `src/app/client/assets/uwp/${channel}/AppXManifest.xml`))
+    const content = await fs.readFile(fileManifest, 'utf-8')
+    await fs.writeFile(fileManifest,
+        content
+            .replace(/ Version="(.+?)"/, `Version="${version}"`)
+    )
 
     // console.log(build, buildNumber)
 
@@ -70,21 +86,14 @@ const run = async () => {
         outputDirectory: path.resolve(pathPackageOut, `${packageName}-appx`),
         flatten: true,
 
-        packageVersion: (() => {
-            const split = packageJSON.version.split('.')
-            if (split.length < 4)
-                times(4 - split.length)(() => {
-                    split.push(buildNumber)
-                })
-            return split.join('.')
-        })(),
+        packageVersion: version,
         packageName: `${packageName}`,
         packageDisplayName: packageName,
         packageDescription: packageJSON.description,
         packageExecutable: `app/${packageName}.exe`,
 
         assets: path.normalize(path.join(pathRoot, `src/app/client/assets/uwp/${channel}/assets`)),
-        manifest: path.normalize(path.join(pathRoot, `src/app/client/assets/uwp/${channel}/AppXManifest.xml`)),
+        manifest: fileManifest,
         // deploy: false,
 
         publisher,
