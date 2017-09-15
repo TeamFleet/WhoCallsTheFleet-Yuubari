@@ -7,6 +7,7 @@ const spinner = require('./spinner')
 const convertToWindowsStore = require('electron-windows-store')
 const isAdminUser = require('node-windows').isAdminUser
 const fileBuild = path.resolve(__dirname, './build-uwp.txt')
+const git = require("simple-git")
 
 // --------------------------------------------------
 
@@ -32,7 +33,7 @@ const {
 // --------------------------------------------------
 
 const run = async () => {
-    const waiting = spinner(`Making APPX for UWP`)
+    let waiting = spinner(`Making APPX for UWP`)
 
     if (!isWindows) {
         waiting.finish()
@@ -113,6 +114,15 @@ const run = async () => {
         buildNumber
     )
 
+    waiting.finish()
+
+    waiting = spinner(`Commiting change...`)
+    const repo = git(pathRoot)
+    repo.add('./*')
+    repo.commit("update build number - " + (new Date()))
+    await new Promise((resolve) => {
+        repo.pull([], () => resolve())
+    })
     waiting.finish()
 }
 
