@@ -7,6 +7,8 @@ import Bullet from '@appUI/components/bullet'
 import LinkMini from '@appUI/components/link-mini'
 // import times from '@appUtils/times'
 
+import sortShips from '@appUtils/sort-ships'
+
 import { db } from 'kckit'
 const {
     equipmentTypes,
@@ -200,7 +202,7 @@ class ExSlot extends React.Component {
             ...props
         } = this.props
 
-        const list = listExSlotShips || []
+        const list = sortShips(listExSlotShips || [])
 
         return (
             <ComponentContainer

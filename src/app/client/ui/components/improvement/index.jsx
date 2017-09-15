@@ -7,6 +7,7 @@ import LinkEquipment from '@appUI/components/link/equipment'
 import getDateTimezone from '@appUtils/get-date-timezone'
 import getLink from '@appUtils/get-link'
 import getShip from '@appUtils/get-ship'
+import sortShips from '@appUtils/sort-ships'
 import arrResources from '@appData/resources'
 import db from '@appLogic/database'
 
@@ -34,7 +35,7 @@ export class DayAndShip extends React.Component {
     renderItem(data, index) {
         let [dataDays, dataShips] = data
         if (dataShips)
-            dataShips = dataShips.map(shipId => getShip(shipId))/*.sort((a, b) => a.order - b.order)*/
+            dataShips = sortShips(dataShips.map(shipId => getShip(shipId)))/*.sort((a, b) => a.order - b.order)*/
         return (
             <div className="item" key={index}>
                 <div className="days">
