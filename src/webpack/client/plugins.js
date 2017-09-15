@@ -32,7 +32,7 @@ module.exports = async (appPath, type, isDev, isSPA) => {
             to: '_bgimgs/thumbnail'
         })
         if (type === 'app') {
-            const pathAssets = path.join(appPath, './src/app/client/assets/')
+            const pathAssets = path.join(appPath, `./src/app/client/assets/logos/${channel}/`)
             arr.push({
                 from: path.resolve(pathAssets, 'appicon.ico'),
                 to: 'assets'
@@ -42,7 +42,7 @@ module.exports = async (appPath, type, isDev, isSPA) => {
                 to: 'assets'
             })
             arr.push({
-                from: path.resolve(pathAssets, `logos/${channel}/128.png`),
+                from: path.resolve(pathAssets, `128.png`),
                 to: 'assets/appicon.png'
             })
         }
