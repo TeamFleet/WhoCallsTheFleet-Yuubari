@@ -5,6 +5,10 @@ export default (list = []) => list.sort((a, b) => (
 )).sort((a, b) => {
     a = getShip(a)
     b = getShip(b)
-    if (a.series === b.series) return a.suffix - b.suffix
+    if (a.series === b.series) return a.name.suffix - b.name.suffix
     return a.order - b.order
 })
+
+// export default (list = []) => list.sort((a, b) => (
+//     getShip(a).order - getShip(b).order
+// ))
