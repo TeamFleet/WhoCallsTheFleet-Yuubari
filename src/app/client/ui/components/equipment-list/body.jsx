@@ -10,12 +10,14 @@ import {
     init as listInit,
     // reset as listReset
 } from '@appLogic/equipment-list/api.js'
+import equipmentTypes from 'kckit/src/types/equipments'
 // import { REALTIME_LOCATION_REDUCER_NAME } from 'sp-isomorphic-utils/realtime-location'
 
 import Title from './title.jsx'
 // import List from './list.jsx'
 import Header from './header.jsx'
-import TableBody from './table-body.jsx'
+import TableBody from './table-body'
+import TableBodyHeaderInterceptor from './table-body-header-interceptor'
 
 import { ImportStyle } from 'sp-css-import'
 // import style from './body.less'
@@ -71,6 +73,9 @@ class EquipmentListBody extends React.Component {
                         'last': typeIndex === collection.list.length - 1
                     })} >
                         <Title id={this.props.id} type={type.type} />
+                        {equipmentTypes.Interceptors.includes(type.type) && (
+                            <TableBodyHeaderInterceptor />
+                        )}
                         <TableBody id={this.props.id} equipments={type.equipments} />
                     </div>
                 </CSSTransitionComponent>

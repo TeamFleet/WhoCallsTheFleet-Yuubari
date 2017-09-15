@@ -1,0 +1,19 @@
+@import './_.less';
+
+.component{
+    position:   absolute;
+    width:      100%;
+    margin-top: (0 - (@cell-padding-vertical * 2) - @cell-line-height);
+    z-index:    -1;
+    .screen-phone({
+        // top:            -2px;
+        // margin-bottom:  2px;
+        transform:      translateY(-4px);
+    });
+    .screen-phone-small({
+        margin-top:     auto;
+        margin-bottom:  2px;
+        position:       relative;
+        transform:      none;
+    });
+}
