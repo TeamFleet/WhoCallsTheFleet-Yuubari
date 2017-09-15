@@ -6,6 +6,7 @@ const spinner = require('./spinner')
 
 const convertToWindowsStore = require('electron-windows-store')
 const isAdminUser = require('node-windows').isAdminUser
+const fileBuild = path.resolve(__dirname, './build-uwp.txt')
 
 // --------------------------------------------------
 
@@ -44,6 +45,10 @@ const run = async () => {
     const publisherId = publisher.split('=')[1]
     const windowsKit = 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.15063.0\\x64'
     const certFilePath = path.join(process.env.APPDATA, 'electron-windows-store', publisherId)
+    const build = await fs.readFile(fileBuild, 'utf-8')
+    const buildNumber = parseInt(build) + 1
+
+    // console.log(build, buildNumber)
 
     let devCert = path.resolve(certFilePath, `${publisher}.pfx`)
     if (!fs.existsSync(devCert)) {
@@ -69,7 +74,7 @@ const run = async () => {
             const split = packageJSON.version.split('.')
             if (split.length < 4)
                 times(4 - split.length)(() => {
-                    split.push('0')
+                    split.push(buildNumber)
                 })
             return split.join('.')
         })(),
@@ -93,8 +98,16 @@ const run = async () => {
         // createConfigParams: ['/a'],
         // createPriParams: ['/b'],
     })
+
+    await fs.writeFile(
+        fileBuild,
+        buildNumber
+    )
+
     waiting.finish()
 }
+
+// run()
 
 return new Promise((resolve, reject) => {
     isAdminUser(isAdmin => {

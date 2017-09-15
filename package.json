@@ -17,8 +17,6 @@
     },
 
 
-
-
     "scripts": {
         "start": "npm run build && npm run pord:run",
         "start:pm2": "npm run build && npm run clean:web:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
@@ -29,19 +27,16 @@
         "build:app": "node ./scripts/build-app",
         "dev": "npm run prebuild && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
-
         
         "clean:web": "node ./scripts/clean-web",
         "clean:web:sourcemap": "node ./scripts/clean-web-sourcemap",
         "copy:web": "node ./scripts/copyfiles-web",
         "copy:spa": "node ./scripts/copyfiles-spa",
 
-
         "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
         "pm2:dev:client": "pm2 restart pm2.json --only fleet-dev-client",
         "pm2:dev:server": "pm2 restart pm2.json --only fleet-dev-server",
         "pm2:dev:run": "pm2 restart pm2.json --only fleet-dev-run --watch",
-
 
         "dev:bundle:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=client WEBPACK_DEV_SERVER_PORT=3001 node ./src/webpack/enter",
         "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./src/webpack/enter",
@@ -51,56 +46,6 @@
 
         "update": "npm i --no-save"
     },
-
-
-
-
-    "window": {
-        "frame": true,
-        "toolbar": false,
-        "width": 1280,
-        "height": 720,
-        "icon": "./app/appicon.png",
-        "position": "center",
-        "min_width": 640,
-        "min_height": 480,
-        "as_desktop": false,
-        "resizable": true,
-        "always-on-top": false,
-        "fullscreen": false,
-        "show_in_taskbar": true,
-        "show": false,
-        "kiosk": false,
-        "transparent": false
-    },
-    "platformOverrides": {
-        "win": {
-            "debug": false,
-            "window": {
-                "frame": false
-            }
-        },
-        "win32": {
-            "debug": false,
-            "window": {
-                "frame": false
-            }
-        },
-        "osx": {
-            "debug": false,
-            "window": {
-                "frame": true
-            }
-        },
-        "linux": {
-            "debug": false,
-            "window": {
-                "frame": true
-            }
-        }
-    },
-
-
 
 
     "dependencies": {
@@ -154,5 +99,54 @@
         "node-windows": "^0.1.14",
 
         "jest": "^21.0.2"
+    },
+
+
+    "appxBuild": 0,
+
+
+    "window": {
+        "frame": true,
+        "toolbar": false,
+        "width": 1280,
+        "height": 720,
+        "icon": "./app/appicon.png",
+        "position": "center",
+        "min_width": 640,
+        "min_height": 480,
+        "as_desktop": false,
+        "resizable": true,
+        "always-on-top": false,
+        "fullscreen": false,
+        "show_in_taskbar": true,
+        "show": false,
+        "kiosk": false,
+        "transparent": false
+    },
+    "platformOverrides": {
+        "win": {
+            "debug": false,
+            "window": {
+                "frame": false
+            }
+        },
+        "win32": {
+            "debug": false,
+            "window": {
+                "frame": false
+            }
+        },
+        "osx": {
+            "debug": false,
+            "window": {
+                "frame": true
+            }
+        },
+        "linux": {
+            "debug": false,
+            "window": {
+                "frame": true
+            }
+        }
     }
 }
