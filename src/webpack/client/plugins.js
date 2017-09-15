@@ -9,13 +9,14 @@ const platform = os.platform()
 const isWindows = /^win/.test(platform)
 const isMac = /^darwin/.test(platform)
 
-const channel = process.env.WEBPACK_BUILD_ENV === 'app'
-    ? 'stable'
-    : (
-        /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description)
-            ? 'yuubari'
-            : 'stable'
-    )
+// const channel = process.env.WEBPACK_BUILD_ENV === 'app'
+//     ? 'stable'
+//     : (
+//         /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description)
+//             ? 'yuubari'
+//             : 'stable'
+//     )
+const channel = require(path.resolve(process.cwd(), 'src/utils/get-channel'))()
 
 module.exports = async (appPath, type, isDev, isSPA) => {
     const arr = []

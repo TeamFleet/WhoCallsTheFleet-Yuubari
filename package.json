@@ -102,9 +102,6 @@
     },
 
 
-    "appxBuild": 0,
-
-
     "window": {
         "frame": true,
         "toolbar": false,

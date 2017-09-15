@@ -12,9 +12,7 @@ module.exports = {
     isMac: /^darwin/.test(platform),
 
     packageJSON,
-    channel: /^yuubari/i.test(packageJSON.description)
-        ? 'yuubari'
-        : 'stable',
+    channel: require(path.resolve(__dirname, '../../src/utils/get-channel'))(),
 
     symbols: {
         complete: '√'

@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const packageJson = fs.readJSONSync(path.resolve(process.cwd(), 'package.json'))
 
-if (/^yuubari/i.test(packageJson.description)) {
+if (require(path.resolve(process.cwd(), 'src/utils/get-channel'))()) {
     // Yuubari channel
     fs.copySync(
         path.resolve(process.cwd(), 'public/assets', 'yuubari'),

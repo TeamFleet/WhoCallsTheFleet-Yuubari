@@ -105,14 +105,17 @@ const plugins = [
     extractCriticalCSS,
 
     new webpack.DefinePlugin({
+        // '__CHANNEL__': JSON.stringify(
+        //     process.env.WEBPACK_BUILD_ENV === 'app'
+        //         ? 'stable'
+        //         : (
+        //             /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description)
+        //                 ? 'yuubari'
+        //                 : 'stable'
+        //         )
+        // ),
         '__CHANNEL__': JSON.stringify(
-            process.env.WEBPACK_BUILD_ENV === 'app'
-                ? 'stable'
-                : (
-                    /^yuubari/i.test(fs.readJSONSync(path.resolve(process.cwd(), 'package.json')).description)
-                        ? 'yuubari'
-                        : 'stable'
-                )
+            require(path.resolve(appPath, 'src/utils/get-channel'))()
         ),
         '__BGIMG_LIST__': JSON.stringify(
             // glob.sync(path.resolve(pathBgimgs, '*.jpg'))
