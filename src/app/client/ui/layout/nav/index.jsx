@@ -69,6 +69,8 @@ export default class extends React.Component {
 
     get isLoading() {
         if (__SERVER__ || typeof this.props.realtimeLocation.pathname === 'undefined') return false
+        if (__SPA__)
+            return (this.props.realtimeLocation.hash.substr(1) !== this.props.location.pathname)
         return (this.props.realtimeLocation.pathname !== this.props.location.pathname)
     }
 
@@ -108,7 +110,9 @@ export default class extends React.Component {
 
                 <div className="wrapper">
                     <div className="logo">
-                        {__SPA__ && <button type="button" className="btn-back" disabled={!this.state.showBackButton} onClick={this.historyBack} />}
+                        {__SPA__ && (
+                            <button type="button" className="btn-back" disabled={!this.state.showBackButton} onClick={this.historyBack} />
+                        )}
                         <IndexLink to="/" className="btn-home-logo" activeClassName="on" style={logoStyles}>{translate('title')}</IndexLink>
                         {__CHANNEL__ === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
                     </div>
