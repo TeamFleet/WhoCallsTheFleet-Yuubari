@@ -28,7 +28,6 @@ Version="1.0.0.6" />
        BackgroundColor="#263238"
        DisplayName="TheFleet (DEV)"
        Square150x150Logo="assets\icon150x150.png"
-       Square71x71Logo="assets\icon71x71.png"
        Square44x44Logo="assets\icon44x44.png"
        Description="Yuubari (Dev) Channel for Who Calls the Fleet (https://yuubari.fleet.moe)">
         <uap:DefaultTile Wide310x150Logo="assets\icon310x150.png" />
