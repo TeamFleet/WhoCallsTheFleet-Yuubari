@@ -2,48 +2,81 @@
 
 
 .component{
-    @count:     @navy-flags-count;
-
     width:      @navy-flag-width;
     height:     @navy-flag-height;
     display:    inline-block;
 
-    background:     url('~Assets/flags-navy.png') no-repeat 50% @navy-flag-height / cover;
+    background:     url('~Assets/navy-flags/normal.png') no-repeat 50% @navy-flag-height / cover;
 
     .navies(@n, @i: 0) when (@i =< @n) {
         &[data-navy="@{i}"]{
-            // background-position: 50% percentage(0 - @i / @count);
-            background-position: 50% percentage(@i / (@count - 1));
+            // background-position: 50% percentage(0 - @i / @navy-flags-count);
+            background-position: 50% percentage(@i / (@navy-flags-count - 1));
         }
         .navies(@n, (@i + 1));
     }
-    .navies(@count);
+    .navies(@navy-flags-count);
 
     /* 1.25 dpr */
     @media 
     (-webkit-min-device-pixel-ratio: 1.25), 
     (min-resolution: 120dpi){
-        background-image:   url('~Assets/flags-navy@1.25.png');
+        background-image:   url('~Assets/navy-flags/normal@1.25.png');
     }
 
     /* 1.5 dpr */
     @media 
     (-webkit-min-device-pixel-ratio: 1.5), 
     (min-resolution: 144dpi){
-        background-image:   url('~Assets/flags-navy@1.5.png');
+        background-image:   url('~Assets/navy-flags/normal@1.5.png');
     }
 
     /* 2.0 dpr */
     @media 
     (-webkit-min-device-pixel-ratio: 2), 
     (min-resolution: 192dpi){
-        background-image:   url('~Assets/flags-navy@2.png');
+        background-image:   url('~Assets/navy-flags/normal@2.png');
     }
 
     /* 3.0 dpr */
     @media 
     (-webkit-min-device-pixel-ratio: 3), 
     (min-resolution: 288dpi){
-        background-image:   url('~Assets/flags-navy@3.png');
+        background-image:   url('~Assets/navy-flags/normal@3.png');
+    }
+}
+
+.component.has-shadow{
+    width:      (@navy-flag-width + 1);
+    // height:     @navy-flag-height;
+
+    background-image:     url('~Assets/navy-flags/shadow.png');
+
+    /* 1.25 dpr */
+    @media 
+    (-webkit-min-device-pixel-ratio: 1.25), 
+    (min-resolution: 120dpi){
+        background-image:   url('~Assets/navy-flags/shadow@1.25.png');
+    }
+
+    /* 1.5 dpr */
+    @media 
+    (-webkit-min-device-pixel-ratio: 1.5), 
+    (min-resolution: 144dpi){
+        background-image:   url('~Assets/navy-flags/shadow@1.5.png');
+    }
+
+    /* 2.0 dpr */
+    @media 
+    (-webkit-min-device-pixel-ratio: 2), 
+    (min-resolution: 192dpi){
+        background-image:   url('~Assets/navy-flags/shadow@2.png');
+    }
+
+    /* 3.0 dpr */
+    @media 
+    (-webkit-min-device-pixel-ratio: 3), 
+    (min-resolution: 288dpi){
+        background-image:   url('~Assets/navy-flags/shadow@3.png');
     }
 }
