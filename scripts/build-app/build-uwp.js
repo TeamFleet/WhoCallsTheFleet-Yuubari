@@ -3,6 +3,7 @@ const path = require('path')
 
 const times = require('../../src/app/utils/times')
 const spinner = require('./spinner')
+const dirs = require('../../src/config/directories')
 
 const convertToWindowsStore = require('electron-windows-store')
 const isAdminUser = require('node-windows').isAdminUser
@@ -58,7 +59,7 @@ const run = async () => {
             })
         return split.join('.')
     })()
-    const fileManifest = path.normalize(path.join(pathRoot, `src/app/client/assets/uwp/${channel}/AppXManifest.xml`))
+    const fileManifest = path.normalize(path.resolve(dirs.assets, `uwp/${channel}/AppXManifest.xml`))
     const content = await fs.readFile(fileManifest, 'utf-8')
     await fs.writeFile(fileManifest,
         content
@@ -93,7 +94,7 @@ const run = async () => {
         packageDescription: packageJSON.description,
         packageExecutable: `app/${packageName}.exe`,
 
-        assets: path.normalize(path.join(pathRoot, `src/app/client/assets/uwp/${channel}/assets`)),
+        assets: path.normalize(path.resolve(dirs.assets, `uwp/${channel}/assets`)),
         manifest: fileManifest,
         // deploy: false,
 

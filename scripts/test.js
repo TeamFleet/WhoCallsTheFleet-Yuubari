@@ -3,9 +3,13 @@ const fs = require('fs-extra')
 const path = require('path')
 const glob = require('glob')
 
+// const {
+//     assets: pathAssets
+// } = require('../src/config/directories')
+
 const getPics = async (appPath = process.cwd()) => {
 
-    const dirPics = path.resolve(appPath, './src/client/assets/pics/')
+    const dirPics = path.resolve(__dirname, '../pics')
     const dirTo = '_pics'
     const dirTarget = path.resolve(appPath, './dist-web/public/client/' + dirTo)
 

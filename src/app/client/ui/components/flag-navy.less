@@ -1,14 +1,14 @@
 @import '../base.less';
 
-@size:      20px;
-@count:     7;
 
 .component{
-    width:      @size;
-    height:     @size;
+    @count:     @navy-flags-count;
+
+    width:      @navy-flag-width;
+    height:     @navy-flag-height;
     display:    inline-block;
 
-    background:     url('../../assets/flags-navy.png') no-repeat 50% @size / cover;
+    background:     url('~Assets/flags-navy.png') no-repeat 50% @navy-flag-height / cover;
 
     .navies(@n, @i: 0) when (@i =< @n) {
         &[data-navy="@{i}"]{
@@ -23,27 +23,27 @@
     @media 
     (-webkit-min-device-pixel-ratio: 1.25), 
     (min-resolution: 120dpi){
-        background-image:   url('../../assets/flags-navy@1.25.png');
+        background-image:   url('~Assets/flags-navy@1.25.png');
     }
 
     /* 1.5 dpr */
     @media 
     (-webkit-min-device-pixel-ratio: 1.5), 
     (min-resolution: 144dpi){
-        background-image:   url('../../assets/flags-navy@1.5.png');
+        background-image:   url('~Assets/flags-navy@1.5.png');
     }
 
     /* 2.0 dpr */
     @media 
     (-webkit-min-device-pixel-ratio: 2), 
     (min-resolution: 192dpi){
-        background-image:   url('../../assets/flags-navy@2.png');
+        background-image:   url('~Assets/flags-navy@2.png');
     }
 
     /* 3.0 dpr */
     @media 
     (-webkit-min-device-pixel-ratio: 3), 
     (min-resolution: 288dpi){
-        background-image:   url('../../assets/flags-navy@3.png');
+        background-image:   url('~Assets/flags-navy@3.png');
     }
 }
