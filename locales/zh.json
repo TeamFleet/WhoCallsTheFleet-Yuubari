@@ -29,7 +29,9 @@
         "level": "需要等级：${level}",
         "min_possible_level": "可能的最低等级：${level}",
         "equipment": "需要装备：${type}",
+        "equipment_no_need": "无需装备：${type}",
         "equipment_type": "需要装备类型：${type}",
+        "equipment_type_no_need": "无需装备类型：${type}",
         "equipment_has_stat": "需要装备：${type} (${stat}至少为${value})",
         "ship_stat_with_equipments": "需要${stat}属性：${value} (计算装备)",
         "has_stat": "${stat}至少为${value}"
@@ -40,6 +42,7 @@
     "other_ships_of_type": "其他${type}",
     "shipname_dash_none": "",
     "exslot": "补强增设栏位",
+    "equipment_series": "${equipment}系列",
 
     "stat": {
         "fire": "火力",
@@ -93,7 +96,8 @@
         "ots": "先制雷击",
         "day": "昼炮雷击战",
         "torpedo": "雷击战",
-        "night": "夜战"
+        "night": "夜战",
+        "night_air_assault": "夜间航空打击"
     },
 
     "aaci": {
@@ -188,7 +192,9 @@
         "light_attack_carrier_asw_title": "优先攻击水面舰",
         "light_attack_carrier_asw_note": "即使可以攻击潜艇而且敌方存在潜艇",
         "range_different_title": "射程：${range}",
-        "range_different_note": "其他${type}的射程：${range}",
+        "range_different_note": "其他大多数${type}的射程：${range}",
+        "carrier_default_night_battle": "即使没有达到夜间航空打击的装备需求，也可以参与夜战，但伤害偏低。",
+        "carrier_swordfish_night_battle": "即使没有达到夜间航空打击的装备需求，只要装备有剑鱼系列鱼雷机，也可以参与夜战，但伤害偏低。",
 
         "other_special": "其他特殊能力",
         "tp_bonus": "运输作战TP加成：+${bonus}",

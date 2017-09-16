@@ -29,7 +29,9 @@
         "level": "Require level: ${level}",
         "min_possible_level": "Minimum possible level: ${level}",
         "equipment": "Require equipment: ${type}",
+        "equipment_no_need": "No need for equipment: ${type}",
         "equipment_type": "Require equipment type: ${type}",
+        "equipment_type_no_need": "No need for equipment type: ${type}",
         "equipment_has_stat": "Require equipment: ${type} (${stat} at least ${value})",
         "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)",
         "has_stat": "${stat} at least ${value}"
@@ -40,6 +42,7 @@
     "other_ships_of_type": "Other ${type}s",
     "shipname_dash_none": " ",
     "exslot": "Expansion Slot",
+    "equipment_series": "${equipment}-series",
 
     "stat": {
         "fire": "FP",
@@ -93,7 +96,8 @@
         "ots": "Opening Torpedo Salvo",
         "day": "Day Combat",
         "torpedo": "Torpedo Salvo",
-        "night": "Night Battle"
+        "night": "Night Battle",
+        "night_air_assault": "Night Air Assault"
     },
 
     "aaci": {
@@ -188,7 +192,9 @@
         "light_attack_carrier_asw_title": "Will attack surface ships prioritised",
         "light_attack_carrier_asw_note": "Even if can attack submarines and there's submarine exist.",
         "range_different_title": "Range: ${range}",
-        "range_different_note": "Other ${type}s have range: ${range}",
+        "range_different_note": "Most other ${type} have range: ${range}",
+        "carrier_default_night_battle": "Can still participate in night battle even if not meet the require for night air assault. But the damage maybe low.",
+        "carrier_swordfish_night_battle": "If has Swordfish-series torpedo bomber equipped, can still participate in night battle even if not meet the require for night air assault. But the damage maybe low.",
 
         "other_special": "Other Special Capabilities",
         "tp_bonus": "Transport phase TP bonus: +${bonus}",
@@ -200,7 +206,7 @@
         "equipable_exslot_and": "And...",
         "equipable_legend_no": "Not equipable",
         "equipable_legend_yes": "Equipable",
-        "equipable_legend_yes_extra": "No for other ${type}s"
+        "equipable_legend_yes_extra": "No for other ${type}"
     },
 
     "equipment_details": {

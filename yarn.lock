@@ -2655,9 +2655,9 @@ electron-osx-sign@^0.4.1:
     minimist "^1.2.0"
     plist "^2.1.0"
 
-electron-packager@^9.0.1:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/electron-packager/-/electron-packager-9.0.1.tgz#c3c4da7e419e1a7f30d98f0948a4af058dd8d76e"
+electron-packager@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/electron-packager/-/electron-packager-9.1.0.tgz#4b2ef9f8343f5de431182d82929d9c06c0d51a1d"
   dependencies:
     asar "^0.13.0"
     camelize "^1.0.0"
@@ -4811,9 +4811,9 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
-kckit@^1.14.2:
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.14.2.tgz#f1928c4ae66eec84368fce61754de51d8f542cec"
+kckit@^1.15.6:
+  version "1.15.6"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.15.6.tgz#89c0be5bb6e3ab98d7d07548e9d10c5ae4830b62"
   dependencies:
     camelcase "^4.1.0"
 
@@ -8600,9 +8600,9 @@ whocallsthefleet-backgrounds@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.2.0.tgz#07047acd36ad3a1bd093b7f79cb1e1c32cd3918a"
 
-whocallsthefleet-database@2017.9.16:
-  version "2017.9.16"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-2017.9.16.tgz#ce33446d8c6ea5bfc8f46bad1cf93dfb4c0fc485"
+whocallsthefleet-database@2017.9.17:
+  version "2017.9.17"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-2017.9.17.tgz#3563e675db818d6b2e6a8baa9c806c7c1a9d5353"
 
 wide-align@^1.1.0:
   version "1.1.2"
