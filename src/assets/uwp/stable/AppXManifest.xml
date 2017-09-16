@@ -11,7 +11,7 @@
     <DisplayName>WhoCallsTheFleet</DisplayName>
     <PublisherDisplayName>Diablohu</PublisherDisplayName>
     <Description>Stable Channel for Who Calls the Fleet (https://fleet.moe)</Description>
-    <Logo>assets\icon.50x50.png</Logo>
+    <Logo>assets\icon71x71.png</Logo>
   </Properties>
   <Resources>
     <Resource Language="en-us" />
@@ -25,12 +25,13 @@
   <Applications>
     <Application Id="WhoCallsTheFleet" Executable="app/WhoCallsTheFleet.exe" EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
-       BackgroundColor="#464646"
+       BackgroundColor="#263238"
        DisplayName="TheFleet"
-       Square150x150Logo="assets\icon.150x150.png"
-       Square44x44Logo="assets\icon.44x44.png"
+       Square150x150Logo="assets\icon150x150.png"
+       Square71x71Logo="assets\icon71x71.png"
+       Square44x44Logo="assets\icon44x44.png"
        Description="Stable Channel for Who Calls the Fleet (https://yuubari.fleet.moe)">
-        <uap:DefaultTile Wide310x150Logo="assets\icon.310x150.png" />
+        <uap:DefaultTile Wide310x150Logo="assets\icon310x150.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
