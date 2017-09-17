@@ -67,7 +67,7 @@ export default class LinkShip extends React.Component {
                 name={this.checkShow('name') ? this.renderName() : null}
             >
                 {this.props.extraIllust && this.ship.hasExtraIllust() && <Icon className="icon-has-extra-illust" icon="hanger" />}
-                {this.checkShow('navy') && this.ship._navy !== 'ijn' && <FlagNavy className="flag-navy" navy={this.ship._navy} />}
+                {this.checkShow('navy') && this.ship._navy !== 'ijn' && <FlagNavy className="flag-navy" navy={this.ship._navy} shadow={true} />}
                 {this.props.children}
             </Link>
         )

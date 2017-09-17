@@ -8,6 +8,25 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const extractCriticalCSS = new ExtractTextPlugin('[name].[chunkhash].css');
 const pathBgimgs = path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output')
 
+const dirs = require('../config/directories')
+
+// const useSpCssLoader = {
+//     loader: "sp-css-loader",
+//     options: {
+//         length: 8,
+//         mode: 'replace'
+//     }
+// }
+const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
+const useUniversalAliasLoader = {
+    loader: "universal-alias-loader",
+    options: {
+        alias: {
+            "~Assets": dirs.assets
+        }
+    }
+}
+
 // 执行顺序，从右到左
 const rules = [
     {
@@ -19,30 +38,56 @@ const rules = [
     {
         test: /\.css$/,
         exclude: [/\.g\.css$/, /node_modules/],
-        loader: 'sp-css-loader?length=8&mode=replace!postcss-loader'
+        use: [
+            useSpCssLoader,
+            "postcss-loader",
+            useUniversalAliasLoader
+        ]
+        // loader: 'sp-css-loader?length=8&mode=replace!postcss-loader'
     }, {
         test: /\.less$/,
         exclude: [/\.g\.less$/, /node_modules/],
-        loader: 'sp-css-loader?length=8&mode=replace!postcss-loader!less-loader'
+        use: [
+            useSpCssLoader,
+            "postcss-loader",
+            "less-loader",
+            useUniversalAliasLoader
+        ]
     }, {
         test: /\.scss$/,
         exclude: [/\.g\.scss$/, /node_modules/],
-        loader: 'sp-css-loader?length=8&mode=replace!postcss-loader!sass-loader'
+        use: [
+            useSpCssLoader,
+            "postcss-loader",
+            "sass-loader",
+            useUniversalAliasLoader
+        ]
     },
 
     // CSS - in node_modules
     {
         test: /\.css$/,
         include: /node_modules/,
-        loader: 'style-loader!postcss-loader'
+        use: [
+            "style-loader",
+            "postcss-loader"
+        ]
     }, {
         test: /\.less$/,
         include: /node_modules/,
-        loader: 'style-loader!postcss-loader!less-loader'
+        use: [
+            "style-loader",
+            "postcss-loader",
+            "less-loader"
+        ]
     }, {
         test: /\.scss$/,
         include: /node_modules/,
-        loader: 'style-loader!postcss-loader!sass-loader'
+        use: [
+            "style-loader",
+            "postcss-loader",
+            "sass-loader"
+        ]
     },
 
     // CSS - critical
@@ -125,7 +170,7 @@ const plugins = [
         ),
         '__ICONSVG__': JSON.stringify(
             fs.readFileSync(
-                path.resolve(appPath, './src/app/client/assets/symbols/symbol-defs.svg'), 'utf8'
+                path.resolve(dirs.assets, './symbols/symbol-defs.svg'), 'utf8'
             ).replace(/<title>(.+?)<\/title>/g, '')
         )
     })
@@ -139,13 +184,14 @@ const resolve = {
     alias: {
         Apps: path.resolve(appPath, './src/apps'),
         Locales: path.resolve(appPath, './locales'),
+        Assets: dirs.assets,
 
         "@app": path.resolve(appPath, './src/app'),
         "@appConfig": path.resolve(appPath, './src/app/config'),
         "@appLocales": path.resolve(appPath, './locales'),
         "@appUtils": path.resolve(appPath, './src/app/utils'),
         "@appData": path.resolve(appPath, './src/app/data'),
-        "@appAssets": path.resolve(appPath, './src/app/client/assets'),
+        "@appAssets": dirs.assets,
         "@appUI": path.resolve(appPath, './src/app/client/ui'),
         "@appLogic": path.resolve(appPath, './src/app/client/logic'),
         "@appDocs": path.resolve(appPath, './docs')

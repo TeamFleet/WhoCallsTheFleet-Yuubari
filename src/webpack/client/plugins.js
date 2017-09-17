@@ -4,6 +4,10 @@ const path = require('path')
 // const glob = require('glob')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const {
+    assets: pathAssets
+} = require('../../config/directories')
+
 const os = require('os')
 const platform = os.platform()
 const isWindows = /^win/.test(platform)
@@ -32,17 +36,17 @@ module.exports = async (appPath, type, isDev, isSPA) => {
             to: '_bgimgs/thumbnail'
         })
         if (type === 'app') {
-            const pathAssets = path.join(appPath, `./src/app/client/assets/logos/${channel}/`)
+            const pathAssetsLogos = path.resolve(pathAssets, `logos/${channel}/`)
             arr.push({
-                from: path.resolve(pathAssets, 'appicon.ico'),
+                from: path.resolve(pathAssetsLogos, 'appicon.ico'),
                 to: 'assets'
             })
             arr.push({
-                from: path.resolve(pathAssets, 'appicon.icns'),
+                from: path.resolve(pathAssetsLogos, 'appicon.icns'),
                 to: 'assets'
             })
             arr.push({
-                from: path.resolve(pathAssets, `128.png`),
+                from: path.resolve(pathAssetsLogos, `128.png`),
                 to: 'assets/appicon.png'
             })
         }
@@ -52,7 +56,7 @@ module.exports = async (appPath, type, isDev, isSPA) => {
             to: '_bgimgs'
         })
         arr.push({
-            from: path.resolve(appPath, `./src/app/client/assets/logos/${channel}/32.ico`),
+            from: path.resolve(pathAssets, `logos/${channel}/32.ico`),
             to: '../favicon.ico'
         })
         arr.push(...await getPics(appPath, isDev))
@@ -91,7 +95,7 @@ const asyncTest = async (appPath) => {
             console.log('alalala')
             resolve(
                 [{
-                    from: path.resolve(appPath, `./src/app/client/assets/akashi.png`),
+                    from: path.resolve(pathAssets, `akashi.png`),
                 }]
             )
         }, 10000)

@@ -17,7 +17,7 @@
         width:      @size;
         height:     @size;
         display:    inline-block;
-        background: url('../../../assets/equiptypeicon.png') no-repeat 0% @size / cover;
+        background: url('~Assets/equiptypeicon.png') no-repeat 0% @size / cover;
     }
 
     .icons(@n, @i: 0) when (@i =< @n) {
@@ -59,7 +59,7 @@
             border:     1px solid @theme-green-a200;
             color:      @theme-green-a100;
             border-radius: (1.1em / 2);
-            // background:     url('../../../assets/stats.png') no-repeat 0% 31.57894737% / cover;
+            // background:     url('~Assets/stats.png') no-repeat 0% 31.57894737% / cover;
             transform:  scale((10 / 12));
             transform-origin: 100% 100%;
         }
@@ -71,10 +71,10 @@
             bottom:     0;
         }
         &[data-suffix="+"]:after{
-            background: url('../../../assets/symbols-other/arrow-up-buff.svg') no-repeat 50% 50% / cover;
+            background: url('~Assets/symbols-other/arrow-up-buff.svg') no-repeat 50% 50% / cover;
         }
         &[data-suffix="-"]:after{
-            background: url('../../../assets/symbols-other/arrow-up-nobuff.svg') no-repeat 50% 50% / cover;
+            background: url('~Assets/symbols-other/arrow-up-nobuff.svg') no-repeat 50% 50% / cover;
         }
         &[data-icon="16"][data-suffix="+"]:after,
         &[data-icon="16"][data-suffix="-"]:after{
@@ -83,7 +83,7 @@
             height:     @size;
             right:      -5px;
             bottom:     -5px;
-            background: url('../../../assets/equiptypeicon.png') no-repeat 0% percentage((30 - 1) / (@count - 1)) / cover;
+            background: url('~Assets/equiptypeicon.png') no-repeat 0% percentage((30 - 1) / (@count - 1)) / cover;
         }
         &[data-icon="16"][data-suffix="-"]:after{
             filter:     saturate(0%);

@@ -1,6 +1,8 @@
 import React from 'react'
 
 import db from '@appLogic/database'
+import dataTP from 'kckit/src/data/tp'
+import equipmentTypes from 'kckit/src/types/equipments'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
@@ -14,17 +16,20 @@ import translate from 'sp-i18n'
 // @ImportStyle(styles)
 export default class ShipDetailsSpecialOther extends React.Component {
     render() {
+        const {
+            count_as_landing_craft
+        } = this.props.ship.getCapability()
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.other_special")}>
-                {this.props.ship.tp && <Bullet
+                {count_as_landing_craft && <Bullet
                     title={translate("ship_details.tp_bonus", {
-                        bonus: this.props.ship.tp
+                        bonus: count_as_landing_craft * dataTP.equipmentType[equipmentTypes.LandingCraft]
                     })}
                     level={2}
                 />}
-                {this.props.ship.tp >= 8 && <Bullet
+                {count_as_landing_craft && <Bullet
                     title={translate("ship_details.expedition_bonus", {
-                        bonus: '5%'
+                        bonus: `${5 * count_as_landing_craft}%`
                     })}
                     level={2}
                 >
@@ -36,7 +41,7 @@ export default class ShipDetailsSpecialOther extends React.Component {
                         daihatsu: db.equipments[68]._name
                     })}
                 </Bullet>}
-                {!this.props.ship.tp && <Bullet
+                {!count_as_landing_craft && <Bullet
                     title={translate("none")}
                     level={0}
                 />}

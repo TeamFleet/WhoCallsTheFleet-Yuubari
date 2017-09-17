@@ -6,6 +6,10 @@ const common = require('../common')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackOnBuildPlugin = require('on-build-webpack')
 
+const {
+    assets: pathAssets
+} = require('../../config/directories')
+
 // const jsonPretty = require('json-pretty')
 
 const times = n => f => {
@@ -156,7 +160,7 @@ const getConfig = async (appPath, type) => {
                 html = html.replace(
                     /\{\{[ ]*SVG_SYMBOLS[ ]*\}\}/g,
                     fs.readFileSync(
-                        path.resolve(appPath, './src/app/client/assets/symbols/symbol-defs.svg'), 'utf8'
+                        path.resolve(pathAssets, 'symbols/symbol-defs.svg'), 'utf8'
                     ).replace(/<title>(.+?)<\/title>/g, '')
                 )
 

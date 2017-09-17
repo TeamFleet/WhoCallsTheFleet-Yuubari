@@ -183,16 +183,74 @@ export default class ShipDetailsSpecialCombat extends React.Component {
             )
         return null
     }
+    renderNightAirAssault() {
+        const {
+            count_as_night_operation_aviation_personnel,
+            participate_night_battle_when_equip_swordfish
+        } = this.props.ship.getCapability()
+
+        if (count_as_night_operation_aviation_personnel) {
+            const equipment = db.equipments[258] // 夜間作戦航空要員
+            return (
+                <Bullet
+                    title={translate("combat_phases.night_air_assault")}
+                    level={2}
+                >
+                    {translate('require.equipment_no_need', { type: "" })}
+                    <IconEquipment className="equipment" icon={equipment._icon}>
+                        {equipment._name}
+                    </IconEquipment>
+                </Bullet>
+            )
+        }
+
+        if (this.props.ship.stat.fire || this.props.ship.stat.torpedo) {
+            return (
+                <Bullet
+                    title={translate("combat_phases.night")}
+                    level={1}
+                >
+                    {translate('ship_details.carrier_default_night_battle')}
+                </Bullet>
+            )
+        }
+
+        if (participate_night_battle_when_equip_swordfish) {
+            const equipment = db.equipments[242] // Swordfish
+            return (
+                <Bullet
+                    title={translate("combat_phases.night")}
+                    level={1}
+                >
+                    {translate('ship_details.carrier_swordfish_night_battle')}
+                    <br />
+                    {translate('require.equipment', { type: "" })}
+                    <IconEquipment className="equipment" icon={equipment._icon}>
+                        {translate("equipment_series", {
+                            equipment: equipment._name
+                        })}
+                    </IconEquipment>
+                </Bullet>
+            )
+        }
+
+        return null
+    }
     render() {
-        const isBattleship = this.props.ship.isType('battleship')
-        const isCarrier = this.props.ship.isType('carrier')
+        const {
+            ship,
+            className
+        } = this.props
 
-        const statASW99 = this.props.ship.getAttribute('asw', 99)
-        const statTorpedo99 = this.props.ship.getAttribute('torpedo', 99)
+        const isBattleship = ship.isType('battleship')
+        const isCarrier = ship.isType('carrier')
 
-        const aaciTypes = checkAACI(this.props.ship.id)
+        const statASW99 = ship.getAttribute('asw', 99)
+        const statTorpedo99 = ship.getAttribute('torpedo', 99)
 
-        const canJetAssault = checkShip(this.props.ship, {
+        const aaciTypes = checkAACI(ship.id)
+
+        const canJetAssault = checkShip(ship, {
             isID: [
                 461, // 翔鶴・改二
                 466, // 翔鶴・改二甲
@@ -203,7 +261,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
         const canAACI = (Array.isArray(aaciTypes) && aaciTypes.length) ? true : false
 
         return (
-            <ComponentContainer className={this.props.className} title={translate("ship_details.combat_special")}>
+            <ComponentContainer className={className} title={translate("ship_details.combat_special")}>
                 {isCarrier && <Bullet
                     title={translate("combat_phases.jet")}
                     level={canJetAssault ? 1 : 0}
@@ -235,17 +293,20 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                     level={2}
                 />}
 
-                {this.props.ship.type === 30 && <Bullet
+                {ship.type === 30 && <Bullet
                     title={translate("ship_details.light_attack_carrier_asw_title")}
                     level={2}
                 >
                     {translate("ship_details.light_attack_carrier_asw_note")}
                 </Bullet>}
 
-                {isCarrier && <Bullet
-                    title={translate("combat_phases.night")}
-                    level={this.props.ship.additional_night_shelling ? 2 : 0}
-                />}
+                {isCarrier && this.renderNightAirAssault()}
+                {!isCarrier && (ship.stat.fire + ship.stat.torpedo <= 0) && (
+                    <Bullet
+                        title={translate("combat_phases.night")}
+                        level={0}
+                    />
+                )}
             </ComponentContainer>
         )
     }
