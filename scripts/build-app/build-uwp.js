@@ -63,7 +63,7 @@ const run = async () => {
     const content = await fs.readFile(fileManifest, 'utf-8')
     await fs.writeFile(fileManifest,
         content
-            .replace(/ Version="(.+?)"/, `Version="${version}"`)
+            .replace(/ Version="(.+?)"/, ` Version="${version}"`)
     )
 
     // console.log(build, buildNumber)
