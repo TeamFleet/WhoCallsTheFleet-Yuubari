@@ -1,0 +1,20 @@
+@import "../../base.less";
+
+.component{
+    position:   relative;
+
+    &.is-loading:after{
+        z-index:    -1;
+        .style-spinner-inner();
+        content:    "";
+        position:   absolute;
+        top:        50%;
+        left:       50%;
+        width:      @spinner-size;
+        height:     @spinner-size;
+        margin-left:(0 - @spinner-size / 2);
+        margin-top: (0 - @spinner-size / 2);
+        transform-origin: 50%;
+        animation: spinning 1s linear infinite;
+    }
+}

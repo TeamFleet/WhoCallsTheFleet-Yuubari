@@ -10,7 +10,7 @@
     margin-top: (0 - @size / 2);
 
     transform-origin: 50%;
-    animation: sipnner 1s linear infinite;
+    animation: spinning 1s linear infinite;
 
     &:before{
         .style-spinner-inner();
@@ -27,10 +27,4 @@
     border:     2px solid @color-border-2;
     border-top-color: fade(@color-accent, 75%);
     border-radius: 50%;
-}
-
-@keyframes spinner {
-    100% {
-        transform: rotate(360deg);
-    }
 }

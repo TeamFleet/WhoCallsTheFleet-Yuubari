@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Image from '@appUI/components/image'
 import ComponentContainer from '@appUI/containers/infos-component'
 
 // import translate from 'sp-i18n'
@@ -14,9 +15,7 @@ export default class EquipmentDetailsComponentIllust extends React.Component {
     render() {
         return (
             <ComponentContainer className={this.props.className}>
-                <div className="wrapper">
-                    <img className="illust" src={getPic('equipment', this.props.equipment.id, 'card')} />
-                </div>
+                <Image className="illust" src={getPic('equipment', this.props.equipment.id, 'card')} />
             </ComponentContainer>
         )
     }
