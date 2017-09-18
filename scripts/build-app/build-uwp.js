@@ -63,7 +63,7 @@ const run = async () => {
     const content = await fs.readFile(fileManifest, 'utf-8')
     await fs.writeFile(fileManifest,
         content
-            .replace(/ Version="(.+?)"/, `Version="${version}"`)
+            .replace(/ Version="(.+?)"/, ` Version="${version}"`)
     )
 
     // console.log(build, buildNumber)
@@ -122,7 +122,7 @@ const run = async () => {
     repo.add('./*')
     repo.commit("update build number - " + (new Date()))
     await new Promise((resolve) => {
-        repo.pull([], () => resolve())
+        repo.push([], () => resolve())
     })
     waiting.finish()
 }
