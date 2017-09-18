@@ -155,19 +155,8 @@
         }
         /* Preloader */
             .swiper-lazy-preloader {
-                @size: @spinner-size;
-                width: @size;
-                height: @size;
-                // position: absolute;
-                // left: 50%;
-                // top: 50%;
-                margin-left: (0 - @size / 2);
-                margin-top: (0 - @size / 2);
-                // transform-origin: 50%;
-                // animation: swiper-preloader-spin 1s steps(8, end) infinite;
-                animation: spinner 1s linear infinite;
-                // animation: none;
-                // opacity:    .15;
+                .style-spinner();
+                .style-spinner-position();
             }
             .swiper-lazy-preloader:after,
             .swiper-lazy-preloader-white:after {
