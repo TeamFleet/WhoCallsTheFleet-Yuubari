@@ -122,7 +122,7 @@ const run = async () => {
     repo.add('./*')
     repo.commit("update build number - " + (new Date()))
     await new Promise((resolve) => {
-        repo.pull([], () => resolve())
+        repo.push([], () => resolve())
     })
     waiting.finish()
 }
