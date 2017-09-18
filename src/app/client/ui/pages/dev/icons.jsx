@@ -35,7 +35,7 @@ export default class extends React.Component {
         let icons = []
 
         for (let symbol of doc.querySelectorAll('symbol[id]')) {
-            icons.push(symbol.getAttribute('id').replace(/^icon\-/, ''))
+            icons.push(symbol.getAttribute('id').replace(/^icon-/, ''))
         }
 
         return icons

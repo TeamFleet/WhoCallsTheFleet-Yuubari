@@ -129,8 +129,12 @@ const rules = [
     //
 
     {
-        test: /\.(ico|gif|jpg|jpeg|png|svg|webp)$/,
+        test: /\.(ico|gif|jpg|jpeg|png|webp)$/,
         loader: 'file-loader?context=static&name=assets/[hash:32].[ext]',
+        exclude: /node_modules/
+    }, {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
         exclude: /node_modules/
     }, {
         test: /\.(js|jsx)$/,

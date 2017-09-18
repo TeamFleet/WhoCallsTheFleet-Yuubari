@@ -16,7 +16,7 @@ const getConfig = async (appPath, type) => {
 
     return {
         target: 'web',
-        devtool: 'source-map',
+        // devtool: 'source-map',
         entry: entries,
         output: {
             filename: `[name].[chunkhash].js`,

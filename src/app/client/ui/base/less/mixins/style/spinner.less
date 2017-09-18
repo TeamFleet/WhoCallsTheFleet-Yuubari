@@ -1,0 +1,36 @@
+.style-spinner() {
+    @size: @spinner-size;
+    
+    position: absolute;
+    width: @size;
+    height: @size;
+    left: 50%;
+    top: 50%;
+    margin-left: (0 - @size / 2);
+    margin-top: (0 - @size / 2);
+
+    transform-origin: 50%;
+    animation: sipnner 1s linear infinite;
+
+    &:before{
+        .style-spinner-inner();
+        content:    "";
+        position:   absolute;
+        top:        0;
+        left:       0;
+        width:      100%;
+        height:     100%;
+    }
+}
+
+.style-spinner-inner(){
+    border:     2px solid @color-border-2;
+    border-top-color: fade(@color-accent, 75%);
+    border-radius: 50%;
+}
+
+@keyframes spinner {
+    100% {
+        transform: rotate(360deg);
+    }
+}

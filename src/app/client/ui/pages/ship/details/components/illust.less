@@ -153,6 +153,70 @@
         .swiper-lazy-loaded{
             animation:  fadein @base-transition-duration @base-transition-timing-function;
         }
+        /* Preloader */
+            .swiper-lazy-preloader {
+                @size: @spinner-size;
+                width: @size;
+                height: @size;
+                // position: absolute;
+                // left: 50%;
+                // top: 50%;
+                margin-left: (0 - @size / 2);
+                margin-top: (0 - @size / 2);
+                // transform-origin: 50%;
+                // animation: swiper-preloader-spin 1s steps(8, end) infinite;
+                animation: spinner 1s linear infinite;
+                // animation: none;
+                // opacity:    .15;
+            }
+            .swiper-lazy-preloader:after,
+            .swiper-lazy-preloader-white:after {
+                // opacity: .15;
+                // background-image: url("~Assets/symbols-other/spinner6.svg");
+                // background-image: url("~Assets/symbols-other/spinner5.svg");
+                background:     none;
+                .style-spinner-inner();
+            }
+            /*
+            .swiper-lazy-preloader:before,
+            .swiper-lazy-preloader:after,
+            .swiper-lazy-preloader-white:before,
+            .swiper-lazy-preloader-white:after {
+                content:    "";
+                position:   absolute;
+                left:       0;
+                top:        0;
+                width:      100%;
+                height:     100%;
+                border-radius: 50%;
+                border:     2px solid transparent;
+                transform-origin: 50%;
+            }
+            .swiper-lazy-preloader:before,
+            .swiper-lazy-preloader-white:before {
+                z-index:    2;
+                // border-left-color: fade(@color-border, 100%);
+                border-top-color: @color-accent;
+                animation: swiper-preloader-spin 1s linear infinite;
+            }
+            .swiper-lazy-preloader:after,
+            .swiper-lazy-preloader-white:after {
+                z-index:    1;
+                // border-top-color: fade(@color-border, 100%);
+                // border-right-color: fade(@color-border, 100%);
+                border-color: @color-border;
+            }
+            */
+            // .swiper-lazy-preloader:after {
+            //     background-position: 50%;
+            //     background-size: 100%;
+            //     background-repeat: no-repeat;
+            // }
+            // @keyframes swiper-preloader-spin {
+            //     100% {
+            //         transform: rotate(360deg);
+            //     }
+            // }
 
     .illust-name-container{
         flex:       0;
