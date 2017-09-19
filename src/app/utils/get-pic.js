@@ -39,12 +39,16 @@ const getUri = (type, id, file, revision) => {
             return `equipments/${id}/${file}${ext}${revision}`
 
         case 'entity':
-        case 'entities':
-            return `entities/${id}/${file}${ext}${revision}`
+        case 'entities': {
+            let _ext = ext
+            if (file == 2) _ext = '.jpg'
+            return `entities/${id}/${file}${_ext}${revision}`
+        }
 
         case 'enemy':
-        case 'enemies':
+        case 'enemies': {
             return `enemies/${id}/${file}${ext}${revision}`
+        }
     }
 }
 

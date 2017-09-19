@@ -43,7 +43,9 @@ export default class extends React.Component {
                 <p><i>{translate('under_construction')}...</i></p>
 
                 <h2>{translate('seiyuu')}</h2>
-                {listCVs.map(entity => (
+                {listCVs.sort((a, b) => (
+                    b.relation.cv.length - a.relation.cv.length
+                )).map(entity => (
                     <LinkEntity entity={entity} key={entity.id} />
                 ))}
 
