@@ -20,14 +20,16 @@ import TableBody from './table-body'
 import TableBodyHeaderInterceptor from './table-body-header-interceptor'
 
 import { ImportStyle } from 'sp-css-import'
-// import style from './body.less'
+
+
+// --------------------------------------------------
+
 
 @connect((state, ownProps) => ({
     // ...state.shipList[ownProps.id],
     isInit: state.equipmentList[ownProps.id] ? true : false,
     // location: state[REALTIME_LOCATION_REDUCER_NAME]
 }))
-// @ImportStyle(style)
 export default class EquipmentList extends React.Component {
     // componentWillMount() {
     //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
@@ -46,6 +48,10 @@ export default class EquipmentList extends React.Component {
     }
 }
 
+
+// --------------------------------------------------
+
+
 // @connect((state, ownProps) => ({
 //     ...state.equipmentList[ownProps.id],
 //     // location: state.location
@@ -56,7 +62,6 @@ export default class EquipmentList extends React.Component {
     delete obj.highlightingStat
     return obj
 })
-// @connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
 @ImportStyle(require('./body.less'))
 class EquipmentListBody extends React.Component {
 
@@ -128,6 +133,10 @@ class EquipmentListBody extends React.Component {
     }
 }
 
+
+// --------------------------------------------------
+
+
 @connect((state, ownProps) => ({
     highlightingIndex: state.equipmentList[ownProps.id].highlightingIndex,
     highlightingStat: state.equipmentList[ownProps.id].highlightingStat
@@ -145,6 +154,10 @@ class EquipmentListBodyDataHost extends React.Component {
     }
 }
 
+
+// --------------------------------------------------
+
+
 // @connect((state, ownProps) => ({
 //     ...state.equipmentList[ownProps.id],
 //     // location: state.location
@@ -161,6 +174,10 @@ class EquipmentListBodyDataHost extends React.Component {
 //         )
 //     }
 // }
+
+
+// --------------------------------------------------
+
 
 const CSSTransitionComponent = (props) => (
     <CSSTransition
