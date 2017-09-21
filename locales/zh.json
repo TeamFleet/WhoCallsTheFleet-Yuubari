@@ -15,6 +15,17 @@
     "ok": "确认",
     "none": "无",
 
+    "shipclass": "${class}级",
+    "shipclass_number": "${class}级 ${number} 号舰",
+    "other_ships_of_type": "其他${type}",
+    "shipname_dash_none": "",
+    "exslot": "补强增设栏位",
+    "equipment_series": "${equipment}系列",
+    "seiyuu": "声优",
+    "seiyuus": "声优",
+    "artist": "画师",
+    "artists": "画师",
+
     "day_abbr": {
         "Sunday": "日",
         "Monday": "一",
@@ -36,15 +47,6 @@
         "ship_stat_with_equipments": "需要${stat}属性：${value} (计算装备)",
         "has_stat": "${stat}至少为${value}"
     },
-
-    "shipclass": "${class}级",
-    "shipclass_number": "${class}级 ${number} 号舰",
-    "other_ships_of_type": "其他${type}",
-    "shipname_dash_none": "",
-    "exslot": "补强增设栏位",
-    "equipment_series": "${equipment}系列",
-    "seiyuus": "声优",
-    "artists": "画师",
 
     "stat": {
         "fire": "火力",
@@ -165,9 +167,7 @@
         "remodel_initial": "初始",
 
         "quickfacts": "小知识",
-        "navy": "军籍",
-        "cv": "声优",
-        "illustrator": "画师",
+        "navy": "海军",
 
         "stats": "基础属性",
 
@@ -210,7 +210,7 @@
         "equipable_legend_yes": "可装备",
         "equipable_legend_yes_extra": "其他${type}不可"
     },
-    
+
     "equipment_details": {
         "infos": "信息",
         "refittable": "可装备于...",

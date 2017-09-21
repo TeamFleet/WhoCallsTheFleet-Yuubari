@@ -4,26 +4,54 @@ import { connect } from 'react-redux'
 import translate from 'sp-i18n'
 // import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from '@appUtils/html-head.js'
+import db from '@appLogic/database'
+import { ImportStyle } from 'sp-css-import'
+import getSubtitle from './get-subtitle'
+
 import Header from './commons/header.jsx'
 import InfosPageContainer from '@appUI/containers/infos-page'
 import ComponentContainer from '@appUI/containers/infos-component'
-import db from '@appLogic/database'
 
 import Pictures from './components/pictures'
 
-import { ImportStyle } from 'sp-css-import'
+const extractFromState = (state) => {
+    const pathname = state.routing.locationBeforeTransitions.pathname
+    const segs = pathname.split('/')
+    const indexEntities = segs.indexOf('entities')
+
+    return {
+        id: parseInt(segs[indexEntities + 1])
+    }
+}
 
 @connect()
 @ImportStyle(require('./styles.less'))
 export default class extends React.Component {
+    // static onServerRenderHtmlExtend(ext, store) {
+    //     const head = htmlHead({
+    //         store,
+    //         title: db.entities[store.getState().routing.locationBeforeTransitions.pathname.split('/').reverse()[0]]._name
+    //     })
+
+    //     ext.metas = ext.metas.concat(head.meta)
+    //     ext.title = head.title
+    // }
     static onServerRenderHtmlExtend(ext, store) {
-        const head = htmlHead({
-            store,
-            title: db.entities[store.getState().routing.locationBeforeTransitions.pathname.split('/').reverse()[0]]._name
-        })
+        const { id } = extractFromState(store.getState())
+
+        const entity = db.entities[id]
+        const obj = {
+            store
+        }
+        if (entity) {
+            obj.title = entity._name
+            obj.subtitle = getSubtitle(entity)
+            // obj.description = getDescription(ship)
+        }
+        const head = htmlHead(obj)
 
         ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
+        ext.title = head.title// + translate("ship_details." + tab)
     }
 
     get data() {

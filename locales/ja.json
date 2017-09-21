@@ -16,6 +16,17 @@
     "ok": "OK",
     "none": "None",
 
+    "shipclass": "${class}型",
+    "shipclass_number": "${class}型 ${number} 番艦",
+    "other_ships_of_type": "Other ${type}s",
+    "shipname_dash_none": "",
+    "exslot": "補強増設スロットへ",
+    "equipment_series": "${equipment}-series",
+    "seiyuu": "CV",
+    "seiyuus": "CV",
+    "artist": "イラストレーター",
+    "artists": "イラストレーター",
+
     "day_abbr": {
         "Sunday": "日",
         "Monday": "月",
@@ -37,15 +48,6 @@
         "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)",
         "has_stat": "${stat} at least ${value}"
     },
-
-    "shipclass": "${class}型",
-    "shipclass_number": "${class}型 ${number} 番艦",
-    "other_ships_of_type": "Other ${type}s",
-    "shipname_dash_none": "",
-    "exslot": "補強増設スロットへ",
-    "equipment_series": "${equipment}-series",
-    "seiyuus": "CV",
-    "artists": "イラストレーター",
 
     "stat": {
         "fire": "火力",
@@ -167,8 +169,6 @@
 
         "quickfacts": "ヒント",
         "navy": "海軍",
-        "cv": "CV",
-        "illustrator": "イラストレーター",
 
         "stats": "ステータス",
 
@@ -211,7 +211,7 @@
         "equipable_legend_yes": "Equipable",
         "equipable_legend_yes_extra": "No for other ${type}"
     },
-    
+
     "equipment_details": {
         "infos": "情報",
         "refittable": "装備可能艦...",

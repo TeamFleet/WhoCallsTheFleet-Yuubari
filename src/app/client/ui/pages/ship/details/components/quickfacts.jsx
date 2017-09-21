@@ -31,14 +31,14 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                 </Stat>
                 <Stat
                     className="item"
-                    title={translate("ship_details.cv")}
+                    title={translate("seiyuu")}
                 >
                     {ship._cv && <Link to={`/entities/${ship.getRel('cv')}`}>{ship._cv}</Link>}
                     {!ship._cv && <span className="unknown">?</span>}
                 </Stat>
                 <Stat
                     className="item"
-                    title={translate("ship_details.illustrator")}
+                    title={translate("artist")}
                 >
                     {ship._illustrator && <Link to={`/entities/${ship.getRel('illustrator')}`}>{ship._illustrator}</Link>}
                     {!ship._illustrator && <span className="unknown">?</span>}

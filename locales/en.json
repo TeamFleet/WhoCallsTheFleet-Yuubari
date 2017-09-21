@@ -15,6 +15,17 @@
     "ok": "OK",
     "none": "None",
 
+    "shipclass": "${class} Class",
+    "shipclass_number": "${class} Class (#${number})",
+    "other_ships_of_type": "Other ${type}s",
+    "shipname_dash_none": " ",
+    "exslot": "Expansion Slot",
+    "equipment_series": "${equipment}-series",
+    "seiyuu": "Seiyuu",
+    "seiyuus": "Seiyuus",
+    "artist": "Artist",
+    "artists": "Artists",
+
     "day_abbr": {
         "Sunday": "S",
         "Monday": "M",
@@ -36,15 +47,6 @@
         "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)",
         "has_stat": "${stat} at least ${value}"
     },
-
-    "shipclass": "${class} Class",
-    "shipclass_number": "${class} Class (#${number})",
-    "other_ships_of_type": "Other ${type}s",
-    "shipname_dash_none": " ",
-    "exslot": "Expansion Slot",
-    "equipment_series": "${equipment}-series",
-    "seiyuus": "Seiyuus",
-    "artists": "Artists",
 
     "stat": {
         "fire": "FP",
@@ -166,8 +168,6 @@
 
         "quickfacts": "Quick Facts",
         "navy": "Navy",
-        "cv": "CV",
-        "illustrator": "Artist",
 
         "stats": "Statistics",
 
