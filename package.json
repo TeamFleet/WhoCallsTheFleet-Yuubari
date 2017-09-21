@@ -76,7 +76,7 @@
         "fs-extra": "^4.0.2",
         "glob": "^7.1.2",
         "json-pretty": "^0.0.1",
-        "request": "^2.81.0",
+        "request": "^2.82.0",
         "nedb-promise": "^2.0.1",
         "simple-git": "^1.77.0",
         "npm-run-script": "^0.0.4",
