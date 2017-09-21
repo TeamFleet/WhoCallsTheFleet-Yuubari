@@ -3,6 +3,11 @@
 .component{
     position:   relative;
 
+    &.is-loading > .img{
+        opacity:    0;
+        z-index:    -1000;
+    }
+
     &.is-loading:after{
         content:    "";
         position:   absolute;
