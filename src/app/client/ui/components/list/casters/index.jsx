@@ -14,6 +14,7 @@ export default class ListCasters extends React.Component {
             array: _array,
             empty,
             children,
+            count,
             ...props
         } = this.props
 
@@ -28,6 +29,7 @@ export default class ListCasters extends React.Component {
                             entity={entity}
                             key={entity.id}
                             className="item"
+                            count={count ? 'cv' : false}
                             {...props}
                         />
                     ))

@@ -17,6 +17,7 @@ export default class LinkEntity extends React.Component {
             pic,
             name,
             children,
+            count,
             ...props
         } = this.props
 
@@ -27,6 +28,7 @@ export default class LinkEntity extends React.Component {
                 to={getLink('entity', entity.id)}
                 pic={checkShow(pic) ? getPic(entity, '0-2') : null}
                 name={checkShow(name) ? entity._name : null}
+                nameExtra={count ? `(${entity.relation[count].length})` : undefined}
                 {...props}
             >
                 {children}

@@ -6,11 +6,12 @@ import style from './_normal.less'
 
 @ImportStyle(style)
 export default class LinkTypeNormal extends React.Component {
-    renderName(name) {
+    renderName(name, extra) {
         if (typeof name === 'string') {
             return (
                 <span className="name">
                     {name}
+                    {typeof extra !== 'undefined' && <small className="name-extra">{extra}</small>}
                 </span>
             )
         }
@@ -22,7 +23,7 @@ export default class LinkTypeNormal extends React.Component {
     render() {
         const {
             pic, avatar, image, src, picture, img,
-            name, title, text,
+            name, title, text, nameExtra,
             to, href, link,
             ...props
         } = this.props
@@ -41,7 +42,7 @@ export default class LinkTypeNormal extends React.Component {
                         backgroundImage: `url(${thisPic})`
                     }}
                 />}
-                {thisName && this.renderName(thisName)}
+                {thisName && this.renderName(thisName, nameExtra)}
                 {this.props.children}
             </Link>
         )

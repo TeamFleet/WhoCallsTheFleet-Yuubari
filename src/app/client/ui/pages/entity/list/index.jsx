@@ -49,6 +49,7 @@ export default class extends React.Component {
                     list={listCVs.sort((a, b) => (
                         b.relation.cv.length - a.relation.cv.length
                     ))}
+                    count={true}
                 />
 
                 <h2>{translate('artist')}</h2>
