@@ -1,16 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-// import { ImportStyle } from 'sp-css-import'
+import { ImportStyle } from 'sp-css-import'
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 
-import LinkEntity from '@appUI/components/link/entity'
 import ListCasters from '@appUI/components/list/casters'
-
+import ListArtists from '@appUI/components/list/artists'
 
 @connect()
 // @ImportStyle(style)
@@ -42,9 +41,7 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <p><i>{translate('under_construction')}...</i></p>
-
-                <h2>{translate('seiyuu')}</h2>
+                <Title>{translate('seiyuus')}</Title>
                 <ListCasters
                     list={listCVs.sort((a, b) => (
                         b.relation.cv.length - a.relation.cv.length
@@ -52,8 +49,29 @@ export default class extends React.Component {
                     count={true}
                 />
 
-                <h2>{translate('artist')}</h2>
+                <Title>{translate('artists')}</Title>
+                <ListArtists
+                    list={listArtists.sort((a, b) => (
+                        b.relation.illustrator.length - a.relation.illustrator.length
+                    ))}
+                    count={true}
+                />
             </PageContainer>
+        )
+    }
+}
+
+@ImportStyle(require('./styles-title.less'))
+class Title extends React.Component {
+    render() {
+        const {
+            children,
+            ...props
+        } = this.props
+        return (
+            <h2 {...props}>
+                {children}
+            </h2>
         )
     }
 }

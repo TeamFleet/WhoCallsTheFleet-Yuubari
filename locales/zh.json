@@ -43,6 +43,8 @@
     "shipname_dash_none": "",
     "exslot": "补强增设栏位",
     "equipment_series": "${equipment}系列",
+    "seiyuus": "声优",
+    "artists": "画师",
 
     "stat": {
         "fire": "火力",

@@ -1,11 +1,13 @@
 import React from 'react'
-// import { ImportStyle } from 'sp-css-import'
+import { ImportStyle } from 'sp-css-import'
 
 import ListContainer from '@appUI/containers/list'
-import LinkEntity from '@appUI/components/link/entity'
+import LinkMini from '@appUI/components/link-mini'
+
+import getEntity from '@appUtils/get-entity'
 
 // @connect()
-// @ImportStyle(require('../ships/styles.less'))
+@ImportStyle(require('./styles.less'))
 export default class ListCasters extends React.Component {
     render() {
         const {
@@ -25,13 +27,14 @@ export default class ListCasters extends React.Component {
             <ListContainer className={className}>
                 {hasItem && list
                     .map(entity => (
-                        <LinkEntity
+                        <LinkMini
                             entity={entity}
                             key={entity.id}
                             className="item"
-                            count={count ? 'cv' : false}
                             {...props}
-                        />
+                        >
+                            {count && <small className="count">({getEntity(entity).relation.illustrator.length})</small>}
+                        </LinkMini>
                     ))
                 }
                 {!hasItem && !!(empty) && <span className="list-empty">{empty}</span>}

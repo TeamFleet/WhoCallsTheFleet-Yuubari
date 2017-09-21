@@ -2,13 +2,16 @@
 
 .component{
     @height:    20px;
-    .style-badge-mono();
+
+    .style-badge-mono-transparent();
+    // background-color: transparent;
+    // border-color: transparent;
 
     display:    inline-block;
     line-height:@height;
     font-size:  14px;
     border-radius: ((@height + 2) / 2);
-    padding:    0 8px;
+    padding:    0 @link-mini-horizontal;
     position:   relative;
 
     // color:              @color-badge-off;
@@ -24,7 +27,7 @@
         background-size: cover;
         z-index:    -1;
         width:      (@height + 10 + 2);
-        margin:     -1px 5px -1px -9px;
+        margin:     -1px 5px -1px (0 - @link-mini-horizontal - 1);
         background-position: 60% 0%;
         // width:      (@height + 10 + 8);
         // margin:     -1px 5px -1px -9px;
@@ -38,12 +41,24 @@
 a.component,
 .component.link{
     color: 	        @color-alt;
-    border-color:   @color-border;
-    &:hover{
-        color: 	@color-accent;
+    // border-color:   @color-border;
+    // border-color:   transparent;
+    // background-color:transparent;
+    .styles-hover(){
+        color: 	    @color-accent;
+        background: fade(#000, 15%);
     }
-    &:active{
+    .styles-active(){
         color:  fade(#fff, 50%);
+        background: fade(#000, 15%);
+    }
+    .is-hover({
+        .styles-hover();
+    }; {
+        .styles-active();
+    });
+    &:active{
+        .styles-active();
     }
 }
 

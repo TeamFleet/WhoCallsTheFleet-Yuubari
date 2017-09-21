@@ -1,7 +1,7 @@
 import React from 'react'
 // import { ImportStyle } from 'sp-css-import'
 
-import ListContainer from '../_avatar'
+import ListContainer from '@appUI/containers/list'
 import LinkShip from '@appUI/components/link/ship'
 import getShip from '@appUtils/get-ship.js'
 import sortShips from '@appUtils/sort-ships.js'

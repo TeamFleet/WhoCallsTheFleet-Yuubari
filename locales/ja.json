@@ -44,6 +44,8 @@
     "shipname_dash_none": "",
     "exslot": "補強増設スロットへ",
     "equipment_series": "${equipment}-series",
+    "seiyuus": "CV",
+    "artists": "イラストレーター",
 
     "stat": {
         "fire": "火力",

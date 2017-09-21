@@ -3,11 +3,12 @@ import { ImportStyle } from 'sp-css-import'
 
 // @connect()
 @ImportStyle(require('./styles.less'))
-export default class ListWithAvatar extends React.Component {
+export default class ListContainer extends React.Component {
     insertPlaceHolders() {
         let i = 0;
         let arr = []
-        while (i++ < 10) arr.push(<span className="item placeholder" key={i}></span>)
+        while (i++ < 10)
+            arr.push(<span className="item placeholder" key={i}></span>)
         return arr
     }
     render() {

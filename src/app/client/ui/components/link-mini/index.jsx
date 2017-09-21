@@ -3,6 +3,8 @@ import React from 'react'
 import Link from '@appUI/components/link'
 
 import getShip from '@appUtils/get-ship.js'
+import getEquipment from '@appUtils/get-equipment.js'
+import getEntity from '@appUtils/get-entity.js'
 import getPic from '@appUtils/get-pic.js'
 import getLink from '@appUtils/get-link.js'
 
@@ -14,6 +16,7 @@ export default class LinkMini extends React.Component {
         const {
             ship: _ship,
             equipment: _equipment,
+            entity: _entity,
             id: _id,
 
             to: _to,
@@ -26,7 +29,6 @@ export default class LinkMini extends React.Component {
 
         const to = _to || _href || undefined
         const ship = getShip(_ship || _id)
-        const equipment = getShip(_equipment || _id)
 
         if (ship)
             return (
@@ -43,7 +45,8 @@ export default class LinkMini extends React.Component {
                 </Link>
             )
 
-        if (equipment)
+        if (_equipment) {
+            const equipment = getEquipment(_equipment)
             return (
                 <Link
                     className={className}
@@ -54,6 +57,21 @@ export default class LinkMini extends React.Component {
                     {children}
                 </Link>
             )
+        }
+
+        if (_entity) {
+            const entity = getEntity(_entity)
+            return (
+                <Link
+                    className={className}
+                    to={to || getLink('entity', entity.id)}
+                    {...props}
+                >
+                    {entity._name}
+                    {children}
+                </Link>
+            )
+        }
 
         if (to)
             return (
