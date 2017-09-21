@@ -5,7 +5,8 @@ import {
     EQUIPMENTLIST_CHANGE_COLLECTION,
     EQUIPMENTLIST_HIGHLIGHT_COLUMN,
 
-    EQUIPMENTLIST_SCROLL
+    EQUIPMENTLIST_SCROLL,
+    EQUIPMENTLIST_OBSERVER
 } from '../../redux/action-types.js'
 
 const initialState = {}
@@ -13,6 +14,7 @@ const initialStateSingle = {
     collection: 0,
     // highlightingIndex: undefined,
     // highlightingStat: undefined,
+    // observer: undefined,
 }
 
 const updateState = (fullState, id, state) =>
@@ -60,6 +62,12 @@ export default function (state = initialState, action) {
         case EQUIPMENTLIST_SCROLL: {
             return updateState(state, action.id, {
                 compareScrollLeft: action.scrollLeft
+            })
+        }
+
+        case EQUIPMENTLIST_OBSERVER: {
+            return updateState(state, action.id, {
+                observer: action.observer
             })
         }
 

@@ -8,6 +8,7 @@ import classNames from 'classnames'
 import db from '@appLogic/database'
 import {
     init as listInit,
+    observer as listObserver,
     // reset as listReset
 } from '@appLogic/equipment-list/api.js'
 import equipmentTypes from 'kckit/src/types/equipments'
@@ -19,6 +20,7 @@ import Header from './header.jsx'
 import TableBody from './table-body'
 import TableBodyHeaderInterceptor from './table-body-header-interceptor'
 
+import { observer } from '@appUI/hoc/observer'
 import { ImportStyle } from 'sp-css-import'
 
 
@@ -30,6 +32,9 @@ import { ImportStyle } from 'sp-css-import'
     isInit: state.equipmentList[ownProps.id] ? true : false,
     // location: state[REALTIME_LOCATION_REDUCER_NAME]
 }))
+@observer({
+    rootMargin: "50px 0px"
+})
 export default class EquipmentList extends React.Component {
     // componentWillMount() {
     //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
@@ -37,6 +42,11 @@ export default class EquipmentList extends React.Component {
     // }
 
     render() {
+        const {
+            observer,
+            ...props
+        } = this.props
+
         if (!this.props.isInit) {
             this.props.dispatch(
                 listInit(this.props.id)
@@ -44,7 +54,13 @@ export default class EquipmentList extends React.Component {
             if (__CLIENT__) return null
         }
 
-        return <EquipmentListBody { ...this.props } />
+        if(__CLIENT__){
+            this.props.dispatch(
+                listObserver(this.props.id, observer)
+            )
+        }
+
+        return <EquipmentListBody { ...props } />
     }
 }
 

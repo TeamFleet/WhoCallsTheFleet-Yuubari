@@ -5,7 +5,8 @@ import {
     EQUIPMENTLIST_CHANGE_COLLECTION,
     EQUIPMENTLIST_HIGHLIGHT_COLUMN,
 
-    EQUIPMENTLIST_SCROLL
+    EQUIPMENTLIST_SCROLL,
+    EQUIPMENTLIST_OBSERVER
 } from '../../redux/action-types.js'
 
 export const init = (id, initialState) => ({
@@ -36,4 +37,10 @@ export const scroll = (id, scrollLeft) => ({
     type: EQUIPMENTLIST_SCROLL,
     id,
     scrollLeft
+})
+
+export const observer = (id, observer) => ({
+    type: EQUIPMENTLIST_OBSERVER,
+    id,
+    observer
 })

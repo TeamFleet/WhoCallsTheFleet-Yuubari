@@ -29,3 +29,9 @@ export const scroll = (id, scrollLeft) => (dispatch) => {
         actions.scroll(id, scrollLeft)
     )
 }
+
+export const observer = (id, observer) => (dispatch) => {
+    dispatch(
+        actions.observer(id, observer)
+    )
+}

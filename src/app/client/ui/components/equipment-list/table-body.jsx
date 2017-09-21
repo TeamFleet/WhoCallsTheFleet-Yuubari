@@ -8,12 +8,14 @@ import { get } from 'kckit'
 import {
     highlightColumn
 } from '@appLogic/equipment-list/api.js'
+import getFromState from '@appLogic/equipment-list/get-from-state.js'
 import arrStats from '@appData/equipment-stats'
 import routerPush from '@appUtils/router-push'
 import getLink from '@appUtils/get-link'
 // import DataTableFlex, { Row, Cell } from '@appUI/components/datatable-flex'
 
 import { ImportStyle } from 'sp-css-import'
+import { observerItem } from '@appUI/hoc/observer'
 // import style from './table-body.less'
 
 export const stats = [
@@ -23,10 +25,12 @@ export const stats = [
 ]
 
 @connect((state, ownProps) => ({
-    collection: state.equipmentList[ownProps.id].collection,
+    collection: getFromState(state, ownProps).collection,
+    observer: getFromState(state, ownProps).observer
     // columnHighlight: state.equipmentList[ownProps.id].column
 }))
 @ImportStyle(require('./table-body.less'))
+@observerItem()
 export default class EquipmentListTableBody extends React.Component {
     getData() {
         if (!Array.isArray(this.props.equipments)) return []
