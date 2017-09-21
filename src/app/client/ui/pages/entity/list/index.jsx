@@ -1,14 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+// import { ImportStyle } from 'sp-css-import'
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
+
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 
 import LinkEntity from '@appUI/components/link/entity'
+import ListCasters from '@appUI/components/list/casters'
 
-// import { ImportStyle } from 'sp-css-import'
 
 @connect()
 // @ImportStyle(style)
@@ -43,11 +45,11 @@ export default class extends React.Component {
                 <p><i>{translate('under_construction')}...</i></p>
 
                 <h2>{translate('seiyuu')}</h2>
-                {listCVs.sort((a, b) => (
-                    b.relation.cv.length - a.relation.cv.length
-                )).map(entity => (
-                    <LinkEntity entity={entity} key={entity.id} />
-                ))}
+                <ListCasters
+                    list={listCVs.sort((a, b) => (
+                        b.relation.cv.length - a.relation.cv.length
+                    ))}
+                />
 
                 <h2>{translate('artist')}</h2>
             </PageContainer>

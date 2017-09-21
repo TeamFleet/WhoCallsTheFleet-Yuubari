@@ -13,20 +13,20 @@ const checkShow = value => (value || typeof value === 'undefined')
 export default class LinkEntity extends React.Component {
     render() {
         const {
-            entity, id,
+            entity: _entity, id,
             pic,
             name,
             children,
             ...props
         } = this.props
 
-        this.entity = getEntity(entity || id)
+        const entity = getEntity(_entity || id)
 
         return (
             <Link
-                to={getLink('entity', this.entity.id)}
-                pic={checkShow(pic) ? getPic(this.entity, '0-2') : null}
-                name={checkShow(name) ? this.entity._name : null}
+                to={getLink('entity', entity.id)}
+                pic={checkShow(pic) ? getPic(entity, '0-2') : null}
+                name={checkShow(name) ? entity._name : null}
                 {...props}
             >
                 {children}
