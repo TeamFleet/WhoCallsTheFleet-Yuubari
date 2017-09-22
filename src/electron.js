@@ -54,7 +54,7 @@ function createWindow() {
 
     // and load the index.html of the app.
     const entry = path.join(pathApp, '/index.html')
-    console.log(entry)
+    // console.log(entry)
     mainWindow.loadURL(url.format({
         pathname: entry,
         protocol: 'file:',

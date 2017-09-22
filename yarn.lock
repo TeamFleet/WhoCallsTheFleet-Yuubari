@@ -1060,12 +1060,6 @@ babel-preset-es2015-loose@^8.0.0:
   dependencies:
     modify-babel-preset "^3.1.0"
 
-babel-preset-es2015-minimal@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-es2015-minimal/-/babel-preset-es2015-minimal-2.1.0.tgz#e492413c72f5273a57626bc9794fe7e1824fb14f"
-  dependencies:
-    modify-babel-preset "^3.0.0"
-
 babel-preset-es2015@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-preset-es2015/-/babel-preset-es2015-6.24.1.tgz#d44050d6bc2c9feea702aaf38d727a0210538939"
@@ -4058,12 +4052,6 @@ immediate@~3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
 
-immutability-helper@^2.1.2:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.4.0.tgz#00d421e2957c17f0f0781475f05ffd837e73458d"
-  dependencies:
-    invariant "^2.2.0"
-
 imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
@@ -5495,7 +5483,7 @@ mksnapshot@^0.3.0:
     fs-extra "0.26.7"
     request "^2.79.0"
 
-modify-babel-preset@^3.0.0, modify-babel-preset@^3.1.0:
+modify-babel-preset@^3.1.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/modify-babel-preset/-/modify-babel-preset-3.2.1.tgz#d7172aa3c0822ed3fc08e308fd0971295136ab50"
   dependencies:
@@ -6713,30 +6701,6 @@ postcss@^6.0.11:
     source-map "^0.5.7"
     supports-color "^4.4.0"
 
-preact-compat@^3.17.0:
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/preact-compat/-/preact-compat-3.17.0.tgz#528cfdfc301190c1a0f47567336be1f4be0266b3"
-  dependencies:
-    immutability-helper "^2.1.2"
-    preact-render-to-string "^3.6.0"
-    preact-transition-group "^1.1.0"
-    prop-types "^15.5.8"
-    standalone-react-addons-pure-render-mixin "^0.1.1"
-
-preact-render-to-string@^3.6.0:
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-3.6.3.tgz#481d0d5bdac9192d3347557437d5cd00aa312043"
-  dependencies:
-    pretty-format "^3.5.1"
-
-preact-transition-group@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/preact-transition-group/-/preact-transition-group-1.1.1.tgz#f0a49327ea515ece34ea2be864c4a7d29e5d6e10"
-
-preact@^8.2.5:
-  version "8.2.5"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-8.2.5.tgz#cbfa3962a8012768159f6d01d46f9c1eb3213c0a"
-
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -6769,10 +6733,6 @@ pretty-format@^21.1.0:
   dependencies:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
-
-pretty-format@^3.5.1:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
 
 private@^0.1.6, private@^0.1.7, private@~0.1.5:
   version "0.1.7"
@@ -7900,10 +7860,6 @@ sshpk@^1.7.0:
 stackframe@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-0.3.1.tgz#33aa84f1177a5548c8935533cbfeb3420975f5a4"
-
-standalone-react-addons-pure-render-mixin@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/standalone-react-addons-pure-render-mixin/-/standalone-react-addons-pure-render-mixin-0.1.1.tgz#3c7409f4c79c40de9ac72c616cf679a994f37551"
 
 "statuses@>= 1.3.1 < 2", statuses@^1.0.0, statuses@^1.2.0, statuses@~1.3.1:
   version "1.3.1"

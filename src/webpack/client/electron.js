@@ -6,7 +6,7 @@ const getConfig = (appPath, config) => {
 
     const result = Object.assign({}, config, {
         target: 'electron-main',
-        devtool: undefined
+        // devtool: undefined
     })
 
     // console.log(' ')
