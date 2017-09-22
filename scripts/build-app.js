@@ -47,7 +47,7 @@ const run = async (src) => {
     // determine src path
     // if (!src) src = path.resolve(pathPackage, './WhoCallsTheFleet')
     if (!src) src = pathPackage
-    src = path.resolve(src)
+    src = path.normalize(src)
     console.log(`${symbols.complete} Target directory: ${src}`)
 
     // --------------------------------------------------
@@ -64,7 +64,7 @@ const run = async (src) => {
 
     // build app into src directory
     waiting = spinner(`Building app into target directory`)
-    const env = `cross-env WEBPACK_BUILD_ENV=app WEBPACK_STAGE_MODE=client WEBPACK_OUTPUT_PATH=${src}`
+    const env = `cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client WEBPACK_OUTPUT_PATH=${src.replace(/\\/g, '\\\\')}`
     const cmd = `${env} node ./src/webpack/enter`
     await new Promise((resolve, reject) => {
         const child = npmRunScript(cmd, {
