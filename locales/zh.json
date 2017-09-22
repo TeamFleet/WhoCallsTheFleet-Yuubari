@@ -245,5 +245,10 @@
         "can_equip_in_ex_slot": "可装备于补强增设栏位",
         "cannot_equip_in_ex_slot_but_ex_ships": "不可装备于大多数舰娘的补强增设栏位，但以下舰娘例外……",
         "cannot_equip_in_ex_slot": "不可装备于补强增设栏位"
+    },
+
+    "entity_details": {
+        "casts": "配音...",
+        "illustrates": "绘制..."
     }
 }

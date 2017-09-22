@@ -14,12 +14,27 @@ import style from './ship.less'
 
 @ImportStyle(style)
 export default class LinkShip extends React.Component {
-    checkShow(type) {
-        return (this.props[type] || typeof this.props[type] === 'undefined')
+    checkShow(value) {
+        return (value || typeof value === 'undefined')
     }
 
-    renderName() {
-        if (this.props.type) {
+    renderName(type = this.props.type) {
+        if (type === 'names') {
+            const names = []
+            this.ship._series.forEach(obj => {
+                const thisShip = getShip(obj.id)
+                // console.log(thisShip)
+                const baseName = thisShip.getNameNoSuffix()
+                if (!names.includes(baseName))
+                    names.push(baseName)
+            })
+            return (
+                <span>
+                    {names.join(' / ')}
+                </span>
+            )
+        }
+        if (type) {
             const type = (this.ship.type && this.ship.type_display && this.ship.type !== this.ship.type_display)
                 ? this.ship.type_display
                 : this.ship.type
@@ -41,7 +56,22 @@ export default class LinkShip extends React.Component {
     }
 
     render() {
-        this.ship = getShip(this.props.ship)
+        const {
+            className,
+            ship,
+
+            type,
+            extraIllust,
+            pic,
+            name,
+            navy,
+
+            children,
+
+            ...props
+        } = this.props
+
+        this.ship = getShip(ship)
 
         // const props = { ...this.props };
         // [
@@ -60,15 +90,15 @@ export default class LinkShip extends React.Component {
 
         return (
             <Link
-                className={this.props.className}
+                className={className}
                 to={'/ships/' + this.ship.id}
-                onClick={this.props.onClick}
-                pic={this.checkShow('pic') ? getPic(this.ship, '0-2') : null}
-                name={this.checkShow('name') ? this.renderName() : null}
+                pic={this.checkShow(pic) ? getPic(this.ship, '0-2') : null}
+                name={this.checkShow(name) ? this.renderName(type) : null}
+                {...props}
             >
-                {this.props.extraIllust && this.ship.hasExtraIllust() && <Icon className="icon-has-extra-illust" icon="hanger" />}
-                {this.checkShow('navy') && this.ship._navy !== 'ijn' && <FlagNavy className="flag-navy" navy={this.ship._navy} shadow={true} />}
-                {this.props.children}
+                {extraIllust && this.ship.hasExtraIllust() && <Icon className="icon-has-extra-illust" icon="hanger" />}
+                {this.checkShow(navy) && this.ship._navy !== 'ijn' && <FlagNavy className="flag-navy" navy={this.ship._navy} shadow={true} />}
+                {children}
             </Link>
         )
     }

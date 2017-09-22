@@ -2,11 +2,18 @@
 
 .component{
     .entityinfo-pictures{
+        // float:      left;
+        // margin-right:(@infos-component-gutter-vertical / 2);
         float:      right;
         margin-left:(@infos-component-gutter-vertical / 2);
-        margin-bottom:  -100px;
+        // margin-bottom:  -100px;
         .screen-max({
             width:  20vw;
+        // });
+        // .screen-t0({
+            // float:      right;
+            // margin-left:(@infos-component-gutter-vertical / 2);
+            // margin-right: auto;
         });
         .screen-tablet({
             float:      none;
@@ -15,6 +22,12 @@
             width:      auto;
             margin-bottom:  auto;
         });
+    }
+
+    .entityinfo-list{
+        .list{
+            clear: none;
+        }
     }
 
     // .screen-tablet({

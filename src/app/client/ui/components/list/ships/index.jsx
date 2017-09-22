@@ -28,14 +28,17 @@ export default class ListShips extends React.Component {
             array: _array,
             empty,
             type,
+            sort,
             children,
             ...props
         } = this.props
+
         const list = _list || _array || []
         const hasItem = list.length ? true : false
+
         return (
             <ListContainer className={className}>
-                {hasItem && getList(list)
+                {hasItem && getList(list, sort)
                     .map(ship => (
                         <LinkShip
                             ship={ship}

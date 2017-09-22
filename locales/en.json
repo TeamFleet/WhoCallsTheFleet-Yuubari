@@ -245,5 +245,10 @@
         "can_equip_in_ex_slot": "Can be equipped in ex-slot",
         "cannot_equip_in_ex_slot_but_ex_ships": "Cannot be equipped in ex-slot for most ships but following ships...",
         "cannot_equip_in_ex_slot": "Cannot be equipped in ex-slot"
+    },
+
+    "entity_details": {
+        "casts": "Casts...",
+        "illustrates": "Illustrates..."
     }
 }

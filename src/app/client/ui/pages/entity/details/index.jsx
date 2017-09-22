@@ -13,6 +13,7 @@ import InfosPageContainer from '@appUI/containers/infos-page'
 import ComponentContainer from '@appUI/containers/infos-component'
 
 import Pictures from './components/pictures'
+import ListShips from '@appUI/components/list/ships'
 
 const extractFromState = (state) => {
     const pathname = state.routing.locationBeforeTransitions.pathname
@@ -60,6 +61,32 @@ export default class extends React.Component {
         return this._data || {}
     }
 
+    getList(type) {
+        if (Array.isArray(this.data.relation[type]) && this.data.relation[type].length)
+            return this.data.relation[type].map(series => (
+                series[series.length - 1]
+            ))
+        return []
+    }
+
+    renderList(type, list, props = {}) {
+        if (!list.length) return null
+        return (
+            <ComponentContainer
+                title={translate(`entity_details.${type}`)}
+                className={`entityinfo entityinfo-list entityinfo-${type}`}
+            >
+                <ListShips
+                    list={list}
+                    type="names"
+                    className="list"
+                    sort={false}
+                    {...props}
+                />
+            </ComponentContainer>
+        )
+    }
+
     render() {
         if (__CLIENT__ && __DEV__) console.log('thisEntity', this.data)
 
@@ -76,9 +103,12 @@ export default class extends React.Component {
                 />
 
                 {hasPics && <Pictures entity={this.data} className="entityinfo entityinfo-pictures" />}
-                <ComponentContainer className="entityinfo">
-                    <p><i>{translate('under_construction')}...</i></p>
-                </ComponentContainer>
+
+                {this.renderList('casts', this.getList('cv'))}
+                {this.renderList('illustrates', this.getList('illustrator'), {
+                    extraIllust: true
+                })}
+
             </InfosPageContainer>
         )
     }

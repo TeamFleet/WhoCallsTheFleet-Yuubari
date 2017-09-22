@@ -24,7 +24,7 @@ let navs = [
     'ships',
     'equipments',
     'indev-arsenal',
-    'indev-entities',
+    'entities',
     undefined,
     'about'
 ]
