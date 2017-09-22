@@ -6,7 +6,7 @@
   <Identity Name="WhoCallsTheFleet"
     ProcessorArchitecture="x64"
     Publisher="CN=43EB8253-2612-4378-9B96-6A35957E0E07"
-    Version="1.0.0.15" />
+    Version="1.0.0.16" />
   <Properties>
     <DisplayName>WhoCallsTheFleet (DEV)</DisplayName>
     <PublisherDisplayName>Diablohu</PublisherDisplayName>

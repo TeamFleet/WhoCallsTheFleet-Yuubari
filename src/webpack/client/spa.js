@@ -32,7 +32,7 @@ const getConfig = async (appPath, type) => {
     const outputPath = process.env.WEBPACK_OUTPUT_PATH || path.resolve(appPath, `dist-spa`)
     const publicPath = `./`
     const htmlFileName = 'index.html'
-    const isElectron = process.env.WEBPACK_BUILD_ENV === 'app'
+    const isElectron = ['app', 'electron'].includes(process.env.WEBPACK_BUILD_ENV)
 
     let config = {
         target: 'web',
