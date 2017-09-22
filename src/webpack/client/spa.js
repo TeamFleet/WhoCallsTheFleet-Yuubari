@@ -59,7 +59,7 @@ const getConfig = async (appPath, type) => {
                 '__SERVER__': false,
                 '__SPA__': true,
                 '__ELECTRON__': isElectron,
-                '__DEV__': true,
+                '__DEV__': false,
                 '__PUBLIC__': JSON.stringify(publicPath)
             }),
             new webpack.NoEmitOnErrorsPlugin(),
