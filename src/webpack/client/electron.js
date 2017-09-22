@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 const getConfig = (appPath, config) => {
 
@@ -13,6 +14,17 @@ const getConfig = (appPath, config) => {
     result.output.path = process.env.WEBPACK_OUTPUT_PATH
         ? path.normalize(process.env.WEBPACK_OUTPUT_PATH)
         : path.resolve(appPath, `dist-electron`)
+
+    result.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            beautify: false,
+            comments: false,
+            sourceMap: false
+        })
+    )
 
     // console.log(' ')
     // console.log(' ')

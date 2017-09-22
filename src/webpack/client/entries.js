@@ -20,16 +20,24 @@ module.exports = (appPath, type) => {
             }*/
 
         case 'app': {
+            const critical = [
+                path.resolve(appPath, `./src/app/client/critical`)
+            ]
+            if (isSPA)
+                return {
+                    critical,
+                    client: [
+                        path.resolve(appPath, `./src/app/client/index.spa`)
+                    ]
+                }
             return {
                 "critical-extra-old-ie": [
                     "babel-polyfill",
                     path.resolve(appPath, `./src/app/client/critical.extra-old-ie.js`)
                 ],
-                critical: [
-                    path.resolve(appPath, `./src/app/client/critical`)
-                ],
+                critical,
                 client: [
-                    isSPA ? path.resolve(appPath, `./src/app/client/index.spa.js`) : path.resolve(appPath, `./src/app/client`)
+                    path.resolve(appPath, `./src/app/client`)
                 ]
             }
         }
