@@ -1,6 +1,7 @@
 import Root from '@appUI/app.jsx'
 
 import tools from './tools.js'
+import operations from './operations'
 import data from './data.js'
 import dev from './dev.js'
 
@@ -35,6 +36,7 @@ export default {
         // },
 
         ...tools,
+        ...operations,
         ...data,
 
         {

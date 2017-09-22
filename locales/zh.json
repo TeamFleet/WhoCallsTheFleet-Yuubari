@@ -114,11 +114,14 @@
     "nav": {
         "home": "首页",
         "fleets": "舰队模拟",
-        "calctp": "TP计算",
+        "calculators": "计算工具",
+        "sets": "配装指南",
+        "sorties": "出击海域 & 敌舰",
+        "expeditions": "远征 & 计划",
         "ships": "舰娘",
         "equipments": "装备",
         "arsenal": "改修工厂",
-        "entities": "声优&画师",
+        "entities": "声优 & 画师",
         "about": "关于"
     },
 

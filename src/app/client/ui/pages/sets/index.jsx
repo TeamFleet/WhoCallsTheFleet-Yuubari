@@ -3,18 +3,16 @@ import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
+import { ImportStyle } from 'sp-css-import'
 import htmlHead from '@appUtils/html-head.js'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './calctp.less'
-
 @connect()
-@ImportStyle(style)
+// @ImportStyle(style)
 export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
             store,
-            title: translate('nav.calctp')
+            title: translate('nav.sets')
         })
 
         ext.metas = ext.metas.concat(head.meta)

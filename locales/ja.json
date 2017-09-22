@@ -115,7 +115,10 @@
     "nav": {
         "home": "ホーム",
         "fleets": "艦隊ビルダー",
-        "calctp": "TPカルキュレーター",
+        "calculators": "カルキュレーター",
+        "sets": "Equipment Sets",
+        "sorties": "Sories & Enemies",
+        "expeditions": "Expeditions & Plan",
         "ships": "艦娘",
         "equipments": "装備",
         "arsenal": "明石の改修工廠",

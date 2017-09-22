@@ -114,7 +114,10 @@
     "nav": {
         "home": "Home",
         "fleets": "Fleet Builder",
-        "calctp": "TP Calculator",
+        "calculators": "Calculators",
+        "sets": "Equipment Sets",
+        "sorties": "Sories & Enemies",
+        "expeditions": "Expeditions & Plan",
         "ships": "Ships",
         "equipments": "Equipments",
         "arsenal": "Akashi's Arsenal",

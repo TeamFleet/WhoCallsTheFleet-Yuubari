@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
+import classNames from 'classnames'
 
 import translate from 'sp-i18n'
 import { enterBackground as appModeEnterBackground } from '@appLogic/app-mode/api.js'
@@ -13,13 +14,17 @@ import style from './nav.less'
 
 let navs = [
     undefined,
-    'fleets',
-    'calctp',
+    'indev-fleets',
+    'indev-calculators',
+    __DEV__ ? 'indev-sets' : null,
+    __DEV__ ? undefined : null,
+    __DEV__ ? 'indev-sorties' : null,
+    __DEV__ ? 'indev-expeditions' : null,
     undefined,
     'ships',
     'equipments',
-    'arsenal',
-    'entities',
+    'indev-arsenal',
+    'indev-entities',
     undefined,
     'about'
 ]
@@ -75,18 +80,35 @@ export default class extends React.Component {
     }
 
     renderItem(route, index) {
-        if (typeof route === 'undefined') {
+        if (route === null)
+            return null
+
+        if (typeof route === 'undefined')
             return <s className="blank" key={index}></s>
-        } else {
-            return (
-                <Link
-                    to={'/' + route}
-                    key={index}
-                    className="link"
-                    activeClassName="on"
-                >{translate('nav.' + route)}</Link>
-            )
-        }
+
+        let title
+        let isIndev = false
+
+        if (route.substr(0, 6) === 'indev-') {
+            route = route.substr(6)
+            title = translate('nav.' + route)
+            isIndev = true
+        } else if (route.substr(0, 4) === 'dev-')
+            title = route
+        else
+            title = translate('nav.' + route)
+
+        return (
+            <Link
+                to={'/' + route}
+                key={index}
+                className={classNames({
+                    link: true,
+                    'is-indev': isIndev
+                })}
+                activeClassName="on"
+            >{title}</Link>
+        )
     }
 
     // share() {
