@@ -49,7 +49,7 @@ const run = async () => {
     // navy flags count
     {
         const dimensions = sizeOf(
-            path.resolve(pathAssets, 'flags-navy.png')
+            path.resolve(pathAssets, 'navy-flags/normal.png')
         )
         const count = Math.floor(dimensions.height / (dimensions.width - 1))
         content = content.replace(
