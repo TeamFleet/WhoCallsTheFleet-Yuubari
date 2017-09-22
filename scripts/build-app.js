@@ -65,12 +65,13 @@ const run = async (src) => {
     // build app into src directory
     waiting = spinner(`Building app into target directory`)
     const env = `cross-env WEBPACK_BUILD_ENV=app WEBPACK_STAGE_MODE=client WEBPACK_OUTPUT_PATH=${src}`
-    const cmd = `${env} npm run copy:spa && ${env} node ./src/webpack/enter`
+    const cmd = `${env} node ./src/webpack/enter`
     await new Promise((resolve, reject) => {
         const child = npmRunScript(cmd, {
             stdio: 'ignore' // quiet
         });
         child.once('error', (error) => {
+            console.log(error)
             process.exit(1);
             reject(error);
         });

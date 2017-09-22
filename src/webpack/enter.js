@@ -126,6 +126,12 @@ const run = async (config) => {
     // 客户端打包: SPA
     if (stage === 'client' && (env === 'electron' || env === 'app')) {
 
+        console.log('')
+        console.log('')
+        console.log('aaaaaaaaaaaa')
+        console.log('')
+        console.log('')
+
         process.env.NODE_ENV = 'production'
 
         let wcd = await require('./client/electron')(appRunPath)

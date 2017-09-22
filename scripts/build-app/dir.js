@@ -3,7 +3,7 @@ const path = require('path')
 const pathRoot = path.resolve(__dirname, '../../')
 const pathPics = path.resolve(pathRoot, './dist-web/public/app/_pics')
 // const pathPackage = path.resolve(pathRoot, `../${dirPackage}/src`)
-const pathPackage = path.resolve(pathRoot, `./dist-app-package/src`)
+const pathPackage = path.resolve(pathRoot, `./dist-package/src`)
 
 module.exports = {
     pathRoot,
