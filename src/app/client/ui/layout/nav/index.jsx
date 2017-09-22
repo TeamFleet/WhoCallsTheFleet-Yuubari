@@ -79,38 +79,6 @@ export default class extends React.Component {
         return (this.props.realtimeLocation.pathname !== this.props.location.pathname)
     }
 
-    renderItem(route, index) {
-        if (route === null)
-            return null
-
-        if (typeof route === 'undefined')
-            return <s className="blank" key={index}></s>
-
-        let title
-        let isIndev = false
-
-        if (route.substr(0, 6) === 'indev-') {
-            route = route.substr(6)
-            title = translate('nav.' + route)
-            isIndev = true
-        } else if (route.substr(0, 4) === 'dev-')
-            title = route
-        else
-            title = translate('nav.' + route)
-
-        return (
-            <Link
-                to={'/' + route}
-                key={index}
-                className={classNames({
-                    link: true,
-                    'is-indev': isIndev
-                })}
-                activeClassName="on"
-            >{title}</Link>
-        )
-    }
-
     // share() {
     //     if (!__CLIENT__) return
     //     if (!navigator.share) return
@@ -139,10 +107,7 @@ export default class extends React.Component {
                         {__CHANNEL__ === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
                     </div>
 
-                    <div className="navs">
-                        <IndexLink to="/" activeClassName="on" className="link">{translate('nav.home')}</IndexLink>
-                        {navs.map(this.renderItem)}
-                    </div>
+                    <Navs />
 
                     <LanguageSwitch />
 
@@ -176,8 +141,54 @@ export const onRouterChange = () => {
 
 
 
-import stylesLanguageSwitch from './styles-language-switch.less'
-@ImportStyle(stylesLanguageSwitch)
+@ImportStyle(require('./styles-navs.less'))
+class Navs extends React.Component {
+    renderItem(route, index) {
+        if (route === null)
+            return null
+
+        if (typeof route === 'undefined')
+            return <s className="blank" key={index}></s>
+
+        let title
+        let isIndev = false
+
+        if (route.substr(0, 6) === 'indev-') {
+            route = route.substr(6)
+            title = translate('nav.' + route)
+            isIndev = true
+        } else if (route.substr(0, 4) === 'dev-')
+            title = route
+        else
+            title = translate('nav.' + route)
+
+        return (
+            <Link
+                to={'/' + route}
+                key={index}
+                className={classNames({
+                    link: true,
+                    'is-indev': isIndev
+                })}
+                activeClassName="on"
+            >{title}</Link>
+        )
+    }
+    render() {
+        return (
+            <div className={this.props.className}>
+                <IndexLink to="/" activeClassName="on" className="link">{translate('nav.home')}</IndexLink>
+                {navs.map(this.renderItem)}
+            </div>
+        )
+    }
+}
+
+
+
+
+
+@ImportStyle(require('./styles-language-switch.less'))
 class LanguageSwitch extends React.Component {
     render() {
         return (
@@ -193,11 +204,10 @@ class LanguageSwitch extends React.Component {
 
 
 
-import stylesAppBar from './styles-appbar.less'
 @connect(state => ({
     pageTitle: state.pageTitle
 }))
-@ImportStyle(stylesAppBar)
+@ImportStyle(require('./styles-appbar.less'))
 class AppBar extends React.Component {
     render() {
         return (
