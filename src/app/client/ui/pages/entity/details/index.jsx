@@ -14,6 +14,7 @@ import ComponentContainer from '@appUI/containers/infos-component'
 
 import Pictures from './components/pictures'
 import ListShips from '@appUI/components/list/ships'
+import Title from '@appUI/components/title.jsx'
 
 const extractFromState = (state) => {
     const pathname = state.routing.locationBeforeTransitions.pathname
@@ -28,15 +29,6 @@ const extractFromState = (state) => {
 @connect()
 @ImportStyle(require('./styles.less'))
 export default class extends React.Component {
-    // static onServerRenderHtmlExtend(ext, store) {
-    //     const head = htmlHead({
-    //         store,
-    //         title: db.entities[store.getState().routing.locationBeforeTransitions.pathname.split('/').reverse()[0]]._name
-    //     })
-
-    //     ext.metas = ext.metas.concat(head.meta)
-    //     ext.title = head.title
-    // }
     static onServerRenderHtmlExtend(ext, store) {
         const { id } = extractFromState(store.getState())
 
@@ -73,7 +65,10 @@ export default class extends React.Component {
         if (!list.length) return null
         return (
             <ComponentContainer
-                title={translate(`entity_details.${type}`)}
+                title={<Title tag="h2" className="title">
+                    {translate(`entity_details.${type}`)}
+                    <small className="count">({list.length})</small>
+                </Title>}
                 className={`entityinfo entityinfo-list entityinfo-${type}`}
             >
                 <ListShips
@@ -83,6 +78,29 @@ export default class extends React.Component {
                     sort={false}
                     {...props}
                 />
+            </ComponentContainer>
+        )
+    }
+
+    renderLinks(links) {
+        if (!Array.isArray(links)) return null
+        links = links.filter(obj => !!(obj.name))
+        if (!links.length) return null
+        return (
+            <ComponentContainer
+                title={translate(`entity_details.links`)}
+                className={`entityinfo entityinfo-links`}
+            >
+                {links.map((obj, index) => (
+                    <a
+                        className="item"
+                        href={obj.url}
+                        target="_blank"
+                        key={index}
+                    >
+                        {obj.name}
+                    </a>
+                ))}
             </ComponentContainer>
         )
     }
@@ -108,6 +126,8 @@ export default class extends React.Component {
                 {this.renderList('illustrates', this.getList('illustrator'), {
                     extraIllust: true
                 })}
+
+                {this.renderLinks(this.data.links)}
 
             </InfosPageContainer>
         )

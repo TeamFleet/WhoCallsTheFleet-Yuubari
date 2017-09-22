@@ -40,7 +40,6 @@ If you want help us for English translation, you can submit your changes [HERE](
   * Fleet Builder
   * TP Calculator
   * Akashi's Arsenal
-  * CV & Illustrator Details
   * About
 * Frame
   * Navigation

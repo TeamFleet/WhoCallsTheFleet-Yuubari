@@ -248,7 +248,8 @@
     },
 
     "entity_details": {
-        "casts": "配音...",
-        "illustrates": "绘制..."
+        "casts": "配音",
+        "illustrates": "绘制",
+        "links": "相关链接"
     }
 }

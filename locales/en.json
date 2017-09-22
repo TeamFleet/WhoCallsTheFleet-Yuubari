@@ -248,7 +248,8 @@
     },
 
     "entity_details": {
-        "casts": "Casts...",
-        "illustrates": "Illustrates..."
+        "casts": "Casts",
+        "illustrates": "Illustrates",
+        "links": "Links"
     }
 }
