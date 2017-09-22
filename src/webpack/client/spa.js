@@ -32,11 +32,12 @@ const getConfig = async (appPath, type) => {
     const outputPath = process.env.WEBPACK_OUTPUT_PATH || path.resolve(appPath, `dist-app`)
     const publicPath = `./`
     const htmlFileName = 'index.html'
+    const isElectron = process.env.WEBPACK_BUILD_ENV === 'app'
 
     let config = {
-        target: 'electron-main',
+        target: isElectron ? 'electron-main' : 'web',
         // target: "web",
-        // devtool: 'source-map',
+        devtool: isElectron ? undefined : 'source-map',
         entry: entries,
         output: {
             filename: `[name].[chunkhash].js`,
@@ -58,6 +59,7 @@ const getConfig = async (appPath, type) => {
                 '__CLIENT__': true,
                 '__SERVER__': false,
                 '__SPA__': true,
+                '__ELECTRON__': isElectron,
                 '__DEV__': false,
                 '__PUBLIC__': JSON.stringify(publicPath)
             }),
@@ -79,6 +81,7 @@ const getConfig = async (appPath, type) => {
                 template: path.resolve(appPath, `./src/app/html.ejs`),
                 inject: false
             }),
+
             new WebpackOnBuildPlugin(function (stats) {
                 // After webpack build...
                 // create(parseOptions(...args))

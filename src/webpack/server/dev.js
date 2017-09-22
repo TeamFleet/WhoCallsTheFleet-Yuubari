@@ -28,6 +28,7 @@ module.exports = (appPath, clientDevPort) => {
                 '__CLIENT__': false,
                 '__SERVER__': true,
                 '__SPA__': false,
+                '__ELECTRON__': false,
                 '__DEV__': true,
                 '__PUBLIC__': JSON.stringify(publicPath)
             }),

@@ -38,6 +38,7 @@ const getConfig = async (appPath, type) => {
                 '__CLIENT__': true,
                 '__SERVER__': false,
                 '__SPA__': false,
+                '__ELECTRON__': false,
                 '__DEV__': false,
                 '__PUBLIC__': JSON.stringify(publicPath)
             }),

@@ -55,17 +55,17 @@ const getUri = (type, id, file, revision) => {
 export default (type, id, file) => {
     if (__SERVER__) return ''
 
-    // ? 'https://yuubari.fleet.moe/client'
-    const base = __SPA__ ? '' : (
-        __DEV__
-            ? '/app'
-            : __PUBLIC__
-    )
+    const filepath = getUri(type, id, file)
 
-    // const folder = __SPA__ ? '../pics/' : '/_pics/'
-    const folder = __SPA__
-        ? require('electron').remote.getGlobal('__path_pics')
-        : '/_pics/'
+    if (__ELECTRON__)
+        return require('electron').remote.getGlobal('__path_pics') + filepath
 
-    return base + folder + getUri(type, id, file)
+    if (__SPA__)
+        return '../pics/' + filepath
+
+    const base = __DEV__
+        ? '/app'
+        : __PUBLIC__
+
+    return base + '/_pics/' + filepath
 }

@@ -34,6 +34,7 @@ const getConfig = async (appPath, port, type) => {
                 '__CLIENT__': true,
                 '__SERVER__': false,
                 '__SPA__': false,
+                '__ELECTRON__': false,
                 '__DEV__': true,
                 '__CLIENTPORT__': JSON.stringify(port),
                 '__PUBLIC__': JSON.stringify(publicPath)

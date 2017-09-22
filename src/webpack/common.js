@@ -187,6 +187,10 @@ const resolve = {
         path.resolve(appPath, './src/modules')
     ],
     alias: {
+        // preact
+        // 'react': 'preact-compat',
+        // 'react-dom': 'preact-compat',
+
         Apps: path.resolve(appPath, './src/apps'),
         Locales: path.resolve(appPath, './locales'),
         Assets: dirs.assets,

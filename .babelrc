@@ -16,6 +16,12 @@
     ],
     "compact": false,
     "plugins": [
+        // [
+        //     "transform-react-jsx",
+        //     {
+        //         "pragma": "h"
+        //     }
+        // ],
         "react-hot-loader/babel",
         "transform-decorators-legacy",
         "transform-regenerator"

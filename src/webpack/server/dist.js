@@ -30,6 +30,7 @@ const getConfig = (appPath, type) => {
                 '__CLIENT__': false,
                 '__SERVER__': true,
                 '__SPA__': false,
+                '__ELECTRON__': false,
                 '__DEV__': false,
                 '__PUBLIC__': JSON.stringify(publicPath)
             }),
