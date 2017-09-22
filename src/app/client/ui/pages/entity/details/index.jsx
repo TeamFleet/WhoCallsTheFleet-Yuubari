@@ -76,7 +76,7 @@ export default class extends React.Component {
                 />
 
                 {hasPics && <Pictures entity={this.data} className="entityinfo entityinfo-pictures" />}
-                <ComponentContainer>
+                <ComponentContainer className="entityinfo">
                     <p><i>{translate('under_construction')}...</i></p>
                 </ComponentContainer>
             </InfosPageContainer>
