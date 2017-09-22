@@ -29,15 +29,14 @@ const getConfig = async (appPath, type) => {
     const entries = require('./entries.js')(appPath, type)
     const typeName = type ? type : 'default'
     // const outputPath = path.resolve(appPath, `dist-app/${typeName}/includes`)
-    const outputPath = process.env.WEBPACK_OUTPUT_PATH || path.resolve(appPath, `dist-app`)
+    const outputPath = process.env.WEBPACK_OUTPUT_PATH || path.resolve(appPath, `dist-spa`)
     const publicPath = `./`
     const htmlFileName = 'index.html'
     const isElectron = process.env.WEBPACK_BUILD_ENV === 'app'
 
     let config = {
-        target: isElectron ? 'electron-main' : 'web',
-        // target: "web",
-        devtool: isElectron ? undefined : 'source-map',
+        target: 'web',
+        devtool: 'source-map',
         entry: entries,
         output: {
             filename: `[name].[chunkhash].js`,

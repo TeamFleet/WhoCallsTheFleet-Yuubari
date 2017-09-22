@@ -38,9 +38,7 @@ jspm_packages
 # super project
 node_modules/
 *.log
-dist-app
-dist-app-package
-dist-web
+/dist-*
 /app.asar
 
 

@@ -21,7 +21,7 @@ const isMac = /^darwin/.test(platform)
 const isDist = fs.existsSync(path.resolve(__dirname, 'index.html'))
 const pathApp = isDist
     ? path.resolve(__dirname)
-    : path.join(__dirname, '../dist-app/')
+    : path.join(__dirname, '../dist-electron/')
 const pathAssets = path.join(pathApp, 'assets')
 
 // --------------------------------------------------
@@ -53,8 +53,10 @@ function createWindow() {
     })
 
     // and load the index.html of the app.
+    const entry = path.join(pathApp, '/index.html')
+    console.log(entry)
     mainWindow.loadURL(url.format({
-        pathname: path.join(pathApp, '/index.html'),
+        pathname: entry,
         protocol: 'file:',
         slashes: true
     }))
