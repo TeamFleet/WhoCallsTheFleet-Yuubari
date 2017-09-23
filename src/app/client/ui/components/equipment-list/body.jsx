@@ -9,6 +9,7 @@ import db from '@appLogic/database'
 import {
     init as listInit,
     observer as listObserver,
+    highlightColumn as listHighlightColumn,
     // reset as listReset
 } from '@appLogic/equipment-list/api.js'
 import equipmentTypes from 'kckit/src/types/equipments'
@@ -36,10 +37,16 @@ import { ImportStyle } from 'sp-css-import'
     rootMargin: "50px 0px"
 })
 export default class EquipmentList extends React.Component {
-    // componentWillMount() {
+    componentWillMount() {
     //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
     //         this.props.dispatch(listReset(this.props.id))
-    // }
+        this.props.dispatch(
+            listHighlightColumn(
+                this.props.id,
+                undefined, undefined
+            )
+        )
+    }
 
     render() {
         const {
