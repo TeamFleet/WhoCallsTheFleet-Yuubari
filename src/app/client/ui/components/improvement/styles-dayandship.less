@@ -21,7 +21,7 @@
     }
 
     .days{
-        overflow:   hidden;
+        overflow:   visible;
         position:   absolute;
         left:       0;
         top:        0;
@@ -132,17 +132,17 @@
             }
         // style-triangle
             .style-3(){
-                &[data-day]{                    
+                &[data-day]{
                     @size:      4px;
                     @width:     4px;
                     @height:    3px;
                     @offset:    (0 - @height - 2px);
                     // @color:     @color-base;
-                    @color:     @color-fade;
+                    // @color:     @color-fade;
                     // @color:     @color-positive;
                     // @color:     @theme-green-700;
                     // @color:     @theme-green-a100;
-                    // @color:     @color-accent;
+                    @color:     @color-accent;
                     &:before, &:after{
                         content:    "";
                         position:   absolute;
@@ -170,6 +170,67 @@
                 .style-3-loop(@n, @i: 1) when (@i =< @n) {
                     &[data-day="@{i}"]{
                         &:before, &:after{
+                            left:   (@height + 1) * @i + @height / 2;
+                        }
+                    }
+                    .style-3-loop(@n, (@i + 1));
+                }
+                .style-3-loop(7);
+            }
+            .style-3-alt(){
+                &[data-day]{
+                    @size:      4px;
+                    @indicator-width:  4px;
+                    @indicator-height: 3px;
+                    @offset:    (0 - @indicator-height - 2px);
+                    // @color:     @color-base;
+                    // @color:     @color-fade;
+                    // @color:     @color-positive;
+                    // @color:     @theme-green-700;
+                    // @color:     @theme-green-a100;
+                    @color:     @color-accent;
+                    .item:first-child .days:before,
+                    .item:last-child .days:after{
+                        content:    "";
+                        position:   absolute;
+                        overflow:   hidden;
+                        width:      0;
+                        height:     0;
+                        left:       (@indicator-height / 2);
+                        z-index:    5;
+                        // border:     @size solid transparent;
+                        border-left:    @indicator-width solid transparent;
+                        border-right:   @indicator-width solid transparent;
+                        border-top:     @indicator-height solid transparent;
+                        border-bottom:  @indicator-height solid transparent;
+                        margin-left:(0 - @indicator-width);
+                    }
+                    .item:first-child .days:before{
+                        top:        @offset;
+                        border-top-color:   @color;
+                    }
+                    .item:last-child .days:after{
+                        bottom:     @offset;
+                        border-bottom-color:@color;
+                    }
+                    .item:not(:last-child):after{
+                        content:    "";
+                        position:   absolute;
+                        overflow:   hidden;
+                        left:       (@indicator-height / 2);
+                        width:      2px;
+                        top:        (@height + 2);
+                        bottom:     1px;
+                        margin-left:-1px;
+                        background: fade(@color, 50%);
+                        // background: linear-gradient(to right, transparent, @color, transparent);
+                    }
+                }
+                .style-3-loop(@n, @i: 1) when (@i =< @n) {
+                    &[data-day="@{i}"]{
+                        .item:first-child .days:before,
+                        .item:last-child .days:after,
+                        .item:not(:last-child):after{
                             left:   (@height + 1) * @i + @height / 2;
                         }
                     }
@@ -213,5 +274,5 @@
                 }
                 .style-4-loop(7);
             }
-        .style-4();
+        .style-3-alt();
 }

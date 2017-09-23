@@ -43,11 +43,14 @@ class EquipmentDetailsComponentImprovementsImprovement extends React.Component {
                     <span className="subtitle">
                         {upgrade ? translate(`equipment_details.upgrade_to`) : translate(`equipment_details.facts_unupgradable`)}
                     </span>
-                    {upgrade && <LinkEquipment
-                        equipment={upgrade[0]}
-                        className="equipment color-alt"
-                    />}
-                    {upgrade && !!(upgrade[1]) && <Star className="default-star" star={upgrade[1]} />}
+                    {upgrade && (
+                        <LinkEquipment
+                            equipment={upgrade[0]}
+                            className="equipment color-alt"
+                        >
+                            {upgrade && !!(upgrade[1]) && <Star className="default-star" star={upgrade[1]} />}
+                        </LinkEquipment>
+                    )}
                 </Bullet>
                 <DayAndShip className="dayships" data={req} />
                 <Resources className="resources" data={resource} upgradable={upgradable} />
