@@ -4873,9 +4873,9 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
-kckit@^1.15.6:
-  version "1.15.6"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.15.6.tgz#89c0be5bb6e3ab98d7d07548e9d10c5ae4830b62"
+kckit@^1.15.7:
+  version "1.15.7"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.15.7.tgz#8d314b9933d6a87278d23cc89ef0797c0529b86a"
   dependencies:
     camelcase "^4.1.0"
 

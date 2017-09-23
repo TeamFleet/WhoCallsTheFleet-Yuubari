@@ -226,7 +226,7 @@
                         // background: linear-gradient(to right, transparent, @color, transparent);
                     }
                 }
-                .style-3-loop(@n, @i: 1) when (@i =< @n) {
+                .style-3-loop(@n, @i: 0) when (@i =< @n) {
                     &[data-day="@{i}"]{
                         .item:first-child .days:before,
                         .item:last-child .days:after,
@@ -236,7 +236,7 @@
                     }
                     .style-3-loop(@n, (@i + 1));
                 }
-                .style-3-loop(7);
+                .style-3-loop(6);
             }
         // style-line-gradient
             .style-4(){
