@@ -8112,9 +8112,9 @@ supports-color@^4.4.0:
   dependencies:
     has-flag "^2.0.0"
 
-svg-url-loader@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/svg-url-loader/-/svg-url-loader-2.1.1.tgz#11ba66f4dd08d508c26d8561923b7ab2245469f0"
+svg-url-loader@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/svg-url-loader/-/svg-url-loader-2.2.0.tgz#107e02a3e5127c23e5a0a76ba32392df39f5ad98"
   dependencies:
     file-loader "0.11.2"
     loader-utils "1.1.0"
