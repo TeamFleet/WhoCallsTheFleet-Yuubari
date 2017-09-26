@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const common = require('../common')
 
 const getConfig = async (appPath, port, type) => {
-    const entries = require('./entries.js')(appPath, type)
+    const entries = require('./_entries.js')(appPath, type)
     const typeName = type ? type : 'default'
     const outputPath = path.resolve(appPath, `dist/public/client`)
     const publicPath = `http://localhost:${port}/dist`
@@ -41,7 +41,7 @@ const getConfig = async (appPath, port, type) => {
             }),
             new webpack.NoEmitOnErrorsPlugin(),
             ...common.plugins,
-            ...await require('./plugins.js')(appPath, type, true)
+            ...await require('./_plugins.js')(appPath, type, true)
         ],
         resolve: common.resolve
     }

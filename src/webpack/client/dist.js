@@ -9,7 +9,7 @@ const pwaCreatePlugin = require('sp-pwa')
 
 const getConfig = async (appPath, type) => {
 
-    const entries = require('./entries.js')(appPath, type)
+    const entries = require('./_entries.js')(appPath, type)
     const typeName = type ? type : 'default'
     const outputPath = path.resolve(appPath, `dist-web/public/${typeName}/`)
     const publicPath = `/${typeName}`
@@ -54,7 +54,7 @@ const getConfig = async (appPath, type) => {
                 sourceMap: false
             }),
 
-            ...await require('./plugins.js')(appPath, type, false),
+            ...await require('./_plugins.js')(appPath, type, false),
 
             pwaCreatePlugin({
                 outputPath: path.resolve(outputPath, '../'),

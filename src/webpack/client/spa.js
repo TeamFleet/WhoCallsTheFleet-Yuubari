@@ -26,7 +26,7 @@ const times = n => f => {
 
 const getConfig = async (appPath, type) => {
 
-    const entries = require('./entries.js')(appPath, type)
+    const entries = require('./_entries.js')(appPath, type)
     const typeName = type ? type : 'default'
     // const outputPath = path.resolve(appPath, `dist-app/${typeName}/includes`)
     const outputPath = process.env.WEBPACK_OUTPUT_PATH || path.resolve(appPath, `dist-spa`)
@@ -72,7 +72,7 @@ const getConfig = async (appPath, type) => {
             //     comments: false,
             //     sourceMap: false
             // }),
-            ...await require('./plugins.js')(appPath, type, false, true),
+            ...await require('./_plugins.js')(appPath, type, false, true),
 
             new HtmlWebpackPlugin({
                 title: 'WhoCallsTheFleet',
