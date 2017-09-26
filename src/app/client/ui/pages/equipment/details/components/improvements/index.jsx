@@ -22,7 +22,7 @@ export default class EquipmentDetailsComponentImprovements extends React.Compone
                 {hasItem && list.map((data, index) => (
                     <EquipmentDetailsComponentImprovementsImprovement data={data} key={index} upgradable={upgradable} className="flex-item" />
                 ))}
-                {hasItem && placeholders}
+                {hasItem && list.length > 1 && placeholders}
                 {!hasItem && <span className="disabled">{translate("none")}</span>}
             </ComponentContainer>
         )
