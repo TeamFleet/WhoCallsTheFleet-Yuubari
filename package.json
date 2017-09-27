@@ -53,7 +53,7 @@
         "whocallsthefleet-database": "2017.9.18",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "super-project": "^1.6.1",
+        "super-project": "^2.0.0",
         
         "react-portal": "^3.1.0",
         "react-transition-group": "^2.2.0",
@@ -76,7 +76,7 @@
         "fs-extra": "^4.0.2",
         "glob": "^7.1.2",
         "json-pretty": "^0.0.1",
-        "request": "^2.82.0",
+        "request": "^2.83.0",
         "nedb-promise": "^2.0.1",
         "simple-git": "^1.77.0",
         "npm-run-script": "^0.0.4",
@@ -101,7 +101,7 @@
         "node-windows": "^0.1.14",
         "simple-git": "^1.77.0",
 
-        "jest": "^21.1.0"
+        "jest": "^21.2.0"
     },
 
 

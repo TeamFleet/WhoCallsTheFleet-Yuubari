@@ -1,8 +1,6 @@
 // const argv = require('yargs').argv
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
-const Dashboard = require('webpack-dashboard')
-const DashboardPlugin = require('webpack-dashboard/plugin')
 
 
 // 客户端开发环境webpack-dev-server端口号
@@ -64,9 +62,6 @@ const run = async (config) => {
         extendConfig(wcd, config.client.dev)
 
         const compiler = webpack(wcd)
-        // const dashboard = new Dashboard()
-
-        // compiler.apply(new DashboardPlugin(dashboard.setData))
 
         // more config
         // http://webpack.github.io/docs/webpack-dev-server.html
