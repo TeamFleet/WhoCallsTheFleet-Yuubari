@@ -21,25 +21,25 @@ export default class extends React.Component {
     // }
 
     onAnimationEnd(evt) {
-        if (!evt) return
-        if (evt && evt.nativeEvent) evt = evt.nativeEvent
+        // if (!evt) return
+        // if (evt && evt.nativeEvent) evt = evt.nativeEvent
 
-        if (evt.animationName === 'fadeout') {
-            evt.target.parentNode.removeChild(evt.target)
-        }
+        // if (evt.animationName === 'fadeout') {
+        //     evt.target.parentNode.removeChild(evt.target)
+        // }
     }
 
-    shouldComponentUpdate(nextProps/*, nextState*/) {
-        if(nextProps.pathname === this.props.pathname) return false
-        return true
-    }
+    // shouldComponentUpdate(nextProps/*, nextState*/) {
+    //     if(nextProps.pathname === this.props.pathname) return false
+    //     return true
+    // }
 
     render() {
         // console.log('#main-mask - render()', this.props.pathname)
-        if (this.el)
-            for (let i = 0; i < this.el.childNodes.length; ++i) {
-                this.el.childNodes[i].classList.add('fadeout')
-            }
+        // if (this.el)
+        //     for (let i = 0; i < this.el.childNodes.length; ++i) {
+        //         this.el.childNodes[i].classList.add('fadeout')
+        //     }
         // this.el.childNodes.forEach(node => {
         //     if (!node.classList.contains('is-entering'))
         //         node.classList.add('fadeout')

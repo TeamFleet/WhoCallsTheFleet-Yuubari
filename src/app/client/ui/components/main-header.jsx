@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import checkCssProp from 'check-css-prop'
+// import checkCssProp from 'check-css-prop'
 
 import Background from './background.jsx'
 
@@ -10,16 +10,24 @@ import style from './main-header.less'
 
 @ImportStyle(style)
 export default class extends React.Component {
-    getProps() {
-        let props = { ...this.props }
-        delete props.className
+    // getProps() {
+    //     let props = { ...this.props }
+    //     delete props.className
 
-        return props
-    }
+    //     return props
+    // }
     renderContent() {
+        const {
+            className,
+            children,
+            ...props
+        } = this.props
         return (
-            <div className={this.props.className + " main-header"} {...this.getProps() }>
-                {this.props.children}
+            <div
+                className={className + " main-header"}
+                {...props}
+            >
+                {children}
                 {__CLIENT__ && <Background type="blured" />}
             </div>
         )

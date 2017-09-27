@@ -53,7 +53,7 @@
         "whocallsthefleet-database": "2017.9.18",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "super-project": "^2.0.0",
+        "super-project": "^2.0.1",
         
         "react-portal": "^3.1.0",
         "react-transition-group": "^2.2.0",
