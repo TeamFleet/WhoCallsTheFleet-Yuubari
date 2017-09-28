@@ -74,7 +74,6 @@ const getConfig = async (appPath, type, options = {}) => {
                 },
                 appendUrls: [
                     '/fleets',
-                    '/calctp',
                     '/ships',
                     '/equipments'
                 ]
