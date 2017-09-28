@@ -30,5 +30,6 @@ export default [{
 {
     path: 'calctp',
     name: 'calctp',
+    isRedirect: true,
     onEnter: ({ params }, replace) => replace(`/calculators/calctp`)
 }]

@@ -19,6 +19,37 @@ const getConfig = async (appPath, type, options = {}) => {
     const outputPath = path.resolve(appPath, `dist-web/public/${typeName}/`)
     const publicPath = `/${typeName}`
 
+    // const getUrlsFromRouter = () => {
+    //     const router = require(path.resolve(appPath, './src/app/client/router'))
+    //     const urls = []
+
+    //     console.log(router)
+
+    //     const parse = (obj, prefix = '') => {
+    //         if (obj.indexRoute)
+    //             urls.push(`${prefix}/`)
+
+    //         if (Array.isArray(obj.childRoutes)) {
+    //             obj.childRoutes.filter(innerObj => (
+    //                 typeof innerObj.path !== 'undefined'
+    //                 && !innerObj.path.includes('/:')
+    //                 && innerObj.path.substr(0, 1) !== ':'
+    //                 && !innerObj.isRedirect
+    //             )).forEach(innerObj => {
+    //                 console.log(innerObj)
+    //                 urls.push(`${prefix}/${innerObj.path}`.replace(/\/\//g, `/`))
+    //                 parse(innerObj, innerObj.path)
+    //             })
+    //         }
+    //     }
+
+    //     parse(router)
+
+    //     console.log(urls)
+
+    //     return urls
+    // }
+
     return {
         target: 'web',
         // devtool: 'source-map',
@@ -72,11 +103,8 @@ const getConfig = async (appPath, type, options = {}) => {
                         '/**/_*/**/*'
                     ]
                 },
-                appendUrls: [
-                    '/fleets',
-                    '/ships',
-                    '/equipments'
-                ]
+                // appendUrls: getUrlsFromRouter()
+                appendUrls: []
             }) : undefined
         ],
         resolve: common.resolve
