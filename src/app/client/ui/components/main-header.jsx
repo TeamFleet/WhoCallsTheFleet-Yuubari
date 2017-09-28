@@ -54,9 +54,11 @@ class MainHeaderPortal extends React.Component {
         }
     }
     componentDidMount() {
+        // setTimeout(() => {
         this.setState({
             waiting: false
         })
+        // }, 0)
         // modalRoot.appendChild(this.el);
     }
 

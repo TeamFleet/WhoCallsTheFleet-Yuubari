@@ -72,6 +72,7 @@ export default class extends React.Component {
                 document.body.classList.add('is-ready')
                 setTimeout(() => {
                     this.isAppReadyFull = true
+                    if (typeof window !== 'undefined') window.isAppReadyFull = true
                 }, 1000)
             }, timeout)
         }
