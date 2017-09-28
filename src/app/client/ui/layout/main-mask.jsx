@@ -1,13 +1,12 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-
+import bindEvent from 'bind-event'
 import { ImportStyle } from 'sp-css-import'
-import style from './main-mask.less'
 
 // @connect(/*state => ({
 //     realtimeLocation: state.location
 // })*/)
-@ImportStyle(style)
+@ImportStyle(require('./main-mask.less'))
 export default class extends React.Component {
     // componentWillReceiveProps(newProps) {
     //     if (newProps.realtimeLocation) {
@@ -27,6 +26,10 @@ export default class extends React.Component {
         // if (evt.animationName === 'fadeout') {
         //     evt.target.parentNode.removeChild(evt.target)
         // }
+
+        // if (evt.nativeEvent.animationName === 'fadein') {
+        //     console.log(evt.target)
+        // }
     }
 
     // shouldComponentUpdate(nextProps/*, nextState*/) {
@@ -34,12 +37,26 @@ export default class extends React.Component {
     //     return true
     // }
 
+    componentDidMount() {
+        if (__SERVER__) return
+        bindEvent(
+            this.el,
+            'animationend',
+            (evt) => {
+                if (evt.animationName === 'fadein' && evt.target.offsetParent === this.el) {
+                    evt.target.setAttribute('data-enter', true)
+                }
+            }
+        )
+    }
+
     render() {
         // console.log('#main-mask - render()', this.props.pathname)
-        // if (this.el)
-        //     for (let i = 0; i < this.el.childNodes.length; ++i) {
-        //         this.el.childNodes[i].classList.add('fadeout')
-        //     }
+        if (__CLIENT__ && this.el)
+            for (let i = 0; i < this.el.childNodes.length; ++i) {
+                if (this.el.childNodes[i].dataset.enter === 'true')
+                    this.el.childNodes[i].classList.add('fadeout')
+            }
         // this.el.childNodes.forEach(node => {
         //     if (!node.classList.contains('is-entering'))
         //         node.classList.add('fadeout')
@@ -49,7 +66,6 @@ export default class extends React.Component {
                 id="main-mask"
                 className={this.props.className}
                 ref={(c) => this.el = c}
-                onAnimationEnd={this.onAnimationEnd.bind(this)}
             >
                 {this.props.children}
             </div>

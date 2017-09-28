@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
 import db from '@appLogic/database'
-import bindEvent from 'bind-event'
+// import bindEvent from 'bind-event'
 import {
     changeCollection,
     filterEnter,
@@ -26,7 +26,18 @@ import TableHeader from './table-header.jsx'
 import { ImportStyle } from 'sp-css-import'
 import styleHeader from './header.less'
 
-@connect((state, ownProps) => state.shipList[ownProps.id] || {})
+@connect((state, ownProps) => {
+    const {
+        isModeCompare,
+        isModeFilter,
+        compareState
+    } = state.shipList[ownProps.id] || {}
+    return {
+        isModeCompare,
+        isModeFilter,
+        compareState
+    }
+})
 @ImportStyle(styleHeader)
 export default class ShipListHeader extends React.Component {
     constructor() {
@@ -37,19 +48,19 @@ export default class ShipListHeader extends React.Component {
         }
     }
 
-    componentDidMount() {
-        bindEvent(
-            this._wrapper.offsetParent,
-            'animationend',
-            (evt) => {
-                if (evt.animationName === 'ship-list-header-compare-leave') {
-                    this.props.dispatch(
-                        compareLeave(this.props.id, true)
-                    )
-                }
-            }
-        )
-    }
+    // componentDidMount() {
+    //     bindEvent(
+    //         this._wrapper.offsetParent,
+    //         'animationend',
+    //         (evt) => {
+    //             if (evt.animationName === 'ship-list-header-compare-leave') {
+    //                 this.props.dispatch(
+    //                     compareLeave(this.props.id, true)
+    //                 )
+    //             }
+    //         }
+    //     )
+    // }
 
     renderExtraButtons() {
         if (!Array.isArray(this.props.extraButtons)) return null
@@ -77,20 +88,32 @@ export default class ShipListHeader extends React.Component {
         })
     }
 
+    onAnimationEnd(evt) {
+        if (evt.animationName === 'ship-list-header-compare-leave') {
+            this.props.dispatch(
+                compareLeave(this.props.id, true)
+            )
+        }
+    }
+
     render() {
         return (
-            <MainHeader data-compare-state={
-                typeof this.props.isModeCompare !== 'undefined'
-                    ? this.props.compareState
-                    : null
-            } className={classNames(
-                this.props.className,
-                {
-                    'is-filtering': this.props.isModeFilter,
-                    'is-compare': typeof this.props.isModeCompare !== 'undefined',
-                    'is-compare-leaving': this.props.isModeCompare === false
+            <MainHeader
+                data-compare-state={
+                    typeof this.props.isModeCompare !== 'undefined'
+                        ? this.props.compareState
+                        : null
                 }
-            )}>
+                className={classNames(
+                    this.props.className,
+                    {
+                        'is-filtering': this.props.isModeFilter,
+                        'is-compare': typeof this.props.isModeCompare !== 'undefined',
+                        'is-compare-leaving': this.props.isModeCompare === false
+                    }
+                )}
+                onAnimationEnd={this.onAnimationEnd.bind(this)}
+            >
                 <div className="wrapper" ref={el => this._wrapper = el}>
                     <div className="body">
                         <Filter id={this.props.id} />

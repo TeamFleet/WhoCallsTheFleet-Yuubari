@@ -20,9 +20,12 @@
         transform:  none;
     });
 
-    & > .wrapper{
+    & > .wrapper:not([data-enter="true"]){
         transition: inherit;
         animation: 	fadein @duration-main-transition ease-out;
+    }
+    & > .wrapper.fadeout[data-enter="true"]{
+        opacity:    0;
     }
 
     .background-container{

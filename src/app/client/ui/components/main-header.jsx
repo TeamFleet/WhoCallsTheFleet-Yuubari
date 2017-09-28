@@ -47,19 +47,32 @@ export default class extends React.Component {
 }
 
 class MainHeaderPortal extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            waiting: true
+        }
+    }
     componentDidMount() {
+        this.setState({
+            waiting: false
+        })
         // modalRoot.appendChild(this.el);
     }
 
-    componentWillUnmount() {
-        // modalRoot.removeChild(this.el);
-    }
+    // componentWillUnmount() {
+    //     alert(123)
+    //     // modalRoot.removeChild(this.el);
+    // }
 
     render() {
-        return ReactDOM.createPortal(
-            this.props.children,
-            document.getElementById('main-mask'),
-        )
+        if (!this.state.waiting)
+            return ReactDOM.createPortal(
+                this.props.children,
+                document.getElementById('main-mask'),
+            )
+
+        return null
     }
 }
 

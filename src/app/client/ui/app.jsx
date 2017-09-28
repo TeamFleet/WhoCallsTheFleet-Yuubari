@@ -132,6 +132,10 @@ export default class extends React.Component {
         if (startSwipeAtLeftBorder) startSwipeAtLeftBorder = false
     }
 
+    componentDidCatch(error, errorInfo) {
+        console.log(error, errorInfo)
+    }
+
     componentWillMount() {
         if (__CLIENT__ && self._html)
             self._html.classList.add('is-react-ready')
@@ -159,10 +163,10 @@ export default class extends React.Component {
                 onTouchCancel={this.onTouchCancel.bind(this)}
             >
                 <Nav location={this.props.location} />
+                <MainMask pathname={this.props.location.pathname} />
                 <Main location={this.props.location}>
                     {this.props.children}
                 </Main>
-                <MainMask pathname={this.props.location.pathname} />
                 <Bgimg />
             </div>
         )
