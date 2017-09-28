@@ -33,7 +33,7 @@ export default class IconEquipment extends React.Component {
         return (
             <TagName
                 className={className}
-                data-icon={iconID}
+                data-icon={isNaN(iconID) ? undefined : iconID}
                 data-suffix={('' + _icon).replace(iconID, '').toUpperCase() || undefined}
             >
                 {this.props.children}
