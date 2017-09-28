@@ -22,6 +22,7 @@ const useUniversalAliasLoader = {
     loader: "universal-alias-loader",
     options: {
         alias: {
+            "~base.less": dirs.appUI + '/base.less',
             "~Assets": dirs.assets,
             "~/": dirs.appUI + '//'
         }

@@ -1,15 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
-import htmlHead from '@appUtils/html-head.js'
-
 import { ImportStyle } from 'sp-css-import'
-import style from './arsenal.less'
+import htmlHead from '@appUtils/html-head.js'
+import translate from 'sp-i18n'
+
+import PageContainer from 'sp-ui-pagecontainer'
 
 @connect()
-@ImportStyle(style)
+@ImportStyle(require('./arsenal.less'))
 export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
