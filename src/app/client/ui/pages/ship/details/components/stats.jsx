@@ -53,6 +53,18 @@ export default class ShipDetailsComponentStats extends React.Component {
             this.onLevelChange(lv)
         }
     }
+    getStatMax(stat) {
+        switch (stat) {
+            case 'luck':
+                return this.props.ship.stat.luck_max
+            case 'hp':
+                return `+${this.props.ship.getStatExtraMax(stat, this.state.lv) || 0}`
+            case 'asw':
+                return `+${this.props.ship.getStatExtraMax(stat) || 0}`
+            default:
+                return undefined
+        }
+    }
     onInputChange(evt) {
         const newLv = Math.min(Math.max(evt.target.value, this.props.ship._minLv), maxShipLv)
         if (newLv != this.state.lv) {
@@ -111,7 +123,7 @@ export default class ShipDetailsComponentStats extends React.Component {
                     }])
                 }
                 stat={stat.replace('consum.', '')}
-                max={stat === 'luck' && this.props.ship.stat.luck_max}
+                max={typeof value === 'number' ? this.getStatMax(stat) : undefined}
                 disableResourceColor={true}
             >
                 {value}
