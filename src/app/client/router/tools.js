@@ -5,7 +5,7 @@ export default [{
     name: 'fleets',
     getComponent: (nextState, cb) => {
         require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/fleets.jsx').default)
+            if (routeCheck(nextState)) cb(null, require('@appUI/pages/fleets').default)
         }, 'fleets')
     }
 }, {

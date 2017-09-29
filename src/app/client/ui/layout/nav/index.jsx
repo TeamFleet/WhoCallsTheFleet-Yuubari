@@ -25,6 +25,7 @@ let navs = [
     'equipments',
     'indev-arsenal',
     'entities',
+    __DEV__ ? 'indev-exillusts' : null,
     undefined,
     'about'
 ]

@@ -32,6 +32,14 @@ export default [{
             if (routeCheck(nextState)) cb(null, require('@appUI/pages/entity/list').default)
         }, 'entities')
     }
+}, {
+    path: 'exillusts',
+    name: 'exillusts',
+    getComponent: (nextState, cb) => {
+        require.ensure([], (require) => {
+            if (routeCheck(nextState)) cb(null, require('@appUI/pages/exillusts').default)
+        }, 'exillusts')
+    }
 },
 
 

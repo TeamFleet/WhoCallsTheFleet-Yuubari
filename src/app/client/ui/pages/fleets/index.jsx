@@ -3,13 +3,11 @@ import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
+import { ImportStyle } from 'sp-css-import'
 import htmlHead from '@appUtils/html-head.js'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './fleets.less'
-
 @connect()
-@ImportStyle(style)
+// @ImportStyle(style)
 export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({

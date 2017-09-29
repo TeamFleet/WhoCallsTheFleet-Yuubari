@@ -41,23 +41,34 @@
             }
         }
         &.is-indev{
+            // &:after{
+            //     content:    "DEV";
+            //     font-size:  12px;
+            //     position:   absolute;
+            //     z-index:    -1;
+            //     line-height:1.2em;
+            //     padding:    0 .25em;
+            //     border-radius:0.6em;
+
+            //     color:      #000;
+            //     background: @theme-red-900;
+
+            //     top:        0;
+            //     left:       15px;
+
+            //     transform:  scale((8 / 12)) rotate(-15deg);
+            //     transform-origin: 0% 0%;
+            // }
             &:after{
-                content:    "DEV";
-                font-size:  12px;
+                @color:     @theme-red-a400;
+                content:    "";
                 position:   absolute;
-                z-index:    -1;
-                line-height:1.2em;
-                padding:    0 .25em;
-                border-radius:0.6em;
-
-                color:      #000;
-                background: @theme-red-900;
-
+                left:       -20px;
                 top:        0;
-                left:       15px;
-
-                transform:  scale((8 / 12)) rotate(-15deg);
-                transform-origin: 0% 0%;
+                bottom:     0;
+                background: ease-out-sine-gradient(to right, fade(@color, 50%), fade(@color, 0%));
+                width:      80px;
+                z-index:    -1;
             }
         }
     }
