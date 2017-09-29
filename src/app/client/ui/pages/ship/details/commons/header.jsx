@@ -1,25 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import translate, { localeId } from 'sp-i18n'
+import { ImportStyle } from 'sp-css-import'
 import db from '@appLogic/database'
 import {
-    changeTab as shipDetailsChangeTab
-} from '@appLogic/ship-details/api'
+    changeTab as shipDetailsChangeTab,
+    TABINDEX
+} from '@appLogic/infospage/api'
+import { getInfosId } from '../../details'
 import getLink from '@appUtils/get-link'
 
 import Header from '@appUI/containers/infos-header'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './header.less'
-
-@connect((state, ownProps) => state.shipDetails[ownProps.ship.id] || {})
-@ImportStyle(styles)
+@connect((state, ownProps) => state.infosPage[getInfosId(ownProps.ship.id)] || {})
+@ImportStyle(require('./header.less'))
 export default class ShipDetailsHeader extends React.Component {
     onTabChange(tabId, tabIndex) {
         if (typeof this.props.onTabChange === 'function')
             this.props.onTabChange(tabId, tabIndex)
-        this.props.dispatch(shipDetailsChangeTab(this.props.ship.id, tabIndex))
+        this.props.dispatch(
+            shipDetailsChangeTab(getInfosId(this.props.ship.id), tabIndex)
+        )
     }
 
     getShipType() {
@@ -48,7 +49,7 @@ export default class ShipDetailsHeader extends React.Component {
                 subtitle={this.getShipType()}
                 tabs={this.getTabs()}
                 urlBase={getLink('ship', this.props.ship.id)}
-                currentIndex={this.props.tabIndex}
+                currentIndex={this.props[TABINDEX]}
                 onTabChange={this.onTabChange.bind(this)}
             >
                 <span className="shipclassnumber">No.{this.props.ship.getNo()}</span>

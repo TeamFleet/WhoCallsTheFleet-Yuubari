@@ -11,9 +11,8 @@ import db from '@appLogic/database'
 import {
     init as shipDetailsInit,
     reset as shipDetailsReset,
-    // changeTab as shipDetailsChangeTab,
-    // changeIllust as shipDetailsChangeIllust
-} from '@appLogic/ship-details/api.js'
+    TABINDEX
+} from '@appLogic/infospage/api.js'
 
 import Header from './details/commons/header.jsx'
 
@@ -80,7 +79,9 @@ const getDescription = ship => {
         + `, ${translate("ship_details.illustrator")}: ${ship._illustrator}`
 }
 
-@connect((state, ownProps) => state.shipDetails[ownProps.params.id] || {})
+export const getInfosId = id => `SHIP_${id}`
+
+@connect((state, ownProps) => state.infosPage[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
 export default class PageShipDetails extends React.Component {
     static onServerRenderStoreExtend(store) {
@@ -92,9 +93,12 @@ export default class PageShipDetails extends React.Component {
 
         preprocessTasks.push(
             dispatch(
-                shipDetailsInit(id, {
-                    tabIndex: tabsAvailable.indexOf(tab)
-                })
+                shipDetailsInit(
+                    getInfosId(id),
+                    {
+                        [TABINDEX]: tabsAvailable.indexOf(tab)
+                    }
+                )
             )
         )
         return preprocessTasks
@@ -138,8 +142,10 @@ export default class PageShipDetails extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.location.action === 'PUSH' && typeof this.props.tabIndex !== 'undefined')
-            this.props.dispatch(shipDetailsReset(this.props.params.id))
+        if (this.props.location.action === 'PUSH' && typeof this.props[TABINDEX] !== 'undefined')
+            this.props.dispatch(
+                shipDetailsReset(getInfosId(this.props.params.id))
+            )
     }
 
     render() {
@@ -148,11 +154,14 @@ export default class PageShipDetails extends React.Component {
         // const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
         // const tabIndex = __CLIENT__ ? (isLocationPUSH ? 0 : this.props.tabIndex) : undefined
 
-        if (typeof this.props.tabIndex === 'undefined') {
+        if (typeof this.props[TABINDEX] === 'undefined') {
             this.props.dispatch(
-                shipDetailsInit(this.props.params.id, {
-                    tabIndex: tabsAvailable.indexOf(this.props.params && this.props.params.tab ? this.props.params.tab : tabsAvailable[0])
-                })
+                shipDetailsInit(
+                    getInfosId(this.props.params.id),
+                    {
+                        [TABINDEX]: tabsAvailable.indexOf(this.props.params && this.props.params.tab ? this.props.params.tab : tabsAvailable[0])
+                    }
+                )
             )
             if (__CLIENT__) return null
         }
@@ -160,7 +169,7 @@ export default class PageShipDetails extends React.Component {
         if (!this.ship) return null
 
         if (__CLIENT__ && __DEV__)
-            console.log('thisShip', this.ship, this.props.tabIndex)
+            console.log('thisShip', this.ship, this.props[TABINDEX])
 
         return (
             <InfosPageContainer className={this.props.className}>
@@ -181,7 +190,9 @@ export default class PageShipDetails extends React.Component {
 
 @connect((state, ownProps) => ({
     // ...state.shipDetails[ownProps.ship.id]
-    tabIndex: state.shipDetails[ownProps.ship.id] ? state.shipDetails[ownProps.ship.id].tabIndex : undefined
+    [TABINDEX]: state.infosPage[getInfosId(ownProps.ship.id)]
+        ? state.infosPage[getInfosId(ownProps.ship.id)][TABINDEX]
+        : undefined
 }))
 class PageShipDetailsBody extends React.Component {
     // onIllustChange(newIllustIndex) {
@@ -202,8 +213,8 @@ class PageShipDetailsBody extends React.Component {
     render() {
         // const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
 
-        if (__CLIENT__ && typeof this.props.tabIndex !== 'undefined')
-            return React.createElement(contentComponents[this.props.tabIndex], {
+        if (__CLIENT__ && typeof this.props[TABINDEX] !== 'undefined')
+            return React.createElement(contentComponents[this.props[TABINDEX]], {
                 ship: this.props.ship,
                 // illustIndex: this.props.illustIndex,
                 // onIllustChange: this.onIllustChange.bind(this)

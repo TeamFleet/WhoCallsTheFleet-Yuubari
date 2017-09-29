@@ -7,18 +7,19 @@ import ComponentContainer from '@appUI/containers/infos-component'
 import Swiper from '@appUI/components/swiper'
 import Icon from '@appUI/components/icon'
 
+import { ImportStyle } from 'sp-css-import'
 import db from '@appLogic/database'
 import getPic from '@appUtils/get-pic.js'
 import {
     // init as shipDetailsInit,
     // reset as shipDetailsReset,
     // changeTab as shipDetailsChangeTab,
-    changeIllust as shipDetailsChangeIllust
-} from '@appLogic/ship-details/api.js'
+    update as shipDetailsUpdate
+} from '@appLogic/infospage/api.js'
+import { getInfosId } from '../../details'
 // import translate from 'sp-i18n'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './illust.less'
+const ILLUSTINDEX = 'illustIndex'
 
 const getExtraIllustPic = (ship, id, illustId) => {
     if (db.exillusts[id] && Array.isArray(db.exillusts[id].exclude) && db.exillusts[id].exclude.includes(illustId))
@@ -28,10 +29,12 @@ const getExtraIllustPic = (ship, id, illustId) => {
 
 // @connect()
 @connect((state, ownProps) => ({
-    // ...state.shipDetails[ownProps.ship.id]
-    defaultIndex: state.shipDetails[ownProps.ship.id] ? state.shipDetails[ownProps.ship.id].illustIndex : undefined
+    // ...state.infosPage[getInfosId(ownProps.ship.id)]
+    defaultIndex: state.infosPage[getInfosId(ownProps.ship.id)]
+        ? state.infosPage[getInfosId(ownProps.ship.id)][ILLUSTINDEX]
+        : undefined
 }))
-@ImportStyle(styles)
+@ImportStyle(require('./illust.less'))
 export default class ShipDetailsComponentSlotEquipments extends React.Component {
     constructor(props) {
         super(props)
@@ -103,7 +106,12 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
 
     componentWillUnmount() {
         this.props.dispatch(
-            shipDetailsChangeIllust(this.props.ship.id, this.state.swiperIndex)
+            shipDetailsUpdate(
+                getInfosId(this.props.ship.id),
+                {
+                    [ILLUSTINDEX]: this.state.swiperIndex
+                }
+            )
         )
     }
 

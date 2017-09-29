@@ -3,9 +3,8 @@ import bgimgReducer from '@appLogic/bgimg/reducer'
 import pageTitleReducer from '@appLogic/page-title/reducer'
 import sideMenuReducer from '@appLogic/side-menu/reducer'
 import shipListReducer from '@appLogic/ship-list/reducer'
-import shipDetailsReducer from '@appLogic/ship-details/reducer'
 import equipmentListReducer from '@appLogic/equipment-list/reducer'
-import equipmentDetailsReducer from '@appLogic/equipment-details/reducer'
+import infosPageReducer from '@appLogic/infospage/reducer'
 
 export default [
     ['appMode', appModeReducer],
@@ -13,10 +12,9 @@ export default [
     ['timeSwipedFromLeftEdge', sideMenuReducer],
 
     ['pageTitle', pageTitleReducer],
+    ['infosPage', infosPageReducer],
 
     ['shipList', shipListReducer],
-    ['shipDetails', shipDetailsReducer],
 
-    ['equipmentList', equipmentListReducer],
-    ['equipmentDetails', equipmentDetailsReducer]
+    ['equipmentList', equipmentListReducer]
 ]

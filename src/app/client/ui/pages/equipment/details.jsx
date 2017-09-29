@@ -9,9 +9,8 @@ import db from '@appLogic/database'
 import {
     init as equipmentDetailsInit,
     reset as equipmentDetailsReset,
-    // changeTab as equipmentDetailsChangeTab,
-    // changeIllust as equipmentDetailsChangeIllust
-} from '@appLogic/equipment-details/api.js'
+    TABINDEX
+} from '@appLogic/infospage/api.js'
 
 import Header from './details/commons/header.jsx'
 
@@ -31,7 +30,7 @@ if (__CLIENT__)
         contentComponents[index] = require(`./details/${tab}.jsx`).default
     })
 
-const extracFromState = (state) => {
+const extractFromState = (state) => {
     const pathname = state.routing.locationBeforeTransitions.pathname
     const segs = pathname.split('/')
     const indexEquipments = segs.indexOf('equipments')
@@ -48,7 +47,9 @@ const getDescription = equipment => {
         + `${equipment.type ? `, ${equipment._type}` : ''}`
 }
 
-@connect((state, ownProps) => state.equipmentDetails[ownProps.params.id] || {})
+export const getInfosId = id => `EQUIPMENT_${id}`
+
+@connect((state, ownProps) => state.infosPage[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
 export default class extends React.Component {
     static onServerRenderStoreExtend(store) {
@@ -56,19 +57,22 @@ export default class extends React.Component {
         const dispatch = store.dispatch
         const preprocessTasks = []
 
-        const { id, tab } = extracFromState(state)
+        const { id, tab } = extractFromState(state)
 
         preprocessTasks.push(
             dispatch(
-                equipmentDetailsInit(id, {
-                    tabIndex: tabsAvailable.indexOf(tab)
-                })
+                equipmentDetailsInit(
+                    getInfosId(id),
+                    {
+                        [TABINDEX]: tabsAvailable.indexOf(tab)
+                    }
+                )
             )
         )
         return preprocessTasks
     }
     static onServerRenderHtmlExtend(ext, store) {
-        const { id/*, tab*/ } = extracFromState(store.getState())
+        const { id/*, tab*/ } = extractFromState(store.getState())
 
         const equipment = db.equipments[id]
         const obj = {
@@ -102,16 +106,21 @@ export default class extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.location.action === 'PUSH' && typeof this.props.tabIndex !== 'undefined')
-            this.props.dispatch(equipmentDetailsReset(this.props.params.id))
+        if (this.props.location.action === 'PUSH' && typeof this.props[TABINDEX] !== 'undefined')
+            this.props.dispatch(
+                equipmentDetailsReset(getInfosId(this.props.params.id))
+            )
     }
 
     render() {
-        if (typeof this.props.tabIndex === 'undefined') {
+        if (typeof this.props[TABINDEX] === 'undefined') {
             this.props.dispatch(
-                equipmentDetailsInit(this.props.params.id, {
-                    tabIndex: tabsAvailable.indexOf(this.props.params && this.props.params.tab ? this.props.params.tab : tabsAvailable[0])
-                })
+                equipmentDetailsInit(
+                    getInfosId(this.props.params.id),
+                    {
+                        [TABINDEX]: tabsAvailable.indexOf(this.props.params && this.props.params.tab ? this.props.params.tab : tabsAvailable[0])
+                    }
+                )
             )
             if (__CLIENT__) return null
         }
@@ -119,7 +128,7 @@ export default class extends React.Component {
         if (!this.equipment) return null
 
         if (__CLIENT__ && __DEV__)
-            console.log('thisEquipment', this.equipment, this.props.tabIndex)
+            console.log('thisEquipment', this.equipment, this.props[TABINDEX])
 
         return (
             <InfosPageContainer className={this.props.className}>
@@ -139,12 +148,14 @@ export default class extends React.Component {
 
 
 @connect((state, ownProps) => ({
-    tabIndex: state.equipmentDetails[ownProps.equipment.id] ? state.equipmentDetails[ownProps.equipment.id].tabIndex : undefined
+    [TABINDEX]: state.infosPage[getInfosId(ownProps.equipment.id)]
+        ? state.infosPage[getInfosId(ownProps.equipment.id)][TABINDEX]
+        : undefined
 }))
 class PageEquipmentDetailsBody extends React.Component {
     render() {
-        if (__CLIENT__ && typeof this.props.tabIndex !== 'undefined')
-            return React.createElement(contentComponents[this.props.tabIndex], {
+        if (__CLIENT__ && typeof this.props[TABINDEX] !== 'undefined')
+            return React.createElement(contentComponents[this.props[TABINDEX]], {
                 equipment: this.props.equipment,
                 // illustIndex: this.props.illustIndex,
                 // onIllustChange: this.onIllustChange.bind(this)

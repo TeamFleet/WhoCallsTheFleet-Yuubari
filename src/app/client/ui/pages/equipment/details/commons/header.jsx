@@ -1,25 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import translate, { localeId } from 'sp-i18n'
+import { ImportStyle } from 'sp-css-import'
 // import db from '@appLogic/database'
 import {
-    changeTab as equipmentDetailsChangeTab
-} from '@appLogic/equipment-details/api'
+    changeTab as equipmentDetailsChangeTab,
+    TABINDEX
+} from '@appLogic/infospage/api'
+import { getInfosId } from '../../details'
 import getLink from '@appUtils/get-link'
 
 import Header from '@appUI/containers/infos-header'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './header.less'
-
-@connect((state, ownProps) => state.equipmentDetails[ownProps.equipment.id] || {})
-@ImportStyle(styles)
+@connect((state, ownProps) => state.infosPage[getInfosId(ownProps.equipment.id)] || {})
+@ImportStyle(require('./header.less'))
 export default class EquipmentDetailsHeader extends React.Component {
     onTabChange(tabId, tabIndex) {
         if (typeof this.props.onTabChange === 'function')
             this.props.onTabChange(tabId, tabIndex)
-        this.props.dispatch(equipmentDetailsChangeTab(this.props.equipment.id, tabIndex))
+        this.props.dispatch(equipmentDetailsChangeTab(getInfosId(this.props.equipment.id), tabIndex))
     }
 
     getTabs() {
@@ -40,7 +39,7 @@ export default class EquipmentDetailsHeader extends React.Component {
                 subtitle={this.props.equipment._type}
                 tabs={this.getTabs()}
                 urlBase={getLink('equipment', this.props.equipment.id)}
-                currentIndex={this.props.tabIndex}
+                currentIndex={this.props[TABINDEX]}
                 onTabChange={this.onTabChange.bind(this)}
             >
                 <span className="number">No.{this.props.equipment.id}</span>
