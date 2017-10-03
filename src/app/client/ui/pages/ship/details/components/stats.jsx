@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import bindEvent from 'bind-event'
 
 import { maxShipLv } from 'kckit'
 
@@ -44,6 +45,7 @@ export default class ShipDetailsComponentStats extends React.Component {
             lvInput: defaultLv
         }
     }
+
     setLv(lv) {
         if (lv != this.state.lv) {
             this.setState({
@@ -65,6 +67,7 @@ export default class ShipDetailsComponentStats extends React.Component {
                 return undefined
         }
     }
+
     onInputChange(evt) {
         const newLv = Math.min(Math.max(evt.target.value, this.props.ship._minLv), maxShipLv)
         if (newLv != this.state.lv) {
@@ -101,6 +104,9 @@ export default class ShipDetailsComponentStats extends React.Component {
             this.onLevelChange(newLv)
         }
         this._input.value = newLv
+    }
+    onRangeTouchMove(evt) {
+        evt.preventDefault()
     }
     onLevelChange(newLv) {
         prefs.shipDetailsStatLevel = newLv
@@ -174,6 +180,7 @@ export default class ShipDetailsComponentStats extends React.Component {
                         min="1"
                         max={maxShipLv}
                         onChange={this.onRangeChange.bind(this)}
+                        onTouchMove={this.onRangeTouchMove.bind(this)}
                     />
                     <span className="current" style={{
                         // left: (this.props.ship._minLv / maxShipLv * 100) + '%',
