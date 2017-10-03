@@ -78,13 +78,22 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         }
     }
 
+    // onInit(swiper) {
+    //     this.swiper = swiper
+    // }
+
     onSlideChangeEnd(swiper) {
         this.setState({
             swiperIndex: swiper.realIndex
         })
         if (typeof this.props.onIndexChange === 'function')
             this.props.onIndexChange(swiper.realIndex)
-        // console.log(swiper.activeIndex, swiper.realIndex)
+        // if (swiper.progress == 0 || swiper.progress == 1) {
+        //     swiper.mousewheelReleaseOnEdges = true
+        // } else {
+        //     swiper.mousewheelReleaseOnEdges = false
+        // }
+        // console.log(swiper, swiper.activeIndex, swiper.realIndex)
     }
 
     renderExillustName(type) {
@@ -137,6 +146,8 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
 
                     grabCursor={true}
                     mousewheelControl={true}
+                    mousewheelReleaseOnEdges={true}
+                    touchReleaseOnEdges={true}
 
                     preloadImages={false}
                     lazyLoading={true}

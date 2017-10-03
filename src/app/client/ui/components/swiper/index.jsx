@@ -15,7 +15,10 @@ const defaults = {
 export default class extends React.Component {
     componentDidMount() {
         if (Swiper) {
-            const { ...props } = this.props
+            const {
+                onInit,
+                ...props
+            } = this.props
             delete props.className
             delete props.children
             delete props.slides;
@@ -48,10 +51,13 @@ export default class extends React.Component {
                 delete props[key]
             });
 
-            this.illusts = new Swiper(
+            const thisSwiper = new Swiper(
                 this._container,
                 Object.assign(defaults, props)
-            );
+            )
+
+            if (typeof onInit === 'function')
+                onInit(thisSwiper)
         }
     }
 
