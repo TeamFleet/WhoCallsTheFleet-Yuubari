@@ -53,7 +53,7 @@
     //     }
     // }
 
-    @media all and (min-width: 524px) {
+    @media all and (min-width: (@item-width * 2 + @main-margin-phone * 2)) {
         @supports (display: grid){
             &:not(.is-exslot){
                 @basis:     (@equipmenticon-size + 10);
