@@ -1,16 +1,19 @@
 import React from 'react'
-
 import { ImportStyle } from 'sp-css-import'
-import styles from './title.less'
 
-@ImportStyle(styles)
+@ImportStyle(require('./title.less'))
 export default class Title extends React.Component {
     render() {
-        const TagName = this.props.tag || this.props.tagname || 'div'
+        const {
+            component, tag, tagname, element,
+            children,
+            ...props
+        } = this.props
+        const Component = component || tag || tagname || element || 'div'
         return (
-            <TagName className={this.props.className}>
-                {this.props.children}
-            </TagName>
+            <Component {...props}>
+                {children}
+            </Component>
         )
     }
 }
