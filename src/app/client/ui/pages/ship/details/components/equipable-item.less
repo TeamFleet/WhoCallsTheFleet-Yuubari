@@ -83,6 +83,11 @@
             border-color:       @color-off-border;
             background-color:   @color-off-background;
         }
+        &.on.is-special{
+            color:              @color-special;
+            border-color:       @color-special-border;
+            background-color:   @color-special-border;
+        }
     }
     a.other.on{
         .is-hover({
@@ -93,6 +98,17 @@
             color:              @color-on;
             border-color:       @color-on-border;
             background-color:   @theme-green-900;
+        });
+    }
+    a.other.on.is-special{
+        .is-hover({
+            color:              #fff;
+            border-color:       @theme-lightblue-600;
+            background-color:   @theme-lightblue-600;
+        }; {
+            color:              @color-special;
+            border-color:       @color-special-border;
+            background-color:   @theme-lightblue-900;
         });
     }
 

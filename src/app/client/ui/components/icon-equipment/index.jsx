@@ -10,11 +10,12 @@ import style from './styles.less'
 export default class IconEquipment extends React.Component {
     render() {
         const {
-            className,
             tag,
             icon,
             type,
-            equipment
+            equipment,
+            children,
+            ...props
         } = this.props
 
         const TagName = tag || 'span'
@@ -32,11 +33,11 @@ export default class IconEquipment extends React.Component {
 
         return (
             <TagName
-                className={className}
                 data-icon={isNaN(iconID) ? undefined : iconID}
                 data-suffix={('' + _icon).replace(iconID, '').toUpperCase() || undefined}
+                {...props}
             >
-                {this.props.children}
+                {children}
             </TagName>
         )
     }

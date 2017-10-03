@@ -6,7 +6,7 @@ import IconEquipment from '@appUI/components/icon-equipment'
 import Link from '@appUI/components/link'
 import LinkMini from '@appUI/components/link-mini'
 
-import getPic from '@appUtils/get-pic'
+// import getPic from '@appUtils/get-pic'
 import getLink from '@appUtils/get-link'
 import translate from 'sp-i18n'
 import db from '@appLogic/database'
@@ -31,64 +31,58 @@ const { equipmentTypesExclude } = db
 // @connect()
 @ImportStyle(styles)
 export default class ShipDetailsContentEquipable extends React.Component {
-    insertPlaceHolders() {
-        let i = 0;
-        let arr = []
-        while (i++ < 10) arr.push(<span className="item placeholder" key={i}></span>)
-        return arr
-    }
-
     renderCollection(collection, collectionIndex) {
         return (
             <ComponentContainer
-                className="collection"
                 key={collectionIndex}
                 title={collection.name}
             >
-                {collection.list
-                    .filter(list => !equipmentTypesExclude.includes(list.type))
-                    .map((list, listIndex) => (
-                        <ShipDetailsContentEquipableItem
-                            className="item"
-                            key={`${collectionIndex}-${listIndex}`}
-                            type={db.equipmentTypes[list.type]}
-                            ship={this.props.ship}
-                        />
-                    ))}
-                {this.insertPlaceHolders()}
+                <ShipDetailsContentEquipableListContainer>
+                    {collection.list
+                        .filter(list => !equipmentTypesExclude.includes(list.type))
+                        .map((list, listIndex) => (
+                            <ShipDetailsContentEquipableItem
+                                className="item"
+                                key={`${collectionIndex}-${listIndex}`}
+                                type={db.equipmentTypes[list.type]}
+                                ship={this.props.ship}
+                            />
+                        ))}
+                </ShipDetailsContentEquipableListContainer>
             </ComponentContainer>
         )
     }
     renderExSolot() {
         return (
             <ComponentContainer
-                className="collection"
                 title={translate("ship_details.equipable_exslot")}
             >
-                {this.props.ship.getExSlotEquipmentTypes()
-                    .filter(typeID => !equipmentTypesExclude.includes(typeID) && this.props.ship.canEquip(typeID))
-                    .sort((a, b) => db.equipmentTypes[a].order - db.equipmentTypes[b].order)
-                    .map((typeID, index) => (
-                        <ShipDetailsContentEquipableItem
-                            className="item is-exslot"
-                            key={index}
-                            type={db.equipmentTypes[typeID]}
-                        />
-                    ))}
-                {this.insertPlaceHolders()}
+                <ShipDetailsContentEquipableListContainer className="is-exslot">
+                    {this.props.ship.getExSlotEquipmentTypes()
+                        .filter(typeID => !equipmentTypesExclude.includes(typeID) && this.props.ship.canEquip(typeID))
+                        .sort((a, b) => db.equipmentTypes[a].order - db.equipmentTypes[b].order)
+                        .map((typeID, index) => (
+                            <ShipDetailsContentEquipableItem
+                                className="item is-exslot"
+                                key={index}
+                                type={db.equipmentTypes[typeID]}
+                            />
+                        ))}
+                </ShipDetailsContentEquipableListContainer>
 
                 <div className="noflex and">{translate("ship_details.equipable_exslot_and")}</div>
 
-                {this.props.ship.getExSlotOtherEquipments()
-                    .sort((a, b) => db.equipments[a].order - db.equipments[b].order)
-                    .map((equipmentID, index) => (
-                        <ShipDetailsContentEquipableItem
-                            className="item is-exslot"
-                            key={index}
-                            equipment={db.equipments[equipmentID]}
-                        />
-                    ))}
-                {this.insertPlaceHolders()}
+                <ShipDetailsContentEquipableListContainer className="is-exslot">
+                    {this.props.ship.getExSlotOtherEquipments()
+                        .sort((a, b) => db.equipments[a].order - db.equipments[b].order)
+                        .map((equipmentID, index) => (
+                            <ShipDetailsContentEquipableItem
+                                className="item is-exslot"
+                                key={index}
+                                equipment={db.equipments[equipmentID]}
+                            />
+                        ))}
+                </ShipDetailsContentEquipableListContainer>
             </ComponentContainer>
         )
     }
@@ -115,6 +109,30 @@ export default class ShipDetailsContentEquipable extends React.Component {
                 </ComponentContainer>
                 {db.equipmentCollections.map(this.renderCollection.bind(this))}
                 {this.renderExSolot()}
+            </div>
+        )
+    }
+}
+
+@ImportStyle(require('./components/equipable-list.less'))
+class ShipDetailsContentEquipableListContainer extends React.Component {
+    insertPlaceHolders() {
+        let i = 0;
+        let arr = []
+        while (i++ < 10) arr.push(<span className="item placeholder" key={i}></span>)
+        return arr
+    }
+    render() {
+        const {
+            children,
+            ...props
+        } = this.props
+        return (
+            <div
+                {...props}
+            >
+                {children}
+                {this.insertPlaceHolders()}
             </div>
         )
     }
@@ -154,6 +172,8 @@ class ShipDetailsContentEquipableItem extends React.Component {
             && canEquipShipType !== db.ships[shipId].canEquip(this.props.type.id)
         )
 
+        let spCount = specialList.length + (canEquip !== canEquipShipType ? 1 : 0)
+
         return (
             <IconEquipment
                 className={classNames([this.props.className, {
@@ -162,6 +182,7 @@ class ShipDetailsContentEquipableItem extends React.Component {
                     'is-special': /*isNotAV && */canEquip && !canEquipShipType
                 }])}
                 icon={this.props.type.icon}
+                data-special-count={spCount > 0 ? spCount : undefined}
             >
                 <span className="name">
                     <span className="name-wrapper">
@@ -172,7 +193,7 @@ class ShipDetailsContentEquipableItem extends React.Component {
                 {specialList.length > 0 &&
                     specialList.map((shipId, index) => (
                         <span className="block" key={index}>
-                            <LinkMini className="other on ship" ship={shipId} />
+                            <LinkMini className="other on ship is-special" ship={shipId} />
                         </span>
                     ))
                 }
