@@ -1,7 +1,7 @@
 @import "./_.less";
 
 .component{
-    height:         (@equipmenticon-size + 5 + 5);
+    min-height:     (@equipmenticon-size + 5 + 5);
     padding:        5px (@equipment-padding-right) 5px @equipment-padding-left;
     // border-bottom:  1px solid transparent;
     border-bottom:  1px solid @color-border;
@@ -30,6 +30,16 @@
             width:      0;
             height:     100%;
             overflow:   hidden;
+        }
+        @supports (display: flex) {
+            display:    flex;
+            flex-flow:  row wrap;
+            align-items:center;
+            height:     auto;
+            min-height: 36px;
+            &:after{
+                content:initial;
+            }
         }
     }
     .icon, .input{
@@ -61,6 +71,9 @@
             font-size:  12px;
             line-height:(@equipmenticon-size / 2);
             padding-left: 1em;
+            display:    flex;
+            flex-flow:  row wrap;
+            align-items:center;
         }
     }
 
