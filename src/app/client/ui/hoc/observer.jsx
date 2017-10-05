@@ -72,7 +72,7 @@ export const observerItem = () => (WrappedComponent) => (
     class ObserverItem extends Component {
 
         componentDidMount() {
-            if (__CLIENT__ && typeof window !== 'undefined') {
+            if (!this._item && typeof document !== 'undefined') {
                 const { findDOMNode } = require('react-dom')
                 this._item = findDOMNode(this)
             }
