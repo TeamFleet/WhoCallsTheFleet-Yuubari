@@ -31,6 +31,10 @@ If you want help us for Japanese translation, you can submit your changes [HERE]
   * OASW Calculator
 * New: Tab for equipable types.
 
+**Equipment Details**
+
+* New stat: TP (When available)
+
 ## TODOs
 
 **In Development**

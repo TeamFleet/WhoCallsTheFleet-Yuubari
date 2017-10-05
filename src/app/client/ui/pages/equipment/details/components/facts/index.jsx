@@ -1,29 +1,26 @@
 import React from 'react'
 import classNames from 'classnames'
+import { ImportStyle } from 'sp-css-import'
+import translate from 'sp-i18n'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
 
 import arrStats from '@appData/equipment-stats'
-// import arrResources from '@appData/resources'
+import arrResources from '@appData/resources'
 // import getEquipment from '@appUtils/get-equipment'
 // import equipmentTypes from 'kckit/src/types/equipments'
 import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
 import { get } from 'kckit'
 
-import translate from 'sp-i18n'
-
 /*
  * non-aircraft: 开发 | 改修 | 升级
  * aircraft: 开发 | 改修 | 升级 | 提升熟练度
  */
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
-
 // @connect()
-@ImportStyle(styles)
+@ImportStyle(require('./styles.less'))
 export default class EquipmentDetailsComponentFacts extends React.Component {
     render() {
         return (
@@ -88,6 +85,7 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
         const { equipment, className } = this.props
         const stats = [...arrStats]
         const isInterceptor = equipment.isType('Interceptor')
+        const valueTP = equipment.getTP()
 
         if (equipment.isType('Aircraft'))
             stats.push('distance')
@@ -122,6 +120,40 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
                         {`${value > 0 && stat !== 'range' && stat !== 'distance' ? '+' : ''}${!value ? '-' : value}`}
                     </Stat>)
                 })}
+
+                {!!(valueTP) && (
+                    <Stat
+                        type={translate(`tp`)}
+                        className="item is-positive"
+                        key="tp"
+                    >
+                        {valueTP}
+                    </Stat>
+                )}
+
+                <Stat
+                    type={translate(`equipment_details.scrap`)}
+                    className="item scrap"
+                    key="scrap"
+                >
+                    {arrResources.map((resource, index) => {
+                        const value = getValue(equipment.dismantle[index])
+                        return (
+                            <Stat
+                                className={
+                                    classNames(['scrap-resource', {
+                                        disabled: !value
+                                    }])
+                                }
+                                key={index}
+                                stat={resource}
+                            >
+                                {value}
+                            </Stat>
+                        )
+                    })}
+                </Stat>
+
             </EquipmentDetailsComponentFactsContainer>
         )
     }
