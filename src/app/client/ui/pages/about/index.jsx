@@ -27,7 +27,7 @@ export default class About extends React.Component {
                 className={this.props.className}
             >
                 <p><i>{translate('under_construction')}...</i></p>
-                <p>Fork on <a href="https://github.com/TeamFleet/WhoCallsTheFleet" target="_blank">GitHub</a></p>
+                <p>Fork on <a href="https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari" target="_blank">GitHub</a></p>
                 <p>Based on <a href="https://github.com/websage-team/super-project" target="_blank">Super Project</a> v{require('super-project/package.json').version}</p>
             </PageContainer>
         )

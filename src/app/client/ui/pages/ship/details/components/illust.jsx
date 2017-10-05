@@ -171,15 +171,13 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
 
                     onSlideChangeEnd={this.onSlideChangeEnd.bind(this)}
                 >
-                    {__CLIENT__ && (
-                        <TransitionGroup component="div" className="illust-name-container" appear={true}>
-                            {currentExtraIllustId
-                                && db.exillusts[currentExtraIllustId]
-                                && db.exillusts[currentExtraIllustId].type
-                                && this.renderExillustName(db.exillusts[currentExtraIllustId].type)
-                            }
-                        </TransitionGroup>
-                    )}
+                    <TransitionGroup component="div" className="illust-name-container" appear={true}>
+                        {currentExtraIllustId
+                            && db.exillusts[currentExtraIllustId]
+                            && db.exillusts[currentExtraIllustId].type
+                            && this.renderExillustName(db.exillusts[currentExtraIllustId].type)
+                        }
+                    </TransitionGroup>
                 </Swiper>
             </ComponentContainer>
         )

@@ -1,17 +1,15 @@
 import React from 'react'
+import { ImportStyle } from 'sp-css-import'
 
 const Swiper = typeof window !== 'undefined' && require('swiper')
 typeof window !== 'undefined' && require('swiper/dist/css/swiper.min.css')
-
-import { ImportStyle } from 'sp-css-import'
-import style from './styles.less'
 
 const defaults = {
     // speed: 400,
     // spaceBetween: 100
 }
 
-@ImportStyle(style)
+@ImportStyle(require('./styles.less'))
 export default class extends React.Component {
     componentDidMount() {
         if (Swiper) {
@@ -19,6 +17,7 @@ export default class extends React.Component {
                 onInit,
                 ...props
             } = this.props
+
             delete props.className
             delete props.children
             delete props.slides;
@@ -61,22 +60,40 @@ export default class extends React.Component {
         }
     }
 
-    renderButtonPrev() {
-        if (this.props.prevButton === true)
-            return <div className="swiper-button-prev" ref={el => this._prevButton = el}></div>
-        else if (React.isValidElement(this.props.prevButton))
-            return <div className="swiper-button-prev" ref={el => this._prevButton = el}>{this.props.prevButton}</div>
-        else
-            return undefined
+    renderButtonPrev(prevButton = this.props.prevButton) {
+        if (
+            typeof prevButton !== 'undefined'
+            && prevButton !== false
+            && prevButton !== null
+        )
+            return (
+                <div
+                    className="swiper-button-prev"
+                    ref={el => this._prevButton = el}
+                >
+                    {prevButton !== true && prevButton}
+                </div>
+            )
+
+        return undefined
     }
 
-    renderButtonNext() {
-        if (this.props.nextButton === true)
-            return <div className="swiper-button-next" ref={el => this._nextButton = el}></div>
-        else if (React.isValidElement(this.props.nextButton))
-            return <div className="swiper-button-next" ref={el => this._nextButton = el}>{this.props.nextButton}</div>
-        else
-            return undefined
+    renderButtonNext(nextButton = this.props.nextButton) {
+        if (
+            typeof nextButton !== 'undefined'
+            && nextButton !== false
+            && nextButton !== null
+        )
+            return (
+                <div
+                    className="swiper-button-next"
+                    ref={el => this._nextButton = el}
+                >
+                    {nextButton !== true && nextButton}
+                </div>
+            )
+
+        return undefined
     }
 
     render() {
