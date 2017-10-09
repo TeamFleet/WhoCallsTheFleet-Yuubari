@@ -23,7 +23,7 @@ let startSwipeAtLeftBorder = false
     }
 })
 @ImportStyle(style)
-export default class extends React.Component {
+class App extends React.Component {
     /*
      * this.isAppReady      是否已初始化
      */
@@ -133,10 +133,6 @@ export default class extends React.Component {
         if (startSwipeAtLeftBorder) startSwipeAtLeftBorder = false
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.log(error, errorInfo)
-    }
-
     componentWillMount() {
         if (__CLIENT__ && self._html)
             self._html.classList.add('is-react-ready')
@@ -170,6 +166,30 @@ export default class extends React.Component {
                 </Main>
                 <Bgimg />
             </div>
+        )
+    }
+}
+
+class ErrorBoundary extends React.Component {
+    componentDidCatch(error, info) {
+        console.log(error, info)
+        // Display fallback UI
+        // this.setState({ hasError: true })
+        // You can also log the error to an error reporting service
+        // logErrorToMyService(error, info);
+    }
+
+    render() {
+        return this.props.children
+    }
+}
+
+export default class extends React.Component {
+    render() {
+        return (
+            <ErrorBoundary>
+                <App {...this.props} />
+            </ErrorBoundary>
         )
     }
 }
