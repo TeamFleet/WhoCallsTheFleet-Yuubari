@@ -63,7 +63,7 @@
         "classnames": "^2.2.5",
         "lz-string": "^1.4.4",
         "js-cookie": "^2.1.4",
-        "localforage": "^1.5.0",
+        "localforage": "^1.5.1",
         "metas": "^1.0.1",
         "swiper": "^3.4.2",
 
