@@ -1,6 +1,6 @@
 {
     "name": "whocallsthefleet-yuubari",
-    "main": "dist-app/main.html",
+    "main": "dist-spa/index.html",
 
     "version": "1.0.0",
 
@@ -28,7 +28,7 @@
         "build:app": "node ./scripts/build-app",
         "dev": "npm run prebuild && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
-        
+
         "clean:web": "node ./scripts/clean-web",
         "clean:web:sourcemap": "node ./scripts/clean-web-sourcemap",
         "copy:web": "node ./scripts/copyfiles-web",
@@ -42,9 +42,9 @@
         "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./src/webpack/enter",
         "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./src/webpack/enter",
         "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./src/webpack/enter",
-        "pord:run": "cross-env DEFAULT_SUB_APP_KEY=localhost SERVER_PORT=8080 node ./dist-web/server",
+        "pord:run": "cross-env DEFAULT_SUB_APP_KEY=localhost node ./dist-web/server",
 
-        "update": "npm i --no-save"
+        "update": "super update"
     },
 
 
@@ -83,12 +83,11 @@
         "image-size": "^0.6.1",
 
         "copy-webpack-plugin": "^4.1.1",
-        "html-webpack-plugin": "^2.30.1",
         "extract-text-webpack-plugin": "^3.0.1",
         "on-build-webpack": "^0.1.0",
         "universal-alias-loader": "^1.2.2",
         "svg-url-loader": "^2.2.0",
-        "babel-loader": "^7.1.2"
+        "webpack-config": "^7.4.0"
     },
     "devDependencies": {
         "glob": "^7.1.2",
