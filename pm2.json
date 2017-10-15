@@ -8,7 +8,7 @@
         // client dev
         {
             "name": "fleet-dev-client",
-            "script": "./src/webpack/enter.js",
+            "script": "./system/webpack/enter.js",
             "max_memory_restart": "1G",
             "out_file": "logs/dev/fleet-dev-client.log",
             "error_file": "logs/dev/fleet-dev-client-error.log",
@@ -22,14 +22,15 @@
         // server dev
         {
             "name": "fleet-dev-server",
-            "script": "./src/webpack/enter.js",
+            "script": "./system/webpack/enter.js",
             "max_memory_restart": "1G",
             "out_file": "logs/dev/fleet-dev-server.log",
             "error_file": "logs/dev/fleet-dev-server-error.log",
             "env": {
                 "WEBPACK_STAGE_MODE": "server",
                 "WEBPACK_BUILD_ENV": "dev",
-                "WEBPACK_DEV_SERVER_PORT": "3001"
+                "WEBPACK_DEV_SERVER_PORT": "3001",
+                "SERVER_PORT": "3000"
             }
         },
 
@@ -43,7 +44,12 @@
             "watch": [ // 监控变化的目录，一旦变化，自动重启
                 "dist-web"
             ],
-            "env": {}
+            "env": {
+                "WEBPACK_STAGE_MODE": "server",
+                "WEBPACK_BUILD_ENV": "dev",
+                "WEBPACK_DEV_SERVER_PORT": "3001",
+                "SERVER_PORT": "3000"
+            }
         },
 
         // online
