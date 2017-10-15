@@ -33,6 +33,8 @@ const {
     pathPackageAssets,
     pathPackageOut
 } = require('./build-app/dir')
+const pathWebpackEnter = './system/webpack/enter'
+const pathStartElectron = path.resolve(pathRoot, 'apps/app/electron.js')
 
 // --------------------------------------------------
 
@@ -65,7 +67,7 @@ const run = async (src) => {
     // build app into src directory
     waiting = spinner(`Building app into target directory`)
     const env = `cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client WEBPACK_OUTPUT_PATH=${src.replace(/\\/g, '\\\\')}`
-    const cmd = `${env} node ./src/webpack/enter`
+    const cmd = `${env} node ${pathWebpackEnter}`
     await new Promise((resolve, reject) => {
         const child = npmRunScript(cmd, {
             stdio: 'ignore' // quiet
@@ -110,7 +112,7 @@ const run = async (src) => {
 
     // copy startup js to src
     waiting = spinner(`Creating & copying other files`)
-    await fs.copy(path.resolve(pathRoot, 'src/electron.js'), path.resolve(pathPackage, 'index.js'))
+    await fs.copy(pathStartElectron, path.resolve(pathPackage, 'index.js'))
     // await fs.writeJson(path.resolve(pathPackage, 'package.json'), {
     //     "name": "whocallsthefleet",
     //     "version": fs.readJSONSync(path.resolve(pathRoot, 'package.json')).version,

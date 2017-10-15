@@ -12,7 +12,7 @@ const outputPath = config.outputPath || (() => {
 })()
 
 // 客户端入库文件
-const clientEntries = config.clientEntries || ((appPath, type) => {
+const clientEntries = config.clientEntries || ((appPath, app) => {
 
     const isSPA = [
         'spa',
@@ -20,20 +20,20 @@ const clientEntries = config.clientEntries || ((appPath, type) => {
         'nwjs'
     ].includes(process.env.WEBPACK_BUILD_ENV)
 
-    switch (type) {
+    switch (app) {
         case 'app': {
             return {
                 "critical-extra-old-ie": [
                     "babel-polyfill",
-                    path.resolve(appPath, `./apps/${type}/client/critical.extra-old-ie.js`)
+                    path.resolve(appPath, `./apps/${app}/client/critical.extra-old-ie.js`)
                 ],
                 critical: [
-                    path.resolve(appPath, `./apps/${type}/client/critical`)
+                    path.resolve(appPath, `./apps/${app}/client/critical`)
                 ],
                 client: [
                     isSPA
-                        ? path.resolve(appPath, `./apps/${type}/client/index.spa.js`)
-                        : path.resolve(appPath, `./apps/${type}/client`)
+                        ? path.resolve(appPath, `./apps/${app}/client/index.spa.js`)
+                        : path.resolve(appPath, `./apps/${app}/client`)
                 ]
             }
         }
@@ -41,10 +41,10 @@ const clientEntries = config.clientEntries || ((appPath, type) => {
         default: {
             return {
                 critical: [
-                    path.resolve(appPath, `./apps/${type}/client/critical`)
+                    path.resolve(appPath, `./apps/${app}/client/critical`)
                 ],
                 client: [
-                    path.resolve(appPath, `./apps/${type}/client`)
+                    path.resolve(appPath, `./apps/${app}/client`)
                 ]
             }
         }

@@ -8,6 +8,8 @@ module.exports = (appPath, app) => {
         'nwjs'
     ].includes(process.env.WEBPACK_BUILD_ENV)
 
+    // console.log(appPath, app)
+
     switch (app) {
         case 'app': {
             const critical = [

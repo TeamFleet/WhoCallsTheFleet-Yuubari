@@ -1,33 +1,28 @@
-const path = require('path')
+// const path = require('path')
 // const fs = require('fs-extra')
 
 const webpack = require('webpack')
 const common = require('../common')
-// const WebpackOnBuildPlugin = require('on-build-webpack')
 // const opn = require('opn')
 
 const getConfigs = require('./_getConfigs')
 
-const defaults = {
-    outputPathDev: common.outputPath
-}
+const getConfig = async (appPath, app, options = {}) => {
 
-const getConfig = async (appPath, type, options = {}) => {
-    // const entries = require('./_entries.js')(appPath, type)
-    const entries = common.clientEntries(appPath, type)
-    const typeName = type ? type : 'default'
-    const outputPath = path.resolve(appPath, options.outputPathDev || defaults.outputPathDev, `public/client`)
+    const entries = common.clientEntries(appPath, app)
+    const typeName = app ? app : 'default'
     const publicPath = `http://localhost:${options.clientDevPort}/dist/`
-    // const configServer = require(path.resolve(appPath, `config/server`))
 
     let config = {
         target: 'web',
         devtool: 'source-map',
         entry: entries,
         output: {
-            filename: `${typeName}.[name].js`,
-            chunkFilename: `${typeName}.chunk.[name].js`,
-            path: outputPath,
+            // -_-_-_-_-_- is trying to fix a pm2 bug that will currupt [name] value
+            // check enter.js for the fix
+            filename: `${typeName}.-_-_-_-_-_-[name]-_-_-_-_-_-.js`,
+            chunkFilename: `${typeName}.chunk.-_-_-_-_-_-[name]-_-_-_-_-_-.js`,
+            path: '/',
             publicPath: publicPath
         },
         module: {
@@ -64,5 +59,5 @@ const getConfig = async (appPath, type, options = {}) => {
 module.exports = async (appPath, clientDevPort) => await getConfigs(
     getConfig,
     appPath,
-    Object.assign({}, defaults, { clientDevPort })
+    { clientDevPort }
 )

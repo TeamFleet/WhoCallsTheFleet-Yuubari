@@ -1,9 +1,7 @@
 {
     "name": "whocallsthefleet-yuubari",
     "main": "dist-spa/index.html",
-
     "version": "1.0.0",
-
     "description": "Yuubari (Dev) Channel for Who Calls the Fleet (https://yuubari.fleet.moe)",
     "author": {
         "name": "Diablohu",
@@ -15,17 +13,17 @@
         "type": "git",
         "url": "https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari"
     },
-
-
     "scripts": {
         "start": "npm run build && npm run pord:run",
         "start:pm2": "npm run build && npm run clean:web:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
-        "start:electron": "electron ./src/electron",
+        "start:electron": "electron ./apps/app/electron",
+
         "prebuild": "node ./scripts/database.js && node ./scripts/less-variables",
         "build": "npm run clean:web && npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web",
-        "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./src/webpack/enter",
-        "build:electron": "rimraf ./dist-electron && cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client node ./src/webpack/enter",
+        "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
+        "build:electron": "rimraf ./dist-electron && cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
         "build:app": "node ./scripts/build-app",
+
         "dev": "npm run prebuild && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
 
@@ -38,27 +36,28 @@
         "pm2:dev:server": "pm2 restart pm2.json --only fleet-dev-server",
         "pm2:dev:run": "pm2 restart pm2.json --only fleet-dev-run --watch",
 
-        "dev:bundle:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=client WEBPACK_DEV_SERVER_PORT=3001 node ./src/webpack/enter",
-        "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./src/webpack/enter",
-        "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./src/webpack/enter",
-        "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./src/webpack/enter",
+        "dev:bundle:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=client WEBPACK_DEV_SERVER_PORT=3001 node ./system/webpack/enter",
+        "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./system/webpack/enter",
+        "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
+        "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./system/webpack/enter",
         "pord:run": "cross-env DEFAULT_SUB_APP_KEY=localhost node ./dist-web/server",
 
         "update": "super update"
     },
-
-
+    "superProject": {
+        "type": "react"
+    },
     "dependencies": {
         "kckit": "^1.15.9",
         "whocallsthefleet-database": "2017.9.29",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "super-project": "^2.0.7",
+        "super-project": "2.0.8",
         "super-project-cli": "^1.1.0",
 
         "react-transition-group": "^2.2.1",
         "react-markdown": "^2.5.0",
-        
+
         "bind-event": "^1.0.5",
         "check-css-prop": "^1.0.1",
         "classnames": "^2.2.5",
@@ -103,8 +102,6 @@
     "optionalDependencies": {
         "node-windows": "^0.1.14"
     },
-
-
     "window": {
         "frame": true,
         "toolbar": false,

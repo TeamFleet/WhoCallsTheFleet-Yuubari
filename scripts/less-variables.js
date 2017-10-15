@@ -5,10 +5,11 @@ const sizeOf = require('image-size')
 
 const {
     assets: pathAssets
-} = require('../src/config/directories')
+} = require('../config/directories')
 
 // const pathAssets = path.resolve(process.cwd(), 'src/app/client/assets/')
-const pathfile = path.resolve(process.cwd(), 'src/app/client/ui/base/less/', 'variables.less')
+const pathApp = path.resolve(process.cwd(), 'apps/app/')
+const pathfile = path.resolve(pathApp, 'client/ui/base/less/', 'variables.less')
 
 const run = async () => {
     console.log('replacing less variables...')
@@ -38,7 +39,7 @@ const run = async () => {
     // equipment list stat columns count
     {
         const stats = require(
-            path.resolve(process.cwd(), 'src/app/data/', 'equipment-stats')
+            path.resolve(pathApp, 'data/', 'equipment-stats')
         )
         content = content.replace(
             /@equipment-list-stat-count:([ \t]*)([0-9]+);/g,

@@ -9,7 +9,7 @@ const WebpackOnBuildPlugin = require('on-build-webpack')
 const getConfigs = require('./_getConfigs')
 
 const defaults = {
-    outputPathSpa: common.outputPath
+    outputPath: common.outputPath
 }
 
 const times = n => f => {
@@ -21,18 +21,13 @@ const times = n => f => {
     return iter(0)
 }
 
-const getConfig = async (appPath, type, options = {}) => {
+const getConfig = async (appPath, app, options = {}) => {
 
-    // const entries = require('./_entries.js')(appPath, type)
-    const entries = common.clientEntries(appPath, type)
-    const typeName = type ? type : 'default'
-    const outputPath = path.resolve(appPath, options.outputPathSpa || defaults.outputPathSpa, `${typeName}/includes`)
+    const entries = common.clientEntries(appPath, app)
+    const typeName = app ? app : 'default'
+    const outputPath = path.resolve(appPath, options.outputPath || defaults.outputPath, `${typeName}/includes`)
     const publicPath = `includes/`
     const htmlFileName = '../index.html'
-
-    console.log('appPath', appPath)
-    console.log('outputPathSpa', options.outputPathSpa, defaults.outputPathSpa)
-    console.log('outputPath', outputPath)
 
     let config = {
         target: 'web',
@@ -73,7 +68,7 @@ const getConfig = async (appPath, type, options = {}) => {
             new HtmlWebpackPlugin({
                 title: options.spaHtmlTitle || 'Super Project',
                 filename: htmlFileName,
-                template: options.spaTemplatePath || path.resolve(appPath, `./apps/${type}/html.ejs`),
+                template: options.spaTemplatePath || path.resolve(appPath, `./apps/${app}/html.ejs`),
                 inject: false
             }),
             new WebpackOnBuildPlugin(function (stats) {

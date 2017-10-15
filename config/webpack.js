@@ -19,6 +19,9 @@ config.rules = require('./webpack/rules')
 // 扩展 webpack 配置的 rules 属性
 config.rulesExt = require('./webpack/rules-ext')
 
+// 扩展 webpack 配置的 plugins 属性
+config.plugins = require('./webpack/plugins')
+
 // 扩展 webpack 入口执行流程
 config.enterExt = require('./webpack/enter-ext')
 

@@ -11,14 +11,14 @@ const getConfigs = require('./_getConfigs')
 
 const defaults = {
     pwa: true,
-    outputPathDist: common.outputPath
+    outputPath: common.outputPath
 }
 
-const getConfig = async (appPath, type, options = {}) => {
+const getConfig = async (appPath, app, options = {}) => {
 
-    const entries = common.clientEntries(appPath, type)
-    const typeName = type ? type : 'default'
-    const outputPath = path.resolve(appPath, options.outputPathDist || defaults.outputPathDist, `public/${typeName}/`)
+    const entries = common.clientEntries(appPath, app)
+    const typeName = app ? app : 'default'
+    const outputPath = path.resolve(appPath, options.outputPath || defaults.outputPath, `public/${typeName}/`)
     const publicPath = `/${typeName}/`
 
     let config = {

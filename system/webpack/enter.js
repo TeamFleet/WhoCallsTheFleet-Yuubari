@@ -41,33 +41,39 @@ const factoryConfig = (config) => {
 
 // 扩展配置
 // 配置有可能是 Array
-const extendConfig = (config, obj) => {
+const parseConfig = (config, defaults) => {
     if (Array.isArray(config))
-        config = config.map(thisConfig => Object.assign(thisConfig, obj))
-    else
-        Object.assign(config, obj)
+        return config.map(thisConfig => parseConfig(thisConfig, defaults))
+
+    // try to fix a pm2 bug that will currupt [name] value
+    if (config.output) {
+        for (let key in config.output) {
+            config.output[key] = config.output[key].replace(/-_-_-_-_-_-(.+?)-_-_-_-_-_-/g, '[name]')
+        }
+    }
+
+    // console.log(config.entry)
+    return Object.assign({}, defaults, config)
 }
 
-const run = async (config) => {
-
-    // 配置非空处理
-    if (config === undefined) config = {}
-
+const run = async (defaults = {}) => {
     // 标准化配置
-    config = factoryConfig(config)
+    defaults = factoryConfig(defaults)
+    const webpackConfig = parseConfig(
+        await require(`./${stage}/${env}`)(appRunPath, CLIENT_DEV_PORT),
+        defaults[stage][env]
+    )
+
+    // console.log('webpackConfig', webpackConfig)
 
     // 客户端开发模式
     if (stage === 'client' && env === 'dev') {
-
-        let wcd = await require('./client/dev')(appRunPath, CLIENT_DEV_PORT)
-        extendConfig(wcd, config.client.dev)
-
-        const compiler = webpack(wcd)
+        const compiler = webpack(webpackConfig)
 
         // more config
         // http://webpack.github.io/docs/webpack-dev-server.html
         const server = new WebpackDevServer(compiler, {
-            quiet: true,
+            quiet: false,
             stats: { colors: true },
             hot: true,
             inline: true,
@@ -83,13 +89,9 @@ const run = async (config) => {
 
     // 客户端打包
     if (stage === 'client' && env === 'dist') {
-
         process.env.NODE_ENV = 'production'
 
-        let wcd = await require('./client/dist')(appRunPath)
-        extendConfig(wcd, config.client.dist)
-
-        const compiler = webpack(wcd)
+        const compiler = webpack(webpackConfig)
         compiler.run((err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)
 
@@ -102,13 +104,9 @@ const run = async (config) => {
 
     // 客户端打包: SPA
     if (stage === 'client' && env === 'spa') {
-
         process.env.NODE_ENV = 'production'
 
-        let wcd = await require('./client/spa')(appRunPath)
-        extendConfig(wcd, config.client.dist)
-
-        const compiler = webpack(wcd)
+        const compiler = webpack(webpackConfig)
         compiler.run((err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)
 
@@ -121,11 +119,7 @@ const run = async (config) => {
 
     // 服务端开发环境
     if (stage === 'server' && env === 'dev') {
-
-        let wsd = await require('./server/dev')(appRunPath, CLIENT_DEV_PORT)
-        extendConfig(wsd, config.server.dev)
-
-        webpack(wsd, (err, stats) => {
+        webpack(webpackConfig, (err, stats) => {
             if (err) console.log(`webpack dev error: ${err}`)
 
             console.log(stats.toString({
@@ -137,13 +131,9 @@ const run = async (config) => {
 
     // 服务端打包
     if (stage === 'server' && env === 'dist') {
-
         process.env.NODE_ENV = 'production'
 
-        let wsd = await require('./server/dist')(appRunPath)
-        extendConfig(wsd, config.server.dist)
-
-        webpack(wsd, (err, stats) => {
+        webpack(webpackConfig, (err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)
 
             console.log(stats.toString({
@@ -155,7 +145,7 @@ const run = async (config) => {
 
     // 扩展流程
     if (typeof customConfig.enterExt === 'function')
-        await customConfig.enterExt(config)
+        await customConfig.enterExt(defaults)
 
 }
 

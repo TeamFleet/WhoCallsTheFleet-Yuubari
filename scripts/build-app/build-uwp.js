@@ -1,9 +1,9 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-const times = require('../../src/app/utils/times')
+const times = require('../../apps/app/utils/times')
 const spinner = require('./spinner')
-const dirs = require('../../src/config/directories')
+const dirs = require('../../config/directories')
 
 const convertToWindowsStore = require('electron-windows-store')
 const isAdminUser = require('node-windows').isAdminUser

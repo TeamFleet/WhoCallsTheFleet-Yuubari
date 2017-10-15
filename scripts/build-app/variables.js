@@ -12,7 +12,7 @@ module.exports = {
     isMac: /^darwin/.test(platform),
 
     packageJSON,
-    channel: require(path.resolve(__dirname, '../../src/utils/get-channel'))(),
+    channel: require(path.resolve(__dirname, '../../utils/get-channel'))(),
 
     symbols: {
         complete: '√'
