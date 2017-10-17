@@ -43,6 +43,11 @@ module.exports = async (config = {}) => {
             result.plugins.push(
                 ...await pluginCopyImages(appPath, 'app', false, true)
             )
+            result.plugins.push(
+                new webpack.DefinePlugin({
+                    '__PUBLIC__': '',
+                }),
+            )
 
             return result
         }

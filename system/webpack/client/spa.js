@@ -23,11 +23,13 @@ const times = n => f => {
 
 const getConfig = async (appPath, app, options = {}) => {
 
+    const thisOptions = options['client-spa'] || {}
+
     const entries = common.clientEntries(appPath, app)
     const typeName = app ? app : 'default'
     const outputPath = path.resolve(appPath, options.outputPath || defaults.outputPath, `${typeName}/includes`)
-    const publicPath = `includes/`
-    const htmlFileName = options.spaFileName || '../index.html'
+    const publicPath = thisOptions.output && typeof thisOptions.output.publicPath !== 'undefined' ? thisOptions.output.publicPath : `includes/`
+    const htmlFileName = thisOptions.spaFileName || options.spaFileName || '../index.html'
 
     let config = {
         target: 'web',
@@ -66,9 +68,9 @@ const getConfig = async (appPath, app, options = {}) => {
             //     sourceMap: false
             // }),
             new HtmlWebpackPlugin({
-                title: options.spaHtmlTitle || 'Super Project',
+                title: thisOptions.spaHtmlTitle || options.spaHtmlTitle || 'Super Project',
                 filename: htmlFileName,
-                template: options.spaTemplatePath || path.resolve(appPath, `./apps/${app}/html.ejs`),
+                template: thisOptions.spaTemplatePath || options.spaTemplatePath || path.resolve(appPath, `./apps/${app}/html.ejs`),
                 inject: false
             }),
             new WebpackOnBuildPlugin(function (stats) {

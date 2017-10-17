@@ -77,6 +77,7 @@ module.exports = (async () => (
             // appendUrls: getUrlsFromRouter()
             appendUrls: []
         }),
+        // pwa: false,
 
         spaHtmlTitle: 'WhoCallsTheFleet',
         spaFileName: process.env.WEBPACK_BUILD_ENV === 'electron' ? 'index.html' : '../index.html',
@@ -93,6 +94,9 @@ module.exports = (async () => (
             ]
         },
         'client-spa': {
+            output: {
+                publicPath: process.env.WEBPACK_BUILD_ENV === 'electron' ? './' : 'includes/',
+            },
             plugins: [
                 ...await pluginCopyImages(appPath, 'app', false, true),
             ]

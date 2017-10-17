@@ -1,4 +1,5 @@
 const fs = require('fs-extra')
+const path = require('path')
 // const argv = require('yargs').argv
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
@@ -53,6 +54,11 @@ const parseConfig = (config, defaults) => {
         }
     }
 
+    // remove all undefined from plugins
+    if (Array.isArray(config.plugins)) {
+        config.plugins = config.plugins.filter(plugin => typeof plugin !== 'undefined')
+    }
+
     // console.log(config.entry)
     return Object.assign({}, defaults, config)
 }
@@ -60,7 +66,7 @@ const parseConfig = (config, defaults) => {
 const run = async (defaults = {}) => {
     // 标准化配置
     defaults = factoryConfig(defaults)
-    const webpackConfig = fs.existsSync(`./${stage}/${env}`)
+    const webpackConfig = fs.existsSync(path.resolve(__dirname, `./${stage}/${env}.js`))
         ? parseConfig(
             await require(`./${stage}/${env}`)(appRunPath, CLIENT_DEV_PORT),
             defaults[stage][env]
