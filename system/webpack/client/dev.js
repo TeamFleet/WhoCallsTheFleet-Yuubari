@@ -9,8 +9,6 @@ const getConfigs = require('./_getConfigs')
 
 const getConfig = async (appPath, app, options = {}) => {
 
-    const thisOptions = options['client-dev'] || {}
-
     const entries = common.clientEntries(appPath, app)
     const typeName = app ? app : 'default'
     const publicPath = `http://localhost:${options.clientDevPort}/dist/`
