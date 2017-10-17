@@ -61,7 +61,7 @@ export default (type, id, file) => {
         return require('electron').remote.getGlobal('__path_pics') + filepath
 
     if (__SPA__)
-        return '../pics/' + filepath
+        return '../../pics/' + filepath
 
     const base = __DEV__
         ? '/app'
