@@ -15,11 +15,11 @@
     },
     "scripts": {
         "start": "npm run build && npm run pord:run",
-        "start:pm2": "npm run build && npm run clean:web:sourcemap && pm2 restart pm2.json --only fleet-yuubari",
+        "start:pm2": "npm run build && pm2 restart pm2.json --only fleet-yuubari",
         "start:electron": "electron ./apps/app/electron",
 
         "prebuild": "node ./scripts/database.js && node ./scripts/less-variables",
-        "build": "npm run clean:web && npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web",
+        "build": "npm run clean:web && npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web && npm run clean:web:sourcemap",
         "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
         "build:electron": "rimraf ./dist-electron && cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
         "build:app": "node ./scripts/build-app",
@@ -53,7 +53,7 @@
         "whocallsthefleet-backgrounds": "1.2.0",
 
         "super-project": "2.0.8",
-        "super-project-cli": "^1.1.0",
+        "super-project-cli": "^1.1.4",
 
         "react-transition-group": "^2.2.1",
         "react-markdown": "^2.5.0",

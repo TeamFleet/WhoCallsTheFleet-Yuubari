@@ -23,4 +23,5 @@ require('../config/install').forEach((item) => {
 server.mountSwitchSubAppMiddleware()
 
 /* 系统运行 */
+
 server.run(serverConfig.SERVER_PORT)
