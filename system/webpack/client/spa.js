@@ -27,7 +27,7 @@ const getConfig = async (appPath, app, options = {}) => {
     const typeName = app ? app : 'default'
     const outputPath = path.resolve(appPath, options.outputPath || defaults.outputPath, `${typeName}/includes`)
     const publicPath = `includes/`
-    const htmlFileName = '../index.html'
+    const htmlFileName = options.spaFileName || '../index.html'
 
     let config = {
         target: 'web',

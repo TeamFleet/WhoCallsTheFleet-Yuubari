@@ -52,8 +52,8 @@
         "whocallsthefleet-database": "2017.9.29",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "super-project": "2.0.8",
-        "super-project-cli": "^1.1.4",
+        "super-project": "^2.0.8",
+        "super-project-cli": "^1.1.6",
 
         "react-transition-group": "^2.2.1",
         "react-markdown": "^2.5.0",

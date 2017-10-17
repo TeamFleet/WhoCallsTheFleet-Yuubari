@@ -2,6 +2,8 @@
 const webpack = require('webpack')
 const path = require('path')
 
+const pluginCopyImages = require('./lib/plugin-copy-images')
+
 const env = process.env.WEBPACK_BUILD_ENV
 const stage = process.env.WEBPACK_STAGE_MODE
 const appRunPath = process.cwd()
@@ -10,9 +12,13 @@ module.exports = async (config = {}) => {
     // 扩展的流程函数
     // 客户端打包: Electron
     if (stage === 'client' && (env === 'electron' || env === 'app')) {
-        const getConfig = (appPath, config) => {
+        const getConfig = async (appPath, config) => {
             if (Array.isArray(config))
-                return config.map(thisConfig => getConfig(appPath, thisConfig))
+                return await Promise.all(
+                    config.map(async thisConfig =>
+                        await getConfig(appPath, thisConfig)
+                    )
+                )
 
             const result = Object.assign({}, config, {
                 target: 'electron-main',
@@ -22,6 +28,7 @@ module.exports = async (config = {}) => {
             result.output.path = process.env.WEBPACK_OUTPUT_PATH
                 ? path.normalize(process.env.WEBPACK_OUTPUT_PATH)
                 : path.resolve(appPath, `dist-electron`)
+            result.output.publicPath = ''
 
             result.plugins.push(
                 new webpack.optimize.UglifyJsPlugin({
@@ -33,13 +40,16 @@ module.exports = async (config = {}) => {
                     sourceMap: false
                 })
             )
+            result.plugins.push(
+                ...await pluginCopyImages(appPath, 'app', false, true)
+            )
 
             return result
         }
 
         process.env.NODE_ENV = 'production'
 
-        let wcd = getConfig(
+        let wcd = await getConfig(
             appRunPath,
             await require(path.resolve(appRunPath, 'system/webpack/client/spa'))(appRunPath)
         )

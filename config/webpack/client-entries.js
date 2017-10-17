@@ -1,12 +1,7 @@
 const path = require('path')
 
 module.exports = (appPath, app) => {
-    const isSPA = [
-        'spa',
-        'app',
-        'electron',
-        'nwjs'
-    ].includes(process.env.WEBPACK_BUILD_ENV)
+    const isSPA = require('./_base').isSPA
 
     // console.log(appPath, app)
 

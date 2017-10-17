@@ -1,3 +1,4 @@
+const fs = require('fs-extra')
 // const argv = require('yargs').argv
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
@@ -59,10 +60,12 @@ const parseConfig = (config, defaults) => {
 const run = async (defaults = {}) => {
     // 标准化配置
     defaults = factoryConfig(defaults)
-    const webpackConfig = parseConfig(
-        await require(`./${stage}/${env}`)(appRunPath, CLIENT_DEV_PORT),
-        defaults[stage][env]
-    )
+    const webpackConfig = fs.existsSync(`./${stage}/${env}`)
+        ? parseConfig(
+            await require(`./${stage}/${env}`)(appRunPath, CLIENT_DEV_PORT),
+            defaults[stage][env]
+        )
+        : defaults[stage][env]
 
     // console.log('webpackConfig', webpackConfig)
 

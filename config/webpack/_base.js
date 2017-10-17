@@ -12,5 +12,12 @@ module.exports = {
     APP_1_ENTER_JS_NAME: 'app',
 
     // 需要 bable 处理的模块
-    needBabelHandleList: []
+    needBabelHandleList: [],
+
+    isSPA: [
+        'spa',
+        'app',
+        'electron',
+        'nwjs'
+    ].includes(process.env.WEBPACK_BUILD_ENV)
 }

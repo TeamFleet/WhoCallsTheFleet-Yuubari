@@ -42,216 +42,22 @@
  * app  string  项目名称
  * pwa  boolean|function  仅针对dist。是否启用PWA，如果为true则启用默认service-worker，否则请提供webpack插件函数，参见/system/webpack/client/dist.js
  * spaHtmlTitle  string  仅针对spa。SPA模板页面默认标题
+ * spaFileName  string  仅针对spa。SPA页面文件名，可为相对outputPath的路径
  * spaTemplatePath  string  仅针对spa。SPA模板文件位置
  * [`${process.env.WEBPACK_STAGE_MODE}-${process.env.WEBPACK_BUILD_ENV}`]
  *      object
  *      为对应的打包类型扩展配置
  */
 
-const fs = require('fs-extra')
+// const fs = require('fs-extra')
 const path = require('path')
 const pwaCreatePlugin = require('sp-pwa')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const WebpackOnBuildPlugin = require('on-build-webpack')
+// const WebpackOnBuildPlugin = require('on-build-webpack')
 
 const appPath = process.cwd()
-const {
-    assets: pathAssets
-} = require('../directories')
 const outputPath = require('./output-path')
 
-const os = require('os')
-const platform = os.platform()
-const isWindows = /^win/.test(platform)
-const isMac = /^darwin/.test(platform)
-
-const channel = require(path.resolve(appPath, 'utils/get-channel'))()
-
-const pluginCopyImages = async (appPath, type, isDev, isSPA) => {
-    const arr = []
-
-    if (isSPA) {
-        arr.push({
-            context: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
-            from: '**/*.webp',
-            to: '_bgimgs'
-        })
-        arr.push({
-            from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output/thumbnail'),
-            to: '_bgimgs/thumbnail'
-        })
-        if (type === 'app') {
-            const pathAssetsLogos = path.resolve(pathAssets, `logos/${channel}/`)
-            arr.push({
-                from: path.resolve(pathAssetsLogos, 'appicon.ico'),
-                to: 'assets'
-            })
-            arr.push({
-                from: path.resolve(pathAssetsLogos, 'appicon.icns'),
-                to: 'assets'
-            })
-            arr.push({
-                from: path.resolve(pathAssetsLogos, `128.png`),
-                to: 'assets/appicon.png'
-            })
-        }
-    } else {
-        arr.push({
-            from: path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output'),
-            to: '_bgimgs'
-        })
-        arr.push({
-            from: path.resolve(pathAssets, `logos/${channel}/32.ico`),
-            to: '../favicon.ico'
-        })
-        arr.push(...await getPics(appPath, isDev))
-    }
-
-    const plugins = [
-        new CopyWebpackPlugin(arr)
-    ]
-    // switch (type) {
-    //     case 'app': {
-    //         const pathBgimgs = path.resolve(appPath, './node_modules/whocallsthefleet-backgrounds/output')
-    //         plugins.push(
-    //             new webpack.DefinePlugin({
-    //                 '__BGIMG_LIST__': JSON.stringify(
-    //                     // glob.sync(path.resolve(pathBgimgs, '*.jpg'))
-    //                     fs.readdirSync(pathBgimgs).filter(
-    //                         file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory() && path.extname(path.resolve(pathBgimgs, file)) === '.jpg'
-    //                     )
-    //                 ),
-    //                 '__ICONSVG__': JSON.stringify(
-    //                     fs.readFileSync(
-    //                         path.resolve(appPath, './src/app/client/assets/symbols/symbol-defs.svg'), 'utf8'
-    //                     ).replace(/<title>(.+?)<\/title>/g, '')
-    //                 )
-    //             })
-    //         )
-    //         break
-    //     }
-    // }
-    return plugins
-}
-
-const asyncTest = async (appPath) => {
-    return await new Promise(resolve => {
-        setTimeout(() => {
-            console.log('alalala')
-            resolve(
-                [{
-                    from: path.resolve(pathAssets, `akashi.png`),
-                }]
-            )
-        }, 10000)
-    })
-}
-
-const getPics = async (appPath = process.cwd(), isDev) => {
-
-    // TODO: check version to overwrite
-
-    const dirPics = path.resolve(appPath, './pics/')
-    const dirTo = '_pics'
-    const dirTarget = path.resolve(appPath, outputPath, 'public/app/' + dirTo)
-
-    let results = []
-    let ships
-
-    const filelist = {
-        ships: [
-            '0',
-            '0-1',
-            '0-2'
-        ],
-        shipsExtra: ['8', '9'],
-        equipments: ['card']
-    }
-
-    const getDb = async (dbname) => {
-        let arr = []
-        await new Promise((resolve, reject) => {
-            fs.readFile(path.resolve(appPath, `./node_modules/whocallsthefleet-database/db/${dbname}.nedb`), 'utf-8', (err, data) => {
-                if (err) reject(err)
-                data.split(/\r?\n/).forEach(item => {
-                    if (!item) return
-                    arr.push(JSON.parse(item))
-                })
-                resolve()
-            })
-        })
-        return arr
-    }
-
-    const readdir = async (dir) => {
-        return new Promise((resolve, reject) => {
-            fs.readdir(dir, (err, files) => {
-                if (err) reject(err)
-                resolve(files)
-            })
-        })
-    }
-
-    const checkDo = async (type, id, listBasename) => {
-        for (let file of await readdir(path.join(dirPics, type, id))) {
-            if (typeof listBasename === 'undefined' || listBasename.indexOf(path.basename(file, path.extname(file))) > -1) {
-                if (!isDev && !fs.existsSync(path.join(dirTarget, type, id, file)))
-                    resultAdd(type, id, file)
-            }
-        }
-    }
-
-    const resultAdd = (type, id, file) => {
-        // console.log(type, id, file)
-        results.push({
-            context: path.resolve(dirPics),
-            from: `${type}/${id}/${file}`,
-            to: `${dirTo}/${type}/${id}`
-        })
-    }
-
-    for (let type of await readdir(dirPics)) {
-        const dirType = path.join(dirPics, type)
-        for (let id of await readdir(dirType)) {
-            switch (type) {
-                case 'ships': {
-                    if (!ships) {
-                        ships = {}
-                        for (let ship of await getDb('ships')) {
-                            ships[ship.id] = ship
-                        }
-                    }
-                    if (ships[id] && ships[id].illust_same_as_prev) {
-                        // console.log(id, ships[id].name.ja_jp)
-                        await checkDo(type, id, filelist.ships)
-                    } else
-                        await checkDo(type, id, [
-                            ...filelist.ships,
-                            '8',
-                            '9',
-                            '10'
-                        ])
-                    break
-                }
-                case 'ships-extra':
-                    await checkDo(type, id, filelist.shipsExtra)
-                    break
-                case 'equipments':
-                    await checkDo(type, id, filelist.equipments)
-                    break
-                default:
-                    await checkDo(type, id)
-                    break
-            }
-        }
-    }
-
-    // enemies
-
-    // console.log(results)
-
-    return results
-}
+const pluginCopyImages = require('./lib/plugin-copy-images')
 
 module.exports = (async () => (
     [{
@@ -273,6 +79,7 @@ module.exports = (async () => (
         }),
 
         spaHtmlTitle: 'WhoCallsTheFleet',
+        spaFileName: process.env.WEBPACK_BUILD_ENV === 'electron' ? 'index.html' : '../index.html',
         // spaTemplatePath: path.resolve(process.cwd(), `./apps/app/html.ejs`),
 
         'client-dev': {
@@ -288,106 +95,6 @@ module.exports = (async () => (
         'client-spa': {
             plugins: [
                 ...await pluginCopyImages(appPath, 'app', false, true),
-                new WebpackOnBuildPlugin(function (stats) {
-                    const htmlFileName = '../index.html'
-
-                    // After webpack build...
-                    // create(parseOptions(...args))
-                    // console.log('')
-                    // console.log('----------------------------------------')
-                    // console.log('')
-
-                    const chunks = {}
-                    const outputPath = stats.compilation.outputOptions.path
-                    const publicPath = stats.compilation.outputOptions.publicPath
-                    let html = fs.readFileSync(
-                        path.resolve(outputPath, htmlFileName),
-                        'utf-8'
-                    )
-
-                    // const log = (obj, spaceCount = 1, deep = 2) => {
-                    //     if (typeof obj === 'object') {
-                    //         let spaces = ''
-                    //         times(spaceCount)(() => {
-                    //             spaces += '    '
-                    //         })
-                    //         for (let key in obj) {
-                    //             console.log(spaces + key)
-                    //             if (spaceCount < deep)
-                    //                 log(obj[key], spaceCount + 1, deep)
-                    //         }
-                    //     }
-                    // }
-
-                    // log(stats)
-
-                    // for (let key in stats) {
-                    //     console.log(key)
-                    //     obj[key] = stats[key]
-                    // }
-                    // console.log(stats.compilation.namedChunks)
-
-                    // log(stats.compilation.chunks, undefined, 2)
-
-                    for (let id in stats.compilation.chunks) {
-                        const o = stats.compilation.chunks[id]
-                        chunks[o.name] = o.files
-                        // console.log(
-                        //     o.id,
-                        //     // o.ids,
-                        //     o.name,
-                        //     // o.chunks,
-                        //     o.files
-                        //     // o.hash,
-                        //     // o.renderedHash
-                        // )
-                    }
-
-                    // console.log(chunks)
-                    // console.log(outputPath)
-
-                    html = html.replace(/\{\{[ ]*SRC:(.+?)[ ]*\}\}/g, (match, ...parts) => {
-                        // console.log(match, parts)
-                        return publicPath + chunks[parts[0]][0]
-                    })
-
-                    // id
-                    // ids
-                    // debugId
-                    // name
-                    // _modules
-                    // entrypoints
-                    // chunks
-                    // parents
-                    // blocks
-                    // origins
-                    // files
-                    // rendered
-                    // entryModule
-                    // hash
-                    // renderedHash
-
-                    // SVG Symbols
-                    html = html.replace(
-                        /\{\{[ ]*SVG_SYMBOLS[ ]*\}\}/g,
-                        fs.readFileSync(
-                            path.resolve(pathAssets, 'symbols/symbol-defs.svg'), 'utf8'
-                        ).replace(/<title>(.+?)<\/title>/g, '')
-                    )
-
-                    // write file
-
-                    fs.writeFileSync(
-                        path.resolve(outputPath, htmlFileName),
-                        html,
-                        'utf-8'
-                    )
-
-                    // console.log('')
-                    // console.log('----------------------------------------')
-                    // console.log('')
-
-                }),
             ]
         },
         // 'server-dev': {},

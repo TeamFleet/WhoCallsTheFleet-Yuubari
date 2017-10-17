@@ -21,7 +21,7 @@ const isMac = /^darwin/.test(platform)
 const isDist = fs.existsSync(path.resolve(__dirname, 'index.html'))
 const pathApp = isDist
     ? path.resolve(__dirname)
-    : path.join(__dirname, '../dist-electron/')
+    : path.join(process.cwd(), 'dist-electron/')
 const pathAssets = path.join(pathApp, 'assets')
 
 // --------------------------------------------------
