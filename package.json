@@ -41,7 +41,8 @@
         "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./system/webpack/enter",
         "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
         "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./system/webpack/enter",
-        "pord:run": "cross-env DEFAULT_SUB_APP_KEY=localhost node ./dist-web/server",
+        "pord:run": "node ./dist-web/server",
+        "server:run": "cross-env SERVER_DOMAIN=yuubari.fleet.moe node ./dist-web/server",
 
         "update": "super update"
     },

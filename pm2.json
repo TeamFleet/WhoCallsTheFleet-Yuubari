@@ -62,7 +62,8 @@
             "out_file": "logs/dev/fleet-yuubari.log",
             "error_file": "logs/dev/fleet-yuubari-error.log",
             "env": {
-                "SERVER_PORT": "8080"
+                "SERVER_PORT": "8080",
+                "SERVER_DOMAIN": "yuubari.fleet.moe"
             }
         }
     ]
