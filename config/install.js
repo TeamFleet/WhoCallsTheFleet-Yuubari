@@ -8,8 +8,6 @@
     }]
 */
 
-console.log(require('@app/config/site').domain)
-
 module.exports = [
     {
         domain: require('@app/config/site').domain,
