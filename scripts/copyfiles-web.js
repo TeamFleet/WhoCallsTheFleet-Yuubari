@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
-const packageJson = fs.readJSONSync(path.resolve(process.cwd(), 'package.json'))
+// const packageJson = fs.readJSONSync(path.resolve(process.cwd(), 'package.json'))
 
 if (require(path.resolve(process.cwd(), 'utils/get-channel'))()) {
     // Yuubari channel
