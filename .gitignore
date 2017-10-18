@@ -51,4 +51,4 @@ node_modules/
 /_.cmd
 .eslintrc.full
 /game_data
-/src/app/client/logic/database/db
+/apps/app/client/logic/database/db
