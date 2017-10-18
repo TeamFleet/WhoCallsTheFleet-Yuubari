@@ -13,6 +13,7 @@
         "type": "git",
         "url": "https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari"
     },
+
     "scripts": {
         "start": "npm run build && npm run pord:run",
         "start:pm2": "npm run build && pm2 restart pm2.json --only fleet-yuubari",
@@ -44,9 +45,11 @@
 
         "update": "super update"
     },
+
     "superProject": {
         "type": "react"
     },
+
     "dependencies": {
         "kckit": "^1.15.9",
         "whocallsthefleet-database": "2017.10.18",
@@ -102,6 +105,11 @@
     "optionalDependencies": {
         "node-windows": "^0.1.14"
     },
+
+    "engines": {
+        "node" : ">=8.0.0"
+    },
+
     "window": {
         "frame": true,
         "toolbar": false,
