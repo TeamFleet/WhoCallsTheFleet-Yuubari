@@ -4,6 +4,12 @@ import { ImportStyle } from 'sp-css-import'
 import htmlHead from '@appUtils/html-head.js'
 import translate from 'sp-i18n'
 
+import {
+    init as infosInit,
+    reset as infosReset,
+    TABINDEX
+} from '@appLogic/infospage/api.js'
+
 import PageContainer from 'sp-ui-pagecontainer'
 
 @connect()

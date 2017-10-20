@@ -32,6 +32,6 @@
         "temp"
     ],
     "include": [
-        "src/**/*"
+        "apps/**/*"
     ]
 }
