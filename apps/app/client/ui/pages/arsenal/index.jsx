@@ -16,7 +16,7 @@ export const infosId = `ARSENAL`
 
 @connect(state => state.infosPage.infosId || {})
 @ImportStyle(require('./arsenal.less'))
-export default class extends React.Component {
+export default class PageArsenal extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
             store,
