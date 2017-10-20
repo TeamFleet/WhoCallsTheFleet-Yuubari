@@ -12,7 +12,9 @@ import {
 
 import PageContainer from 'sp-ui-pagecontainer'
 
-@connect()
+export const infosId = `ARSENAL`
+
+@connect(state => state.infosPage.infosId || {})
 @ImportStyle(require('./arsenal.less'))
 export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
