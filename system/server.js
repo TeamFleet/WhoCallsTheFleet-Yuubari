@@ -4,7 +4,7 @@
 
 import { AppContainer } from 'super-project/AppContainer'
 
-const serverConfig = require('../config/server')
+const serverConfig = require('../config/system')
 const server = new AppContainer()
 
 /* 公用的koa配置 */
@@ -16,10 +16,21 @@ server.app.keys = serverConfig.COOKIE_KEYS
 require('./middleware')(server)
 
 /* 挂载子应用 */
+;(async(server) => {
+    const appsConfig = await require('../config/apps')
+    for (let appName in appsConfig) {
+        let config = appsConfig[appName]
+        server.addSubApp(config.domain, config.server) // 、、、、、、、、、、、因为是异步的，server内容可能不全！！！
+    }
+})(server)
 
-require('../config/install').forEach((item) => {
-    server.addSubApp(item.domain, item.app)
-})
+// const appsConfig = require('../config/apps')
+// for (let appName in appsConfig) {
+//     let config = appsConfig[appName]
+//     console.log(config)
+//     server.addSubApp(config.domain, require('../apps/api/index')) 
+// }
+
 server.mountSwitchSubAppMiddleware()
 
 /* 系统运行 */

@@ -1,29 +1,20 @@
-// const path = require('path')
-// const fs = require('fs-extra')
-
 const webpack = require('webpack')
 const common = require('../common')
-// const opn = require('opn')
 
-const getConfigs = require('./_getConfigs')
+const factoryConfig = async(opt) => {
 
-const getConfig = async (appPath, app, options = {}) => {
-
-    const entries = common.clientEntries(appPath, app)
-    const typeName = app ? app : 'default'
-    const publicPath = `http://localhost:${options.clientDevPort}/dist/`
+    let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
 
     let config = {
         target: 'web',
         devtool: 'source-map',
-        entry: entries,
         output: {
             // -_-_-_-_-_- is trying to fix a pm2 bug that will currupt [name] value
             // check enter.js for the fix
-            filename: `${typeName}.-_-_-_-_-_-[name]-_-_-_-_-_-.js`,
-            chunkFilename: `${typeName}.chunk.-_-_-_-_-_-[name]-_-_-_-_-_-.js`,
+            filename: `${APP_KEY}.-_-_-_-_-_-[name]-_-_-_-_-_-.js`,
+            chunkFilename: `${APP_KEY}.chunk.-_-_-_-_-_-[name]-_-_-_-_-_-.js`,
             path: '/',
-            publicPath: publicPath
+            publicPath: `http://localhost:${CLIENT_DEV_PORT}/dist/`
         },
         module: {
             rules: [...common.rules]
@@ -35,20 +26,7 @@ const getConfig = async (appPath, app, options = {}) => {
                     'NODE_ENV': JSON.stringify('development')
                 }
             }),
-            new webpack.DefinePlugin({
-                '__CLIENT__': true,
-                '__SERVER__': false,
-                '__DEV__': true,
-                '__SPA__': false,
-                '__CLIENTPORT__': JSON.stringify(options.clientDevPort),
-                '__PUBLIC__': JSON.stringify(publicPath)
-            }),
-            new webpack.NoEmitOnErrorsPlugin(),
-            // new WebpackOnBuildPlugin(function () {
-            //     opn(`http://localhost:${configServer.SERVER_PORT}`)
-            // }),
-            ...common.plugins,
-
+            new webpack.NoEmitOnErrorsPlugin()
         ],
         resolve: common.resolve
     }
@@ -56,8 +34,4 @@ const getConfig = async (appPath, app, options = {}) => {
     return config
 }
 
-module.exports = async (appPath, clientDevPort) => await getConfigs(
-    getConfig,
-    appPath,
-    { clientDevPort }
-)
+module.exports = async(opt) => await factoryConfig(opt)

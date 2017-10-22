@@ -1,30 +1,72 @@
 const fs = require('fs')
+// const webpack = require('webpack')
 const path = require('path')
-const webpack = require('webpack')
-const pwaCreatePlugin = require('sp-pwa')
+const config = require('../../config/webpack')
+const appPath = process.cwd()
 
 // 打包结果目录
-const outputPath = /* config.outputPath ||  */ (() => {
+const outputPath = config.outputPath || (() => {
     if (process.env.WEBPACK_BUILD_ENV === 'spa')
         return 'dist-spa'
     return 'dist'
 })()
 
+// 客户端入库文件
+const clientEntries = config.clientEntries || ((appPath, app) => {
+
+    const isSPA = [
+        'spa',
+        'electron',
+        'nwjs'
+    ].includes(process.env.WEBPACK_BUILD_ENV)
+
+    switch (app) {
+        case 'app': {
+            return {
+                "critical-extra-old-ie": [
+                    "babel-polyfill",
+                    path.resolve(appPath, `./apps/${app}/client/critical.extra-old-ie.js`)
+                ],
+                critical: [
+                    path.resolve(appPath, `./apps/${app}/client/critical`)
+                ],
+                client: [
+                    isSPA
+                        ? path.resolve(appPath, `./apps/${app}/client/index.spa.js`)
+                        : path.resolve(appPath, `./apps/${app}/client`)
+                ]
+            }
+        }
+
+        default: {
+            return {
+                critical: [
+                    path.resolve(appPath, `./apps/${app}/client/critical`)
+                ],
+                client: [
+                    path.resolve(appPath, `./apps/${app}/client`)
+                ]
+            }
+        }
+
+    }
+})
+
 // 服务端入库文件
-const serverEntries = /* config.serverEntries ||  */ ((appPath) => [
+const serverEntries = config.serverEntries || ((appPath) => [
     path.resolve(appPath, 'system/start')
 ])
 
 // 执行顺序，从右到左
 const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
 const rules = (() => {
-    let rules = [{
+    let rules = config.rules || [
+        {
             test: /\.json$/,
             loader: 'json-loader'
         },
 
         // CSS - general
-
         {
             test: /\.css$/,
             exclude: [/\.g\.css$/, /node_modules/],
@@ -110,66 +152,34 @@ const rules = (() => {
         }
     ]
 
+    if (config.rulesExt)
+        rules = rules.concat(config.rulesExt)
     return rules
 })()
 
 
-// 执行顺序, 先 -> 后
-const plugins = (env, stage, spa = false) => {
+// 执行顺序，？
+const plugins = [
+].concat(config.plugins || [])
 
-    let g = {
-        '__CLIENT__': stage == 'client',
-        '__SERVER__': stage == 'server',
-        '__DEV__': env == 'dev',
-        '__SPA__': !!spa
-    }
-
-    if (env == 'dist') {
-        g['process.env'] = {
-            'NODE_ENV': JSON.stringify('production')
-        }
-    }
-
-    return [
-        new webpack.DefinePlugin(g)
-    ]
-}
-
-const factoryPWAPlugin = (opt) => {
-
-    let config = {
-        outputPath: '',//path.resolve(opt.outputPath, '../'),  // 子应用打包后文件夹的上一级
-        outputFilename: `service-worker.${opt.appName}.js`,
-        // customServiceWorkerPath: path.normalize(appPath + '/src/client/custom-service-worker.js'),
-        globPattern: `/${opt.appName}/**/*`,
-        // globOptions: {
-        //     ignore: [
-        //         '/**/portals/',
-        //         '/**/portals/**/*'
-        //     ]
-        // }
-    }
-
-    Object.assign(config, opt)
-
-    return pwaCreatePlugin(config)
-}
-
-const resolve = Object.assign({
-    modules: [
-        'node_modules'
-    ],
-    alias: {
-        // Apps: path.resolve(appPath, './apps'),
-        // "@app": path.resolve(appPath, './apps/app')
+const resolve = Object.assign(
+    {
+        modules: [
+            'node_modules'
+        ],
+        alias: {
+            Apps: path.resolve(appPath, './apps'),
+            "@app": path.resolve(appPath, './apps/app')
+        },
+        extensions: ['.js', '.jsx', '.json', '.css', '.less', '.sass', '.scss']
     },
-    extensions: ['.js', '.jsx', '.json', '.css', '.less', '.sass', '.scss']
-})
+    config.resolve || {}
+)
 
 
 // 这里配置需要babel处理的node_modules
 // 大部分是自己用es6语法写的模块
-const needBabelHandleList = [
+const needBabelHandleList = config.needBabelHandleList.concat([
     'super-project',
     'sp-base',
     'sp-boilerplate',
@@ -186,7 +196,7 @@ const needBabelHandleList = [
     'sp-response',
     'sp-upload',
     'sp-i18n'
-]
+])
 
 // https://github.com/webpack/webpack/issues/2852
 // webpack 在打包服务端依赖 node_modules 的时候易出错，
@@ -205,10 +215,10 @@ const filterExternalsModules = () => fs
 // 已下属都可以在 /config/webpack.js 中扩展
 module.exports = {
     outputPath,
+    clientEntries,
     serverEntries,
     rules,
     plugins,
-    factoryPWAPlugin,
     resolve,
     needBabelHandleList,
     filterExternalsModules
