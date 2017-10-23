@@ -22,6 +22,7 @@ module.exports = (async () => ({
             // client 客户端 | server 服务端
             const STAGE = process.env.WEBPACK_STAGE_MODE || 'client'
 
+            if (STAGE === 'client' && ENV === 'dev') return await require('./client-dev')
             if (STAGE === 'client' && ENV === 'dist') return await require('./client-dist')
             return await require('./server')
             // return {}
