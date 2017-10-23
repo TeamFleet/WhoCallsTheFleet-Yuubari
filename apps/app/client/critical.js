@@ -21,7 +21,7 @@ if (typeof Object.assign != 'function') self.importJS(
 require('./critical.g.less')
 
 // 内置背景图列表
-self.__BGIMG_LIST__ = __BGIMG_LIST__
+self.__BGIMG_LIST__ = __BGIMG_LIST__ || []
 
 document.addEventListener("DOMContentLoaded", function () {
     // let boatLoader = document.createElement('div')

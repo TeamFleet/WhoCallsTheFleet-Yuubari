@@ -44,7 +44,8 @@
         "__CHANNEL__": false,
         "__BGIMG_LIST__": false,
         "__ICONSVG__": false,
-        "_hmt": false
+        "_hmt": false,
+        "__webpack_public_path__": true
     },
     "settings": {
         "import/ignore": [

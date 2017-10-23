@@ -129,6 +129,11 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
     }
 })
 
+app.use(async(ctx, next) => {
+    if (!__DEV__) __webpack_public_path__ = '/app/' // TODO: 移动到配置里
+    await next()
+})
+
 app.use(isomorphic)
 
 export default app
