@@ -37,8 +37,8 @@ export const template = `
         <script>//inject_metas</script>
         <!--INJECT_META_END-->
 
-        <script>//inject_style</script>
         <script>//inject_critical_css</script>
+        <script>//inject_style</script>
 
         <script>//inject_critical_extra_old_ie_filename</script>
         <script>var __SERVICE_WORKER_FILENAME__ = "<script>//inject_serviceworker_path</script>"</script>

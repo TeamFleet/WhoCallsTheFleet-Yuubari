@@ -1,4 +1,4 @@
-module.exports = (async() => ({
+module.exports = (async () => ({
 
     app: await require('./app'),
     // api: {

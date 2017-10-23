@@ -65,7 +65,7 @@ export default (type, id, file) => {
 
     const base = __DEV__
         ? '/app'
-        : __PUBLIC__
+        : require('@appConfig/root')
 
-    return base + '/_pics/' + filepath
+    return base + '/pics/' + filepath
 }

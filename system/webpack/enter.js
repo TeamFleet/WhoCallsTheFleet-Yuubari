@@ -9,7 +9,7 @@ const WebpackConfig = require('webpack-config').default
 const common = require('./common')
 
 // 调试webpack模式
-const DEBUG = true
+const DEBUG = 1
 
 // 程序启动路径，作为查找文件的基础
 const RUN_PATH = process.cwd()
@@ -85,6 +85,49 @@ function makeItButter(config) {
 
     // no ref obj
     return Object.assign({}, config)
+}
+
+/**
+ * 分析并处理rules
+ * eg:
+ * rules: [{自定义rule}, 'default', {自定义rule}]
+ * 
+ * @param {any} customRules 
+ * @param {any} defaultRules 
+ * @returns 处理后的rules
+ */
+function handlerRules(customRules) {
+
+    const ruleMap = {}
+
+    // 默认rules
+    ruleMap['default'] = common.rules
+
+    // 解析需要的rules
+    // =>
+    if (customRules == 'default') {
+        customRules = ruleMap['default']
+    } else
+
+    // =>
+    if (Array.isArray(customRules)) {
+
+        let _rlist = []
+
+        customRules.forEach((item) => {
+
+            if (item == 'default') {
+                _rlist = _rlist.concat(ruleMap['default'])
+            } else {
+                _rlist.push(item)
+            }
+
+        })
+
+        customRules = _rlist
+    }
+
+    return customRules
 }
 
 /**
@@ -211,7 +254,7 @@ async function justDoooooooooooooIt() {
                     pluginMap['global'] = common.plugins(ENV, STAGE, clientConfig.spa)
 
                     // sp扩展的plugins
-                    pluginMap['pwd'] = common.factoryPWAPlugin({ appName: appName, outputPath: '' })
+                    pluginMap['pwa'] = common.factoryPWAPlugin({ appName: appName, outputPath: '' })
 
 
                     // 字符串且等于default，使用默认plugins
@@ -267,6 +310,15 @@ async function justDoooooooooooooIt() {
                     }
                 }
 
+                //
+                // 如果自定义了loader，则分析并实例化loader
+                //
+                if (clientConfig.module.rules) {
+
+                    clientConfig.module.rules = handlerRules(clientConfig.module.rules)
+                    _defaultConfig.module.rules = undefined
+                }
+
                 config
                     .merge(makeItButter(_defaultConfig))
                     .merge(makeItButter(clientConfig))
@@ -300,12 +352,26 @@ async function justDoooooooooooooIt() {
             if (!Array.isArray(clientConfig))
                 clientConfig = [clientConfig]
 
-            clientConfig.forEach((config) => tempClientConfig.merge(config))
+            clientConfig.forEach((config) => {
+
+
+                //
+                // 如果自定义了loader，则分析并实例化loader
+                //
+                if (config.module.rules) {
+
+                    config.module.rules = handlerRules(config.module.rules)
+                }
+
+                tempClientConfig.merge(config)
+            })
         }
 
         let opt = { RUN_PATH, CLIENT_DEV_PORT }
         let defaultConfig = await createDefaultConfig(opt)
         let config = new WebpackConfig()
+
+
 
         // 注:在某些项目里，可能会出现下面的加载顺序有特定的区别，需要自行加判断
         //    利用每个app的配置，设置 include\exclude 等。
@@ -402,7 +468,7 @@ async function justDoooooooooooooIt() {
 
     DEBUG && console.log('执行配置：')
     DEBUG && console.log('-----------------------------------------')
-    DEBUG && console.log(webpackConfigs)
+    DEBUG && console.log(JSON.stringify(webpackConfigs))
     DEBUG && console.log('============== Webpack Debug End =============')
 }
 
