@@ -44,7 +44,7 @@ export default class Background {
         if (typeof type !== 'string') type = ''
         const prop = '_path' + type
         if (!this[prop]) {
-            this[prop] = `${require('@appConfig/root')}/bgimgs/${type ? (type + '/') : ''}${type ? this.filename : (this.filenameOriginal || this.filename)}${type === 'thumbnail' ? '.jpg' : this.ext}`
+            this[prop] = `${require('@appConstants/root')}bgimgs/${type ? (type + '/') : ''}${type ? this.filename : (this.filenameOriginal || this.filename)}${type === 'thumbnail' ? '.jpg' : this.ext}`
         }
         return this[prop]
     }

@@ -12,6 +12,8 @@ import Icon from '@appUI/components/icon.jsx'
 import { ImportStyle } from 'sp-css-import'
 import style from './nav.less'
 
+import channel from '@appConstants/channel'
+
 let navs = [
     undefined,
     'indev-fleets',
@@ -92,7 +94,7 @@ export default class extends React.Component {
     // }
 
     render() {
-        const logoStyles = __CHANNEL__ === 'yuubari' ? {
+        const logoStyles = channel === 'yuubari' ? {
             backgroundImage: `url(${require('@appAssets/logos/yuubari/128.png')})`
         } : undefined
         return (
@@ -105,7 +107,7 @@ export default class extends React.Component {
                             <button type="button" className="btn-back" disabled={!this.state.showBackButton} onClick={this.historyBack} />
                         )}
                         <IndexLink to="/" className="btn-home-logo" activeClassName="on" style={logoStyles}>{translate('title')}</IndexLink>
-                        {__CHANNEL__ === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
+                        {channel === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
                     </div>
 
                     <Navs />

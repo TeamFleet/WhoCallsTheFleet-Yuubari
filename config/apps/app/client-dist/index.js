@@ -4,13 +4,11 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const {
-    app: pathApp,
-    output: pathOutput,
+    _app: pathApp,
+    _appOutput: pathOutput,
+    _appName: pathNameSub,
     ...dirs
 } = require('../../../directories.js')
-const {
-    pathNameSub
-} = require(path.resolve(pathApp, './config/site'))
 const publicPath = `/${pathNameSub}/`
 
 const pluginCopyImages = require('../base/plugin-copy-images')
@@ -62,7 +60,7 @@ module.exports = (async () => Object.assign({}, config, {
             new ExtractTextPlugin('[name].[chunkhash].css'),
             new webpack.DefinePlugin({
                 '__ELECTRON__': false,
-                // '__PUBLIC__': JSON.stringify(publicPath),
+                '__PUBLIC__': JSON.stringify(publicPath),
             }),
             ...await pluginCopyImages(),
         ]

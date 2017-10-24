@@ -24,7 +24,7 @@ const factoryConfig = async(opt) => {
             publicPath: `${publicPath}/`
         },
         module: {
-            rules: [...common.rules]
+            // rules: [...common.rules]
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin({ quiet: true })

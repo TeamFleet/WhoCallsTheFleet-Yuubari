@@ -4,7 +4,10 @@ const path = require('path')
 const glob = require('glob')
 
 const run = async () => {
-    const dirDistWeb = path.join(__dirname, '../dist-web')
+    const {
+        output: dirDistWeb,
+    } = require('../config/directories')
+    // const dirDistWeb = path.join(__dirname, '../dist-web')
     const dirNamePics = 'pics'
 
     if (!fs.existsSync(dirDistWeb)) return

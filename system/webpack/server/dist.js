@@ -17,7 +17,7 @@ const factoryConfig = async(opt) => {
             publicPath: `/[need_set_in_app:__webpack_public_path__]/`
         },
         module: {
-            rules: [...common.rules]
+            // rules: [...common.rules]
         },
         plugins: [],
         externals: common.filterExternalsModules(),

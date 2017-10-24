@@ -1,3 +1,7 @@
+const {
+    pathNameDistWeb
+} = require('./directories')
+
 module.exports = {
 
     // cookie serect key
@@ -5,4 +9,6 @@ module.exports = {
 
     // 系统服务启动端口
     SERVER_PORT: process.env.SERVER_PORT || (process.env.WEBPACK_BUILD_ENV === 'dev' ? '3000' : '8080'),
+
+    WEBPACK_SERVER_OUTPATH: `${pathNameDistWeb}/server`
 }

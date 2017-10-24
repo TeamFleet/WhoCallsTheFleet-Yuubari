@@ -25,6 +25,9 @@ const ENV = process.env.WEBPACK_BUILD_ENV || 'dev'
 // client 客户端 | server 服务端
 const STAGE = process.env.WEBPACK_STAGE_MODE || 'client'
 
+// 用户自定义系统配置
+const SYSTEM_CONFIG = require('../../config/system')
+
 /**
  * 修复配置
  * 配置有可能是 Array
@@ -56,6 +59,7 @@ function makeItButter(config) {
     // }
 
     // remove duplicate rules
+    
     if (Array.isArray(config.module.rules)) {
         config.module.rules = removeDuplicateObject(config.module.rules)
     }
@@ -109,23 +113,23 @@ function handlerRules(customRules) {
         customRules = ruleMap['default']
     } else
 
-        // =>
-        if (Array.isArray(customRules)) {
+    // =>
+    if (Array.isArray(customRules)) {
 
-            let _rlist = []
+        let _rlist = []
 
-            customRules.forEach((item) => {
+        customRules.forEach((item) => {
 
-                if (item == 'default') {
-                    _rlist = _rlist.concat(ruleMap['default'])
-                } else {
-                    _rlist.push(item)
-                }
+            if (item == 'default') {
+                _rlist = _rlist.concat(ruleMap['default'])
+            } else {
+                _rlist.push(item)
+            }
 
-            })
+        })
 
-            customRules = _rlist
-        }
+        customRules = _rlist
+    }
 
     return customRules
 }
@@ -260,68 +264,69 @@ async function justDoooooooooooooIt() {
                     // 字符串且等于default，使用默认plugins
                     // =>
                     if (clientConfig.plugins == 'default') {
-
                         clientConfig.plugins = pluginMap['global'].concat(pluginMap['default'])
                     } else
 
-                        // 需要解析的plugins
-                        // =>
-                        if (Array.isArray(clientConfig.plugins)) {
+                    // 需要解析的plugins
+                    // =>
+                    if (Array.isArray(clientConfig.plugins)) {
 
-                            let _plist = []
+                        let _plist = []
 
-                            _plist = _plist.concat(pluginMap['global'])
+                        _plist = _plist.concat(pluginMap['global'])
 
-                            clientConfig.plugins.forEach((item) => {
+                        clientConfig.plugins.forEach((item) => {
 
-                                // 默认plugin列表
-                                if (item == 'default') {
-                                    _plist = _plist.concat(pluginMap['default'])
+                            // 默认plugin列表
+                            if (item == 'default') {
+                                _plist = _plist.concat(pluginMap['default'])
+                            }
+
+                            // 自定义plugin列表
+                            if (Array.isArray(item)) {
+                                _plist = _plist.concat(item)
+                            }
+
+                            // sp的自定义plugin列表，key是名字，val是配置项
+                            if (typeof item == 'object') {
+
+                                // sp的PWA配置
+                                if (item['pwa']) {
+                                    let autoConfig = { appName: appName, outputPath: path.resolve(clientConfig.output.path, '../') }
+                                    let opt = Object.assign({}, autoConfig, item['pwa'])
+                                    _plist.push(common.factoryPWAPlugin(opt))
                                 }
 
-                                // 自定义plugin列表
-                                if (Array.isArray(item)) {
-                                    _plist = _plist.concat(item)
-                                }
+                                // 
+                                // .... 这里可以继续写sp自己的扩展plugin
+                                // 
+                            }
+                        })
 
-                                // sp的自定义plugin列表，key是名字，val是配置项
-                                if (typeof item == 'object') {
+                        // 把解析好的plugin列表反赋值给客户端配置
+                        clientConfig.plugins = _plist
+                    }
 
-                                    // sp的PWA配置
-                                    if (item['pwa']) {
-                                        let autoConfig = { appName: appName, outputPath: path.resolve(clientConfig.output.path, '../') }
-                                        let opt = Object.assign({}, autoConfig, item['pwa'])
-                                        _plist.push(common.factoryPWAPlugin(opt))
-                                    }
-
-                                    // 
-                                    // .... 这里可以继续写sp自己的扩展plugin
-                                    // 
-                                }
-                            })
-
-                            // 把解析好的plugin列表反赋值给客户端配置
-                            clientConfig.plugins = _plist
-                        }
-
-                        // =>
-                        else {
-                            new Error('plugins 配置内容有错误，必须是 array | [default]')
-                        }
+                    // =>
+                    else {
+                        new Error('plugins 配置内容有错误，必须是 array | [default]')
+                    }
+                } else {
+                    // 未设置情况，需要补充给默认配置全局变量
+                    _defaultConfig.plugins = _defaultConfig.plugins.concat(common.plugins(ENV, STAGE, clientConfig.spa))
                 }
 
                 //
                 // 如果自定义了loader，则分析并实例化loader
                 //
-                if (clientConfig.module.rules) {
-
+                if (clientConfig.module && clientConfig.module.rules) {
                     clientConfig.module.rules = handlerRules(clientConfig.module.rules)
                     _defaultConfig.module.rules = undefined
                 }
 
                 config
-                    .merge(makeItButter(_defaultConfig))
-                    .merge(makeItButter(clientConfig))
+                    .merge(_defaultConfig)
+                    .merge(clientConfig)
 
                 webpackConfigs.push(config)
             })
@@ -354,12 +359,10 @@ async function justDoooooooooooooIt() {
 
             clientConfig.forEach((config) => {
 
-
                 //
                 // 如果自定义了loader，则分析并实例化loader
                 //
-                if (config.module.rules) {
-
+                if (config.module && config.module.rules) {
                     config.module.rules = handlerRules(config.module.rules)
                 }
 
@@ -384,7 +387,9 @@ async function justDoooooooooooooIt() {
                 plugins: common.plugins(ENV, STAGE)
             })
 
-        // config.module.rules.forEach((item) => console.log(JSON.stringify(item)))
+        // 如果用户自己配置了服务端打包路径，则覆盖默认的
+        if (SYSTEM_CONFIG.WEBPACK_SERVER_OUTPATH)
+            config.output.path = path.resolve(RUN_PATH, SYSTEM_CONFIG.WEBPACK_SERVER_OUTPATH)
 
         webpackConfigs.push(config)
     }
@@ -455,8 +460,6 @@ async function justDoooooooooooooIt() {
         process.env.NODE_ENV = 'production'
 
         await handlerServerConfig()
-
-        console.log(webpackConfigs)
 
         webpack(makeItButter(webpackConfigs), (err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)

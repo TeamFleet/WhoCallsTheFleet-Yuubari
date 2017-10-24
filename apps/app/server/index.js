@@ -12,8 +12,10 @@ import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
 // import injectPWA from 'sp-pwa/inject-pwa'
 
 // const webpackConfig = require('../../../config/webpack')
-
-const distPathname = 'dist-web'
+const {
+    pathNameDistWeb: distPathname
+} = require('../config/site')
+const dirs = require('../../../config/directories')
 
 // 
 
@@ -41,6 +43,10 @@ const option = {
     gzip: true,
     extensions: false
 }
+
+console.log('==============================')
+console.log(rootPath)
+console.log('==============================')
 
 app.use(convert(koaStatic(rootPath, option)))
 
@@ -73,7 +79,11 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
             const { mtime } = __DEV__ ? '' : fs.statSync(path.join(rootPath, filename))
             return `<link rel="manifest" href="/${filename}?${mtime ? mtime.valueOf() : ''}">`
         },
-        svg_symbols: `<div class="hide">${__ICONSVG__}</div>`,
+        svg_symbols: `<div class="hide">${
+            fs.readFileSync(
+                path.resolve(dirs.assets, './symbols/symbol-defs.svg'), 'utf8'
+            ).replace(/<title>(.+?)<\/title>/g, '')
+        }</div>`,
 
         critical: `<script src="${getFile('critical.js')}"></script>`,
         critical_css: (() => {

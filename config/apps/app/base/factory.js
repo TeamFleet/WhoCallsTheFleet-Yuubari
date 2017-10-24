@@ -7,10 +7,12 @@ const {
     base: pathBase,
     assets: pathAssets,
     bgimgs: pathBgimgs,
-    app: pathApp,
-    appUI: pathAppUI,
-    ...dirs
-} = require('../../../directories.js')
+    // pathNameDistWeb,
+    _app: pathApp,
+    _appUI: pathAppUI,
+    _appName: appName,
+    // ...dirs
+} = require('../../../directories')
 
 const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
 const useUniversalAliasLoader = {
@@ -23,6 +25,8 @@ const useUniversalAliasLoader = {
         }
     }
 }
+
+const channel = require('../../../channel')
 
 module.exports = (options = {}) => {
 
@@ -163,19 +167,17 @@ module.exports = (options = {}) => {
 
         plugins: [
             new webpack.DefinePlugin({
-                '__CHANNEL__': JSON.stringify(
-                    require(path.resolve(pathBase, 'utils/get-channel'))()
-                ),
+                '__CHANNEL__': JSON.stringify(channel),
                 '__BGIMG_LIST__': JSON.stringify(
                     fs.readdirSync(pathBgimgs).filter(
                         file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory() && path.extname(path.resolve(pathBgimgs, file)) === '.jpg'
                     )
                 ),
-                '__ICONSVG__': JSON.stringify(
-                    fs.readFileSync(
-                        path.resolve(pathAssets, './symbols/symbol-defs.svg'), 'utf8'
-                    ).replace(/<title>(.+?)<\/title>/g, '')
-                ),
+                // '__ICONSVG__': JSON.stringify(
+                //     fs.readFileSync(
+                //         path.resolve(pathAssets, './symbols/symbol-defs.svg'), 'utf8'
+                //     ).replace(/<title>(.+?)<\/title>/g, '')
+                // ),
             }),
         ],
 
@@ -183,6 +185,9 @@ module.exports = (options = {}) => {
             alias: {
                 // 目录别名，不用的项目可以删除
                 '@apps': path.resolve(pathBase, './apps'),
+                '@config': path.resolve(pathBase, './config'),
+
+                '@appName': appName,
 
                 '@app': pathApp,
                 '@appConfig': path.resolve(pathApp, './config'),
@@ -190,6 +195,8 @@ module.exports = (options = {}) => {
                 '@appUI': path.resolve(pathApp, './client/ui'),
                 '@appLogic': path.resolve(pathApp, './client/logic'),
                 "@appData": path.resolve(pathApp, './data'),
+                "@appConstants": path.resolve(pathApp, './constants'),
+                "@appConst": path.resolve(pathApp, './constants'),
 
                 '@appLocales': path.resolve(pathBase, './locales'),
                 '@appAssets': path.resolve(pathBase, './assets'),

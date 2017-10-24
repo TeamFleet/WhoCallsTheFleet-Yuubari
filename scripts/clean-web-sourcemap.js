@@ -2,7 +2,11 @@ const path = require('path')
 const fs = require('fs-extra')
 const glob = require('glob')
 
-const distpath = path.resolve(process.cwd(), 'dist-web', 'public')
+const {
+    output: pathOutput,
+} = require('../config/directories')
+
+const distpath = path.resolve(pathOutput, './public')
 
 const run = () => {
     console.log('cleaning source-maps...')

@@ -2,16 +2,16 @@ const fs = require('fs-extra')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+const channel = require('../../../channel')
+
 const {
     base: pathBase,
     assets: pathAssets,
     pics: pathPics,
     bgimgs: pathBgimgs,
-    // app: pathApp,
-    output: pathOutput,
-} = require('../../../directories.js')
-
-const channel = require(path.resolve(pathBase, './utils/get-channel'))()
+    // _app: pathApp,
+    _appOutput: pathOutput,
+} = require('../../../directories')
 
 const pathAssetsLogos = path.resolve(pathAssets, `./logos/${channel}/`)
 
@@ -21,6 +21,8 @@ const isWindows = /^win/.test(platform)
 const isMac = /^darwin/.test(platform)
 
 const pluginCopyImages = async (isDev, isSPA) => {
+    if (process.env.WEBPACK_STAGE_MODE === 'server') return []
+
     const arr = []
 
     if (isSPA) {

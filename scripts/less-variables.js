@@ -4,12 +4,13 @@ const kckit = require('kckit')
 const sizeOf = require('image-size')
 
 const {
-    assets: pathAssets
+    assets: pathAssets,
+    _app: pathApp,
+    _appUI: pathAppUI,
 } = require('../config/directories')
 
 // const pathAssets = path.resolve(process.cwd(), 'src/app/client/assets/')
-const pathApp = path.resolve(process.cwd(), 'apps/app/')
-const pathfile = path.resolve(pathApp, 'client/ui/base/less/', 'variables.less')
+const pathfile = path.resolve(pathAppUI, './base/less/variables.less')
 
 const run = async () => {
     console.log('replacing less variables...')

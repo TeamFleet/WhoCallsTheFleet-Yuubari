@@ -4,11 +4,7 @@ const webpack = require('webpack')
 const pwaCreatePlugin = require('sp-pwa')
 
 // 打包结果目录
-const outputPath = /* config.outputPath ||  */ (() => {
-    if (process.env.WEBPACK_BUILD_ENV === 'spa')
-        return 'dist-spa'
-    return 'dist'
-})()
+const outputPath = 'dist'
 
 // 服务端入库文件
 const serverEntries = /* config.serverEntries ||  */ ((appPath) => [
@@ -18,7 +14,8 @@ const serverEntries = /* config.serverEntries ||  */ ((appPath) => [
 // 执行顺序，从右到左
 const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
 const rules = (() => {
-    let rules = [{
+    let rules = [
+        {
             test: /\.json$/,
             loader: 'json-loader'
         },

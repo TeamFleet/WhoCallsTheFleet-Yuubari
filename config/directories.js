@@ -1,20 +1,26 @@
 const path = require('path')
 
-const pathBase = path.resolve(__dirname, '../')
+const pathBase = typeof process === 'undefined' ? path.resolve(__dirname, '../') : process.cwd()
 const pathApp = path.resolve(pathBase, './apps/app')
 
-const {
-    pathNameOutput, pathNameSub
-} = require(path.resolve(pathApp, './config/site'))
+const pathNameDistWeb = 'dist-web'
+const _appName = 'app'
+
+const pathDistWeb = path.resolve(pathBase, pathNameDistWeb)
 
 module.exports = {
     base: pathBase,
     assets: path.resolve(pathBase, './assets'),
     pics: path.resolve(pathBase, './pics'),
     bgimgs: path.resolve(pathBase, './node_modules/whocallsthefleet-backgrounds/output'),
+    output: pathDistWeb,
+    outputRelative: `${pathNameDistWeb}`,
 
-    app: pathApp,
-    appUI: path.resolve(pathApp, './client/ui'),
+    distWeb: pathDistWeb,
+    pathNameDistWeb,
 
-    output: path.resolve(pathBase, pathNameOutput, `public/${pathNameSub}/`),
+    _app: pathApp,
+    _appUI: path.resolve(pathApp, './client/ui'),
+    _appOutput: path.resolve(pathDistWeb, `public/${_appName}/`),
+    _appName,
 }
