@@ -8,7 +8,7 @@ const {
     // _appName: pathNameSub,
     ...dirs
 } = require('../../../directories.js')
-const publicPath = `http://localhost:${process.env.WEBPACK_DEV_SERVER_PORT || 3001}/dist/`
+// const publicPath = `http://localhost:${process.env.WEBPACK_DEV_SERVER_PORT || 3001}/dist/`
 
 const pluginCopyImages = require('../base/plugin-copy-images')
 
@@ -46,7 +46,7 @@ module.exports = (async () => Object.assign({}, config, {
             new ExtractTextPlugin('[name].[chunkhash].css'),
             new webpack.DefinePlugin({
                 '__ELECTRON__': false,
-                '__PUBLIC__': JSON.stringify(publicPath),
+                // '__PUBLIC__': JSON.stringify(publicPath),
             }),
             ...await pluginCopyImages(true),
         ]

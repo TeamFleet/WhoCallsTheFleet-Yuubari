@@ -19,7 +19,7 @@ const factoryConfig = async(opt) => {
         ]),
         output: {
             filename: 'index.js',
-            chunkFilename: 'chunk.[name].js',
+            chunkFilename: 'chunk.-_-_-_-_-_-[name]-_-_-_-_-_-.js',
             path: `${RUN_PATH}/${common.outputPath}/server`,
             publicPath: `${publicPath}/`
         },
