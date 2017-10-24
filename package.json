@@ -15,7 +15,7 @@
     },
 
     "scripts": {
-        "start": "npm run build && npm run pord:run",
+        "start": "npm run build && npm run prod:run",
         "start:pm2": "npm run build && pm2 restart pm2.json --only fleet-yuubari",
         "start:electron": "electron ./apps/app/electron",
 
@@ -41,7 +41,7 @@
         "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./system/webpack/enter",
         "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
         "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./system/webpack/enter",
-        "pord:run": "node ./dist-web/server",
+        "prod:run": "node ./dist-web/server",
         "server:run": "cross-env SERVER_DOMAIN=yuubari.fleet.moe node ./dist-web/server",
 
         "update": "super update"

@@ -13,13 +13,14 @@ import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
 
 // const webpackConfig = require('../../../config/webpack')
 const {
-    pathNameDistWeb: distPathname
+    pathNameDistWeb: distPathname,
+    pathNameSub: appName
 } = require('../config/site')
 const dirs = require('../../../config/directories')
 
 // 
 
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const Koa = require('koa')
 const app = new Koa()
@@ -44,9 +45,9 @@ const option = {
     extensions: false
 }
 
-console.log('==============================')
-console.log(rootPath)
-console.log('==============================')
+// console.log('==============================')
+// console.log(rootPath)
+// console.log('==============================')
 
 app.use(convert(koaStatic(rootPath, option)))
 
@@ -54,10 +55,38 @@ app.use(convert(koaStatic(rootPath, option)))
 
 /* 同构配置 */
 
-const getFile = filename => isomorphicUtils.getFile(
-    __DEV__ ? `app.${filename}` : `app/${filename}`,
-    distPathname
-)
+const _getFile = (filename, appName, distPathname) => {
+    if (__DEV__)
+        return `http://localhost:${process.env.WEBPACK_DEV_SERVER_PORT || 3001}/dist/${appName}.${filename}`
+
+    const pathChunckmap = path.resolve(process.cwd(), distPathname, 'public', appName, '.chunckmap.json')
+
+    if (fs.existsSync(pathChunckmap)) {
+        const chunckmap = fs.readJsonSync(pathChunckmap)
+        const extname = path.extname(filename)
+        const key = path.basename(filename, extname)
+        let result
+        if (Array.isArray(chunckmap[key])) {
+            chunckmap[key].some(value => {
+                if (path.extname(value) === extname) {
+                    result = value
+                    return true
+                }
+                return false
+            })
+        }
+        if (result) return '/' + result
+    }
+
+    return isomorphicUtils.getFile(`${appName}/${filename}`, distPathname)
+}
+
+const getFile = filename => _getFile(filename, appName, distPathname)
+
+// const getFile = filename => isomorphicUtils.getFile(
+//     __DEV__ ? `app.${filename}` : `app/${filename}`,
+//     distPathname
+// )
 
 const isomorphic = reactApp.isomorphic.createKoaMiddleware({
 
@@ -79,11 +108,9 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
             const { mtime } = __DEV__ ? '' : fs.statSync(path.join(rootPath, filename))
             return `<link rel="manifest" href="/${filename}?${mtime ? mtime.valueOf() : ''}">`
         },
-        svg_symbols: `<div class="hide">${
-            fs.readFileSync(
-                path.resolve(dirs.assets, './symbols/symbol-defs.svg'), 'utf8'
-            ).replace(/<title>(.+?)<\/title>/g, '')
-        }</div>`,
+        svg_symbols: `<div class="hide">${fs.readFileSync(
+            path.resolve(dirs.assets, './symbols/symbol-defs.svg'), 'utf8'
+        ).replace(/<title>(.+?)<\/title>/g, '')}</div>`,
 
         critical: `<script src="${getFile('critical.js')}"></script>`,
         critical_css: (() => {
@@ -92,7 +119,7 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
             else //return `<link rel="stylesheet" type="text/css" href="${getFile('critical.css')}" />`
                 return `<style type="text/css">${
                     fs.readFileSync(
-                        path.join(rootPath, getFile('critical.css')),
+                        path.join(rootPath, appName, getFile('critical.css')),
                         'utf-8'
                     )}</style>`
         })(),
@@ -101,7 +128,7 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
             getFile('client.js')
         ]))(),
         // css: [],
-        serviceworker_path: __DEV__ ? '' : getServiceWorkerFile('service-worker.app.js', distPathname),
+        serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
         // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')
     },
 
@@ -139,8 +166,8 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
     }
 })
 
-app.use(async(ctx, next) => {
-    if (!__DEV__) __webpack_public_path__ = '/app/' // TODO: 移动到配置里
+app.use(async (ctx, next) => {
+    if (!__DEV__) __webpack_public_path__ = `/${appName}/` // TODO: 移动到配置里
     await next()
 })
 
