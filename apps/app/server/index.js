@@ -75,7 +75,7 @@ const _getFile = (filename, appName, distPathname) => {
                 return false
             })
         }
-        if (result) return '/' + result
+        if (result) return `/${appName}/${result}`
     }
 
     return isomorphicUtils.getFile(`${appName}/${filename}`, distPathname)
@@ -119,7 +119,7 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
             else //return `<link rel="stylesheet" type="text/css" href="${getFile('critical.css')}" />`
                 return `<style type="text/css">${
                     fs.readFileSync(
-                        path.join(rootPath, appName, getFile('critical.css')),
+                        path.join(rootPath, getFile('critical.css')),
                         'utf-8'
                     )}</style>`
         })(),
