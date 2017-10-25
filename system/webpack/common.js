@@ -122,9 +122,10 @@ const plugins = (env, stage, spa = false) => {
     }
 
     if (env == 'dist') {
-        g['process.env'] = {
-            'NODE_ENV': JSON.stringify('production')
-        }
+        process.env.NODE_ENV = 'production'
+        // g['process.env'] = {
+        //     'NODE_ENV': JSON.stringify('production')
+        // }
     }
 
     return [

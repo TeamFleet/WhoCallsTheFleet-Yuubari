@@ -1,3 +1,7 @@
+// console.log(new Date())
+// console.log(process.env)
+// console.log('__CLIENT__', __CLIENT__)
+
 module.exports = (async () => ({
 
     // 

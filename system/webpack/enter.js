@@ -421,7 +421,7 @@ async function justDoooooooooooooIt() {
     // 客户端打包
     if (STAGE === 'client' && ENV === 'dist') {
 
-        process.env.NODE_ENV = 'production'
+        // process.env.NODE_ENV = 'production'
 
         await handlerClientConfig()
 
@@ -457,7 +457,7 @@ async function justDoooooooooooooIt() {
     // 服务端打包
     if (STAGE === 'server' && ENV === 'dist') {
 
-        process.env.NODE_ENV = 'production'
+        // process.env.NODE_ENV = 'production'
 
         await handlerServerConfig()
 
