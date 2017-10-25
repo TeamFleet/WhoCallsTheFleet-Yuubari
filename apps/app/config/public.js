@@ -1,7 +1,7 @@
 module.exports = (() => {
     const thisRoot = require('./root')
 
-    if (__DEV__) return `${thisRoot}dist/`
+    if (__DEV__) return `${thisRoot}`
 
     const {
         pathNameSub

@@ -55,33 +55,7 @@ app.use(convert(koaStatic(rootPath, option)))
 
 /* 同构配置 */
 
-const _getFile = (filename, appName, distPathname) => {
-    if (__DEV__)
-        return `http://localhost:${process.env.WEBPACK_DEV_SERVER_PORT || 3001}/dist/${appName}.${filename}`
-
-    const pathChunckmap = path.resolve(process.cwd(), distPathname, 'public', appName, '.chunckmap.json')
-
-    if (fs.existsSync(pathChunckmap)) {
-        const chunckmap = fs.readJsonSync(pathChunckmap)
-        const extname = path.extname(filename)
-        const key = path.basename(filename, extname)
-        let result
-        if (Array.isArray(chunckmap[key])) {
-            chunckmap[key].some(value => {
-                if (path.extname(value) === extname) {
-                    result = value
-                    return true
-                }
-                return false
-            })
-        }
-        if (result) return `/${appName}/${result}`
-    }
-
-    return isomorphicUtils.getFile(`${appName}/${filename}`, distPathname)
-}
-
-const getFile = filename => _getFile(filename, appName, distPathname)
+const getFile = filename => isomorphicUtils.getFile(filename, appName, distPathname)
 
 // const getFile = filename => isomorphicUtils.getFile(
 //     __DEV__ ? `app.${filename}` : `app/${filename}`,
