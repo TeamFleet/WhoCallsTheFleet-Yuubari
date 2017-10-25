@@ -6,7 +6,7 @@ const {
 module.exports = {
     name: 'Who Calls The Fleet',
     origin: 'https://fleet.moe',
-    domain: process.env.SERVER_DOMAIN || 'localhost',
+    domain: (() => process.env.SERVER_DOMAIN || 'localhost')(),
     fb_app_id: '',
     pathNameDistWeb,
     pathNameSub: appName,
