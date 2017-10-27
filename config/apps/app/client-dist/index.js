@@ -62,6 +62,15 @@ module.exports = (async () => Object.assign({}, config, {
                 '__ELECTRON__': false,
                 '__PUBLIC__': JSON.stringify(publicPath),
             }),
+            new webpack.optimize.CommonsChunkPlugin({
+                children: true,
+                deepChildren: true,
+            }),
+            // new webpack.optimize.CommonsChunkPlugin({
+            //     name: "commons",
+            //     filename: '[name].[chunkhash].js',
+            //     minChunks: 3
+            // }),
             ...await pluginCopyImages(),
         ]
     ],
