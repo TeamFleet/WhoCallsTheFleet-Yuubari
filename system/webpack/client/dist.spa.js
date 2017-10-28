@@ -40,14 +40,14 @@ const factoryConfig = async(opt) => {
                 }
             }),
             new webpack.NoEmitOnErrorsPlugin(),
-            // new webpack.optimize.UglifyJsPlugin({
-            //     compress: {
-            //         warnings: false
-            //     },
-            //     beautify: false,
-            //     comments: false,
-            //     sourceMap: false
-            // }),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                },
+                beautify: false,
+                comments: false,
+                sourceMap: false
+            }),
             new HtmlWebpackPlugin({
                 filename: '../index.html',
                 template: path.resolve(RUN_PATH, `./apps/${APP_KEY}/html.ejs`),
