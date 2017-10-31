@@ -11,7 +11,7 @@ const factoryConfig = async(opt) => {
 
     return {
         target: 'web',
-        devtool: 'source-map',
+        // devtool: 'source-map',
         entry: {
             client: [
                 path.resolve(RUN_PATH, `./apps/${APP_KEY}/client/index.js`)
