@@ -14,7 +14,7 @@
 let db = {}
 // let lastLocaleId
 export let locale = null
-export const changeLocale = newLocale => locale = newLocale
+export const updateLocale = newLocale => locale = newLocale
 
 // const requireDb = (name) => {
 //     if (__SERVER__) return require(`whocallsthefleet-database/db/${name}.nedb`)
@@ -129,9 +129,10 @@ export const changeLocale = newLocale => locale = newLocale
 //     if (__CLIENT__ && __DEV__) console.log('KCKit', require('kckit'))
 // }
 
-export const init = () => import(
-    /* webpackChunkName: "database" */
-    './init')
-    .then(init => init.default())
+export const init = () =>
+    import(
+        /* webpackChunkName: "database" */
+        './init'
+    ).then(init => init.default())
 
 export default db

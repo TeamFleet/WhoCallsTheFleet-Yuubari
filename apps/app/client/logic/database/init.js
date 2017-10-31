@@ -1,19 +1,20 @@
 import { localeId } from 'sp-i18n'
+import kckit, { register, parseRaw } from 'kckit'
 
 import shipCollections from './db/ship_collections.json'
 import equipmentCollections from './db/equipment_collections.json'
 
-import { locale, changeLocale } from './'
+import db, { locale, updateLocale } from './'
 
 const LZString = __CLIENT__ && require('lz-string')
 
-const {
-    register,
-    parseRaw
-} = require('kckit')
+// const {
+//     register,
+//     parseRaw
+// } = require('kckit')
 
 let isInitDb
-let db = {}
+// let db = {}
 let lastLocaleId
 // export let locale = null
 
@@ -28,11 +29,11 @@ export default () => {
     let needInit = false
 
     if (lastLocaleId !== localeId) {
-        changeLocale(localeId)
-        if (/^zh/.test(localeId)) changeLocale('zh_cn')
-        else if (/^en/.test(localeId)) changeLocale('en_us')
-        // else if (/^ja/.test(locale)) changeLocale('ja_jp')
-        else changeLocale('ja_jp')
+        updateLocale(localeId)
+        if (/^zh/.test(localeId)) updateLocale('zh_cn')
+        else if (/^en/.test(localeId)) updateLocale('en_us')
+        // else if (/^ja/.test(locale)) updateLocale('ja_jp')
+        else updateLocale('ja_jp')
         objInit.locale = locale
         lastLocaleId = localeId
         needInit = true
@@ -127,5 +128,5 @@ export default () => {
     if (needInit)
         register(objInit)
 
-    if (__CLIENT__ && __DEV__) console.log('KCKit', require('kckit'))
+    if (__CLIENT__ && __DEV__) console.log('KCKit', kckit)
 }
