@@ -17,9 +17,11 @@ const config = require('../base/factory')({
     isExtractTextPlugin: true
 })
 
+const isAnalyze = false
+
 module.exports = (async () => Object.assign({}, config, {
 
-    // analyzer: true,
+    analyzer: isAnalyze,
 
     entry: {
         ...config.entry,
@@ -74,7 +76,7 @@ module.exports = (async () => Object.assign({}, config, {
             //     filename: '[name].[chunkhash].js',
             //     minChunks: 3
             // }),
-            ...await pluginCopyImages(),
+            ...(isAnalyze ? [] : await pluginCopyImages()),
         ]
     ],
 

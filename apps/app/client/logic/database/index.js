@@ -134,5 +134,6 @@ export const init = () =>
         /* webpackChunkName: "database" */
         './init'
     ).then(init => init.default())
+// export const init = require('./init').default
 
 export default db
