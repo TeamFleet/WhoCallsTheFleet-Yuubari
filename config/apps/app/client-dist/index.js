@@ -19,6 +19,8 @@ const config = require('../base/factory')({
 
 module.exports = (async () => Object.assign({}, config, {
 
+    // analyzer: true,
+
     entry: {
         ...config.entry,
         "critical-extra-old-ie": [
@@ -48,7 +50,8 @@ module.exports = (async () => Object.assign({}, config, {
                 globOptions: {
                     ignore: [
                         '/**/_*/',
-                        '/**/_*/**/*'
+                        '/**/_*/**/*',
+                        '/**/chunk.database.*'
                     ]
                 },
                 // appendUrls: getUrlsFromRouter()
@@ -62,6 +65,15 @@ module.exports = (async () => Object.assign({}, config, {
                 '__ELECTRON__': false,
                 '__PUBLIC__': JSON.stringify(publicPath),
             }),
+            new webpack.optimize.CommonsChunkPlugin({
+                children: true,
+                deepChildren: true,
+            }),
+            // new webpack.optimize.CommonsChunkPlugin({
+            //     name: "commons",
+            //     filename: '[name].[chunkhash].js',
+            //     minChunks: 3
+            // }),
             ...await pluginCopyImages(),
         ]
     ],

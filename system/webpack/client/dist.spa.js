@@ -15,13 +15,13 @@ const times = n => f => {
     return iter(0)
 }
 
-const factoryConfig = async(opt) => {
+const factoryConfig = async (opt) => {
 
     let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
 
     let config = {
         target: 'web',
-        devtool: 'source-map',
+        // devtool: 'source-map',
         // entry: entries,
         // output: {
         //     filename: `[name].[chunkhash].js`,
@@ -53,7 +53,7 @@ const factoryConfig = async(opt) => {
                 template: path.resolve(RUN_PATH, `./apps/${APP_KEY}/html.ejs`),
                 inject: false
             }),
-            new WebpackOnBuildPlugin(function(stats) {
+            new WebpackOnBuildPlugin(function (stats) {
 
                 const chunks = {}
                 const outputPath = stats.compilation.outputOptions.path
@@ -78,17 +78,48 @@ const factoryConfig = async(opt) => {
                     chunks[o.name] = o.files
                 }
 
-                fs.writeFileSync(
-                    path.resolve(outputPath, '../index.html'),
-                    fs.readFileSync(
+                const file = path.resolve(outputPath, '../index.html')
+                const getFile = filename => {
+                    const extname = path.extname(filename)
+                    const key = path.basename(filename, extname)
+                    // console.log(filename, key, extname, chunks[key])
+                    if (Array.isArray(chunks[key])) {
+                        let result
+                        chunks[key].some(value => {
+                            if (path.extname(value) === extname)
+                                result = value
+                            return result
+                        })
+                        return result
+                    }
+                    return undefined
+                }
+
+                if (fs.existsSync(file)) {
+                    fs.writeFileSync(
                         path.resolve(outputPath, '../index.html'),
+                        fs.readFileSync(
+                            path.resolve(outputPath, '../index.html'),
+                            'utf-8'
+                        ).replace(/\{\{[ ]*SRC:(.+?)[ ]*\}\}/g, (match, ...parts) => {
+                            // console.log(match, parts)
+                            return publicPath + chunks[parts[0]][0]
+                        }).replace(/\{\{[ ]*CONTENT:(.+?)[ ]*\}\}/g, (match, ...parts) => {
+                            const filename = getFile(parts[0])
+                            if (filename) {
+                                const file = path.resolve(outputPath, filename)
+                                // console.log(file)
+                                return fs.readFileSync(file)
+                            }
+                            return match
+                            // console.log(match, parts)
+                            // return publicPath + chunks[parts[0]][0]
+                        }),
                         'utf-8'
-                    ).replace(/\{\{[ ]*SRC:(.+?)[ ]*\}\}/g, (match, ...parts) => {
-                        // console.log(match, parts)
-                        return publicPath + chunks[parts[0]][0]
-                    }),
-                    'utf-8'
-                )
+                    )
+                } else {
+                    console.log('SPA template file not found')
+                }
             })
         ],
         resolve: common.resolve
@@ -96,4 +127,4 @@ const factoryConfig = async(opt) => {
 
     return config
 }
-module.exports = async(opt) => await factoryConfig(opt)
+module.exports = async (opt) => await factoryConfig(opt)

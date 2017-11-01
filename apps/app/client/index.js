@@ -23,6 +23,7 @@ import reducers from './redux/reducers.js'
 import { init as dbInit } from '@appLogic/database'
 import prefs from '@appLogic/preferences'
 // import lastScroll from '@appUtils/last-scroll.js'
+import kckit from 'kckit'
 
 const ROUTER_REDUCDER_NAME = 'routing'
 
@@ -76,37 +77,41 @@ reactApp.react.router.ext({
 //
 
 if (__SERVER__) {
-    // 载入所有多语言文件
-    let locales = {}
-    availableLocales.forEach(locale => {
-        locales[locale] = require(`@appLocales/${locale}.json`)
-    })
-    // 服务器端注册多语言
-    i18nRegister(availableLocales, locales)
+    (async () => {
+        // 载入所有多语言文件
+        let locales = {}
+        availableLocales.forEach(locale => {
+            locales[locale] = require(`@appLocales/${locale}.json`)
+        })
+        // 服务器端注册多语言
+        i18nRegister(availableLocales, locales)
+
+        await dbInit()
+    })()
 }
 
 if (__CLIENT__) {
     /*const store = reactApp.run({
     })*/
-    prefs.init().then(() => {
-        reactApp.run({
-            browserHistoryOnUpdate: (location, store) => {
-                // 回调: browserHistoryOnUpdate
-                // 正常路由跳转时，URL发生变化后瞬间会触发，顺序在react组件读取、渲染之前
-                if (__DEV__) {
-                    console.log(' ')
-                    console.log('browserHistory update', location)
-                    console.log(' ')
+    prefs.init()
+        .then(() => dbInit())
+        .then(() => {
+            reactApp.run({
+                browserHistoryOnUpdate: (location, store) => {
+                    // 回调: browserHistoryOnUpdate
+                    // 正常路由跳转时，URL发生变化后瞬间会触发，顺序在react组件读取、渲染之前
+                    if (__DEV__) {
+                        console.log(' ')
+                        console.log('browserHistory update', location)
+                        console.log(' ')
+                    }
+                    store.dispatch(actionUpdate(location))
                 }
-                store.dispatch(actionUpdate(location))
-            }
+            })
         })
-    })
     // 客户端注册多语言
     i18nRegister(__REDUX_STATE__)
 }
-
-dbInit()
 
 //
 
