@@ -103,6 +103,7 @@ const factoryConfig = async (opt) => {
                             'utf-8'
                         ).replace(/\{\{[ ]*SRC:(.+?)[ ]*\}\}/g, (match, ...parts) => {
                             // console.log(match, parts)
+                            if (!Array.isArray(chunks[parts[0]])) return match
                             return publicPath + chunks[parts[0]][0]
                         }).replace(/\{\{[ ]*CONTENT:(.+?)[ ]*\}\}/g, (match, ...parts) => {
                             const filename = getFile(parts[0])
