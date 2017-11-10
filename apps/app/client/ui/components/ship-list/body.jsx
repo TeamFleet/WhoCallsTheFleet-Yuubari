@@ -14,6 +14,8 @@ import {
     // compareReset
 } from '@appLogic/ship-list/api.js'
 import pref from '@appLogic/preferences'
+
+import sortShips from '@appUtils/sort-ships'
 // import { REALTIME_LOCATION_REDUCER_NAME } from 'sp-isomorphic-utils/realtime-location'
 
 import Title from './title.jsx'
@@ -150,6 +152,10 @@ class ShipListBody extends React.Component {
             filteredResultText = translate('ship_list.filter.no_result')
         } else {
             filteredResultText = translate('ship_list.filter.no_result_show_previous')
+        }
+
+        if (Array.isArray(this.filteredResult) && this.filteredResult.length) {
+            this.filteredResult = sortShips(this.filteredResult)
         }
 
         return (

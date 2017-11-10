@@ -17,6 +17,12 @@ export default (list = []) => list
     .sort((a, b) => {
         a = getShip(a)
         b = getShip(b)
+        if (a.remodel && b.remodel) {
+            if (a.remodel.next === b.id)
+                return -1
+            if (a.remodel.prev === b.id)
+                return 1
+        }
         if (a.series === b.series) return a.name.suffix - b.name.suffix
         return a.order - b.order
     })
