@@ -231,7 +231,9 @@ class Filter extends React.Component {
         return (
             <div className={this.props.className}>
                 <Icon className="icon-search" icon="search" />
-                <button className="close" onClick={this.onCloseClick.bind(this)}><Icon className="icon-close" icon="cross" /></button>
+                <span className="btn-close" onClick={this.onCloseClick.bind(this)}>
+                    <Icon className="icon-close" icon="cross" />
+                </span>
                 <input
                     className="input"
                     type="text"

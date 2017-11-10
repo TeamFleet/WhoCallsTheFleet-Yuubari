@@ -86,7 +86,29 @@ export default class ShipList extends React.Component {
 //     ...state.shipList[ownProps.id],
 //     // location: state.location
 // }))
-@connect((state, ownProps) => state.shipList[ownProps.id] || {})
+// @connect((state, ownProps) => state.shipList[ownProps.id] || {})
+@connect((state, ownProps) => {
+    const {
+        collection,
+        isModeFilter,
+        filterInput,
+        isModeCompare,
+        compareState,
+        compareList,
+    } = state.shipList[ownProps.id] || {}
+    return {
+        collection,
+
+        isModeFilter,
+        filterInput,
+
+        isModeCompare,
+        compareState,
+        compareList,
+        // compareSort,
+        // compareScrollLeft,
+    }
+})
 @ImportStyle(style)
 class ShipListBody extends React.Component {
     getExtraButtons() {
@@ -234,10 +256,11 @@ class ShipListBody extends React.Component {
         }
 
         return (
-            <div className={
-                this.props.className
-                + (this.props.isModeCompare ? ` is-compare is-compare-${this.props.compareState}` : '')
-            }>
+            <div className={classNames({
+                [this.props.className]: true,
+                'is-compare': this.props.isModeCompare,
+                [`is-compare-${this.props.compareState}`]: this.props.isModeCompare,
+            })}>
                 {__CLIENT__ && <Header
                     id={this.props.id}
                     extraButtons={this.getExtraButtons()}

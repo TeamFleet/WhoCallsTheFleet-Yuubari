@@ -20,7 +20,7 @@
         margin-left:    8px;
     }
 
-    .close{
+    .btn-close{
         display:        none;
     }
 
@@ -72,24 +72,38 @@
 .is-filtering .component{
     width:      @width-filter-focus;
     z-index:    10;
+    .btn-close{
+        @size:      40px;
+        display:    block;
+        position:   absolute;
+        top:        50%;
+        right:      0;
+        margin-top: (0 - @size / 2);
+        z-index:    10;
+        // appearance: none;
+        line-height:0;
+        height:     @size;
+        width:      @size;
+        padding:    ((@size - 16px) / 2);
+        background: transparent;
+        border:     0;
+        color:      inherit;
+        .is-hover({
+            &:not(:focus){
+                color:  #fff;
+            }
+        }, {
+            &:not(:focus){
+                color:  @color-fade-2;
+            }
+        });
+    }
     .screen-phone({
         // width:  100%;
         width:  auto;
         right:  (0 - @main-margin-phone);
-        .close{
-            @size:      40px;
-            display:    block;
-            position:   absolute;
-            top:        50%;
+        .btn-close{
             right:      8px;
-            margin-top: (0 - @size / 2);
-            z-index:    10;
-            appearance: none;
-            height:     @size;
-            width:      @size;
-            padding:    ((@size - 16px) / 2);
-            background: transparent;
-            border:     0;
             color:      inherit;
         }
     });
