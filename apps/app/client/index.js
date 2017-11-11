@@ -94,7 +94,11 @@ if (__CLIENT__) {
     /*const store = reactApp.run({
     })*/
     prefs.init()
+        // 注册多语言
+        .then(() => i18nRegister(__REDUX_STATE__))
+        // 初始化数据库
         .then(() => dbInit())
+        // 渲染React
         .then(() => {
             reactApp.run({
                 browserHistoryOnUpdate: (location, store) => {
@@ -109,8 +113,6 @@ if (__CLIENT__) {
                 }
             })
         })
-    // 客户端注册多语言
-    i18nRegister(__REDUX_STATE__)
 }
 
 //

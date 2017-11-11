@@ -40,6 +40,8 @@ export default class Image extends React.Component {
             pic: _pic,
             picture: _picture,
 
+            styleImg,
+
             ...props
         } = this.props
 
@@ -58,6 +60,7 @@ export default class Image extends React.Component {
                     src={src}
                     onLoad={this.onLoad.bind(this)}
                     onError={this.onError.bind(this)}
+                    style={styleImg}
                 />
                 {children}
             </Component>
