@@ -1,4 +1,4 @@
-import { localeId } from 'sp-i18n'
+// import { localeId } from 'sp-i18n'
 import kckit, { register, parseRaw } from 'kckit'
 
 import shipCollections from './db/ship_collections.json'
@@ -15,7 +15,7 @@ const LZString = __CLIENT__ && require('lz-string')
 
 let isInitDb
 // let db = {}
-let lastLocaleId
+// let lastLocaleId
 // export let locale = null
 
 const requireDb = (name) => {
@@ -26,17 +26,10 @@ const requireDb = (name) => {
 
 export default () => {
     let objInit = {}
-    let needInit = false
+    let needInit = updateLocale()
 
-    if (lastLocaleId !== localeId) {
-        updateLocale(localeId)
-        if (/^zh/.test(localeId)) updateLocale('zh_cn')
-        else if (/^en/.test(localeId)) updateLocale('en_us')
-        // else if (/^ja/.test(locale)) updateLocale('ja_jp')
-        else updateLocale('ja_jp')
+    if (needInit) {
         objInit.locale = locale
-        lastLocaleId = localeId
-        needInit = true
     }
 
     if (!isInitDb) {

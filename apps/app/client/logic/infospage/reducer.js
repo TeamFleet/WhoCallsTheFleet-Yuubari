@@ -24,6 +24,8 @@ export default function (state = initialState, action) {
     switch (action.type) {
 
         case INFOSPAGE_INIT: {
+            if (state[action.id])
+                return state
             return Object.assign(
                 {}, state,
                 {

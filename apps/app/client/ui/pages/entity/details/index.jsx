@@ -26,6 +26,14 @@ const extractFromState = (state) => {
     }
 }
 
+const isCV = entity => (Array.isArray(entity.relation.cv) && entity.relation.cv.length)
+
+const getDescription = entity => {
+    return entity._name
+        // 类型
+        + `, ${translate(isCV(entity) ? 'seiyuu' : 'artist')}`
+}
+
 @connect()
 @ImportStyle(require('./styles.less'))
 export default class extends React.Component {
@@ -39,12 +47,12 @@ export default class extends React.Component {
         if (entity) {
             obj.title = entity._name
             obj.subtitle = getSubtitle(entity)
-            // obj.description = getDescription(ship)
+            obj.description = getDescription(entity)
         }
         const head = htmlHead(obj)
 
         ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title// + translate("ship_details." + tab)
+        ext.title = head.title
     }
 
     get data() {
@@ -61,55 +69,11 @@ export default class extends React.Component {
         return []
     }
 
-    renderList(type, list, props = {}) {
-        if (!list.length) return null
-        return (
-            <ComponentContainer
-                title={<Title tag="h2" className="title">
-                    {translate(`entity_details.${type}`)}
-                    <small className="count">({list.length})</small>
-                </Title>}
-                className={`entityinfo entityinfo-list entityinfo-${type}`}
-            >
-                <ListShips
-                    list={list}
-                    type="names"
-                    className="list"
-                    sort={false}
-                    {...props}
-                />
-            </ComponentContainer>
-        )
-    }
-
-    renderLinks(links) {
-        if (!Array.isArray(links)) return null
-        links = links.filter(obj => !!(obj.name))
-        if (!links.length) return null
-        return (
-            <ComponentContainer
-                title={translate(`entity_details.links`)}
-                className={`entityinfo entityinfo-links`}
-            >
-                {links.map((obj, index) => (
-                    <a
-                        className="item"
-                        href={obj.url}
-                        target="_blank"
-                        key={index}
-                    >
-                        {obj.name}
-                    </a>
-                ))}
-            </ComponentContainer>
-        )
-    }
-
     render() {
         if (__CLIENT__ && __DEV__) console.log('thisEntity', this.data)
 
-        const isCV = (Array.isArray(this.data.relation.cv) && this.data.relation.cv.length)
-        const hasPics = (isCV)
+        // const isCV = (Array.isArray(this.data.relation.cv) && this.data.relation.cv.length)
+        const hasPics = isCV(this.data)
 
         return (
             <InfosPageContainer
@@ -122,14 +86,65 @@ export default class extends React.Component {
 
                 {hasPics && <Pictures entity={this.data} className="entityinfo entityinfo-pictures" />}
 
-                {this.renderList('casts', this.getList('cv'))}
-                {this.renderList('illustrates', this.getList('illustrator'), {
-                    extraIllust: true
-                })}
+                <ContentList
+                    type="casts"
+                    list={this.getList('cv')}
+                />
+                <ContentList
+                    type="illustrates"
+                    list={this.getList('illustrator')}
+                    extraIllust={true}
+                />
 
-                {this.renderLinks(this.data.links)}
+                <ContentLinks links={this.data.links} />
 
             </InfosPageContainer>
         )
     }
+}
+
+const ContentList = ({ list, type, ...props }) => {
+    if (!list.length) return null
+    return (
+        <ComponentContainer
+            title={<Title tag="h2" className="title">
+                {translate(`entity_details.${type}`)}
+                <small className="count">({list.length})</small>
+            </Title>}
+            className={`entityinfo entityinfo-list entityinfo-${type}`}
+        >
+            <ListShips
+                list={list}
+                type="names"
+                className="list"
+                sort={false}
+                {...props}
+            />
+        </ComponentContainer>
+    )
+}
+
+const ContentLinks = ({ links }) => {
+    if (!Array.isArray(links)) return null
+
+    links = links.filter(obj => !!(obj.name))
+    if (!links.length) return null
+
+    return (
+        <ComponentContainer
+            title={translate(`entity_details.links`)}
+            className={`entityinfo entityinfo-links`}
+        >
+            {links.map((obj, index) => (
+                <a
+                    className="item"
+                    href={obj.url}
+                    target="_blank"
+                    key={index}
+                >
+                    {obj.name}
+                </a>
+            ))}
+        </ComponentContainer>
+    )
 }

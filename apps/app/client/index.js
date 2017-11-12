@@ -22,7 +22,7 @@ import reducers from './redux/reducers.js'
 import { init as dbInit } from '@appLogic/database'
 import prefs from '@appLogic/preferences'
 // import lastScroll from '@appUtils/last-scroll.js'
-import kckit from 'kckit'
+// import kckit from 'kckit'
 
 const ROUTER_REDUCDER_NAME = 'routing'
 
@@ -76,17 +76,18 @@ reactApp.react.router.ext({
 //
 
 if (__SERVER__) {
-    (async () => {
-        // 载入所有多语言文件
-        let locales = {}
-        availableLocales.forEach(locale => {
-            locales[locale] = require(`@appLocales/${locale}.json`)
-        })
-        // 服务器端注册多语言
-        i18nRegister(availableLocales, locales)
+    // (async () => {
+    // 载入所有多语言文件
+    let locales = {}
+    availableLocales.forEach(locale => {
+        locales[locale] = require(`@appLocales/${locale}.json`)
+    })
+    // 服务器端注册多语言
+    i18nRegister(availableLocales, locales)
 
-        await dbInit()
-    })()
+    // await dbInit()
+    dbInit()
+    // })()
 }
 
 if (__CLIENT__) {

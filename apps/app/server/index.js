@@ -9,6 +9,7 @@ import isomorphicUtils from 'sp-isomorphic-utils'
 import { localeId as currentLocaleId } from 'sp-i18n'
 import i18nOnServerRender from 'sp-i18n/onServerRender'
 import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
+import { updateLocale as dbUpdateLocale } from '@appLogic/database'
 // import injectPWA from 'sp-pwa/inject-pwa'
 
 // const webpackConfig = require('../../../config/webpack')
@@ -137,6 +138,7 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
         reduxStore.dispatch({ type: TELL_CLIENT_URL, data: koaCtx.origin })
 
         i18nOnServerRender(obj)
+        dbUpdateLocale()
     }
 })
 

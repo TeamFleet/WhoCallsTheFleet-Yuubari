@@ -17,7 +17,7 @@ const config = require('../base/factory')({
     isExtractTextPlugin: true
 })
 
-const isAnalyze = false
+const isAnalyze = true
 
 module.exports = (async () => Object.assign({}, config, {
 

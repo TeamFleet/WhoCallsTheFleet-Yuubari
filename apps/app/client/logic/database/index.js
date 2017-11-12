@@ -1,20 +1,34 @@
-// import { localeId } from 'sp-i18n'
+import { localeId } from 'sp-i18n'
 
 // import shipCollections from './db/ship_collections.json'
 // import equipmentCollections from './db/equipment_collections.json'
 
 // const LZString = __CLIENT__ && require('lz-string')
 
-// const {
-//     register,
-//     parseRaw
-// } = require('kckit')
+const {
+    register,
+} = require('kckit')
 
 // let isInitDb
 let db = {}
-// let lastLocaleId
+let lastLocaleId
 export let locale = null
-export const updateLocale = newLocale => locale = newLocale
+export const updateLocale = () => {
+    if (!localeId) return false
+    if (lastLocaleId !== localeId) {
+        locale = localeId
+        if (/^zh/.test(localeId)) locale = 'zh_cn'
+        else if (/^en/.test(localeId)) locale = 'en_us'
+        else if (/^ja/.test(localeId)) locale = 'ja_jp'
+        else locale = 'ja_jp'
+        lastLocaleId = localeId
+        register({
+            locale
+        })
+        return true
+    }
+    return false
+}
 
 // const requireDb = (name) => {
 //     if (__SERVER__) return require(`whocallsthefleet-database/db/${name}.nedb`)
@@ -129,11 +143,11 @@ export const updateLocale = newLocale => locale = newLocale
 //     if (__CLIENT__ && __DEV__) console.log('KCKit', require('kckit'))
 // }
 
-export const init = () =>
-    import(
-        /* webpackChunkName: "database" */
-        './init'
-    ).then(init => init.default())
-// export const init = require('./init').default
+// export const init = () =>
+//     import(
+//         /* webpackChunkName: "database" */
+//         './init'
+//     ).then(init => init.default())
+export const init = require('./init').default
 
 export default db

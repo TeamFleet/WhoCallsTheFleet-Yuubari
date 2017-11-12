@@ -1,136 +1,169 @@
 import { routeCheck } from './'
 
-export default [{
-    path: 'ships',
-    name: 'ships',
-    getComponent: (nextState, cb) => {
-        require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/list').default)
-        }, 'ships')
-    }
-}, {
-    path: 'equipments',
-    name: 'equipments',
-    getComponent: (nextState, cb) => {
-        require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/list').default)
-        }, 'equipments')
-    }
-}, {
-    path: 'arsenal',
-    name: 'arsenal',
-    getComponent: (nextState, cb) => {
-        require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal').default)
-        }, 'arsenal')
+export default [
+    {
+        path: 'ships',
+        name: 'ships',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/list').default)
+            }, 'ships')
+        },
     },
-    // childRoutes: [
-    //     {
-    //         path: 'all',
-    //         name: 'all',
-    //         getComponent: (nextState, cb) => {
-    //             require.ensure([], (require) => {
-    //                 if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal/all').default)
-    //             })
-    //         },
-    //         isIndex: true
-    //     }, {
-    //         path: ':day',
-    //         getComponent: (nextState, cb) => {
-    //             require.ensure([], (require) => {
-    //                 if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal/day').default)
-    //             })
-    //         }
-    //     }
-    // ]
-}, {
-    path: 'entities',
-    name: 'entities',
-    getComponent: (nextState, cb) => {
-        require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/entity/list').default)
-        }, 'entities')
-    }
-}, {
-    path: 'exillusts',
-    name: 'exillusts',
-    getComponent: (nextState, cb) => {
-        require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/exillusts').default)
-        }, 'exillusts')
-    }
-},
+    {
+        path: 'ships/:id',
+        name: 'shipDetails',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/details').default)
+            }, 'shipDetails')
+        },
+        childRoutes: [{
+            path: ':tab'
+        }],
+        /*
+            childRoutes: __CLIENT__ ? [
+                {
+                    path: ':tab'
+                }
+            ] : [
+                {
+                    path: 'infos',
+                    name: 'infos',
+                    getComponent: (nextState, cb) => {
+                        require.ensure([], (require) => {
+                            if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/details/infos').default)
+                        }, 'thisShip-infos')
+                    },
+                    isIndex: true
+                }, {
+                    path: ':tab',
+                    getComponent: (nextState, cb) => {
+                        require.ensure([], (require) => {
+                            if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/details/' + nextState.params.tab).default)
+                        })
+                    }
+                }
+            ]
+        */
+    },
 
 
-{
-    path: 'ships/:id',
-    name: 'thisShip',
-    getComponent: (nextState, cb) => {
-        require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/details').default)
-        }, 'thisShip')
+    // ==================================================
+
+
+    {
+        path: 'equipments',
+        name: 'equipments',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/list').default)
+            }, 'equipments')
+        }
     },
-    childRoutes: /*__CLIENT__ ? [
-        {
+    {
+        path: 'equipments/:id',
+        name: 'equipmentDetails',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details').default)
+            }, 'equipmentDetails')
+        },
+        childRoutes: [{
             path: ':tab'
-        }
-    ] : */[
-        {
-            path: 'infos',
-            name: 'infos',
-            getComponent: (nextState, cb) => {
-                require.ensure([], (require) => {
-                    if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/details/infos').default)
-                })
-            },
-            isIndex: true
-        }, {
-            path: ':tab',
-            getComponent: (nextState, cb) => {
-                require.ensure([], (require) => {
-                    if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/details/' + nextState.params.tab).default)
-                })
-            }
-        }
-    ]
-}, {
-    path: 'equipments/:id',
-    name: 'thisEquipment',
-    getComponent: (nextState, cb) => {
-        require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details').default)
-        }, 'thisEquipment')
+        }],
+        /*
+            childRoutes: __CLIENT__ ? [
+                {
+                    path: ':tab'
+                }
+            ] : [{
+                path: 'infos',
+                name: 'infos',
+                getComponent: (nextState, cb) => {
+                    require.ensure([], (require) => {
+                        if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details/infos').default)
+                    })
+                },
+                isIndex: true
+            }, {
+                path: ':tab',
+                getComponent: (nextState, cb) => {
+                    require.ensure([], (require) => {
+                        if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details/' + nextState.params.tab).default)
+                    })
+                }
+            }]
+        */
     },
-    childRoutes: /*__CLIENT__ ? [
-        {
-            path: ':tab'
+
+
+    // ==================================================
+
+
+    {
+        path: 'arsenal',
+        name: 'arsenal',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal').default)
+            }, 'arsenal')
+        },
+        // childRoutes: [
+        //     {
+        //         path: 'all',
+        //         name: 'all',
+        //         getComponent: (nextState, cb) => {
+        //             require.ensure([], (require) => {
+        //                 if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal/all').default)
+        //             })
+        //         },
+        //         isIndex: true
+        //     }, {
+        //         path: ':day',
+        //         getComponent: (nextState, cb) => {
+        //             require.ensure([], (require) => {
+        //                 if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal/day').default)
+        //             })
+        //         }
+        //     }
+        // ]
+    },
+
+
+    // ==================================================
+
+
+    {
+        path: 'entities',
+        name: 'entities',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/entity/list').default)
+            }, 'entities')
         }
-    ] : */[
-        {
-            path: 'infos',
-            name: 'infos',
-            getComponent: (nextState, cb) => {
-                require.ensure([], (require) => {
-                    if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details/infos').default)
-                })
-            },
-            isIndex: true
-        }, {
-            path: ':tab',
-            getComponent: (nextState, cb) => {
-                require.ensure([], (require) => {
-                    if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details/' + nextState.params.tab).default)
-                })
-            }
+    },
+    {
+        path: 'entities/:id',
+        name: 'entityDetails',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/entity/details').default)
+            }, 'entityDetails')
         }
-    ]
-}, {
-    path: 'entities/:id',
-    name: 'thisEntity',
-    getComponent: (nextState, cb) => {
-        require.ensure([], (require) => {
-            if (routeCheck(nextState)) cb(null, require('@appUI/pages/entity/details').default)
-        }, 'thisEntity')
-    }
-}
+    },
+
+
+    // ==================================================
+
+
+    {
+        path: 'exillusts',
+        name: 'exillusts',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/exillusts').default)
+            }, 'exillusts')
+        }
+    },
 ]

@@ -114,14 +114,16 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
     }
 
     componentWillUnmount() {
-        this.props.dispatch(
-            shipDetailsUpdate(
-                getInfosId(this.props.ship.id),
-                {
-                    [ILLUSTINDEX]: this.state.swiperIndex
-                }
+        setTimeout(() => {
+            this.props.dispatch(
+                shipDetailsUpdate(
+                    getInfosId(this.props.ship.id),
+                    {
+                        [ILLUSTINDEX]: this.state.swiperIndex
+                    }
+                )
             )
-        )
+        }, 10)
     }
 
     render() {
