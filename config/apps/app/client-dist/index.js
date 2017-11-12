@@ -17,7 +17,7 @@ const config = require('../base/factory')({
     isExtractTextPlugin: true
 })
 
-const isAnalyze = false
+const isAnalyze = process.env.WEBPACK_ANALYZER || false
 
 module.exports = (async () => Object.assign({}, config, {
 

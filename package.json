@@ -44,6 +44,7 @@
         "prod:run": "cross-env TEST=test node ./dist-web/server",
         "server:run": "cross-env SERVER_DOMAIN=yuubari.fleet.moe node ./dist-web/server",
         "server:run:test": "cross-env SERVER_DOMAIN=yuubari.fleet.test node ./dist-web/server",
+        "analyze": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client WEBPACK_ANALYZER=true node ./system/webpack/enter",
 
         "test:server": "npm run prod:bundle:server && npm run prod:run",
 
