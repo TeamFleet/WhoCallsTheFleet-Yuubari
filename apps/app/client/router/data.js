@@ -70,11 +70,11 @@ export default [{
             if (routeCheck(nextState)) cb(null, require('@appUI/pages/ship/details').default)
         }, 'thisShip')
     },
-    childRoutes: __CLIENT__ ? [
+    childRoutes: /*__CLIENT__ ? [
         {
             path: ':tab'
         }
-    ] : [
+    ] : */[
         {
             path: 'infos',
             name: 'infos',
@@ -101,11 +101,11 @@ export default [{
             if (routeCheck(nextState)) cb(null, require('@appUI/pages/equipment/details').default)
         }, 'thisEquipment')
     },
-    childRoutes: __CLIENT__ ? [
+    childRoutes: /*__CLIENT__ ? [
         {
             path: ':tab'
         }
-    ] : [
+    ] : */[
         {
             path: 'infos',
             name: 'infos',

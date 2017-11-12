@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
 import htmlHead from '@appUtils/html-head.js'
 
-import modeBackgroundOnAnimationEnd from '@appLogic/app-mode/mode-background.js'
-import { swipedFromLeftEdge } from '@appLogic/side-menu/api.js'
+import { updateAppReady } from '@appLogic/app/api'
+import { swipedFromLeftEdge } from '@appLogic/side-menu/api'
 
 import style from './app.less'
 
@@ -53,6 +54,11 @@ class App extends React.Component {
     appReady(timeout = 0) {
         if (__CLIENT__ && !this.isAppReady) {
             this.isAppReady = true
+            setTimeout(() => {
+                this.props.dispatch(
+                    updateAppReady(true)
+                )
+            })
 
             if ('serviceWorker' in navigator) {
                 // console.log('Service Worker SUPPORTED')
@@ -68,7 +74,7 @@ class App extends React.Component {
             }
 
             setTimeout(() => {
-                console.log('appReady')
+                if (__DEV__) console.log('🎈 App is now ready!')
                 document.body.classList.add('is-ready')
                 setTimeout(() => {
                     this.isAppReadyFull = true
@@ -76,22 +82,6 @@ class App extends React.Component {
                 }, 1000)
             }, timeout)
         }
-    }
-
-    get className() {
-        return this.props.className
-            + (this.isAppReady && this.props.appMode.mode
-                ? (' is-mode-' + this.props.appMode.mode
-                    + (!this.props.appMode.leaving && this.props.appMode.animation ? (' is-mode-' + this.props.appMode.mode + '-entering') : '')
-                    + (this.props.appMode.leaving ? (' is-mode-' + this.props.appMode.mode + '-leaving') : '')
-                )
-                : ''
-            )
-    }
-
-    onAnimationEnd(evt) {
-        const action = modeBackgroundOnAnimationEnd(evt.nativeEvent)
-        if (action) this.props.dispatch(action)
     }
 
     onTouchStart(evt) {
@@ -149,11 +139,17 @@ class App extends React.Component {
         // if (__DEV__) console.log('app - render')
         if (this.props.isMainBgimgLoaded) this.appReady()
 
+        const hasMode = (this.isAppReady && this.props.appMode.mode)
+
         return (
             <div
                 id="app"
-                className={this.className}
-                onAnimationEnd={this.onAnimationEnd.bind(this)}
+                className={classNames({
+                    [this.props.className]: true,
+                    [`is-mode-${this.props.appMode.mode}`]: hasMode,
+                    [`is-mode-${this.props.appMode.mode}-entering`]: (hasMode && !this.props.appMode.leaving && this.props.appMode.animation),
+                    [`is-mode-${this.props.appMode.mode}-leaving`]: (hasMode && this.props.appMode.leaving),
+                })}
                 onTouchStart={this.onTouchStart.bind(this)}
                 onTouchMove={this.onTouchMove.bind(this)}
                 onTouchEnd={this.onTouchEnd.bind(this)}

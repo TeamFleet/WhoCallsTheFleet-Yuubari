@@ -1,0 +1,133 @@
+@import "~base.less";
+@import './_.less';
+
+.component{
+    .mainframe();
+    position:   absolute;
+    z-index:    2;
+    top:        0;
+    bottom:     0;
+    overflow:   hidden;
+
+    .bg-container{
+        transition: inherit;
+        left:       0;
+        right:      0;
+        
+        &,
+        &:before,
+        .background{
+            position:   absolute;
+            top:        0;
+            bottom:     0;
+            overflow:   hidden;
+        }
+        // &,
+        // &:before{
+        //     bottom:     0;
+        // }
+        .background{
+            z-index:    1;
+            width:      100vw;
+            // height:     100vh;
+            background-attachment: initial;
+        }
+        &:before{
+            content:    "";
+            z-index:    2;
+            left:       0;
+            right:      0;
+        }
+    }
+
+    &.nav{
+        left:       0;
+        width:      @nav-width;
+        transform:  translateX(-100%);
+        // .is-ready({
+        //     transform:  none;
+        // });
+        .is-mode-background({
+            transform:  translateX(-100%);
+        });
+        .is-mode-background-leaving({
+            transform:  none;
+        });
+        .bg-container{
+            transform:  translateX(100%);
+            &:before{
+                background: @theme-bluegrey-900;
+                background: fade(@theme-bluegrey-900, 50%);
+            }
+            .background{
+                left:   0;
+                right:  auto;
+            }
+            .is-ready({
+                transform:  none;
+            });
+            .is-mode-background({
+                transform:  translateX(100%);
+            });
+            .is-mode-background-leaving({
+                transform:  none;
+            });
+        }
+        .screen-t1({
+            width:      @nav-width-t1;
+        });
+        .screen-tablet({
+            display:    none;
+        });
+    }
+    &.main{
+        left:       @nav-width;
+        right:      0;
+        transform:  translateX(100%);
+        // .is-ready({
+        //     transform:  none;
+        // });
+        .is-mode-background({
+            transform:  translateX(100%);
+        });
+        .is-mode-background-leaving({
+            transform:  none;
+        });
+        .bg-container{
+            transform:  translateX(-100%);
+            &:before{
+                // background: @theme-bluegrey-900;
+                background: @color-background-main;
+            }
+            .background{
+                left:   auto;
+                right:  0;
+            }
+            .is-ready({
+                transform:  none;
+            });
+            .is-mode-background({
+                transform:  translateX(-100%);
+            });
+            .is-mode-background-leaving({
+                transform:  none;
+            });
+        }
+        .screen-t1({
+            left:       @nav-width-t1;
+        });
+        .screen-tablet({
+            left:       0;
+            transform:  translate(0%, 100%);
+            .is-mode-background({
+                transform:  translate(0%, 100%);
+            });
+            .bg-container{
+                transform:  translate(0%, -100%);
+                .is-mode-background({
+                    transform:  translate(0%, -100%);
+                });
+            }
+        });
+    }
+}

@@ -47,7 +47,8 @@ function makeItButter(config) {
     // try to fix a pm2 bug that will currupt [name] value
     if (config.output) {
         for (let key in config.output) {
-            config.output[key] = config.output[key].replace(/-_-_-_-_-_-(.+?)-_-_-_-_-_-/g, '[name]')
+            if (typeof config.output[key] === 'string')
+                config.output[key] = config.output[key].replace(/-_-_-_-_-_-(.+?)-_-_-_-_-_-/g, '[name]')
         }
     }
 

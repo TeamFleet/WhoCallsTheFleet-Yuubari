@@ -1,11 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
+import { ImportStyle } from 'sp-css-import'
+
+import { updateMainKey } from '@appLogic/app/api'
 
 // import lastScroll from '@appUtils/last-scroll.js'
-
-import { ImportStyle } from 'sp-css-import'
-import style from './main.less'
 
 let action
 let lastScrollY = 0
@@ -15,7 +16,8 @@ let pathnameLastScrollY = {}
 //     console.log('state', state)
 //     return {}
 // })
-@ImportStyle(style)
+@connect()
+@ImportStyle(require('./main.less'))
 export default class extends React.Component {
     // onAnimationStart(evt) {
     //     switch (evt.nativeEvent.animationName) {
@@ -56,6 +58,10 @@ export default class extends React.Component {
     }
 
     render() {
+        const key = this.props.location.pathname.split('/').slice(0, 3).join('/')
+        this.props.dispatch(
+            updateMainKey(key)
+        )
         return (
             <main
                 id="main"
@@ -67,7 +73,7 @@ export default class extends React.Component {
                 >
                     {this.props.children && (
                         <CSSTransition
-                            key={this.props.location.pathname.split('/').slice(0, 3).join('/')}
+                            key={key}
                             classNames="main-transition"
                             timeout={250}
                             onExit={this.onExit.bind(this)}

@@ -15,6 +15,8 @@ export const LOADED_MAIN_BGIMG = 'LOADED_MAIN_BGIMG'
 
 // location
 export const LOCATION_UPDATE = 'LOCATION_UPDATE'
+export const MAIN_KEY_UPDATE = 'MAIN_KEY_UPDATE'
+export const APP_READY_UPDATE = 'APP_READY_UPDATE'
 
 // page-title
 export const UPDATE_PAGE_TITLE = 'UPDATE_PAGE_TITLE'

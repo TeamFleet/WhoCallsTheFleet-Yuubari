@@ -18,7 +18,7 @@ import TableHeader from './table-header.jsx'
 import { ImportStyle } from 'sp-css-import'
 import styleHeader from './header.less'
 
-@connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
+// @connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
 @ImportStyle(styleHeader)
 export default class EquipmentListHeader extends React.Component {
     render() {

@@ -20,15 +20,15 @@
         transform:  none;
     });
 
-    & > .wrapper:not([data-enter="true"]){
-        transition: inherit;
-        animation: 	fadein @duration-main-transition ease-out;
-    }
-    & > .wrapper.fadeout[data-enter="true"]{
-        opacity:    0;
-    }
+    // & > .wrapper:not([data-enter="true"]){
+    //     transition: inherit;
+    //     animation: 	fadein @duration-main-transition ease-out;
+    // }
+    // & > .wrapper.fadeout[data-enter="true"]{
+    //     opacity:    0;
+    // }
 
-    .background-container{
+    .bg-container{
         transition: inherit;
         left:       0;
         right:      0;
@@ -88,7 +88,7 @@
         .is-mode-background({
             transform:  translate(0%, calc(~"100vh - @{nav-height-tablet}"));
         });
-        .background-container{
+        .bg-container{
             transform:  translate(0%, calc(~"-100vh + @{nav-height-tablet}"));
             .background{
                 top:    (0 - @nav-height-tablet);
@@ -101,7 +101,7 @@
 
     .screen-phone({
         top:        @nav-height-phone;
-        .background-container{
+        .bg-container{
             .background{
                 top:    (0 - @nav-height-phone);
             }

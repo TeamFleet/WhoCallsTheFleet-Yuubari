@@ -1,26 +1,33 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { connect } from 'react-redux'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
+import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
+// import { REALTIME_LOCATION_REDUCER_NAME } from 'sp-isomorphic-utils/realtime-location'
 
 // import checkCssProp from 'check-css-prop'
 
 import Background from './background.jsx'
 
+@connect(state => ({
+    mainKey: state.app.mainKey,
+    // appReady: state.app.ready,
+}))
 @ImportStyle(require('./main-header.less'))
 export default class extends React.Component {
-    // getProps() {
-    //     let props = { ...this.props }
-    //     delete props.className
-
-    //     return props
-    // }
     renderContent(isPortal) {
         const {
             className,
             children,
             ...props
         } = this.props
+
+        delete props.mainKey
+        // delete props.appReady
+        delete props.dispatch
+
         return (
             <div
                 className={classNames({
@@ -31,17 +38,31 @@ export default class extends React.Component {
                 {...props}
             >
                 {children}
-                {__CLIENT__ && <Background type="blured" />}
+                {__CLIENT__ && <Background className="bg-container" type="blured" />}
             </div>
         )
     }
+
     render() {
-        if (__SERVER__) return this.renderContent()
+        if (__SERVER__)
+            return this.renderContent()
+
+        if (!this.key)
+            this.key = this.props.mainKey
+
+        if (this.key !== this.props.mainKey
+            || !this.props.mainKey
+            // || !this.props.appReady
+            // || this.state.waiting
+        )
+            return null
 
         return (
-            <MainHeaderPortal>
-                {this.renderContent(true)}
-            </MainHeaderPortal>
+            <TransitionGroup data-role="transition-group">
+                <MainHeaderPortal key={this.key}>
+                    {this.renderContent(true)}
+                </MainHeaderPortal>
+            </TransitionGroup>
         )
     }
 }
@@ -54,27 +75,25 @@ class MainHeaderPortal extends React.Component {
         }
     }
     componentDidMount() {
-        // setTimeout(() => {
         this.setState({
             waiting: false
         })
-        // }, 0)
-        // modalRoot.appendChild(this.el);
     }
 
-    // componentWillUnmount() {
-    //     alert(123)
-    //     // modalRoot.removeChild(this.el);
-    // }
-
     render() {
-        if (!this.state.waiting)
-            return ReactDOM.createPortal(
-                this.props.children,
-                document.getElementById('main-mask'),
-            )
-
-        return null
+        if (this.state.waiting) return null
+        return ReactDOM.createPortal(
+            this.props.children && (
+                <CSSTransition
+                    key={this.props.key}
+                    classNames="transition"
+                    timeout={250}
+                >
+                    {this.props.children}
+                </CSSTransition>
+            ),
+            document.getElementById('main-mask'),
+        )
     }
 }
 

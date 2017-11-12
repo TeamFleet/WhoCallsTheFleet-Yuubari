@@ -14,7 +14,8 @@ const factoryConfig = async(opt) => {
             filename: `${APP_KEY}.-_-_-_-_-_-[name]-_-_-_-_-_-.js`,
             chunkFilename: `${APP_KEY}.chunk.-_-_-_-_-_-[name]-_-_-_-_-_-.js`,
             path: '/',
-            publicPath: `http://localhost:${CLIENT_DEV_PORT}/dist/`
+            publicPath: `http://localhost:${CLIENT_DEV_PORT}/dist/`,
+            crossOriginLoading: 'anonymous',
         },
         module: {
             rules: [...common.rules]

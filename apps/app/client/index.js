@@ -1,7 +1,6 @@
 import thunk from 'redux-thunk'
 import { browserHistory } from 'react-router'
-import { routerMiddleware } from 'react-router-redux'
-import { routerReducer } from 'react-router-redux'
+import { routerMiddleware, routerReducer } from 'react-router-redux'
 
 //
 
@@ -108,8 +107,10 @@ if (__CLIENT__) {
                         console.log(' ')
                         console.log('browserHistory update', location)
                         console.log(' ')
+                        // console.log(actionUpdate(location))
                     }
                     store.dispatch(actionUpdate(location))
+                    // console.log(store.getState())
                 }
             })
         })

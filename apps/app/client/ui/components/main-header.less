@@ -28,7 +28,7 @@
         padding-right:  @main-margin-phone;
     });
 
-    .background-container{
+    .bg-container{
         z-index:    -2;
         // right:      (0 - @main-margin) !important;
     }
@@ -52,4 +52,20 @@
         //     right:  @main-margin-phone;
         // });
     }
+
+    &.transition-enter {
+        opacity:    0.01;
+    }
+        &.transition-enter-active {
+            animation: 	fadein @duration-main-transition ease-out;
+            opacity:    1;
+        }
+
+    .transition-exit {
+        opacity:    1;
+    }
+        &.transition-exit-active {
+            animation: 	fadeout @duration-main-transition ease-out;
+            opacity:    0.01;
+        }
 }

@@ -38,8 +38,8 @@ import { ImportStyle } from 'sp-css-import'
 })
 export default class EquipmentList extends React.Component {
     componentWillMount() {
-    //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
-    //         this.props.dispatch(listReset(this.props.id))
+        //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
+        //         this.props.dispatch(listReset(this.props.id))
         this.props.dispatch(
             listHighlightColumn(
                 this.props.id,
@@ -61,7 +61,7 @@ export default class EquipmentList extends React.Component {
             if (__CLIENT__) return null
         }
 
-        if(__CLIENT__){
+        if (__CLIENT__) {
             this.props.dispatch(
                 listObserver(this.props.id, observer)
             )
@@ -79,11 +79,19 @@ export default class EquipmentList extends React.Component {
 //     ...state.equipmentList[ownProps.id],
 //     // location: state.location
 // }))
+// @connect((state, ownProps) => {
+//     const obj = { ...state.equipmentList[ownProps.id] } || {}
+//     delete obj.highlightingIndex
+//     delete obj.highlightingStat
+//     return obj
+// })
 @connect((state, ownProps) => {
-    const obj = { ...state.equipmentList[ownProps.id] } || {}
-    delete obj.highlightingIndex
-    delete obj.highlightingStat
-    return obj
+    const {
+        collection
+    } = state.equipmentList[ownProps.id] || {}
+    return {
+        collection
+    }
 })
 @ImportStyle(require('./body.less'))
 class EquipmentListBody extends React.Component {

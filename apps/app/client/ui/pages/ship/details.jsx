@@ -8,11 +8,11 @@ import translate from 'sp-i18n'
 import InfosPageContainer from '@appUI/containers/infos-page'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
-import {
-    init as shipDetailsInit,
-    reset as shipDetailsReset,
-    TABINDEX
-} from '@appLogic/infospage/api.js'
+// import {
+//     init as shipDetailsInit,
+//     reset as shipDetailsReset,
+//     TABINDEX
+// } from '@appLogic/infospage/api.js'
 
 import Header from './details/commons/header.jsx'
 
@@ -84,25 +84,25 @@ export const getInfosId = id => `SHIP_${id}`
 @connect((state, ownProps) => state.infosPage[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
 export default class PageShipDetails extends React.Component {
-    static onServerRenderStoreExtend(store) {
-        const state = store.getState()
-        const dispatch = store.dispatch
-        const preprocessTasks = []
+    // static onServerRenderStoreExtend(store) {
+    //     const state = store.getState()
+    //     const dispatch = store.dispatch
+    //     const preprocessTasks = []
 
-        const { id, tab } = extracFromState(state)
+    //     const { id, tab } = extracFromState(state)
 
-        preprocessTasks.push(
-            dispatch(
-                shipDetailsInit(
-                    getInfosId(id),
-                    {
-                        [TABINDEX]: tabsAvailable.indexOf(tab)
-                    }
-                )
-            )
-        )
-        return preprocessTasks
-    }
+    //     preprocessTasks.push(
+    //         dispatch(
+    //             shipDetailsInit(
+    //                 getInfosId(id),
+    //                 {
+    //                     [TABINDEX]: tabsAvailable.indexOf(tab)
+    //                 }
+    //             )
+    //         )
+    //     )
+    //     return preprocessTasks
+    // }
     static onServerRenderHtmlExtend(ext, store) {
         const { id/*, tab*/ } = extracFromState(store.getState())
 
@@ -141,12 +141,12 @@ export default class PageShipDetails extends React.Component {
         // }
     }
 
-    componentWillMount() {
-        if (this.props.location.action === 'PUSH' && typeof this.props[TABINDEX] !== 'undefined')
-            this.props.dispatch(
-                shipDetailsReset(getInfosId(this.props.params.id))
-            )
-    }
+    // componentWillMount() {
+    //     if (this.props.location.action === 'PUSH' && typeof this.props[TABINDEX] !== 'undefined')
+    //         this.props.dispatch(
+    //             shipDetailsReset(getInfosId(this.props.params.id))
+    //         )
+    // }
 
     render() {
         // console.log(this.props.tabIndex, this.props.illustIndex)
@@ -154,28 +154,31 @@ export default class PageShipDetails extends React.Component {
         // const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
         // const tabIndex = __CLIENT__ ? (isLocationPUSH ? 0 : this.props.tabIndex) : undefined
 
-        if (typeof this.props[TABINDEX] === 'undefined') {
-            this.props.dispatch(
-                shipDetailsInit(
-                    getInfosId(this.props.params.id),
-                    {
-                        [TABINDEX]: tabsAvailable.indexOf(this.props.params && this.props.params.tab ? this.props.params.tab : tabsAvailable[0])
-                    }
-                )
-            )
-            if (__CLIENT__) return null
-        }
+        // if (typeof this.props[TABINDEX] === 'undefined') {
+        //     this.props.dispatch(
+        //         shipDetailsInit(
+        //             getInfosId(this.props.params.id),
+        //             {
+        //                 [TABINDEX]: tabsAvailable.indexOf(this.props.params && this.props.params.tab ? this.props.params.tab : tabsAvailable[0])
+        //             }
+        //         )
+        //     )
+        //     if (__CLIENT__) return null
+        // }
 
         if (!this.ship) return null
 
         if (__CLIENT__ && __DEV__)
-            console.log('thisShip', this.ship, this.props[TABINDEX])
+            console.log('thisShip', this.ship/*, this.props[TABINDEX]*/)
 
         return (
             <InfosPageContainer className={this.props.className}>
                 <Header
                     ship={this.ship}
                     tabs={this.ship.type_display ? tabsAvailable : [tabsAvailable[0]]}
+                    defaultTabIndex={tabsAvailable.indexOf(
+                        this.props.params && this.props.params.tab ? this.props.params.tab : tabsAvailable[0]
+                    )}
                     onTabChange={__CLIENT__ ? this.onTabChange.bind(this) : undefined}
                 />
                 <PageShipDetailsBody ship={this.ship}>
@@ -188,12 +191,12 @@ export default class PageShipDetails extends React.Component {
 
 
 
-@connect((state, ownProps) => ({
-    // ...state.shipDetails[ownProps.ship.id]
-    [TABINDEX]: state.infosPage[getInfosId(ownProps.ship.id)]
-        ? state.infosPage[getInfosId(ownProps.ship.id)][TABINDEX]
-        : undefined
-}))
+// @connect((state, ownProps) => ({
+//     // ...state.shipDetails[ownProps.ship.id]
+//     [TABINDEX]: state.infosPage[getInfosId(ownProps.ship.id)]
+//         ? state.infosPage[getInfosId(ownProps.ship.id)][TABINDEX]
+//         : undefined
+// }))
 class PageShipDetailsBody extends React.Component {
     // onIllustChange(newIllustIndex) {
     //     this.illustIndex = newIllustIndex
@@ -213,16 +216,17 @@ class PageShipDetailsBody extends React.Component {
     render() {
         // const isLocationPUSH = this.props.location && this.props.location.action === 'PUSH'
 
-        if (__CLIENT__ && typeof this.props[TABINDEX] !== 'undefined')
-            return React.createElement(contentComponents[this.props[TABINDEX]], {
-                ship: this.props.ship,
-                // illustIndex: this.props.illustIndex,
-                // onIllustChange: this.onIllustChange.bind(this)
-            })
+        // if (__CLIENT__ && typeof this.props[TABINDEX] !== 'undefined')
+        //     return React.createElement(contentComponents[this.props[TABINDEX]], {
+        //         ship: this.props.ship,
+        //         // illustIndex: this.props.illustIndex,
+        //         // onIllustChange: this.onIllustChange.bind(this)
+        //     })
 
-        if (__SERVER__)
-            return React.cloneElement(this.props.children, {
-                ship: this.props.ship
-            })
+        // if (__SERVER__)
+        if (!this.props.children) return null
+        return React.cloneElement(this.props.children, {
+            ship: this.props.ship
+        })
     }
 }

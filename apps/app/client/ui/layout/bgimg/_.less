@@ -1,0 +1,46 @@
+@size-thumbnail:100px;
+@list-width:    (@size-thumbnail * 2 + 10 * 3);
+
+@keyframes app-mode-background-original-enter{
+    0% {
+        opacity:    0;
+        // transform:  translateY(-4rem);
+        transform:  translateX(4rem);
+    }
+    100% {
+        opacity:    1;
+        transform:  none;
+    }
+}
+
+@keyframes app-mode-background-original-leave{
+    0% {
+        opacity:    1;
+        transform:  none;
+    }
+    100% {
+        opacity:    0;
+        // transform:  translateY(-4rem);
+        transform:  translateX(4rem);
+    }
+}
+
+@keyframes app-mode-background-list-enter{
+    0% {
+        // transform:  translateY(100%);
+        transform:  translateX(-100%);
+    }
+    100% {
+        transform:  none;
+    }
+}
+
+@keyframes app-mode-background-list-leave{
+    0% {
+        transform:  none;
+    }
+    100% {
+        // transform:  translateY(100%);
+        transform:  translateX(-100%);
+    }
+}

@@ -23,26 +23,39 @@ export default class InfosHeader extends React.Component {
      *      tabName
      * }]
      */
+    constructor(props){
+        super(props)
+        this.state = {
+            currentIndex: props.defaultIndex || 0
+        }
+    }
+
     renderTab(tabInfo, tabIndex) {
         const { tabId, tabName } = tabInfo
         const url = `${this.props.urlBase}${tabIndex ? `/${tabId}` : ''}`
 
         if (__CLIENT__) {
+            const current = typeof this.props.currentIndex === 'undefined'
+                ? this.state.currentIndex
+                : this.props.currentIndex
             return (
                 <a
                     href={url}
                     className={classNames([
                         'tab', {
-                            'on': tabIndex === this.props.currentIndex
+                            'on': tabIndex === current
                         }
                     ])}
                     key={tabIndex}
                     onClick={evt => {
+                        this.setState({
+                            currentIndex: tabIndex
+                        })
                         if (typeof this.props.onTabChange === 'function') {
                             evt.preventDefault()
                             this.props.onTabChange(tabId, tabIndex)
                         }
-                        // if (url) routerReplace(url)
+                        if (url) routerReplace(url)
                     }}
                 >
                     {tabName}
@@ -79,6 +92,7 @@ export default class InfosHeader extends React.Component {
         [
             'urlBase',
             'currentIndex',
+            'defaultIndex',
             'onTabChange'
         ].forEach(key => delete props[key])
 

@@ -13,7 +13,7 @@ import style from './background.less'
 export default class extends React.Component {
     render() {
         return (
-            <div className={"background-container " + this.props.className}>
+            <div className={this.props.className}>
                 <div
                     className="background"
                     style={getStyles(this.props.currentBg, this.props.type)}
