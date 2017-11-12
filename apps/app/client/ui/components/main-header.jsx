@@ -17,6 +17,18 @@ import Background from './background.jsx'
 }))
 @ImportStyle(require('./main-header.less'))
 export default class extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            waiting: true
+        }
+    }
+    componentDidMount() {
+        this.setState({
+            waiting: false
+        })
+    }
+
     renderContent(isPortal) {
         const {
             className,
@@ -50,48 +62,51 @@ export default class extends React.Component {
         if (!this.key)
             this.key = this.props.mainKey
 
-        if (this.key !== this.props.mainKey
-            || !this.props.mainKey
-            // || !this.props.appReady
-            // || this.state.waiting
-        )
+        if (this.state.waiting)
             return null
 
+        // console.log(this.key, this.props.mainKey)
+
         return (
-            <TransitionGroup data-role="transition-group">
-                <MainHeaderPortal key={this.key}>
-                    {this.renderContent(true)}
-                </MainHeaderPortal>
+            <TransitionGroup
+                data-role="transition-group"
+                appear={false}
+                enter={false}
+            >
+                {this.props.mainKey &&
+                    this.key === this.props.mainKey &&
+                    <CSSTransition
+                        key={this.props.key}
+                        classNames="transition"
+                        timeout={250}
+                    >
+                        <MainHeaderPortal key={this.key}>
+                            {this.renderContent(true)}
+                        </MainHeaderPortal>
+                    </CSSTransition>
+                }
             </TransitionGroup>
         )
     }
 }
 
 class MainHeaderPortal extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            waiting: true
-        }
-    }
-    componentDidMount() {
-        this.setState({
-            waiting: false
-        })
-    }
+    // constructor() {
+    //     super()
+    //     this.state = {
+    //         waiting: true
+    //     }
+    // }
+    // componentDidMount() {
+    //     this.setState({
+    //         waiting: false
+    //     })
+    // }
 
     render() {
-        if (this.state.waiting) return null
+        // if (this.state.waiting) return null
         return ReactDOM.createPortal(
-            this.props.children && (
-                <CSSTransition
-                    key={this.props.key}
-                    classNames="transition"
-                    timeout={250}
-                >
-                    {this.props.children}
-                </CSSTransition>
-            ),
+            this.props.children,
             document.getElementById('main-mask'),
         )
     }

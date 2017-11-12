@@ -12,6 +12,8 @@ let action
 let lastScrollY = 0
 let pathnameLastScrollY = {}
 
+const getKey = location => location.pathname.split('/').slice(0, 3).join('/')
+
 // @connect(state => {
 //     console.log('state', state)
 //     return {}
@@ -48,6 +50,15 @@ export default class extends React.Component {
         action = nextProps.location.action
         lastScrollY = window.scrollY
         pathnameLastScrollY[this.props.location.pathname] = window.scrollY
+        this.props.dispatch(
+            updateMainKey(getKey(nextProps.location))
+        )
+    }
+
+    componentDidMount() {
+        this.props.dispatch(
+            updateMainKey(getKey(this.props.location))
+        )
     }
 
     componentDidUpdate() {
@@ -58,10 +69,6 @@ export default class extends React.Component {
     }
 
     render() {
-        const key = this.props.location.pathname.split('/').slice(0, 3).join('/')
-        this.props.dispatch(
-            updateMainKey(key)
-        )
         return (
             <main
                 id="main"
@@ -73,7 +80,7 @@ export default class extends React.Component {
                 >
                     {this.props.children && (
                         <CSSTransition
-                            key={key}
+                            key={getKey(this.props.location)}
                             classNames="main-transition"
                             timeout={250}
                             onExit={this.onExit.bind(this)}
