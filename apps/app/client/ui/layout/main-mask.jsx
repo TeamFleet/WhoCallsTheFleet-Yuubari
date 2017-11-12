@@ -19,18 +19,18 @@ export default class extends React.Component {
     //     }
     // }
 
-    onAnimationEnd(evt) {
-        // if (!evt) return
-        // if (evt && evt.nativeEvent) evt = evt.nativeEvent
+    // onAnimationEnd(evt) {
+    //     if (!evt) return
+    //     if (evt && evt.nativeEvent) evt = evt.nativeEvent
 
-        // if (evt.animationName === 'fadeout') {
-        //     evt.target.parentNode.removeChild(evt.target)
-        // }
+    //     if (evt.animationName === 'fadeout') {
+    //         evt.target.parentNode.removeChild(evt.target)
+    //     }
 
-        // if (evt.nativeEvent.animationName === 'fadein') {
-        //     console.log(evt.target)
-        // }
-    }
+    //     if (evt.nativeEvent.animationName === 'fadein') {
+    //         console.log(evt.target)
+    //     }
+    // }
 
     // shouldComponentUpdate(nextProps/*, nextState*/) {
     //     if(nextProps.pathname === this.props.pathname) return false

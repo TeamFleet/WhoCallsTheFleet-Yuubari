@@ -2,15 +2,15 @@ import React from 'react'
 // import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import classNames from 'classnames'
+import { ImportStyle } from 'sp-css-import'
+
+import routerReplace from '@appUtils/router-replace'
 
 import MainHeader from '@appUI/components/main-header.jsx'
 import Title from '@appUI/components/title.jsx'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
-
 // @connect()
-@ImportStyle(styles)
+@ImportStyle(require('./styles.less'))
 export default class InfosHeader extends React.Component {
     /* props
      * currentIndex
@@ -42,6 +42,7 @@ export default class InfosHeader extends React.Component {
                             evt.preventDefault()
                             this.props.onTabChange(tabId, tabIndex)
                         }
+                        // if (url) routerReplace(url)
                     }}
                 >
                     {tabName}

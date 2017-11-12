@@ -23,7 +23,26 @@ export default [{
         require.ensure([], (require) => {
             if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal').default)
         }, 'arsenal')
-    }
+    },
+    // childRoutes: [
+    //     {
+    //         path: 'all',
+    //         name: 'all',
+    //         getComponent: (nextState, cb) => {
+    //             require.ensure([], (require) => {
+    //                 if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal/all').default)
+    //             })
+    //         },
+    //         isIndex: true
+    //     }, {
+    //         path: ':day',
+    //         getComponent: (nextState, cb) => {
+    //             require.ensure([], (require) => {
+    //                 if (routeCheck(nextState)) cb(null, require('@appUI/pages/arsenal/day').default)
+    //             })
+    //         }
+    //     }
+    // ]
 }, {
     path: 'entities',
     name: 'entities',

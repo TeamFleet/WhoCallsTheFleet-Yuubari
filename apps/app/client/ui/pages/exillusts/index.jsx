@@ -11,7 +11,7 @@ import db from '@appLogic/database'
 import {
     init as infosInit,
     changeTab as infosChangeTab,
-    reset as infosReset,
+    // reset as infosReset,
     TABINDEX
 } from '@appLogic/infospage/api.js'
 
@@ -107,8 +107,6 @@ export default class extends React.Component {
 
         const cur = this.types[this.props[TABINDEX]]
         if (!cur) return null
-
-        console.log(cur.list)
 
         return (
             <PageContainer
