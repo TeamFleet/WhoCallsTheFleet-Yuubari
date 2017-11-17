@@ -285,14 +285,15 @@ pre{
 	// visibility:	hidden;
 	z-index: 	-1;
 }
-	// .is-webapp #root{
-	// 	display: 	none;
-	// }
+	.is-webapp #root{
+		display: 	none;
+	}
 	// .is-webapp.is-react-ready #root{
 	// 	display: 	block;
 	// }
-	.is-react-ready #root{
+	.is-webapp.is-react-ready #root{
 		// visibility: visible;
+		display: 	block;
 		z-index: 	@z-index-app;
 	}
 
