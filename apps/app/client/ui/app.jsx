@@ -17,7 +17,6 @@ import Bgimg from './layout/bgimg'
 let startSwipeAtLeftBorder = false
 
 @connect(state => {
-    // console.log(state)
     return {
         isMainBgimgLoaded: state.bgimg.isMainLoaded,
         appMode: state.appMode
@@ -54,6 +53,7 @@ class App extends React.Component {
     appReady(timeout = 0) {
         if (__CLIENT__ && !this.isAppReady) {
             self.appReady()
+            this.isAppReady = true
             setTimeout(() => {
                 this.props.dispatch(
                     updateAppReady(true)

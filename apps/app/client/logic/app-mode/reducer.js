@@ -27,11 +27,12 @@ export default function (state = initialState, action) {
             }
             return {}
 
-        case ENTER_APPMODE:
+        case ENTER_APPMODE: {
             if (state.animation) return state
             return Object.assign(action.state, {
                 animation: true
             })
+        }
 
         case LEAVE_APPMODE:
             if (state.animation) return state

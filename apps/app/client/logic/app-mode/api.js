@@ -28,8 +28,7 @@ export const animationEnd = () => (dispatch) => {
 
 
 
-export const enterBackground = (scrollY = __CLIENT__ ? window.scrollY : 0) => (dispatch) => {
+export const enterBackground = (scrollY = __CLIENT__ ? window.scrollY : 0) => (dispatch) => 
     dispatch(
         actions.enter('background', scrollY)
     )
-}
