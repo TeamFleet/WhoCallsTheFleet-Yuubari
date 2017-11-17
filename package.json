@@ -92,7 +92,9 @@
         "on-build-webpack": "^0.1.0",
         "universal-alias-loader": "^1.2.2",
         "svg-url-loader": "^2.3.0",
-        "webpack-config": "^7.5.0"
+        "webpack-config": "^7.5.0",
+
+        "simple-git": "^1.82.0"
     },
     "devDependencies": {
         "glob": "^7.1.2",
@@ -104,9 +106,7 @@
         "electron-windows-store": "^0.12.0",
 
         "webpack-bundle-analyzer": "^2.9.1",
-        "jest": "^21.2.1",
-
-        "simple-git": "^1.82.0"
+        "jest": "^21.2.1"
     },
     "optionalDependencies": {
         "node-windows": "^0.1.14"
