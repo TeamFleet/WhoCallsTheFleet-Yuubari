@@ -51,6 +51,7 @@ self.logHr = function () {
     if (__DEV__) console.log('🚨 Initializing: critical process...')
 
     self.isCriticalInit = true
+    self._html = document.documentElement
 
     // 加载最优先CSS
     require('./critical.g.less')
@@ -113,10 +114,21 @@ self.logHr = function () {
         self.isWx = self.isWechat
     }
 
+    // 添加基础class
+    if (__CLIENT__) {
+        self._html.classList.add('is-webapp')
+        self._html.classList.add('is-critical-ready')
+    }
+    if (__DEV__)
+        self._html.classList.add('is-dev')
+    if (self.isMobile)
+        self._html.classList.add('is-mobile')
+    if (platform)
+        self._html.classList.add('platform-' + platform)
+
     document.addEventListener("DOMContentLoaded", function () {
         // let boatLoader = document.createElement('div')
         const boatLoader = document.getElementById('boat-loader')
-        let tagHtml = document.getElementsByTagName('html')
         self.isMobile = false
         // let platform = 'not-specified'
 
@@ -133,18 +145,6 @@ self.logHr = function () {
             }
         )
 
-        if (tagHtml && tagHtml.length) {
-            tagHtml = tagHtml[0]
-            if (self.isMobile)
-                tagHtml.classList.add('is-mobile')
-            if (platform)
-                tagHtml.classList.add('platform-' + platform)
-            if (__CLIENT__)
-                tagHtml.classList.add('is-webapp')
-            if (__DEV__)
-                tagHtml.classList.add('is-dev')
-        }
-
         // 检查 WebP 支持
         const canUseWebP = () => {
             var elem = document.createElement('canvas');
@@ -157,7 +157,7 @@ self.logHr = function () {
                 return false;
             }
         }
-        if (canUseWebP()) tagHtml.classList.add('webp')
+        if (canUseWebP()) self._html.classList.add('webp')
 
         // 开发模式: 插入SVG图标库
         // if (__DEV__) {
@@ -170,11 +170,11 @@ self.logHr = function () {
         // online / offline
         function doOnline() {
             // console.log('online')
-            tagHtml.classList.remove('is-offline')
+            self._html.classList.remove('is-offline')
         }
         function doOffline() {
             // console.log('offline')
-            tagHtml.classList.add('is-offline')
+            self._html.classList.add('is-offline')
         }
         window.addEventListener('online', doOnline)
         window.addEventListener('offline', doOffline)
@@ -182,26 +182,26 @@ self.logHr = function () {
 
         // 利用 pointer event 判断当前是否为 hover
         if (window.PointerEvent) {
-            tagHtml.classList.add('is-hover')
+            self._html.classList.add('is-hover')
             document.body.addEventListener("pointerenter", (evt) => {
                 if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
-                    tagHtml.classList.add('is-hover')
+                    self._html.classList.add('is-hover')
                 else
-                    tagHtml.classList.remove('is-hover')
+                    self._html.classList.remove('is-hover')
             });
             document.body.addEventListener("pointerleave", () => {
-                tagHtml.classList.remove('is-hover')
+                self._html.classList.remove('is-hover')
             });
         } else {
             document.body.addEventListener("mouseenter", () => {
-                tagHtml.classList.add('is-hover')
+                self._html.classList.add('is-hover')
             });
             document.body.addEventListener("mouseleave", () => {
-                tagHtml.classList.remove('is-hover')
+                self._html.classList.remove('is-hover')
             });
         }
 
-        self._html = tagHtml
+        // self._html = tagHtml
     })
 
     new Promise(resolve => {

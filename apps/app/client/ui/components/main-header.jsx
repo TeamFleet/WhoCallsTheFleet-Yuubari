@@ -70,7 +70,7 @@ export default class extends React.Component {
         return (
             <TransitionGroup
                 data-role="transition-group"
-                appear={false}
+                appear={true}
                 enter={false}
             >
                 {this.props.mainKey &&

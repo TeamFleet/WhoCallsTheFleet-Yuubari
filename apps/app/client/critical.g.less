@@ -82,11 +82,15 @@ html{
 	line-height: 	@base-line-height;
 	box-sizing:  	border-box;
 	overflow-x: 	hidden;
-	overflow-y: 	scroll;
+	overflow-y: 	hidden;
 	transition: 	none;
 	user-select: 	none;
 	cursor:         default;
 	// scroll-behavior:smooth;
+
+	&.is-critical-ready{
+		overflow-y: 	scroll;
+	}
 
 	&.is-mobile{
 		user-select: 	none;
@@ -108,13 +112,13 @@ html{
 	}
 
     @media all and (min-width: (@layout-width-max + 1)) and (min-height: (@layout-height-max + 1)){
-        font-size: 		(@root-font-size * (17 / @base-font-size));
+        font-size: 		floor(@root-font-size * (17 / @base-font-size));
     }
     .screen-t1({
-        font-size: 		(@root-font-size * (14 / @base-font-size));
+        font-size: 		floor(@root-font-size * (14 / @base-font-size));
     });
     .screen-tablet({
-        font-size: 		(@root-font-size * (16 / @base-font-size));
+        font-size: 		floor(@root-font-size * (16 / @base-font-size));
     });
 }
 
@@ -285,13 +289,13 @@ pre{
 	// visibility:	hidden;
 	z-index: 	-1;
 }
-	.is-webapp #root{
+	.is-critical-ready #root{
 		display: 	none;
 	}
 	// .is-webapp.is-react-ready #root{
 	// 	display: 	block;
 	// }
-	.is-webapp.is-react-ready #root{
+	.is-critical-ready.is-react-ready #root{
 		// visibility: visible;
 		display: 	block;
 		z-index: 	@z-index-app;

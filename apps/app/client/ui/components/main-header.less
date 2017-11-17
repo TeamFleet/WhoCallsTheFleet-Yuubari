@@ -53,16 +53,17 @@
         // });
     }
 
-    opacity: 0;
-    animation: 	fadein (@duration-main-transition * 1) ease-out both;
-    animation-delay: 0.05s;
-    // &.transition-appear{
-    //     opacity:    0.01;
-    // }
-    //     &.transition-enter-active{
-    //         animation: 	fadein (@duration-main-transition * 1) ease-out;
-    //         opacity:    1;
-    //     }
+    // opacity: 0;
+    // animation: 	fadein (@duration-main-transition * 1) ease-out both;
+    // animation-delay: 0.05s;
+    &.transition-appear{
+        opacity:    0.01;
+    }
+        &.transition-appear-active{
+            animation: 	fadein (@duration-main-transition * 1) ease-out both;
+            animation-delay: 50ms;
+            opacity:    1;
+        }
 
     .transition-exit {
         opacity:    1;
