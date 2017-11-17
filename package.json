@@ -60,11 +60,11 @@
         "whocallsthefleet-database": "2017.11.11",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "super-project": "^2.1.4",
+        "super-project": "^2.2.1",
         "super-project-cli": "^1.1.7",
 
         "react-transition-group": "^2.2.1",
-        "react-markdown": "^2.5.0",
+        "react-markdown": "^2.5.1",
 
         "bind-event": "^1.0.5",
         "check-css-prop": "^1.0.1",
@@ -84,7 +84,6 @@
         "json-pretty": "^0.0.1",
         "request": "^2.83.0",
         "nedb-promise": "^2.0.1",
-        "simple-git": "^1.80.1",
         "npm-run-script": "^0.0.4",
         "image-size": "^0.6.1",
 
@@ -104,8 +103,10 @@
         "electron-packager": "^9.1.0",
         "electron-windows-store": "^0.12.0",
 
-        "webpack-bundle-analyzer": "^2.9.0",
-        "jest": "^21.2.1"
+        "webpack-bundle-analyzer": "^2.9.1",
+        "jest": "^21.2.1",
+
+        "simple-git": "^1.82.0"
     },
     "optionalDependencies": {
         "node-windows": "^0.1.14"

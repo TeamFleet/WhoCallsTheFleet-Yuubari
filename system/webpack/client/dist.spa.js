@@ -51,7 +51,11 @@ const factoryConfig = async (opt) => {
             new HtmlWebpackPlugin({
                 filename: '../index.html',
                 template: path.resolve(RUN_PATH, `./apps/${APP_KEY}/html.ejs`),
-                inject: false
+                inject: false,
+                minify: {
+                    collapseWhitespace: true,
+                    collapseInlineTagWhitespace: true
+                }
             }),
             new WebpackOnBuildPlugin(function (stats) {
 

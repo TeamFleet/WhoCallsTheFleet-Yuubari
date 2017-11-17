@@ -38,10 +38,11 @@ export const template = `
         <!--INJECT_META_END-->
 
         <script>//inject_critical_css</script>
-        <script>//inject_style</script>
+        <!--<script>inject_style</script>-->
 
-        <script>//inject_critical_extra_old_ie_filename</script>
         <script>var __SERVICE_WORKER_FILENAME__ = "<script>//inject_serviceworker_path</script>"</script>
+        <script>//inject_critical_extra_old_ie_filename</script>
+        <script>//inject_client_filename</script>
     </head>
     <body>
         <div id="boat-loader">LOADING...</div>
@@ -52,7 +53,7 @@ export const template = `
         </div>
         <script>//inject_svg_symbols</script>
         <script>//inject_redux</script>
-        <script>//inject_js</script>
+        <!--<script>inject_js</script>-->
 
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

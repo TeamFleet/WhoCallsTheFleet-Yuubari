@@ -155,6 +155,7 @@ const factoryPWAPlugin = (opt) => {
 
 const resolve = Object.assign({
     modules: [
+        '__modules',
         'node_modules'
     ],
     alias: {

@@ -53,34 +53,12 @@ class App extends React.Component {
 
     appReady(timeout = 0) {
         if (__CLIENT__ && !this.isAppReady) {
-            this.isAppReady = true
             setTimeout(() => {
                 this.props.dispatch(
                     updateAppReady(true)
                 )
             })
-
-            if ('serviceWorker' in navigator) {
-                // console.log('Service Worker SUPPORTED')
-                navigator.serviceWorker.register(self.__SERVICE_WORKER_FILENAME__, {
-                    scope: '/'
-                }).then((reg) => {
-                    // console.log('Service Worker register', reg)
-                }).catch((err) => {
-                    console.log('Service Worker SUPPORTED. ERROR', err)
-                })
-            } else {
-                console.log('Service Worker NOT-SUPPORTED')
-            }
-
-            setTimeout(() => {
-                if (__DEV__) console.log('🎈 App is now ready!')
-                document.body.classList.add('is-ready')
-                setTimeout(() => {
-                    this.isAppReadyFull = true
-                    if (typeof window !== 'undefined') window.isAppReadyFull = true
-                }, 1000)
-            }, timeout)
+            self.appReady()
         }
     }
 

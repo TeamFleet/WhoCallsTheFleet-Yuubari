@@ -30,7 +30,8 @@ const reactApp = new ReactApp({ rootDom: 'root' })
 
 //
 
-if (__DEV__) console.log('client.js')
+if (__DEV__ && __CLIENT__) self.logHr()
+if (__DEV__) console.log('⚓ Client initialing...')
 
 //
 
@@ -98,6 +99,10 @@ if (__CLIENT__) {
         .then(() => i18nRegister(__REDUX_STATE__))
         // 初始化数据库
         .then(() => dbInit())
+        .then(() => {
+            if (__CLIENT__ && self._html)
+                self._html.classList.add('is-client-ready')
+        })
         // 渲染React
         .then(() => {
             reactApp.run({

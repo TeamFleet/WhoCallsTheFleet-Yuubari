@@ -99,9 +99,10 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
                     )}</style>`
         })(),
         critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
-        js: (() => ([
-            getFile('client.js')
-        ]))(),
+        client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
+        // js: (() => ([
+        //     getFile('client.js')
+        // ]))(),
         // css: [],
         serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
         // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')

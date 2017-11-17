@@ -123,6 +123,8 @@ body{
 	font-size: 		unit(@base-font-size / @root-font-size, rem);
 	line-height: 	@base-line-height;
 	// margin: 		0;
+	background: 	@color-background;
+	transition: 	none;
 }
 
 a{
@@ -273,19 +275,25 @@ pre{
 #root{
     // display:    none;
     position:   relative;
-    z-index:    @z-index-app;
+    // z-index:    @z-index-app;
 	// overflow-x: hidden;
 	// width: 	    100%;
 	// height:     100%;
     min-height: 100%;
     margin-left: auto;
-    margin-right: auto;
+	margin-right: auto;
+	// visibility:	hidden;
+	z-index: 	-1;
 }
-	.is-webapp #root{
-		display: 	none;
-	}
-	.is-webapp.is-react-ready #root{
-		display: 	block;
+	// .is-webapp #root{
+	// 	display: 	none;
+	// }
+	// .is-webapp.is-react-ready #root{
+	// 	display: 	block;
+	// }
+	.is-react-ready #root{
+		// visibility: visible;
+		z-index: 	@z-index-app;
 	}
 
 #main-android-cmpg{

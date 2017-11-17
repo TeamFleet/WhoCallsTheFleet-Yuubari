@@ -86,7 +86,7 @@ function makeItButter(config) {
         return list.filter(rule => rule != undefined)
     }
 
-    if (config.analyzer)
+    if (process.env.WEBPACK_ANALYZE || config.analyzer)
         config.plugins.push(
             new (require('webpack-bundle-analyzer').BundleAnalyzerPlugin)()
         )
