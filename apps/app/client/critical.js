@@ -205,7 +205,7 @@ self.logHr = function () {
     })
 
     new Promise(resolve => {
-        if (typeof Object.assign === 'function') {
+        if (typeof Object.assign !== 'function') {
             if (__DEV__) console.log('🚨 Old browser detected. Importing compatibility extend file(s)...')
             self.importJS(
                 typeof self.__CRITICAL_EXTRA_OLD_IE_FILENAME__ == 'undefined'
