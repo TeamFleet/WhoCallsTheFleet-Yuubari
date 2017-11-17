@@ -53,12 +53,12 @@ class App extends React.Component {
 
     appReady(timeout = 0) {
         if (__CLIENT__ && !this.isAppReady) {
+            self.appReady()
             setTimeout(() => {
                 this.props.dispatch(
                     updateAppReady(true)
                 )
-            })
-            self.appReady()
+            }, 10)
         }
     }
 
