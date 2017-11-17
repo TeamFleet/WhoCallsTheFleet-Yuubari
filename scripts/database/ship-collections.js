@@ -54,7 +54,16 @@ const appendCollection = async (index, name, types, expandClass) => {
         // console.log(name.zh_cn, type, expandClass, index, thisSubIndex)
 
         let ships = await db.ships.cfind({ type: type })
-            .sort({ 'class': 1, 'class_no': 1, 'time_created': 1, 'name.suffix': 1, series: 1, suffix: 1, id: 1 })
+            .sort({
+                'class': 1,
+                'class_no': 1,
+                'name.ja_jp': 1,
+                'name.suffix': 1,
+                series: 1,
+                suffix: 1,
+                id: 1,
+                'time_created': 1,
+            })
             .exec()
 
         if (!shipClassInited[index]) shipClassInited[index] = []
