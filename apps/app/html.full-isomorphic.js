@@ -42,17 +42,17 @@ export const template = `
 
         <script>var __SERVICE_WORKER_FILENAME__ = "<script>//inject_serviceworker_path</script>"</script>
         <script>//inject_critical_extra_old_ie_filename</script>
-        <!--<script>inject_client_filename</script>-->
+        <script>//inject_client_filename</script>
     </head>
     <body>
         <div id="boat-loader">LOADING...</div>
+        <script>//inject_critical</script>
 
         <div id="root">
             <script>//inject_react</script>
         </div>
         <script>//inject_svg_symbols</script>
         <script>//inject_redux</script>
-        <script>//inject_scripts</script>
         <!--<script>inject_js</script>-->
 
         <script>

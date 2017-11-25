@@ -2,7 +2,13 @@ import React from 'react'
 import { ImportStyle } from 'sp-css-import'
 
 const Swiper = typeof window !== 'undefined' && require('swiper')
-typeof window !== 'undefined' && require('swiper/dist/css/swiper.min.css')
+if (typeof document !== 'undefined' && !document.getElementById('__swiper')) {
+    const style = document.createElement('style')
+    style.id = '__swiper'
+    style.type = "text/css"
+    style.innerHTML = __SWIPER_CSS__
+    document.getElementsByTagName('head')[0].appendChild(style)
+}
 
 const defaults = {
     // speed: 400,
@@ -12,6 +18,10 @@ const defaults = {
 @ImportStyle(require('./styles.less'))
 export default class extends React.Component {
     componentDidMount() {
+        // if (typeof window !== 'undefined')
+        //     require('swiper/dist/css/swiper.min.css')
+        // if (typeof window !== 'undefined')
+        //     require('./swiper.g.less')
         if (Swiper) {
             const {
                 onInit,

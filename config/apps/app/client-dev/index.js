@@ -18,13 +18,6 @@ module.exports = (async () => Object.assign({}, config, {
 
     entry: {
         ...config.entry,
-        "critical-extra-old-ie": [
-            "babel-polyfill",
-            path.resolve(pathApp, './client/critical.extra-old-ie.js')
-        ],
-        client: [
-            path.resolve(pathApp, `./client`)
-        ]
     },
 
     // output: {

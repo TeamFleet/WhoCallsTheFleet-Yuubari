@@ -43,9 +43,13 @@ self.appReady = function () {
 
 self.logHr = function () {
     console.log('========================================')
-};
+}
 
-(() => {
+self.onInitError = () => {
+
+}
+
+const init = () => {
 
     if (self && self.isCriticalInit) return true
     if (__DEV__) console.log('🚨 Initializing: critical process...')
@@ -233,8 +237,10 @@ self.logHr = function () {
 
     })
         .then(() => {
-            if (__DEV__) console.log('🚨 Complete: critical process! Importing client file(s)...')
+            if (__DEV__) console.log('🚨 Complete: critical process!')
         })
-        .then(() => self.importJS(self.__CLIENT_FILENAME__))
+    // .then(() => self.importJS(self.__CLIENT_FILENAME__))
 
-})()
+}
+
+init()

@@ -6,6 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const {
     base: pathBase,
     assets: pathAssets,
+    nodeModules: pathNodeModules,
     bgimgs: pathBgimgs,
     // pathNameDistWeb,
     _app: pathApp,
@@ -39,7 +40,35 @@ module.exports = (options = {}) => {
         entry: {
             critical: [
                 path.resolve(pathApp, './client/critical.js')
-            ]
+            ],
+            client: [
+                path.resolve(pathApp, `./client`)
+            ],
+            "critical-extra-old-ie": [
+                "babel-polyfill",
+                path.resolve(pathApp, './client/critical.extra-old-ie.js')
+            ],
+            // commons: [
+            //     'react',
+            //     'react-dom',
+    
+            //     'redux',
+            //     'redux-thunk',
+            //     'react-redux',
+    
+            //     'react-router',
+            //     'react-router-redux',
+    
+            //     'react-transition-group',
+    
+            //     // 'localforage',
+            //     'lz-string',
+            //     'metas',
+            //     'classnames',
+            //     'js-cookie',
+    
+            //     'kckit',
+            // ]
         },
 
         module: {
@@ -167,11 +196,14 @@ module.exports = (options = {}) => {
 
         plugins: [
             new webpack.DefinePlugin({
-                '__CHANNEL__': JSON.stringify(channel),
-                '__BGIMG_LIST__': JSON.stringify(
+                __CHANNEL__: JSON.stringify(channel),
+                __BGIMG_LIST__: JSON.stringify(
                     fs.readdirSync(pathBgimgs).filter(
                         file => !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory() && path.extname(path.resolve(pathBgimgs, file)) === '.jpg'
                     )
+                ),
+                __SWIPER_CSS__: JSON.stringify(
+                    fs.readFileSync(path.resolve(pathNodeModules, 'swiper/dist/css/swiper.min.css'), 'utf-8')
                 ),
                 // '__ICONSVG__': JSON.stringify(
                 //     fs.readFileSync(
@@ -179,6 +211,15 @@ module.exports = (options = {}) => {
                 //     ).replace(/<title>(.+?)<\/title>/g, '')
                 // ),
             }),
+            // new webpack.optimize.CommonsChunkPlugin({
+            //     names: [
+            //         'commons',
+            //         'critical',
+            //     ],
+            //     filename: process.env.WEBPACK_BUILD_ENV !== 'dev'
+            //         ? 'core.[chunkhash].js'
+            //         : '[name].js'
+            // }),
         ],
 
         resolve: {

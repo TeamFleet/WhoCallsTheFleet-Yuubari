@@ -57,6 +57,10 @@ app.use(convert(koaStatic(rootPath, option)))
 /* 同构配置 */
 
 const getFile = filename => isomorphicUtils.getFile(filename, appName, distPathname)
+const getFileContent = filename => fs.readFileSync(
+    path.join(rootPath, getFile(filename)),
+    'utf-8'
+)
 
 // const getFile = filename => isomorphicUtils.getFile(
 //     __DEV__ ? `app.${filename}` : `app/${filename}`,
@@ -87,25 +91,38 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
             path.resolve(dirs.assets, './symbols/symbol-defs.svg'), 'utf8'
         ).replace(/<title>(.+?)<\/title>/g, '')}</div>`,
 
-        critical: `<script src="${getFile('critical.js')}"></script>`,
         critical_css: (() => {
             // console.log(path.join(rootPath, getFile('critical.css')))
             if (__DEV__) return ''
             else //return `<link rel="stylesheet" type="text/css" href="${getFile('critical.css')}" />`
-                return `<style type="text/css">${
-                    fs.readFileSync(
-                        path.join(rootPath, getFile('critical.css')),
-                        'utf-8'
-                    )}</style>`
+                return `<style type="text/css">${getFileContent('critical.css')}</style>`
         })(),
+
         critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
-        client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
+        // client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
         // js: (() => ([
         //     getFile('client.js')
         // ]))(),
         // css: [],
         serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
         // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')
+
+        scripts: (() => {
+            let html = ''
+            const scripts = [
+                'commons.js',
+                'client.js'
+            ]
+
+            if (__DEV__) html += `<script type="text/javascript" src="${getFile('critical.js')}"></script>`
+            else html += `<script type="text/javascript">${getFileContent('critical.js')}</script>`
+
+            scripts.forEach(filename => {
+                html += `<script type="text/javascript" src="${getFile(filename)}" onerror="onInitError()" defer></script>`
+            })
+
+            return html
+        })(),
     },
 
     onServerRender: (obj) => {

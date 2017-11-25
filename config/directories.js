@@ -12,6 +12,7 @@ module.exports = {
     base: pathBase,
     assets: path.resolve(pathBase, './assets'),
     pics: path.resolve(pathBase, './pics'),
+    nodeModules: path.resolve(pathBase, './node_modules'),
     bgimgs: path.resolve(pathBase, './node_modules/whocallsthefleet-backgrounds/output'),
     output: pathDistWeb,
     outputRelative: `${pathNameDistWeb}`,
