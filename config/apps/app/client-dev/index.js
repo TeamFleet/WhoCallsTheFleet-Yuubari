@@ -2,6 +2,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const WebpackOnBuildPlugin = require('on-build-webpack')
+const opn = require('opn')
+
+let isOpened = false
 
 const {
     _app: pathApp,
@@ -42,6 +46,12 @@ module.exports = (async () => Object.assign({}, config, {
                 // '__PUBLIC__': JSON.stringify(publicPath),
             }),
             ...await pluginCopyImages(true),
+            new WebpackOnBuildPlugin(function () {
+                if (!isOpened) {
+                    opn(`http://127.0.0.1:3000/`)
+                    isOpened = true
+                }
+            })
         ]
     ],
 
