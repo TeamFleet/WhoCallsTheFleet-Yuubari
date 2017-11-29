@@ -2,65 +2,74 @@ import bindEvent from 'bind-event'
 
 // this.isAppReady = false
 
-self.importJS = uri => new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.onerror = () => reject()
-    script.onload = () => resolve()
-    document.getElementsByTagName('head')[0].appendChild(script)
-    script.src = uri
-    script.type = "text/javascript"
-    script.async = false
-})
-
-self.appReady = function () {
-    if (this.isAppReady) return true
-
-    this.isAppReady = true
-    if ('serviceWorker' in navigator) {
-        // console.log('Service Worker SUPPORTED')
-        navigator.serviceWorker.register(self.__SERVICE_WORKER_FILENAME__, {
-            scope: '/'
-        }).then((reg) => {
-            // console.log('Service Worker register', reg)
-        }).catch((err) => {
-            console.log('Service Worker SUPPORTED. ERROR', err)
-        })
-    } else {
-        console.log('Service Worker NOT-SUPPORTED')
-    }
-
-    setTimeout(() => {
-        if (__DEV__) self.logHr()
-        if (__DEV__) console.log('🚀 App ready')
-        if (__DEV__) self.logHr()
-        document.body.classList.add('is-ready')
-        setTimeout(() => {
-            this.isAppReadyFull = true
-            if (typeof window !== 'undefined') window.isAppReadyFull = true
-        }, 1000)
-    })
-}
-
-self.logHr = function () {
-    console.log('========================================')
-}
-
-self.onInitError = () => {
-
-}
-
-const init = () => {
+// Critical 过程
+const doCricital = () => {
 
     if (self && self.isCriticalInit) return true
     if (__DEV__) console.log('🚨 Initializing: critical process...')
 
     self.isCriticalInit = true
+
     self._html = document.documentElement
+
+    // 内置背景图列表
+    self.__BGIMG_LIST__ = __BGIMG_LIST__ || []
+
+    // 利用 Promise 语法写入 script 标签
+    self.importJS = uri => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.onerror = () => reject()
+        script.onload = () => resolve()
+        document.getElementsByTagName('head')[0].appendChild(script)
+        script.src = uri
+        script.type = "text/javascript"
+        script.async = false
+    })
+
+    // App 初始化成功
+    self.appReady = () => {
+        if (this.isAppReady) return true
+
+        this.isAppReady = true
+        if ('serviceWorker' in navigator) {
+            // console.log('Service Worker SUPPORTED')
+            navigator.serviceWorker.register(self.__SERVICE_WORKER_FILENAME__, {
+                scope: '/'
+            }).then((reg) => {
+                // console.log('Service Worker register', reg)
+            }).catch((err) => {
+                console.log('Service Worker SUPPORTED. ERROR', err)
+            })
+        } else {
+            console.log('Service Worker NOT-SUPPORTED')
+        }
+
+        setTimeout(() => {
+            if (__DEV__) self.logHr()
+            if (__DEV__) console.log('🚀 App ready')
+            if (__DEV__) self.logHr()
+            document.body.classList.add('is-ready')
+            setTimeout(() => {
+                this.isAppReadyFull = true
+                if (typeof window !== 'undefined') window.isAppReadyFull = true
+            }, 1000)
+        })
+    }
+
+    // App 初始化失败
+    self.onInitError = () => {
+
+    }
+
+    // 在 console 中 log 一行 ==========
+    self.logHr = function () {
+        console.log('========================================')
+    }
 
     // 加载最优先CSS
     require('./critical.g.less')
 
-    // 检查UA
+    // 检查 UA / 客户端环境
     let platform = 'not-specified'
     const iOSversion = () => {
         if (/iP(hone|od|ad)/.test(navigator.platform)) {
@@ -118,7 +127,7 @@ const init = () => {
         self.isWx = self.isWechat
     }
 
-    // 添加基础class
+    // 根据 UA / 客户端环境 添加基础class
     if (__CLIENT__) {
         self._html.classList.add('is-webapp')
         self._html.classList.add('is-critical-ready')
@@ -130,6 +139,38 @@ const init = () => {
     if (platform)
         self._html.classList.add('platform-' + platform)
 
+    // 检查客户端兼容性，如果需要，载入兼容性扩展脚本
+    new Promise(resolve => {
+        if (typeof Object.assign !== 'function') {
+            if (__DEV__) console.log('🚨 Old browser detected. Importing compatibility extend file(s)...')
+            self.importJS(
+                typeof self.__CRITICAL_EXTRA_OLD_IE_FILENAME__ == 'undefined'
+                    ? "/client/critical-extra-old-ie.js"
+                    : self.__CRITICAL_EXTRA_OLD_IE_FILENAME__
+            ).then(() => {
+                if (__DEV__) console.log('   ✔ Imported!')
+                resolve()
+            }).catch(() => {
+                if (__DEV__) console.log('   ❌ Importe failed!')
+                throw new Error('Importing compatibility extend file(s) failed')
+            })
+        } else
+            resolve()
+    }).then(() => {
+        // [nw.js] show and focus window
+        if (self.nw && self.nw.win) {
+            self.nw.win.show()
+            self.nw.win.focus()
+        }
+        // self.__LATHPATHNAME__
+    })
+        .then(() => {
+            if (__DEV__) console.log('🚨 Complete: critical process!')
+        })
+        .catch(err => self.onInitError(err))
+    // .then(() => self.importJS(self.__CLIENT_FILENAME__))
+
+    // DOM ready 时
     document.addEventListener("DOMContentLoaded", function () {
         // let boatLoader = document.createElement('div')
         const boatLoader = document.getElementById('boat-loader')
@@ -139,7 +180,6 @@ const init = () => {
         // boatLoader.id = 'boat-loader'
         // document.body.appendChild(boatLoader)
         bindEvent(
-            // boatLoader,
             boatLoader,
             'transitionend',
             function (evt) {
@@ -208,39 +248,6 @@ const init = () => {
         // self._html = tagHtml
     })
 
-    new Promise(resolve => {
-        if (typeof Object.assign !== 'function') {
-            if (__DEV__) console.log('🚨 Old browser detected. Importing compatibility extend file(s)...')
-            self.importJS(
-                typeof self.__CRITICAL_EXTRA_OLD_IE_FILENAME__ == 'undefined'
-                    ? "/client/critical-extra-old-ie.js"
-                    : self.__CRITICAL_EXTRA_OLD_IE_FILENAME__
-            ).then(() => {
-                if (__DEV__) console.log('   ✔ Imported!')
-                resolve()
-            }).catch(() => {
-                if (__DEV__) console.log('   ❌ Importe failed!')
-                throw new Error('Importing compatibility extend file(s) failed')
-            })
-        } else resolve()
-    }).then(() => {
-        // 内置背景图列表
-        self.__BGIMG_LIST__ = __BGIMG_LIST__ || []
-
-        // [nw.js] show and focus window
-        if (self.nw && self.nw.win) {
-            self.nw.win.show()
-            self.nw.win.focus()
-        }
-
-        // self.__LATHPATHNAME__
-
-    })
-        .then(() => {
-            if (__DEV__) console.log('🚨 Complete: critical process!')
-        })
-    // .then(() => self.importJS(self.__CLIENT_FILENAME__))
-
 }
 
-init()
+doCricital()
