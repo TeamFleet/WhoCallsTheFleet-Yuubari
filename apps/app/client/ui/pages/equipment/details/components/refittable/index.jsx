@@ -100,7 +100,7 @@ class ShipCollection extends React.Component {
         const cachedTypes = []
         // const cachedShips = []
 
-        const extraShips = []
+        let extraShips = []
         const types = data.list.map(thisType => {
             const id = thisType.type
             if (!id) return
@@ -157,7 +157,7 @@ class ShipCollection extends React.Component {
                 </div>
                 {!!(extraShips.length) && (
                     <div className="list ships">
-                        {extraShips.map(ship => (
+                        {sortShips(extraShips).map(ship => (
                             <LinkMini className="item ship" ship={ship} key={ship.id} />
                         ))}
                     </div>
