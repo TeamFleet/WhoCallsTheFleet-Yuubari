@@ -60,7 +60,7 @@
         "whocallsthefleet-database": "2017.11.29",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "super-project": "^2.2.1",
+        "super-project": "^2.2.2",
         "super-project-cli": "^1.1.7",
 
         "react-transition-group": "^2.2.1",
@@ -70,7 +70,7 @@
         "check-css-prop": "^1.0.1",
         "classnames": "^2.2.5",
         "lz-string": "^1.4.4",
-        "localforage": "^1.5.3",
+        "localforage": "^1.5.4",
         "metas": "^1.0.1",
         "swiper": "^3.4.2",
 
