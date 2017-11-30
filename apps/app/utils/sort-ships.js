@@ -13,6 +13,7 @@ export default (list = []) => list
         getShip(a).series !== getShip(b).series
             ? 1
             : 0
+        // getShip(a).series - getShip(b).series
     ))
     .sort((a, b) => {
         a = getShip(a)

@@ -139,6 +139,11 @@ class ShipCollection extends React.Component {
         //     <span className="item placeholder" key={index}></span>
         // ))
 
+        // if (extraShips.length > 1) {
+        //     console.log(extraShips.map(ship => ship._name))
+        //     console.log(sortShips(extraShips).map(ship => ship._name))
+        // }
+
         return (
             <ComponentContainer
                 className={className}
