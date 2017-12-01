@@ -95,7 +95,7 @@
         "svg-url-loader": "^2.3.0",
         "webpack-config": "^7.5.0",
 
-        "simple-git": "^1.83.0"
+        "simple-git": "^1.84.0"
     },
     "devDependencies": {
         "glob": "^7.1.2",
