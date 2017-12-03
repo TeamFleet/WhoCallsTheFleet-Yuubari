@@ -31,7 +31,7 @@ tabsAvailable.forEach((tab, index) => {
 })
 
 
-const extracFromState = (state) => {
+const extractFromState = (state) => {
     const pathname = state.routing.locationBeforeTransitions.pathname
     const segs = pathname.split('/')
     const indexShips = segs.indexOf('ships')
@@ -83,7 +83,7 @@ export const getInfosId = id => `SHIP_${id}`
 @connect()
 export default class PageShipDetails extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
-        const { id, tab } = extracFromState(store.getState())
+        const { id, tab } = extractFromState(store.getState())
 
         const ship = db.ships[id]
         const obj = {

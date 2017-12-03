@@ -90,23 +90,25 @@ export default class ShipDetailsContentEquipable extends React.Component {
         if (__DEV__) console.log('thisShip equipable', this.props.ship.getEquipmentTypes())
         return (
             <div className={this.props.className}>
-                <ComponentContainer
-                    className="legends"
-                >
-                    <ShipDetailsContentEquipableLegend
-                        className="item off"
-                        text={translate("ship_details.equipable_legend_no")}
-                    />
-                    <ShipDetailsContentEquipableLegend
-                        className="item on"
-                        text={translate("ship_details.equipable_legend_yes")}
-                    />
-                    <ShipDetailsContentEquipableLegend
-                        className="item on is-special"
-                        text={translate("ship_details.equipable_legend_yes")}
-                        textSmall={translate("ship_details.equipable_legend_yes_extra", { type: db.shipTypes[this.props.ship.type_display]._name })}
-                    />
-                </ComponentContainer>
+                <div className="legends">
+                    <ComponentContainer
+                        className="wrapper"
+                    >
+                        <ShipDetailsContentEquipableLegend
+                            className="item off"
+                            text={translate("ship_details.equipable_legend_no")}
+                        />
+                        <ShipDetailsContentEquipableLegend
+                            className="item on"
+                            text={translate("ship_details.equipable_legend_yes")}
+                        />
+                        <ShipDetailsContentEquipableLegend
+                            className="item on is-special"
+                            text={translate("ship_details.equipable_legend_yes")}
+                            textSmall={translate("ship_details.equipable_legend_yes_extra", { type: db.shipTypes[this.props.ship.type_display]._name })}
+                        />
+                    </ComponentContainer>
+                </div>
                 {db.equipmentCollections.map(this.renderCollection.bind(this))}
                 {this.renderExSolot()}
             </div>

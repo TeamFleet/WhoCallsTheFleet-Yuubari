@@ -20,11 +20,13 @@ export default class ShipDetailsContentCapabilities extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
-                <CombatSpecial ship={this.props.ship} className="shipinfo shipinfo-combat" />
-                <OtherSpecial ship={this.props.ship} className="shipinfo shipinfo-special" />
-                <AACI ship={this.props.ship} className="shipinfo shipinfo-aaci" />
-                <SpeedUpCalculator ship={this.props.ship} className="shipinfo shipinfo-speedup" />
-                <OASWCalculator ship={this.props.ship} className="shipinfo shipinfo-oasw" />
+                <div className="wrapper">
+                    <CombatSpecial ship={this.props.ship} className="shipinfo shipinfo-combat" />
+                    <OtherSpecial ship={this.props.ship} className="shipinfo shipinfo-special" />
+                    <AACI ship={this.props.ship} className="shipinfo shipinfo-aaci" />
+                    <SpeedUpCalculator ship={this.props.ship} className="shipinfo shipinfo-speedup" />
+                    <OASWCalculator ship={this.props.ship} className="shipinfo shipinfo-oasw" />
+                </div>
             </div>
         )
     }

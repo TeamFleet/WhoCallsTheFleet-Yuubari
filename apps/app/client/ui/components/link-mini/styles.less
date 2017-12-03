@@ -62,6 +62,25 @@ a.component,
     }
 }
 
+.component.mod-badge{
+    color:              lighten(@theme-lightblue-a100, 15%);
+    border-color:       @theme-lightblue-800;
+    background-color:   @theme-lightblue-800;
+}
+
+a.component.mod-badge,
+.component.mod-badge.link{
+    .is-hover({
+        color:              #fff;
+        border-color:       @theme-lightblue-600;
+        background-color:   @theme-lightblue-600;
+    }; {
+        color:              lighten(@theme-lightblue-a100, 15%);
+        border-color:       @theme-lightblue-800;
+        background-color:   @theme-lightblue-900;
+    });
+}
+
 // a.component,
 // .component.link{
 //     color:              @color-badge-on;

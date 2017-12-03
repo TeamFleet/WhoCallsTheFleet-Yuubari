@@ -19,10 +19,12 @@ export default class EquipmentDetailsComponentImprovements extends React.Compone
         const upgradable = (Array.isArray(this.props.equipment.upgrade_to) && this.props.equipment.upgrade_to.length)
         return (
             <ComponentContainer className={this.props.className} title={translate("equipment_details.improvements")}>
-                {hasItem && list.map((data, index) => (
-                    <EquipmentDetailsComponentImprovementsImprovement data={data} key={index} upgradable={upgradable} className="flex-item" />
-                ))}
-                {hasItem && list.length > 1 && placeholders}
+                {hasItem && <div className="list">
+                    {list.map((data, index) => (
+                        <EquipmentDetailsComponentImprovementsImprovement data={data} key={index} upgradable={upgradable} className="flex-item" />
+                    ))}
+                    {list.length > 1 && placeholders}
+                </div>}
                 {!hasItem && <span className="disabled">{translate("none")}</span>}
             </ComponentContainer>
         )

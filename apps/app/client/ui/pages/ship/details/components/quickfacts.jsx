@@ -22,27 +22,29 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         //title={translate("ship_details.quickfacts")}
         return (
             <ComponentContainer className={this.props.className}>
-                <Stat
-                    className="item"
-                    title={translate("ship_details.navy")}
-                >
-                    <FlagNavy className="flag-navy" navy={ship._navy} />
-                    {ship._navyName}
-                </Stat>
-                <Stat
-                    className="item"
-                    title={translate("seiyuu")}
-                >
-                    {ship._cv && <Link to={`/entities/${ship.getRel('cv')}`}>{ship._cv}</Link>}
-                    {!ship._cv && <span className="unknown">?</span>}
-                </Stat>
-                <Stat
-                    className="item"
-                    title={translate("artist")}
-                >
-                    {ship._illustrator && <Link to={`/entities/${ship.getRel('illustrator')}`}>{ship._illustrator}</Link>}
-                    {!ship._illustrator && <span className="unknown">?</span>}
-                </Stat>
+                <div className="wrapper">
+                    <Stat
+                        className="item"
+                        title={translate("ship_details.navy")}
+                    >
+                        <FlagNavy className="flag-navy" navy={ship._navy} />
+                        {ship._navyName}
+                    </Stat>
+                    <Stat
+                        className="item"
+                        title={translate("seiyuu")}
+                    >
+                        {ship._cv && <Link to={`/entities/${ship.getRel('cv')}`}>{ship._cv}</Link>}
+                        {!ship._cv && <span className="unknown">?</span>}
+                    </Stat>
+                    <Stat
+                        className="item"
+                        title={translate("artist")}
+                    >
+                        {ship._illustrator && <Link to={`/entities/${ship.getRel('illustrator')}`}>{ship._illustrator}</Link>}
+                        {!ship._illustrator && <span className="unknown">?</span>}
+                    </Stat>
+                </div>
             </ComponentContainer>
         )
     }

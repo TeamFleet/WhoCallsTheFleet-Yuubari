@@ -14,12 +14,15 @@ export default class InfosPageContainer extends React.Component {
             children,
             ...props
         } = this.props
-        
+
         return (
-            <PageContainer className={classNames({
-                [className]: true,
-                'has-tabs': hasTabs || (typeof hasTabs === 'undefined')
-            })} {...props}>
+            <PageContainer
+                className={classNames({
+                    [className]: true,
+                    'has-tabs': hasTabs || (typeof hasTabs === 'undefined')
+                })}
+                {...props}
+            >
                 {children}
             </PageContainer>
         )

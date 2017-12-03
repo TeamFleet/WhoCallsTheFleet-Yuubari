@@ -1,7 +1,11 @@
 @import "./_.less";
 
 .component{
-    margin-bottom:  (0 - @shiptypebadge-gutter);
+
+    & + .component{
+        margin-top:  (0 - @shiptypebadge-gutter);
+    }
+
     .list{
         margin-right:   (0 - @shiptypebadge-gutter * 1.5);
         margin-top:     (@shiptypebadge-gutter * 1);
@@ -95,18 +99,18 @@
         border-color:       @color-badge-off-border;
         background-color:   @color-badge-off-background;
     }
-    .item.ship{
-        color:              @color-badge-on;
-        border-color:       @color-badge-on-border;
-        background-color:   @color-badge-on-border;
-        .is-hover({
-            color:              #fff;
-            border-color:       @theme-green-500;
-            background-color:   @theme-green-500;
-        }; {
-            color:              @color-badge-on;
-            border-color:       @color-badge-on-border;
-            background-color:   @theme-green-900;
-        });
-    }
+    // .item.ship{
+    //     color:              lighten(@theme-lightblue-a100, 15%);
+    //     border-color:       @theme-lightblue-800;
+    //     background-color:   @theme-lightblue-800;
+    //     .is-hover({
+    //         color:              #fff;
+    //         border-color:       @theme-lightblue-600;
+    //         background-color:   @theme-lightblue-600;
+    //     }; {
+    //         color:              lighten(@theme-lightblue-a100, 15%);
+    //         border-color:       @theme-lightblue-800;
+    //         background-color:   @theme-lightblue-900;
+    //     });
+    // }
 }

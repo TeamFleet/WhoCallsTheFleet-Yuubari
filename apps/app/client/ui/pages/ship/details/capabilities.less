@@ -1,13 +1,17 @@
 @import './_.less';
 
 .component{
-    display:        flex;
-    flex-flow:      row wrap;
-    margin-right:   -40px;
-    // align-content:  space-between;
-    .screen-phone({
-        display:    block;
-    });
+    overflow-x:     hidden;
+
+    & > .wrapper{
+        display:        flex;
+        flex-flow:      row wrap;
+        margin-right:   -40px;
+        // align-content:  space-between;
+        .screen-phone({
+            display:    block;
+        });
+    }
 
     .shipinfo{
         flex:       1 0 33.3333%;

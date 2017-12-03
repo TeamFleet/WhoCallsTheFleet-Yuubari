@@ -1,9 +1,6 @@
 @import "../../_.less";
 
 .component{
-    display:    flex;
-    flex-flow:  row wrap;
-    margin-right: -20px;
 
     & > h2.title{
         flex:   none;
@@ -16,12 +13,19 @@
         margin-top:     25px;
     }
 
-    & > .flex-item{
-        flex:           1 1 500px;
-        &.placeholder{
-            margin-top: auto;
-            margin-bottom: auto;
-            height:     0;
+    & > .list{
+        display:    flex;
+        flex-flow:  row wrap;
+        margin-right: -20px;
+
+        & > .flex-item{
+            flex:           1 1 500px;
+            &.placeholder{
+                margin-top: auto;
+                margin-bottom: auto;
+                height:     0;
+            }
         }
     }
+
 }

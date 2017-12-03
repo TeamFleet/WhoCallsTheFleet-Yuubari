@@ -163,7 +163,7 @@ class ShipCollection extends React.Component {
                 {!!(extraShips.length) && (
                     <div className="list ships">
                         {sortShips(extraShips).map(ship => (
-                            <LinkMini className="item ship" ship={ship} key={ship.id} />
+                            <LinkMini className="item" ship={ship} key={ship.id} badge={true} />
                         ))}
                     </div>
                 )}

@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import Link from '@appUI/components/link'
 
@@ -22,13 +23,19 @@ export default class LinkMini extends React.Component {
             to: _to,
             href: _href,
 
-            className,
+            className: _className,
+            badge,
+
             children,
             ...props
         } = this.props
 
         const to = _to || _href || undefined
         const ship = getShip(_ship || _id)
+        const className = classNames({
+            [_className]: true,
+            'mod-badge': !!badge
+        })
 
         if (ship)
             return (

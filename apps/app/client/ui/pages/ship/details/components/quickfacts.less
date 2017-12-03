@@ -3,14 +3,33 @@
 .component{
     overflow:   hidden;
     margin-top:     (0 - @component-title-margin-bottom - 5);
-    margin-right:   (0 - @main-margin);
 
     // & > h2.title{
     //     margin-bottom:  0
     // }
 
+    & > .wrapper{
+        margin-right:   (0 - @main-margin);
+
+        .screen-tablet({
+            display:    flex;
+            flex-flow:  row nowrap;
+            .item{
+                float:  none;
+                flex:   1 0 auto;
+            }
+        });
+
+        .screen-phone-small({
+            display:    block;
+            .item{
+                float:  none;
+            }
+        });
+    }
+
     .item{
-        float:      left;
+        float:          left;
         margin-top:     @component-title-margin-bottom;
         margin-right:   @main-margin;
         .type{
