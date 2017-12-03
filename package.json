@@ -60,7 +60,7 @@
         "whocallsthefleet-database": "2017.11.29-2",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "super-project": "^2.2.3",
+        "super-project": "^2.2.4",
         "super-project-cli": "^1.1.7",
 
         "react-transition-group": "^2.2.1",
