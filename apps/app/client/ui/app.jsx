@@ -51,9 +51,8 @@ class App extends React.Component {
     }
 
     appReady(timeout = 0) {
-        if (__CLIENT__ && !this.isAppReady) {
+        if (__CLIENT__ && !self.isAppReady) {
             self.appReady()
-            this.isAppReady = true
             setTimeout(() => {
                 this.props.dispatch(
                     updateAppReady(true)
@@ -63,7 +62,8 @@ class App extends React.Component {
     }
 
     onTouchStart(evt) {
-        if (this.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
+        if (!__CLIENT__) return
+        if (self.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
             startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
                 y: evt.nativeEvent.touches[0].screenY,
@@ -117,7 +117,7 @@ class App extends React.Component {
         // if (__DEV__) console.log('app - render')
         if (this.props.isMainBgimgLoaded) this.appReady()
 
-        const hasMode = (this.isAppReady && this.props.appMode.mode)
+        const hasMode = (__CLIENT__ && self.isAppReady && this.props.appMode.mode)
 
         return (
             <div

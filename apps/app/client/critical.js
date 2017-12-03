@@ -28,9 +28,9 @@ const doCricital = () => {
 
     // App 初始化成功
     self.appReady = () => {
-        if (this.isAppReady) return true
+        if (self.isAppReady) return true
 
-        this.isAppReady = true
+        self.isAppReady = true
         if ('serviceWorker' in navigator) {
             // console.log('Service Worker SUPPORTED')
             navigator.serviceWorker.register(self.__SERVICE_WORKER_FILENAME__, {
@@ -50,8 +50,7 @@ const doCricital = () => {
             if (__DEV__) self.logHr()
             document.body.classList.add('is-ready')
             setTimeout(() => {
-                this.isAppReadyFull = true
-                if (typeof window !== 'undefined') window.isAppReadyFull = true
+                self.isAppReadyFull = true
             }, 1000)
         })
     }
