@@ -23,13 +23,22 @@ const daysArr = [
     "Saturday"
 ]
 
-// @connect()
+@connect()
 @ImportStyle(require('./arsenal.less'))
 export default class PageArsenal extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
+        const state = store.getState()
+        const pathname = state.routing.locationBeforeTransitions.pathname
+        const segs = pathname.split('/')
+        const indexArsenal = segs.indexOf('arsenal')
+        let day
+
+        if (typeof segs[indexArsenal + 1] !== 'undefined')
+            day = translate(`day_full.${daysArr[parseInt(segs[indexArsenal + 1])]}`)
+
         const head = htmlHead({
             store,
-            title: translate('nav.arsenal')
+            title: translate('nav.arsenal') + (day ? ` / ${day}` : '')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -44,46 +53,7 @@ export default class PageArsenal extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <MainHeader
-                    className={classNames({
-                        [this.props.className]: true,
-                        // 'is-options-show': this.props.isModeFilter,
-                    })}
-                >
-                    <span className="days">
-                        <Link
-                            href={`/arsenal/${jstDay}`}
-                            replace={true}
-                            className="link-today"
-                        >
-                            {translate(`DAYS`)}
-                        </Link>
-                        {daysArr.map((day, index) => (
-                            <Link
-                                key={day}
-                                href={`/arsenal/${index}`}
-                                replace={true}
-                                className={classNames({
-                                    'link-day': true,
-                                    'is-today': jstDay === index
-                                })}
-                                activeClassName="on"
-                            >
-                                {translate(`day_abbr.${day}`)}
-                            </Link>
-                        ))}
-                    </span>
-                    <Link
-                        href={`/arsenal`}
-                        replace={true}
-                        className={classNames({
-                            'link-all': true,
-                            'on': !isDay
-                        })}
-                    >
-                        {translate(`ALL`)}
-                    </Link>
-                </MainHeader>
+                <PageArsenalHeader />
 
                 <p><i>{translate('under_construction')}...</i></p>
                 <p>JST NOW: {jstDay}</p>
@@ -91,6 +61,56 @@ export default class PageArsenal extends React.Component {
                     <p>CURRENT DAY: {this.props.params.day}</p>
                 )}
             </PageContainer>
+        )
+    }
+}
+
+// @ImportStyle(require('./arsenal.less'))
+class PageArsenalHeader extends React.Component {
+    render() {
+        const jst = getTimeJST()
+        const jstDay = jst.getDay()
+        const isDay = typeof this.props.params === 'object' && typeof this.props.params.day !== 'undefined'
+        return (
+            <MainHeader
+                className={classNames({
+                    [this.props.className]: true,
+                    // 'is-options-show': this.props.isModeFilter,
+                })}
+            >
+                {[
+                    <Link
+                        key="today"
+                        href={`/arsenal/${jstDay}`}
+                        replace={true}
+                        className="link-today"
+                        children={translate(`DAYS`)}
+                    />,
+                    ...daysArr.map((day, index) => (
+                        <Link
+                            key={day}
+                            href={`/arsenal/${index}`}
+                            replace={true}
+                            className={classNames({
+                                'link-day': true,
+                                'is-today': jstDay === index
+                            })}
+                            activeClassName="on"
+                            children={translate(`day_abbr.${day}`)}
+                        />
+                    )),
+                    <Link
+                        key="all"
+                        href={`/arsenal`}
+                        replace={true}
+                        className={classNames({
+                            'link-all': true,
+                            'on': !isDay
+                        })}
+                        children={translate(`ALL`)}
+                    />
+                ]}
+            </MainHeader>
         )
     }
 }
