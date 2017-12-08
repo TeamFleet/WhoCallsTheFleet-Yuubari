@@ -48,7 +48,11 @@ export default () => {
 
             entities: requireDb('entities'),
 
-            consumables: requireDb('consumables')
+            consumables: requireDb('consumables'),
+
+            arsenalAll: requireDb('arsenal_all'),
+            // arsenalDays: requireDb('arsenal_weekday').replace(/"weekday":([0-9])/g, '"weekday":$1,"id":$1'),
+            arsenalDays: requireDb('arsenal_weekday').replace(/"weekday":([0-9])/g, '"weekday":$1,"id":$1'),
         }, db)
 
         // shipCollections
@@ -108,6 +112,25 @@ export default () => {
             } else {
                 cache.push(type.id_ingame)
             }
+        }
+
+        // arsenal-all
+        {
+            const arsenalAll = []
+            for (const id in db.arsenalAll) {
+                arsenalAll.push(db.arsenalAll[id])
+            }
+            arsenalAll.sort((a, b) => a.sort - b.sort)
+            db.arsenalAll = arsenalAll.map(obj => obj.id)
+        }
+
+        // arsenal-days
+        {
+            const days = []
+            for (const id in db.arsenalDays) {
+                days[db.arsenalDays[id].weekday] = db.arsenalDays[id].improvements
+            }
+            db.arsenalDays = days
         }
 
         if (__CLIENT__ && __DEV__) console.log('database init', db)
