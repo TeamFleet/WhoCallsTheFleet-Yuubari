@@ -87,9 +87,17 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
             const { mtime } = __DEV__ ? '' : fs.statSync(path.join(rootPath, filename))
             return `<link rel="manifest" href="/${filename}?${mtime ? mtime.valueOf() : ''}">`
         },
-        svg_symbols: `<div class="hide">${fs.readFileSync(
-            path.resolve(dirs.assets, './symbols/symbol-defs.svg'), 'utf8'
-        ).replace(/<title>(.+?)<\/title>/g, '')}</div>`,
+        svg_symbols: (() => {
+            const content = fs.readFileSync(
+                path.resolve(dirs.assets, './symbols/symbol-defs.svg'),
+                'utf8'
+            )
+                .replace(/<title>(.+?)<\/title>/g, '')
+                .replace(/\n/g, '')
+
+            return `<div class="hide">${content}</div>`
+            + (__DEV__ ? `<script>var __ICONSVG__ = \`${content}\`</script>` : '')
+        }),
 
         critical_css: (() => {
             // console.log(path.join(rootPath, getFile('critical.css')))

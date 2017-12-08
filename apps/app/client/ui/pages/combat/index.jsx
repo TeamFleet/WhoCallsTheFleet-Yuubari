@@ -12,7 +12,7 @@ export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
             store,
-            title: translate('nav.calculators')
+            title: translate('nav.combat')
         })
 
         ext.metas = ext.metas.concat(head.meta)

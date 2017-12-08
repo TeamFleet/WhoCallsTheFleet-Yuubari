@@ -127,7 +127,8 @@
     "nav": {
         "home": "ホーム",
         "fleets": "艦隊ビルダー",
-        "calculators": "カルキュレーター",
+        "combat": "戦闘説明・カルキュレーター",
+        "calctp": "TPカルキュレーター",
         "sets": "Equipment Sets",
         "sorties": "Sories & Enemies",
         "expeditions": "Expeditions & Plan",

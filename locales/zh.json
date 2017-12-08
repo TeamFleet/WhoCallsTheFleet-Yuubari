@@ -126,7 +126,8 @@
     "nav": {
         "home": "首页",
         "fleets": "舰队模拟",
-        "calculators": "计算工具",
+        "combat": "战斗解说 & 计算",
+        "calctp": "TP计算",
         "sets": "配装指南",
         "sorties": "出击海域 & 敌舰",
         "expeditions": "远征 & 计划",

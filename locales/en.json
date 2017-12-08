@@ -126,7 +126,8 @@
     "nav": {
         "home": "Home",
         "fleets": "Fleet Builder",
-        "calculators": "Calculators",
+        "combat": "Combat Infos & Calculators",
+        "calctp": "TP Calculator",
         "sets": "Equipment Sets",
         "sorties": "Sories & Enemies",
         "expeditions": "Expeditions & Plan",

@@ -173,13 +173,17 @@ export class Resources extends React.Component {
 
     render() {
         let data = this.props.data || this.props.resource || this.props.resources
-        if (typeof data === 'object' && data.resource)
+        let upgradable = this.props.upgradable
+
+        if (typeof data === 'object' && data.resource) {
+            if (typeof upgradable === 'undefined' && Array.isArray(data.upgrade) && data.upgrade.length)
+                upgradable = true
             data = data.resource
+        }
         if (!Array.isArray(data))
             data = []
-        const upgradable = typeof this.props.upgradable !== 'undefined'
-            ? this.props.upgradable
-            : typeof data[3] !== 'undefined'
+
+        if (data.length < 3) upgradable = false
 
         return (
             <div className={this.props.className}>
