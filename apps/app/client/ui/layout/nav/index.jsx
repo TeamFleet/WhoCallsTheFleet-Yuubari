@@ -13,6 +13,7 @@ import { ImportStyle } from 'sp-css-import'
 import style from './nav.less'
 
 import channel from '@appConstants/channel'
+import getTimeJST from '@appUtils/get-time-jst.js'
 
 let navs = [
     undefined,
@@ -110,7 +111,7 @@ export default class extends React.Component {
                         {channel === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
                     </div>
 
-                    <Navs />
+                    <Navs location={this.props.location} />
 
                     <LanguageSwitch />
 
@@ -155,6 +156,7 @@ class Navs extends React.Component {
 
         let title
         let isIndev = false
+        let isCurrent
 
         if (route.substr(0, 6) === 'indev-') {
             route = route.substr(6)
@@ -165,13 +167,27 @@ class Navs extends React.Component {
         else
             title = translate('nav.' + route)
 
+        switch (route) {
+            case 'arsenal': {
+                const jst = getTimeJST()
+                route = `arsenal/${jst.getDay()}`
+                if (this.props.location &&
+                    this.props.location.pathname &&
+                    this.props.location.pathname.indexOf('/arsenal') === 0
+                )
+                    isCurrent = true
+                break
+            }
+        }
+
         return (
             <Link
                 to={'/' + route}
                 key={index}
                 className={classNames({
                     link: true,
-                    'is-indev': isIndev
+                    'is-indev': isIndev,
+                    on: isCurrent
                 })}
                 activeClassName="on"
             >{title}</Link>
@@ -181,7 +197,7 @@ class Navs extends React.Component {
         return (
             <div className={this.props.className}>
                 <IndexLink to="/" activeClassName="on" className="link">{translate('nav.home')}</IndexLink>
-                {navs.map(this.renderItem)}
+                {navs.map(this.renderItem.bind(this))}
             </div>
         )
     }

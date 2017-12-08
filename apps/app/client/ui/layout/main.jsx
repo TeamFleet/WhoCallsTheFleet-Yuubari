@@ -12,7 +12,18 @@ let action
 let lastScrollY = 0
 let pathnameLastScrollY = {}
 
-const getKey = location => location.pathname.split('/').slice(0, 3).join('/')
+const getKey = location => {
+    // console.log(location)
+    const pathname = location.pathname.substr(0, 1) === '/'
+        ? location.pathname.substr(1)
+        : location.pathname
+    const segs = pathname.split('/')
+
+    if (segs[0] === 'arsenal')
+        return segs.slice(0, 1).join('/')
+
+    return segs.slice(0, 2).join('/')
+}
 
 // @connect(state => {
 //     console.log('state', state)
@@ -69,6 +80,7 @@ export default class extends React.Component {
     }
 
     render() {
+        // console.log(this.props)
         return (
             <main
                 id="main"
