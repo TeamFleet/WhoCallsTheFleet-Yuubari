@@ -64,7 +64,7 @@
         "super-project-cli": "^1.1.7",
 
         "react-transition-group": "^2.2.1",
-        "react-markdown": "^3.0.2",
+        "react-markdown": "^3.1.0",
 
         "bind-event": "^1.0.5",
         "check-css-prop": "^1.0.1",
@@ -79,7 +79,7 @@
         "postcss-pxtorem": "^4.0.1",
         "cssnano": "^4.0.0-rc.2",
 
-        "fs-extra": "^4.0.2",
+        "fs-extra": "^4.0.3",
         "glob": "^7.1.2",
         "json-pretty": "^0.0.1",
         "request": "^2.83.0",
