@@ -12,6 +12,7 @@
             "max_memory_restart": "1G",
             "out_file": "logs/dev/fleet-dev-client.log",
             "error_file": "logs/dev/fleet-dev-client-error.log",
+            "detached": true,
             "env": {
                 "WEBPACK_STAGE_MODE": "client",
                 "WEBPACK_BUILD_ENV": "dev",
@@ -26,6 +27,7 @@
             "max_memory_restart": "1G",
             "out_file": "logs/dev/fleet-dev-server.log",
             "error_file": "logs/dev/fleet-dev-server-error.log",
+            "detached": true,
             "env": {
                 "WEBPACK_STAGE_MODE": "server",
                 "WEBPACK_BUILD_ENV": "dev",
@@ -44,6 +46,7 @@
             "watch": [ // 监控变化的目录，一旦变化，自动重启
                 "dist-web"
             ],
+            "detached": true,
             "env": {
                 "WEBPACK_STAGE_MODE": "server",
                 "WEBPACK_BUILD_ENV": "dev",

@@ -20,23 +20,23 @@ export default [
         }
     },
     {
-        path: 'combat',
-        name: 'combat',
+        path: 'academy',
+        name: 'academy',
         getComponent: (nextState, cb) => {
             require.ensure([], (require) => {
-                if (routeCheck(nextState)) cb(null, require('@appUI/pages/combat').default)
-            }, 'combat')
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/academy').default)
+            }, 'academy')
         }
     },
-    {
-        path: 'sets',
-        name: 'sets',
-        getComponent: (nextState, cb) => {
-            require.ensure([], (require) => {
-                if (routeCheck(nextState)) cb(null, require('@appUI/pages/sets').default)
-            }, 'sets')
-        }
-    },
+    // {
+    //     path: 'sets',
+    //     name: 'sets',
+    //     getComponent: (nextState, cb) => {
+    //         require.ensure([], (require) => {
+    //             if (routeCheck(nextState)) cb(null, require('@appUI/pages/sets').default)
+    //         }, 'sets')
+    //     }
+    // },
 
     // redirects
     // {

@@ -99,7 +99,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
                                         </IconEquipment>
                                     </li>)
                                 else if (Array.isArray(type)) {
-                                    console.log(type)
+                                    // console.log(type)
                                     return (<li key={`${index}-${indexType}`}>
                                         {translate("require.equipment", { type: "" })}
                                         {typeof type[0] === 'number' && (

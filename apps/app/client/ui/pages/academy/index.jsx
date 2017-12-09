@@ -12,7 +12,7 @@ export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
             store,
-            title: translate('nav.sets')
+            title: translate('nav.academy')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -24,6 +24,7 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
+                <h2>{translate('nav.academy')}</h2>
                 <p><i>{translate('under_construction')}...</i></p>
             </PageContainer>
         )

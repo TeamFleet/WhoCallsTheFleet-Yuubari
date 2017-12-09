@@ -24,6 +24,7 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
+                <h2>{translate('nav.sorties')}</h2>
                 <p><i>{translate('under_construction')}...</i></p>
             </PageContainer>
         )
