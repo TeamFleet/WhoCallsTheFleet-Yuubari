@@ -4,8 +4,9 @@ import times from '@appUtils/times'
 import { ImportStyle } from 'sp-css-import'
 
 export const placeholders = []
+export const itemClassName = 'flex-item'
 times(10)(index => placeholders.push(
-    <span className="flex-item placeholder" key={index}></span>
+    <span className={`${itemClassName} placeholder`} key={index}></span>
 ))
 
 @ImportStyle(require('./styles.less'))

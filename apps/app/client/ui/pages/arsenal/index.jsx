@@ -19,8 +19,9 @@ import sortShips from '@appUtils/sort-ships'
 // import {Link, IndexLink} from 'react-router'
 import Link from '@appUI/components/link'
 import LinkEquipment from '@appUI/components/link/equipment'
-import MainHeader from '@appUI/components/main-header'
+import MainHeaderTabs, { tabClassName as mainHeaderTabClassName } from '@appUI/components/main-header/tabs'
 import { Resources as ImprovementResources } from '@appUI/components/improvement'
+import FlexContainer, { itemClassName as flexItemClassName } from '@appUI/containers/flex'
 
 const daysArr = [
     "Sunday",
@@ -33,7 +34,7 @@ const daysArr = [
 ]
 
 @connect()
-@ImportStyle(require('./arsenal.less'))
+@ImportStyle(require('./styles.less'))
 export default class PageArsenal extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const state = store.getState()
@@ -70,72 +71,71 @@ export default class PageArsenal extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <PageArsenalHeader />
+                <PageArsenalHeader isDay={typeof this.props.params === 'object' && typeof this.props.params.day !== 'undefined'} />
 
-                {day > -1 && <PageArsenalListDay day={day} />}
-
-                {day === -1 && (<div>
-                    {db.arsenalAll.map((item, index) => {
-                        const equipment = getEquipment(item)
-                        return (
-                            <p key={index}>
-                                <span>{equipment._name}</span>
-                            </p>
-                        )
-                    })}
-                </div>)}
+                <FlexContainer className="list">
+                    {day > -1 && <PageArsenalListDay day={day} />}
+                    {day === -1 && (<div>
+                        {db.arsenalAll.map((item, index) => {
+                            const equipment = getEquipment(item)
+                            return (
+                                <p key={index}>
+                                    <span>{equipment._name}</span>
+                                </p>
+                            )
+                        })}
+                    </div>)}
+                </FlexContainer>
             </PageContainer>
         )
     }
 }
 
-// @ImportStyle(require('./arsenal.less'))
+@ImportStyle(require('./styles-header.less'))
 class PageArsenalHeader extends React.Component {
     render() {
         const jst = getTimeJST()
         const jstDay = jst.getDay()
-        const isDay = typeof this.props.params === 'object' && typeof this.props.params.day !== 'undefined'
-        return (
-            <MainHeader
-                className={classNames({
-                    [this.props.className]: true,
-                    // 'is-options-show': this.props.isModeFilter,
-                })}
-            >
-                {[
+        return <MainHeaderTabs
+            className={classNames({
+                [this.props.className]: true,
+                // 'is-options-show': this.props.isModeFilter,
+            })}
+            tabs={[
+                <Link
+                    key="today"
+                    href={`/arsenal/${jstDay}`}
+                    replace={true}
+                    className={classNames([mainHeaderTabClassName, "link-today"])}
+                    children={translate(`DAYS`)}
+                />,
+                ...daysArr.map((day, index) => (
                     <Link
-                        key="today"
-                        href={`/arsenal/${jstDay}`}
-                        replace={true}
-                        className="link-today"
-                        children={translate(`DAYS`)}
-                    />,
-                    ...daysArr.map((day, index) => (
-                        <Link
-                            key={day}
-                            href={`/arsenal/${index}`}
-                            replace={true}
-                            className={classNames({
-                                'link-day': true,
-                                'is-today': jstDay === index
-                            })}
-                            activeClassName="on"
-                            children={translate(`day_abbr.${day}`)}
-                        />
-                    )),
-                    <Link
-                        key="all"
-                        href={`/arsenal`}
+                        key={day}
+                        href={`/arsenal/${index}`}
                         replace={true}
                         className={classNames({
-                            'link-all': true,
-                            'on': !isDay
+                            [mainHeaderTabClassName]: true,
+                            'link-day': true,
+                            'is-today': jstDay === index
                         })}
-                        children={translate(`ALL`)}
+                        activeClassName="on"
+                        children={translate(`day_abbr.${day}`)}
                     />
-                ]}
-            </MainHeader>
-        )
+                )),
+                <Link
+                    key="all"
+                    href={`/arsenal`}
+                    replace={true}
+                    className={classNames({
+                        [mainHeaderTabClassName]: true,
+                        'link-all': true,
+                        'on': !this.props.isDay
+                    })}
+                    children={translate(`ALL`)}
+                />
+            ]}
+        />
     }
 }
 
@@ -149,48 +149,68 @@ class PageArsenalListDay extends React.Component {
             if (!Array.isArray(equipment.improvement) || !equipment.improvement[improvementIndex])
                 return null
 
-            const requirements = item[2]
-            const reqShips = []
-            const data = equipment.improvement[improvementIndex]
-            const hasUpgrade = Array.isArray(data.upgrade) && data.upgrade.length
-
-            requirements.forEach(index => {
-                if (!Array.isArray(data.req) || !data.req[index] || !Array.isArray(data.req[index][1]))
-                    return
-                data.req[index][1].forEach(id => reqShips.push(id))
-            })
-            const hasReqShips = reqShips.length ? true : false
-
-            return (
-                <div key={JSON.stringify(item)}>
-                    <br />
-
-                    <span><LinkEquipment equipment={equipment} /></span>
-                    {hasUpgrade &&
-                        <span> ⇨ <LinkEquipment equipment={data.upgrade[0]} /> ★+{data.upgrade[1]}</span>
-                    }
-
-                    <div>
-                        {hasReqShips && (
-                            sortShips(reqShips).map(ship => {
-                                ship = getShip(ship)
-                                return <Link
-                                    key={ship.id}
-                                    to={getLink('ship', ship.id)}
-                                    children={ship.getName(translate('shipname_dash_none'))}
-                                />
-                            })
-                        )}
-                        {!hasReqShips && (
-                            'NO REQ'
-                        )}
-                    </div>
-
-                    <ImprovementResources
-                        data={data}
-                    />
-                </div>
-            )
+            return <PageArsenalListItem
+                key={JSON.stringify(item)}
+                equipment={equipment}
+                improvementIndex={improvementIndex}
+                requirements={item[2]}
+            />
         })
+    }
+}
+
+@ImportStyle(require('./styles-item.less'))
+class PageArsenalListItem extends React.Component {
+    render() {
+        const {
+            equipment,
+            improvementIndex,
+            requirements
+        } = this.props
+
+        const reqShips = []
+        const data = equipment.improvement[improvementIndex]
+        const hasUpgrade = Array.isArray(data.upgrade) && data.upgrade.length
+
+        requirements.forEach(index => {
+            if (!Array.isArray(data.req) || !data.req[index] || !Array.isArray(data.req[index][1]))
+                return
+            data.req[index][1].forEach(id => reqShips.push(id))
+        })
+        const hasReqShips = reqShips.length ? true : false
+
+        return (
+            <div
+                className={classNames([
+                    this.props.className,
+                    flexItemClassName
+                ])}
+            >
+                <br />
+
+                <span><LinkEquipment equipment={equipment} /></span>
+                {hasUpgrade &&
+                    <span> ⇨ <LinkEquipment equipment={data.upgrade[0]} /> ★+{data.upgrade[1]}</span>
+                }
+
+                <div>
+                    {hasReqShips && (
+                        sortShips(reqShips).map(ship => {
+                            ship = getShip(ship)
+                            return <Link
+                                key={ship.id}
+                                to={getLink('ship', ship.id)}
+                                children={ship.getName(translate('shipname_dash_none'))}
+                            />
+                        })
+                    )}
+                    {!hasReqShips && translate('improvement.any_2nd_ship')}
+                </div>
+
+                <ImprovementResources
+                    data={data}
+                />
+            </div>
+        )
     }
 }

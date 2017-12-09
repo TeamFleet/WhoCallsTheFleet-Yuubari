@@ -1,0 +1,14 @@
+@import "~base.less";
+
+.component{
+    & > .tabs{
+        line-height:@infos-tab-height;
+    }
+    .main-header-tab-item{
+        .style-tab();
+        height: (@infos-tab-height - 1);
+        & + .main-header-tab-item{
+            margin-left: 20px;
+        }
+    }
+}

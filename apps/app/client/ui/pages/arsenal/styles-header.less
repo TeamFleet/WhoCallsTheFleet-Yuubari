@@ -1,0 +1,29 @@
+@import "~base.less";
+
+.component{
+    .link-today{
+        margin-right: 5px;
+        &:after{
+            content:    "";
+            position:   absolute;
+            top:        50%;
+            right:      -15px;
+            width:      1px;
+            height:     30px;
+            margin-top: -15px;
+            transform:  skew(-17.5deg);
+            transform-origin: 50% 50%;
+            background: @color-border;
+        }
+    }
+    .link-day{
+        min-width:  25px;
+        margin-right:-15px;
+        &.is-today{
+            border-bottom-color: @color-fade;
+        }
+    }
+    .link-day + .link-all{
+        left:   25px;
+    }
+}
