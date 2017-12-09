@@ -11,9 +11,9 @@
             width:      1px;
             height:     30px;
             margin-top: -15px;
-            transform:  skew(-17.5deg);
+            transform:  skew(-20deg) scale(2, 1);
             transform-origin: 50% 50%;
-            background: @color-border;
+            background: @color-border-2;
         }
     }
     .link-day{
@@ -26,4 +26,13 @@
     .link-day + .link-all{
         left:   25px;
     }
+
+    .screen-phone-small({
+        .link-today{
+            display:    none;
+            & + .link-day{
+                margin-left: 0;
+            }
+        }
+    });
 }
