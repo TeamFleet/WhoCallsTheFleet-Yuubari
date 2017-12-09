@@ -1,71 +1,68 @@
+
+const fs = require('fs-extra')
+const path = require('path')
+const Koa = require('koa')
+const koaStatic = require('koa-static')
+const convert = require('koa-convert')
+
 import cookie from 'cookie'
-
-//
-
-import { reactApp } from '../client'
-import { template } from '../html'
-import { CHANGE_LANGUAGE, TELL_CLIENT_URL, SERVER_REDUCER_NAME, serverReducer } from './server-redux'
 import isomorphicUtils from 'sp-isomorphic-utils'
 import { localeId as currentLocaleId } from 'sp-i18n'
 import i18nOnServerRender from 'sp-i18n/onServerRender'
 import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
-import { updateLocale as dbUpdateLocale } from '@appLogic/database'
 // import injectPWA from 'sp-pwa/inject-pwa'
 
-// const webpackConfig = require('../../../config/webpack')
+import { reactApp } from '../client'
+import { template } from '../html'
+import { CHANGE_LANGUAGE, TELL_CLIENT_URL, SERVER_REDUCER_NAME, serverReducer } from './server-redux'
+
+
+
+
+// ============================================================================
+// 载入目录、相关配置、自定模块等
+import { updateLocale as dbUpdateLocale } from '@appLogic/database'
 const {
     pathNameDistWeb: distPathname,
     pathNameSub: appName
 } = require('../config/site')
 const dirs = require('../../../config/directories')
+const rootPath = process.cwd() + '/' + distPathname + '/public'
+// const webpackConfig = require('../../../config/webpack')
 
-// 
 
-const fs = require('fs-extra')
-const path = require('path')
-const Koa = require('koa')
+
+
+// ============================================================================
+// 创建KOA实例
 const app = new Koa()
 
 /* 扩展服务端特色处理的redux */
-
 reactApp.redux.reducer.use(SERVER_REDUCER_NAME, serverReducer)
 
-
-
 /* 静态目录,用于外界访问打包好的静态文件js、css等 */
-
-const koaStatic = require('koa-static')
-const convert = require('koa-convert')
-const rootPath = process.cwd() + '/' + distPathname + '/public'
-const option = {
-    maxage: 0,
-    hidden: true,
-    index: 'index.html',
-    defer: false,
-    gzip: true,
-    extensions: false
-}
-
-// console.log('==============================')
-// console.log(rootPath)
-// console.log('==============================')
-
-app.use(convert(koaStatic(rootPath, option)))
+app.use(convert(koaStatic(
+    rootPath,
+    {
+        maxage: 0,
+        hidden: true,
+        index: 'index.html',
+        defer: false,
+        gzip: true,
+        extensions: false
+    }
+)))
 
 
 
-/* 同构配置 */
 
+// ============================================================================
+// 同构配置
 const getFile = filename => isomorphicUtils.getFile(filename, appName, distPathname)
 const getFileContent = filename => fs.readFileSync(
     path.join(rootPath, getFile(filename)),
     'utf-8'
 )
-
-// const getFile = filename => isomorphicUtils.getFile(
-//     __DEV__ ? `app.${filename}` : `app/${filename}`,
-//     distPathname
-// )
 
 const isomorphic = reactApp.isomorphic.createKoaMiddleware({
 
@@ -96,15 +93,13 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
                 .replace(/\n/g, '')
 
             return `<div class="hide">${content}</div>`
-            + (__DEV__ ? `<script>var __ICONSVG__ = \`${content}\`</script>` : '')
+                + (__DEV__ ? `<script>var __ICONSVG__ = \`${content}\`</script>` : '')
         }),
 
-        critical_css: (() => {
-            // console.log(path.join(rootPath, getFile('critical.css')))
-            if (__DEV__) return ''
-            else //return `<link rel="stylesheet" type="text/css" href="${getFile('critical.css')}" />`
-                return `<style type="text/css">${getFileContent('critical.css')}</style>`
-        })(),
+        critical_css: (() => __DEV__
+            ? ''
+            : `<style type="text/css">${getFileContent('critical.css')}</style>`
+        )(),
 
         critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
         // client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
@@ -117,10 +112,8 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
 
         scripts: (() => {
             let html = ''
-            const scripts = [
-                'commons.js',
-                'client.js'
-            ]
+            const scripts = (__DEV__ ? [] : ['commons.js'])
+                .concat(['client.js'])
 
             if (__DEV__) html += `<script type="text/javascript" src="${getFile('critical.js')}"></script>`
             else html += `<script type="text/javascript">${getFileContent('critical.js')}</script>`

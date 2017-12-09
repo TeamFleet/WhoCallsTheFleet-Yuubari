@@ -133,7 +133,7 @@ export default () => {
             db.arsenalDays = days
         }
 
-        if (__CLIENT__ && __DEV__) console.log('database init', db)
+        if (__CLIENT__ && __DEV__) console.log('📦 Database inited.', db)
 
         objInit.db = db
         needInit = true
@@ -144,5 +144,5 @@ export default () => {
     if (needInit)
         register(objInit)
 
-    if (__CLIENT__ && __DEV__) console.log('KCKit', kckit)
+    if (__CLIENT__ && __DEV__) console.log('🔌 KCKit inited.', kckit)
 }
