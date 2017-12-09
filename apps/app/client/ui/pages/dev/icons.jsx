@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import PageContainer from 'sp-ui-pagecontainer'
-import htmlHead from '@appUtils/html-head.js'
+import htmlHead from '@appUtils/html-head'
 
-import MainHeader from '@appUI/components/main-header.jsx'
-import Icon from '@appUI/components/icon.jsx'
+import MainHeader from '@appUI/components/main-header'
+import Icon from '@appUI/components/icon'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './icons.less'

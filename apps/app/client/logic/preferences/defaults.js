@@ -1,4 +1,6 @@
 export default {
     shipListShowAllShips: false,
-    shipDetailsStatLevel: 99
+    shipDetailsStatLevel: 99,
+
+    arsenalResourcesDetails: false,
 }

@@ -9,13 +9,13 @@ import { ImportStyle } from 'sp-css-import'
 
 // import checkCssProp from 'check-css-prop'
 
-import Background from './background.jsx'
+import Background from '@appUI/components/background.jsx'
 
 @connect(state => ({
     mainKey: state.app.mainKey,
     // appReady: state.app.ready,
 }))
-@ImportStyle(require('./main-header.less'))
+@ImportStyle(require('./styles.less'))
 export default class extends React.Component {
     constructor() {
         super()

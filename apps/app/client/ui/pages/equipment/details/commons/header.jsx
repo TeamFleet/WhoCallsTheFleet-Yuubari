@@ -7,10 +7,10 @@ import { ImportStyle } from 'sp-css-import'
 //     changeTab as equipmentDetailsChangeTab,
 //     TABINDEX
 // } from '@appLogic/infospage/api'
-import { getInfosId } from '../../details'
+// import { getInfosId } from '../../details'
 import getLink from '@appUtils/get-link'
 
-import Header from '@appUI/containers/infos-header'
+import Header from '@appUI/components/main-header/infos'
 
 // @connect((state, ownProps) => state.infosPage[getInfosId(ownProps.equipment.id)] || {})
 @ImportStyle(require('./header.less'))

@@ -10,7 +10,7 @@ import db from '@appLogic/database'
 // import { getInfosId } from '../../details'
 import getLink from '@appUtils/get-link'
 
-import Header from '@appUI/containers/infos-header'
+import Header from '@appUI/components/main-header/infos'
 
 // @connect((state, ownProps) => state.infosPage[getInfosId(ownProps.ship.id)] || {})
 @ImportStyle(require('./header.less'))

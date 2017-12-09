@@ -2,11 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import PageContainer from 'sp-ui-pagecontainer'
-import htmlHead from '@appUtils/html-head.js'
-import DevHeader from '@appUI/components/dev/header.jsx'
+import htmlHead from '@appUtils/html-head'
 
-import Button from '@appUI/components/button.jsx'
-import ButtonGroup from '@appUI/components/button-group.jsx'
+import DevHeader from '@appUI/components/dev/header'
+import Button from '@appUI/components/button'
+import ButtonGroup from '@appUI/components/button-group'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './components.less'

@@ -17,11 +17,11 @@ import {
 } from '@appLogic/ship-list/api.js'
 import classNames from 'classnames'
 
-import MainHeader from '@appUI/components/main-header.jsx'
-import Icon from '@appUI/components/icon.jsx'
-// import Button from '@appUI/components/button.jsx'
-// import ButtonGroup from '@appUI/components/button-group.jsx'
-import TableHeader from './table-header.jsx'
+import MainHeader from '@appUI/components/main-header'
+import Icon from '@appUI/components/icon'
+// import Button from '@appUI/components/button'
+// import ButtonGroup from '@appUI/components/button-group'
+import TableHeader from './table-header'
 
 import { ImportStyle } from 'sp-css-import'
 import styleHeader from './header.less'

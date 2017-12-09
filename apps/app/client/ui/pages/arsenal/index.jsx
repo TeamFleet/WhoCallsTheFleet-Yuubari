@@ -6,6 +6,7 @@ import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
 
 import db from '@appLogic/database'
+import pref from '@appLogic/preferences'
 
 import htmlHead from '@appUtils/html-head'
 import getTimeJST from '@appUtils/get-time-jst'
@@ -71,57 +72,7 @@ export default class PageArsenal extends React.Component {
             >
                 <PageArsenalHeader />
 
-                {day > -1 && (
-                    db.arsenalDays[day].map(item => {
-                        const equipment = getEquipment(item[0])
-                        const improvementIndex = item[1]
-                        if (!Array.isArray(equipment.improvement) || !equipment.improvement[improvementIndex])
-                            return null
-
-                        const requirements = item[2]
-                        const reqShips = []
-                        const data = equipment.improvement[improvementIndex]
-                        const hasUpgrade = Array.isArray(data.upgrade) && data.upgrade.length
-
-                        requirements.forEach(index => {
-                            if (!Array.isArray(data.req) || !data.req[index] || !Array.isArray(data.req[index][1]))
-                                return
-                            data.req[index][1].forEach(id => reqShips.push(id))
-                        })
-                        const hasReqShips = reqShips.length ? true : false
-
-                        return (
-                            <div key={JSON.stringify(item)}>
-                                <br />
-
-                                <span><LinkEquipment equipment={equipment} /></span>
-                                {hasUpgrade &&
-                                    <span> ⇨ <LinkEquipment equipment={data.upgrade[0]} /> ★+{data.upgrade[1]}</span>
-                                }
-
-                                <div>
-                                    {hasReqShips && (
-                                        sortShips(reqShips).map(ship => {
-                                            ship = getShip(ship)
-                                            return <Link
-                                                key={ship.id}
-                                                to={getLink('ship', ship.id)}
-                                                children={ship.getName(translate('shipname_dash_none'))}
-                                            />
-                                        })
-                                    )}
-                                    {!hasReqShips && (
-                                        'NO REQ'
-                                    )}
-                                </div>
-
-                                <ImprovementResources
-                                    data={data}
-                                />
-                            </div>
-                        )
-                    })
-                )}
+                {day > -1 && <PageArsenalListDay day={day} />}
 
                 {day === -1 && (<div>
                     {db.arsenalAll.map((item, index) => {
@@ -185,5 +136,61 @@ class PageArsenalHeader extends React.Component {
                 ]}
             </MainHeader>
         )
+    }
+}
+
+class PageArsenalListDay extends React.Component {
+    render() {
+        return db.arsenalDays[this.props.day].map(item => {
+
+            const equipment = getEquipment(item[0])
+            const improvementIndex = item[1]
+
+            if (!Array.isArray(equipment.improvement) || !equipment.improvement[improvementIndex])
+                return null
+
+            const requirements = item[2]
+            const reqShips = []
+            const data = equipment.improvement[improvementIndex]
+            const hasUpgrade = Array.isArray(data.upgrade) && data.upgrade.length
+
+            requirements.forEach(index => {
+                if (!Array.isArray(data.req) || !data.req[index] || !Array.isArray(data.req[index][1]))
+                    return
+                data.req[index][1].forEach(id => reqShips.push(id))
+            })
+            const hasReqShips = reqShips.length ? true : false
+
+            return (
+                <div key={JSON.stringify(item)}>
+                    <br />
+
+                    <span><LinkEquipment equipment={equipment} /></span>
+                    {hasUpgrade &&
+                        <span> ⇨ <LinkEquipment equipment={data.upgrade[0]} /> ★+{data.upgrade[1]}</span>
+                    }
+
+                    <div>
+                        {hasReqShips && (
+                            sortShips(reqShips).map(ship => {
+                                ship = getShip(ship)
+                                return <Link
+                                    key={ship.id}
+                                    to={getLink('ship', ship.id)}
+                                    children={ship.getName(translate('shipname_dash_none'))}
+                                />
+                            })
+                        )}
+                        {!hasReqShips && (
+                            'NO REQ'
+                        )}
+                    </div>
+
+                    <ImprovementResources
+                        data={data}
+                    />
+                </div>
+            )
+        })
     }
 }

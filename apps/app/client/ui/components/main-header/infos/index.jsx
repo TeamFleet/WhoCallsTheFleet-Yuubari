@@ -6,12 +6,12 @@ import { ImportStyle } from 'sp-css-import'
 
 import routerReplace from '@appUtils/router-replace'
 
-import MainHeader from '@appUI/components/main-header.jsx'
-import Title from '@appUI/components/title.jsx'
+import MainHeader from '@appUI/components/main-header'
+import Title from '@appUI/components/title'
 
 // @connect()
 @ImportStyle(require('./styles.less'))
-export default class InfosHeader extends React.Component {
+export default class MainHeaderInfos extends React.Component {
     /* props
      * currentIndex
      * urlBase
@@ -78,7 +78,7 @@ export default class InfosHeader extends React.Component {
 
     render() {
         const isPortal = __CLIENT__
-        const Component = isPortal ? MainHeader : 'div'
+        // const Component = isPortal ? MainHeader : 'div'
 
         const {
             className,
@@ -97,7 +97,7 @@ export default class InfosHeader extends React.Component {
         ].forEach(key => delete props[key])
 
         return (
-            <Component className={classNames([
+            <MainHeader className={classNames([
                 className, {
                     'is-portal': isPortal,
                     'has-subtitle': !!(subtitle),
@@ -122,7 +122,7 @@ export default class InfosHeader extends React.Component {
 
                 {!tabs && <div className="tabs-placeholder" />}
 
-            </Component>
+            </MainHeader>
         )
     }
 }
