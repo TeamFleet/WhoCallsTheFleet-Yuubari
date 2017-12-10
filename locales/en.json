@@ -265,5 +265,10 @@
         "casts": "Casts",
         "illustrates": "Illustrates",
         "links": "Links"
+    },
+
+    "arsenal": {
+        "filter_by_day": "Filter by day",
+        "all": "All"
     }
 }

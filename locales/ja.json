@@ -266,5 +266,10 @@
         "casts": "Casts",
         "illustrates": "Illustrates",
         "links": "Links"
+    },
+
+    "arsenal": {
+        "filter_by_day": "曜日別",
+        "all": "一覧"
     }
 }

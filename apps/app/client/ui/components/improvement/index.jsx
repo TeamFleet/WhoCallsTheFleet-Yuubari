@@ -78,8 +78,29 @@ const getValue = value => {
     return _getValue(value)
 }
 
+class _Resources extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.data = props.data || props.resource || props.resources
+        this.upgradable = props.upgradable
+
+        if (typeof this.data === 'object' && this.data.resource) {
+            if (typeof this.upgradable === 'undefined' &&
+                Array.isArray(this.data.upgrade) && this.data.upgrade.length
+            )
+                this.upgradable = true
+            this.data = this.data.resource
+        }
+        if (!Array.isArray(this.data))
+            this.data = []
+
+        if (this.data.length < 3) this.upgradable = false
+    }
+}
+
 @ImportStyle(require('./styles-resources.less'))
-export class Resources extends React.Component {
+export class Resources extends _Resources {
     renderCategory(category, data) {
         const title = typeof category === 'string'
             ? translate(`improvement.${category}`)
@@ -172,26 +193,13 @@ export class Resources extends React.Component {
     }
 
     render() {
-        let data = this.props.data || this.props.resource || this.props.resources
-        let upgradable = this.props.upgradable
-
-        if (typeof data === 'object' && data.resource) {
-            if (typeof upgradable === 'undefined' && Array.isArray(data.upgrade) && data.upgrade.length)
-                upgradable = true
-            data = data.resource
-        }
-        if (!Array.isArray(data))
-            data = []
-
-        if (data.length < 3) upgradable = false
-
         return (
             <div className={this.props.className}>
-                {this.renderCategory('resources', data[0] || [undefined, undefined, undefined, undefined])}
-                {this.renderCategory(0, data[1] || [undefined, undefined, undefined, undefined, undefined])}
-                {this.renderCategory(6, data[2] || [undefined, undefined, undefined, undefined, undefined])}
-                {upgradable && this.renderCategory('upgrading', data[3])}
-                {!upgradable && this.renderCategory('upgrading', false)}
+                {this.renderCategory('resources', this.data[0] || [undefined, undefined, undefined, undefined])}
+                {this.renderCategory(0, this.data[1] || [undefined, undefined, undefined, undefined, undefined])}
+                {this.renderCategory(6, this.data[2] || [undefined, undefined, undefined, undefined, undefined])}
+                {this.upgradable && this.renderCategory('upgrading', this.data[3])}
+                {!this.upgradable && this.renderCategory('upgrading', false)}
             </div>
         )
     }

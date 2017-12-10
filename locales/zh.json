@@ -265,5 +265,10 @@
         "casts": "配音",
         "illustrates": "绘制",
         "links": "相关链接"
+    },
+
+    "arsenal": {
+        "filter_by_day": "每日改修",
+        "all": "全部改修"
     }
 }

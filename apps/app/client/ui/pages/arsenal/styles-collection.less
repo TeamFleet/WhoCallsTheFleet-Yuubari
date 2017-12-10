@@ -1,0 +1,60 @@
+@import '~base.less';
+
+.component{
+    display:    grid;
+    grid-gap:   20px;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr) );
+
+    padding-top:    35px;
+    margin-bottom:  15px;
+
+    &:last-child{
+        margin-bottom: 0;
+    }
+
+    & > .title{
+        position:   absolute;
+        font-size:  @font-size-h4;
+        line-height:20px;
+        height:     20px;
+        padding:    0 1em 0 15px;
+        transition-property: color;
+		.is-hover({
+			color: 	@color-accent;
+		}; {
+			color:  @color-link-active;
+		});
+		&:active{
+			color:  @color-link-active;
+		}
+        .sku-webapp({
+            cursor:     pointer;
+        });
+        &:before{
+            @size:      6px;
+            content:    "";
+            position:   absolute;
+            left:       0;
+            top:        50%;
+            margin-top: (0 - @size);
+            width:      0;
+            height:     0;
+            overflow:   hidden;
+            border:     @size solid transparent;
+            border-left-color:  currentColor;
+            transform-origin:   25% 33.3333%;
+        }
+    }
+
+    &.on{
+        margin-bottom:  30px;
+        &:last-child{
+            margin-bottom: 0;
+        }
+        & > .title{
+            &:before{
+                transform:  rotate(90deg);
+            }
+        }
+    }
+}

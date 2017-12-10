@@ -59,7 +59,7 @@ export default () => {
         db.shipsSpecial = {}
         let shipIndex = 0
         shipCollections.forEach(collection => {
-            collection.name = collection.name[locale]
+            collection.names = { ...collection.name }
             collection.list.forEach(list => {
                 list.ships.forEach((arrShips, index) => {
                     list.ships[index] = arrShips.map(shipId => {
@@ -79,6 +79,11 @@ export default () => {
                     })
                 })
             })
+            Object.defineProperty(collection, 'name', {
+                get: function () {
+                    return this.names[locale]
+                }
+            })
         })
         db.shipCollections = shipCollections
 
@@ -86,7 +91,7 @@ export default () => {
         let equipmentTypeIndex = 0
         let equipmentIndex = 0
         equipmentCollections.forEach(collection => {
-            collection.name = collection.name[locale]
+            collection.names = { ...collection.name }
             collection.list.forEach(list => {
                 Object.assign(db.equipmentTypes[list.type], {
                     order: equipmentTypeIndex++
@@ -97,6 +102,11 @@ export default () => {
                     })
                     return db.equipments[equipmentId]
                 })
+            })
+            Object.defineProperty(collection, 'name', {
+                get: function () {
+                    return this.names[locale]
+                }
             })
         })
         db.equipmentCollections = equipmentCollections

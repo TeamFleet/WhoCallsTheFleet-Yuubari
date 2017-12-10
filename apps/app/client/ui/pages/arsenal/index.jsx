@@ -19,9 +19,8 @@ import sortShips from '@appUtils/sort-ships'
 // import {Link, IndexLink} from 'react-router'
 import Link from '@appUI/components/link'
 import LinkEquipment from '@appUI/components/link/equipment'
-import MainHeaderTabs, { tabClassName as mainHeaderTabClassName } from '@appUI/components/main-header/tabs'
+import MainHeader from '@appUI/components/main-header/main-options'
 import { Resources as ImprovementResources } from '@appUI/components/improvement'
-import FlexContainer, { itemClassName as flexItemClassName } from '@appUI/containers/flex'
 
 const daysArr = [
     "Sunday",
@@ -73,19 +72,17 @@ export default class PageArsenal extends React.Component {
             >
                 <PageArsenalHeader isDay={typeof this.props.params === 'object' && typeof this.props.params.day !== 'undefined'} />
 
-                <FlexContainer className="list">
-                    {day > -1 && <PageArsenalListDay day={day} />}
-                    {day === -1 && (<div>
-                        {db.arsenalAll.map((item, index) => {
-                            const equipment = getEquipment(item)
-                            return (
-                                <p key={index}>
-                                    <span>{equipment._name}</span>
-                                </p>
-                            )
-                        })}
-                    </div>)}
-                </FlexContainer>
+                {day > -1 && <PageArsenalListDay day={day} />}
+                {day === -1 && (<div>
+                    {db.arsenalAll.map((item, index) => {
+                        const equipment = getEquipment(item)
+                        return (
+                            <p key={index}>
+                                <span>{equipment._name}</span>
+                            </p>
+                        )
+                    })}
+                </div>)}
             </PageContainer>
         )
     }
@@ -96,18 +93,20 @@ class PageArsenalHeader extends React.Component {
     render() {
         const jst = getTimeJST()
         const jstDay = jst.getDay()
-        return <MainHeaderTabs
+        return <MainHeader
             className={classNames({
                 [this.props.className]: true,
                 // 'is-options-show': this.props.isModeFilter,
             })}
-            tabs={[
+
+            mainClassName="tabs"
+            main={[
                 <Link
                     key="today"
                     href={`/arsenal/${jstDay}`}
                     replace={true}
-                    className={classNames([mainHeaderTabClassName, "link-today"])}
-                    children={translate(`DAYS`)}
+                    className={classNames(['tab', "link-today"])}
+                    children={translate(`arsenal.filter_by_day`)}
                 />,
                 ...daysArr.map((day, index) => (
                     <Link
@@ -115,7 +114,7 @@ class PageArsenalHeader extends React.Component {
                         href={`/arsenal/${index}`}
                         replace={true}
                         className={classNames({
-                            [mainHeaderTabClassName]: true,
+                            tab: true,
                             'link-day': true,
                             'is-today': jstDay === index
                         })}
@@ -128,11 +127,11 @@ class PageArsenalHeader extends React.Component {
                     href={`/arsenal`}
                     replace={true}
                     className={classNames({
-                        [mainHeaderTabClassName]: true,
+                        tab: true,
                         'link-all': true,
                         'on': !this.props.isDay
                     })}
-                    children={translate(`ALL`)}
+                    children={translate(`arsenal.all`)}
                 />
             ]}
         />
@@ -141,21 +140,84 @@ class PageArsenalHeader extends React.Component {
 
 class PageArsenalListDay extends React.Component {
     render() {
-        return db.arsenalDays[this.props.day].map(item => {
+        let lastCollection = -1
+        const collectionIndexMap = {}
+        const collections = []
 
+        db.arsenalDays[this.props.day].forEach(item => {
             const equipment = getEquipment(item[0])
             const improvementIndex = item[1]
 
             if (!Array.isArray(equipment.improvement) || !equipment.improvement[improvementIndex])
                 return null
 
-            return <PageArsenalListItem
+            let collection
+            // console.log(db.equipmentCollections)
+            db.equipmentCollections.some(o => {
+                o.list.some(l => {
+                    if (equipment.type === l.type)
+                        collection = o.name
+                    return typeof collection !== 'undefined'
+                })
+                return typeof collection !== 'undefined'
+            })
+            let index = collectionIndexMap[collection]
+            if (lastCollection !== collection && typeof collection !== 'undefined') {
+                lastCollection = collection
+                if (typeof collectionIndexMap[collection] === 'undefined') {
+                    index = collections.length
+                    collectionIndexMap[collection] = collections.length
+                    collections.push({
+                        title: collection,
+                        list: []
+                    })
+                }
+                // list.push(
+                //     <PageArsenalListTitle key={`title-${collection}`} children={collection} />
+                // )
+            }
+
+            collections[index].list.push(<PageArsenalListItem
                 key={JSON.stringify(item)}
                 equipment={equipment}
                 improvementIndex={improvementIndex}
                 requirements={item[2]}
-            />
+            />)
         })
+
+        return collections.map(collection => (
+            <PageArsenalCollection
+                key={`collection-${collection.title}`}
+                title={collection.title}
+            >
+                {collection.list}
+            </PageArsenalCollection>
+        ))
+    }
+}
+
+@ImportStyle(require('./styles-collection.less'))
+class PageArsenalCollection extends React.Component {
+    constructor(){
+        super()
+        this.state = {
+            show: false
+        }
+    }
+    render() {
+        return (
+            <div className={classNames({
+                [this.props.className]: true,
+                'on': this.state.show
+            })}>
+                <h2 className="title" onClick={() => {
+                    this.setState({
+                        show: !this.state.show
+                    })
+                }}>{this.props.title}</h2>
+                {this.state.show && this.props.children}
+            </div>
+        )
     }
 }
 
@@ -183,11 +245,8 @@ class PageArsenalListItem extends React.Component {
             <div
                 className={classNames([
                     this.props.className,
-                    flexItemClassName
                 ])}
             >
-                <br />
-
                 <span><LinkEquipment equipment={equipment} /></span>
                 {hasUpgrade &&
                     <span> ⇨ <LinkEquipment equipment={data.upgrade[0]} /> ★+{data.upgrade[1]}</span>
