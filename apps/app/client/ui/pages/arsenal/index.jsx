@@ -214,7 +214,7 @@ class PageArsenalCollection extends React.Component {
                     this.setState({
                         show: !this.state.show
                     })
-                }}>{this.props.title}</h2>
+                }}>{this.props.title.split('&').join(' & ')}</h2>
                 {this.state.show && this.props.children}
             </div>
         )

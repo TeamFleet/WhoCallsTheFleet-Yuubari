@@ -1,9 +1,11 @@
 @import '~base.less';
 
 .component{
+    @column-width: 500px;
+
     display:    grid;
     grid-gap:   20px;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr) );
+    grid-template-columns: repeat(auto-fill, minmax(@column-width, 1fr) );
 
     padding-top:    35px;
     margin-bottom:  15px;
@@ -18,6 +20,7 @@
         line-height:20px;
         height:     20px;
         padding:    0 1em 0 15px;
+        font-weight:normal;
         transition-property: color;
 		.is-hover({
 			color: 	@color-accent;
@@ -33,6 +36,7 @@
         &:before{
             @size:      6px;
             content:    "";
+            opacity:    .5;
             position:   absolute;
             left:       0;
             top:        50%;
@@ -52,9 +56,15 @@
             margin-bottom: 0;
         }
         & > .title{
+            font-weight:    bolder;
             &:before{
+                opacity:    1;
                 transform:  rotate(90deg);
             }
         }
+    }
+
+    @media all and (max-width: (@column-width + @main-margin-phone * 2)){
+        grid-template-columns: 100%;
     }
 }
