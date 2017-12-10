@@ -26,7 +26,7 @@ let navs = [
     undefined,
     'ships',
     'equipments',
-    'indev-arsenal',
+    'wip-arsenal',
     'entities',
     __DEV__ ? 'indev-exillusts' : null,
     undefined,
@@ -156,12 +156,17 @@ class Navs extends React.Component {
 
         let title
         let isIndev = false
+        let isWIP = false
         let isCurrent
 
         if (route.substr(0, 6) === 'indev-') {
             route = route.substr(6)
             title = translate('nav.' + route)
             isIndev = true
+        } else if (route.substr(0, 4) === 'wip-') {
+            route = route.substr(4)
+            title = translate('nav.' + route)
+            isWIP = true
         } else if (route.substr(0, 4) === 'dev-')
             title = route
         else
@@ -187,6 +192,7 @@ class Navs extends React.Component {
                 className={classNames({
                     link: true,
                     'is-indev': isIndev,
+                    'is-wip': isWIP,
                     on: isCurrent
                 })}
                 activeClassName="on"

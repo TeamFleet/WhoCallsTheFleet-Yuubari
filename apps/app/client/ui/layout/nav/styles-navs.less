@@ -40,6 +40,18 @@
                 animation:  fadein @base-transition-duration @base-transition-timing-function;
             }
         }
+        &.is-indev,
+        &.is-wip{
+            &:after{
+                content:    "";
+                position:   absolute;
+                left:       -20px;
+                top:        0;
+                bottom:     0;
+                width:      80px;
+                z-index:    -1;
+            }
+        }
         &.is-indev{
             // &:after{
             //     content:    "DEV";
@@ -61,14 +73,13 @@
             // }
             &:after{
                 @color:     @theme-red-a400;
-                content:    "";
-                position:   absolute;
-                left:       -20px;
-                top:        0;
-                bottom:     0;
                 background: ease-out-sine-gradient(to right, fade(@color, 50%), fade(@color, 0%));
-                width:      80px;
-                z-index:    -1;
+            }
+        }
+        &.is-wip{
+            &:after{
+                @color:     @theme-blue-a700;
+                background: ease-out-sine-gradient(to right, fade(@color, 50%), fade(@color, 0%));
             }
         }
     }
