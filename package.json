@@ -57,7 +57,7 @@
 
     "dependencies": {
         "kckit": "^1.15.14",
-        "whocallsthefleet-database": "2017.12.11",
+        "whocallsthefleet-database": "2017.12.12",
         "whocallsthefleet-backgrounds": "1.2.0",
 
         "super-project": "^2.2.4",
