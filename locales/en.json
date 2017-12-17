@@ -242,6 +242,8 @@
         "facts_rankupgradable": "Rank-upgradable",
         "facts_unrankupgradable": "Un-rank-upgradable",
 
+        "bonus_stat": "Bonus",
+
         "scrap": "Scrap Value",
 
         "improvements": "Improvement Options",

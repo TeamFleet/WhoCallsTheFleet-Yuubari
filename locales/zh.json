@@ -241,6 +241,8 @@
         "facts_unupgradable": "不可升级",
         "facts_rankupgradable": "可提升熟练度",
         "facts_unrankupgradable": "不可提升熟练度",
+
+        "bonus_stat": "额外收益",
         
         "scrap": "废弃获得资源",
 

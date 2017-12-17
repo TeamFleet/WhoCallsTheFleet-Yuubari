@@ -5,12 +5,13 @@ import translate from 'sp-i18n'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
+import LinkMini from '@appUI/components/link-mini'
+import Stat from '@appUI/components/stat'
 
 import arrStats from '@appData/equipment-stats'
 import arrResources from '@appData/resources'
 // import getEquipment from '@appUtils/get-equipment'
 // import equipmentTypes from 'kckit/src/types/equipments'
-import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
 import { get } from 'kckit'
 
@@ -105,20 +106,12 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
                     }
 
                     {/* if (!value) return null */ }
-                    return (<Stat
-                        type={translate(`stat.${stat}`)}
+                    return (<StatValue
                         key={stat}
-                        className={
-                            classNames(["item", {
-                                "is-negative": (value < 0),
-                                "is-positive": (value > 0 && stat !== 'range' && stat !== 'distance'),
-                                'disabled': !value
-                            }])
-                        }
+                        className='item'
                         stat={stat}
-                    >
-                        {`${value > 0 && stat !== 'range' && stat !== 'distance' ? '+' : ''}${!value ? '-' : value}`}
-                    </Stat>)
+                        value={value}
+                    />)
                 })}
 
                 {!!(valueTP) && (
@@ -131,33 +124,99 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
                     </Stat>
                 )}
 
-                <Stat
-                    type={translate(`equipment_details.scrap`)}
-                    className="item scrap"
-                    key="scrap"
-                >
-                    {arrResources.map((resource, index) => {
-                        const value = getValue(equipment.dismantle[index])
-                        return (
-                            <Stat
-                                className={
-                                    classNames(['scrap-resource', {
-                                        disabled: !value
-                                    }])
-                                }
-                                key={index}
-                                stat={resource}
-                            >
-                                {value}
-                            </Stat>
-                        )
-                    })}
-                </Stat>
+                <BonusStat bonus={equipment.stat_bonus} />
+                <Scrap scrap={equipment.dismantle} />
 
             </EquipmentDetailsComponentFactsContainer>
         )
     }
 }
+
+const StatValue = ({ stat, value, className, hideTitle }) => (
+    <Stat
+        type={hideTitle ? undefined : translate(`stat.${stat}`)}
+        key={stat}
+        className={classNames([className, {
+            "is-negative": (value < 0),
+            "is-positive": (value > 0 && stat !== 'range' && stat !== 'distance'),
+            'disabled': !value
+        }])}
+        stat={stat}
+    >
+        {`${value > 0 && stat !== 'range' && stat !== 'distance' ? '+' : ''}${!value ? '-' : value}`}
+    </Stat>
+)
+
+const Scrap = ImportStyle(require('./styles-stats-scrap.less'))(
+    ({ scrap }) => (
+        <Stat
+            type={translate(`equipment_details.scrap`)}
+            className="item scrap"
+            key="scrap"
+        >
+            {arrResources.map((resource, index) => {
+                const value = getValue(scrap[index])
+                return (
+                    <Stat
+                        className={
+                            classNames(['scrap-resource', {
+                                disabled: !value
+                            }])
+                        }
+                        key={index}
+                        stat={resource}
+                    >
+                        {value}
+                    </Stat>
+                )
+            })}
+        </Stat>
+    )
+)
+
+const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
+    ({
+        bonus,
+        className
+    }) => {
+        if (!Array.isArray(bonus) || !bonus.length)
+            return null
+        return (
+            <div className={className}>
+                {bonus.map((o, index) => {
+                    const stats = []
+                    for (const key in o.bonus) {
+                        stats.push({
+                            stat: key,
+                            value: o.bonus[key]
+                        })
+                    }
+                    return (
+                        <div className="bonus-item" key={index}>
+                            <div className="ships">
+                                {o.ships.map(ship => (
+                                    <LinkMini className="ship" ship={ship} key={ship.id || ship} />
+                                ))}
+                            </div>
+                            <div className="bonus">
+                                <span className="title">{translate(`equipment_details.bonus_stat`)}</span>
+                                {stats.map(o => (
+                                    <StatValue
+                                        key={o.stat}
+                                        className='stat'
+                                        stat={o.stat}
+                                        value={o.value}
+                                        hideTitle={true}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+)
 
 // import stylesScrap from './styles-scrap.less'
 // @ImportStyle(stylesScrap)

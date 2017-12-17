@@ -1,0 +1,46 @@
+@import "./_.less";
+
+.component{
+    border: 1px solid @color-border;
+    background: @color-black-fade-3;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 15px;
+    clear: both;
+    display: inline-block;
+    width: 100%;
+
+    .bonus-item{
+        display: block;
+        padding: 10px 10px 5px 10px;
+        & + .bonus-item{
+            border-top: 1px solid @color-border;
+        }
+    }
+
+    .ships{
+        margin-right:   -7px;
+        overflow:       hidden;
+        .ship{
+            float:      left;
+            margin-right:7px;
+            margin-bottom:5px;
+        }
+    }
+
+    .bonus{
+        overflow: hidden;
+        margin-right: -7px;
+        .title, .stat{
+            float: left;
+            font-size: 14px;
+            margin-right: 7px;
+        }
+        .title{
+            color: @color-alt;
+        }
+        .stat{
+            margin-top: 1px;
+        }
+    }
+}
