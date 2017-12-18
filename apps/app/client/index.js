@@ -14,7 +14,7 @@ import {
     reducerLocales as i18nReducerLocales,
     register as i18nRegister
 } from 'sp-i18n'
-import { availableLocales } from '@appConfig/i18n'
+// import { availableLocales } from '@appConfig/i18n'
 
 // 其他引用，仅针对本项目案例
 import { onRouterChange } from '@appUI/layout/nav'
@@ -55,45 +55,31 @@ reactApp.react.router.use({
     // component: App, 可扩展1层component
     childRoutes: [clientRouter]
 })
-reactApp.react.router.ext({
-    onUpdate: () => {
-        // if (__DEV__) console.log('router onUpdate', self.__LATHPATHNAME__, location.pathname)
-
-        // if (self.__LATHPATHNAME__)
-        //     lastScroll.set(self.__LATHPATHNAME__, window.scrollY)
-
-        // 统计代码第一次默认走html引入js
-        if (typeof ga !== 'undefined' && isGAInit) {
-            ga('send', 'pageview')
-        }
-        isGAInit = true
-
-        /***/ onRouterChange()
-
-        self.__LATHPATHNAME__ = location.pathname
-    }
-})
 
 //
-
-if (__SERVER__) {
-    // (async () => {
-    // 载入所有多语言文件
-    let locales = {}
-    availableLocales.forEach(locale => {
-        locales[locale] = require(`@appLocales/${locale}.json`)
-    })
-    // 服务器端注册多语言
-    i18nRegister(availableLocales, locales)
-
-    // await dbInit()
-    dbInit()
-    // })()
-
-    if (__DEV__) console.log('⚓ Server - Client inited.')
-}
+// server端初始化进程参见 ../server/index.js
+// if (__SERVER__) { }
 
 if (__CLIENT__) {
+    reactApp.react.router.ext({
+        onUpdate: () => {
+            // if (__DEV__) console.log('router onUpdate', self.__LATHPATHNAME__, location.pathname)
+    
+            // if (self.__LATHPATHNAME__)
+            //     lastScroll.set(self.__LATHPATHNAME__, window.scrollY)
+    
+            // 统计代码第一次默认走html引入js
+            if (typeof ga !== 'undefined' && isGAInit) {
+                ga('send', 'pageview')
+            }
+            isGAInit = true
+    
+            /***/ onRouterChange()
+    
+            self.__LATHPATHNAME__ = location.pathname
+        }
+    })
+
     /*const store = reactApp.run({
     })*/
     prefs.init()

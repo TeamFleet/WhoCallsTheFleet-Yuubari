@@ -6,15 +6,20 @@ const koaStatic = require('koa-static')
 const convert = require('koa-convert')
 
 import cookie from 'cookie'
+
 import isomorphicUtils from 'sp-isomorphic-utils'
-import { localeId as currentLocaleId } from 'sp-i18n'
-import i18nOnServerRender from 'sp-i18n/onServerRender'
+
 import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
 // import injectPWA from 'sp-pwa/inject-pwa'
+
+import { localeId as currentLocaleId, register as i18nRegister } from 'sp-i18n'
+import i18nOnServerRender from 'sp-i18n/onServerRender'
+import { availableLocales } from '@appConfig/i18n'
 
 import { reactApp } from '../client'
 import { template } from '../html'
 import { CHANGE_LANGUAGE, TELL_CLIENT_URL, SERVER_REDUCER_NAME, serverReducer } from './server-redux'
+import { init as dbInit } from '@appLogic/database'
 
 
 
@@ -29,6 +34,24 @@ const {
 const dirs = require('../../../config/directories')
 const rootPath = process.cwd() + '/' + distPathname + '/public'
 // const webpackConfig = require('../../../config/webpack')
+
+
+
+
+// ============================================================================
+// 对应client的server端处理
+let locales = {}
+availableLocales.forEach(locale => {
+    locales[locale] = require(`@appLocales/${locale}.json`)
+})
+// 服务器端注册多语言
+i18nRegister(availableLocales, locales)
+
+// await dbInit()
+dbInit()
+// })()
+
+if (__DEV__) console.log('⚓ Server - Client inited.')
 
 
 
