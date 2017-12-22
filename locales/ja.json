@@ -16,6 +16,7 @@
     "ok": "OK",
     "none": "None",
 
+    "shiptypeclass": "${class}型${type}",
     "shipclass": "${class}型",
     "shipclass_number": "${class}型 ${number} 番艦",
     "other_ships_of_type": "Other ${type}s",

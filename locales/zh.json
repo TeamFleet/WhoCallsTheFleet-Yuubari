@@ -15,6 +15,7 @@
     "ok": "确认",
     "none": "无",
 
+    "shiptypeclass": "${class}级${type}",
     "shipclass": "${class}级",
     "shipclass_number": "${class}级 ${number} 号舰",
     "other_ships_of_type": "其他${type}",

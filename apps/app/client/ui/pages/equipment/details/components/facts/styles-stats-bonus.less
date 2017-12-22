@@ -9,6 +9,9 @@
     clear: both;
     display: inline-block;
     width: 100%;
+    width: ~"calc(100% - 20px)";
+    color: @color-alt;
+    font-size: 14px;
 
     .bonus-item{
         display: block;
@@ -16,6 +19,10 @@
         & + .bonus-item{
             border-top: 1px solid @color-border;
         }
+    }
+
+    .ship-class{
+        display: inline-block;
     }
 
     .ships{
@@ -33,12 +40,11 @@
         margin-right: -7px;
         .title, .stat{
             float: left;
-            font-size: 14px;
             margin-right: 7px;
         }
-        .title{
-            color: @color-alt;
-        }
+        // .title{
+        //     color: @color-alt;
+        // }
         .stat{
             margin-top: 1px;
         }

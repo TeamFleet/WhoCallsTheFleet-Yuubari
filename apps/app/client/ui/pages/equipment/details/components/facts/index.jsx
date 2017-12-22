@@ -185,19 +185,48 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
             <div className={className}>
                 {bonus.map((o, index) => {
                     const stats = []
+                    const hasShipClasses = Array.isArray(o.ship_classes) && o.ship_classes.length
+                    const hasShips = Array.isArray(o.ships) && o.ships.length
                     for (const key in o.bonus) {
-                        stats.push({
-                            stat: key,
-                            value: o.bonus[key]
-                        })
+                        if (o.bonus[key])
+                            stats.push({
+                                stat: key,
+                                value: o.bonus[key]
+                            })
                     }
                     return (
                         <div className="bonus-item" key={index}>
-                            <div className="ships">
-                                {o.ships.map(ship => (
-                                    <LinkMini className="ship" ship={ship} key={ship.id || ship} />
-                                ))}
-                            </div>
+                            {hasShipClasses &&
+                                <div className="ship-classes">
+                                    {o.ship_classes.map((classId, index) => {
+                                        const shipClass = get.shipClass(classId)
+                                        const shipTypeId = shipClass.ship_type_id
+                                        return (
+                                            <span className="ship-class" key={classId}>{
+                                                shipTypeId
+                                                    ? translate('shiptypeclass', {
+                                                        type: get.shipType(shipTypeId)._name,
+                                                        class: shipClass._name
+                                                    })
+                                                    : translate('shipclass', {
+                                                        class: shipClass._name
+                                                    })
+                                            }{
+                                                index < o.ship_classes.length - 1
+                                                    ? ' / '
+                                                    : ''
+                                            }</span>
+                                        )
+                                    })}
+                                </div>
+                            }
+                            {hasShips &&
+                                <div className="ships">
+                                    {o.ships.map(ship => (
+                                        <LinkMini className="ship" ship={ship} key={ship.id || ship} />
+                                    ))}
+                                </div>
+                            }
                             <div className="bonus">
                                 <span className="title">{translate(`equipment_details.bonus_stat`)}</span>
                                 {stats.map(o => (
