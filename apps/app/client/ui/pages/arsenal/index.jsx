@@ -198,7 +198,7 @@ class PageArsenalListDay extends React.Component {
 
 @ImportStyle(require('./styles-collection.less'))
 class PageArsenalCollection extends React.Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             show: false
@@ -206,16 +206,28 @@ class PageArsenalCollection extends React.Component {
     }
     render() {
         return (
-            <div className={classNames({
-                [this.props.className]: true,
-                'on': this.state.show
-            })}>
-                <h2 className="title" onClick={() => {
-                    this.setState({
-                        show: !this.state.show
-                    })
-                }}>{this.props.title.split('&').join(' & ')}</h2>
-                {this.state.show && this.props.children}
+            <div className={this.props.className}>
+                <h2
+                    className={classNames({
+                        [`${this.props.className}-title`]: true,
+                        'on': this.state.show
+                    })}
+                    onClick={() => {
+                        this.setState({
+                            show: !this.state.show
+                        })
+                    }}
+                    key={`${this.props.title}-title`}
+                    children={this.props.title.split('&').join(' & ')}
+                />
+                <div
+                    className={classNames({
+                        [`${this.props.className}-list`]: true,
+                        'on': this.state.show
+                    })}
+                    children={this.state.show && this.props.children}
+                    key={`${this.props.title}-list`}
+                />
             </div>
         )
     }
