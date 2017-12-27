@@ -56,11 +56,11 @@
     },
 
     "dependencies": {
-        "kckit": "^1.16.4",
-        "whocallsthefleet-database": "2017.12.23",
+        "kckit": "^1.16.5",
+        "whocallsthefleet-database": "2017.12.28",
         "whocallsthefleet-backgrounds": "1.2.0",
 
-        "super-project": "^2.2.11",
+        "super-project": "^2.3.0",
         "super-project-cli": "^1.1.7",
 
         "react-transition-group": "^2.2.1",
