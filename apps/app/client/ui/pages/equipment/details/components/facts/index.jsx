@@ -242,6 +242,11 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
                         </div>
                     )
                 })}
+                {bonus.length > 1 &&
+                    <div className="bonus-item bonus-note">
+                        {translate('equipment_details.bonus_note_max_value')}
+                    </div>
+                }
             </div>
         )
     }

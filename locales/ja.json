@@ -245,6 +245,7 @@
         "facts_unrankupgradable": "熟練度が上がらない",
 
         "bonus_stat": "ボーナス",
+        "bonus_note_max_value": "If a ship meets multiple requirements, use the highest value",
         
         "scrap": "廢棄",
 

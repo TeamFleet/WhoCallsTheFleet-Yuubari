@@ -244,6 +244,7 @@
         "facts_unrankupgradable": "不可提升熟练度",
 
         "bonus_stat": "额外收益",
+        "bonus_note_max_value": "如果舰娘满足了多个需求，额外收益取最大值",
         
         "scrap": "废弃获得资源",
 

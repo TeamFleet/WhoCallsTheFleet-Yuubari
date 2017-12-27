@@ -244,6 +244,7 @@
         "facts_unrankupgradable": "Un-rank-upgradable",
 
         "bonus_stat": "Bonus",
+        "bonus_note_max_value": "If a ship meets multiple requirements, use the highest value",
 
         "scrap": "Scrap Value",
 
