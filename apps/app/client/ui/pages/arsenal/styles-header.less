@@ -85,6 +85,7 @@
         display: block;
         background-image: url("~Assets/akashi.png");
         background-repeat: no-repeat;
+        background-size: (@face-width + @eye-width) auto;
     }
     &:before{
         // eye
@@ -94,6 +95,7 @@
         top: 19px;
         left: 22px;
         background-position: (0 - @face-width) 0%;
+        // background-size: percentage(@eye-width / (@face-width + @eye-width)) auto;
         transform-origin: -22px -19px;
         animation: none 3s steps(1) 3s infinite;
     }
@@ -105,6 +107,7 @@
         width: @face-width;
         height: @face-height;
         background-position: 0% 0%;
+        // background-size: percentage(@face-width / (@face-width + @eye-width)) auto;
         transform-origin: 0% 0%;
     }
 
