@@ -99,8 +99,9 @@ class PageArsenalHeader extends React.Component {
                 // 'is-options-show': this.props.isModeFilter,
             })}
 
-            mainClassName="tabs"
+            mainClassName={this.props.className + "-tabs"}
             main={[
+                <PageArsenalHeaderAkashi className={this.props.className + "-akashi"} key="akashi" />,
                 <Link
                     key="today"
                     href={`/arsenal/${jstDay}`}
@@ -135,6 +136,29 @@ class PageArsenalHeader extends React.Component {
                 />
             ]}
         />
+    }
+}
+
+class PageArsenalHeaderAkashi extends React.Component {
+    constructor(){
+        super()
+        this.state = {
+            animation: Math.floor((Math.random() * 3) + 1)
+        }
+    }
+    changeAnimation() {
+        this.setState({
+            animation: Math.floor((Math.random() * 3) + 1)
+        })
+    }
+    render() {
+        return (
+            <span
+                className={this.props.className}
+                data-blink-animation={this.state.animation}
+                onAnimationIteration={this.changeAnimation.bind(this)}
+            />
+        )
     }
 }
 
