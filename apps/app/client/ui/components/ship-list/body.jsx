@@ -89,22 +89,22 @@ export default class ShipList extends React.Component {
 // @connect((state, ownProps) => state.shipList[ownProps.id] || {})
 @connect((state, ownProps) => {
     const {
-        collection,
+        // collection,
         isModeFilter,
         filterInput,
         isModeCompare,
         compareState,
-        compareList,
+        // compareList,
     } = state.shipList[ownProps.id] || {}
     return {
-        collection,
+        // collection,
 
         isModeFilter,
-        filterInput,
+        hasFilterInput: (typeof filterInput !== 'undefined' && filterInput !== "") ? true : false,
 
         isModeCompare,
         compareState,
-        compareList,
+        // compareList,
         // compareSort,
         // compareScrollLeft,
     }
@@ -123,12 +123,15 @@ class ShipListBody extends React.Component {
         return buttons
     }
 
+    /*
     renderCollection(collection, index) {
         if (typeof index !== 'undefined')
             index = index + '-'
         else
             index = ''
+
         let listType
+
         return collection.list.map((type, index2) => {
             const list = getShipList(type.ships)
             if (type.type && type.class && typeof listType === 'undefined') {
@@ -159,65 +162,36 @@ class ShipListBody extends React.Component {
         })
     }
 
-    renderFilteredResult() {
-        let result = shipListFilter(this.props.filterInput)
-        let filteredResultText
-
-        if (result.length > filterSelectMax) {
-            this.filteredResult = result.slice(0, filterSelectMax)
-            filteredResultText = translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterSelectMax })
-        } else if (result.length > 0) {
-            this.filteredResult = result
-            filteredResultText = translate('ship_list.filter.results_count', { count: result.length })
-        } else if (!this.filteredResult || !this.filteredResult.length) {
-            this.filteredResult = result
-            filteredResultText = translate('ship_list.filter.no_result')
-        } else {
-            filteredResultText = translate('ship_list.filter.no_result_show_previous')
-        }
-
-        if (Array.isArray(this.filteredResult) && this.filteredResult.length) {
-            this.filteredResult = sortShips(this.filteredResult)
-        }
-
-        return (
-            <CSSTransitionComponent key="results">
-                <div className="results">
-                    <p className="results-text">{filteredResultText}</p>
-                    {<List
-                        id={this.props.id}
-                        ships={this.filteredResult}
-                    />}
-                </div>
-            </CSSTransitionComponent>
-        )
-    }
-
     renderBody() {
         // console.log(db)
         if (this.props.isModeCompare && this.props.compareState === 'comparing') {
-            return (
-                <CSSTransitionComponent key="compare">
-                    <TableBody id={this.props.id} ships={this.props.compareList} />
-                </CSSTransitionComponent>
-            )
+            return <ShipListBodyListCompare key="compare" id={this.props.id} />
         } else if (__CLIENT__) {
-            if (this.props.isModeFilter && typeof this.props.filterInput !== 'undefined' && this.props.filterInput !== "")
-                return this.renderFilteredResult()
+            if (this.props.isModeFilter && this.props.hasFilterInput)
+                return <ShipListBodyListFilteredResult key="filtered" id={this.props.id} />
             else {
-                this.filteredResult = undefined
+                // this.filteredResult = undefined
                 // if (__DEV__) console.log(db.shipCollections[this.props.collection])
-                return this.renderCollection(db.shipCollections[this.props.collection], 'c-' + this.props.collection)
+                return <ShipListBodyListCollection key="collection" id={this.props.id} />
+                // return this.renderCollection(db.shipCollections[this.props.collection], 'c-' + this.props.collection)
             }
         } else {
-            return db.shipCollections.map(this.renderCollection.bind(this))
+            // return db.shipCollections.map(this.renderCollection.bind(this))
+            return db.shipCollections.map((collection, index) => (
+                <ShipListBodyListCollection
+                    key={'c-' + index}
+                    index={'c-' + index}
+                    id={this.props.id}
+                />
+            ))
         }
     }
+    */
 
-    componentDidUpdate(prevProps/*, prevState*/) {
-        if (prevProps.collection !== this.props.collection)
-            window.scrollTo(undefined, 0)
-    }
+    // componentDidUpdate(prevProps/*, prevState*/) {
+    //     if (prevProps.collection !== this.props.collection)
+    //         window.scrollTo(undefined, 0)
+    // }
 
     // componentWillMount() {
     //     if (this.props.location && this.props.location.action === 'PUSH') {
@@ -255,36 +229,207 @@ class ShipListBody extends React.Component {
             })
         }
 
+        let showType
+        if (this.props.isModeCompare && this.props.compareState === 'comparing')
+            showType = 'compare'
+        else if (this.props.isModeFilter && this.props.hasFilterInput)
+            showType = 'filtered'
+        else if (__CLIENT__)
+            showType = 'collection'
+
         return (
-            <div className={classNames({
-                [this.props.className]: true,
-                'is-compare': this.props.isModeCompare,
-                [`is-compare-${this.props.compareState}`]: this.props.isModeCompare,
-            })}>
+            <div className={
+                classNames({
+                    [this.props.className]: true,
+                    'is-compare': this.props.isModeCompare,
+                    [`is-compare-${this.props.compareState}`]: this.props.isModeCompare,
+                })
+            } >
                 {__CLIENT__ && <Header
                     id={this.props.id}
                     extraButtons={this.getExtraButtons()}
                 />}
 
-                <TransitionGroup
-                    component="div"
-                    className="wrapper"
-                >
-                    {this.renderBody()}
-                </TransitionGroup>
-
+                {<ShipListBodyListCompare show={showType === 'compare'} id={this.props.id} />}
+                {<ShipListBodyListFilteredResult show={showType === 'filtered'} id={this.props.id} />}
+                {__CLIENT__ && <ShipListBodyListCollection show={showType === 'collection'} id={this.props.id} />}
+                {__SERVER__ && (
+                    db.shipCollections.map((collection, index) => (
+                        <ShipListBodyListCollection
+                            key={'c-' + index}
+                            index={index}
+                            id={this.props.id}
+                        />
+                    ))
+                )}
             </div>
         )
     }
 }
 
+const CSSTransitionGroup = (props) => (
+    <TransitionGroup
+        component="div"
+        className="wrapper"
+        {...props}
+    />
+);
+
 const CSSTransitionComponent = (props) => (
     <CSSTransition
         {...props}
         classNames="transition"
-        timeout={{
-            enter: 200
-        }}
+        timeout={200}
         exit={false}
     />
 );
+
+@connect((state, ownProps) => {
+    const {
+        compareState,
+        compareList,
+    } = state.shipList[ownProps.id] || {}
+    return {
+        compareState,
+        compareList,
+    }
+})
+class ShipListBodyListCompare extends React.Component {
+    render() {
+        const show = (
+            this.props.show &&
+            this.props.compareState === 'comparing'
+        )
+
+        return (
+            <CSSTransitionGroup>
+                {show &&
+                    <CSSTransitionComponent key="compare">
+                        <TableBody id={this.props.id} ships={this.props.compareList} />
+                    </CSSTransitionComponent>
+                }
+            </CSSTransitionGroup>
+        )
+    }
+}
+
+@connect((state, ownProps) => ({
+    filterInput: state.shipList[ownProps.id]
+        ? state.shipList[ownProps.id].filterInput
+        : undefined,
+}))
+class ShipListBodyListFilteredResult extends React.Component {
+    componentDidUpdate(prevProps/*, prevState*/) {
+        if (prevProps.filterInput !== this.props.filterInput)
+            window.scrollTo(undefined, 0)
+    }
+    render() {
+        const show = (
+            this.props.show &&
+            typeof this.props.filterInput !== 'undefined' &&
+            this.props.filterInput !== ''
+        )
+
+        let text, list
+
+        if (show) {
+            const result = shipListFilter(this.props.filterInput)
+            if (result.length > filterSelectMax) {
+                list = result.slice(0, filterSelectMax)
+                text = translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterSelectMax })
+            } else if (result.length > 0) {
+                list = result
+                text = translate('ship_list.filter.results_count', { count: result.length })
+            } else if (!list || !list.length) {
+                list = result
+                text = translate('ship_list.filter.no_result')
+            } else {
+                text = translate('ship_list.filter.no_result_show_previous')
+            }
+
+            if (Array.isArray(list) && list.length) {
+                list = sortShips(list)
+            }
+        }
+
+        return (
+            <CSSTransitionGroup>
+                {show &&
+                    <CSSTransitionComponent key="filterd">
+                        <div className="results">
+                            <p className="results-text">{text}</p>
+                            {<List
+                                id={this.props.id}
+                                ships={list}
+                            />}
+                        </div>
+                    </CSSTransitionComponent>
+                }
+            </CSSTransitionGroup>
+        )
+    }
+}
+
+@connect((state, ownProps) => {
+    const {
+        collection,
+    } = state.shipList[ownProps.id] || {}
+    return {
+        collection,
+    }
+})
+class ShipListBodyListCollection extends React.Component {
+    componentDidUpdate(prevProps/*, prevState*/) {
+        if (prevProps.collection !== this.props.collection)
+            window.scrollTo(undefined, 0)
+    }
+    render() {
+        let {
+            collection,
+            show,
+        } = this.props
+
+        if (__SERVER__) {
+            collection = db.shipCollections[this.props.index]
+        } else if (typeof collection === 'undefined' || !show) {
+            collection = { list: [] }
+        } else if (typeof collection !== 'object') {
+            collection = db.shipCollections[collection]
+        }
+
+        let listType
+
+        return (
+            <CSSTransitionGroup>
+                {collection.list.map((type, index2) => {
+                    const list = getShipList(type.ships)
+                    if (type.type && type.class && typeof listType === 'undefined') {
+                        listType = []
+                        collection.list.forEach(type => {
+                            listType = listType.concat(getShipList(type.ships))
+                        })
+                    }
+                    return (
+                        <CSSTransitionComponent key={collection.name + index2} data-key={collection.name + index2}>
+                            <div
+                                className={classNames({
+                                    'first': index2 === 0,
+                                    'last': index2 === collection.list.length - 1,
+                                    'is-unselectable': !type.type
+                                })}
+                            >
+                                {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={listType || list} />) : null}
+                                {!type.type && (<Title />)}
+                                {type.class && (<Title class={type.class} id={this.props.id} ships={list} />)}
+                                <List
+                                    id={this.props.id}
+                                    ships={list}
+                                />
+                            </div>
+                        </CSSTransitionComponent>
+                    )
+                })}
+            </CSSTransitionGroup>
+        )
+    }
+}
