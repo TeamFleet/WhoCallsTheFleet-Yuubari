@@ -274,6 +274,7 @@
 
     "arsenal": {
         "filter_by_day": "曜日別",
-        "all": "一覧"
+        "all": "一覧",
+        "resources_toggle": "資材表示..."
     }
 }

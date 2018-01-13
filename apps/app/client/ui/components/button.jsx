@@ -17,6 +17,7 @@ export default class extends React.Component {
             color,
             size,
             state,
+            onClick,
             ...props
         } = this.props
 
@@ -49,6 +50,11 @@ export default class extends React.Component {
                 to={to}
                 type={buttonType}
                 disabled={disabled}
+                onClick={evt => {
+                    evt.target.blur()
+                    if (typeof onClick === 'function')
+                        onClick(evt)
+                }}
                 {...props}
             >
                 {children}

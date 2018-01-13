@@ -55,6 +55,10 @@
     line-height: (@imporivement-shipname-height - 4);
     font-size:  @imporivement-shipname-font-size;
     color: @color-fade;
+    .screen-tablet({
+        position: relative;
+        z-index: -1;
+    });
 }
     .component-ships-ship{
         // margin-right:   12px;
@@ -71,5 +75,41 @@
         }
         &:last-child:after{
             content:    initial;
+        }
+    }
+
+.component-resources{
+    // border-top: 2px solid transparent;
+    padding-top: 4px;
+    padding-left: @link-equipment-padding-left;
+    position: relative;
+}
+    .component-resources-toggle[data-role="toggle"]{
+        display: block;
+        // font-size: 12px;
+        // line-height: 1em;
+        // padding: .2em .5em .1em .5em;
+        border-radius: 1em;
+        font-size: 14px;
+        line-height: 0;
+        // padding-top: 4px;
+        // padding-bottom: 12px;
+        padding: 4px 8px 12px 8px;
+        font-weight: 600;
+        letter-spacing: .1em;
+        border-color: @color-border;
+        // margin-top: 2px;
+        .screen-tablet({
+            padding: 8px 10px 16px 10px;
+        });
+
+        &.is-expand{
+            @size: (@link-equipment-padding-left - 4);
+            position: absolute;
+            padding: 0;
+            width: @size;
+            height: @size;
+            top: 0;
+            left: 0;
         }
     }

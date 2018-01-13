@@ -20,6 +20,7 @@ import sortShips from '@appUtils/sort-ships'
 import Link from '@appUI/components/link'
 import LinkEquipment from '@appUI/components/link/equipment'
 import Title from '@appUI/components/title'
+import Button from '@appUI/components/button'
 import MainHeader from '@appUI/components/main-header/main-options'
 import { Resources as ImprovementResources } from '@appUI/components/improvement'
 import ImprovementStar from '@appUI/components/improvement/star'
@@ -273,6 +274,12 @@ class PageArsenalCollection extends React.Component {
 
 @ImportStyle(require('./styles-item.less'))
 class PageArsenalListItem extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            expand: false
+        }
+    }
     render() {
         const {
             className,
@@ -336,9 +343,27 @@ class PageArsenalListItem extends React.Component {
                     {!hasReqShips && translate('improvement.any_2nd_ship')}
                 </div>
 
-                {/*<ImprovementResources
-                    data={data}
-                />*/}
+                <div className={className + '-resources'}>
+                    <Button
+                        className={classNames({
+                            [className + '-resources-toggle']: true,
+                            'is-expand': this.state.expand,
+                        })}
+                        onClick={() => {
+                            this.setState({
+                                expand: !this.state.expand
+                            })
+                        }}
+                        //children={!this.state.expand ? translate('arsenal.resources_toggle') : undefined}
+                        children={!this.state.expand ? "..." : undefined}
+                        data-role="toggle"
+                    />
+                    {this.state.expand &&
+                        <ImprovementResources
+                            data={data}
+                        />
+                    }
+                </div>
             </div>
         )
     }

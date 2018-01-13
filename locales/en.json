@@ -273,6 +273,7 @@
 
     "arsenal": {
         "filter_by_day": "Filter by day",
-        "all": "All"
+        "all": "All",
+        "resources_toggle": "Show cost details..."
     }
 }
