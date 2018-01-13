@@ -78,6 +78,12 @@
         }
     }
 
+.component-day-and-ships{
+    margin-top: 8px;
+    margin-left: @link-equipment-padding-left;
+    margin-bottom: 8px;
+}
+
 .component-resources{
     // border-top: 2px solid transparent;
     padding-top: 4px;
@@ -109,7 +115,28 @@
             padding: 0;
             width: @size;
             height: @size;
-            top: 0;
+            top: 2px;
             left: 0;
+            &:before, &:after{
+                @size-arrow: 8px;
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: (0 - @size-arrow / 2);
+                width: @size-arrow;
+                height: @size-arrow;
+                transform: rotate(45deg);
+                border-top: 2px solid @color-fade-2;
+                border-left: 2px solid @color-fade-2;
+            }
+            &:before{
+                margin-top: -6px;
+            }
+            &:after{
+                margin-top: 0px;
+                border-top-width: 1px;
+                border-left-width: 1px;
+            }
         }
     }

@@ -22,7 +22,10 @@ import LinkEquipment from '@appUI/components/link/equipment'
 import Title from '@appUI/components/title'
 import Button from '@appUI/components/button'
 import MainHeader from '@appUI/components/main-header/main-options'
-import { Resources as ImprovementResources } from '@appUI/components/improvement'
+import {
+    DayAndShip as ImprovementDayAndShip,
+    Resources as ImprovementResources
+} from '@appUI/components/improvement'
 import ImprovementStar from '@appUI/components/improvement/star'
 
 const daysArr = [
@@ -79,16 +82,7 @@ export default class PageArsenal extends React.Component {
                 <PageArsenalHeader isDay={typeof this.props.params === 'object' && typeof this.props.params.day !== 'undefined'} />
 
                 {day > -1 && <PageArsenalListDay day={day} />}
-                {day === -1 && (<div>
-                    {db.arsenalAll.map((item, index) => {
-                        const equipment = getEquipment(item)
-                        return (
-                            <p key={index}>
-                                <span>{equipment._name}</span>
-                            </p>
-                        )
-                    })}
-                </div>)}
+                {day === -1 && <PageArsenalListAll />}
             </PageContainer>
         )
     }
@@ -226,6 +220,66 @@ class PageArsenalListDay extends React.Component {
     }
 }
 
+class PageArsenalListAll extends React.Component {
+    render() {
+        let lastCollection = -1
+        const collectionIndexMap = {}
+        const collections = []
+
+        db.arsenalAll.forEach(item => {
+            const equipment = getEquipment(item)
+
+            if (!Array.isArray(equipment.improvement) || !equipment.improvement.length)
+                return null
+
+            let collection
+            // console.log(db.equipmentCollections)
+            db.equipmentCollections.some(o => {
+                o.list.some(l => {
+                    if (equipment.type === l.type)
+                        collection = o.name
+                    return typeof collection !== 'undefined'
+                })
+                return typeof collection !== 'undefined'
+            })
+            let index = collectionIndexMap[collection]
+            if (lastCollection !== collection && typeof collection !== 'undefined') {
+                lastCollection = collection
+                if (typeof collectionIndexMap[collection] === 'undefined') {
+                    index = collections.length
+                    collectionIndexMap[collection] = collections.length
+                    collections.push({
+                        title: collection,
+                        list: []
+                    })
+                }
+                // list.push(
+                //     <PageArsenalListTitle key={`title-${collection}`} children={collection} />
+                // )
+            }
+
+            equipment.improvement.forEach((improvement, _index) => {
+                collections[index].list.push(
+                    <PageArsenalListItem
+                        key={item + '-' + _index}
+                        equipment={equipment}
+                        improvementIndex={_index}
+                    />
+                )
+            })
+        })
+
+        return collections.map(collection => (
+            <PageArsenalCollection
+                key={`collection-${collection.title}`}
+                title={collection.title}
+            >
+                {collection.list}
+            </PageArsenalCollection>
+        ))
+    }
+}
+
 @ImportStyle(require('./styles-collection.less'))
 class PageArsenalCollection extends React.Component {
     // constructor() {
@@ -291,12 +345,15 @@ class PageArsenalListItem extends React.Component {
         const reqShips = []
         const data = equipment.improvement[improvementIndex]
         const hasUpgrade = Array.isArray(data.upgrade) && data.upgrade.length
+        const showReqShips = Array.isArray(requirements)
 
-        requirements.forEach(index => {
-            if (!Array.isArray(data.req) || !data.req[index] || !Array.isArray(data.req[index][1]))
-                return
-            data.req[index][1].forEach(id => reqShips.push(id))
-        })
+        if (showReqShips) {
+            requirements.forEach(index => {
+                if (!Array.isArray(data.req) || !data.req[index] || !Array.isArray(data.req[index][1]))
+                    return
+                data.req[index][1].forEach(id => reqShips.push(id))
+            })
+        }
         const hasReqShips = reqShips.length ? true : false
         const showStar = hasUpgrade && data.upgrade[1] ? true : false
 
@@ -328,20 +385,26 @@ class PageArsenalListItem extends React.Component {
                     </span>
                 }
 
-                <div className={className + '-ships'}>
-                    {hasReqShips && (
-                        sortShips(reqShips).map(ship => {
-                            ship = getShip(ship)
-                            return <Link
-                                className={`${className}-ships-ship color-alt`}
-                                key={ship.id}
-                                to={getLink('ship', ship.id)}
-                                children={ship.getName(translate('shipname_dash_none'))}
-                            />
-                        })
-                    )}
-                    {!hasReqShips && translate('improvement.any_2nd_ship')}
-                </div>
+                {showReqShips &&
+                    <div className={className + '-ships'}>
+                        {hasReqShips && (
+                            sortShips(reqShips).map(ship => {
+                                ship = getShip(ship)
+                                return <Link
+                                    className={`${className}-ships-ship color-alt`}
+                                    key={ship.id}
+                                    to={getLink('ship', ship.id)}
+                                    children={ship.getName(translate('shipname_dash_none'))}
+                                />
+                            })
+                        )}
+                        {!hasReqShips && translate('improvement.any_2nd_ship')}
+                    </div>
+                }
+
+                {!showReqShips &&
+                    <ImprovementDayAndShip className={className + '-day-and-ships'} data={data} />
+                }
 
                 <div className={className + '-resources'}>
                     <Button
