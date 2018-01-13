@@ -3,3 +3,27 @@
 .component{
 
 }
+
+.component-ships{
+    padding: 2px 0 2px @link-equipment-padding-left;
+    line-height: (@imporivement-shipname-height - 4);
+    font-size:  @imporivement-shipname-font-size;
+    color: @color-fade;
+}
+    .component-ships-ship{
+        // margin-right:   12px;
+        display: inline-block;
+        // color: @color-base-dimmed;
+        &:after{
+            content:    '/';
+            display:    inline-block;
+            margin:     0 4px;
+            z-index:    -1;
+            // position:   absolute;
+            // color:      @color-base;
+            color:      @color-base-dimmed;
+        }
+        &:last-child:after{
+            content:    initial;
+        }
+    }

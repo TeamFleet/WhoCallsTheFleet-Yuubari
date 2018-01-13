@@ -19,6 +19,7 @@ import sortShips from '@appUtils/sort-ships'
 // import {Link, IndexLink} from 'react-router'
 import Link from '@appUI/components/link'
 import LinkEquipment from '@appUI/components/link/equipment'
+import Title from '@appUI/components/title'
 import MainHeader from '@appUI/components/main-header/main-options'
 import { Resources as ImprovementResources } from '@appUI/components/improvement'
 
@@ -143,7 +144,7 @@ class PageArsenalHeader extends React.Component {
 }
 
 class PageArsenalHeaderAkashi extends React.Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             animation: Math.floor((Math.random() * 3) + 1)
@@ -225,16 +226,20 @@ class PageArsenalListDay extends React.Component {
 
 @ImportStyle(require('./styles-collection.less'))
 class PageArsenalCollection extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            show: false
-        }
-    }
+    // constructor() {
+    //     super()
+    //     this.state = {
+    //         show: false
+    //     }
+    // }
     render() {
         return (
             <div className={this.props.className}>
-                <h2
+                <Title
+                    component="h2"
+                    type="line-append"
+                    className={`${this.props.className}-title`}
+                    /*
                     className={classNames({
                         [`${this.props.className}-title`]: true,
                         'on': this.state.show
@@ -244,14 +249,19 @@ class PageArsenalCollection extends React.Component {
                             show: !this.state.show
                         })
                     }}
+                    */
                     key={`${this.props.title}-title`}
                     children={this.props.title.split('&').join(' & ')}
                 />
                 <div
+                    /*
                     className={classNames({
                         [`${this.props.className}-list`]: true,
                         'on': this.state.show
                     })}
+                    children={this.state.show && this.props.children}
+                    */
+                    className={`${this.props.className}-list`}
                     children={this.props.children}
                     key={`${this.props.title}-list`}
                 />
@@ -281,21 +291,26 @@ class PageArsenalListItem extends React.Component {
         const hasReqShips = reqShips.length ? true : false
 
         return (
-            <div
-                className={classNames([
-                    this.props.className,
-                ])}
-            >
-                <span><LinkEquipment equipment={equipment} /></span>
+            <div className={this.props.className}>
+                <span>
+                    <LinkEquipment
+                        className={`${this.props.className}-name color-alt-lighter`}
+                        equipment={equipment}
+                    />
+                </span>
                 {hasUpgrade &&
-                    <span> ⇨ <LinkEquipment equipment={data.upgrade[0]} /> ★+{data.upgrade[1]}</span>
+                    <span> ⇨ <LinkEquipment
+                        className={`${this.props.className}-name color-alt-lighter`}
+                        equipment={data.upgrade[0]}
+                    /> ★+{data.upgrade[1]}</span>
                 }
 
-                <div>
+                <div className={this.props.className + '-ships'}>
                     {hasReqShips && (
                         sortShips(reqShips).map(ship => {
                             ship = getShip(ship)
                             return <Link
+                                className={`${this.props.className}-ships-ship color-alt`}
                                 key={ship.id}
                                 to={getLink('ship', ship.id)}
                                 children={ship.getName(translate('shipname_dash_none'))}

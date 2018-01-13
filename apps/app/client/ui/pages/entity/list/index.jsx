@@ -10,6 +10,7 @@ import db from '@appLogic/database'
 
 import ListCasters from '@appUI/components/list/casters'
 import ListArtists from '@appUI/components/list/artists'
+import Title from '@appUI/components/title'
 
 @connect()
 // @ImportStyle(style)
@@ -41,7 +42,7 @@ export default class extends React.Component {
             <PageContainer
                 className={this.props.className}
             >
-                <Title>{translate('seiyuus')}</Title>
+                <ListTitle>{translate('seiyuus')}</ListTitle>
                 <ListCasters
                     list={listCVs.sort((a, b) => (
                         b.relation.cv.length - a.relation.cv.length
@@ -49,7 +50,7 @@ export default class extends React.Component {
                     count={true}
                 />
 
-                <Title>{translate('artists')}</Title>
+                <ListTitle>{translate('artists')}</ListTitle>
                 <ListArtists
                     list={listArtists.sort((a, b) => (
                         b.relation.illustrator.length - a.relation.illustrator.length
@@ -62,16 +63,10 @@ export default class extends React.Component {
 }
 
 @ImportStyle(require('./styles-title.less'))
-class Title extends React.Component {
+class ListTitle extends React.Component {
     render() {
-        const {
-            children,
-            ...props
-        } = this.props
         return (
-            <h2 {...props}>
-                {children}
-            </h2>
+            <Title component="h2" type="line-append" {...this.props} />
         )
     }
 }

@@ -3,112 +3,128 @@
 @collection-item-gap: 20px;
 
 .component{
-    margin-bottom:  floor(@base-font-size * @base-line-height);
+    // margin-top: @collection-item-gap;
+    margin-bottom: floor(@base-font-size * @base-line-height) + @collection-item-gap;
+    overflow: hidden;
 
+    // &:first-child{
+    //     margin-top: 0;
+    // }
     &:last-child{
         margin-bottom: 0;
     }
 
-    &.on{
+    // &.on{
         // margin-bottom:  30px;
         // &:last-child{
         //     margin-bottom: 0;
         // }
-    }
+    // }
 }
 
 .component-title{
-    @height: floor(@base-font-size * @base-line-height) + 8;
+    @height: floor(@base-font-size * @base-line-height);
 
-    position:   relative;
-    font-size:  @font-size-h4;
-    line-height:@height;
-    height:     @height;
-    padding:    0 15px;
-    font-weight:normal;
-    transition-property: color;
-    margin: 0 0 -8px 0;
-    z-index: 2;
-    display: inline-block;
+    font-size: @font-size-h4;
+    line-height: @height;
+    height: @height;
+    margin: 0 auto @collection-item-gap 0;
+}
 
-    .is-hover({
-        color: 	@color-accent;
-    }; {
-        color:  @color-link-active;
-    });
-    &:active{
-        color:  @color-link-active;
-    }
-    .sku-webapp({
-        cursor:     pointer;
-    });
-    &:before{
-        @size:      6px;
-        content:    "";
-        opacity:    .5;
-        position:   absolute;
-        left:       0;
-        top:        50%;
-        margin-top: (0 - @size);
-        width:      0;
-        height:     0;
-        overflow:   hidden;
-        border:     @size solid transparent;
-        border-left-color:  currentColor;
-        transform-origin:   25% 50%;
-    }
-    &:after{
-        @color-edge: fade(@color-border, 25%);
-        content: "";
-        position: absolute;
-        // top: -5px;
-        // bottom: -5px;
-        top: -3px;
-        bottom: -3px;
-        left: -15px;
-        right: -15px;
-        opacity: 0;
-        // border-radius: ((@height + 10) / 2);
-        // background: @color-link-dimmed;
-        z-index: -1;
-        background: repeat-x;
-        background-image: linear-gradient(to right, transparent, @color-edge 15px, @color-edge calc(~"100% - 15px"), transparent),
-                          linear-gradient(to right, transparent, @color-edge 15px, @color-edge calc(~"100% - 15px"), transparent),
-                          linear-gradient(to right, transparent, @color-background-main 15px, @color-background-main calc(~"100% - 15px"), transparent);
-        background-size: 100% 1px,
-                         100% 1px,
-                         100% 100%;
-        background-position: 0% 1px,
-                             0% calc(~"100% -1px"),
-                             0% 50%;
-    }
+/* title, sticky version
+    .component-title{
+        @height: floor(@base-font-size * @base-line-height) + 8;
 
-    &.on{
-        font-weight:    bolder;
-        // color: @color-background;
-        // transform: translateX(10px);
-        // backdrop-filter: blur(20px);
+        position:   relative;
+        font-size:  @font-size-h4;
+        line-height:@height;
+        height:     @height;
+        padding:    0 15px;
+        font-weight:normal;
+        transition-property: color;
+        margin: 0 0 -8px 0;
+        z-index: 2;
+        display: inline-block;
+
+        .is-hover({
+            color: 	@color-accent;
+        }; {
+            color:  @color-link-active;
+        });
+        &:active{
+            color:  @color-link-active;
+        }
+        .sku-webapp({
+            cursor:     pointer;
+        });
         &:before{
-            opacity:    1;
-            transform:  rotate(90deg);
+            @size:      6px;
+            content:    "";
+            opacity:    .5;
+            position:   absolute;
+            left:       0;
+            top:        50%;
+            margin-top: (0 - @size);
+            width:      0;
+            height:     0;
+            overflow:   hidden;
+            border:     @size solid transparent;
+            border-left-color:  currentColor;
+            transform-origin:   25% 50%;
         }
         &:after{
-            opacity: 1;
+            @color-edge: fade(@color-border, 25%);
+            content: "";
+            position: absolute;
+            // top: -5px;
+            // bottom: -5px;
+            top: -3px;
+            bottom: -3px;
+            left: -15px;
+            right: -15px;
+            opacity: 0;
+            // border-radius: ((@height + 10) / 2);
+            // background: @color-link-dimmed;
+            z-index: -1;
+            background: repeat-x;
+            background-image: linear-gradient(to right, transparent, @color-edge 15px, @color-edge calc(~"100% - 15px"), transparent),
+                            linear-gradient(to right, transparent, @color-edge 15px, @color-edge calc(~"100% - 15px"), transparent),
+                            linear-gradient(to right, transparent, @color-background-main 15px, @color-background-main calc(~"100% - 15px"), transparent);
+            background-size: 100% 1px,
+                            100% 1px,
+                            100% 100%;
+            background-position: 0% 1px,
+                                0% calc(~"100% -1px"),
+                                0% 50%;
         }
 
-        @supports (position: sticky) {
-            position: sticky;
-            top: (@infos-tab-height);
-            .screen-tablet({
-                width: 100%;
-                top: (@infos-tab-height + @nav-height-tablet);
-            });
-            .screen-phone({
-                top: (@infos-tab-height + @nav-height-phone);
-            });
+        &.on{
+            font-weight:    bolder;
+            // color: @color-background;
+            // transform: translateX(10px);
+            // backdrop-filter: blur(20px);
+            &:before{
+                opacity:    1;
+                transform:  rotate(90deg);
+            }
+            &:after{
+                opacity: 1;
+            }
+
+            @supports (position: sticky) {
+                position: sticky;
+                top: (@infos-tab-height);
+                .screen-tablet({
+                    width: 100%;
+                    top: (@infos-tab-height + @nav-height-tablet);
+                });
+                .screen-phone({
+                    top: (@infos-tab-height + @nav-height-phone);
+                });
+            }
         }
     }
-}
+*/
 
 .component-list{
     @column-width: 500px;

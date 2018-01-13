@@ -193,6 +193,18 @@ a, .link{
 			color:  @color-link-active;
 		}
 	}
+
+	&.color-alt-lighter{
+		color: 	@theme-grey-50;
+		.is-hover({
+			color: 	@color-accent;
+		}; {
+			color:  @color-link-active;
+		});
+		&:active{
+			color:  @color-link-active;
+		}
+	}
 }
 .link{
 	cursor: 	pointer;
