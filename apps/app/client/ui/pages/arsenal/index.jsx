@@ -22,6 +22,7 @@ import LinkEquipment from '@appUI/components/link/equipment'
 import Title from '@appUI/components/title'
 import MainHeader from '@appUI/components/main-header/main-options'
 import { Resources as ImprovementResources } from '@appUI/components/improvement'
+import ImprovementStar from '@appUI/components/improvement/star'
 
 const daysArr = [
     "Sunday",
@@ -274,6 +275,7 @@ class PageArsenalCollection extends React.Component {
 class PageArsenalListItem extends React.Component {
     render() {
         const {
+            className,
             equipment,
             improvementIndex,
             requirements
@@ -289,28 +291,42 @@ class PageArsenalListItem extends React.Component {
             data.req[index][1].forEach(id => reqShips.push(id))
         })
         const hasReqShips = reqShips.length ? true : false
+        const showStar = hasUpgrade && data.upgrade[1] ? true : false
 
         return (
-            <div className={this.props.className}>
-                <span>
+            <div className={className}>
+                <span className={classNames({
+                    [className + '-equipment']: true,
+                    'has-upgrade': hasUpgrade,
+                })}>
                     <LinkEquipment
-                        className={`${this.props.className}-name color-alt-lighter`}
+                        className={`${className}-name color-alt-lighter`}
                         equipment={equipment}
                     />
                 </span>
                 {hasUpgrade &&
-                    <span> ⇨ <LinkEquipment
-                        className={`${this.props.className}-name color-alt-lighter`}
-                        equipment={data.upgrade[0]}
-                    /> ★+{data.upgrade[1]}</span>
+                    <span className={className + '-equipment'}>
+                        <LinkEquipment
+                            className={`${className}-name color-alt-lighter`}
+                            equipment={data.upgrade[0]}
+                            children={
+                                showStar
+                                    ? <ImprovementStar
+                                        className={className + '-equipment-star'}
+                                        star={data.upgrade[1]}
+                                    />
+                                    : undefined
+                            }
+                        />
+                    </span>
                 }
 
-                <div className={this.props.className + '-ships'}>
+                <div className={className + '-ships'}>
                     {hasReqShips && (
                         sortShips(reqShips).map(ship => {
                             ship = getShip(ship)
                             return <Link
-                                className={`${this.props.className}-ships-ship color-alt`}
+                                className={`${className}-ships-ship color-alt`}
                                 key={ship.id}
                                 to={getLink('ship', ship.id)}
                                 children={ship.getName(translate('shipname_dash_none'))}

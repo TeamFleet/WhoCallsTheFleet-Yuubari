@@ -3,6 +3,7 @@ import React from 'react'
 import Link from '@appUI/components/link'
 import Stat from '@appUI/components/stat'
 import LinkEquipment from '@appUI/components/link/equipment'
+// import Star from './star'
 
 import getTimeJST from '@appUtils/get-time-jst'
 import getLink from '@appUtils/get-link'
@@ -205,14 +206,16 @@ export class Resources extends _Resources {
     }
 }
 
-@ImportStyle(require('./styles-star.less'))
-export class Star extends React.Component {
-    render() {
-        const { className, star, ...props } = this.props
-        return (
-            <span className={className} {...props}>
-                +{star}
-            </span>
-        )
-    }
-}
+export Star from './star'
+
+// @ImportStyle(require('./styles-star.less'))
+// export class Star extends React.Component {
+//     render() {
+//         const { className, star, ...props } = this.props
+//         return (
+//             <span className={className} {...props}>
+//                 +{star}
+//             </span>
+//         )
+//     }
+// }

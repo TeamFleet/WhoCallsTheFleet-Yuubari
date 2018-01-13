@@ -4,6 +4,52 @@
 
 }
 
+.component-equipment{
+    display: inline-block;
+    &.has-upgrade{
+        // &:after{
+        //     content: "⇨";
+        //     display: inline-block;
+        //     padding: 0 .25em;
+        //     font-size: 16px;
+        //     color: @color-improvement-star;
+        //     font-weight: normal;
+        // }
+        @size: 10px;
+        padding-right: (@size * 3.5);
+        position: relative;
+        &:before, &:after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            z-index: -1;
+        }
+        &:before{
+            @height: floor(@size * .4);
+            width: @size;
+            height: @height;
+            margin-top: (floor(0 - @height / 2) - 1);
+            right: (@size * 1.5);
+            background: @color-improvement-star;
+        }
+        &:after{
+            @height: floor(@size * .6);
+            width: 0;
+            height: 0;
+            border-left: @size solid @color-improvement-star;
+            border-right: 0;
+            border-top: @height solid transparent;
+            border-bottom: @height solid transparent;
+            margin-top: (0 - @height - 1);
+            right: (@size * .5);
+        }
+    }
+}
+    // .component-equipment-star{
+    //     display: inline-block;
+    //     color: @color-improvement-star;
+    // }
+
 .component-ships{
     padding: 2px 0 2px @link-equipment-padding-left;
     line-height: (@imporivement-shipname-height - 4);

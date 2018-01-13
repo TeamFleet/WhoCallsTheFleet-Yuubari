@@ -54,9 +54,18 @@
             &:nth-child(n+2){
                 text-align: center;
                 font-size:  14px;
+                .screen-max({
+                    font-size:  13px;
+                });
+                .screen-t1({
+                    font-size: 	12px;
+                    flex-basis: 32px;
+                });
                 .screen-tablet({
                     order:  10;
                     width:  40px;
+                    font-size:  13px;
+                    flex-basis: 40px;
                     &.is-sorting{
                         order:      2;
                     }
