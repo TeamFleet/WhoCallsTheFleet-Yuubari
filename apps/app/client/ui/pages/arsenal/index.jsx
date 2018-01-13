@@ -47,7 +47,10 @@ export default class PageArsenal extends React.Component {
 
         const head = htmlHead({
             store,
-            title: translate('nav.arsenal') + (day ? ` / ${day}` : '')
+            title: [
+                translate('nav.arsenal'),
+                day
+            ]
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -249,7 +252,7 @@ class PageArsenalCollection extends React.Component {
                         [`${this.props.className}-list`]: true,
                         'on': this.state.show
                     })}
-                    children={this.state.show && this.props.children}
+                    children={this.props.children}
                     key={`${this.props.title}-list`}
                 />
             </div>
@@ -302,9 +305,9 @@ class PageArsenalListItem extends React.Component {
                     {!hasReqShips && translate('improvement.any_2nd_ship')}
                 </div>
 
-                <ImprovementResources
+                {/*<ImprovementResources
                     data={data}
-                />
+                />*/}
             </div>
         )
     }

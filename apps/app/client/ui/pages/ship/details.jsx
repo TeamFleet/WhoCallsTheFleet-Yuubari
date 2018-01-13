@@ -90,8 +90,11 @@ export default class PageShipDetails extends React.Component {
             store
         }
         if (ship) {
-            const textTab = tab === tabsAvailable[0] ? '' : ` / ${translate("ship_details." + tab)}`
-            obj.title = `${ship._name}${textTab}`
+            // const textTab = tab === tabsAvailable[0] ? '' : ` / ${translate("ship_details." + tab)}`
+            obj.title = [
+                ship._name,
+                tab === tabsAvailable[0] ? undefined : translate("ship_details." + tab)
+            ]
             obj.subtitle = getShipType(ship)
                 + (ship.class || ship.class_no ? ' / ' : '')
                 + (ship.class_no

@@ -58,8 +58,10 @@ export default class extends React.Component {
             store
         }
         if (equipment) {
-            const textTab = tab === tabsAvailable[0] ? '' : ` / ${translate("equipment_details." + tab)}`
-            obj.title = equipment._name + textTab
+            obj.title = [
+                equipment._name,
+                tab === tabsAvailable[0] ? undefined : translate("equipment_details." + tab)
+            ]
             obj.subtitle = equipment.type ? equipment._type : ''
             obj.description = getDescription(equipment)
         }

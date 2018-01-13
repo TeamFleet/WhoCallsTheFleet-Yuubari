@@ -50,13 +50,19 @@ export default (settings = {}) => {
 
     if (uri.substr(0, 1) == '/') uri = uri.substr(1)
     if (title) {
+        if (Array.isArray(title))
+            title = title.filter(str => typeof str !== 'undefined' && str !== '')
+
+        const titleMain = Array.isArray(title) && title.length ? title[0] : title
+        title = Array.isArray(title) ? title.join(' / ') : title
+
         if (dispatch) {
             if (typeof subtitle !== 'undefined')
                 dispatch(updatePageTitle({
-                    main: title,
+                    main: titleMain,
                     sub: subtitle
                 }))
-            else dispatch(updatePageTitle(title))
+            else dispatch(updatePageTitle(titleMain))
         }
         if (title !== siteName)
             title = title.replace(/\n/g, '') + ' - ' + siteName
