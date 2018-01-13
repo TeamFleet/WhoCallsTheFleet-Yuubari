@@ -18,7 +18,7 @@
 }
 
 .component-title{
-    @height: floor(@base-font-size * @base-line-height);
+    @height: floor(@base-font-size * @base-line-height) + 8;
 
     position:   relative;
     font-size:  @font-size-h4;
@@ -27,20 +27,9 @@
     padding:    0 15px;
     font-weight:normal;
     transition-property: color;
-    margin: 0;
+    margin: 0 0 -8px 0;
     z-index: 2;
     display: inline-block;
-
-    @supports (position: sticky) {
-        position: sticky;
-        top: (@infos-tab-height + @main-margin-top);
-        .screen-tablet({
-            top: (@infos-tab-height + @main-margin-top + @nav-height-tablet);
-        });
-        .screen-phone({
-            top: (@infos-tab-height + @main-margin-top + @nav-height-phone);
-        });
-    }
 
     .is-hover({
         color: 	@color-accent;
@@ -66,31 +55,57 @@
         overflow:   hidden;
         border:     @size solid transparent;
         border-left-color:  currentColor;
-        transform-origin:   25% 33.3333%;
+        transform-origin:   25% 50%;
     }
     &:after{
+        @color-edge: fade(@color-border, 25%);
         content: "";
         position: absolute;
-        top: -5px;
-        bottom: -5px;
+        // top: -5px;
+        // bottom: -5px;
+        top: -3px;
+        bottom: -3px;
         left: -15px;
-        right: 0;
+        right: -15px;
         opacity: 0;
-        border-radius: ((@height + 10) / 2);
-        background: @color-link-dimmed;
+        // border-radius: ((@height + 10) / 2);
+        // background: @color-link-dimmed;
         z-index: -1;
+        background: repeat-x;
+        background-image: linear-gradient(to right, transparent, @color-edge 15px, @color-edge calc(~"100% - 15px"), transparent),
+                          linear-gradient(to right, transparent, @color-edge 15px, @color-edge calc(~"100% - 15px"), transparent),
+                          linear-gradient(to right, transparent, @color-background-main 15px, @color-background-main calc(~"100% - 15px"), transparent);
+        background-size: 100% 1px,
+                         100% 1px,
+                         100% 100%;
+        background-position: 0% 1px,
+                             0% calc(~"100% -1px"),
+                             0% 50%;
     }
 
     &.on{
         font-weight:    bolder;
-        color: @color-background;
-        transform: translateX(10px);
+        // color: @color-background;
+        // transform: translateX(10px);
+        // backdrop-filter: blur(20px);
         &:before{
             opacity:    1;
             transform:  rotate(90deg);
         }
         &:after{
             opacity: 1;
+        }
+
+        @supports (position: sticky) {
+            position: sticky;
+            top: (@infos-tab-height);
+            .screen-tablet({
+                width: 100%;
+                top: (@infos-tab-height + @nav-height-tablet);
+            });
+            .screen-phone({
+                top: (@infos-tab-height + @nav-height-phone);
+            });
         }
     }
 }
