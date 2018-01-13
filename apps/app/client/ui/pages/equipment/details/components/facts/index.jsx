@@ -211,10 +211,6 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
                                                     : translate('shipclass', {
                                                         class: shipClass._name
                                                     })
-                                            }{
-                                                index < o.ship_classes.length - 1
-                                                    ? ' / '
-                                                    : ''
                                             }</span>
                                         )
                                     })}
