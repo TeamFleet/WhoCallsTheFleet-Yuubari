@@ -87,15 +87,32 @@
             }
         }
         a.equipment-name{
-            .is-hover({
+            // color: @color-badge-blue-text;
+            .style-hover() {
+                color: @color-badge-blue-hover-text;
                 &:after{
-                    background-color:   @color-special-border;
-                    border-color:       @color-special-border;
+                    background-color:   @color-badge-blue-hover-border;
+                    border-color:       @color-badge-blue-hover-background;
                 }
                 .icon{
                     background-color:   @color-special-background;
                     border-color:       @color-special-border;
                 }
+            }
+            .style-active() {
+                color: @color-badge-blue-active-text;
+                &:after{
+                    background-color:   @color-badge-blue-active-background;
+                    border-color:       @color-badge-blue-active-border;
+                }
+            }
+            .is-hover({
+                .style-hover();
+            }, {
+                .style-active();
             });
+            &:active{
+                .style-active();
+            }
         }
 }

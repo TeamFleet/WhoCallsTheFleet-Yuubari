@@ -43,9 +43,11 @@ export default class EquipmentDetailsHeader extends React.Component {
                 defaultIndex={this.props.defaultTabIndex}
                 onTabChange={this.onTabChange.bind(this)}
             >
-                <span className="number">No.{this.props.equipment.id}</span>
+                <span className={this.props.className + "-number"}>No.{this.props.equipment.id}</span>
+                {/*
                 {localeId === 'ja' && <br />}
                 {localeId !== 'ja' && <span className="name-ja">{this.props.equipment.getName(undefined, 'ja_jp')}</span>}
+                */}
             </Header>
         )
     }

@@ -87,7 +87,7 @@ export default class ShipDetailsContentEquipable extends React.Component {
         )
     }
     render() {
-        if (__DEV__) console.log('thisShip equipable', this.props.ship.getEquipmentTypes())
+        if (__CLIENT__ && __DEV__) console.log('thisShip equipable', this.props.ship.getEquipmentTypes())
         return (
             <div className={this.props.className}>
                 <div className="legends">

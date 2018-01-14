@@ -53,12 +53,19 @@ export default class ShipDetailsHeader extends React.Component {
                 onTabChange={this.onTabChange.bind(this)}
             >
                 <span className="shipclassnumber">No.{this.props.ship.getNo()}</span>
+                <br />
+                {this.props.ship.class_no
+                    ? translate("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
+                    : translate("shipclass", { class: this.props.ship._class })
+                }
+                {/*
                 {localeId === 'ja' && <br />}
                 {this.props.ship.class_no
                     ? translate("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
                     : translate("shipclass", { class: this.props.ship._class })
                 }
                 {localeId !== 'ja' && <span className="shipname-ja">{this.props.ship.getName(undefined, 'ja_jp')}</span>}
+                */}
                 {/* this.props.ship.class && this.props.ship.type && ` / ${this.getShipType()}` */}
             </Header>
         )
