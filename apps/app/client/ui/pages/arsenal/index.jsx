@@ -168,7 +168,7 @@ class PageArsenalListDay extends React.Component {
         const collectionIndexMap = {}
         const collections = []
 
-        db.arsenalDays[this.props.day].forEach(item => {
+        db.arsenalDays[this.props.day].forEach((item, _index) => {
             const equipment = getEquipment(item[0])
             const improvementIndex = item[1]
 
@@ -206,13 +206,15 @@ class PageArsenalListDay extends React.Component {
                 equipment={equipment}
                 improvementIndex={improvementIndex}
                 requirements={item[2]}
+                index={_index}
             />)
         })
 
-        return collections.map(collection => (
+        return collections.map((collection, index) => (
             <PageArsenalCollection
                 key={`collection-${collection.title}`}
                 title={collection.title}
+                index={index}
             >
                 {collection.list}
             </PageArsenalCollection>
@@ -264,15 +266,17 @@ class PageArsenalListAll extends React.Component {
                         key={item + '-' + _index}
                         equipment={equipment}
                         improvementIndex={_index}
+                        index={_index}
                     />
                 )
             })
         })
 
-        return collections.map(collection => (
+        return collections.map((collection, index) => (
             <PageArsenalCollection
                 key={`collection-${collection.title}`}
                 title={collection.title}
+                index={index}
             >
                 {collection.list}
             </PageArsenalCollection>
@@ -282,13 +286,23 @@ class PageArsenalListAll extends React.Component {
 
 @ImportStyle(require('./styles-collection.less'))
 class PageArsenalCollection extends React.Component {
-    // constructor() {
-    //     super()
-    //     this.state = {
-    //         show: false
-    //     }
-    // }
+    constructor(props) {
+        super(props)
+        this.state = {
+            render: __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady),
+            // show: false
+        }
+    }
+    componentWillMount() {
+        if (!this.state.render)
+            setTimeout(() => {
+                this.setState({
+                    render: true
+                })
+            }, 100 * (this.props.index || 0))
+    }
     render() {
+        // if (!this.state.render) return null
         return (
             <div className={this.props.className}>
                 <Title
@@ -318,7 +332,7 @@ class PageArsenalCollection extends React.Component {
                     children={this.state.show && this.props.children}
                     */
                     className={`${this.props.className}-list`}
-                    children={this.props.children}
+                    children={this.state.render ? this.props.children : undefined}
                     key={`${this.props.title}-list`}
                 />
             </div>
@@ -331,10 +345,21 @@ class PageArsenalListItem extends React.Component {
     constructor() {
         super()
         this.state = {
+            // render: __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady),
             expand: false
         }
     }
+    // componentWillMount() {
+    //     if (!this.state.render)
+    //         setTimeout(() => {
+    //             this.setState({
+    //                 render: true
+    //             })
+    //         }, 1 * (this.props.index || 0))
+    // }
     render() {
+        // if (!this.state.render) return null
+
         const {
             className,
             equipment,
