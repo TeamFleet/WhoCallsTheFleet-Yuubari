@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 import IconEquipment from '@appUI/components/icon-equipment'
+import ImprovementStar from '@appUI/components/improvement/star'
 
 import translate from 'sp-i18n'
 import db from '@appLogic/database'
@@ -20,8 +21,12 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         times(4)(index => {
             const slot = this.props.ship.slot[index]
             const hasSlot = typeof slot !== 'undefined'
-            const equipmentId = hasSlot ? this.props.ship.equip[index] : undefined
+            const data = this.props.ship.equip[index]
+            const equipmentId = hasSlot ? (
+                typeof data === 'object' ? data.id : data
+            ) : undefined
             const equipment = equipmentId && db.equipments[equipmentId]
+            const star = typeof data === 'object' ? data.star : undefined
             renderArr.push(
                 <dl key={index} className={classNames([
                     'item', {
@@ -35,6 +40,9 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                             <Link to={`/equipments/${equipmentId}`} className="equipment-name">
                                 <IconEquipment className="icon" icon={equipment._icon} />
                                 {equipment._name}
+                                {star ? (
+                                    <ImprovementStar className="equipment-star">{star}</ImprovementStar>
+                                ) : null}
                             </Link>
                         }
                         {!equipmentId && hasSlot && <span className="equipment-name">

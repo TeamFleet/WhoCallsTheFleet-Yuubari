@@ -115,4 +115,30 @@
                 .style-active();
             }
         }
+        .equipment-star{
+            position: absolute;
+            top: 50%;
+            margin-top: -8px;
+            z-index: 1;
+            border-left: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            left: 100%;
+            margin: -8px 0 0 -2px;
+            &:before, &:after{
+                content: "";
+                z-index: -1;
+                position: absolute;
+                right: 100%;
+                width: 2px;
+                height: 1px;
+                background: linear-gradient(to right, transparent, currentColor);
+            }
+            &:before{
+                top: -1px;
+            }
+            &:after{
+                bottom: -1px;
+            }
+        }
 }
