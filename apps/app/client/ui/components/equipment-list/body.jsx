@@ -104,16 +104,16 @@ class EquipmentListBody extends React.Component {
         return collection.list.map((type, typeIndex) => {
             return (
                 <CSSTransitionComponent key={index + typeIndex}>
-                    <div className={classNames({
-                        'first': typeIndex === 0,
-                        'last': typeIndex === collection.list.length - 1
-                    })} >
-                        <Title id={this.props.id} type={type.type} />
-                        {equipmentTypes.Interceptors.includes(type.type) && (
-                            <TableBodyHeaderInterceptor />
-                        )}
-                        <TableBody id={this.props.id} equipments={type.equipments} />
-                    </div>
+                    <EquipmentListBodyList
+                        key={index + typeIndex}
+                        id={this.props.id}
+                        index={typeIndex}
+                        type={type.type}
+                        equipments={type.equipments}
+                        className={this.props.className + '-list'}
+                        isFirst={typeIndex === 0}
+                        isLast={typeIndex === collection.list.length - 1}
+                    />
                 </CSSTransitionComponent>
             )
         })
@@ -184,6 +184,72 @@ class EquipmentListBodyDataHost extends React.Component {
         )
     }
 }
+
+const EquipmentListBodyList = ({
+    id,
+    type, equipments,
+    className, isFirst, isLast,
+}) =>
+    (
+        <div className={classNames({
+            [className]: true,
+            'first': isFirst,
+            'last': isLast
+        })} >
+            <Title id={id} type={type} />
+            {equipmentTypes.Interceptors.includes(type) && (
+                <TableBodyHeaderInterceptor />
+            )}
+            <TableBody id={id} equipments={equipments} />
+        </div>
+    )
+// class EquipmentListBodyList extends React.Component {
+//     constructor(props) {
+//         super(props)
+//         this.state = {
+//             render: __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady),
+//             // show: false
+//         }
+//     }
+//     componentWillMount() {
+//         if (!this.state.render)
+//             setTimeout(() => {
+//                 this.setState({
+//                     render: true
+//                 })
+//                 if (typeof this.props.onRender === 'function')
+//                     this.props.onRender(this)
+//             }, 10 * (this.props.index || 0))
+//         else if (typeof this.props.onRender === 'function')
+//             this.props.onRender(this)
+//     }
+//     render() {
+//         if (!this.state.render) return <div />
+//         const {
+//             id,
+
+//             type,
+//             equipments,
+
+//             className,
+//             isFirst,
+//             isLast,
+//         } = this.props
+//         return (
+//             <div className={classNames({
+//                 [className]: true,
+//                 'first': isFirst,
+//                 'last': isLast
+//             })} >
+//                 <Title id={id} type={type} />
+//                 {equipmentTypes.Interceptors.includes(type) && (
+//                     <TableBodyHeaderInterceptor />
+//                 )}
+//                 <TableBody id={id} equipments={equipments} />
+//             </div>
+//         )
+//     }
+// }
 
 
 // --------------------------------------------------

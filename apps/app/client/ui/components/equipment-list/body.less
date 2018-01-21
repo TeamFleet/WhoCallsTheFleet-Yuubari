@@ -1,16 +1,19 @@
 @import './_.less';
 
 .component{
-    @transition-duration:   (@duration-main-transition / 3 * 2);
-    @transition-duration-enter: @transition-duration;
-    @transition-delay:      (@transition-duration / 3);
-
     padding-top:    @header-height;
     .screen-phone({
         padding-top:@header-height-phone;
     });
 
-    .transition-enter {
+}
+
+.component-list{
+    @transition-duration:   (@duration-main-transition / 3 * 2);
+    @transition-duration-enter: @transition-duration;
+    @transition-delay:      (@transition-duration / 3);
+
+    &.transition-enter {
         opacity:    0.01 !important;
         transform:  translateY(-1rem);
         transition-property: opacity, transform;
@@ -39,6 +42,9 @@
             transform:  none;
         }
     }
+//     opacity: 0.01;
+//     animation: fadein @base-transition-duration @base-transition-timing-function;
+//     animation-fill-mode: both;
 }
 
 // .highlighting(@n, @i: 0) when (@i =< @n) {

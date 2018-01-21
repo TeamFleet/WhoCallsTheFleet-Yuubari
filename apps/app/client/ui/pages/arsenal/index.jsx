@@ -335,7 +335,7 @@ class PageArsenalCollection extends React.Component {
                 })
                 if (typeof this.props.onRender === 'function')
                     this.props.onRender(this)
-            }, 10 * (this.props.index || 0))
+            }, 20 * (this.props.index || 0))
         else if (typeof this.props.onRender === 'function')
             this.props.onRender(this)
     }
