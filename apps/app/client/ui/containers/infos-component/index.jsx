@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Title from '@appUI/components/title.jsx'
+import Title from '@appUI/components/title'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './styles.less'

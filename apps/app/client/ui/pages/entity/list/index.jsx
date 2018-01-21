@@ -66,7 +66,12 @@ export default class extends React.Component {
 class ListTitle extends React.Component {
     render() {
         return (
-            <Title component="h2" type="line-append" {...this.props} />
+            <Title
+                component="h2"
+                type="line-append"
+                inherit={true}
+                {...this.props}
+            />
         )
     }
 }

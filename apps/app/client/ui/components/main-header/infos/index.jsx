@@ -23,7 +23,7 @@ export default class MainHeaderInfos extends React.Component {
      *      tabName
      * }]
      */
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             currentIndex: props.defaultIndex || 0
@@ -107,10 +107,10 @@ export default class MainHeaderInfos extends React.Component {
             ])} {...props}>
 
                 <div className="infos">
-                    {title && <Title tag="h1" className="title">
+                    {title && <div className="title">
                         {subtitle && <span className="subtitle">{subtitle}</span>}
-                        {title}
-                    </Title>}
+                        <Title tag="h1" className="title-h1" children={title} />
+                    </div>}
                     {children}
                 </div>
 

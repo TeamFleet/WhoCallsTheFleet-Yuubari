@@ -1,15 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import PageContainer from 'sp-ui-pagecontainer'
-import CenterContainer from '@appUI/containers/center'
-import htmlHead from '@appUtils/html-head.js'
-
 import { ImportStyle } from 'sp-css-import'
-import style from './LoremIpsum.less'
+
+import htmlHead from '@appUtils/html-head'
+
+import Page from '@appUI/containers/page'
+import CenterContainer from '@appUI/containers/center'
+
+import Title from '@appUI/components/title'
 
 @connect()
-@ImportStyle(style)
+@ImportStyle(require('./LoremIpsum.less'))
 export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
@@ -23,13 +25,13 @@ export default class extends React.Component {
 
     render() {
         return (
-            <PageContainer className={this.props.className}>
+            <Page className={this.props.className}>
                 <CenterContainer>
-                    <h1>Qui est in parvis malis.</h1>
+                    <Title component="h1">Qui est in parvis malis.</Title>
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Res enim concurrent contrariae. Quodsi ipsam honestatem undique pertectam atque absolutam. <i>Minime vero istorum quidem, inquit.</i> Vitae autem degendae ratio maxime quidem illis placuit quieta. </p>
 
-                    <h5>Atqui, inquam, Cato, si istud optinueris, traducas me ad te totum licebit.</h5>
+                    <Title component="h5">Atqui, inquam, Cato, si istud optinueris, traducas me ad te totum licebit.</Title>
 
                     <p>Quamvis enim depravatae non sint, pravae tamen esse possunt. Graecis hoc modicum est: Leonidas, Epaminondas, tres aliqui aut quattuor; Tum Piso: Quoniam igitur aliquid omnes, quid Lucius noster? <b>Nunc agendum est subtilius.</b> Quid censes in Latino fore? Cetera illa adhibebat, quibus demptis negat se Epicurus intellegere quid sit bonum. <b>Sedulo, inquam, faciam.</b> <code>Sed ad illum redeo.</code> <mark>Suo genere perveniant ad extremum;</mark> </p>
 
@@ -68,7 +70,7 @@ export default class extends React.Component {
 
                     <p>Illa videamus, quae a te de amicitia dicta sunt. Mihi enim erit isdem istis fortasse iam utendum. <i>Comprehensum, quod cognitum non habet?</i> <a href="http://loripsum.net/" target="_blank">Hoc simile tandem est?</a> Apparet statim, quae sint officia, quae actiones. </p>
 
-                    <h2>Nam Pyrrho, Aristo, Erillus iam diu abiecti.</h2>
+                    <Title component="h2">Nam Pyrrho, Aristo, Erillus iam diu abiecti.</Title>
 
                     <p>Quamquam in hac divisione rem ipsam prorsus probo, elegantiam desidero. Est enim tanti philosophi tamque nobilis audacter sua decreta defendere. Quid de Platone aut de Democrito loquar? Duo enim genera quae erant, fecit tria. <code>Sed ille, ut dixi, vitiose.</code> <b>Frater et T.</b> Nam ista vestra: Si gravis, brevis; Quae hic rei publicae vulnera inponebat, eadem ille sanabat. Sed videbimus. Idque testamento cavebit is, qui nobis quasi oraculum ediderit nihil post mortem ad nos pertinere? </p>
 
@@ -92,7 +94,7 @@ ratio et vitae degendae et rerum gerendarum.
                     </dl>
 
 
-                    <h3>Scaevola tribunus plebis ferret ad plebem vellentne de ea re quaeri.</h3>
+                    <Title component="h3">Scaevola tribunus plebis ferret ad plebem vellentne de ea re quaeri.</Title>
 
                     <p><a href="http://loripsum.net/" target="_blank">Id enim natura desiderat.</a> Et quidem Arcesilas tuus, etsi fuit in disserendo pertinacior, tamen noster fuit; Commoda autem et incommoda in eo genere sunt, quae praeposita et reiecta diximus; <b>Qualem igitur hominem natura inchoavit?</b> Quamquam haec quidem praeposita recte et reiecta dicere licebit. Multa sunt dicta ab antiquis de contemnendis ac despiciendis rebus humanis; Quid vero? </p>
 
@@ -104,7 +106,7 @@ ratio et vitae degendae et rerum gerendarum.
                     </ul>
 
 
-                    <h4>Non potes, nisi retexueris illa.</h4>
+                    <Title component="h4">Non potes, nisi retexueris illa.</Title>
 
                     <p><i>Quid, de quo nulla dissensio est?</i> Quasi ego id curem, quid ille aiat aut neget. Nescio quo modo praetervolavit oratio. <a href="http://loripsum.net/" target="_blank">Negat enim summo bono afferre incrementum diem.</a> <a href="http://loripsum.net/" target="_blank">Collatio igitur ista te nihil iuvat.</a> <i>Negare non possum.</i> Hunc vos beatum; Quid sequatur, quid repugnet, vident. </p>
 
@@ -196,7 +198,7 @@ probare?
                         Nec vero dico eorum metum mortis, qui, quia privari se vitae bonis arbitrentur, aut quia quasdam post mortem formidines extimescant, aut si metuant, ne cum dolore moriantur, idcirco mortem fugiant;
 </blockquote>
                 </CenterContainer>
-            </PageContainer>
+            </Page>
         )
     }
 }

@@ -14,7 +14,7 @@
         font-size:  12px;
         margin-left:10px;
         font-weight:normal;
-        color:      @color-fade;
+        color:      @color-base-dimmed;
         // color:      @color-base;
     }
 
@@ -26,6 +26,18 @@
             height:     40px;
         }
     }
+
+    &[disabled]{
+        font-weight: 100;
+    }
+}
+
+.component-title{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    // font-size: inherit;
+    line-height: inherit;
 }
 
 .is-compare-selecting{

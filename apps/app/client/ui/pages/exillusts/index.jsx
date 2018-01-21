@@ -143,11 +143,12 @@ export default class extends React.Component {
                 <hr />
 
                 <div>
-                    <Title component="h2">
-                        {cur._name}{
-                            cur._time ? (<small>  ({cur._time})</small>) : undefined
-                        }
-                    </Title>
+                    <div className="title">
+                        <Title type="inline-block" component="h2">
+                            {cur._name}
+                        </Title>
+                        {cur._time && <small>  ({cur._time})</small>}
+                    </div>
                     {cur.list.map(obj => (
                         <div
                             key={obj.id}

@@ -1,17 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { ImportStyle } from 'sp-css-import'
 import PageContainer from 'sp-ui-pagecontainer'
+
 import htmlHead from '@appUtils/html-head'
 
 import MainHeader from '@appUI/components/main-header'
 import Icon from '@appUI/components/icon'
-
-import { ImportStyle } from 'sp-css-import'
-import style from './icons.less'
+import Title from '@appUI/components/title'
 
 @connect()
-@ImportStyle(style)
+@ImportStyle(require('./icons.less'))
 export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
@@ -47,7 +47,7 @@ export default class extends React.Component {
             <PageContainer className={this.props.className}>
                 <MainHeader>
                     <div className="header" style={{ height: "100px", paddingTop: "20px" }}>
-                        <h1>Icons</h1>
+                        <Title component="h1">Icons</Title>
                     </div>
                 </MainHeader>
                 <div className="icon-sample-group">

@@ -1,16 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { ImportStyle } from 'sp-css-import'
 import translate from 'sp-i18n'
+
 import db, { locale as dbLocaleId } from '@appLogic/database'
 import {
     compareAdd,
     compareRemove
 } from '@appLogic/ship-list/api.js'
-import Icon from '@appUI/components/icon.jsx'
 
-import { ImportStyle } from 'sp-css-import'
-import styleTitle from './title.less'
+import Icon from '@appUI/components/icon.jsx'
+import Title from '@appUI/components/title'
 
 const getChecked = (ownList, selectedList) => {
     let matched = 0
@@ -37,7 +38,7 @@ const getChecked = (ownList, selectedList) => {
             : undefined
         : undefined
 }))
-@ImportStyle(styleTitle)
+@ImportStyle(require('./title.less'))
 export default class ShipListTitle extends React.Component {
     toggle() {
         if (typeof this.props.checked === 'undefined') return false
@@ -67,11 +68,19 @@ export default class ShipListTitle extends React.Component {
         if (this.props.type) {
             const type = db.shipTypes[this.props.type]
             return (
-                <h4 className={this.props.className} data-checked={this.props.checked} onClick={this.toggle.bind(this)}>
+                <div
+                    className={this.props.className}
+                    data-checked={this.props.checked}
+                    onClick={this.toggle.bind(this)}
+                >
                     {this.renderCheckmark()}
-                    {type.name[dbLocaleId] || type.name.ja_jp}
+                    <Title
+                        component="h4"
+                        className={this.props.className + '-title'}
+                        children={type.name[dbLocaleId] || type.name.ja_jp}
+                    />
                     {type.code && (<small className="code">[{type.code}]</small>)}
-                </h4>
+                </div>
             )
         } else if (this.props.class) {
             return (
@@ -84,7 +93,7 @@ export default class ShipListTitle extends React.Component {
             )
         } else
             return (
-                <h4 className={this.props.className}>--</h4>
+                <h4 className={this.props.className} disabled>--</h4>
             )
     }
 }

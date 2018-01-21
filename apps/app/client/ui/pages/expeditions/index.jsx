@@ -2,9 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
 import { ImportStyle } from 'sp-css-import'
-import htmlHead from '@appUtils/html-head.js'
+
+import htmlHead from '@appUtils/html-head'
+
+import Page from '@appUI/containers/page'
+
+import Title from '@appUI/components/title'
 
 @connect()
 // @ImportStyle(style)
@@ -21,11 +25,12 @@ export default class extends React.Component {
 
     render() {
         return (
-            <PageContainer
+            <Page
                 className={this.props.className}
             >
+                <Title component="h2" children={translate('nav.expeditions')} />
                 <p><i>{translate('under_construction')}...</i></p>
-            </PageContainer>
+            </Page>
         )
     }
 }

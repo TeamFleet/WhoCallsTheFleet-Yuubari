@@ -21,6 +21,7 @@ If you want help us for English translation, you can submit your changes [HERE](
 
 **Ship Details**
 
+* New design
 * New: Navy, Resources for dismantle.
 * New: Level slider for stats.
 * New: Notes for special illustrations.
@@ -33,7 +34,12 @@ If you want help us for English translation, you can submit your changes [HERE](
 
 **Equipment Details**
 
+* New design
 * New stat: TP (When available)
+
+**Akashi's Arsenal**
+
+* New design
 
 ## TODOs
 
@@ -43,7 +49,6 @@ If you want help us for English translation, you can submit your changes [HERE](
   * Home
   * Fleet Builder
   * TP Calculator
-  * Akashi's Arsenal
   * About
 * Frame
   * Navigation
@@ -65,8 +70,6 @@ If you want help us for English translation, you can submit your changes [HERE](
     * Add quick check for equipment set (eg. AACI, Night battle)
   * Folder for List view
   * API for importing build and full documents support
-* Akashi's Arsenal
-  * New: Filter for screw number in weekday view.
 
 ## On the Horizon
 
@@ -76,6 +79,8 @@ If you want help us for English translation, you can submit your changes [HERE](
   * New tab: Availability
 * Equipment Details
   * New data (or tab?): Availability
+* Akashi's Arsenal
+  * New: Filter for screw number in weekday view.
 * New category: Expeditions
 * New category: Sorties
 * New category: Juckbox

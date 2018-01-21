@@ -1,19 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Markdown from 'react-markdown'
-import { localeId } from 'sp-i18n'
+import { ImportStyle } from 'sp-css-import'
+import translate, { localeId } from 'sp-i18n'
 
-import Link from '@appUI/components/link'
+import htmlHead from '@appUtils/html-head'
+
+import Page from '@appUI/containers/page'
 import CenterContainer from '@appUI/containers/center'
 
-import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
-import htmlHead from '@appUtils/html-head.js'
-
-import { ImportStyle } from 'sp-css-import'
-import style from './styles.less'
+import Title from '@appUI/components/title'
+import Link from '@appUI/components/link'
 
 const markdownRenderers = {
+    heading: (props) => {
+        // console.log(props)
+        let type
+        if (props.level == 2) {
+            type = "line-append"
+        }
+        return <Title type={type} {...props} />
+    },
     Link: (props) => {
         return (
             props.href.match(/^(https?:)?\/\//)
@@ -27,7 +34,7 @@ const markdownRenderers = {
 }
 
 @connect()
-@ImportStyle(style)
+@ImportStyle(require('./styles.less'))
 export default class Home extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
@@ -48,7 +55,7 @@ export default class Home extends React.Component {
     }
     render() {
         return (
-            <PageContainer className={this.props.className}>
+            <Page className={this.props.className}>
                 <CenterContainer>
                     <Markdown
                         source={this.getMD()}
@@ -58,7 +65,7 @@ export default class Home extends React.Component {
                         }
                     />
                 </CenterContainer>
-            </PageContainer>
+            </Page>
         )
     }
 }

@@ -347,6 +347,7 @@ class PageArsenalCollection extends React.Component {
                     component="h2"
                     type="line-append"
                     className={`${this.props.className}-title`}
+                    inherit={true}
                     /*
                     className={classNames({
                         [`${this.props.className}-title`]: true,

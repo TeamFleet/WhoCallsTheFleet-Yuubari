@@ -1,15 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { ImportStyle } from 'sp-css-import'
 import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
+
 import htmlHead from '@appUtils/html-head.js'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './styles.less'
+import Page from '@appUI/containers/page'
+
+import Title from '@appUI/components/title'
 
 @connect()
-@ImportStyle(style)
+@ImportStyle(require('./styles.less'))
 export default class About extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
@@ -23,13 +25,17 @@ export default class About extends React.Component {
 
     render() {
         return (
-            <PageContainer
+            <Page
                 className={this.props.className}
             >
+                <Title component="h2" children={translate('nav.about')} />
                 <p><i>{translate('under_construction')}...</i></p>
-                <p>Fork on <a href="https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari" target="_blank">GitHub</a></p>
-                <p>Based on <a href="https://github.com/websage-team/super-project" target="_blank">Super Project</a> v{require('super-project/package.json').version}</p>
-            </PageContainer>
+                <p>
+                    Based on <a href="https://github.com/websage-team/super-project" target="_blank">Super Project</a> v{require('super-project/package.json').version}
+                    <br />
+                    Fork on <a href="https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari" target="_blank">GitHub</a>
+                </p>
+            </Page>
         )
     }
 }

@@ -14,7 +14,7 @@ import ComponentContainer from '@appUI/containers/infos-component'
 
 import Pictures from './components/pictures'
 import ListShips from '@appUI/components/list/ships'
-import Title from '@appUI/components/title.jsx'
+import Title from '@appUI/components/title'
 
 const extractFromState = (state) => {
     const pathname = state.routing.locationBeforeTransitions.pathname
@@ -107,10 +107,12 @@ const ContentList = ({ list, type, ...props }) => {
     if (!list.length) return null
     return (
         <ComponentContainer
-            title={<Title tag="h2" className="title">
-                {translate(`entity_details.${type}`)}
-                <small className="count">({list.length})</small>
-            </Title>}
+            title={
+                <div className="title">
+                    <Title tag="h2" className="title-inline" children={translate(`entity_details.${type}`)} />
+                    <small className="count">({list.length})</small>
+                </div>
+            }
             className={`entityinfo entityinfo-list entityinfo-${type}`}
         >
             <ListShips
