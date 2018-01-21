@@ -110,6 +110,7 @@ if (__CLIENT__) {
 }
 
 //
+if (__DEV__) console.log('⚓ Client inited...')
 
 export {
     reactApp

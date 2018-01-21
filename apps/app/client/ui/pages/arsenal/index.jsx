@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
 import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
+// import PageContainer from 'sp-ui-pagecontainer'
 
 import db from '@appLogic/database'
 import pref from '@appLogic/preferences'
@@ -17,6 +17,8 @@ import sortShips from '@appUtils/sort-ships'
 // import routerReplace from '@appUtils/router-replace'
 
 // import {Link, IndexLink} from 'react-router'
+import Page from '@appUI/containers/page'
+
 import Link from '@appUI/components/link'
 import LinkEquipment from '@appUI/components/link/equipment'
 import Title from '@appUI/components/title'
@@ -63,6 +65,13 @@ export default class PageArsenal extends React.Component {
         ext.title = head.title
     }
 
+    constructor() {
+        super()
+        this.state = {
+            rendering: true
+        }
+    }
+
     componentDidUpdate(prevProps/*, prevState*/) {
         // const prevParams = prevProps.params || {}
         // const params = this.props.params || {}
@@ -70,20 +79,36 @@ export default class PageArsenal extends React.Component {
             window.scrollTo(undefined, 0)
     }
 
+    onRender() {
+        // console.log(123)
+        this.setState({
+            rendering: false
+        })
+    }
+
     render() {
         const day = typeof this.props.params === 'object' && typeof this.props.params.day !== 'undefined'
             ? this.props.params.day
             : -1
         // console.log(db)
+        // console.log('[PageArsenal] render')
         return (
-            <PageContainer
+            <Page
                 className={this.props.className}
+                pathname={this.props.location.pathname}
+                rendering={this.state.rendering}
+            // location={this.props.location}
+            // params={this.props.params}
+            // route={this.props.route}
+            // routeParams={this.props.routeParams}
+            // router={this.props.router}
+            // routes={this.props.routes}
             >
                 <PageArsenalHeader isDay={typeof this.props.params === 'object' && typeof this.props.params.day !== 'undefined'} />
 
-                {day > -1 && <PageArsenalListDay day={day} />}
-                {day === -1 && <PageArsenalListAll />}
-            </PageContainer>
+                {day > -1 && <PageArsenalListDay day={day} onRender={this.onRender.bind(this)} />}
+                {day === -1 && <PageArsenalListAll onRender={this.onRender.bind(this)} />}
+            </Page>
         )
     }
 }
@@ -162,6 +187,27 @@ class PageArsenalHeaderAkashi extends React.Component {
     }
 }
 
+class PageArsenalList extends React.Component {
+    render() {
+        // console.log('[PageArsenalList] render')
+        return this.props.collections.map((collection, index) => (
+            <PageArsenalCollection
+                key={`collection-${collection.title}`}
+                title={collection.title}
+                index={index}
+                onRender={() => {
+                    if (typeof this.props.onRender === 'function' &&
+                        index >= this.props.collections.length - 1
+                    )
+                        this.props.onRender(this)
+                }}
+            >
+                {collection.list}
+            </PageArsenalCollection>
+        ))
+    }
+}
+
 class PageArsenalListDay extends React.Component {
     render() {
         let lastCollection = -1
@@ -210,15 +256,9 @@ class PageArsenalListDay extends React.Component {
             />)
         })
 
-        return collections.map((collection, index) => (
-            <PageArsenalCollection
-                key={`collection-${collection.title}`}
-                title={collection.title}
-                index={index}
-            >
-                {collection.list}
-            </PageArsenalCollection>
-        ))
+        return (
+            <PageArsenalList collections={collections} {...this.props} />
+        )
     }
 }
 
@@ -272,15 +312,9 @@ class PageArsenalListAll extends React.Component {
             })
         })
 
-        return collections.map((collection, index) => (
-            <PageArsenalCollection
-                key={`collection-${collection.title}`}
-                title={collection.title}
-                index={index}
-            >
-                {collection.list}
-            </PageArsenalCollection>
-        ))
+        return (
+            <PageArsenalList collections={collections} {...this.props} />
+        )
     }
 }
 
@@ -299,7 +333,11 @@ class PageArsenalCollection extends React.Component {
                 this.setState({
                     render: true
                 })
-            }, 100 * (this.props.index || 0))
+                if (typeof this.props.onRender === 'function')
+                    this.props.onRender(this)
+            }, 10 * (this.props.index || 0))
+        else if (typeof this.props.onRender === 'function')
+            this.props.onRender(this)
     }
     render() {
         // if (!this.state.render) return null

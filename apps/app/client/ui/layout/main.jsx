@@ -73,7 +73,10 @@ export default class extends React.Component {
     }
 
     componentDidUpdate() {
-        if (action === 'POP' && typeof pathnameLastScrollY[this.props.location.pathname] !== 'undefined') {
+        if (action === 'POP' &&
+            typeof pathnameLastScrollY[this.props.location.pathname] !== 'undefined'
+        ) {
+            // console.log(this.props.children)
             window.scrollTo(undefined, pathnameLastScrollY[this.props.location.pathname])
             delete pathnameLastScrollY[this.props.location.pathname]
         }

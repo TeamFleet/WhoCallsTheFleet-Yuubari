@@ -1,3 +1,4 @@
+if (__DEV__) console.log('∞ Server initializing...')
 
 const fs = require('fs-extra')
 const path = require('path')
@@ -50,8 +51,6 @@ i18nRegister(availableLocales, locales)
 // await dbInit()
 dbInit()
 // })()
-
-if (__DEV__) console.log('⚓ Server - Client inited.')
 
 
 
@@ -190,5 +189,7 @@ app.use(async (ctx, next) => {
 })
 
 app.use(isomorphic)
+
+if (__DEV__) console.log('✔ Server inited.')
 
 export default app
