@@ -46,8 +46,10 @@ export default class extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.rendering && this.props.locationBeforeTransitions.action === 'POP')
-            this.restoreScrollY()
+        if (this.props.locationBeforeTransitions.action === 'POP') {
+            if (!this.props.rendering) this.restoreScrollY()
+        } else
+            delete lastScrollY[this.props.pathname]
     }
 
     render() {
