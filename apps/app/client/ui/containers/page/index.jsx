@@ -3,14 +3,7 @@ import { connect } from 'react-redux'
 
 import SpPageContainer from 'sp-ui-pagecontainer'
 
-let lastScrollY
-const restoreScrollY = () => {
-    if (typeof lastScrollY !== 'undefined') {
-        // console.log('restoring scrollY')
-        window.scrollTo(undefined, lastScrollY)
-        lastScrollY = undefined
-    }
-}
+const lastScrollY = {}
 
 /**
  * Page - a container component. Will restore last scroll position when re-mounting.
@@ -22,6 +15,14 @@ const restoreScrollY = () => {
     locationBeforeTransitions: state.routing.locationBeforeTransitions
 }))
 export default class extends React.Component {
+    restoreScrollY() {
+        if (typeof lastScrollY[this.props.pathname] !== 'undefined') {
+            // console.log('restoring scrollY')
+            window.scrollTo(undefined, lastScrollY[this.props.pathname])
+            delete lastScrollY[this.props.pathname]
+        }
+    }
+
     shouldComponentUpdate(newProps) {
         // un-mounting
         if (newProps.pathname !== newProps.locationBeforeTransitions.pathname) {
@@ -31,13 +32,13 @@ export default class extends React.Component {
                     + ` ${newProps.pathname} -> ${newProps.locationBeforeTransitions.pathname}`
                     + ` @0,${window.scrollY}`
                 )
-            lastScrollY = window.scrollY
+            lastScrollY[newProps.pathname] = window.scrollY
             return false
         }
 
         // rendered
         if (newProps.rendering !== this.props.rendering && !newProps.rendering) {
-            restoreScrollY()
+            this.restoreScrollY()
             return false
         }
 
@@ -46,7 +47,7 @@ export default class extends React.Component {
 
     componentDidMount() {
         if (!this.props.rendering && this.props.locationBeforeTransitions.action === 'POP')
-            restoreScrollY()
+            this.restoreScrollY()
     }
 
     render() {
