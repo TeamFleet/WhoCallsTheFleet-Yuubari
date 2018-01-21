@@ -103,15 +103,18 @@
                 // }
                 opacity:    1;
             }
+            .style-active() {
+                opacity:    .35;
+            }
     
             .is-hover({
                 .style-hover();
             }; {
-                // opacity:    .5;
-                .ship{
-                    opacity:    .5;
-                }
+                .style-active();
             }; true);
+            &:active{
+                .style-active();
+            }
         }
         .pic{
             display:    block;

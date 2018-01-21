@@ -48,6 +48,7 @@ export default class ShipDetailsComponentRemodels extends React.Component {
                     name={false}
                     pic={false}
                     extraIllust={true}
+                    replace={true}
                 >
                     <span className="pic" style={{
                         backgroundImage: `url(${getPic(ship, checkCssProp('mask') ? '0' : '0-1')})`

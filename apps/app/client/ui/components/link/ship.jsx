@@ -1,18 +1,17 @@
 import React from 'react'
-import Link from './_normal.jsx'
+import { ImportStyle } from 'sp-css-import'
 
 import db from '@appLogic/database'
 
 import getShip from '@appUtils/get-ship.js'
 import getPic from '@appUtils/get-pic.js'
+// import routerReplace from '@appUtils/router-replace'
 
+import Link from './_normal.jsx'
 import Icon from '@appUI/components/icon.jsx'
 import FlagNavy from '@appUI/components/flag-navy.jsx'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './ship.less'
-
-@ImportStyle(style)
+@ImportStyle(require('./ship.less'))
 export default class LinkShip extends React.Component {
     checkShow(value) {
         return (value || typeof value === 'undefined')
@@ -66,6 +65,7 @@ export default class LinkShip extends React.Component {
             name,
             navy,
 
+            // replace = false,
             children,
 
             ...props
@@ -88,10 +88,22 @@ export default class LinkShip extends React.Component {
 
         // console.log(props)
 
+        // const Component = replace ? 'a' : Link
+        // const to = '/ships/' + this.ship.id
+
+        // if (Component === 'a') {
+        //     props.href = to
+        //     props.onClick = evt => {
+        //         evt.preventDefault()
+        //         routerReplace(to)
+        //     }
+        // } else
+        //     props.to = to
+
         return (
             <Link
-                className={className}
                 to={'/ships/' + this.ship.id}
+                className={className}
                 pic={this.checkShow(pic) ? getPic(this.ship, '0-2') : null}
                 name={this.checkShow(name) ? this.renderName(type) : null}
                 {...props}

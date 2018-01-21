@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
-
 import { ImportStyle } from 'sp-css-import'
-import style from './_normal.less'
+import routerReplace from '@appUtils/router-replace'
 
-@ImportStyle(style)
+@ImportStyle(require('./_normal.less'))
 export default class LinkTypeNormal extends React.Component {
     renderName(name, extra) {
         if (typeof name === 'string') {
@@ -24,16 +23,28 @@ export default class LinkTypeNormal extends React.Component {
         const {
             pic, avatar, image, src, picture, img,
             name, title, text, nameExtra,
-            to, href, link,
+            to: _to, href, link,
+            replace = false,
             ...props
         } = this.props
 
         const thisPic = pic || avatar || image || src || picture || img
         const thisName = name || title || text || null
 
+        const Component = replace ? 'a' : Link
+        const to = _to || href || link
+
+        if (Component === 'a') {
+            props.href = to
+            props.onClick = evt => {
+                evt.preventDefault()
+                routerReplace(to)
+            }
+        } else
+            props.to = to
+
         return (
-            <Link
-                to={to || href || link}
+            <Component
                 {...props}
             >
                 {thisPic && <span
@@ -44,7 +55,7 @@ export default class LinkTypeNormal extends React.Component {
                 />}
                 {thisName && this.renderName(thisName, nameExtra)}
                 {this.props.children}
-            </Link>
+            </Component>
         )
     }
 }
