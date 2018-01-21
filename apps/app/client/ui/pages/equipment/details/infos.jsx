@@ -1,4 +1,5 @@
 import React from 'react'
+import { ImportStyle } from 'sp-css-import'
 
 import Illust from './components/illust'
 import Facts from './components/facts'
@@ -9,22 +10,23 @@ import RequiredForImprovements from './components/required-for-improvements'
 import UpgradeFrom from './components/upgrade-from'
 import Stocked from './components/stocked'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './infos.less'
-
 // @connect()
-@ImportStyle(styles)
+@ImportStyle(require('./infos.less'))
 export default class EquipmentDetailsContentInfos extends React.Component {
+    getInfoClassName(type) {
+        const name = this.props.className + '-info'
+        return name + (type ? ` ${name}-${type}` : null)
+    }
     render() {
         return (
             <div className={this.props.className}>
-                <Illust equipment={this.props.equipment} className="equipmentinfo equipmentinfo-illust" />
-                <Facts equipment={this.props.equipment} className="equipmentinfo equipmentinfo-facts" />
-                {/*<Scrap equipment={this.props.equipment} className="equipmentinfo equipmentinfo-scrap" />*/}
-                <Improvements equipment={this.props.equipment} className="equipmentinfo equipmentinfo-improvements" />
-                <RequiredForImprovements equipment={this.props.equipment} className="equipmentinfo equipmentinfo-required-for-improvements" />
-                <UpgradeFrom equipment={this.props.equipment} className="equipmentinfo equipmentinfo-upgrade-from" />
-                <Stocked equipment={this.props.equipment} className="equipmentinfo equipmentinfo-stocked" />
+                <Illust equipment={this.props.equipment} className={this.getInfoClassName('illust')} />
+                <Facts equipment={this.props.equipment} className={this.getInfoClassName('facts')} />
+                {/*<Scrap equipment={this.props.equipment} className={this.getInfoClassName('scrap')} />*/}
+                <Improvements equipment={this.props.equipment} className={this.getInfoClassName('improvements')} />
+                <RequiredForImprovements equipment={this.props.equipment} className={this.getInfoClassName('required-for-improvements')} />
+                <UpgradeFrom equipment={this.props.equipment} className={this.getInfoClassName('upgrade-from')} />
+                <Stocked equipment={this.props.equipment} className={this.getInfoClassName('stocked')} />
             </div>
         )
     }

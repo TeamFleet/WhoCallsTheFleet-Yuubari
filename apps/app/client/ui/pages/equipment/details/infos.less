@@ -1,22 +1,28 @@
 @import './_.less';
 
-.component{
-    .equipmentinfo{
-        overflow:   hidden;
-    }
-    .equipmentinfo-illust{
-        float:      right;
-        margin-left:(@infos-component-gutter-vertical / 2);
-        margin-bottom:  -100px;
-        .screen-max({
-            width:  20vw;
-        });
-        .screen-tablet({
-            float:      none;
-            margin-left:auto;
-            margin-right:auto;
-            width:      auto;
-            margin-bottom:  auto;
-        });
-    }
+// .component{
+// }
+
+.component-info{
+    overflow: hidden;
+}
+
+.component-info-illust{
+    float:      right;
+    margin-left:(@infos-component-gutter-vertical / 2);
+    margin-bottom:  -100px;
+    .screen-max({
+        width:  20vw;
+    });
+    .screen-tablet({
+        float:      none;
+        margin-left:auto;
+        margin-right:auto;
+        width:      auto;
+        margin-bottom:  auto;
+    });
+}
+
+.component-info-stocked{
+    overflow: visible;
 }
