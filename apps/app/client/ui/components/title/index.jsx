@@ -5,7 +5,7 @@ import { ImportStyle } from 'sp-css-import'
 @ImportStyle(require('./styles.less'))
 export default class Title extends React.Component {
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         const {
             className, classNameInner,
             component, tag, tagname, element, level,
