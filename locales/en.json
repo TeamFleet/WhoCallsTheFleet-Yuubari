@@ -153,7 +153,7 @@
         "unable": "Unable to perform",
         "unknown": "ASW stat growth unknown",
         "always": "Can always perform",
-        "no_result": "Required equipment missing",
+        "no_result": "Required equipment(s)",
         "result": "Required level: "
     },
 

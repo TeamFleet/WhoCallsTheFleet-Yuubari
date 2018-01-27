@@ -19,22 +19,55 @@ export default class IconEquipment extends React.Component {
         } = this.props
 
         const TagName = tag || 'span'
-        let _icon = icon
 
-        if (typeof _icon === 'undefined') {
+        let iconId, suffix, matches
+
+        // 15[3,]
+        // 15[3,8]
+        matches = /^([0-9]+)\[([0-9]*),([0-9]*)\]$/.exec(icon)
+        if (Array.isArray(matches)) {
+            iconId = matches[1]
+            if (matches[2] && matches[3])
+                suffix = `${matches[2]}~${matches[3]}`
+            else if (matches[2])
+                suffix = `${matches[2]}+`
+            else if (matches[3])
+                suffix = `0~${matches[3]}+`
+            if (suffix)
+                props['data-suffix-type'] = 'stat-range'
+        }
+
+        matches = /^([0-9]+):([0-9]+)$/.exec(icon)
+        if (Array.isArray(matches)) {
+            iconId = matches[1]
+            if (matches[2])
+                suffix = getEquipment(matches[2])._name
+            if (suffix)
+                props['data-suffix-type'] = 'equipment-name'
+        }
+
+        // console.log(icon, iconId, suffix)
+
+        if (typeof iconId === 'undefined') {
             if (equipment) {
-                _icon = getEquipment(equipment)._icon
+                iconId = getEquipment(equipment)._icon
             } else if (type) {
-                _icon = db.equipmentTypes[type].icon
+                iconId = db.equipmentTypes[type].icon
+            } else {
+                iconId = parseInt(icon)
             }
         }
 
-        const iconID = parseInt(_icon)
+        if (isNaN(iconId))
+            iconId = undefined
+
+        if (!suffix)
+            suffix = ('' + icon).replace(iconId, '').toUpperCase() || undefined
 
         return (
             <TagName
-                data-icon={isNaN(iconID) ? undefined : iconID}
-                data-suffix={('' + _icon).replace(iconID, '').toUpperCase() || undefined}
+                data-icon={iconId}
+                data-suffix={suffix}
                 {...props}
             >
                 {children}
