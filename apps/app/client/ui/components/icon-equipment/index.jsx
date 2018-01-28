@@ -1,12 +1,13 @@
 import React from 'react'
+import { ImportStyle } from 'sp-css-import'
 
 import db from '@appLogic/database'
 import getEquipment from '@appUtils/get-equipment'
+import getLink from '@appUtils/get-link'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './styles.less'
+import { Link } from 'react-router'
 
-@ImportStyle(style)
+@ImportStyle(require('./styles.less'))
 export default class IconEquipment extends React.Component {
     render() {
         const {
@@ -18,8 +19,7 @@ export default class IconEquipment extends React.Component {
             ...props
         } = this.props
 
-        const TagName = tag || 'span'
-
+        let Component = tag || 'span'
         let iconId, suffix, matches
 
         // 15[3,]
@@ -40,8 +40,11 @@ export default class IconEquipment extends React.Component {
         matches = /^([0-9]+):([0-9]+)$/.exec(icon)
         if (Array.isArray(matches)) {
             iconId = matches[1]
-            if (matches[2])
+            if (matches[2]) {
                 suffix = getEquipment(matches[2])._name
+                Component = Link
+                props.to = getLink('equipment', matches[2])
+            }
             if (suffix)
                 props['data-suffix-type'] = 'equipment-name'
         }
@@ -65,13 +68,13 @@ export default class IconEquipment extends React.Component {
             suffix = ('' + icon).replace(iconId, '').toUpperCase() || undefined
 
         return (
-            <TagName
+            <Component
                 data-icon={iconId}
                 data-suffix={suffix}
                 {...props}
             >
                 {children}
-            </TagName>
+            </Component>
         )
     }
 }

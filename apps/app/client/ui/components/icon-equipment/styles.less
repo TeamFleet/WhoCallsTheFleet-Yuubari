@@ -129,3 +129,21 @@
             }
         }
 }
+
+a.component[data-suffix-type="equipment-name"]{
+    &:after{
+        transition-property: color;
+    }
+	.is-hover({
+        &:after{
+            color: #fff;
+        }
+	}; {
+        &:after{
+            color:  @color-link-active;
+        }
+	});
+	&:active:after{
+		color:  @color-link-active;
+	}
+}

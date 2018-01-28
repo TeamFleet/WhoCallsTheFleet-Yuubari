@@ -17,7 +17,7 @@ const maxSlots = 4
 @ImportStyle(styles)
 export default class CalculatorSpeed extends React.Component {
     constructor(props) {
-        if (__DEV__) console.log('thisShip > Speed', { speed: props.ship.stat.speed, rule: props.ship.getSpeedRule() })
+        if (__DEV__ && __CLIENT__) console.log('thisShip > Speed', { speed: props.ship.stat.speed, rule: props.ship.getSpeedRule() })
         super(props)
 
         this.state = {

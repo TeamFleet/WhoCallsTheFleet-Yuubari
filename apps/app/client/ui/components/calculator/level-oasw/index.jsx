@@ -148,8 +148,8 @@ export default class CalculatorLevelOASW extends React.Component {
             defaultState[equipmentID] = 0
         })
 
-        // if (__DEV__) console.log('thisShip > OASW', this.oaswTable, this.equipmentGroupList)
-        if (__DEV__) console.log('thisShip > OASW', this.oaswTable, this.equipmentList, this.isRequired)
+        // if (__DEV__ && __CLIENT__) console.log('thisShip > OASW', this.oaswTable, this.equipmentGroupList)
+        if (__DEV__ && __CLIENT__) console.log('thisShip > OASW', this.oaswTable, this.equipmentList, this.isRequired)
 
         this.slotsCount = props.ship.slot.length
 

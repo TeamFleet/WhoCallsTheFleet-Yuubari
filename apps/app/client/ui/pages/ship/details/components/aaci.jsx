@@ -43,7 +43,7 @@ export default class ShipDetailsAACI extends React.Component {
     render() {
         const aaciTypes = checkAACI(this.props.ship.id)
         const ableToAACI = (Array.isArray(aaciTypes) && aaciTypes.length) ? true : false
-        if (__DEV__) console.log('thisShip > AACI', aaciTypes)
+        if (__DEV__ && __CLIENT__) console.log('thisShip > AACI', aaciTypes)
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.aaci")}>
                 {!ableToAACI && <Bullet
