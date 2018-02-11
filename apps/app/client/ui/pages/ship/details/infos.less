@@ -26,6 +26,8 @@
         flex:   1 0 100%;
     }
         .shipinfo-illust{
+            @top: (@title-height + @tab-height + 10px/* + @title-margin-bottom + @title-margin-bottom + @title-margin-bottom*/);
+
             flex:       none;
             // position:   absolute;
             // top:        0;
@@ -35,10 +37,9 @@
             // background: rgba(0,0,0, .1);
             // margin-right:  (0 - @main-margin);
             position:   fixed;
-            @top:       (@title-height + @tab-height + 10/* + @title-margin-bottom + @title-margin-bottom + @title-margin-bottom*/);
             top:        @top;
             // bottom:     calc(~"10vh - 40px");
-            height:     calc(~"90vh - @{top} + 40px");
+            height:     calc(90vh - (@top - 40px));
             // border-top: 0;
             .swiper-container{
                 mask:   linear-gradient(to right, transparent, #000 20px);
