@@ -63,6 +63,7 @@ module.exports = (async () => Object.assign({}, config, {
             'pwa': {
                 outputPath: path.resolve(pathOutput, '../'),
                 outputFilename: `service-worker.${pathNameSub}.js`,
+                outputFilenameHash: false,
                 // customServiceWorkerPath: path.normalize(appPath + '/src/client/custom-service-worker.js'),
                 globPattern: `/${pathNameSub}/**/*`,
                 globOptions: {
