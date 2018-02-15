@@ -3,15 +3,13 @@ import classNames from 'classnames'
 
 import kckit from 'kckit'
 import db from '@appLogic/database'
+import translate from 'sp-i18n'
+import { ImportStyle } from 'sp-css-import'
 
 import Icon from '@appUI/components/icon'
 import Equipment from '../equipment'
-import InputNumber from '../input-number'
-
-import translate from 'sp-i18n'
-
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
+// import InputNumber from '../input-number'
+import InputCounter from '@appUI/components/input/counter'
 
 const equipmentSamples = {
     Sonar: [
@@ -49,7 +47,7 @@ const requiredEquipmentSamples = {
     ],
 }
 
-@ImportStyle(styles)
+@ImportStyle(require('./styles.less'))
 export default class CalculatorLevelOASW extends React.Component {
     constructor(props) {
         super(props)
@@ -220,7 +218,7 @@ export default class CalculatorLevelOASW extends React.Component {
     }
     renderInput(id) {
         return (
-            <InputNumber
+            <InputCounter
                 className="input"
 
                 defaultValue={this.state[id]}

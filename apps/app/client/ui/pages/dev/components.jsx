@@ -11,6 +11,7 @@ import Title from '@appUI/components/title'
 import DevHeader from '@appUI/components/dev/header'
 import Button from '@appUI/components/button'
 import ButtonGroup from '@appUI/components/button-group'
+import InputCounter from '@appUI/components/input/counter'
 
 @connect()
 @ImportStyle(require('./components.less'))
@@ -31,6 +32,7 @@ export default class extends React.Component {
                 <DevHeader />
                 <SamplesButton />
                 <SamplesButtonGroup />
+                <SamplesInput />
             </Page>
         )
     }
@@ -75,7 +77,6 @@ class SamplesButton extends React.Component {
     }
 }
 
-
 class SamplesButtonGroup extends React.Component {
     render() {
         return (
@@ -93,3 +94,13 @@ class SamplesButtonGroup extends React.Component {
         )
     }
 }
+
+const SamplesInput = () => (
+    <div>
+        <Title component="h2">Input/Counter</Title>
+        <p>
+            <InputCounter />
+            <InputCounter defaultValue="10" max="20" min="-5" />
+        </p>
+    </div>
+)

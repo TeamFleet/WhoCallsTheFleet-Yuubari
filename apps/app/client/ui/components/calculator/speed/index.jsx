@@ -2,19 +2,17 @@ import React from 'react'
 import classNames from 'classnames'
 
 import kckit from 'kckit'
-
-import Equipment from '../equipment'
-import InputNumber from '../input-number'
-
+import { ImportStyle } from 'sp-css-import'
 import translate from 'sp-i18n'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
+import Equipment from '../equipment'
+// import InputNumber from '../input-number'
+import InputCounter from '@appUI/components/input/counter'
 
 const calculateSpeed = kckit.calculate.ship.speed
 const maxSlots = 4
 
-@ImportStyle(styles)
+@ImportStyle(require('./styles.less'))
 export default class CalculatorSpeed extends React.Component {
     constructor(props) {
         if (__DEV__ && __CLIENT__) console.log('thisShip > Speed', { speed: props.ship.stat.speed, rule: props.ship.getSpeedRule() })
@@ -80,7 +78,7 @@ export default class CalculatorSpeed extends React.Component {
             )
         }
         return (
-            <InputNumber
+            <InputCounter
                 className="input"
 
                 defaultValue={this.state[id]}

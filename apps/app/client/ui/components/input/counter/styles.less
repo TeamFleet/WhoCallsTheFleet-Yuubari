@@ -1,0 +1,83 @@
+@import "~base.less";
+
+@input-width: 35px;
+@button-width: 20px;
+@button-height: (@input-counter-height - 0);
+
+.component{
+    display: block;
+    position: relative;
+    width: (@input-width + @button-width * 2);
+    height: @input-counter-height;
+    padding: 0 @button-width;
+    box-sizing: border-box;
+}
+
+.component-input,
+.component-btn{
+    display: block;
+    height: @input-counter-height;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.component-input[type]{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    border-radius: 0;
+    line-height: (@input-counter-height - 2);
+    // border-left-width: 0;
+    // border-right-width: 0;
+    // &:focus{
+    //     border-left-width: 1px;
+    //     border-right-width: 1px;
+    // }
+    &::-webkit-inner-spin-button, 
+    &::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+    &::inner-spin-button, 
+    &::outer-spin-button { 
+        appearance: none; 
+        margin: 0; 
+    }
+}
+
+.component-btn{
+    .style-input();
+    appearance: none;
+    position: absolute;
+    top: 50%;
+    width: (@button-width + 1);
+    padding: 0;
+    height: @button-height;
+    line-height: (@button-height - 2);
+    margin-top: (0 - @button-height / 2);
+    &:hover{
+        z-index: 3;
+    }
+}
+    .component-btn-minus{
+        left: 0;
+        border-radius: @button-height 0 0 @button-height;
+        padding-left: 2.5%;
+        padding-right: 1px;
+        border-right-width: 0;
+        &:active{
+            padding-right: 0;
+            border-right-width: 1px;
+        }
+    }
+    .component-btn-plus{
+        right: 0;
+        border-radius: 0 @button-height @button-height 0;
+        padding-right: 2.5%;
+        padding-left: 1px;
+        border-left-width: 0;
+        &:active{
+            padding-left: 0;
+            border-left-width: 1px;
+        }
+    }

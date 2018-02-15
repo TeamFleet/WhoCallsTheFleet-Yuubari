@@ -1,12 +1,16 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import { ImportStyle } from 'sp-css-import'
-import styles from './input-number.less'
 
-const getValue = prop => typeof prop !== 'undefined' && !isNaN(prop) ? parseInt(prop) : undefined
+const getValue = prop =>
+    typeof prop !== 'undefined' && !isNaN(prop)
+        ? parseInt(prop)
+        : undefined
 
-@ImportStyle(styles)
-export default class CalculatorInputNumber extends React.Component {
+// @connect()
+@ImportStyle(require('./styles.less'))
+export default class InputCounter extends React.Component {
     constructor(props) {
         super(props)
 
@@ -14,7 +18,7 @@ export default class CalculatorInputNumber extends React.Component {
         this.max = getValue(props.max)
 
         this.state = {
-            value: props.defaultValue
+            value: props.defaultValue || 0
         }
     }
     update(el = this.input) {
@@ -49,26 +53,27 @@ export default class CalculatorInputNumber extends React.Component {
         evt.target.blur()
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     if (nextProps.max !== this.props.max) {
-    //         console.log(nextProps.max)
-    //         this.max = getValue(nextProps.max)
-    //         if (typeof this.max !== 'undefined' && this.input > this.max)
-    //             this.input = this.max
-    //         this.update()
-    //     }
-    // }
+    shouldComponentUpdate(newProps) {
+        if (newProps.defaultValue !== this.props.defaultValue)
+            return false
+        return true
+    }
 
     render() {
+        const classNamePre = this.props.className.split(' ')[0]
         return (
             <div className={this.props.className}>
                 <button
                     type="button"
-                    className="btn btn-minus"
+                    className={classNames([
+                        classNamePre + '-btn',
+                        classNamePre + '-btn-minus'
+                    ])}
                     disabled={typeof this.min !== 'undefined' && this.state.value <= this.min}
                     onClick={evt => this.onBtnClick(evt, -1)}
                 >-</button>
                 <input
+                    className={classNamePre + '-input'}
                     type="number"
                     min={this.min}
                     max={this.max}
@@ -79,7 +84,10 @@ export default class CalculatorInputNumber extends React.Component {
                 />
                 <button
                     type="button"
-                    className="btn btn-plus"
+                    className={classNames([
+                        classNamePre + '-btn',
+                        classNamePre + '-btn-plus'
+                    ])}
                     disabled={typeof this.max !== 'undefined' && this.state.value >= this.max}
                     onClick={evt => this.onBtnClick(evt, 1)}
                 >+</button>
