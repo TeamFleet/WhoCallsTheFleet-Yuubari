@@ -85,20 +85,26 @@
             transform:  scale((10 / 12));
             transform-origin: 100% 100%;
             // background:     url('~Assets/stats.png') no-repeat 0% 31.57894737% / cover;
-            box-shadow: 0 0 1px 1px fade(#000, 50%);
+            box-shadow: 0 0 1px 1px fade(#000, 35%);
         }
 
         &[data-suffix="AA"]:after{
             padding:    0 .25em;
-            background: fade(@theme-green-700, 50%);
-            border:     1px solid @theme-green-a200;
-            color:      @theme-green-a100;
+            // background: fade(@theme-green-700, 50%);
+            // border:     1px solid @theme-green-a200;
+            // color:      @theme-green-a100;
         }
         &[data-suffix-type="stat-range"]:after{
             padding:    0 .3em;
             background: fade(@theme-lightgreen-800, 65%);
             border:     1px solid @theme-lightgreen-a200;
             color:      @theme-lightgreen-a100;
+        }
+        &[data-suffix="AA"]:after,
+        &[data-icon="15"][data-suffix-type="stat-range"]:after{
+            background: fade(@color-stat-aa, 65%);
+            border:     1px solid lighten(@color-stat-aa, 25%);
+            color:      lighten(@color-stat-aa, 50%);
         }
 
         &[data-suffix-type="equipment-name"]{
