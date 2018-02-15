@@ -102,11 +102,11 @@
         "ora": "^1.4.0",
 
         "electron": "~1.8.2",
-        "electron-packager": "^11.0.0",
+        "electron-packager": "^11.0.1",
         "electron-windows-store": "^0.12.0",
 
         "webpack-bundle-analyzer": "^2.10.0",
-        "jest": "^22.2.2"
+        "jest": "^22.3.0"
     },
     "optionalDependencies": {
         "node-windows": "^0.1.14"
