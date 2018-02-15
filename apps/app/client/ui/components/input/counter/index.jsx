@@ -22,13 +22,31 @@ export default class InputCounter extends React.Component {
         }
     }
     update(el = this.input) {
+        let value = el.value
+        if (isNaN(value))
+            value = Math.max(0, this.min || 0)
+        value = parseInt(value)
+
+        if (typeof this.max !== 'undefined' && value > this.max)
+            value = this.max
+        if (typeof this.min !== 'undefined' && value < this.min)
+            value = this.min
+
+        if (!value) value = 0
+
+        if (value === this.state.value)
+            return
+
         this.setState({
-            value: el.value
+            value
         }, () => {
-            this.onUpdate(parseInt(el.value))
+            this.onUpdate(value)
         })
     }
     onUpdate(newValue) {
+        if (isNaN(newValue))
+            newValue = Math.max(0, this.min || 0)
+        // console.log(newValue)
         if (typeof this.props.onUpdate === 'function')
             return this.props.onUpdate(newValue)
     }
@@ -45,6 +63,12 @@ export default class InputCounter extends React.Component {
         if (typeof this.min !== 'undefined' && evt.target.value < this.min)
             evt.target.value = this.min
         this.update(evt.target)
+    }
+    onInputKeyDown(evt) {
+        if (evt.keyCode == 13) {
+            this.update(evt.target)
+            evt.target.blur()
+        }
     }
     onBtnClick(evt, delta) {
         const newValue = parseInt(this.input.value) + delta
@@ -80,6 +104,7 @@ export default class InputCounter extends React.Component {
                     ref={el => this.input = el}
                     onChange={this.onChange.bind(this)}
                     onBlur={this.onBlur.bind(this)}
+                    onKeyDown={this.onInputKeyDown.bind(this)}
                     defaultValue={this.props.defaultValue}
                 />
                 <button
