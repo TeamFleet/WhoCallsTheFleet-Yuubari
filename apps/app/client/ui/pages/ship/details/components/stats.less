@@ -5,6 +5,7 @@
     @slider-track-height:   2px;
     @slider-tick-size:      6px;
     @slider-thumb-size:     10px;
+    @lvtext-line-height: 22px;
 
     // display:    flex;
     // flex-flow:  row wrap;
@@ -25,30 +26,19 @@
         text-align: right;
         display:    block;
         float:      left;
-        line-height:22px;
+        line-height:@lvtext-line-height;
     }
         .lv-input{
-            padding:    0;
-            flex:       none;
-            position:   absolute;
-            top:        1px;
-            right:      0;
-            opacity:    0;
-            width:      2.5em;
-            text-align: center;
-            -moz-appearance: textfield;
-            &::-webkit-inner-spin-button, 
-            &::-webkit-outer-spin-button { 
-                -webkit-appearance: none; 
-                margin: 0; 
-            }
-            &::inner-spin-button, 
-            &::outer-spin-button { 
-                appearance: none; 
-                margin: 0; 
-            }
-            &:focus{
-                opacity:1;
+            position: absolute;
+            flex: none;
+            top: ((@lvtext-line-height - @input-counter-height) / 2);
+            right: -24px;
+            z-index: 2;
+            cursor: text;
+            opacity: 0;
+            &.is-focus{
+                opacity: 1;
+                cursor: initial;
                 & ~ .lv-text{
                     opacity:0;
                     &:before{
@@ -56,6 +46,34 @@
                     }
                 }
             }
+        //     padding:    0;
+        //     flex:       none;
+        //     position:   absolute;
+        //     top:        1px;
+        //     right:      0;
+        //     opacity:    0;
+        //     width:      2.5em;
+        //     text-align: center;
+        //     -moz-appearance: textfield;
+        //     &::-webkit-inner-spin-button, 
+        //     &::-webkit-outer-spin-button { 
+        //         -webkit-appearance: none; 
+        //         margin: 0; 
+        //     }
+        //     &::inner-spin-button, 
+        //     &::outer-spin-button { 
+        //         appearance: none; 
+        //         margin: 0; 
+        //     }
+        //     &:focus{
+        //         opacity:1;
+        //         & ~ .lv-text{
+        //             opacity:0;
+        //             &:before{
+        //                 opacity:0;
+        //             }
+        //         }
+        //     }
         }
         .lv-text{
             border-bottom:  1px solid @color-fade;

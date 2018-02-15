@@ -1,18 +1,18 @@
 import React from 'react'
 import classNames from 'classnames'
-import bindEvent from 'bind-event'
+// import bindEvent from 'bind-event'
 
 import { maxShipLv } from 'kckit'
+import translate from 'sp-i18n'
+import { ImportStyle } from 'sp-css-import'
+
+import prefs from '@appLogic/preferences'
+
+import getValue from '@appUtils/get-value'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '@appUI/components/stat'
-import getValue from '@appUtils/get-value'
-import prefs from '@appLogic/preferences'
-
-import translate from 'sp-i18n'
-
-import { ImportStyle } from 'sp-css-import'
-import styles from './stats.less'
+import InputCounter from '@appUI/components/input/counter'
 
 const stats = [
     'fire',
@@ -34,7 +34,7 @@ const stats = [
 const percentage = (number, max) => (number / max * 100) + '%'
 
 // @connect()
-@ImportStyle(styles)
+@ImportStyle(require('./stats.less'))
 export default class ShipDetailsComponentStats extends React.Component {
     constructor(props) {
         super(props)
@@ -42,7 +42,8 @@ export default class ShipDetailsComponentStats extends React.Component {
         const defaultLv = Math.max(prefs.shipDetailsStatLevel || 99, props.ship._minLv)
         this.state = {
             lv: defaultLv,
-            lvInput: defaultLv
+            // lvInput: defaultLv,
+            // showInput: false,
         }
     }
 
@@ -51,7 +52,7 @@ export default class ShipDetailsComponentStats extends React.Component {
             this.setState({
                 lv: lv
             })
-            this._input.value = lv
+            // this._input.value = lv
             this.onLevelChange(lv)
         }
     }
@@ -68,29 +69,37 @@ export default class ShipDetailsComponentStats extends React.Component {
         }
     }
 
-    onInputChange(evt) {
-        const newLv = Math.min(Math.max(evt.target.value, this.props.ship._minLv), maxShipLv)
-        if (newLv != this.state.lv) {
+    // onInputChange(evt) {
+    //     const newLv = Math.min(Math.max(evt.target.value, this.props.ship._minLv), maxShipLv)
+    //     if (newLv != this.state.lv) {
+    //         this.setState({
+    //             lv: newLv
+    //         })
+    //         this.onLevelChange(newLv)
+    //     }
+    //     evt.target.value = evt.target.value
+    // }
+    onCounterUpdate(newValue) {
+        if (newValue != this.state.lv) {
             this.setState({
-                lv: newLv
+                lv: newValue
             })
-            this.onLevelChange(newLv)
-        }
-        evt.target.value = evt.target.value
-    }
-    onInputBlur(evt) {
-        if (evt.target.value < this.props.ship._minLv)
-            evt.target.value = this.props.ship._minLv
-        else if (evt.target.value > maxShipLv)
-            evt.target.value = maxShipLv
-    }
-    onInputKeyDown(evt) {
-        switch (evt.nativeEvent.keyCode) {
-            case 27: // esc
-            case 13: // enter
-                evt.target.blur()
+            this.onLevelChange(newValue)
         }
     }
+    // onInputBlur(evt) {
+    //     if (evt.target.value < this.props.ship._minLv)
+    //         evt.target.value = this.props.ship._minLv
+    //     else if (evt.target.value > maxShipLv)
+    //         evt.target.value = maxShipLv
+    // }
+    // onInputKeyDown(evt) {
+    //     switch (evt.nativeEvent.keyCode) {
+    //         case 27: // esc
+    //         case 13: // enter
+    //             evt.target.blur()
+    //     }
+    // }
     onRangeChange(evt) {
         let newLv = evt.target.value
         if (newLv < this.props.ship._minLv) {
@@ -103,7 +112,7 @@ export default class ShipDetailsComponentStats extends React.Component {
             })
             this.onLevelChange(newLv)
         }
-        this._input.value = newLv
+        // this._input.value = newLv
     }
     onRangeTouchMove(evt) {
         evt.preventDefault()
@@ -159,18 +168,18 @@ export default class ShipDetailsComponentStats extends React.Component {
         return (
             <ComponentContainer className={this.props.className} title={translate("ship_details.stats")}>
                 <span className="lv">
-                    <input
-                        type="number"
+                    <InputCounter
                         className="lv-input"
+                        onUpdate={this.onCounterUpdate.bind(this)}
                         defaultValue={this.state.lv}
+                        currentValue={this.state.lv}
                         min={this.props.ship._minLv}
                         max={maxShipLv}
-                        onChange={this.onInputChange.bind(this)}
-                        onBlur={this.onInputBlur.bind(this)}
-                        onKeyDown={this.onInputKeyDown.bind(this)}
-                        ref={el => this._input = el}
+                        showButtons={false}
                     />
-                    <span className="lv-text">{this.state.lv}</span>
+                    <span
+                        className="lv-text"
+                    >{this.state.lv}</span>
                 </span>
                 <span className="slider">
                     <input
