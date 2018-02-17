@@ -18,10 +18,10 @@ import styles from './slot-equipments.less'
 export default class ShipDetailsComponentSlotEquipments extends React.Component {
     render() {
         let renderArr = []
-        times(4)(index => {
+        times((Math.max(4, this.props.ship.slot.length)))(index => {
             const slot = this.props.ship.slot[index]
             const hasSlot = typeof slot !== 'undefined'
-            const data = this.props.ship.equip[index]
+            const data = this.props.ship.equip[index] || undefined
             const equipmentId = hasSlot ? (
                 typeof data === 'object' ? data.id : data
             ) : undefined
