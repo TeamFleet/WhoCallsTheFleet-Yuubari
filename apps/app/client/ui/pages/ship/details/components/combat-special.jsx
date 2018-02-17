@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 // import classNames from 'classnames'
 
+import translate from 'sp-i18n'
+import { ImportStyle } from 'sp-css-import'
 import kckit from 'kckit'
 // const checkShip = kckit.check.ship
 const checkAACI = kckit.check.aaci
@@ -14,8 +16,7 @@ import getEquipmentTypesFromCondition from '@appUtils/get-equipment-types-from-c
 import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
 import IconEquipment from '@appUI/components/icon-equipment'
-
-import translate from 'sp-i18n'
+import LinkEquipment from '@appUI/components/link/equipment'
 
 const shipTypeRangeNormal = [
     ['BB', 3],
@@ -24,13 +25,10 @@ const shipTypeRangeNormal = [
     ['CA', 2]
 ]
 
-// import { ImportStyle } from 'sp-css-import'
-// import styles from './combat-special.less'
-
 @connect(state => ({
     locales_equipment_types: state.locales.equipment_types
 }))
-// @ImportStyle(styles)
+@ImportStyle(require('./combat-special.less'))
 export default class ShipDetailsSpecialCombat extends React.Component {
     render() {
         const {
@@ -97,12 +95,27 @@ const CapabilityAACI = ({ ship }) => {
 }
 
 const CapabilityAARocketBarrage = ({ ship }) => {
-    const level = ship.getCapability('anti_air_rocket_barrage')
+    let level = ship.getCapability('anti_air_rocket_barrage')
+    switch (level) {
+        case true: {
+            level = 1
+            break
+        }
+        case 'high': {
+            level = 2
+            break
+        }
+    }
+    const able = level ? true : false
     return (
         <Bullet
-            title={translate("ship_details.anti_air_rocket_barrage")}
+            title={translate("combat_phases.anti_air_rocket_barrage")}
             level={level || 0}
         >
+            {able && translate("require.equipment", { type: "" })}
+            {able &&
+                <LinkEquipment className="color-alt link-equipment" equipment={274} />
+            }
         </Bullet>
     )
 }
