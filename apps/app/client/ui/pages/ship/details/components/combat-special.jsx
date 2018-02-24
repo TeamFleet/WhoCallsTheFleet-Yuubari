@@ -156,6 +156,7 @@ const CapabilityOASW = ({ ship, locales_equipment_types }) => {
     const oaswTable = checkOASW(ship.id) || []
     const canAlways = oaswTable === true
     const canOASW = canAlways || (Array.isArray(oaswTable) && oaswTable.length) ? true : false
+
     return (
         <Bullet
             title={translate("combat_phases.oasw")}
@@ -303,7 +304,10 @@ const CapabilityTorpedo = ({ ship }) => {
 }
 
 const CapabilitySkipSS = ({ ship }) => {
-    if (ship.type != 30) return null
+    if (
+        ship.type != 30 &&
+        !ship.getCapability('attack_surface_ship_prioritised')
+    ) return null
     return (
         <Bullet
             title={translate("ship_details.light_attack_carrier_asw_title")}

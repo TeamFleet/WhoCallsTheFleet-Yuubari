@@ -19,11 +19,15 @@ const equipmentSamples = {
     DepthCharge: [
         45,
         44
+    ],
+    LargeSonar: [
+        132
     ]
 }
 
 const requiredEquipmentSamples = {
     hasSonar: 'Sonar',
+    hasLargeSonar: 'LargeSonar',
     hasDiveBomber: [
         'any',
         233
@@ -39,6 +43,12 @@ const requiredEquipmentSamples = {
     hasAircraftHasStat_asw_1: [
         'aircraft',
         70
+    ],
+    hasAircraftHasStat_asw_7: [
+        82,
+        83,
+        69,
+        244
     ],
     hasTorpedoBomberHasStat_asw_7: [
         82,
@@ -58,7 +68,9 @@ export default class CalculatorLevelOASW extends React.Component {
         this.statUnknown = props.ship.getAttribute('asw', 99) === undefined
 
         // 确定计算器显示的装备列表
+        let equipmentList = []
         this.equipmentList = []
+
         this.isAny = []
         const samples = Object.assign({}, equipmentSamples)
         if (!this.canAlways && this.canOASW) {
@@ -77,41 +89,41 @@ export default class CalculatorLevelOASW extends React.Component {
                         const value = requiredEquipmentSamples[req]
                         if (typeof value === 'string') {
                             // this.equipmentGroupList.push(equipmentSamples[req])
-                            this.equipmentList = this.equipmentList.concat(equipmentSamples[value])
+                            equipmentList = equipmentList.concat(equipmentSamples[value])
                             delete samples[value]
                         } else if (Array.isArray(value)) {
                             if (value[0] === 'any') {
                                 // this.equipmentGroupList.push([value[1]])
-                                this.equipmentList.push(value[1])
+                                equipmentList.push(value[1])
                                 this.isAny.push(value[1])
                             } else if (typeof value[0] === 'string') {
-                                this.equipmentList.push([value[0], value[1], hasStat])
+                                equipmentList.push([value[0], value[1], hasStat])
                                 this.isAny.push(value[1])
                             } else {
                                 // this.equipmentGroupList.push(value)
-                                this.equipmentList = this.equipmentList.concat(value)
+                                equipmentList = equipmentList.concat(value)
                             }
                         } else if (Array.isArray(requiredEquipmentSamples[`${req}${OASW.equipments[req]}`])) {
                             if (requiredEquipmentSamples[`${req}${OASW.equipments[req]}`][0] === 'any') {
                                 // this.equipmentGroupList.push([requiredEquipmentSamples[`${req}${OASW.equipments[req]}`][1]])
-                                this.equipmentList.push(requiredEquipmentSamples[`${req}${OASW.equipments[req]}`][1])
+                                equipmentList.push(requiredEquipmentSamples[`${req}${OASW.equipments[req]}`][1])
                                 this.isAny.push(requiredEquipmentSamples[`${req}${OASW.equipments[req]}`][1])
                             } else {
                                 // this.equipmentGroupList.push(requiredEquipmentSamples[`${req}${OASW.equipments[req]}`])
-                                this.equipmentList = this.equipmentList.concat(requiredEquipmentSamples[`${req}${OASW.equipments[req]}`])
+                                equipmentList = equipmentList.concat(requiredEquipmentSamples[`${req}${OASW.equipments[req]}`])
                             }
                         }
                     }
             })
         }
-        this.isRequired = this.equipmentList.map(equipmentID => {
+        this.isRequired = equipmentList.map(equipmentID => {
             if (Array.isArray(equipmentID))
                 return equipmentID[1]
             return equipmentID
         })
         for (let type in samples) {
             // this.equipmentGroupList.push(samples[type])
-            this.equipmentList = this.equipmentList.concat(samples[type])
+            equipmentList = equipmentList.concat(samples[type])
         }
         // 检查舰娘是否可装备
         // this.equipmentGroupList = this.equipmentGroupList.filter(group => {
@@ -124,12 +136,18 @@ export default class CalculatorLevelOASW extends React.Component {
         //     })
         //     return (Array.isArray(group) && group.length)
         // })
-        this.equipmentList = this.equipmentList.filter(equipmentID => {
-            if (Array.isArray(equipmentID)) return true
-            const equipment = kckit.get.equipment(equipmentID)
-            if (!equipment) return false
-            return props.ship.canEquip(equipment.type)
-        })
+        equipmentList
+            .filter(equipmentID => {
+                if (Array.isArray(equipmentID)) return true
+                const equipment = kckit.get.equipment(equipmentID)
+                if (!equipment) return false
+                return props.ship.canEquip(equipment.type)
+            })
+            .forEach(equipmentId => {
+                if (this.equipmentList.includes(equipmentId))
+                    return false
+                this.equipmentList.push(equipmentId)
+            })
 
         // 初始 state
         const defaultState = {}
