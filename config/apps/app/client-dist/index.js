@@ -104,5 +104,14 @@ module.exports = (async () => Object.assign({}, config, {
         ]
     ],
 
+    // optimization: {
+    //     splitChunks: {
+    //         names: [
+    //             'commons',
+    //             'critical',
+    //         ],
+    //         filename: 'core.[chunkhash].js'
+    //     }
+    // }
 })
 )()

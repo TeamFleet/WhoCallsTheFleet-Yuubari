@@ -60,21 +60,21 @@
         "whocallsthefleet-database": "2018.02.25",
         "whocallsthefleet-backgrounds": "1.3.1",
 
-        "super-project": "^2.4.0-beta.4",
+        "super-project": "^2.4.0",
         "super-project-cli": "^1.1.7",
 
         "react-transition-group": "^2.2.1",
-        "react-markdown": "^3.1.5",
+        "react-markdown": "^3.2.1",
 
         "bind-event": "^1.0.5",
         "check-css-prop": "^1.0.1",
         "classnames": "^2.2.5",
         "lz-string": "^1.4.4",
-        "localforage": "^1.5.6",
+        "localforage": "^1.5.7",
         "metas": "^1.0.1",
         "swiper": "^3.4.2",
 
-        "normalize.css": "^7.0.0",
+        "normalize.css": "^8.0.0",
         "postcss-easing-gradients": "^1.2.3",
         "postcss-pxtorem": "^4.0.1",
         "cssnano": "^4.0.0-rc.2",
@@ -87,26 +87,26 @@
         "image-size": "^0.6.2",
 
         "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
-        "copy-webpack-plugin": "^4.4.1",
+        "copy-webpack-plugin": "^4.4.2",
         "extract-text-webpack-plugin": "^3.0.2",
         "on-build-webpack": "^0.1.0",
         "universal-alias-loader": "^1.2.2",
         "svg-url-loader": "^2.3.1",
         "webpack-config": "^7.5.0",
 
-        "simple-git": "^1.89.0"
+        "simple-git": "^1.91.0"
     },
     "devDependencies": {
         "glob": "^7.1.2",
         "jsonfile": "^4.0.0",
-        "ora": "^1.4.0",
+        "ora": "^2.0.0",
 
         "electron": "~1.8.2",
         "electron-packager": "^11.0.1",
         "electron-windows-store": "^0.12.0",
 
-        "webpack-bundle-analyzer": "^2.10.0",
-        "jest": "^22.3.0"
+        "webpack-bundle-analyzer": "^2.10.1",
+        "jest": "^22.4.2"
     },
     "optionalDependencies": {
         "node-windows": "^0.1.14"
