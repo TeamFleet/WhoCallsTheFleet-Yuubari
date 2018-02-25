@@ -64,6 +64,7 @@ export default class LinkShip extends React.Component {
             pic,
             name,
             navy,
+            "min-level": minLv = false,
 
             // replace = false,
             children,
@@ -100,6 +101,8 @@ export default class LinkShip extends React.Component {
         // } else
         //     props.to = to
 
+        const classNameHash = className.split(' ')[0]
+
         return (
             <Link
                 to={'/ships/' + this.ship.id}
@@ -108,8 +111,15 @@ export default class LinkShip extends React.Component {
                 name={this.checkShow(name) ? this.renderName(type) : null}
                 {...props}
             >
-                {extraIllust && this.ship.hasExtraIllust() && <Icon className="icon-has-extra-illust" icon="hanger" />}
-                {this.checkShow(navy) && this.ship._navy !== 'ijn' && <FlagNavy className="flag-navy" navy={this.ship._navy} shadow={true} />}
+                {extraIllust && this.ship.hasExtraIllust() &&
+                    <Icon className="icon-has-extra-illust" icon="hanger" />
+                }
+                {this.checkShow(navy) && this.ship._navy !== 'ijn' &&
+                    <FlagNavy className="flag-navy" navy={this.ship._navy} shadow={true} />
+                }
+                {minLv && ship._minLv > 1 &&
+                    <span className={classNameHash + '-min-level'} children={ship._minLv} />
+                }
                 {children}
             </Link>
         )

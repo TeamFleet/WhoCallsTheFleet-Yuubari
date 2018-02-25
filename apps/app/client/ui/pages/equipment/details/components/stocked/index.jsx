@@ -20,6 +20,7 @@ export default class EquipmentDetailsComponentStocked extends React.Component {
                     sort={true}
 
                     navy={true}
+                    min-level={true}
                 />
             </ComponentContainer>
         )
