@@ -2,6 +2,8 @@ const jsonPretty = require('json-pretty')
 const Datastore = require('nedb-promise')
 const path = require('path')
 const fs = require('fs-extra')
+const kckit = require('kckit')
+const camelCase = require('camelcase')
 
 let db = {}
 let shipCollections = []
@@ -10,6 +12,7 @@ let shipSeriesInCollection = []
 let shipTypesAppended = []
 let shipSeries = {}
 let shipClassInited = {}
+let data = {}
 
 const appendCollection = async (index, name, types, expandClass) => {
     const initSublist = (type, index, subIndex) => {
@@ -69,36 +72,58 @@ const appendCollection = async (index, name, types, expandClass) => {
         if (!shipClassInited[index]) shipClassInited[index] = []
         // if (expandClass) thisSubIndex = -1
 
-        // console.log(ships.map(ship => ship.id))
-        ships.forEach(ship => {
-            const series = ship.series
-            let listSeries
+        // console.log(ships.map(ship => ship._navy))
+        try {
+            ships
+                // .sort((a, b) => (
+                //     data.ships[a.id].series !== data.ships[b.id].series
+                //         ? 1
+                //         : 0
+                //     // getShip(a).series - getShip(b).series
+                // ))
+                // .sort((a, b) => {
+                //     const navyA = data.ships[a.id]._navy || 'ijn'
+                //     const navyB = data.ships[b.id]._navy || 'ijn'
+                //     if (navyA === 'ijn') return -1
+                //     if (navyB === 'ijn') return 1
+                //     if (navyA < navyB) return -1
+                //     if (navyA > navyB) return 1
+                //     return 0;
+                // })
+                .forEach(ship => {
+                    const series = ship.series
+                    let listSeries
 
-            if (expandClass && shipClassInited[index].indexOf(ship.class) < 0) {
-                // console.log(ship.class)
-                thisSubIndex = shipClassInited[index].length
-                // thisSubIndex++
-                // classIndex[ship.class_no] = thisSubIndex
-                shipCollections[index].list[thisSubIndex] = {
-                    type: type,
-                    class: ship.class,
-                    ships: []
-                }
-                shipSeriesInCollection[index][thisSubIndex] = {}
-                shipClassInited[index].push(ship.class)
-            }
+                    if (expandClass && shipClassInited[index].indexOf(ship.class) < 0) {
+                        // console.log(ship.class)
+                        thisSubIndex = shipClassInited[index].length
+                        // thisSubIndex++
+                        // classIndex[ship.class_no] = thisSubIndex
+                        shipCollections[index].list[thisSubIndex] = {
+                            type: type,
+                            class: ship.class,
+                            ships: []
+                        }
+                        shipSeriesInCollection[index][thisSubIndex] = {}
+                        shipClassInited[index].push(ship.class)
+                    }
 
-            if (typeof shipSeriesInCollection[index][thisSubIndex][series] === 'undefined') {
-                const i = shipCollections[index].list[thisSubIndex].ships.length
-                shipSeriesInCollection[index][thisSubIndex][series] = i
-                shipCollections[index].list[thisSubIndex].ships[i] = []
-                listSeries = shipCollections[index].list[thisSubIndex].ships[i]
-            } else {
-                listSeries = shipCollections[index].list[thisSubIndex].ships[shipSeriesInCollection[index][thisSubIndex][series]]
-            }
+                    if (typeof shipSeriesInCollection[index][thisSubIndex][series] === 'undefined') {
+                        const i = shipCollections[index].list[thisSubIndex].ships.length
+                        shipSeriesInCollection[index][thisSubIndex][series] = i
+                        shipCollections[index].list[thisSubIndex].ships[i] = []
+                        listSeries = shipCollections[index].list[thisSubIndex].ships[i]
+                    } else {
+                        listSeries = shipCollections[index].list[thisSubIndex].ships[shipSeriesInCollection[index][thisSubIndex][series]]
+                    }
 
-            listSeries[shipSeries[series].indexOf(ship.id)] = ship
-        })
+                    listSeries[shipSeries[series].indexOf(ship.id)] = ship
+
+                    // console.log(listSeries)
+                })
+        } catch (e) {
+            console.log(e)
+        }
 
         shipTypesAppended.push(type)
 
@@ -108,8 +133,47 @@ const appendCollection = async (index, name, types, expandClass) => {
     await Promise.all(promises)
 }
 
+const initDatabase = async (dbpath) => {
+    const raw = {}
+    const dbnames = [
+        'ships',
+        'ship_types',
+        'ship_classes',
+        'ship_namesuffix',
+        'ship_series',
+        'items',
+        'item_types',
+        'entities',
+        'consumables',
+        'exillusts',
+        'exillust_types'
+    ]
+
+    for (let dbname of dbnames) {
+        const type = camelCase(dbname)
+        raw[type] = await new Promise((resolve, reject) => {
+            fs.readFile(
+                path.resolve(dbpath, `./${dbname}.nedb`),
+                'utf-8',
+                (err, data) => {
+                    if (err) reject(err)
+                    else resolve(data)
+                }
+            )
+        })
+    }
+
+    return kckit.parseRaw(raw)
+}
+
 module.exports = async (dbpath, topath) => {
     console.log('creating ship collections...')
+
+    data = await initDatabase(dbpath)
+    kckit.register({
+        db: data
+    })
+    // console.log(data.ships)
 
     // 初始化db
     db.ships = new Datastore({
@@ -165,6 +229,49 @@ module.exports = async (dbpath, topath) => {
             return (types.ships.length > 0)
         })
         return (collection.list.length > 0)
+    })
+
+    // 遍历全部collection，根据海军排序
+    shipCollections.forEach((collection, indexCollection) => {
+        collection.list.forEach((shipType, indexShipType) => {
+            shipType.ships
+                .filter(arr =>
+                    Array.isArray(arr) &&
+                    arr.length
+                )
+            shipType.ships.forEach((series, indexSeries) => {
+                shipCollections[indexCollection].list[indexShipType].ships[indexSeries] = series.filter(ship => ship ? true : false)
+            })
+        })
+        if (collection.list[0].class) {
+            collection.list.sort((a, b) => {
+                const shipA = a.ships[0][0]
+                const shipB = b.ships[0][0]
+                const navyA = data.ships[shipA.id]._navy || 'ijn'
+                const navyB = data.ships[shipB.id]._navy || 'ijn'
+                if (navyA === 'ijn' && navyB === 'ijn')
+                    return a.class - b.class
+                if (navyA < navyB) return -1
+                if (navyA > navyB) return 1
+                return 0
+            })
+        } else {
+            collection.list.forEach((shipType) => {
+                shipType.ships
+                    .sort((a, b) => {
+                        // console.log(a)
+                        const navyA = data.ships[a[0].id]._navy || 'ijn'
+                        const navyB = data.ships[b[0].id]._navy || 'ijn'
+                        if (navyA === 'ijn' && navyB === 'ijn')
+                            return data.ships[a[0].id].class - data.ships[b[0].id].class
+                        // if (navyA === 'ijn') return 0
+                        // if (navyB === 'ijn') return 0
+                        if (navyA < navyB) return -1
+                        if (navyA > navyB) return 1
+                        return 0
+                    })
+            })
+        }
     })
 
     // 遍历全部collection，将ship object替换为shipId，并生成可读版
