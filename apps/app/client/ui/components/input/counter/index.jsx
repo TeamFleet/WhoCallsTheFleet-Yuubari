@@ -84,7 +84,7 @@ export default class InputCounter extends React.Component {
         }
     }
     onBtnClick(evt, delta) {
-        const newValue = parseInt(this.input.value) + delta
+        const newValue = parseInt(this.input.value || 0) + delta
         this.input.value = newValue
         this.update()
         evt.target.blur()
