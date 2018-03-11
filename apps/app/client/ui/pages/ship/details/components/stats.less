@@ -32,7 +32,7 @@
             position: absolute;
             flex: none;
             top: ((@lvtext-line-height - @input-counter-height) / 2);
-            right: -24px;
+            right: -2px;
             z-index: 2;
             // cursor: text;
             opacity: 0;
@@ -45,6 +45,9 @@
                         opacity:0;
                     }
                 }
+            }
+            &:hover + .lv-text{
+                color: @color-alt;
             }
         //     padding:    0;
         //     flex:       none;
@@ -273,7 +276,7 @@
             .is-hover({
                 &:before{
                     // color:      @color-base;
-                    color:      @color-base-dimmed;
+                    color:      @color-alt;
                 }
             });
         }
