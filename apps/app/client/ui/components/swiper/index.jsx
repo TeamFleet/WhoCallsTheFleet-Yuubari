@@ -1,7 +1,7 @@
 import React from 'react'
 import { ImportStyle } from 'sp-css-import'
 
-const Swiper = typeof window !== 'undefined' && require('swiper')
+const Swiper = typeof window !== 'undefined' && require('swiper').default
 if (typeof document !== 'undefined' && !document.getElementById('__swiper')) {
     const style = document.createElement('style')
     style.id = '__swiper'
@@ -22,9 +22,8 @@ export default class extends React.Component {
         //     require('swiper/dist/css/swiper.min.css')
         // if (typeof window !== 'undefined')
         //     require('./swiper.g.less')
-        if (Swiper) {
+        if (Swiper && !this._init) {
             const {
-                onInit,
                 ...props
             } = this.props
 
@@ -33,8 +32,12 @@ export default class extends React.Component {
             delete props.slides;
 
             if (this.props.pagination === true) {
-                props.pagination = '.swiper-pagination'
-                props.paginationClickable = true
+                // props.pagination = '.swiper-pagination'
+                // props.paginationClickable = true
+                props.pagination = {
+                    el: '.swiper-pagination',
+                    clickable: true
+                }
             }
 
             [
@@ -60,13 +63,24 @@ export default class extends React.Component {
                 delete props[key]
             });
 
+            if (typeof props.on === 'object') {
+                for (const event in props.on) {
+                    if (typeof props.on[event] === 'function') {
+                        const cb = props.on[event]
+                        props.on[event] = (...args) => {
+                            // console.log(event, ...args)
+                            cb(thisSwiper, ...args)
+                        }
+                    }
+                }
+            }
+
             const thisSwiper = new Swiper(
                 this._container,
                 Object.assign(defaults, props)
             )
 
-            if (typeof onInit === 'function')
-                onInit(thisSwiper)
+            this._init = true
         }
     }
 
@@ -113,7 +127,7 @@ export default class extends React.Component {
                     {this.props.slides.map((el, index) => (
                         <div className="swiper-slide" key={index}>
                             {el}
-                            {this.props.lazyLoading && <div className="swiper-lazy-preloader"></div>}
+                            {this.props.lazy && <div className="swiper-lazy-preloader"></div>}
                         </div>
                     ))}
                 </div>

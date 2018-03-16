@@ -72,7 +72,7 @@
         "lz-string": "^1.4.4",
         "localforage": "^1.6.0",
         "metas": "^1.0.1",
-        "swiper": "^3.4.2",
+        "swiper": "^4.1.6",
 
         "normalize.css": "^8.0.0",
         "postcss-easing-gradients": "^1.2.3",
@@ -81,7 +81,7 @@
 
         "glob": "^7.1.2",
         "json-pretty": "^0.0.1",
-        "request": "^2.83.0",
+        "request": "^2.85.0",
         "nedb-promise": "^2.0.1",
         "npm-run-script": "^0.0.4",
         "image-size": "^0.6.2",

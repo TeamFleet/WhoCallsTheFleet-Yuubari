@@ -35,7 +35,7 @@ const getExtraIllustPic = (ship, id, illustId) => {
         : undefined
 }))
 @ImportStyle(require('./illust.less'))
-export default class ShipDetailsComponentSlotEquipments extends React.Component {
+export default class ShipDetailsComponentIllust extends React.Component {
     constructor(props) {
         super(props)
 
@@ -44,6 +44,7 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         }
 
         // console.log(db.exillusts, db.exillustTypes)
+        // this.swiper
 
         this.pics = []
         this.extraIllusts = props.ship._extraIllust
@@ -68,21 +69,22 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
         })
     }
 
-    componentDidMount() {
-        if (__CLIENT__) {
-            const Swiper = require('swiper')
-            this.illusts = new Swiper(this._container, {
-                speed: 400,
-                spaceBetween: 100
-            });
-        }
-    }
+    // componentDidMount() {
+    //     if (__CLIENT__) {
+    //         const Swiper = require('swiper')
+    //         this.illusts = new Swiper(this._container, {
+    //             speed: 400,
+    //             spaceBetween: 100
+    //         });
+    //     }
+    // }
 
     // onInit(swiper) {
     //     this.swiper = swiper
     // }
 
     onSlideChangeEnd(swiper) {
+        // console.log(swiper)
         this.setState({
             swiperIndex: swiper.realIndex
         })
@@ -147,14 +149,17 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                     nextButton={<Icon className="icon" icon="arrow-right3" />}
 
                     grabCursor={true}
-                    mousewheelControl={true}
-                    mousewheelReleaseOnEdges={true}
                     touchReleaseOnEdges={true}
+                    mousewheel={{
+                        releaseOnEdges: true,
+                    }}
 
                     preloadImages={false}
-                    lazyLoading={true}
-                    lazyLoadingInPrevNext={true}
-                    lazyLoadingInPrevNextAmount={2}
+                    lazy={{
+                        loadPrevNext: true,
+                        loadPrevNextAmount: 2,
+                        loadOnTransitionStart: true,
+                    }}
 
                     breakpoints={{
                         480: {
@@ -171,7 +176,9 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                         }
                     }}
 
-                    onSlideChangeEnd={this.onSlideChangeEnd.bind(this)}
+                    on={{
+                        slideChange: this.onSlideChangeEnd.bind(this)
+                    }}
                 >
                     <TransitionGroup component="div" className="illust-name-container" appear={true}>
                         {currentExtraIllustId
