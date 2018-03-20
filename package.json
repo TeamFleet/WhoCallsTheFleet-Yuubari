@@ -72,7 +72,7 @@
         "lz-string": "^1.4.4",
         "localforage": "^1.6.0",
         "metas": "^1.0.1",
-        "swiper": "^4.1.6",
+        "swiper": "^4.2.0",
 
         "normalize.css": "^8.0.0",
         "postcss-easing-gradients": "^1.2.3",
@@ -103,7 +103,7 @@
         "jsonfile": "^4.0.0",
         "ora": "^2.0.0",
 
-        "electron": "~1.8.2",
+        "electron": "~1.8.4",
         "electron-packager": "^11.1.0",
         "electron-windows-store": "^0.12.0",
 
