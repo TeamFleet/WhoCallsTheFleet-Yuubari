@@ -84,7 +84,7 @@ export default class ShipDetailsComponentIllust extends React.Component {
     // }
 
     onSlideChangeEnd(swiper) {
-        // console.log(swiper)
+        // console.log('onSlideChangeEnd', swiper)
         this.setState({
             swiperIndex: swiper.realIndex
         })

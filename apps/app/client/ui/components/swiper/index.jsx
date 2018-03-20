@@ -23,6 +23,8 @@ export default class extends React.Component {
         // if (typeof window !== 'undefined')
         //     require('./swiper.g.less')
         if (Swiper && !this._init) {
+            let thisSwiper
+
             const {
                 ...props
             } = this.props
@@ -68,14 +70,18 @@ export default class extends React.Component {
                     if (typeof props.on[event] === 'function') {
                         const cb = props.on[event]
                         props.on[event] = (...args) => {
-                            // console.log(event, ...args)
-                            cb(thisSwiper, ...args)
+                            setTimeout(() => {
+                                // console.log(event, thisSwiper, ...args)
+                                cb(thisSwiper, ...args)
+                            })
                         }
                     }
                 }
             }
 
-            const thisSwiper = new Swiper(
+            // console.log('swiper init', props)
+
+            thisSwiper = new Swiper(
                 this._container,
                 Object.assign(defaults, props)
             )
