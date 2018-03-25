@@ -1,0 +1,85 @@
+@import "~base.less";
+
+@counter-width: 240px;
+
+.component{
+    border-top: (@main-header-height + @main-header-options-height) solid transparent;
+}
+
+// .component-header{
+//     height: @infos-tab-height;
+// }
+    .component-header-title{
+        line-height: @main-header-height;
+    }
+    .component-header-result{
+        line-height: @main-header-options-height;
+        color: @color-base-dimmed;
+        font-size: 20px;
+        strong, span{
+            display: inline-block;
+        }
+        strong{
+            color: @theme-amber-a100;
+        }
+        span{
+            color: @theme-red-a100;
+            margin-left: 1em;
+        }
+    }
+
+// .component-body{
+// }
+    .component-body-title:first-child{
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+        .component-body-set ~ .component-body-set .component-body-title{
+            margin-top: 30px;
+        }
+    .component-body-grid{
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(@counter-width, 1fr) );
+        .screen-phone({
+            display: block;
+        });
+    }
+    .component-body-counter{
+        .screen-phone({
+            display: flex;
+            flex-flow: row nowrap;
+            margin-top: 10px;
+            align-items: center;
+        });
+    }
+    .component-body-counter-name{
+        display: block;
+        line-height: @equipmenticon-size;
+        // height: @equipmenticon-size;
+        margin-top: ((20px - @equipmenticon-size) / 2);
+        margin-bottom: ((20px - @equipmenticon-size) / 2 + 4);
+        overflow: hidden;
+        color: @color-alt;
+        small{
+            font-size:  12px;
+            margin-left:10px;
+            font-weight:normal;
+            color:      @color-base-dimmed;
+            // color:      @color-base;
+            vertical-align: bottom;
+        }
+        &::before{
+            margin-left: -4px;
+            margin-right: 0;
+        }
+        .screen-phone({
+            flex: 1;
+            margin: 0;
+        });
+    }
+    .component-body-counter-counter{
+        .screen-phone({
+            flex: 0 0 auto;
+        });
+    }

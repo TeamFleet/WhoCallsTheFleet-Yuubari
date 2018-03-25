@@ -1,25 +1,25 @@
 import {
-    INFOSPAGE_INIT,
-    INFOSPAGE_RESET,
-    INFOSPAGE_UPDATE
+    PAGE_INIT,
+    PAGE_RESET,
+    PAGE_UPDATE
 } from '../../redux/action-types'
 
 import { TABINDEX } from './reducer'
 
 export const init = (id, initialState) => ({
-    type: INFOSPAGE_INIT,
+    type: PAGE_INIT,
     id,
     initialState
 })
 
 export const reset = (id, initialState) => ({
-    type: INFOSPAGE_RESET,
+    type: PAGE_RESET,
     id,
     initialState
 })
 
 export const update = (id, state) => ({
-    type: INFOSPAGE_UPDATE,
+    type: PAGE_UPDATE,
     id,
     state
 })

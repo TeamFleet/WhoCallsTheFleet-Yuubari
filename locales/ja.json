@@ -16,6 +16,9 @@
     "ok": "OK",
     "none": "None",
 
+    "ship_type": "Ship Type",
+    "equipment_type": "Equipment Type",
+
     "shiptypeclass": "${class}型${type}",
     "shipclass": "${class}型",
     "shipclass_number": "${class}型 ${number} 番艦",

@@ -15,7 +15,7 @@ import {
     // reset as shipDetailsReset,
     // changeTab as shipDetailsChangeTab,
     update as shipDetailsUpdate
-} from '@appLogic/infospage/api.js'
+} from '@appLogic/pages'
 import { getInfosId } from '../../details'
 // import translate from 'sp-i18n'
 
@@ -29,9 +29,9 @@ const getExtraIllustPic = (ship, id, illustId) => {
 
 // @connect()
 @connect((state, ownProps) => ({
-    // ...state.infosPage[getInfosId(ownProps.ship.id)]
-    defaultIndex: state.infosPage[getInfosId(ownProps.ship.id)]
-        ? state.infosPage[getInfosId(ownProps.ship.id)][ILLUSTINDEX]
+    // ...state.pages[getInfosId(ownProps.ship.id)]
+    defaultIndex: state.pages[getInfosId(ownProps.ship.id)]
+        ? state.pages[getInfosId(ownProps.ship.id)][ILLUSTINDEX]
         : undefined
 }))
 @ImportStyle(require('./illust.less'))

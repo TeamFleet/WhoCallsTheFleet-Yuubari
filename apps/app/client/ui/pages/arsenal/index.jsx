@@ -6,7 +6,7 @@ import translate from 'sp-i18n'
 // import PageContainer from 'sp-ui-pagecontainer'
 
 import db from '@appLogic/database'
-import pref from '@appLogic/preferences'
+// import pref from '@appLogic/preferences'
 
 import htmlHead from '@appUtils/html-head'
 import getTimeJST from '@appUtils/get-time-jst'

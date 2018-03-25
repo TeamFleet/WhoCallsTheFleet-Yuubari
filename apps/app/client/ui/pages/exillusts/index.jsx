@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
 import PageContainer from 'sp-ui-pagecontainer'
-import { ImportStyle } from 'sp-css-import'
+// import { ImportStyle } from 'sp-css-import'
 import htmlHead from '@appUtils/html-head.js'
 import getPic from '@appUtils/get-pic.js'
 
@@ -13,7 +13,7 @@ import {
     changeTab as infosChangeTab,
     // reset as infosReset,
     TABINDEX
-} from '@appLogic/infospage/api.js'
+} from '@appLogic/pages'
 
 import Title from '@appUI/components/title'
 import Image from '@appUI/components/image'
@@ -46,7 +46,7 @@ const illustIds = [8, 9]
 // }
 
 @connect(
-    state => state.infosPage[infosId] || {},
+    state => state.pages[infosId] || {},
     (dispatch, ownProps) => ({
         init: defaultIndex => dispatch(
             infosInit(

@@ -1,5 +1,27 @@
 @import "~base.less";
 
 .component{
-    line-height:@infos-tab-height;
+    line-height: @main-header-height;
+
+    &.has-options{
+        &::before{
+            content:    "";
+            position:   absolute;
+            left:       0;
+            width:      100%;
+            top:        auto;
+            bottom:     0;        
+            height:     @main-header-options-height;
+            border-top:     1px solid @color-border;
+            border-bottom:  1px solid @color-border;
+            z-index:    -1;
+        }
+        &::after{
+            top:        auto;
+            bottom:     1px;
+            height:     (@main-header-options-height - 2);
+            background: fade(#000, 20%);
+            z-index:    -2;
+        }
+    }
 }

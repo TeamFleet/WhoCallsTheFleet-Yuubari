@@ -11,7 +11,7 @@ import {
     init as shipDetailsInit,
     reset as shipDetailsReset,
     //     TABINDEX
-} from '@appLogic/infospage/api.js'
+} from '@appLogic/pages'
 
 import Header from './details/commons/header.jsx'
 
@@ -78,7 +78,7 @@ const getDescription = ship => {
 
 export const getInfosId = id => `SHIP_${id}`
 
-// @connect((state, ownProps) => state.infosPage[getInfosId(ownProps.params.id)] || {})
+// @connect((state, ownProps) => state.pages[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
 @connect()
 export default class PageShipDetails extends React.Component {

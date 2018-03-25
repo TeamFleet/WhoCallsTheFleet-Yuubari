@@ -18,7 +18,7 @@ import getTimeJST from '@appUtils/get-time-jst.js'
 let navs = [
     undefined,
     'indev-fleets',
-    'indev-calctp',
+    'wip-calctp',
     __DEV__ ? 'indev-academy' : null,
     __DEV__ ? undefined : null,
     __DEV__ ? 'indev-sorties' : null,

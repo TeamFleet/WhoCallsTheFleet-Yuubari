@@ -15,6 +15,9 @@
     "ok": "OK",
     "none": "None",
 
+    "ship_type": "Ship Type",
+    "equipment_type": "Equipment Type",
+
     "shiptypeclass": "${class} Class ${type}",
     "shipclass": "${class} Class",
     "shipclass_number": "${class} Class (#${number})",

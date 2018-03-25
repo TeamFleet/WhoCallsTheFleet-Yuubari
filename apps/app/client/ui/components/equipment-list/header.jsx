@@ -9,24 +9,25 @@ import {
 } from '@appLogic/equipment-list/api'
 // import classNames from 'classnames'
 
-import MainHeader from '@appUI/components/main-header'
+import MainHeader from '@appUI/components/main-header/main-options'
 // import Icon from '@appUI/components/icon'
 // import Button from '@appUI/components/button'
 // import ButtonGroup from '@appUI/components/button-group'
 import TableHeader from './table-header'
 
 import { ImportStyle } from 'sp-css-import'
-import styleHeader from './header.less'
+// import styleHeader from './header.less'
 
 // @connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
-@ImportStyle(styleHeader)
+// @ImportStyle(styleHeader)
 export default class EquipmentListHeader extends React.Component {
     render() {
         return (
-            <MainHeader className={this.props.className}>
-                <Tabs id={this.props.id} />
-                <TableHeader id={this.props.id} />
-            </MainHeader>
+            <MainHeader
+                className={this.props.className}
+                main={<Tabs id={this.props.id} />}
+                options={<TableHeader id={this.props.id} />}
+            />
         )
     }
 }

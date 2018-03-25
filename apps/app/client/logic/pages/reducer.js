@@ -1,7 +1,7 @@
 import {
-    INFOSPAGE_INIT,
-    INFOSPAGE_RESET,
-    INFOSPAGE_UPDATE
+    PAGE_INIT,
+    PAGE_RESET,
+    PAGE_UPDATE
 } from '../../redux/action-types'
 
 export const TABINDEX = '__tabIndex'
@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
 
     switch (action.type) {
 
-        case INFOSPAGE_INIT: {
+        case PAGE_INIT: {
             if (state[action.id])
                 return state
             return Object.assign(
@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
             )
         }
 
-        case INFOSPAGE_RESET: {
+        case PAGE_RESET: {
             // console.log('reset', action, state[action.id])
             if (state[action.id])
                 return Object.assign(
@@ -52,7 +52,7 @@ export default function (state = initialState, action) {
             return state
         }
 
-        case INFOSPAGE_UPDATE: {
+        case PAGE_UPDATE: {
             return update(action.id, action.state)
         }
 

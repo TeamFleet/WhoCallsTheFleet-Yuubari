@@ -6,12 +6,17 @@ import kckit from 'kckit'
 import EquipmentTypes from 'kckit/src/types/equipments'
 
 import db from '@appLogic/database'
+import { init as pageInit, update as pageUpdate } from '@appLogic/pages'
 
 import htmlHead from '@appUtils/html-head'
 
 import Page from '@appUI/containers/page'
+import Header from '@appUI/components/main-header/main-options'
 import Title from '@appUI/components/title'
 import Counter from '@appUI/components/input/counter'
+import IconEquipment from '@appUI/components/icon-equipment'
+
+const pageId = 'CALCTP'
 
 const shipTypes = [
     1,  // DD
@@ -34,7 +39,7 @@ const equipmentTypes = [
 ]
 
 @connect()
-// @ImportStyle(style)
+@ImportStyle(require('./styles.less'))
 export default class extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
@@ -54,20 +59,51 @@ export default class extends React.Component {
         }
     }
 
+    componentWillMount() {
+        this.props.dispatch(
+            pageInit(pageId, {
+                result: 0
+            })
+        )
+    }
+
     render() {
         return (
             <Page
                 className={this.props.className}
             >
-                <Title component="h2" children={translate('nav.calctp')} />
-                <p><i>{translate('under_construction')}...</i></p>
-
-                <PageCalcTPBody />
+                <PageCalcTPHeader
+                    className={this.props.className + '-header'}
+                />
+                <PageCalcTPBody
+                    className={this.props.className + '-body'}
+                />
             </Page>
         )
     }
 }
 
+const PageCalcTPHeader = ({ className }) => (
+    <Header
+        className={className}
+        main={
+            <Title
+                className={className + '-title'}
+                component="h2"
+                children={translate('nav.calctp')}
+            />
+        }
+        options={
+            <PageCalcTPResult
+                className={className + '-result'}
+            />
+        }
+    />
+)
+
+@connect(state => ({
+    result: state.pages[pageId].result
+}))
 class PageCalcTPBody extends React.Component {
     constructor() {
         super()
@@ -75,58 +111,98 @@ class PageCalcTPBody extends React.Component {
             shipType: {},
             equipmentType: {},
         }
-        this.state = {
-            result: 0,
-        }
     }
 
     update() {
-        this.setState({
+        this.props.dispatch(pageUpdate(pageId, {
             result: kckit.calculate.tp(this.count)
-        })
+        }))
     }
 
     render() {
         return (
             <div className={this.props.className}>
-                <fieldset>
-                    <legend>舰种</legend>
-                    {shipTypes.map((typeId, index) => (
-                        <div key={index}>
-                            <span>{db.shipTypes[typeId]._name}</span>
-                            <Counter
-                                min={0}
+                <div className={this.props.className + "-set"}>
+                    <Title
+                        className={this.props.className + "-title"}
+                        component="h4"
+                        type="line-append"
+                        children={translate('ship_type')}
+                    />
+                    <div className={this.props.className + "-grid"}>
+                        {shipTypes.map((typeId, index) => (
+                            <PageCalcTPCounter
+                                className={this.props.className + "-counter"}
+                                key={index}
+                                name={[
+                                    db.shipTypes[typeId]._name,
+                                    <small key="code">[{db.shipTypes[typeId].code}]</small>
+                                ]}
                                 onUpdate={newValue => {
                                     this.count.shipType[typeId] = newValue
                                     this.update()
                                 }}
                             />
-                        </div>
-                    ))}
-                </fieldset>
+                        ))}
+                    </div>
+                </div>
 
-                <fieldset>
-                    <legend>装备类型</legend>
-                    {equipmentTypes.map((typeId, index) => (
-                        <div key={index}>
-                            <span>{db.equipmentTypes[typeId]._name}</span>
-                            <Counter
-                                min={0}
+                <div className={this.props.className + "-set"}>
+                    <Title
+                        className={this.props.className + "-title"}
+                        component="h4"
+                        type="line-append"
+                        children={translate('equipment_type')}
+                    />
+                    <div className={this.props.className + "-grid"}>
+                        {equipmentTypes.map((typeId, index) => (
+                            <PageCalcTPCounter
+                                className={this.props.className + "-counter"}
+                                key={index}
+                                name={db.equipmentTypes[typeId]._name}
+                                icon={db.equipmentTypes[typeId].icon}
                                 onUpdate={newValue => {
                                     this.count.equipmentType[typeId] = newValue
                                     this.update()
                                 }}
                             />
-                        </div>
-                    ))}
-                </fieldset>
-
-                <fieldset>
-                    <legend>结果</legend>
-                    <div>S: {this.state.result}</div>
-                    <div>A: {Math.floor(this.state.result * 0.7)}</div>
-                </fieldset>
+                        ))}
+                    </div>
+                </div>
             </div>
         )
     }
 }
+
+const PageCalcTPResult = connect(state => ({
+    result: state.pages[pageId].result
+}))(
+    ({ className, result }) => (
+        <div
+            className={className}
+        >
+            <strong>S: {result}</strong>
+            <span>A: {Math.floor(result * 0.7)}</span>
+        </div>
+    )
+)
+
+const PageCalcTPCounter = ({
+    className,
+    name,
+    min = 0,
+    onUpdate,
+    icon,
+}) => (
+    <div className={className}>
+        {typeof icon === 'undefined'
+            ? <span className={className + '-name'}>{name}</span>
+            : <IconEquipment className={className + '-name'} icon={icon} children={name} />
+        }
+        <Counter
+            min={min}
+            onUpdate={onUpdate}
+            className={className + '-counter'}
+        />
+    </div>
+)

@@ -1,18 +1,18 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-import translate, { localeId } from 'sp-i18n'
+import translate/*, { localeId }*/ from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 import db from '@appLogic/database'
 // import {
 //     changeTab as shipDetailsChangeTab,
 //     TABINDEX
-// } from '@appLogic/infospage/api'
+// } from '@appLogic/pages'
 // import { getInfosId } from '../../details'
 import getLink from '@appUtils/get-link'
 
 import Header from '@appUI/components/main-header/infos'
 
-// @connect((state, ownProps) => state.infosPage[getInfosId(ownProps.ship.id)] || {})
+// @connect((state, ownProps) => state.pages[getInfosId(ownProps.ship.id)] || {})
 @ImportStyle(require('./header.less'))
 export default class ShipDetailsHeader extends React.Component {
     onTabChange(tabId, tabIndex) {

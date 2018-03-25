@@ -9,7 +9,7 @@ import db from '@appLogic/database'
 //     init as equipmentDetailsInit,
 //     reset as equipmentDetailsReset,
 //     TABINDEX
-// } from '@appLogic/infospage/api.js'
+// } from '@appLogic/pages'
 
 import Header from './details/commons/header.jsx'
 
@@ -46,7 +46,7 @@ const getDescription = equipment => {
 
 // export const getInfosId = id => `EQUIPMENT_${id}`
 
-// @connect((state, ownProps) => state.infosPage[getInfosId(ownProps.params.id)] || {})
+// @connect((state, ownProps) => state.pages[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
 @connect()
 export default class extends React.Component {

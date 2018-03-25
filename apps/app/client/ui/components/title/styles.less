@@ -30,6 +30,11 @@
 .component {
     // background:     #fff;
     .title();
+    margin-bottom: 	(1.25 * @base-font-size);
+    
+    &:last-child{
+        margin-bottom: 0;
+    }
 
     &[data-title-is-inherit]
     &[data-title-type="inherit"]{
@@ -42,7 +47,7 @@
 
     &[data-title-type="line-append"]{
         overflow: hidden;
-        margin-bottom: (1.25 * @base-font-size);
+        // margin-bottom: (1.25 * @base-font-size);
         background: none transparent;
         -webkit-background-clip: initial;
         -webkit-text-fill-color: initial;
