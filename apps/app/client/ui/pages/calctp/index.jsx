@@ -126,7 +126,7 @@ class PageCalcTPBody extends React.Component {
                     <Title
                         className={this.props.className + "-title"}
                         component="h4"
-                        type="line-append"
+                        // type="line-append"
                         children={translate('ship_type')}
                     />
                     <div className={this.props.className + "-grid"}>
@@ -151,7 +151,7 @@ class PageCalcTPBody extends React.Component {
                     <Title
                         className={this.props.className + "-title"}
                         component="h4"
-                        type="line-append"
+                        // type="line-append"
                         children={translate('equipment_type')}
                     />
                     <div className={this.props.className + "-grid"}>
@@ -193,16 +193,18 @@ const PageCalcTPCounter = ({
     min = 0,
     onUpdate,
     icon,
-}) => (
-    <div className={className}>
-        {typeof icon === 'undefined'
-            ? <span className={className + '-name'}>{name}</span>
-            : <IconEquipment className={className + '-name'} icon={icon} children={name} />
-        }
-        <Counter
-            min={min}
-            onUpdate={onUpdate}
-            className={className + '-counter'}
-        />
-    </div>
-)
+}) => {
+    return (
+        <div className={className}>
+            {typeof icon === 'undefined'
+                ? <span className={className + '-name'}>{name}</span>
+                : <IconEquipment className={className + '-name'} icon={icon} children={name} />
+            }
+            <Counter
+                min={min}
+                onUpdate={onUpdate}
+                className={className + '-counter'}
+            />
+        </div>
+    )
+}
