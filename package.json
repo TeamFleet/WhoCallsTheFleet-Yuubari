@@ -75,7 +75,7 @@
         "swiper": "^4.2.0",
 
         "normalize.css": "^8.0.0",
-        "postcss-easing-gradients": "^1.2.3",
+        "postcss-easing-gradients": "^2.0.1",
         "postcss-pxtorem": "^4.0.1",
         "cssnano": "^4.0.0-rc.2",
 
@@ -104,11 +104,11 @@
         "ora": "^2.0.0",
 
         "electron": "~1.8.4",
-        "electron-packager": "^11.1.0",
+        "electron-packager": "^11.2.0",
         "electron-windows-store": "^0.12.0",
 
         "webpack-bundle-analyzer": "^2.11.1",
-        "jest": "^22.4.2"
+        "jest": "^22.4.3"
     },
     "optionalDependencies": {
         "node-windows": "^0.1.14"

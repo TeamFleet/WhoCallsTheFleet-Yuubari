@@ -257,11 +257,11 @@
                     }
                     &:before{
                         top:        @offset;
-                        background: ease-out-sine-gradient(to bottom, transparent, @color);
+                        background: linear-gradient(to bottom, transparent, @ease-out-sine, @color);
                     }
                     &:after{
                         bottom:     @offset;
-                        background: ease-out-sine-gradient(to top, transparent, @color);
+                        background: linear-gradient(to top, transparent, @ease-out-sine, @color);
                     }
                 }
                 .style-4-loop(@n, @i: 1) when (@i =< @n) {

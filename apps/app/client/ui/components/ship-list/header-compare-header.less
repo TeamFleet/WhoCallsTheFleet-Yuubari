@@ -70,7 +70,7 @@
             position:   relative;
             color:      inherit;
             &:after{
-                background: ease-out-sine-gradient(to bottom, transparent, fade(@color-accent, 35%));
+                background: linear-gradient(to bottom, transparent, @ease-out-sine, fade(@color-accent, 35%));
             }
             &:focus{
                 outline:    0;

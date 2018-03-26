@@ -73,13 +73,13 @@
             // }
             &:after{
                 @color:     @theme-red-a400;
-                background: ease-out-sine-gradient(to right, fade(@color, 50%), fade(@color, 0%));
+                background: linear-gradient(to right, fade(@color, 50%), @ease-out-sine, fade(@color, 0%));
             }
         }
         &.is-wip{
             &:after{
                 @color:     @theme-blue-a700;
-                background: ease-out-sine-gradient(to right, fade(@color, 50%), fade(@color, 0%));
+                background: linear-gradient(to right, fade(@color, 50%), @ease-out-sine, fade(@color, 0%));
             }
         }
     }

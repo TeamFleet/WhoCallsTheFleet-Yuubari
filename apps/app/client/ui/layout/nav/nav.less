@@ -57,7 +57,7 @@
     &:after{
         z-index:    9;
         width:      @size-block-shadow;
-        background: ease-out-sine-gradient(to left, fade(#000, 20%), fade(#000, 0%));
+        background: linear-gradient(to left, fade(#000, 20%), @ease-out-sine, fade(#000, 0%));
         opacity:    0;
         transition: inherit;
         .is-ready({
