@@ -51,14 +51,6 @@ export default class extends React.Component {
         ext.title = head.title
     }
 
-    constructor() {
-        super()
-        this.state = {
-            countShipType: {},
-            countEquipmentType: {},
-        }
-    }
-
     componentWillMount() {
         this.props.dispatch(
             pageInit(pageId, {
@@ -105,12 +97,9 @@ const PageCalcTPHeader = ({ className }) => (
     result: state.pages[pageId].result
 }))
 class PageCalcTPBody extends React.Component {
-    constructor() {
-        super()
-        this.count = {
-            shipType: {},
-            equipmentType: {},
-        }
+    count = {
+        shipType: {},
+        equipmentType: {},
     }
 
     update() {

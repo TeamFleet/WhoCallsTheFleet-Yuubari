@@ -65,11 +65,8 @@ export default class PageArsenal extends React.Component {
         ext.title = head.title
     }
 
-    constructor() {
-        super()
-        this.state = {
-            rendering: true
-        }
+    state = {
+        rendering: true
     }
 
     componentDidUpdate(prevProps/*, prevState*/) {
@@ -165,11 +162,8 @@ class PageArsenalHeader extends React.Component {
 }
 
 class PageArsenalHeaderAkashi extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            animation: Math.floor((Math.random() * 3) + 1)
-        }
+    state = {
+        animation: Math.floor((Math.random() * 3) + 1)
     }
     changeAnimation() {
         this.setState({
@@ -381,12 +375,9 @@ class PageArsenalCollection extends React.Component {
 
 @ImportStyle(require('./styles-item.less'))
 class PageArsenalListItem extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            // render: __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady),
-            expand: false
-        }
+    state = {
+        // render: __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady),
+        expand: false
     }
     // componentWillMount() {
     //     if (!this.state.render)

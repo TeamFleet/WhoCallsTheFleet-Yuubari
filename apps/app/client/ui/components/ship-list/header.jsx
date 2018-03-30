@@ -40,12 +40,8 @@ import styleHeader from './header.less'
 })
 @ImportStyle(styleHeader)
 export default class ShipListHeader extends React.Component {
-    constructor() {
-        super()
-
-        this.state = {
-            isClassCompare: false
-        }
+    state = {
+        isClassCompare: false
     }
 
     // componentDidMount() {

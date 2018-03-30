@@ -17,12 +17,10 @@ import Background from '@appUI/components/background.jsx'
 }))
 @ImportStyle(require('./styles.less'))
 export default class extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            waiting: true
-        }
+    state = {
+        waiting: true
     }
+
     componentDidMount() {
         this.setState({
             waiting: false

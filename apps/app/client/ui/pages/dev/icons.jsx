@@ -23,10 +23,6 @@ export default class extends React.Component {
         ext.title = head.title
     }
 
-    constructor() {
-        super()
-    }
-
     getIcons() {
         if (__SERVER__) return []
 

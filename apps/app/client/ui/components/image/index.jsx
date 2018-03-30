@@ -4,13 +4,10 @@ import { ImportStyle } from 'sp-css-import'
 
 @ImportStyle(require('./styles.less'))
 export default class Image extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            isLoading: true,
-            isLoaded: false,
-            isError: false
-        }
+    state = {
+        isLoading: true,
+        isLoaded: false,
+        isError: false
     }
 
     onLoad(/*evt*/) {
