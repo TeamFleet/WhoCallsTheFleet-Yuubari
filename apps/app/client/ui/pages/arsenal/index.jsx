@@ -321,7 +321,7 @@ class PageArsenalCollection extends React.Component {
             // show: false
         }
     }
-    componentWillMount() {
+    componentDidMount() {
         if (!this.state.render)
             setTimeout(() => {
                 this.setState({

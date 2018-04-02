@@ -50,6 +50,12 @@ class App extends React.Component {
         ext.title = head.title
     }
 
+    constructor() {
+        super()
+        if (document && document.documentElement)
+            document.documentElement.classList.add('is-react-ready')
+    }
+
     appReady(timeout = 0) {
         if (__CLIENT__ && !self.isAppReady) {
             self.appReady()
@@ -99,11 +105,6 @@ class App extends React.Component {
 
     onTouchCancel() {
         if (startSwipeAtLeftBorder) startSwipeAtLeftBorder = false
-    }
-
-    componentWillMount() {
-        if (__CLIENT__ && self._html)
-            self._html.classList.add('is-react-ready')
     }
 
     render() {
