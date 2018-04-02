@@ -52,7 +52,7 @@ class App extends React.Component {
 
     constructor() {
         super()
-        if (document && document.documentElement)
+        if (typeof document !== 'undefined' && document.documentElement)
             document.documentElement.classList.add('is-react-ready')
     }
 

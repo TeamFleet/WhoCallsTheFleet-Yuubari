@@ -85,7 +85,7 @@
         "nedb-promise": "^2.0.1",
         "npm-run-script": "^0.0.4",
         "image-size": "^0.6.2",
-        "camelcase": "^4.1.0",
+        "camelcase": "^5.0.0",
 
         "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
         "copy-webpack-plugin": "^4.5.1",
