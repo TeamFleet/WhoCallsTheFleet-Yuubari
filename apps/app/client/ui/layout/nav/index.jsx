@@ -15,10 +15,12 @@ import style from './nav.less'
 import channel from '@appConstants/channel'
 import getTimeJST from '@appUtils/get-time-jst.js'
 
+// wip-
+// indev-
 let navs = [
     undefined,
     'indev-fleets',
-    'wip-calctp',
+    'calctp',
     __DEV__ ? 'indev-academy' : null,
     __DEV__ ? undefined : null,
     __DEV__ ? 'indev-sorties' : null,
