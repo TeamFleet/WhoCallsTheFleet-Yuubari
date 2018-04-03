@@ -37,12 +37,11 @@ import { ImportStyle } from 'sp-css-import'
     rootMargin: "50px 0px"
 })
 export default class EquipmentList extends React.Component {
-    componentWillMount() {
-        //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH')
-        //         this.props.dispatch(listReset(this.props.id))
-        this.props.dispatch(
+    constructor(props){
+        super(props)
+        props.dispatch(
             listHighlightColumn(
-                this.props.id,
+                props.id,
                 undefined, undefined
             )
         )

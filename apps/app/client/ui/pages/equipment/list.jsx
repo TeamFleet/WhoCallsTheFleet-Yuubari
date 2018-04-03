@@ -22,7 +22,7 @@ const equipmentListId = 'pageEquipmentList'
     isEquipmentListInit: (typeof state.equipmentList[equipmentListId] !== 'undefined')
 }))
 @ImportStyle(style)
-export default class About extends React.Component {
+export default class PageEquipmentList extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
             store,

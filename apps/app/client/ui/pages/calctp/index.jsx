@@ -51,12 +51,19 @@ export default class extends React.Component {
         ext.title = head.title
     }
 
-    componentWillMount() {
-        this.props.dispatch(
+    constructor(props) {
+        super(props)
+        props.dispatch(
             pageInit(pageId, {
                 result: 0
             })
         )
+    }
+
+    componentWillUnmount(){
+        this.props.dispatch(pageUpdate(pageId, {
+            result: 0
+        }))
     }
 
     render() {
