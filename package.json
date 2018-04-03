@@ -63,16 +63,16 @@
         "super-project": "^2.4.0",
         "super-project-cli": "^1.1.7",
 
-        "react-transition-group": "^2.2.1",
+        "react-transition-group": "^2.3.0",
         "react-markdown": "^3.3.0",
 
         "bind-event": "^1.0.5",
         "check-css-prop": "^1.0.1",
         "classnames": "^2.2.5",
         "lz-string": "^1.4.4",
-        "localforage": "^1.6.0",
+        "localforage": "^1.7.1",
         "metas": "^1.0.1",
-        "swiper": "^4.2.0",
+        "swiper": "^4.2.2",
 
         "normalize.css": "^8.0.0",
         "postcss-easing-gradients": "^2.0.1",
