@@ -149,7 +149,10 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
     },
 
     onServerRender: (obj) => {
-        if (__DEV__) console.log('onServerRender')
+        if (__DEV__) {
+            console.log(' ')
+            console.log('[SERVER] onRender')
+        }
 
         let { koaCtx, reduxStore } = obj
 
