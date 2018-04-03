@@ -77,10 +77,10 @@ export default class PageArsenal extends React.Component {
     }
 
     onRender() {
-        // console.log(123)
-        this.setState({
-            rendering: false
-        })
+        if (!this.state.rendering)
+            this.setState({
+                rendering: false
+            })
     }
 
     render() {
@@ -202,139 +202,142 @@ class PageArsenalList extends React.Component {
     }
 }
 
-class PageArsenalListDay extends React.Component {
-    render() {
-        let lastCollection = -1
-        const collectionIndexMap = {}
-        const collections = []
+const PageArsenalListDay = (props) => {
+    // console.log('[PageArsenalListDay] render')
 
-        db.arsenalDays[this.props.day].forEach((item, _index) => {
-            const equipment = getEquipment(item[0])
-            const improvementIndex = item[1]
+    let lastCollection = -1
+    const collectionIndexMap = {}
+    const collections = []
 
-            if (!Array.isArray(equipment.improvement) || !equipment.improvement[improvementIndex])
-                return null
+    db.arsenalDays[props.day].forEach((item, _index) => {
+        const equipment = getEquipment(item[0])
+        const improvementIndex = item[1]
 
-            let collection
-            // console.log(db.equipmentCollections)
-            db.equipmentCollections.some(o => {
-                o.list.some(l => {
-                    if (equipment.type === l.type)
-                        collection = o.name
-                    return typeof collection !== 'undefined'
-                })
+        if (!Array.isArray(equipment.improvement) || !equipment.improvement[improvementIndex])
+            return null
+
+        let collection
+        // console.log(db.equipmentCollections)
+        db.equipmentCollections.some(o => {
+            o.list.some(l => {
+                if (equipment.type === l.type)
+                    collection = o.name
                 return typeof collection !== 'undefined'
             })
-            let index = collectionIndexMap[collection]
-            if (lastCollection !== collection && typeof collection !== 'undefined') {
-                lastCollection = collection
-                if (typeof collectionIndexMap[collection] === 'undefined') {
-                    index = collections.length
-                    collectionIndexMap[collection] = collections.length
-                    collections.push({
-                        title: collection,
-                        list: []
-                    })
-                }
-                // list.push(
-                //     <PageArsenalListTitle key={`title-${collection}`} children={collection} />
-                // )
-            }
-
-            collections[index].list.push(<PageArsenalListItem
-                key={JSON.stringify(item)}
-                equipment={equipment}
-                improvementIndex={improvementIndex}
-                requirements={item[2]}
-                index={_index}
-            />)
+            return typeof collection !== 'undefined'
         })
+        let index = collectionIndexMap[collection]
+        if (lastCollection !== collection && typeof collection !== 'undefined') {
+            lastCollection = collection
+            if (typeof collectionIndexMap[collection] === 'undefined') {
+                index = collections.length
+                collectionIndexMap[collection] = collections.length
+                collections.push({
+                    title: collection,
+                    list: []
+                })
+            }
+            // list.push(
+            //     <PageArsenalListTitle key={`title-${collection}`} children={collection} />
+            // )
+        }
 
-        return (
-            <PageArsenalList collections={collections} {...this.props} />
-        )
-    }
+        collections[index].list.push(<PageArsenalListItem
+            key={JSON.stringify(item)}
+            equipment={equipment}
+            improvementIndex={improvementIndex}
+            requirements={item[2]}
+            index={_index}
+        />)
+    })
+
+    return (
+        <PageArsenalList collections={collections} {...props} />
+    )
 }
 
-class PageArsenalListAll extends React.Component {
-    render() {
-        let lastCollection = -1
-        const collectionIndexMap = {}
-        const collections = []
+const PageArsenalListAll = (props) => {
+    // console.log('[PageArsenalListAll] render')
 
-        db.arsenalAll.forEach(item => {
-            const equipment = getEquipment(item)
+    let lastCollection = -1
+    const collectionIndexMap = {}
+    const collections = []
 
-            if (!Array.isArray(equipment.improvement) || !equipment.improvement.length)
-                return null
+    db.arsenalAll.forEach(item => {
+        const equipment = getEquipment(item)
 
-            let collection
-            // console.log(db.equipmentCollections)
-            db.equipmentCollections.some(o => {
-                o.list.some(l => {
-                    if (equipment.type === l.type)
-                        collection = o.name
-                    return typeof collection !== 'undefined'
-                })
+        if (!Array.isArray(equipment.improvement) || !equipment.improvement.length)
+            return null
+
+        let collection
+        // console.log(db.equipmentCollections)
+        db.equipmentCollections.some(o => {
+            o.list.some(l => {
+                if (equipment.type === l.type)
+                    collection = o.name
                 return typeof collection !== 'undefined'
             })
-            let index = collectionIndexMap[collection]
-            if (lastCollection !== collection && typeof collection !== 'undefined') {
-                lastCollection = collection
-                if (typeof collectionIndexMap[collection] === 'undefined') {
-                    index = collections.length
-                    collectionIndexMap[collection] = collections.length
-                    collections.push({
-                        title: collection,
-                        list: []
-                    })
-                }
-                // list.push(
-                //     <PageArsenalListTitle key={`title-${collection}`} children={collection} />
-                // )
-            }
-
-            equipment.improvement.forEach((improvement, _index) => {
-                collections[index].list.push(
-                    <PageArsenalListItem
-                        key={item + '-' + _index}
-                        equipment={equipment}
-                        improvementIndex={_index}
-                        index={_index}
-                    />
-                )
-            })
+            return typeof collection !== 'undefined'
         })
+        let index = collectionIndexMap[collection]
+        if (lastCollection !== collection && typeof collection !== 'undefined') {
+            lastCollection = collection
+            if (typeof collectionIndexMap[collection] === 'undefined') {
+                index = collections.length
+                collectionIndexMap[collection] = collections.length
+                collections.push({
+                    title: collection,
+                    list: []
+                })
+            }
+            // list.push(
+            //     <PageArsenalListTitle key={`title-${collection}`} children={collection} />
+            // )
+        }
 
-        return (
-            <PageArsenalList collections={collections} {...this.props} />
-        )
-    }
+        equipment.improvement.forEach((improvement, _index) => {
+            collections[index].list.push(
+                <PageArsenalListItem
+                    key={item + '-' + _index}
+                    equipment={equipment}
+                    improvementIndex={_index}
+                    index={_index}
+                />
+            )
+        })
+    })
+
+    return (
+        <PageArsenalList collections={collections} {...props} />
+    )
 }
 
 @ImportStyle(require('./styles-collection.less'))
 class PageArsenalCollection extends React.Component {
+    rendered = false
+
     constructor(props) {
         super(props)
+        const render = __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady)
         this.state = {
-            render: __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady),
+            render,
             // show: false
         }
-    }
-    componentDidMount() {
-        if (!this.state.render)
+        if (!render) {
             setTimeout(() => {
                 this.setState({
                     render: true
                 })
-                if (typeof this.props.onRender === 'function')
-                    this.props.onRender(this)
-            }, 20 * (this.props.index || 0))
-        else if (typeof this.props.onRender === 'function')
-            this.props.onRender(this)
+                if (typeof props.onRender === 'function')
+                    props.onRender(this)
+            }, 20 * (props.index || 0))
+        } else if (typeof props.onRender === 'function') {
+            props.onRender(this)
+        }
     }
     render() {
-        // if (!this.state.render) return null
+        if (!this.state.render) return null
+        // console.log(this.props.index, this.state.render)
         return (
             <div className={this.props.className}>
                 <Title
