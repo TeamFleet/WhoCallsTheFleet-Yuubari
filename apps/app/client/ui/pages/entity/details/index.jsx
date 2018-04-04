@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
-// import PageContainer from 'sp-ui-pagecontainer'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 import { ImportStyle } from 'sp-css-import'

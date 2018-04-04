@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 
 import { ImportStyle } from 'sp-css-import'
 import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
 
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
+
+import Page from '@appUI/containers/page'
 
 import ListCasters from '@appUI/components/list/casters'
 import ListArtists from '@appUI/components/list/artists'
@@ -39,7 +40,7 @@ export default class extends React.Component {
         }
 
         return (
-            <PageContainer
+            <Page
                 className={this.props.className}
             >
                 <ListTitle>{translate('seiyuus')}</ListTitle>
@@ -57,7 +58,7 @@ export default class extends React.Component {
                     ))}
                     count={true}
                 />
-            </PageContainer>
+            </Page>
         )
     }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { ImportStyle } from 'sp-css-import'
-import PageContainer from 'sp-ui-pagecontainer'
+import Page from '@appUI/containers/page'
 
 import htmlHead from '@appUtils/html-head'
 
@@ -40,7 +40,7 @@ export default class extends React.Component {
     render() {
         this.getIcons()
         return (
-            <PageContainer className={this.props.className}>
+            <Page className={this.props.className}>
                 <MainHeader>
                     <div className="header" style={{ height: "100px", paddingTop: "20px" }}>
                         <Title component="h1">Icons</Title>
@@ -51,7 +51,7 @@ export default class extends React.Component {
                         <IconSample icon={icon} key={index} />
                     ))}
                 </div>
-            </PageContainer>
+            </Page>
         )
     }
 }

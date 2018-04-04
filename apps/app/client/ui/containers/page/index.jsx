@@ -15,6 +15,8 @@ const lastScrollY = {}
     locationBeforeTransitions: state.routing.locationBeforeTransitions
 }))
 export default class extends React.Component {
+    updating = false
+
     restoreScrollY() {
         if (typeof lastScrollY[this.props.pathname] !== 'undefined') {
             // console.log('restoring scrollY')
@@ -25,23 +27,48 @@ export default class extends React.Component {
 
     shouldComponentUpdate(newProps) {
         // un-mounting
-        if (newProps.pathname !== newProps.locationBeforeTransitions.pathname) {
-            if (__DEV__)
+        if (
+            // !this.updating &&
+            typeof this.props.locationBeforeTransitions === 'object' &&
+            typeof newProps.locationBeforeTransitions === 'object' &&
+            // newProps.pathname !== newProps.locationBeforeTransitions.pathname
+            this.props.locationBeforeTransitions.pathname !== newProps.locationBeforeTransitions.pathname
+        ) {
+            if (__DEV__) {
+                const style = (str) => [
+                    `line-height: 2em`,
+                    `display: inline-block`,
+                    `margin: 0 -7px`,
+                    `border-radius: 100px`,
+                    `padding: 0 1em`,
+                    `float: left`,
+                    str,
+                ].join(';')
                 console.log(
-                    `⏏ UN-MOUNTING:`
-                    + ` ${newProps.pathname} -> ${newProps.locationBeforeTransitions.pathname}`
-                    + ` @0,${window.scrollY}`
+                    `%c%s%c%s%c%s`,
+                    style(`background: #800; color: #fee;`),
+                    `[Page] onChange/onUnmount`,
+                    style(`background: #080; color: #efe;`),
+                    `${this.props.locationBeforeTransitions.pathname} -> ${newProps.locationBeforeTransitions.pathname}`,
+                    style(`background: #008; color: #eef;`),
+                    `@ 0,${window.scrollY}`,
                 )
-            lastScrollY[newProps.pathname] = window.scrollY
+            }
+            lastScrollY[this.props.locationBeforeTransitions.pathname] = window.scrollY
             return false
         }
 
         // rendered
-        if (newProps.rendering !== this.props.rendering && !newProps.rendering) {
+        // console.log(newProps.rendering, this.props.rendering)
+        if (
+            // !this.updating &&
+            newProps.rendering !== this.props.rendering && !newProps.rendering
+        ) {
             this.restoreScrollY()
             return false
         }
 
+        this.updating = true
         return true
     }
 
@@ -50,6 +77,10 @@ export default class extends React.Component {
             if (!this.props.rendering) this.restoreScrollY()
         } else
             delete lastScrollY[this.props.pathname]
+    }
+
+    componentDidUpdate() {
+        this.updating = false
     }
 
     render() {

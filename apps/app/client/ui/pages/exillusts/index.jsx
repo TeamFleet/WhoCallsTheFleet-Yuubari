@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
 // import { ImportStyle } from 'sp-css-import'
+
 import htmlHead from '@appUtils/html-head.js'
 import getPic from '@appUtils/get-pic.js'
 
@@ -14,6 +14,8 @@ import {
     // reset as infosReset,
     TABINDEX
 } from '@appLogic/pages'
+
+import Page from '@appUI/containers/page'
 
 import Title from '@appUI/components/title'
 import Image from '@appUI/components/image'
@@ -109,7 +111,7 @@ export default class extends React.Component {
         if (!cur) return null
 
         return (
-            <PageContainer
+            <Page
                 className={this.props.className}
             >
                 <p><i>{translate('under_construction')}...</i></p>
@@ -204,7 +206,7 @@ export default class extends React.Component {
                         </div>
                     ))}
                 </div>
-            </PageContainer>
+            </Page>
         )
     }
 }

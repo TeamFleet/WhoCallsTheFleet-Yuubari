@@ -6,8 +6,17 @@ export default [
         name: 'fleets',
         getComponent: (nextState, cb) => {
             require.ensure([], (require) => {
-                if (routeCheck(nextState)) cb(null, require('@appUI/pages/fleets').default)
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/fleets-indev').default)
             }, 'fleets')
+        }
+    },
+    {
+        path: 'fleets-wip',
+        name: '舰队模拟',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/fleets').default)
+            }, '舰队模拟')
         }
     },
     {

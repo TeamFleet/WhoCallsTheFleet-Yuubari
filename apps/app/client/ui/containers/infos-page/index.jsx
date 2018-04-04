@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 
-import PageContainer from 'sp-ui-pagecontainer'
+import Page from '@appUI/containers/page'
 
 import { ImportStyle } from 'sp-css-import'
 
@@ -16,7 +16,7 @@ export default class InfosPageContainer extends React.Component {
         } = this.props
 
         return (
-            <PageContainer
+            <Page
                 className={classNames({
                     [className]: true,
                     'has-tabs': hasTabs || (typeof hasTabs === 'undefined')
@@ -24,7 +24,7 @@ export default class InfosPageContainer extends React.Component {
                 {...props}
             >
                 {children}
-            </PageContainer>
+            </Page>
         )
     }
 }

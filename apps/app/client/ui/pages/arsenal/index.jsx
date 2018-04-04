@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
 import translate from 'sp-i18n'
-// import PageContainer from 'sp-ui-pagecontainer'
 
 import db from '@appLogic/database'
 // import pref from '@appLogic/preferences'
@@ -77,10 +76,10 @@ export default class PageArsenal extends React.Component {
     }
 
     onRender() {
-        if (!this.state.rendering)
-            this.setState({
-                rendering: false
-            })
+        // if (!this.state.rendering)
+        this.setState({
+            rendering: false
+        })
     }
 
     render() {

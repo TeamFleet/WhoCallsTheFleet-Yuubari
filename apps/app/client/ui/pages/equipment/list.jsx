@@ -4,24 +4,26 @@ import { connect } from 'react-redux'
 // import Link from '@appUI/components/link'
 
 import translate from 'sp-i18n'
-import PageContainer from 'sp-ui-pagecontainer'
+import { ImportStyle } from 'sp-css-import'
+
 import htmlHead from '@appUtils/html-head.js'
+
 import db from '@appLogic/database'
 import {
     reset as equipmentListReset
 } from '@appLogic/equipment-list/api.js'
 
-import EquipmentList from '@appUI/components/equipment-list'
+import Page from '@appUI/containers/page'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './list.less'
+import EquipmentList from '@appUI/components/equipment-list'
 
 const equipmentListId = 'pageEquipmentList'
 
-@connect(state => ({
-    isEquipmentListInit: (typeof state.equipmentList[equipmentListId] !== 'undefined')
-}))
-@ImportStyle(style)
+// @connect(state => ({
+//     isEquipmentListInit: (typeof state.equipmentList[equipmentListId] !== 'undefined')
+// }))
+@connect()
+@ImportStyle(require('./list.less'))
 export default class PageEquipmentList extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
@@ -34,16 +36,16 @@ export default class PageEquipmentList extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.isEquipmentListInit && this.props.location.action === 'PUSH')
+        if (this.props.location.action === 'PUSH')
             this.props.dispatch(equipmentListReset(equipmentListId))
     }
 
     render() {
         if (__DEV__) console.log('Equipment Collections', db.equipmentCollections)
         return (
-            <PageContainer className={this.props.className} >
+            <Page className={this.props.className} >
                 <EquipmentList id={equipmentListId} />
-            </PageContainer>
+            </Page>
         )
         // return (
         //     <PageContainer
