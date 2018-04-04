@@ -5,4 +5,23 @@
     h1{
         margin-top: 0;
     }
+
+    .dev-sample-container{
+        position: relative;
+        display: block;
+        overflow: hidden;
+
+        & ~ .dev-sample-container{
+            padding-top: 61px;
+            &:before{
+                content: "";
+                position: absolute;
+                top: 30px;
+                height: 1px;
+                left: 0;
+                right: 0;
+                background: linear-gradient(to right, fade(@color-border, 0%), @color-border 35%, @color-border 65%, fade(@color-border, 0%));
+            }
+        }
+    }
 }

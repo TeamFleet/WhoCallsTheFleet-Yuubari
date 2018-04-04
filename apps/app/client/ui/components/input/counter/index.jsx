@@ -22,17 +22,19 @@ export default class InputCounter extends React.Component {
             isFocus: false,
         }
     }
+    getValue(value) {
+        if (typeof this.max === 'number' && value > this.max)
+            return this.max
+        if (typeof this.min === 'number' && value < this.min)
+            return this.min
+        return value
+    }
     update(el = this.input, value) {
         if (typeof value === 'undefined')
             value = el.value
         if (isNaN(value))
             value = Math.max(0, this.min || 0)
-        value = parseInt(value)
-
-        if (typeof this.max !== 'undefined' && value > this.max)
-            value = this.max
-        if (typeof this.min !== 'undefined' && value < this.min)
-            value = this.min
+        value = this.getValue(parseInt(value))
 
         if (!value) value = 0
 
@@ -83,11 +85,32 @@ export default class InputCounter extends React.Component {
             evt.target.blur()
         }
     }
-    onBtnClick(evt, delta) {
-        const newValue = parseInt(this.input.value || 0) + delta
+    onBtnClick(evt, delta, stayFocus = false) {
+        const newValue = this.getValue(parseInt(this.input.value || 0) + delta)
         this.input.value = newValue
         this.update()
-        evt.target.blur()
+        if (!stayFocus) evt.target.blur()
+    }
+    onWheel(evt) {
+        if (this.state.isFocus) {
+            const e = evt.nativeEvent
+
+            if (
+                (typeof e.wheelDelta === 'number' && e.wheelDelta > 0) ||
+                (typeof e.wheelDeltaY === 'number' && e.wheelDeltaY > 0) ||
+                (typeof e.deltaY === 'number' && e.deltaY < 0)
+            )
+                this.onBtnClick(evt, 1, true)
+            else if (
+                (typeof e.wheelDelta === 'number' && e.wheelDelta < 0) ||
+                (typeof e.wheelDeltaY === 'number' && e.wheelDeltaY < 0) ||
+                (typeof e.deltaY === 'number' && e.deltaY > 0)
+            )
+                this.onBtnClick(evt, -1, true)
+
+            evt.stopPropagation()
+            evt.preventDefault()
+        }
     }
 
     shouldComponentUpdate(newProps) {
@@ -106,7 +129,7 @@ export default class InputCounter extends React.Component {
             showButtons = true
         } = this.props
         return (
-            <div
+            <span
                 className={classNames({
                     [this.props.className]: true,
                     'is-focus': this.state.isFocus,
@@ -119,11 +142,12 @@ export default class InputCounter extends React.Component {
                     min={this.min}
                     max={this.max}
                     ref={el => this.input = el}
+                    defaultValue={this.props.defaultValue}
                     onChange={this.onChange.bind(this)}
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
                     onKeyDown={this.onInputKeyDown.bind(this)}
-                    defaultValue={this.props.defaultValue}
+                    onWheel={this.onWheel.bind(this)}
                 />
                 {showButtons &&
                     <button
@@ -147,7 +171,7 @@ export default class InputCounter extends React.Component {
                         onClick={evt => this.onBtnClick(evt, 1)}
                     >+</button>
                 }
-            </div>
+            </span>
         )
     }
 }

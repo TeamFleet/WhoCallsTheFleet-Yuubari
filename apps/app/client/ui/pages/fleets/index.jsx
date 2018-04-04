@@ -8,6 +8,7 @@ import htmlHead from '@appUtils/html-head'
 import Page from '@appUI/containers/page'
 
 import Title from '@appUI/components/title'
+import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
 
 @connect()
 export default class PageFleets extends React.Component {
@@ -32,35 +33,41 @@ export default class PageFleets extends React.Component {
 
 // @ImportStyle(style)
 class PageFleetsContainer extends React.Component {
+    static Title = <Title component="h2" children={translate('nav.fleets')} />
+
     state = {
-        Nedb: false,
+        init: typeof Nedb !== 'undefined' || false,
     }
 
     componentDidMount() {
-        if (typeof Nedb !== 'undefined') {
-            this.setState({
-                Nedb
-            })
-        } else {
+        if (!this.state.init && __CLIENT__) {
             import(/*
-                webpackChunkName: "nedb"
-            */ 'nedb/browser-version/out/nedb.min.js'
+                    webpackChunkName: "nedb"
+                */ 'nedb/browser-version/out/nedb.min.js'
             ).then(module => {
                 self.Nedb = module
+                this.setState({
+                    init: true,
+                })
             })
         }
     }
 
     render() {
-        if (!__CLIENT__) {
+        if (!__CLIENT__)
+            return PageFleetsContainer.Title
+
+        if (!this.state.init)
             return (
-                <Title component="h2" children={translate('nav.fleets')} />
+                <React.Fragment>
+                    {PageFleetsContainer.Title}
+                    <LoaderFairyOoyodo2 />
+                </React.Fragment>
             )
-        }
 
         return (
             <React.Fragment>
-                <Title component="h2" children={translate('nav.fleets')} />
+                {PageFleetsContainer.Title}
                 <p><i>{translate('under_construction')}...</i></p>
             </React.Fragment>
         )

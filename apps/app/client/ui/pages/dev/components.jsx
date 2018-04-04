@@ -33,74 +33,87 @@ export default class extends React.Component {
                 <SamplesButton />
                 <SamplesButtonGroup />
                 <SamplesInput />
+                <SamplesLoaders />
             </Page>
         )
     }
 }
 
+const Samples = ({ className, ...props }) => (
+    <div
+        className={
+            ['dev-sample-container', className]
+                .filter(c => !!c)
+                .join(' ')
+        }
+        {...props}
+    />
+)
 
-class SamplesButton extends React.Component {
-    render() {
-        return (
-            <div>
-                <Title component="h2">Button</Title>
-                <p>
-                    <Button>Sample Button</Button>
-                    <Button href="/">With URI link</Button>
-                    <Button to="/">With Router link</Button>
-                    <Button tag="span">Custom tag name</Button>
-                </p>
-                <Title component="h4">Colors</Title>
-                <p>
-                    <Button>Default color</Button>
-                    <Button color="primary">Primary</Button>
-                    <Button color="success">Success</Button>
-                    <Button color="warning">Warning</Button>
-                    <Button color="danger">Danger</Button>
-                </p>
-                <Title component="h4">Sizes</Title>
-                <p>
-                    <Button>Default size</Button>
-                    <Button size="large">Large</Button>
-                    <Button size="small">Small</Button>
-                    <Button size="tiny">Tiny</Button>
-                </p>
-                <Title component="h4">States</Title>
-                <p>
-                    <Button>Default state</Button>
-                    <Button state="disabled">Disabled</Button>
-                    <Button disabled={true}>Disabled another method</Button>
-                    <Button state="active">Active</Button>
-                </p>
-            </div>
-        )
-    }
-}
+const SamplesButton = () => (
+    <Samples>
+        <Title component="h2">Button</Title>
+        <p>
+            <Button>Sample Button</Button>
+            <Button href="/">With URI link</Button>
+            <Button to="/">With Router link</Button>
+            <Button tag="span">Custom tag name</Button>
+        </p>
+        <Title component="h4">Colors</Title>
+        <p>
+            <Button>Default color</Button>
+            <Button color="primary">Primary</Button>
+            <Button color="success">Success</Button>
+            <Button color="warning">Warning</Button>
+            <Button color="danger">Danger</Button>
+        </p>
+        <Title component="h4">Sizes</Title>
+        <p>
+            <Button>Default size</Button>
+            <Button size="large">Large</Button>
+            <Button size="small">Small</Button>
+            <Button size="tiny">Tiny</Button>
+        </p>
+        <Title component="h4">States</Title>
+        <p>
+            <Button>Default state</Button>
+            <Button state="disabled">Disabled</Button>
+            <Button disabled={true}>Disabled another method</Button>
+            <Button state="active">Active</Button>
+        </p>
+    </Samples>
+)
 
-class SamplesButtonGroup extends React.Component {
-    render() {
-        return (
-            <div>
-                <Title component="h2">Button Group</Title>
-                <p>
-                    <ButtonGroup>
-                        <Button>Sample Button</Button>
-                        <Button href="/">With URI link</Button>
-                        <Button to="/">With Router link</Button>
-                        <Button tag="span">Custom tag name</Button>
-                    </ButtonGroup>
-                </p>
-            </div>
-        )
-    }
-}
+const SamplesButtonGroup = () => (
+    <Samples>
+        <Title component="h2">Button Group</Title>
+        <p>
+            <ButtonGroup>
+                <Button>Sample Button</Button>
+                <Button href="/">With URI link</Button>
+                <Button to="/">With Router link</Button>
+                <Button tag="span">Custom tag name</Button>
+            </ButtonGroup>
+        </p>
+    </Samples>
+)
 
 const SamplesInput = () => (
-    <div>
-        <Title component="h2">Input/Counter</Title>
+    <Samples>
+        <Title component="h2">input / counter</Title>
         <p>
             <InputCounter />
             <InputCounter defaultValue="10" max="20" min="-5" />
         </p>
-    </div>
+    </Samples>
+)
+
+import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
+const SamplesLoaders = () => (
+    <Samples>
+        <Title component="h2">loader / fairy-ooyodo-2</Title>
+        <p>
+            <LoaderFairyOoyodo2 />
+        </p>
+    </Samples>
 )
