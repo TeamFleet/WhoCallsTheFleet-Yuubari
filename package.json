@@ -104,7 +104,7 @@
         "ora": "^2.0.0",
 
         "electron": "~1.8.4",
-        "electron-packager": "^11.2.0",
+        "electron-packager": "^12.0.0",
         "electron-windows-store": "^0.12.0",
 
         "webpack-bundle-analyzer": "^2.11.1",
