@@ -1,16 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
-
 import { ImportStyle } from 'sp-css-import'
-import style from './button.less'
 
-@ImportStyle(style)
+@ImportStyle(require('./button.less'))
 export default class extends React.Component {
     render() {
         let {
             className,
             children,
-            tag,
+            tag, component,
             href, link,
             to,
             type,
@@ -21,22 +19,23 @@ export default class extends React.Component {
             ...props
         } = this.props
 
-        let TagName
-        if (tag) TagName = tag
-        else if (to) TagName = Link
-        else if (href || link) TagName = 'a'
-        else TagName = 'button'
+        let Component
+        if (tag) Component = tag
+        else if (component) Component = component
+        else if (to) Component = Link
+        else if (href || link) Component = 'a'
+        else Component = 'button'
 
         let disabled
 
-        const buttonType = type || (TagName === 'button' ? 'button' : undefined)
+        const buttonType = type || (Component === 'button' ? 'button' : undefined)
         const linkUrl = href || link || undefined
 
         if (color)
-            className += ' is-color-' + color
+            className += ' mod-color-' + color
 
         if (size)
-            className += ' is-size-' + size
+            className += ' mod-size-' + size
 
         if (state === 'disable' || state === 'disabled')
             disabled = true
@@ -44,7 +43,7 @@ export default class extends React.Component {
             className += ' is-state-' + state
 
         return (
-            <TagName
+            <Component
                 className={'button ' + className}
                 href={linkUrl}
                 to={to}
@@ -58,7 +57,7 @@ export default class extends React.Component {
                 {...props}
             >
                 {children}
-            </TagName>
+            </Component>
         )
     }
 }

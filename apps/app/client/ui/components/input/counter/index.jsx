@@ -3,6 +3,8 @@ import classNames from 'classnames'
 
 import { ImportStyle } from 'sp-css-import'
 
+import Button from '@appUI/components/button'
+
 const getValue = prop =>
     typeof prop !== 'undefined' && !isNaN(prop)
         ? parseInt(prop)
@@ -85,11 +87,11 @@ export default class InputCounter extends React.Component {
             evt.target.blur()
         }
     }
-    onBtnClick(evt, delta, stayFocus = false) {
+    onBtnClick(evt, delta) {
         const newValue = this.getValue(parseInt(this.input.value || 0) + delta)
         this.input.value = newValue
         this.update()
-        if (!stayFocus) evt.target.blur()
+        if (evt) evt.target.blur()
     }
     onWheel(evt) {
         if (this.state.isFocus) {
@@ -100,13 +102,13 @@ export default class InputCounter extends React.Component {
                 (typeof e.wheelDeltaY === 'number' && e.wheelDeltaY > 0) ||
                 (typeof e.deltaY === 'number' && e.deltaY < 0)
             )
-                this.onBtnClick(evt, 1, true)
+                this.onBtnClick(undefined, 1)
             else if (
                 (typeof e.wheelDelta === 'number' && e.wheelDelta < 0) ||
                 (typeof e.wheelDeltaY === 'number' && e.wheelDeltaY < 0) ||
                 (typeof e.deltaY === 'number' && e.deltaY > 0)
             )
-                this.onBtnClick(evt, -1, true)
+                this.onBtnClick(undefined, -1)
 
             evt.stopPropagation()
             evt.preventDefault()
@@ -150,7 +152,8 @@ export default class InputCounter extends React.Component {
                     onWheel={this.onWheel.bind(this)}
                 />
                 {showButtons &&
-                    <button
+                    <Button
+                        component="button"
                         type="button"
                         className={classNames([
                             classNamePre + '-btn',
@@ -158,10 +161,12 @@ export default class InputCounter extends React.Component {
                         ])}
                         disabled={typeof this.min !== 'undefined' && this.state.value <= this.min}
                         onClick={evt => this.onBtnClick(evt, -1)}
-                    >-</button>
+                        children="-"
+                    />
                 }
                 {showButtons &&
-                    <button
+                    <Button
+                        component="button"
                         type="button"
                         className={classNames([
                             classNamePre + '-btn',
@@ -169,7 +174,8 @@ export default class InputCounter extends React.Component {
                         ])}
                         disabled={typeof this.max !== 'undefined' && this.state.value >= this.max}
                         onClick={evt => this.onBtnClick(evt, 1)}
-                    >+</button>
+                        children="+"
+                    />
                 }
             </span>
         )
