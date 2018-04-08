@@ -11,6 +11,15 @@ export default [
         }
     },
     {
+        path: 'fleets/:id_-_:build',
+        name: '舰队模拟配置',
+        getComponent: (nextState, cb) => {
+            require.ensure([], (require) => {
+                if (routeCheck(nextState)) cb(null, require('@appUI/pages/fleets/details').default)
+            }, '舰队模拟配置')
+        }
+    },
+    {
         path: 'fleets-wip',
         name: '舰队模拟',
         getComponent: (nextState, cb) => {

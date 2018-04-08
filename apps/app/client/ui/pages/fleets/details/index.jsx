@@ -6,7 +6,7 @@ import { ImportStyle } from 'sp-css-import'
 
 import {
     init/*, refresh*/,
-    newBuild,
+    getBuild,
 } from '@appLogic/fleets'
 
 import htmlHead from '@appUtils/html-head'
@@ -20,7 +20,7 @@ import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
 import Header from '@appUI/components/main-header/main-options'
 
 @connect()
-export default class PageFleets extends React.Component {
+export default class PageFleet extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
             store,
@@ -31,10 +31,20 @@ export default class PageFleets extends React.Component {
         ext.title = head.title
     }
 
+    shouldComponentUpdate(newProps) {
+        if (
+            typeof newProps.params === 'object' &&
+            typeof this.props.params === 'object' &&
+            newProps.params.id === this.props.params.id
+        )
+            return false
+        return true
+    }
+
     render() {
         return (
             <Page>
-                <PageFleetsContainer />
+                <PageFleetContainer />
             </Page>
         )
     }
@@ -42,7 +52,7 @@ export default class PageFleets extends React.Component {
 
 @connect()
 @ImportStyle(require('./styles.less'))
-class PageFleetsContainer extends React.Component {
+class PageFleetContainer extends React.Component {
     state = {
         ready: false,
     }
@@ -81,59 +91,22 @@ class PageFleetsContainer extends React.Component {
 
         return (
             <React.Fragment>
-                <PageFleetsHeader className={className + '-header'} />
+                <PageFleetHeader className={className + '-header'} />
                 <div className={className}>
-                    <PageFleetsList className={className + '-list'} />
+                    123
                 </div>
             </React.Fragment>
         )
     }
 }
 
-const PageFleetsHeader = connect()(({
-    className,
-    dispatch,
+const PageFleetHeader = connect()(({
+    className
 }) => {
     return (
         <Header
             className={className}
-            main={
-                <div>
-                    {translate('under_construction')}
-                    <Button
-                        children="NEW BUILD"
-                        onClick={() => dispatch(newBuild(true))}
-                    />
-                </div>
-            }
+            main={translate('under_construction')}
         />
-    )
-})
-
-const PageFleetsList = connect(state => ({
-    builds: state.fleets.builds
-}))(({
-    className,
-    builds,
-    dispatch,
-}) => {
-    const hasData = Array.isArray(builds) && builds.length > 0
-    return (
-        <div
-            className={className}
-        >
-            <Title component="h2" children={translate('under_construction')} />
-            {hasData && builds.map(build => (
-                <div key={build._id}>{build._id}</div>
-            ))}
-            {!hasData &&
-                <div>
-                    <Button
-                        children="NEW BUILD"
-                        onClick={() => dispatch(newBuild(true))}
-                    />
-                </div>
-            }
-        </div>
     )
 })
