@@ -34,6 +34,7 @@ export default class extends React.Component {
                 <SamplesButtonGroup />
                 <SamplesInput />
                 <SamplesLoaders />
+                <SamplesList />
             </Page>
         )
     }
@@ -115,5 +116,49 @@ const SamplesLoaders = () => (
         <p>
             <LoaderFairyOoyodo2 />
         </p>
+    </Samples>
+)
+
+import ListShips from '@appUI/components/list/ships'
+const _listShips = [394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404,]
+const SamplesList = () => (
+    <Samples>
+        <Title component="h2">list / ships</Title>
+        <ListShips
+            list={_listShips}
+            empty="EMPTY"
+        />
+        <Title component="h4">unsort</Title>
+        <ListShips
+            list={_listShips}
+            empty="EMPTY"
+            sort={false}
+        />
+        <Title component="h4">without navy, with min-level</Title>
+        <ListShips
+            list={_listShips}
+            empty="EMPTY"
+            navy={false}
+            min-level={true}
+        />
+        <Title component="h4">without type</Title>
+        <ListShips
+            list={_listShips}
+            empty="EMPTY"
+            type={false}
+        />
+        <Title component="h4">size: mini</Title>
+        <ListShips
+            list={_listShips}
+            empty="EMPTY"
+            size="mini"
+        />
+        <Title component="h4">size: mini, no grid</Title>
+        <ListShips
+            list={_listShips}
+            empty="EMPTY"
+            size="mini"
+            grid={false}
+        />
     </Samples>
 )

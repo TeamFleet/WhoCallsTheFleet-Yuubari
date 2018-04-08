@@ -1,10 +1,13 @@
 import React from 'react'
-// import { ImportStyle } from 'sp-css-import'
+import { ImportStyle } from 'sp-css-import'
 
-import ListContainer from '@appUI/containers/list'
-import LinkShip from '@appUI/components/link/ship'
 import getShip from '@appUtils/get-ship.js'
 import sortShips from '@appUtils/sort-ships.js'
+
+import ListContainer from '@appUI/containers/list'
+
+import LinkShip from '@appUI/components/link/ship'
+import LinkMini from '@appUI/components/link-mini'
 
 const getList = (list, sort) => (
     sort
@@ -13,40 +16,67 @@ const getList = (list, sort) => (
         )))
         : list.map(shipId => (
             getShip(shipId)
-        )).sort((a, b) => (
+        ))/*.sort((a, b) => (
             a.order - b.order
-        ))
+        ))*/
 )
 
 // @connect()
-// @ImportStyle(styles)
+@ImportStyle(require('./styles.less'))
 export default class ListShips extends React.Component {
     render() {
         const {
-            className,
+            className: _className,
+
             list: _list,
             array: _array,
+            ships: _ships,
+
             empty,
+
+            grid = true,
+            size,
+            gutter,
+
             type,
-            sort,
+            sort = true,
+
             children,
             ...props
         } = this.props
 
-        const list = _list || _array || []
+        const list = _list || _array || _ships || []
         const hasItem = list.length ? true : false
 
+        const className = _className.split(' ')
+        if (!grid) className.push('no-grid')
+
         return (
-            <ListContainer className={className}>
+            <ListContainer
+                className={className}
+                grid={grid}
+                gutter={gutter}
+            >
                 {hasItem && getList(list, sort)
                     .map(ship => (
-                        <LinkShip
-                            ship={ship}
-                            key={ship.id}
-                            className="item"
-                            type={typeof type === 'undefined' ? true : type}
-                            {...props}
-                        />
+                        size === 'mini'
+                            ? (
+                                <LinkMini
+                                    ship={ship}
+                                    key={ship.id}
+                                    className="item"
+                                    {...props}
+                                />
+                            )
+                            : (
+                                <LinkShip
+                                    ship={ship}
+                                    key={ship.id}
+                                    className="item"
+                                    type={typeof type === 'undefined' ? true : type}
+                                    {...props}
+                                />
+                            )
                     ))
                 }
                 {!hasItem && !!(empty) && <span className="list-empty">{empty}</span>}

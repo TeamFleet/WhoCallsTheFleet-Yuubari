@@ -13,14 +13,19 @@ export default class ListContainer extends React.Component {
     }
     render() {
         const {
+            className: _className,
+            grid = true,
             children,
             ...props
         } = this.props
 
+        const className = _className.split(' ')
+        if (grid) className.push('mod-grid')
+
         return (
-            <div {...props}>
+            <div className={className.join(' ')} {...props}>
                 {children}
-                {this.insertPlaceHolders()}
+                {grid && this.insertPlaceHolders()}
             </div>
         )
     }

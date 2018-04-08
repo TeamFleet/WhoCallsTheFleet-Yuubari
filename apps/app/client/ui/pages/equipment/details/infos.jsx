@@ -9,6 +9,7 @@ import Improvements from './components/improvements'
 import RequiredForImprovements from './components/required-for-improvements'
 import UpgradeFrom from './components/upgrade-from'
 import Stocked from './components/stocked'
+import Acquisition from './components/acquisition'
 
 // @connect()
 @ImportStyle(require('./infos.less'))
@@ -18,15 +19,28 @@ export default class EquipmentDetailsContentInfos extends React.Component {
         return name + (type ? ` ${name}-${type}` : null)
     }
     render() {
+        if (!this.props.equipment) return null
         return (
             <div className={this.props.className}>
-                <Illust equipment={this.props.equipment} className={this.getInfoClassName('illust')} />
-                <Facts equipment={this.props.equipment} className={this.getInfoClassName('facts')} />
-                {/*<Scrap equipment={this.props.equipment} className={this.getInfoClassName('scrap')} />*/}
-                <Improvements equipment={this.props.equipment} className={this.getInfoClassName('improvements')} />
-                <RequiredForImprovements equipment={this.props.equipment} className={this.getInfoClassName('required-for-improvements')} />
-                <UpgradeFrom equipment={this.props.equipment} className={this.getInfoClassName('upgrade-from')} />
-                <Stocked equipment={this.props.equipment} className={this.getInfoClassName('stocked')} />
+                {[
+                    [Illust, 'illust'],
+                    [Facts, 'facts'],
+                    // [Scrap, 'scrap'],
+                    [Improvements, 'improvements'],
+                    [RequiredForImprovements, 'required-for-improvements'],
+                    [Acquisition, 'acquisition'],
+                    // [UpgradeFrom, 'upgrade-from'],
+                    // [Stocked, 'stocked'],
+                ].map((o, index) => {
+                    const [Component, name] = o
+                    return (
+                        <Component
+                            key={index}
+                            equipment={this.props.equipment}
+                            className={this.getInfoClassName(name)}
+                        />
+                    )
+                })}
             </div>
         )
     }
