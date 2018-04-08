@@ -72,6 +72,15 @@
 .main-sizing-position-reset-margin-monitor-right(){
     margin-right:  (0 - @main-margin);
 }
+.main-full-height() {
+    height: calc(~"100vh - @{main-margin-top} - @{main-margin}");
+    .screen-tablet({
+        height: calc(~"100vh - @{main-margin-top} - @{main-margin} - @{nav-height-tablet}");
+    });
+    .screen-phone({
+        height: calc(~"100vh - @{main-margin-top} - @{main-margin} - @{nav-height-phone}");
+    });
+}
 
 
 .clearfix(){

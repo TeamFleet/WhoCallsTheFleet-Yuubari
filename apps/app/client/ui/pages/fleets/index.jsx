@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import classNames from 'classnames'
 import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import htmlHead from '@appUtils/html-head'
 
 import Page from '@appUI/containers/page'
+import Center from '@appUI/containers/center'
 
 import Title from '@appUI/components/title'
 import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
@@ -31,12 +33,12 @@ export default class PageFleets extends React.Component {
     }
 }
 
-// @ImportStyle(style)
+@ImportStyle(require('./styles.less'))
 class PageFleetsContainer extends React.Component {
-    static Title = <Title component="h2" children={translate('nav.fleets')} />
-
     state = {
         init: typeof Nedb !== 'undefined' || false,
+        // loading: false,
+        // entryAnimation: false,
     }
 
     componentDidMount() {
@@ -48,6 +50,7 @@ class PageFleetsContainer extends React.Component {
                 self.Nedb = module
                 this.setState({
                     init: true,
+                    entryAnimation: true,
                 })
             })
         }
@@ -55,21 +58,31 @@ class PageFleetsContainer extends React.Component {
 
     render() {
         if (!__CLIENT__)
-            return PageFleetsContainer.Title
+            return <Title component="h2" children={translate('nav.fleets')} />
 
-        if (!this.state.init)
-            return (
-                <React.Fragment>
-                    {PageFleetsContainer.Title}
-                    <LoaderFairyOoyodo2 />
-                </React.Fragment>
-            )
-
+        // if (!this.state.init)
         return (
-            <React.Fragment>
-                {PageFleetsContainer.Title}
-                <p><i>{translate('under_construction')}...</i></p>
-            </React.Fragment>
+            <Center
+                className={classNames([
+                    this.props.className,
+                    'is-initializing',
+                ])}
+            >
+                <LoaderFairyOoyodo2 className="loader" />
+            </Center>
         )
+
+        // return (
+        //     <div className={this.props.className}>
+        //         111
+        //     </div>
+        // )
+
+        // return (
+        //     <React.Fragment>
+        //         {PageFleetsContainer.Title}
+        //         <p><i>{translate('under_construction')}...</i></p>
+        //     </React.Fragment>
+        // )
     }
 }

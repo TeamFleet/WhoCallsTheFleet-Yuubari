@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
 
 // @connect()
@@ -13,17 +14,20 @@ export default class ListContainer extends React.Component {
     }
     render() {
         const {
-            className: _className,
+            className,
             grid = true,
             children,
             ...props
         } = this.props
 
-        const className = _className.split(' ')
-        if (grid) className.push('mod-grid')
-
         return (
-            <div className={className.join(' ')} {...props}>
+            <div
+                className={classNames({
+                    [className]: true,
+                    'mod-grid': !!grid,
+                })}
+                {...props}
+            >
                 {children}
                 {grid && this.insertPlaceHolders()}
             </div>

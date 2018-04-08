@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
 
 import getShip from '@appUtils/get-ship.js'
@@ -26,7 +27,7 @@ const getList = (list, sort) => (
 export default class ListShips extends React.Component {
     render() {
         const {
-            className: _className,
+            className,
 
             list: _list,
             array: _array,
@@ -48,12 +49,12 @@ export default class ListShips extends React.Component {
         const list = _list || _array || _ships || []
         const hasItem = list.length ? true : false
 
-        const className = _className.split(' ')
-        if (!grid) className.push('no-grid')
-
         return (
             <ListContainer
-                className={className}
+                className={classNames({
+                    [className]: true,
+                    'no-grid': !grid,
+                })}
                 grid={grid}
                 gutter={gutter}
             >
