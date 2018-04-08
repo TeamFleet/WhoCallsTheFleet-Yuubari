@@ -1,4 +1,96 @@
 @import "../../_.less";
 
-.component{
+.component-level{
+    @level-width: 40px;
+    @level-padding: 30px;
+    @level-line-color: @color-border;
+
+    position: relative;
+    margin-top: 0;
+    padding-left: (@level-width + @level-padding + 1);
+
+    &:before{
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: (@level-width + @level-padding / 2 - 1);
+        width: 2px;
+        background: @level-line-color;
+    }
+    &:after{
+        @size: 6px;
+        content: "";
+        position: absolute;
+        top: (16px - @size / 2);
+        left: (@level-width + @level-padding / 2 - @size / 2);
+        width: @size;
+        height: @size;
+        background: @color-accent;
+        border-radius: 50%;
+        z-index: 2;
+    }
+
+    .level{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #fff;
+        line-height: 34px;
+        width: @level-width;
+        text-align: right;
+        &:before{
+            content: "Lv.";
+            color: @color-base-dimmed;
+            font-size: 12px;
+            padding-right: .25em;
+        }
+    }
+
+    & + .component-level{
+        padding-top: 10px;
+        &:after, .level{
+            margin-top: 5px;
+        }
+    }
+
+    &.is-first{
+        &:before{
+            background: linear-gradient(
+                to bottom,
+                fade(@level-line-color, 0%),
+                @level-line-color 10px
+            );
+        }
+    }
+    &.is-last{
+        padding-bottom: 5px;
+        &:before{
+            background: linear-gradient(
+                to top,
+                fade(@level-line-color, 0%),
+                @level-line-color 10px
+            );
+        }
+    }
+    &.is-first.is-last{
+        &:before{
+            background: linear-gradient(
+                to bottom,
+                fade(@level-line-color, 0%),
+                @level-line-color 10px,
+                @level-line-color calc(~"100% - 10px"),
+                fade(@level-line-color, 0%) 100%
+            );
+        }
+    }
+
+    .screen-phone({
+        @level-padding-phone: 20px;
+        padding-left: (@level-width + @level-padding-phone + 1);
+        &:before, &:after{
+            margin-left: ((@level-padding-phone - @level-padding) / 2);
+        }
+    });
 }

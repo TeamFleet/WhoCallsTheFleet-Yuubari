@@ -9,7 +9,7 @@ import Improvements from './components/improvements'
 import RequiredForImprovements from './components/required-for-improvements'
 import UpgradeFrom from './components/upgrade-from'
 import Stocked from './components/stocked'
-import Acquisition from './components/acquisition'
+// import Acquisition from './components/acquisition'
 
 // @connect()
 @ImportStyle(require('./infos.less'))
@@ -28,9 +28,9 @@ export default class EquipmentDetailsContentInfos extends React.Component {
                     // [Scrap, 'scrap'],
                     [Improvements, 'improvements'],
                     [RequiredForImprovements, 'required-for-improvements'],
-                    [Acquisition, 'acquisition'],
-                    // [UpgradeFrom, 'upgrade-from'],
-                    // [Stocked, 'stocked'],
+                    // [Acquisition, 'acquisition'],
+                    [UpgradeFrom, 'upgrade-from'],
+                    [Stocked, 'stocked'],
                 ].map((o, index) => {
                     const [Component, name] = o
                     return (

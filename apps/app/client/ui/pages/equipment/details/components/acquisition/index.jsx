@@ -69,7 +69,7 @@ const ListStockedBody = ({ list: arrShipId, className }) => {
     const classNameThis = className.split([' '])[0]
     arrShipId.forEach(shipId => {
         const ship = getShip(shipId)
-        console.log(ship._name, ship._minLv)
+        // console.log(ship._name, ship._minLv)
         if (Array.isArray(list[ship._minLv])) {
             list[ship._minLv] = list[ship._minLv].concat(ship)
         } else {
