@@ -4,6 +4,10 @@ import classNames from 'classnames'
 import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
+import {
+    init/*, refresh*/
+} from '@appLogic/fleets'
+
 import htmlHead from '@appUtils/html-head'
 
 import Page from '@appUI/containers/page'
@@ -11,6 +15,7 @@ import Center from '@appUI/containers/center'
 
 import Title from '@appUI/components/title'
 import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
+import Header from '@appUI/components/main-header/main-options'
 
 @connect()
 export default class PageFleets extends React.Component {
@@ -33,50 +38,53 @@ export default class PageFleets extends React.Component {
     }
 }
 
+@connect()
 @ImportStyle(require('./styles.less'))
 class PageFleetsContainer extends React.Component {
     state = {
-        init: typeof Nedb !== 'undefined' || false,
-        // loading: false,
-        // entryAnimation: false,
+        ready: false,
     }
 
     componentDidMount() {
-        if (!this.state.init && __CLIENT__) {
-            import(/*
-                    webpackChunkName: "nedb"
-                */ 'nedb/browser-version/out/nedb.min.js'
-            ).then(module => {
-                self.Nedb = module
-                this.setState({
-                    init: true,
-                    entryAnimation: true,
+        if (!__CLIENT__) return
+        setTimeout(() => {
+            this.props.dispatch(init())
+                .then(() => {
+                    this.setState({
+                        ready: true,
+                    })
                 })
-            })
-        }
+        }, self.isAppReady ? 500 : 2500)
     }
 
     render() {
         if (!__CLIENT__)
             return <Title component="h2" children={translate('nav.fleets')} />
 
-        // if (!this.state.init)
-        return (
-            <Center
-                className={classNames([
-                    this.props.className,
-                    'is-initializing',
-                ])}
-            >
-                <LoaderFairyOoyodo2 className="loader" />
-            </Center>
-        )
+        if (!this.state.ready)
+            return (
+                <Center
+                    className={classNames([
+                        this.props.className,
+                        'is-initializing',
+                    ])}
+                >
+                    <LoaderFairyOoyodo2 className="loader" />
+                </Center>
+            )
 
-        // return (
-        //     <div className={this.props.className}>
-        //         111
-        //     </div>
-        // )
+        const {
+            className
+        } = this.props
+
+        return (
+            <React.Fragment>
+                <PageFleetsHeader className={className + '-header'} />
+                <div className={className}>
+                    <Title component="h2" children={translate('under_construction')} />
+                </div>
+            </React.Fragment>
+        )
 
         // return (
         //     <React.Fragment>
@@ -86,3 +94,15 @@ class PageFleetsContainer extends React.Component {
         // )
     }
 }
+
+const PageFleetsHeader = connect()(({
+    className
+}) => {
+    return (
+        <Header
+            className={className}
+            main={'OPTIONS'}
+            options={undefined}
+        />
+    )
+})

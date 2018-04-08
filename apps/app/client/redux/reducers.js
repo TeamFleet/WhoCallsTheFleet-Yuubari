@@ -7,6 +7,7 @@ import sideMenuReducer from '@appLogic/side-menu/reducer'
 import shipListReducer from '@appLogic/ship-list/reducer'
 import equipmentListReducer from '@appLogic/equipment-list/reducer'
 import pagesReducer from '@appLogic/pages/reducer'
+import fleetsReducer from '@appLogic/fleets/reducer'
 
 export default [
     [SERVER_REDUCER_NAME, serverReducer],
@@ -20,6 +21,7 @@ export default [
     ['pages', pagesReducer],
 
     ['shipList', shipListReducer],
+    ['equipmentList', equipmentListReducer],
 
-    ['equipmentList', equipmentListReducer]
+    ['fleets', fleetsReducer],
 ]
