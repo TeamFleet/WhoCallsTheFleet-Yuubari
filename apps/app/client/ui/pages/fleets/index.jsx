@@ -5,11 +5,11 @@ import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
-    init/*, refresh*/,
-    newBuild,
+    init, newBuild, editBuild,
 } from '@appLogic/fleets'
 
 import htmlHead from '@appUtils/html-head'
+import routerPush from '@appUtils/router-push'
 
 import Page from '@appUI/containers/page'
 import Center from '@appUI/containers/center'
@@ -49,14 +49,18 @@ class PageFleetsContainer extends React.Component {
 
     componentDidMount() {
         if (!__CLIENT__) return
-        setTimeout(() => {
-            this.props.dispatch(init())
-                .then(() => {
-                    this.setState({
-                        ready: true,
-                    })
+        Promise.all([
+            this.props.dispatch(init()),
+            new Promise(resolve => setTimeout(
+                () => resolve(),
+                self.isAppReady ? 500 : 2000
+            ))
+        ])
+            .then(() => {
+                this.setState({
+                    ready: true,
                 })
-        }, self.isAppReady ? 500 : 2000)
+            })
     }
 
     render() {
@@ -124,7 +128,10 @@ const PageFleetsList = connect(state => ({
         >
             <Title component="h2" children={translate('under_construction')} />
             {hasData && builds.map(build => (
-                <div key={build._id}>{build._id}</div>
+                <div
+                    key={build._id}
+                    onClick={() => dispatch(editBuild(build))}
+                >{build._id}</div>
             ))}
             {!hasData &&
                 <div>

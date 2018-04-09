@@ -11,7 +11,7 @@ export default [
         }
     },
     {
-        path: 'fleets/:id_-_:build',
+        path: 'fleets/:id.:build',
         name: '舰队模拟配置',
         getComponent: (nextState, cb) => {
             require.ensure([], (require) => {

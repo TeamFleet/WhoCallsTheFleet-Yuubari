@@ -1,3 +1,6 @@
+import { compressToEncodedURIComponent } from 'lz-string'
+//decompressFromEncodedURIComponent
+
 import {
     FLEETS_INIT,
     // FLEETS_REFRESH,
@@ -10,8 +13,23 @@ import {
 import routerPush from '@appUtils/router-push'
 import routerReplace from '@appUtils/router-replace'
 
+
+
+
+/**************************************
+ * Nedb store for fleets builds
+ *************************************/
+
 let db
 export default db
+
+
+
+
+
+/**************************************
+ * Defaults data for build
+ *************************************/
 
 const defaults = {
     history: [],
@@ -28,7 +46,14 @@ const defaults = {
     rating: -1,
 }
 
-const getNedb = () =>
+
+
+
+/**************************************
+ * Common functions
+ *************************************/
+
+const initNedb = () =>
     new Promise(resolve => {
         // 载入Nedb
         if (typeof Nedb === 'undefined')
@@ -54,7 +79,7 @@ const getNedb = () =>
             })
         }))
 
-const getBuilds = () => getNedb()
+const getAllBuilds = () => initNedb()
     // 初始化并读取舰队数据
     .then(() => new Promise((resolve, reject) => {
         db.find({}, (err, docs) => {
@@ -71,7 +96,21 @@ const getBuilds = () => getNedb()
         })
     }))
 
-export const init = () => dispatch => getBuilds()
+export const getBuildUrl = (build = {}) => {
+    if (!build._id || !Array.isArray(build.data))
+        return undefined
+    return `/fleets/${build._id}.${compressToEncodedURIComponent(build)}`
+}
+
+
+
+
+/**************************************
+ * Redux actions
+ *************************************/
+
+// 初始化
+export const init = () => dispatch => getAllBuilds()
     // 
     .then(builds => (
         dispatch({
@@ -80,7 +119,8 @@ export const init = () => dispatch => getBuilds()
         })
     ))
 
-export const newBuild = (isRedirect) => dispatch => getNedb()
+// 创建配置
+export const newBuild = (isRedirect) => dispatch => initNedb()
     // 新建一条数据
     .then(() => new Promise((resolve, reject) => {
         db.insert(defaults, (err, newDoc) => {   // Callback is optional
@@ -95,9 +135,20 @@ export const newBuild = (isRedirect) => dispatch => getNedb()
             data: newDoc,
         })
         if (isRedirect) {
-            routerPush(`/fleets/${newDoc._id}_-_1`)
+            routerPush(getBuildUrl(newDoc))
         }
         return newDoc
+    })
+
+// 开始编辑配置
+export const editBuild = (build) => dispatch => initNedb()
+    .then(() => {
+        dispatch({
+            type: FLEETS_NEW_BUILD,
+            data: build,
+        })
+        routerPush(getBuildUrl(build))
+        return build
     })
 
 export const removeBuild = (id) => dispatch => dispatch(

@@ -44,21 +44,44 @@ export default class PageFleet extends React.Component {
     render() {
         return (
             <Page>
-                <PageFleetContainer />
+                <PageFleetContainer id={this.props.params.id} />
             </Page>
         )
     }
 }
 
-@connect()
+@connect((state, ownProps) => {
+    const isNedbInit = (
+        typeof state.fleets === 'object' &&
+        typeof state.fleets.current === 'object'
+    )
+    return {
+        isNedbInit,
+        isBuildStored: (
+            isNedbInit &&
+            (
+                ownProps.id === state.fleets.current._id ||
+                (
+                    Array.isArray(state.fleets.builds) &&
+                    state.fleets.builds.some(build => build._id === ownProps._id)
+                )
+            )
+        ),
+    }
+})
 @ImportStyle(require('./styles.less'))
 class PageFleetContainer extends React.Component {
     state = {
         ready: false,
     }
 
+    check() {
+
+    }
+
     componentDidMount() {
         if (!__CLIENT__) return
+        this.check()
         setTimeout(() => {
             this.props.dispatch(init())
                 .then(() => {
@@ -67,6 +90,11 @@ class PageFleetContainer extends React.Component {
                     })
                 })
         }, self.isAppReady ? 500 : 2000)
+    }
+
+    componentDidUpdate() {
+        if (!__CLIENT__) return
+        this.check()
     }
 
     render() {
@@ -91,7 +119,10 @@ class PageFleetContainer extends React.Component {
 
         return (
             <React.Fragment>
-                <PageFleetHeader className={className + '-header'} />
+                <PageFleetHeader
+                    className={className + '-header'}
+                    build={this.props.build}
+                />
                 <div className={className}>
                     123
                 </div>
@@ -101,7 +132,8 @@ class PageFleetContainer extends React.Component {
 }
 
 const PageFleetHeader = connect()(({
-    className
+    className,
+    build,
 }) => {
     return (
         <Header
