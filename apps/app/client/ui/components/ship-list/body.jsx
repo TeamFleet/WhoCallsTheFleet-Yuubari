@@ -69,16 +69,21 @@ export default class ShipList extends React.Component {
     //         this.props.dispatch(shipListReset(this.props.id))
     //     }
     // }
+    constructor(props) {
+        super(props)
+        if (!props.isInit) {
+            props.dispatch(
+                shipListInit(props.id)
+            )
+        }
+    }
 
     render() {
         if (!this.props.isInit) {
-            this.props.dispatch(
-                shipListInit(this.props.id)
-            )
             if (__CLIENT__) return null
         }
 
-        return <ShipListBody { ...this.props } />
+        return <ShipListBody {...this.props} />
     }
 }
 

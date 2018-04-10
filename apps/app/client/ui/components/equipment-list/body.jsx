@@ -37,8 +37,13 @@ import { ImportStyle } from 'sp-css-import'
     rootMargin: "50px 0px"
 })
 export default class EquipmentList extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
+        if (!props.isInit) {
+            props.dispatch(
+                listInit(props.id)
+            )
+        }
         props.dispatch(
             listHighlightColumn(
                 props.id,
@@ -54,9 +59,6 @@ export default class EquipmentList extends React.Component {
         } = this.props
 
         if (!this.props.isInit) {
-            this.props.dispatch(
-                listInit(this.props.id)
-            )
             if (__CLIENT__) return null
         }
 
@@ -66,7 +68,7 @@ export default class EquipmentList extends React.Component {
             )
         }
 
-        return <EquipmentListBody { ...props } />
+        return <EquipmentListBody {...props} />
     }
 }
 

@@ -1,5 +1,7 @@
-import { compressToEncodedURIComponent } from 'lz-string'
-//decompressFromEncodedURIComponent
+import {
+    compressToEncodedURIComponent,
+    decompressFromEncodedURIComponent,
+} from 'lz-string'
 
 import {
     FLEETS_INIT,
@@ -59,8 +61,8 @@ const initNedb = () =>
         if (typeof Nedb === 'undefined')
             return (
                 import(/*
-            webpackChunkName: "nedb"
-        */ 'nedb/browser-version/out/nedb.min.js'
+                    webpackChunkName: "nedb"
+                */ 'nedb/browser-version/out/nedb.min.js'
                 ).then(module => {
                     self.Nedb = module
                     resolve()
@@ -71,7 +73,8 @@ const initNedb = () =>
         // 初始化Nedb
         .then(() => new Promise((resolve, reject) => {
             db = new Nedb({
-                filename: 'fleets'
+                filename: 'fleets',
+                timestampData: true,
             })
             db.loadDatabase(err => {
                 if (err) return reject(err)
@@ -99,8 +102,11 @@ const getAllBuilds = () => initNedb()
 export const getBuildUrl = (build = {}) => {
     if (!build._id || !Array.isArray(build.data))
         return undefined
-    return `/fleets/${build._id}.${compressToEncodedURIComponent(build)}`
+    return `/fleets/${build._id}.${compressToEncodedURIComponent(JSON.stringify(build))}`
 }
+
+export const decompressBuild = (str) =>
+    JSON.parse(decompressFromEncodedURIComponent(str))
 
 
 

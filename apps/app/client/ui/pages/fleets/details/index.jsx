@@ -5,8 +5,8 @@ import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
-    init/*, refresh*/,
-    getBuild,
+    init, getBuild,
+    decompressBuild,
 } from '@appLogic/fleets'
 
 import htmlHead from '@appUtils/html-head'
@@ -44,7 +44,10 @@ export default class PageFleet extends React.Component {
     render() {
         return (
             <Page>
-                <PageFleetContainer id={this.props.params.id} />
+                <PageFleetContainer
+                    id={this.props.params.id}
+                    initialBuild={decompressBuild(this.props.params.build)}
+                />
             </Page>
         )
     }
@@ -55,16 +58,30 @@ export default class PageFleet extends React.Component {
         typeof state.fleets === 'object' &&
         typeof state.fleets.current === 'object'
     )
+    if (!isNedbInit)
+        return {
+            isNedbInit
+        }
+
+    const isBuildCurrent = (
+        isNedbInit &&
+        typeof state.fleets === 'object' &&
+        ownProps.id === state.fleets.current._id
+    )
+    if (isBuildCurrent)
+        return {
+            isNedbInit,
+            isBuildCurrent,
+            // build: state.fleets.current,
+        }
+
     return {
         isNedbInit,
+        // isBuildCurrent,
         isBuildStored: (
-            isNedbInit &&
-            (
-                ownProps.id === state.fleets.current._id ||
-                (
-                    Array.isArray(state.fleets.builds) &&
-                    state.fleets.builds.some(build => build._id === ownProps._id)
-                )
+            isNedbInit && (
+                Array.isArray(state.fleets.builds) &&
+                state.fleets.builds.some(build => build._id === ownProps._id)
             )
         ),
     }
@@ -76,25 +93,46 @@ class PageFleetContainer extends React.Component {
     }
 
     check() {
+        if (
+            this.state.ready ||
+            !__CLIENT__ ||
+            !this.mounted
+        ) return
 
+        const ready = () => {
+            this.setState({
+                ready: true,
+            })
+        }
+
+        if (!this.props.isNedbInit)
+            return this.props.dispatch(init())
+
+        if (this.props.isBuildCurrent)
+            return ready()
+
+        if (this.props.isBuildStored)
+            return Promise.all([
+                this.props.dispatch(init()),
+                new Promise(resolve => setTimeout(
+                    () => resolve(),
+                    self.isAppReady ? 500 : 2000
+                ))
+            ])
+                .then(ready)
     }
 
     componentDidMount() {
-        if (!__CLIENT__) return
+        this.mounted = true
         this.check()
-        setTimeout(() => {
-            this.props.dispatch(init())
-                .then(() => {
-                    this.setState({
-                        ready: true,
-                    })
-                })
-        }, self.isAppReady ? 500 : 2000)
     }
 
     componentDidUpdate() {
-        if (!__CLIENT__) return
         this.check()
+    }
+
+    componentWillUnmount() {
+        this.mounted = false
     }
 
     render() {
@@ -119,10 +157,7 @@ class PageFleetContainer extends React.Component {
 
         return (
             <React.Fragment>
-                <PageFleetHeader
-                    className={className + '-header'}
-                    build={this.props.build}
-                />
+                <PageFleetHeader className={className + '-header'} />
                 <div className={className}>
                     123
                 </div>

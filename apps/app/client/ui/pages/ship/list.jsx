@@ -33,8 +33,8 @@ export default class PageShipList extends React.Component {
 
     componentWillMount() {
         // console.log('PageShipList - componentWillMount', (this.props.isShipListInit && this.props.location.action === 'PUSH'))
-        if (this.props.location.action === 'PUSH')
-            this.props.dispatch(shipListReset(shipListId))
+        // if (this.props.location.action === 'PUSH')
+        //     this.props.dispatch(shipListReset(shipListId))
     }
 
     render() {
