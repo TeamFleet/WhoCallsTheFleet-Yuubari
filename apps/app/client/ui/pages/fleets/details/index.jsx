@@ -5,7 +5,7 @@ import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
-    init, getBuild,
+    init, editBuild,
     decompressBuild,
 } from '@appLogic/fleets'
 
@@ -54,36 +54,28 @@ export default class PageFleet extends React.Component {
 }
 
 @connect((state, ownProps) => {
-    const isNedbInit = (
-        typeof state.fleets === 'object' &&
-        typeof state.fleets.current === 'object'
-    )
-    if (!isNedbInit)
-        return {
-            isNedbInit
-        }
+    if (
+        typeof state.fleets !== 'object' ||
+        !Array.isArray(state.fleets.builds)
+    ) return {
+        status: 'no-nedb'
+    }
 
-    const isBuildCurrent = (
-        isNedbInit &&
-        typeof state.fleets === 'object' &&
+    if (
+        typeof state.fleets.current === 'object' &&
         ownProps.id === state.fleets.current._id
-    )
-    if (isBuildCurrent)
-        return {
-            isNedbInit,
-            isBuildCurrent,
-            // build: state.fleets.current,
-        }
+    ) return {
+        status: 'is-current'
+    }
+
+    if (
+        state.fleets.builds.some(build => build._id === ownProps.id)
+    ) return {
+        status: 'build-stored'
+    }
 
     return {
-        isNedbInit,
-        // isBuildCurrent,
-        isBuildStored: (
-            isNedbInit && (
-                Array.isArray(state.fleets.builds) &&
-                state.fleets.builds.some(build => build._id === ownProps._id)
-            )
-        ),
+        status: 'build-not-exist'
     }
 })
 @ImportStyle(require('./styles.less'))
@@ -105,21 +97,30 @@ class PageFleetContainer extends React.Component {
             })
         }
 
-        if (!this.props.isNedbInit)
-            return this.props.dispatch(init())
+        // if (__CLIENT__ && __DEV__) {
+        //     console.log(' ')
+        //     console.log('status', this.props.status)
+        //     console.log(' ')
+        // }
 
-        if (this.props.isBuildCurrent)
-            return ready()
+        switch (this.props.status) {
+            case 'no-nedb': {
+                return this.props.dispatch(init())
+            }
 
-        if (this.props.isBuildStored)
-            return Promise.all([
-                this.props.dispatch(init()),
-                new Promise(resolve => setTimeout(
-                    () => resolve(),
-                    self.isAppReady ? 500 : 2000
+            case 'is-current': {
+                return ready()
+            }
+
+            case 'build-stored': {
+                return this.props.dispatch(editBuild(
+                    this.props.initialBuild
                 ))
-            ])
-                .then(ready)
+            }
+
+            case 'build-not-exist': {
+            }
+        }
     }
 
     componentDidMount() {
@@ -166,14 +167,28 @@ class PageFleetContainer extends React.Component {
     }
 }
 
-const PageFleetHeader = connect()(({
+const PageFleetHeader = connect(state => {
+    if (!state.fleets.current) return {}
+    const {
+        name,
+        hq_lv,
+        currentFleet,
+        _id: id,
+    } = state.fleets.current
+    return {
+        name,
+        hq_lv,
+        currentFleet,
+        id
+    }
+})(({
     className,
-    build,
+    id, name, currentFleet,
 }) => {
     return (
         <Header
             className={className}
-            main={translate('under_construction')}
+            main={`${id} | ${name || '无标题'}`}
         />
     )
 })

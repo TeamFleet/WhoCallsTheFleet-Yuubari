@@ -46,6 +46,8 @@ const defaults = {
     theme: 0,
 
     rating: -1,
+
+    currentFleet: 0,
 }
 
 
@@ -87,15 +89,8 @@ const getAllBuilds = () => initNedb()
     .then(() => new Promise((resolve, reject) => {
         db.find({}, (err, docs) => {
             if (err) return reject(err)
+            // console.log('getAllBuilds', docs)
             resolve(docs)
-            // resolve(docs.concat([
-            //     {
-            //         _id: '123'
-            //     },
-            //     {
-            //         _id: '456'
-            //     },
-            // ]))
         })
     }))
 
@@ -147,13 +142,15 @@ export const newBuild = (isRedirect) => dispatch => initNedb()
     })
 
 // 开始编辑配置
-export const editBuild = (build) => dispatch => initNedb()
+export const editBuild = (build, isRedirect) => dispatch => initNedb()
     .then(() => {
         dispatch({
             type: FLEETS_NEW_BUILD,
             data: build,
         })
-        routerPush(getBuildUrl(build))
+        if (isRedirect) {
+            routerPush(getBuildUrl(build))
+        }
         return build
     })
 

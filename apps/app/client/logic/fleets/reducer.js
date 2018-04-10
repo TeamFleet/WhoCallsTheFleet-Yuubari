@@ -8,7 +8,7 @@ import {
 } from '../../redux/action-types.js'
 
 const initialState = {
-    builds: [],
+    // builds: [],
     groupByTheme: true,
     order: ['theme', 'asc'],
     // current: {},

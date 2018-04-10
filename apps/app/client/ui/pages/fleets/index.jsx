@@ -130,7 +130,7 @@ const PageFleetsList = connect(state => ({
             {hasData && builds.map(build => (
                 <div
                     key={build._id}
-                    onClick={() => dispatch(editBuild(build))}
+                    onClick={() => dispatch(editBuild(build, true))}
                 >{build._id}</div>
             ))}
             {!hasData &&
