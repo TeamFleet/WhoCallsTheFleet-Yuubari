@@ -53,7 +53,7 @@ class PageFleetsContainer extends React.Component {
             this.props.dispatch(init()),
             new Promise(resolve => setTimeout(
                 () => resolve(),
-                self.isAppReady ? 500 : 2000
+                self.isAppReadyFull ? 0 : 2000
             ))
         ])
             .then(() => {

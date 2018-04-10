@@ -102,25 +102,43 @@ class PageFleetContainer extends React.Component {
         //     console.log('status', this.props.status)
         //     console.log(' ')
         // }
+        Promise.all([
+            new Promise(resolve => {
+                switch (this.props.status) {
+                    case 'no-nedb': {
+                        this.props.dispatch(init())
+                            .then(resolve)
+                        break
+                    }
 
-        switch (this.props.status) {
-            case 'no-nedb': {
-                return this.props.dispatch(init())
-            }
+                    case 'is-current': {
+                        resolve()
+                        break
+                    }
 
-            case 'is-current': {
-                return ready()
-            }
+                    case 'build-stored': {
+                        this.props.dispatch(editBuild(
+                            this.props.initialBuild
+                        ))
+                            .then(resolve)
+                        break
+                    }
 
-            case 'build-stored': {
-                return this.props.dispatch(editBuild(
-                    this.props.initialBuild
-                ))
-            }
-
-            case 'build-not-exist': {
-            }
-        }
+                    case 'build-not-exist': {
+                        break
+                    }
+                }
+            }),
+            new Promise(resolve => setTimeout(
+                () => resolve(),
+                self.isAppReadyFull ? 0 : 2000
+            ))
+        ])
+            .then(() => {
+                this.setState({
+                    ready: true,
+                })
+            })
     }
 
     componentDidMount() {
