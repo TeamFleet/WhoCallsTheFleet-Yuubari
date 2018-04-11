@@ -8,11 +8,11 @@ import {
     init, editBuild,
     decompressBuild,
 } from '@appLogic/fleets'
-import { update as updatePageTitle } from '@appLogic/page-title/api'
 
 import htmlHead from '@appUtils/html-head'
 
-import Page from '@appUI/containers/page'
+// import Page from '@appUI/containers/page'
+import InfosPage from '@appUI/containers/infos-page'
 import Center from '@appUI/containers/center'
 
 import Button from '@appUI/components/button'
@@ -45,12 +45,12 @@ export default class PageFleet extends React.Component {
 
     render() {
         return (
-            <Page>
+            <InfosPage>
                 <PageFleetContainer
                     id={this.props.params.id}
                     initialBuild={decompressBuild(this.props.params.build)}
                 />
-            </Page>
+            </InfosPage>
         )
     }
 }
@@ -121,6 +121,7 @@ class PageFleetContainer extends React.Component {
                     }
 
                     case 'build-not-exist': {
+                        // console.log('status', this.props.status)
                         break
                     }
                 }
@@ -166,6 +167,21 @@ class PageFleetContainer extends React.Component {
                 </Center>
             )
 
+        if (this.props.status === 'build-not-exist')
+            return (
+                <Center
+                    className={classNames([
+                        this.props.className,
+                        'is-initializing',
+                    ])}
+                >
+                    <div style={{ display: 'inline-block' }}>
+                        <Title component="h4" style={{ margin: '0' }} children="W.I.P." />
+                        <Title component="h2" style={{ marginTop: '5px' }} children="BUILD NOT EXIST" />
+                    </div>
+                </Center>
+            )
+
         const {
             className
         } = this.props
@@ -173,7 +189,7 @@ class PageFleetContainer extends React.Component {
         return (
             <React.Fragment>
                 <PageFleetHeader className={className + '-header'} />
-                <div className={className}>
+                <div className={className} style={{ marginTop: '40px' }}>
                     123
                 </div>
             </React.Fragment>
@@ -181,52 +197,60 @@ class PageFleetContainer extends React.Component {
     }
 }
 
-const PageFleetHeader = connect(state => {
+@connect(state => {
+    // console.log(state)
     if (!state.fleets.current) return {}
     const {
         name,
         hq_lv,
-        currentTab,
+        // currentTab,
         _id: id,
     } = state.fleets.current
     return {
         name,
         hq_lv,
-        currentTab,
+        // currentTab,
         id
     }
-})(({
-    className,
-
-    id,
-    name = '__UNTITLED__',
-    currentTab,
-
-    dispatch,
-}) => {
-    setTimeout(() => {
-        // dispatch(updatePageTitle(name))
-        htmlHead({
-            title: `FLEET: ${name}`,
-            dispatch
-        })
-    })
-    return (
-        <Header
-            className={className}
-            title={`${id} | ${name}`}
-            tabs={[
-                '#1',
-                '#2',
-                '#3',
-                '#4',
-                'BASE'
-            ]}
-            tabLink={false}
-            defaultIndex={currentTab}
-            onTabChange={(tab) => {
-                console.log(tab)
-            }}
-        />
-    )
 })
+class PageFleetHeader extends React.Component {
+    // mounted = false
+    onNameUpdate() {
+        if (!this.mounted) return
+        htmlHead({
+            title: `FLEET: ${this.props.name}`,
+            dispatch: this.props.dispatch,
+        })
+    }
+    componentDidMount() {
+        this.mounted = true
+        this.onNameUpdate()
+    }
+    componentWillUpdate(newProps) {
+        if (newProps.name !== this.props.name)
+            this.onNameUpdate()
+    }
+    componentWillUnmount() {
+        this.mounted = false
+    }
+    render() {
+        return (
+            <Header
+                className={this.props.className}
+                title={`${this.props.id} | ${this.props.name}`}
+                tabs={[
+                    '#1',
+                    '#2',
+                    '#3',
+                    '#4',
+                    'BASE'
+                ]}
+                tabLink={false}
+                defaultIndex={0}
+                onTabChange={(tab) => {
+                    console.log(tab)
+                }}
+            />
+        )
+    }
+}

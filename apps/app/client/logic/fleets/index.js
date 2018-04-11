@@ -47,7 +47,7 @@ const defaults = {
 
     rating: -1,
 
-    currentTab: 0,
+    // currentTab: 0,
 }
 
 

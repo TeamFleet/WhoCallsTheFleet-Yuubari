@@ -10,7 +10,7 @@ export default class InfosPageContainer extends React.Component {
     render() {
         const {
             className,
-            ['has-tabs']: hasTabs,
+            ['has-tabs']: hasTabs = true,
             children,
             ...props
         } = this.props
@@ -19,7 +19,7 @@ export default class InfosPageContainer extends React.Component {
             <Page
                 className={classNames({
                     [className]: true,
-                    'has-tabs': hasTabs || (typeof hasTabs === 'undefined')
+                    'has-tabs': hasTabs
                 })}
                 {...props}
             >
