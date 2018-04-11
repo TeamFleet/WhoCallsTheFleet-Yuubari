@@ -1,0 +1,28 @@
+@import "~//base.less";
+
+.component{
+    clear: both;
+    margin-right: -10px;
+    margin-top: -10px;
+
+    .item{
+        margin: 10px 10px 0 0;
+        &.placeholder{
+            margin-top: auto;
+            height: 0;
+        }
+    }
+
+    .list-empty{
+        color: @color-fade;
+        margin-top: 10px;
+    }
+
+    &.mod-grid{
+        display:    flex;
+        flex-flow:  row wrap;
+        .item{
+            flex:   1 0 (@ship-link-width + 0);
+        }
+    }
+}

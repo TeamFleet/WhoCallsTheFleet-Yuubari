@@ -1,0 +1,46 @@
+@import "~base.less";
+@import './_.less';
+
+.component{
+    position:   absolute;
+    z-index:    2;
+    top:        0;
+    bottom:     0;
+    left:       0;
+    width:      @list-width;
+    background: fade(#fff, 10%);
+    overflow-y: auto;
+    overflow-x: hidden;
+    // transform:  translateY(100%);
+    .platform-mobile({
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    });
+    .list-custom, .list-default{
+        overflow:   hidden;
+        margin-right: 10px;
+    }
+    .background-thumbnail{
+        display:    block;
+        width:      50%;
+        float:      left;
+        padding:    10px 0 0 10px;
+        position:   relative;
+        .ratio{
+            display:    block;
+            position:   relative;
+            border:     1px solid fade(#fff, 20%);
+            background: no-repeat 50% 38.2% / cover;
+            height:     0;
+            padding:    0 0 100% 0;
+        }
+    }
+
+    .is-mode-background({
+        animation-name:  app-mode-background-list-enter;
+    });
+
+    .is-mode-background-leaving({
+        animation-name:  app-mode-background-list-leave;
+    });
+}

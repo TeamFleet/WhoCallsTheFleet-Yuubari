@@ -1,0 +1,19 @@
+@import "../../base.less";
+
+.component{
+    position:   relative;
+
+    &.is-loading > .img{
+        opacity:    0;
+        z-index:    -1000;
+    }
+
+    &.is-loading:after{
+        content:    "";
+        position:   absolute;
+        z-index:    -1;
+        .style-spinner();
+        .style-spinner-position();
+        .style-spinner-inner();
+    }
+}

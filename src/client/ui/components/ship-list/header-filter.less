@@ -1,0 +1,110 @@
+@import './_.less';
+
+.component{
+    // float:          left;
+    position:   absolute;
+    left:       0;
+
+    width:          @width-filter;
+    will-change:    width;
+    z-index:        2;
+
+    transition-property:    width;
+
+    .icon-search{
+        position:   absolute;
+        top:        50%;
+        margin-top: -8px;
+        pointer-events: none;
+
+        margin-left:    8px;
+    }
+
+    .btn-close{
+        display:        none;
+    }
+
+    .input{
+        padding-left:   32px;
+        position:       relative;
+        width:          100%;
+    }
+
+    &:active{
+        transition-duration: @base-transition-duration;
+    }
+
+    .screen-phone({
+        top:    0;
+        bottom: 0;
+        width:  calc(~"(100% - @{main-margin-phone} * 2) * 0.58");
+        transition-property:none;
+        left:       (0 - @main-margin-phone);
+        height:     (@height-phone - 2);
+        overflow:   hidden;
+        .icon-search{
+            margin-left:18px;
+            margin-top: -7px;
+        }
+        .input{
+            // padding-left:60px;
+            padding-left:40px;
+            // height:     100%;
+            // height:     (@height-phone - 2);
+            // line-height:@height-phone;
+            height:     @height-phone;
+            border:     0;
+            background: transparent;
+            border-radius:  0;
+            vertical-align: top;
+            .is-hover({
+                &:not(:focus){
+                    background: inherit;
+                }
+            });
+            &:focus{
+                box-shadow: none;
+            }
+        }
+    });
+}
+
+.is-filtering .component{
+    width:      @width-filter-focus;
+    z-index:    10;
+    .btn-close{
+        @size:      40px;
+        display:    block;
+        position:   absolute;
+        top:        50%;
+        right:      0;
+        margin-top: (0 - @size / 2);
+        z-index:    10;
+        // appearance: none;
+        line-height:0;
+        height:     @size;
+        width:      @size;
+        padding:    ((@size - 16px) / 2);
+        background: transparent;
+        border:     0;
+        color:      inherit;
+        .is-hover({
+            &:not(:focus){
+                color:  #fff;
+            }
+        }, {
+            &:not(:focus){
+                color:  @color-fade-2;
+            }
+        });
+    }
+    .screen-phone({
+        // width:  100%;
+        width:  auto;
+        right:  (0 - @main-margin-phone);
+        .btn-close{
+            right:      8px;
+            color:      inherit;
+        }
+    });
+}

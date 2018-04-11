@@ -1,0 +1,109 @@
+@import './_.less';
+
+.component{
+    display:    block;
+    line-height:20px;
+    height:     20px;
+    margin:     0;
+    float:      left;
+    clear:      both;
+
+    padding-right:  1em;
+
+    .code{
+        font-size:  12px;
+        margin-left:10px;
+        font-weight:normal;
+        color:      @color-base-dimmed;
+        // color:      @color-base;
+    }
+
+    &.is-sub{
+        font-weight:100;
+        font-style: italic;
+        &:nth-child(2){
+            border-top: 20px solid transparent;
+            height:     40px;
+        }
+    }
+
+    &[disabled]{
+        font-weight: 100;
+    }
+}
+
+.component-title{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    // font-size: inherit;
+    line-height: inherit;
+}
+
+.is-compare-selecting{
+    .component{
+        transform:  translateX(12px);
+        position:   relative;
+        .sku-webapp({
+            cursor:     pointer;
+        });
+        .is-hover({
+            color:      @color-accent;
+            &:active{
+                color:      @color-active;
+            }
+        });
+        &:active{
+            color:      @color-active;
+        }
+
+        @size:  @size-checkbox;
+        &:before, &:after, .icon{
+            position:   absolute;
+            left:       -22px;
+            top:        50%;
+        // }
+        // &:before, .icon{
+            width:      @size;
+            height:     @size;
+            margin-top: (0 - @size / 2 - 1px);
+        }
+        &:before, &:after{
+            content:    "";
+        }
+        &:before{
+            content:    "";
+            border-radius: 2px;
+            // border:     1px solid @color-base;
+            border:     1px solid @color-base-dimmed;
+            animation:  fadein @base-transition-duration @base-transition-timing-function;
+        }
+        &:after{
+            @size-square:   (@size - 8);
+            opacity:    0;
+            // width:      @size-square;
+            // height:     @size-square;
+            // margin-top: (0 - @size-square / 2);
+            // margin-left:((@size - @size-square) / 2);
+            background: @color-fade;
+            border-radius: 1px;
+            transform:  scale( .5 );
+        }
+        .icon{
+            opacity:    0;
+            fill:       @color-accent;
+        }
+
+        .is-hover({
+            &:before{
+                border-color: @color-accent;
+            }
+        });
+        &[data-checked="true"] .icon{
+            opacity:    1;
+        }
+        &[data-checked="indeterminate"]:after{
+            opacity:    1;
+        }
+    }
+}

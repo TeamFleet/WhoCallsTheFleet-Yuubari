@@ -1,0 +1,25 @@
+@import './_.less';
+
+.component{
+    display:    block;
+    line-height:@equipmenticon-size;
+    height:     50px;
+    margin:     0;
+    // float:      left;
+    // clear:      both;
+
+    padding-right:  1em;
+    padding-top:    (50 - @equipmenticon-size);
+}
+
+.component-title{
+    display: inline-block;
+    line-height: inherit;
+    margin: 0;
+}
+
+.first .component{
+    height:     @equipmenticon-size;
+    margin-top: ((20 - @equipmenticon-size) / 2);
+    padding-top:0;
+}

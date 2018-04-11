@@ -1,0 +1,72 @@
+@import './_.less';
+
+.component{
+    height:         @header-height-thead;
+
+    // ******************************************
+
+    &.flex{
+        .table();
+
+        // .row{
+        //     height:     @header-height-thead;
+        // }
+
+        .cell{
+            height:     @header-height-thead;
+            line-height:@header-height-thead;
+            &.is-highlight{
+                .is-hover-nopseudo({
+                    background: fade(#fff, 10%);
+                });
+            }
+        }
+
+        // .row .cell{
+        //     &:nth-child(n+2){
+        //         .screen-max({
+        //             font-size:  13px;
+        //             .locale-en({
+        //                 font-size:  12px;
+        //                 // font-family:@font-famliy-serif-number;
+        //             });
+        //         });
+        //     }
+        // }
+
+        // ******************************************
+
+        // margin-left:        auto;
+
+        // .screen-max({
+        //     padding-left:    (@main-margin - 15px);
+        //     padding-right:   (@main-margin - 15px);
+        // });
+
+        // .screen-t1({
+        //     padding-left:    (@main-margin - 30px);
+        //     padding-right:   (@main-margin - 25px);
+        // });
+
+        // .screen-tablet({
+        //     padding-left:    0;
+        //     padding-right:   0;
+        //     .cell.is-sorting{
+        //         order:      2;
+        //     }
+        // });
+
+        // .screen-phone({
+        //     padding-left:    0;
+        //     padding-right:   0;
+        // });
+
+        .screen-phone({
+            .row .cell[data-stat]{
+                transform:  rotate(-30deg);
+            }
+        });
+    }
+
+    // ******************************************
+}

@@ -1,0 +1,116 @@
+@import "./_.less";
+
+.component{
+
+    & + .component{
+        margin-top:  (0 - @shiptypebadge-gutter);
+    }
+
+    .list{
+        margin-right:   (0 - @shiptypebadge-gutter * 1.5);
+        margin-top:     (@shiptypebadge-gutter * 1);
+        overflow:       hidden;
+        .item{
+            float:      left;
+            margin-right:(@shiptypebadge-gutter * 1.5);
+            margin-bottom:@shiptypebadge-gutter;
+        }
+    }
+    .types{
+        .item{
+            @height:    26px;
+            font-size:  16px;
+            line-height:18px;
+            // height:     (@equipmenticon-size - 2 - 16px);
+            border-radius:(@height / 2);
+            padding:    ((@height - 2 - 18px) / 2) .75em;
+            // padding-left: 15px;
+            // padding-right:15px;
+        }
+    }
+    // .types{
+    //     margin-bottom:  (0 - @shiptypebadge-gutter);
+    //     margin-right:   (0 - @shiptypebadge-gutter);
+    //     display:    flex;
+    //     flex-flow:  row wrap;
+    //     align-items:baseline;
+    //     .item{
+    //         flex:   1 0 (@ship-link-width + 20);
+    //         margin: 0 @shiptypebadge-gutter @shiptypebadge-gutter 0;
+    //         &.placeholder{
+    //             margin-bottom:  0;
+    //         }
+    //     }
+    // }
+
+    &.legends{
+        @gutter: 1.25em;
+        .list{
+            margin-right:   (0 - @gutter);
+            margin-top:     0;
+            .item{
+                margin-right:@gutter;
+                margin-bottom:@shiptypebadge-gutter;
+                font-size:  16px;
+                line-height:18px;
+                // height:     (@equipmenticon-size - 2 - 16px);
+                border-radius:(@equipmenticon-size / 2);
+                padding:    ((@equipmenticon-size - 2 - 16px) / 2) 15px;
+                // padding-left: 15px;
+                // padding-right:15px;
+            }
+            .on{
+                color:              @color-badge-on;
+                background-color:   @color-badge-on-border;
+            }
+        }
+    }
+
+    &.exslot{
+        & > h2.title{
+            margin-bottom: -5px;
+            // border-bottom-width: 0;
+        }
+    //     .item{
+    //         color: 	        @color-alt;
+    //         // border-color:   transparent;
+    //         // background-color:transparent;
+    //         .is-hover({
+    //             color: 	    @color-accent;
+    //             background: fade(#000, 15%);
+    //         }; {
+    //             color:  fade(#fff, 50%);
+    //             background: fade(#000, 15%);
+    //         });
+    //         &:active{
+    //             color:  fade(#fff, 50%);
+    //             background: fade(#000, 15%);
+    //         }
+    //     }
+    }
+
+    .item.on{
+        color:              @color-badge-on;
+        background-color:   @color-badge-on-border;
+        border-color:       @color-badge-on-border;
+    }
+    .item.off{
+        color:              @color-badge-off;
+        border-color:       @color-badge-off-border;
+        background-color:   @color-badge-off-background;
+    }
+    // .item.ship{
+    //     color:              lighten(@theme-lightblue-a100, 15%);
+    //     border-color:       @theme-lightblue-800;
+    //     background-color:   @theme-lightblue-800;
+    //     .is-hover({
+    //         color:              #fff;
+    //         border-color:       @theme-lightblue-600;
+    //         background-color:   @theme-lightblue-600;
+    //     }; {
+    //         color:              lighten(@theme-lightblue-a100, 15%);
+    //         border-color:       @theme-lightblue-800;
+    //         background-color:   @theme-lightblue-900;
+    //     });
+    // }
+}

@@ -1,0 +1,155 @@
+@import '../../base.less';
+
+@size:      @equipmenticon-size;
+@count:     @equipment-icons-count;
+
+.component{
+    position:   relative;
+
+    &:before{
+        content:    "";
+        float:      left;
+        margin:     0 4px 0 0;
+    }
+
+    &:before,
+    &:empty{
+        width:      @size;
+        height:     @size;
+        display:    inline-block;
+        background: url('~Assets/equiptypeicon.png') no-repeat 0% @size / cover;
+    }
+
+    .icons(@n, @i: 0) when (@i =< @n) {
+        &[data-icon="@{i}"]:before{
+            background-position: 0% percentage((@i - 1) / (@count - 1));
+        }
+        .icons(@n, (@i + 1));
+    }
+    .icons(@count);
+
+    &:empty{
+        &:before{
+            display: none;
+        }
+        .icons-empty(@n, @i: 0) when (@i =< @n) {
+            &[data-icon="@{i}"]{
+                background-position: 0% percentage((@i - 1) / (@count - 1));
+            }
+            .icons-empty(@n, (@i + 1));
+        }
+        .icons-empty(@count);
+    }
+
+    &[data-suffix]:after{
+        content:    "";
+        position:   absolute;
+        bottom:     0;
+        right:      0;
+        display:    block;
+        font-size:  12px;
+        line-height:1.2em;
+        text-align: center;
+        z-index:    2;
+    }
+        &[data-suffix="+"]:after,
+        &[data-suffix="-"]:after{
+            @size:      14px;
+            width:      @size;
+            height:     @size;
+            bottom:     0;
+        }
+        &[data-suffix="+"]:after{
+            background: url('~Assets/symbols-other/arrow-up-buff.svg') no-repeat 50% 50% / cover;
+        }
+        &[data-suffix="-"]:after{
+            background: url('~Assets/symbols-other/arrow-up-nobuff.svg') no-repeat 50% 50% / cover;
+        }
+        &[data-icon="16"][data-suffix="+"]:after,
+        &[data-icon="16"][data-suffix="-"]:after{
+            @size:      28px;
+            width:      @size;
+            height:     @size;
+            right:      -5px;
+            bottom:     -5px;
+            background: url('~Assets/equiptypeicon.png') no-repeat 0% percentage((30 - 1) / (@count - 1)) / cover;
+        }
+        &[data-icon="16"][data-suffix="-"]:after{
+            filter:     hue-rotate(260deg);
+        }
+        
+        &[data-suffix="AA"]:after,
+        &[data-suffix-type="stat-range"]:after{
+            content:    attr(data-suffix);
+            border-radius: 5px;
+            transform:  scale((10 / 12));
+            transform-origin: 100% 100%;
+            // background:     url('~Assets/stats.png') no-repeat 0% 31.57894737% / cover;
+            box-shadow: 0 0 1px 1px fade(#000, 35%);
+        }
+
+        &[data-suffix="AA"]:after{
+            padding:    0 .25em;
+            // background: fade(@theme-green-700, 50%);
+            // border:     1px solid @theme-green-a200;
+            // color:      @theme-green-a100;
+        }
+        &[data-suffix-type="stat-range"]:after{
+            padding:    0 .3em;
+            background: fade(@theme-lightgreen-800, 65%);
+            border:     1px solid @theme-lightgreen-a200;
+            color:      @theme-lightgreen-a100;
+        }
+        &[data-suffix="AA"]:after,
+        &[data-icon="15"][data-suffix-type="stat-range"]:after{
+            background: fade(@color-stat-aa, 65%);
+            border:     1px solid lighten(@color-stat-aa, 25%);
+            color:      lighten(@color-stat-aa, 50%);
+        }
+
+        &[data-suffix-type="equipment-name"]{
+            margin-right: @size;
+            &:after{
+                content: attr(data-suffix);
+                top: 50%;
+                bottom: auto;
+                left: 90%;
+                right: -125%;
+                font-size: 12px;
+                line-height: 1.1em;
+                text-align: left;
+                transform: translate(0, -50%) scale((10 / 12));
+                transform-origin: 0% 50%;
+                color: @color-base-dimmed;
+                text-shadow: 0 0 2px #000;
+                // padding:    .15em .25em;
+                // background: fade(@theme-cyan-800, 65%);
+                // border: 1px solid @theme-cyan-a400;
+                // color: @theme-cyan-a100;
+            }
+            &[data-icon="15"],
+            &[data-icon="16"]{
+                &:after{
+                    color: lighten(#71cd7b, 5%);
+                }
+            }
+        }
+}
+
+a.component[data-suffix-type="equipment-name"]{
+    &:after{
+        transition-property: color;
+    }
+	.is-hover({
+        &:after{
+            color: #fff;
+        }
+	}; {
+        &:after{
+            color:  @color-link-active;
+        }
+	});
+	&:active:after{
+		color:  @color-link-active;
+	}
+}

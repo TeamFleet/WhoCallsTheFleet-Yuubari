@@ -1,0 +1,27 @@
+.initializing(){
+    text-align: center;
+    vertical-align: middle;
+
+    .main-full-height();
+    .screen-tablet({
+        border-bottom: (@nav-height-tablet / 2) solid transparent;
+    });
+    .screen-phone({
+        border-bottom: (@nav-height-phone / 2) solid transparent;
+    });
+
+    .loader{
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 auto;
+    }
+
+    &:before{
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+}

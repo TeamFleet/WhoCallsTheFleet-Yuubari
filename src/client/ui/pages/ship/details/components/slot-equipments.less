@@ -1,0 +1,144 @@
+@import '../_.less';
+@import './equipable.less';
+
+.component{
+    @slot-size:     22px;
+    @line-height:   18px;
+    @icon-size:     30px;
+    @gutter:        11px;
+
+    // margin-top:     (0 - @gutter);
+
+    .item{
+        display:    block;
+        margin:     0;
+        padding:    0;
+        margin-top: @gutter;
+        position:   relative;
+        line-height:@slot-size;
+        border-radius: (@slot-size / 2);
+        &.disabled{
+            opacity:.25;
+        }
+    }
+        .slot{
+            .style-badge();
+            position:   absolute;
+            top:        50%;
+            left:       0;
+            width:      (@slot-size + 10);
+            height:     @slot-size;
+            line-height:@slot-size;
+            margin-top: (0 - @slot-size / 2);
+            font-size:  14px;
+            text-align: center;
+            display:    inline-block;
+            // font-weight:600;
+            padding:    0 0 0 4px;
+            // background: @color-fade;
+            border-radius: (@slot-size / 2) 0 0 (@slot-size / 2);
+            border-right: 10px solid transparent;
+            z-index:    2;
+        }
+        .equipment{
+            // line-height:@line-height;
+            // padding:    ((@slot-size - @line-height) / 2) 0 ((@slot-size - @line-height) / 2) (@icon-size + 4);
+            padding-left:(@icon-size + @slot-size + 4);
+            margin:     0;
+            display:    inline-block;
+            // position:   relative;
+            // z-index:    1;
+            // @color2:    fade(@color-theme, 50%);
+            // @position1: (@slot-size + @icon-size / 2);
+            // @position2: (@slot-size + @icon-size) * 2;
+            // background: linear-gradient(to right, transparent, transparent @position1, @color2 @position1);
+            // border-radius: (@slot-size / 2);
+            // border-radius: (@slot-size / 2) 0 0 (@slot-size / 2);
+            // min-width:  @position2;
+            padding-right:  .75em;
+            font-size:      14px;
+            position:   relative;
+            .icon{
+                width:      @icon-size;
+                height:     @icon-size;
+                position:   absolute;
+                top:        50%;
+                // margin-top: (0 - (@icon-size - @line-height) / 2);
+                margin-top: (0 - @icon-size / 2);
+                left:       @slot-size;
+                background-color: @color-theme;
+                border-radius: 50%;
+                border:     1px solid @color-fade;
+                z-index:    10;
+            }
+        }
+        .equipment-name{
+            &:after{
+                content:    "";
+                position:   absolute;
+                z-index:    -2;
+                top:        -1px;
+                bottom:     -1px;
+                left:       (@slot-size + @icon-size / 2);
+                right:      0;
+                background: fade(@color-theme, 50%);
+                border:     1px solid fade(@color-fade, 25%);
+                border-radius: (@slot-size / 2);
+            }
+        }
+        a.equipment-name{
+            // color: @color-badge-blue-text;
+            .style-hover() {
+                color: @color-badge-blue-hover-text;
+                &:after{
+                    background-color:   @color-badge-blue-hover-border;
+                    border-color:       @color-badge-blue-hover-background;
+                }
+                .icon{
+                    background-color:   @color-special-background;
+                    border-color:       @color-special-border;
+                }
+            }
+            .style-active() {
+                color: @color-badge-blue-active-text;
+                &:after{
+                    background-color:   @color-badge-blue-active-background;
+                    border-color:       @color-badge-blue-active-border;
+                }
+            }
+            .is-hover({
+                .style-hover();
+            }, {
+                .style-active();
+            });
+            &:active{
+                .style-active();
+            }
+        }
+        .equipment-star{
+            position: absolute;
+            top: 50%;
+            margin-top: -8px;
+            z-index: 1;
+            border-left: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            left: 100%;
+            margin: -8px 0 0 -2px;
+            &:before, &:after{
+                content: "";
+                z-index: -1;
+                position: absolute;
+                right: 100%;
+                width: 2px;
+                height: 1px;
+                background: linear-gradient(to right, transparent, currentColor);
+            }
+            &:before{
+                top: -1px;
+            }
+            &:after{
+                bottom: -1px;
+            }
+        }
+}

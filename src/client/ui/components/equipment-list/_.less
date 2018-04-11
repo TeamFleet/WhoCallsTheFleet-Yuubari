@@ -1,0 +1,89 @@
+@import '../../base.less';
+
+@margin:        20px;
+@gutter:        20px;
+@line-height:   20px;
+
+@header-height-thead:   40px;
+@header-height-tabs:    (@line-height + @margin * 2);
+@header-height: (@header-height-tabs + @header-height-thead);
+@header-height-tabs-phone:    (@header-height-tabs * 0.75);
+@header-height-phone:   (@header-height-tabs-phone + @header-height-thead);
+
+@cell-padding-vertical: 5px;
+@cell-line-height:  (25px - 4 - 4 - 1);
+
+.table() {
+    overflow-x: hidden;
+
+    padding-left:       0;
+    // .main-sizing-position-reset-margin();
+    .screen-t1({
+        margin-left:    (0 - @main-margin);
+        margin-right:   (0 - @main-margin / 2);
+    });
+    .screen-tablet({
+        .main-sizing-position-reset-tablet-margin();
+    });
+    .screen-phone({
+        .main-sizing-position-reset-phone-margin();
+    });
+
+    .row{
+        // &:after{
+        //     flex:       0 0 1em;
+        //     content:    "";
+        //     order:      100;
+        //     height:     1px;
+        // }
+        .screen-tablet({
+            &:after{
+                // flex-basis: .5em;
+                flex:       0 0 .5em;
+                content:    "";
+                order:      100;
+                height:     1px;
+            }
+        });
+        .screen-phone({
+            &:after{
+                flex-basis: 8px;
+            }
+        });
+
+        .cell{
+            flex:       1 0 40px;
+            font-size:  14px;
+            &.cell-name{    
+                flex:       7.5 0 150px;
+                text-align: left;
+                z-index:    -1;
+                pointer-events: none;
+                @supports (pointer-events: none) {
+                    z-index: initial;
+                }
+            }
+            &[data-stat]{
+                text-align: center;
+            }
+            .screen-phone({
+                &.cell-name{
+                    flex-basis: 85px;
+                    flex-shrink:1;
+                }
+                &[data-stat]{
+                    font-size:  12px;
+                    // flex:       0 0 2em;
+                    flex-basis: 2em;
+                    // white-space:nowrap;
+                    width:      2em;
+                    // transform:  rotate(-30deg);
+                }
+                &[data-stat="craftable"],
+                &[data-stat="improvable"]{
+                    display:    none;
+                }
+            });
+        }
+    }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+    <base target="_self">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no,email=no,address=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!--
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/icon-256.png" type="image/png" sizes="256x256">
+    <link rel="icon" href="/icon-128.png" type="image/png" sizes="128x128">
+    -->
+
+    <meta name="theme-color" content="#263238" />
+
+    <!-- IE/Edge -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="copyright" content="Copyright (c) 2017 fleet.moe">
+
+    <script type="text/javascript" src="{{ SRC:critical }}"></script>
+</head>
+
+<body>
+    <div id="boat-loader">LOADING...</div>
+    <div id="root"></div>
+    <script type="text/javascript">
+        var __REDUX_STATE__ = {};
+    </script>
+    <script type="text/javascript" src="{{ SRC:client }}" defer></script>
+    {{ SVG_SYMBOLS }}
+</body>
+
+</html>

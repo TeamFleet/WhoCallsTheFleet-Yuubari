@@ -1,0 +1,12 @@
+@import '../../base.less';
+
+.component{
+    @max-width:     1200px;
+    @max-width-half:(@max-width / 2);
+
+    max-width:      1200px;
+
+    @media screen and (min-width: (@max-width + (@nav-width) * 2)) {
+        margin-left: calc(~"50vw - @{max-width-half} - 150px");
+    }
+}

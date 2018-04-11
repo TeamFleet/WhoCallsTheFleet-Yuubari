@@ -1,0 +1,20 @@
+@import "../../../base.less";
+
+.component{
+    @line-height:   (@link-equipment-padding-left - 2);
+    @size-icon:     30px;
+
+    display:        inline-block;
+    position:       relative;
+    padding-left:   (@line-height + 2);
+
+    .icon{
+        &:empty, &:before{
+            position:   absolute;
+            width:      @size-icon;
+            height:     @size-icon;
+            top:        ((@line-height - @size-icon) / 2);
+            left:       ((@line-height - @size-icon) / 2);
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@import "../../_.less";
+
+.component{
+
+    & > h2.title{
+        flex:   none;
+        width:  100%;
+        // border-bottom-width: 0;
+    }
+
+    // & > .disabled{
+    //     margin-top:     25px;
+    // }
+
+    & > .list{
+        display:    flex;
+        flex-flow:  row wrap;
+        margin-top:  (@infos-component-title-margin-bottom - 35);
+        margin-right: -20px;
+
+        & > .flex-item{
+            flex:           1 1 500px;
+            &.placeholder{
+                margin-top: auto;
+                margin-bottom: auto;
+                height:     0;
+            }
+        }
+    }
+
+}

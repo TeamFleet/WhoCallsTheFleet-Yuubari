@@ -1,0 +1,38 @@
+@import '../base.less';
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+input[type="month"],
+input[type="year"],
+input[type="time"],
+input[type="search"],
+textarea{
+    .style-input();
+
+    line-height:    1.5em;
+    border-radius:  3px;
+
+    .placeholder() {
+        // color:    @color-base;
+        // opacity:  0.5;
+        color:      @color-fade;
+        font-size:  14px;
+    }
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        .placeholder();
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        .placeholder();
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        .placeholder();
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        .placeholder();
+    }
+    &::-ms-input-placeholder { /* Microsoft Edge */
+        .placeholder();
+    }
+}

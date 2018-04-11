@@ -1,0 +1,131 @@
+@import '../../base.less';
+
+.component{
+    display:    inline-block;
+    position:   relative;
+    color:      @color-main;
+    // color:      @color-alt;
+    // overflow:   hidden;
+
+    min-width:  @ship-link-width;
+    height:     @ship-link-height;
+
+    // padding-left:   87px;
+
+    vertical-align:	middle;
+
+	&:before{
+		content:		"";
+		display:		inline-block;
+		vertical-align:	middle;
+		width:			0;
+		height:			100%;
+		overflow:		hidden;
+	}
+
+    &:after{
+        content:    "";
+        position:   absolute;
+        z-index:    -10;
+        top:        0;
+        bottom:     0;
+        left:       20px;
+        right:      0;
+        border-radius: 0 5px 5px 0;
+    }
+
+    .pic{
+        display:    block;
+        position:   absolute;
+        z-index:    -2;
+
+        top:        0;
+        // left:       -10px;
+        left:       -5px;
+        right:      0;
+        height:     100%;
+        // width:      auto;
+        background: no-repeat -50px 0 / contain;
+
+        pointer-events: none;
+    }
+
+    .name{
+        display:    inline-block;
+        position:   relative;
+        z-index:    2;
+        line-height:1.1em;
+        vertical-align:	middle;
+        // transition: none;
+        // font-weight:700;
+        // margin-right: -2px;
+    }
+        .name-type,
+        .name-suffix{
+            display:    block;
+            line-height:1.05em;
+            font-weight:400;
+            font-size:  unit(12 / 16, em);
+            transition: inherit;
+        }
+        .name-type{
+            margin-bottom: .15em;
+            // color:      @color-alt;
+            // transition:     none;
+        }
+        .name-suffix{
+            margin-top: .15em;
+            margin-left:4px;
+            // color:      @color-base;
+            color:      @color-base-dimmed;
+        }
+        .name-extra{
+            display: inline-block;
+            margin-left: 5px;
+        }
+    
+    .styles-hover() {
+        color:  @color-accent;
+        &:after{
+            background: fade(#000, 15%);
+        }
+        // .name-type{
+        //     color:      inherit;
+        // }
+        .name-suffix{
+            color:      @theme-lightblue-500;
+        }
+        // .name-suffix{
+        //     color:      @color-main;
+        // }
+    }
+    .styles-active() {
+        color:  fade(#fff, 50%);
+        &:after{
+            background: fade(#000, 15%);
+        }
+        // .name-type{
+        //     color:      inherit;
+        // }
+        .name-suffix{
+            color:      fade(#fff, 50%);
+            // transition: inherit;
+        }
+    }
+    
+    .is-hover({
+        .styles-hover();
+    }; {
+        .styles-active();
+    });
+    
+    &:active{
+        .styles-active();
+    }
+}
+
+[data-locale="en"] .component{
+    .name{
+        font-size:  14px;
+    }
+}

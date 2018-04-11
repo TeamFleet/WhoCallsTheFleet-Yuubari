@@ -1,0 +1,278 @@
+@import './_.less';
+
+.component{
+    @height:        @imporivement-shipname-height;
+    @line-height:   16px;
+    @border-radius: 5px;
+
+    font-size:  @imporivement-shipname-font-size;
+    line-height:@line-height;
+    position:   relative;
+
+    .item{
+        margin-bottom:  1px;
+        padding-left:   ((@height + 1) * 7 + 6);
+        padding-top:    ((@height - @line-height) / 2);
+        padding-bottom: ((@height - @line-height) / 2);
+        position:       relative;
+        &:last-child{
+            margin-bottom:  0;
+        }
+    }
+
+    .days{
+        overflow:   visible;
+        position:   absolute;
+        left:       0;
+        top:        0;
+    }
+        .day{
+            display:    block;
+            float:      left;
+            height:     @height;
+            width:      @height;
+            line-height:@height;
+            text-align: center;
+            font-size:  12px;
+            margin-right: 1px;
+            background: @color-border;
+            color:      @color-fade;
+            &.on{
+                background: @theme-green-700;
+                color:      @theme-green-a100;
+            }
+            &:first-child{
+                border-top-left-radius: @border-radius;
+                border-bottom-left-radius: @border-radius;
+            }
+            &:last-child{
+                border-top-right-radius: @border-radius;
+                border-bottom-right-radius: @border-radius;
+            }
+        }
+    
+    .ships{
+        margin-right:   -12px;
+        color:      @color-fade;
+    }
+        .ship{
+            margin-right:   12px;
+            display:        inline-block;
+            &:after{
+                content:    '/';
+                display:    inline-block;
+                margin:     0 4px;
+                z-index:    -1;
+                position:   absolute;
+                // color:      @color-base;
+                color:      @color-base-dimmed;
+            }
+            &:last-child:after{
+                content:    initial;
+            }
+        }
+
+    // indicator for today
+        // style-1
+            .style-1(){
+                &[data-day]{
+                    &:after{
+                        content:    "";
+                        position:   absolute;
+                        top:        -3px;
+                        bottom:     -3px;
+                        left:       -3px;
+                        width:      (@height + 6);
+                        z-index:    5;
+                        // background: fade(#fff, 10%);
+                        border:     1px solid fade(@color-positive, 50%);
+                        border-radius: @border-radius;
+                    }
+                }
+                .style-1-loop(@n, @i: 1) when (@i =< @n) {
+                    &[data-day="@{i}"]:after {
+                        left:       (-3px + (@height + 1) * @i);
+                    }
+                    .style-1-loop(@n, (@i + 1));
+                }
+                .style-1-loop(7);
+            }
+        // style-line
+            .style-2(){
+                &[data-day]{
+                    @size:      2px;
+                    @offset:    (0 - @size - 1);
+                    &:before, &:after{
+                        content:    "";
+                        position:   absolute;
+                        width:      @height;
+                        left:       0;
+                        height:     @size;
+                        background: @color-fade;
+                        // background: @color-positive;
+                        // background: @color-accent;
+                        z-index:    5;
+                    }
+                    &:before{
+                        top:        @offset;
+                    }
+                    &:after{
+                        bottom:     @offset;
+                    }
+                }
+                .style-2-loop(@n, @i: 1) when (@i =< @n) {
+                    &[data-day="@{i}"]{
+                        &:before, &:after{
+                            left:   (@height + 1) * @i;
+                        }
+                    }
+                    .style-2-loop(@n, (@i + 1));
+                }
+                .style-2-loop(7);
+            }
+        // style-triangle
+            .style-3(){
+                &[data-day]{
+                    @size:      4px;
+                    @width:     4px;
+                    @height:    3px;
+                    @offset:    (0 - @height - 2px);
+                    // @color:     @color-base;
+                    // @color:     @color-fade;
+                    // @color:     @color-positive;
+                    // @color:     @theme-green-700;
+                    // @color:     @theme-green-a100;
+                    @color:     @color-accent;
+                    &:before, &:after{
+                        content:    "";
+                        position:   absolute;
+                        overflow:   hidden;
+                        width:      0;
+                        height:     0;
+                        left:       (@height / 2);
+                        z-index:    5;
+                        // border:     @size solid transparent;
+                        border-left:    @width solid transparent;
+                        border-right:   @width solid transparent;
+                        border-top:     @height solid transparent;
+                        border-bottom:  @height solid transparent;
+                        margin-left:(0 - @width);
+                    }
+                    &:before{
+                        top:        @offset;
+                        border-top-color:   @color;
+                    }
+                    &:after{
+                        bottom:     @offset;
+                        border-bottom-color:@color;
+                    }
+                }
+                .style-3-loop(@n, @i: 1) when (@i =< @n) {
+                    &[data-day="@{i}"]{
+                        &:before, &:after{
+                            left:   (@height + 1) * @i + @height / 2;
+                        }
+                    }
+                    .style-3-loop(@n, (@i + 1));
+                }
+                .style-3-loop(7);
+            }
+            .style-3-alt(){
+                &[data-day]{
+                    @size:      4px;
+                    @indicator-width:  4px;
+                    @indicator-height: 3px;
+                    @offset:    (0 - @indicator-height - 2px);
+                    // @color:     @color-base;
+                    // @color:     @color-fade;
+                    // @color:     @color-positive;
+                    // @color:     @theme-green-700;
+                    // @color:     @theme-green-a100;
+                    @color:     @color-accent;
+                    .item:first-child .days:before,
+                    .item:last-child .days:after{
+                        content:    "";
+                        position:   absolute;
+                        overflow:   hidden;
+                        width:      0;
+                        height:     0;
+                        left:       (@indicator-height / 2);
+                        z-index:    5;
+                        // border:     @size solid transparent;
+                        border-left:    @indicator-width solid transparent;
+                        border-right:   @indicator-width solid transparent;
+                        border-top:     @indicator-height solid transparent;
+                        border-bottom:  @indicator-height solid transparent;
+                        margin-left:(0 - @indicator-width);
+                    }
+                    .item:first-child .days:before{
+                        top:        @offset;
+                        border-top-color:   @color;
+                    }
+                    .item:last-child .days:after{
+                        bottom:     @offset;
+                        border-bottom-color:@color;
+                    }
+                    .item:not(:last-child):after{
+                        content:    "";
+                        position:   absolute;
+                        overflow:   hidden;
+                        left:       (@indicator-height / 2);
+                        width:      2px;
+                        top:        (@height + 2);
+                        bottom:     1px;
+                        margin-left:-1px;
+                        background: fade(@color, 50%);
+                        // background: linear-gradient(to right, transparent, @color, transparent);
+                    }
+                }
+                .style-3-loop(@n, @i: 0) when (@i =< @n) {
+                    &[data-day="@{i}"]{
+                        .item:first-child .days:before,
+                        .item:last-child .days:after,
+                        .item:not(:last-child):after{
+                            left:   (@height + 1) * @i + @height / 2;
+                        }
+                    }
+                    .style-3-loop(@n, (@i + 1));
+                }
+                .style-3-loop(6);
+            }
+        // style-line-gradient
+            .style-4(){
+                &[data-day]{
+                    @size:      3px;
+                    @offset:    (0 - @size - 1);
+                    @color:     @color-accent;
+                    // @color:     @color-positive;
+                    // @color:     @color-fade;
+                    // @color:     @color-base;
+                    &:before, &:after{
+                        content:    "";
+                        position:   absolute;
+                        width:      @height;
+                        left:       0;
+                        height:     @size;
+                        z-index:    5;
+                    }
+                    &:before{
+                        top:        @offset;
+                        background: linear-gradient(to bottom, transparent, @ease-out-sine, @color);
+                    }
+                    &:after{
+                        bottom:     @offset;
+                        background: linear-gradient(to top, transparent, @ease-out-sine, @color);
+                    }
+                }
+                .style-4-loop(@n, @i: 1) when (@i =< @n) {
+                    &[data-day="@{i}"]{
+                        &:before, &:after{
+                            left:   (@height + 1) * @i;
+                        }
+                    }
+                    .style-4-loop(@n, (@i + 1));
+                }
+                .style-4-loop(7);
+            }
+        .style-3-alt();
+}

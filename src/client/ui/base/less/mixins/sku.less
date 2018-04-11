@@ -1,0 +1,17 @@
+.sku( @sku, @rules ){
+    html.is-@{sku} &{
+        @rules();
+    }
+}
+
+.sku-webapp( @rules ){
+    html.is-webapp &{
+        @rules();
+    }
+}
+
+.sku-dev( @rules ){
+    html.is-dev &{
+        @rules();
+    }
+}

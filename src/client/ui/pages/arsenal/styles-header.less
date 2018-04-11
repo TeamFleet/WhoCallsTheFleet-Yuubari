@@ -1,0 +1,197 @@
+@import "~base.less";
+
+.component{
+    .tab{
+        .style-tab();
+        height: (@infos-tab-height - 1);
+        // height: @infos-tab-height;
+        float: left;
+    }
+
+    .link-today{
+        margin-right:   30px;
+        &:after{
+            content:    "";
+            position:   absolute;
+            top:        50%;
+            right:      -15px;
+            width:      1px;
+            height:     30px;
+            margin-top: -15px;
+            transform:  skew(-20deg) scale(2, 1);
+            transform-origin: 50% 50%;
+            background: @color-border-2;
+        }
+    }
+    .link-day{
+        min-width:      25px;
+        margin-right:   5px;
+        &.is-today:not(.on){
+            border-bottom-color: @color-fade;
+        }
+    }
+    .link-all{
+        margin-left:    25px;
+    }
+
+    .screen-phone-small({
+        .link-today{
+            display:    none;
+        }
+        .tabs{
+            display:    flex;
+            flex-flow:  row nowrap;
+        }
+        .link-day{
+            flex:       none;
+        }
+        .link-all{
+            flex:       none;
+            margin-left:15px;
+        }
+    });
+}
+
+.component-tabs{
+    overflow: hidden;
+    height: @infos-tab-height;
+}
+
+.component-akashi{
+    @face-width: 214px;
+    @face-height: 77px;
+
+    @eye-width: 51px;
+    @eye-height: 34px;
+
+    @actual-height: (@infos-tab-height - 2);
+    @actual-width: (@face-width * @actual-height) / @face-height;
+
+    @scale: unit(@actual-height / @face-height);
+
+    display: block;
+    float: left;
+    position: relative;
+    margin-right: 30px;
+    width: @actual-width;
+    height: @actual-height;
+    transition: none;
+
+    &:before, &:after{
+        content: "";
+        position: absolute;
+        transform: scale(@scale);
+        transition: inherit;
+        display: block;
+        background-image: url("~Assets/akashi.png");
+        background-repeat: no-repeat;
+        background-size: (@face-width + @eye-width) auto;
+    }
+    &:before{
+        // eye
+        z-index: 2;
+        width: @eye-width;
+        height: @eye-height;
+        top: 19px;
+        left: 22px;
+        background-position: (0 - @face-width) 0%;
+        // background-size: percentage(@eye-width / (@face-width + @eye-width)) auto;
+        transform-origin: -22px -19px;
+        animation: none 3s steps(1) 3s infinite;
+    }
+    &:after{
+        // face
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: @face-width;
+        height: @face-height;
+        background-position: 0% 0%;
+        // background-size: percentage(@face-width / (@face-width + @eye-width)) auto;
+        transform-origin: 0% 0%;
+    }
+
+    .screen-phone({
+        display: none;
+    });
+
+    .animations(@n, @i: 1) when (@i =< @n) {
+        &[data-blink-animation="@{i}"]:before{
+            animation-name: ~"akashi-blink-@{i}";
+        }
+        .animations(@n, (@i + 1))
+    }
+    .animations(3);
+
+    @keyframes akashi-blink-1{
+        0%{
+            background-position: (0 - @face-width) 0;
+        }
+        3%{
+            background-position: (0 - @face-width) (0 - @eye-height * 1);
+        }
+        6%{
+            background-position: (0 - @face-width) (0 - @eye-height * 2);
+        }
+        9%{
+            background-position: (0 - @face-width) (0 - @eye-height * 1);
+        }
+        12%{
+            background-position: (0 - @face-width) 0;
+        }
+    }
+    
+    @keyframes akashi-blink-2{
+        0%{
+            background-position: (0 - @face-width) 0;
+        }
+        3%{
+            background-position: (0 - @face-width) (0 - @eye-height * 1);
+        }
+        6%{
+            background-position: (0 - @face-width) (0 - @eye-height * 2);
+        }
+        9%{
+            background-position: (0 - @face-width) (0 - @eye-height * 1);
+        }
+        12%{
+            background-position: (0 - @face-width) (0 - @eye-height * 2);
+        }
+        15%{
+            background-position: (0 - @face-width) (0 - @eye-height * 1);
+        }
+        18%{
+            background-position: (0 - @face-width) 0;
+        }
+    }
+    
+    @keyframes akashi-blink-3{
+        0%{
+            background-position: (0 - @face-width) 0;
+        }
+        2%{
+            background-position: (0 - @face-width) (0 - @eye-height * 1);
+        }
+        4%{
+            background-position: (0 - @face-width) (0 - @eye-height * 2);
+        }
+        6%{
+            background-position: (0 - @face-width) (0 - @eye-height * 3);
+        }
+        8%{
+            background-position: (0 - @face-width) (0 - @eye-height * 4);
+        }
+        40%{
+            background-position: (0 - @face-width) (0 - @eye-height * 3);
+        }
+        42%{
+            background-position: (0 - @face-width) (0 - @eye-height * 2);
+        }
+        44%{
+            background-position: (0 - @face-width) (0 - @eye-height * 1);
+        }
+        46%{
+            background-position: (0 - @face-width) 0;
+        }
+    }
+}

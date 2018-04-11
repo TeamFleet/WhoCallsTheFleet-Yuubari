@@ -1,0 +1,26 @@
+@import "~base.less";
+@import './_.less';
+
+.component{
+    position:   absolute;
+    z-index:    5;
+    left:       (@list-width + 20);
+    right:      20px;
+    top:        20px;
+    bottom:     20px;
+    // opacity:    0;
+    background: no-repeat 50% 50% / contain;
+    // transform:  translateY(-4rem);
+
+    .is-mode-background({
+        animation-name:  app-mode-background-original-enter;
+        // opacity:    1;
+        // transform:  none;
+        // transition-delay: (@base-transition-duration * 4);
+        // transition-duration: (@base-transition-duration * 2);
+    });
+
+    .is-mode-background-leaving({
+        animation-name:  app-mode-background-original-leave;
+    });
+}

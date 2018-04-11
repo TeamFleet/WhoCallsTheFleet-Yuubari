@@ -1,0 +1,44 @@
+@import '../../base.less';
+
+.component{
+    padding-top:    100px;
+
+    @icon-size:     32px;
+    @item-width:    (@icon-size + 100px);
+    @item-height:   (@icon-size + 10px);
+
+    .icon-sample-group{
+        display:    grid;
+        grid-template-columns:  repeat(auto-fit, minmax(@item-width, 1fr));
+        grid-column-gap:        20px;
+        grid-row-gap:           10px;
+    }
+
+    .icon-sample{
+        height:         @item-height;
+        display:        flex;
+        flex-flow:      row nowrap;
+        align-items:    center;
+
+        .icon{
+            order:      1;
+            flex:       0 0 @icon-size;
+            width:      @icon-size;
+            height:     @icon-size;
+        }
+
+        input{
+            order:      2;
+            flex:       1 0 auto;
+            font-size:  12px;
+            width:      0;
+            margin:     0 0 0 8px;
+            padding:    .2em .35em;
+        }
+
+        input:focus ~ .icon{
+            fill:       @color-accent;
+            filter:     drop-shadow(0 0 5px #000);
+        }
+    }
+}

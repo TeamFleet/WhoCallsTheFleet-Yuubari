@@ -1,0 +1,33 @@
+.style-badge() {
+    // background: fade(@color-background-main, 85%);
+    // background: fade(#000, 35%);
+    // background: fade(@color-theme, 50%);
+    background: @color-fade;
+    color:      @color-background;
+    border-radius: 3px;
+}
+
+.style-badge-mono() {
+    // color:      @color-base;
+    // color:      @color-base-dimmed;
+    color:      @color-fade;
+    border:     1px solid fade(@color-fade, 35%);
+    // background: fade(@color-background, 50%);
+    // background: @color-border;
+    // background: fade(@color-border, 15%);
+    background: fade(@color-base-dimmed, 10%);
+    // background: fade(#fff, 5%);
+    border-radius: 3px;
+}
+
+.style-badge-mono-transparent() {
+    // color:      @color-base;
+    color:      @color-base-dimmed;
+    border:     1px solid transparent;
+    // background: fade(@color-background, 50%);
+    // background: @color-border;
+    // background: fade(@color-border, 15%);
+    // background: fade(@color-base-dimmed, 10%);
+    // background: fade(#fff, 5%);
+    border-radius: 3px;
+}

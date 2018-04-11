@@ -1,0 +1,152 @@
+@import './_.less';
+
+.component{
+    position:   absolute;
+    right:      0;
+    top:        0;
+    z-index:    2;
+    line-height:@height;
+
+    .item{
+        display:    inline-block;
+        color:      @color-fade;
+        // color:      inherit;
+        // color:      @color-base-dimmed;
+        height:     (@height - 1);
+        margin-left:    @gutter;
+        border-bottom:  2px solid transparent;
+        .icon{
+            fill:   @color-fade;
+            // fill:   @color-base;
+            // fill:   @color-base-dimmed;
+            vertical-align: text-top;
+            margin-right: 4px;
+        }
+        .is-hover({
+            // color:  @color-base;
+            color:  #fff;
+            .icon{
+                fill:   #fff;
+            }
+            &:active{
+                color:  @color-active;
+                .icon{
+                    fill:   @color-active;
+                }
+            }
+        });
+        &:active{
+            color:  @color-active;
+            .icon{
+                fill:   @color-active;
+            }
+        }
+        &.on{
+            color:  #fff;
+            // border-bottom-color: @color-base;
+            border-bottom-color: @color-base-dimmed;
+        }
+        .screen-phone({
+            height:         (@height-phone - 1);
+        });
+    }
+
+        .btn-toggle-compare{
+            position:   relative;
+            .icon-close{
+                position:   absolute;
+                opacity:    0;
+                top:        50%;
+                left:       50%;
+                margin:     (0 - @icon-size / 2) auto auto (0 - @icon-size / 2);
+                fill:       #fff;
+            }
+            &.on{
+                color:      transparent;
+                .icon{
+                    fill:   transparent;
+                }
+                .icon-close{
+                    opacity:1;
+                }
+                .is-hover({
+                    color:  transparent;
+                    .icon{
+                        fill:   transparent;
+                    }
+                });
+            }
+        }
+
+
+    .screen-phone({
+        position:       relative;
+        height:         (@height-phone - 2);
+        line-height:    @height-phone;
+        flex:           0 0 auto;
+        &:before{
+            content:    "";
+            position:   absolute;
+            top:        0;
+            bottom:     0;
+            left:       0;
+            width:      1px;
+            background: linear-gradient(to bottom, fade(@color-border, 0%), ease, @color-border);
+        }
+        .item{
+            margin-left:@main-margin-phone;
+            // color:      @color-base;
+            color:      @color-base-dimmed;
+            .icon{
+                // fill:   @color-base;
+                fill:   @color-base-dimmed;
+            }
+            .is-hover({
+                color:  #fff;
+                .icon{
+                    fill:   #fff;
+                }
+                &:active{
+                    color:  @color-active;
+                    .icon{
+                        fill:   @color-active;
+                    }
+                }
+            });
+            &:active{
+                color:  @color-active;
+                .icon{
+                    fill:   @color-active;
+                }
+            }
+            &.on{
+                color:  #fff;
+                .icon{
+                    fill:   #fff;
+                }
+            }
+        }
+            .btn-toggle-compare{
+                &.on{
+                    color:      transparent;
+                    .icon{
+                        fill:   transparent;
+                    }
+                    .is-hover({
+                        color:  transparent;
+                        .icon{
+                            fill:   transparent;
+                        }
+                    });
+                }
+            }
+    });
+}
+
+.is-filtering .component{
+    transform:  translateX((@width-filter-focus - @width-filter));
+    opacity:    0;
+    .screen-phone({
+        transform:  none;
+    });
+}

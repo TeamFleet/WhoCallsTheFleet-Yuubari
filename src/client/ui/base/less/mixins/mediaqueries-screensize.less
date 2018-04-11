@@ -1,0 +1,51 @@
+@import '../color.less';
+@import '../tools.less';
+@import '../variables.less';
+
+.screen-max( @rules ){
+    @media all and (max-width: @layout-width-max){
+        &{
+            @rules();
+        }
+    }
+}
+
+.screen-t0( @rules ){
+    @media all and (max-width: @screen-t0){
+        &{
+            @rules();
+        }
+    }
+}
+
+.screen-t1( @rules ){
+    @media all and (max-width: @screen-t1){
+        &{
+            @rules();
+        }
+    }
+}
+
+.screen-tablet( @rules ){
+    @media all and (max-width: @screen-tablet){
+        &{
+            @rules();
+        }
+    }
+}
+
+.screen-phone( @rules ){
+    @media all and (max-width: @screen-phone){
+        &{
+            @rules();
+        }
+    }
+}
+
+.screen-phone-small( @rules ){
+    @media all and (max-width: @screen-phone-small){
+        &{
+            @rules();
+        }
+    }
+}
