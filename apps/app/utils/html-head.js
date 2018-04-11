@@ -34,6 +34,8 @@ export default (settings = {}) => {
         options.state = options.store.getState()
         dispatch = options.store.dispatch
     }
+    if (typeof options.dispatch === 'function')
+        dispatch = options.dispatch
 
     let { uri, title, subtitle, description, image, state } = options
     const curLocaleId = state.localeId || currentLocaleId

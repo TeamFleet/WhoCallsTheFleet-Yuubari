@@ -8,6 +8,7 @@ import {
     init, editBuild,
     decompressBuild,
 } from '@appLogic/fleets'
+import { update as updatePageTitle } from '@appLogic/page-title/api'
 
 import htmlHead from '@appUtils/html-head'
 
@@ -185,23 +186,35 @@ const PageFleetHeader = connect(state => {
     const {
         name,
         hq_lv,
-        currentFleet,
+        currentTab,
         _id: id,
     } = state.fleets.current
     return {
         name,
         hq_lv,
-        currentFleet,
+        currentTab,
         id
     }
 })(({
     className,
-    id, name, currentFleet,
+
+    id,
+    name = '__UNTITLED__',
+    currentTab,
+
+    dispatch,
 }) => {
+    setTimeout(() => {
+        // dispatch(updatePageTitle(name))
+        htmlHead({
+            title: `FLEET: ${name}`,
+            dispatch
+        })
+    })
     return (
         <Header
             className={className}
-            title={`${id} | ${name || '无标题'}`}
+            title={`${id} | ${name}`}
             tabs={[
                 '#1',
                 '#2',
@@ -210,7 +223,7 @@ const PageFleetHeader = connect(state => {
                 'BASE'
             ]}
             tabLink={false}
-            defaultIndex={0}
+            defaultIndex={currentTab}
             onTabChange={(tab) => {
                 console.log(tab)
             }}

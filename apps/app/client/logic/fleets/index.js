@@ -47,7 +47,7 @@ const defaults = {
 
     rating: -1,
 
-    currentFleet: 0,
+    currentTab: 0,
 }
 
 

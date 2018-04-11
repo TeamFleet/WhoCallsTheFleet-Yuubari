@@ -33,9 +33,7 @@ export const template = `
 
         <meta name="copyright" content="Copyright (c) 2017 fleet.moe">
 
-        <!--INJECT_META_START-->
-        <script>//inject_metas</script>
-        <!--INJECT_META_END-->
+        <!--INJECT_META_START--><script>//inject_metas</script><!--INJECT_META_END-->
 
         <script>//inject_critical_css</script>
         <!--<script>inject_style</script>-->
