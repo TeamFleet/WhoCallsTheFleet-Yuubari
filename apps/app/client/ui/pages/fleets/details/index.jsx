@@ -17,7 +17,8 @@ import Center from '@appUI/containers/center'
 import Button from '@appUI/components/button'
 import Title from '@appUI/components/title'
 import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
-import Header from '@appUI/components/main-header/main-options'
+// import Header from '@appUI/components/main-header/main-options'
+import Header from '@appUI/components/main-header/infos'
 
 @connect()
 export default class PageFleet extends React.Component {
@@ -90,12 +91,6 @@ class PageFleetContainer extends React.Component {
             !__CLIENT__ ||
             !this.mounted
         ) return
-
-        const ready = () => {
-            this.setState({
-                ready: true,
-            })
-        }
 
         // if (__CLIENT__ && __DEV__) {
         //     console.log(' ')
@@ -206,7 +201,19 @@ const PageFleetHeader = connect(state => {
     return (
         <Header
             className={className}
-            main={`${id} | ${name || '无标题'}`}
+            title={`${id} | ${name || '无标题'}`}
+            tabs={[
+                '#1',
+                '#2',
+                '#3',
+                '#4',
+                'BASE'
+            ]}
+            tabLink={false}
+            defaultIndex={0}
+            onTabChange={(tab) => {
+                console.log(tab)
+            }}
         />
     )
 })

@@ -31,18 +31,38 @@ export default class MainHeaderInfos extends React.Component {
     }
 
     renderTab(tabInfo, tabIndex) {
-        const { tabId, tabName } = tabInfo
-        const url = `${this.props.urlBase}${tabIndex ? `/${tabId}` : ''}`
+        const {
+            urlBase,
+            onTabChange,
+            tabLink = true,
+        } = this.props;
+
+        let tabId, tabName
+        if (Array.isArray(tabInfo)) {
+            tabId = tabInfo[0]
+            tabName = tabInfo[1]
+        } else if (typeof tabInfo === 'object') {
+            tabId = tabInfo.tabId
+            tabName = tabInfo.tabName
+        } else {
+            tabId = tabIndex
+            tabName = tabInfo
+        }
+        // const { tabId, tabName } = tabInfo
+        const url = tabLink
+            ? `${urlBase}${tabIndex ? `/${tabId}` : ''}`
+            : undefined
 
         if (__CLIENT__) {
             const current = typeof this.props.currentIndex === 'undefined'
                 ? this.state.currentIndex
                 : this.props.currentIndex
+            const Component = tabLink ? 'a' : 'span'
             return (
-                <a
+                <Component
                     href={url}
                     className={classNames([
-                        'tab', {
+                        'link', 'tab', {
                             'on': tabIndex === current
                         }
                     ])}
@@ -51,27 +71,29 @@ export default class MainHeaderInfos extends React.Component {
                         this.setState({
                             currentIndex: tabIndex
                         })
-                        if (typeof this.props.onTabChange === 'function') {
+                        if (typeof onTabChange === 'function') {
                             evt.preventDefault()
-                            this.props.onTabChange(tabId, tabIndex)
+                            onTabChange(tabId, tabIndex)
                         }
                         if (url) routerReplace(url)
                     }}
                 >
                     {tabName}
-                </a>
+                </Component>
             )
         } else {
-            const Tag = tabIndex ? Link : IndexLink
+            const Component = !tabLink
+                ? 'span'
+                : (tabIndex ? Link : IndexLink)
             return (
-                <Tag
+                <Component
                     to={url}
-                    className="tab"
+                    className="link tab"
                     activeClassName="on"
                     key={tabIndex}
                 >
                     {tabName}
-                </Tag>
+                </Component>
             )
         }
     }
@@ -93,7 +115,8 @@ export default class MainHeaderInfos extends React.Component {
             'urlBase',
             'currentIndex',
             'defaultIndex',
-            'onTabChange'
+            'onTabChange',
+            'tabLink',
         ].forEach(key => delete props[key])
 
         return (
