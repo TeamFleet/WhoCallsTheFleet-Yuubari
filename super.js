@@ -27,14 +27,14 @@ export const template = __CLIENT__ ? '' : require('./src/html').default
 // Object，路由配置
 // 无默认值
 // 同构模式：必须指定
-export const router = require('./src/router')
+export const router = require('./src/router').default
 
 // Object，Redux配置
 // 无默认值
 // 同构模式：必须指定
 export const redux = {
     // 附加 reducer，与 combineReducers 参数语法相同
-    combineReducers: require('./src/redux/reducers')
+    combineReducers: require('./src/redux/reducers').default
 }
 
 // Boolean，是否支持多语言
@@ -57,13 +57,13 @@ export const client = { // 扩展默认的启动流程
     // String，路由历史类型，支持 'browser' 'hash' 'memory'，同构时默认为 'browser'，其他情况默认为 'hash'
     history: 'browser',
     // Function，在启动前的回调
-    beforeRun: require('./src/super/client/before-run'),
+    beforeRun: require('./src/super/client/before-run').default,
     // Function，在启动后的回调
-    afterRun: require('./src/super/client/after-run'),
+    afterRun: require('./src/super/client/after-run').default,
     // Function，在路由发生改变时的回调
-    onRouterUpdate: require('./src/super/client/on-router-update'),
+    onRouterUpdate: require('./src/super/client/on-router-update').default,
     // Function，在浏览器历史发生改变时的回调
-    onHistoryUpdate: require('./src/super/client/on-history-update'),
+    onHistoryUpdate: require('./src/super/client/on-history-update').default,
 }
 
 // Function || Object，服务器端启动代码或配置
@@ -89,13 +89,13 @@ export const server = __CLIENT__ ? {} : { // 扩展默认的启动流程
     // String，服务器侦听的域名，多项目同构时必须提供
     domain: (() => process.env.SERVER_DOMAIN || 'localhost')(),
     // Object，注入内容
-    inject: require('./src/super/server/inject'),
+    inject: require('./src/super/server/inject').default,
     // Function，在启动前的回调
-    beforeRun: require('./src/super/server/before-run'),
+    beforeRun: require('./src/super/server/before-run').default,
     // Function，在启动后的回调
-    afterRun: require('./src/super/server/after-run'),
+    afterRun: require('./src/super/server/after-run').default,
     // Function，在渲染时的回调
-    onRender: require('./src/super/server/on-render'),
+    onRender: require('./src/super/server/on-render').default,
 }
 
 // Object，扩展默认webpack配置，参见下文

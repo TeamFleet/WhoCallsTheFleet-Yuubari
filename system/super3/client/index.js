@@ -78,7 +78,7 @@ export default ({
     reactApp.react.router.use({
         path: '',
         // component: App, 可扩展1层component
-        childRoutes: router
+        childRoutes: [router]
     })
 
 
@@ -94,6 +94,7 @@ export default ({
             onRouterUpdate,
             onHistoryUpdate,
         } = client
+
         reactApp.react.router.ext({
             onUpdate: () => {
                 // if (__DEV__) console.log('router onUpdate', self.__LATHPATHNAME__, location.pathname)

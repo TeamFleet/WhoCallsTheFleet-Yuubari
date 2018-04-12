@@ -14,7 +14,7 @@ import i18nOnServerRender from 'sp-i18n/onServerRender'
 
 //
 
-import { CHANGE_LANGUAGE, TELL_CLIENT_URL, SERVER_REDUCER_NAME, serverReducer } from '../server-redux'
+import { CHANGE_LANGUAGE, TELL_CLIENT_URL/*, SERVER_REDUCER_NAME, serverReducer*/ } from '../server-redux'
 import superClient from '../client'
 
 
@@ -23,7 +23,7 @@ import superClient from '../client'
 
 export default async ({
     name,
-    dir,
+    // dir,
     dist,
     template,
     i18n,
@@ -33,7 +33,7 @@ export default async ({
     client,
     server,
 }) => {
-    if (__DEV__) console.log('∞ Server initializing...')
+    if (__DEV__) console.log('\r\nServer initializing...')
 
 
 
@@ -60,14 +60,14 @@ export default async ({
     // ============================================================================
     // 载入目录、相关配置、自定模块等
     // ============================================================================
-    if (__DEV__) console.log('  ├─ client code initializing...')
-    const reactApp = superClient({
+    if (__DEV__) console.log('├─ client code initializing...')
+    const reactApp = await superClient({
         i18n,
         router,
         redux,
         client
     })
-    if (__DEV__) console.log('  ├─ client code inited')
+    if (__DEV__) console.log('├─ client code inited')
 
 
 
@@ -85,7 +85,7 @@ export default async ({
             localesObj[localeId] = localeFilePath
         })
         // 服务器端注册多语言
-        i18nRegister(availableLocales, locales)
+        i18nRegister(availableLocales, localesObj)
     }
 
 
@@ -108,11 +108,12 @@ export default async ({
     const app = new Koa()
 
     /* 扩展服务端特色处理的redux */
-    reactApp.redux.reducer.use(SERVER_REDUCER_NAME, serverReducer)
+    // console.log(reactApp.redux.reducer)
+    // reactApp.redux.reducer.use(SERVER_REDUCER_NAME, serverReducer)
 
     /* 静态目录,用于外界访问打包好的静态文件js、css等 */
     app.use(convert(koaStatic(
-        path.resolve(dir, dist, './public'),
+        path.resolve(dist, './public'),
         {
             maxage: 0,
             hidden: true,
@@ -181,14 +182,14 @@ export default async ({
         }
     })
 
-    app.use(async (ctx, next) => {
+    await app.use(async (ctx, next) => {
         if (!__DEV__) __webpack_public_path__ = `/${name}/` // TODO: 移动到配置里
         await next()
     })
 
     app.use(isomorphic)
 
-    if (__DEV__) console.log('  └─ ✔ Server inited.')
+    if (__DEV__) console.log('└─ ✔ Server inited.\r\n')
 
     return app
 }

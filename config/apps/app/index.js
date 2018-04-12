@@ -7,7 +7,7 @@ module.exports = (async () => ({
     // 
     domain: require('../../../src/config/site').domain,
     server: global.NOT_WEBPACK_RUN
-        ? require('../../../src/server').default
+        ? await require('../../../src/server').default()
         : '',
 
     //

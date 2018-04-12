@@ -12,15 +12,16 @@ import {
     server,
 } from '../super'
 
-export default superServer({
-    name,
-    dir,
-    dist,
-    template,
-    i18n,
-    locales,
-    router,
-    redux,
-    client,
-    server,
-})
+export default async () =>
+    await superServer({
+        name,
+        dir,
+        dist,
+        template,
+        i18n,
+        locales,
+        router,
+        redux,
+        client,
+        server,
+    })
