@@ -1,4 +1,3 @@
-// import { SERVER_REDUCER_NAME, serverReducer } from '@app/server/server-redux'
 import app from '@appLogic/app/reducer'
 import appMode from '@appLogic/app-mode/reducer'
 import bgimg from '@appLogic/bgimg/reducer'

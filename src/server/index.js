@@ -1,38 +1,38 @@
 if (__DEV__) console.log('∞ Server initializing...')
 
-const fs = require('fs-extra')
-const path = require('path')
+// const fs = require('fs-extra')
+// const path = require('path')
 const Koa = require('koa')
 const koaStatic = require('koa-static')
 const convert = require('koa-convert')
 
 import cookie from 'cookie'
 
-import isomorphicUtils from 'sp-isomorphic-utils'
+// import isomorphicUtils from 'sp-isomorphic-utils'
 
-import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
+// import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
 // import injectPWA from 'sp-pwa/inject-pwa'
 
-import { localeId as currentLocaleId, register as i18nRegister } from 'sp-i18n'
+import { /*localeId as currentLocaleId,*/ register as i18nRegister } from 'sp-i18n'
 import i18nOnServerRender from 'sp-i18n/onServerRender'
 import { availableLocales } from '@appConfig/i18n'
 
 import { reactApp } from '../client'
 import { template } from '../html'
 import { CHANGE_LANGUAGE, TELL_CLIENT_URL, SERVER_REDUCER_NAME, serverReducer } from './server-redux'
-import { init as dbInit } from '@appLogic/database'
+// import { init as dbInit } from '@appLogic/database'
 
 
 
 
 // ============================================================================
 // 载入目录、相关配置、自定模块等
-import { updateLocale as dbUpdateLocale } from '@appLogic/database'
+// import { updateLocale as dbUpdateLocale } from '@appLogic/database'
 const {
     pathNameDistWeb: distPathname,
     pathNameSub: appName
 } = require('../config/site')
-const dirs = require('../../../config/directories')
+// const dirs = require('../../../config/directories')
 const rootPath = process.cwd() + '/' + distPathname + '/public'
 // const webpackConfig = require('../../../config/webpack')
 
@@ -49,7 +49,7 @@ availableLocales.forEach(locale => {
 i18nRegister(availableLocales, locales)
 
 // await dbInit()
-dbInit()
+// dbInit()
 // })()
 
 
@@ -80,11 +80,11 @@ app.use(convert(koaStatic(
 
 // ============================================================================
 // 同构配置
-const getFile = filename => isomorphicUtils.getFile(filename, appName, distPathname)
-const getFileContent = filename => fs.readFileSync(
-    path.join(rootPath, getFile(filename)),
-    'utf-8'
-)
+// const getFile = filename => isomorphicUtils.getFile(filename, appName, distPathname)
+// const getFileContent = filename => fs.readFileSync(
+//     path.join(rootPath, getFile(filename)),
+//     'utf-8'
+// )
 
 const isomorphic = reactApp.isomorphic.createKoaMiddleware({
 
@@ -100,59 +100,59 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
     // 对HTML基础模板的自定义注入
     // 例如：<script>//inject_critical</script>  替换为 critical
     inject: {
-        htmlattr: () => ` data-locale="${currentLocaleId}" lang="${currentLocaleId}"`,
-        manifest: () => {
-            const filename = `manifest-${currentLocaleId}.json`
-            const { mtime } = __DEV__ ? '' : fs.statSync(path.join(rootPath, filename))
-            return `<link rel="manifest" href="/${filename}?${mtime ? mtime.valueOf() : ''}">`
-        },
-        svg_symbols: (() => {
-            const content = fs.readFileSync(
-                path.resolve(dirs.assets, './symbols/symbol-defs.svg'),
-                'utf8'
-            )
-                .replace(/<title>(.+?)<\/title>/g, '')
-                .replace(/\n/g, '')
+        // htmlattr: () => ` data-locale="${currentLocaleId}" lang="${currentLocaleId}"`,
+        // manifest: () => {
+        //     const filename = `manifest-${currentLocaleId}.json`
+        //     const { mtime } = __DEV__ ? '' : fs.statSync(path.join(rootPath, filename))
+        //     return `<link rel="manifest" href="/${filename}?${mtime ? mtime.valueOf() : ''}">`
+        // },
+        // svg_symbols: (() => {
+        //     const content = fs.readFileSync(
+        //         path.resolve(dirs.assets, './symbols/symbol-defs.svg'),
+        //         'utf8'
+        //     )
+        //         .replace(/<title>(.+?)<\/title>/g, '')
+        //         .replace(/\n/g, '')
 
-            return `<div class="hide">${content}</div>`
-                + (__DEV__ ? `<script>var __ICONSVG__ = \`${content}\`</script>` : '')
-        }),
+        //     return `<div class="hide">${content}</div>`
+        //         + (__DEV__ ? `<script>var __ICONSVG__ = \`${content}\`</script>` : '')
+        // }),
 
-        critical_css: (() => __DEV__
-            ? ''
-            : `<style type="text/css">${getFileContent('critical.css')}</style>`
-        )(),
+        // critical_css: (() => __DEV__
+        //     ? ''
+        //     : `<style type="text/css">${getFileContent('critical.css')}</style>`
+        // )(),
 
-        critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
-        // client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
-        // js: (() => ([
-        //     getFile('client.js')
-        // ]))(),
-        // css: [],
-        serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
-        // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')
+        // critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
+        // // client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
+        // // js: (() => ([
+        // //     getFile('client.js')
+        // // ]))(),
+        // // css: [],
+        // serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
+        // // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')
 
-        scripts: (() => {
-            let html = ''
-            const scripts = (__DEV__ ? [] : ['commons.js'])
-                .concat(['client.js'])
+        // scripts: (() => {
+        //     let html = ''
+        //     const scripts = (__DEV__ ? [] : ['commons.js'])
+        //         .concat(['client.js'])
 
-            if (__DEV__) html += `<script type="text/javascript" src="${getFile('critical.js')}"></script>`
-            else html += `<script type="text/javascript">${getFileContent('critical.js')}</script>`
+        //     if (__DEV__) html += `<script type="text/javascript" src="${getFile('critical.js')}"></script>`
+        //     else html += `<script type="text/javascript">${getFileContent('critical.js')}</script>`
 
-            scripts.forEach(filename => {
-                html += `<script type="text/javascript" src="${getFile(filename)}" onerror="onInitError()" defer></script>`
-            })
+        //     scripts.forEach(filename => {
+        //         html += `<script type="text/javascript" src="${getFile(filename)}" onerror="onInitError()" defer></script>`
+        //     })
 
-            return html
-        })(),
+        //     return html
+        // })(),
     },
 
     onServerRender: (obj) => {
-        if (__DEV__) {
-            console.log(' ')
-            console.log('[SERVER] onRender')
-        }
+        // if (__DEV__) {
+        //     console.log(' ')
+        //     console.log('[SERVER] onRender')
+        // }
 
         let { koaCtx, reduxStore } = obj
 
@@ -182,7 +182,7 @@ const isomorphic = reactApp.isomorphic.createKoaMiddleware({
         reduxStore.dispatch({ type: TELL_CLIENT_URL, data: koaCtx.origin })
 
         i18nOnServerRender(obj)
-        dbUpdateLocale()
+        // dbUpdateLocale()
     }
 })
 
@@ -193,6 +193,6 @@ app.use(async (ctx, next) => {
 
 app.use(isomorphic)
 
-if (__DEV__) console.log('✔ Server inited.')
+// if (__DEV__) console.log('✔ Server inited.')
 
 export default app

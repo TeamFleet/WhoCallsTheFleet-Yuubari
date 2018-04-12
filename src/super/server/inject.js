@@ -1,3 +1,23 @@
+import fs from 'fs-extra'
+import path from 'path'
+
+import { localeId as currentLocaleId } from 'sp-i18n'
+import isomorphicUtils from 'sp-isomorphic-utils'
+import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
+
+const {
+    pathNameDistWeb: distPathname,
+    pathNameSub: appName
+} = require('../../config/site')
+const dirs = require('../../../config/directories')
+const rootPath = process.cwd() + '/' + distPathname + '/public'
+
+const getFile = filename => isomorphicUtils.getFile(filename, appName, distPathname)
+const getFileContent = filename => fs.readFileSync(
+    path.join(rootPath, getFile(filename)),
+    'utf-8'
+)
+
 export default {
     htmlattr: () => ` data-locale="${currentLocaleId}" lang="${currentLocaleId}"`,
     manifest: () => {

@@ -1,5 +1,3 @@
-
-import { register as i18nRegister } from 'sp-i18n'
 import { init as dbInit } from '@appLogic/database'
 import prefs from '@appLogic/preferences'
 
@@ -10,9 +8,6 @@ export default () => {
     }
 
     return prefs.init()
-
-        // 注册多语言
-        .then(() => i18nRegister(__REDUX_STATE__))
 
         // 初始化数据库
         .then(() => dbInit())

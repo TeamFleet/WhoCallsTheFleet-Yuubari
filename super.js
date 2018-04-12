@@ -8,7 +8,7 @@ export default async () => ({
     isomorphic: true,
 
     // String，项目源码根目录，无默认值，必须指定。可为绝对路径或相对于项目根目录的相对路径
-    path: path.resolve(__dirname, './src/'),
+    dir: path.resolve(__dirname, './src/'),
 
     // String，HTML基础模板，无默认值，必须指定。
     template: './html',
@@ -51,7 +51,17 @@ export default async () => ({
         // String || Number，服务器启动端口
         port: '3000',
         // Function，Koa App
-        app: './super/server/app',
+        // app: './super/server/app',
+        koaStatic: {
+            maxage: 0,
+            hidden: true,
+            index: 'index.html',
+            defer: false,
+            gzip: true,
+            extensions: false
+        },
+        // Object，服务器专用的附加 Reducer，与 combineReducers 参数语法相同
+        // reducers: {},
         // String，服务器侦听的域名，多项目同构时必须提供
         domain: (() => process.env.SERVER_DOMAIN || 'localhost')(),
         // Object，注入内容
