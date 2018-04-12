@@ -1,5 +1,3 @@
-if (__DEV__) console.log('∞ Server initializing...')
-
 import cookie from 'cookie'
 
 //
@@ -33,15 +31,17 @@ export default async (config) => {
 
 
 
+    if (__DEV__) console.log('∞ Server initializing...')
+
+
+
+
     // ============================================================================
     // 载入目录、相关配置、自定模块等
     // ============================================================================
+    if (__DEV__) console.log('  ├─ client code initializing...')
     const reactApp = require('../client')(config)
-    // const {
-    //     pathNameDistWeb: distPathname,
-    //     pathNameSub: appName
-    // } = require('../config/site')
-    // const rootPath = process.cwd() + '/' + distPathname + '/public'
+    if (__DEV__) console.log('  ├─ client code inited')
 
 
 
@@ -103,6 +103,14 @@ export default async (config) => {
     // ============================================================================
     // 同构配置
     // ============================================================================
+    const template = getValue(dir, config.template)
+    const inject = getValue(dir, config.server.inject)
+
+    if (typeof template !== 'string')
+        throw new Error('Error: "template" type check fail!')
+
+    if (typeof inject !== 'object')
+        throw new Error('Error: "server.inject" type check fail!')
 
     const isomorphic = reactApp.isomorphic.createKoaMiddleware({
 
@@ -117,90 +125,43 @@ export default async (config) => {
 
         // 对HTML基础模板的自定义注入
         // 例如：<script>//inject_critical</script>  替换为 critical
-        inject: {
-            // htmlattr: () => ` data-locale="${currentLocaleId}" lang="${currentLocaleId}"`,
-            // manifest: () => {
-            //     const filename = `manifest-${currentLocaleId}.json`
-            //     const { mtime } = __DEV__ ? '' : fs.statSync(path.join(rootPath, filename))
-            //     return `<link rel="manifest" href="/${filename}?${mtime ? mtime.valueOf() : ''}">`
-            // },
-            // svg_symbols: (() => {
-            //     const content = fs.readFileSync(
-            //         path.resolve(dirs.assets, './symbols/symbol-defs.svg'),
-            //         'utf8'
-            //     )
-            //         .replace(/<title>(.+?)<\/title>/g, '')
-            //         .replace(/\n/g, '')
-
-            //     return `<div class="hide">${content}</div>`
-            //         + (__DEV__ ? `<script>var __ICONSVG__ = \`${content}\`</script>` : '')
-            // }),
-
-            // critical_css: (() => __DEV__
-            //     ? ''
-            //     : `<style type="text/css">${getFileContent('critical.css')}</style>`
-            // )(),
-
-            // critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
-            // // client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
-            // // js: (() => ([
-            // //     getFile('client.js')
-            // // ]))(),
-            // // css: [],
-            // serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
-            // // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')
-
-            // scripts: (() => {
-            //     let html = ''
-            //     const scripts = (__DEV__ ? [] : ['commons.js'])
-            //         .concat(['client.js'])
-
-            //     if (__DEV__) html += `<script type="text/javascript" src="${getFile('critical.js')}"></script>`
-            //     else html += `<script type="text/javascript">${getFileContent('critical.js')}</script>`
-
-            //     scripts.forEach(filename => {
-            //         html += `<script type="text/javascript" src="${getFile(filename)}" onerror="onInitError()" defer></script>`
-            //     })
-
-            //     return html
-            // })(),
-        },
+        inject,
 
         onServerRender: (obj) => {
-            // if (__DEV__) {
-            //     console.log(' ')
-            //     console.log('[SERVER] onRender')
-            // }
-
             let { koaCtx, reduxStore } = obj
 
-            let lang = (() => {
-
-                // 先查看URL参数是否有语音设置
-                // hl 这个参数名是参考了Instargram
-                let lang = koaCtx.query.hl
-
-                // 如果没有，检查cookie
-                const cookies = cookie.parse(koaCtx.request.header.cookie || '')
-                if (!lang && cookies.spLocaleId && cookies.spLocaleId !== 'null')
-                    lang = cookies.spLocaleId
-
-                // 如果没有，再看header里是否有语言设置
-                if (!lang)
-                    lang = koaCtx.header['accept-language']
-
-                // 如没有，再用默认
-                if (!lang)
-                    lang = 'en'
-
-                return lang
-            })()
-
-            reduxStore.dispatch({ type: CHANGE_LANGUAGE, data: lang })
             reduxStore.dispatch({ type: TELL_CLIENT_URL, data: koaCtx.origin })
 
-            i18nOnServerRender(obj)
-            // dbUpdateLocale()
+            if (i18n) {
+                let lang = (() => {
+
+                    // 先查看URL参数是否有语音设置
+                    // hl 这个参数名是参考了Instargram
+                    let lang = koaCtx.query.hl
+
+                    // 如果没有，检查cookie
+                    const cookies = cookie.parse(koaCtx.request.header.cookie || '')
+                    if (!lang && cookies.spLocaleId && cookies.spLocaleId !== 'null')
+                        lang = cookies.spLocaleId
+
+                    // 如果没有，再看header里是否有语言设置
+                    if (!lang)
+                        lang = koaCtx.header['accept-language']
+
+                    // 如没有，再用默认
+                    if (!lang)
+                        lang = 'en'
+
+                    return lang
+                })()
+
+                reduxStore.dispatch({ type: CHANGE_LANGUAGE, data: lang })
+                i18nOnServerRender(obj)
+            }
+
+            const onRender = getValue(dir, config.server.onRender)
+            if (typeof onRender === 'function')
+                onRender(obj)
         }
     })
 
@@ -211,7 +172,7 @@ export default async (config) => {
 
     app.use(isomorphic)
 
-    // if (__DEV__) console.log('✔ Server inited.')
+    if (__DEV__) console.log('  └─ ✔ Server inited.')
 
     return app
 }

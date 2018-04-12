@@ -26,9 +26,6 @@ export default (config) => {
     const {
         dir,
         locales,
-        client: {
-            history,
-        },
     } = config
     const i18n = Array.isArray(locales)
 
