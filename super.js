@@ -1,6 +1,9 @@
 import path from 'path'
 
 export default async () => ({
+    // String，项目标识名
+    name: 'app',
+
     // String，项目类型，无默认值，必须指定。目前支持 'react'。计划支持 'react-config' 'vue'
     type: 'react',
 

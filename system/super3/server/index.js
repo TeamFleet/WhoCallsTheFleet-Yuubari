@@ -23,10 +23,8 @@ import { CHANGE_LANGUAGE, TELL_CLIENT_URL, SERVER_REDUCER_NAME, serverReducer } 
 
 
 export default async (config) => {
-
-    // import { template } from '../html'
-
     const {
+        name,
         dir,
         locales,
     } = config
@@ -105,11 +103,6 @@ export default async (config) => {
     // ============================================================================
     // 同构配置
     // ============================================================================
-    // const getFile = filename => isomorphicUtils.getFile(filename, appName, distPathname)
-    // const getFileContent = filename => fs.readFileSync(
-    //     path.join(rootPath, getFile(filename)),
-    //     'utf-8'
-    // )
 
     const isomorphic = reactApp.isomorphic.createKoaMiddleware({
 
@@ -212,7 +205,7 @@ export default async (config) => {
     })
 
     app.use(async (ctx, next) => {
-        if (!__DEV__) __webpack_public_path__ = `/${appName}/` // TODO: 移动到配置里
+        if (!__DEV__) __webpack_public_path__ = `/${name}/` // TODO: 移动到配置里
         await next()
     })
 
