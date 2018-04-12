@@ -7,7 +7,7 @@ import {
 
     EQUIPMENTLIST_SCROLL,
     EQUIPMENTLIST_OBSERVER
-} from '../../redux/action-types.js'
+} from '@appRedux/action-types.js'
 
 export const init = (id, initialState) => ({
     type: EQUIPMENTLIST_INIT,

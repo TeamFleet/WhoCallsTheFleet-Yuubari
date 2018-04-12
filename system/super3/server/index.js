@@ -1,3 +1,4 @@
+import path from 'path'
 import cookie from 'cookie'
 
 //
@@ -13,25 +14,45 @@ import i18nOnServerRender from 'sp-i18n/onServerRender'
 
 //
 
-import getValue from './get-value'
 import { CHANGE_LANGUAGE, TELL_CLIENT_URL, SERVER_REDUCER_NAME, serverReducer } from '../server-redux'
+import superClient from '../client'
 
 
 
 
 
-export default async (config) => {
-    const {
-        name,
-        dir,
-        locales,
-    } = config
-    const i18n = Array.isArray(locales)
-
-
-
-
+export default async ({
+    name,
+    dir,
+    dist,
+    template,
+    i18n,
+    locales,
+    router,
+    redux,
+    client,
+    server,
+}) => {
     if (__DEV__) console.log('∞ Server initializing...')
+
+
+
+
+
+    // ============================================================================
+    // 相关检查、赋值
+    // ============================================================================
+    const {
+        inject,
+        onRender,
+    } = server
+
+    if (typeof template !== 'string')
+        throw new Error('Error: "template" type check fail!')
+
+    if (typeof inject !== 'object')
+        throw new Error('Error: "server.inject" type check fail!')
+
 
 
 
@@ -40,7 +61,12 @@ export default async (config) => {
     // 载入目录、相关配置、自定模块等
     // ============================================================================
     if (__DEV__) console.log('  ├─ client code initializing...')
-    const reactApp = require('../client')(config)
+    const reactApp = superClient({
+        i18n,
+        router,
+        redux,
+        client
+    })
     if (__DEV__) console.log('  ├─ client code inited')
 
 
@@ -56,7 +82,7 @@ export default async (config) => {
         locales.forEach(o => {
             const [localeId, localeFilePath] = o
             availableLocales.push(localeId)
-            localesObj[localeId] = getValue(dir, localeFilePath)
+            localesObj[localeId] = localeFilePath
         })
         // 服务器端注册多语言
         i18nRegister(availableLocales, locales)
@@ -68,7 +94,7 @@ export default async (config) => {
     // ============================================================================
     // callback: before run
     // ============================================================================
-    let beforeRun = getValue(dir, config.server.beforeRun)
+    const { beforeRun } = server
     if (typeof beforeRun === 'function') {
         await beforeRun()
     }
@@ -86,7 +112,7 @@ export default async (config) => {
 
     /* 静态目录,用于外界访问打包好的静态文件js、css等 */
     app.use(convert(koaStatic(
-        rootPath,
+        path.resolve(dir, dist, './public'),
         {
             maxage: 0,
             hidden: true,
@@ -103,15 +129,6 @@ export default async (config) => {
     // ============================================================================
     // 同构配置
     // ============================================================================
-    const template = getValue(dir, config.template)
-    const inject = getValue(dir, config.server.inject)
-
-    if (typeof template !== 'string')
-        throw new Error('Error: "template" type check fail!')
-
-    if (typeof inject !== 'object')
-        throw new Error('Error: "server.inject" type check fail!')
-
     const isomorphic = reactApp.isomorphic.createKoaMiddleware({
 
         // react-router 配置对象
@@ -159,7 +176,6 @@ export default async (config) => {
                 i18nOnServerRender(obj)
             }
 
-            const onRender = getValue(dir, config.server.onRender)
             if (typeof onRender === 'function')
                 onRender(obj)
         }

@@ -3,7 +3,7 @@ import {
     ENTER_APPMODE,
     LEAVE_APPMODE,
     APPMODE_ANIMATION_END
-} from '../../redux/action-types.js'
+} from '@appRedux/action-types.js'
 
 const initialState = {
     // mode: '',

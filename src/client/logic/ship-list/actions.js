@@ -17,7 +17,7 @@ import {
     SHIPLIST_COMPARE_REMOVE,
     SHIPLIST_COMPARE_SORT,
     SHIPLIST_COMPARE_SCROLL
-} from '../../redux/action-types.js'
+} from '@appRedux/action-types.js'
 
 export const init = (id, initialState) => ({
     type: SHIPLIST_INIT,

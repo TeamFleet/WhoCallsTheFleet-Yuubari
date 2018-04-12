@@ -42,7 +42,8 @@ module.exports = (options = {}) => {
                 path.resolve(pathApp, './client/critical.js')
             ],
             client: [
-                path.resolve(pathApp, `./client`)
+                // path.resolve(pathApp, `./client`)
+                path.resolve(pathApp, './client.js')
             ],
             "critical-extra-old-ie": [
                 "babel-polyfill",
@@ -238,6 +239,7 @@ module.exports = (options = {}) => {
                 "@appData": path.resolve(pathApp, './data'),
                 "@appConstants": path.resolve(pathApp, './constants'),
                 "@appConst": path.resolve(pathApp, './constants'),
+                "@appRedux": path.resolve(pathApp, './redux'),
 
                 '@appLocales': path.resolve(pathBase, './locales'),
                 '@appAssets': path.resolve(pathBase, './assets'),

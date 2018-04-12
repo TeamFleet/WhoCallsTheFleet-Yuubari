@@ -14,7 +14,6 @@ import {
 
 //
 
-import getValue from './get-value'
 import { SERVER_REDUCER_NAME, serverReducer } from '../server-redux'
 
 const ROUTER_REDUCDER_NAME = 'routing'
@@ -22,16 +21,12 @@ const ROUTER_REDUCDER_NAME = 'routing'
 
 
 
-export default (config) => {
-    const {
-        dir,
-        locales,
-    } = config
-    const i18n = Array.isArray(locales)
-
-
-
-
+export default ({
+    i18n,
+    router,
+    redux,
+    client
+}) => {
     // ============================================================================
     // React 初始化
     // ============================================================================
@@ -61,7 +56,7 @@ export default (config) => {
         reducers.localeId = i18nReducerLocaleId
         reducers.locales = i18nReducerLocales
     }
-    const combineReducers = getValue(dir, config.redux.combineReducers)
+    const { combineReducers } = redux
     if (typeof combineReducers === 'object') {
         for (let key in combineReducers) {
             reducers[key] = combineReducers[key]
@@ -77,15 +72,13 @@ export default (config) => {
     // ============================================================================
     // 路由初始化
     // ============================================================================
-
-    let router = getValue(dir, config.router)
     if (typeof router !== 'object') {
         router = {}
     }
     reactApp.react.router.use({
         path: '',
         // component: App, 可扩展1层component
-        childRoutes: [router]
+        childRoutes: router
     })
 
 
@@ -96,7 +89,11 @@ export default (config) => {
     // ============================================================================
 
     if (__CLIENT__) {
-        let onRouterUpdate = getValue(dir, config.client.onRouterUpdate)
+        const {
+            afterRun,
+            onRouterUpdate,
+            onHistoryUpdate,
+        } = client
         reactApp.react.router.ext({
             onUpdate: () => {
                 // if (__DEV__) console.log('router onUpdate', self.__LATHPATHNAME__, location.pathname)
@@ -107,7 +104,7 @@ export default (config) => {
 
         if (i18n) i18nRegister(__REDUX_STATE__)
 
-        let beforeRun = getValue(dir, config.client.beforeRun)
+        let { beforeRun } = client
         if (typeof beforeRun === 'function') {
             beforeRun = new Promise(resolve => {
                 beforeRun()
@@ -129,14 +126,12 @@ export default (config) => {
                     store.dispatch(actionUpdate(location))
                     // console.log(store.getState())
 
-                    const onHistoryUpdate = getValue(dir, config.client.onHistoryUpdate)
                     if (typeof onHistoryUpdate === 'function')
                         onHistoryUpdate(location, store)
                 }
             })
         )
             .then(() => {
-                const afterRun = getValue(dir, config.client.afterRun)
                 if (typeof afterRun === 'function') afterRun()
             })
     }
@@ -147,7 +142,5 @@ export default (config) => {
     // ============================================================================
     // 结束
     // ============================================================================
-    return {
-        reactApp
-    }
+    return reactApp
 }

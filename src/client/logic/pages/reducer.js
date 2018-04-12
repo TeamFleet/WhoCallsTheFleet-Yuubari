@@ -2,7 +2,7 @@ import {
     PAGE_INIT,
     PAGE_RESET,
     PAGE_UPDATE
-} from '../../redux/action-types'
+} from '@appRedux/action-types'
 
 export const TABINDEX = '__tabIndex'
 

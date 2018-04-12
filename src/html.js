@@ -1,4 +1,4 @@
-export const template = `
+export default `
     <!DOCTYPE html>
     <html<script>//inject_htmlattr</script>>
     <head>

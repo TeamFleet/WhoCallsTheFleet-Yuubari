@@ -1,6 +1,6 @@
 import {
     SWIPED_FROM_LEFT_EDGE
-} from '../../redux/action-types.js'
+} from '@appRedux/action-types.js'
 
 const initialState = 0
 

@@ -1,7 +1,7 @@
 import {
     APP_READY_UPDATE,
     MAIN_KEY_UPDATE,
-} from '../../redux/action-types.js'
+} from '@appRedux/action-types.js'
 
 export const updateAppReady = ready => ({
     type: APP_READY_UPDATE,

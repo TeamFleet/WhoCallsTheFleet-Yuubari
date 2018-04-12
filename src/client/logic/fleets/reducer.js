@@ -5,7 +5,7 @@ import {
     FLEETS_NEW_BUILD,
     FLEETS_REMOVE_BUILD,
     FLEETS_UPDATE_BUILD,
-} from '../../redux/action-types.js'
+} from '@appRedux/action-types.js'
 
 const initialState = {
     // builds: [],

@@ -4,7 +4,7 @@ import {
     REMOVE_BGIMG,
     CHANGE_BGIMG,
     LOADED_MAIN_BGIMG
-} from '../../redux/action-types.js';
+} from '@appRedux/action-types.js';
 
 const initialState = {
     isMainLoaded: false,

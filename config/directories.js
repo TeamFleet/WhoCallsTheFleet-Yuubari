@@ -1,7 +1,7 @@
 const path = require('path')
 
 const pathBase = typeof process === 'undefined' ? path.resolve(__dirname, '../') : process.cwd()
-const pathApp = path.resolve(pathBase, './apps/app')
+const pathApp = path.resolve(pathBase, './src')
 
 const pathNameDistWeb = 'dist-web'
 const _appName = 'app'

@@ -1,7 +1,7 @@
 const {
     pathNameDistWeb,
     _appName: appName
-} = require('../../../config/directories')
+} = require('../../config/directories')
 
 module.exports = {
     name: 'Who Calls The Fleet',

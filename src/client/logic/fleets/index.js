@@ -10,7 +10,7 @@ import {
     FLEETS_NEW_BUILD,
     FLEETS_REMOVE_BUILD,
     FLEETS_UPDATE_BUILD,
-} from '../../redux/action-types.js'
+} from '@appRedux/action-types.js'
 
 import routerPush from '@appUtils/router-push'
 import routerReplace from '@appUtils/router-replace'

@@ -5,9 +5,9 @@
 module.exports = (async () => ({
 
     // 
-    domain: require('../../../apps/app/config/site').domain,
+    domain: require('../../../src/config/site').domain,
     server: global.NOT_WEBPACK_RUN
-        ? require('../../../apps/app/server').default
+        ? require('../../../src/server').default
         : '',
 
     //

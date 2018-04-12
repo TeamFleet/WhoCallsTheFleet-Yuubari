@@ -4,7 +4,7 @@ import {
     REMOVE_BGIMG,
     CHANGE_BGIMG,
     LOADED_MAIN_BGIMG
-} from '../../redux/action-types.js';
+} from '@appRedux/action-types.js';
 
 export function init(newState) {
     return {
