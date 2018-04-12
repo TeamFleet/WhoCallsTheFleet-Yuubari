@@ -6,7 +6,7 @@ import {
     client,
 } from '../super'
 
-superClient({
+export default superClient({
     i18n,
     router,
     redux,

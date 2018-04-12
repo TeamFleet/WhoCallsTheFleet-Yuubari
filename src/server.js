@@ -12,7 +12,7 @@ import {
     server,
 } from '../super'
 
-superServer({
+export default superServer({
     name,
     dir,
     dist,
