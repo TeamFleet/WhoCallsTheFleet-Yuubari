@@ -19,6 +19,9 @@ import { SERVER_REDUCER_NAME, serverReducer } from '../server-redux'
 
 const ROUTER_REDUCDER_NAME = 'routing'
 
+
+
+
 export default (config) => {
     const {
         dir,
@@ -29,23 +32,12 @@ export default (config) => {
     } = config
     const i18n = Array.isArray(locales)
 
-    /**
-     * 路由初始化
-     */
 
-    let router = getValue(dir, config.router)
-    if (typeof router !== 'object') {
-        router = false
-    }
-    reactApp.react.router.use({
-        path: '',
-        // component: App, 可扩展1层component
-        childRoutes: [router]
-    })
 
-    /**
-     * React 初始化
-     */
+
+    // ============================================================================
+    // React 初始化
+    // ============================================================================
 
     const reactApp = new ReactApp({ rootDom: 'root' })
 
@@ -53,9 +45,12 @@ export default (config) => {
     reactApp.redux.middleware.use(routerMiddleware(browserHistory))
     if (__CLIENT__) self.routerHistory = browserHistory
 
-    /**
-     * Redux/Reducer 初始化
-     */
+
+
+
+    // ============================================================================
+    // Redux/Reducer 初始化
+    // ============================================================================
 
     const reducers = {
         // 路由状态扩展
@@ -79,9 +74,29 @@ export default (config) => {
         reactApp.redux.reducer.use(key, reducers[key])
     }
 
-    /**
-     * 客户端专用初始化流程
-     */
+
+
+
+    // ============================================================================
+    // 路由初始化
+    // ============================================================================
+
+    let router = getValue(dir, config.router)
+    if (typeof router !== 'object') {
+        router = {}
+    }
+    reactApp.react.router.use({
+        path: '',
+        // component: App, 可扩展1层component
+        childRoutes: [router]
+    })
+
+
+
+
+    // ============================================================================
+    // 客户端专用初始化流程
+    // ============================================================================
 
     if (__CLIENT__) {
         let onRouterUpdate = getValue(dir, config.client.onRouterUpdate)
@@ -99,7 +114,7 @@ export default (config) => {
         if (typeof beforeRun === 'function') {
             beforeRun = new Promise(resolve => {
                 beforeRun()
-                resolve()
+                    .then(() => resolve())
             })
         } else if (typeof beforeRun !== 'object' || typeof beforeRun.then !== 'function') {
             beforeRun = new Promise(resolve => resolve())
@@ -129,6 +144,12 @@ export default (config) => {
             })
     }
 
+
+
+
+    // ============================================================================
+    // 结束
+    // ============================================================================
     return {
         reactApp
     }
