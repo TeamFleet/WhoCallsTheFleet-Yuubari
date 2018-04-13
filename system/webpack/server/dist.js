@@ -1,7 +1,11 @@
 const common = require('../common')
-const factoryConfig = async(opt) => {
 
-    let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
+const factoryConfig = async ({
+    RUN_PATH,
+    // CLIENT_DEV_PORT,
+}) => {
+
+    // let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
 
     return {
         target: 'async-node',
@@ -25,4 +29,4 @@ const factoryConfig = async(opt) => {
     }
 }
 
-module.exports = async(opt) => await factoryConfig(opt)
+module.exports = async (opt) => await factoryConfig(opt)

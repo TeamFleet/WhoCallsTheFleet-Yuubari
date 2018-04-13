@@ -126,25 +126,22 @@ function handlerRules(customRules) {
     // =>
     if (customRules == 'default') {
         customRules = ruleMap['default']
-    } else
+    } else if (Array.isArray(customRules)) {
 
-        // =>
-        if (Array.isArray(customRules)) {
+        let _rlist = []
 
-            let _rlist = []
+        customRules.forEach((item) => {
 
-            customRules.forEach((item) => {
+            if (item == 'default') {
+                _rlist = _rlist.concat(ruleMap['default'])
+            } else {
+                _rlist.push(item)
+            }
 
-                if (item == 'default') {
-                    _rlist = _rlist.concat(ruleMap['default'])
-                } else {
-                    _rlist.push(item)
-                }
+        })
 
-            })
-
-            customRules = _rlist
-        }
+        customRules = _rlist
+    }
 
     return customRules
 }
@@ -207,6 +204,8 @@ const _afterBuild = async () => {
  */
 module.exports = async ({
     config,
+    dist,
+    aliases,
     beforeBuild,
     afterBuild,
 }) => {
@@ -214,6 +213,7 @@ module.exports = async ({
     if (typeof beforeBuild === 'function') await beforeBuild()
 
     if (typeof config === 'function') config = await config()
+    if (typeof config !== 'object') config = {}
 
     // webpack 执行用的配置对象
     let webpackConfigs = []
@@ -225,142 +225,144 @@ module.exports = async ({
      * 处理客户端配置文件
      * [n个应用] x [m个打包配置] = [webpack打包配置集合]
      */
-    async function handlerClientConfig() {
+    const handlerClientConfig = async () => {
 
         // 把装载的所有子应用的 webpack 配置都加上
-        const appsConfig = await require('../../config/apps')
+        // const appsConfig = await require('../../config/apps')
 
-        for (let appName in appsConfig) {
+        // for (let appName in appsConfig) {
 
-            let opt = { RUN_PATH, CLIENT_DEV_PORT, APP_KEY: appName }
-            let defaultConfig = await createDefaultConfig(opt)
-            let defaultSPAConfig = await createSPADefaultConfig(opt)
+        let opt = {
+            RUN_PATH,
+            CLIENT_DEV_PORT,
+            /*APP_KEY: appName */
+        }
+        let defaultConfig = await createDefaultConfig(opt)
+        let defaultSPAConfig = await createSPADefaultConfig(opt)
 
-            let appConfig = appsConfig[appName]
+        // let appConfig = appsConfig[appName]
 
-            // 如果没有webpack配置，则表示没有react，不需要打包
-            if (!appConfig.webpack) continue
+        // 如果没有webpack配置，则表示没有react，不需要打包
+        // if (!appConfig.webpack) continue
 
-            let clientConfigs = appConfig.webpack.client
+        let clientConfigs = config
 
-            // 统一转成数组，支持多个client配置
-            if (!Array.isArray(clientConfigs)) {
-                clientConfigs = [clientConfigs]
+        // 统一转成数组，支持多个client配置
+        if (!Array.isArray(clientConfigs)) {
+            clientConfigs = [clientConfigs]
+        }
+
+        clientConfigs.forEach((clientConfig) => {
+
+            let config = new WebpackConfig()
+            clientConfig = new WebpackConfig().merge(clientConfig)
+
+            // 跟进打包环境和用户自定义配置，扩展webpack配置
+            if (clientConfig.__ext) {
+                clientConfig.merge(clientConfig.__ext[ENV])
             }
 
-            clientConfigs.forEach((clientConfig) => {
+            let _defaultConfig = (() => {
 
-                let config = new WebpackConfig()
-                clientConfig = new WebpackConfig().merge(clientConfig)
+                let config = Object.assign({}, defaultConfig)
 
-                // 跟进打包环境和用户自定义配置，扩展webpack配置
-                if (clientConfig.__ext) {
-                    clientConfig.merge(clientConfig.__ext[ENV])
+                // 如果是SPA应用
+                if (clientConfig.spa) {
+                    config = Object.assign({}, defaultSPAConfig)
                 }
+                return config
+            })()
 
-                let _defaultConfig = (() => {
+            // 如果自定义了，则清除默认
+            if (clientConfig.entry) _defaultConfig.entry = undefined
+            if (clientConfig.output) _defaultConfig.output = undefined
 
-                    let config = Object.assign({}, defaultConfig)
+            //
+            // 如果自定义了plugins，则分析并实例化plugins内容
+            // 
+            if (clientConfig.plugins) {
 
-                    // 如果是SPA应用
-                    if (clientConfig.spa) {
-                        config = Object.assign({}, defaultSPAConfig)
-                    }
-                    return config
-                })()
+                const pluginMap = {}
 
-                // 如果自定义了，则清除默认
-                if (clientConfig.entry) _defaultConfig.entry = undefined
-                if (clientConfig.output) _defaultConfig.output = undefined
+                // 默认plugins
+                pluginMap['default'] = _defaultConfig.plugins
+                _defaultConfig.plugins = undefined
 
-                //
-                // 如果自定义了plugins，则分析并实例化plugins内容
-                // 
-                if (clientConfig.plugins) {
+                // 补充必须的打包环境变量
+                pluginMap['global'] = common.plugins(ENV, STAGE, clientConfig.spa)
 
-                    const pluginMap = {}
-
-                    // 默认plugins
-                    pluginMap['default'] = _defaultConfig.plugins
-                    _defaultConfig.plugins = undefined
-
-                    // 补充必须的打包环境变量
-                    pluginMap['global'] = common.plugins(ENV, STAGE, clientConfig.spa)
-
-                    // sp扩展的plugins
-                    pluginMap['pwa'] = common.factoryPWAPlugin({ appName: appName, outputPath: '' })
+                // sp扩展的plugins
+                // pluginMap['pwa'] = common.factoryPWAPlugin({ appName: appName, outputPath: '' })
 
 
-                    // 字符串且等于default，使用默认plugins
+                // 字符串且等于default，使用默认plugins
+                // =>
+                if (clientConfig.plugins == 'default') {
+                    clientConfig.plugins = pluginMap['global'].concat(pluginMap['default'])
+                } else if (Array.isArray(clientConfig.plugins)) {
+                    // 需要解析的plugins
                     // =>
-                    if (clientConfig.plugins == 'default') {
-                        clientConfig.plugins = pluginMap['global'].concat(pluginMap['default'])
-                    } else
 
-                        // 需要解析的plugins
-                        // =>
-                        if (Array.isArray(clientConfig.plugins)) {
+                    let _plist = []
 
-                            let _plist = []
+                    _plist = _plist.concat(pluginMap['global'])
 
-                            _plist = _plist.concat(pluginMap['global'])
+                    clientConfig.plugins.forEach((item) => {
 
-                            clientConfig.plugins.forEach((item) => {
-
-                                // 默认plugin列表
-                                if (item == 'default') {
-                                    _plist = _plist.concat(pluginMap['default'])
-                                }
-
-                                // 自定义plugin列表
-                                if (Array.isArray(item)) {
-                                    _plist = _plist.concat(item)
-                                }
-
-                                // sp的自定义plugin列表，key是名字，val是配置项
-                                if (typeof item == 'object') {
-
-                                    // sp的PWA配置
-                                    if (item['pwa']) {
-                                        let autoConfig = { appName: appName, outputPath: path.resolve(clientConfig.output ? clientConfig.output.path : _defaultConfig.output.path, '../') }
-                                        let opt = Object.assign({}, autoConfig, item['pwa'])
-                                        _plist.push(common.factoryPWAPlugin(opt))
-                                    }
-
-                                    // 
-                                    // .... 这里可以继续写sp自己的扩展plugin
-                                    // 
-                                }
-                            })
-
-                            // 把解析好的plugin列表反赋值给客户端配置
-                            clientConfig.plugins = _plist
+                        // 默认plugin列表
+                        if (item == 'default') {
+                            _plist = _plist.concat(pluginMap['default'])
                         }
 
-                        // =>
-                        else {
-                            new Error('plugins 配置内容有错误，必须是 array | [default]')
+                        // 自定义plugin列表
+                        if (Array.isArray(item)) {
+                            _plist = _plist.concat(item)
                         }
-                } else {
-                    // 未设置情况，需要补充给默认配置全局变量
-                    _defaultConfig.plugins = _defaultConfig.plugins.concat(common.plugins(ENV, STAGE, clientConfig.spa))
+
+                        // sp的自定义plugin列表，key是名字，val是配置项
+                        if (typeof item == 'object') {
+
+                            // sp的PWA配置
+                            // if (item['pwa']) {
+                            //     let autoConfig = { appName: appName, outputPath: path.resolve(clientConfig.output ? clientConfig.output.path : _defaultConfig.output.path, '../') }
+                            //     let opt = Object.assign({}, autoConfig, item['pwa'])
+                            //     _plist.push(common.factoryPWAPlugin(opt))
+                            // }
+
+                            // 
+                            // .... 这里可以继续写sp自己的扩展plugin
+                            // 
+                        }
+                    })
+
+                    // 把解析好的plugin列表反赋值给客户端配置
+                    clientConfig.plugins = _plist
                 }
 
-                //
-                // 如果自定义了loader，则分析并实例化loader
-                //
-                if (clientConfig.module && clientConfig.module.rules) {
-                    clientConfig.module.rules = handlerRules(clientConfig.module.rules)
-                    _defaultConfig.module.rules = undefined
+                // =>
+                else {
+                    new Error('plugins 配置内容有错误，必须是 array | [default]')
                 }
+            } else {
+                // 未设置情况，需要补充给默认配置全局变量
+                _defaultConfig.plugins = _defaultConfig.plugins.concat(common.plugins(ENV, STAGE, clientConfig.spa))
+            }
 
-                config
-                    .merge(_defaultConfig)
-                    .merge(clientConfig)
+            //
+            // 如果自定义了loader，则分析并实例化loader
+            //
+            if (clientConfig.module && clientConfig.module.rules) {
+                clientConfig.module.rules = handlerRules(clientConfig.module.rules)
+                _defaultConfig.module.rules = undefined
+            }
 
-                webpackConfigs.push(config)
-            })
-        }
+            config
+                .merge(_defaultConfig)
+                .merge(clientConfig)
+
+            webpackConfigs.push(config)
+        })
+        // }
     }
 
     /**
@@ -368,48 +370,48 @@ module.exports = async ({
      * [n个应用] 公用1个服务端打包配置，并且merge了client的相关配置
      * 注：如果客户端的配置有特殊要求或者冲突，则需要手动调整下面的代码
      */
-    async function handlerServerConfig() {
+    const handlerServerConfig = async () => {
 
         // 服务端需要全部子项目的配置集合
         // 先合并全部子项目的配置内容
         // 再合并到服务端配置里
 
-        const appsConfig = await require('../../config/apps')
+        // const appsConfig = await require('../../config/apps')
         let tempClientConfig = new WebpackConfig()
 
-        for (let appName in appsConfig) {
+        // for (let appName in appsConfig) {
 
-            // 如果没有webpack配置，则表示没有react，不需要打包
-            if (!appsConfig[appName].webpack) continue
+        // 如果没有webpack配置，则表示没有react，不需要打包
+        // if (!appsConfig[appName].webpack) continue
 
-            let clientConfig = appsConfig[appName].webpack.client
+        let clientConfig = config
 
-            if (!Array.isArray(clientConfig))
-                clientConfig = [clientConfig]
+        if (!Array.isArray(clientConfig))
+            clientConfig = [clientConfig]
 
-            clientConfig.forEach((config) => {
+        clientConfig.forEach((config) => {
 
-                //
-                // 如果自定义了loader，则分析并实例化loader
-                //
-                if (config.module && config.module.rules) {
-                    config.module.rules = handlerRules(config.module.rules)
-                }
+            //
+            // 如果自定义了loader，则分析并实例化loader
+            //
+            if (config.module && config.module.rules) {
+                config.module.rules = handlerRules(config.module.rules)
+            }
 
-                tempClientConfig.merge(config)
-            })
-        }
+            tempClientConfig.merge(config)
+        })
+        // }
 
         let opt = { RUN_PATH, CLIENT_DEV_PORT }
         let defaultConfig = await createDefaultConfig(opt)
-        let config = new WebpackConfig()
+        let thisConfig = new WebpackConfig()
 
 
 
         // 注:在某些项目里，可能会出现下面的加载顺序有特定的区别，需要自行加判断
         //    利用每个app的配置，设置 include\exclude 等。
 
-        config
+        thisConfig
             .merge(defaultConfig)
             .merge({
                 module: tempClientConfig.module || { rules: common.rules },
@@ -418,10 +420,13 @@ module.exports = async ({
             })
 
         // 如果用户自己配置了服务端打包路径，则覆盖默认的
+        if (dist) {
+            thisConfig.output.path = path.resolve(dist, './server')
+        }
         // if (SYSTEM_CONFIG.WEBPACK_SERVER_OUTPATH)
         //     config.output.path = path.resolve(RUN_PATH, SYSTEM_CONFIG.WEBPACK_SERVER_OUTPATH)
 
-        webpackConfigs.push(config)
+        webpackConfigs.push(thisConfig)
     }
 
     // 客户端开发模式

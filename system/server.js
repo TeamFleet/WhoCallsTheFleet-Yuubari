@@ -4,24 +4,42 @@
 
 import { AppContainer } from 'super-project/AppContainer'
 
-const serverConfig = require('../config/system')
+// import {
+//     COOKIE_KEYS,
+//     SERVER_PORT,
+// } from '../super.build'
+import {
+    server as _server
+} from '../super'
+
+const {
+    domain,
+    port,
+    cookieKeys,
+} = _server
+
+// const serverConfig = require('../config/system')
 const server = new AppContainer()
 
 /* 公用的koa配置 */
 
-server.app.keys = serverConfig.COOKIE_KEYS
+server.app.keys = cookieKeys
 
 /* 公用koa中间件 */
 
 require('./middleware')(server)
 
 /* 挂载子应用 */
-;(async(server) => {
-    const appsConfig = await require('../config/apps')
-    for (let appName in appsConfig) {
-        let config = appsConfig[appName]
-        server.addSubApp(config.domain, config.server) // 、、、、、、、、、、、因为是异步的，server内容可能不全！！！
-    }
+; (async (server) => {
+    // const appsConfig = await require('../config/apps')
+    // for (let appName in appsConfig) {
+    //     let config = appsConfig[appName]
+    //     server.addSubApp(config.domain, config.server) // 、、、、、、、、、、、因为是异步的，server内容可能不全！！！
+    // }
+    server.addSubApp(
+        domain,
+        await require('../src/server').default()
+    ) // 、、、、、、、、、、、因为是异步的，server内容可能不全！！！
 })(server)
 
 // const appsConfig = require('../config/apps')
@@ -35,4 +53,4 @@ server.mountSwitchSubAppMiddleware()
 
 /* 系统运行 */
 
-server.run(serverConfig.SERVER_PORT)
+server.run(port)

@@ -22,6 +22,7 @@ module.exports = {
 
     _app: pathApp,
     _appUI: path.resolve(pathApp, './client/ui'),
-    _appOutput: path.resolve(pathDistWeb, `public/${_appName}/`),
+    // _appOutput: path.resolve(pathDistWeb, `public/${_appName}/`),
+    _appOutput: path.resolve(pathDistWeb, `public/includes/`),
     _appName,
 }

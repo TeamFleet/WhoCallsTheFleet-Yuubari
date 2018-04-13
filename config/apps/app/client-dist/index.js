@@ -8,10 +8,10 @@ const {
     // _app: pathApp,
     nodeModules: pathNodeModules,
     _appOutput: pathOutput,
-    _appName: pathNameSub,
+    // _appName: pathNameSub,
     // ...dirs
 } = require('../../../directories.js')
-const publicPath = `/${pathNameSub}/`
+const publicPath = `/includes/`
 
 const pluginCopyImages = require('../base/plugin-copy-images')
 
@@ -72,10 +72,10 @@ module.exports = (async () => {
                     {
                         'pwa': {
                             outputPath: path.resolve(pathOutput, '../'),
-                            outputFilename: `service-worker.${pathNameSub}.js`,
+                            outputFilename: `service-worker.js`,
                             outputFilenameHash: false,
                             // customServiceWorkerPath: path.normalize(appPath + '/src/client/custom-service-worker.js'),
-                            globPattern: `/${pathNameSub}/**/*`,
+                            globPattern: `/$includes/**/*`,
                             globOptions: {
                                 ignore: [
                                     '/**/_*/',

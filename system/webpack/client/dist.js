@@ -5,17 +5,20 @@ const common = require('../common')
 
 const WebpackOnBuildPlugin = require('on-build-webpack')
 
-const factoryConfig = async(opt) => {
+const factoryConfig = async (/*{
+    // RUN_PATH,
+    // CLIENT_DEV_PORT,
+}*/) => {
 
-    let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
+    // let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
 
     return {
         target: 'web',
         // devtool: 'source-map',
         entry: {
-            client: [
-                path.resolve(RUN_PATH, `./apps/${APP_KEY}/client/index.js`)
-            ]
+            // client: [
+            //     path.resolve(RUN_PATH, `./apps/${APP_KEY}/client/index.js`)
+            // ]
         },
         module: {
             rules: [...common.rules]
@@ -137,4 +140,4 @@ const factoryConfig = async(opt) => {
     }
 }
 
-module.exports = async(opt) => await factoryConfig(opt)
+module.exports = async (opt) => await factoryConfig(opt)

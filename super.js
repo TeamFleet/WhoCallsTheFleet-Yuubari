@@ -17,7 +17,7 @@ export const isomorphic = true
 export const dir = path.resolve(__dirname, './src/')
 
 // String，打包目标目录
-export const dist = path.resolve(dir, '../dist-web/')
+export const dist = path.resolve('./dist-web/')
 
 // String，HTML基础模板
 // 无默认值，必须指定
@@ -105,11 +105,11 @@ export const server = __SERVER__ ? { // 扩展默认的启动流程
 
 // Object，扩展默认webpack配置，参见下文
 // export const webpack = {} // 非同构时，只需要配置client模式
-export const webpack = isDoWebpack
-    ? {
-        client: {},
-        server: {},
-    } : {}
+// export const webpack = isDoWebpack
+//     ? {
+//         client: {},
+//         server: {},
+//     } : {}
 
-// Object，PWA相关配置，参见下文
-export const pwa = {}
+// // Object，PWA相关配置，参见下文
+// export const pwa = {}

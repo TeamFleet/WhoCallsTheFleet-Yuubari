@@ -1,9 +1,12 @@
 const webpack = require('webpack')
 const common = require('../common')
 
-const factoryConfig = async(opt) => {
+const factoryConfig = async ({
+    RUN_PATH,
+    CLIENT_DEV_PORT,
+}) => {
 
-    let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
+    // let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
 
     // 此处引用 Webpack dev server 的文件，动态打包更新
     const publicPath = `http://localhost:${CLIENT_DEV_PORT}/dist`
@@ -34,4 +37,4 @@ const factoryConfig = async(opt) => {
     }
 }
 
-module.exports = async(opt) => await factoryConfig(opt)
+module.exports = async (opt) => await factoryConfig(opt)

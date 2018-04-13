@@ -12,7 +12,7 @@ const {
 const dirs = require('../../../config/directories')
 const rootPath = process.cwd() + '/' + distPathname + '/public'
 
-const getFile = filename => isomorphicUtils.getFile(filename, appName, distPathname)
+const getFile = filename => isomorphicUtils.getFile(filename, __SERVER__ ? '' : 'includes', distPathname)
 const getFileContent = filename => fs.readFileSync(
     path.join(rootPath, getFile(filename)),
     'utf-8'
