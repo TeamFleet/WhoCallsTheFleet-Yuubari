@@ -1,6 +1,8 @@
 // 此文件可或者 koa 中间件，所有 app 都会用到
 // 扩展时候需考虑普适性
 
+const path = require('path')
+
 module.exports = (server) => {
 
 
@@ -8,7 +10,8 @@ module.exports = (server) => {
 
     const koaStatic = require('koa-static')
     const convert = require('koa-convert')
-    const rootPath = process.cwd() + '/dist/public'
+    // const rootPath = process.cwd() + '/dist/public'
+    const rootPath = path.resolve(__DIST__, './public')
     const option = {
         maxage: 0,
         hidden: true,

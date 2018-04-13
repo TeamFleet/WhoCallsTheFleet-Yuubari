@@ -4,10 +4,12 @@ const path = require('path')
 
 const superBuild = require('./system/webpack/enter')
 
-//
-
+// String
+// 打包目标目录
 const dist = path.resolve('./dist-web/')
 
+// Object || Function
+// Webpack 配置对象或生成方法
 const config = async () => {
     // 描述环境
     // dev 开发 | dist 部署
@@ -26,6 +28,9 @@ const config = async () => {
     return {}
 }
 
+// Object
+// 目录或文件别名
+// 在项目内的 Javascript 和 CSS/Less/Sass 代码中均可直接使用
 const aliases = {
 
 }
@@ -41,6 +46,6 @@ superBuild({
     afterBuild,
 })
 
-module.exports = {
-    dist
-}
+// module.exports = {
+//     dist
+// }

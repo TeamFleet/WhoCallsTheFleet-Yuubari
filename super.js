@@ -16,9 +16,6 @@ export const isomorphic = true
 // 无默认值，必须指定
 export const dir = path.resolve(__dirname, './src/')
 
-// String，打包目标目录
-export const dist = path.resolve('./dist-web/')
-
 // String，HTML基础模板
 // 无默认值，必须指定
 // 同构模式、客户端环境：忽略

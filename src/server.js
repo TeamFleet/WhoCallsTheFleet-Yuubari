@@ -2,7 +2,6 @@ import superServer from '../system/super3/server'
 import {
     name,
     dir,
-    dist,
     template,
     i18n,
     locales,
@@ -16,7 +15,6 @@ export default async () =>
     await superServer({
         name,
         dir,
-        dist,
         template,
         i18n,
         locales,

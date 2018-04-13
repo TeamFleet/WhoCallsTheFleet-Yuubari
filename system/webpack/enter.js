@@ -212,6 +212,10 @@ module.exports = async ({
     await _beforeBuild()
     if (typeof beforeBuild === 'function') await beforeBuild()
 
+    // 将打包目录存入环境变量
+    // 在打包时，会使用 DefinePlugin 插件将该值赋值到 __DIST__ 全部变量中，以供项目内代码使用
+    process.env.__SUPER_DIST__ = dist
+
     if (typeof config === 'function') config = await config()
     if (typeof config !== 'object') config = {}
 

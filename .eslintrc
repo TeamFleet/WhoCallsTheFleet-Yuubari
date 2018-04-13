@@ -34,6 +34,7 @@
     // 全局变量
     // ture 可以被重写，false 不可以被重写
     "globals": {
+        "__DIST__": false,
         "__DEV__": false,
         "__CLIENT__": false,
         "__SERVER__": false,

@@ -5,9 +5,7 @@ const common = require('../common')
 
 const WebpackOnBuildPlugin = require('on-build-webpack')
 
-const {
-    dist
-} = require(path.resolve(process.cwd(), './super.build'))
+const dist = process.env.__SUPER_DIST__
 
 const factoryConfig = async (/*{
     // RUN_PATH,

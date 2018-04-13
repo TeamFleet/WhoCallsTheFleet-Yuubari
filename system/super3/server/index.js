@@ -24,7 +24,6 @@ import superClient from '../client'
 export default async ({
     name,
     // dir,
-    dist,
     template,
     i18n,
     locales,
@@ -113,7 +112,7 @@ export default async ({
 
     /* 静态目录,用于外界访问打包好的静态文件js、css等 */
     app.use(convert(koaStatic(
-        path.resolve(dist, './public'),
+        path.resolve(__DIST__, './public'),
         {
             maxage: 0,
             hidden: true,
