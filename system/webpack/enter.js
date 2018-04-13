@@ -1,3 +1,5 @@
+process.env.DO_WEBPACK = true
+
 //
 const fs = require('fs-extra')
 const path = require('path')
@@ -26,7 +28,10 @@ const ENV = process.env.WEBPACK_BUILD_ENV || 'dev'
 const STAGE = process.env.WEBPACK_STAGE_MODE || 'client'
 
 // 用户自定义系统配置
-const SYSTEM_CONFIG = require('../../config/system')
+// const SYSTEM_CONFIG = require('../../config/system')
+// const DIST_PATH = require('')
+
+process.env.DO_WEBPACK = false
 
 /**
  * 修复配置
@@ -190,10 +195,25 @@ async function getConfigFactory(path) {
     return factory
 }
 
+const _beforeBuild = async () => {
+
+}
+const _afterBuild = async () => {
+
+}
+
 /**
  * Webpack 运行入口方法
  */
-async function justDoooooooooooooIt() {
+module.exports = async ({
+    config,
+    beforeBuild,
+    afterBuild,
+}) => {
+    await _beforeBuild()
+    if (typeof beforeBuild === 'function') await beforeBuild()
+
+    if (typeof config === 'function') config = await config()
 
     // webpack 执行用的配置对象
     let webpackConfigs = []
@@ -398,8 +418,8 @@ async function justDoooooooooooooIt() {
             })
 
         // 如果用户自己配置了服务端打包路径，则覆盖默认的
-        if (SYSTEM_CONFIG.WEBPACK_SERVER_OUTPATH)
-            config.output.path = path.resolve(RUN_PATH, SYSTEM_CONFIG.WEBPACK_SERVER_OUTPATH)
+        // if (SYSTEM_CONFIG.WEBPACK_SERVER_OUTPATH)
+        //     config.output.path = path.resolve(RUN_PATH, SYSTEM_CONFIG.WEBPACK_SERVER_OUTPATH)
 
         webpackConfigs.push(config)
     }
@@ -485,6 +505,9 @@ async function justDoooooooooooooIt() {
     DEBUG && console.log('-----------------------------------------')
     DEBUG && console.log(JSON.stringify(webpackConfigs))
     DEBUG && console.log('============== Webpack Debug End =============')
+
+    await _afterBuild()
+    if (typeof afterBuild === 'function') await afterBuild()
 }
 
-justDoooooooooooooIt()
+// justDoooooooooooooIt()

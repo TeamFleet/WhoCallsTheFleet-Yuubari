@@ -22,7 +22,9 @@ export const dist = path.resolve(dir, '../dist-web/')
 // String，HTML基础模板
 // 无默认值，必须指定
 // 同构模式、客户端环境：忽略
-export const template = __CLIENT__ ? '' : require('./src/html').default
+export const template = (__SERVER__ || __SPA__)
+    ? require('./src/html').default
+    : ''
 
 // Object，路由配置
 // 无默认值
@@ -44,11 +46,12 @@ export const i18n = true
 // 无默认值
 // i18n 为 true 时必须指定，否则会忽略
 // 第一个语言为默认语言
-export const locales = __CLIENT__ ? [] : [
-    ['en', require(`./locales/en.json`)],
-    ['zh', require(`./locales/zh.json`)],
-    ['ja', require(`./locales/ja.json`)],
-]
+export const locales = (__SERVER__ || __SPA__)
+    ? [
+        ['en', require(`./locales/en.json`)],
+        ['zh', require(`./locales/zh.json`)],
+        ['ja', require(`./locales/ja.json`)],
+    ] : []
 
 // Function || Object，客户端启动代码或配置
 // 可不指定
@@ -71,9 +74,13 @@ export const client = { // 扩展默认的启动流程
 // 非同构模式：忽略
 // 客户端环境：忽略
 // export const server = require('/src/app1/server'), // 替代默认的服务器端启动流程
-export const server = __CLIENT__ ? {} : { // 扩展默认的启动流程
+export const server = __SERVER__ ? { // 扩展默认的启动流程
+    // String，服务器侦听的域名，多项目同构时必须提供
+    domain: (() => process.env.SERVER_DOMAIN || 'localhost')(),
     // String || Number，服务器启动端口
-    port: '3000',
+    port: process.env.SERVER_PORT || (process.env.WEBPACK_BUILD_ENV === 'dev' ? '3000' : '8080'),
+    // Array，Cookie键值
+    cookieKeys: ['super-project-key'],
     // Function，Koa App
     // app: './super/server/app',
     koaStatic: {
@@ -86,8 +93,6 @@ export const server = __CLIENT__ ? {} : { // 扩展默认的启动流程
     },
     // Object，服务器专用的附加 Reducer，与 combineReducers 参数语法相同
     // reducers: {},
-    // String，服务器侦听的域名，多项目同构时必须提供
-    domain: (() => process.env.SERVER_DOMAIN || 'localhost')(),
     // Object，注入内容
     inject: require('./src/super/server/inject').default,
     // Function，在启动前的回调
@@ -96,14 +101,15 @@ export const server = __CLIENT__ ? {} : { // 扩展默认的启动流程
     afterRun: require('./src/super/server/after-run').default,
     // Function，在渲染时的回调
     onRender: require('./src/super/server/on-render').default,
-}
+} : {}
 
 // Object，扩展默认webpack配置，参见下文
 // export const webpack = {} // 非同构时，只需要配置client模式
-export const webpack = {
-    client: {},
-    server: {},
-}
+export const webpack = isDoWebpack
+    ? {
+        client: {},
+        server: {},
+    } : {}
 
 // Object，PWA相关配置，参见下文
 export const pwa = {}

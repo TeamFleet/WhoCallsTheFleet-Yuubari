@@ -21,9 +21,9 @@
 
         "prebuild": "node ./scripts/database.js && node ./scripts/less-variables",
         "build": "npm run clean:web && npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web && npm run clean:web:sourcemap",
-        "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
-        "build:electron": "rimraf ./dist-electron && cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
-        "build:app": "node ./scripts/build-app",
+        "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./super.build.js",
+        "build:electron": "rimraf ./dist-electron && cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client node ./super.build.js",
+        "build:app": "cross-env NAME=CompileDesktopApp node ./scripts/build-app",
 
         "dev": "npm run prebuild && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
@@ -37,14 +37,14 @@
         "pm2:dev:server": "pm2 restart pm2.json --only fleet-dev-server",
         "pm2:dev:run": "pm2 restart pm2.json --only fleet-dev-run --watch",
 
-        "dev:bundle:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=client WEBPACK_DEV_SERVER_PORT=3001 node ./system/webpack/enter",
-        "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./system/webpack/enter",
-        "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./system/webpack/enter",
-        "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./system/webpack/enter",
+        "dev:bundle:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=client WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
+        "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
+        "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./super.build.js",
+        "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./super.build.js",
         "prod:run": "cross-env TEST=test node ./dist-web/server",
         "server:run": "cross-env SERVER_DOMAIN=yuubari.fleet.moe node ./dist-web/server",
         "server:run:test": "cross-env SERVER_DOMAIN=yuubari.fleet.test node ./dist-web/server",
-        "analyze": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client WEBPACK_ANALYZER=true node ./system/webpack/enter",
+        "analyze": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client WEBPACK_ANALYZER=true node ./super.build.js",
 
         "test:server": "npm run prod:bundle:server && npm run prod:run",
 
