@@ -33,7 +33,7 @@ const {
     pathPackageAssets,
     pathPackageOut
 } = require('./build-app/dir')
-const pathWebpackEnter = './system/webpack/enter'
+const pathWebpackEnter = './super.build.js'
 const pathStartElectron = path.resolve(pathRoot, 'apps/app/electron.js')
 
 // --------------------------------------------------
