@@ -463,7 +463,7 @@ module.exports = async ({
         // 执行打包
         const compiler = webpack(makeItButter(webpackConfigs))
 
-        compiler.run((err, stats) => {
+        await compiler.run((err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)
 
             console.log(stats.toString({
@@ -479,7 +479,7 @@ module.exports = async ({
 
         await handlerServerConfig()
 
-        webpack(makeItButter(webpackConfigs), (err, stats) => {
+        await webpack(makeItButter(webpackConfigs), (err, stats) => {
             if (err) console.log(`webpack dev error: ${err}`)
 
             console.log(stats.toString({
@@ -496,7 +496,7 @@ module.exports = async ({
 
         await handlerServerConfig()
 
-        webpack(makeItButter(webpackConfigs), (err, stats) => {
+        await webpack(makeItButter(webpackConfigs), (err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)
 
             console.log(stats.toString({
@@ -506,9 +506,25 @@ module.exports = async ({
         })
     }
 
-    DEBUG && console.log('执行配置：')
-    DEBUG && console.log('-----------------------------------------')
-    DEBUG && console.log(JSON.stringify(webpackConfigs))
+    // DEBUG && console.log('执行配置：')
+    // DEBUG && console.log('-----------------------------------------')
+    // DEBUG && console.log(JSON.stringify(webpackConfigs))
+    if (DEBUG) {
+        await fs.ensureDir(
+            path.resolve(
+                RUN_PATH,
+                `./logs/webpack-config`
+            )
+        )
+        await fs.writeFile(
+            path.resolve(
+                RUN_PATH,
+                `./logs/webpack-config/${STAGE}.${ENV}.${Date.now()}.json`
+            ),
+            JSON.stringify(webpackConfigs, null, '\t'),
+            'utf-8'
+        )
+    }
     DEBUG && console.log('============== Webpack Debug End =============')
 
     await _afterBuild()

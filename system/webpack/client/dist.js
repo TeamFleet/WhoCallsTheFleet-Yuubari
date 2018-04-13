@@ -5,6 +5,10 @@ const common = require('../common')
 
 const WebpackOnBuildPlugin = require('on-build-webpack')
 
+const {
+    dist
+} = require(path.resolve(process.cwd(), './super.build'))
+
 const factoryConfig = async (/*{
     // RUN_PATH,
     // CLIENT_DEV_PORT,
@@ -76,18 +80,33 @@ const factoryConfig = async (/*{
                 // log(stats)
 
                 // for (let key in stats) {
-                //     console.log(key)
-                //     obj[key] = stats[key]
+                // console.log(key)
+                // obj[key] = stats[key]
                 // }
                 // console.log(stats.compilation.namedChunks)
+                // console.log(stats.compilation)
 
                 // log(stats.compilation.chunks, undefined, 2)
 
+                const dirPublic = path.resolve(
+                    // stats.compilation.outputOptions.path,
+                    dist,
+                    './public/',
+                )
+                const dirRelative = path.relative(
+                    dirPublic,
+                    stats.compilation.outputOptions.path
+                )
                 for (let id in stats.compilation.chunks) {
                     const o = stats.compilation.chunks[id]
                     // console.log(o)
                     if (typeof o.name === 'undefined' || o.name === null) continue
                     chunks[o.name] = o.files
+
+                    if (Array.isArray(chunks[o.name]))
+                        chunks[o.name] = chunks[o.name].map(file => (
+                            `${dirRelative}/${file}`
+                        ))
                     // console.log(
                     //     o.id,
                     //     // o.ids,
@@ -105,7 +124,8 @@ const factoryConfig = async (/*{
 
                 await fs.writeJsonSync(
                     path.resolve(
-                        stats.compilation.outputOptions.path,
+                        // stats.compilation.outputOptions.path,
+                        dirPublic,
                         `.chunckmap.json`
                     ),
                     chunks,

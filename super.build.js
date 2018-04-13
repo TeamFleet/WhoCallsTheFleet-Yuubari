@@ -40,3 +40,7 @@ superBuild({
     beforeBuild,
     afterBuild,
 })
+
+module.exports = {
+    dist
+}
