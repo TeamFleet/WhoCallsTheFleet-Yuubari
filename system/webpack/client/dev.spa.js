@@ -48,9 +48,6 @@ const factoryConfig = async(opt) => {
             // publicPath: `http://localhost:${CLIENT_DEV_PORT}/${APP_KEY}/`
             publicPath: `/${APP_KEY}/`
         },
-        module: {
-            rules: [...common.rules]
-        },
         plugins: [
             // 在node执行环境中设置，不起作用，此处不能省略
             // new webpack.DefinePlugin({
@@ -84,7 +81,6 @@ const factoryConfig = async(opt) => {
                 }
             })
         ],
-        resolve: common.resolve
     }
 
     return config

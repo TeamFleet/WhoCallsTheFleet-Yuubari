@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const common = require('../common')
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const WebpackOnBuildPlugin = require('on-build-webpack')
 
 const dist = global.__SUPER_DIST__
@@ -25,9 +26,6 @@ const factoryConfig = async ({
                 )
             ]
         },
-        module: {
-            rules: [...common.rules]
-        },
         plugins: [
             // 在node执行环境中设置，不起作用，此处不能省略
             new webpack.DefinePlugin({
@@ -44,6 +42,7 @@ const factoryConfig = async ({
                 comments: false,
                 sourceMap: false
             }),
+            new ExtractTextPlugin('[name].[chunkhash].css'),
             await new WebpackOnBuildPlugin(async function (stats) {
                 // After webpack build...
                 // create(parseOptions(...args))
@@ -152,7 +151,6 @@ const factoryConfig = async ({
 
             }),
         ],
-        resolve: common.resolve
     }
 }
 

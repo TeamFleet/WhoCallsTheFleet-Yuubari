@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 const webpack = require('webpack')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+// const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const semver = require('semver')
 
 const {
@@ -15,7 +15,7 @@ const publicPath = `/includes/`
 const pluginCopyImages = require('../base/plugin-copy-images')
 
 const defaults = require('../base/factory')({
-    isExtractTextPlugin: true
+    // isExtractTextPlugin: true
 })
 
 const isAnalyze = process.env.WEBPACK_ANALYZER || false
@@ -88,7 +88,7 @@ module.exports = (async () => {
                     },
                     [
                         ...defaults.plugins,
-                        new ExtractTextPlugin('[name].[chunkhash].css'),
+                        // new ExtractTextPlugin('[name].[chunkhash].css'),
                         new webpack.DefinePlugin({
                             '__ELECTRON__': false,
                             '__PUBLIC__': JSON.stringify(publicPath),

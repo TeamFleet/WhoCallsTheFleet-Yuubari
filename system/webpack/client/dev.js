@@ -1,14 +1,16 @@
 const webpack = require('webpack')
 const common = require('../common')
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+
 const factoryConfig = async ({
     // RUN_PATH,
-    CLIENT_DEV_PORT
+    CLIENT_DEV_PORT,
 }) => {
 
     // let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
 
-    const config = {
+    return {
         target: 'web',
         devtool: 'source-map',
         output: {
@@ -22,9 +24,6 @@ const factoryConfig = async ({
             publicPath: `http://localhost:${CLIENT_DEV_PORT}/dist/`,
             crossOriginLoading: 'anonymous',
         },
-        module: {
-            rules: [...common.rules]
-        },
         plugins: [
             // 在node执行环境中设置，不起作用，此处不能省略
             new webpack.DefinePlugin({
@@ -32,12 +31,10 @@ const factoryConfig = async ({
                     'NODE_ENV': JSON.stringify('development')
                 }
             }),
-            new webpack.NoEmitOnErrorsPlugin()
+            new webpack.NoEmitOnErrorsPlugin(),
+            new ExtractTextPlugin('[name].[chunkhash].css'),
         ],
-        resolve: common.resolve
     }
-
-    return config
 }
 
 module.exports = async (opt) => await factoryConfig(opt)

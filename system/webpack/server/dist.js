@@ -20,12 +20,8 @@ const factoryConfig = async ({
             path: `${RUN_PATH}/${common.outputPath}/server`,
             publicPath: `/[need_set_in_app:__webpack_public_path__]/`
         },
-        module: {
-            // rules: [...common.rules]
-        },
         plugins: [],
         externals: common.filterExternalsModules(),
-        resolve: common.resolve
     }
 }
 

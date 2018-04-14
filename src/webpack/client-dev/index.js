@@ -1,7 +1,7 @@
 // const fs = require('fs-extra')
 // const path = require('path')
 const webpack = require('webpack')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+// const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const WebpackOnBuildPlugin = require('on-build-webpack')
 const opn = require('opn')
 
@@ -40,7 +40,7 @@ module.exports = (async () => Object.assign({}, config, {
         },
         [
             ...config.plugins,
-            new ExtractTextPlugin('[name].[chunkhash].css'),
+            // new ExtractTextPlugin('[name].[chunkhash].css'),
             new webpack.DefinePlugin({
                 '__ELECTRON__': false,
                 // '__PUBLIC__': JSON.stringify(publicPath),

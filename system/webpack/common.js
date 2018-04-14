@@ -1,7 +1,17 @@
 const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+
 const pwaCreatePlugin = require('sp-pwa')
+
+// 描述环境
+// dev 开发 | dist 部署
+const ENV = process.env.WEBPACK_BUILD_ENV || 'dev'
+
+// 描述场景
+// client 客户端 | server 服务端
+const STAGE = process.env.WEBPACK_STAGE_MODE || 'client'
 
 // 打包结果目录
 const outputPath = 'dist'
@@ -12,103 +22,136 @@ const serverEntries = /* config.serverEntries ||  */ ((appPath) => [
 ])
 
 // 执行顺序，从右到左
-const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
-const rules = (() => {
-    let rules = [
-        {
-            test: /\.json$/,
-            loader: 'json-loader'
-        },
-
-        // CSS - general
-
-        {
-            test: /\.css$/,
-            exclude: [/\.g\.css$/, /node_modules/],
-            use: [
-                useSpCssLoader,
-                "postcss-loader",
-            ]
-        }, {
-            test: /\.less$/,
-            exclude: [/\.g\.less$/, /node_modules/],
-            use: [
-                useSpCssLoader,
-                "postcss-loader",
-                "less-loader",
-            ]
-        }, {
-            test: /\.scss$/,
-            exclude: [/\.g\.scss$/, /node_modules/],
-            use: [
-                useSpCssLoader,
-                "postcss-loader",
-                "sass-loader",
-            ]
-        },
-
-        // CSS - in node_modules
-        {
-            test: /\.css$/,
-            include: /node_modules/,
-            use: [
-                "style-loader",
-                "postcss-loader"
-            ]
-        }, {
-            test: /\.less$/,
-            include: /node_modules/,
-            use: [
-                "style-loader",
-                "postcss-loader",
-                "less-loader"
-            ]
-        }, {
-            test: /\.scss$/,
-            include: /node_modules/,
-            use: [
-                "style-loader",
-                "postcss-loader",
-                "sass-loader"
-            ]
-        },
-
-        // CSS - other global
-        {
-            test: /\.g\.css$/,
-            use: [
-                "style-loader",
-                "postcss-loader"
-            ]
-        }, {
-            test: /\.g\.less$/,
-            use: [
-                "style-loader",
-                "postcss-loader",
-                "less-loader"
-            ]
-        }, {
-            test: /\.g\.scss$/,
-            use: [
-                "style-loader",
-                "postcss-loader",
-                "sass-loader"
-            ]
-        },
-
-        // commons
-        {
-            test: /\.(ico|gif|jpg|jpeg|png|svg|webp)$/,
-            loader: 'file-loader?context=static&name=assets/[hash:32].[ext]',
-            exclude: /node_modules/
-        }, {
-            test: /\.(js|jsx)$/,
-            loader: 'babel-loader'
+const factory = async ({
+    aliases
+}) => {
+    const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
+    const useUniversalAliasLoader = {
+        loader: "universal-alias-loader",
+        options: {
+            alias: aliases
         }
-    ]
+    }
 
-    return rules
-})()
+    const isExtractTextPlugin = ENV === 'dist' ? true : false
+
+    return {
+        module: {
+            rules: [
+                {
+                    test: /\.json$/,
+                    loader: 'json-loader'
+                },
+
+                // CSS - general
+                {
+                    test: /\.css$/,
+                    exclude: [/\.g\.css$/, /node_modules/],
+                    use: [
+                        useSpCssLoader,
+                        "postcss-loader",
+                        useUniversalAliasLoader
+                    ]
+                }, {
+                    test: /\.less$/,
+                    exclude: [/\.g\.less$/, /node_modules/],
+                    use: [
+                        useSpCssLoader,
+                        "postcss-loader",
+                        "less-loader",
+                        useUniversalAliasLoader
+                    ]
+                }, {
+                    test: /\.scss$/,
+                    exclude: [/\.g\.scss$/, /node_modules/],
+                    use: [
+                        useSpCssLoader,
+                        "postcss-loader",
+                        "sass-loader",
+                        useUniversalAliasLoader
+                    ]
+                },
+
+                // CSS - in node_modules
+                {
+                    test: /\.css$/,
+                    include: /node_modules/,
+                    use: [
+                        "style-loader",
+                        "postcss-loader"
+                    ]
+                }, {
+                    test: /\.less$/,
+                    include: /node_modules/,
+                    use: [
+                        "style-loader",
+                        "postcss-loader",
+                        "less-loader"
+                    ]
+                }, {
+                    test: /\.scss$/,
+                    include: /node_modules/,
+                    use: [
+                        "style-loader",
+                        "postcss-loader",
+                        "sass-loader"
+                    ]
+                },
+
+                // CSS - critical
+                {
+                    test: isExtractTextPlugin ? /critical\.g\.css$/ : /^IMPOSSIBLE$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: "style-loader",
+                        use: ["css-loader", "postcss-loader"]
+                    })
+                }, {
+                    test: isExtractTextPlugin ? /critical\.g\.less$/ : /^IMPOSSIBLE$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: "style-loader",
+                        use: ["css-loader", "postcss-loader", "less-loader"]
+                    })
+                }, {
+                    test: isExtractTextPlugin ? /critical\.g\.scss$/ : /^IMPOSSIBLE$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: "style-loader",
+                        use: ["css-loader", "postcss-loader", "sass-loader"]
+                    })
+                },
+
+                // CSS - other global
+                {
+                    test: /\.g\.css$/,
+                    exclude: isExtractTextPlugin ? /critical\.g\.css$/ : undefined,
+                    loader: 'style-loader!postcss-loader'
+                }, {
+                    test: /\.g\.less$/,
+                    exclude: isExtractTextPlugin ? /critical\.g\.less$/ : undefined,
+                    loader: 'style-loader!postcss-loader!less-loader'
+                }, {
+                    test: /\.g\.scss$/,
+                    exclude: isExtractTextPlugin ? /critical\.g\.scss$/ : undefined,
+                    loader: 'style-loader!postcss-loader!sass-loader'
+                },
+
+                //
+
+                {
+                    test: /\.(js|jsx)$/,
+                    loader: 'babel-loader'
+                }
+            ]
+        },
+        resolve: {
+            alias: { ...aliases },
+            modules: [
+                '__modules',
+                'node_modules'
+            ],
+            extensions: ['.js', '.jsx', '.json', '.css', '.less', '.sass', '.scss']
+        }
+    }
+}
 
 
 // 执行顺序, 先 -> 后
@@ -130,7 +173,7 @@ const plugins = (env, stage, spa = false) => {
     }
 
     return [
-        new webpack.DefinePlugin(g)
+        new webpack.DefinePlugin(g),
     ]
 }
 
@@ -204,9 +247,11 @@ const filterExternalsModules = () => fs
 
 // 已下属都可以在 /config/webpack.js 中扩展
 module.exports = {
+    factory,
+
     outputPath,
     serverEntries,
-    rules,
+    // rules,
     plugins,
     factoryPWAPlugin,
     resolve,

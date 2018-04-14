@@ -114,7 +114,6 @@ function makeItButter(config) {
  * @param {any} customRules 
  * @param {any} defaultRules 
  * @returns 处理后的rules
- */
 function handlerRules(customRules) {
 
     const ruleMap = {}
@@ -145,6 +144,7 @@ function handlerRules(customRules) {
 
     return customRules
 }
+ */
 
 /**
  * 根据应用配置生产出一个默认webpack配置
@@ -153,7 +153,7 @@ function handlerRules(customRules) {
  * @param {any} _path 读取默认配置文件地址，非必须
  * @returns 
  */
-async function createDefaultConfig(opt, _path) {
+async function createDefaultConfig(opt, _path, aliases = {}) {
 
     // 根据当前环境变量，定位对应的默认配置文件
     _path = _path || path.resolve(RUN_PATH, `./system/webpack/${STAGE}/${ENV}.js`)
@@ -170,8 +170,8 @@ async function createDefaultConfig(opt, _path) {
  * @param {any} opt 
  * @returns 
  */
-async function createSPADefaultConfig(opt) {
-    return createDefaultConfig(opt, path.resolve(RUN_PATH, `./system/webpack/${STAGE}/${ENV}.spa.js`))
+async function createSPADefaultConfig(opt, aliases) {
+    return createDefaultConfig(opt, path.resolve(RUN_PATH, `./system/webpack/${STAGE}/${ENV}.spa.js`), aliases)
 }
 
 /**
@@ -190,6 +190,43 @@ async function getConfigFactory(path) {
         console.log(`!!! ERROR !!!  没找到对应的配置文件: ${path}`)
 
     return factory
+}
+
+
+/**
+ * 合并 Webpack 配置对象
+ * 
+ * @param {[object]} base 基础 Webpack 配置对象
+ * @param {[object]} custom 合并 Webpack 配置对象
+ * @returns 合并后的值
+ */
+const mergeConfigs = (base = {}, config = {}) => {
+    // 合并 module.rules / loaders
+    if (typeof config.module === 'object') {
+        if (!Array.isArray(config.module.rules)) {
+            config.module.rules = [
+                ...base.module.rules,
+            ]
+        } else {
+            if (config.module.rules[0] === true) {
+                config.module.rules.shift()
+            } else {
+                config.module.rules = [
+                    ...base.module.rules,
+                    ...config.module.rules
+                ]
+            }
+            base.module.rules = undefined
+        }
+    } else {
+        config.module = {
+            rules: config.module.rules
+        }
+    }
+
+    // 合并 plugins
+
+    return config
 }
 
 const _beforeBuild = async () => {
@@ -229,6 +266,9 @@ module.exports = async ({
     // webpack 执行用的配置对象
     let webpackConfigs = []
 
+    // 默认rules
+    const baseConfigs = await common.factory({ aliases })
+
     /**
      * 处理客户端配置文件
      * [n个应用] x [m个打包配置] = [webpack打包配置集合]
@@ -263,7 +303,9 @@ module.exports = async ({
         clientConfigs.forEach((clientConfig) => {
 
             let config = new WebpackConfig()
-            clientConfig = new WebpackConfig().merge(clientConfig)
+            clientConfig = new WebpackConfig()
+                .merge(baseConfigs)
+                .merge(clientConfig)
 
             // 跟进打包环境和用户自定义配置，扩展webpack配置
             if (clientConfig.__ext) {
@@ -356,13 +398,7 @@ module.exports = async ({
                 _defaultConfig.plugins = _defaultConfig.plugins.concat(common.plugins(ENV, STAGE, clientConfig.spa))
             }
 
-            //
-            // 如果自定义了loader，则分析并实例化loader
-            //
-            if (clientConfig.module && clientConfig.module.rules) {
-                clientConfig.module.rules = handlerRules(clientConfig.module.rules)
-                _defaultConfig.module.rules = undefined
-            }
+            mergeConfigs(baseConfigs, clientConfig)
 
             config
                 .merge(_defaultConfig)
@@ -401,20 +437,13 @@ module.exports = async ({
         // 如果没有webpack配置，则表示没有react，不需要打包
         // if (!appsConfig[appName].webpack) continue
 
-        let clientConfig = config
+        let configs = config
 
-        if (!Array.isArray(clientConfig))
-            clientConfig = [clientConfig]
+        if (!Array.isArray(configs))
+            configs = [configs]
 
-        clientConfig.forEach((config) => {
-
-            //
-            // 如果自定义了loader，则分析并实例化loader
-            //
-            if (config.module && config.module.rules) {
-                config.module.rules = handlerRules(config.module.rules)
-            }
-
+        configs.forEach((config) => {
+            mergeConfigs(baseConfigs, config)
             tempClientConfig.merge(config)
         })
         // }
@@ -423,15 +452,14 @@ module.exports = async ({
         let defaultConfig = await createDefaultConfig(opt)
         let thisConfig = new WebpackConfig()
 
-
-
         // 注:在某些项目里，可能会出现下面的加载顺序有特定的区别，需要自行加判断
         //    利用每个app的配置，设置 include\exclude 等。
 
         thisConfig
+            .merge(baseConfigs)
             .merge(defaultConfig)
             .merge({
-                module: tempClientConfig.module || { rules: common.rules },
+                module: tempClientConfig.module,
                 resolve: tempClientConfig.resolve,
                 plugins: common.plugins(ENV, STAGE)
             })
