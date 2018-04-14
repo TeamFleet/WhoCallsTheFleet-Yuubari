@@ -3,21 +3,21 @@ const fs = require('fs-extra')
 const glob = require('glob')
 
 const {
-    output: pathOutput,
-} = require('../config/directories')
+    dist: {
+        public: pathPublic,
+    }
+} = require('../src/directories')
 
-const distpath = path.resolve(pathOutput, './public')
-
-const run = () => {
+module.exports = async () => {
     console.log('cleaning source-maps...')
 
-    glob.sync(path.resolve(distpath, '**', '*.map')).forEach(file => {
+    glob.sync(path.resolve(pathPublic, '**', '*.map')).forEach(file => {
         fs.removeSync(file)
         console.log('  > removed: ' + file)
     })
 
     // modify js files
-    glob.sync(path.resolve(distpath, '**', '*.js')).forEach(file => {
+    glob.sync(path.resolve(pathPublic, '**', '*.js')).forEach(file => {
         // fs.removeSync(file)
         fs.writeFileSync(
             file,
@@ -28,7 +28,7 @@ const run = () => {
     })
 
     // modify css files
-    glob.sync(path.resolve(distpath, '**', '*.css')).forEach(file => {
+    glob.sync(path.resolve(pathPublic, '**', '*.css')).forEach(file => {
         // fs.removeSync(file)
         fs.writeFileSync(
             file,
@@ -40,5 +40,3 @@ const run = () => {
 
     console.log('COMPLETE: clean source-maps')
 }
-
-run()

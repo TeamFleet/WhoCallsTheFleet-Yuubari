@@ -3,18 +3,19 @@ const fs = require('fs-extra')
 const path = require('path')
 const glob = require('glob')
 
-const run = async () => {
-    const {
-        output: dirDistWeb,
-    } = require('../config/directories')
+module.exports = async () => {
+    // const {
+    //     output: dirDistWeb,
+    // } = require('../config/directories')
     // const dirDistWeb = path.join(__dirname, '../dist-web')
+    const pathDist = global.__SUPER_DIST__ || (typeof __DIST__ === 'undefined' ? '' : __DIST__)
     const dirNamePics = 'pics'
 
-    if (!fs.existsSync(dirDistWeb)) return
+    if (!fs.existsSync(pathDist)) return
 
     const fileList = await new Promise((resolve, reject) => {
         glob(
-            path.join(dirDistWeb, '**/*'),
+            path.join(pathDist, '**/*'),
             {},
             (err, files) => {
                 if (err) reject(err)
@@ -42,4 +43,4 @@ const run = async () => {
     console.log('')
 }
 
-run()
+// run()

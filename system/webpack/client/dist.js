@@ -5,12 +5,12 @@ const common = require('../common')
 
 const WebpackOnBuildPlugin = require('on-build-webpack')
 
-const dist = process.env.__SUPER_DIST__
+const dist = global.__SUPER_DIST__
 
-const factoryConfig = async (/*{
-    // RUN_PATH,
+const factoryConfig = async ({
+    RUN_PATH,
     // CLIENT_DEV_PORT,
-}*/) => {
+}) => {
 
     // let { RUN_PATH, CLIENT_DEV_PORT, APP_KEY } = opt
 
@@ -18,9 +18,12 @@ const factoryConfig = async (/*{
         target: 'web',
         // devtool: 'source-map',
         entry: {
-            // client: [
-            //     path.resolve(RUN_PATH, `./apps/${APP_KEY}/client/index.js`)
-            // ]
+            client: [
+                path.resolve(
+                    RUN_PATH,
+                    `./system/super3/client`
+                )
+            ]
         },
         module: {
             rules: [...common.rules]
@@ -86,15 +89,10 @@ const factoryConfig = async (/*{
 
                 // log(stats.compilation.chunks, undefined, 2)
 
-                const dirPublic = path.resolve(
-                    // stats.compilation.outputOptions.path,
-                    dist,
-                    './public/',
-                )
                 const dirRelative = path.relative(
-                    dirPublic,
+                    dist,
                     stats.compilation.outputOptions.path
-                )
+                ).replace(`\\`, '/')
                 for (let id in stats.compilation.chunks) {
                     const o = stats.compilation.chunks[id]
                     // console.log(o)
@@ -123,8 +121,8 @@ const factoryConfig = async (/*{
                 await fs.writeJsonSync(
                     path.resolve(
                         // stats.compilation.outputOptions.path,
-                        dirPublic,
-                        `.chunckmap.json`
+                        dist,
+                        `.public-chunckmap.json`
                     ),
                     chunks,
                     {

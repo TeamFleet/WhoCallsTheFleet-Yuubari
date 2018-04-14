@@ -1,1 +1,1 @@
-module.exports = __CLIENT__ ? __CHANNEL__ : require('@config/channel')
+module.exports = __CLIENT__ ? __CHANNEL__ : require('../channel')

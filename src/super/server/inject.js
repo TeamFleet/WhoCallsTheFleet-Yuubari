@@ -2,21 +2,15 @@ import fs from 'fs-extra'
 import path from 'path'
 
 import { localeId as currentLocaleId } from 'sp-i18n'
-import isomorphicUtils from 'sp-isomorphic-utils'
-import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
+// import isomorphicUtils from 'sp-isomorphic-utils'
+// import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
 
-const {
-    pathNameDistWeb: distPathname,
-    pathNameSub: appName
-} = require('../../config/site')
-const dirs = require('../../../config/directories')
-const rootPath = process.cwd() + '/' + distPathname + '/public'
+const dirs = require('../../directories')
 
-const getFile = filename => isomorphicUtils.getFile(filename, __SERVER__ ? '' : 'includes', distPathname)
-const getFileContent = filename => fs.readFileSync(
-    path.join(rootPath, getFile(filename)),
-    'utf-8'
-)
+const rootPath = path.resolve(__DIST__, './public')
+
+const getFilePath = require('../../../system/super3/utils/get-client-file-path')
+const readFile = require('../../../system/super3/utils/read-client-file')
 
 export default {
     htmlattr: () => ` data-locale="${currentLocaleId}" lang="${currentLocaleId}"`,
@@ -39,16 +33,19 @@ export default {
 
     critical_css: (() => __DEV__
         ? ''
-        : `<style type="text/css">${getFileContent('critical.css')}</style>`
+        : `<style type="text/css">${readFile('critical.css')}</style>`
     )(),
 
-    critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFile('critical-extra-old-ie.js')}"</script>`,
+    critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFilePath('critical-extra-old-ie.js')}"</script>`,
     // client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
     // js: (() => ([
     //     getFile('client.js')
     // ]))(),
     // css: [],
-    serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
+
+    // serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
+
+    serviceworker_path: '',
     // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')
 
     scripts: (() => {
@@ -56,11 +53,11 @@ export default {
         const scripts = (__DEV__ ? [] : ['commons.js'])
             .concat(['client.js'])
 
-        if (__DEV__) html += `<script type="text/javascript" src="${getFile('critical.js')}"></script>`
-        else html += `<script type="text/javascript">${getFileContent('critical.js')}</script>`
+        if (__DEV__) html += `<script type="text/javascript" src="${getFilePath('critical.js')}"></script>`
+        else html += `<script type="text/javascript">${readFile('critical.js')}</script>`
 
         scripts.forEach(filename => {
-            html += `<script type="text/javascript" src="${getFile(filename)}" onerror="onInitError()" defer></script>`
+            html += `<script type="text/javascript" src="${getFilePath(filename)}" onerror="onInitError()" defer></script>`
         })
 
         return html

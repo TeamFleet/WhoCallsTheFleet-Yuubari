@@ -20,17 +20,13 @@
         "start:electron": "electron ./apps/app/electron",
 
         "prebuild": "node ./scripts/database.js && node ./scripts/less-variables",
-        "build": "npm run clean:web && npm run prod:bundle:client && npm run prod:bundle:server && npm run copy:web && npm run clean:web:sourcemap",
+        "build": "npm run prod:bundle:client && npm run prod:bundle:server",
         "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./super.build.js",
         "build:electron": "rimraf ./dist-electron && cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client node ./super.build.js",
         "build:app": "cross-env NAME=CompileDesktopApp node ./scripts/build-app",
 
         "dev": "npm run prebuild && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
-
-        "clean:web": "node ./scripts/clean-web",
-        "clean:web:sourcemap": "node ./scripts/clean-web-sourcemap",
-        "copy:web": "node ./scripts/copyfiles-web",
 
         "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
         "pm2:dev:client": "pm2 restart pm2.json --only fleet-dev-client",

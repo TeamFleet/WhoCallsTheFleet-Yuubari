@@ -38,7 +38,7 @@ require('./middleware')(server)
     // }
     server.addSubApp(
         domain,
-        await require('../src/server').default()
+        await require('./super3/server').default()
     ) // 、、、、、、、、、、、因为是异步的，server内容可能不全！！！
 })(server)
 

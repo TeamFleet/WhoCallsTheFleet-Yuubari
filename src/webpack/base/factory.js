@@ -4,30 +4,29 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const {
-    base: pathBase,
+    root: pathRoot,
     assets: pathAssets,
-    nodeModules: pathNodeModules,
     bgimgs: pathBgimgs,
-    // pathNameDistWeb,
-    _app: pathApp,
-    _appUI: pathAppUI,
-    _appName: appName,
-    // ...dirs
-} = require('../../../directories')
+    nodeModules: pathNodeModules,
+    src: {
+        _: pathSrc,
+        ui: pathUI,
+    }
+} = require('../../directories')
 
 const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
 const useUniversalAliasLoader = {
     loader: "universal-alias-loader",
     options: {
         alias: {
-            "~base.less": pathAppUI + '/base.less',
+            "~base.less": pathUI + '/base.less',
             "~Assets": pathAssets,
-            "~/": pathAppUI + '//'
+            "~/": pathUI + '//'
         }
     }
 }
 
-const channel = require('../../../channel')
+const channel = require('../../channel')
 
 module.exports = (options = {}) => {
 
@@ -39,15 +38,11 @@ module.exports = (options = {}) => {
 
         entry: {
             critical: [
-                path.resolve(pathApp, './client/critical.js')
-            ],
-            client: [
-                // path.resolve(pathApp, `./client`)
-                path.resolve(pathApp, './client.js')
+                path.resolve(pathSrc, './client/critical.js')
             ],
             "critical-extra-old-ie": [
                 "babel-polyfill",
-                path.resolve(pathApp, './client/critical.extra-old-ie.js')
+                path.resolve(pathSrc, './client/critical.extra-old-ie.js')
             ],
             // commons: [
             //     'react',
@@ -226,24 +221,19 @@ module.exports = (options = {}) => {
         resolve: {
             alias: {
                 // 目录别名，不用的项目可以删除
-                '@apps': path.resolve(pathBase, './apps'),
-                '@config': path.resolve(pathBase, './config'),
+                '@app': pathSrc,
+                '@appConfig': path.resolve(pathSrc, './config'),
+                '@appUtils': path.resolve(pathSrc, './utils'),
+                '@appUI': path.resolve(pathSrc, './client/ui'),
+                '@appLogic': path.resolve(pathSrc, './client/logic'),
+                "@appData": path.resolve(pathSrc, './data'),
+                "@appConstants": path.resolve(pathSrc, './constants'),
+                "@appConst": path.resolve(pathSrc, './constants'),
+                "@appRedux": path.resolve(pathSrc, './redux'),
 
-                '@appName': appName,
-
-                '@app': pathApp,
-                '@appConfig': path.resolve(pathApp, './config'),
-                '@appUtils': path.resolve(pathApp, './utils'),
-                '@appUI': path.resolve(pathApp, './client/ui'),
-                '@appLogic': path.resolve(pathApp, './client/logic'),
-                "@appData": path.resolve(pathApp, './data'),
-                "@appConstants": path.resolve(pathApp, './constants'),
-                "@appConst": path.resolve(pathApp, './constants'),
-                "@appRedux": path.resolve(pathApp, './redux'),
-
-                '@appLocales': path.resolve(pathBase, './locales'),
-                '@appAssets': path.resolve(pathBase, './assets'),
-                '@appDocs': path.resolve(pathBase, './docs'),
+                '@appLocales': path.resolve(pathRoot, './locales'),
+                '@appAssets': path.resolve(pathRoot, './assets'),
+                '@appDocs': path.resolve(pathRoot, './docs'),
             }
         }
 

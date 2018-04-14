@@ -5,9 +5,11 @@ const sizeOf = require('image-size')
 
 const {
     assets: pathAssets,
-    _app: pathApp,
-    _appUI: pathAppUI,
-} = require('../config/directories')
+    src: {
+        _: pathApp,
+        ui: pathAppUI,
+    },
+} = require('../src/directories')
 
 // const pathAssets = path.resolve(process.cwd(), 'src/app/client/assets/')
 const pathfile = path.resolve(pathAppUI, './base/less/variables.less')

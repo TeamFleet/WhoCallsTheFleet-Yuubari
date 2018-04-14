@@ -5,12 +5,11 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const semver = require('semver')
 
 const {
-    // _app: pathApp,
     nodeModules: pathNodeModules,
-    _appOutput: pathOutput,
-    // _appName: pathNameSub,
-    // ...dirs
-} = require('../../../directories.js')
+    dist: {
+        includes: pathIncludes,
+    }
+} = require('../../directories')
 const publicPath = `/includes/`
 
 const pluginCopyImages = require('../base/plugin-copy-images')
@@ -63,7 +62,7 @@ module.exports = (async () => {
                     // chunkFilename: `chunk.[name].[chunkhash].js`,
                     filename: `core.[chunkhash].js`,
                     chunkFilename: `chunk.[chunkhash].js`,
-                    path: pathOutput,
+                    path: pathIncludes,
                     publicPath: publicPath // TODO 改成静态第三方URL用于CDN部署 http://localhost:3000/
                 },
 
@@ -71,7 +70,7 @@ module.exports = (async () => {
                     'default',
                     {
                         'pwa': {
-                            outputPath: path.resolve(pathOutput, '../'),
+                            outputPath: path.resolve(pathIncludes, '../'),
                             outputFilename: `service-worker.js`,
                             outputFilenameHash: false,
                             // customServiceWorkerPath: path.normalize(appPath + '/src/client/custom-service-worker.js'),

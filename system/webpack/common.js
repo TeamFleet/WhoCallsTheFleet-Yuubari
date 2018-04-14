@@ -119,7 +119,7 @@ const plugins = (env, stage, spa = false) => {
         '__SERVER__': stage == 'server',
         '__DEV__': env == 'dev',
         '__SPA__': !!spa,
-        '__DIST__': JSON.stringify(process.env.__SUPER_DIST__),
+        '__DIST__': JSON.stringify(global.__SUPER_DIST__),
     }
 
     if (env == 'dist') {

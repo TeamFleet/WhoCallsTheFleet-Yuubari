@@ -3,8 +3,10 @@ const path = require('path')
 const fs = require('fs-extra')
 
 const {
-    _app: pathApp,
-} = require('../config/directories')
+    src: {
+        _: pathApp
+    },
+} = require('../src/directories')
 
 const dbpath = path.resolve(process.cwd(), 'node_modules', 'whocallsthefleet-database', 'db')
 const topath = path.resolve(pathApp, 'client', 'logic', 'database', 'db')

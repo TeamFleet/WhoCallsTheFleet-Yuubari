@@ -1,0 +1,27 @@
+{
+    "short_name": "The Fleet (DEV)",
+    "name": "Who Calls the Fleet (DEV)",
+    "icons": [
+        {
+            "src": "splash.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icon-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        }
+    ],
+    "background_color": "#212121",
+    "theme_color": "#263238",
+
+    "start_url": "/?utm_source=web_app_manifest",
+    "display": "standalone",
+    "orientation": "portrait"
+}

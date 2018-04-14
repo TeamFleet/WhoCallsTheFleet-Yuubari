@@ -2,16 +2,25 @@ const fs = require('fs-extra')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const channel = require('../../../channel')
+const channel = require('../../channel')
 
+// const {
+//     base: pathBase,
+//     assets: pathAssets,
+//     pics: pathPics,
+//     bgimgs: pathBgimgs,
+//     // _app: pathApp,
+//     _appOutput: pathOutput,
+// } = require('../../../directories')
 const {
-    base: pathBase,
+    root: pathRoot,
     assets: pathAssets,
-    pics: pathPics,
     bgimgs: pathBgimgs,
-    // _app: pathApp,
-    _appOutput: pathOutput,
-} = require('../../../directories')
+    pics: pathPics,
+    dist: {
+        includes: pathIncludes,
+    }
+} = require('../../directories')
 
 const pathAssetsLogos = path.resolve(pathAssets, `./logos/${channel}/`)
 
@@ -105,7 +114,10 @@ const getPics = async (isDev) => {
 
     const dirPics = pathPics
     const dirTo = '../pics'
-    const dirTarget = path.resolve(pathOutput, `./${dirTo}`)
+    const dirTarget = path.resolve(
+        pathIncludes,
+        `./${dirTo}`
+    )
 
     let results = []
     let ships
@@ -123,7 +135,7 @@ const getPics = async (isDev) => {
     const getDb = async (dbname) => {
         let arr = []
         await new Promise((resolve, reject) => {
-            fs.readFile(path.resolve(pathBase, `./node_modules/whocallsthefleet-database/db/${dbname}.nedb`), 'utf-8', (err, data) => {
+            fs.readFile(path.resolve(pathRoot, `./node_modules/whocallsthefleet-database/db/${dbname}.nedb`), 'utf-8', (err, data) => {
                 if (err) reject(err)
                 data.split(/\r?\n/).forEach(item => {
                     if (!item) return

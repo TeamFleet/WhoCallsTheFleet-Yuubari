@@ -1,5 +1,5 @@
 // const fs = require('fs-extra')
-const path = require('path')
+// const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const WebpackOnBuildPlugin = require('on-build-webpack')
@@ -7,11 +7,11 @@ const opn = require('opn')
 
 let isOpened = false
 
-const {
-    _app: pathApp,
-    // _appName: pathNameSub,
-    ...dirs
-} = require('../../../directories.js')
+// const {
+//     _app: pathApp,
+//     // _appName: pathNameSub,
+//     ...dirs
+// } = require('../../../directories.js')
 // const publicPath = `http://localhost:${process.env.WEBPACK_DEV_SERVER_PORT || 3001}/dist/`
 
 const pluginCopyImages = require('../base/plugin-copy-images')

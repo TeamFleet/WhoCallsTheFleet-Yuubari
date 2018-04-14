@@ -209,21 +209,25 @@ module.exports = async ({
     beforeBuild,
     afterBuild,
 }) => {
-    await _beforeBuild()
-    if (typeof beforeBuild === 'function') await beforeBuild()
+    DEBUG && console.log('============== Webpack Debug =============')
+    DEBUG && console.log('Webpack 打包环境：', STAGE, ENV)
 
-    // 将打包目录存入环境变量
+    // 将打包目录存入全局变量
     // 在打包时，会使用 DefinePlugin 插件将该值赋值到 __DIST__ 全部变量中，以供项目内代码使用
-    process.env.__SUPER_DIST__ = dist
+    global.__SUPER_DIST__ = dist
+
+    await _beforeBuild()
+    if (typeof beforeBuild === 'function') {
+        console.log('before build')
+        await beforeBuild()
+        console.log('before build done')
+    }
 
     if (typeof config === 'function') config = await config()
     if (typeof config !== 'object') config = {}
 
     // webpack 执行用的配置对象
     let webpackConfigs = []
-
-    DEBUG && console.log('============== Webpack Debug =============')
-    DEBUG && console.log('Webpack 打包环境：', STAGE, ENV)
 
     /**
      * 处理客户端配置文件
@@ -364,6 +368,15 @@ module.exports = async ({
                 .merge(_defaultConfig)
                 .merge(clientConfig)
 
+            if (typeof config.entry === 'object' &&
+                !config.entry.client
+            ) {
+                config.entry.client = path.resolve(
+                    RUN_PATH,
+                    `./system/super3/client`
+                )
+            }
+
             webpackConfigs.push(config)
         })
         // }
@@ -433,12 +446,19 @@ module.exports = async ({
         webpackConfigs.push(thisConfig)
     }
 
+    const after = async () => {
+        await _afterBuild()
+        if (typeof afterBuild === 'function') await afterBuild()
+    }
+
     // 客户端开发模式
     if (STAGE === 'client' && ENV === 'dev') {
 
         await handlerClientConfig()
 
         const compiler = webpack(makeItButter(webpackConfigs))
+
+        await after()
 
         // more config
         // http://webpack.github.io/docs/webpack-dev-server.html
@@ -467,13 +487,15 @@ module.exports = async ({
         // 执行打包
         const compiler = webpack(makeItButter(webpackConfigs))
 
-        await compiler.run((err, stats) => {
+        await compiler.run(async (err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)
 
             console.log(stats.toString({
                 chunks: false, // 输出精简内容
                 colors: true
             }))
+
+            await after()
         })
 
     }
@@ -482,6 +504,8 @@ module.exports = async ({
     if (STAGE === 'server' && ENV === 'dev') {
 
         await handlerServerConfig()
+
+        await after()
 
         await webpack(makeItButter(webpackConfigs), (err, stats) => {
             if (err) console.log(`webpack dev error: ${err}`)
@@ -500,13 +524,15 @@ module.exports = async ({
 
         await handlerServerConfig()
 
-        await webpack(makeItButter(webpackConfigs), (err, stats) => {
+        await webpack(makeItButter(webpackConfigs), async (err, stats) => {
             if (err) console.log(`webpack dist error: ${err}`)
 
             console.log(stats.toString({
                 chunks: false, // Makes the build much quieter
                 colors: true
             }))
+
+            await after()
         })
     }
 
@@ -531,8 +557,6 @@ module.exports = async ({
     }
     DEBUG && console.log('============== Webpack Debug End =============')
 
-    await _afterBuild()
-    if (typeof afterBuild === 'function') await afterBuild()
 }
 
 // justDoooooooooooooIt()
