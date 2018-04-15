@@ -268,7 +268,11 @@ module.exports = async ({
         }
 
         // 合并 plugins
-        if (!Array.isArray(config.plugins)) {
+        if (STAGE === 'server') {
+            config.plugins = [
+                ...baseConfig.plugins,
+            ]
+        } else if(!Array.isArray(config.plugins)) {
             config.plugins = [
                 ...baseConfig.plugins,
             ]
@@ -409,7 +413,7 @@ module.exports = async ({
                 module: tempClientConfig.module,
                 resolve: tempClientConfig.resolve,
                 // plugins: tempClientConfig.plugins,
-                plugins: common.plugins(ENV, STAGE),
+                plugins: tempClientConfig.plugins,
             })
 
         // 如果用户自己配置了服务端打包路径，则覆盖默认的
