@@ -193,41 +193,6 @@ async function getConfigFactory(path) {
 }
 
 
-/**
- * 合并 Webpack 配置对象
- * 
- * @param {[object]} base 基础 Webpack 配置对象
- * @param {[object]} custom 合并 Webpack 配置对象
- * @returns 合并后的值
- */
-const mergeConfigs = (base = {}, config = {}) => {
-    // 合并 module.rules / loaders
-    if (typeof config.module === 'object') {
-        if (!Array.isArray(config.module.rules)) {
-            config.module.rules = [
-                ...base.module.rules,
-            ]
-        } else {
-            if (config.module.rules[0] === true) {
-                config.module.rules.shift()
-            } else {
-                config.module.rules = [
-                    ...base.module.rules,
-                    ...config.module.rules
-                ]
-            }
-            base.module.rules = undefined
-        }
-    } else {
-        config.module = {
-            rules: config.module.rules
-        }
-    }
-
-    // 合并 plugins
-
-    return config
-}
 
 const _beforeBuild = async () => {
 
@@ -255,9 +220,7 @@ module.exports = async ({
 
     await _beforeBuild()
     if (typeof beforeBuild === 'function') {
-        console.log('before build')
         await beforeBuild()
-        console.log('before build done')
     }
 
     if (typeof config === 'function') config = await config()
@@ -267,7 +230,62 @@ module.exports = async ({
     let webpackConfigs = []
 
     // 默认rules
-    const baseConfigs = await common.factory({ aliases })
+    const baseConfig = await common.factory({
+        aliases,
+        env: ENV,
+        stage: STAGE,
+        spa: false,
+    })
+
+    /**
+     * 处理 Webpack 配置对象
+     * 
+     * @param {object} custom 合并 Webpack 配置对象
+     * @returns 合并后的值
+     */
+    const parseConfig = (config = {}) => {
+        // 合并 module.rules / loaders
+        if (typeof config.module === 'object') {
+            if (!Array.isArray(config.module.rules)) {
+                config.module.rules = [
+                    ...baseConfig.module.rules,
+                ]
+            } else {
+                if (config.module.rules[0] === true) {
+                    config.module.rules.shift()
+                } else {
+                    config.module.rules = [
+                        ...baseConfig.module.rules,
+                        ...config.module.rules
+                    ]
+                }
+                baseConfig.module.rules = undefined
+            }
+        } else {
+            config.module = {
+                rules: config.module.rules
+            }
+        }
+
+        // 合并 plugins
+        if (!Array.isArray(config.plugins)) {
+            config.plugins = [
+                ...baseConfig.plugins,
+            ]
+        } else {
+            if (config.plugins[0] === true) {
+                config.plugins.shift()
+            } else {
+                config.plugins = [
+                    ...baseConfig.plugins,
+                    ...config.plugins
+                ]
+            }
+            baseConfig.plugins = undefined
+        }
+
+        return config
+    }
 
     /**
      * 处理客户端配置文件
@@ -304,7 +322,7 @@ module.exports = async ({
 
             let config = new WebpackConfig()
             clientConfig = new WebpackConfig()
-                .merge(baseConfigs)
+                .merge(baseConfig)
                 .merge(clientConfig)
 
             // 跟进打包环境和用户自定义配置，扩展webpack配置
@@ -327,78 +345,7 @@ module.exports = async ({
             if (clientConfig.entry) _defaultConfig.entry = undefined
             if (clientConfig.output) _defaultConfig.output = undefined
 
-            //
-            // 如果自定义了plugins，则分析并实例化plugins内容
-            // 
-            if (clientConfig.plugins) {
-
-                const pluginMap = {}
-
-                // 默认plugins
-                pluginMap['default'] = _defaultConfig.plugins
-                _defaultConfig.plugins = undefined
-
-                // 补充必须的打包环境变量
-                pluginMap['global'] = common.plugins(ENV, STAGE, clientConfig.spa)
-
-                // sp扩展的plugins
-                // pluginMap['pwa'] = common.factoryPWAPlugin({ appName: appName, outputPath: '' })
-
-
-                // 字符串且等于default，使用默认plugins
-                // =>
-                if (clientConfig.plugins == 'default') {
-                    clientConfig.plugins = pluginMap['global'].concat(pluginMap['default'])
-                } else if (Array.isArray(clientConfig.plugins)) {
-                    // 需要解析的plugins
-                    // =>
-
-                    let _plist = []
-
-                    _plist = _plist.concat(pluginMap['global'])
-
-                    clientConfig.plugins.forEach((item) => {
-
-                        // 默认plugin列表
-                        if (item == 'default') {
-                            _plist = _plist.concat(pluginMap['default'])
-                        }
-
-                        // 自定义plugin列表
-                        if (Array.isArray(item)) {
-                            _plist = _plist.concat(item)
-                        }
-
-                        // sp的自定义plugin列表，key是名字，val是配置项
-                        if (typeof item == 'object') {
-
-                            // sp的PWA配置
-                            // if (item['pwa']) {
-                            //     let autoConfig = { appName: appName, outputPath: path.resolve(clientConfig.output ? clientConfig.output.path : _defaultConfig.output.path, '../') }
-                            //     let opt = Object.assign({}, autoConfig, item['pwa'])
-                            //     _plist.push(common.factoryPWAPlugin(opt))
-                            // }
-
-                            // 
-                            // .... 这里可以继续写sp自己的扩展plugin
-                            // 
-                        }
-                    })
-
-                    // 把解析好的plugin列表反赋值给客户端配置
-                    clientConfig.plugins = _plist
-                }
-
-                // =>
-                else {
-                    new Error('plugins 配置内容有错误，必须是 array | [default]')
-                }
-            } else {
-                // 未设置情况，需要补充给默认配置全局变量
-                _defaultConfig.plugins = _defaultConfig.plugins.concat(common.plugins(ENV, STAGE, clientConfig.spa))
-            }
-
-            mergeConfigs(baseConfigs, clientConfig)
+            parseConfig(clientConfig)
 
             config
                 .merge(_defaultConfig)
@@ -443,7 +390,7 @@ module.exports = async ({
             configs = [configs]
 
         configs.forEach((config) => {
-            mergeConfigs(baseConfigs, config)
+            parseConfig(config)
             tempClientConfig.merge(config)
         })
         // }
@@ -456,12 +403,13 @@ module.exports = async ({
         //    利用每个app的配置，设置 include\exclude 等。
 
         thisConfig
-            .merge(baseConfigs)
+            .merge(baseConfig)
             .merge(defaultConfig)
             .merge({
                 module: tempClientConfig.module,
                 resolve: tempClientConfig.resolve,
-                plugins: common.plugins(ENV, STAGE)
+                // plugins: tempClientConfig.plugins,
+                plugins: common.plugins(ENV, STAGE),
             })
 
         // 如果用户自己配置了服务端打包路径，则覆盖默认的

@@ -92,3 +92,23 @@ superBuild({
     beforeBuild,
     afterBuild,
 })
+
+
+// {
+//     'pwa': {
+//         outputPath: path.resolve(pathIncludes, '../'),
+//         outputFilename: `service-worker.js`,
+//         outputFilenameHash: false,
+//         // customServiceWorkerPath: path.normalize(appPath + '/src/client/custom-service-worker.js'),
+//         globPattern: `/$includes/**/*`,
+//         globOptions: {
+//             ignore: [
+//                 '/**/_*/',
+//                 '/**/_*/**/*',
+//                 '/**/chunk.database.*'
+//             ]
+//         },
+//         // appendUrls: getUrlsFromRouter()
+//         appendUrls: []
+//     }
+// },

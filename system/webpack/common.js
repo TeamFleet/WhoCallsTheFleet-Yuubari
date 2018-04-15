@@ -23,7 +23,8 @@ const serverEntries = /* config.serverEntries ||  */ ((appPath) => [
 
 // 执行顺序，从右到左
 const factory = async ({
-    aliases
+    aliases,
+    env, stage, spa = false,
 }) => {
     const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
     const useUniversalAliasLoader = {
@@ -149,7 +150,8 @@ const factory = async ({
                 'node_modules'
             ],
             extensions: ['.js', '.jsx', '.json', '.css', '.less', '.sass', '.scss']
-        }
+        },
+        plugins: plugins(env, stage, spa)
     }
 }
 

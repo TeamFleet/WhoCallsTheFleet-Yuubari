@@ -34,25 +34,19 @@ module.exports = (async () => Object.assign({}, config, {
     // },
 
     plugins: [
-        'default',
-        {
-            'pwa': false
-        },
-        [
-            ...config.plugins,
-            // new ExtractTextPlugin('[name].[chunkhash].css'),
-            new webpack.DefinePlugin({
-                '__ELECTRON__': false,
-                // '__PUBLIC__': JSON.stringify(publicPath),
-            }),
-            ...await pluginCopyImages(true),
-            new WebpackOnBuildPlugin(function () {
-                if (!isOpened) {
-                    opn(`http://127.0.0.1:3000/`)
-                    isOpened = true
-                }
-            })
-        ]
+        ...config.plugins,
+        // new ExtractTextPlugin('[name].[chunkhash].css'),
+        new webpack.DefinePlugin({
+            '__ELECTRON__': false,
+            // '__PUBLIC__': JSON.stringify(publicPath),
+        }),
+        ...await pluginCopyImages(true),
+        new WebpackOnBuildPlugin(function () {
+            if (!isOpened) {
+                opn(`http://127.0.0.1:3000/`)
+                isOpened = true
+            }
+        })
     ],
 
 })

@@ -67,43 +67,22 @@ module.exports = (async () => {
                 },
 
                 plugins: [
-                    'default',
-                    {
-                        'pwa': {
-                            outputPath: path.resolve(pathIncludes, '../'),
-                            outputFilename: `service-worker.js`,
-                            outputFilenameHash: false,
-                            // customServiceWorkerPath: path.normalize(appPath + '/src/client/custom-service-worker.js'),
-                            globPattern: `/$includes/**/*`,
-                            globOptions: {
-                                ignore: [
-                                    '/**/_*/',
-                                    '/**/_*/**/*',
-                                    '/**/chunk.database.*'
-                                ]
-                            },
-                            // appendUrls: getUrlsFromRouter()
-                            appendUrls: []
-                        }
-                    },
-                    [
-                        ...defaults.plugins,
-                        // new ExtractTextPlugin('[name].[chunkhash].css'),
-                        new webpack.DefinePlugin({
-                            '__ELECTRON__': false,
-                            '__PUBLIC__': JSON.stringify(publicPath),
-                        }),
-                        // new webpack.optimize.CommonsChunkPlugin({
-                        //     children: true,
-                        //     deepChildren: true,
-                        // }),
-                        // new webpack.optimize.CommonsChunkPlugin({
-                        //     name: "commons",
-                        //     filename: '[name].[chunkhash].js',
-                        //     minChunks: 3
-                        // }),
-                        ...(isAnalyze ? [] : await pluginCopyImages()),
-                    ]
+                    ...defaults.plugins,
+                    // new ExtractTextPlugin('[name].[chunkhash].css'),
+                    new webpack.DefinePlugin({
+                        '__ELECTRON__': false,
+                        '__PUBLIC__': JSON.stringify(publicPath),
+                    }),
+                    // new webpack.optimize.CommonsChunkPlugin({
+                    //     children: true,
+                    //     deepChildren: true,
+                    // }),
+                    // new webpack.optimize.CommonsChunkPlugin({
+                    //     name: "commons",
+                    //     filename: '[name].[chunkhash].js',
+                    //     minChunks: 3
+                    // }),
+                    ...(isAnalyze ? [] : await pluginCopyImages()),
                 ],
             }
         })()
@@ -115,13 +94,13 @@ module.exports = (async () => {
             ],
             filename: 'core.[chunkhash].js'
         }
-    
+
         if (semver.satisfies(webpackVersion, '>= 4.0.0')) {
             if (!config.optimization)
                 config.optimization = {}
             config.optimization.splitChunks = optimizationSplitChunks
         } else {
-            config.plugins[2].push(
+            config.plugins.push(
                 new webpack.optimize.CommonsChunkPlugin(optimizationSplitChunks)
             )
         }
