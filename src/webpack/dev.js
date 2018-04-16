@@ -14,9 +14,8 @@ let isOpened = false
 // } = require('../../../directories.js')
 // const publicPath = `http://localhost:${process.env.WEBPACK_DEV_SERVER_PORT || 3001}/dist/`
 
-const pluginCopyImages = require('../base/plugin-copy-images')
-
-const config = require('../base/factory')()
+const config = require('./base/factory')()
+const pluginCopyImages = require('./base/plugin-copy-images')
 
 module.exports = (async () => Object.assign({}, config, {
 

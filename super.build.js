@@ -27,11 +27,11 @@ const dist = path.resolve('./dist-web/')
  * {object|function} Webpack 配置对象或生成方法，可为异步方法
  */
 const config = async () => {
-    if (STAGE === 'client' && ENV === 'dev') return await require('./src/webpack/client-dev')
-    if (STAGE === 'client' && ENV === 'dist') return await require('./src/webpack/client-dist')
+    if (ENV === 'dev') return await require('./src/webpack/dev')
+    if (ENV === 'dist') return await require('./src/webpack/dist')
 
-    if (STAGE === 'server' && ENV === 'dev') return await require('./src/webpack/client-dev')
-    if (STAGE === 'server' && ENV === 'dist') return await require('./src/webpack/client-dist')
+    // if (STAGE === 'server' && ENV === 'dev') return await require('./src/webpack/client-dev')
+    // if (STAGE === 'server' && ENV === 'dist') return await require('./src/webpack/client-dist')
 
     return {}
 }

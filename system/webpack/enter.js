@@ -263,7 +263,9 @@ module.exports = async ({
             }
         } else {
             config.module = {
-                rules: config.module.rules
+                rules: [
+                    ...baseConfig.module.rules
+                ]
             }
         }
 
@@ -272,7 +274,7 @@ module.exports = async ({
             config.plugins = [
                 ...baseConfig.plugins,
             ]
-        } else if(!Array.isArray(config.plugins)) {
+        } else if (!Array.isArray(config.plugins)) {
             config.plugins = [
                 ...baseConfig.plugins,
             ]

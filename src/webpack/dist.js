@@ -9,14 +9,13 @@ const {
     dist: {
         includes: pathIncludes,
     }
-} = require('../../directories')
+} = require('../directories')
 const publicPath = `/includes/`
 
-const pluginCopyImages = require('../base/plugin-copy-images')
-
-const defaults = require('../base/factory')({
+const defaults = require('./base/factory')({
     // isExtractTextPlugin: true
 })
+const pluginCopyImages = require('./base/plugin-copy-images')
 
 const isAnalyze = process.env.WEBPACK_ANALYZER || false
 
