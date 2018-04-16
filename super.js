@@ -1,7 +1,7 @@
 import path from 'path'
 
 // String，项目标识名
-export const name = 'app'
+export const name = 'theFleet'
 
 // String，项目类型
 // 无默认值，必须指定
@@ -100,13 +100,14 @@ export const server = __SERVER__ ? { // 扩展默认的启动流程
     onRender: require('./src/super/server/on-render').default,
 } : {}
 
-// Object，扩展默认webpack配置，参见下文
-// export const webpack = {} // 非同构时，只需要配置client模式
-// export const webpack = isDoWebpack
-//     ? {
-//         client: {},
-//         server: {},
-//     } : {}
-
-// // Object，PWA相关配置，参见下文
-// export const pwa = {}
+// Object，PWA相关配置，参见下文
+export const pwa = {
+    // pathname: '/service-worker.js',
+    // template: path.resolve('./src/sw-template.js'),
+    // initialCache: [routes, '/includes/**/*'],
+    initialCacheIgonre: [
+        '/dev-*',
+        '/**/_*/',
+        '/**/_*/**/*',
+    ]
+}

@@ -1,5 +1,5 @@
 const path = require('path')
-const superBuild = require('./system/webpack/enter')
+const superBuild = require('super-project/core/webpack/enter')
 
 
 //
@@ -27,11 +27,8 @@ const dist = path.resolve('./dist-web/')
  * {object|function} Webpack 配置对象或生成方法，可为异步方法
  */
 const config = async () => {
-    if (ENV === 'dev') return await require('./src/webpack/dev')
-    if (ENV === 'dist') return await require('./src/webpack/dist')
-
-    // if (STAGE === 'server' && ENV === 'dev') return await require('./src/webpack/client-dev')
-    // if (STAGE === 'server' && ENV === 'dist') return await require('./src/webpack/client-dist')
+    if (ENV === 'dev') return require('./src/webpack/dev')
+    if (ENV === 'dist') return require('./src/webpack/dist')
 
     return {}
 }

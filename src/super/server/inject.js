@@ -9,8 +9,8 @@ const dirs = require('../../directories')
 
 const rootPath = path.resolve(__DIST__, './public')
 
-const getFilePath = require('../../../system/super3/utils/get-client-file-path')
-const readFile = require('../../../system/super3/utils/read-client-file')
+const getFilePath = require('super-project/utils/get-client-file-path')
+const readFile = require('super-project/utils/read-client-file')
 
 export default {
     htmlattr: () => ` data-locale="${currentLocaleId}" lang="${currentLocaleId}"`,

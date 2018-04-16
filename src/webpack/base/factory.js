@@ -1,29 +1,14 @@
 const fs = require('fs-extra')
 const path = require('path')
 const webpack = require('webpack')
-// const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const {
-    // assets: pathAssets,
     bgimgs: pathBgimgs,
     nodeModules: pathNodeModules,
     src: {
         _: pathSrc,
-        // ui: pathUI,
     }
 } = require('../../directories')
-
-// const useSpCssLoader = 'sp-css-loader?length=8&mode=replace'
-// const useUniversalAliasLoader = {
-//     loader: "universal-alias-loader",
-//     options: {
-//         alias: {
-//             "~base.less": pathUI + '/base.less',
-//             "~Assets": pathAssets,
-//             "~/": pathUI + '//'
-//         }
-//     }
-// }
 
 const channel = require('../../channel')
 
