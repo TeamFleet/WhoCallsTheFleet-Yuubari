@@ -20,31 +20,10 @@ module.exports = () => {
             critical: [
                 path.resolve(pathSrc, './client/critical.js')
             ],
-            "critical-extra-old-ie": [
+            polyfill: [
                 "babel-polyfill",
                 path.resolve(pathSrc, './client/critical.extra-old-ie.js')
             ],
-            // commons: [
-            //     'react',
-            //     'react-dom',
-    
-            //     'redux',
-            //     'redux-thunk',
-            //     'react-redux',
-    
-            //     'react-router',
-            //     'react-router-redux',
-    
-            //     'react-transition-group',
-    
-            //     // 'localforage',
-            //     'lz-string',
-            //     'metas',
-            //     'classnames',
-            //     'js-cookie',
-    
-            //     'kckit',
-            // ]
         },
 
         module: {

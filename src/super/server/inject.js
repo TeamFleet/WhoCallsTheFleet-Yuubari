@@ -36,7 +36,7 @@ export default {
         : `<style type="text/css">${readFile('critical.css')}</style>`
     )(),
 
-    critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFilePath('critical-extra-old-ie.js')}"</script>`,
+    critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFilePath('polyfill.js')}"</script>`,
     // client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
     // js: (() => ([
     //     getFile('client.js')
@@ -56,6 +56,7 @@ export default {
         if (__DEV__) html += `<script type="text/javascript" src="${getFilePath('critical.js')}"></script>`
         else html += `<script type="text/javascript">${readFile('critical.js')}</script>`
 
+        // html += `<!-- ${scripts.join(', ')} -->`
         scripts.forEach(filename => {
             html += `<script type="text/javascript" src="${getFilePath(filename)}" onerror="onInitError()" defer></script>`
         })

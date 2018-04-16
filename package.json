@@ -20,7 +20,7 @@
         "start:electron": "electron ./apps/app/electron",
 
         "prebuild": "node ./scripts/database.js && node ./scripts/less-variables",
-        "build": "npm run prod:bundle:client && npm run prod:bundle:server",
+        "build": "npm run build:client && npm run prod:bundle:server",
         "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_STAGE_MODE=client node ./super.build.js",
         "build:electron": "rimraf ./dist-electron && cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client node ./super.build.js",
         "build:app": "cross-env NAME=CompileDesktopApp node ./scripts/build-app",
@@ -35,7 +35,7 @@
 
         "dev:bundle:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=client WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
         "dev:bundle:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_STAGE_MODE=server WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
-        "prod:bundle:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./super.build.js",
+        "build:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=client node ./super.build.js",
         "prod:bundle:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_STAGE_MODE=server node ./super.build.js",
         "prod:run": "cross-env TEST=test node ./dist-web/server",
         "server:run": "cross-env SERVER_DOMAIN=yuubari.fleet.moe node ./dist-web/server",
@@ -56,7 +56,7 @@
         "whocallsthefleet-database": "2018.04.13",
         "whocallsthefleet-backgrounds": "1.3.1",
 
-        "super-project": "^3.0.0-alpha.1",
+        "super-project": "^3.0.4-alpha.1",
         "super-project-cli": "^1.1.7",
 
         "react-transition-group": "^2.3.1",
@@ -85,7 +85,6 @@
 
         "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
         "copy-webpack-plugin": "^4.5.1",
-        "extract-text-webpack-plugin": "^3.0.2",
         "on-build-webpack": "^0.1.0",
         "universal-alias-loader": "^1.2.2",
         "svg-url-loader": "^2.3.2",

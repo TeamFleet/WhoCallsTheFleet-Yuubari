@@ -32,7 +32,6 @@ module.exports = (async () => {
                 analyzer: isAnalyze,
 
                 entry: {
-                    ...defaults.entry,
                     commons: [
                         'react',
                         'react-dom',
@@ -53,7 +52,8 @@ module.exports = (async () => {
                         'js-cookie',
 
                         'kckit',
-                    ]
+                    ],
+                    ...defaults.entry,
                 },
 
                 output: {
@@ -83,26 +83,49 @@ module.exports = (async () => {
                     // }),
                     ...(isAnalyze ? [] : await pluginCopyImages()),
                 ],
+
+                optimization: {
+                    // minimize: false,
+                    // splitChunks: {
+                    //     chunks: 'all'
+                    // }
+                    splitChunks: {
+                        cacheGroups: {
+                            commons: {
+                                name: "commons",
+                                chunks: "initial",
+                                minChunks: 2
+                            }
+                        }
+                    }
+                }
             }
         })()
 
-        const optimizationSplitChunks = {
-            names: [
-                'commons',
-                'critical',
-            ],
-            filename: 'core.[chunkhash].js'
-        }
+        // const optimizationSplitChunks = {
+        //     names: [
+        //         'commons',
+        //         'critical',
+        //     ],
+        //     filename: 'core.[chunkhash].js'
+        // }
 
-        if (semver.satisfies(webpackVersion, '>= 4.0.0')) {
-            if (!config.optimization)
-                config.optimization = {}
-            config.optimization.splitChunks = optimizationSplitChunks
-        } else {
-            config.plugins.push(
-                new webpack.optimize.CommonsChunkPlugin(optimizationSplitChunks)
-            )
-        }
+        // if (semver.satisfies(webpackVersion, '>= 4.0.0')) {
+        //     if (!config.optimization)
+        //         config.optimization = {}
+        //     // const {
+        //     //     names: chunks,
+        //     //     filename,
+        //     // } = optimizationSplitChunks
+        //     config.optimization.splitChunks = {
+        //         chunks: 'initial',
+        //         name: true,
+        //     }
+        // } else {
+        //     config.plugins.push(
+        //         new webpack.optimize.CommonsChunkPlugin(optimizationSplitChunks)
+        //     )
+        // }
     } catch (e) {
         console.log(e)
     }
