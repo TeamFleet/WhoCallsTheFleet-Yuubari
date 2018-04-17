@@ -72,10 +72,6 @@ export const client = { // 扩展默认的启动流程
 // 客户端环境：忽略
 // export const server = require('/src/app1/server'), // 替代默认的服务器端启动流程
 export const server = __SERVER__ ? { // 扩展默认的启动流程
-    // String，服务器侦听的域名，多项目同构时必须提供
-    domain: (() => process.env.SERVER_DOMAIN || 'localhost')(),
-    // String || Number，服务器启动端口
-    port: process.env.SERVER_PORT || (process.env.WEBPACK_BUILD_ENV === 'dev' ? '3000' : '8080'),
     // Array，Cookie键值
     cookieKeys: ['super-project-key'],
     // Function，Koa App
