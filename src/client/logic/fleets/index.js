@@ -66,7 +66,8 @@ const initNedb = () =>
                     webpackChunkName: "nedb"
                 */ 'nedb/browser-version/out/nedb.min.js'
                 ).then(module => {
-                    self.Nedb = module
+                    // console.log('nedb', module)
+                    self.Nedb = module.default
                     resolve()
                 })
             )
