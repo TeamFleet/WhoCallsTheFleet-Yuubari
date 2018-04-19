@@ -67,6 +67,11 @@ const aliases = {
 }
 
 /**
+ * {Object} STAGE: client && ENV: dev 环境下的 webpack dev server 配置
+ */
+const devServer = {}
+
+/**
  * {function} 在 Webpack 打包执行前运行的方法，可为异步
  */
 const beforeBuild = async () => {
@@ -92,6 +97,7 @@ superBuild({
     config,
     dist,
     aliases,
+    devServer,
     beforeBuild,
     afterBuild,
 })
