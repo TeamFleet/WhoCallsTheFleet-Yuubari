@@ -108,6 +108,15 @@ export default class PageShipDetails extends React.Component {
         ext.title = head.title
     }
 
+    constructor(props) {
+        super(props)
+
+        if (props.location.action === 'PUSH')
+            props.dispatch(
+                shipDetailsReset(getInfosId(props.params.id))
+            )
+    }
+
     get ship() {
         if (!this._data && this.props.params.id)
             this._data = db.ships[this.props.params.id]
@@ -131,13 +140,6 @@ export default class PageShipDetails extends React.Component {
                 {}
             )
         )
-    }
-
-    componentWillMount() {
-        if (this.props.location.action === 'PUSH')
-            this.props.dispatch(
-                shipDetailsReset(getInfosId(this.props.params.id))
-            )
     }
 
     render() {

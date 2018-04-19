@@ -217,18 +217,19 @@ class PageFleetHeader extends React.Component {
     // mounted = false
     onNameUpdate() {
         if (!this.mounted) return
+        if (this.lastName === this.props.name) return
         htmlHead({
             title: `FLEET: ${this.props.name}`,
             dispatch: this.props.dispatch,
         })
+        this.lastName = this.props.name
     }
     componentDidMount() {
         this.mounted = true
         this.onNameUpdate()
     }
-    componentWillUpdate(newProps) {
-        if (newProps.name !== this.props.name)
-            this.onNameUpdate()
+    componentDidUpdate() {
+        this.onNameUpdate()
     }
     componentWillUnmount() {
         this.mounted = false

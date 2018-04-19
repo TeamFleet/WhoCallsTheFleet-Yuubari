@@ -35,9 +35,11 @@ export default class PageEquipmentList extends React.Component {
         ext.title = head.title
     }
 
-    componentWillMount() {
-        if (this.props.location.action === 'PUSH')
-            this.props.dispatch(equipmentListReset(equipmentListId))
+    constructor(props) {
+        super(props)
+
+        if (props.location.action === 'PUSH')
+            props.dispatch(equipmentListReset(equipmentListId))
     }
 
     render() {

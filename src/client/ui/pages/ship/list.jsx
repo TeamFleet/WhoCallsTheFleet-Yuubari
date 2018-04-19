@@ -31,10 +31,11 @@ export default class PageShipList extends React.Component {
         ext.title = head.title
     }
 
-    componentWillMount() {
-        // console.log('PageShipList - componentWillMount', (this.props.isShipListInit && this.props.location.action === 'PUSH'))
-        // if (this.props.location.action === 'PUSH')
-        //     this.props.dispatch(shipListReset(shipListId))
+    constructor(props) {
+        super(props)
+
+        if (props.location.action === 'PUSH')
+            props.dispatch(shipListReset(shipListId))
     }
 
     render() {

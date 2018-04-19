@@ -95,16 +95,12 @@ class BackgroundMainBlured extends React.Component {
 }))
 @ImportStyle(require('./styles-main.less'))
 class BackgroundMain extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            stylesOriginal: false,
-            showOriginal: false
-        }
+    state = {
+        stylesOriginal: false,
+        showOriginal: false
     }
 
-    componentWillReceiveProps() {
+    componentDidUpdate() {
         this.isOriginalLoaded = false
         this.isOriginalTransitionEnd = false
     }
@@ -121,6 +117,8 @@ class BackgroundMain extends React.Component {
     }
 
     originalLoaded(evt) {
+        // if (__DEV__)
+        //     console.log('originalLoaded', this.isOriginalLoaded)
         if (this.isOriginalLoaded) return
         // console.log('originalLoaded')
         this.isOriginalLoaded = true
@@ -141,7 +139,7 @@ class BackgroundMain extends React.Component {
         }
     }
 
-    bluredLoaded(evt, isForce) {
+    bluredLoaded(evt/*, isForce*/) {
         // if (__DEV__) console.log('[BgMain] bluredLoaded')
         this.isBluredLoaded = true
         this.props.currentBg.onLoaded(evt)

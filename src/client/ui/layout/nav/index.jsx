@@ -51,12 +51,8 @@ if (__DEV__)
 }))
 @ImportStyle(style)
 export default class extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            showBackButton: false
-        }
+    state = {
+        showBackButton: false
     }
 
     historyBack() {
@@ -69,15 +65,18 @@ export default class extends React.Component {
         // document.body.classList.add('mode-bg')
     }
 
-    componentWillReceiveProps(nextProps) {
+    getSnapshotBeforeUpdate(prevProps) {
         // this.setState({
         //     showBackButton: nextProps.location !== this.props.location
         // })
 
-        if (nextProps.timeSwipedFromLeftEdge !== this.props.timeSwipedFromLeftEdge) {
+        if (prevProps.timeSwipedFromLeftEdge !== this.props.timeSwipedFromLeftEdge)
             this._navSwitch.checked = true
-        }
+
+        return null
     }
+
+    componentDidUpdate() { }
 
     get isLoading() {
         if (__SERVER__ || typeof this.props.realtimeLocation.pathname === 'undefined') return false

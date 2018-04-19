@@ -57,13 +57,14 @@ export default class extends React.Component {
         }
     }
 
-    componentWillUpdate(nextProps) {
+    shouldComponentUpdate(nextProps) {
         action = nextProps.location.action
         lastScrollY = window.scrollY
         pathnameLastScrollY[this.props.location.pathname] = window.scrollY
         this.props.dispatch(
             updateMainKey(getKey(nextProps.location))
         )
+        return true
     }
 
     componentDidMount() {

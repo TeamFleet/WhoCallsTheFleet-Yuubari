@@ -163,7 +163,9 @@ export default class extends React.Component {
     render() {
         return (
             <ErrorBoundary>
-                <App {...this.props} />
+                <React.StrictMode>
+                    <App {...this.props} />
+                </React.StrictMode>
             </ErrorBoundary>
         )
     }
