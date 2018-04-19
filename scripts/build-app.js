@@ -66,7 +66,7 @@ const run = async (src) => {
 
     // build app into src directory
     waiting = spinner(`Building app into target directory`)
-    const env = `cross-env WEBPACK_BUILD_ENV=electron WEBPACK_STAGE_MODE=client WEBPACK_OUTPUT_PATH=${src.replace(/\\/g, '\\\\')}`
+    const env = `cross-env WEBPACK_BUILD_ENV=electron WEBPACK_BUILD_STAGE=client WEBPACK_OUTPUT_PATH=${src.replace(/\\/g, '\\\\')}`
     const cmd = `${env} node ${pathWebpackEnter}`
     await new Promise((resolve, reject) => {
         const child = npmRunScript(cmd, {

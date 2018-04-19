@@ -10,7 +10,7 @@ export const name = 'theFleet'
 export const type = 'react'
 
 // Boolean，是否为同构，默认为 false
-export const isomorphic = true
+// export const isomorphic = true
 
 // String，项目源码根目录
 // 无默认值，必须指定

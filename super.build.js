@@ -8,7 +8,7 @@ const superBuild = require('super-project/core/webpack/enter')
  * 默认环境变量
  * 
  * WEBPACK_BUILD_ENV
- * WEBPACK_STAGE_MODE
+ * WEBPACK_BUILD_STAGE
  * SERVER_DOMAIN 运行服务器/测试服务器域名
  * SERVER_PORT 运行服务器/测试服务器端口
  * WEBPACK_DEV_SERVER_PORT Webpack开发服务器端口
@@ -16,7 +16,7 @@ const superBuild = require('super-project/core/webpack/enter')
  */
 const {
     WEBPACK_BUILD_ENV: ENV,
-    WEBPACK_STAGE_MODE: STAGE,
+    WEBPACK_BUILD_STAGE: STAGE,
 } = process.env
 
 

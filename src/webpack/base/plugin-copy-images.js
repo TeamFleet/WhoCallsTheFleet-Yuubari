@@ -30,7 +30,7 @@ const isWindows = /^win/.test(platform)
 const isMac = /^darwin/.test(platform)
 
 const pluginCopyImages = async (isDev, isSPA) => {
-    if (process.env.WEBPACK_STAGE_MODE === 'server') return []
+    if (process.env.WEBPACK_BUILD_STAGE === 'server') return []
 
     const arr = []
 
