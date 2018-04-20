@@ -45,7 +45,7 @@ export default {
 
     // serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
 
-    serviceworker_path: '',
+    serviceworker_path: __DEV__ ? '' : getFilePath('service-worker.js'),
     // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')
 
     scripts: (() => {

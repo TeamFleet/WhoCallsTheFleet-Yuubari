@@ -67,6 +67,21 @@ const aliases = {
 }
 
 /**
+ * {Object|boolean} PWA相关设置，仅在 ENV: prod 环境下生效
+ */
+const pwa = {
+    // pathname: '/service-worker.js',
+    // template: path.resolve('./src/sw-template.js'),
+    // initialCache: '/**/*',
+    // initialCacheAppend: [// real urls],
+    initialCacheIgonre: [
+        '/bgimgs/**/*',
+        '/pics/**/*',
+        '/dev-*',
+    ]
+}
+
+/**
  * {Object} STAGE: client && ENV: dev 环境下的 webpack dev server 配置
  */
 const devServer = {}
@@ -97,6 +112,7 @@ superBuild({
     config,
     dist,
     aliases,
+    pwa,
     devServer,
     beforeBuild,
     afterBuild,
