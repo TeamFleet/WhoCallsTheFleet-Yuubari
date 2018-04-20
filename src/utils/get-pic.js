@@ -57,8 +57,8 @@ export default (type, id, file) => {
 
     const filepath = getUri(type, id, file)
 
-    if (__ELECTRON__)
-        return require('electron').remote.getGlobal('__path_pics') + filepath
+    // if (__ELECTRON__)
+    //     return require('electron').remote.getGlobal('__path_pics') + filepath
 
     if (__SPA__)
         return '../../pics/' + filepath
