@@ -34,7 +34,7 @@ const dist = path.resolve('./dist-web/')
  */
 const config = async () => {
     if (ENV === 'dev') return require('./src/webpack/dev')
-    if (ENV === 'dist') return require('./src/webpack/dist')
+    if (ENV === 'prod') return require('./src/webpack/prod')
 
     return {}
 }
@@ -75,7 +75,7 @@ const devServer = {}
  * {function} 在 Webpack 打包执行前运行的方法，可为异步
  */
 const beforeBuild = async () => {
-    if (STAGE === 'client' && ENV === 'dist') {
+    if (STAGE === 'client' && ENV === 'prod') {
         await require('./scripts/clean-web')()
     }
 }
@@ -83,7 +83,7 @@ const beforeBuild = async () => {
  * {function} 在 Webpack 打包执行后运行的方法，可为异步
  */
 const afterBuild = async () => {
-    if (STAGE === 'client' && ENV === 'dist') {
+    if (STAGE === 'client' && ENV === 'prod') {
         await require('./scripts/copyfiles-web')()
         await require('./scripts/clean-web-sourcemap')()
     }

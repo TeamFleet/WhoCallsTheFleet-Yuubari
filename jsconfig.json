@@ -9,17 +9,17 @@
         "jsx": "react",
         "baseUrl": ".",
         "paths": {
-            "Apps/*": ["./src/apps"],
+            "Apps/*": ["./src"],
             "Locales/*": ["./locales"],
 
-            "@app/*": ["./src/app"],
-            "@appConfig/*": ["./src/app/config"],
+            "@app/*": ["./src"],
+            "@appConfig/*": ["./src/config"],
             "@appLocales/*": ["./locales"],
-            "@appUtils/*": ["./src/app/utils"],
-            "@appData/*": ["./src/app/data"],
-            "@appAssets/*": ["./src/app/client/assets"],
-            "@appUI/*": ["./src/app/client/ui"],
-            "@appLogic/*": ["./src/app/client/logic"],
+            "@appUtils/*": ["./src/utils"],
+            "@appData/*": ["./src/data"],
+            "@appAssets/*": ["./src/client/assets"],
+            "@appUI/*": ["./src/client/ui"],
+            "@appLogic/*": ["./src/client/logic"],
             "@appDocs/*": ["./docs"]
         }
     },

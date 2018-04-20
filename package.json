@@ -35,12 +35,12 @@
 
         "dev:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_BUILD_STAGE=client WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
         "dev:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_BUILD_STAGE=server WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
-        "build:client": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_BUILD_STAGE=client node ./super.build.js",
-        "build:server": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_BUILD_STAGE=server node ./super.build.js",
+        "build:client": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client node ./super.build.js",
+        "build:server": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=server node ./super.build.js",
         "prod:run": "cross-env TEST=test node ./dist-web/server",
         "server:run": "cross-env SERVER_DOMAIN=yuubari.fleet.moe node ./dist-web/server",
         "server:run:test": "cross-env SERVER_DOMAIN=yuubari.fleet.test node ./dist-web/server",
-        "analyze": "cross-env WEBPACK_BUILD_ENV=dist WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js",
+        "analyze": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js",
 
         "test:server": "npm run build:server && npm run prod:run",
 
@@ -56,7 +56,7 @@
         "whocallsthefleet-database": "2018.04.13",
         "whocallsthefleet-backgrounds": "1.3.1",
 
-        "super-project": "^3.0.6-alpha.13",
+        "super-project": "^3.0.6-alpha.14",
         "super-project-cli": "^1.1.7",
 
         "react-transition-group": "^2.3.1",
