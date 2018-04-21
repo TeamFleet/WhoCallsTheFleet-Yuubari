@@ -17,12 +17,10 @@
     "scripts": {
         "start": "npm run build && npm run prod:run",
         "start:pm2": "cross-env SERVER_PORT=8080 SERVER_DOMAIN=yuubari.fleet.moe npm run build && pm2 restart pm2.json --only fleet-yuubari",
-        "start:electron": "electron ./apps/app/electron",
 
         "prebuild": "node ./scripts/database.js && node ./scripts/less-variables",
         "build": "npm run build:client && npm run build:server",
         "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_BUILD_STAGE=client node ./super.build.js",
-        "build:electron": "rimraf ./dist-electron && cross-env WEBPACK_BUILD_ENV=electron WEBPACK_BUILD_STAGE=client node ./super.build.js",
         "build:app": "cross-env NAME=CompileDesktopApp node ./scripts/build-app",
 
         "dev": "npm run prebuild && npm run pm2:dev",
@@ -97,10 +95,6 @@
         "glob": "^7.1.2",
         "jsonfile": "^4.0.0",
         "ora": "^2.0.0",
-
-        "electron": "~1.8.4",
-        "electron-packager": "^12.0.1",
-        "electron-windows-store": "^0.12.0",
 
         "jest": "^22.4.3"
     },
