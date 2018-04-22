@@ -5,15 +5,16 @@ import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
-    init, newBuild, editBuild,
+    init, newBuild, editBuild, getBuildUrl,
 } from '@appLogic/fleets'
 
 import htmlHead from '@appUtils/html-head'
-import routerPush from '@appUtils/router-push'
+// import routerPush from '@appUtils/router-push'
 
 import Page from '@appUI/containers/page'
 import Center from '@appUI/containers/center'
 
+import { Link } from 'react-router'
 import Button from '@appUI/components/button'
 import Title from '@appUI/components/title'
 import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
@@ -102,13 +103,13 @@ const PageFleetsHeader = connect()(({
         <Header
             className={className}
             main={
-                <div>
+                <React.Fragment>
                     {translate('under_construction')}
                     <Button
                         children="NEW BUILD"
                         onClick={() => dispatch(newBuild(true))}
                     />
-                </div>
+                </React.Fragment>
             }
         />
     )
@@ -123,15 +124,18 @@ const PageFleetsList = connect(state => ({
 }) => {
     const hasData = Array.isArray(builds) && builds.length > 0
     return (
-        <div
+        <React.Fragment
             className={className}
         >
             <Title component="h2" children={translate('under_construction')} />
             {hasData && builds.map(build => (
                 <div
                     key={build._id}
-                    onClick={() => dispatch(editBuild(build, true))}
-                >{build._id}</div>
+                >
+                    <Link to={getBuildUrl(build)}>
+                        {build._id}
+                    </Link>
+                </div>
             ))}
             {!hasData &&
                 <div>
@@ -141,6 +145,6 @@ const PageFleetsList = connect(state => ({
                     />
                 </div>
             }
-        </div>
+        </React.Fragment>
     )
 })
