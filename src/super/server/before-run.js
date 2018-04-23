@@ -1,5 +1,5 @@
 import { init as dbInit } from '@appLogic/database'
 
-export default async () => {
+export default async (app) => {
     dbInit()
 }
