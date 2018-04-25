@@ -21,6 +21,7 @@ import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
 
 import Header from './header'
 import Fleet from './fleet'
+import Bases from './bases'
 
 @connect()
 export default class PageFleetDetails extends React.Component {
@@ -190,6 +191,7 @@ class PageFleetDetailsBody extends React.Component {
             ])}>
                 <Header className={this.props.className + '-header'} />
                 <Fleet />
+                <Bases />
             </div>
         )
     }

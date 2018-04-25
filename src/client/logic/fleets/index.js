@@ -47,8 +47,9 @@ const defaults = {
     currentTab: 0,
 }
 export const maxSubFleetCount = 4
-export const maxBaseCount = 3
 export const defaultShipInFleetCount = 6
+export const maxBaseCount = 3
+export const maxSquadronInBaseCount = 4
 
 
 

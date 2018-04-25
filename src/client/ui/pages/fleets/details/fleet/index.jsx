@@ -8,6 +8,8 @@ import {
     defaultShipInFleetCount,
 } from '@appLogic/fleets'
 
+import Button from '@appUI/components/button'
+
 export default connect(state => {
     // console.log(state)
     if (
@@ -46,6 +48,9 @@ export default connect(state => {
         return (
             <div className={className}>
                 {ships}
+                <Button
+                    children="+ [WIP] ADD"
+                />
             </div>
         )
     }
