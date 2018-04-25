@@ -118,15 +118,13 @@ const PageFleetsHeader = connect()(({
 const PageFleetsList = connect(state => ({
     builds: state.fleets.builds
 }))(({
-    className,
+    // className,
     builds,
     dispatch,
 }) => {
     const hasData = Array.isArray(builds) && builds.length > 0
     return (
-        <React.Fragment
-            className={className}
-        >
+        <React.Fragment>
             <Title component="h2" children={translate('under_construction')} />
             {hasData && builds.map(build => (
                 <div

@@ -7,6 +7,7 @@
 
     position: relative;
     margin-top: 0;
+    padding-top: 5px;
     padding-left: (@level-width + @level-padding + 1);
 
     &:before{
@@ -15,6 +16,7 @@
         top: 0;
         bottom: 0;
         left: (@level-width + @level-padding / 2 - 1);
+        // margin-top: 5px;
         width: 2px;
         background: @level-line-color;
     }
@@ -24,6 +26,7 @@
         position: absolute;
         top: (16px - @size / 2);
         left: (@level-width + @level-padding / 2 - @size / 2);
+        // margin-top: 5px;
         width: @size;
         height: @size;
         background: @color-accent;
@@ -45,17 +48,15 @@
             color: @color-base-dimmed;
             font-size: 12px;
             padding-right: .25em;
-        }
-    }
-
-    & + .component-level{
-        padding-top: 10px;
-        &:after, .level{
-            margin-top: 5px;
+            transition-property: color;
         }
     }
 
     &.is-first{
+        padding-top: 0;
+        &:after, .level{
+            margin-top: 0;
+        }
         &:before{
             background: linear-gradient(
                 to bottom,
@@ -65,7 +66,6 @@
         }
     }
     &.is-last{
-        padding-bottom: 5px;
         &:before{
             background: linear-gradient(
                 to top,
@@ -85,6 +85,38 @@
             );
         }
     }
+
+    .component-list{
+        padding-bottom: 5px;
+        // &::after{
+        //     content: "";
+        //     position: absolute;
+        //     top: 0;
+        //     bottom: 0;
+        //     left: -3px;
+        //     right: 0;
+        //     border-radius: 7px;
+        //     z-index: -1;
+        //     border: 1px solid transparent;
+        // }
+    }
+
+    .is-hover({
+        &::after{
+            background: #fff;
+            transform: scale(1.25);
+        }
+        // .level{
+        //     color: @color-accent;
+        // }
+        .level::before{
+            color: #fff;
+        }
+        // .component-list::after{
+        //     background: @color-black-fade-3;
+        //     border-color: @color-border;
+        // }
+    });
 
     .screen-phone({
         @level-padding-phone: 20px;

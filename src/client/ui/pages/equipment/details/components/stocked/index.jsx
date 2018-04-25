@@ -28,23 +28,24 @@ export default class EquipmentDetailsComponentStocked extends React.Component {
         })
         levels.sort()
         // console.log(list, levels)
-        return (
-            <React.Fragment>
-                {levels.map((level, index) => (
-                    <div
-                        className={
-                            classNameThis + "-level"
-                            + (!index ? ' is-first' : '')
-                            + (index >= levels.length - 1 ? ' is-last' : '')
-                        }
-                        key={level}
-                    >
-                        <span className="level">{level}</span>
-                        <ListShips list={list[level]} size="mini" grid={false} />
-                    </div>
-                ))}
-            </React.Fragment>
-        )
+        return levels.map((level, index) => (
+            <div
+                className={
+                    classNameThis + "-level"
+                    + (!index ? ' is-first' : '')
+                    + (index >= levels.length - 1 ? ' is-last' : '')
+                }
+                key={level}
+            >
+                <span className="level">{level}</span>
+                <ListShips
+                    className={classNameThis + '-list'}
+                    list={list[level]}
+                    size="mini"
+                    grid={false}
+                />
+            </div>
+        ))
     }
     render() {
         return (
