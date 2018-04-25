@@ -17,7 +17,6 @@
 
     "ship_type": "Ship Type",
     "equipment_type": "Equipment Type",
-
     "shiptypeclass": "${class} Class ${type}",
     "shipclass": "${class} Class",
     "shipclass_number": "${class} Class (#${number})",
@@ -26,6 +25,7 @@
     "exslot": "Expansion Slot",
     "equipment_series": "${equipment}-series",
     "tp": "TP",
+    "land_bases": "Land Bases",
 
     "seiyuu": "Seiyuu",
     "seiyuus": "Seiyuus",
@@ -179,7 +179,7 @@
     },
 
     "ship_details": {
-        "infos": "Infos & Illustrations",
+        "infos": "Infos & CGs",
         "equipable": "Equipable...",
         "voicelines": "Voices & Lines",
         "availability": "Availability",

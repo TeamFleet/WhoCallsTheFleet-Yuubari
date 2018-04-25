@@ -5,76 +5,48 @@ import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
-    updateCurrent as updateCurrentBuild,
+    defaultShipInFleetCount,
 } from '@appLogic/fleets'
 
-import htmlHead from '@appUtils/html-head'
-
-import MainHeader from '@appUI/components/main-header/infos'
-
-@connect(state => {
+export default connect(state => {
     // console.log(state)
-    if (!state.fleets.current) return {}
-    const {
-        name,
-        hq_lv,
-        // currentTab,
-        _id: id,
-    } = state.fleets.current
+    if (
+        !state.fleets.current ||
+        typeof state.fleets.current.currentTab !== 'number'
+    ) return {}
+    const index = state.fleets.current.currentTab
     return {
-        name,
-        hq_lv,
-        // currentTab,
-        id
-    }
-})
-@ImportStyle(require('./styles.less'))
-export default class Header extends React.Component {
-    // mounted = false
-    onNameUpdate() {
-        if (!this.mounted) return
-        if (this.lastName === this.props.name) return
-        htmlHead({
-            title: `FLEET: ${this.props.name}`,
-            dispatch: this.props.dispatch,
-        })
-        this.lastName = this.props.name
-    }
-    onTabChange = tabIndex => {
-        this.props.dispatch(
-            updateCurrentBuild({
-                currentTab: tabIndex
-            })
+        id: state.fleets.current._id,
+        index,
+        count: Math.max(
+            defaultShipInFleetCount,
+            (state.fleets.current.fleets[index] || []).length
         )
     }
+})(ImportStyle(require('./styles.less'))(
+    ({
+        index,
+        count,
+        className,
+    }) => {
+        if (typeof index !== 'number')
+            return null
 
-    componentDidMount() {
-        this.mounted = true
-        this.onNameUpdate()
-    }
-    componentDidUpdate() {
-        this.onNameUpdate()
-    }
-    componentWillUnmount() {
-        this.mounted = false
-    }
+        const ships = []
+        for (let i = 0; i < count; i++) {
+            ships.push(
+                <div
+                    key={i}
+                    data-ship-index={i}
+                    data-fleet-index={index}
+                >Fleet #{index + 1} | Ship #{i + 1}</div>
+            )
+        }
 
-    render() {
         return (
-            <MainHeader
-                className={this.props.className}
-                title={`${this.props.id} | ${this.props.name}`}
-                tabs={[
-                    '#1',
-                    '#2',
-                    '#3',
-                    '#4',
-                    'BASE'
-                ]}
-                tabLink={false}
-                defaultIndex={0}
-                onTabChange={this.onTabChange}
-            />
+            <div className={className}>
+                {ships}
+            </div>
         )
     }
-}
+))

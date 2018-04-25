@@ -5,12 +5,19 @@ import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
-    updateCurrent as updateCurrentBuild,
+    maxSubFleetCount,
+    currentChangeTab,
 } from '@appLogic/fleets'
 
 import htmlHead from '@appUtils/html-head'
 
 import MainHeader from '@appUI/components/main-header/infos'
+
+const tabs = []
+for (let i = 0; i < maxSubFleetCount; i++) {
+    tabs.push(`#${i + 1}`)
+}
+tabs.push(translate('land_bases'))
 
 @connect(state => {
     // console.log(state)
@@ -43,11 +50,11 @@ export default class Header extends React.Component {
         this.lastName = this.props.name
     }
     onTabChange = tabIndex => {
-        this.props.dispatch(
-            updateCurrentBuild({
-                currentTab: tabIndex
-            })
-        )
+        this.props.dispatch(currentChangeTab(
+            tabIndex >= maxSubFleetCount
+                ? 'base'
+                : tabIndex
+        ))
     }
 
     componentDidMount() {
@@ -66,13 +73,7 @@ export default class Header extends React.Component {
             <MainHeader
                 className={this.props.className}
                 title={`${this.props.id} | ${this.props.name}`}
-                tabs={[
-                    '#1',
-                    '#2',
-                    '#3',
-                    '#4',
-                    'BASE'
-                ]}
+                tabs={tabs}
                 tabLink={false}
                 defaultIndex={0}
                 onTabChange={this.onTabChange}

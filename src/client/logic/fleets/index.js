@@ -11,7 +11,7 @@ import {
     FLEETS_REMOVE_BUILD,
     FLEETS_UPDATE_BUILD,
 
-    FLEETS_UPDATE_CURRENT,
+    FLEETS_CURRENT_CHANGE_TAB,
 } from '@appRedux/action-types.js'
 
 import routerPush from '@appUtils/router-push'
@@ -32,9 +32,8 @@ export default db
 
 
 /**************************************
- * Defaults data for build
+ * Defaults
  *************************************/
-
 const defaults = {
     history: [],
 
@@ -45,8 +44,11 @@ const defaults = {
     note: undefined,
     theme: 0,
 
-    // currentTab: 0,
+    currentTab: 0,
 }
+export const maxSubFleetCount = 4
+export const maxBaseCount = 3
+export const defaultShipInFleetCount = 6
 
 
 
@@ -104,6 +106,7 @@ export const getBuildUrl = (build = {}) => {
         return undefined
     const {
         history,
+        currentTab,
         ...data
     } = build
     return `/fleets/${build._id}.${compressToEncodedURIComponent(JSON.stringify(data))}`
@@ -177,7 +180,7 @@ export const getBuild = (id) => dispatch => dispatch(
 )
 
 // 更新当前配置
-export const updateCurrent = (data = {}) => dispatch => dispatch({
-    type: FLEETS_UPDATE_CURRENT,
-    data,
+export const currentChangeTab = (tab) => dispatch => dispatch({
+    type: FLEETS_CURRENT_CHANGE_TAB,
+    tab,
 })

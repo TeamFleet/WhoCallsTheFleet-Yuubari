@@ -20,6 +20,7 @@ import Title from '@appUI/components/title'
 import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
 
 import Header from './header'
+import Fleet from './fleet'
 
 @connect()
 export default class PageFleetDetails extends React.Component {
@@ -167,7 +168,7 @@ class PageFleetDetailsBody extends React.Component {
                 </Center>
             )
 
-        if (this.props.status === 'build-not-exist')
+        if (this.props.status === 'build-not-stored')
             return (
                 <Center
                     className={classNames([
@@ -177,23 +178,19 @@ class PageFleetDetailsBody extends React.Component {
                 >
                     <div style={{ display: 'inline-block' }}>
                         <Title component="h4" style={{ margin: '0' }} children="W.I.P." />
-                        <Title component="h2" style={{ marginTop: '5px' }} children="BUILD NOT EXIST" />
+                        <Title component="h2" style={{ marginTop: '5px' }} children="BUILD NOT STORED" />
                     </div>
                 </Center>
             )
 
-        const {
-            className
-        } = this.props
-
         return (
-            <React.Fragment>
-                <Header className={className + '-header'} />
-                <div className={className} style={{ marginTop: '40px' }}>
-                    123
-                </div>
-            </React.Fragment>
+            <div className={classNames([
+                this.props.className,
+                'is-ready',
+            ])}>
+                <Header className={this.props.className + '-header'} />
+                <Fleet />
+            </div>
         )
     }
 }
-

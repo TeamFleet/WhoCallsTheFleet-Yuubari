@@ -18,7 +18,6 @@
 
     "ship_type": "Ship Type",
     "equipment_type": "Equipment Type",
-
     "shiptypeclass": "${class}型${type}",
     "shipclass": "${class}型",
     "shipclass_number": "${class}型 ${number} 番艦",
@@ -27,6 +26,7 @@
     "exslot": "補強増設スロットへ",
     "equipment_series": "${equipment}-series",
     "tp": "TP",
+    "land_bases": "基地航空隊",
     
     "seiyuu": "CV",
     "seiyuus": "CV",

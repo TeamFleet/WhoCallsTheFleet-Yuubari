@@ -6,7 +6,7 @@ import {
     FLEETS_REMOVE_BUILD,
     FLEETS_UPDATE_BUILD,
 
-    FLEETS_UPDATE_CURRENT,
+    FLEETS_CURRENT_CHANGE_TAB,
 } from '@appRedux/action-types.js'
 
 const initialState = {
@@ -41,6 +41,16 @@ export default function (state = initialState, action) {
         case FLEETS_NEW_BUILD: {
             return Object.assign({}, state, {
                 current: action.data,
+            })
+        }
+
+        case FLEETS_CURRENT_CHANGE_TAB: {
+            if (typeof state.current !== 'object')
+                return state
+            return Object.assign({}, state, {
+                current: Object.assign({}, state.current, {
+                    currentTab: action.tab
+                })
             })
         }
 
