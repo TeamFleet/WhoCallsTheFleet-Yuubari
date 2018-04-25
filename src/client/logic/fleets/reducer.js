@@ -5,6 +5,8 @@ import {
     FLEETS_NEW_BUILD,
     FLEETS_REMOVE_BUILD,
     FLEETS_UPDATE_BUILD,
+
+    FLEETS_UPDATE_CURRENT,
 } from '@appRedux/action-types.js'
 
 const initialState = {

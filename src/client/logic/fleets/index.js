@@ -10,6 +10,8 @@ import {
     FLEETS_NEW_BUILD,
     FLEETS_REMOVE_BUILD,
     FLEETS_UPDATE_BUILD,
+
+    FLEETS_UPDATE_CURRENT,
 } from '@appRedux/action-types.js'
 
 import routerPush from '@appUtils/router-push'
@@ -36,16 +38,12 @@ export default db
 const defaults = {
     history: [],
 
-    data: [],
-
+    fleets: [],
+    bases: [],
     name: undefined,
-    name_airfields: [],
-    hq_lv: -1,
+    lv: -1,
     note: undefined,
-
     theme: 0,
-
-    rating: -1,
 
     // currentTab: 0,
 }
@@ -95,10 +93,20 @@ const getAllBuilds = () => initNedb()
         })
     }))
 
+const isBuildValid = (obj = {}) => (
+    typeof obj._id !== 'undefined' &&
+    Array.isArray(obj.fleets) &&
+    Array.isArray(obj.bases)
+)
+
 export const getBuildUrl = (build = {}) => {
-    if (!build._id || !Array.isArray(build.data))
+    if (!isBuildValid(build))
         return undefined
-    return `/fleets/${build._id}.${compressToEncodedURIComponent(JSON.stringify(build))}`
+    const {
+        history,
+        ...data
+    } = build
+    return `/fleets/${build._id}.${compressToEncodedURIComponent(JSON.stringify(data))}`
 }
 
 export const decompressBuild = (str) =>
@@ -145,6 +153,7 @@ export const newBuild = (isRedirect) => dispatch => initNedb()
 // 开始编辑配置
 export const editBuild = (build, isRedirect) => dispatch => initNedb()
     .then(() => {
+        build = Object.assign({}, defaults, build)
         dispatch({
             type: FLEETS_NEW_BUILD,
             data: build,
@@ -166,3 +175,9 @@ export const updateBuild = (id, data) => dispatch => dispatch(
 export const getBuild = (id) => dispatch => dispatch(
     actions.updateBuild(id, data)
 )
+
+// 更新当前配置
+export const updateCurrent = (data = {}) => dispatch => dispatch({
+    type: FLEETS_UPDATE_CURRENT,
+    data,
+})

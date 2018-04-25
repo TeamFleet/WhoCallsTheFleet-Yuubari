@@ -35,7 +35,7 @@ export default class PageFleets extends React.Component {
     render() {
         return (
             <Page>
-                <PageFleetsContainer />
+                <PageFleetsBody />
             </Page>
         )
     }
@@ -43,7 +43,7 @@ export default class PageFleets extends React.Component {
 
 @connect()
 @ImportStyle(require('./styles.less'))
-class PageFleetsContainer extends React.Component {
+class PageFleetsBody extends React.Component {
     state = {
         ready: false,
     }

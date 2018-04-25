@@ -18,11 +18,11 @@ import Center from '@appUI/containers/center'
 import Button from '@appUI/components/button'
 import Title from '@appUI/components/title'
 import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
-// import Header from '@appUI/components/main-header/main-options'
-import Header from '@appUI/components/main-header/infos'
+
+import Header from './header'
 
 @connect()
-export default class PageFleet extends React.Component {
+export default class PageFleetDetails extends React.Component {
     static onServerRenderHtmlExtend(ext, store) {
         const head = htmlHead({
             store,
@@ -46,7 +46,7 @@ export default class PageFleet extends React.Component {
     render() {
         return (
             <InfosPage>
-                <PageFleetContainer
+                <PageFleetDetailsBody
                     id={this.props.params.id}
                     initialBuild={decompressBuild(this.props.params.build)}
                 />
@@ -73,15 +73,15 @@ export default class PageFleet extends React.Component {
     if (
         state.fleets.builds.some(build => build._id === ownProps.id)
     ) return {
-        status: 'build-stored'
+        status: 'build-stored-not-current'
     }
 
     return {
-        status: 'build-not-exist'
+        status: 'build-not-stored'
     }
 })
 @ImportStyle(require('./styles.less'))
-class PageFleetContainer extends React.Component {
+class PageFleetDetailsBody extends React.Component {
     state = {
         ready: false,
     }
@@ -112,7 +112,7 @@ class PageFleetContainer extends React.Component {
                         break
                     }
 
-                    case 'build-stored': {
+                    case 'build-stored-not-current': {
                         this.props.dispatch(editBuild(
                             this.props.initialBuild
                         ))
@@ -120,8 +120,8 @@ class PageFleetContainer extends React.Component {
                         break
                     }
 
-                    case 'build-not-exist': {
-                        // console.log('status', this.props.status)
+                    case 'build-not-stored': {
+                        console.warn('WIP: build-not-stored')
                         break
                     }
                 }
@@ -188,7 +188,7 @@ class PageFleetContainer extends React.Component {
 
         return (
             <React.Fragment>
-                <PageFleetHeader className={className + '-header'} />
+                <Header className={className + '-header'} />
                 <div className={className} style={{ marginTop: '40px' }}>
                     123
                 </div>
@@ -197,61 +197,3 @@ class PageFleetContainer extends React.Component {
     }
 }
 
-@connect(state => {
-    // console.log(state)
-    if (!state.fleets.current) return {}
-    const {
-        name,
-        hq_lv,
-        // currentTab,
-        _id: id,
-    } = state.fleets.current
-    return {
-        name,
-        hq_lv,
-        // currentTab,
-        id
-    }
-})
-class PageFleetHeader extends React.Component {
-    // mounted = false
-    onNameUpdate() {
-        if (!this.mounted) return
-        if (this.lastName === this.props.name) return
-        htmlHead({
-            title: `FLEET: ${this.props.name}`,
-            dispatch: this.props.dispatch,
-        })
-        this.lastName = this.props.name
-    }
-    componentDidMount() {
-        this.mounted = true
-        this.onNameUpdate()
-    }
-    componentDidUpdate() {
-        this.onNameUpdate()
-    }
-    componentWillUnmount() {
-        this.mounted = false
-    }
-    render() {
-        return (
-            <Header
-                className={this.props.className}
-                title={`${this.props.id} | ${this.props.name}`}
-                tabs={[
-                    '#1',
-                    '#2',
-                    '#3',
-                    '#4',
-                    'BASE'
-                ]}
-                tabLink={false}
-                defaultIndex={0}
-                onTabChange={(tab) => {
-                    console.log(tab)
-                }}
-            />
-        )
-    }
-}
