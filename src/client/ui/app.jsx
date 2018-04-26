@@ -19,7 +19,7 @@ let startSwipeAtLeftBorder = false
 @connect(state => {
     return {
         isMainBgimgLoaded: state.bgimg.isMainLoaded,
-        appMode: state.appMode
+        uiMode: state.uiMode
     }
 })
 @ImportStyle(style)
@@ -118,16 +118,16 @@ class App extends React.Component {
         // if (__DEV__) console.log('app - render')
         if (this.props.isMainBgimgLoaded) this.appReady()
 
-        const hasMode = (__CLIENT__ && self.isAppReady && this.props.appMode.mode)
+        const hasMode = (__CLIENT__ && self.isAppReady && this.props.uiMode.mode)
 
         return (
             <div
                 id="app"
                 className={classNames({
                     [this.props.className]: true,
-                    [`is-mode-${this.props.appMode.mode}`]: hasMode,
-                    [`is-mode-${this.props.appMode.mode}-entering`]: (hasMode && !this.props.appMode.leaving && this.props.appMode.animation),
-                    [`is-mode-${this.props.appMode.mode}-leaving`]: (hasMode && this.props.appMode.leaving),
+                    [`is-mode-${this.props.uiMode.mode}`]: hasMode,
+                    [`is-mode-${this.props.uiMode.mode}-entering`]: (hasMode && !this.props.uiMode.leaving && this.props.uiMode.animation),
+                    [`is-mode-${this.props.uiMode.mode}-leaving`]: (hasMode && this.props.uiMode.leaving),
                 })}
                 onTouchStart={this.onTouchStart.bind(this)}
                 onTouchMove={this.onTouchMove.bind(this)}

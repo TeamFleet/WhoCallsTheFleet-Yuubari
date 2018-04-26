@@ -1,4 +1,4 @@
-import { reset, animationEnd } from './api.js'
+import { reset, animationEnd } from './index.js'
 
 export default (evt) => {
     if (!evt) return
@@ -7,9 +7,9 @@ export default (evt) => {
     // console.log(evt.animationName)
 
     switch (evt.animationName) {
-        case 'app-mode-background-list-enter':
+        case 'ui-mode-background-list-enter':
             return animationEnd()
-        case 'app-mode-background-original-leave':
+        case 'ui-mode-background-original-leave':
             return reset(evt.elapsedTime * 1000 * 2)
     }
 }

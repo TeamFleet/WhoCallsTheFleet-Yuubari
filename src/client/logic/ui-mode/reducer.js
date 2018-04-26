@@ -1,8 +1,8 @@
 import {
-    RESET_APPMODE,
-    ENTER_APPMODE,
-    LEAVE_APPMODE,
-    APPMODE_ANIMATION_END
+    RESET_UIMODE,
+    ENTER_UIMODE,
+    LEAVE_UIMODE,
+    UIMODE_ANIMATION_END
 } from '@appRedux/action-types.js'
 
 const initialState = {
@@ -19,7 +19,7 @@ export default function (state = initialState, action) {
 
     switch (action.type) {
 
-        case RESET_APPMODE:
+        case RESET_UIMODE:
             if (__CLIENT__ && typeof state.scrollY !== 'undefined') {
                 setTimeout(() => {
                     window.scrollTo(undefined, state.scrollY)
@@ -27,21 +27,21 @@ export default function (state = initialState, action) {
             }
             return {}
 
-        case ENTER_APPMODE: {
+        case ENTER_UIMODE: {
             if (state.animation) return state
             return Object.assign(action.state, {
                 animation: true
             })
         }
 
-        case LEAVE_APPMODE:
+        case LEAVE_UIMODE:
             if (state.animation) return state
             return Object.assign({}, state, {
                 animation: true,
                 leaving: true
             })
 
-        case APPMODE_ANIMATION_END:
+        case UIMODE_ANIMATION_END:
             if (!state.animation) return state
             newState = { ...state }
             delete newState.animation

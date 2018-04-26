@@ -5,9 +5,9 @@ import { ImportStyle } from 'sp-css-import'
 
 import Cookies from 'js-cookie'
 
-import { leave as appModeLeave } from '@appLogic/app-mode/api.js'
+import { leave as leaveUIMode } from '@appLogic/ui-mode'
+import modeBackgroundOnAnimationEnd from '@appLogic/ui-mode/mode-background.js'
 import * as bgimgApi from '@appLogic/bgimg/api.js'
-import modeBackgroundOnAnimationEnd from '@appLogic/app-mode/mode-background.js'
 
 import getStyles from '@appUtils/background-styles.js'
 
@@ -22,7 +22,7 @@ const setCookieSessionBackgroundIndex = index => {
  * bgimg controls UI
  */
 @connect(state => ({
-    isAppModeBackground: (state.appMode.mode == 'background')
+    isModeBackground: (state.uiMode.mode == 'background')
 }))
 @ImportStyle(require('./styles.less'))
 export default class Bgimg extends React.Component {
@@ -58,7 +58,7 @@ export default class Bgimg extends React.Component {
                 <BackgroundMain />
                 <BackgroundMainBlured type="nav" />
                 <BackgroundMainBlured type="main" />
-                {this.props.isAppModeBackground && (
+                {this.props.isModeBackground && (
                     <BackgroundPanels />
                 )}
             </div>
@@ -335,7 +335,7 @@ class BgMain extends React.Component {
     undefined,
     dispatch => ({
         leaveAppModeBackground: () => dispatch(
-            appModeLeave()
+            leaveUIMode()
         )
     })
 )

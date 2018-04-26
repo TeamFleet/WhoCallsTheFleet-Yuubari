@@ -96,7 +96,7 @@ const getAllBuilds = () => initNedb()
         })
     }))
 
-const isBuildValid = (obj = {}) => (
+export const isBuildValid = (obj = {}) => (
     typeof obj._id !== 'undefined' &&
     Array.isArray(obj.fleets) &&
     Array.isArray(obj.bases)

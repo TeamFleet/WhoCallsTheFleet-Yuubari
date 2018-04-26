@@ -4,7 +4,7 @@ import { Link, IndexLink } from 'react-router'
 import classNames from 'classnames'
 
 import translate from 'sp-i18n'
-import { enterBackground as appModeEnterBackground } from '@appLogic/app-mode/api.js'
+import { enterBackground as enterUIModeBackground } from '@appLogic/ui-mode'
 
 import LangSwitch from '@appUI/components/lang-switch.jsx'
 import Icon from '@appUI/components/icon.jsx'
@@ -61,7 +61,7 @@ export default class extends React.Component {
     }
 
     enterAppModeBackground() {
-        this.props.dispatch(appModeEnterBackground())
+        this.props.dispatch(enterUIModeBackground())
         // document.body.classList.add('mode-bg')
     }
 

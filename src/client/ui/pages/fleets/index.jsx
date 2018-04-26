@@ -5,7 +5,11 @@ import translate from 'sp-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
-    init, newBuild, editBuild, getBuildUrl,
+    init,
+    isBuildValid,
+    getBuildUrl,
+    newBuild,
+    editBuild,
 } from '@appLogic/fleets'
 
 import htmlHead from '@appUtils/html-head'
@@ -122,6 +126,15 @@ const PageFleetsList = connect(state => ({
     builds,
     dispatch,
 }) => {
+    builds = builds
+        .filter(build => {
+            if (!isBuildValid(build)) {
+                if (__DEV__)
+                    console.warn('INVALID BUILD', build)
+                return false
+            }
+            return true
+        })
     const hasData = Array.isArray(builds) && builds.length > 0
     return (
         <React.Fragment>
