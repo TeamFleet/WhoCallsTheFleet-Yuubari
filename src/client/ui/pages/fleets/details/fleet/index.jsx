@@ -7,6 +7,7 @@ import { ImportStyle } from 'sp-css-import'
 import {
     defaultShipInFleetCount,
 } from '@appLogic/fleets'
+import selectShip from '@actions/select-ship'
 
 import Button from '@appUI/components/button'
 
@@ -41,6 +42,7 @@ export default connect(state => {
                     key={i}
                     data-ship-index={i}
                     data-fleet-index={index}
+                    onClick={() => selectShip()}
                 >Fleet #{index + 1} | Ship #{i + 1}</div>
             )
         }

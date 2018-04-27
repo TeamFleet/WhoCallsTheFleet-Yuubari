@@ -60,7 +60,11 @@ const aliases = {
     '@appLocales': path.resolve('./locales'),
     '@appAssets': path.resolve('./assets'),
     '@appDocs': path.resolve('./docs'),
+
     '@actions': path.resolve('./src/client/actions'),
+    "@constants": path.resolve('./src/constants'),
+    "@const": path.resolve('./src/constants'),
+    '@utils': path.resolve('./src/utils'),
 
     "~base.less": path.resolve('./src/client/ui/base.less'),
     "~Assets": path.resolve('./assets'),

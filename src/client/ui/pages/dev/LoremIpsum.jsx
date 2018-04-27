@@ -78,8 +78,7 @@ export default class extends React.Component {
 propter corpus nec dolere.
 
 Praeterea sublata cognitione et scientia tollitur omnis
-ratio et vitae degendae et rerum gerendarum.
-</pre>
+ratio et vitae degendae et rerum gerendarum.</pre>
 
 
                     <dl>
@@ -132,15 +131,14 @@ ratio et vitae degendae et rerum gerendarum.
                     <pre>Numquam hoc ita defendit Epicurus neque Metrodorus aut
 quisquam eorum, qui aut saperet aliquid aut ista didicisset.
 
-Illis videtur, qui illud non dubitant bonum dicere -;
-</pre>
+Illis videtur, qui illud non dubitant bonum dicere -;</pre>
 
 
                     <p>Quem si tenueris, non modo meum Ciceronem, sed etiam me ipsum abducas licebit. <a href="http://loripsum.net/" target="_blank">Aliter enim explicari, quod quaeritur, non potest.</a> Duo enim genera quae erant, fecit tria. <i>Itaque ad tempus ad Pisonem omnes.</i> Qui autem esse poteris, nisi te amor ipse ceperit? Ratio quidem vestra sic cogit. Quod idem cum vestri faciant, non satis magnam tribuunt inventoribus gratiam. Verum esto: verbum ipsum voluptatis non habet dignitatem, nec nos fortasse intellegimus. <mark>Sed ad illum redeo.</mark> Hanc quoque iucunditatem, si vis, transfer in animum; </p>
 
                     <blockquote cite="http://loripsum.net">
                         Qui bonum omne in virtute ponit, is potest dicere perfici beatam vitam perfectione virtutis;
-</blockquote>
+                    </blockquote>
 
 
                     <p>Nam, ut sint illa vendibiliora, haec uberiora certe sunt. <i>Eam stabilem appellas.</i> <code>Si longus, levis.</code> <code>Sint ista Graecorum;</code> </p>
@@ -185,18 +183,17 @@ Illis videtur, qui illud non dubitant bonum dicere -;
 aliquid, quod sequantur, quasi curta sententia;
 
 Quis enim potest ea, quae probabilia videantur ei, non
-probare?
-</pre>
+probare?</pre>
 
 
                     <blockquote cite="http://loripsum.net">
                         Et quae per vim oblatum stuprum volontaria morte lueret inventa est et qui interficeret filiam, ne stupraretur.
-</blockquote>
+                    </blockquote>
 
 
                     <blockquote cite="http://loripsum.net">
                         Nec vero dico eorum metum mortis, qui, quia privari se vitae bonis arbitrentur, aut quia quasdam post mortem formidines extimescant, aut si metuant, ne cum dolore moriantur, idcirco mortem fugiant;
-</blockquote>
+                    </blockquote>
                 </CenterContainer>
             </Page>
         )
