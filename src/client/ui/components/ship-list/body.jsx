@@ -4,7 +4,7 @@ import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import db from '@appLogic/database'
 import shipListFilter from '@appLogic/database/list-ships-filter.js'
 import {

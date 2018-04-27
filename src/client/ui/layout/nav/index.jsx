@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import classNames from 'classnames'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import { enterBackground as enterUIModeBackground } from '@appLogic/ui-mode'
 
 import LangSwitch from '@appUI/components/lang-switch.jsx'

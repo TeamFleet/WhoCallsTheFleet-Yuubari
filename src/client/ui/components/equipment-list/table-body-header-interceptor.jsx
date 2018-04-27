@@ -3,7 +3,7 @@ import React from 'react'
 import { stats } from './table-body'
 import DataTableFlex, { Row, Cell } from '@appUI/components/datatable-flex'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 @ImportStyle(require('./table-body-header-interceptor.less'))

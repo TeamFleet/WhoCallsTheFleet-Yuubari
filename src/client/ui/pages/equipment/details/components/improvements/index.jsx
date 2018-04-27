@@ -6,7 +6,7 @@ import { DayAndShip, Resources, Star } from '@appUI/components/improvement'
 import Bullet from '@appUI/components/bullet'
 import LinkEquipment from '@appUI/components/link/equipment'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import { ImportStyle } from 'sp-css-import'
 

@@ -17,7 +17,7 @@ const {
     // ships
 } = db
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 // @connect()
@@ -107,11 +107,12 @@ class ShipCollection extends React.Component {
 
             thisType.ships.forEach(series => {
                 series.forEach(ship => {
-                    if ((
-                        ship.type_display && ship.type_display !== ship.type
-                        && availableShipTypes.includes(ship.type)
-                        && !availableShipTypes.includes(ship.type_display)
-                    ) || (
+                    if (
+                        (
+                            ship.type_display && ship.type_display !== ship.type
+                            && availableShipTypes.includes(ship.type)
+                            && !availableShipTypes.includes(ship.type_display)
+                        ) || (
                             availableExtraShips.includes(ship.id)
                             && !availableShipTypes.includes(ship.type)
                             && !availableShipTypes.includes(ship.type_display)

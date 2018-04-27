@@ -7,7 +7,7 @@ const pluginCopyImages = require('./base/plugin-copy-images')
 const isAnalyze = process.env.WEBPACK_ANALYZE == 'true'
 
 module.exports = (async () => {
-    const pathDist = global.__SUPER_DIST__ || (typeof __DIST__ === 'undefined' ? '' : __DIST__)
+    const pathDist = process.env.SUPER_DIST_DIR
     const publicPath = `/includes/`
     const config = {
         entry: {

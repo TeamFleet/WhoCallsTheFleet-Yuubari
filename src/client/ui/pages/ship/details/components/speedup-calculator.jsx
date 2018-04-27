@@ -3,7 +3,7 @@ import React from 'react'
 import ComponentContainer from '@appUI/containers/infos-component'
 import CalculatorSpeed from '@appUI/components/calculator/speed'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './speedup-calculator.less'

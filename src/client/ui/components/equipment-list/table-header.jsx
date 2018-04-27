@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import DataTable from '../datatable.jsx'
 // import arrStats from '@appData/equipment-stats'
 import { stats } from './table-body'

@@ -167,7 +167,7 @@ const initDatabase = async (dbpath) => {
 }
 
 module.exports = async (dbpath, topath) => {
-    console.log('creating ship collections...')
+    console.log('  > Creating ship collections...')
 
     data = await initDatabase(dbpath)
     kckit.register({
@@ -308,5 +308,5 @@ module.exports = async (dbpath, topath) => {
         'utf-8'
     )
 
-    console.log('COMPLETE: creating ship collections')
+    console.log('    > COMPLETE')
 }

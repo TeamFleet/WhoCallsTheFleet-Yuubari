@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
@@ -26,7 +26,7 @@ import Header from '@appUI/components/main-header/main-options'
 
 @connect()
 export default class PageFleets extends React.Component {
-    static onServerRenderHtmlExtend(ext, store) {
+    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
             title: translate('nav.fleets')

@@ -3,7 +3,7 @@ import React from 'react'
 import ComponentContainer from '@appUI/containers/infos-component'
 import ListEquipments from '@appUI/components/list/equipments'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 // import { ImportStyle } from 'sp-css-import'
 // import styles from './styles.less'

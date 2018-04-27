@@ -6,7 +6,7 @@ import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
 import resources from '@appData/resources'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './modernization.less'

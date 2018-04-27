@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import kckit from 'kckit'
 import db from '@appLogic/database'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import Icon from '@appUI/components/icon'

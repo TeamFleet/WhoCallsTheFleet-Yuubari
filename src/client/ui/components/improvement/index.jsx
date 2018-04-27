@@ -12,7 +12,7 @@ import sortShips from '@appUtils/sort-ships'
 import arrResources from '@appData/resources'
 import db from '@appLogic/database'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 const days = [
@@ -206,16 +206,5 @@ export class Resources extends _Resources {
     }
 }
 
-export Star from './star'
-
-// @ImportStyle(require('./styles-star.less'))
-// export class Star extends React.Component {
-//     render() {
-//         const { className, star, ...props } = this.props
-//         return (
-//             <span className={className} {...props}>
-//                 +{star}
-//             </span>
-//         )
-//     }
-// }
+import Star from './star'
+export { Star }

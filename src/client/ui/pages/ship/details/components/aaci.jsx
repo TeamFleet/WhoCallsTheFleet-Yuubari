@@ -9,7 +9,7 @@ import IconEquipment from '@appUI/components/icon-equipment'
 // import Icon from '@appUI/components/icon'
 import Bullet from '@appUI/components/bullet'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './aaci.less'

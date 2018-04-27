@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import db from '@appLogic/database'
 // import pref from '@appLogic/preferences'
@@ -42,7 +42,7 @@ const daysArr = [
 @connect()
 @ImportStyle(require('./styles.less'))
 export default class PageArsenal extends React.Component {
-    static onServerRenderHtmlExtend(ext, store) {
+    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const state = store.getState()
         const pathname = state.routing.locationBeforeTransitions.pathname
         const segs = pathname.split('/')

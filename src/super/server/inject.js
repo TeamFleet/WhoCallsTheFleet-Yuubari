@@ -1,13 +1,13 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-import { localeId as currentLocaleId } from 'sp-i18n'
+import { localeId as currentLocaleId } from 'super-i18n'
 // import isomorphicUtils from 'sp-isomorphic-utils'
 // import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
 
 const dirs = require('../../directories')
 
-const rootPath = path.resolve(__DIST__, './public')
+const rootPath = path.resolve(process.env.SUPER_DIST_DIR, './public')
 
 const getFilePath = require('super-project/utils/get-client-file-path')
 const readFile = require('super-project/utils/read-client-file')

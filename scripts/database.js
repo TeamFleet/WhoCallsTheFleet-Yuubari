@@ -11,8 +11,8 @@ const {
 const dbpath = path.resolve(process.cwd(), 'node_modules', 'whocallsthefleet-database', 'db')
 const topath = path.resolve(pathApp, 'client', 'logic', 'database', 'db')
 
-const run = async () => {
-    console.log('compressing database...')
+module.exports = async () => {
+    console.log('\nCompressing database...')
 
     // ensure and empty target dir
     fs.ensureDirSync(topath)
@@ -45,11 +45,11 @@ const run = async () => {
         console.log('  > ' + file)
     })
 
-    console.log('COMPLETE: compressing database')
+    console.log('  > COMPLETE')
 
-    console.log('')
+    console.log('\nCreating collections...')
     await require('./database/ship-collections.js')(dbpath, topath)
     await require('./database/equipment-collections.js')(dbpath, topath)
 }
 
-run()
+// run()

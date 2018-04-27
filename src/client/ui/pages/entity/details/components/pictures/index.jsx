@@ -3,7 +3,7 @@ import React from 'react'
 import Image from '@appUI/components/image'
 import ComponentContainer from '@appUI/containers/infos-component'
 
-// import translate from 'sp-i18n'
+// import translate from 'super-i18n'
 import getPic from '@appUtils/get-pic.js'
 
 import { ImportStyle } from 'sp-css-import'

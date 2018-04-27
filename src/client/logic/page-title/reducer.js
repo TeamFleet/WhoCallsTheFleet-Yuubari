@@ -1,7 +1,7 @@
 import {
     UPDATE_PAGE_TITLE
 } from '@appRedux/action-types.js'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 const initialState = {
     // main: '',

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import SpPageContainer from 'sp-ui-pagecontainer'
+import SpPageContainer from 'super-ui-pagecontainer'
 
 const lastScrollY = {}
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import InfosPageContainer from '@appUI/containers/infos-page'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
@@ -50,7 +50,7 @@ const getDescription = equipment => {
 // @ImportStyle(style)
 @connect()
 export default class extends React.Component {
-    static onServerRenderHtmlExtend(ext, store) {
+    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const { id, tab } = extractFromState(store.getState())
 
         const equipment = db.equipments[id]

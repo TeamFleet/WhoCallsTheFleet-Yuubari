@@ -1,5 +1,5 @@
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 export default (entity) => {
     if (Array.isArray(entity.relation.cv) && entity.relation.cv.length)

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import /*translate,*/ { localeId } from 'sp-i18n'
+import /*translate,*/ { localeId } from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 import getSubtitle from '../get-subtitle'
 // import db from '@appLogic/database'

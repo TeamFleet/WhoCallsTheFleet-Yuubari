@@ -8,7 +8,7 @@ import LinkMini from '@appUI/components/link-mini'
 
 // import getPic from '@appUtils/get-pic'
 import getLink from '@appUtils/get-link'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import db from '@appLogic/database'
 
 import { ImportStyle } from 'sp-css-import'

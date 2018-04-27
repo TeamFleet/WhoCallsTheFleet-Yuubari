@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { ImportStyle } from 'sp-css-import'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import htmlHead from '@appUtils/html-head.js'
 
@@ -13,7 +13,7 @@ import Title from '@appUI/components/title'
 @connect()
 @ImportStyle(require('./styles.less'))
 export default class About extends React.Component {
-    static onServerRenderHtmlExtend(ext, store) {
+    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
             title: translate('nav.about')

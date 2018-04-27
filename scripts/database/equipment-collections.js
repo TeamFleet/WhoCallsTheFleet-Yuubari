@@ -65,7 +65,7 @@ const appendCollection = async (index, name, types) => {
 }
 
 module.exports = async (dbpath, topath) => {
-    console.log('creating equipment collections...')
+    console.log('  > Creating equipment collections...')
 
     // 初始化db
     db.equipments = new Datastore({
@@ -146,5 +146,5 @@ module.exports = async (dbpath, topath) => {
         'utf-8'
     )
 
-    console.log('COMPLETE: creating equipment collections')
+    console.log('    > COMPLETE')
 }

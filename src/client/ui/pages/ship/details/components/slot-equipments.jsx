@@ -6,7 +6,7 @@ import ComponentContainer from '@appUI/containers/infos-component'
 import IconEquipment from '@appUI/components/icon-equipment'
 import ImprovementStar from '@appUI/components/improvement/star'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import db from '@appLogic/database'
 import times from '@appUtils/times'
 

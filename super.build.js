@@ -91,6 +91,10 @@ const devServer = {}
  * {function} 在 Webpack 打包执行前运行的方法，可为异步
  */
 const beforeBuild = async () => {
+    if (STAGE === 'client') {
+        await require('./scripts/database')()
+        await require('./scripts/less-variables')()
+    }
     if (STAGE === 'client' && ENV === 'prod') {
         await require('./scripts/clean-web')()
     }

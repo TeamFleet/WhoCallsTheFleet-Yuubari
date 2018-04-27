@@ -39,7 +39,7 @@ class App extends React.Component {
     // }
 
     // 仅针对 __SERVER__
-    static onServerRenderHtmlExtend(ext, store) {
+    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         if (__SERVER__) require('@appLogic/database/index.js').init()
 
         const head = htmlHead({

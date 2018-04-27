@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ImportStyle } from 'sp-css-import'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import getShip from '@appUtils/get-ship.js'
 

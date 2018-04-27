@@ -8,7 +8,7 @@ import FlagNavy from '@appUI/components/flag-navy'
 import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '@appUI/components/stat'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 // import db from '@appLogic/database'
 
 import { ImportStyle } from 'sp-css-import'

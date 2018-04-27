@@ -1,4 +1,4 @@
-import { localeId } from 'sp-i18n'
+import { localeId } from 'super-i18n'
 
 // import shipCollections from './db/ship_collections.json'
 // import equipmentCollections from './db/equipment_collections.json'

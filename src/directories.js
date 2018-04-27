@@ -2,7 +2,7 @@ const path = require('path')
 
 const pathRoot = path.resolve(__dirname, '../')
 const pathSrc = path.resolve(pathRoot, './src')
-const pathDist = global.__SUPER_DIST__ || (typeof __DIST__ === 'undefined' ? '' : __DIST__)
+const pathDist = process.env.SUPER_DIST_DIR
 
 module.exports = {
     root: pathRoot,

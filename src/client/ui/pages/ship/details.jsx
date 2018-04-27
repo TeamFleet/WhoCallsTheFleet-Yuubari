@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 // import TransitionGroup from 'react-transition-group/TransitionGroup'
 // import CSSTransition from 'react-transition-group/CSSTransition'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import InfosPageContainer from '@appUI/containers/infos-page'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
@@ -82,7 +82,7 @@ export const getInfosId = id => `SHIP_${id}`
 // @ImportStyle(style)
 @connect()
 export default class PageShipDetails extends React.Component {
-    static onServerRenderHtmlExtend(ext, store) {
+    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const { id, tab } = extractFromState(store.getState())
 
         const ship = db.ships[id]

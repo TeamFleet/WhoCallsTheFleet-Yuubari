@@ -4,7 +4,7 @@ import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
 import CalculatorLevelOASW from '@appUI/components/calculator/level-oasw'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './oasw-calculator.less'

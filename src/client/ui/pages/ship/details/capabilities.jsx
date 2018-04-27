@@ -8,7 +8,7 @@ import SpeedUpCalculator from './components/speedup-calculator.jsx'
 
 // import CenterContainer from '@appUI/containers/center'
 
-// import translate from 'sp-i18n'
+// import translate from 'super-i18n'
 // import db from '@appLogic/database'
 
 import { ImportStyle } from 'sp-css-import'

@@ -6,7 +6,7 @@ import LinkShip from '@appUI/components/link/ship.jsx'
 import Icon from '@appUI/components/icon'
 import ComponentContainer from '@appUI/containers/infos-component'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import getShip from '@appUtils/get-ship.js'
 import getPic from '@appUtils/get-pic.js'
 

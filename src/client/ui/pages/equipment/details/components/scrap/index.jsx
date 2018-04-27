@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '@appUI/components/stat'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import arrResources from '@appData/resources'
 import getValue from '@appUtils/get-value'
 

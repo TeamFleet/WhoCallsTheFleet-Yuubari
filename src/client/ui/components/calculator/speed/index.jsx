@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import kckit from 'kckit'
 import { ImportStyle } from 'sp-css-import'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 
 import Equipment from '../equipment'
 // import InputNumber from '../input-number'

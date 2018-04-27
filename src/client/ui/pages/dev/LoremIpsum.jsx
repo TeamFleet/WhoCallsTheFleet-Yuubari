@@ -13,7 +13,7 @@ import Title from '@appUI/components/title'
 @connect()
 @ImportStyle(require('./LoremIpsum.less'))
 export default class extends React.Component {
-    static onServerRenderHtmlExtend(ext, store) {
+    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
             title: 'Dev (lorem ipsum)'

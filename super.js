@@ -14,14 +14,16 @@ export const type = 'react'
 
 // String，项目源码根目录
 // 无默认值，必须指定
-export const dir = path.resolve(__dirname, './src/')
+// export const dir = path.resolve(__dirname, './src/')
 
 // String，HTML基础模板
 // 无默认值，必须指定
 // 同构模式、客户端环境：忽略
-export const template = (__SERVER__ || __SPA__)
-    ? require('./src/html').default
-    : ''
+export const template = (() => {
+    if (__SERVER__) return require('./src/html').default
+    if (__SPA__) return require('./src/html').default
+    return ''
+})()
 
 // Object，路由配置
 // 无默认值
@@ -57,9 +59,9 @@ export const client = { // 扩展默认的启动流程
     // String，路由历史类型，支持 'browser' 'hash' 'memory'，同构时默认为 'browser'，其他情况默认为 'hash'
     history: 'browser',
     // Function，在启动前的回调
-    beforeRun: require('./src/super/client/before-run').default,
+    before: require('./src/super/client/before').default,
     // Function，在启动后的回调
-    afterRun: require('./src/super/client/after-run').default,
+    after: require('./src/super/client/after').default,
     // Function，在路由发生改变时的回调
     onRouterUpdate: require('./src/super/client/on-router-update').default,
     // Function，在浏览器历史发生改变时的回调
@@ -89,9 +91,9 @@ export const server = __SERVER__ ? { // 扩展默认的启动流程
     // Object，注入内容
     inject: require('./src/super/server/inject').default,
     // Function，在启动前的回调
-    beforeRun: require('./src/super/server/before-run').default,
+    before: require('./src/super/server/before').default,
     // Function，在启动后的回调
-    afterRun: require('./src/super/server/after-run').default,
+    after: require('./src/super/server/after').default,
     // Function，在渲染时的回调
     onRender: require('./src/super/server/on-render').default,
 } : {}

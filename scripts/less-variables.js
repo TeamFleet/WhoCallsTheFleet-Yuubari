@@ -14,8 +14,8 @@ const {
 // const pathAssets = path.resolve(process.cwd(), 'src/app/client/assets/')
 const pathfile = path.resolve(pathAppUI, './base/less/variables.less')
 
-const run = async () => {
-    console.log('replacing less variables...')
+module.exports = async () => {
+    console.log('\nReplacing less variables...')
 
     let content = await new Promise((resolve, reject) => {
         fs.readFile(pathfile, 'utf-8', (err, data) => {
@@ -37,6 +37,7 @@ const run = async () => {
             /@equipment-icons-count:([ \t]*)([0-9]+);/g,
             `@equipment-icons-count:$1${parseInt(count)};`
         )
+        console.log(`  > @equipment-icons-count: ${parseInt(count)}`)
     }
 
     // equipment list stat columns count
@@ -48,6 +49,7 @@ const run = async () => {
             /@equipment-list-stat-count:([ \t]*)([0-9]+);/g,
             `@equipment-list-stat-count:$1${parseInt(stats.length + 2)};`
         )
+        console.log(`  > @equipment-list-stat-count: ${parseInt(stats.length + 2)}`)
     }
 
     // navy flags count
@@ -60,6 +62,7 @@ const run = async () => {
             /@navy-flags-count:([ \t]*)([0-9]+);/g,
             `@navy-flags-count:$1${parseInt(count)};`
         )
+        console.log(`  > @navy-flags-count: ${parseInt(count)}`)
     }
 
     await new Promise((resolve, reject) => {
@@ -74,7 +77,7 @@ const run = async () => {
         )
     })
 
-    console.log('COMPLETE: replace less variables')
+    console.log('  > COMPLETE')
 }
 
-run()
+// run()

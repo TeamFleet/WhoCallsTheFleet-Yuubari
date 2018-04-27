@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 // import Link from '@appUI/components/link'
 
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import htmlHead from '@appUtils/html-head.js'
@@ -25,7 +25,7 @@ const equipmentListId = 'pageEquipmentList'
 @connect()
 @ImportStyle(require('./list.less'))
 export default class PageEquipmentList extends React.Component {
-    static onServerRenderHtmlExtend(ext, store) {
+    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
             title: translate('nav.equipments')

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 // import bindEvent from 'bind-event'
 
 import { maxShipLv } from 'kckit'
-import translate from 'sp-i18n'
+import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import prefs from '@appLogic/preferences'
