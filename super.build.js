@@ -71,6 +71,16 @@ const aliases = {
     "~/": path.resolve('./src/client/ui')
 }
 
+const i18n = {
+    // type: 'default', // default | store
+    locales: [
+        ['zh', './locales/zh.json'],
+        ['en', './locales/en.json'],
+        ['ja', './locales/ja.json'],
+    ],
+    expr: '__',
+}
+
 /**
  * {Object|boolean} PWA相关设置，仅在 ENV: prod 环境下生效
  */
@@ -121,6 +131,7 @@ superBuild({
     config,
     dist,
     aliases,
+    i18n,
     pwa,
     devServer,
     beforeBuild,

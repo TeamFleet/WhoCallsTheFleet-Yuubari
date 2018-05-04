@@ -38,20 +38,6 @@ export const redux = {
     combineReducers: require('./src/redux/reducers').default
 }
 
-// Boolean，是否支持多语言
-export const i18n = true
-
-// Array，多语言配置
-// 无默认值
-// i18n 为 true 时必须指定，否则会忽略
-// 第一个语言为默认语言
-export const locales = (__SERVER__ || __SPA__)
-    ? [
-        ['en', require(`./locales/en.json`)],
-        ['zh', require(`./locales/zh.json`)],
-        ['ja', require(`./locales/ja.json`)],
-    ] : []
-
 // Function || Object，客户端启动代码或配置
 // 可不指定
 // export const client = require('/src/app1/client'), // 替代默认的客户端启动流程

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import classNames from 'classnames'
 
-import translate from 'super-i18n'
 import { enterBackground as enterUIModeBackground } from '@appLogic/ui-mode'
 
 import LangSwitch from '@appUI/components/lang-switch.jsx'
@@ -109,7 +108,7 @@ export default class extends React.Component {
                         {__SPA__ && (
                             <button type="button" className="btn-back" disabled={!this.state.showBackButton} onClick={this.historyBack} />
                         )}
-                        <IndexLink to="/" className="btn-home-logo" activeClassName="on" style={logoStyles}>{translate('title')}</IndexLink>
+                        <IndexLink to="/" className="btn-home-logo" activeClassName="on" style={logoStyles}>{__('title')}</IndexLink>
                         {channel === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
                     </div>
 
@@ -148,6 +147,7 @@ export const onRouterChange = () => {
 
 
 @ImportStyle(require('./styles-navs.less'))
+// @i18n()
 class Navs extends React.Component {
     renderItem(route, index) {
         if (route === null)
@@ -163,16 +163,21 @@ class Navs extends React.Component {
 
         if (route.substr(0, 6) === 'indev-') {
             route = route.substr(6)
-            title = translate('nav.' + route)
+            title = __('nav', route)
             isIndev = true
         } else if (route.substr(0, 4) === 'wip-') {
             route = route.substr(4)
-            title = translate('nav.' + route)
+            title = __('nav', route)
             isWIP = true
         } else if (route.substr(0, 4) === 'dev-')
             title = route
         else
-            title = translate('nav.' + route)
+            title = __('nav', route)
+            // __(`nav.${route}`)
+            // __.nav[route]
+
+            // __.A.B='b' 
+            // __('b')
 
         switch (route) {
             case 'arsenal': {
@@ -202,9 +207,11 @@ class Navs extends React.Component {
         )
     }
     render() {
+        // const a = 'A'
+        // console.log(__('header.nav', a, 12, '__AA__', { time: Date.now() }))
         return (
             <div className={this.props.className}>
-                <IndexLink to="/" activeClassName="on" className="link">{translate('nav.home')}</IndexLink>
+                <IndexLink to="/" activeClassName="on" className="link">{__('nav.home')}</IndexLink>
                 {navs.map(this.renderItem.bind(this))}
             </div>
         )
@@ -220,7 +227,7 @@ class LanguageSwitch extends React.Component {
     render() {
         return (
             <div className={this.props.className}>
-                <span className="title">{translate('nav.languageSwitch')}</span>
+                <span className="title">{__('nav.languageSwitch')}</span>
                 <LangSwitch className="container" />
             </div>
         )

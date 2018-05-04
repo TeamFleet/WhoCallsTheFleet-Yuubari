@@ -54,8 +54,10 @@
         "whocallsthefleet-database": "2018.04.28",
         "whocallsthefleet-backgrounds": "1.3.1",
 
-        "super-project": "3.0.6-alpha.47",
+        "super-project": "3.0.6-alpha.48",
         "super-project-cli": "^1.1.7",
+
+        "i18n-webpack-plugin": "^1.0.0",
 
         "react-transition-group": "^2.3.1",
         "react-markdown": "^3.3.0",
