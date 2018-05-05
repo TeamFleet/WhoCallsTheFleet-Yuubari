@@ -19,7 +19,7 @@ export default {
         const { mtime } = __DEV__ ? '' : fs.statSync(path.join(rootPath, filename))
         return `<link rel="manifest" href="/${filename}?${mtime ? mtime.valueOf() : ''}">`
     },
-    svg_symbols: (() => {
+    svg_symbols: () => {
         const content = fs.readFileSync(
             path.resolve(dirs.assets, './symbols/symbol-defs.svg'),
             'utf8'
@@ -29,14 +29,15 @@ export default {
 
         return `<div class="hide">${content}</div>`
             + (__DEV__ ? `<script>var __ICONSVG__ = \`${content}\`</script>` : '')
-    }),
+    },
 
-    critical_css: (() => __DEV__
+    critical_css: () => __DEV__
         ? ''
         : `<style type="text/css">${readFile('critical.css')}</style>`
-    )(),
+    ,
 
-    critical_extra_old_ie_filename: `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFilePath('polyfill.js')}"</script>`,
+    critical_extra_old_ie_filename: () =>
+        `<script>var __CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getFilePath('polyfill.js')}"</script>`,
     // client_filename: `<script>var __CLIENT_FILENAME__ = "${getFile('client.js')}"</script>`,
     // js: (() => ([
     //     getFile('client.js')
@@ -45,10 +46,11 @@ export default {
 
     // serviceworker_path: __DEV__ ? '' : getServiceWorkerFile(`service-worker.${appName}.js`, distPathname),
 
-    serviceworker_path: __DEV__ ? '' : getFilePath('service-worker.js'),
+    serviceworker_path: () =>
+        __DEV__ ? '' : getFilePath('service-worker.js'),
     // pwa: __DEV__ ? '' : injectPWA('service-worker.app.js')
 
-    scripts: (() => {
+    scripts: () => {
         let html = ''
         const scripts = (__DEV__ ? [] : ['commons.js'])
             .concat(['client.js'])
@@ -62,5 +64,5 @@ export default {
         })
 
         return html
-    })(),
+    },
 }

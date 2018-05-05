@@ -1,6 +1,7 @@
 const LZString = require('lz-string')
 const path = require('path')
 const fs = require('fs-extra')
+const spinner = require('./commons/spinner')
 
 const {
     src: {
@@ -12,7 +13,8 @@ const dbpath = path.resolve(process.cwd(), 'node_modules', 'whocallsthefleet-dat
 const topath = path.resolve(pathApp, 'client', 'logic', 'database', 'db')
 
 module.exports = async () => {
-    console.log('\nCompressing database...')
+    const stepCompressing = spinner('Compressing database...')
+    const succeed = []
 
     // ensure and empty target dir
     fs.ensureDirSync(topath)
@@ -42,14 +44,18 @@ module.exports = async () => {
             LZString.compressToEncodedURIComponent(content),
             'utf-8'
         )
+        succeed.push(file)
+    })
+
+    stepCompressing.succeed()
+    succeed.forEach(file => {
         console.log('  > ' + file)
     })
 
-    console.log('  > COMPLETE')
-
-    console.log('\nCreating collections...')
+    const stepCollections = spinner('Creating collections...')
     await require('./database/ship-collections.js')(dbpath, topath)
     await require('./database/equipment-collections.js')(dbpath, topath)
+    stepCollections.succeed()
 }
 
 // run()

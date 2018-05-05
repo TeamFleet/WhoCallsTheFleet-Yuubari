@@ -78,7 +78,7 @@ const i18n = {
         ['en', './locales/en.json'],
         ['ja', './locales/ja.json'],
     ],
-    expr: '__',
+    // expr: '__',
 }
 
 /**
@@ -104,14 +104,17 @@ const devServer = {}
 /**
  * {function} 在 Webpack 打包执行前运行的方法，可为异步
  */
-const beforeBuild = async () => {
+const beforeBuild = async (args) => {
     if (STAGE === 'client') {
+        console.log(' ')
+        if (ENV === 'prod') {
+            await require('./scripts/clean-web')(args)
+        }
         await require('./scripts/database')()
         await require('./scripts/less-variables')()
+        await require('./scripts/copyfiles')(args)
     }
-    if (STAGE === 'client' && ENV === 'prod') {
-        await require('./scripts/clean-web')()
-    }
+    return
 }
 /**
  * {function} 在 Webpack 打包执行后运行的方法，可为异步
@@ -121,6 +124,7 @@ const afterBuild = async () => {
         await require('./scripts/copyfiles-web')()
         await require('./scripts/clean-web-sourcemap')()
     }
+    return
 }
 
 
@@ -137,23 +141,3 @@ superBuild({
     beforeBuild,
     afterBuild,
 })
-
-
-// {
-//     'pwa': {
-//         outputPath: path.resolve(pathIncludes, '../'),
-//         outputFilename: `service-worker.js`,
-//         outputFilenameHash: false,
-//         // customServiceWorkerPath: path.normalize(appPath + '/src/client/custom-service-worker.js'),
-//         globPattern: `/$includes/**/*`,
-//         globOptions: {
-//             ignore: [
-//                 '/**/_*/',
-//                 '/**/_*/**/*',
-//                 '/**/chunk.database.*'
-//             ]
-//         },
-//         // appendUrls: getUrlsFromRouter()
-//         appendUrls: []
-//     }
-// },

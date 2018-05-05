@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const kckit = require('kckit')
 const sizeOf = require('image-size')
+const spinner = require('./commons/spinner')
 
 const {
     assets: pathAssets,
@@ -15,7 +16,8 @@ const {
 const pathfile = path.resolve(pathAppUI, './base/less/variables.less')
 
 module.exports = async () => {
-    console.log('\nReplacing less variables...')
+    const waiting = spinner('Replacing less variables...')
+    const results = []
 
     let content = await new Promise((resolve, reject) => {
         fs.readFile(pathfile, 'utf-8', (err, data) => {
@@ -37,7 +39,10 @@ module.exports = async () => {
             /@equipment-icons-count:([ \t]*)([0-9]+);/g,
             `@equipment-icons-count:$1${parseInt(count)};`
         )
-        console.log(`  > @equipment-icons-count: ${parseInt(count)}`)
+        results.push([
+            `equipment-icons-count`,
+            parseInt(count)
+        ])
     }
 
     // equipment list stat columns count
@@ -49,7 +54,10 @@ module.exports = async () => {
             /@equipment-list-stat-count:([ \t]*)([0-9]+);/g,
             `@equipment-list-stat-count:$1${parseInt(stats.length + 2)};`
         )
-        console.log(`  > @equipment-list-stat-count: ${parseInt(stats.length + 2)}`)
+        results.push([
+            `equipment-list-stat-count`,
+            parseInt(stats.length + 2)
+        ])
     }
 
     // navy flags count
@@ -62,7 +70,10 @@ module.exports = async () => {
             /@navy-flags-count:([ \t]*)([0-9]+);/g,
             `@navy-flags-count:$1${parseInt(count)};`
         )
-        console.log(`  > @navy-flags-count: ${parseInt(count)}`)
+        results.push([
+            `navy-flags-count`,
+            parseInt(count)
+        ])
     }
 
     await new Promise((resolve, reject) => {
@@ -77,7 +88,10 @@ module.exports = async () => {
         )
     })
 
-    console.log('  > COMPLETE')
+    waiting.succeed()
+    results.forEach(arr => {
+        console.log(`  > @${arr[0]}: ${arr[1]}`)
+    })
 }
 
 // run()

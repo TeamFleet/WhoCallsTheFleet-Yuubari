@@ -83,15 +83,3 @@ export const server = __SERVER__ ? { // 扩展默认的启动流程
     // Function，在渲染时的回调
     onRender: require('./src/super/server/on-render').default,
 } : {}
-
-// Object，PWA相关配置，参见下文
-export const pwa = {
-    // pathname: '/service-worker.js',
-    // template: path.resolve('./src/sw-template.js'),
-    // initialCache: [routes, '/includes/**/*'],
-    initialCacheIgonre: [
-        '/dev-*',
-        '/**/_*/',
-        '/**/_*/**/*',
-    ]
-}

@@ -2,11 +2,10 @@ const path = require('path')
 const webpack = require('webpack')
 
 const defaults = require('./base/factory')()
-const pluginCopyImages = require('./base/plugin-copy-images')
-
-const isAnalyze = process.env.WEBPACK_ANALYZE == 'true'
+// const pluginCopyImages = require('./base/plugin-copy-images')
 
 module.exports = (async () => {
+    const isAnalyze = process.env.WEBPACK_ANALYZE == 'true'
     const pathDist = process.env.SUPER_DIST_DIR
     const publicPath = `/includes/`
     const config = {
@@ -48,7 +47,7 @@ module.exports = (async () => {
                 '__ELECTRON__': false,
                 '__PUBLIC__': JSON.stringify(publicPath),
             }),
-            ...(isAnalyze ? [] : await pluginCopyImages()),
+            // ...(isAnalyze ? [] : await pluginCopyImages()),
         ],
 
         optimization: {

@@ -2,16 +2,21 @@
 const fs = require('fs-extra')
 const path = require('path')
 const glob = require('glob')
+const spinner = require('./commons/spinner')
 
-module.exports = async () => {
+module.exports = async ({
+    dist: pathDist
+}) => {
     // const {
     //     output: dirDistWeb,
     // } = require('../config/directories')
     // const dirDistWeb = path.join(__dirname, '../dist-web')
-    const pathDist = global.__SUPER_DIST__ || (typeof __DIST__ === 'undefined' ? '' : __DIST__)
+    // const pathDist = global.__SUPER_DIST__ || (typeof __DIST__ === 'undefined' ? '' : __DIST__)
     const dirNamePics = 'pics'
 
     if (!fs.existsSync(pathDist)) return
+
+    const waiting = spinner('Cleaning dist directory...')
 
     const fileList = await new Promise((resolve, reject) => {
         glob(
@@ -39,8 +44,8 @@ module.exports = async () => {
         })
     }
 
-    console.log('  > cleaned /dist-web')
-    console.log('')
+    // console.log('  > COMPLETE')
+    waiting.succeed()
 }
 
 // run()
