@@ -24,39 +24,27 @@ const shipTypeRangeNormal = [
     ['CA', 2]
 ]
 
-@connect(state => ({
-    locales_equipment_types: state.locales.equipment_types
-}))
-@ImportStyle(require('./combat-special.less'))
-export default class ShipDetailsSpecialCombat extends React.Component {
-    render() {
-        const {
-            ship,
-            className
-        } = this.props
-
-        return (
-            <ComponentContainer
-                className={className}
-                title={__("ship_details.combat_special")}
-            >
-                <CapabilityJetAssult ship={ship} />
-                <CapabilityAACI ship={ship} />
-                <CapabilityAARocketBarrage ship={ship} />
-                <CapabilitySpecialRange ship={ship} />
-                <CapabilityOASW
-                    ship={ship}
-                    locales_equipment_types={this.props.locales_equipment_types}
-                />
-                <CapabilityOTS ship={ship} />
-                <CapabilityTorpedo ship={ship} />
-                <CapabilitySkipSS ship={ship} />
-                <CapabilityNightAirAssult ship={ship} />
-                <CapabilityNoNightBattle ship={ship} />
-            </ComponentContainer>
-        )
-    }
-}
+export default ImportStyle(require('./combat-special.less'))(
+    ({
+        ship,
+        className
+    }) =>
+        <ComponentContainer
+            className={className}
+            title={__("ship_details.combat_special")}
+        >
+            <CapabilityJetAssult ship={ship} />
+            <CapabilityAACI ship={ship} />
+            <CapabilityAARocketBarrage ship={ship} />
+            <CapabilitySpecialRange ship={ship} />
+            <CapabilityOASW ship={ship} />
+            <CapabilityOTS ship={ship} />
+            <CapabilityTorpedo ship={ship} />
+            <CapabilitySkipSS ship={ship} />
+            <CapabilityNightAirAssult ship={ship} />
+            <CapabilityNoNightBattle ship={ship} />
+        </ComponentContainer>
+)
 
 const CapabilityJetAssult = ({ ship }) => {
     const isCarrier = ship.isType('carrier')
@@ -139,7 +127,7 @@ const CapabilitySpecialRange = ({ ship }) => {
     )
 }
 
-const CapabilityOASW = ({ ship, locales_equipment_types }) => {
+const CapabilityOASW = ({ ship }) => {
     const statASW99 = ship.getAttribute('asw', 99)
 
     if (statASW99 === false)
@@ -181,11 +169,9 @@ const CapabilityOASW = ({ ship, locales_equipment_types }) => {
                                 stat[0] = key
                                 stat[1] = equipments[condition].hasStat[key]
                             }
-                            if (condition.substr(0, 3) === 'has' && locales_equipment_types[condition.substr(3).toLocaleLowerCase()]) {
-                                equipmentRequired.push([
-                                    __(`equipment_types`, condition.substr(3).toLocaleLowerCase()),
-                                    stat
-                                ])
+                            const eType = __('equipment_types', condition.substr(3).toLocaleLowerCase())
+                            if (condition.substr(0, 3) === 'has' && eType) {
+                                equipmentRequired.push([eType, stat])
                             } else {
                                 equipmentRequired.push([
                                     getEquipmentTypesFromCondition({

@@ -72,13 +72,13 @@ const aliases = {
 }
 
 const i18n = {
-    // type: 'default', // default | store
+    // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
+    // expr: '__',
     locales: [
         ['zh', './locales/zh.json'],
         ['en', './locales/en.json'],
         ['ja', './locales/ja.json'],
     ],
-    // expr: '__',
 }
 
 /**

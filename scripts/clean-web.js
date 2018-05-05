@@ -18,30 +18,34 @@ module.exports = async ({
 
     const waiting = spinner('Cleaning dist directory...')
 
-    const fileList = await new Promise((resolve, reject) => {
-        glob(
-            path.join(pathDist, '**/*'),
-            {},
-            (err, files) => {
-                if (err) reject(err)
-                resolve(files)
-            }
-        )
-    })
-
-    for (let file of fileList) {
-        if (file.indexOf(`public/${dirNamePics}/`) > -1) continue
-        if (file.indexOf(`public${path.sep}${dirNamePics}${path.sep}`) > -1) continue
-        if (/\/public\/pics$/.test(file)) continue
-        if (/\/public$/.test(file)) continue
-
-        await new Promise((resolve, reject) => {
-            fs.remove(file, err => {
-                if (err) reject(err)
-                // console.log('  > removed ' + file)
-                resolve()
-            })
+    try {
+        const fileList = await new Promise((resolve, reject) => {
+            glob(
+                path.join(pathDist, '**/*'),
+                {},
+                (err, files) => {
+                    if (err) reject(err)
+                    resolve(files)
+                }
+            )
         })
+
+        for (let file of fileList) {
+            if (file.indexOf(`public/${dirNamePics}/`) > -1) continue
+            if (file.indexOf(`public${path.sep}${dirNamePics}${path.sep}`) > -1) continue
+            if (/\/public\/pics$/.test(file)) continue
+            if (/\/public$/.test(file)) continue
+
+            await new Promise((resolve, reject) => {
+                fs.remove(file, err => {
+                    if (err) reject(err)
+                    // console.log('  > removed ' + file)
+                    resolve()
+                })
+            })
+        }
+    } catch (e) {
+        console.log(e)
     }
 
     // console.log('  > COMPLETE')
