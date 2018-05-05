@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import translate from 'super-i18n'
 import InfosPageContainer from '@appUI/containers/infos-page'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
@@ -60,7 +59,7 @@ export default class extends React.Component {
         if (equipment) {
             obj.title = [
                 equipment._name,
-                tab === tabsAvailable[0] ? undefined : translate("equipment_details." + tab)
+                tab === tabsAvailable[0] ? undefined : __("equipment_details", tab)
             ]
             obj.subtitle = equipment.type ? equipment._type : ''
             obj.description = getDescription(equipment)

@@ -1,7 +1,6 @@
 import {
     UPDATE_PAGE_TITLE
 } from '@appRedux/action-types.js'
-import translate from 'super-i18n'
 
 const initialState = {
     // main: '',
@@ -21,10 +20,10 @@ export default function (state = initialState, action) {
                     main: action.title,
                     sub: undefined
                 }
-            return translate('title')
+            return __('title')
 
     }
 
-    return state || translate('title');
+    return state || __('title');
 
 }

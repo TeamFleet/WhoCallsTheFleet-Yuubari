@@ -3,7 +3,6 @@ import classNames from 'classnames'
 
 import kckit from 'kckit'
 import db from '@appLogic/database'
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import Icon from '@appUI/components/icon'
@@ -205,15 +204,15 @@ export default class CalculatorLevelOASW extends React.Component {
         let displayName
         if (Array.isArray(id)) {
             if (Array.isArray(id[2]))
-                displayName = translate(`equipment_types.${id[0]}`)
+                displayName = __(`equipment_types`, id[0])
                     + ' ('
-                    + translate('require.has_stat', {
-                        stat: translate(`stat.${id[2][0]}`),
+                    + __('require.has_stat', {
+                        stat: __(`stat`, id[2][0]),
                         value: id[2][1]
                     })
                     + ')'
             else
-                displayName = translate(`equipment_types.${id[0]}`)
+                displayName = __(`equipment_types`, id[0])
             id = id[1]
         } else if (this.isAny.includes(id)) {
             displayName = db.equipmentTypes[kckit.get.equipment(id).type]._name
@@ -262,7 +261,7 @@ export default class CalculatorLevelOASW extends React.Component {
         if (!this.state.meetEquipmentsRequirement)
             return <strong className="is-missing">
                 <Icon className="icon-missing" icon="warning2" />
-                {translate("oasw_calculator.no_result")}
+                {__("oasw_calculator.no_result")}
             </strong>
         if (!this.state.result || this.state.result > kckit.maxShipLv)
             return <strong>--</strong>
@@ -272,7 +271,7 @@ export default class CalculatorLevelOASW extends React.Component {
         })}>{this.state.result}</strong>
     }
     render() {
-        if (__SERVER__) return <div>{translate("no_javascript_warning")}</div>
+        if (__SERVER__) return <div>{__("no_javascript_warning")}</div>
         return (
             <div className={classNames([this.props.className, {
                 'is-unable': !this.canOASW,
@@ -284,7 +283,7 @@ export default class CalculatorLevelOASW extends React.Component {
 
                 {this.canOASW && !this.canAlways && this.renderEquipmentGroup()}
                 {this.canOASW && !this.canAlways && <div className="area-result">
-                    {this.state.meetEquipmentsRequirement && translate("oasw_calculator.result")}
+                    {this.state.meetEquipmentsRequirement && __("oasw_calculator.result")}
                     {this.getResult()}
                 </div>}
             </div>

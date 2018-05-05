@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { ImportStyle } from 'sp-css-import'
-import translate from 'super-i18n'
 
 import getShip from '@appUtils/get-ship.js'
 
@@ -49,12 +48,12 @@ export default class EquipmentDetailsComponentStocked extends React.Component {
     }
     render() {
         return (
-            <ComponentContainer className={this.props.className} title={translate("equipment_details.stocked")}>
+            <ComponentContainer className={this.props.className} title={__("equipment_details.stocked")}>
                 {!!this.list.length && this.getList()}
-                {!this.list.length && <span className="disabled">{translate("none")}</span>}
+                {!this.list.length && <span className="disabled">{__("none")}</span>}
                 {/* <ListShips
                     list={this.props.equipment.default_equipped_on || []}
-                    empty={translate("equipment_details.stocked_list_empty")}
+                    empty={__("equipment_details.stocked_list_empty")}
                     sort={true}
 
                     navy={true}

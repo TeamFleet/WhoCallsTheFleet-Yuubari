@@ -1,6 +1,5 @@
 import React from 'react'
 
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import getShip from '@appUtils/get-ship.js'
@@ -21,10 +20,10 @@ export default class EquipmentDetailsComponentAcquisition extends React.Componen
         // console.log(this.listUpgradeFrom, this.listStocked)
         const classNameThis = this.props.className.split([' '])[0]
         return (
-            <ComponentContainer title={translate("equipment_details.acquisition")}>
+            <ComponentContainer title={__("equipment_details.acquisition")}>
                 <dl className={this.props.className}>
                     <List
-                        title={translate("equipment_details.upgrade_from")}
+                        title={__("equipment_details.upgrade_from")}
                         list={
                             this.listUpgradeFrom.length
                                 ? <ListEquipments list={this.listUpgradeFrom} />
@@ -32,7 +31,7 @@ export default class EquipmentDetailsComponentAcquisition extends React.Componen
                         }
                     />
                     <List
-                        title={translate("equipment_details.stocked")}
+                        title={__("equipment_details.stocked")}
                         list={
                             this.listStocked.length
                                 ? <ListStockedBody
@@ -53,7 +52,7 @@ const List = ({
     list,
 }) => {
     const _list = !list
-        ? <dd className="empty">{translate("none")}</dd>
+        ? <dd className="empty">{__("none")}</dd>
         : <dd>{list}</dd>
     return (
         <React.Fragment>

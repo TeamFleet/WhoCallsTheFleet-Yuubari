@@ -1,6 +1,5 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-import translate/*, { localeId }*/ from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 import db from '@appLogic/database'
 // import {
@@ -36,7 +35,7 @@ export default class ShipDetailsHeader extends React.Component {
         if (!Array.isArray(this.props.tabs)) return []
         return this.props.tabs.map(tabId => ({
             tabId,
-            tabName: translate("ship_details." + tabId)
+            tabName: __("ship_details", tabId)
         }))
     }
 
@@ -55,14 +54,14 @@ export default class ShipDetailsHeader extends React.Component {
                 <span className="shipclassnumber">No.{this.props.ship.getNo()}</span>
                 <br />
                 {this.props.ship.class_no
-                    ? translate("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
-                    : translate("shipclass", { class: this.props.ship._class })
+                    ? __("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
+                    : __("shipclass", { class: this.props.ship._class })
                 }
                 {/*
                 {localeId === 'ja' && <br />}
                 {this.props.ship.class_no
-                    ? translate("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
-                    : translate("shipclass", { class: this.props.ship._class })
+                    ? __("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
+                    : __("shipclass", { class: this.props.ship._class })
                 }
                 {localeId !== 'ja' && <span className="shipname-ja">{this.props.ship.getName(undefined, 'ja_jp')}</span>}
                 */}

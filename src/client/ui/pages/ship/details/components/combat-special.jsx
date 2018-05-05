@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 // import classNames from 'classnames'
 
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 import kckit from 'kckit'
 // const checkShip = kckit.check.ship
@@ -39,7 +38,7 @@ export default class ShipDetailsSpecialCombat extends React.Component {
         return (
             <ComponentContainer
                 className={className}
-                title={translate("ship_details.combat_special")}
+                title={__("ship_details.combat_special")}
             >
                 <CapabilityJetAssult ship={ship} />
                 <CapabilityAACI ship={ship} />
@@ -67,13 +66,13 @@ const CapabilityJetAssult = ({ ship }) => {
 
     return (
         <Bullet
-            title={translate("combat_phases.jet")}
+            title={__("combat_phases.jet")}
             level={able ? 1 : 0}
         >
-            {able && translate("require.equipment", { type: "" })}
+            {able && __("require.equipment", { type: "" })}
             {able &&
                 <IconEquipment className="equipment" icon={39}>
-                    {translate("equipment_types.jet")}
+                    {__("equipment_types.jet")}
                 </IconEquipment>
             }
         </Bullet>
@@ -86,10 +85,10 @@ const CapabilityAACI = ({ ship }) => {
 
     return (
         <Bullet
-            title={translate("aaci.title")}
+            title={__("aaci.title")}
             level={able ? 1 : 0}
         >
-            {able && translate("ship_details.see_below_for_required_equipment_types")}
+            {able && __("ship_details.see_below_for_required_equipment_types")}
         </Bullet>
     )
 }
@@ -109,10 +108,10 @@ const CapabilityAARocketBarrage = ({ ship }) => {
     const able = level ? true : false
     return (
         <Bullet
-            title={translate("combat_phases.anti_air_rocket_barrage")}
+            title={__("combat_phases.anti_air_rocket_barrage")}
             level={level || 0}
         >
-            {able && translate("require.equipment", { type: "" })}
+            {able && __("require.equipment", { type: "" })}
             {able &&
                 <LinkEquipment className="color-alt link-equipment" equipment={274} />
             }
@@ -129,10 +128,10 @@ const CapabilitySpecialRange = ({ ship }) => {
 
     return (
         <Bullet
-            title={translate("ship_details.range_different_title", { range: ship._range })}
+            title={__("ship_details.range_different_title", { range: ship._range })}
             level={ship.stat.range > pair[0][1] ? 2 : 1}
         >
-            {translate("ship_details.range_different_note", {
+            {__("ship_details.range_different_note", {
                 range: kckit.get.range(pair[0][1]),
                 type: db.shipTypes[ship.type_display]._name
             })}
@@ -148,7 +147,7 @@ const CapabilityOASW = ({ ship, locales_equipment_types }) => {
     if (statASW99 === undefined)
         return (
             <Bullet
-                title={translate("combat_phases.oasw")}
+                title={__("combat_phases.oasw")}
                 level={-1}
             />
         )
@@ -159,11 +158,11 @@ const CapabilityOASW = ({ ship, locales_equipment_types }) => {
 
     return (
         <Bullet
-            title={translate("combat_phases.oasw")}
+            title={__("combat_phases.oasw")}
             level={canOASW ? (canAlways ? 2 : 1) : 0}
         >
-            {canOASW && canAlways && translate("ship_details.can_always_perform")}
-            {canOASW && !canAlways && oaswTable.length > 1 && translate("ship_details.meet_one_requirements_below")}
+            {canOASW && canAlways && __("ship_details.can_always_perform")}
+            {canOASW && !canAlways && oaswTable.length > 1 && __("ship_details.meet_one_requirements_below")}
             {canOASW && !canAlways && oaswTable.map((OASW, index) => {
                 const statsWithEquipments = []
                 let equipmentRequired = []
@@ -184,7 +183,7 @@ const CapabilityOASW = ({ ship, locales_equipment_types }) => {
                             }
                             if (condition.substr(0, 3) === 'has' && locales_equipment_types[condition.substr(3).toLocaleLowerCase()]) {
                                 equipmentRequired.push([
-                                    translate(`equipment_types.${condition.substr(3).toLocaleLowerCase()}`),
+                                    __(`equipment_types`, condition.substr(3).toLocaleLowerCase()),
                                     stat
                                 ])
                             } else {
@@ -206,15 +205,15 @@ const CapabilityOASW = ({ ship, locales_equipment_types }) => {
                     <ul key={index} className="requirement">
                         {oaswTable.length > 1 && (`#${index + 1}`)}
                         {statsWithEquipments.map((stat, indexStat) => <li key={`${index}-${indexStat}`}>
-                            {translate("require.ship_stat_with_equipments", {
-                                stat: translate(`stat.${stat[0]}`),
+                            {__("require.ship_stat_with_equipments", {
+                                stat: __(`stat`, stat[0]),
                                 value: stat[1]
                             })}
                         </li>)}
                         {equipmentRequired.map((type, indexType) => {
                             if (type === '九三一空')
                                 return (<li key={`${index}-${indexType}`}>
-                                    {translate("require.equipment", { type: "" })}
+                                    {__("require.equipment", { type: "" })}
                                     <IconEquipment className="equipment" icon={8}>
                                         九三一空
                                     </IconEquipment>
@@ -222,28 +221,28 @@ const CapabilityOASW = ({ ship, locales_equipment_types }) => {
                             else if (Array.isArray(type)) {
                                 // console.log(type)
                                 return (<li key={`${index}-${indexType}`}>
-                                    {translate("require.equipment", { type: "" })}
+                                    {__("require.equipment", { type: "" })}
                                     {typeof type[0] === 'number' && (
                                         <IconEquipment className="equipment" icon={db.equipmentTypes[type[0]].icon}>
                                             {db.equipmentTypes[type[0]]._name}
                                         </IconEquipment>
                                     )}
                                     {typeof type[0] === 'string' && type[0]}
-                                    {' (' + translate("require.has_stat", {
-                                        stat: translate(`stat.${type[1][0]}`),
+                                    {' (' + __("require.has_stat", {
+                                        stat: __(`stat`, type[1][0]),
                                         value: type[1][1]
                                     }) + ')'}
                                 </li>)
                             }
                             else
                                 return (<li key={`${index}-${indexType}`}>
-                                    {translate("require.equipment_type", { type: "" })}
+                                    {__("require.equipment_type", { type: "" })}
                                     <IconEquipment className="equipment" icon={db.equipmentTypes[type].icon}>
                                         {db.equipmentTypes[type]._name}
                                     </IconEquipment>
                                 </li>)
                         })}
-                        {OASW.minLv && <li>{translate("require.min_possible_level", {
+                        {OASW.minLv && <li>{__("require.min_possible_level", {
                             level: OASW.minLv || ship._minLv
                         })}</li>}
                     </ul>
@@ -262,11 +261,11 @@ const CapabilityOTS = ({ ship }) => {
     const canOTS = canAlways || (Array.isArray(otsTable) && otsTable.length) ? true : false
     return (
         <Bullet
-            title={translate("combat_phases.ots")}
+            title={__("combat_phases.ots")}
             level={canOTS ? (canAlways ? 2 : 1) : 0}
         >
-            {canOTS && canAlways && translate("ship_details.can_always_perform")}
-            {canOTS && !canAlways && otsTable.length > 1 && translate("ship_details.meet_one_requirements_below")}
+            {canOTS && canAlways && __("ship_details.can_always_perform")}
+            {canOTS && !canAlways && otsTable.length > 1 && __("ship_details.meet_one_requirements_below")}
             {canOTS && !canAlways && otsTable.map((OTS, index) => {
                 let equipmentRequired = []
                 if (OTS.equipments) {
@@ -276,12 +275,12 @@ const CapabilityOTS = ({ ship }) => {
                     <ul key={index} className="requirement">
                         {otsTable.length > 1 && (`#${index + 1}`)}
                         {equipmentRequired.map((type, indexType) => <li key={`${index}-${indexType}`} data-type={type}>
-                            {translate("require.equipment_type", { type: "" })}
+                            {__("require.equipment_type", { type: "" })}
                             <IconEquipment className="equipment" icon={db.equipmentTypes[type].icon}>
                                 {db.equipmentTypes[type]._name}
                             </IconEquipment>
                         </li>)}
-                        {OTS.ship && OTS.ship.minLevel && <li>{translate("require.level", {
+                        {OTS.ship && OTS.ship.minLevel && <li>{__("require.level", {
                             level: OTS.ship.minLevel
                         })}</li>}
                     </ul>
@@ -297,7 +296,7 @@ const CapabilityTorpedo = ({ ship }) => {
     if (!isBattleship || statTorpedo99 === false) return null
     return (
         <Bullet
-            title={translate("combat_phases.torpedo")}
+            title={__("combat_phases.torpedo")}
             level={2}
         />
     )
@@ -310,10 +309,10 @@ const CapabilitySkipSS = ({ ship }) => {
     ) return null
     return (
         <Bullet
-            title={translate("ship_details.light_attack_carrier_asw_title")}
+            title={__("ship_details.light_attack_carrier_asw_title")}
             level={2}
         >
-            {translate("ship_details.light_attack_carrier_asw_note")}
+            {__("ship_details.light_attack_carrier_asw_note")}
         </Bullet>
     )
 }
@@ -331,10 +330,10 @@ const CapabilityNightAirAssult = ({ ship }) => {
         const equipment = db.equipments[258] // 夜間作戦航空要員
         return (
             <Bullet
-                title={translate("combat_phases.night_air_assault")}
+                title={__("combat_phases.night_air_assault")}
                 level={2}
             >
-                {translate('require.equipment_no_need', { type: "" })}
+                {__('require.equipment_no_need', { type: "" })}
                 <IconEquipment className="equipment" icon={equipment._icon}>
                     {equipment._name}
                 </IconEquipment>
@@ -345,10 +344,10 @@ const CapabilityNightAirAssult = ({ ship }) => {
     if (ship.stat.fire || ship.stat.torpedo) {
         return (
             <Bullet
-                title={translate("combat_phases.night")}
+                title={__("combat_phases.night")}
                 level={1}
             >
-                {translate('ship_details.carrier_default_night_battle')}
+                {__('ship_details.carrier_default_night_battle')}
             </Bullet>
         )
     }
@@ -357,14 +356,14 @@ const CapabilityNightAirAssult = ({ ship }) => {
         const equipment = db.equipments[242] // Swordfish
         return (
             <Bullet
-                title={translate("combat_phases.night")}
+                title={__("combat_phases.night")}
                 level={1}
             >
-                {translate('ship_details.carrier_swordfish_night_battle')}
+                {__('ship_details.carrier_swordfish_night_battle')}
                 <br />
-                {translate('require.equipment', { type: "" })}
+                {__('require.equipment', { type: "" })}
                 <IconEquipment className="equipment" icon={equipment._icon}>
-                    {translate("equipment_series", {
+                    {__("equipment_series", {
                         equipment: equipment._name
                     })}
                 </IconEquipment>
@@ -381,14 +380,14 @@ const CapabilityNoNightBattle = ({ ship }) => {
         return null
     return (
         <Bullet
-            title={translate("combat_phases.night")}
+            title={__("combat_phases.night")}
             level={0}
         />
     )
 }
 
-const Capability = ({ ship }) => {
-    return (
-        '1'
-    )
-}
+// const Capability = ({ ship }) => {
+//     return (
+//         '1'
+//     )
+// }

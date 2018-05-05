@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-// import translate from 'super-i18n'
 import db from '@appLogic/database'
 // import bindEvent from 'bind-event'
 import {

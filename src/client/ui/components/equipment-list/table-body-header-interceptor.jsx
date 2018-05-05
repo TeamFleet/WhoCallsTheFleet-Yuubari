@@ -3,7 +3,6 @@ import React from 'react'
 import { stats } from './table-body'
 import DataTableFlex, { Row, Cell } from '@appUI/components/datatable-flex'
 
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 @ImportStyle(require('./table-body-header-interceptor.less'))
@@ -26,9 +25,9 @@ class EquipmentListTableBodyHeaderInterceptorBody extends React.Component {
         let content = null
 
         if (stat === 'hit')
-            content = translate('stat.antibomber')
+            content = __('stat.antibomber')
         else if (stat === 'evasion')
-            content = translate('stat.interception')
+            content = __('stat.interception')
 
         return (
             <Cell

@@ -17,7 +17,6 @@ import {
     update as shipDetailsUpdate
 } from '@appLogic/pages'
 import { getInfosId } from '../../details'
-// import translate from 'super-i18n'
 
 const ILLUSTINDEX = 'illustIndex'
 

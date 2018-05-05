@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 import kckit from 'kckit'
 import EquipmentTypes from 'kckit/src/types/equipments'
@@ -44,7 +43,7 @@ export default class extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('nav.calctp')
+            title: __('nav.calctp')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -89,7 +88,7 @@ const PageCalcTPHeader = ({ className }) => (
             <Title
                 className={className + '-title'}
                 component="h2"
-                children={translate('nav.calctp')}
+                children={__('nav.calctp')}
             />
         }
         options={
@@ -123,7 +122,7 @@ class PageCalcTPBody extends React.Component {
                         className={this.props.className + "-title"}
                         component="h4"
                         // type="line-append"
-                        children={translate('ship_type')}
+                        children={__('ship_type')}
                     />
                     <div className={this.props.className + "-grid"}>
                         {shipTypes.map((typeId, index) => (
@@ -148,7 +147,7 @@ class PageCalcTPBody extends React.Component {
                         className={this.props.className + "-title"}
                         component="h4"
                         // type="line-append"
-                        children={translate('equipment_type')}
+                        children={__('equipment_type')}
                     />
                     <div className={this.props.className + "-grid"}>
                         {equipmentTypes.map((typeId, index) => (

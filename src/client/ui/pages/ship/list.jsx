@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import translate from 'super-i18n'
 import Page from '@appUI/containers/page'
 import htmlHead from '@appUtils/html-head.js'
 import {
@@ -24,7 +23,7 @@ export default class PageShipList extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('nav.ships')
+            title: __('nav.ships')
         })
 
         ext.metas = ext.metas.concat(head.meta)

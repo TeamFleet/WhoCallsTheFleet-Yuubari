@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
@@ -15,7 +14,7 @@ import htmlHead from '@appUtils/html-head'
 import InfosPage from '@appUI/containers/infos-page'
 import Center from '@appUI/containers/center'
 
-import Button from '@appUI/components/button'
+// import Button from '@appUI/components/button'
 import Title from '@appUI/components/title'
 import LoaderFairyOoyodo2 from '@appUI/components/loader/fairy-ooyodo-2'
 
@@ -28,7 +27,7 @@ export default class PageFleetDetails extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('nav.fleets')
+            title: __('nav.fleets')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -155,7 +154,7 @@ class PageFleetDetailsBody extends React.Component {
 
     render() {
         if (!__CLIENT__)
-            return <Title component="h2" children={translate('nav.fleets')} />
+            return <Title component="h2" children={__('nav.fleets')} />
 
         if (!this.state.ready)
             return (

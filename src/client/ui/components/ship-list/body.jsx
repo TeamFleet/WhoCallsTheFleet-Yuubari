@@ -4,7 +4,6 @@ import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
 
-import translate from 'super-i18n'
 import db from '@appLogic/database'
 import shipListFilter from '@appLogic/database/list-ships-filter.js'
 import {
@@ -341,15 +340,15 @@ class ShipListBodyListFilteredResult extends React.Component {
             const result = shipListFilter(this.props.filterInput)
             if (result.length > filterSelectMax) {
                 list = result.slice(0, filterSelectMax)
-                text = translate('ship_list.filter.results_count_too_many', { count: result.length, showing: filterSelectMax })
+                text = __('ship_list.filter.results_count_too_many', { count: result.length, showing: filterSelectMax })
             } else if (result.length > 0) {
                 list = result
-                text = translate('ship_list.filter.results_count', { count: result.length })
+                text = __('ship_list.filter.results_count', { count: result.length })
             } else if (!list || !list.length) {
                 list = result
-                text = translate('ship_list.filter.no_result')
+                text = __('ship_list.filter.no_result')
             } else {
-                text = translate('ship_list.filter.no_result_show_previous')
+                text = __('ship_list.filter.no_result_show_previous')
             }
 
             if (Array.isArray(list) && list.length) {

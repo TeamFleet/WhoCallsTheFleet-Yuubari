@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import translate from 'super-i18n'
 // import { ImportStyle } from 'sp-css-import'
 
 import htmlHead from '@appUtils/html-head.js'
@@ -29,7 +28,7 @@ const illustIds = [8, 9]
 //     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
 //         const head = htmlHead({
 //             store,
-//             title: translate('nav.exillusts')
+//             title: __('nav.exillusts')
 //         })
 
 //         ext.metas = ext.metas.concat(head.meta)
@@ -41,7 +40,7 @@ const illustIds = [8, 9]
 //             <PageContainer
 //                 className={this.props.className}
 //             >
-//                 <p><i>{translate('under_construction')}...</i></p>
+//                 <p><i>{__('under_construction')}...</i></p>
 //             </PageContainer>
 //         )
 //     }
@@ -68,7 +67,7 @@ export default class extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('nav.exillusts')
+            title: __('nav.exillusts')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -114,7 +113,7 @@ export default class extends React.Component {
             <Page
                 className={this.props.className}
             >
-                <p><i>{translate('under_construction')}...</i></p>
+                <p><i>{__('under_construction')}...</i></p>
 
                 <div style={{
                     marginRight: '-10px',

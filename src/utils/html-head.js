@@ -1,6 +1,6 @@
 import metas from 'metas'
 
-import translate, { localeId as currentLocaleId } from 'super-i18n'
+import { localeId as currentLocaleId } from 'super-i18n'
 import getLocaleId from 'super-i18n/parse-locale-id'
 
 import { origin as siteOrigin } from '@appConfig/site.js'
@@ -15,7 +15,7 @@ export default (settings = {}) => {
     let fb_locale
     let fb_app_id = fb_app_id
     let dispatch
-    const siteName = translate('title') + (__DEV__ ? ' (DEV)' : '')
+    const siteName = __('title') + (__DEV__ ? ' (DEV)' : '')
 
     /**
      * 默认选项

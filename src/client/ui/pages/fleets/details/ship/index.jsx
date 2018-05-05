@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import classNames from 'classnames'
-import translate from 'super-i18n'
+// import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
 
 import {

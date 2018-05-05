@@ -6,7 +6,6 @@ import ComponentContainer from '@appUI/containers/infos-component'
 import IconEquipment from '@appUI/components/icon-equipment'
 import ImprovementStar from '@appUI/components/improvement/star'
 
-import translate from 'super-i18n'
 import db from '@appLogic/database'
 import times from '@appUtils/times'
 
@@ -47,18 +46,18 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
                         }
                         {!equipmentId && hasSlot && <span className="equipment-name">
                             <IconEquipment className="icon" />
-                            {translate("ship_details.emptyslot")}
+                            {__("ship_details.emptyslot")}
                         </span>}
                         {!equipmentId && !hasSlot && <span className="equipment-name">
                             <IconEquipment className="icon" />
-                            {translate("ship_details.noslot")}
+                            {__("ship_details.noslot")}
                         </span>}
                     </dd>
                 </dl>
             )
         })
         return (
-            <ComponentContainer className={this.props.className} title={translate("ship_details.slot_equipments")}>
+            <ComponentContainer className={this.props.className} title={__("ship_details.slot_equipments")}>
                 {renderArr}
             </ComponentContainer>
         )

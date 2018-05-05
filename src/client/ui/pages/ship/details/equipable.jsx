@@ -8,7 +8,6 @@ import LinkMini from '@appUI/components/link-mini'
 
 // import getPic from '@appUtils/get-pic'
 import getLink from '@appUtils/get-link'
-import translate from 'super-i18n'
 import db from '@appLogic/database'
 
 import { ImportStyle } from 'sp-css-import'
@@ -55,7 +54,7 @@ export default class ShipDetailsContentEquipable extends React.Component {
     renderExSolot() {
         return (
             <ComponentContainer
-                title={translate("ship_details.equipable_exslot")}
+                title={__("ship_details.equipable_exslot")}
             >
                 <ShipDetailsContentEquipableListContainer className="is-exslot">
                     {this.props.ship.getExSlotEquipmentTypes()
@@ -70,7 +69,7 @@ export default class ShipDetailsContentEquipable extends React.Component {
                         ))}
                 </ShipDetailsContentEquipableListContainer>
 
-                <div className="noflex and">{translate("ship_details.equipable_exslot_and")}</div>
+                <div className="noflex and">{__("ship_details.equipable_exslot_and")}</div>
 
                 <ShipDetailsContentEquipableListContainer className="is-exslot">
                     {this.props.ship.getExSlotOtherEquipments()
@@ -96,16 +95,16 @@ export default class ShipDetailsContentEquipable extends React.Component {
                     >
                         <ShipDetailsContentEquipableLegend
                             className="item off"
-                            text={translate("ship_details.equipable_legend_no")}
+                            text={__("ship_details.equipable_legend_no")}
                         />
                         <ShipDetailsContentEquipableLegend
                             className="item on"
-                            text={translate("ship_details.equipable_legend_yes")}
+                            text={__("ship_details.equipable_legend_yes")}
                         />
                         <ShipDetailsContentEquipableLegend
                             className="item on is-special"
-                            text={translate("ship_details.equipable_legend_yes")}
-                            textSmall={translate("ship_details.equipable_legend_yes_extra", { type: db.shipTypes[this.props.ship.type_display]._name })}
+                            text={__("ship_details.equipable_legend_yes")}
+                            textSmall={__("ship_details.equipable_legend_yes_extra", { type: db.shipTypes[this.props.ship.type_display]._name })}
                         />
                     </ComponentContainer>
                 </div>
@@ -205,7 +204,7 @@ class ShipDetailsContentEquipableItem extends React.Component {
                             'on': canEquipShipType,
                             'off': !canEquipShipType
                         }])}>
-                            {translate("other_ships_of_type", {
+                            {__("other_ships_of_type", {
                                 type: db.shipTypes[this.props.ship.type_display]._name
                             })}
                         </LinkMini>

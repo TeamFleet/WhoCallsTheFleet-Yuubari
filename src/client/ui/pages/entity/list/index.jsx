@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { ImportStyle } from 'sp-css-import'
-import translate from 'super-i18n'
 
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
@@ -19,7 +18,7 @@ export default class extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('nav.entities')
+            title: __('nav.entities')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -43,7 +42,7 @@ export default class extends React.Component {
             <Page
                 className={this.props.className}
             >
-                <ListTitle>{translate('seiyuus')}</ListTitle>
+                <ListTitle>{__('seiyuus')}</ListTitle>
                 <ListCasters
                     list={listCVs.sort((a, b) => (
                         b.relation.cv.length - a.relation.cv.length
@@ -51,7 +50,7 @@ export default class extends React.Component {
                     count={true}
                 />
 
-                <ListTitle>{translate('artists')}</ListTitle>
+                <ListTitle>{__('artists')}</ListTitle>
                 <ListArtists
                     list={listArtists.sort((a, b) => (
                         b.relation.illustrator.length - a.relation.illustrator.length

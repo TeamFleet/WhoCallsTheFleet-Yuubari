@@ -9,7 +9,7 @@
         {
             "name": "fleet-dev-client",
             "script": "./super.build.js",
-            "max_memory_restart": "1G",
+            "max_memory_restart": "4G",
             "out_file": "logs/dev/fleet-dev-client.log",
             "error_file": "logs/dev/fleet-dev-client-error.log",
             "detached": true,
@@ -24,7 +24,7 @@
         {
             "name": "fleet-dev-server",
             "script": "./super.build.js",
-            "max_memory_restart": "1G",
+            "max_memory_restart": "4G",
             "out_file": "logs/dev/fleet-dev-server.log",
             "error_file": "logs/dev/fleet-dev-server-error.log",
             "detached": true,
@@ -44,7 +44,8 @@
             "out_file": "logs/dev/fleet-dev-run.log",
             "error_file": "logs/dev/fleet-dev-run-error.log",
             "watch": [ // 监控变化的目录，一旦变化，自动重启
-                "dist-web"
+                "dist-web/public/includes",
+                "dist-web/server"
             ],
             "detached": true,
             "env": {

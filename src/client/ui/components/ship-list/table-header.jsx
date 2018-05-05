@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import translate from 'super-i18n'
 import DataTable from '../datatable.jsx'
 import {
     compareScroll,
@@ -56,7 +55,7 @@ export default class ShipListTableHeader extends React.Component {
             const type = stat.replace(/^consum\./, '')
             return [
                 stat
-                    ? translate('stat.' + stat)
+                    ? __('stat', stat)
                     // ? (<IconStat className="icon" stat={stat} />)
                     : null,
                 {

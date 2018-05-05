@@ -17,7 +17,6 @@ const {
     // ships
 } = db
 
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 // @connect()
@@ -75,10 +74,10 @@ class Legends extends React.Component {
             <div className={this.props.className + ' legends'}>
                 <div className="list types">
                     <LinkMini className="item off">
-                        {translate("equipment_details.refittable_legend_no")}
+                        {__("equipment_details.refittable_legend_no")}
                     </LinkMini>
                     <LinkMini className="item on">
-                        {translate("equipment_details.refittable_legend_yes")}
+                        {__("equipment_details.refittable_legend_yes")}
                     </LinkMini>
                 </div>
             </div>
@@ -213,24 +212,24 @@ class ExSlot extends React.Component {
         return (
             <ComponentContainer
                 className={className + ' exslot'}
-                title={translate('exslot')}
+                title={__('exslot')}
                 {...props}
             >
                 {!!(isEquipableExSlot) && <Bullet
                     className="bullet"
-                    title={translate(`equipment_details.can_equip_in_ex_slot`)}
+                    title={__(`equipment_details.can_equip_in_ex_slot`)}
                     level={2}
                 />}
 
                 {!(isEquipableExSlot) && !!(list.length) && <Bullet
                     className="bullet"
-                    title={translate(`equipment_details.cannot_equip_in_ex_slot_but_ex_ships`)}
+                    title={__(`equipment_details.cannot_equip_in_ex_slot_but_ex_ships`)}
                     level={1}
                 />}
 
                 {!(isEquipableExSlot) && !(list.length) && <Bullet
                     className="bullet"
-                    title={translate(`equipment_details.cannot_equip_in_ex_slot`)}
+                    title={__(`equipment_details.cannot_equip_in_ex_slot`)}
                     level={0}
                 />}
 

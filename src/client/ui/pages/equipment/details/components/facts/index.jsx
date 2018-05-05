@@ -1,7 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
-import translate from 'super-i18n'
 
 import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
@@ -69,7 +68,7 @@ class EquipmentDetailsComponentFactsFacts extends React.Component {
                 {arr.map(pair => (
                     <Bullet
                         className="item"
-                        title={translate(`equipment_details.facts_${pair[1] ? '' : 'un'}${pair[0]}`)}
+                        title={__(`equipment_details`, `facts_${pair[1] ? '' : 'un'}${pair[0]}`)}
                         level={pair[1] ? 2 : 0}
                         key={pair[0]}
                     />
@@ -116,7 +115,7 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
 
                 {!!(valueTP) && (
                     <Stat
-                        type={translate(`tp`)}
+                        type={__(`tp`)}
                         className="item is-positive"
                         key="tp"
                     >
@@ -134,7 +133,7 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
 
 const StatValue = ({ stat, value, className, hideTitle }) => (
     <Stat
-        type={hideTitle ? undefined : translate(`stat.${stat}`)}
+        type={hideTitle ? undefined : __(`stat`, stat)}
         key={stat}
         className={classNames([className, {
             "is-negative": (value < 0),
@@ -150,7 +149,7 @@ const StatValue = ({ stat, value, className, hideTitle }) => (
 const Scrap = ImportStyle(require('./styles-stats-scrap.less'))(
     ({ scrap }) => (
         <Stat
-            type={translate(`equipment_details.scrap`)}
+            type={__(`equipment_details.scrap`)}
             className="item scrap"
             key="scrap"
         >
@@ -204,11 +203,11 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
                                         return (
                                             <span className="ship-class" key={classId}>{
                                                 shipTypeId
-                                                    ? translate('shiptypeclass', {
+                                                    ? __('shiptypeclass', {
                                                         type: get.shipType(shipTypeId)._name,
                                                         class: shipClass._name
                                                     })
-                                                    : translate('shipclass', {
+                                                    : __('shipclass', {
                                                         class: shipClass._name
                                                     })
                                             }</span>
@@ -224,7 +223,7 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
                                 </div>
                             }
                             <div className="bonus">
-                                <span className="title">{translate(`equipment_details.bonus_stat`)}</span>
+                                <span className="title">{__(`equipment_details.bonus_stat`)}</span>
                                 {stats.map(o => (
                                     <StatValue
                                         key={o.stat}
@@ -240,7 +239,7 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
                 })}
                 {bonus.length > 1 &&
                     <div className="bonus-item bonus-note">
-                        {translate('equipment_details.bonus_note_max_value')}
+                        {__('equipment_details.bonus_note_max_value')}
                     </div>
                 }
             </div>
@@ -253,7 +252,7 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
 // class EquipmentDetailsComponentFactsScrap extends React.Component {
 //     render() {
 //         return (
-//             <ComponentContainer className={this.props.className} title={translate("equipment_details.scrap")}>
+//             <ComponentContainer className={this.props.className} title={__("equipment_details.scrap")}>
 //                 <EquipmentDetailsComponentFactsContainer className={this.props.className}>
 //                     {arrResources.map((resource, index) => {
 //                         const value = getValue(this.props.equipment.dismantle[index])

@@ -3,7 +3,6 @@ import classNames from 'classnames'
 
 import kckit from 'kckit'
 import { ImportStyle } from 'sp-css-import'
-import translate from 'super-i18n'
 
 import Equipment from '../equipment'
 // import InputNumber from '../input-number'
@@ -77,9 +76,9 @@ export default class CalculatorSpeed extends React.Component {
         if (id === 33) {
             return (
                 <div className="note">
-                    {translate("speed_calculator.equipment_33_note_1")}
+                    {__("speed_calculator.equipment_33_note_1")}
                     <br />
-                    {translate("speed_calculator.equipment_33_note_2")}
+                    {__("speed_calculator.equipment_33_note_2")}
                 </div>
             )
         }
@@ -95,7 +94,7 @@ export default class CalculatorSpeed extends React.Component {
         )
     }
     render() {
-        if(__SERVER__) return <div>{translate("no_javascript_warning")}</div>
+        if(__SERVER__) return <div>{__("no_javascript_warning")}</div>
         return (
             <div className={this.props.className}>
                 <div className="area-requirement">
@@ -107,11 +106,11 @@ export default class CalculatorSpeed extends React.Component {
                 </div>
                 <div className="area-result">
                     <div className="base">
-                        {translate("speed_calculator.base_speed")}
+                        {__("speed_calculator.base_speed")}
                         <strong data-speed-id={this.props.ship.stat.speed}>{this.props.ship.getSpeed()}</strong>
                     </div>
                     <div className="result">
-                        {translate("speed_calculator.result")}
+                        {__("speed_calculator.result")}
                         <strong data-speed-id={this.state.speedId}>{this.state.speed}</strong>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import {
@@ -29,7 +28,7 @@ export default class PageFleets extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('nav.fleets')
+            title: __('nav.fleets')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -70,7 +69,7 @@ class PageFleetsBody extends React.Component {
 
     render() {
         if (!__CLIENT__)
-            return <Title component="h2" children={translate('nav.fleets')} />
+            return <Title component="h2" children={__('nav.fleets')} />
 
         if (!this.state.ready)
             return (
@@ -108,7 +107,7 @@ const PageFleetsHeader = connect()(({
             className={className}
             main={
                 <React.Fragment>
-                    {translate('under_construction')}
+                    {__('under_construction')}
                     <Button
                         children="NEW BUILD"
                         onClick={() => dispatch(newBuild(true))}
@@ -138,7 +137,7 @@ const PageFleetsList = connect(state => ({
     const hasData = Array.isArray(builds) && builds.length > 0
     return (
         <React.Fragment>
-            <Title component="h2" children={translate('under_construction')} />
+            <Title component="h2" children={__('under_construction')} />
             {hasData && builds.map(build => (
                 <div
                     key={build._id}

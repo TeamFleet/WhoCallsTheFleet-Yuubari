@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '@appUI/components/stat'
 
-import translate from 'super-i18n'
 import arrResources from '@appData/resources'
 import getValue from '@appUtils/get-value'
 
@@ -16,7 +15,7 @@ import styles from './styles.less'
 export default class EquipmentDetailsComponentScrap extends React.Component {
     render() {
         return (
-            <ComponentContainer className={this.props.className} title={translate("equipment_details.scrap")}>
+            <ComponentContainer className={this.props.className} title={__("equipment_details.scrap")}>
                 {arrResources.map((resource, index) => {
                     const value = getValue(this.props.equipment.dismantle[index])
                     return (

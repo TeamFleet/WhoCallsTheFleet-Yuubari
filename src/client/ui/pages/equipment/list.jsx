@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 // import Link from '@appUI/components/link'
 
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import htmlHead from '@appUtils/html-head.js'
@@ -28,7 +27,7 @@ export default class PageEquipmentList extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('nav.equipments')
+            title: __('nav.equipments')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -53,7 +52,7 @@ export default class PageEquipmentList extends React.Component {
         //     <PageContainer
         //         className={this.props.className}
         //     >
-        //         <p><i>{translate('under_construction')}...</i></p>
+        //         <p><i>{__('under_construction')}...</i></p>
         //         {db.equipmentCollections.map((collection, collectionIndex) => (
         //             <div key={collectionIndex}>
         //                 <h3>{collection.name}</h3>

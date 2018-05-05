@@ -9,7 +9,6 @@ import Illust from './components/illust.jsx'
 import Modernization from './components/modernization.jsx'
 import Dismantle from './components/dismantle.jsx'
 
-// import translate from 'super-i18n'
 // import db from '@appLogic/database'
 
 import { ImportStyle } from 'sp-css-import'

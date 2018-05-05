@@ -8,7 +8,6 @@ import FlagNavy from '@appUI/components/flag-navy'
 import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '@appUI/components/stat'
 
-import translate from 'super-i18n'
 // import db from '@appLogic/database'
 
 import { ImportStyle } from 'sp-css-import'
@@ -19,27 +18,27 @@ import styles from './quickfacts.less'
 export default class ShipDetailsComponentSlotEquipments extends React.Component {
     render() {
         const ship = this.props.ship
-        //title={translate("ship_details.quickfacts")}
+        //title={__("ship_details.quickfacts")}
         return (
             <ComponentContainer className={this.props.className}>
                 <div className="wrapper">
                     <Stat
                         className="item"
-                        title={translate("ship_details.navy")}
+                        title={__("ship_details.navy")}
                     >
                         <FlagNavy className="flag-navy" navy={ship._navy} />
                         {ship._navyName}
                     </Stat>
                     <Stat
                         className="item"
-                        title={translate("seiyuu")}
+                        title={__("seiyuu")}
                     >
                         {ship._cv && <Link to={`/entities/${ship.getRel('cv')}`}>{ship._cv}</Link>}
                         {!ship._cv && <span className="unknown">?</span>}
                     </Stat>
                     <Stat
                         className="item"
-                        title={translate("artist")}
+                        title={__("artist")}
                     >
                         {ship._illustrator && <Link to={`/entities/${ship.getRel('illustrator')}`}>{ship._illustrator}</Link>}
                         {!ship._illustrator && <span className="unknown">?</span>}

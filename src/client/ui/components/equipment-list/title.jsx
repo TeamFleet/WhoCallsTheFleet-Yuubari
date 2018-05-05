@@ -2,7 +2,6 @@ import React from 'react'
 // import { connect } from 'react-redux'
 
 import { ImportStyle } from 'sp-css-import'
-// import translate from 'super-i18n'
 
 import db from '@appLogic/database'
 

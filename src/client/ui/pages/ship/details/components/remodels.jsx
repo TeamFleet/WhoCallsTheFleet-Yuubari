@@ -6,7 +6,6 @@ import LinkShip from '@appUI/components/link/ship.jsx'
 import Icon from '@appUI/components/icon'
 import ComponentContainer from '@appUI/containers/infos-component'
 
-import translate from 'super-i18n'
 import getShip from '@appUtils/get-ship.js'
 import getPic from '@appUtils/get-pic.js'
 
@@ -36,7 +35,7 @@ export default class ShipDetailsComponentRemodels extends React.Component {
                 <span className={classNames(['lvl', {
                     'is-initial': index <= 0
                 }])}>
-                    {index > 0 ? series[index - 1].next_lvl : translate('ship_details.remodel_initial')}
+                    {index > 0 ? series[index - 1].next_lvl : __('ship_details.remodel_initial')}
                     {index > 0 && series[index - 1].next_catapult === 'on' && <span className="icon icon-catapult" />}
                     {index > 0 && series[index - 1].next_blueprint === 'on' && <span className="icon icon-blueprint" />}
                 </span>
@@ -61,7 +60,7 @@ export default class ShipDetailsComponentRemodels extends React.Component {
 
     render() {
         return (
-            <ComponentContainer className={this.props.className} title={translate("ship_details.remodels")}>
+            <ComponentContainer className={this.props.className} title={__("ship_details.remodels")}>
                 <div className="container">
                     {this.props.ship._series.map(this.renderSeries.bind(this))}
                 </div>

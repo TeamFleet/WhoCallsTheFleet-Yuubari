@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
-import translate from 'super-i18n'
 
 import db from '@appLogic/database'
 // import pref from '@appLogic/preferences'
@@ -50,12 +49,12 @@ export default class PageArsenal extends React.Component {
         let day
 
         if (typeof segs[indexArsenal + 1] !== 'undefined')
-            day = translate(`day_full.${daysArr[parseInt(segs[indexArsenal + 1])]}`)
+            day = __(`day_full`, daysArr[parseInt(segs[indexArsenal + 1])])
 
         const head = htmlHead({
             store,
             title: [
-                translate('nav.arsenal'),
+                __('nav.arsenal'),
                 day
             ]
         })
@@ -128,7 +127,7 @@ class PageArsenalHeader extends React.Component {
                     href={`/arsenal/${jstDay}`}
                     replace={true}
                     className={classNames(['tab', "link-today"])}
-                    children={translate(`arsenal.filter_by_day`)}
+                    children={__(`arsenal.filter_by_day`)}
                 />,
                 ...daysArr.map((day, index) => (
                     <Link
@@ -141,7 +140,7 @@ class PageArsenalHeader extends React.Component {
                             'is-today': jstDay === index
                         })}
                         activeClassName="on"
-                        children={translate(`day_abbr.${day}`)}
+                        children={__(`day_abbr`, day)}
                     />
                 )),
                 <Link
@@ -153,7 +152,7 @@ class PageArsenalHeader extends React.Component {
                         'link-all': true,
                         'on': !this.props.isDay
                     })}
-                    children={translate(`arsenal.all`)}
+                    children={__(`arsenal.all`)}
                 />
             ]}
         />
@@ -451,11 +450,11 @@ class PageArsenalListItem extends React.Component {
                                     className={`${className}-ships-ship color-alt`}
                                     key={ship.id}
                                     to={getLink('ship', ship.id)}
-                                    children={ship.getName(translate('shipname_dash_none'))}
+                                    children={ship.getName(__('shipname_dash_none'))}
                                 />
                             })
                         )}
-                        {!hasReqShips && translate('improvement.any_2nd_ship')}
+                        {!hasReqShips && __('improvement.any_2nd_ship')}
                     </div>
                 }
 
@@ -474,7 +473,7 @@ class PageArsenalListItem extends React.Component {
                                 expand: !this.state.expand
                             })
                         }}
-                        //children={!this.state.expand ? translate('arsenal.resources_toggle') : undefined}
+                        //children={!this.state.expand ? __('arsenal.resources_toggle') : undefined}
                         children={!this.state.expand ? "..." : undefined}
                         data-role="toggle"
                     />

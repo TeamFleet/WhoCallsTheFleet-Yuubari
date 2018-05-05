@@ -3,7 +3,6 @@ import classNames from 'classnames'
 // import bindEvent from 'bind-event'
 
 import { maxShipLv } from 'kckit'
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 import prefs from '@appLogic/preferences'
@@ -128,7 +127,7 @@ export default class ShipDetailsComponentStats extends React.Component {
             : getValue(this.props.ship.getAttribute(stat, this.state.lv))
         return (
             <Stat
-                type={translate(`stat.${stat}`)}
+                type={__(`stat`, stat)}
                 key={index}
                 className={
                     classNames(["stat", {
@@ -166,7 +165,7 @@ export default class ShipDetailsComponentStats extends React.Component {
     }
     render() {
         return (
-            <ComponentContainer className={this.props.className} title={translate("ship_details.stats")}>
+            <ComponentContainer className={this.props.className} title={__("ship_details.stats")}>
                 <span className="lv">
                     <InputCounter
                         className="lv-input"

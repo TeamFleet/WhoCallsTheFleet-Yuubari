@@ -12,7 +12,6 @@ import sortShips from '@appUtils/sort-ships'
 import arrResources from '@appData/resources'
 import db from '@appLogic/database'
 
-import translate from 'super-i18n'
 import { ImportStyle } from 'sp-css-import'
 
 const days = [
@@ -41,16 +40,16 @@ export class DayAndShip extends React.Component {
             <div className="item" key={index}>
                 <div className="days">
                     {days.map((day, index) => (
-                        <span className={'day' + (dataDays[index] ? ' on' : '')} key={index}>{translate(`day_abbr.${day}`)}</span>
+                        <span className={'day' + (dataDays[index] ? ' on' : '')} key={index}>{__(`day_abbr`, day)}</span>
                     ))}
                 </div>
                 <div className={"ships" + (!dataShips ? ' is-any' : '')}>
                     {dataShips && dataShips.map((ship, index) => (
                         <Link className="ship color-alt" key={index} to={getLink('ship', ship.id)}>
-                            {ship.getName(translate('shipname_dash_none'))}
+                            {ship.getName(__('shipname_dash_none'))}
                         </Link>
                     ))}
-                    {!dataShips && translate('improvement.any_2nd_ship')}
+                    {!dataShips && __('improvement.any_2nd_ship')}
                 </div>
             </div>
         )
@@ -104,7 +103,7 @@ class _Resources extends React.Component {
 export class Resources extends _Resources {
     renderCategory(category, data) {
         const title = typeof category === 'string'
-            ? translate(`improvement.${category}`)
+            ? __(`improvement`, category)
             : (`★+${category} ~ ` + (category === 0 ? '+6' : 'MAX'))
         let resources = null
         let equipments = null

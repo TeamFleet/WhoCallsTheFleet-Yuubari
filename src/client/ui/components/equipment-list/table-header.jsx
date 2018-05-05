@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 
-import translate from 'super-i18n'
 import DataTable from '../datatable.jsx'
 // import arrStats from '@appData/equipment-stats'
 import { stats } from './table-body'
@@ -34,7 +33,7 @@ export default class ShipListTableHeader extends React.Component {
         if (this.props.collection === 2 && stat === 'range')
             stat = 'distance'
         return [
-            stat ? translate('stat.' + stat) : null,
+            stat ? __('stat', stat) : null,
             {
                 className: classNames({
                     'cell-name': (!stat),

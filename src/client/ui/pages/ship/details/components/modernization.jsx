@@ -5,8 +5,6 @@ import ComponentContainer from '@appUI/containers/infos-component'
 import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
 
-import translate from 'super-i18n'
-
 import { ImportStyle } from 'sp-css-import'
 import styles from './modernization.less'
 
@@ -39,8 +37,8 @@ export default class ShipDetailsComponentModernization extends React.Component {
     render() {
         const hasModernization = Array.isArray(this.props.ship.modernization)
         return (
-            <ComponentContainer className={this.props.className} title={translate("ship_details.modernization")}>
-                {!hasModernization && translate("none")}
+            <ComponentContainer className={this.props.className} title={__("ship_details.modernization")}>
+                {!hasModernization && __("none")}
                 {hasModernization && stats.map(this.renderItem.bind(this))}
                 {this.props.ship.id === 163 && this.renderItem('luck', undefined, 1.2)}
                 {this.props.ship.id === 402 && this.renderItem('luck', undefined, 1.6)}

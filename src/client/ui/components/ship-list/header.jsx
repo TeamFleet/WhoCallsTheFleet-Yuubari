@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import translate from 'super-i18n'
 import db from '@appLogic/database'
 // import bindEvent from 'bind-event'
 import {
@@ -74,7 +73,7 @@ export default class ShipListHeader extends React.Component {
                             }}
                         >
                             <Icon className="icon icon-compare" icon="paragraph-left" />
-                            {translate("ship_list.compare.button")}
+                            {__("ship_list.compare.button")}
                             <Icon className="icon-close" icon="cross" />
                         </span>
                     )
@@ -233,7 +232,7 @@ class Filter extends React.Component {
                 <input
                     className="input"
                     type="text"
-                    placeholder={translate('ship_list.filter.placeholder')}
+                    placeholder={__('ship_list.filter.placeholder')}
                     onInput={this.onInput.bind(this)}
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
@@ -285,7 +284,7 @@ class Compare extends React.Component {
         // >
         //     <Icon className="icon-close" icon="cross" />
         // </button>
-        // {translate("ship_list.compare.selected", { count: this.props.compareList.length })}
+        // {__("ship_list.compare.selected", { count: this.props.compareList.length })}
         return (
             <div className={this.props.className}>
                 <div className="selecting">
@@ -297,8 +296,8 @@ class Compare extends React.Component {
                             onClick={this.compareStart.bind(this)}
                         >
                             {this.props.count
-                                ? translate("ship_list.compare.selected_to_start", { count: this.props.count })
-                                : translate("ship_list.compare.wait_for_selection")
+                                ? __("ship_list.compare.selected_to_start", { count: this.props.count })
+                                : __("ship_list.compare.wait_for_selection")
                             }
                         </button>
                     </div>
@@ -348,7 +347,7 @@ class CompareControls extends React.Component {
                         onClick={this.compareReset.bind(this)}
                     >
                         <Icon className="icon" icon="puzzle2" />
-                        {translate("ship_list.compare.quit")}
+                        {__("ship_list.compare.quit")}
                     </button>
                     <button
                         type="button"
@@ -356,7 +355,7 @@ class CompareControls extends React.Component {
                         onClick={this.compareAddRemove.bind(this)}
                     >
                         <Icon className="icon" icon="puzzle" />
-                        {translate("ship_list.compare.add_remove")}
+                        {__("ship_list.compare.add_remove")}
                     </button>
                 </div>
             </div>
@@ -369,9 +368,9 @@ class CompareControls extends React.Component {
                         onClick={this.compareResetSort.bind(this)}
                     >
                         {!this.props.compareSortType && <Icon className="icon" icon="sort-amount-desc" />}
-                        {!this.props.compareSortType && translate("ship_list.compare.click_to_sort")}
+                        {!this.props.compareSortType && __("ship_list.compare.click_to_sort")}
                         {this.props.compareSortType && <Icon className="icon" icon="paragraph-left" />}
-                        {this.props.compareSortType && translate("ship_list.compare.reset_sort")}
+                        {this.props.compareSortType && __("ship_list.compare.reset_sort")}
                     </button>
         */
     }

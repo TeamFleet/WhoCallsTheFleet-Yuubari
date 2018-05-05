@@ -4,8 +4,6 @@ import ComponentContainer from '@appUI/containers/infos-component'
 import Bullet from '@appUI/components/bullet'
 import CalculatorLevelOASW from '@appUI/components/calculator/level-oasw'
 
-import translate from 'super-i18n'
-
 import { ImportStyle } from 'sp-css-import'
 import styles from './oasw-calculator.less'
 
@@ -14,7 +12,7 @@ import styles from './oasw-calculator.less'
 export default class ShipDetailsCalculatorOASW extends React.Component {
     render() {
         return (
-            <ComponentContainer className={this.props.className} title={translate("oasw_calculator.title")}>
+            <ComponentContainer className={this.props.className} title={__("oasw_calculator.title")}>
                 <CalculatorLevelOASW
                     className="calculator"
                     ship={this.props.ship}
@@ -22,21 +20,21 @@ export default class ShipDetailsCalculatorOASW extends React.Component {
                     componentUnknown={
                         <Bullet
                             className="special"
-                            title={translate("oasw_calculator.unknown")}
+                            title={__("oasw_calculator.unknown")}
                             level={-1}
                         />
                     }
                     componentUnable={
                         <Bullet
                             className="special"
-                            title={translate("oasw_calculator.unable")}
+                            title={__("oasw_calculator.unable")}
                             level={0}
                         />
                     }
                     componentAlways={
                         <Bullet
                             className="special"
-                            title={translate("oasw_calculator.always")}
+                            title={__("oasw_calculator.always")}
                             level={2}
                         />
                     }

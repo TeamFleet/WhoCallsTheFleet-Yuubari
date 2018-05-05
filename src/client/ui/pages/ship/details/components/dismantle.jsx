@@ -6,8 +6,6 @@ import Stat from '@appUI/components/stat'
 import getValue from '@appUtils/get-value'
 import resources from '@appData/resources'
 
-import translate from 'super-i18n'
-
 import { ImportStyle } from 'sp-css-import'
 import styles from './modernization.less'
 
@@ -33,8 +31,8 @@ export default class ShipDetailsComponentDismantle extends React.Component {
     render() {
         const hasDismantle = Array.isArray(this.props.ship.scrap)
         return (
-            <ComponentContainer className={this.props.className} title={translate("ship_details.dismantle")}>
-                {!hasDismantle && translate("none")}
+            <ComponentContainer className={this.props.className} title={__("ship_details.dismantle")}>
+                {!hasDismantle && __("none")}
                 {hasDismantle && resources.map(this.renderItem.bind(this))}
             </ComponentContainer>
         )

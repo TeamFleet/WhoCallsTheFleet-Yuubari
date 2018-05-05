@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { ImportStyle } from 'sp-css-import'
-import translate from 'super-i18n'
 
 import db, { locale as dbLocaleId } from '@appLogic/database'
 import {
@@ -83,11 +82,12 @@ export default class ShipListTitle extends React.Component {
                 </div>
             )
         } else if (this.props.class) {
+            const _class = db.shipClasses[this.props.class]._name
             return (
                 <h5 className={this.props.className + ' is-sub'} data-checked={this.props.checked} onClick={this.toggle.bind(this)}>
                     {this.renderCheckmark()}
-                    {translate("shipclass", {
-                        class: db.shipClasses[this.props.class].name[dbLocaleId] || db.shipClasses[this.props.class].name.ja_jp
+                    {__("shipclass", {
+                        class: _class
                     })}
                 </h5>
             )

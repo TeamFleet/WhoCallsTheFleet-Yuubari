@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Markdown from 'react-markdown'
 import { ImportStyle } from 'sp-css-import'
-import translate, { localeId } from 'super-i18n'
+import { localeId } from 'super-i18n'
 
 import htmlHead from '@appUtils/html-head'
 
@@ -39,7 +39,7 @@ export default class Home extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('title')
+            title: __('title')
         })
 
         ext.metas = ext.metas.concat(head.meta)

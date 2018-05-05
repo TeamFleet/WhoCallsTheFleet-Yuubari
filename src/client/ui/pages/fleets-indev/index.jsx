@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import translate from 'super-i18n'
-import { ImportStyle } from 'sp-css-import'
+// import { ImportStyle } from 'sp-css-import'
 
 import htmlHead from '@appUtils/html-head'
 
@@ -16,7 +15,7 @@ export default class extends React.Component {
     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
         const head = htmlHead({
             store,
-            title: translate('nav.fleets')
+            title: __('nav.fleets')
         })
 
         ext.metas = ext.metas.concat(head.meta)
@@ -28,8 +27,8 @@ export default class extends React.Component {
             <Page
                 className={this.props.className}
             >
-                <Title component="h2" children={translate('nav.fleets')} />
-                <p><i>{translate('under_construction')}...</i></p>
+                <Title component="h2" children={__('nav.fleets')} />
+                <p><i>{__('under_construction')}...</i></p>
             </Page>
         )
     }

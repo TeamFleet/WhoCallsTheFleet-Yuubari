@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import translate from 'super-i18n'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
 import { ImportStyle } from 'sp-css-import'
@@ -30,7 +29,7 @@ const isCV = entity => (Array.isArray(entity.relation.cv) && entity.relation.cv.
 const getDescription = entity => {
     return entity._name
         // 类型
-        + `, ${translate(isCV(entity) ? 'seiyuu' : 'artist')}`
+        + `, ${isCV(entity) ? __('seiyuu') : __('artist')}`
 }
 
 @connect()
@@ -108,7 +107,7 @@ const ContentList = ({ list, type, ...props }) => {
         <ComponentContainer
             title={
                 <div className="title">
-                    <Title tag="h2" className="title-inline" children={translate(`entity_details.${type}`)} />
+                    <Title tag="h2" className="title-inline" children={__(`entity_details`, type)} />
                     <small className="count">({list.length})</small>
                 </div>
             }
@@ -133,7 +132,7 @@ const ContentLinks = ({ links }) => {
 
     return (
         <ComponentContainer
-            title={translate(`entity_details.links`)}
+            title={__(`entity_details.links`)}
             className={`entityinfo entityinfo-links`}
         >
             {links.map((obj, index) => (

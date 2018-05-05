@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 // import TransitionGroup from 'react-transition-group/TransitionGroup'
 // import CSSTransition from 'react-transition-group/CSSTransition'
 
-import translate from 'super-i18n'
 import InfosPageContainer from '@appUI/containers/infos-page'
 import htmlHead from '@appUtils/html-head.js'
 import db from '@appLogic/database'
@@ -64,16 +63,16 @@ const getDescription = ship => {
     return ship._name
         // 舰级 & 舰种
         + `, ${ship.class_no
-            ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
-            : translate("shipclass", { class: ship._class })}`
+            ? __("shipclass_number", { class: ship._class, number: ship.class_no })
+            : __("shipclass", { class: ship._class })}`
         // 类型
         + `${ship.class && ship.type ? `, ${getShipType()}` : ''}`
         // 军籍
-        + ` | ${translate("ship_details.navy")}: ${ship._navyName}`
+        + ` | ${__("ship_details.navy")}: ${ship._navyName}`
         // CV
-        + `, ${translate("seiyuu")}: ${ship._cv}`
+        + `, ${__("seiyuu")}: ${ship._cv}`
         // 画师
-        + `, ${translate("artist")}: ${ship._illustrator}`
+        + `, ${__("artist")}: ${ship._illustrator}`
 }
 
 export const getInfosId = id => `SHIP_${id}`
@@ -90,16 +89,16 @@ export default class PageShipDetails extends React.Component {
             store
         }
         if (ship) {
-            // const textTab = tab === tabsAvailable[0] ? '' : ` / ${translate("ship_details." + tab)}`
+            // const textTab = tab === tabsAvailable[0] ? '' : ` / ${__("ship_details." + tab)}`
             obj.title = [
                 ship._name,
-                tab === tabsAvailable[0] ? undefined : translate("ship_details." + tab)
+                tab === tabsAvailable[0] ? undefined : __("ship_details", tab)
             ]
             obj.subtitle = getShipType(ship)
                 + (ship.class || ship.class_no ? ' / ' : '')
                 + (ship.class_no
-                    ? translate("shipclass_number", { class: ship._class, number: ship.class_no })
-                    : translate("shipclass", { class: ship._class }))
+                    ? __("shipclass_number", { class: ship._class, number: ship.class_no })
+                    : __("shipclass", { class: ship._class }))
             obj.description = getDescription(ship)
         }
         const head = htmlHead(obj)
