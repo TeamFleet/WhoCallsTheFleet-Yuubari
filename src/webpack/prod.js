@@ -5,7 +5,7 @@ const defaults = require('./base/factory')()
 // const pluginCopyImages = require('./base/plugin-copy-images')
 
 module.exports = (async () => {
-    const isAnalyze = process.env.WEBPACK_ANALYZE == 'true'
+    // const isAnalyze = process.env.WEBPACK_ANALYZE == 'true'
     const pathDist = process.env.SUPER_DIST_DIR
     const publicPath = `/includes/`
     const config = {

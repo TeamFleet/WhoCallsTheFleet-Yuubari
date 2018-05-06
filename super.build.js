@@ -71,8 +71,14 @@ const aliases = {
     "~/": path.resolve('./src/client/ui')
 }
 
+// const i18n = [
+//     ['zh', './locales/zh.json'],
+//     ['en', './locales/en.json'],
+//     ['ja', './locales/ja.json'],
+// ]
 const i18n = {
     // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
+    type: 'redux',
     // expr: '__',
     locales: [
         ['zh', './locales/zh.json'],
