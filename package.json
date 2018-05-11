@@ -54,13 +54,13 @@
         "whocallsthefleet-database": "2018.05.06",
         "whocallsthefleet-backgrounds": "1.3.1",
 
-        "super-project": "3.0.6-alpha.62",
+        "super-project": "3.0.6-alpha.65",
         "super-project-cli": "^1.1.7",
 
         "i18n-webpack-plugin": "^1.0.0",
 
         "react-transition-group": "^2.3.1",
-        "react-markdown": "^3.3.0",
+        "react-markdown": "^3.3.2",
 
         "bind-event": "^1.0.5",
         "check-css-prop": "^1.0.1",
@@ -106,50 +106,5 @@
 
     "engines": {
         "node" : ">=8.0.0"
-    },
-
-    "window": {
-        "frame": true,
-        "toolbar": false,
-        "width": 1280,
-        "height": 720,
-        "icon": "./app/appicon.png",
-        "position": "center",
-        "min_width": 640,
-        "min_height": 480,
-        "as_desktop": false,
-        "resizable": true,
-        "always-on-top": false,
-        "fullscreen": false,
-        "show_in_taskbar": true,
-        "show": false,
-        "kiosk": false,
-        "transparent": false
-    },
-    "platformOverrides": {
-        "win": {
-            "debug": false,
-            "window": {
-                "frame": false
-            }
-        },
-        "win32": {
-            "debug": false,
-            "window": {
-                "frame": false
-            }
-        },
-        "osx": {
-            "debug": false,
-            "window": {
-                "frame": true
-            }
-        },
-        "linux": {
-            "debug": false,
-            "window": {
-                "frame": true
-            }
-        }
     }
 }

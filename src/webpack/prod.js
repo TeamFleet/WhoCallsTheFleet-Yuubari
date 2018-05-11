@@ -37,7 +37,7 @@ module.exports = (async () => {
         output: {
             filename: `core.[chunkhash].js`,
             chunkFilename: `chunk.[chunkhash].js`,
-            path: path.resolve(pathDist, `./public/${publicPath}`),
+            path: path.resolve(pathDist, `./public${publicPath}`),
             publicPath,
         },
 
