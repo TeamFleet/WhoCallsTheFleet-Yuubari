@@ -55,7 +55,7 @@ module.exports = {
     // port: 8080,
     port: {
         dev: 3000,
-        prod: 5000,
+        prod: 8080,
     },
 
     /**
