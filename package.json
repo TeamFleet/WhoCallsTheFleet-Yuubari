@@ -17,6 +17,8 @@
         "start:pm2": "cross-env SERVER_PORT=8080 SERVER_DOMAIN=yuubari.fleet.moe npm run build && pm2 restart pm2.json --only fleet-yuubari",
         "prebuild": "node ./scripts/empty",
         "build": "npm run build:client && npm run build:server",
+        "build:client": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client node ./super.build.js",
+        "build:server": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=server node ./super.build.js",
         "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_BUILD_STAGE=client node ./super.build.js",
         "build:app": "cross-env NAME=CompileDesktopApp node ./scripts/build-app",
         "dev": "npm run prebuild && npm run pm2:dev",
@@ -27,19 +29,18 @@
         "pm2:dev:run": "pm2 restart pm2.json --only fleet-dev-run --watch",
         "dev:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_BUILD_STAGE=client WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
         "dev:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_BUILD_STAGE=server WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
-        "build:client": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client node ./super.build.js",
-        "build:server": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=server node ./super.build.js",
         "prod:run": "cross-env TEST=test node ./dist-web/server",
         "server:run": "cross-env SERVER_DOMAIN=yuubari.fleet.moe node ./dist-web/server",
         "server:run:test": "cross-env SERVER_DOMAIN=yuubari.fleet.test node ./dist-web/server",
         "analyze": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js",
-        "test:server": "npm run build:server && npm run prod:run"
+        "test:server": "npm run build:server && npm run prod:run",
+        "test:build": "super-build --env prod"
     },
     "superProject": {
         "type": "react"
     },
     "dependencies": {
-        "super-project": "3.0.6-alpha.65",
+        "super-project": "3.0.6-alpha.68",
         "kckit": "^1.17.3",
         "whocallsthefleet-database": "2018.05.06",
         "whocallsthefleet-backgrounds": "1.3.1",
