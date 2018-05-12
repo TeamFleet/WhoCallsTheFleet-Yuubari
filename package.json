@@ -1,6 +1,5 @@
 {
     "name": "whocallsthefleet-yuubari",
-    "main": "dist-spa/index.html",
     "version": "1.0.0",
     "description": "Yuubari (Dev) Channel for Who Calls the Fleet (https://yuubari.fleet.moe)",
     "author": {
@@ -13,24 +12,19 @@
         "type": "git",
         "url": "https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari"
     },
-
     "scripts": {
         "start": "npm run build && npm run prod:run",
         "start:pm2": "cross-env SERVER_PORT=8080 SERVER_DOMAIN=yuubari.fleet.moe npm run build && pm2 restart pm2.json --only fleet-yuubari",
-
         "prebuild": "node ./scripts/empty",
         "build": "npm run build:client && npm run build:server",
         "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_BUILD_STAGE=client node ./super.build.js",
         "build:app": "cross-env NAME=CompileDesktopApp node ./scripts/build-app",
-
         "dev": "npm run prebuild && npm run pm2:dev",
         "deploy": "git pull && node ./deploy",
-
         "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
         "pm2:dev:client": "pm2 restart pm2.json --only fleet-dev-client",
         "pm2:dev:server": "pm2 restart pm2.json --only fleet-dev-server",
         "pm2:dev:run": "pm2 restart pm2.json --only fleet-dev-run --watch",
-
         "dev:client": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_BUILD_STAGE=client WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
         "dev:server": "cross-env WEBPACK_BUILD_ENV=dev WEBPACK_BUILD_STAGE=server WEBPACK_DEV_SERVER_PORT=3001 node ./super.build.js",
         "build:client": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client node ./super.build.js",
@@ -39,29 +33,18 @@
         "server:run": "cross-env SERVER_DOMAIN=yuubari.fleet.moe node ./dist-web/server",
         "server:run:test": "cross-env SERVER_DOMAIN=yuubari.fleet.test node ./dist-web/server",
         "analyze": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js",
-
-        "test:server": "npm run build:server && npm run prod:run",
-
-        "update": "super update"
+        "test:server": "npm run build:server && npm run prod:run"
     },
-
     "superProject": {
         "type": "react"
     },
-
     "dependencies": {
+        "super-project": "3.0.6-alpha.65",
         "kckit": "^1.17.3",
         "whocallsthefleet-database": "2018.05.06",
         "whocallsthefleet-backgrounds": "1.3.1",
-
-        "super-project": "3.0.6-alpha.65",
-        "super-project-cli": "^1.1.7",
-
-        "i18n-webpack-plugin": "^1.0.0",
-
         "react-transition-group": "^2.3.1",
         "react-markdown": "^3.3.2",
-
         "bind-event": "^1.0.5",
         "check-css-prop": "^1.0.1",
         "classnames": "^2.2.5",
@@ -69,28 +52,15 @@
         "localforage": "^1.7.1",
         "metas": "^1.0.1",
         "swiper": "^4.2.6",
-
         "normalize.css": "^8.0.0",
         "postcss-easing-gradients": "^2.0.1",
         "postcss-pxtorem": "^4.0.1",
         "cssnano": "^4.0.0-rc.2",
-
-        "glob": "^7.1.2",
         "json-pretty": "^0.0.1",
-        "request": "^2.85.0",
         "nedb-promise": "^2.0.1",
-        "npm-run-script": "^0.0.4",
         "image-size": "^0.6.2",
         "camelcase": "^5.0.0",
-
-        "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
-        "copy-webpack-plugin": "^4.5.1",
-        "on-build-webpack": "^0.1.0",
-        "svg-url-loader": "^2.3.2",
-        "semver": "^5.5.0",
-        "chalk": "^2.4.1",
-
-        "simple-git": "^1.92.0"
+        "svg-url-loader": "^2.3.2"
     },
     "devDependencies": {
         "glob": "^7.1.2",
@@ -98,13 +68,10 @@
         "ora": "^2.1.0",
         "progress": "^2.0.0",
         "cli-spinners": "^1.3.1",
-        "ncp": "^2.0.0",
         "jest": "^22.4.3"
     },
-    "optionalDependencies": {
-    },
-
+    "optionalDependencies": {},
     "engines": {
-        "node" : ">=8.0.0"
+        "node": ">=8.0.0"
     }
 }

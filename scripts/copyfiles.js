@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
-const ncp = require('ncp').ncp
+// const ncp = require('ncp').ncp
 const {
     root: dirRoot,
     assets: dirAssets,

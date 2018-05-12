@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 const glob = require('glob')
+const spinner = require('./commons/spinner')
 
 const {
     dist: {
@@ -9,34 +10,55 @@ const {
 } = require('../src/directories')
 
 module.exports = async () => {
-    console.log('cleaning source-maps...')
+    // console.log('cleaning source-maps...')
+    const waiting = spinner('Cleaning source-maps...')
 
-    glob.sync(path.resolve(pathPublic, '**', '*.map')).forEach(file => {
-        fs.removeSync(file)
-        console.log('  > removed: ' + file)
+    const removed = []
+    const modified = []
+
+    let files
+
+    files = await new Promise((resolve, reject) => {
+        glob(path.resolve(pathPublic, '**', '*.map'), {}, (err, files) => {
+            if (err) return reject(err)
+            resolve(files)
+        })
     })
+    for (let file of files) {
+        await fs.removeSync(file)
+        removed.push(file)
+    }
 
-    // modify js files
-    glob.sync(path.resolve(pathPublic, '**', '*.js')).forEach(file => {
-        // fs.removeSync(file)
-        fs.writeFileSync(
-            file,
-            fs.readFileSync(file, 'utf-8').replace(/\r?\n\/\/# sourceMappingURL=.+$/, ''),
-            'utf-8'
-        )
-        console.log('  > modified: ' + file)
+    // modify js/css files
+    files = await new Promise((resolve, reject) => {
+        glob(path.resolve(pathPublic, '**', '*.+(js|css)'), {}, (err, files) => {
+            if (err) return reject(err)
+            resolve(files)
+        })
     })
+    for (let file of files) {
+        const content = await fs.readFile(file, 'utf-8')
+        const regex = /\r?\n\/\/# sourceMappingURL=.+$/
+        if (regex.test(content)) {
+            await fs.writeFile(
+                file,
+                content.replace(regex, ''),
+                'utf-8'
+            )
+            modified.push(file)
+        }
+    }
 
-    // modify css files
-    glob.sync(path.resolve(pathPublic, '**', '*.css')).forEach(file => {
-        // fs.removeSync(file)
-        fs.writeFileSync(
-            file,
-            fs.readFileSync(file, 'utf-8').replace(/\r?\n\/\*# sourceMappingURL=.+$/, ''),
-            'utf-8'
-        )
-        console.log('  > modified: ' + file)
-    })
+    waiting.succeed()
 
-    console.log('COMPLETE: clean source-maps')
+    const logResult = (arr, title) => {
+        if (arr.length) {
+            console.log(`  > ${title}:`)
+            arr.forEach(file => {
+                console.log(`    > ${path.relative(pathPublic, file)}`)
+            })
+        }
+    }
+    logResult(removed, 'Removed')
+    logResult(modified, 'Modified')
 }
