@@ -13,15 +13,13 @@
         "url": "https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari"
     },
     "scripts": {
-        "start": "npm run build && npm run start:server",
-        "start:server": "node ./dist-web/server",
-        "start:pm2": "cross-env SERVER_PORT=8080 SERVER_DOMAIN=yuubari.fleet.moe npm run build && pm2 restart pm2.json --only fleet-yuubari",
+        "start": "super-start",
+        "start:server": "super-start --no-build",
+        "start:pm2": "super-start --pm2",
         "build": "super-build",
         "build:client": "super-build --stage client",
         "build:server": "super-build --stage server",
-        "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_BUILD_STAGE=client node ./super.build.js",
-        "build:app": "cross-env NAME=CompileDesktopApp node ./scripts/build-app",
-        "dev": "npm run prebuild && npm run pm2:dev",
+        "dev": "super-dev",
         "deploy": "git pull && node ./deploy",
         "pm2:dev": "npm run pm2:dev:client && npm run pm2:dev:server && npm run pm2:dev:run",
         "pm2:dev:client": "pm2 restart pm2.json --only fleet-dev-client",
@@ -35,12 +33,18 @@
         "test:server": "npm run build:server && npm run prod:run"
     },
     "scriptsOld": {
+        "start": "npm run build && npm run start:server",
+        "start:server": "node ./dist-web/server",
+        "start:pm2": "cross-env SERVER_PORT=8080 SERVER_DOMAIN=yuubari.fleet.moe npm run build && pm2 restart pm2.json --only fleet-yuubari",
         "build": "npm run build:client && npm run build:server",
         "build:client": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client node ./super.build.js",
-        "build:server": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=server node ./super.build.js"
+        "build:server": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=server node ./super.build.js",
+        "build:spa": "rimraf ./dist-spa && cross-env WEBPACK_BUILD_ENV=spa WEBPACK_BUILD_STAGE=client node ./super.build.js",
+        "build:app": "cross-env NAME=CompileDesktopApp node ./scripts/build-app",
+        "dev": "npm run prebuild && npm run pm2:dev"
     },
     "dependencies": {
-        "super-project": "3.0.6-alpha.68",
+        "super-project": "3.0.6-alpha.71",
         "kckit": "^1.17.3",
         "whocallsthefleet-database": "2018.05.06",
         "whocallsthefleet-backgrounds": "1.3.1",

@@ -50,6 +50,15 @@ module.exports = {
     },
 
     /**
+     * {number|string|Object} 服务器运行端口
+     */
+    // port: 8080,
+    port: {
+        dev: 3000,
+        prod: 5000,
+    },
+
+    /**
      * {Boolean|Array[]|Object} 多语言配置
      */
     // i18n: false,
@@ -83,7 +92,6 @@ module.exports = {
             '/dev-*',
         ]
     },
-
 
     /**
      * {Object} STAGE: client && ENV: dev 环境下的 webpack dev server 配置
