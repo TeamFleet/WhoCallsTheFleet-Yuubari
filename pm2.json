@@ -1,11 +1,5 @@
 {
-    /**
-     * Application configuration section
-     * http://pm2.keymetrics.io/docs/usage/application-declaration/
-     */
     "apps": [
-
-        // client dev
         {
             "name": "fleet-dev-client",
             "script": "./super.build.js",
@@ -19,8 +13,6 @@
                 "WEBPACK_DEV_SERVER_PORT": "3001"
             }
         },
-
-        // server dev
         {
             "name": "fleet-dev-server",
             "script": "./super.build.js",
@@ -35,15 +27,13 @@
                 "SERVER_PORT": "3000"
             }
         },
-
-        // server dev run
         {
             "name": "fleet-dev-run",
             "script": "dist-web/server",
             "max_memory_restart": "300M",
             "out_file": "logs/dev/fleet-dev-run.log",
             "error_file": "logs/dev/fleet-dev-run-error.log",
-            "watch": [ // 监控变化的目录，一旦变化，自动重启
+            "watch": [
                 "dist-web/public/includes",
                 "dist-web/server"
             ],
@@ -55,16 +45,14 @@
                 "SERVER_PORT": "3000"
             }
         },
-
-        // online
         {
-            "name": "fleet-yuubari",
+            "name": "yuubari",
             "script": "dist-web/server",
-            "max_memory_restart": "300M",
+            "max_memory_restart": "500M",
             "instances": 1,
-            "exec_mode": "cluster",
-            "out_file": "logs/dev/fleet-yuubari.log",
-            "error_file": "logs/dev/fleet-yuubari-error.log"
+            "exec_mode": "fork",
+            "out_file": "logs/dev/server.log",
+            "error_file": "logs/dev/server-error.log"
         }
     ]
 }

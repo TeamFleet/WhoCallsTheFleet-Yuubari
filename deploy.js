@@ -1,7 +1,8 @@
-const git = require("simple-git")
+// const git = require("simple-git")
 const npmRunScript = require('npm-run-script')
+const spinner = require('./scripts/commons/spinner')
 
-const run = () => {
+const run = async () => {
 
     // console.log(__dirname)
 
@@ -15,25 +16,21 @@ const run = () => {
     //     })
     // }
 
-    const runScript = (script, name) => {
-        console.log(name + ' - start')
+    const runScript = (cmd, name) => {
+        const waiting = spinner(name)
         return new Promise((resolve, reject) => {
-            const child = npmRunScript(
-                script,
-                {
-                    stdio: 'ignore' // quiet
-                }
-            );
+            const child = npmRunScript(cmd, {
+                stdio: 'ignore' // quiet
+            })
             child.once('error', (error) => {
-                process.exit(1);
-                reject(error);
-            });
+                process.exit(1)
+                reject(error)
+            })
             child.once('exit', (exitCode) => {
-                console.log(name + ' - complete')
-                // process.exit(exitCode);
-                resolve();
+                // process.exit(exitCode)
+                resolve(exitCode)
             });
-        })
+        }).then(() => waiting.succeed())
     }
 
     // gitPull().then(() => {
@@ -41,17 +38,13 @@ const run = () => {
     //     return true
     // })
 
-    runScript('npm install --no-save --only=production', '[NPM] install')
-        // .then(() => runScript('npm run build', '[NPM] build'))
-        // .then(() => runScript('pm2 delete sp-boilerplate', '[PM2] kill service'))
-        .then(() => runScript('npm run start:pm2', '[NPM] build & [PM2] starting server'))
+    // await runScript('npm install --no-save --only=production', 'NPM installing...')
+    await runScript('npm run build', 'Building...')
+    await runScript('pm2 stop yuubari', 'Stopping server process...')
+    await runScript('npm run start:server:pm2', 'Starting server process...')
 
-        .then(() => {
-            console.log('ALL DONE!')
-            npmRunScript('pm2 list')
-            return true
-        })
-
+    // console.log('ALL DONE!')
+    npmRunScript('pm2 list')
 }
 
 run()

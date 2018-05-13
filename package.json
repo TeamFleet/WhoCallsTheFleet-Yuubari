@@ -15,13 +15,13 @@
     "scripts": {
         "start": "super-start",
         "start:server": "super-start --no-build",
-        "start:pm2": "super-start --pm2",
+        "start:server:pm2": "pm2 restart pm2.json --only yuubari",
         "build": "super-build",
-        "build:client": "super-build --stage client",
-        "build:server": "super-build --stage server",
+        "build:client": "super-build --client",
+        "build:server": "super-build --server",
         "dev": "super-dev",
-        "dev:client": "super-dev --stage client",
-        "dev:server": "super-dev --stage server",
+        "dev:client": "super-dev --client",
+        "dev:server": "super-dev --server",
         "analyze": "super-analyze",
         "deploy": "git pull && node ./deploy"
     },
@@ -40,7 +40,7 @@
         "analyze": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js"
     },
     "dependencies": {
-        "super-project": "3.0.6-alpha.71",
+        "super-project": "3.0.6-alpha.72",
         "kckit": "^1.17.3",
         "whocallsthefleet-database": "2018.05.06",
         "whocallsthefleet-backgrounds": "1.3.1",
