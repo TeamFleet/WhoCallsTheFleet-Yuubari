@@ -38,7 +38,7 @@ const run = async () => {
     //     return true
     // })
 
-    // await runScript('npm install --no-save --only=production', 'NPM installing...')
+    await runScript('npm install --no-save --only=production', 'NPM installing...')
     await runScript('npm run build', 'Building...')
     await runScript('pm2 stop yuubari', 'Stopping server process...')
     await runScript('npm run start:server:pm2', 'Starting server process...')
