@@ -51,8 +51,8 @@
             "max_memory_restart": "500M",
             "instances": 1,
             "exec_mode": "fork",
-            "out_file": "logs/dev/server.log",
-            "error_file": "logs/dev/server-error.log"
+            "out_file": "logs/prod/server.log",
+            "error_file": "logs/prod/server-error.log"
         }
     ]
 }
