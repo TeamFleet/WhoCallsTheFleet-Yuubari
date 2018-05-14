@@ -23,7 +23,9 @@
         "dev:client": "super-dev --client",
         "dev:server": "super-dev --server",
         "analyze": "super-analyze",
-        "deploy": "git pull && node ./deploy"
+        "deploy": "git pull && node ./deploy",
+        "test:server": "npm run build:server && npm run start:server",
+        "test:server:port": "cross-env SERVER_PORT=4000 super-start --no-build"
     },
     "scriptsOld": {
         "start": "npm run build && npm run start:server",
@@ -40,7 +42,7 @@
         "analyze": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js"
     },
     "dependencies": {
-        "super-project": "3.0.6-alpha.72",
+        "super-project": "3.0.6-alpha.73",
         "kckit": "^1.17.3",
         "whocallsthefleet-database": "2018.05.06",
         "whocallsthefleet-backgrounds": "1.3.1",
