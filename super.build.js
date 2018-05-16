@@ -126,4 +126,9 @@ module.exports = {
         }
         return
     },
+
+    /**
+     * {Object} 扩展 webpack.DefinePlugin 的内容
+     */
+    defines: {},
 }

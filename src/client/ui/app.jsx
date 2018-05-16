@@ -52,6 +52,7 @@ class App extends React.Component {
 
     constructor() {
         super()
+        // console.log('QA:', typeof __QA__ === 'undefined' ? 'undefined' : __QA__)
         if (typeof document !== 'undefined' && document.documentElement)
             document.documentElement.classList.add('is-react-ready')
     }
