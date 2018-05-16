@@ -1,4 +1,4 @@
-// import { localeId } from 'super-i18n'
+// import { localeId } from 'super-project/i18n'
 import kckit, { register, parseRaw } from 'kckit'
 
 import shipCollections from './db/ship_collections.json'

@@ -1,7 +1,7 @@
 import metas from 'metas'
 
-import { localeId as currentLocaleId } from 'super-i18n'
-import getLocaleId from 'super-i18n/parse-locale-id'
+import { localeId as currentLocaleId } from 'super-project/i18n'
+import getLocaleId from 'super-project/i18n/parse-locale-id'
 
 import { origin as siteOrigin } from '@appConfig/site.js'
 import { availableLocalesFb } from '@appConfig/i18n.js'

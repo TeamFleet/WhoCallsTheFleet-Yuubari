@@ -76,6 +76,7 @@ module.exports = {
             ['en', './locales/en.json'],
             ['ja', './locales/ja.json'],
         ],
+        // cookieKey: 'fleetLocaleId',
     },
 
     /**

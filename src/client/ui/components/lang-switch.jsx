@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'js-cookie'
 
-import { localeId } from 'super-i18n'
+import { localeId } from 'super-project/i18n'
 import { availableLocales } from '@appConfig/i18n'
 
 import { ImportStyle } from 'sp-css-import'
