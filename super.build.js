@@ -1,3 +1,11 @@
+/**
+ * 项目构建/打包配置
+ * 该文件会在 webpack 打包前载入
+ * 
+ * 无法加载 ES6 module
+ * 无法使用 webpack.definePlugin 中定义的变量
+ */
+
 const path = require('path')
 
 module.exports = {
@@ -132,4 +140,9 @@ module.exports = {
      * {Object} 扩展 webpack.DefinePlugin 的内容
      */
     defines: {},
+
+    /**
+     * {boolean} 是否默认拥有服务器，默认为 true
+     */
+    // server: true,
 }

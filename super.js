@@ -1,3 +1,10 @@
+/**
+ * 有关项目启动的相关配置
+ * 本文件的代码会被 webpack 打包
+ * 
+ * 可以加载 ES6 module
+ * 可以使用构建配置中 defines (webpack.definePlugin) 中定义的变量
+ */
 
 // String，项目标识名
 export const name = 'theFleet'
@@ -7,9 +14,6 @@ export const name = 'theFleet'
 // 目前支持 'react'
 // 计划支持 'react-config' 'vue'
 export const type = 'react'
-
-// Boolean，是否为同构，默认为 false
-// export const isomorphic = true
 
 // String，HTML基础模板
 // 无默认值，必须指定
