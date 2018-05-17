@@ -143,12 +143,7 @@ module.exports = {
     defines: {},
 
     /**
-     * {boolean} 是否默认拥有服务器，默认为 true
-     */
-    // server: true,
-
-    /**
      * {string} HTML 模板文件地址
      */
-    template: './src/html.js',
+    // template: './src/html.js',
 }
