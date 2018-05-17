@@ -19,8 +19,8 @@ export const type = 'react'
 // 无默认值，必须指定
 // 同构模式、客户端环境：忽略
 export const template = (() => {
-    if (__SERVER__) return require('./src/html').default
-    if (__SPA__) return require('./src/html').default
+    if (__SERVER__) return require('./src/html')
+    if (__SPA__) return require('./src/html')
     return ''
 })()
 

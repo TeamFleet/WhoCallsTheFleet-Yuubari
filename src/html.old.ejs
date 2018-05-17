@@ -2,7 +2,9 @@
 <html>
 
 <head>
-    <title><!-- inject:title --></title>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
 
     <base target="_self">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,10 +18,11 @@
     <meta name="HandheldFriendly" content="true">
     <meta name="mobile-web-app-capable" content="yes">
 
+    <!--
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/icon-256.png" type="image/png" sizes="256x256">
     <link rel="icon" href="/icon-128.png" type="image/png" sizes="128x128">
-    <!-- inject:manifest -->
+    -->
 
     <meta name="theme-color" content="#263238" />
 
@@ -33,35 +36,17 @@
 
     <meta name="copyright" content="Copyright (c) 2017 fleet.moe">
 
-    <!--INJECT_META_START-->
-    <!-- inject:metas -->
-    <!--INJECT_META_END-->
-
-    <!-- inject:critical_css -->
-
-    <script>var __SERVICE_WORKER_FILENAME__ = "<!-- inject:serviceworker_path -->";</script>
-    <!-- inject:critical_extra_old_ie_filename -->
+    <script type="text/javascript" src="{{ SRC:critical }}"></script>
 </head>
 
 <body>
     <div id="boat-loader">LOADING...</div>
-
-    <div id="root"><!-- inject:react --></div>
-    <!-- inject:svg_symbols -->
-    <!-- inject:redux -->
-    <!-- inject:scripts -->
-
-    <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-63582858-4', 'auto');
-        ga('send', 'pageview');
+    <div id="root"></div>
+    <script type="text/javascript">
+        var __REDUX_STATE__ = {};
     </script>
+    <script type="text/javascript" src="{{ SRC:client }}" defer></script>
+    {{ SVG_SYMBOLS }}
 </body>
 
 </html>

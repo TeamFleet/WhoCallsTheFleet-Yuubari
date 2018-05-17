@@ -1,4 +1,4 @@
-export default `
+module.exports = `
     <!DOCTYPE html>
     <html<script>//inject_htmlattr</script>>
     <head>
@@ -31,7 +31,7 @@ export default `
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-        <meta name="copyright" content="Copyright (c) 2017 fleet.moe">
+        <meta name="copyright" content="Copyright (c) 2018 fleet.moe">
 
         <!--INJECT_META_START--><script>//inject_metas</script><!--INJECT_META_END-->
 

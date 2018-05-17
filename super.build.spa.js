@@ -7,4 +7,5 @@ module.exports = Object.assign({}, base, {
     defines: {
         __SPA__: JSON.stringify(true),
     },
+    template: './src/html.ejs'
 })

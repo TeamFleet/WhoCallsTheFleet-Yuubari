@@ -12,8 +12,9 @@ module.exports = {
     /**
      * {string} 打包目标目录
      * 默认会在该目录下建立 public 和 server 目录，分别对应 web 服务器和服务器执行代码
+     * 注：如果为相对路径，请确保第一个字符为 .
      */
-    dist: path.resolve('./dist-web/'),
+    dist: './dist-web/',
 
     /**
      * {object|function} Webpack 配置对象或生成方法，可为异步方法
@@ -145,4 +146,9 @@ module.exports = {
      * {boolean} 是否默认拥有服务器，默认为 true
      */
     // server: true,
+
+    /**
+     * {string} HTML 模板文件地址
+     */
+    template: './src/html.js',
 }
