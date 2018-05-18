@@ -16,11 +16,12 @@
         "start": "super-start",
         "start:server": "super-start --no-build",
         "start:server:pm2": "pm2 restart pm2.json --only yuubari",
-        "start:server:spa": "super-start --config ./super.build.spa.js",
+        "start:qa": "super-start --config ./super.build.qa.js",
+        "start:spa": "super-start --type react-spa --config ./super.build.spa.js",
         "build": "super-build",
         "build:client": "super-build --client",
         "build:server": "super-build --server",
-        "build:spa": "super-build --config ./super.build.spa.js",
+        "build:spa": "super-build --client --type react-spa --config ./super.build.spa.js",
         "dev": "super-dev",
         "dev:client": "super-dev --client",
         "dev:server": "super-dev --server",
@@ -28,8 +29,7 @@
         "analyze": "super-analyze",
         "deploy": "git pull && node ./deploy",
         "test:server": "npm run build:server && npm run start:server",
-        "test:server:port": "cross-env SERVER_PORT=4000 super-start --no-build",
-        "test:customconfig": "super-build --config ./super.build.qa.js && node ./dist-web-qa/server"
+        "test:server:port": "cross-env SERVER_PORT=4000 super-start --no-build"
     },
     "scriptsOld": {
         "start": "npm run build && npm run start:server",
