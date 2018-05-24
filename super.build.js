@@ -86,7 +86,7 @@ module.exports = {
             ['ja', './locales/ja.json'],
         ],
         // cookieKey: 'fleetLocaleId',
-        domain: '127.0.0.1',
+        // domain: '127.0.0.1',
     },
 
     /**
