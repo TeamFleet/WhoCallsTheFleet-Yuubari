@@ -15,7 +15,6 @@ import {
 import pref from '@appLogic/preferences'
 
 import sortShips from '@appUtils/sort-ships'
-// import { REALTIME_LOCATION_REDUCER_NAME } from 'sp-isomorphic-utils/realtime-location'
 
 import Title from './title.jsx'
 import List from './list.jsx'

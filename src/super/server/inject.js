@@ -2,8 +2,6 @@ import fs from 'fs-extra'
 import path from 'path'
 
 import { localeId as currentLocaleId } from 'super-project/i18n'
-// import isomorphicUtils from 'sp-isomorphic-utils'
-// import getServiceWorkerFile from 'sp-pwa/get-service-worker-file'
 
 const dirs = require('../../directories')
 

@@ -5,7 +5,6 @@ import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
-// import { REALTIME_LOCATION_REDUCER_NAME } from 'sp-isomorphic-utils/realtime-location'
 
 // import checkCssProp from 'check-css-prop'
 

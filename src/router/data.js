@@ -1,4 +1,4 @@
-import { routeCheck } from './'
+import routeCheck from 'super-project/React/route-check'
 
 export default [
     {
