@@ -229,7 +229,7 @@ const doCricital = () => {
 
         // 利用 pointer event 判断当前是否为 hover
         if (window.PointerEvent) {
-            // self._html.classList.add('is-hover')
+            self._html.classList.add('is-hover')
             document.documentElement.addEventListener("pointerenter", (evt) => {
                 if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
                     self._html.classList.add('is-hover')
