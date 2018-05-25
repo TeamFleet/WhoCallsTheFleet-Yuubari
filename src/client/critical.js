@@ -229,21 +229,21 @@ const doCricital = () => {
 
         // 利用 pointer event 判断当前是否为 hover
         if (window.PointerEvent) {
-            self._html.classList.add('is-hover')
-            document.body.addEventListener("pointerenter", (evt) => {
+            // self._html.classList.add('is-hover')
+            document.documentElement.addEventListener("pointerenter", (evt) => {
                 if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
                     self._html.classList.add('is-hover')
                 else
                     self._html.classList.remove('is-hover')
             });
-            document.body.addEventListener("pointerleave", () => {
+            document.documentElement.addEventListener("pointerleave", () => {
                 self._html.classList.remove('is-hover')
             });
         } else {
-            document.body.addEventListener("mouseenter", () => {
+            document.documentElement.addEventListener("mouseenter", () => {
                 self._html.classList.add('is-hover')
             });
-            document.body.addEventListener("mouseleave", () => {
+            document.documentElement.addEventListener("mouseleave", () => {
                 self._html.classList.remove('is-hover')
             });
         }
