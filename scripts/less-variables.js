@@ -48,7 +48,7 @@ module.exports = async () => {
     // equipment list stat columns count
     {
         const stats = require(
-            path.resolve(pathApp, 'data/', 'equipment-stats')
+            path.resolve(pathApp, 'app/constants/', 'equipment-stats')
         )
         content = content.replace(
             /@equipment-list-stat-count:([ \t]*)([0-9]+);/g,

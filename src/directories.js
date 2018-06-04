@@ -7,14 +7,14 @@ const pathDist = process.env.SUPER_DIST_DIR
 module.exports = {
     root: pathRoot,
 
-    assets: path.resolve(pathRoot, './assets'),
+    assets: path.resolve(pathSrc, './assets'),
     pics: path.resolve(pathRoot, './pics'),
     nodeModules: path.resolve(pathRoot, './node_modules'),
     bgimgs: path.resolve(pathRoot, './node_modules/whocallsthefleet-backgrounds/output'),
 
     src: {
         _: pathSrc,
-        ui: path.resolve(pathSrc, './client/ui'),
+        ui: path.resolve(pathSrc, './app/ui'),
     },
 
     dist: {

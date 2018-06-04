@@ -1,7 +1,7 @@
 // rimraf ./dist-web
 const fs = require('fs-extra')
 const path = require('path')
-const glob = require('glob')
+// const glob = require('glob')
 
 const {
     pics: pathPics,

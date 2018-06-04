@@ -36,7 +36,7 @@ const appendCollection = async (index, name, types, expandClass) => {
         shipSeriesInCollection[index] = []
     }
 
-    let promises = types.map(async type => new Promise(async function (resolve, reject) {
+    let promises = types.map(async type => new Promise(async function (resolve/*, reject*/) {
         let thisSubIndex
         if (Array.isArray(type)) {
             let subIndex = shipCollections[index].list.length
@@ -203,10 +203,12 @@ module.exports = async (dbpath, topath) => {
     })
 
     // 根据已载入数据生成collection
-    await Promise.all(shipTypeCollections.map(async (collection, index) => new Promise(async function (resolve, reject) {
-        await appendCollection(index, collection.name, collection.types)
-        resolve()
-    })))
+    await Promise.all(shipTypeCollections.map(async (collection, index) =>
+        new Promise(async function (resolve/*, reject*/) {
+            await appendCollection(index, collection.name, collection.types)
+            resolve()
+        })
+    ))
 
     // 从db载入未处理过的舰娘，加入到collection中
     let shipsRemains = await db.ships

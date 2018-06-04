@@ -4,65 +4,78 @@
  * 
  * 可以加载 ES6 module
  * 可以使用构建配置中 defines (webpack.definePlugin) 中定义的变量
+ * 
+ * @module super
  */
 
-// String，项目标识名
+/** 
+ * 项目标识名
+ * @type {string}
+ */
 export const name = 'theFleet'
 
-// String，项目类型
-// 无默认值，必须指定
-// 目前支持 'react'
-// 计划支持 'react-config' 'vue'
+/** 
+ * 项目类型
+ * 目前支持 'react'
+ * 计划支持 'react-config' 'vue'
+ * @type {string}
+ */
 export const type = 'react'
 
-// String，HTML基础模板
-// 无默认值，必须指定
-// 同构模式、客户端环境：忽略
-export const template = (() => {
-    if (__SERVER__) return require('./src/html')
-    if (__SPA__) return require('./src/html')
-    return ''
-})()
+/** 
+ * HTML基础模板文件路径
+ * @type {string}
+ */
+export const template = './src/app/template.ejs'
 
-// Object，路由配置
-// 无默认值
-// 同构模式：必须指定
-export const router = require('./src/router').default
+/** 
+ * 路由配置 (同构时必须指定)
+ * @type {Object}
+ */
+export const router = require('./src/app/router').default
 
-// Object，Redux配置
-// 无默认值
-// 同构模式：必须指定
+/** 
+ * Redux配置 (同构时必须指定) 
+ * @type {Object}
+ * @namespace
+ * @property {Object} combineReducers - 附加 reducer，与 combineReducers 参数语法相同
+ */
 export const redux = {
-    // 附加 reducer，与 combineReducers 参数语法相同
-    combineReducers: require('./src/redux/reducers').default
+    combineReducers: require('./src/app/redux/reducers').default
 }
 
-// Function || Object，客户端启动代码或配置
-// 可不指定
+/** 
+ * 客户端配置或启动代码
+ * @type {(Object|Function)}
+ * @namespace
+ * @property {string} [history=(browser|hash)] - 路由历史类型，支持 'browser' 'hash' 'memory' (同构时默认为 'browser'，其他情况默认为 'hash')
+ * @property {Function} [before] - 回调：启动前
+ * @property {Function} [after] - 回调：启动完成
+ * @property {Function} [onRouterUpdate] - 回调：在路由发生改变时
+ * @property {Function} [onHistoryUpdate] - 回调：在浏览器历史发生改变时时
+ */
 // export const client = require('/src/app1/client'), // 替代默认的客户端启动流程
 export const client = { // 扩展默认的启动流程
-    // String，路由历史类型，支持 'browser' 'hash' 'memory'，同构时默认为 'browser'，其他情况默认为 'hash'
     history: 'browser',
-    // Function，在启动前的回调
-    before: require('./src/super/client/before').default,
-    // Function，在启动后的回调
-    after: require('./src/super/client/after').default,
-    // Function，在路由发生改变时的回调
-    onRouterUpdate: require('./src/super/client/on-router-update').default,
-    // Function，在浏览器历史发生改变时的回调
-    onHistoryUpdate: require('./src/super/client/on-history-update').default,
+    before: require('./src/app/lifecycle/before').default,
+    after: require('./src/app/lifecycle/after').default,
+    onRouterUpdate: require('./src/app/lifecycle/on-router-update').default,
+    onHistoryUpdate: require('./src/app/lifecycle/on-history-update').default,
 }
 
-// Function || Object，服务器端启动代码或配置
-// 可不指定
-// 非同构模式：忽略
-// 客户端环境：忽略
+/** 
+ * 服务器端配置或启动代码
+ * @type {(Object|Function)}
+ * @namespace
+ * @property {Object} [koaStatic] - KOA 静态资源服务器扩展配置
+ * @property {Object} [reducers] - 服务器专用的附加 Reducer，与 combineReducers 参数语法相同
+ * @property {Function} [inject] - 注入内容
+ * @property {Function} [before] - 回调：启动前
+ * @property {Function} [after] - 回调：启动完成
+ * @property {Function} [onRender] - 回调：在渲染时
+ */
 // export const server = require('/src/app1/server'), // 替代默认的服务器端启动流程
 export const server = __SERVER__ ? { // 扩展默认的启动流程
-    // Array，Cookie键值
-    cookieKeys: ['super-project-key'],
-    // Function，Koa App
-    // app: './super/server/app',
     koaStatic: {
         maxage: 0,
         hidden: true,
@@ -71,14 +84,9 @@ export const server = __SERVER__ ? { // 扩展默认的启动流程
         gzip: true,
         extensions: false
     },
-    // Object，服务器专用的附加 Reducer，与 combineReducers 参数语法相同
     // reducers: {},
-    // Object，注入内容
-    inject: require('./src/super/server/inject').default,
-    // Function，在启动前的回调
-    before: require('./src/super/server/before').default,
-    // Function，在启动后的回调
-    after: require('./src/super/server/after').default,
-    // Function，在渲染时的回调
-    onRender: require('./src/super/server/on-render').default,
+    inject: require('./src/server/inject').default,
+    before: require('./src/server/lifecycle/before').default,
+    after: require('./src/server/lifecycle/after').default,
+    onRender: require('./src/server/lifecycle/on-render').default,
 } : {}

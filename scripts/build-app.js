@@ -17,9 +17,9 @@ const packager = require('electron-packager')
 
 const {
     packageName,
-    isWindows, isMac,
+    isWindows, //isMac,
     packageJSON,
-    channel,
+    // channel,
     symbols
 } = require('./build-app/variables')
 
@@ -77,7 +77,7 @@ const run = async (src) => {
             process.exit(1);
             reject(error);
         });
-        child.once('exit', (exitCode) => {
+        child.once('exit', (/*exitCode*/) => {
             // process.exit(exitCode);
             resolve();
         });

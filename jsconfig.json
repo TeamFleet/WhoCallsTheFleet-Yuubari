@@ -9,18 +9,19 @@
         "jsx": "react",
         "baseUrl": ".",
         "paths": {
-            "Apps/*": ["./src"],
-            "Locales/*": ["./locales"],
-
-            "@app/*": ["./src"],
-            "@appConfig/*": ["./src/config"],
-            "@appLocales/*": ["./locales"],
-            "@appUtils/*": ["./src/utils"],
-            "@appData/*": ["./src/data"],
-            "@appAssets/*": ["./src/client/assets"],
-            "@appUI/*": ["./src/client/ui"],
-            "@appLogic/*": ["./src/client/logic"],
-            "@appDocs/*": ["./docs"]
+            "@src/*": ["./src/*"],
+            "@docs/*": ["./docs/*"],
+            "@locales/*": ["./src/locales/*"],
+            "@assets/*": ["./src/assets/*"],
+            "@app/*": ["./src/app/*"],
+            "@utils/*": ["./src/app/utils/*"],
+            "@ui/*": ["./src/app/ui/*"],
+            "@api/*": ["./src/app/api/*"],
+            "@const/*": ["./src/app/constants/*"],
+            "@redux/*": ["./src/app/redux/*"],
+            "@actions/*": ["./src/app/api/actions/*"],
+            "~Assets/*": ["./src/assets/*"],
+            "~/*": ["./src/app/ui/*"]
         }
     },
     "exclude": [

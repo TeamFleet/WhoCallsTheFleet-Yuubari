@@ -1,13 +1,6 @@
-const path = require('path')
-const webpack = require('webpack')
-
-const defaults = require('./base/factory')()
-// const pluginCopyImages = require('./base/plugin-copy-images')
+const defaults = require('./_factory')()
 
 module.exports = (async () => {
-    // const isAnalyze = process.env.WEBPACK_ANALYZE == 'true'
-    const pathDist = process.env.SUPER_DIST_DIR
-    const publicPath = `/includes/`
     const config = {
         entry: {
             commons: [
@@ -37,24 +30,13 @@ module.exports = (async () => {
         output: {
             filename: `core.[chunkhash].js`,
             chunkFilename: `chunk.[chunkhash].js`,
-            path: path.resolve(pathDist, `./public${publicPath}`),
-            publicPath,
         },
 
         plugins: [
             ...defaults.plugins,
-            new webpack.DefinePlugin({
-                '__ELECTRON__': false,
-                '__PUBLIC__': JSON.stringify(publicPath),
-            }),
-            // ...(isAnalyze ? [] : await pluginCopyImages()),
         ],
 
         optimization: {
-            // minimize: false,
-            // splitChunks: {
-            //     chunks: 'all'
-            // }
             splitChunks: {
                 cacheGroups: {
                     commons: {

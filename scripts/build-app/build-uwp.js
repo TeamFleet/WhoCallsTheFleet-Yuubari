@@ -14,20 +14,20 @@ const git = require("simple-git")
 
 const {
     packageName,
-    isWindows, isMac,
+    isWindows, //isMac,
     packageJSON,
     channel,
-    symbols
+    // symbols
 } = require('./variables')
 
 // --------------------------------------------------
 
 const {
     pathRoot,
-    pathPics,
-    pathPackage,
-    pathPackageJSON,
-    pathPackageAssets,
+    // pathPics,
+    // pathPackage,
+    // pathPackageJSON,
+    // pathPackageAssets,
     pathPackageOut
 } = require('./dir')
 

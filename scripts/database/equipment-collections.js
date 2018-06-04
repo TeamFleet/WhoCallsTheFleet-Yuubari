@@ -30,7 +30,7 @@ const appendCollection = async (index, name, types) => {
         }
     }
 
-    let promises = types.map(async type => new Promise(async function (resolve, reject) {
+    let promises = types.map(async type => new Promise(async function (resolve/*, reject*/) {
         let thisSubIndex
         // console.log(subIndex)
         if (typeof subIndex === 'undefined') {
@@ -90,7 +90,7 @@ module.exports = async (dbpath, topath) => {
 
     // 根据已载入数据生成 collection
     await Promise.all(equipmentTypeCollections.map(
-        async (collection, index) => new Promise(async function (resolve, reject) {
+        async (collection, index) => new Promise(async function (resolve/*, reject*/) {
             await appendCollection(index, collection.name, collection.types)
             resolve()
         }))
