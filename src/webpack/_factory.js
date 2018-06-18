@@ -14,11 +14,11 @@ module.exports = () => ({
 
     entry: {
         critical: [
-            path.resolve(pathSrc, './client/critical.js')
+            path.resolve(pathSrc, './app/critical.js')
         ],
         polyfill: [
             "babel-polyfill",
-            path.resolve(pathSrc, './client/polyfill.js')
+            path.resolve(pathSrc, './app/polyfill.js')
         ],
     },
 

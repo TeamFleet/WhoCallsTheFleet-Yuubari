@@ -1,8 +1,10 @@
-import db from '@api/database'
-
+import getPublicPath from 'super-project/utils/get-public-dir'
 import Ship from 'kckit/src/class/ship.js'
 import Entity from 'kckit/src/class/entity.js'
 
+import db from '@api/database'
+
+const publicPath = __DEV__ ? '/' : getPublicPath()
 const ext = __CLIENT__ && self._html && self._html.classList.contains('webp') ? '.webp' : '.png'
 
 const getUri = (type, id, file, revision) => {
@@ -60,12 +62,7 @@ export default (type, id, file) => {
     // if (__ELECTRON__)
     //     return require('electron').remote.getGlobal('__path_pics') + filepath
 
-    if (__SPA__)
-        return '../../pics/' + filepath
+    if (__SPA__) return '../../pics/' + filepath
 
-    const base = __DEV__
-        ? '/'
-        : require('@appConstants/root')
-
-    return base + 'pics/' + filepath
+    return publicPath + 'pics/' + filepath
 }

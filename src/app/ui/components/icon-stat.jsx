@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './icon-stat.less'
-import arrResources from '@appData/resources'
+import arrResources from '@const/resources'
 
 const stats = [
     'hp',

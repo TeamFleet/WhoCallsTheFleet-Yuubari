@@ -1,3 +1,6 @@
+import getPublicPath from 'super-project/utils/get-public-dir'
+
+const publicPath = __DEV__ ? '/' : getPublicPath()
 const defaults = {
     filename: '',
     position: '50% 38.2%',
@@ -48,8 +51,8 @@ export default class Background {
         if (typeof type !== 'string') type = ''
         const prop = '_path' + type
         if (!this[prop]) {
-            this[prop] = 
-                (__DEV__ ? '/' : require('@appConstants/root'))
+            this[prop] =
+                publicPath
                 + 'bgimgs/'
                 + (type ? (type + '/') : '')
                 + (type ? this.filename : (this.filenameOriginal || this.filename))

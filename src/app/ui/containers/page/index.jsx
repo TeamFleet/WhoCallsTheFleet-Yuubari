@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import SpPageContainer from 'super-ui-pagecontainer'
-
 const lastScrollY = {}
 
 /**
@@ -84,16 +82,17 @@ export default class extends React.Component {
     }
 
     render() {
-        const {
-            locationBeforeTransitions,
-            rendering,
-            ...props
-        } = this.props
+        const { ...props } = this.props;
+
+        [
+            'locationBeforeTransitions',
+            'rendering'
+        ].forEach(key => delete props[key])
 
         // if (__DEV__ && __CLIENT__) console.log('render', locationBeforeTransitions)
 
         return (
-            <SpPageContainer
+            <div
                 {...props}
             />
         )

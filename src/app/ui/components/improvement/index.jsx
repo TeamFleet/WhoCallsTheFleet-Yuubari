@@ -9,7 +9,7 @@ import getTimeJST from '@utils/get-time-jst'
 import getLink from '@utils/get-link'
 import getShip from '@utils/get-ship'
 import sortShips from '@utils/sort-ships'
-import arrResources from '@appData/resources'
+import arrResources from '@const/resources'
 import db from '@api/database'
 
 import { ImportStyle } from 'sp-css-import'

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import ComponentContainer from '@ui/containers/infos-component'
 import Stat from '@ui/components/stat'
 import getValue from '@utils/get-value'
-import resources from '@appData/resources'
+import resources from '@const/resources'
 
 import { ImportStyle } from 'sp-css-import'
 import styles from './modernization.less'

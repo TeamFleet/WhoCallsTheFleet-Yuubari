@@ -48,10 +48,10 @@ export default class Home extends React.Component {
 
     getMD() {
         if (localeId === 'en')
-            return require(`@appDocs/updates/1.0.0/en.md`)
+            return require(`@docs/updates/1.0.0/en.md`)
         if (localeId === 'ja')
-            return require(`@appDocs/updates/1.0.0/ja.md`)
-        return require(`@appDocs/updates/1.0.0/zh.md`)
+            return require(`@docs/updates/1.0.0/ja.md`)
+        return require(`@docs/updates/1.0.0/zh.md`)
     }
     render() {
         return (

@@ -11,7 +11,6 @@ import Icon from '@ui/components/icon.jsx'
 import { ImportStyle } from 'sp-css-import'
 import style from './nav.less'
 
-import channel from '@appConstants/channel'
 import getTimeJST from '@utils/get-time-jst.js'
 
 // wip-
@@ -96,7 +95,7 @@ export default class extends React.Component {
     // }
 
     render() {
-        const logoStyles = channel === 'yuubari' ? {
+        const logoStyles = __CHANNEL__ === 'yuubari' ? {
             backgroundImage: `url(${require('@assets/logos/yuubari/128.png')})`
         } : undefined
         return (
@@ -109,7 +108,7 @@ export default class extends React.Component {
                             <button type="button" className="btn-back" disabled={!this.state.showBackButton} onClick={this.historyBack} />
                         )}
                         <IndexLink to="/" className="btn-home-logo" activeClassName="on" style={logoStyles}>{__('title')}</IndexLink>
-                        {channel === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
+                        {__CHANNEL__ === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
                     </div>
 
                     <Navs location={this.props.location} />

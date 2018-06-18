@@ -1,10 +1,11 @@
 import metas from 'metas'
 
+import { store } from 'super-project'
 import { localeId as currentLocaleId } from 'super-project/i18n'
 import getLocaleId from 'super-project/i18n/parse-locale-id'
 
-import { origin as siteOrigin } from '@appConfig/site.js'
-import { availableLocalesFb } from '@appConfig/i18n.js'
+// import { origin as siteOrigin } from '@appConfig/site.js'
+// import { availableLocalesFb } from '@appConfig/i18n.js'
 
 import { update as updatePageTitle } from '@api/page-title/api.js'
 
@@ -28,7 +29,7 @@ export default (settings = {}) => {
         state: {},
 
         "twitter:card": "summary_large_image",
-        "currentOrigin": siteOrigin
+        "currentOrigin": store.getState().server.origin
     }, settings)
 
     if (options.store) {
@@ -139,47 +140,47 @@ export default (settings = {}) => {
     ]
     */
 
-    if (fb_locale)
-        fb_locale = fb_locale.replace(/-/g, '_')
-    else {
-        availableLocalesFb.some(locale => {
-            if (curLocaleId == getLocaleId(locale))
-                fb_locale = locale
-            return fb_locale
-        })
-    }
+    // if (fb_locale)
+    //     fb_locale = fb_locale.replace(/-/g, '_')
+    // else {
+    //     availableLocalesFb.some(locale => {
+    //         if (curLocaleId == getLocaleId(locale))
+    //             fb_locale = locale
+    //         return fb_locale
+    //     })
+    // }
 
-    if (fb_locale) {
-        const localeId = getLocaleId(fb_locale)
-        const fb_locale_parsed = fb_locale.replace(/_/g, '-').toLowerCase()
-        const seg = fb_locale_parsed.split('-')
+    // if (fb_locale) {
+    //     const localeId = getLocaleId(fb_locale)
+    //     const fb_locale_parsed = fb_locale.replace(/_/g, '-').toLowerCase()
+    //     const seg = fb_locale_parsed.split('-')
 
-        // console.log(availableLocalesFb, localeId, fb_locale, seg)
+    //     // console.log(availableLocalesFb, localeId, fb_locale, seg)
 
-        let localeMain, locales = []
+    //     let localeMain, locales = []
 
-        if (localeId === fb_locale_parsed || localeId === seg[0]) {
-            localeMain = fb_locale
-        } else {
-            localeMain = availableLocalesFb[0]
-        }
+    //     if (localeId === fb_locale_parsed || localeId === seg[0]) {
+    //         localeMain = fb_locale
+    //     } else {
+    //         localeMain = availableLocalesFb[0]
+    //     }
 
-        locales = availableLocalesFb.filter(locale => locale !== localeMain)
+    //     locales = availableLocalesFb.filter(locale => locale !== localeMain)
 
-        // console.log(localeMain, locales)
+    //     // console.log(localeMain, locales)
 
-        meta.push({
-            "property": "og:locale",
-            "content": localeMain
-        })
+    //     meta.push({
+    //         "property": "og:locale",
+    //         "content": localeMain
+    //     })
 
-        locales.forEach(locale => {
-            meta.push({
-                "property": "og:locale:alternate",
-                "content": locale
-            })
-        })
-    }
+    //     locales.forEach(locale => {
+    //         meta.push({
+    //             "property": "og:locale:alternate",
+    //             "content": locale
+    //         })
+    //     })
+    // }
 
     const metaOutput = meta.filter(obj => obj.content)
 

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import ComponentContainer from '@ui/containers/infos-component'
 import Stat from '@ui/components/stat'
 
-import arrResources from '@appData/resources'
+import arrResources from '@const/resources'
 import getValue from '@utils/get-value'
 
 import { ImportStyle } from 'sp-css-import'
