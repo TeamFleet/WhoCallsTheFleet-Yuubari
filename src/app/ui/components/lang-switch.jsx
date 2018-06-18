@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Cookies from 'js-cookie'
 
 import { localeId } from 'super-project/i18n'
-import { availableLocales } from '@src/locales'
+import availableLocales from '@src/locales'
 
 import { ImportStyle } from 'sp-css-import'
 import style from './lang-switch.less'

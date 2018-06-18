@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
-import htmlHead from '@utils/html-head.js'
+// import htmlHead from '@utils/html-head.js'
 
 import { updateAppReady } from '@api/app/api'
 import { swipedFromLeftEdge } from '@api/side-menu/api'
@@ -39,16 +39,16 @@ class App extends React.Component {
     // }
 
     // 仅针对 __SERVER__
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        // if (__SERVER__) require('@api/database/index.js').init()
+    // static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
+    //     // if (__SERVER__) require('@api/database/index.js').init()
 
-        const head = htmlHead({
-            state: store.getState()
-        })
+    //     const head = htmlHead({
+    //         state: store.getState()
+    //     })
 
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
+    //     ext.metas = ext.metas.concat(head.meta)
+    //     ext.title = head.title
+    // }
 
     constructor() {
         super()
@@ -148,7 +148,7 @@ class App extends React.Component {
 
 class ErrorBoundary extends React.Component {
     componentDidCatch(error, info) {
-        console.log(error, info)
+        console.log('React ERROR', error, info)
         // Display fallback UI
         // this.setState({ hasError: true })
         // You can also log the error to an error reporting service
