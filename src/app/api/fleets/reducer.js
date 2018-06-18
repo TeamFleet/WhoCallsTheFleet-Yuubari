@@ -2,12 +2,12 @@ import {
     FLEETS_INIT,
     // FLEETS_REFRESH,
 
-    // FLEETS_NEW_BUILD,
+    FLEETS_NEW_BUILD,
     // FLEETS_REMOVE_BUILD,
     // FLEETS_UPDATE_BUILD,
 
     FLEETS_CURRENT_CHANGE_TAB,
-} from '@redux/action-types.js'
+} from '@redux/action-types'
 
 const initialState = {
     // builds: [],

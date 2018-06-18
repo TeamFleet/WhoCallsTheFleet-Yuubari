@@ -1,8 +1,8 @@
-import { set as setStore } from '@utils/get-store'
+// import { set as setStore } from '@utils/get-store'
 
-export default ({
+export default (/*{
     store,
-}) => {
+}*/) => {
     if (__DEV__) console.log('⚓ Client inited.')
-    setStore(store)
+    // setStore(store)
 }

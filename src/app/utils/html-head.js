@@ -2,7 +2,7 @@ import metas from 'metas'
 
 import { store } from 'super-project'
 import { localeId as currentLocaleId } from 'super-project/i18n'
-import getLocaleId from 'super-project/i18n/parse-locale-id'
+// import getLocaleId from 'super-project/i18n/parse-locale-id'
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'
@@ -13,7 +13,7 @@ let head
 
 export default (settings = {}) => {
 
-    let fb_locale
+    // let fb_locale
     let fb_app_id = fb_app_id
     let dispatch
     const siteName = __('title') + (__DEV__ ? ' (DEV)' : '')
@@ -29,7 +29,7 @@ export default (settings = {}) => {
         state: {},
 
         "twitter:card": "summary_large_image",
-        "currentOrigin": store.getState().server.origin
+        "currentOrigin": store ? store.getState().server.origin : undefined
     }, settings)
 
     if (options.store) {

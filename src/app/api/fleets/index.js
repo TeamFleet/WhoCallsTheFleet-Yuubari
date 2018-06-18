@@ -12,7 +12,7 @@ import {
     // FLEETS_UPDATE_BUILD,
 
     FLEETS_CURRENT_CHANGE_TAB,
-} from '@redux/action-types.js'
+} from '@redux/action-types'
 
 import routerPush from '@utils/router-push'
 // import routerReplace from '@utils/router-replace'
