@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
 
-import Page from '@ui/containers/page'
-import htmlHead from '@utils/html-head.js'
+import htmlHead from '@utils/html-head'
 import {
     reset as shipListReset
-} from '@api/ship-list/api.js'
+} from '@api/ship-list/api'
+
+import Page from '@ui/containers/page'
 
 import ShipList from '@ui/components/ship-list'
-
-import { ImportStyle } from 'sp-css-import'
-import style from './list.less'
 
 const shipListId = 'pageShipList'
 
@@ -18,17 +18,11 @@ const shipListId = 'pageShipList'
 //     isShipListInit: (typeof state.shipList[shipListId] !== 'undefined')
 // }))
 @connect()
-@ImportStyle(style)
+@pageinfo(() => htmlHead({
+    title: __('nav.ships')
+}))
+@ImportStyle(require('./list.less'))
 export default class PageShipList extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: __('nav.ships')
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     constructor(props) {
         super(props)

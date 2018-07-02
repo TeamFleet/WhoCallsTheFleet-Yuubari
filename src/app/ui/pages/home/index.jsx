@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Markdown from 'react-markdown'
 import { ImportStyle } from 'sp-css-import'
-import { localeId } from 'super-project/i18n'
+import { pageinfo, localeId } from 'super-project'
 
 import htmlHead from '@utils/html-head'
 
@@ -34,17 +34,9 @@ const markdownRenderers = {
 }
 
 @connect()
+@pageinfo(() => htmlHead())
 @ImportStyle(require('./styles.less'))
 export default class Home extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: __('title')
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     getMD() {
         if (localeId === 'en')

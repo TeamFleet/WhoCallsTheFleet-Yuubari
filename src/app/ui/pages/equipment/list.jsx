@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-// import Link from '@ui/components/link'
-
 import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
 
-import htmlHead from '@utils/html-head.js'
+import htmlHead from '@utils/html-head'
 
 import db from '@api/database'
 import {
@@ -14,6 +12,7 @@ import {
 
 import Page from '@ui/containers/page'
 
+// import Link from '@ui/components/link'
 import EquipmentList from '@ui/components/equipment-list'
 
 const equipmentListId = 'pageEquipmentList'
@@ -22,17 +21,11 @@ const equipmentListId = 'pageEquipmentList'
 //     isEquipmentListInit: (typeof state.equipmentList[equipmentListId] !== 'undefined')
 // }))
 @connect()
+@pageinfo(() => htmlHead({
+    title: __('nav.equipments')
+}))
 @ImportStyle(require('./list.less'))
 export default class PageEquipmentList extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: __('nav.equipments')
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     constructor(props) {
         super(props)
@@ -42,7 +35,7 @@ export default class PageEquipmentList extends React.Component {
     }
 
     render() {
-        if (__DEV__) console.log('Equipment Collections', db.equipmentCollections)
+        if (__DEV__ && __CLIENT__) console.log('Equipment Collections', db.equipmentCollections)
         return (
             <Page className={this.props.className} >
                 <EquipmentList id={equipmentListId} />

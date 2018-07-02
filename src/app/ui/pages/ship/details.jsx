@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 // import TransitionGroup from 'react-transition-group/TransitionGroup'
 // import CSSTransition from 'react-transition-group/CSSTransition'
+import { pageinfo } from 'super-project'
 
-import InfosPageContainer from '@ui/containers/infos-page'
-import htmlHead from '@utils/html-head.js'
+import htmlHead from '@utils/html-head'
 import db from '@api/database'
 import {
     init as shipDetailsInit,
@@ -13,6 +13,7 @@ import {
 } from '@api/pages'
 
 import Header from './details/commons/header.jsx'
+import InfosPageContainer from '@ui/containers/infos-page'
 
 // import { ImportStyle } from 'sp-css-import'
 
@@ -28,18 +29,6 @@ const contentComponents = {}
 tabsAvailable.forEach((tab, index) => {
     contentComponents[!index ? 'index' : tab] = require(`./details/${tab}.jsx`).default
 })
-
-
-const extractFromState = (state) => {
-    const pathname = state.routing.locationBeforeTransitions.pathname
-    const segs = pathname.split('/')
-    const indexShips = segs.indexOf('ships')
-
-    return {
-        id: parseInt(segs[indexShips + 1]),
-        tab: segs[indexShips + 2] || tabsAvailable[0]
-    }
-}
 
 const getShipType = ship => {
     // if (ship.type && ship.type_display && ship.type !== ship.type_display)
@@ -80,32 +69,31 @@ export const getInfosId = id => `SHIP_${id}`
 // @connect((state, ownProps) => state.pages[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
 @connect()
+@pageinfo((state, renderProps) => {
+    const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
+    const tab = typeof renderProps.params === 'object' ? renderProps.params.tab : undefined
+
+    if (typeof id === 'undefined')
+        return {}
+
+    const ship = db.ships[id]
+
+    return htmlHead({
+        title: [
+            ship._name,
+            typeof tab === 'undefined' || tab === tabsAvailable[0]
+                ? undefined
+                : __("ship_details", tab)
+        ],
+        subtitle: getShipType(ship)
+            + (ship.class || ship.class_no ? ' / ' : '')
+            + (ship.class_no
+                ? __("shipclass_number", { class: ship._class, number: ship.class_no })
+                : __("shipclass", { class: ship._class })),
+        description: getDescription(ship),
+    })
+})
 export default class PageShipDetails extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const { id, tab } = extractFromState(store.getState())
-
-        const ship = db.ships[id]
-        const obj = {
-            store
-        }
-        if (ship) {
-            // const textTab = tab === tabsAvailable[0] ? '' : ` / ${__("ship_details." + tab)}`
-            obj.title = [
-                ship._name,
-                tab === tabsAvailable[0] ? undefined : __("ship_details", tab)
-            ]
-            obj.subtitle = getShipType(ship)
-                + (ship.class || ship.class_no ? ' / ' : '')
-                + (ship.class_no
-                    ? __("shipclass_number", { class: ship._class, number: ship.class_no })
-                    : __("shipclass", { class: ship._class }))
-            obj.description = getDescription(ship)
-        }
-        const head = htmlHead(obj)
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     constructor(props) {
         super(props)

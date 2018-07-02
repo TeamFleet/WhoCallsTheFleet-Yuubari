@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
 
 import {
     init,
@@ -24,17 +25,10 @@ import LoaderFairyOoyodo2 from '@ui/components/loader/fairy-ooyodo-2'
 import Header from '@ui/components/main-header/main-options'
 
 @connect()
+@pageinfo(() => htmlHead({
+    title: __('nav.fleets')
+}))
 export default class PageFleets extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: __('nav.fleets')
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
-
     render() {
         return (
             <Page>

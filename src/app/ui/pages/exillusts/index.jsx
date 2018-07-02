@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 // import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
 
-import htmlHead from '@utils/html-head.js'
-import getPic from '@utils/get-pic.js'
+import htmlHead from '@utils/html-head'
+import getPic from '@utils/get-pic'
 
 import db from '@api/database'
 import {
@@ -48,7 +48,7 @@ const illustIds = [8, 9]
 
 @connect(
     state => state.pages[infosId] || {},
-    (dispatch, ownProps) => ({
+    (dispatch/*, ownProps*/) => ({
         init: defaultIndex => dispatch(
             infosInit(
                 infosId,
@@ -62,17 +62,11 @@ const illustIds = [8, 9]
         )
     })
 )
+@pageinfo(() => htmlHead({
+    title: __('nav.exillusts')
+}))
 // @ImportStyle(style)
 export default class extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: __('nav.exillusts')
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     constructor() {
         super()

@@ -1,57 +1,43 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-import htmlHead from '@utils/html-head.js'
-import db from '@api/database'
 import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
+
+import db from '@api/database'
+import htmlHead from '@utils/html-head'
 import getSubtitle from './get-subtitle'
 
-import Header from './commons/header.jsx'
+import Header from './commons/header'
+import Pictures from './components/pictures'
 import InfosPageContainer from '@ui/containers/infos-page'
 import ComponentContainer from '@ui/containers/infos-component'
-
-import Pictures from './components/pictures'
 import ListShips from '@ui/components/list/ships'
 import Title from '@ui/components/title'
 
-const extractFromState = (state) => {
-    const pathname = state.routing.locationBeforeTransitions.pathname
-    const segs = pathname.split('/')
-    const indexEntities = segs.indexOf('entities')
-
-    return {
-        id: parseInt(segs[indexEntities + 1])
-    }
-}
-
 const isCV = entity => (Array.isArray(entity.relation.cv) && entity.relation.cv.length)
 
-const getDescription = entity => {
-    return entity._name
-        // 类型
-        + `, ${isCV(entity) ? __('seiyuu') : __('artist')}`
-}
-
 @connect()
+@pageinfo((state, renderProps) => {
+    const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
+
+    if (typeof id === 'undefined')
+        return {}
+
+    const entity = db.entities[id]
+    const name = entity._name
+
+    return htmlHead({
+        title: name,
+        subtitle: getSubtitle(entity),
+        description: (
+            name
+            // 类型
+            + `, ${isCV(entity) ? __('seiyuu') : __('artist')}`
+        ),
+    })
+})
 @ImportStyle(require('./styles.less'))
 export default class extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const { id } = extractFromState(store.getState())
-
-        const entity = db.entities[id]
-        const obj = {
-            store
-        }
-        if (entity) {
-            obj.title = entity._name
-            obj.subtitle = getSubtitle(entity)
-            obj.description = getDescription(entity)
-        }
-        const head = htmlHead(obj)
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     get data() {
         if (!this._data && this.props.params.id)

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { pageinfo } from 'super-project'
 
-import InfosPageContainer from '@ui/containers/infos-page'
-import htmlHead from '@utils/html-head.js'
+import htmlHead from '@utils/html-head'
 import db from '@api/database'
 // import {
 //     init as equipmentDetailsInit,
@@ -10,6 +10,7 @@ import db from '@api/database'
 //     TABINDEX
 // } from '@api/pages'
 
+import InfosPageContainer from '@ui/containers/infos-page'
 import Header from './details/commons/header.jsx'
 
 // import { ImportStyle } from 'sp-css-import'
@@ -26,49 +27,37 @@ tabsAvailable.forEach((tab, index) => {
     contentComponents[!index ? 'index' : tab] = require(`./details/${tab}.jsx`).default
 })
 
-const extractFromState = (state) => {
-    const pathname = state.routing.locationBeforeTransitions.pathname
-    const segs = pathname.split('/')
-    const indexEquipments = segs.indexOf('equipments')
-
-    return {
-        id: parseInt(segs[indexEquipments + 1]),
-        tab: segs[indexEquipments + 2] || tabsAvailable[0]
-    }
-}
-
-const getDescription = equipment => {
-    return equipment._name
-        // 类型
-        + `${equipment.type ? `, ${equipment._type}` : ''}`
-}
-
 // export const getInfosId = id => `EQUIPMENT_${id}`
 
 // @connect((state, ownProps) => state.pages[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
 @connect()
+@pageinfo((state, renderProps) => {
+    const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
+    const tab = typeof renderProps.params === 'object' ? renderProps.params.tab : undefined
+
+    if (typeof id === 'undefined')
+        return {}
+
+    const equipment = db.equipments[id]
+    const name = equipment._name
+
+    return htmlHead({
+        title: [
+            name,
+            typeof tab === 'undefined' || tab === tabsAvailable[0]
+                ? undefined
+                : __("equipment_details", tab)
+        ],
+        subtitle: equipment.type ? equipment._type : '',
+        description: (
+            name
+            // 类型
+            + `${equipment.type ? `, ${equipment._type}` : ''}`
+        ),
+    })
+})
 export default class extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const { id, tab } = extractFromState(store.getState())
-
-        const equipment = db.equipments[id]
-        const obj = {
-            store
-        }
-        if (equipment) {
-            obj.title = [
-                equipment._name,
-                tab === tabsAvailable[0] ? undefined : __("equipment_details", tab)
-            ]
-            obj.subtitle = equipment.type ? equipment._type : ''
-            obj.description = getDescription(equipment)
-        }
-        const head = htmlHead(obj)
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     get equipment() {
         if (!this._data && this.props.params.id)
