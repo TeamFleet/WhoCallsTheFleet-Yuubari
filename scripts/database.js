@@ -10,7 +10,7 @@ const {
 } = require('../src/directories')
 
 const dbpath = path.resolve(process.cwd(), 'node_modules', 'whocallsthefleet-database', 'db')
-const topath = path.resolve(pathApp, 'client', 'logic', 'database', 'db')
+const topath = path.resolve(pathApp, 'app', 'api', 'database', 'db')
 
 module.exports = async () => {
     const stepCompressing = spinner('Compressing database...')

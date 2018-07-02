@@ -1,8 +1,8 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 
-module.exports = /^yuubari/i.test(JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf-8')).description)
+module.exports = /^yuubari/i.test(
+    fs.readJsonSync(path.resolve(__dirname, '../package.json')).description
+)
     ? 'yuubari'
     : 'stable'
-
-// module.exports = 'yuubari'

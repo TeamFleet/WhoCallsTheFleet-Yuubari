@@ -54,3 +54,4 @@ node_modules/
 /game_data
 /apps/app/client/logic/database/db
 /src/client/logic/database/db
+/src/app/api/database/db

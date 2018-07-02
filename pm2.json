@@ -1,51 +1,6 @@
 {
     "apps": [
         {
-            "name": "fleet-dev-client",
-            "script": "./super.build.js",
-            "max_memory_restart": "4G",
-            "out_file": "logs/dev/fleet-dev-client.log",
-            "error_file": "logs/dev/fleet-dev-client-error.log",
-            "detached": true,
-            "env": {
-                "WEBPACK_BUILD_STAGE": "client",
-                "WEBPACK_BUILD_ENV": "dev",
-                "WEBPACK_DEV_SERVER_PORT": "3001"
-            }
-        },
-        {
-            "name": "fleet-dev-server",
-            "script": "./super.build.js",
-            "max_memory_restart": "4G",
-            "out_file": "logs/dev/fleet-dev-server.log",
-            "error_file": "logs/dev/fleet-dev-server-error.log",
-            "detached": true,
-            "env": {
-                "WEBPACK_BUILD_STAGE": "server",
-                "WEBPACK_BUILD_ENV": "dev",
-                "WEBPACK_DEV_SERVER_PORT": "3001",
-                "SERVER_PORT": "3000"
-            }
-        },
-        {
-            "name": "fleet-dev-run",
-            "script": "dist-web/server",
-            "max_memory_restart": "300M",
-            "out_file": "logs/dev/fleet-dev-run.log",
-            "error_file": "logs/dev/fleet-dev-run-error.log",
-            "watch": [
-                "dist-web/public/includes",
-                "dist-web/server"
-            ],
-            "detached": true,
-            "env": {
-                "WEBPACK_BUILD_STAGE": "server",
-                "WEBPACK_BUILD_ENV": "dev",
-                "WEBPACK_DEV_SERVER_PORT": "3001",
-                "SERVER_PORT": "3000"
-            }
-        },
-        {
             "name": "yuubari",
             "script": "dist-web/server",
             "max_memory_restart": "500M",
