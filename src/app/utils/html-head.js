@@ -1,58 +1,36 @@
 import metas from 'metas'
-
-import { store } from 'super-project'
-import { localeId as currentLocaleId } from 'super-project/i18n'
-// import getLocaleId from 'super-project/i18n/parse-locale-id'
+import { store, localeId } from 'super-project'
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'
 
 import { update as updatePageTitle } from '@api/page-title/api.js'
 
-let head
+export default (infos = {}) => {
 
-export default (settings = {}) => {
-
-    // let fb_locale
-    let fb_app_id = fb_app_id
-    let dispatch
+    const state = store.getState()
     const siteName = __('title') + (__DEV__ ? ' (DEV)' : '')
+    let origin = state.server.origin
 
-    /**
-     * 默认选项
-     */
-    const options = Object.assign({
+    let {
+        uri = typeof location !== 'undefined' ? location.pathname : undefined,
+        title = siteName,
+        subtitle,
+        description,
+        image
+    } = Object.assign({
         uri: '',
-        description: '',
-        image: null,
-
-        state: {},
-
         "twitter:card": "summary_large_image",
-        "currentOrigin": store ? store.getState().server.origin : undefined
-    }, settings)
-
-    if (options.store) {
-        options.state = options.store.getState()
-        dispatch = options.store.dispatch
-    }
-    if (typeof options.dispatch === 'function')
-        dispatch = options.dispatch
-
-    let { uri, title, subtitle, description, image, state } = options
-    const curLocaleId = state.localeId || currentLocaleId
+    }, infos)
 
     if (typeof uri === 'object') {
-        let pathname = uri.pathname
-        const query = uri.query || {}
-
-        uri = pathname
-        fb_locale = query.fb_locale
-    } else if (typeof location !== 'undefined') {
-        uri = location.pathname
+        uri = uri.pathname
+        // const pathname = uri.pathname
+        // const query = uri.query || {}
+        // fb_locale = query.fb_locale
     }
-
     if (uri.substr(0, 1) == '/') uri = uri.substr(1)
+
     if (title) {
         if (Array.isArray(title))
             title = title.filter(str => typeof str !== 'undefined' && str !== '')
@@ -60,40 +38,40 @@ export default (settings = {}) => {
         const titleMain = Array.isArray(title) && title.length ? title[0] : title
         title = Array.isArray(title) ? title.join(' / ') : title
 
-        if (dispatch) {
-            if (typeof subtitle !== 'undefined')
-                dispatch(updatePageTitle({
-                    main: titleMain,
-                    sub: subtitle
-                }))
-            else dispatch(updatePageTitle(titleMain))
-        }
+        if (typeof subtitle !== 'undefined')
+            store.dispatch(updatePageTitle({
+                main: titleMain,
+                sub: subtitle
+            }))
+        else
+            store.dispatch(updatePageTitle(titleMain))
+
         if (title !== siteName)
             title = title.replace(/\n/g, '') + ' - ' + siteName
-    } else {
-        title = siteName
     }
+
     if (description) description = description.replace(/\n/g, '')
 
-    if (state.server) options.currentOrigin = state.server.origin || options.currentOrigin
+    if (origin.substr(origin.length - 1, 1) !== '/') origin += '/'
 
-    if (options.currentOrigin) options.currentOrigin = options.currentOrigin + '/'
-
-    const meta = metas({
+    return {
         title,
-        description,
-        image: image || (options.currentOrigin + 'launcher.jpg'),
-        url: options.currentOrigin + uri,
-        type: "website",
-        locale: curLocaleId,
+        metas: metas({
+            title,
+            description,
+            image: image || (origin + 'launcher.jpg'),
+            url: origin + uri,
+            type: "website",
+            locale: localeId,
 
-        siteName,
+            siteName,
 
-        twitter: {
-            card: "summary",
-            siteCreator: "Diablohu"
-        }
-    }, true)
+            twitter: {
+                card: "summary",
+                siteCreator: "Diablohu"
+            }
+        }, true)
+    }
     /*
     const meta = [
         // Schema.org markup for Google+
@@ -181,40 +159,4 @@ export default (settings = {}) => {
     //         })
     //     })
     // }
-
-    const metaOutput = meta.filter(obj => obj.content)
-
-    // replace existing meta
-    if (typeof document !== 'undefined') {
-        if (!head) head = document.getElementsByTagName('head')[0]
-        if (title) document.title = title
-        let str = metaOutput.map(obj => {
-            let str = '<meta'
-            for (let i in obj) {
-                str += ` ${i}="${obj[i]}"`
-            }
-            str += '>'
-            return str
-        })
-        str = str.join('')
-        const match = /(<!--INJECT_META_START-->)(.+)(<!--INJECT_META_END-->)/g.exec(head.innerHTML)
-
-        if (match && match.length > 3) {
-            if (str !== match[2]) {
-                head.innerHTML = head.innerHTML.replace(/<!--INJECT_META_START-->(.+)<!--INJECT_META_END-->/g, '<!--INJECT_META_START-->' + str + '<!--INJECT_META_END-->')
-                // console.log('head meta updated')
-            } else {
-                // console.log('head meta not change, do not update')
-            }
-        } else {
-            head.innerHTML += '<!--INJECT_META_START-->' + str + '<!--INJECT_META_END-->'
-            // console.log('head meta appended')
-        }
-
-    }
-
-    return {
-        meta: metaOutput,
-        title
-    }
 }

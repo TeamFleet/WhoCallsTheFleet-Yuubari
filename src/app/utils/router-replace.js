@@ -1,3 +1,5 @@
+import { history } from 'super-project'
+
 export default (uri) => {
     if (!__CLIENT__) return
 
@@ -7,7 +9,7 @@ export default (uri) => {
     //     + uri
     // )
 
-    self.routerHistory.replace(
+    history.replace(
         (uri.substr(0, 1) !== '/' ? '/' : '')
         + uri
     );

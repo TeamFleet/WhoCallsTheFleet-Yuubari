@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
 import kckit from 'kckit'
 import EquipmentTypes from 'kckit/src/types/equipments'
 
@@ -38,17 +39,11 @@ const equipmentTypes = [
 ]
 
 @connect()
+@pageinfo(() => htmlHead({
+    title: __('nav.calctp')
+}))
 @ImportStyle(require('./styles.less'))
 export default class extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: __('nav.calctp')
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     constructor(props) {
         super(props)

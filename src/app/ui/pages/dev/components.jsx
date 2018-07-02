@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
 
 import htmlHead from '@utils/html-head'
 
@@ -14,18 +14,11 @@ import ButtonGroup from '@ui/components/button-group'
 import InputCounter from '@ui/components/input/counter'
 
 @connect()
+@pageinfo(() => htmlHead({
+    title: 'Dev (Components)'
+}))
 @ImportStyle(require('./components.less'))
 export default class extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: 'Dev (Components)'
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
-
     render() {
         return (
             <Page className={this.props.className}>

@@ -1,27 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
 
-import htmlHead from '@utils/html-head.js'
+import htmlHead from '@utils/html-head'
 
 import Page from '@ui/containers/page'
-
 import Title from '@ui/components/title'
 
 @connect()
+@pageinfo(() => htmlHead({
+    title: __('nav.about')
+}))
 @ImportStyle(require('./styles.less'))
 export default class About extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: __('nav.about')
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
-
     render() {
         return (
             <Page

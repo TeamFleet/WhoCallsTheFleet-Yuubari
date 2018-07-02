@@ -86,7 +86,8 @@ export default class extends React.Component {
 
         [
             'locationBeforeTransitions',
-            'rendering'
+            'rendering',
+            'dispatch',
         ].forEach(key => delete props[key])
 
         // if (__DEV__ && __CLIENT__) console.log('render', locationBeforeTransitions)

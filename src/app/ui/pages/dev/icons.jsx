@@ -1,27 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import { ImportStyle } from 'sp-css-import'
-import Page from '@ui/containers/page'
+import { pageinfo } from 'super-project'
 
 import htmlHead from '@utils/html-head'
+
+import Page from '@ui/containers/page'
 
 import MainHeader from '@ui/components/main-header'
 import Icon from '@ui/components/icon'
 import Title from '@ui/components/title'
 
 @connect()
+@pageinfo(() => htmlHead({
+    title: 'Dev (Icons)'
+}))
 @ImportStyle(require('./icons.less'))
 export default class extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const head = htmlHead({
-            store,
-            title: 'Dev (Icons)'
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     getIcons() {
         if (__SERVER__) return []
@@ -60,7 +55,14 @@ class IconSample extends React.Component {
     render() {
         return (
             <label className="icon-sample">
-                <input type="text" value={this.props.icon} readOnly />
+                <input
+                    type="text"
+                    value={this.props.icon}
+                    readOnly
+                    onFocus={evt => {
+                        evt.target.select()
+                    }}
+                />
                 <Icon icon={this.props.icon} className="icon" />
             </label>
         )

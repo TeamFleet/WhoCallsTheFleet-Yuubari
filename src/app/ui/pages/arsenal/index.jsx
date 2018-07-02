@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
+import { pageinfo } from 'super-project'
 
 import db from '@api/database'
 // import pref from '@api/preferences'
@@ -39,29 +40,19 @@ const daysArr = [
 ]
 
 @connect()
+@pageinfo((state, renderProps) => {
+    const day = typeof renderProps.params === 'object' ? renderProps.params.day : undefined
+    return htmlHead({
+        title: [
+            __('nav.arsenal'),
+            typeof day !== 'undefined'
+                ? __(`day_full`, daysArr[day])
+                : undefined,
+        ]
+    })
+})
 @ImportStyle(require('./styles.less'))
 export default class PageArsenal extends React.Component {
-    static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-        const state = store.getState()
-        const pathname = state.routing.locationBeforeTransitions.pathname
-        const segs = pathname.split('/')
-        const indexArsenal = segs.indexOf('arsenal')
-        let day
-
-        if (typeof segs[indexArsenal + 1] !== 'undefined')
-            day = __(`day_full`, daysArr[parseInt(segs[indexArsenal + 1])])
-
-        const head = htmlHead({
-            store,
-            title: [
-                __('nav.arsenal'),
-                day
-            ]
-        })
-
-        ext.metas = ext.metas.concat(head.meta)
-        ext.title = head.title
-    }
 
     state = {
         rendering: true
@@ -312,7 +303,8 @@ const PageArsenalListAll = (props) => {
 
 @ImportStyle(require('./styles-collection.less'))
 class PageArsenalCollection extends React.Component {
-    rendered = false
+    // rendered = false
+    // mouted = false
 
     constructor(props) {
         super(props)
@@ -323,6 +315,7 @@ class PageArsenalCollection extends React.Component {
         }
         if (!render) {
             setTimeout(() => {
+                if (!this.mounted) return
                 this.setState({
                     render: true
                 })
@@ -333,6 +326,15 @@ class PageArsenalCollection extends React.Component {
             props.onRender(this)
         }
     }
+
+    componentDidMount() {
+        this.mounted = true
+    }
+
+    componentWillUnmount() {
+        this.mounted = false
+    }
+
     render() {
         if (!this.state.render) return null
         // console.log(this.props.index, this.state.render)
