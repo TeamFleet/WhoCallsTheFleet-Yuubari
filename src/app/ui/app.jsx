@@ -74,7 +74,7 @@ class App extends React.Component {
             startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
                 y: evt.nativeEvent.touches[0].screenY,
-                timestamp: (new Date()).valueOf()
+                timestamp: Date.now()
             }
         else
             startSwipeAtLeftBorder = false
@@ -84,7 +84,7 @@ class App extends React.Component {
         if (startSwipeAtLeftBorder) {
             const deltaX = evt.nativeEvent.touches[0].screenX - startSwipeAtLeftBorder.x
             const deltaY = evt.nativeEvent.touches[0].screenY - startSwipeAtLeftBorder.y
-            const elapseTime = (new Date()).valueOf() - startSwipeAtLeftBorder.timestamp
+            const elapseTime = Date.now() - startSwipeAtLeftBorder.timestamp
 
             if (elapseTime > 200) {
                 startSwipeAtLeftBorder = false
