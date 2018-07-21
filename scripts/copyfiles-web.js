@@ -1,15 +1,16 @@
 const fs = require('fs-extra')
 const path = require('path')
+// const getDistPath = require('super-project/utils/get-dist-path')
 // const packageJson = fs.readJSONSync(path.resolve(process.cwd(), 'package.json'))
 
 const {
-    dist: {
-        public: pathPublic,
-    }
+    getDistPublic,
 } = require('../src/directories')
 const spinner = require('./commons/spinner')
 
 module.exports = async () => {
+    const pathPublic = getDistPublic()
+
     const title = 'Copying other files...'
     const waiting = spinner(title)
 

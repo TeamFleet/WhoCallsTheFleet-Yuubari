@@ -1,8 +1,9 @@
+const getDistPath = require('super-project/utils/get-dist-path')
+
 const path = require('path')
 
 const pathRoot = path.resolve(__dirname, '../')
 const pathSrc = path.resolve(pathRoot, './src')
-const pathDist = process.env.SUPER_DIST_DIR
 
 module.exports = {
     root: pathRoot,
@@ -17,9 +18,13 @@ module.exports = {
         ui: path.resolve(pathSrc, './app/ui'),
     },
 
-    dist: {
-        _: pathDist,
-        public: path.resolve(pathDist, './public'),
-        includes: path.resolve(pathDist, './public/includes'),
-    }
+    getDist: () => getDistPath(),
+    getDistPublic: () => path.resolve(getDistPath(), 'public'),
+    getDistIncludes: () => path.resolve(getDistPath(), 'public/includes'),
+
+    // dist: {
+    //     _: pathDist,
+    //     public: path.resolve(pathDist, './public'),
+    //     includes: path.resolve(pathDist, './public/includes'),
+    // }
 }

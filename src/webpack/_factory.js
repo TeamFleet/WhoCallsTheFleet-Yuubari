@@ -1,24 +1,14 @@
-const fs = require('fs-extra')
 const path = require('path')
-const webpack = require('webpack')
-
-const {
-    bgimgs: pathBgimgs,
-    nodeModules: pathNodeModules,
-    src: {
-        _: pathSrc,
-    }
-} = require('../directories')
 
 module.exports = () => ({
 
     entry: {
         critical: [
-            path.resolve(pathSrc, './app/critical.js')
+            path.resolve(__dirname, '../app/critical.js')
         ],
         polyfill: [
             "babel-polyfill",
-            path.resolve(pathSrc, './app/polyfill.js')
+            path.resolve(__dirname, '../app/polyfill.js')
         ],
     },
 
@@ -43,28 +33,6 @@ module.exports = () => ({
         ]
     },
 
-    plugins: [
-        new webpack.DefinePlugin({
-            __CHANNEL__: JSON.stringify(require('../channel')),
-            __BGIMG_LIST__: JSON.stringify(
-                fs.readdirSync(pathBgimgs)
-                    .filter(file => (
-                        !fs.lstatSync(path.resolve(pathBgimgs, file)).isDirectory() &&
-                        path.extname(path.resolve(pathBgimgs, file)) === '.jpg'
-                    ))
-            ),
-            __SWIPER_CSS__: JSON.stringify(
-                fs.readFileSync(
-                    path.resolve(pathNodeModules, 'swiper/dist/css/swiper.min.css'),
-                    'utf-8'
-                )
-            ),
-            // '__ICONSVG__': JSON.stringify(
-            //     fs.readFileSync(
-            //         path.resolve(pathAssets, './symbols/symbol-defs.svg'), 'utf8'
-            //     ).replace(/<title>(.+?)<\/title>/g, '')
-            // ),
-        }),
-    ],
+    plugins: [],
 
 })

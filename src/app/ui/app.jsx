@@ -6,8 +6,6 @@ import { ImportStyle } from 'sp-css-import'
 import { updateAppReady } from '@api/app/api'
 import { swipedFromLeftEdge } from '@api/side-menu/api'
 
-import style from './app.less'
-
 import Main from './layout/main'
 import MainMask from './layout/main-mask'
 import Nav from './layout/nav'
@@ -16,38 +14,17 @@ import Bgimg from './layout/bgimg'
 let startSwipeAtLeftBorder = false
 
 @connect(state => {
+    if (__DEV__) console.log('Redux connected', state)
     return {
         isMainBgimgLoaded: state.bgimg.isMainLoaded,
         uiMode: state.uiMode
     }
 })
-@ImportStyle(style)
-class App extends React.Component {
+@ImportStyle(require('./app.less'))
+export default class App extends React.Component {
     /*
      * this.isAppReady      是否已初始化
      */
-
-    // 仅针对 __SERVER__
-    // static onServerRenderStoreExtend(store) {
-    //     const state = store.getState()
-    //     const dispatch = store.dispatch
-    //     const preprocessTasks = []
-    //     preprocessTasks.push(
-    //     )
-    //     return preprocessTasks
-    // }
-
-    // 仅针对 __SERVER__
-    // static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
-    //     // if (__SERVER__) require('@api/database/index.js').init()
-
-    //     const head = htmlHead({
-    //         state: store.getState()
-    //     })
-
-    //     ext.metas = ext.metas.concat(head.meta)
-    //     ext.title = head.title
-    // }
 
     constructor() {
         super()
@@ -56,8 +33,8 @@ class App extends React.Component {
             document.documentElement.classList.add('is-react-ready')
     }
 
-    appReady(timeout = 10) {
-        if (__CLIENT__ && !self.isAppReady) {
+    checkAppReady(timeout = 10) {
+        if (__CLIENT__ && this.props.isMainBgimgLoaded && !self.isAppReady) {
             self.appReady()
             setTimeout(() => {
                 this.props.dispatch(
@@ -67,8 +44,8 @@ class App extends React.Component {
         }
     }
 
-    onTouchStart(evt) {
-        if (!__CLIENT__) return
+    onTouchStart = (evt) => {
+        // if (!__CLIENT__) return
         if (self.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
             startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
@@ -79,7 +56,7 @@ class App extends React.Component {
             startSwipeAtLeftBorder = false
     }
 
-    onTouchMove(evt) {
+    onTouchMove = (evt) => {
         if (startSwipeAtLeftBorder) {
             const deltaX = evt.nativeEvent.touches[0].screenX - startSwipeAtLeftBorder.x
             const deltaY = evt.nativeEvent.touches[0].screenY - startSwipeAtLeftBorder.y
@@ -115,8 +92,15 @@ class App extends React.Component {
         // logErrorToMyService(error, info);
     }
 
+    componentDidMount() {
+        this.checkAppReady()
+    }
+
+    componentDidUpdate() {
+        this.checkAppReady()
+    }
+
     render() {
-        // if (__CLIENT__) this.appReady(100)
         // if (__SERVER__) {
         //     return null
         //     await new Promise(resolve => {
@@ -124,37 +108,37 @@ class App extends React.Component {
         //     })
         // }
         // if (__DEV__) console.log('app - render')
-        if (this.props.isMainBgimgLoaded) this.appReady()
 
-        const hasMode = (__CLIENT__ && self.isAppReady && this.props.uiMode.mode)
+        const {
+            mode: uiMode,
+            leaving: uiModeIsLeaving,
+            animation: uiModeAnimation,
+        } = this.props.uiMode
+        const hasMode = (__CLIENT__ && self.isAppReady && uiMode)
 
         return (
-            <div
-                id="app"
-                className={classNames({
-                    [this.props.className]: true,
-                    [`is-mode-${this.props.uiMode.mode}`]: hasMode,
-                    [`is-mode-${this.props.uiMode.mode}-entering`]: (hasMode && !this.props.uiMode.leaving && this.props.uiMode.animation),
-                    [`is-mode-${this.props.uiMode.mode}-leaving`]: (hasMode && this.props.uiMode.leaving),
-                })}
-                onTouchStart={this.onTouchStart.bind(this)}
-                onTouchMove={this.onTouchMove.bind(this)}
-                onTouchEnd={this.onTouchEnd.bind(this)}
-                onTouchCancel={this.onTouchCancel.bind(this)}
-            >
-                <Nav location={this.props.location} />
-                <MainMask pathname={this.props.location.pathname} />
-                <Main location={this.props.location}>
-                    {this.props.children}
-                </Main>
-                <Bgimg />
-            </div>
+            <React.StrictMode>
+                <div
+                    id="app"
+                    className={classNames({
+                        [this.props.className]: true,
+                        [`is-mode-${uiMode}`]: hasMode,
+                        [`is-mode-${uiMode}-entering`]: (hasMode && !uiModeIsLeaving && uiModeAnimation),
+                        [`is-mode-${uiMode}-leaving`]: (hasMode && uiModeIsLeaving),
+                    })}
+                    onTouchStart={this.onTouchStart}
+                    onTouchMove={this.onTouchMove}
+                    onTouchEnd={this.onTouchEnd}
+                    onTouchCancel={this.onTouchCancel}
+                >
+                    <Nav location={this.props.location} />
+                    <MainMask pathname={this.props.location.pathname} />
+                    <Main location={this.props.location}>
+                        {this.props.children}
+                    </Main>
+                    <Bgimg />
+                </div>
+            </React.StrictMode>
         )
     }
 }
-
-export default (props) => (
-    <React.StrictMode>
-        <App {...props} />
-    </React.StrictMode>
-)

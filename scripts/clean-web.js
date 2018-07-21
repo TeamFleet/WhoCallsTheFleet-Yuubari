@@ -21,7 +21,7 @@ module.exports = async ({
     try {
         const fileList = await new Promise((resolve, reject) => {
             glob(
-                path.join(pathDist, '**/*'),
+                path.join(pathDist, '!(node_modules)/**/*'),
                 {},
                 (err, files) => {
                     if (err) reject(err)

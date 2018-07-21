@@ -9,7 +9,7 @@
  */
 
 const path = require('path')
-const fs = require('fs-extra')
+const defines = require('./src/defines')
 
 module.exports = {
     /** 
@@ -157,7 +157,7 @@ module.exports = {
      * 扩展 webpack.DefinePlugin 的内容
      * @type {Object}
      */
-    defines: {},
+    defines,
 
     /** 
      * 强制指定模板文件地址，覆盖 super.js 中的配置

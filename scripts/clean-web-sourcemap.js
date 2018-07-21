@@ -4,12 +4,12 @@ const glob = require('glob')
 const spinner = require('./commons/spinner')
 
 const {
-    dist: {
-        public: pathPublic,
-    }
+    getDistPublic,
 } = require('../src/directories')
 
 module.exports = async () => {
+    const pathPublic = getDistPublic()
+
     // console.log('cleaning source-maps...')
     const waiting = spinner('Cleaning source-maps...')
 

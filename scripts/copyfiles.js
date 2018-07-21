@@ -1,20 +1,25 @@
 const fs = require('fs-extra')
 const path = require('path')
 // const ncp = require('ncp').ncp
+// const getDistPath = require('super-project/utils/get-dist-path')
+
 const {
     root: dirRoot,
     assets: dirAssets,
     pics: dirPics,
     bgimgs: dirBgimgs,
-    dist: {
-        includes: dirIncludes,
-    }
+    getDistIncludes,
+    // dist: {
+    //     includes: dirIncludes,
+    // }
 } = require('../src/directories')
 const channel = require('../src/channel')
 const spinner = require('./commons/spinner')
 const Progress = require('./commons/progress')
 
 module.exports = async () => {
+    const dirIncludes = getDistIncludes()
+
     const title = 'Copying files...'
     const waiting = spinner(title)
 
@@ -75,8 +80,9 @@ module.exports = async () => {
 }
 
 const getPics = async () => {
-
     // TODO: check version to overwrite
+
+    const dirIncludes = getDistIncludes()
 
     const dirTo = '../pics'
     const dirTarget = path.resolve(

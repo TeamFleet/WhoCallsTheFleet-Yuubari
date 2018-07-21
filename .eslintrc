@@ -40,7 +40,8 @@
         "__SWIPER_CSS__": false,
         "Nedb": false,
         "ga": false,
-        "__": false
+        "__": false,
+        "__SVG_SYMBOLS__": false
     },
     "settings": {
         "import/ignore": [
