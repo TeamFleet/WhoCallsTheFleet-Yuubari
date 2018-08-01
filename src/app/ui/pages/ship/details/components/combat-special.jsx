@@ -17,12 +17,13 @@ import Bullet from '@ui/components/bullet'
 import IconEquipment from '@ui/components/icon-equipment'
 import LinkEquipment from '@ui/components/link/equipment'
 
-const shipTypeRangeNormal = [
-    ['BB', 3],
-    ['CV', 1],
-    ['CL', 2],
-    ['CA', 2]
-]
+const shipTypeRangeNormal = {
+    BB: 3,
+    CV: 1,
+    CL: 2,
+    CA: 2,
+    DD: 1,
+}
 
 export default ImportStyle(require('./combat-special.less'))(
     ({
@@ -108,19 +109,26 @@ const CapabilityAARocketBarrage = ({ ship }) => {
 }
 
 const CapabilitySpecialRange = ({ ship }) => {
-    const pair = shipTypeRangeNormal.filter(arr => (
-        ship.isType(arr[0]) && ship.stat.range != arr[1]
-    ))
-    if (!Array.isArray(pair) || !pair.length)
-        return null
+    let defaultRange
+
+    Object.keys(shipTypeRangeNormal)
+        .some(type => {
+            if (ship.isType(type) && ship.stat.range != shipTypeRangeNormal[type]) {
+                defaultRange = shipTypeRangeNormal[type]
+                return true
+            }
+            return false
+        })
+
+    if (typeof defaultRange === 'undefined') return null
 
     return (
         <Bullet
             title={__("ship_details.range_different_title", { range: ship._range })}
-            level={ship.stat.range > pair[0][1] ? 2 : 1}
+            level={ship.stat.range > defaultRange ? 2 : 1}
         >
             {__("ship_details.range_different_note", {
-                range: kckit.get.range(pair[0][1]),
+                range: kckit.get.range(defaultRange),
                 type: db.shipTypes[ship.type_display]._name
             })}
         </Bullet>
