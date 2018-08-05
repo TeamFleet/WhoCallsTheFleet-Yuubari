@@ -14,7 +14,10 @@ import Bgimg from './layout/bgimg'
 let startSwipeAtLeftBorder = false
 
 @connect(state => {
-    if (__DEV__) console.log('Redux connected', state)
+    if (__CLIENT__ && __DEV__ && !self.reduxLogShowed) {
+        console.log('Redux connected', state)
+        self.reduxLogShowed = true
+    }
     return {
         isMainBgimgLoaded: state.bgimg.isMainLoaded,
         uiMode: state.uiMode

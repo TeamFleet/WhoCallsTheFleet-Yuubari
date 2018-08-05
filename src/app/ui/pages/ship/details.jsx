@@ -21,6 +21,7 @@ const tabsAvailable = [
     'infos',
     'capabilities',
     'equipable',
+    'bonuses'
     // 'voicelines',
     // 'availability'
 ]

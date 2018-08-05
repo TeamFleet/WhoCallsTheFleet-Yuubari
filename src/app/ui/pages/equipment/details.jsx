@@ -19,6 +19,7 @@ import Header from './details/commons/header.jsx'
 const tabsAvailable = [
     'infos',
     'refittable',
+    'bonuses'
     // 'availability'
 ]
 

@@ -161,6 +161,11 @@
         "result": "Required level: "
     },
 
+    "bonuses": {
+        "single": "Equipment Stat Bonus",
+        "sets": "Set Bonus"
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "Filter by name...",
@@ -184,6 +189,7 @@
         "voicelines": "Voices & Lines",
         "availability": "Availability",
         "capabilities": "Capabilities",
+        "bonuses": "Stat Bonuses",
 
         "remodels": "Remodels",
         "remodel_initial": "Initial",
@@ -233,10 +239,12 @@
         "equipable_legend_yes_extra": "No for other ${type}"
     },
 
+
     "equipment_details": {
         "infos": "Infos",
         "refittable": "Refittable...",
         "availability": "Availability",
+        "bonuses": "Stat Bonuses",
 
         "facts_craftable": "Craftable",
         "facts_uncraftable": "Uncraftable",

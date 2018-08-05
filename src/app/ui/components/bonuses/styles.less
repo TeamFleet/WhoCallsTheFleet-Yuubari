@@ -1,0 +1,21 @@
+@import '~base.less';
+
+.component{
+    overflow: hidden;
+    margin-right: (0 - @main-margin);
+
+    .bonuses{
+        border-right: @main-margin solid transparent;
+        float: left;
+        width: 50%;
+    }
+
+    .screen-t0({
+        margin-right: auto;
+        .bonuses{
+            border-right-width: 0;
+            float: none;
+            width: auto;
+        }
+    });
+}

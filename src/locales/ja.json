@@ -162,6 +162,11 @@
         "result": "Required level: "
     },
 
+    "bonuses": {
+        "single": "Equipment Stat Bonus",
+        "sets": "Set Bonus"
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "艦娘検索...",
@@ -185,6 +190,7 @@
         "voicelines": "ボイス・ライン",
         "availability": "入手情報",
         "capabilities": "機能・特徴",
+        "bonuses": "Stat Bonuses",
 
         "remodels": "改造チャート",
         "remodel_initial": "初期",
@@ -238,6 +244,7 @@
         "infos": "情報",
         "refittable": "装備可能艦...",
         "availability": "入手情報",
+        "bonuses": "Stat Bonuses",
 
         "facts_craftable": "開発可能",
         "facts_uncraftable": "開発不可",

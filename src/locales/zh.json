@@ -161,6 +161,11 @@
         "result": "需要等级："
     },
 
+    "bonuses": {
+        "single": "装备属性加成",
+        "sets": "套装加成"
+    },
+
     "ship_list": {
         "filter": {
             "placeholder": "搜索舰名...",
@@ -184,6 +189,7 @@
         "voicelines": "语音 & 台词",
         "availability": "获取方式",
         "capabilities": "功能 & 作战能力",
+        "bonuses": "属性加成",
 
         "remodels": "改造系谱",
         "remodel_initial": "初始",
@@ -237,6 +243,7 @@
         "infos": "信息",
         "refittable": "可装备于...",
         "availability": "获取方式",
+        "bonuses": "属性加成",
 
         "facts_craftable": "可开发",
         "facts_uncraftable": "不可开发",
