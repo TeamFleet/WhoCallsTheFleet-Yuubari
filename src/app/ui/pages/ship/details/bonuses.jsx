@@ -9,5 +9,5 @@ export default ({
 }) =>
     <Bonuses
         className={className}
-        bonuses={ship.getBonuses()}
+        ship={ship}
     />

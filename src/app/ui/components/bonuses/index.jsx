@@ -2,11 +2,16 @@ import React from 'react'
 import { ImportStyle } from 'sp-css-import'
 
 import ComponentContainer from '@ui/containers/infos-component'
+import BonusSingle from './bonus-single'
 
 export default ImportStyle(require('./styles.less'))(({
     className,
-    bonuses = [],
+    bonuses,
+    ship, equipment,
 }) => {
+    if (!Array.isArray(bonuses) && (ship || equipment))
+        bonuses = (ship || equipment).getBonuses()
+
     const single = []
     const set = []
     bonuses.forEach(bonus => {
@@ -15,15 +20,19 @@ export default ImportStyle(require('./styles.less'))(({
         else
             single.push(bonus)
     })
+
     console.log(single, set)
+
     return (
         <div className={className}>
             <ComponentContainer
                 className="bonuses bonuses-single"
                 title={__("bonuses.single")}
             >
-                {single.length 
-                    ? "SINGLE"
+                {single.length
+                    ? single.map((bonus, index) => (
+                        <BonusSingle key={index} className="item" bonus={bonus} ship={ship} equipment={equipment} />
+                    ))
                     : <span className="disabled">{__("none")}</span>
                 }
             </ComponentContainer>
@@ -31,7 +40,7 @@ export default ImportStyle(require('./styles.less'))(({
                 className="bonuses bonuses-sets"
                 title={__("bonuses.sets")}
             >
-                {set.length 
+                {set.length
                     ? "SETS"
                     : <span className="disabled">{__("none")}</span>
                 }

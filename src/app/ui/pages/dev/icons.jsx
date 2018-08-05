@@ -22,7 +22,7 @@ export default class extends React.Component {
         if (__SERVER__) return []
 
         const parser = new DOMParser()
-        const doc = parser.parseFromString(__ICONSVG__, "image/svg+xml")
+        const doc = parser.parseFromString(__SVG_SYMBOLS__, "image/svg+xml")
         let icons = []
 
         for (let symbol of doc.querySelectorAll('symbol[id]')) {

@@ -163,7 +163,13 @@
 
     "bonuses": {
         "single": "装备属性加成",
-        "sets": "套装加成"
+        "sets": "套装加成",
+        "info_prefix_when_equipped": "装备于以上舰娘时，",
+        "range_increase": "射程提高一档",
+        "stat_donot_stack": "该属性不叠加",
+        "based_on_number": "根据该装备数量提供加成 (超额部分不提供加成)",
+        "based_on_star": "每个该装备根据改修星级提供属性加成",
+        "based_on_nothing": "每个该装备提供属性加成"
     },
 
     "ship_list": {

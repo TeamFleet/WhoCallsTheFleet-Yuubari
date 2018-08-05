@@ -163,7 +163,13 @@
 
     "bonuses": {
         "single": "Equipment Stat Bonus",
-        "sets": "Set Bonus"
+        "sets": "Set Bonus",
+        "info_prefix_when_equipped": "When equipped, ",
+        "range_increase": "Range increased by 1",
+        "stat_donot_stack": "Donot stack",
+        "based_on_number": "Provide bonus based on number of this equipment",
+        "based_on_star": "Each of this equipment provide bonus based on star level",
+        "based_on_nothing": "Each of this equipment provide bonus"
     },
 
     "ship_list": {

@@ -9,6 +9,6 @@ export default ({
 }) => (
     <Bonuses
         className={className}
-        bonuses={equipment.getBonuses()}
+        equipment={equipment}
     />
 )
