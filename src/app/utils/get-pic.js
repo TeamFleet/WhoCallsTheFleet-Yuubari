@@ -1,4 +1,4 @@
-import getPublicPath from 'super-project/utils/get-public-dir'
+import getPublicPath from 'koot/utils/get-public-dir'
 import Ship from 'kckit/src/class/ship.js'
 import Entity from 'kckit/src/class/entity.js'
 
@@ -29,8 +29,10 @@ const getUri = (type, id, file, revision) => {
 
     switch (type) {
         case 'ship':
-        case 'ships':
-            return 'ships/' + db.ships[id].getPic(file, ext)
+        case 'ships': {
+            const ship = db.ships[id]
+            return 'ships/' + ship.getPic(file, ext) + (ship.illust_version ? `?version=${ship.illust_version}` : '')
+        }
 
         case 'ship-extra':
         case 'ships-extra':

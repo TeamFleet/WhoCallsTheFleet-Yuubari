@@ -1,4 +1,4 @@
-import { localeId } from 'super-project/i18n'
+import { localeId } from 'koot'
 
 // import shipCollections from './db/ship_collections.json'
 // import equipmentCollections from './db/equipment_collections.json'

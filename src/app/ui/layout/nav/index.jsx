@@ -172,11 +172,11 @@ class Navs extends React.Component {
             title = route
         else
             title = __('nav', route)
-            // __(`nav.${route}`)
-            // __.nav[route]
+        // __(`nav.${route}`)
+        // __.nav[route]
 
-            // __.A.B='b' 
-            // __('b')
+        // __.A.B='b' 
+        // __('b')
 
         switch (route) {
             case 'arsenal': {

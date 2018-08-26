@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import bindEvent from 'bind-event'
+// import bindEvent from 'bind-event'
 import { ImportStyle } from 'sp-css-import'
 
 // @connect(/*state => ({

@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'super-project'
+import { pageinfo } from 'koot'
 
 import {
     init,
     isBuildValid,
     getBuildUrl,
     newBuild,
-    editBuild,
+    // editBuild,
 } from '@api/fleets'
 
 import htmlHead from '@utils/html-head'

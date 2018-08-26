@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Markdown from 'react-markdown'
 import { ImportStyle } from 'sp-css-import'
-import { pageinfo, localeId } from 'super-project'
+import { pageinfo, localeId } from 'koot'
 
 import htmlHead from '@utils/html-head'
 

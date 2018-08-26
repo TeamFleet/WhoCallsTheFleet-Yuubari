@@ -1,4 +1,4 @@
-import routeCheck from 'super-project/React/route-check'
+import routeCheck from 'koot/React/route-check'
 
 export default [
     {

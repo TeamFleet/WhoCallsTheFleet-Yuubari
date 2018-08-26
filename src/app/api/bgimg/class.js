@@ -1,4 +1,4 @@
-import getPublicPath from 'super-project/utils/get-public-dir'
+import getPublicPath from 'koot/utils/get-public-dir'
 
 const publicPath = __DEV__ ? '/' : getPublicPath()
 const defaults = {

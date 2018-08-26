@@ -3,7 +3,7 @@ import React from 'react'
 import { ImportStyle } from 'sp-css-import'
 
 import getShip from '@utils/get-ship.js'
-import sortShips from '@utils/sort-ships'
+// import sortShips from '@utils/sort-ships'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import ListEquipments from '@ui/components/list/equipments'

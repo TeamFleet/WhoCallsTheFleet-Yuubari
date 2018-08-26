@@ -1,5 +1,5 @@
 import metas from 'metas'
-import { store, localeId } from 'super-project'
+import { store, localeId } from 'koot'
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'

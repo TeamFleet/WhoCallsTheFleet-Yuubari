@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'super-project'
+import { pageinfo } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
@@ -22,7 +22,7 @@ export default class About extends React.Component {
                 <Title component="h2" children={__('nav.about')} />
                 <p><i>{__('under_construction')}...</i></p>
                 <p>
-                    Based on <a href="https://github.com/websage-team/super-project" target="_blank">Super Project</a> v{require('super-project/package.json').version}
+                    Based on <a href="https://github.com/cmux/koot" target="_blank">Koot.js</a> v{require('koot/package.json').version}
                     <br />
                     Fork on <a href="https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari" target="_blank">GitHub</a>
                 </p>

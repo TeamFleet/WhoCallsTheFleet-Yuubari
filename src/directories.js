@@ -1,4 +1,4 @@
-const getDistPath = require('super-project/utils/get-dist-path')
+const getDistPath = require('koot/utils/get-dist-path')
 
 const path = require('path')
 

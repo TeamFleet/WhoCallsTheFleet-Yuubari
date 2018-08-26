@@ -1,4 +1,4 @@
-import { history } from 'super-project'
+import { history } from 'koot'
 
 export default (uri) => {
     if (!__CLIENT__) return

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import getPic from '@utils/get-pic'
+// import getPic from '@utils/get-pic'
 
 import Link from '@ui/components/link'
 // import Icon from '@ui/components/icon'

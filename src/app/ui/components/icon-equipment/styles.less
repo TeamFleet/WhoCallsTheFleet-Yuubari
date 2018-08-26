@@ -17,7 +17,7 @@
         width:      @size;
         height:     @size;
         display:    inline-block;
-        background: url('~Assets/equiptypeicon.png') no-repeat 0% @size / cover;
+        background: url(~"@{file-equipment-icon}") no-repeat 0% @size / cover;
     }
 
     .icons(@n, @i: 0) when (@i =< @n) {
@@ -72,7 +72,7 @@
             height:     @size;
             right:      -5px;
             bottom:     -5px;
-            background: url('~Assets/equiptypeicon.png') no-repeat 0% percentage((30 - 1) / (@count - 1)) / cover;
+            background: url(~"@{file-equipment-icon}") no-repeat 0% percentage((30 - 1) / (@count - 1)) / cover;
         }
         &[data-icon="16"][data-suffix="-"]:after{
             filter:     hue-rotate(260deg);
@@ -84,7 +84,7 @@
             border-radius: 5px;
             transform:  scale((10 / 12));
             transform-origin: 100% 100%;
-            // background:     url('~Assets/stats.png') no-repeat 0% 31.57894737% / cover;
+            // background:     url(~"@{file-stats}") no-repeat 0% 31.57894737% / cover;
             box-shadow: 0 0 1px 1px fade(#000, 35%);
         }
 

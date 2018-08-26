@@ -197,7 +197,7 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
                         <div className="bonus-item" key={index}>
                             {hasShipClasses &&
                                 <div className="ship-classes">
-                                    {o.ship_classes.map((classId, index) => {
+                                    {o.ship_classes.map((classId/*, index*/) => {
                                         const shipClass = get.shipClass(classId)
                                         const shipTypeId = shipClass.ship_type_id
                                         return (

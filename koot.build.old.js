@@ -1,5 +1,5 @@
 const path = require('path')
-const superBuild = require('super-project/core/webpack/enter')
+const superBuild = require('koot/core/webpack/enter')
 
 
 //
@@ -114,11 +114,11 @@ const beforeBuild = async (args) => {
     if (STAGE === 'client') {
         console.log(' ')
         if (ENV === 'prod') {
-            await require('./scripts/clean-web')(args)
+            await require('scripts/clean-web')(args)
         }
-        await require('./scripts/database')()
-        await require('./scripts/less-variables')()
-        await require('./scripts/copyfiles')(args)
+        await require('scripts/database')()
+        await require('scripts/less-variables')()
+        await require('scripts/copyfiles')(args)
     }
     return
 }
@@ -127,8 +127,8 @@ const beforeBuild = async (args) => {
  */
 const afterBuild = async () => {
     if (STAGE === 'client' && ENV === 'prod') {
-        await require('./scripts/copyfiles-web')()
-        await require('./scripts/clean-web-sourcemap')()
+        await require('scripts/copyfiles-web')()
+        await require('scripts/clean-web-sourcemap')()
     }
     return
 }

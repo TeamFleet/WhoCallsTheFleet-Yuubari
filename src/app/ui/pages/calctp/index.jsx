@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'super-project'
+import { pageinfo } from 'koot'
 import kckit from 'kckit'
 import EquipmentTypes from 'kckit/src/types/equipments'
 

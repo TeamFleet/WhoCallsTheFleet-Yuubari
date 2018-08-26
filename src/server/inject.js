@@ -1,9 +1,9 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { localeId } from 'super-project/i18n'
-import getDistPath from 'super-project/utils/get-dist-path'
-import getClientFilePath from 'super-project/utils/get-client-file-path'
-// const readFile = require('super-project/utils/read-client-file')
+import { localeId } from 'koot'
+import getDistPath from 'koot/utils/get-dist-path'
+import getClientFilePath from 'koot/utils/get-client-file-path'
+// const readFile = require('koot/utils/read-client-file')
 
 const pathDist = getDistPath()
 const manifestLastModified = new Map()

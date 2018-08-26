@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { pageinfo } from 'super-project'
+import { pageinfo } from 'koot'
 
 import htmlHead from '@utils/html-head'
 import db from '@api/database'

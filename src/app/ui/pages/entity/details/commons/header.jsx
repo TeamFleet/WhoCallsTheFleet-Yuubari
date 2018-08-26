@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { localeId } from 'super-project/i18n'
+import { localeId } from 'koot'
 import { ImportStyle } from 'sp-css-import'
 import getSubtitle from '../get-subtitle'
 // import db from '@api/database'

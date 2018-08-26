@@ -10,9 +10,10 @@ import styles from './styles.less'
 @ImportStyle(styles)
 export default class ListShips extends React.Component {
     render() {
-        const { className, list, array, type, ...props } = this.props
+        const { className, list, array, ...props } = this.props
         const _list = list || array || []
         const hasItem = _list.length ? true : false
+        delete props.type
         return (
             <div className={className}>
                 {hasItem && _list.map(equipmentId => (
