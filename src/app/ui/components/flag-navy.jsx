@@ -11,7 +11,8 @@ const navies = [
     "mn", // 法国海军"
     "rn", // 英国皇家海军"
     "usn", // 美国海军"
-    "vmf" // 苏联海军"
+    "vmf", // 苏联海军"
+    "sm", // 瑞典海军"
 ]
 
 @ImportStyle(style)
