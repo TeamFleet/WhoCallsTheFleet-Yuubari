@@ -7,7 +7,7 @@ module.exports = () => ({
             path.resolve(__dirname, '../app/critical.js')
         ],
         polyfill: [
-            "babel-polyfill",
+            "@babel/polyfill",
             path.resolve(__dirname, '../app/polyfill.js')
         ],
     },
