@@ -26,6 +26,7 @@
         "dev:client": "koot-dev --client",
         "dev:server": "koot-dev --server",
         "dev:spa": "koot-dev --config ./koot.build.spa.js",
+        "dev:no-open": "koot-dev --no-open",
         "analyze": "koot-analyze",
         "deploy": "git pull && node ./deploy",
         "test:server": "npm run build:server && npm run start:server",

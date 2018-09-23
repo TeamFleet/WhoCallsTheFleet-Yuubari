@@ -19,8 +19,7 @@
         "ecmaFeatures": {
             "globalReturn": true,
             "impliedStrict": true,
-            "jsx": true,
-            "experimentalObjectRestSpread": true
+            "jsx": true
         }
     },
     "globals": {

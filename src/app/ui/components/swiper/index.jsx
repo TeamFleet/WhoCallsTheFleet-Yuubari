@@ -47,7 +47,16 @@ export default class extends React.Component {
                 'nextButton',
             ].forEach(key => {
                 if (this.props[key] === true || React.isValidElement(props[key])) {
-                    props[key] = this['_' + key]
+                    if (typeof props.navigation !== 'object')
+                        props.navigation = {}
+                    // props[key] = this['_' + key]
+
+                    if (key === 'prevButton')
+                        props.navigation.prevEl = this['_' + key]
+                    if (key === 'nextButton')
+                        props.navigation.nextEl = this['_' + key]
+
+                    delete props[key]
                 }
             });
 
