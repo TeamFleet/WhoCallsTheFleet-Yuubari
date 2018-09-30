@@ -12,7 +12,9 @@ import Dismantle from './components/dismantle.jsx'
 
 // import db from '@api/database'
 
-const ShipDetailsInfos = ({
+const ShipDetailsInfos = wrapper({
+    styles: require('./infos.less')
+})(({
     className,
     ship
 }) =>
@@ -32,7 +34,6 @@ const ShipDetailsInfos = ({
         </div>
         <Remodels ship={ship} className="shipinfo shipinfo-remodels" />
     </div>
+)
 
-export default wrapper({
-    styles: require('./infos.less')
-})(ShipDetailsInfos)
+export default ShipDetailsInfos
