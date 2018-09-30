@@ -5,6 +5,7 @@
 
 .component{
     position:   relative;
+    vertical-align: top;
 
     &:before{
         content:    "";
@@ -108,29 +109,57 @@
         }
 
         &[data-suffix-type="equipment-name"]{
-            margin-right: @size;
+            /*
+            @size-small: (@size * 0.5);
+            @margin-right: (@size + @size - @size-small);
+            @scale: (10 / 12);
+            width: @size-small;
+            height: @size-small;
+            margin-top: ((@size - @size-small) / 2);
+            margin-right: @margin-right;
             &:after{
                 content: attr(data-suffix);
                 top: 50%;
                 bottom: auto;
                 left: 90%;
-                right: -125%;
+                right: (0 - @margin-right / @scale);
                 font-size: 12px;
                 line-height: 1.1em;
                 text-align: left;
-                transform: translate(0, -50%) scale((10 / 12));
+                transform: translate(0, -50%) scale(@scale);
                 transform-origin: 0% 50%;
                 color: @color-base-dimmed;
-                text-shadow: 0 0 2px #000;
+                // text-shadow: 0 0 2px #000;
                 // padding:    .15em .25em;
                 // background: fade(@theme-cyan-800, 65%);
                 // border: 1px solid @theme-cyan-a400;
                 // color: @theme-cyan-a100;
             }
+            */
+            display: block;
+            width: auto;
+            background-size: @size auto;
+            &:after{
+                content: attr(data-suffix);
+                text-align: left;
+                padding-left: @size;
+                left: auto;
+                right: auto;
+                position: relative;
+                min-height: @size;
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+            }
+            &[data-icon="3"]{
+                &:after{
+                    color: lighten(@color-equipment-primary-gun, 35%);
+                }
+            }
             &[data-icon="15"],
             &[data-icon="16"]{
                 &:after{
-                    color: lighten(#71cd7b, 5%);
+                    color: lighten(@color-equipment-aa-gun, 10%);
                 }
             }
         }

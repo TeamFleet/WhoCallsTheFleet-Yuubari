@@ -1,4 +1,5 @@
 import React from 'react'
+import { wrapper } from 'koot'
 // import { Link } from 'react-router'
 
 import Remodels from './components/remodels.jsx'
@@ -11,30 +12,27 @@ import Dismantle from './components/dismantle.jsx'
 
 // import db from '@api/database'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './infos.less'
+const ShipDetailsInfos = ({
+    className,
+    ship
+}) =>
+    <div className={className}>
+        <Illust
+            ship={ship}
+            className="shipinfo shipinfo-illust"
+        // defaultIndex={this.props.illustIndex}
+        // onIndexChange={this.props.onIllustChange}
+        />
+        <QuickFacts ship={ship} className="shipinfo shipinfo-facts" />
+        <Stats ship={ship} className="shipinfo shipinfo-stats" />
+        <SlotEquipments ship={ship} className="shipinfo shipinfo-equipments" />
+        <div className="shipinfo shipinfo-misc">
+            <Modernization ship={ship} className="shipinfo shipinfo-modernization" />
+            <Dismantle ship={ship} className="shipinfo shipinfo-dismantle" />
+        </div>
+        <Remodels ship={ship} className="shipinfo shipinfo-remodels" />
+    </div>
 
-// @connect()
-@ImportStyle(styles)
-export default class ShipDetailsContentInfos extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                <Illust
-                    ship={this.props.ship}
-                    className="shipinfo shipinfo-illust"
-                    // defaultIndex={this.props.illustIndex}
-                    // onIndexChange={this.props.onIllustChange}
-                />
-                <QuickFacts ship={this.props.ship} className="shipinfo shipinfo-facts" />
-                <Stats ship={this.props.ship} className="shipinfo shipinfo-stats" />
-                <SlotEquipments ship={this.props.ship} className="shipinfo shipinfo-equipments" />
-                <div className="shipinfo shipinfo-misc">
-                    <Modernization ship={this.props.ship} className="shipinfo shipinfo-modernization" />
-                    <Dismantle ship={this.props.ship} className="shipinfo shipinfo-dismantle" />
-                </div>
-                <Remodels ship={this.props.ship} className="shipinfo shipinfo-remodels" />
-            </div>
-        )
-    }
-}
+export default wrapper({
+    styles: require('./infos.less')
+})(ShipDetailsInfos)

@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 // import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { wrapper } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
@@ -9,12 +8,14 @@ import Page from '@ui/containers/page'
 
 import Title from '@ui/components/title'
 
-@connect()
-@pageinfo(() => htmlHead({
-    title: __('nav.sorties')
-}))
-// @ImportStyle(style)
-export default class extends React.Component {
+@wrapper({
+    connect: true,
+    pageinfo: () => htmlHead({
+        title: __('nav.sorties')
+    }),
+    // styles: 
+})
+class PageSorties extends React.Component {
     render() {
         return (
             <Page
@@ -26,3 +27,5 @@ export default class extends React.Component {
         )
     }
 }
+
+export default PageSorties

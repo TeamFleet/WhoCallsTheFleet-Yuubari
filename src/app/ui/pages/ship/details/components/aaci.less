@@ -5,7 +5,8 @@
         display:    flex;
         flex-flow:  row nowrap;
         line-height:@equipmenticon-size;
-        height:     @equipmenticon-size;
+        min-height: @equipmenticon-size;
+        // height: @equipmenticon-size;
         font-size:  14px;
         border-top: 1px solid @color-border;
         margin:     0;
@@ -14,6 +15,9 @@
         dt, dd{
             margin:     0;
             padding:    0;
+        }
+        .id, .fixed, .modifier{
+            height: @equipmenticon-size;
         }
         .id{
             flex:   0.1 0 3em;
@@ -30,6 +34,12 @@
         }
         .icons{
             flex:   0.5 0 (@equipmenticon-size * 4 + 5);
+            // display: flex;
+            // flex-flow: row wrap;
+            // [data-icon][data-suffix-type="equipment-name"]{
+                // height: auto;
+                // min-height: @equipmenticon-size;
+            // }
         }
         .fixed, .modifier{
             flex:   1 0 35px;

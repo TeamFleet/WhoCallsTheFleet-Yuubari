@@ -1,7 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { wrapper } from 'koot'
 
 import htmlHead from '@utils/html-head'
 import {
@@ -17,12 +15,14 @@ const shipListId = 'pageShipList'
 // @connect(state => ({
 //     isShipListInit: (typeof state.shipList[shipListId] !== 'undefined')
 // }))
-@connect()
-@pageinfo(() => htmlHead({
-    title: __('nav.ships')
-}))
-@ImportStyle(require('./list.less'))
-export default class PageShipList extends React.Component {
+@wrapper({
+    connect: true,
+    pageinfo: () => htmlHead({
+        title: __('nav.ships')
+    }),
+    styles: require('./list.less')
+})
+class PageShipList extends React.Component {
 
     constructor(props) {
         super(props)
@@ -42,3 +42,5 @@ export default class PageShipList extends React.Component {
         )
     }
 }
+
+export default PageShipList

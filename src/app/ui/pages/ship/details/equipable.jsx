@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import { wrapper } from 'koot'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import IconEquipment from '@ui/components/icon-equipment'
@@ -9,9 +10,6 @@ import LinkMini from '@ui/components/link-mini'
 // import getPic from '@utils/get-pic'
 import getLink from '@utils/get-link'
 import db from '@api/database'
-
-import { ImportStyle } from 'sp-css-import'
-import styles from './equipable.less'
 
 const { equipmentTypesExclude } = db
 // const equipmentTypeIdExclude = [
@@ -28,8 +26,10 @@ const { equipmentTypesExclude } = db
 // ]
 
 // @connect()
-@ImportStyle(styles)
-export default class ShipDetailsContentEquipable extends React.Component {
+@wrapper({
+    styles: require('./equipable.less')
+})
+class ShipDetailsContentEquipable extends React.Component {
     renderCollection(collection, collectionIndex) {
         return (
             <ComponentContainer
@@ -115,7 +115,9 @@ export default class ShipDetailsContentEquipable extends React.Component {
     }
 }
 
-@ImportStyle(require('./components/equipable-list.less'))
+@wrapper({
+    styles: require('./components/equipable-list.less')
+})
 class ShipDetailsContentEquipableListContainer extends React.Component {
     insertPlaceHolders() {
         let i = 0;
@@ -139,8 +141,9 @@ class ShipDetailsContentEquipableListContainer extends React.Component {
     }
 }
 
-import stylesItem from './components/equipable-item.less'
-@ImportStyle(stylesItem)
+@wrapper({
+    styles: require('./components/equipable-item.less')
+})
 class ShipDetailsContentEquipableItem extends React.Component {
     render() {
         if (this.props.equipment)
@@ -215,8 +218,9 @@ class ShipDetailsContentEquipableItem extends React.Component {
     }
 }
 
-import stylesLegend from './components/equipable-legend.less'
-@ImportStyle(stylesLegend)
+@wrapper({
+    styles: './components/equipable-legend.less'
+})
 class ShipDetailsContentEquipableLegend extends React.Component {
     render() {
         return (
@@ -229,3 +233,5 @@ class ShipDetailsContentEquipableLegend extends React.Component {
         )
     }
 }
+
+export default ShipDetailsContentEquipable
