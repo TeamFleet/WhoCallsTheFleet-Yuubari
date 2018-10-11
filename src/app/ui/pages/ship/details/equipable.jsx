@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { wrapper } from 'koot'
+import { extend } from 'koot'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import IconEquipment from '@ui/components/icon-equipment'
@@ -26,7 +26,7 @@ const { equipmentTypesExclude } = db
 // ]
 
 // @connect()
-@wrapper({
+@extend({
     styles: require('./equipable.less')
 })
 class ShipDetailsContentEquipable extends React.Component {
@@ -115,7 +115,7 @@ class ShipDetailsContentEquipable extends React.Component {
     }
 }
 
-@wrapper({
+@extend({
     styles: require('./components/equipable-list.less')
 })
 class ShipDetailsContentEquipableListContainer extends React.Component {
@@ -141,7 +141,7 @@ class ShipDetailsContentEquipableListContainer extends React.Component {
     }
 }
 
-@wrapper({
+@extend({
     styles: require('./components/equipable-item.less')
 })
 class ShipDetailsContentEquipableItem extends React.Component {
@@ -218,7 +218,7 @@ class ShipDetailsContentEquipableItem extends React.Component {
     }
 }
 
-@wrapper({
+@extend({
     styles: './components/equipable-legend.less'
 })
 class ShipDetailsContentEquipableLegend extends React.Component {

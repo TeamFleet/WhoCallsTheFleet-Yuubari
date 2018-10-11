@@ -1,5 +1,5 @@
 import React from 'react'
-import { wrapper } from 'koot'
+import { extend } from 'koot'
 
 import db from '@api/database'
 import getEquipment from '@utils/get-equipment'
@@ -7,7 +7,7 @@ import getLink from '@utils/get-link'
 
 import { Link } from 'react-router'
 
-const IconEquipment = wrapper({
+const IconEquipment = extend({
     styles: require('./styles.less')
 })(({
     tag,

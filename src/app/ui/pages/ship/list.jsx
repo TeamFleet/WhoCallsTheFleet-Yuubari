@@ -1,5 +1,5 @@
 import React from 'react'
-import { wrapper } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 import {
@@ -15,7 +15,7 @@ const shipListId = 'pageShipList'
 // @connect(state => ({
 //     isShipListInit: (typeof state.shipList[shipListId] !== 'undefined')
 // }))
-@wrapper({
+@extend({
     connect: true,
     pageinfo: () => htmlHead({
         title: __('nav.ships')

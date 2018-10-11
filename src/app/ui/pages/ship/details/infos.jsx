@@ -1,5 +1,5 @@
 import React from 'react'
-import { wrapper } from 'koot'
+import { extend } from 'koot'
 // import { Link } from 'react-router'
 
 import Remodels from './components/remodels.jsx'
@@ -12,7 +12,7 @@ import Dismantle from './components/dismantle.jsx'
 
 // import db from '@api/database'
 
-const ShipDetailsInfos = wrapper({
+const ShipDetailsInfos = extend({
     styles: require('./infos.less')
 })(({
     className,

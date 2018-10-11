@@ -1,6 +1,6 @@
 import React from 'react'
 // import { ImportStyle } from 'sp-css-import'
-import { wrapper } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
@@ -8,7 +8,7 @@ import Page from '@ui/containers/page'
 
 import Title from '@ui/components/title'
 
-@wrapper({
+@extend({
     connect: true,
     pageinfo: () => htmlHead({
         title: __('nav.sorties')

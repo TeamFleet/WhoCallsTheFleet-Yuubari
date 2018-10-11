@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { wrapper } from 'koot'
+import { extend } from 'koot'
 
 // import kckit from 'kckit'
 // const checkAACI = kckit.check.aaci
@@ -11,7 +11,7 @@ import IconEquipment from '@ui/components/icon-equipment'
 // import Icon from '@ui/components/icon'
 import Bullet from '@ui/components/bullet'
 
-const ShipDetailsAACI = wrapper({
+const ShipDetailsAACI = extend({
     styles: require('./aaci.less')
 })(({
     className,
