@@ -1,6 +1,8 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
+// import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
+
 import db from '@api/database'
 // import {
 //     changeTab as shipDetailsChangeTab,
@@ -12,8 +14,10 @@ import getLink from '@utils/get-link'
 import Header from '@ui/components/main-header/infos'
 
 // @connect((state, ownProps) => state.pages[getInfosId(ownProps.ship.id)] || {})
-@ImportStyle(require('./header.less'))
-export default class ShipDetailsHeader extends React.Component {
+@extend({
+    styles: require('./header.less')
+})
+class ShipDetailsHeader extends React.Component {
     onTabChange(tabId, tabIndex) {
         if (typeof this.props.onTabChange === 'function')
             this.props.onTabChange(tabId, tabIndex)
@@ -39,6 +43,12 @@ export default class ShipDetailsHeader extends React.Component {
         }))
     }
 
+    getStrShipClass() {
+        if (this.props.ship.class_no)
+            return __("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
+        return __("shipclass", { class: this.props.ship._class })
+    }
+
     render() {
         if (!this.props.ship) return null
         return (
@@ -53,10 +63,7 @@ export default class ShipDetailsHeader extends React.Component {
             >
                 <span className="shipclassnumber">No.{this.props.ship.getNo()}</span>
                 <br />
-                {this.props.ship.class_no
-                    ? __("shipclass_number", { class: this.props.ship._class, number: this.props.ship.class_no })
-                    : __("shipclass", { class: this.props.ship._class })
-                }
+                {this.getStrShipClass()}
                 {/*
                 {localeId === 'ja' && <br />}
                 {this.props.ship.class_no
@@ -70,3 +77,15 @@ export default class ShipDetailsHeader extends React.Component {
         )
     }
 }
+
+
+
+
+
+// ============================================================================
+
+
+
+
+
+export default ShipDetailsHeader

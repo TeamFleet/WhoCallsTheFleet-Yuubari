@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+// import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import Bullet from '@ui/components/bullet'
@@ -19,53 +20,79 @@ import { get } from 'kckit'
  * aircraft: 开发 | 改修 | 升级 | 提升熟练度
  */
 
-// @connect()
-@ImportStyle(require('./styles.less'))
-export default class EquipmentDetailsComponentFacts extends React.Component {
-    render() {
-        return (
-            <ComponentContainer className={this.props.className}>
-                <EquipmentDetailsComponentFactsFacts equipment={this.props.equipment} />
-                <EquipmentDetailsComponentFactsStats equipment={this.props.equipment} />
-                {/* <EquipmentDetailsComponentFactsScrap equipment={this.props.equipment} /> */}
-            </ComponentContainer>
-        )
-    }
-}
 
-import stylesContainer from './styles-container.less'
-@ImportStyle(stylesContainer)
-class EquipmentDetailsComponentFactsContainer extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                {this.props.children}
-            </div>
-        )
-    }
-}
 
-import stylesFacts from './styles-facts.less'
-@ImportStyle(stylesFacts)
-class EquipmentDetailsComponentFactsFacts extends React.Component {
-    render() {
-        // const equipment = getEquipment(this.props.equipment)
-        const { equipment, className } = this.props
 
-        const arr = [
+
+// ============================================================================
+
+
+
+
+
+const EquipmentDetailsComponentFacts = extend({
+    // connect: true,
+    styles: require('./styles.less')
+})(
+    ({ className, equipment }) => (
+        <ComponentContainer className={className}>
+            <EquipmentDetailsComponentFactsFacts equipment={equipment} />
+            <EquipmentDetailsComponentFactsStats equipment={equipment} />
+            {/* <EquipmentDetailsComponentFactsScrap equipment={equipment} /> */}
+        </ComponentContainer>
+    )
+)
+
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
+const EquipmentDetailsComponentFactsContainer = extend({
+    styles: require('./styles-container.less')
+})(
+    ({ className, children }) => (
+        <div className={className}>
+            {children}
+        </div>
+    )
+)
+
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
+const EquipmentDetailsComponentFactsFacts = extend({
+    styles: require('./styles-facts.less')
+})(
+    ({ equipment, className }) => {
+        const items = [
             ['craftable', !!(equipment.craftable)],
             ['improvable', !!(equipment.improvable)],
             ['upgradable', (Array.isArray(equipment.upgrade_to) && equipment.upgrade_to.length)]
         ]
 
         if (equipment.isType('Aircraft'))
-            arr.push(
+            items.push(
                 ['rankupgradable', equipment.rankupgradable]
             )
 
         return (
             <EquipmentDetailsComponentFactsContainer className={className}>
-                {arr.map(pair => (
+                {items.map(pair => (
                     <Bullet
                         className="item"
                         title={__(`equipment_details`, `facts_${pair[1] ? '' : 'un'}${pair[0]}`)}
@@ -76,13 +103,23 @@ class EquipmentDetailsComponentFactsFacts extends React.Component {
             </EquipmentDetailsComponentFactsContainer>
         )
     }
-}
+)
 
-import stylesStats from './styles-stats.less'
-@ImportStyle(stylesStats)
-class EquipmentDetailsComponentFactsStats extends React.Component {
-    render() {
-        const { equipment, className } = this.props
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
+const EquipmentDetailsComponentFactsStats = extend({
+    styles: require('./styles-stats.less')
+})(
+    ({ equipment, className }) => {
         const stats = [...arrStats]
         const isInterceptor = equipment.isType('Interceptor')
         const valueTP = equipment.getTP()
@@ -129,7 +166,18 @@ class EquipmentDetailsComponentFactsStats extends React.Component {
             </EquipmentDetailsComponentFactsContainer>
         )
     }
-}
+)
+
+
+
+
+
+// ============================================================================
+
+
+
+
+
 
 const StatValue = ({ stat, value, className, hideTitle }) => (
     <Stat
@@ -146,7 +194,20 @@ const StatValue = ({ stat, value, className, hideTitle }) => (
     </Stat>
 )
 
-const Scrap = ImportStyle(require('./styles-stats-scrap.less'))(
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
+const Scrap = extend({
+    styles: require('./styles-stats-scrap.less')
+})(
     ({ scrap }) => (
         <Stat
             type={__(`equipment_details.scrap`)}
@@ -173,13 +234,34 @@ const Scrap = ImportStyle(require('./styles-stats-scrap.less'))(
     )
 )
 
-const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
-    ({
-        bonus,
-        className
-    }) => {
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
+const getStrShipClass = (shipTypeId, shipClass) => {
+    if (shipTypeId)
+        return __('shiptypeclass', {
+            type: get.shipType(shipTypeId)._name,
+            class: shipClass._name
+        })
+    return __('shipclass', {
+        class: shipClass._name
+    })
+}
+const BonusStat = extend({
+    styles: require('./styles-stats-bonus.less')
+})(
+    ({ bonus, className }) => {
         if (!Array.isArray(bonus) || !bonus.length)
             return null
+
         return (
             <div className={className}>
                 {bonus.map((o, index) => {
@@ -202,14 +284,7 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
                                         const shipTypeId = shipClass.ship_type_id
                                         return (
                                             <span className="ship-class" key={classId}>{
-                                                shipTypeId
-                                                    ? __('shiptypeclass', {
-                                                        type: get.shipType(shipTypeId)._name,
-                                                        class: shipClass._name
-                                                    })
-                                                    : __('shipclass', {
-                                                        class: shipClass._name
-                                                    })
+                                                getStrShipClass(shipTypeId, shipClass)
                                             }</span>
                                         )
                                     })}
@@ -247,6 +322,17 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
     }
 )
 
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
 // import stylesScrap from './styles-scrap.less'
 // @ImportStyle(stylesScrap)
 // class EquipmentDetailsComponentFactsScrap extends React.Component {
@@ -275,3 +361,16 @@ const BonusStat = ImportStyle(require('./styles-stats-bonus.less'))(
 //         )
 //     }
 // }
+
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
+export default EquipmentDetailsComponentFacts

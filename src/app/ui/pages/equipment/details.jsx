@@ -1,6 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 import db from '@api/database'
@@ -16,6 +15,17 @@ import Header from './details/commons/header.jsx'
 // import { ImportStyle } from 'sp-css-import'
 // import style from './details.less'
 
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
 const tabsAvailable = [
     'infos',
     'refittable',
@@ -30,35 +40,51 @@ tabsAvailable.forEach((tab, index) => {
 
 // export const getInfosId = id => `EQUIPMENT_${id}`
 
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
 // @connect((state, ownProps) => state.pages[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
-@connect()
-@pageinfo((state, renderProps) => {
-    const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
-    const tab = typeof renderProps.params === 'object' ? renderProps.params.tab : undefined
+@extend({
+    connect: true,
+    pageinfo: (state, renderProps) => {
+        const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
+        const tab = typeof renderProps.params === 'object' ? renderProps.params.tab : undefined
 
-    if (typeof id === 'undefined')
-        return {}
+        if (typeof id === 'undefined')
+            return {}
 
-    const equipment = db.equipments[id]
-    const name = equipment._name
+        const equipment = db.equipments[id]
 
-    return htmlHead({
-        title: [
-            name,
-            typeof tab === 'undefined' || tab === tabsAvailable[0]
-                ? undefined
-                : __("equipment_details", tab)
-        ],
-        subtitle: equipment.type ? equipment._type : '',
-        description: (
-            name
-            // 类型
-            + `${equipment.type ? `, ${equipment._type}` : ''}`
-        ),
-    })
+        if (!equipment) return {}
+
+        const name = equipment._name
+
+        return htmlHead({
+            title: [
+                name,
+                typeof tab === 'undefined' || tab === tabsAvailable[0]
+                    ? undefined
+                    : __("equipment_details", tab)
+            ],
+            subtitle: equipment.type ? equipment._type : '',
+            description: (
+                name
+                // 类型
+                + `${equipment.type ? `, ${equipment._type}` : ''}`
+            ),
+        })
+    }
 })
-export default class extends React.Component {
+class PageEquipmentDetails extends React.Component {
 
     get equipment() {
         if (!this._data && this.props.params.id)
@@ -107,16 +133,36 @@ export default class extends React.Component {
 
 
 
-class PageEquipmentDetailsBody extends React.Component {
-    render() {
-        if (!this.props.tab) return null
-        return React.createElement(contentComponents[this.props.tab], {
-            equipment: this.props.equipment
-        })
 
-        // if (!this.props.children) return null
-        // return React.cloneElement(this.props.children, {
-        //     equipment: this.props.equipment
-        // })
-    }
+
+// ============================================================================
+
+
+
+
+
+
+const PageEquipmentDetailsBody = ({ tab, equipment }) => {
+    if (!tab) return null
+    return React.createElement(contentComponents[tab], {
+        equipment: equipment
+    })
+
+    // if (!this.props.children) return null
+    // return React.cloneElement(this.props.children, {
+    //     equipment: this.props.equipment
+    // })
 }
+
+
+
+
+
+// ============================================================================
+
+
+
+
+
+
+export default PageEquipmentDetails

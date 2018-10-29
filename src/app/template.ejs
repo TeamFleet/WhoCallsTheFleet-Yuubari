@@ -34,6 +34,7 @@
     <meta name="copyright" content="Copyright (c) 2018 fleet.moe">
 
     <%- inject.metas -%>
+    <style><%- content('critical.css') %></style>
     <%- inject.styles -%>
     <%- inject.definePath -%>
 </head>
@@ -42,6 +43,8 @@
     <div id="root"><%- inject.react %></div>
 
     <%- inject.svgIcons %>
+
+    <script type="text/javascript"><%- content('critical.js') %></script>
     <%- inject.scripts %>
     
     <script>

@@ -1,8 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 // import TransitionGroup from 'react-transition-group/TransitionGroup'
 // import CSSTransition from 'react-transition-group/CSSTransition'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 import db from '@api/database'
@@ -16,6 +16,16 @@ import Header from './details/commons/header.jsx'
 import InfosPageContainer from '@ui/containers/infos-page'
 
 // import { ImportStyle } from 'sp-css-import'
+
+
+
+
+
+// ============================================================================
+
+
+
+
 
 const tabsAvailable = [
     'infos',
@@ -50,11 +60,14 @@ const getDescription = ship => {
             return ship._type
         return ''
     }
+    const getStrShipClass = () => {
+        if (ship.class_no)
+            return __("shipclass_number", { class: ship._class, number: ship.class_no })
+        return __("shipclass", { class: ship._class })
+    }
     return ship._name
         // 舰级 & 舰种
-        + `, ${ship.class_no
-            ? __("shipclass_number", { class: ship._class, number: ship.class_no })
-            : __("shipclass", { class: ship._class })}`
+        + `, ${getStrShipClass}`
         // 类型
         + `${ship.class && ship.type ? `, ${getShipType()}` : ''}`
         // 军籍
@@ -67,34 +80,46 @@ const getDescription = ship => {
 
 export const getInfosId = id => `SHIP_${id}`
 
+
+
+
+
+// ============================================================================
+
+
+
+
+
 // @connect((state, ownProps) => state.pages[getInfosId(ownProps.params.id)] || {})
 // @ImportStyle(style)
-@connect()
-@pageinfo((state, renderProps) => {
-    const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
-    const tab = typeof renderProps.params === 'object' ? renderProps.params.tab : undefined
+@extend({
+    connect: true,
+    pageinfo: (state, renderProps) => {
+        const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
+        const tab = typeof renderProps.params === 'object' ? renderProps.params.tab : undefined
 
-    if (typeof id === 'undefined')
-        return {}
+        if (typeof id === 'undefined')
+            return {}
 
-    const ship = db.ships[id]
+        const ship = db.ships[id]
 
-    return htmlHead({
-        title: [
-            ship._name,
-            typeof tab === 'undefined' || tab === tabsAvailable[0]
-                ? undefined
-                : __("ship_details", tab)
-        ],
-        subtitle: getShipType(ship)
-            + (ship.class || ship.class_no ? ' / ' : '')
-            + (ship.class_no
-                ? __("shipclass_number", { class: ship._class, number: ship.class_no })
-                : __("shipclass", { class: ship._class })),
-        description: getDescription(ship),
-    })
+        return htmlHead({
+            title: [
+                ship._name,
+                typeof tab === 'undefined' || tab === tabsAvailable[0]
+                    ? undefined
+                    : __("ship_details", tab)
+            ],
+            subtitle: getShipType(ship)
+                + (ship.class || ship.class_no ? ' / ' : '')
+                + (ship.class_no
+                    ? __("shipclass_number", { class: ship._class, number: ship.class_no })
+                    : __("shipclass", { class: ship._class })),
+            description: getDescription(ship),
+        })
+    }
 })
-export default class PageShipDetails extends React.Component {
+class PageShipDetails extends React.Component {
 
     constructor(props) {
         super(props)
@@ -163,16 +188,34 @@ export default class PageShipDetails extends React.Component {
 
 
 
-class PageShipDetailsBody extends React.Component {
-    render() {
-        if (!this.props.tab) return null
-        return React.createElement(contentComponents[this.props.tab], {
-            ship: this.props.ship
-        })
 
-        // if (!this.props.children) return null
-        // return React.cloneElement(this.props.children, {
-        //     ship: this.props.ship
-        // })
-    }
+
+// ============================================================================
+
+
+
+
+
+const PageShipDetailsBody = ({tab, ship}) => {
+    if (!tab) return null
+    return React.createElement(contentComponents[tab], {
+        ship: ship
+    })
+
+    // if (!this.props.children) return null
+    // return React.cloneElement(this.props.children, {
+    //     ship: this.props.ship
+    // })
 }
+
+
+
+
+
+// ============================================================================
+
+
+
+
+
+export default PageShipDetails

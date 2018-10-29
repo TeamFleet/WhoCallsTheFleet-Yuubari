@@ -1,7 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
+import { extend } from 'koot'
 
-import { ImportStyle } from 'sp-css-import'
+// import { ImportStyle } from 'sp-css-import'
 
 import db, { locale as dbLocaleId } from '@api/database'
 import {
@@ -9,9 +10,25 @@ import {
     compareRemove
 } from '@api/ship-list/api.js'
 
-import Icon from '@ui/components/icon.jsx'
+import Icon from '@ui/components/icon'
 import Title from '@ui/components/title'
 
+
+
+
+
+// ============================================================================
+
+
+
+
+
+/**
+ * 检查并返回标题选择状态
+ * @param {Array} ownList 
+ * @param {Array} selectedList 
+ * @returns {String|Boolean}
+ */
 const getChecked = (ownList, selectedList) => {
     let matched = 0
 
@@ -30,15 +47,27 @@ const getChecked = (ownList, selectedList) => {
         return false
 }
 
-@connect((state, ownProps) => ({
-    checked: ownProps.id
-        ? state.shipList[ownProps.id].isModeCompare
-            ? getChecked(ownProps.ships || [], ownProps.id ? state.shipList[ownProps.id].compareList : [])
+
+
+
+
+// ============================================================================
+
+
+
+
+
+@extend({
+    connect: (state, ownProps) => ({
+        checked: ownProps.id
+            ? state.shipList[ownProps.id].isModeCompare
+                ? getChecked(ownProps.ships || [], ownProps.id ? state.shipList[ownProps.id].compareList : [])
+                : undefined
             : undefined
-        : undefined
-}))
-@ImportStyle(require('./title.less'))
-export default class ShipListTitle extends React.Component {
+    }),
+    styles: require('./title.less')
+})
+class ShipListTitle extends React.Component {
     toggle() {
         if (typeof this.props.checked === 'undefined') return false
 
@@ -83,12 +112,13 @@ export default class ShipListTitle extends React.Component {
             )
         } else if (this.props.class) {
             const _class = db.shipClasses[this.props.class]._name
+            const strShipClass = __("shipclass", {
+                class: _class
+            })
             return (
                 <h5 className={this.props.className + ' is-sub'} data-checked={this.props.checked} onClick={this.toggle.bind(this)}>
                     {this.renderCheckmark()}
-                    {__("shipclass", {
-                        class: _class
-                    })}
+                    {strShipClass}
                 </h5>
             )
         } else
@@ -97,3 +127,15 @@ export default class ShipListTitle extends React.Component {
             )
     }
 }
+
+
+
+
+
+// ============================================================================
+
+
+
+
+
+export default ShipListTitle
