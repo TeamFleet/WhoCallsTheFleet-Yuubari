@@ -103,6 +103,8 @@ export const getInfosId = id => `SHIP_${id}`
 
         const ship = db.ships[id]
 
+        if (!ship) return {}
+
         return htmlHead({
             title: [
                 ship._name,
@@ -196,7 +198,7 @@ class PageShipDetails extends React.Component {
 
 
 
-const PageShipDetailsBody = ({tab, ship}) => {
+const PageShipDetailsBody = ({ tab, ship }) => {
     if (!tab) return null
     return React.createElement(contentComponents[tab], {
         ship: ship
