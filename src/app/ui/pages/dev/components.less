@@ -9,7 +9,15 @@
     .dev-sample-container{
         position: relative;
         display: block;
-        overflow: hidden;
+        // overflow: hidden;
+
+        &::after{
+            content: "";
+            display: block;
+            height: 0;
+            overflow: hidden;
+            clear: both;
+        }
 
         & ~ .dev-sample-container{
             padding-top: 61px;

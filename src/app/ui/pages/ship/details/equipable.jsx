@@ -218,20 +218,17 @@ class ShipDetailsContentEquipableItem extends React.Component {
     }
 }
 
-@extend({
-    styles: './components/equipable-legend.less'
-})
-class ShipDetailsContentEquipableLegend extends React.Component {
-    render() {
-        return (
-            <span className={this.props.className} >
-                <span className="wrapper">
-                    {this.props.text}
-                    {this.props.textSmall && <small>{this.props.textSmall}</small>}
-                </span>
+const ShipDetailsContentEquipableLegend = extend({
+    styles: require('./components/equipable-legend.less')
+})(
+    ({ className, text, textSmall }) => (
+        <span className={className} >
+            <span className="wrapper">
+                {text}
+                {textSmall && <small>{textSmall}</small>}
             </span>
-        )
-    }
-}
+        </span>
+    )
+)
 
 export default ShipDetailsContentEquipable
