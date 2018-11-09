@@ -1,18 +1,18 @@
 import React from 'react'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
-@ImportStyle(require('./styles.less'))
-export default class Title extends React.Component {
-    render() {
+const Title = extend({
+    styles: require('./styles.less')
+})(
+    ({
+        className, classNameInner,
+        component, tag, tagname, element, level,
+        children, title,
+        type, inherit,
+        ...props
+    }) => {
         // console.log(this.props)
-        const {
-            className, classNameInner,
-            component, tag, tagname, element, level,
-            children,
-            type, inherit,
-            ...props
-        } = this.props
 
         const Component = component
             || tag
@@ -28,7 +28,20 @@ export default class Title extends React.Component {
         //     : undefined
 
         props.children = children
-        props['data-text'] = children
+
+        const theChild = Array.isArray(children) ? children[0] : children
+        if (typeof title === 'string') {
+            props['data-text'] = title
+        } else if (typeof theChild === 'string') {
+            props['data-text'] = theChild
+        } else if (
+            typeof theChild === 'object' &&
+            typeof theChild.props === 'object' &&
+            typeof theChild.props.value === 'string'
+        ) {
+            props['data-text'] = theChild.props.value
+        }
+
         if (inherit) {
             props['data-title-is-inherit'] = ""
         }
@@ -54,4 +67,6 @@ export default class Title extends React.Component {
             />
         )
     }
-}
+)
+
+export default Title
