@@ -47,6 +47,7 @@ export default class ShipDetailsComponentIllust extends React.Component {
 
         this.pics = []
         this.extraIllusts = props.ship._extraIllust
+            .filter(id => !!db.exillusts[id])
         const illustIds = [8, 9]
         let ids = ['_']
 
