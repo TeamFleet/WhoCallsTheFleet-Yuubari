@@ -11,7 +11,7 @@ import CenterContainer from '@ui/containers/center'
 import Title from '@ui/components/title'
 
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: 'Dev (lorem ipsum)'
 }))
 @ImportStyle(require('./LoremIpsum.less'))

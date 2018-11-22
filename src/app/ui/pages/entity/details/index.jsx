@@ -26,7 +26,7 @@ const isCV = entity => (Array.isArray(entity.relation.cv) && entity.relation.cv.
     const entity = db.entities[id]
     const name = entity._name
 
-    return htmlHead({
+    return htmlHead(state, {
         title: name,
         subtitle: getSubtitle(entity),
         description: (

@@ -10,7 +10,7 @@ import Title from '@ui/components/title'
 
 @extend({
     connect: true,
-    pageinfo: () => htmlHead({
+    pageinfo: (state) => htmlHead(state, {
         title: __('nav.sorties')
     }),
     // styles: 

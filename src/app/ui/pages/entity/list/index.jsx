@@ -14,7 +14,7 @@ import ListArtists from '@ui/components/list/artists'
 import Title from '@ui/components/title'
 
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: __('nav.entities')
 }))
 // @ImportStyle(style)

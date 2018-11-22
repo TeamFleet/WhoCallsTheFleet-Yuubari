@@ -39,7 +39,7 @@ const equipmentTypes = [
 ]
 
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: __('nav.calctp')
 }))
 @ImportStyle(require('./styles.less'))

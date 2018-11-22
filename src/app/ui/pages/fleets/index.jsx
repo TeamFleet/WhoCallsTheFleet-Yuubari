@@ -25,7 +25,7 @@ import LoaderFairyOoyodo2 from '@ui/components/loader/fairy-ooyodo-2'
 import Header from '@ui/components/main-header/main-options'
 
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: __('nav.fleets')
 }))
 export default class PageFleets extends React.Component {

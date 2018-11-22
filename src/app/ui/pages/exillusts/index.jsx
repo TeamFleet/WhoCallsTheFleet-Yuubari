@@ -62,7 +62,7 @@ const illustIds = [8, 9]
         )
     })
 )
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: __('nav.exillusts')
 }))
 // @ImportStyle(style)

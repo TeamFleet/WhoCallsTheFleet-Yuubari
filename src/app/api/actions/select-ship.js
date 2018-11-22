@@ -2,6 +2,8 @@
 import { store } from 'koot'
 
 export default () => {
+    // TODO:
+    console.log('[TODO] do not use import store')
     // const store = getStore()
     console.log(store)
 }

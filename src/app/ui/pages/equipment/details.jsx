@@ -68,7 +68,7 @@ tabsAvailable.forEach((tab, index) => {
 
         const name = equipment._name
 
-        return htmlHead({
+        return htmlHead(state, {
             title: [
                 name,
                 typeof tab === 'undefined' || tab === tabsAvailable[0]

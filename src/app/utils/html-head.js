@@ -1,14 +1,16 @@
 import metas from 'metas'
-import { store, localeId } from 'koot'
+import { store } from 'koot'
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'
 
 import { update as updatePageTitle } from '@api/page-title/api.js'
 
-export default (infos = {}) => {
+export default (state = store.getState(), infos = {}) => {
+    if(typeof state !== 'object') return {}
 
-    const state = store.getState()
+    // const state = store.getState()
+    const localeId = state.localeId
     const siteName = __('title') + (__DEV__ ? ' (DEV)' : '')
     let origin = state.server.origin
 

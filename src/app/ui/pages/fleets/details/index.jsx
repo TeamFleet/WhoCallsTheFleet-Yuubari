@@ -24,7 +24,7 @@ import Fleet from './fleet'
 import Bases from './bases'
 
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: __('nav.fleets')
 }))
 export default class PageFleetDetails extends React.Component {

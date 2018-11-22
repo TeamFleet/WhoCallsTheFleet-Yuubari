@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Markdown from 'react-markdown'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo, localeId } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
@@ -33,15 +32,19 @@ const markdownRenderers = {
     }
 }
 
-@connect()
-@pageinfo(() => htmlHead())
-@ImportStyle(require('./styles.less'))
+@extend({
+    connect: state => ({
+        localeId: state.localeId
+    }),
+    pageinfo: (state) => htmlHead(state),
+    styles: require('./styles.less')
+})
 export default class Home extends React.Component {
 
     getMD() {
-        if (localeId === 'en')
+        if (this.props.localeId === 'en')
             return require(`@docs/updates/1.0.0/en.md`)
-        if (localeId === 'ja')
+        if (this.props.localeId === 'ja')
             return require(`@docs/updates/1.0.0/ja.md`)
         return require(`@docs/updates/1.0.0/zh.md`)
     }

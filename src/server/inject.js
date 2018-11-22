@@ -1,6 +1,5 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { localeId } from 'koot'
 import getDistPath from 'koot/utils/get-dist-path'
 import getClientFilePath from 'koot/utils/get-client-file-path'
 // const readFile = require('koot/utils/read-client-file')
@@ -9,7 +8,8 @@ const pathDist = getDistPath()
 const manifestLastModified = new Map()
 
 export default {
-    manifest: () => {
+    manifest: (template, state) => {
+        const localeId = state.localeId
         const filename = `manifest-${localeId}.json`
         if (!manifestLastModified.has(localeId))
             manifestLastModified.set(localeId, fs.statSync(path.join(pathDist, 'public', filename)).mtime.valueOf())

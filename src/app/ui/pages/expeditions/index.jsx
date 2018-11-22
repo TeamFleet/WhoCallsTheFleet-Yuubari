@@ -10,7 +10,7 @@ import Page from '@ui/containers/page'
 import Title from '@ui/components/title'
 
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: __('nav.expeditions')
 }))
 // @ImportStyle(style)

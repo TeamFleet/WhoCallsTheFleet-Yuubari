@@ -105,7 +105,7 @@ export const getInfosId = id => `SHIP_${id}`
 
         if (!ship) return {}
 
-        return htmlHead({
+        return htmlHead(state, {
             title: [
                 ship._name,
                 typeof tab === 'undefined' || tab === tabsAvailable[0]

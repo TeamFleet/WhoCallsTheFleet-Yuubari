@@ -33,7 +33,7 @@ export default class Header extends React.Component {
     onNameUpdate() {
         if (!this.mounted) return
         if (this.lastName === this.props.name) return
-        htmlHead({
+        htmlHead(undefined, {
             title: `FLEET: ${this.props.name}`,
             dispatch: this.props.dispatch,
         })

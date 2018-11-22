@@ -1,13 +1,17 @@
 import React from 'react'
+import { extend } from 'koot'
 
-import { localeId } from 'koot'
-import { ImportStyle } from 'sp-css-import'
 import getSubtitle from '../get-subtitle'
 // import db from '@api/database'
 
 import Header from '@ui/components/main-header/infos'
 
-@ImportStyle(require('./header.less'))
+@extend({
+    connect: state => ({
+        localeId: state.localeId
+    }),
+    styles: require('./header.less')
+})
 export default class EntityDetailsHeader extends React.Component {
     render() {
         if (!this.props.entity) return null
@@ -26,7 +30,7 @@ export default class EntityDetailsHeader extends React.Component {
                 title={entity._name}
                 subtitle={subtitle}
             >
-                {localeId !== 'ja' && (
+                {this.props.localeId !== 'ja' && (
                     <span className="name-ja">{entity.getName('ja_jp')}</span>
                 )}
             </Header>

@@ -12,7 +12,7 @@ import Icon from '@ui/components/icon'
 import Title from '@ui/components/title'
 
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: 'Dev (Icons)'
 }))
 @ImportStyle(require('./icons.less'))

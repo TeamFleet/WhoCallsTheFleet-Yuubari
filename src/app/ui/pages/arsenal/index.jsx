@@ -42,7 +42,7 @@ const daysArr = [
 @connect()
 @pageinfo((state, renderProps) => {
     const day = typeof renderProps.params === 'object' ? renderProps.params.day : undefined
-    return htmlHead({
+    return htmlHead(state, {
         title: [
             __('nav.arsenal'),
             typeof day !== 'undefined'

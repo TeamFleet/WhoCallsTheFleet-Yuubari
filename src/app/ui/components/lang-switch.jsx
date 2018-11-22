@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Cookies from 'js-cookie'
 
-import { localeId } from 'koot'
 import availableLocales from '@src/locales'
 
 import { ImportStyle } from 'sp-css-import'
@@ -15,6 +14,7 @@ const langName = {
 }
 
 @connect(state => ({
+    localeId: state.localeId,
     location: state.routing && state.routing.locationBeforeTransitions
 }))
 @ImportStyle(style)
@@ -52,7 +52,7 @@ export default class extends React.Component {
             <a
                 href={this.currentUrl(thisLocaleId)}
                 className={'item' +
-                    (localeId === thisLocaleId ? ' on' : '')
+                    (this.props.localeId === thisLocaleId ? ' on' : '')
                 }
                 data-lang={thisLocaleId}
                 key={index}

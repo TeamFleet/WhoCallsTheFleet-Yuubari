@@ -21,7 +21,7 @@ const equipmentListId = 'pageEquipmentList'
 //     isEquipmentListInit: (typeof state.equipmentList[equipmentListId] !== 'undefined')
 // }))
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: __('nav.equipments')
 }))
 @ImportStyle(require('./list.less'))

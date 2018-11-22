@@ -17,7 +17,7 @@ const shipListId = 'pageShipList'
 // }))
 @extend({
     connect: true,
-    pageinfo: () => htmlHead({
+    pageinfo: (state) => htmlHead(state, {
         title: __('nav.ships')
     }),
     styles: require('./list.less')

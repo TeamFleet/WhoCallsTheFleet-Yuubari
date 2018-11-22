@@ -14,7 +14,7 @@ import ButtonGroup from '@ui/components/button-group'
 import InputCounter from '@ui/components/input/counter'
 
 @connect()
-@pageinfo(() => htmlHead({
+@pageinfo((state) => htmlHead(state, {
     title: 'Dev (Components)'
 }))
 @ImportStyle(require('./components.less'))

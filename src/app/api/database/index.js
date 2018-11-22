@@ -13,7 +13,11 @@ const {
 let db = {}
 let lastLocaleId
 export let locale = null
-export const updateLocale = () => {
+export const updateLocale = (store) => {
+    if (typeof store !== 'object' && typeof store.getState !== 'function') return false
+
+    const localeId = store.getState().localeId
+
     if (!localeId) return false
     if (lastLocaleId !== localeId) {
         locale = localeId

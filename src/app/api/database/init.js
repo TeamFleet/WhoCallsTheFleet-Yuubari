@@ -1,4 +1,3 @@
-// import { localeId } from 'koot'
 import kckit, { register, parseRaw } from 'kckit'
 
 import shipCollections from './db/ship_collections.json'
