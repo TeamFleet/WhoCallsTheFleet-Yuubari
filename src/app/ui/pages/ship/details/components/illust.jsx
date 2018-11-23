@@ -1,13 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
+import { extend } from 'koot'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import Swiper from '@ui/components/swiper'
 import Icon from '@ui/components/icon'
 
-import { ImportStyle } from 'sp-css-import'
 import db from '@api/database'
 import getPic from '@utils/get-pic.js'
 import {
@@ -26,15 +25,16 @@ const getExtraIllustPic = (ship, id, illustId) => {
     return getPic('ship-extra', id, illustId)
 }
 
-// @connect()
-@connect((state, ownProps) => ({
-    // ...state.pages[getInfosId(ownProps.ship.id)]
-    defaultIndex: state.pages[getInfosId(ownProps.ship.id)]
-        ? state.pages[getInfosId(ownProps.ship.id)][ILLUSTINDEX]
-        : undefined
-}))
-@ImportStyle(require('./illust.less'))
-export default class ShipDetailsComponentIllust extends React.Component {
+@extend({
+    connect: (state, ownProps) => ({
+        // ...state.pages[getInfosId(ownProps.ship.id)]
+        defaultIndex: state.pages[getInfosId(ownProps.ship.id)]
+            ? state.pages[getInfosId(ownProps.ship.id)][ILLUSTINDEX]
+            : undefined
+    }),
+    styles: require('./illust.less')
+})
+class ShipDetailsComponentIllust extends React.Component {
     constructor(props) {
         super(props)
 
@@ -46,8 +46,9 @@ export default class ShipDetailsComponentIllust extends React.Component {
         // this.swiper
 
         this.pics = []
-        this.extraIllusts = props.ship._extraIllust
-            .filter(id => !!db.exillusts[id])
+        this.extraIllusts = Array.isArray(props.ship._extraIllust)
+            ? props.ship._extraIllust.filter(id => !!db.exillusts[id])
+            : undefined
         const illustIds = [8, 9]
         let ids = ['_']
 
@@ -195,3 +196,5 @@ export default class ShipDetailsComponentIllust extends React.Component {
         )
     }
 }
+
+export default ShipDetailsComponentIllust

@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { extend } from 'koot'
 
 import db from '@api/database'
 // import bindEvent from 'bind-event'
@@ -14,7 +14,6 @@ import MainHeader from '@ui/components/main-header/main-options'
 // import ButtonGroup from '@ui/components/button-group'
 import TableHeader from './table-header'
 
-import { ImportStyle } from 'sp-css-import'
 // import styleHeader from './header.less'
 
 // @connect((state, ownProps) => state.equipmentList[ownProps.id] || {})
@@ -31,11 +30,12 @@ export default class EquipmentListHeader extends React.Component {
     }
 }
 
-import styleHeaderTabs from './header-tabs.less'
-@connect((state, ownProps) => ({
-    collection: state.equipmentList[ownProps.id].collection
-}))
-@ImportStyle(styleHeaderTabs)
+@extend({
+    connect: (state, ownProps) => ({
+        collection: state.equipmentList[ownProps.id].collection
+    }),
+    styles: require('./header-tabs.less')
+})
 class Tabs extends React.Component {
     onTabClick(collection) {
         this.props.dispatch(
