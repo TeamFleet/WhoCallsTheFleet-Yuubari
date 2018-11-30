@@ -31,6 +31,7 @@ module.exports = async ({
         })
 
         for (let file of fileList) {
+            if (file.indexOf(`/${dirNamePics}/`) > -1) continue
             if (file.indexOf(`public/${dirNamePics}/`) > -1) continue
             if (file.indexOf(`public${path.sep}${dirNamePics}${path.sep}`) > -1) continue
             if (/\/public\/pics$/.test(file)) continue

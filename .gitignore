@@ -39,6 +39,7 @@ jspm_packages
 node_modules/
 *.log
 /dist-*
+/dev-*
 /app.asar
 /logs
 

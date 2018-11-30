@@ -9,8 +9,6 @@ const manifestLastModified = new Map()
 
 export default {
     manifest: (template, state) => {
-        if (typeof state === 'object' && typeof state.getState === 'function')
-            state = state.getState()
         const localeId = state.localeId
         const filename = `manifest-${localeId}.json`
         if (!manifestLastModified.has(localeId))

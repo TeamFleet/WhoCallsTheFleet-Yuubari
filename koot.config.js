@@ -104,7 +104,11 @@ module.exports = {
      * 默认会在该目录下建立 public 和 server 目录，分别对应 web 服务器和服务器执行代码
      * 注：如果为相对路径，请确保第一个字符为 '.'
      */
-    dist: './dist-web/',
+    dist: (() => {
+        if(process.env.WEBPACK_BUILD_ENV === 'env')
+            return './dev-webapp/'
+        return './dist-webapp/'
+    })(),
 
     /** 
      * @type {Object} Webpack 相关配置
@@ -198,9 +202,6 @@ module.exports = {
             normal: /\.g/,
             component: /^((?!\.g\.).)*/,
         },
-        extract: [
-            /critical\.g\.less$/,
-        ]
     },
 
     /** @type {(Number|Object|String)} 服务器运行端口 */

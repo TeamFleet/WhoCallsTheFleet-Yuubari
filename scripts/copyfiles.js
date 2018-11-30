@@ -8,6 +8,7 @@ const {
     assets: dirAssets,
     pics: dirPics,
     bgimgs: dirBgimgs,
+    // getDistPublic,
     getDistIncludes,
     // dist: {
     //     includes: dirIncludes,
@@ -84,9 +85,10 @@ const getPics = async () => {
 
     const dirIncludes = getDistIncludes()
 
-    const dirTo = '../pics'
+    const dirTo = '../../pics'
     const dirTarget = path.resolve(
         dirIncludes,
+        // getDistPublic(),
         `./${dirTo}`
     )
 
