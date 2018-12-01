@@ -5,7 +5,7 @@ import React from 'react'
 import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
-import db from '@api/database'
+import db from '@database'
 import {
     init as shipDetailsInit,
     reset as shipDetailsReset,

@@ -2,7 +2,7 @@ import React from 'react'
 
 import ComponentContainer from '@ui/containers/infos-component'
 
-// import db from '@api/database'
+// import db from '@database'
 
 // import { ImportStyle } from 'sp-css-import'
 // import styles from './header.less'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import db from '@api/database'
+import db from '@database'
 import dataTP from 'kckit/src/data/tp'
 import equipmentTypes from 'kckit/src/types/equipments'
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
+import { extend } from 'koot'
 
 import kckit from 'kckit'
-import db from '@api/database'
-import { ImportStyle } from 'sp-css-import'
+import db from '@database'
 
 import Icon from '@ui/components/icon'
 import Equipment from '../equipment'
@@ -56,8 +56,10 @@ const requiredEquipmentSamples = {
     ],
 }
 
-@ImportStyle(require('./styles.less'))
-export default class CalculatorLevelOASW extends React.Component {
+@extend({
+    styles: require('./styles.less')
+})
+class CalculatorLevelOASW extends React.Component {
     constructor(props) {
         super(props)
 
@@ -290,3 +292,5 @@ export default class CalculatorLevelOASW extends React.Component {
         )
     }
 }
+
+export default CalculatorLevelOASW

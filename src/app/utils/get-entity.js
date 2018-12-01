@@ -1,4 +1,4 @@
-import db from '@api/database'
+import db from '@database'
 
 export default (item) => {
     if (typeof item === 'object' && item.id)

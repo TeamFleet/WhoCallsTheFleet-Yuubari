@@ -1,26 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router'
 import classNames from 'classnames'
+import { extend } from 'koot'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import IconEquipment from '@ui/components/icon-equipment'
 import ImprovementStar from '@ui/components/improvement/star'
 
-import db from '@api/database'
+import db from '@database'
 import times from '@utils/times'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './slot-equipments.less'
-
-// @connect()
-@ImportStyle(styles)
-export default class ShipDetailsComponentSlotEquipments extends React.Component {
-    render() {
+const ShipDetailsComponentSlotEquipments = extend({
+    styles: require('./slot-equipments.less')
+})(
+    (props) => {
         let renderArr = []
-        times((Math.max(4, this.props.ship.slot.length)))(index => {
-            const slot = this.props.ship.slot[index]
+        times((Math.max(4, props.ship.slot.length)))(index => {
+            const slot = props.ship.slot[index]
             const hasSlot = typeof slot !== 'undefined'
-            const data = this.props.ship.equip[index] || undefined
+            const data = props.ship.equip[index] || undefined
             const equipmentId = hasSlot ? (
                 typeof data === 'object' ? data.id : data
             ) : undefined
@@ -57,9 +55,10 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
             )
         })
         return (
-            <ComponentContainer className={this.props.className} title={__("ship_details.slot_equipments")}>
+            <ComponentContainer className={props.className} title={__("ship_details.slot_equipments")}>
                 {renderArr}
             </ComponentContainer>
         )
     }
-}
+)
+export default ShipDetailsComponentSlotEquipments

@@ -4,7 +4,7 @@ import { extend } from 'koot'
 
 // import { ImportStyle } from 'sp-css-import'
 
-import db, { locale as dbLocaleId } from '@api/database'
+import db, { locale as dbLocaleId } from '@database'
 import {
     compareAdd,
     compareRemove

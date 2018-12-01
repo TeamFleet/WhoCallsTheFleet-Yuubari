@@ -10,7 +10,7 @@ import Illust from './components/illust.jsx'
 import Modernization from './components/modernization.jsx'
 import Dismantle from './components/dismantle.jsx'
 
-// import db from '@api/database'
+// import db from '@database'
 
 const ShipDetailsInfos = extend({
     styles: require('./infos.less')

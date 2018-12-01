@@ -1,18 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { extend } from 'koot'
 
 import IconEquipment from '@ui/components/icon-equipment'
 
-// import db from '@api/database'
 import getEquipment from '@utils/get-equipment'
 import getLink from '@utils/get-link'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
-
-// @connect()
-@ImportStyle(styles)
-export default class LinkEquipment extends React.Component {
+@extend({
+    styles: require('./styles.less')
+})
+class LinkEquipment extends React.Component {
     render() {
         const {
             className,
@@ -38,3 +36,5 @@ export default class LinkEquipment extends React.Component {
         )
     }
 }
+
+export default LinkEquipment

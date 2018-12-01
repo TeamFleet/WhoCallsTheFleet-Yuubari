@@ -1,37 +1,41 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import { updateAppReady } from '@api/app/api'
 import { swipedFromLeftEdge } from '@api/side-menu/api'
+import { updateLocale as updateDbLocale } from '@database'
 
 import Main from './layout/main'
 import MainMask from './layout/main-mask'
 import Nav from './layout/nav'
 import Bgimg from './layout/bgimg'
 
-let startSwipeAtLeftBorder = false
-
-@connect(state => {
-    if (__CLIENT__ && __DEV__ && !self.reduxLogShowed) {
-        console.log('Redux connected', state)
-        self.reduxLogShowed = true
-    }
-    return {
-        isMainBgimgLoaded: state.bgimg.isMainLoaded,
-        uiMode: state.uiMode
-    }
+@extend({
+    connect: state => {
+        if (__CLIENT__ && __DEV__ && !self.reduxLogShowed) {
+            console.log('Redux connected', state)
+            self.reduxLogShowed = true
+        }
+        return {
+            isMainBgimgLoaded: state.bgimg.isMainLoaded,
+            uiMode: state.uiMode,
+            localeId: state.localeId,
+        }
+    },
+    styles: require('./app.less')
 })
-@ImportStyle(require('./app.less'))
-export default class App extends React.Component {
+class App extends React.Component {
     /*
      * this.isAppReady      是否已初始化
      */
+    startSwipeAtLeftBorder = false
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         // console.log('QA:', typeof __QA__ === 'undefined' ? 'undefined' : __QA__)
+        if (__CLIENT__)
+            updateDbLocale({ localeId: props.localeId })
         if (typeof document !== 'undefined' && document.documentElement)
             document.documentElement.classList.add('is-react-ready')
     }
@@ -50,23 +54,23 @@ export default class App extends React.Component {
     onTouchStart = (evt) => {
         // if (!__CLIENT__) return
         if (self.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
-            startSwipeAtLeftBorder = {
+            this.startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
                 y: evt.nativeEvent.touches[0].screenY,
                 timestamp: Date.now()
             }
         else
-            startSwipeAtLeftBorder = false
+            this.startSwipeAtLeftBorder = false
     }
 
     onTouchMove = (evt) => {
-        if (startSwipeAtLeftBorder) {
-            const deltaX = evt.nativeEvent.touches[0].screenX - startSwipeAtLeftBorder.x
-            const deltaY = evt.nativeEvent.touches[0].screenY - startSwipeAtLeftBorder.y
-            const elapseTime = Date.now() - startSwipeAtLeftBorder.timestamp
+        if (this.startSwipeAtLeftBorder) {
+            const deltaX = evt.nativeEvent.touches[0].screenX - this.startSwipeAtLeftBorder.x
+            const deltaY = evt.nativeEvent.touches[0].screenY - this.startSwipeAtLeftBorder.y
+            const elapseTime = Date.now() - this.startSwipeAtLeftBorder.timestamp
 
             if (elapseTime > 200) {
-                startSwipeAtLeftBorder = false
+                this.startSwipeAtLeftBorder = false
                 return
             }
 
@@ -74,17 +78,17 @@ export default class App extends React.Component {
                 if (deltaX > 10 && deltaX >= Math.abs(deltaY) && deltaX / elapseTime > (10 / 200)) {
                     this.props.dispatch(swipedFromLeftEdge())
                 }
-                startSwipeAtLeftBorder = false
+                this.startSwipeAtLeftBorder = false
             }
         }
     }
 
     onTouchEnd() {
-        if (startSwipeAtLeftBorder) startSwipeAtLeftBorder = false
+        if (this.startSwipeAtLeftBorder) this.startSwipeAtLeftBorder = false
     }
 
     onTouchCancel() {
-        if (startSwipeAtLeftBorder) startSwipeAtLeftBorder = false
+        if (this.startSwipeAtLeftBorder) this.startSwipeAtLeftBorder = false
     }
 
     componentDidCatch(error, info) {
@@ -129,10 +133,10 @@ export default class App extends React.Component {
                         [`is-mode-${uiMode}-entering`]: (hasMode && !uiModeIsLeaving && uiModeAnimation),
                         [`is-mode-${uiMode}-leaving`]: (hasMode && uiModeIsLeaving),
                     })}
-                    onTouchStart={this.onTouchStart}
-                    onTouchMove={this.onTouchMove}
-                    onTouchEnd={this.onTouchEnd}
-                    onTouchCancel={this.onTouchCancel}
+                    onTouchStart={this.onTouchStart.bind(this)}
+                    onTouchMove={this.onTouchMove.bind(this)}
+                    onTouchEnd={this.onTouchEnd.bind(this)}
+                    onTouchCancel={this.onTouchCancel.bind(this)}
                 >
                     <Nav location={this.props.location} />
                     <MainMask pathname={this.props.location.pathname} />
@@ -145,3 +149,5 @@ export default class App extends React.Component {
         )
     }
 }
+
+export default App

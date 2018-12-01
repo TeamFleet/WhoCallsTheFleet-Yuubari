@@ -1,13 +1,12 @@
 import React from 'react'
+import { extend } from 'koot'
 
 import Title from '@ui/components/title'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
-
-// @connect()
-@ImportStyle(styles)
-export default class InfosComponentContainer extends React.Component {
+@extend({
+    styles: require('./styles.less')
+})
+class InfosComponentContainer extends React.Component {
     renderTitle(title) {
         if (typeof title === 'undefined' || title === null) return null
 
@@ -31,3 +30,5 @@ export default class InfosComponentContainer extends React.Component {
         )
     }
 }
+
+export default InfosComponentContainer

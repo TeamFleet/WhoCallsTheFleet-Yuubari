@@ -1,12 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
-// import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 import getPic from '@utils/get-pic'
 
-import db from '@api/database'
+import db from '@database'
 import {
     init as infosInit,
     changeTab as infosChangeTab,
@@ -46,27 +44,28 @@ const illustIds = [8, 9]
 //     }
 // }
 
-@connect(
-    state => state.pages[infosId] || {},
-    (dispatch/*, ownProps*/) => ({
-        init: defaultIndex => dispatch(
-            infosInit(
-                infosId,
-                {
-                    [TABINDEX]: defaultIndex
-                }
+@extend({
+    connect: [
+        state => state.pages[infosId] || {},
+        (dispatch/*, ownProps*/) => ({
+            init: defaultIndex => dispatch(
+                infosInit(
+                    infosId,
+                    {
+                        [TABINDEX]: defaultIndex
+                    }
+                )
+            ),
+            changeTab: index => dispatch(
+                infosChangeTab(infosId, index)
             )
-        ),
-        changeTab: index => dispatch(
-            infosChangeTab(infosId, index)
-        )
+        })
+    ],
+    pageinfo: (state) => htmlHead(state, {
+        title: __('nav.exillusts')
     })
-)
-@pageinfo((state) => htmlHead(state, {
-    title: __('nav.exillusts')
-}))
-// @ImportStyle(style)
-export default class extends React.Component {
+})
+class PageExCGs extends React.Component {
 
     constructor() {
         super()
@@ -203,3 +202,4 @@ export default class extends React.Component {
         )
     }
 }
+export default PageExCGs

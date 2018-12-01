@@ -1,4 +1,5 @@
 import React from 'react'
+import { extend } from 'koot'
 
 import Link from '@ui/components/link'
 import Stat from '@ui/components/stat'
@@ -10,9 +11,7 @@ import getLink from '@utils/get-link'
 import getShip from '@utils/get-ship'
 import sortShips from '@utils/sort-ships'
 import arrResources from '@const/resources'
-import db from '@api/database'
-
-import { ImportStyle } from 'sp-css-import'
+import db from '@database'
 
 const days = [
     "Sunday",
@@ -24,14 +23,17 @@ const days = [
     "Saturday"
 ]
 
-export default class Improvement extends React.Component {
+class Improvement extends React.Component {
     render() {
         return null
     }
 }
+export default Improvement
 
-@ImportStyle(require('./styles-dayandship.less'))
-export class DayAndShip extends React.Component {
+@extend({
+    styles: require('./styles-dayandship.less')
+})
+class DayAndShip extends React.Component {
     renderItem(data, index) {
         let [dataDays, dataShips] = data
         if (dataShips)
@@ -70,6 +72,7 @@ export class DayAndShip extends React.Component {
         )
     }
 }
+export { DayAndShip }
 
 const isUndefined = value => (typeof value === 'undefined' || value === -1)
 import _getValue from '@utils/get-value'
@@ -99,8 +102,10 @@ class _Resources extends React.Component {
     }
 }
 
-@ImportStyle(require('./styles-resources.less'))
-export class Resources extends _Resources {
+@extend({
+    styles: require('./styles-resources.less')
+})
+class Resources extends _Resources {
     renderCategory(category, data) {
         const title = typeof category === 'string'
             ? __(`improvement`, category)
@@ -204,6 +209,7 @@ export class Resources extends _Resources {
         )
     }
 }
+export { Resources }
 
 import Star from './star'
 export { Star }

@@ -33,10 +33,10 @@ module.exports = {
     type: 'react',
 
     /** @type {Pathname} HTML 模板 */
-    template: './src/app/template.ejs',
+    template: './src/template.ejs',
 
     /** @type {Pathname} React 路由 */
-    router: './src/app/router',
+    router: './src/router',
 
     /**
      * @type {Object} Redux 配置
@@ -45,7 +45,7 @@ module.exports = {
      * @property {Pathname} [store] 使用自创建的 store，而非 koot 创建的 store。如果提供，会忽略 combineReducers 属性。详细使用方法请参阅 [文档](https://koot.js.org/react/create-store)
      */
     redux: {
-        combineReducers: './src/app/redux/reducers',
+        combineReducers: './src/redux/reducers',
     },
 
     /**
@@ -59,10 +59,10 @@ module.exports = {
      */
     client: {
         history: 'browser',
-        before: './src/app/lifecycle/before',
-        after: './src/app/lifecycle/after',
-        onRouterUpdate: './src/app/lifecycle/on-router-update',
-        onHistoryUpdate: './src/app/lifecycle/on-history-update',
+        before: './src/lifecycle/before',
+        after: './src/lifecycle/after',
+        onRouterUpdate: './src/lifecycle/on-router-update',
+        onHistoryUpdate: './src/lifecycle/on-history-update',
     },
 
     /** 
@@ -93,10 +93,10 @@ module.exports = {
             maxAge: 10 * 1000,
         },
         // reducers: './server/reducers',
-        inject: './src/server/inject',
-        before: './src/server/lifecycle/before',
-        after: './src/server/lifecycle/after',
-        onRender: './src/server/lifecycle/on-render',
+        inject: './server/inject',
+        before: './server/lifecycle/before',
+        after: './server/lifecycle/after',
+        onRender: './server/lifecycle/on-render',
     },
 
     /** 
@@ -105,7 +105,7 @@ module.exports = {
      * 注：如果为相对路径，请确保第一个字符为 '.'
      */
     dist: (() => {
-        if(process.env.WEBPACK_BUILD_ENV === 'env')
+        if (process.env.WEBPACK_BUILD_ENV === 'dev')
             return './dev-webapp/'
         return './dist-webapp/'
     })(),
@@ -122,20 +122,21 @@ module.exports = {
     webpack: {
         config: async () => {
             const ENV = process.env.WEBPACK_BUILD_ENV
-            if (ENV === 'dev') return await require('./src/webpack/dev')
-            if (ENV === 'prod') return await require('./src/webpack/prod')
+            if (ENV === 'dev') return await require('./config/webpack/dev')
+            if (ENV === 'prod') return await require('./config/webpack/prod')
             return {}
         },
         beforeBuild: async (...args) => {
             if (process.env.WEBPACK_BUILD_STAGE === 'client') {
                 console.log(' ')
                 if (process.env.WEBPACK_BUILD_ENV === 'prod') {
-                    await require('./scripts/clean-web')(...args)
+                    await require('./src/scripts/clean-dist')(...args)
                 }
-                await require('./scripts/database')()
-                await require('./scripts/less-variables')()
-                await require('./scripts/copyfiles')(...args)
-                await require('./scripts/copyfiles-web')()
+                await require('./src/scripts/validate-database-files')()
+                await require('./src/scripts/validate-less-variables')()
+                await require('./src/scripts/copyfiles')(...args)
+                await require('./src/scripts/copyfiles-web')()
+                console.log(' ')
             }
             return
         },
@@ -143,7 +144,7 @@ module.exports = {
             if (process.env.WEBPACK_BUILD_STAGE === 'client' &&
                 process.env.WEBPACK_BUILD_ENV === 'prod'
             ) {
-                await require('./scripts/clean-web-sourcemap')()
+                await require('./src/scripts/clean-web-sourcemap')()
             }
             return
         },
@@ -181,8 +182,10 @@ module.exports = {
         '@ui': path.resolve('./src/app/ui'),
         '@api': path.resolve('./src/app/api'),
         "@const": path.resolve('./src/app/constants'),
-        "@redux": path.resolve('./src/app/redux'),
+        "@redux": path.resolve('./src/redux'),
         '@actions': path.resolve('./src/app/api/actions'),
+        '@db': path.resolve('./src/database'),
+        '@database': path.resolve('./src/database'),
 
         "~base.less": path.resolve('./src/app/ui/base.less'),
         "~Assets": path.resolve('./src/assets'),

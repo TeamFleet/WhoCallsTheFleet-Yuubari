@@ -1,9 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
-import db from '@api/database'
+import db from '@database'
 import htmlHead from '@utils/html-head'
 import getSubtitle from './get-subtitle'
 
@@ -16,28 +14,32 @@ import Title from '@ui/components/title'
 
 const isCV = entity => (Array.isArray(entity.relation.cv) && entity.relation.cv.length)
 
-@connect()
-@pageinfo((state, renderProps) => {
-    const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
+//
 
-    if (typeof id === 'undefined')
-        return {}
-
-    const entity = db.entities[id]
-    const name = entity._name
-
-    return htmlHead(state, {
-        title: name,
-        subtitle: getSubtitle(entity),
-        description: (
-            name
-            // 类型
-            + `, ${isCV(entity) ? __('seiyuu') : __('artist')}`
-        ),
-    })
+@extend({
+    connect: true,
+    pageinfo: (state, renderProps) => {
+        const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
+    
+        if (typeof id === 'undefined')
+            return {}
+    
+        const entity = db.entities[id]
+        const name = entity._name
+    
+        return htmlHead(state, {
+            title: name,
+            subtitle: getSubtitle(entity),
+            description: (
+                name
+                // 类型
+                + `, ${isCV(entity) ? __('seiyuu') : __('artist')}`
+            ),
+        })
+    },
+    styles: require('./styles.less')
 })
-@ImportStyle(require('./styles.less'))
-export default class extends React.Component {
+class PageEntityDetails extends React.Component {
 
     get data() {
         if (!this._data && this.props.params.id)
@@ -86,6 +88,9 @@ export default class extends React.Component {
         )
     }
 }
+export default PageEntityDetails
+
+//
 
 const ContentList = ({ list, type, ...props }) => {
     if (!list.length) return null
@@ -109,6 +114,8 @@ const ContentList = ({ list, type, ...props }) => {
         </ComponentContainer>
     )
 }
+
+//
 
 const ContentLinks = ({ links }) => {
     if (!Array.isArray(links)) return null

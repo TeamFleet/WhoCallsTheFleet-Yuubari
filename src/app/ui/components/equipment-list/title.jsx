@@ -1,16 +1,15 @@
 import React from 'react'
-// import { connect } from 'react-redux'
+import { extend } from 'koot'
 
-import { ImportStyle } from 'sp-css-import'
-
-import db from '@api/database'
+import db from '@database'
 
 import IconEquipment from '@ui/components/icon-equipment'
 import Title from '@ui/components/title'
 
-// @connect((state, ownProps) => ({}))
-@ImportStyle(require('./title.less'))
-export default class ShipListTitle extends React.Component {
+@extend({
+    styles: require('./title.less')
+})
+class ShipListTitle extends React.Component {
     render() {
         if (this.props.type) {
             const type = db.equipmentTypes[this.props.type]
@@ -29,3 +28,5 @@ export default class ShipListTitle extends React.Component {
             )
     }
 }
+
+export default ShipListTitle

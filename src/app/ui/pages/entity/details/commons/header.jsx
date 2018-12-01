@@ -2,7 +2,7 @@ import React from 'react'
 import { extend } from 'koot'
 
 import getSubtitle from '../get-subtitle'
-// import db from '@api/database'
+// import db from '@database'
 
 import Header from '@ui/components/main-header/infos'
 
@@ -12,7 +12,7 @@ import Header from '@ui/components/main-header/infos'
     }),
     styles: require('./header.less')
 })
-export default class EntityDetailsHeader extends React.Component {
+class EntityDetailsHeader extends React.Component {
     render() {
         if (!this.props.entity) return null
 
@@ -37,3 +37,5 @@ export default class EntityDetailsHeader extends React.Component {
         )
     }
 }
+
+export default EntityDetailsHeader

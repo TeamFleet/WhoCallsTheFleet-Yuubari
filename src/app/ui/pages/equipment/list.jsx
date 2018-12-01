@@ -1,11 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
-import db from '@api/database'
+import db from '@database'
 import {
     reset as equipmentListReset
 } from '@api/equipment-list/api.js'
@@ -17,15 +15,16 @@ import EquipmentList from '@ui/components/equipment-list'
 
 const equipmentListId = 'pageEquipmentList'
 
-// @connect(state => ({
-//     isEquipmentListInit: (typeof state.equipmentList[equipmentListId] !== 'undefined')
-// }))
-@connect()
-@pageinfo((state) => htmlHead(state, {
-    title: __('nav.equipments')
-}))
-@ImportStyle(require('./list.less'))
-export default class PageEquipmentList extends React.Component {
+//
+
+@extend({
+    connect: true,
+    pageinfo: (state) => htmlHead(state, {
+        title: __('nav.equipments')
+    }),
+    styles: require('./list.less')
+})
+class PageEquipmentList extends React.Component {
 
     constructor(props) {
         super(props)
@@ -71,3 +70,4 @@ export default class PageEquipmentList extends React.Component {
         // )
     }
 }
+export default PageEquipmentList

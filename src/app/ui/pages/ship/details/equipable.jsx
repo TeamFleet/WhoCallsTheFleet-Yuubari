@@ -9,7 +9,7 @@ import LinkMini from '@ui/components/link-mini'
 
 // import getPic from '@utils/get-pic'
 import getLink from '@utils/get-link'
-import db from '@api/database'
+import db from '@database'
 
 const { equipmentTypesExclude } = db
 // const equipmentTypeIdExclude = [

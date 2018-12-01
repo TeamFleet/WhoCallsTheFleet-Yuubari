@@ -1,4 +1,5 @@
 import React from 'react'
+import { extend } from 'koot'
 
 // import getPic from '@utils/get-pic'
 
@@ -8,19 +9,16 @@ import FlagNavy from '@ui/components/flag-navy'
 import ComponentContainer from '@ui/containers/infos-component'
 import Stat from '@ui/components/stat'
 
-// import db from '@api/database'
+// import db from '@database'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './quickfacts.less'
-
-// @connect()
-@ImportStyle(styles)
-export default class ShipDetailsComponentSlotEquipments extends React.Component {
-    render() {
-        const ship = this.props.ship
+const ShipDetailsComponentSlotEquipments = extend({
+    styles: require('./quickfacts.less')
+})(
+    (props) => {
+        const ship = props.ship
         //title={__("ship_details.quickfacts")}
         return (
-            <ComponentContainer className={this.props.className}>
+            <ComponentContainer className={props.className}>
                 <div className="wrapper">
                     <Stat
                         className="item"
@@ -47,4 +45,5 @@ export default class ShipDetailsComponentSlotEquipments extends React.Component 
             </ComponentContainer>
         )
     }
-}
+)
+export default ShipDetailsComponentSlotEquipments

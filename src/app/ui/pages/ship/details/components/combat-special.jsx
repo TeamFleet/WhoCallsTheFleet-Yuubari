@@ -9,7 +9,7 @@ const checkAACI = kckit.check.aaci
 const checkOASW = kckit.check.oasw
 const checkOTS = kckit.check.ots
 
-import db from '@api/database'
+import db from '@database'
 import getEquipmentTypesFromCondition from '@utils/get-equipment-types-from-condition'
 
 import ComponentContainer from '@ui/containers/infos-component'

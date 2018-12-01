@@ -1,7 +1,7 @@
 import React from 'react'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
-import db from '@api/database'
+import db from '@database'
 
 import getShip from '@utils/get-ship.js'
 import getPic from '@utils/get-pic.js'
@@ -11,8 +11,10 @@ import Link from './_normal.jsx'
 import Icon from '@ui/components/icon.jsx'
 import FlagNavy from '@ui/components/flag-navy.jsx'
 
-@ImportStyle(require('./ship.less'))
-export default class LinkShip extends React.Component {
+@extend({
+    styles: require('./ship.less')
+})
+class LinkShip extends React.Component {
     checkShow(value) {
         return (value || typeof value === 'undefined')
     }
@@ -125,3 +127,5 @@ export default class LinkShip extends React.Component {
         )
     }
 }
+
+export default LinkShip

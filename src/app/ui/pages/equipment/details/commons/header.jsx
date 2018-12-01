@@ -1,19 +1,14 @@
 import React from 'react'
-// import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-// import db from '@api/database'
-// import {
-//     changeTab as equipmentDetailsChangeTab,
-//     TABINDEX
-// } from '@api/pages'
-// import { getInfosId } from '../../details'
+import { extend } from 'koot'
+
 import getLink from '@utils/get-link'
 
 import Header from '@ui/components/main-header/infos'
 
-// @connect((state, ownProps) => state.pages[getInfosId(ownProps.equipment.id)] || {})
-@ImportStyle(require('./header.less'))
-export default class EquipmentDetailsHeader extends React.Component {
+@extend({
+    styles: require('./header.less')
+})
+class EquipmentDetailsHeader extends React.Component {
     onTabChange(tabId, tabIndex) {
         if (typeof this.props.onTabChange === 'function')
             this.props.onTabChange(tabId, tabIndex)
@@ -51,3 +46,4 @@ export default class EquipmentDetailsHeader extends React.Component {
         )
     }
 }
+export default EquipmentDetailsHeader

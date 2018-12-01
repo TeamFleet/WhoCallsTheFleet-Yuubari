@@ -4,8 +4,8 @@ import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
 
-import db from '@api/database'
-import shipListFilter from '@api/database/list-ships-filter.js'
+import db from '@database'
+import shipListFilter from '@database/list-ships-filter.js'
 import {
     init as shipListInit,
     // reset as shipListReset,

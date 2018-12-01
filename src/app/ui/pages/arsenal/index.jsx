@@ -1,10 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
-import db from '@api/database'
+import db from '@database'
 // import pref from '@api/preferences'
 
 import htmlHead from '@utils/html-head'
@@ -39,20 +37,24 @@ const daysArr = [
     "Saturday"
 ]
 
-@connect()
-@pageinfo((state, renderProps) => {
-    const day = typeof renderProps.params === 'object' ? renderProps.params.day : undefined
-    return htmlHead(state, {
-        title: [
-            __('nav.arsenal'),
-            typeof day !== 'undefined'
-                ? __(`day_full`, daysArr[day])
-                : undefined,
-        ]
-    })
+//
+
+@extend({
+    connect: true,
+    pageinfo: (state, renderProps) => {
+        const day = typeof renderProps.params === 'object' ? renderProps.params.day : undefined
+        return htmlHead(state, {
+            title: [
+                __('nav.arsenal'),
+                typeof day !== 'undefined'
+                    ? __(`day_full`, daysArr[day])
+                    : undefined,
+            ]
+        })
+    },
+    styles: require('./styles.less')
 })
-@ImportStyle(require('./styles.less'))
-export default class PageArsenal extends React.Component {
+class PageArsenal extends React.Component {
 
     state = {
         rendering: true
@@ -98,21 +100,25 @@ export default class PageArsenal extends React.Component {
         )
     }
 }
+export default PageArsenal
 
-@ImportStyle(require('./styles-header.less'))
-class PageArsenalHeader extends React.Component {
-    render() {
+//
+
+const PageArsenalHeader = extend({
+    styles: require('./styles-header.less')
+})(
+    (props) => {
         const jst = getTimeJST()
         const jstDay = jst.getDay()
         return <MainHeader
             className={classNames({
-                [this.props.className]: true,
-                // 'is-options-show': this.props.isModeFilter,
+                [props.className]: true,
+                // 'is-options-show': props.isModeFilter,
             })}
 
-            mainClassName={this.props.className + "-tabs"}
+            mainClassName={props.className + "-tabs"}
             main={[
-                <PageArsenalHeaderAkashi className={this.props.className + "-akashi"} key="akashi" />,
+                <PageArsenalHeaderAkashi className={props.className + "-akashi"} key="akashi" />,
                 <Link
                     key="today"
                     href={`/arsenal/${jstDay}`}
@@ -141,14 +147,16 @@ class PageArsenalHeader extends React.Component {
                     className={classNames({
                         tab: true,
                         'link-all': true,
-                        'on': !this.props.isDay
+                        'on': !props.isDay
                     })}
                     children={__(`arsenal.all`)}
                 />
             ]}
         />
     }
-}
+)
+
+//
 
 class PageArsenalHeaderAkashi extends React.Component {
     state = {
@@ -170,26 +178,26 @@ class PageArsenalHeaderAkashi extends React.Component {
     }
 }
 
-class PageArsenalList extends React.Component {
-    render() {
-        // console.log('[PageArsenalList] render')
-        return this.props.collections.map((collection, index) => (
-            <PageArsenalCollection
-                key={`collection-${collection.title}`}
-                title={collection.title}
-                index={index}
-                onRender={() => {
-                    if (typeof this.props.onRender === 'function' &&
-                        index >= this.props.collections.length - 1
-                    )
-                        this.props.onRender(this)
-                }}
-            >
-                {collection.list}
-            </PageArsenalCollection>
-        ))
-    }
-}
+//
+
+const PageArsenalList = (props) =>
+    props.collections.map((collection, index) => (
+        <PageArsenalCollection
+            key={`collection-${collection.title}`}
+            title={collection.title}
+            index={index}
+            onRender={() => {
+                if (typeof props.onRender === 'function' &&
+                    index >= props.collections.length - 1
+                )
+                    props.onRender(this)
+            }}
+        >
+            {collection.list}
+        </PageArsenalCollection>
+    ))
+
+//
 
 const PageArsenalListDay = (props) => {
     // console.log('[PageArsenalListDay] render')
@@ -244,6 +252,8 @@ const PageArsenalListDay = (props) => {
         <PageArsenalList collections={collections} {...props} />
     )
 }
+
+//
 
 const PageArsenalListAll = (props) => {
     // console.log('[PageArsenalListAll] render')
@@ -301,7 +311,11 @@ const PageArsenalListAll = (props) => {
     )
 }
 
-@ImportStyle(require('./styles-collection.less'))
+//
+
+@extend({
+    styles: require('./styles-collection.less')
+})
 class PageArsenalCollection extends React.Component {
     // rendered = false
     // mouted = false
@@ -376,7 +390,11 @@ class PageArsenalCollection extends React.Component {
     }
 }
 
-@ImportStyle(require('./styles-item.less'))
+//
+
+@extend({
+    styles: require('./styles-item.less')
+})
 class PageArsenalListItem extends React.Component {
     state = {
         // render: __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady),

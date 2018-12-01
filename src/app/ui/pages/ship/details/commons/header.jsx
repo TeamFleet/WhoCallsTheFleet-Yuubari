@@ -3,7 +3,7 @@ import React from 'react'
 // import { ImportStyle } from 'sp-css-import'
 import { extend } from 'koot'
 
-import db from '@api/database'
+import db from '@database'
 // import {
 //     changeTab as shipDetailsChangeTab,
 //     TABINDEX

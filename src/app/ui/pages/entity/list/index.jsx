@@ -1,11 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
-import db from '@api/database'
+import db from '@database'
 
 import Page from '@ui/containers/page'
 
@@ -13,13 +11,15 @@ import ListCasters from '@ui/components/list/casters'
 import ListArtists from '@ui/components/list/artists'
 import Title from '@ui/components/title'
 
-@connect()
-@pageinfo((state) => htmlHead(state, {
-    title: __('nav.entities')
-}))
-// @ImportStyle(style)
-export default class extends React.Component {
-    render() {
+//
+
+const PageEntityList = extend({
+    connect: true,
+    pageinfo: (state) => htmlHead(state, {
+        title: __('nav.entities')
+    })
+})(
+    (props) => {
         const listCVs = []
         const listArtists = []
 
@@ -34,7 +34,7 @@ export default class extends React.Component {
 
         return (
             <Page
-                className={this.props.className}
+                className={props.className}
             >
                 <ListTitle>{__('seiyuus')}</ListTitle>
                 <ListCasters
@@ -54,18 +54,20 @@ export default class extends React.Component {
             </Page>
         )
     }
-}
+)
+export default PageEntityList
 
-@ImportStyle(require('./styles-title.less'))
-class ListTitle extends React.Component {
-    render() {
-        return (
-            <Title
-                component="h2"
-                type="line-append"
-                inherit={true}
-                {...this.props}
-            />
-        )
-    }
-}
+//
+
+const ListTitle = extend({
+    styles: require('./styles-title.less')
+})(
+    (props) => (
+        <Title
+            component="h2"
+            type="line-append"
+            inherit={true}
+            {...props}
+        />
+    )
+)

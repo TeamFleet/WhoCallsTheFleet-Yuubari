@@ -1,7 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { extend } from 'koot'
 
-import db from '@api/database'
+import db from '@database'
 // import bindEvent from 'bind-event'
 import {
     changeCollection,
@@ -22,23 +22,24 @@ import Icon from '@ui/components/icon'
 // import ButtonGroup from '@ui/components/button-group'
 import TableHeader from './table-header'
 
-import { ImportStyle } from 'sp-css-import'
-import styleHeader from './header.less'
+//
 
-@connect((state, ownProps) => {
-    const {
-        isModeCompare,
-        isModeFilter,
-        compareState
-    } = state.shipList[ownProps.id] || {}
-    return {
-        isModeCompare,
-        isModeFilter,
-        compareState
-    }
+@extend({
+    connect: (state, ownProps) => {
+        const {
+            isModeCompare,
+            isModeFilter,
+            compareState
+        } = state.shipList[ownProps.id] || {}
+        return {
+            isModeCompare,
+            isModeFilter,
+            compareState
+        }
+    },
+    styles: require('./header.less')
 })
-@ImportStyle(styleHeader)
-export default class ShipListHeader extends React.Component {
+class ShipListHeader extends React.Component {
     state = {
         isClassCompare: false
     }
@@ -122,12 +123,16 @@ export default class ShipListHeader extends React.Component {
         )
     }
 }
+export default ShipListHeader
 
-import styleHeaderTabs from './header-tabs.less'
-@connect((state, ownProps) => ({
-    collection: state.shipList[ownProps.id].collection
-}))
-@ImportStyle(styleHeaderTabs)
+//
+
+@extend({
+    connect: (state, ownProps) => ({
+        collection: state.shipList[ownProps.id].collection
+    }),
+    styles: require('./header-tabs.less')
+})
 class Tabs extends React.Component {
     onTabClick(collection) {
         this.props.dispatch(
@@ -184,11 +189,14 @@ class Tabs extends React.Component {
 //     }
 // }
 
-import styleHeaderFilter from './header-filter.less'
-@connect((state, ownProps) => ({
-    filterInput: state.shipList[ownProps.id].filterInput
-}))
-@ImportStyle(styleHeaderFilter)
+//
+
+@extend({
+    connect: (state, ownProps) => ({
+        filterInput: state.shipList[ownProps.id].filterInput
+    }),
+    styles: require('./header-filter.less')
+})
 class Filter extends React.Component {
     onInput(evt) {
         if (typeof this.debounceInput !== 'undefined') clearTimeout(this.debounceInput)
@@ -244,8 +252,11 @@ class Filter extends React.Component {
     }
 }
 
-import styleHeaderExtraButtons from './header-extra-buttons.less'
-@ImportStyle(styleHeaderExtraButtons)
+//
+
+@extend({
+    styles: require('./header-extra-buttons.less')
+})
 class ExtraButtons extends React.Component {
     render() {
         return (
@@ -256,13 +267,16 @@ class ExtraButtons extends React.Component {
     }
 }
 
-import styleHeaderCompareHeader from './header-compare-header.less'
-@connect((state, ownProps) => ({
-    // isModeCompare: state.shipList[ownProps.id].isModeCompare,
-    compareState: state.shipList[ownProps.id].compareState,
-    count: state.shipList[ownProps.id].compareList.length
-}))
-@ImportStyle(styleHeaderCompareHeader)
+//
+
+@extend({
+    connect: (state, ownProps) => ({
+        // isModeCompare: state.shipList[ownProps.id].isModeCompare,
+        compareState: state.shipList[ownProps.id].compareState,
+        count: state.shipList[ownProps.id].compareList.length
+    }),
+    styles: require('./header-compare-header.less')
+})
 class Compare extends React.Component {
     compareStart() {
         if (__CLIENT__)
@@ -312,11 +326,14 @@ class Compare extends React.Component {
     }
 }
 
-import styleHeaderCompareControls from './header-compare-controls.less'
-@connect((state, ownProps) => ({
-    compareSortType: state.shipList[ownProps.id].compareSort[0]
-}))
-@ImportStyle(styleHeaderCompareControls)
+//
+
+@extend({
+    connect: (state, ownProps) => ({
+        compareSortType: state.shipList[ownProps.id].compareSort[0]
+    }),
+    styles: require('./header-compare-controls.less')
+})
 class CompareControls extends React.Component {
     compareReset() {
         if (__CLIENT__)

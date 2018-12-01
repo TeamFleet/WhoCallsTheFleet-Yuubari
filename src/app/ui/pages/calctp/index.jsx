@@ -1,11 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 import kckit from 'kckit'
 import EquipmentTypes from 'kckit/src/types/equipments'
 
-import db from '@api/database'
+import db from '@database'
 import { init as pageInit, update as pageUpdate } from '@api/pages'
 
 import htmlHead from '@utils/html-head'
@@ -38,12 +36,16 @@ const equipmentTypes = [
     EquipmentTypes.CombatRation,
 ]
 
-@connect()
-@pageinfo((state) => htmlHead(state, {
-    title: __('nav.calctp')
-}))
-@ImportStyle(require('./styles.less'))
-export default class extends React.Component {
+//
+
+@extend({
+    connect: true,
+    pageinfo: (state) => htmlHead(state, {
+        title: __('nav.calctp')
+    }),
+    styles: require('./styles.less')
+})
+class PageCalcTP extends React.Component {
 
     constructor(props) {
         super(props)
@@ -54,7 +56,7 @@ export default class extends React.Component {
         )
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.dispatch(pageUpdate(pageId, {
             result: 0
         }))
@@ -75,6 +77,9 @@ export default class extends React.Component {
         )
     }
 }
+export default PageCalcTP
+
+//
 
 const PageCalcTPHeader = ({ className }) => (
     <Header
@@ -94,9 +99,13 @@ const PageCalcTPHeader = ({ className }) => (
     />
 )
 
-@connect(state => ({
-    result: state.pages[pageId].result
-}))
+//
+
+@extend({
+    connect: state => ({
+        result: state.pages[pageId].result
+    })
+})
 class PageCalcTPBody extends React.Component {
     count = {
         shipType: {},
@@ -164,9 +173,13 @@ class PageCalcTPBody extends React.Component {
     }
 }
 
-const PageCalcTPResult = connect(state => ({
-    result: state.pages[pageId].result
-}))(
+//
+
+const PageCalcTPResult = extend({
+    connect: state => ({
+        result: state.pages[pageId].result
+    })
+})(
     ({ className, result }) => (
         <div
             className={className}
@@ -176,6 +189,8 @@ const PageCalcTPResult = connect(state => ({
         </div>
     )
 )
+
+//
 
 const PageCalcTPCounter = ({
     className,

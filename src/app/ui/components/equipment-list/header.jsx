@@ -1,7 +1,7 @@
 import React from 'react'
 import { extend } from 'koot'
 
-import db from '@api/database'
+import db from '@database'
 // import bindEvent from 'bind-event'
 import {
     changeCollection

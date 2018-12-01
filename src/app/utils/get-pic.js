@@ -2,7 +2,7 @@ import getPublicPath from 'koot/utils/get-public-dir'
 import Ship from 'kckit/src/class/ship.js'
 import Entity from 'kckit/src/class/entity.js'
 
-import db from '@api/database'
+import db from '@database'
 
 const publicPath = __DEV__ ? '/' : getPublicPath()
 const ext = __CLIENT__ && self._html && self._html.classList.contains('webp') ? '.webp' : '.png'

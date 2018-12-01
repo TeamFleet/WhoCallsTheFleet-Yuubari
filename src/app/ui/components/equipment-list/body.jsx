@@ -1,10 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
+import { extend } from 'koot'
 
-import db from '@api/database'
+import db from '@database'
 import {
     init as listInit,
     observer as listObserver,
@@ -20,21 +20,22 @@ import TableBody from './table-body'
 import TableBodyHeaderInterceptor from './table-body-header-interceptor'
 
 import { observer } from '@ui/hoc/observer'
-import { ImportStyle } from 'sp-css-import'
 
 
 // --------------------------------------------------
 
 
-@connect((state, ownProps) => ({
-    // ...state.shipList[ownProps.id],
-    isInit: state.equipmentList[ownProps.id] ? true : false,
-    // location: state[REALTIME_LOCATION_REDUCER_NAME]
-}))
+@extend({
+    connect: (state, ownProps) => ({
+        // ...state.shipList[ownProps.id],
+        isInit: state.equipmentList[ownProps.id] ? true : false,
+        // location: state[REALTIME_LOCATION_REDUCER_NAME]
+    })
+})
 @observer({
     rootMargin: "50px 0px"
 })
-export default class EquipmentList extends React.Component {
+class EquipmentList extends React.Component {
     constructor(props) {
         super(props)
         if (!props.isInit) {
@@ -69,6 +70,7 @@ export default class EquipmentList extends React.Component {
         return <EquipmentListBody {...props} />
     }
 }
+export default EquipmentList
 
 
 // --------------------------------------------------
@@ -84,15 +86,17 @@ export default class EquipmentList extends React.Component {
 //     delete obj.highlightingStat
 //     return obj
 // })
-@connect((state, ownProps) => {
-    const {
-        collection
-    } = state.equipmentList[ownProps.id] || {}
-    return {
-        collection
-    }
+@extend({
+    connect: (state, ownProps) => {
+        const {
+            collection
+        } = state.equipmentList[ownProps.id] || {}
+        return {
+            collection
+        }
+    },
+    styles: require('./body.less')
 })
-@ImportStyle(require('./body.less'))
 class EquipmentListBody extends React.Component {
 
     renderCollection(collection, index) {
@@ -167,11 +171,13 @@ class EquipmentListBody extends React.Component {
 // --------------------------------------------------
 
 
-@connect((state, ownProps) => ({
-    highlightingIndex: state.equipmentList[ownProps.id].highlightingIndex,
-    highlightingStat: state.equipmentList[ownProps.id].highlightingStat
-}))
-@ImportStyle(require('./body-datahost.less'))
+@extend({
+    connect: (state, ownProps) => ({
+        highlightingIndex: state.equipmentList[ownProps.id].highlightingIndex,
+        highlightingStat: state.equipmentList[ownProps.id].highlightingStat
+    }),
+    styles: require('./body-datahost.less')
+})
 class EquipmentListBodyDataHost extends React.Component {
     render() {
         return (

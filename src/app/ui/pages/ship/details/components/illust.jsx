@@ -7,7 +7,7 @@ import ComponentContainer from '@ui/containers/infos-component'
 import Swiper from '@ui/components/swiper'
 import Icon from '@ui/components/icon'
 
-import db from '@api/database'
+import db from '@database'
 import getPic from '@utils/get-pic.js'
 import {
     // init as shipDetailsInit,

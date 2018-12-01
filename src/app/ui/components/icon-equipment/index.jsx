@@ -1,7 +1,7 @@
 import React from 'react'
 import { extend } from 'koot'
 
-import db from '@api/database'
+import db from '@database'
 import getEquipment from '@utils/get-equipment'
 import getLink from '@utils/get-link'
 

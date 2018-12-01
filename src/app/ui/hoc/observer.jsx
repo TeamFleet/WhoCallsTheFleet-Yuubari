@@ -67,12 +67,13 @@ export const observer = (options = {}) => (WrappedComponent) => (
 
 )
 
-export const observerItem = () => (WrappedComponent) => (
+export const observerItem = () => (WrappedComponent) => {
 
     class ObserverItem extends Component {
 
         componentDidMount() {
             if (!this._item && typeof document !== 'undefined') {
+                // console.log('observerItem this', this)
                 const { findDOMNode } = require('react-dom')
                 this._item = findDOMNode(this)
             }
@@ -89,6 +90,7 @@ export const observerItem = () => (WrappedComponent) => (
             const {
                 children,
                 observer,
+                forwardedRef,
                 ...props
             } = this.props
 
@@ -96,6 +98,7 @@ export const observerItem = () => (WrappedComponent) => (
 
             return (
                 <WrappedComponent
+                    ref={forwardedRef}
                     {...props}
                     {...this.state}
                 >
@@ -105,4 +108,7 @@ export const observerItem = () => (WrappedComponent) => (
         }
     }
 
-)
+    return React.forwardRef((props, ref) => {
+        return <ObserverItem {...props} forwardedRef={ref} />
+    })
+}
