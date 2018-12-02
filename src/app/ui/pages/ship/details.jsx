@@ -67,7 +67,7 @@ const getDescription = ship => {
     }
     return ship._name
         // 舰级 & 舰种
-        + `, ${getStrShipClass}`
+        + `, ${getStrShipClass()}`
         // 类型
         + `${ship.class && ship.type ? `, ${getShipType()}` : ''}`
         // 军籍
