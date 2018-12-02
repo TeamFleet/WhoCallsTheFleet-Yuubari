@@ -130,8 +130,8 @@ class AppBar extends React.Component {
                     {__CLIENT__ && navigator.share && (
                         <Icon icon="question6" onClick={() => {
                             navigator.share({
-                                title: 'Web Fundamentals',
-                                text: 'Check out Web Fundamentals—it rocks!',
+                                title: document.title,
+                                text: document.querySelector('meta[name="description"]').getAttribute('content'),
                                 url: location.href,
                             })
                                 .then(() => console.log('Successful share'))
