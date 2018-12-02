@@ -29,10 +29,15 @@ export default ImportStyle(require('./styles.less'))(({
                 className="bonuses bonuses-single"
                 title={__("bonuses.single")}
             >
+
                 {single.length
-                    ? single.map((bonus, index) => (
-                        <BonusSingle key={index} className="item" bonus={bonus} ship={ship} equipment={equipment} />
-                    ))
+                    ? (
+                        <div className="grid">
+                            {single.map((bonus, index) => (
+                                <BonusSingle key={index} className="item" bonus={bonus} ship={ship} equipment={equipment} />
+                            ))}
+                        </div>
+                    )
                     : <span className="disabled">{__("none")}</span>
                 }
             </ComponentContainer>
@@ -41,7 +46,11 @@ export default ImportStyle(require('./styles.less'))(({
                 title={__("bonuses.sets")}
             >
                 {set.length
-                    ? "SETS"
+                    ? (
+                        <div className="grid">
+                            SETS
+                        </div>
+                    )
                     : <span className="disabled">{__("none")}</span>
                 }
             </ComponentContainer>

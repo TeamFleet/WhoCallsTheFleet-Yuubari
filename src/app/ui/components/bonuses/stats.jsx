@@ -22,6 +22,7 @@ export default ({
                     switch (stat) {
                         case 'range': {
                             if (value <= 1) text = __('bonuses.range_increase')
+                                + ' (' + __('bonuses.stat_donot_stack') + ')'
                             break
                         }
                         default: {
@@ -42,6 +43,7 @@ export default ({
                             className={classNames(classes)}
                             stat={stat}
                             children={text}
+                            type={stat !== 'range' ? __(`stat`, stat) : undefined}
                         />
                     )
                 })}

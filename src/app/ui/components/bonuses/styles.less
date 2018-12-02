@@ -1,25 +1,128 @@
 @import '~base.less';
 
 .component{
-    overflow: hidden;
-    margin-right: (0 - @main-margin);
+    @size-icon: 32px;
+    @gutter-stats: 16px;
+
+    // margin-right: (0 - @main-margin);
 
     .bonuses{
-        border-right: @main-margin solid transparent;
-        float: left;
-        width: 50%;
+        .grid{
+            margin-top: 20px;
+        }
+    }
+    .bonuses-single{
+        .grid{
+            @column-width: 300px;
+        
+            display: grid;
+            grid-gap: 30px 20px;
+            grid-template-columns: repeat(auto-fill, minmax(@column-width, 1fr) );
+        }
+
+        .bonus + .bonus{
+            @supports (display: grid) {
+                margin-top: 0;
+            }
+        }
+    }
+
+    // .bonus{
+    //     text-shadow: 0 0 2px #000;
+    // }
+
+    .bonus + .bonus{
+        margin-top: 20px;
+    }
+
+    .infos{
+        padding-left: @size-icon;
+        color: @color-fade;
+        font-size: 14px;
+        line-height: 22px;
     }
 
     .stats{
-        // background: red;
+        position: relative;
+        font-size: 14px;
+        padding-left: (@size-icon - @gutter-stats);
+        line-height: 20px;
+        .stat{
+            float: left;
+            margin-left: @gutter-stats;
+            .type{
+                color: @color-main;
+                margin-right: 4px;
+            }
+            .type ~ .value{
+                color: @color-positive;
+                font-size: 16px;
+                position: relative;
+                top: 1px;
+            }
+            &.negative .value{
+                color: @color-negative;
+            }
+        }
     }
 
-    .screen-t0({
-        margin-right: auto;
-        .bonuses{
-            border-right-width: 0;
-            float: none;
-            width: auto;
+    .stats-line{
+        clear: both;
+    }
+
+    .stats-has-extra{
+        @base-margin-right: (0 - @size-icon + @gutter-stats - 6);
+        .extra{
+            position: absolute;
+            text-align: right;
+            right: 100%;
+            margin-right: @base-margin-right;
+            line-height: 22px;
+            white-space: nowrap;
+            &::before{
+                position: absolute;
+                top: 50%;
+                line-height: 0;
+                right: 100%;
+                margin-right: 2px;
+            }
         }
-    });
+        .extra-type-count{
+            color: @color-main;
+            &::before{
+                content: '×';
+            }
+        }
+        .extra-type-star{
+            color: @color-improvement-star;
+            &::before{
+                content: '★';
+            }
+            &[data-star="0"]{
+                color: @color-fade;
+            }
+            &[data-star="10"]{
+                color: transparent;
+                &::before{
+                    content: "";
+                    background: url(~Assets/improve-max.svg) no-repeat 100% 50%;
+                    background-size: contain;
+                    height: 100%;
+                    width: 26px;
+                    top: 0;
+                    right: -2px;
+                    margin: 0;
+                }
+            }
+        }
+        .extra-type-area{
+            color: @color-main-dimmed;
+            font-size: 12px;
+            background: @color-border;
+            border: 1px solid @color-fade;
+            padding: 0 3px;
+            border-radius: 3px;
+            margin-right: (@base-margin-right - 4);
+        }
+    }
 }

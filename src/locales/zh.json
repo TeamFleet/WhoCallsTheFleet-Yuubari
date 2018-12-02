@@ -169,9 +169,14 @@
         "info_prefix_when_equipped": "装备于以上舰娘时，",
         "range_increase": "射程提高一档",
         "stat_donot_stack": "该属性不叠加",
-        "based_on_number": "根据该装备数量提供加成 (超额部分不提供加成)",
-        "based_on_star": "每个该装备根据改修星级提供属性加成",
-        "based_on_nothing": "每个该装备提供属性加成"
+        "based_on_number": "根据该装备的装备数量提供... (超额部分不提供加成)",
+        "based_on_star": "每个该装备根据改修星级提供...",
+        "based_on_area": "根据所处作战海域，每个该装备提供...",
+        "based_on_nothing": "每个该装备提供..."
+    },
+
+    "area": {
+        "north": "北方"
     },
 
     "ship_list": {
@@ -197,7 +202,7 @@
         "voicelines": "语音 & 台词",
         "availability": "获取方式",
         "capabilities": "功能 & 作战能力",
-        "bonuses": "属性加成",
+        "bonuses": "装备属性加成",
 
         "remodels": "改造系谱",
         "remodel_initial": "初始",

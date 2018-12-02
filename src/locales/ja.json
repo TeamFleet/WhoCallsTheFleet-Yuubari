@@ -165,14 +165,19 @@
     },
 
     "bonuses": {
-        "single": "Equipment Stat Bonus",
-        "sets": "Set Bonus",
+        "single": "単体ボーナス",
+        "sets": "相互シナジーボーナス",
         "info_prefix_when_equipped": "When equipped, ",
         "range_increase": "Range increased by 1",
         "stat_donot_stack": "Donot stack",
-        "based_on_number": "Provide bonus based on number of this equipment",
-        "based_on_star": "Each of this equipment provide bonus based on star level",
-        "based_on_nothing": "Each of this equipment provide bonus"
+        "based_on_number": "Based on number of this equipment, provide...",
+        "based_on_star": "Based on star level, Each of this equipment provide...",
+        "based_on_area": "Based on area battle at, each of this equipment provide...",
+        "based_on_nothing": "Each of this equipment provide..."
+    },
+
+    "area": {
+        "north": "北方"
     },
 
     "ship_list": {
@@ -198,7 +203,7 @@
         "voicelines": "ボイス・ライン",
         "availability": "入手情報",
         "capabilities": "機能・特徴",
-        "bonuses": "Stat Bonuses",
+        "bonuses": "装備ボーナス",
 
         "remodels": "改造チャート",
         "remodel_initial": "初期",
@@ -252,7 +257,7 @@
         "infos": "情報",
         "refittable": "装備可能艦...",
         "availability": "入手情報",
-        "bonuses": "Stat Bonuses",
+        "bonuses": "ボーナス",
 
         "facts_craftable": "開発可能",
         "facts_uncraftable": "開発不可",

@@ -1,20 +1,38 @@
 @import "../../../base.less";
 
 .component{
+    @base-height:   (@link-equipment-padding-left - 2);
     @line-height:   (@link-equipment-padding-left - 2);
+    @padding-v:     floor((@base-height - @line-height) / 2);
     @size-icon:     30px;
 
     display:        inline-block;
     position:       relative;
-    padding-left:   (@line-height + 2);
+    padding-left:   @link-equipment-padding-left;
+    padding-top:    @padding-v;
+    padding-bottom: @padding-v;
+    // line-height:    @line-height;
 
     .icon{
         &:empty, &:before{
             position:   absolute;
             width:      @size-icon;
             height:     @size-icon;
-            top:        ((@line-height - @size-icon) / 2);
-            left:       ((@line-height - @size-icon) / 2);
+            top:        ((@base-height - @size-icon) / 2);
+            left:       ((@base-height - @size-icon) / 2);
+        }
+    }
+
+    &.mod-size-large{
+        @size: 36px;
+        padding-left: (@link-equipment-padding-left + 6);
+        .icon{
+            &:empty, &:before{
+                width: @size;
+                height: @size;
+                top: ((@base-height - @size) / 2);
+                left: ((@base-height - @size) / 2);
+            }
         }
     }
 }

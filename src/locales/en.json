@@ -169,9 +169,14 @@
         "info_prefix_when_equipped": "When equipped, ",
         "range_increase": "Range increased by 1",
         "stat_donot_stack": "Donot stack",
-        "based_on_number": "Provide bonus based on number of this equipment",
-        "based_on_star": "Each of this equipment provide bonus based on star level",
-        "based_on_nothing": "Each of this equipment provide bonus"
+        "based_on_number": "Based on number of this equipment, provide...",
+        "based_on_star": "Based on star level, each of this equipment provide...",
+        "based_on_area": "Based on area battle at, each of this equipment provide...",
+        "based_on_nothing": "Each of this equipment provide..."
+    },
+
+    "area": {
+        "north": "North"
     },
 
     "ship_list": {
@@ -197,7 +202,7 @@
         "voicelines": "Voices & Lines",
         "availability": "Availability",
         "capabilities": "Capabilities",
-        "bonuses": "Stat Bonuses",
+        "bonuses": "Equipment Bonuses",
 
         "remodels": "Remodels",
         "remodel_initial": "Initial",

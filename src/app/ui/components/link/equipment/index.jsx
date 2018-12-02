@@ -17,6 +17,7 @@ class LinkEquipment extends React.Component {
             tag,
             equipment,
             children,
+            size,
             ...props
         } = this.props
 
@@ -25,7 +26,10 @@ class LinkEquipment extends React.Component {
 
         return (
             <Component
-                className={className}
+                className={
+                    className
+                    + (size ? ` mod-size-${size}` : '')
+                }
                 to={!tag || tag !== 'a' ? getLink('equipment', _equipment.id) : undefined}
                 {...props}
             >
