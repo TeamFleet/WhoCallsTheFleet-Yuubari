@@ -21,7 +21,7 @@ export default ImportStyle(require('./styles.less'))(({
             single.push(bonus)
     })
 
-    console.log(single, set)
+    if (__CLIENT__ && __DEV__) console.log(single, set)
 
     return (
         <div className={className}>

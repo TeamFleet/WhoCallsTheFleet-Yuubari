@@ -13,11 +13,15 @@
     }
     .bonuses-single{
         .grid{
-            @column-width: 300px;
+            @column-width: 350px;
         
             display: grid;
             grid-gap: 30px 20px;
             grid-template-columns: repeat(auto-fill, minmax(@column-width, 1fr) );
+
+            @media all and (max-width: (@column-width + @main-margin-phone * 2)){
+                grid-template-columns: 100%;
+            }
         }
 
         .bonus + .bonus{
