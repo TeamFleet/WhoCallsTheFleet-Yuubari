@@ -80,7 +80,10 @@ class NavLangSwitch extends React.Component {
         return (
             <div className="lang-switch">
                 <span
-                    className="link"
+                    className={classNames({
+                        "link": true,
+                        "on": this.state.showMenu,
+                    })}
                     children={__('nav.languageSwitch')}
                     data-current-locale-abbr={langName[this.props.localeId][0]}
                     onClick={() => {

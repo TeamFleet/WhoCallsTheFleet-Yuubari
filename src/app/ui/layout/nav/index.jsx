@@ -80,8 +80,10 @@ class Nav extends React.Component {
                                 }
                                 : {}
                             }
-                        >{__('title')}</IndexLink>
-                        {__CHANNEL__ === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
+                        >
+                            <span className="title">{__('title')}</span>
+                            {__CHANNEL__ === 'yuubari' && <span className="channel channel-yuubari">Yuubari</span>}
+                        </IndexLink>
                     </div>
 
                     <NavChannels className="mid" location={this.props.location} />

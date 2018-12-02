@@ -103,8 +103,6 @@
         .btn-home-logo{
             z-index:    2;
             background-image: url('~Assets/appicon.png');
-            color:      transparent;
-            overflow:   hidden;
             .is-hover({
                 filter: brightness(1.2);
                 &:active{
@@ -116,6 +114,10 @@
             }
             &.on{
                 pointer-events: none;
+            }
+            .title{
+                color: transparent;
+                z-index: -1;
             }
         }
 
@@ -137,7 +139,7 @@
             });
         }
             .channel-yuubari{
-                color:  hsl(26, 93%, 80%);
+                color:  hsl(26, 95%, 82.5%);
                 text-shadow: 0 0 2px fade(#000, 75%);
                 &:after{
                     content:    'the Fleet dev channel';

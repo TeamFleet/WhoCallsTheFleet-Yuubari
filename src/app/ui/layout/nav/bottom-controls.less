@@ -26,6 +26,9 @@
             margin-top: (0 - @size / 2);
             .badge(@size);
         }
+        &.on{
+            pointer-events: none;
+        }
     }
 
     .lang-switch{
@@ -56,7 +59,6 @@
             padding-bottom: 5px;
             &.on{
                 pointer-events: none;
-                cursor: pointer;
                 &::before{
                     @size: 6px;
                     content: "";
