@@ -31,13 +31,24 @@
     & > .wrapper{
         position:   absolute;
         z-index:    5;
-        padding-bottom: @controls-height;
         top:        0;
         left:       0;
         height:     100%;
         width:      100%;
         overflow-x: hidden;
         overflow-y: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        padding-bottom: 25px;
+        & > .top, & > .bot {
+            flex: 0 0 auto;
+        }
+        & > .mid {
+            flex: 1;
+        }
+        & > .bot{
+            margin-top: 40px;
+        }
     }
 
     &:before, &:after{
@@ -118,19 +129,29 @@
             font-style: italic;
             font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
             font-size:  1.4rem;
-            transform:  skewY(-5deg);
+            // transform:  skewY(-5deg);
+            .screen-t1({
+                left: (@size + 2px);
+                font-size: 1.2rem;
+                letter-spacing: -.05em;
+            });
         }
             .channel-yuubari{
                 color:  hsl(26, 93%, 80%);
                 text-shadow: 0 0 2px fade(#000, 75%);
                 &:after{
-                    content:    'DEV';
+                    content:    'the Fleet dev channel';
                     position:   absolute;
                     right:      0;
-                    bottom:     0;
+                    bottom:     -.2em;
                     line-height:1em;
-                    font-size:  14px;
+                    font-size:  12px;
                     opacity:    .85;
+                    white-space: nowrap;
+                    letter-spacing: 0;
+                    .screen-t1({
+                        content: 'the Fleet dev';
+                    });
                 }
             }
 
@@ -145,36 +166,6 @@
                     transform:  none;
                 }
             }
-        }
-    }
-
-    .controls{
-        position:   absolute;
-        bottom:     0;
-        height:     @controls-height;
-        line-height:@controls-height;
-        border-left:20px solid transparent;
-    }
-
-    .language-switch{
-        margin-top:     50px;
-        padding-left:   20px;
-    }
-    .language-switch-container{
-        display:    block;
-        overflow:   hidden;
-        .item{
-            @size:      20px;
-
-            display:    block;
-            float:      left;
-            font-size:  12px;
-            width:      @size;
-            line-height:@size;
-            height:     @size;
-            text-align: center;
-            border:     1px solid currentColor;
-            margin:     0 4px 0 0;
         }
     }
 

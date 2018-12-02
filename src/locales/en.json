@@ -141,7 +141,9 @@
         "arsenal": "Akashi's Arsenal",
         "entities": "CV & Illustrators",
         "exillusts": "Limited CGs",
-        "about": "About"
+        "about": "About",
+        "languageSwitch": "Change Language",
+        "backgroundSwitch": "Change Background"
     },
 
     "speed_calculator": {

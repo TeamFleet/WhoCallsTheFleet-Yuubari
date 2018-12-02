@@ -1,37 +1,23 @@
 @import './_.less';
 
 .component {
-    padding:    0 20px;
+    padding:    0 @gutter-right 0 0;
 
     .link{
+        .nav-link();
         display:    block;
-        color:      @theme-bluegrey-100;
         line-height:1.35em;
-        padding:    3px 0 3px 20px;
+        padding-left: @span-left;
         position:   relative;
-        margin-top: 4px;
-        .styles-active(){
-            color:  @color-active;
-        }
-        .is-hover({
-            color:  #fff;
-        }; {
-            .styles-active();
-        });
-        &:active{
-            .styles-active();
-        }
         &.on{
             color:  #fff;
-            cursor: default;
-            pointer-events: none;
             &:before{
                 @size:      8px;
                 content:    '';
                 position:   absolute;
                 // top:        50%;
                 top:        50%;
-                left:       0;
+                left:       20px;
                 width:      @size;
                 height:     @size;
                 margin-top: (0 - @size / 2);
@@ -45,7 +31,7 @@
             &:after{
                 content:    "";
                 position:   absolute;
-                left:       -20px;
+                left:       0;
                 top:        0;
                 bottom:     0;
                 width:      80px;

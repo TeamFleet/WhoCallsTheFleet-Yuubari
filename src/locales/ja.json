@@ -142,7 +142,9 @@
         "arsenal": "明石の改修工廠",
         "entities": "CV・イラストレーター",
         "exillusts": "期間限定図鑑",
-        "about": "アバウト"
+        "about": "アバウト",
+        "languageSwitch": "Change Language",
+        "backgroundSwitch": "Change Background"
     },
 
     "speed_calculator": {

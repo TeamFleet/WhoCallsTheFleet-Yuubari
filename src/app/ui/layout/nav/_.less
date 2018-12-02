@@ -2,3 +2,27 @@
 
 @controls-height:   60px;
 @button-menu-size:  20px;
+@span-left: 40px;
+@gutter-right: 20px;
+
+.nav-link() {
+    color:      @theme-bluegrey-100;
+    line-height:1.35em;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-top: 4px;
+    .styles-active(){
+        color:  @color-active;
+    }
+    .is-hover({
+        color:  #fff;
+    }; {
+        .styles-active();
+    });
+    &:active{
+        .styles-active();
+    }
+    &.on{
+        color:  #fff;
+    }
+}

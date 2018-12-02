@@ -1,0 +1,96 @@
+@import './_.less';
+
+.component {
+    position: relative;
+    border-right: @gutter-right solid transparent;
+
+    .badge(@size: 18px) {
+        display: block;
+        width: @size;
+        height: @size;
+        text-align: center;
+        line-height: (@size - 2);
+        font-size: 12px;
+        border: 1px solid currentColor;
+    }
+
+    .link {
+        .nav-link();
+        display: block;
+        padding-left: @span-left;
+        &[data-current-locale-abbr]::before{
+            @size: 18px;
+            content: attr(data-current-locale-abbr);
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            margin-top: (0 - @size / 2);
+            .badge(@size);
+        }
+    }
+
+    .menu {
+        display: block;
+        position: absolute;
+        bottom: 100%;
+        left: (@span-left - 1 - 25);
+        right: 0;
+        background: fade(@theme-bluegrey-900, 90%);
+        border: 1px solid fade(@theme-bluegrey-50, 20%);
+        border-radius: 5px;
+        box-shadow: 0 0 15px fade(#000, 50%);
+        padding: 5px 0;
+        transition-property: opacity, transform;
+        z-index: 10;
+        .link-lang {
+            .nav-link();
+            display: block;
+            padding-left: 25px;
+            margin: 0;
+            font-size: 13px;
+            position: relative;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            &.on{
+                pointer-events: none;
+                cursor: pointer;
+                &::before{
+                    @size: 6px;
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    line-height: 0;
+                    left: 12px;
+                    width: @size;
+                    height: @size;
+                    margin-top: (0 - @size / 2);
+                    background: @theme-bluegrey-100;
+                    border-radius: 50%;
+                }
+            }
+        }
+        &.transition-enter {
+            opacity: 0.01;
+            transform: translateY(10px);
+        }
+            &.transition-enter-active {
+                opacity: 1;
+                transform: none;
+            }
+        &.transition-exit {
+            opacity: 1;
+            transform: none;
+        }
+            &.transition-exit-active {
+                opacity: 0.01;
+                transform: translateY(10px);
+            }
+        .screen-tablet({
+            background: fade(#000, 85%);
+            .link-lang {
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+        });
+    }
+}
