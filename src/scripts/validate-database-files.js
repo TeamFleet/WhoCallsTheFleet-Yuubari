@@ -12,6 +12,10 @@ const {
 const dbpath = path.resolve(process.cwd(), 'node_modules', 'whocallsthefleet-database', 'db')
 const topath = path.resolve(pathApp, 'database', 'db')
 
+/**
+ * 预处理所有 .nedb database 文件
+ * @async
+ */
 module.exports = async () => {
     const stepCompressing = spinner('Compressing database...')
     const succeed = []

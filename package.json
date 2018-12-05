@@ -28,6 +28,7 @@
         "dev:no-open": "koot-dev --no-open",
         "analyze": "koot-analyze",
         "deploy": "git pull && node ./deploy",
+        "publish:webapp": "node ./src/scripts/publish/webapp/index.js",
         "test:server": "npm run build:server && npm run start:server",
         "test:server:port": "cross-env SERVER_PORT=4000 koot-start --no-build",
         "eslint": "eslint \"!(node_modules|logs|dist|dist*)/**/*.+(js|jsx)\""
