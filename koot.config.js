@@ -92,6 +92,9 @@ module.exports = {
         renderCache: {
             maxAge: 10 * 1000,
         },
+        proxyRequestOrigin: {
+            protocol: 'https',
+        },
         // reducers: './server/reducers',
         inject: './server/inject',
         before: './server/lifecycle/before',
