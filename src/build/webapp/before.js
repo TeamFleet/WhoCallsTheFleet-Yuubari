@@ -19,10 +19,10 @@ const webappBefore = async (data = {}) => {
     }
 
     if (complete) return
-    // if (process.env.WEBPACK_BUILD_ENV !== 'prod') {
-    //     complete = true
-    //     return
-    // }
+    if (process.env.WEBPACK_BUILD_ENV !== 'prod') {
+        complete = true
+        return
+    }
 
     const channel = require('../../channel')
     const repoPath = (() => {
