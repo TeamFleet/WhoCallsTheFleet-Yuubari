@@ -16,14 +16,7 @@ const publishWebApp = async () => {
         return path.resolve(__dirname, '../../../../', dist)
     })()
 
-    // 复制文件
-    const from = path.resolve(__dirname, 'files')
-    for (let filename of fs.readdirSync(from)) {
-        await fs.copyFile(
-            path.resolve(from, filename),
-            path.resolve(dist, filename)
-        )
-    }
+    // npm run build
 
     // git commit & push
 }

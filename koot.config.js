@@ -130,6 +130,7 @@ module.exports = {
             return {}
         },
         beforeBuild: async (...args) => {
+            await require('./src/build/webapp/before')(...args)
             if (process.env.WEBPACK_BUILD_STAGE === 'client') {
                 console.log(' ')
                 if (process.env.WEBPACK_BUILD_ENV === 'prod') {
@@ -149,6 +150,7 @@ module.exports = {
             ) {
                 await require('./src/scripts/clean-web-sourcemap')()
             }
+            await require('./src/build/webapp/after-server')()
             return
         },
         defines: require('./src/defines'),
