@@ -49,7 +49,7 @@ const Title = extend({
         switch (type) {
             case 'line-append': {
                 return (
-                    <div className={className} data-title-type={type}>
+                    <div className={className} data-title-type={type} data-title-tag={Component}>
                         <Component
                             className={classNames([classNameSelf + '-child', classNameInner])}
                             {...props}

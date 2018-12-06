@@ -28,6 +28,7 @@ export default ImportStyle(require('./styles.less'))(({
             <ComponentContainer
                 className="bonuses bonuses-single"
                 title={__("bonuses.single")}
+                titleType="line-append"
             >
 
                 {single.length
@@ -44,6 +45,7 @@ export default ImportStyle(require('./styles.less'))(({
             <ComponentContainer
                 className="bonuses bonuses-sets"
                 title={__("bonuses.sets")}
+                titleType="line-append"
             >
                 {set.length
                     ? (
