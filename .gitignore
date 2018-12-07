@@ -56,4 +56,5 @@ node_modules/
 /apps/app/client/logic/database/db
 /src/client/logic/database/db
 /src/app/api/database/db
+/src/database/db
 .koot.config.tmp.*.js
