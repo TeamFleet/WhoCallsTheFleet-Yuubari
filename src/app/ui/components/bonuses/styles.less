@@ -1,42 +1,133 @@
 @import '~base.less';
 
-.component{
-    @size-icon: 32px;
-    @gutter-stats: 16px;
+.component-bonuses{
+}
 
-    // margin-right: (0 - @main-margin);
+.component-list{
+    margin-top: 20px;
 
-    .bonuses{
-        .grid{
-            margin-top: 20px;
-        }
+    .component-bonus + .component-bonus{
+        margin-top: 20px;
     }
-    .bonuses-single{
-        .grid{
-            @column-width: 350px;
-        
+
+    &.mod-gird{
+        @supports (display: grid) {
             display: grid;
             grid-gap: 30px 20px;
+            .component-bonus + .component-bonus{
+                margin-top: 0;
+            }
+        }
+        .grid-column-width(@column-width){
             grid-template-columns: repeat(auto-fill, minmax(@column-width, 1fr) );
-
             @media all and (max-width: (@column-width + @main-margin-phone * 2)){
                 grid-template-columns: 100%;
             }
         }
-
-        .bonus + .bonus{
-            @supports (display: grid) {
-                margin-top: 0;
-            }
+        &.is-ship{
+            .grid-column-width(350px);
+        }
+        &.is-equipment{
+            .grid-column-width(600px);
         }
     }
 
-    // .bonus{
-    //     text-shadow: 0 0 2px #000;
-    // }
+    &.is-single{
 
-    .bonus + .bonus{
-        margin-top: 20px;
+    }
+
+    &.is-set{
+        
+    }
+}
+
+.component-bonus{
+    @size-icon: 32px;
+    @gutter-stats: 16px;
+    @condition-base-height: 24px;
+
+    .condition{
+        font-size: 16px;
+        line-height: 20px;
+        color: @color-alt;
+
+        & > .at,
+        & > .exclude{
+            padding-top: 2px;
+            padding-bottom: 2px;
+            padding-left: @size-icon;
+            position: relative;
+            &::before{
+                position: absolute;
+                top: 0;
+                left: 0;
+                line-height: @condition-base-height;
+                width: (@size-icon - 4);
+                text-align: center;
+                z-index: -1;
+            }
+            &.is-ship-list{
+                margin-bottom: 2px;
+                .item{
+                    font-size: inherit;
+                }
+                &::before{
+                    margin-top: 5px;
+                }
+            }
+        }
+
+        & > .at{
+            &::before{
+                content: "@";
+                color: @color-positive;
+                font-size: 16px;
+                font-weight: bolder;
+                font-style: italic;
+            }
+        }
+
+        & > .exclude{
+            z-index: -1;
+            color: @color-fade;
+            font-size: 14px;
+            &::before{
+                content: "×";
+                font-size: 24px;
+                padding-top: 1px;
+            }
+            &.is-ship-list{
+                .item{
+                    color: inherit;
+                }
+                .avatar{
+                    opacity: .75;
+                    filter: grayscale(100%) brightness(0.75);
+                }
+            }
+        }
+
+        & > .at + .exclude{
+            &.is-ship-list{
+                &::before{
+                    margin-top: 7px;
+                }
+            }
+        }
+
+        .item{
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .mod-need-sep{
+            .item + .item::before{
+                content: "/";
+                display: inline-block;
+                margin: 0 6px 0 8px;
+                z-index: -1;
+                color: @color-base-dimmed;
+            }
+        }
     }
 
     .infos{
@@ -68,6 +159,13 @@
             &.negative .value{
                 color: @color-negative;
             }
+        }
+        &::after{
+            content: "";
+            display: block;
+            clear: both;
+            height: 0;
+            overflow: hidden;
         }
     }
 

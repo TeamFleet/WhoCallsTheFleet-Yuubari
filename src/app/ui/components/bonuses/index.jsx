@@ -1,11 +1,14 @@
 import React from 'react'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
+import classNames from 'classnames'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import BonusSingle from './bonus-single'
 
-export default ImportStyle(require('./styles.less'))(({
-    className,
+export default extend({
+    styles: require('./styles.less')
+})(({
+    className, ['data-class-name']: classNameThis,
     bonuses,
     ship, equipment,
 }) => {
@@ -21,21 +24,36 @@ export default ImportStyle(require('./styles.less'))(({
             single.push(bonus)
     })
 
-    if (__CLIENT__ && __DEV__) console.log(single, set)
+    if (__CLIENT__ && __DEV__) console.log('Bonuses', single, set)
+
+    // const classNameBonuses = classNameThis + '-bonuses'
+    const classNameList = classNameThis + '-list'
+    const classNameItem = classNameThis + '-bonus'
 
     return (
         <div className={className}>
             <ComponentContainer
-                className="bonuses bonuses-single"
+                // className={classNameBonuses}
                 title={__("bonuses.single")}
                 titleType="line-append"
             >
-
                 {single.length
                     ? (
-                        <div className="grid">
+                        <div className={classNames({
+                            [classNameList]: true,
+                            'mod-gird': single.length > 1,
+                            'is-single': true,
+                            'is-ship': !!ship,
+                            'is-equipment': !!equipment,
+                        })}>
                             {single.map((bonus, index) => (
-                                <BonusSingle key={index} className="item" bonus={bonus} ship={ship} equipment={equipment} />
+                                <BonusSingle
+                                    key={index}
+                                    className={classNameItem}
+                                    bonus={bonus}
+                                    thisShip={ship}
+                                    thisEquipment={equipment}
+                                />
                             ))}
                         </div>
                     )
@@ -43,13 +61,13 @@ export default ImportStyle(require('./styles.less'))(({
                 }
             </ComponentContainer>
             <ComponentContainer
-                className="bonuses bonuses-sets"
+                // className={classNames([classNameBonuses, "is-sets"])}
                 title={__("bonuses.sets")}
                 titleType="line-append"
             >
                 {set.length
                     ? (
-                        <div className="grid">
+                        <div className={classNames([classNameList, 'is-set'])}>
                             SETS
                         </div>
                     )
