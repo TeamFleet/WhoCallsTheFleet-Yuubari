@@ -1,4 +1,5 @@
 const path = require('path')
+const notifier = require('node-notifier')
 const spinner = require('../../commons/spinner')
 
 /**
@@ -38,6 +39,14 @@ const publishWebApp = async () => {
     await git.commit(`New build ${(new Date()).toISOString()}`)
     await git.push('origin', 'master')
     waiting.finish()
+
+    // notify
+    notifier.notify({
+        title: 'The Fleet',
+        message: 'Publish (WebApp) complete!'
+    })
+
+    return
 }
 
 publishWebApp()
