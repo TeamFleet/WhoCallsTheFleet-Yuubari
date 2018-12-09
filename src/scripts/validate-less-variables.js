@@ -16,7 +16,7 @@ const {
 const pathfile = path.resolve(pathAppUI, './base/less/variables.less')
 
 module.exports = async () => {
-    const waiting = spinner('Replacing less variables...')
+    const waiting = spinner('Validating less variables...')
     const results = []
 
     let content = await new Promise((resolve, reject) => {
@@ -48,7 +48,7 @@ module.exports = async () => {
     // equipment list stat columns count
     {
         const stats = require(
-            path.resolve(pathApp, 'app/constants/', 'equipment-stats')
+            path.resolve(pathApp, 'constants/', 'equipment-stats')
         )
         content = content.replace(
             /@equipment-list-stat-count:([ \t]*)([0-9]+);/g,

@@ -182,19 +182,19 @@ module.exports = {
         '@locales': path.resolve('./src/locales'),
         '@assets': path.resolve('./src/assets'),
 
-        '@app': path.resolve('./src/app'),
-        '@utils': path.resolve('./src/app/utils'),
-        '@ui': path.resolve('./src/app/ui'),
-        '@api': path.resolve('./src/app/api'),
-        "@const": path.resolve('./src/app/constants'),
+        '@app': path.resolve('./src'),
+        '@utils': path.resolve('./src/utils'),
+        '@ui': path.resolve('./src/ui'),
+        '@api': path.resolve('./src/api'),
+        "@const": path.resolve('./src/constants'),
         "@redux": path.resolve('./src/redux'),
-        '@actions': path.resolve('./src/app/api/actions'),
+        '@actions': path.resolve('./src/api/actions'),
         '@db': path.resolve('./src/database'),
         '@database': path.resolve('./src/database'),
 
-        "~base.less": path.resolve('./src/app/ui/base.less'),
+        "~base.less": path.resolve('./src/ui/base.less'),
         "~Assets": path.resolve('./src/assets'),
-        "~/": path.resolve('./src/app/ui')
+        "~/": path.resolve('./src/ui')
     },
 
     /**

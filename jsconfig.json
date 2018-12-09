@@ -13,15 +13,17 @@
             "@docs/*": ["./docs/*"],
             "@locales/*": ["./src/locales/*"],
             "@assets/*": ["./src/assets/*"],
-            "@app/*": ["./src/app/*"],
-            "@utils/*": ["./src/app/utils/*"],
-            "@ui/*": ["./src/app/ui/*"],
-            "@api/*": ["./src/app/api/*"],
-            "@const/*": ["./src/app/constants/*"],
-            "@redux/*": ["./src/app/redux/*"],
-            "@actions/*": ["./src/app/api/actions/*"],
+            "@app/*": ["./src/*"],
+            "@utils/*": ["./src/utils/*"],
+            "@ui/*": ["./src/ui/*"],
+            "@api/*": ["./src/api/*"],
+            "@const/*": ["./src/constants/*"],
+            "@redux/*": ["./src/redux/*"],
+            "@actions/*": ["./src/api/actions/*"],
+            "@db/*": ["./src/database/*"],
+            "@database/*": ["./src/database/*"],
             "~Assets/*": ["./src/assets/*"],
-            "~/*": ["./src/app/ui/*"]
+            "~/*": ["./src/ui/*"]
         }
     },
     "exclude": [

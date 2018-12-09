@@ -15,7 +15,7 @@ module.exports = {
 
     src: {
         _: pathSrc,
-        ui: path.resolve(pathSrc, './app/ui'),
+        ui: path.resolve(pathSrc, './ui'),
     },
 
     getDist: () => getDistPath(),
