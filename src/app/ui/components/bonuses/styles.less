@@ -51,6 +51,16 @@
         line-height: 20px;
         color: @color-alt;
 
+        & > .is-ship-list{
+            margin-bottom: 2px;
+            .item{
+                font-size: inherit;
+            }
+            &::before{
+                margin-top: 5px;
+            }
+        }
+
         & > .at,
         & > .exclude{
             padding-top: 2px;
@@ -65,15 +75,6 @@
                 width: (@size-icon - 4);
                 text-align: center;
                 z-index: -1;
-            }
-            &.is-ship-list{
-                margin-bottom: 2px;
-                .item{
-                    font-size: inherit;
-                }
-                &::before{
-                    margin-top: 5px;
-                }
             }
         }
 
@@ -94,7 +95,7 @@
             &::before{
                 content: "×";
                 font-size: 24px;
-                padding-top: 1px;
+                // padding-top: 1px;
             }
             &.is-ship-list{
                 .item{
@@ -107,13 +108,13 @@
             }
         }
 
-        & > .at + .exclude{
-            &.is-ship-list{
-                &::before{
-                    margin-top: 7px;
-                }
-            }
-        }
+        // & > .at + .exclude{
+        //     &.is-ship-list{
+        //         &::before{
+        //             margin-top: 7px;
+        //         }
+        //     }
+        // }
 
         .item{
             display: inline-block;

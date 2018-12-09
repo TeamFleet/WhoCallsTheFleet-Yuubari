@@ -1,5 +1,5 @@
-const fs = require('fs-extra')
 const path = require('path')
+const spinner = require('../../commons/spinner')
 
 /**
  * 发布: WebApp
@@ -17,8 +17,27 @@ const publishWebApp = async () => {
     })()
 
     // npm run build
+    await new Promise(resolve => {
+        const child = require('child_process').spawn(
+            'npm',
+            ['run', 'build'],
+            {
+                stdio: 'inherit',
+                shell: true,
+            }
+        )
+        child.on('close', () => {
+            resolve()
+        })
+    })
 
     // git commit & push
+    const waiting = spinner('Git committing & pushing...')
+    const git = require('simple-git/promise')(dist)
+    await git.add('./*')
+    await git.commit(`New build ${(new Date()).toISOString()}`)
+    await git.push('origin', 'master')
+    waiting.finish()
 }
 
 publishWebApp()

@@ -1,4 +1,6 @@
 const base = require('./_base')
+// const path = require('path')
+// const glob = require('glob')
 
 module.exports = Object.assign({}, base, {
     entry: {
@@ -23,6 +25,7 @@ module.exports = Object.assign({}, base, {
 
             'kckit',
         ],
+        // database: glob.sync(path.resolve(__dirname, '../../src/database/**/*'), { nodir: true }),
         ...base.entry,
     },
 

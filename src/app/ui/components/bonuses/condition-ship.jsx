@@ -47,6 +47,7 @@ export default ({
         components.push(
             <ListShips
                 className="at is-ship-list"
+                classNameItem="item"
                 list={ensureArray(condition.isID)}
                 size="mini"
                 grid={false}
