@@ -117,7 +117,7 @@ class App extends React.Component {
             window.addEventListener('beforeinstallprompt', (evt) => {
                 // console.log('🎯 beforeinstallprompt Event fired')
                 evt.preventDefault()
-                this.dispatch(setInstallPWAEvent(evt))
+                this.props.dispatch(setInstallPWAEvent(evt))
             })
         }
     }

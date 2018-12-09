@@ -50,10 +50,23 @@ const doCricital = () => {
         }
 
         setTimeout(() => {
+
             if (__DEV__) self.logHr()
             if (__DEV__) console.log('🚀 App ready')
             if (__DEV__) self.logHr()
+
+            console.log(`
+ _____ _           ______ _           _   
+|_   _| |          |  ___| |         | |  
+  | | | |__   ___  | |_  | | ___  ___| |_ 
+  | | | '_ \\ / _ \\ |  _| | |/ _ \\/ _ \\ __|
+  | | | | | |  __/ | |   | |  __/  __/ |_ 
+  \\_/ |_| |_|\\___| \\_|   |_|\\___|\\___|\\__|
+
+            `)
+
             document.body.classList.add('is-ready')
+
             setTimeout(() => {
                 self.isAppReadyFull = true
             }, 1000)
