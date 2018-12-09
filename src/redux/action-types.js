@@ -1,4 +1,5 @@
-// export const I18N_INIT = 'I18N_INIT'
+// global / app base
+export const SET_INSTALL_PWA_EVENT = 'SET_INSTALL_PWA_EVENT'
 
 // ui-mode
 export const RESET_UIMODE = 'RESET_UIMODE'

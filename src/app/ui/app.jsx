@@ -1,8 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
-import { extend } from 'koot'
+import { extend, history } from 'koot'
 
-import { updateAppReady } from '@api/app/api'
+import {
+    updateAppReady,
+    setInstallPWAEvent,
+} from '@api/app/api'
 import { swipedFromLeftEdge } from '@api/side-menu/api'
 import { updateLocale as updateDbLocale } from '@database'
 
@@ -100,7 +103,23 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        const {
+            query = {}
+        } = history.getCurrentLocation()
+
+        // 检查 App 是否已准备就绪
         this.checkAppReady()
+
+        // 检查是否需要显示“安装App”按钮
+        if (query.utm_source !== 'web_app_manifest') {
+            // console.log('🎯 not via app')
+            // https://developers.google.com/web/fundamentals/app-install-banners/
+            window.addEventListener('beforeinstallprompt', (evt) => {
+                // console.log('🎯 beforeinstallprompt Event fired')
+                evt.preventDefault()
+                this.dispatch(setInstallPWAEvent(evt))
+            })
+        }
     }
 
     componentDidUpdate() {

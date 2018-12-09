@@ -3,10 +3,11 @@ import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import bindEvent from 'bind-event'
 import classNames from 'classnames'
-import { extend, history } from 'koot'
+import { extend } from 'koot'
 
 import availableLocales from '@src/locales'
 import { enterBackground as enterUIModeBackground } from '@api/ui-mode'
+import installPWA from '@utils/install-app'
 
 const langName = {
     en: ['EN', 'English'],
@@ -125,6 +126,24 @@ class NavLangSwitch extends React.Component {
 //
 
 
+const NavInstall = extend({
+    connect: state => ({
+        evt: state.app.eventInstallPWA
+    })
+})(
+    ({ evt, dispatch }) => {
+        if (!evt)
+            return null
+        return (
+            <span
+                className="link"
+                children={__('nav.install')}
+                onClick={() => installPWA(evt, dispatch)}
+            />
+        )
+    }
+)
+/*
 class NavInstall extends React.Component {
     state = {
         show: false
@@ -182,3 +201,4 @@ class NavInstall extends React.Component {
         )
     }
 }
+*/
