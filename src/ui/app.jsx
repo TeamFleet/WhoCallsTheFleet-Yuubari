@@ -120,6 +120,7 @@ class App extends React.Component {
                 // console.log('🎯 beforeinstallprompt Event fired')
                 evt.preventDefault()
                 this.props.dispatch(setInstallPWAEvent(evt))
+                return false
             })
         }
     }
