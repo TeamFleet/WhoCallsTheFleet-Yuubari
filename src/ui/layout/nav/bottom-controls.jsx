@@ -9,6 +9,8 @@ import availableLocales from '@src/locales'
 import { enterBackground as enterUIModeBackground } from '@api/ui-mode'
 import installPWA from '@utils/install-app'
 
+import Icon from '@ui/components/icon'
+
 const langName = {
     en: ['EN', 'English'],
     ja: ['日', '日本語'],
@@ -26,9 +28,9 @@ const NavBottomControls = extend({
     ({ className, dispatch }) => (
         <div className={className}>
             <NavInstall />
-            <span
-                className="link"
+            <NavBottomItem
                 onClick={() => dispatch(enterUIModeBackground())}
+                icon="image-compare"
                 children={__('nav.backgroundSwitch')}
             />
             <NavLangSwitch />
@@ -36,6 +38,27 @@ const NavBottomControls = extend({
     )
 )
 export default NavBottomControls
+
+
+//
+
+
+const NavBottomItem = ({
+    className,
+    icon,
+    children,
+    ...props,
+}) => {
+    return (
+        <span
+            className={classNames(['link', className])}
+            {...props}
+        >
+            {icon && <Icon icon={icon} className="icon" />}
+            {children}
+        </span>
+    )
+}
 
 
 //
@@ -135,70 +158,11 @@ const NavInstall = extend({
         if (!evt)
             return null
         return (
-            <span
-                className="link"
-                children={__('nav.install')}
+            <NavBottomItem
                 onClick={() => installPWA(evt, dispatch)}
+                icon="download5"
+                children={__('nav.install')}
             />
         )
     }
 )
-/*
-class NavInstall extends React.Component {
-    state = {
-        show: false
-    }
-    // deferredInstallAppPrompt
-    componentDidMount() {
-        const {
-            query = {}
-        } = history.getCurrentLocation()
-        if (query.utm_source !== 'web_app_manifest') {
-            // console.log('🎯 not via app')
-            // https://developers.google.com/web/fundamentals/app-install-banners/
-            window.addEventListener('beforeinstallprompt', (evt) => {
-                // console.log('🎯 beforeinstallprompt Event fired')
-                evt.preventDefault()
-                this.deferredInstallAppPrompt = evt
-                this.setState({
-                    show: true
-                })
-                return false
-            })
-        }
-    }
-    installApp() {
-        if (!this.deferredInstallAppPrompt)
-            return false
-
-        // console.log('🎯 Install App button clicked')
-        // The user has had a postive interaction with our app and Chrome
-        // has tried to prompt previously, so let's show the prompt.
-        this.deferredInstallAppPrompt.prompt();
-        // Follow what the user has done with the prompt.
-        this.deferredInstallAppPrompt.userChoice.then(function (choiceResult) {
-            console.log(choiceResult.outcome)
-            if (choiceResult.outcome == 'dismissed') {
-                console.log('🎯 User cancelled home screen install')
-            } else {
-                console.log('🎯 User added to home screen')
-                this.setState({
-                    show: false
-                })
-            }
-            this.deferredInstallAppPrompt = undefined
-        })
-    }
-    render() {
-        if (!this.state.show)
-            return null
-        return (
-            <span
-                className="link"
-                children={__('nav.install')}
-                onClick={this.installApp.bind(this)}
-            />
-        )
-    }
-}
-*/

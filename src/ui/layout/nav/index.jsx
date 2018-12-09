@@ -2,10 +2,10 @@ import React from 'react'
 import { IndexLink } from 'react-router'
 import { extend } from 'koot'
 
-import Icon from '@ui/components/icon.jsx'
-
+import Icon from '@ui/components/icon'
 import NavChannels from './channels'
 import NavBottomControls from './bottom-controls'
+import AppBar from './appbar'
 
 /** @type {DOM} 控制导航显示的开关 */
 let elNavSwitch
@@ -110,38 +110,4 @@ export const onRouterChange = () => {
     if (typeof document === 'undefined') return
     if (!elNavSwitch) return
     elNavSwitch.checked = false
-}
-
-
-//
-
-
-@extend({
-    connect: state => ({
-        pageTitle: state.pageTitle
-    }),
-    styles: require('./styles-appbar.less')
-})
-class AppBar extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                {this.props.pageTitle.sub && <span className="sub">{this.props.pageTitle.sub}</span>}
-                <span className="main">{this.props.pageTitle.main}</span>
-                <span className="buttons">
-                    {__CLIENT__ && navigator.share && (
-                        <Icon icon="question6" onClick={() => {
-                            navigator.share({
-                                title: document.title,
-                                text: document.querySelector('meta[name="description"]').getAttribute('content'),
-                                url: location.href,
-                            })
-                                .then(() => console.log('Successful share'))
-                                .catch((error) => console.log('Error sharing', error));
-                        }} />
-                    )}
-                </span>
-            </div>
-        )
-    }
 }

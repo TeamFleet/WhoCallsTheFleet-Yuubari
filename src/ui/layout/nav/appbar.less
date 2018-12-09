@@ -1,8 +1,6 @@
 @import './_.less';
 
 .component {
-    @margin-tablet: 72px;
-    @margin-phone: 54px;
     display:    none;
     .screen-tablet({
         display:    flex;
@@ -15,7 +13,7 @@
         z-index:    100;
         background: #000;
         line-height:@nav-height-tablet;
-        padding:    0 0 0 @margin-tablet;
+        padding:    0 0 0 72px;
         z-index:    1;
         // background: @theme-lightblue-700;
         background: @color-theme;
@@ -46,15 +44,34 @@
         .buttons{
             display: block;
             flex: 0 0 auto;
-            padding-right: @margin-tablet;
+            padding-right: 9px;
+            .button{
+                position: relative;
+                display: inline-block;
+                height: 100%;
+                width: 40px;
+                .icon{
+                    @size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: (0 - @size / 2);
+                    margin-left: (0 - @size / 2);
+                    width: @size;
+                    height: @size;
+                }
+                &:active{
+                    opacity: 0.75;
+                }
+            }
         }
     });
 
     .screen-phone({
         line-height:@nav-height-phone;
-        padding:    0 0 0 @margin-phone;
+        padding:    0 0 0 54px;
         .buttons{
-            padding-right: @margin-phone;
+            padding-right: 5px;
         }
     });
 }

@@ -17,6 +17,16 @@
         .nav-link();
         display: block;
         padding-left: @span-left;
+        position: relative;
+        .icon{
+            @size: 16px;
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            margin-top: (0 - @size / 2);
+            width: @size;
+            height: @size;
+        }
         &[data-current-locale-abbr]::before{
             @size: 18px;
             content: attr(data-current-locale-abbr);

@@ -111,7 +111,9 @@ class App extends React.Component {
         this.checkAppReady()
 
         // 检查是否需要显示“安装App”按钮
-        if (query.utm_source !== 'web_app_manifest') {
+        if (__DEV__) {
+            this.props.dispatch(setInstallPWAEvent({}))
+        } else if (query.utm_source !== 'web_app_manifest') {
             // console.log('🎯 not via app')
             // https://developers.google.com/web/fundamentals/app-install-banners/
             window.addEventListener('beforeinstallprompt', (evt) => {
