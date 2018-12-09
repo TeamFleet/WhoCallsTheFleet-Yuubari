@@ -121,12 +121,15 @@
             white-space: nowrap;
         }
         .mod-need-sep{
-            .item + .item::before{
+            .item::after{
                 content: "/";
                 display: inline-block;
                 margin: 0 6px 0 8px;
                 z-index: -1;
                 color: @color-base-dimmed;
+            }
+            .item:last-child::after{
+                content: none;
             }
         }
     }
