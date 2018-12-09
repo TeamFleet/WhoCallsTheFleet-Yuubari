@@ -67,8 +67,18 @@ export default extend({
             >
                 {set.length
                     ? (
-                        <div className={classNames([classNameList, 'is-set'])}>
-                            SETS
+                        <div className={classNames({
+                            [classNameList]: true,
+                            'is-set': true,
+                            'is-ship': !!ship,
+                            'is-equipment': !!equipment,
+                        })}>
+                            {set.map((bonus, index) => (
+                                <div
+                                    key={index}
+                                    children={`[PH] SET BONUS #${index}`}
+                                />
+                            ))}
                         </div>
                     )
                     : <span className="disabled">{__("none")}</span>
