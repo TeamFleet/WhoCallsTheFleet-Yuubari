@@ -25,7 +25,7 @@ const AppBar = extend({
                 {(eventInstallPWA || __DEV__) && (
                     <AppBarButton icon="download5" onClick={() => installPWA(eventInstallPWA, dispatch)} />
                 )}
-                {(navigator.share || __DEV__) && (
+                {((typeof navigator !== 'undefined' && navigator.share) || __DEV__) && (
                     <AppBarButton icon="share3" onClick={() => {
                         navigator.share({
                             title: document.title,
