@@ -135,8 +135,10 @@ class NavInstall extends React.Component {
             query = {}
         } = history.getCurrentLocation()
         if (query.utm_source !== 'web_app_manifest') {
+            // console.log('🎯 not via app')
             // https://developers.google.com/web/fundamentals/app-install-banners/
             window.addEventListener('beforeinstallprompt', (evt) => {
+                // console.log('🎯 beforeinstallprompt Event fired')
                 evt.preventDefault()
                 this.deferredInstallAppPrompt = evt
                 this.setState({
@@ -150,21 +152,22 @@ class NavInstall extends React.Component {
         if (!this.deferredInstallAppPrompt)
             return false
 
+        // console.log('🎯 Install App button clicked')
         // The user has had a postive interaction with our app and Chrome
         // has tried to prompt previously, so let's show the prompt.
-        deferredPrompt.prompt();
+        this.deferredInstallAppPrompt.prompt();
         // Follow what the user has done with the prompt.
-        deferredPrompt.userChoice.then(function (choiceResult) {
-            console.log(choiceResult.outcome);
+        this.deferredInstallAppPrompt.userChoice.then(function (choiceResult) {
+            console.log(choiceResult.outcome)
             if (choiceResult.outcome == 'dismissed') {
-                console.log('User cancelled home screen install');
+                console.log('🎯 User cancelled home screen install')
             } else {
-                console.log('User added to home screen');
+                console.log('🎯 User added to home screen')
                 this.setState({
                     show: false
                 })
             }
-            deferredPrompt = null;
+            this.deferredInstallAppPrompt = undefined
         })
     }
     render() {
