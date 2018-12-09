@@ -16,8 +16,7 @@ export default {
         return `<link rel="manifest" href="/${filename}?${manifestLastModified.get(localeId) || ''}">`
     },
 
-    svgIcons: `<div class="hide">${__SVG_SYMBOLS__}</div>`
-        + (__DEV__ ? `<script>var __ICONSVG__ = "${__SVG_SYMBOLS__}"</script>` : ''),
+    svgIcons: `<div class="hide">${__SVG_SYMBOLS__}</div>`,
 
     definePath: `<script>`
         + `window.__CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getClientFilePath('polyfill.js')}";`
