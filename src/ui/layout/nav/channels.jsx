@@ -8,27 +8,29 @@ import getTimeJST from '@utils/get-time-jst.js'
 // wip-
 // indev-
 let navs = [
-    ' ',
+
+    '__tools',
     'indev-fleets',
     __DEV__ ? 'wip-fleets-wip' : null,
     'calctp',
     __DEV__ ? 'indev-academy' : null,
-    __DEV__ ? ' ' : null,
-    __DEV__ ? 'indev-sorties' : null,
-    __DEV__ ? 'indev-expeditions' : null,
-    ' ',
+
+    '__database',
     'ships',
     'equipments',
     'arsenal',
     'entities',
     __DEV__ ? 'indev-exillusts' : null,
+    __DEV__ ? 'indev-sorties' : null,
+    __DEV__ ? 'indev-expeditions' : null,
+
     ' ',
     'about'
 ]
 
 if (__DEV__)
     navs = navs.concat([
-        ' ',
+        '__dev',
         'dev-ipsum',
         'dev-components',
         'dev-icons'
@@ -59,10 +61,14 @@ const ChannelItem = ({
     if (name === ' ')
         return <s className="blank" />
 
+    if (/^__/.test(name)) {
+        return <span className="subtitle" children={__(`nav.${name.substr(2)}`)} />
+    }
+
     let title
     let isIndev = false
     let isWIP = false
-    let isCurrent
+    let isActive = false
 
     if (name.substr(0, 6) === 'indev-') {
         name = name.substr(6)
@@ -77,29 +83,34 @@ const ChannelItem = ({
     else
         title = __('nav', name)
 
-    let url = name
+    let url = '/' + name
 
     switch (name) {
         case 'arsenal': {
             const jst = getTimeJST()
-            url = `arsenal/${jst.getDay()}`
-            if (location &&
-                location.pathname &&
-                location.pathname.indexOf('/arsenal') === 0
+            url = `/arsenal/${jst.getDay()}`
+            isActive = (
+                location && location.pathname &&
+                /^\/arsenal\//.test(location.pathname)
             )
-                isCurrent = true
             break
+        }
+        default: {
+            isActive = (
+                location && location.pathname &&
+                (new RegExp(`^${url}/`)).test(location.pathname)
+            )
         }
     }
 
     return (
         <Link
-            to={'/' + url}
+            to={url}
             className={classNames({
                 link: true,
                 'is-indev': isIndev,
                 'is-wip': isWIP,
-                on: isCurrent
+                on: isActive
             })}
             activeClassName="on"
             children={title}

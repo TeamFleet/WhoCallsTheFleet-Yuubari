@@ -3,27 +3,72 @@
 .component {
     padding:    0 @gutter-right 0 0;
 
+    .subtitle, .link{
+        padding-left: @span-left;
+        position: relative;
+    }
+    .subtitle{
+        display: inline-block;
+        font-size: 14px;
+        line-height: 28px;
+        margin-top: 16px;
+        font-style: italic;
+        letter-spacing: .1em;
+        // color: hsl(26, 95%, 82.5%);
+        color: @theme-bluegrey-50;
+        // color: @theme-bluegrey-200;
+        cursor: default;
+        // text-shadow: 1px 1px 1px fade(#fff, 35%);
+        text-shadow: 1px 1px 1px fade(#000, 35%);
+        // &::before, &::after{
+        //     content: "";
+        //     position: absolute;
+        //     top: 50%;
+        //     height: 1px;
+        //     background: @color-border;
+        // }
+        // &::before{
+        //     @left: 0;
+        //     // right: 100%;
+        //     // left: (0 - @span-left);
+        //     left: @left;
+        //     width: (@span-left - @left - 6);
+        // }
+        // &::after{
+        //     content: "";
+        //     left: 100%;
+        //     right: (0 - @nav-width);
+        //     margin-left: 6px;
+        // }
+        .screen-tablet({
+            margin-top: 24px;
+            line-height: 32px;
+            // margin-left: -1em;
+            font-style: normal;
+            color: @theme-bluegrey-400;
+        });
+    }
     .link{
         .nav-link();
-        display:    block;
-        line-height:1.35em;
-        padding-left: @span-left;
-        position:   relative;
+        display: block;
+        // line-height:1.35em;
         &.on{
             color:  #fff;
             &:before{
                 @size:      8px;
+                .nav-link-symbol(@size);
+                margin-top: -1px;
                 content:    '';
                 position:   absolute;
-                // top:        50%;
-                top:        50%;
                 left:       20px;
                 width:      @size;
                 height:     @size;
-                margin-top: (0 - @size / 2);
                 background: @theme-bluegrey-100;
                 border-radius: 50%;
                 animation:  fadein @base-transition-duration @base-transition-timing-function;
+                .screen-tablet({
+                    content: none;
+                });
             }
         }
         &.is-indev,
@@ -74,4 +119,8 @@
         display:    block;
         height:     15px;
     }
+
+    .screen-tablet({
+        padding-right: 0;
+    });
 }

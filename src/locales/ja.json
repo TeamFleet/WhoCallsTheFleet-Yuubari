@@ -131,18 +131,20 @@
 
     "nav": {
         "home": "ホーム",
+        "tools": "ツール",
         "fleets": "艦隊ビルダー",
         "academy": "海軍兵学校",
         "calctp": "TPカルキュレーター",
-        "sets": "Equipment Sets",
-        "sorties": "Sories",
-        "expeditions": "Expeditions",
+        "database": "データベース",
         "ships": "艦娘",
         "equipments": "装備",
         "arsenal": "明石の改修工廠",
         "entities": "CV・イラストレーター",
         "exillusts": "期間限定図鑑",
+        "sorties": "出击",
+        "expeditions": "遠征",
         "about": "アバウト",
+        "dev": "開発センター",
         "languageSwitch": "Change Language",
         "backgroundSwitch": "Change Background",
         "install": "インストール"

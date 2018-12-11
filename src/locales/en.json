@@ -130,18 +130,20 @@
 
     "nav": {
         "home": "Home",
+        "tools": "Tools",
         "fleets": "Fleet Builder",
         "academy": "Naval Academy",
         "calctp": "TP Calculator",
-        "sets": "Equipment Sets",
-        "sorties": "Sories",
-        "expeditions": "Expeditions",
+        "database": "Database",
         "ships": "Ships",
         "equipments": "Equipments",
         "arsenal": "Akashi's Arsenal",
         "entities": "CV & Illustrators",
         "exillusts": "Limited CGs",
+        "sorties": "Sories",
+        "expeditions": "Expeditions",
         "about": "About",
+        "dev": "Dev. Center",
         "languageSwitch": "Change Language",
         "backgroundSwitch": "Change Background",
         "install": "Install App"

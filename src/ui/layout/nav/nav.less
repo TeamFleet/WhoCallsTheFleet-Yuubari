@@ -39,7 +39,9 @@
         overflow-y: auto;
         display: flex;
         flex-flow: column nowrap;
-        padding-bottom: 25px;
+        // padding-bottom: 25px;
+        padding-bottom: 10px;
+        transition-property: transform;
         & > .top, & > .bot {
             flex: 0 0 auto;
         }
@@ -85,6 +87,10 @@
         height:     90px;
         position:   relative;
         border-left:20px solid transparent;
+
+        .screen-tablet({
+            border-left-width: @span-left;
+        });
 
         .btn-back, .btn-home-logo{
             position:   absolute;
@@ -132,7 +138,7 @@
             font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
             font-size:  1.4rem;
             // transform:  skewY(-5deg);
-            .screen-t1({
+            .screen-t1_to_tablet({
                 left: (@size + 2px);
                 font-size: 1.2rem;
                 letter-spacing: -.05em;
@@ -151,8 +157,12 @@
                     opacity:    .85;
                     white-space: nowrap;
                     letter-spacing: 0;
-                    .screen-t1({
+                    .screen-t1_to_tablet({
                         content: 'the Fleet dev';
+                    });
+                    .screen-tablet({
+                        right: auto;
+                        left: 0;
                     });
                 }
             }

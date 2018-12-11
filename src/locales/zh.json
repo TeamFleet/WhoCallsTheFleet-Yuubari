@@ -130,10 +130,11 @@
 
     "nav": {
         "home": "首页",
+        "tools": "工具",
         "fleets": "舰队模拟",
         "academy": "海军兵学校",
         "calctp": "TP计算",
-        "sets": "配装指南",
+        "database": "资料库",
         "sorties": "出击海域",
         "expeditions": "远征",
         "ships": "舰娘",
@@ -142,6 +143,7 @@
         "entities": "声优 & 画师",
         "exillusts": "限定图鉴",
         "about": "关于",
+        "dev": "研发中心",
         "languageSwitch": "切换语言",
         "backgroundSwitch": "切换背景图",
         "install": "安装 App"

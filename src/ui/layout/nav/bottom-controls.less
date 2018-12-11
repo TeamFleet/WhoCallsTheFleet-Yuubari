@@ -3,38 +3,33 @@
 .component {
     border-right: @gutter-right solid transparent;
 
-    .badge(@size: 18px) {
-        display: block;
-        width: @size;
-        height: @size;
-        text-align: center;
-        line-height: (@size - 2);
-        font-size: 12px;
-        border: 1px solid currentColor;
-    }
-
     .link {
         .nav-link();
         display: block;
         padding-left: @span-left;
         position: relative;
+        font-size: 14px;
         .icon{
             @size: 16px;
+            .nav-link-symbol(@size);
             position: absolute;
-            top: 50%;
             left: 16px;
-            margin-top: (0 - @size / 2);
             width: @size;
             height: @size;
         }
         &[data-current-locale-abbr]::before{
             @size: 18px;
+            .nav-link-symbol(@size);
             content: attr(data-current-locale-abbr);
             position: absolute;
-            top: 50%;
             left: 15px;
-            margin-top: (0 - @size / 2);
-            .badge(@size);
+            display: block;
+            width: @size;
+            height: @size;
+            text-align: center;
+            line-height: (@size - 2);
+            font-size: 12px;
+            border: 1px solid currentColor;
         }
         &.on{
             pointer-events: none;
