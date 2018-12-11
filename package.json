@@ -52,7 +52,7 @@
         "kckit": "1.21.11",
         "whocallsthefleet-database": "2018.12.9",
         "whocallsthefleet-backgrounds": "1.3.2",
-        "react-transition-group": "2.5.0",
+        "react-transition-group": "2.5.1",
         "react-markdown": "4.0.4",
         "bind-event": "1.0.5",
         "check-css-prop": "1.0.1",
@@ -69,7 +69,7 @@
         "nedb-promise": "2.0.1",
         "image-size": "0.6.3",
         "camelcase": "5.0.0",
-        "raw-loader": "0.5.1",
+        "raw-loader": "1.0.0",
         "svg-url-loader": "2.3.2"
     },
     "devDependencies": {
