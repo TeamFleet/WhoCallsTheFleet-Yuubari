@@ -27,9 +27,10 @@ const AppBar = extend({
                 )}
                 {((typeof navigator !== 'undefined' && navigator.share) || __DEV__) && (
                     <AppBarButton icon="share3" onClick={() => {
+                        const elMetaDescription = document.querySelector('meta[name="description"]')
                         navigator.share({
                             title: document.title,
-                            text: document.querySelector('meta[name="description"]').getAttribute('content'),
+                            text: elMetaDescription ? elMetaDescription.getAttribute('content') : '',
                             url: location.href,
                         })
                             .then(() => console.log('Successful share'))
