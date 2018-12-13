@@ -16,13 +16,15 @@
         cursor: default;
         color: #fff;
         text-shadow: 0 0 5px fade(#fff, 75%);
+        transform: skew(-15deg);
         .icon{
             @size: 16px;
             .nav-link-symbol(@size);
             width: @size;
             height: @size;
             left: (@span-left - @size - 8);
-            fill: @color-base;
+            // fill: @color-base;
+            opacity: 0.75;
         }
         .screen-tablet({
             margin-top: 24px;
@@ -31,9 +33,11 @@
             font-style: normal;
             color: @theme-bluegrey-400;
             text-shadow: none;
+            transform: none;
             .icon{
                 margin-top: -2px;
-                fill: currentColor;
+                opacity: 1;
+                // fill: currentColor;
             }
         });
     }
