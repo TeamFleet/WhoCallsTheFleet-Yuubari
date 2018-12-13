@@ -363,7 +363,7 @@ class CompareControls extends React.Component {
                         className="btn btn-reset"
                         onClick={this.compareReset.bind(this)}
                     >
-                        <Icon className="icon" icon="puzzle2" />
+                        <Icon className="icon" icon="cross" />
                         {__("ship_list.compare.quit")}
                     </button>
                     <button
@@ -371,7 +371,7 @@ class CompareControls extends React.Component {
                         className="btn btn-modify"
                         onClick={this.compareAddRemove.bind(this)}
                     >
-                        <Icon className="icon" icon="puzzle" />
+                        <Icon className="icon" icon="stack-check" />
                         {__("ship_list.compare.add_remove")}
                     </button>
                 </div>

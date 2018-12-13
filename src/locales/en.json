@@ -129,12 +129,16 @@
     },
 
     "nav": {
+        "sub": {
+            "base": "Naval Base",
+            "archive": "Archive",
+            "dev": "Dev. Center"
+        },
         "home": "Home",
         "tools": "Tools",
         "fleets": "Fleet Builder",
         "academy": "Naval Academy",
         "calctp": "TP Calculator",
-        "database": "Database",
         "ships": "Ships",
         "equipments": "Equipments",
         "arsenal": "Akashi's Arsenal",
@@ -143,7 +147,6 @@
         "sorties": "Sories",
         "expeditions": "Expeditions",
         "about": "About",
-        "dev": "Dev. Center",
         "languageSwitch": "Change Language",
         "backgroundSwitch": "Change Background",
         "install": "Install App"

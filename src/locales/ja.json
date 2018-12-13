@@ -130,12 +130,15 @@
     },
 
     "nav": {
+        "sub": {
+            "base": "海軍基地",
+            "archive": "アーカイブ",
+            "dev": "開発センター"
+        },
         "home": "ホーム",
-        "tools": "ツール",
         "fleets": "艦隊ビルダー",
         "academy": "海軍兵学校",
         "calctp": "TPカルキュレーター",
-        "database": "データベース",
         "ships": "艦娘",
         "equipments": "装備",
         "arsenal": "明石の改修工廠",
@@ -144,7 +147,6 @@
         "sorties": "出击",
         "expeditions": "遠征",
         "about": "アバウト",
-        "dev": "開発センター",
         "languageSwitch": "Change Language",
         "backgroundSwitch": "Change Background",
         "install": "インストール"

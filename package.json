@@ -21,11 +21,11 @@
         "build:client": "koot-build --client",
         "build:server": "koot-build --server",
         "build:spa": "koot-build --client --type react-spa --config ./koot.config.spa.js",
-        "dev": "koot-dev",
+        "dev": "koot-dev --no-open",
         "dev:client": "koot-dev --client",
         "dev:server": "koot-dev --server",
         "dev:spa": "koot-dev --config ./koot.config.spa.js",
-        "dev:no-open": "koot-dev --no-open",
+        "dev:open": "koot-dev",
         "analyze": "koot-analyze",
         "deploy": "git pull && node ./deploy",
         "publish:webapp": "node ./src/scripts/publish/webapp/index.js",
@@ -48,7 +48,7 @@
         "analyze": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js"
     },
     "dependencies": {
-        "koot": "0.8.0-alpha.2",
+        "koot": "0.8.0-alpha.5",
         "kckit": "1.21.11",
         "whocallsthefleet-database": "2018.12.9",
         "whocallsthefleet-backgrounds": "1.3.2",

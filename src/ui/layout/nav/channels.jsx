@@ -5,17 +5,19 @@ import { extend } from 'koot'
 
 import getTimeJST from '@utils/get-time-jst.js'
 
+import Icon from '@ui/components/icon'
+
 // wip-
 // indev-
 let navs = [
 
-    '__tools',
+    ['base', 'anchor'],
     'indev-fleets',
     __DEV__ ? 'wip-fleets-wip' : null,
     'calctp',
     __DEV__ ? 'indev-academy' : null,
 
-    '__database',
+    ['archive', 'book3'],
     'ships',
     'equipments',
     'arsenal',
@@ -30,7 +32,7 @@ let navs = [
 
 if (__DEV__)
     navs = navs.concat([
-        '__dev',
+        ['dev', 'warning2'],
         'dev-ipsum',
         'dev-components',
         'dev-icons'
@@ -61,8 +63,17 @@ const ChannelItem = ({
     if (name === ' ')
         return <s className="blank" />
 
+    if (Array.isArray(name)) {
+        return (
+            <span className="subtitle">
+                <Icon icon={name[1]} className="icon" />
+                {__('nav.sub', name[0])}
+            </span>
+        )
+    }
+
     if (/^__/.test(name)) {
-        return <span className="subtitle" children={__(`nav.${name.substr(2)}`)} />
+        return <span className="subtitle" children={__('nav', name.substr(2))} />
     }
 
     let title

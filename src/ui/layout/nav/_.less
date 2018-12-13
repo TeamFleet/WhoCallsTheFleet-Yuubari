@@ -51,3 +51,9 @@
         top: floor((@nav-link-height-mobile - @height) / 2 - 0);
     });
 }
+
+.nav-is-route-changing( @rules ){
+    #nav.is-loading &{
+        @rules();
+    }
+}
