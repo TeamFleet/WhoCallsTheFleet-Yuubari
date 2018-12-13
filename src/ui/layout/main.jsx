@@ -1,8 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import { updateMainKey } from '@api/app/api'
 
@@ -29,9 +28,11 @@ const getKey = location => {
 //     console.log('state', state)
 //     return {}
 // })
-@connect()
-@ImportStyle(require('./main.less'))
-export default class extends React.Component {
+@extend({
+    connect: true,
+    styles: require('./main.less')
+})
+class Main extends React.Component {
     // onAnimationStart(evt) {
     //     switch (evt.nativeEvent.animationName) {
     //         case 'main-transition-enter':
@@ -113,20 +114,23 @@ export default class extends React.Component {
         )
     }
 }
+export default Main
 
-class MainBody extends React.Component {
-    render() {
-        const marginTop = __CLIENT__ && action === 'POP' ? pathnameLastScrollY[location.pathname] - lastScrollY : NaN
-        return (
-            <div style={
-                __CLIENT__ && action === 'POP' && this.props.location.pathname !== location.pathname
-                    ? {
-                        marginTop: isNaN(marginTop) ? undefined : `${marginTop}px`
-                    }
-                    : null
-            }>
-                {this.props.children}
-            </div>
-        )
-    }
+
+//
+
+
+const MainBody = ({ location, children }) => {
+    const marginTop = __CLIENT__ && action === 'POP' ? pathnameLastScrollY[location.pathname] - lastScrollY : NaN
+    return (
+        <div style={
+            __CLIENT__ && action === 'POP' && location.pathname !== location.pathname
+                ? {
+                    marginTop: isNaN(marginTop) ? undefined : `${marginTop}px`
+                }
+                : null
+        }>
+            {children}
+        </div>
+    )
 }

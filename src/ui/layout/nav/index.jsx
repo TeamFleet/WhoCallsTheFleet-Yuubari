@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { extend } from 'koot'
 
 import isRouteChanging from '@api/from-state/is-route-changing'
+import { lock as lockWindowScroll, restore as restoreWindowScroll } from '@utils/toggle-window-scroll'
 
 import Icon from '@ui/components/icon'
 import NavChannels from './channels'
@@ -14,6 +15,12 @@ import Logo from './logo'
 /** @type {DOM} 控制导航显示的开关 */
 let elNavSwitch
 const idNavSwitch = 'nav-switch'
+const changeNavSwitch = (changeTo) => {
+    if (!elNavSwitch) return
+    elNavSwitch.checked = changeTo
+    const event = new Event('change')
+    elNavSwitch.dispatchEvent(event)
+}
 
 
 //
@@ -43,10 +50,10 @@ class Nav extends React.Component {
         // })
 
         if (prevProps.timeSwipedFromLeftEdge !== this.props.timeSwipedFromLeftEdge)
-            elNavSwitch.checked = true
+            changeNavSwitch(true)
 
         if (this.props.isAppHasUiMode)
-            elNavSwitch.checked = false
+            changeNavSwitch(false)
 
         return null
     }
@@ -61,7 +68,16 @@ class Nav extends React.Component {
                     // 'is-loading': true,
                 })}
             >
-                <input type="checkbox" id={idNavSwitch} ref={(c) => elNavSwitch = c} />
+                <input
+                    type="checkbox"
+                    id={idNavSwitch}
+                    ref={(c) => elNavSwitch = c}
+                    onChange={() => {
+                        if (elNavSwitch.checked)
+                            return lockWindowScroll()
+                        return restoreWindowScroll()
+                    }}
+                />
 
                 <div className="wrapper">
                     <Logo
@@ -90,7 +106,7 @@ export default Nav
 
 
 export const onRouterChange = () => {
-    if (typeof document === 'undefined') return
-    if (!elNavSwitch) return
-    elNavSwitch.checked = false
+    if (__SERVER__) return
+    changeNavSwitch(false)
+    restoreWindowScroll(0, 0)
 }
