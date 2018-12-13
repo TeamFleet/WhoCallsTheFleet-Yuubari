@@ -14,7 +14,7 @@ export default ({
 
     if (condition.isType || condition.isNotType) {
         components.push(
-            <div className={classNames([condition.isType ? "at" : 'exclude', 'mod-need-sep'])}>
+            <div key="conditionType" className={classNames([condition.isType ? "at" : 'exclude', 'mod-need-sep'])}>
                 {ensureArray(condition.isType || condition.isNotType).map((typeId, index) => {
                     const type = db.shipTypes[typeId]
                     return (
@@ -26,7 +26,7 @@ export default ({
     }
     if (condition.isClass || condition.isNotClass) {
         components.push(
-            <div className={classNames([condition.isClass ? "at" : 'exclude', 'mod-need-sep'])}>
+            <div key="conditionClass" className={classNames([condition.isClass ? "at" : 'exclude', 'mod-need-sep'])}>
                 {ensureArray(condition.isClass || condition.isNotClass).map((classId, index) => {
                     const cl = db.shipClasses[classId]
                     const type = db.shipTypes[cl.ship_type_id]
@@ -51,12 +51,13 @@ export default ({
                 list={ensureArray(condition.isID)}
                 size="mini"
                 grid={false}
+                key="conditionID"
             />
         )
     }
     if (condition.isNotID) {
         components.push(
-            <div className={'exclude mod-need-sep'}>
+            <div key="conditionNotID" className={'exclude mod-need-sep'}>
                 {ensureArray(condition.isNotID).map((shipId, index) => {
                     return (
                         <ConditionItem
@@ -70,7 +71,7 @@ export default ({
     }
 
     return (
-        <div className={classNames("condition", "is-ship", className)}>
+        <div key="conditions" className={classNames("condition", "is-ship", className)}>
             {components}
         </div>
     )
