@@ -74,8 +74,8 @@ class Nav extends React.Component {
                     id={idNavSwitch}
                     ref={(c) => elNavSwitch = c}
                     onChange={() => {
-                        if (checkCssProp('overscroll-behavior'))
-                            return
+                        // if (checkCssProp('overscroll-behavior'))
+                        //     return
                         if (elNavSwitch.checked)
                             return lockWindowScroll()
                         return restoreWindowScroll()
