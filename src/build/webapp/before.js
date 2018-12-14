@@ -27,8 +27,7 @@ const webappBefore = async (data = {}) => {
     const channel = require('../../channel')
     const repoPath = (() => {
         if (channel === 'yuubari')
-            return 'git@github.com:steveukx/git-js.git'
-        // return 'git@github.com:TeamFleet/yuubari-server.git'
+            return 'git@github.com:TeamFleet/yuubari-server.git'
         return ''
     })()
     const isDistRepo = fs.existsSync(dist) && fs.existsSync(path.resolve(dist, '.git'))
