@@ -41,7 +41,7 @@ const webappBefore = async (data = {}) => {
         const git = require('simple-git/promise')(dist)
         await git.clone(repoPath, dist)
             .catch(err => {
-                waiting.error(err)
+                waiting.fail(err)
             })
     }
 
