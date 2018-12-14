@@ -17,14 +17,14 @@ const prepareDoms = () => {
 export const lock = () => {
     prepareDoms()
     lastScroll.top = getScrollTop()
-    // document.documentElement.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
     _app.classList.add('mod-scroll-locking')
     _main.style.marginTop = `${0 - lastScroll.top}px`
 }
 
 export const restore = (toX = lastScroll.left, toY = lastScroll.top) => {
     prepareDoms()
-    // document.documentElement.style.overflow = ''
+    document.documentElement.style.overflow = ''
     _app.classList.remove('mod-scroll-locking')
     _main.style.marginTop = ``
     window.scrollTo(toX, toY)

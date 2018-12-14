@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import checkCssProp from 'check-css-prop'
 import { extend } from 'koot'
 
 import isRouteChanging from '@api/from-state/is-route-changing'
@@ -73,6 +74,8 @@ class Nav extends React.Component {
                     id={idNavSwitch}
                     ref={(c) => elNavSwitch = c}
                     onChange={() => {
+                        if (checkCssProp('overscroll-behavior'))
+                            return
                         if (elNavSwitch.checked)
                             return lockWindowScroll()
                         return restoreWindowScroll()
