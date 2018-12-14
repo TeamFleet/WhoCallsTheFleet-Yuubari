@@ -74,8 +74,8 @@ class Nav extends React.Component {
                     id={idNavSwitch}
                     ref={(c) => elNavSwitch = c}
                     onChange={() => {
-                        // if (checkCssProp('overscroll-behavior'))
-                        //     return
+                        if (checkCssProp('overscroll-behavior'))
+                            return
                         if (elNavSwitch.checked)
                             return lockWindowScroll()
                         return restoreWindowScroll()
@@ -90,13 +90,13 @@ class Nav extends React.Component {
                     />
                     <NavChannels className="mid" location={this.props.location} />
                     <NavBottomControls className="bot" />
-
                 </div>
 
                 <AppBar />
 
                 <label htmlFor={idNavSwitch} className="label">
                     <div className="icon"><Icon className="icon-menu" icon="menu" /></div>
+                    <div className="mobile-overlay" />
                 </label>
             </nav>
         )

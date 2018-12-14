@@ -37,12 +37,12 @@
         width:      100%;
         overflow-x: hidden;
         overflow-y: auto;
+        overscroll-behavior-y: contain;
         display: flex;
         flex-flow: column nowrap;
         // padding-bottom: 25px;
         padding-bottom: 10px;
         transition-property: transform;
-        overscroll-behavior-y: contain;
         & > .top, & > .bot {
             flex: 0 0 auto;
         }
@@ -290,17 +290,27 @@
                 }
             }
 
-            &:after{
-                content:    "";
-                position:   fixed;
-                z-index:    5;
-                top:        0;
-                left:       0;
-                width:      100%;
-                height:     100%;
+            .mobile-overlay{
+                position: fixed;
+                z-index: 5;
+                top: 0;
+                height: 100%;
+                left: 0;
+                right: -50px;
                 background: fade(#000, 50%);
-                opacity:    0;
+                opacity: 0;
                 pointer-events: none;
+                overflow-x: hidden;
+                overflow-y: auto;
+                overscroll-behavior-y: contain;
+                &::after{
+                    content: "";
+                    position: absolute;
+                    top: -1px;
+                    bottom: -1px;
+                    right: 0;
+                    width: 1px;
+                }
             }
         }
 
@@ -309,7 +319,7 @@
                 transform:  none;
             }
             & ~ label[for="nav-switch"]{
-                &:after{
+                .mobile-overlay{
                     opacity:    1;
                     pointer-events: all;
                 }
