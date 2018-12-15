@@ -10,7 +10,7 @@ export default () => {
     return prefs.init()
 
         // 初始化数据库
-        .then(() => dbInit())
+        .then(dbInit)
 
         // 标记准备状态
         .then(() => {

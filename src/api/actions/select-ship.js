@@ -1,9 +1,11 @@
-// import getStore from '@utils/get-store'
-import { store } from 'koot'
+import { history } from 'koot'
+if (__DEV__) console.warn('TODO: [@actions/select-ship] use `history` from global')
 
 export default () => {
+
+    if (__SERVER__) return
+
+    console.log(history)
+
     // TODO:
-    console.log('[TODO] do not use import store')
-    // const store = getStore()
-    console.log(store)
 }

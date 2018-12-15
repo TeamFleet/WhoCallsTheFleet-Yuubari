@@ -4,6 +4,8 @@ import {
     LEAVE_UIMODE,
     UIMODE_ANIMATION_END
 } from '@redux/action-types.js'
+// import { history } from 'koot'
+// if (__DEV__) console.warn('TODO: [@actions/select-ship] use `history` from global')
 
 
 //
@@ -61,6 +63,10 @@ const actions = {
                 action.state.select = args[0]
                 break
         }
+        // history.push({
+        //     ...history.getCurrentLocation(),
+        //     state: { 'uiMode': action.state }
+        // })
         return action
     },
 

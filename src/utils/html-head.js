@@ -1,5 +1,6 @@
 import metas from 'metas'
 import { store } from 'koot'
+if (__DEV__) console.warn('TODO: [@utils/html-head] use `store` from global')
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'

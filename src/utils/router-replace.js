@@ -1,4 +1,5 @@
 import { history } from 'koot'
+if (__DEV__) console.warn('TODO: [@utils/router-replace] use `history` from global')
 
 export default (uri) => {
     if (!__CLIENT__) return

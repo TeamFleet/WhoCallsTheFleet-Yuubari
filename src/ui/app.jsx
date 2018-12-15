@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import { extend, history } from 'koot'
+if (__DEV__) console.warn('TODO: [App] use `history` from global')
 
 import {
     updateAppReady,
@@ -22,7 +23,10 @@ import Bgimg from './layout/bgimg'
         }
         return {
             isMainBgimgLoaded: state.bgimg.isMainLoaded,
-            uiMode: state.uiMode,
+            uiMode: __CLIENT__
+                ? state.uiMode
+                // ? state.routing.locationBeforeTransitions.state.uiMode || {}
+                : {},
             localeId: state.localeId,
         }
     },
@@ -37,8 +41,17 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         // console.log('QA:', typeof __QA__ === 'undefined' ? 'undefined' : __QA__)
-        if (__CLIENT__)
+        if (__CLIENT__) {
+            // 确定 database 语言
             updateDbLocale({ localeId: props.localeId })
+
+            // 将 history 中的 state 清空
+            // 默认: history 的 state 对象表示临时的 UI 状态
+            history.replace({
+                ...history.getCurrentLocation(),
+                state: {}
+            })
+        }
         if (typeof document !== 'undefined' && document.documentElement)
             document.documentElement.classList.add('is-react-ready')
     }
@@ -113,6 +126,7 @@ class App extends React.Component {
         // 检查是否需要显示“安装App”按钮
         if (__DEV__) {
             this.props.dispatch(setInstallPWAEvent({}))
+            window.History = history
         } else if (query.utm_source !== 'web_app_manifest') {
             // console.log('🎯 not via app')
             // https://developers.google.com/web/fundamentals/app-install-banners/

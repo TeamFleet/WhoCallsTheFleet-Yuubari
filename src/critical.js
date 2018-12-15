@@ -1,4 +1,5 @@
 import bindEvent from 'bind-event'
+if (__DEV__) console.warn('TODO: [critical] use `history` from global')
 require('./critical.g.less')
 
 // this.isAppReady = false
