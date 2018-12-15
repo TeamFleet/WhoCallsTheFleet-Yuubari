@@ -5,6 +5,7 @@ import db from '@database'
 import ensureArray from '@utils/ensure-array'
 
 import ListShips from '@ui/components/list/ships'
+import Icon from '@ui/components/icon'
 
 export default ({
     className,
@@ -13,8 +14,10 @@ export default ({
     const components = []
 
     if (condition.isType || condition.isNotType) {
+        const isAt = condition.isType ? true : false
         components.push(
-            <div key="conditionType" className={classNames([condition.isType ? "at" : 'exclude', 'mod-need-sep'])}>
+            <div key="conditionType" className={classNames([isAt ? "at" : 'exclude', 'mod-need-sep'])}>
+                {isAt ? SymbolAt : SymbolExclude}
                 {ensureArray(condition.isType || condition.isNotType).map((typeId, index) => {
                     const type = db.shipTypes[typeId]
                     return (
@@ -25,8 +28,10 @@ export default ({
         )
     }
     if (condition.isClass || condition.isNotClass) {
+        const isAt = condition.isClass ? true : false
         components.push(
-            <div key="conditionClass" className={classNames([condition.isClass ? "at" : 'exclude', 'mod-need-sep'])}>
+            <div key="conditionClass" className={classNames([isAt ? "at" : 'exclude', 'mod-need-sep'])}>
+                {isAt ? SymbolAt : SymbolExclude}
                 {ensureArray(condition.isClass || condition.isNotClass).map((classId, index) => {
                     const cl = db.shipClasses[classId]
                     const type = db.shipTypes[cl.ship_type_id]
@@ -52,12 +57,14 @@ export default ({
                 size="mini"
                 grid={false}
                 key="conditionID"
+                children={SymbolAt}
             />
         )
     }
     if (condition.isNotID) {
         components.push(
             <div key="conditionNotID" className={'exclude mod-need-sep'}>
+                {SymbolExclude}
                 {ensureArray(condition.isNotID).map((shipId, index) => {
                     return (
                         <ConditionItem
@@ -71,7 +78,7 @@ export default ({
     }
 
     return (
-        <div key="conditions" className={classNames("condition", "is-ship", className)}>
+        <div key="conditions" className={classNames("condition", "mod-ship", className)}>
             {components}
         </div>
     )
@@ -80,3 +87,6 @@ export default ({
 const ConditionItem = ({ children }) => (
     <span className="item" children={children} />
 )
+
+const SymbolAt = <Icon class="symbol is-at" icon="at-sign" />
+const SymbolExclude = <Icon class="symbol is-exclude" icon="cross" />

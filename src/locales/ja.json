@@ -96,7 +96,9 @@
 
     "equipment_types": {
         "aircraft": "Aircraft",
-        "jet": "噴式機"
+        "jet": "噴式機",
+        "surface_radar": "水上電探",
+        "aa_radar": "対空電探"
     },
 
     "improvement": {
@@ -178,7 +180,8 @@
         "based_on_number": "Based on number of this equipment, provide...",
         "based_on_star": "Based on star level, Each of this equipment provide...",
         "based_on_area": "Based on area battle at, each of this equipment provide...",
-        "based_on_nothing": "Each of this equipment provide..."
+        "based_on_nothing": "Each of this equipment provide...",
+        "based_set": "加算ボーナス..."
     },
 
     "area": {

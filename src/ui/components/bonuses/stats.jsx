@@ -6,16 +6,69 @@ import equipmentStats from '@const/equipment-stats'
 import Stat from '@ui/components/stat'
 
 export default ({
-    stats: bonusStats,
+    bonus
 }) => {
-    if (typeof bonusStats !== 'object') return null
+    if (typeof bonus !== 'object') return null
+
+    const isSet = typeof bonus.equipments === 'object'
+    let infoText = isSet ? __('bonuses.based_set') : ''
+    let stats
+
+    if (typeof bonus.bonusCount === 'object') {
+        if (!isSet) infoText = __('bonuses.based_on_number')
+        stats = Object.keys(bonus.bonusCount)
+            .sort((a, b) => parseInt(a) - parseInt(b))
+            .map(count => (
+                <div className="stats-line stats-has-extra" key={count}>
+                    <div className="extra extra-type-count" data-count={count}>{count}</div>
+                    <BonusStats stats={bonus.bonusCount[count]} />
+                </div>
+            ))
+    } else if (typeof bonus.bonusImprove === 'object') {
+        if (!isSet) infoText = __('bonuses.based_on_star')
+        stats = Object.keys(bonus.bonusImprove)
+            .sort((a, b) => parseInt(a) - parseInt(b))
+            .map(star => (
+                <div className="stats-line stats-has-extra" key={star}>
+                    <div className="extra extra-type-star" data-star={star}>{star}</div>
+                    <BonusStats stats={bonus.bonusImprove[star]} />
+                </div>
+            ))
+    } else if (typeof bonus.bonusArea === 'object') {
+        if (!isSet) infoText = __('bonuses.based_on_area')
+        stats = Object.keys(bonus.bonusArea)
+            .map(area => (
+                <div className="stats-line stats-has-extra" key={area}>
+                    <div className="extra extra-type-area" data-area={area}>{__(`area.${area.toLowerCase()}`)}</div>
+                    <BonusStats stats={bonus.bonusArea[area]} />
+                </div>
+            ))
+    } else if (typeof bonus.bonus === 'object') {
+        if (!isSet) infoText = __('bonuses.based_on_nothing')
+        stats = <BonusStats stats={bonus.bonus} />
+    }
+
+    return (
+        <React.Fragment>
+            {infoText ? <div className="infos" children={infoText} /> : null}
+            <div className="stats">
+                {stats}
+            </div>
+        </React.Fragment>
+    )
+}
+
+const BonusStats = ({
+    stats,
+}) => {
+    if (typeof stats !== 'object') return null
 
     return (
         <React.Fragment>
             {equipmentStats
-                .filter(stat => !isNaN(bonusStats[stat]) && bonusStats[stat])
+                .filter(stat => !isNaN(stats[stat]) && stats[stat])
                 .map((stat, index) => {
-                    const value = bonusStats[stat]
+                    const value = stats[stat]
                     let text = ''
                     const classes = ['stat']
 

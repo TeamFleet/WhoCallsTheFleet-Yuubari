@@ -45,8 +45,7 @@ class App extends React.Component {
             // 确定 database 语言
             updateDbLocale({ localeId: props.localeId })
 
-            // 将 history 中的 state 清空
-            // 默认: history 的 state 对象表示临时的 UI 状态
+            // 将 history 中的 state.ui 清空
             history.replace({
                 ...history.getCurrentLocation(),
                 state: {}

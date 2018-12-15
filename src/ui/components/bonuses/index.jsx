@@ -2,8 +2,10 @@ import React from 'react'
 import { extend } from 'koot'
 import classNames from 'classnames'
 
+import bonusIsSet from './bonus-is-set'
 import ComponentContainer from '@ui/containers/infos-component'
 import BonusSingle from './bonus-single'
+import BonusSet from './bonus-set'
 
 export default extend({
     styles: require('./styles.less')
@@ -18,7 +20,7 @@ export default extend({
     const single = []
     const set = []
     bonuses.forEach(bonus => {
-        if (typeof bonus.equipments === 'object')
+        if (bonusIsSet(bonus))
             set.push(bonus)
         else
             single.push(bonus)
@@ -74,9 +76,12 @@ export default extend({
                             'is-equipment': !!equipment,
                         })}>
                             {set.map((bonus, index) => (
-                                <div
+                                <BonusSet
                                     key={index}
-                                    children={`[PH] SET BONUS #${index}`}
+                                    className={classNameItem}
+                                    bonus={bonus}
+                                    thisShip={ship}
+                                    thisEquipment={equipment}
                                 />
                             ))}
                         </div>

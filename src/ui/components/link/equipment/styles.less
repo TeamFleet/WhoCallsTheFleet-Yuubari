@@ -1,8 +1,8 @@
 @import "../../../base.less";
 
 .component{
-    @base-height:   (@link-equipment-padding-left - 2);
-    @line-height:   (@link-equipment-padding-left - 2);
+    @base-height:   @link-equipment-line-height;
+    @line-height:   @link-equipment-line-height;
     @padding-v:     floor((@base-height - @line-height) / 2);
     @size-icon:     30px;
 
@@ -23,7 +23,7 @@
         }
     }
 
-    &.mod-size-large{
+    &.mod-icon-large{
         @size: 36px;
         padding-left: (@link-equipment-padding-left + 6);
         .icon{

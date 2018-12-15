@@ -95,7 +95,9 @@
 
     "equipment_types": {
         "aircraft": "Aircraft",
-        "jet": "Jets"
+        "jet": "Jets",
+        "surface_radar": "Surface Radar",
+        "aa_radar": "AA Radar"
     },
 
     "improvement": {
@@ -178,7 +180,8 @@
         "based_on_number": "Based on number of this equipment, provide...",
         "based_on_star": "Based on star level, each of this equipment provide...",
         "based_on_area": "Based on area battle at, each of this equipment provide...",
-        "based_on_nothing": "Each of this equipment provide..."
+        "based_on_nothing": "Each of this equipment provide...",
+        "based_set": "Additional bonus..."
     },
 
     "area": {

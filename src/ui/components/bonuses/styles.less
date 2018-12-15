@@ -47,8 +47,9 @@
     @condition-base-height: 24px;
 
     .condition{
+        @line-height: 20px;
         font-size: 16px;
-        line-height: 20px;
+        line-height: @line-height;
         color: @color-alt;
 
         & > .is-ship-list{
@@ -56,7 +57,10 @@
             .item{
                 font-size: inherit;
             }
-            &::before{
+            // &::before{
+            //     margin-top: 5px;
+            // }
+            & > .symbol{
                 margin-top: 5px;
             }
         }
@@ -67,38 +71,44 @@
             padding-bottom: 2px;
             padding-left: @size-icon;
             position: relative;
-            &::before{
+            & > .symbol{
+                @size: 16px;
                 position: absolute;
-                top: 0;
-                left: 0;
-                line-height: @condition-base-height;
-                width: (@size-icon - 4);
-                text-align: center;
+                top: 4px;
+                left: 6px;
+                width: @size;
+                height: @size;
                 z-index: -1;
+                &.is-at{
+                    fill: @color-positive;
+                }
+                &.is-exclude{
+                    fill: @color-fade;
+                }
             }
         }
 
-        & > .at{
-            &::before{
-                content: "@";
-                color: @color-positive;
-                font-size: 16px;
-                font-weight: bolder;
-                font-style: italic;
-                // content: "";
-                // background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><title>at-sign</title><path d="M54.627 9.373c-6.044-6.044-14.080-9.373-22.628-9.373s-16.583 3.329-22.628 9.373c-6.044 6.044-9.373 14.080-9.373 22.627s3.329 16.583 9.373 22.627c6.044 6.044 14.080 9.373 22.628 9.373 4.798 0 9.412-1.037 13.717-3.082 1.995-0.948 2.844-3.334 1.897-5.33s-3.334-2.844-5.33-1.897c-3.223 1.531-6.683 2.308-10.284 2.308-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24v4c0 2.206-1.794 4-4 4s-4-1.794-4-4v-16c0-2.209-1.791-4-4-4-1.624 0-3.021 0.968-3.648 2.358-2.433-1.495-5.294-2.358-8.352-2.358-8.822 0-16 7.178-16 16s7.178 16 16 16c4.182 0 7.993-1.613 10.847-4.249 2.203 2.598 5.489 4.249 9.153 4.249 6.617 0 12-5.383 12-12v-4c0-8.547-3.329-16.583-9.373-22.628zM32 40c-4.411 0-8-3.589-8-8s3.589-8 8-8c4.411 0 8 3.589 8 8s-3.589 8-8 8z"></path></svg>')
-            }
-        }
+        // & > .at{
+            // &::before{
+            //     content: "@";
+            //     color: @color-positive;
+            //     font-size: 16px;
+            //     font-weight: bolder;
+            //     font-style: italic;
+            //     // content: "";
+            //     // background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><title>at-sign</title><path d="M54.627 9.373c-6.044-6.044-14.080-9.373-22.628-9.373s-16.583 3.329-22.628 9.373c-6.044 6.044-9.373 14.080-9.373 22.627s3.329 16.583 9.373 22.627c6.044 6.044 14.080 9.373 22.628 9.373 4.798 0 9.412-1.037 13.717-3.082 1.995-0.948 2.844-3.334 1.897-5.33s-3.334-2.844-5.33-1.897c-3.223 1.531-6.683 2.308-10.284 2.308-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24v4c0 2.206-1.794 4-4 4s-4-1.794-4-4v-16c0-2.209-1.791-4-4-4-1.624 0-3.021 0.968-3.648 2.358-2.433-1.495-5.294-2.358-8.352-2.358-8.822 0-16 7.178-16 16s7.178 16 16 16c4.182 0 7.993-1.613 10.847-4.249 2.203 2.598 5.489 4.249 9.153 4.249 6.617 0 12-5.383 12-12v-4c0-8.547-3.329-16.583-9.373-22.628zM32 40c-4.411 0-8-3.589-8-8s3.589-8 8-8c4.411 0 8 3.589 8 8s-3.589 8-8 8z"></path></svg>')
+            // }
+        // }
 
         & > .exclude{
             z-index: -1;
             color: @color-fade;
             font-size: 14px;
-            &::before{
-                content: "×";
-                font-size: 24px;
-                // padding-top: 1px;
-            }
+            // &::before{
+            //     content: "×";
+            //     font-size: 24px;
+            //     // padding-top: 1px;
+            // }
             &.is-ship-list{
                 .item{
                     color: inherit;
@@ -132,6 +142,53 @@
             }
             .item:last-child::after{
                 content: none;
+            }
+        }
+
+        &.mod-ship + .mod-equipments{
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        &.mod-equipment,
+        &.mod-equipments .equipment{
+            padding-top: ceil((@link-equipment-line-height - @line-height) / 2);
+            padding-bottom: floor((@link-equipment-line-height - @line-height) / 2);
+        }
+
+        &.mod-equipments{
+            .equipment{
+                display: block;
+                margin-left: @size-icon;
+                .symbol{
+                    @size: 16px;
+                    position: absolute;
+                    top: floor((@link-equipment-line-height - @size) / 2);
+                    left: (0 - @size-icon + 6);
+                    width: @size;
+                    height: @size;
+                    fill: @color-accent-2;
+                }
+            }
+            .equipment + .equipment{
+                margin-top: 4px;
+            }
+            .equipment-type-explain{
+                display: inline-block;
+                margin-left: 5px;
+                font-size: 12px;
+                color: @color-positive;
+                position: relative;
+                top: -4px;
+                vertical-align: bottom;
+                &::before{
+                    content: '[';
+                    padding-right: 2px;
+                }
+                &::after{
+                    content: ']';
+                    padding-left: 2px;
+                }
             }
         }
     }

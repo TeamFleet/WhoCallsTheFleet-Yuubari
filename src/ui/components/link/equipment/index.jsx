@@ -14,27 +14,29 @@ class LinkEquipment extends React.Component {
     render() {
         const {
             className,
-            tag,
-            equipment,
+            tag, component,
+            equipment, equipmentName,
             children,
-            size,
+            iconSize,
+            star,
             ...props
         } = this.props
 
-        const Component = tag ? tag : Link
+        const theTag = tag || component
+        const Component = theTag ? theTag : Link
         const _equipment = getEquipment(equipment)
 
         return (
             <Component
                 className={
                     className
-                    + (size ? ` mod-size-${size}` : '')
+                    + (iconSize ? ` mod-icon-${iconSize}` : '')
                 }
-                to={!tag || tag !== 'a' ? getLink('equipment', _equipment.id) : undefined}
+                to={!theTag || theTag !== 'a' ? getLink('equipment', _equipment.id) : undefined}
                 {...props}
             >
                 <IconEquipment className="icon" icon={_equipment._icon} />
-                {_equipment._name}
+                {equipmentName || _equipment._name}
                 {children}
             </Component>
         )
