@@ -30,8 +30,8 @@ import InfosPageContainer from '@ui/containers/infos-page'
 const tabsAvailable = [
     'infos',
     'capabilities',
+    'bonuses',
     'equipable',
-    'bonuses'
     // 'voicelines',
     // 'availability'
 ]
