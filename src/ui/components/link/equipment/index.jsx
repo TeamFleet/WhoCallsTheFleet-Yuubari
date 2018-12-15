@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { extend } from 'koot'
 
 import IconEquipment from '@ui/components/icon-equipment'
+import ImprovementStar from '@ui/components/improvement/star'
 
 import getEquipment from '@utils/get-equipment'
 import getLink from '@utils/get-link'
@@ -37,6 +38,7 @@ class LinkEquipment extends React.Component {
             >
                 <IconEquipment className="icon" icon={_equipment._icon} />
                 {equipmentName || _equipment._name}
+                {star ? <ImprovementStar star={star} className="star" /> : null}
                 {children}
             </Component>
         )

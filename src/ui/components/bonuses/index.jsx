@@ -71,6 +71,7 @@ export default extend({
                     ? (
                         <div className={classNames({
                             [classNameList]: true,
+                            'mod-gird': set.length > 1,
                             'is-set': true,
                             'is-ship': !!ship,
                             'is-equipment': !!equipment,

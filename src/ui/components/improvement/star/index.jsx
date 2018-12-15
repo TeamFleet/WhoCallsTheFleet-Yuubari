@@ -1,11 +1,15 @@
 import React from 'react'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
-const ImprovementStar = ({ star, level, lvl, children, ...props }) => (
-    <span
-        {...props}
-        children={'★+' + (star || level || lvl || children)}
-    />
+const ImprovementStar = extend({
+    styles: require('./styles.less')
+})(
+    ({ star, level, lvl, children, ...props }) => (
+        <span
+            {...props}
+            children={'★+' + (star || level || lvl || children)}
+        />
+    )
 )
 
-export default ImportStyle(require('./styles.less'))(ImprovementStar)
+export default ImprovementStar

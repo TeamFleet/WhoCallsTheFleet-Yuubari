@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import checkEquipment from 'kckit/src/check/equipment'
 
 import bonusIsSet from './bonus-is-set'
 
@@ -16,12 +17,19 @@ export default ({
     if (!bonusIsSet(bonus)) return null
 
     let condition = null
-    const getPropsEquipment = (id, star) => ({
-        equipment: id,
-        iconSize: "large",
-        className: "equipment color-alt",
-        star,
-    })
+    const getPropsEquipment = (id, o = {}) => {
+        const { star, isCurrent: _isCurrent = false } = o
+        const isCurrent = _isCurrent || (thisEquipment && id == thisEquipment.id)
+        return {
+            equipment: id,
+            iconSize: "large",
+            className: classNames(["equipment"], {
+                'is-current': isCurrent,
+                'color-alt': !isCurrent
+            }),
+            star,
+        }
+    }
 
     // 条件
     if (typeof thisShip === 'object') {
@@ -42,7 +50,7 @@ export default ({
                         ))
                     }
                     if (typeof item === 'object' && item.id) {
-                        return <Item index={index} key={index} {...getPropsEquipment(item.id, item.star)} />
+                        return <Item index={index} key={index} {...getPropsEquipment(item.id, { star: item.star })} />
                     }
                     if (typeof item === 'string') {
                         switch (item) {
@@ -50,7 +58,11 @@ export default ({
                                 return (
                                     <Item index={index}
                                         key={index}
-                                        {...getPropsEquipment(27)}
+                                        {...getPropsEquipment(27, {
+                                            isCurrent: checkEquipment(thisEquipment, {
+                                                isSurfaceRadar: true,
+                                            })
+                                        })}
                                         component="span"
                                         equipmentName={__('equipment_types.surface_radar')}
                                     >
@@ -61,7 +73,11 @@ export default ({
                                 return (
                                     <Item index={index}
                                         key={index}
-                                        {...getPropsEquipment(27)}
+                                        {...getPropsEquipment(27, {
+                                            isCurrent: checkEquipment(thisEquipment, {
+                                                isAARadar: true,
+                                            })
+                                        })}
                                         component="span"
                                         equipmentName={__('equipment_types.aa_radar')}
                                     >
@@ -79,7 +95,7 @@ export default ({
 
 const Item = ({ index, children, ...props }) => (
     <LinkEquipment {...props}>
-        <Icon icon={!index ? "cog" : "loop"} className="symbol" />
+        <Icon icon={!index ? "hammer-wrench" : "plus3"} className="symbol" />
         {children}
     </LinkEquipment>
 )

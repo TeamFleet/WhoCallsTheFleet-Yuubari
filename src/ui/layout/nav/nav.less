@@ -37,7 +37,6 @@
         width:      100%;
         overflow-x: hidden;
         overflow-y: auto;
-        overscroll-behavior-y: contain;
         display: flex;
         flex-flow: column nowrap;
         // padding-bottom: 25px;
@@ -52,6 +51,9 @@
         & > .bot{
             margin-top: 40px;
         }
+        .screen-tablet({
+            overscroll-behavior-y: contain;
+        });
     }
 
     &:before, &:after{

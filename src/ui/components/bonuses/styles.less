@@ -27,17 +27,10 @@
         &.is-ship{
             .grid-column-width(350px);
         }
+        &.is-set,
         &.is-equipment{
             .grid-column-width(600px);
         }
-    }
-
-    &.is-single{
-
-    }
-
-    &.is-set{
-        
     }
 }
 
@@ -147,7 +140,6 @@
 
         &.mod-ship + .mod-equipments{
             margin-top: 4px;
-            margin-bottom: 4px;
         }
 
         &.mod-equipment,
@@ -157,9 +149,14 @@
         }
 
         &.mod-equipments{
+            overflow: hidden;
+            margin-bottom: 4px;
             .equipment{
                 display: block;
                 margin-left: @size-icon;
+                float: left;
+                clear: both;
+                position: relative;
                 .symbol{
                     @size: 16px;
                     position: absolute;
@@ -167,7 +164,16 @@
                     left: (0 - @size-icon + 6);
                     width: @size;
                     height: @size;
-                    fill: @color-accent-2;
+                    fill: @color-golden;
+                    z-index: -1;
+                }
+                &.is-current{
+                    z-index: -1;
+                    color: @color-golden;
+                    font-weight: 600;
+                    .equipment-type-explain{
+                        font-weight: normal;
+                    }
                 }
             }
             .equipment + .equipment{
