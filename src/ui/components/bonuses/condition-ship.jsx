@@ -88,5 +88,5 @@ const ConditionItem = ({ children }) => (
     <span className="item" children={children} />
 )
 
-const SymbolAt = <Icon class="symbol is-at" icon="at-sign" />
-const SymbolExclude = <Icon class="symbol is-exclude" icon="cross" />
+const SymbolAt = <Icon className="symbol is-at" icon="at-sign" />
+const SymbolExclude = <Icon className="symbol is-exclude" icon="cross" />

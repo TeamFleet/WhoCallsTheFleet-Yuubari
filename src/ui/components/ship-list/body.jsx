@@ -154,7 +154,7 @@ class ShipListBody extends React.Component {
                     >
                         {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={listType || list} />) : null}
                         {!type.type && (<Title />)}
-                        {type.class && (<Title class={type.class} id={this.props.id} ships={list} />)}
+                        {type.class && (<Title className={type.class} id={this.props.id} ships={list} />)}
                         <List
                             id={this.props.id}
                             ships={list}
@@ -423,7 +423,7 @@ class ShipListBodyListCollection extends React.Component {
                             >
                                 {type.type && (!type.class || !index2) ? (<Title type={type.type} id={this.props.id} ships={listType || list} />) : null}
                                 {!type.type && (<Title />)}
-                                {type.class && (<Title class={type.class} id={this.props.id} ships={list} />)}
+                                {type.class && (<Title className={type.class} id={this.props.id} ships={list} />)}
                                 <List
                                     id={this.props.id}
                                     ships={list}

@@ -158,7 +158,7 @@ export default class extends React.Component {
                 {!this.props.controlsWrapper && this.renderButtonPrev()}
                 {!this.props.controlsWrapper && this.renderButtonNext()}
 
-                {this.props.scrollbar === true && <div class="swiper-scrollbar"></div>}
+                {this.props.scrollbar === true && <div className="swiper-scrollbar"></div>}
 
                 {this.props.children}
             </div>
