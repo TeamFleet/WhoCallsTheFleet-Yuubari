@@ -1,8 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-
-import { ImportStyle } from 'sp-css-import'
-import style from './flag-navy.less'
+import { extend } from 'koot'
 
 const navies = [
     "ijn", // 日本帝国海军
@@ -15,22 +13,27 @@ const navies = [
     "sm", // 瑞典海军"
 ]
 
-@ImportStyle(style)
-export default class extends React.Component {
-    render() {
-        const {
-            tag,
-            className,
-            shadow,
-            navy,
-            ...props
-        } = this.props
-        const TagName = tag || 'span'
+const FlagNavy = extend({
+    styles: require('./flag-navy.less')
+})(
+    ({
+        tag, component, element,
+        className,
+        shadow,
+        navy,
+        ...props
+    }) => {
+        const Component = tag || component || element || 'span'
         return (
-            <TagName className={classNames({
-                [className]: true,
-                'has-shadow': !!(shadow)
-            })} data-navy={navies.indexOf(navy)} {...props} />
+            <Component
+                {...props}
+                className={classNames({
+                    [className]: true,
+                    'has-shadow': !!(shadow)
+                })}
+                data-navy-id={navies.indexOf(navy)}
+            />
         )
     }
-}
+)
+export default FlagNavy

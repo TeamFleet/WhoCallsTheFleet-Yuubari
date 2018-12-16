@@ -113,7 +113,7 @@ class ShipListTitle extends React.Component {
         } else if (this.props.class) {
             const _class = db.shipClasses[this.props.class]._name
             const strShipClass = __("shipclass", {
-                class: _class
+                "class": _class
             })
             return (
                 <h5 className={this.props.className + ' is-sub'} data-checked={this.props.checked} onClick={this.toggle.bind(this)}>

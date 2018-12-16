@@ -5,11 +5,12 @@
     width:      @navy-flag-width;
     height:     @navy-flag-height;
     display:    inline-block;
+    transition-property: none;
 
     background:     url('~Assets/navy-flags/normal.png') no-repeat 50% @navy-flag-height / cover;
 
     .navies(@n, @i: 0) when (@i =< @n) {
-        &[data-navy="@{i}"]{
+        &[data-navy-id="@{i}"]{
             // background-position: 50% percentage(0 - @i / @navy-flags-count);
             background-position: 50% percentage(@i / (@navy-flags-count - 1));
         }
