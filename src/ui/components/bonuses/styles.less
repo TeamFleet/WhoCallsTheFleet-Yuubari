@@ -244,6 +244,7 @@
 
     .stats-has-extra{
         @base-margin-right: (0 - @size-icon + @gutter-stats - 6);
+        position: relative;
         .extra{
             position: absolute;
             text-align: right;
@@ -251,7 +252,18 @@
             margin-right: @base-margin-right;
             line-height: 22px;
             white-space: nowrap;
+            // &::before{
+            //     position: absolute;
+            //     top: 50%;
+            //     line-height: 0;
+            //     right: 100%;
+            //     margin-right: 2px;
+            // }
+        }
+        .extra-type-count{
+            color: @color-main;
             &::before{
+                content: '×';
                 position: absolute;
                 top: 50%;
                 line-height: 0;
@@ -259,13 +271,11 @@
                 margin-right: 2px;
             }
         }
-        .extra-type-count{
-            color: @color-main;
-            &::before{
-                content: '×';
-            }
-        }
         .extra-type-star{
+            line-height: @improvement-star-line-height;
+            top: 2px;
+            margin-right: -24px;
+            /*
             color: @color-improvement-star;
             &::before{
                 content: '★';
@@ -286,6 +296,7 @@
                     margin: 0;
                 }
             }
+            */
         }
         .extra-type-area{
             color: @color-main-dimmed;

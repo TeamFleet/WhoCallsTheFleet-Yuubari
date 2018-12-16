@@ -7,6 +7,7 @@ const ImprovementStar = extend({
     ({ star, level, lvl, children, ...props }) => (
         <span
             {...props}
+            data-star={star || level || lvl}
             children={'★+' + (star || level || lvl || children)}
         />
     )

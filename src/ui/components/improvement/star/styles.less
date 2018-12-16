@@ -4,7 +4,7 @@
     color: @color-improvement-star;
     display: inline-block;
     border: 1px solid currentColor;
-    line-height: 1.2em;
+    line-height: @improvement-star-line-height;
     padding: .1em .35em .025em .25em;
     border-radius: 1em;
     font-size: 12px;
@@ -14,4 +14,28 @@
     position: relative;
     background: fade(darken(@color-improvement-star, 25%), 25%);
     font-weight: normal;
+
+    &[data-star="0"]{
+        color: @color-fade;
+        background: fade(darken(@color-fade, 25%), 15%);
+    }
+
+    &[data-star="10"]{
+        color: transparent;
+        background: none transparent;
+        border-color: transparent;
+        // overflow: hidden;
+        width: 32.67px;
+        position: relative;
+        &::before{
+            content: "";
+            background: url(~Assets/improve-max.svg) no-repeat 50% 50%;
+            background-size: contain;
+            width: 100%;
+            top: -1px;
+            bottom: -1px;
+            left: 0;
+            position: absolute;
+        }
+    }
 }

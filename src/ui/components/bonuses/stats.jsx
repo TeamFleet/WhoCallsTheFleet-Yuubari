@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import equipmentStats from '@const/equipment-stats'
 
 import Stat from '@ui/components/stat'
+import ImprovementStar from '@ui/components/improvement/star'
 
 export default ({
     bonus
@@ -31,7 +32,8 @@ export default ({
             .sort((a, b) => parseInt(a) - parseInt(b))
             .map(star => (
                 <div className="stats-line stats-has-extra" key={star}>
-                    <div className="extra extra-type-star" data-star={star}>{star}</div>
+                    {/* <div className="extra extra-type-star" data-star={star}>{star}</div> */}
+                    <ImprovementStar className="extra extra-type-star" star={star} />
                     <BonusStats stats={bonus.bonusImprove[star]} />
                 </div>
             ))
