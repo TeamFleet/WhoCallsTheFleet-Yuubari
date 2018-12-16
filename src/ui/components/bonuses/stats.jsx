@@ -12,7 +12,8 @@ export default ({
 
     const isSet = typeof bonus.equipments === 'object'
     let infoText = isSet ? __('bonuses.based_set') : ''
-    let stats
+    let stats = null
+    let statsAccumulate = null
 
     if (typeof bonus.bonusCount === 'object') {
         if (!isSet) infoText = __('bonuses.based_on_number')
@@ -48,12 +49,20 @@ export default ({
         stats = <BonusStats stats={bonus.bonus} />
     }
 
+    if (typeof bonus.bonusAccumulate === 'object') {
+        statsAccumulate = (
+            <React.Fragment>
+                <div className="infos" children={__('bonuses.based_set_accumulate')} />
+                <BonusStats stats={bonus.bonusAccumulate} />
+            </React.Fragment>
+        )
+    }
+
     return (
         <React.Fragment>
             {infoText ? <div className="infos" children={infoText} /> : null}
-            <div className="stats">
-                {stats}
-            </div>
+            {stats}
+            {statsAccumulate}
         </React.Fragment>
     )
 }
@@ -64,7 +73,7 @@ const BonusStats = ({
     if (typeof stats !== 'object') return null
 
     return (
-        <React.Fragment>
+        <div className="stats">
             {equipmentStats
                 .filter(stat => !isNaN(stats[stat]) && stats[stat])
                 .map((stat, index) => {
@@ -100,6 +109,6 @@ const BonusStats = ({
                         />
                     )
                 })}
-        </React.Fragment>
+        </div>
     )
 }

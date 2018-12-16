@@ -49,8 +49,8 @@
     },
     "dependencies": {
         "koot": "0.8.0-alpha.5",
-        "kckit": "1.21.12",
-        "whocallsthefleet-database": "2018.12.9",
+        "kckit": "1.21.13",
+        "whocallsthefleet-database": "2018.12.16",
         "whocallsthefleet-backgrounds": "1.3.2",
         "react-transition-group": "2.5.1",
         "react-markdown": "4.0.4",

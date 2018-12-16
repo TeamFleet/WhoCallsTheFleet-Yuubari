@@ -26,6 +26,28 @@ export default extend({
             single.push(bonus)
     })
 
+    // 检查所有套装加成
+    // 如果 list 为 Number[]，检查是否是其他某个套装加成的子集
+    // 如果是，修改对应套装加成，添加 bonusAccumulate
+    // set.forEach((bonus, index) => {
+    //     if (!bonus.list.every(item => !isNaN(item)))
+    //         return
+    //     set.forEach((toCheck, indexToCheck) => {
+    //         if (index === indexToCheck ||
+    //             bonus.list.length >= toCheck.list.length ||
+    //             !bonus.list.every(item => toCheck.list.includes(item))
+    //         )
+    //             return
+    //         if (!toCheck.bonusAccumulate)
+    //             toCheck.bonusAccumulate = {}
+    //         Object.keys(bonus.bonus).forEach(stat => {
+    //             if (typeof toCheck.bonusAccumulate[stat] === 'undefined')
+    //                 toCheck.bonusAccumulate[stat] = 0
+    //             toCheck.bonusAccumulate[stat] += bonus.bonus[stat]
+    //         })
+    //     })
+    // })
+
     if (__CLIENT__ && __DEV__) console.log('Bonuses', single, set)
 
     // const classNameBonuses = classNameThis + '-bonuses'

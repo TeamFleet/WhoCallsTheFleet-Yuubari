@@ -181,7 +181,8 @@
         "based_on_star": "Based on star level, each of this equipment provide...",
         "based_on_area": "Based on area battle at, each of this equipment provide...",
         "based_on_nothing": "Each of this equipment provide...",
-        "based_set": "Additional bonus..."
+        "based_set": "Additional bonus...",
+        "based_set_accumulate": "Accumulated set bonus..."
     },
 
     "area": {
