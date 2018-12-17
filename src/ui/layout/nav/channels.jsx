@@ -22,7 +22,7 @@ let navs = [
     'equipments',
     'arsenal',
     'entities',
-    __DEV__ ? 'indev-exillusts' : null,
+    __DEV__ ? 'indev-excgs' : null,
     __DEV__ ? 'indev-sorties' : null,
     __DEV__ ? 'indev-expeditions' : null,
 

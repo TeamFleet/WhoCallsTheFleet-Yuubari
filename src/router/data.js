@@ -143,11 +143,11 @@ export default [
 
 
     {
-        path: 'exillusts',
-        name: 'exillusts',
+        path: 'excgs',
+        name: 'excgs',
         getComponent: (nextState, cb) => {
             require.ensure([], (require) => {
-                if (routeCheck(nextState)) cb(null, require('@ui/pages/exillusts').default)
+                if (routeCheck(nextState)) cb(null, require('@ui/pages/excgs').default)
             }, 'Ex-CGs')
         }
     },
