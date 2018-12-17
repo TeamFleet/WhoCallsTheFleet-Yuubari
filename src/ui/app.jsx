@@ -9,6 +9,10 @@ import {
 } from '@api/app/api'
 import { swipedFromLeftEdge } from '@api/side-menu/api'
 import { updateLocale as updateDbLocale } from '@database'
+import {
+    handlerBeforeReact as beforeinstallpromptHandlerBeforeReact,
+    eventPromptBeforeReact as beforeinstallpromptEventPromptBeforeReact
+} from '@utils/install-app'
 
 import Main from './layout/main'
 import MainMask from './layout/main-mask'
@@ -119,23 +123,32 @@ class App extends React.Component {
             query = {}
         } = history.getCurrentLocation()
 
-        // 检查 App 是否已准备就绪
-        this.checkAppReady()
-
         // 检查是否需要显示“安装App”按钮
         if (__DEV__) {
             this.props.dispatch(setInstallPWAEvent({}))
-            window.History = history
-        } else if (query.utm_source !== 'web_app_manifest') {
-            // console.log('🎯 not via app')
-            // https://developers.google.com/web/fundamentals/app-install-banners/
-            window.addEventListener('beforeinstallprompt', (evt) => {
-                // console.log('🎯 beforeinstallprompt Event fired')
-                evt.preventDefault()
-                this.props.dispatch(setInstallPWAEvent(evt))
-                return false
-            })
+            // window.History = history
+        } else {
+            if (query.utm_source !== 'web_app_manifest') {
+                // console.log('🎯 not via app')
+                // https://developers.google.com/web/fundamentals/app-install-banners/
+                if (beforeinstallpromptEventPromptBeforeReact) {
+                    this.props.dispatch(setInstallPWAEvent(beforeinstallpromptEventPromptBeforeReact))
+                } else {
+                    window.addEventListener('beforeinstallprompt', (evt) => {
+                        // console.log('🎯 beforeinstallprompt Event fired')
+                        evt.preventDefault()
+                        this.props.dispatch(setInstallPWAEvent(evt))
+                        return false
+                    })
+                }
+                window.removeEventListener('beforeinstallprompt', beforeinstallpromptHandlerBeforeReact)
+            } else {
+                this.props.dispatch(setInstallPWAEvent(false))
+            }
         }
+
+        // 检查 App 是否已准备就绪
+        this.checkAppReady()
     }
 
     componentDidUpdate() {

@@ -1,4 +1,8 @@
 import bindEvent from 'bind-event'
+import {
+    handlerBeforeReact as beforeinstallpromptHandlerBeforeReact
+} from '@utils/install-app'
+
 if (__DEV__) console.warn('TODO: [critical] use `history` from global')
 require('./critical.g.less')
 
@@ -263,6 +267,8 @@ const doCricital = () => {
         // self._html = tagHtml
     })
 
+    // 安装 PWA 事件: 如果在 React 渲染前触发
+    window.addEventListener('beforeinstallprompt', beforeinstallpromptHandlerBeforeReact)
 }
 
 doCricital()

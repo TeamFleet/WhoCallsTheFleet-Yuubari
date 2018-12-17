@@ -29,3 +29,13 @@ export default (evt, dispatch) => new Promise(resolve => {
         }
     })
 })
+
+export let eventPromptBeforeReact = false
+export const handlerBeforeReact = () => {
+    window.addEventListener('beforeinstallprompt', (evt) => {
+        // console.log('🎯 beforeinstallprompt Event fired')
+        evt.preventDefault()
+        eventPromptBeforeReact = evt
+        return false
+    })
+}
