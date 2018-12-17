@@ -62,7 +62,7 @@ const illustIds = [8, 9]
         })
     ],
     pageinfo: (state) => htmlHead(state, {
-        title: __('nav.exillusts')
+        title: __('nav.excgs')
     })
 })
 class PageExCGs extends React.Component {
