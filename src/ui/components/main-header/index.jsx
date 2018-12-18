@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { extend } from 'koot'
-import TransitionGroup from 'react-transition-group/TransitionGroup'
-import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
 
 // import checkCssProp from 'check-css-prop'
@@ -17,34 +15,14 @@ import Background from '@ui/components/background.jsx'
     styles: require('./styles.less')
 })
 class MainHeader extends React.Component {
-    // state = {
-    //     render: true
-    // }
-
-    // componentDidMount() {
-    //     MainHeader.keyCurrent = this.props.mainKey
-    //     //     // console.log('1111111111111')
-    //     //     this.setState({
-    //     //         waiting: false
-    //     //     })
-    // }
-    // componentDidUpdate() {
-    //     if (this.keyCurrent !== this.props.mainKey && this.state.render) {
-    //         // if (__DEV__) console.log('MainHeader', { current: this.keyCurrent, main: this.props.mainKey })
-    //         this.setState({
-    //             render: false
-    //         })
-    //     }
-    // }
-
     renderContent(isPortal) {
         const {
             className,
             children,
+            mainKey,
             ...props
         } = this.props
 
-        delete props.mainKey
         // delete props.appReady
         delete props.dispatch
 
@@ -54,7 +32,7 @@ class MainHeader extends React.Component {
                     [className]: true,
                     'main-header': true,
                     'wrapper': isPortal,
-                    'mod-transition-exit': this.keyCurrent !== this.props.mainKey
+                    'mod-transition-exit': this.keyCurrent !== mainKey
                 })}
                 {...props}
             >
@@ -65,11 +43,11 @@ class MainHeader extends React.Component {
     }
 
     render() {
-        // if (!this.state.render)
-        //     return null
-
         if (__SERVER__)
             return this.renderContent()
+
+        if (!this.props.mainKey)
+            return null
 
         if (!this.keyCurrent)
             this.keyCurrent = this.props.mainKey
@@ -81,31 +59,31 @@ class MainHeader extends React.Component {
                 {this.renderContent(true)}
             </MainHeaderPortal>
         )
-        return (
-            <MainHeaderPortal>
-                <TransitionGroup
-                    // data-role="transition-group"
-                    appear={true}
-                    enter={false}
-                    exit={true}
-                    component={React.Fragment}
-                >
-                    {this.props.mainKey &&
-                        this.keyCurrent === this.props.mainKey &&
-                        <CSSTransition
-                            key={this.keyCurrent}
-                            classNames="transition"
-                            timeout={{
-                                appear: 200,
-                                exit: 200,
-                            }}
-                        >
-                            {this.renderContent(true)}
-                        </CSSTransition>
-                    }
-                </TransitionGroup>
-            </MainHeaderPortal>
-        )
+        // return (
+        //     <MainHeaderPortal>
+        //         <TransitionGroup
+        //             // data-role="transition-group"
+        //             appear={true}
+        //             enter={false}
+        //             exit={true}
+        //             component={React.Fragment}
+        //         >
+        //             {this.props.mainKey &&
+        //                 this.keyCurrent === this.props.mainKey &&
+        //                 <CSSTransition
+        //                     key={this.keyCurrent}
+        //                     classNames="transition"
+        //                     timeout={{
+        //                         appear: 200,
+        //                         exit: 200,
+        //                     }}
+        //                 >
+        //                     {this.renderContent(true)}
+        //                 </CSSTransition>
+        //             }
+        //         </TransitionGroup>
+        //     </MainHeaderPortal>
+        // )
     }
 }
 
