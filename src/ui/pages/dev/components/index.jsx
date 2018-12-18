@@ -1,37 +1,40 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
 import Page from '@ui/containers/page'
 
 import Title from '@ui/components/title'
+import Header from './header'
 import DevHeader from '@ui/components/dev/header'
 import Button from '@ui/components/button'
 import ButtonGroup from '@ui/components/button-group'
 import InputCounter from '@ui/components/input/counter'
 
-@connect()
-@pageinfo((state) => htmlHead(state, {
-    title: 'Dev (Components)'
-}))
-@ImportStyle(require('./components.less'))
-export default class extends React.Component {
+@extend({
+    pageinfo: (state) => htmlHead(state, {
+        title: 'Dev (Components)'
+    }),
+    styles: require('./index.less')
+})
+class DevComponents extends React.Component {
     render() {
         return (
             <Page className={this.props.className}>
-                <DevHeader />
-                <SamplesButton />
+                <Header />
+                {this.props.children}
+                {/* <SamplesButton />
                 <SamplesButtonGroup />
                 <SamplesInput />
                 <SamplesLoaders />
-                <SamplesList />
+                <SamplesList /> */}
             </Page>
         )
     }
 }
+
+export default DevComponents
 
 const Samples = ({ className, ...props }) => (
     <div

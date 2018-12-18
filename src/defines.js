@@ -3,8 +3,11 @@ const fs = require('fs-extra')
 
 const {
     bgimgs: pathBgimgs,
-    nodeModules: pathNodeModules,
-    assets: pathAssets
+    // nodeModules: pathNodeModules,
+    assets: pathAssets,
+    src: {
+        ui: pathUI,
+    }
 } = require('./directories')
 
 module.exports = {
@@ -18,12 +21,12 @@ module.exports = {
             ))
     ),
 
-    __SWIPER_CSS__: JSON.stringify(
-        fs.readFileSync(
-            path.resolve(pathNodeModules, 'swiper/dist/css/swiper.min.css'),
-            'utf-8'
-        )
-    ),
+    // __SWIPER_CSS__: JSON.stringify(
+    //     fs.readFileSync(
+    //         path.resolve(pathNodeModules, 'swiper/dist/css/swiper.min.css'),
+    //         'utf-8'
+    //     )
+    // ),
 
     __SVG_SYMBOLS__: JSON.stringify(
         fs.readFileSync(
@@ -32,5 +35,20 @@ module.exports = {
         )
             .replace(/<title>(.+?)<\/title>/g, '')
             .replace(/\n/g, '')
+    ),
+
+    __DEV_COMPONENTS_ROUTES__: JSON.stringify(
+        (() => {
+            const dir = path.resolve(pathUI, 'pages/dev/components')
+            return fs.readdirSync(dir)
+                .filter(filename => (
+                    fs.lstatSync(path.resolve(dir, filename)).isDirectory()
+                ))
+                .map(dirname => ({
+                    name: dirname.replace(/／/g, '/'),
+                    path: dirname.replace(/／/g, '-'),
+                    dirname,
+                }))
+        })()
     )
 }

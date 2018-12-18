@@ -1,22 +1,25 @@
 import React from 'react'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
+import './swiper.g.less'
 
 const Swiper = typeof window !== 'undefined' && require('swiper').default
-if (typeof document !== 'undefined' && !document.getElementById('__swiper')) {
-    const style = document.createElement('style')
-    style.id = '__swiper'
-    style.type = "text/css"
-    style.innerHTML = __SWIPER_CSS__
-    document.getElementsByTagName('head')[0].appendChild(style)
-}
+// if (typeof document !== 'undefined' && !document.getElementById('__swiper')) {
+//     const style = document.createElement('style')
+//     style.id = '__swiper'
+//     style.type = "text/css"
+//     style.innerHTML = __SWIPER_CSS__
+//     document.getElementsByTagName('head')[0].appendChild(style)
+// }
 
 const defaults = {
     // speed: 400,
     // spaceBetween: 100
 }
 
-@ImportStyle(require('./styles.less'))
-export default class extends React.Component {
+@extend({
+    styles: require('./styles.less')
+})
+class SwiperComponent extends React.Component {
     componentDidMount() {
         // if (typeof window !== 'undefined')
         //     require('swiper/dist/css/swiper.min.css')
@@ -165,3 +168,4 @@ export default class extends React.Component {
         )
     }
 }
+export default SwiperComponent

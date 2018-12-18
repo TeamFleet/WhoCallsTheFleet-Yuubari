@@ -4,25 +4,13 @@ import CSSTransition from 'react-transition-group/CSSTransition'
 import { extend } from 'koot'
 
 import { updateMainKey } from '@api/app/api'
+import getKey from '@utils/get-main-key'
 
 // import lastScroll from '@utils/last-scroll.js'
 
 let action
 let lastScrollY = 0
 let pathnameLastScrollY = {}
-
-const getKey = location => {
-    // console.log(location)
-    const pathname = location.pathname.substr(0, 1) === '/'
-        ? location.pathname.substr(1)
-        : location.pathname
-    const segs = pathname.split('/')
-
-    if (segs[0] === 'arsenal')
-        return segs.slice(0, 1).join('/')
-
-    return segs.slice(0, 2).join('/')
-}
 
 // @connect(state => {
 //     console.log('state', state)
@@ -62,6 +50,7 @@ class Main extends React.Component {
         action = nextProps.location.action
         lastScrollY = window.scrollY
         pathnameLastScrollY[this.props.location.pathname] = window.scrollY
+        // if (JSON.stringify(this.props.location) !== JSON.stringify(nextProps.location))
         this.props.dispatch(
             updateMainKey(getKey(nextProps.location))
         )

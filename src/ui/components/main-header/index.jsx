@@ -1,30 +1,41 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { connect } from 'react-redux'
+import { extend } from 'koot'
 import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
 
 // import checkCssProp from 'check-css-prop'
 
 import Background from '@ui/components/background.jsx'
 
-@connect(state => ({
-    mainKey: state.app.mainKey,
-    // appReady: state.app.ready,
-}))
-@ImportStyle(require('./styles.less'))
-export default class extends React.Component {
-    state = {
-        waiting: true
-    }
+@extend({
+    connect: state => ({
+        mainKey: state.app.mainKey,
+        // appReady: state.app.ready,
+    }),
+    styles: require('./styles.less')
+})
+class MainHeader extends React.Component {
+    // state = {
+    //     render: true
+    // }
 
-    componentDidMount() {
-        this.setState({
-            waiting: false
-        })
-    }
+    // componentDidMount() {
+    //     MainHeader.keyCurrent = this.props.mainKey
+    //     //     // console.log('1111111111111')
+    //     //     this.setState({
+    //     //         waiting: false
+    //     //     })
+    // }
+    // componentDidUpdate() {
+    //     if (this.keyCurrent !== this.props.mainKey && this.state.render) {
+    //         // if (__DEV__) console.log('MainHeader', { current: this.keyCurrent, main: this.props.mainKey })
+    //         this.setState({
+    //             render: false
+    //         })
+    //     }
+    // }
 
     renderContent(isPortal) {
         const {
@@ -42,7 +53,8 @@ export default class extends React.Component {
                 className={classNames({
                     [className]: true,
                     'main-header': true,
-                    'wrapper': isPortal
+                    'wrapper': isPortal,
+                    'mod-transition-exit': this.keyCurrent !== this.props.mainKey
                 })}
                 {...props}
             >
@@ -53,61 +65,78 @@ export default class extends React.Component {
     }
 
     render() {
+        // if (!this.state.render)
+        //     return null
+
         if (__SERVER__)
             return this.renderContent()
 
-        if (!this.key)
-            this.key = this.props.mainKey
+        if (!this.keyCurrent)
+            this.keyCurrent = this.props.mainKey
 
-        if (this.state.waiting)
-            return null
-
-        // console.log(this.key, this.props.mainKey)
+        // if (__DEV__) console.log('MainHeader', { current: this.keyCurrent, main: this.props.mainKey })
 
         return (
-            <TransitionGroup
-                data-role="transition-group"
-                appear={true}
-                enter={false}
-            >
-                {this.props.mainKey &&
-                    this.key === this.props.mainKey &&
-                    <CSSTransition
-                        key={this.props.key}
-                        classNames="transition"
-                        timeout={250}
-                    >
-                        <MainHeaderPortal key={this.key}>
+            <MainHeaderPortal key={this.keyCurrent}>
+                {this.renderContent(true)}
+            </MainHeaderPortal>
+        )
+        return (
+            <MainHeaderPortal>
+                <TransitionGroup
+                    // data-role="transition-group"
+                    appear={true}
+                    enter={false}
+                    exit={true}
+                    component={React.Fragment}
+                >
+                    {this.props.mainKey &&
+                        this.keyCurrent === this.props.mainKey &&
+                        <CSSTransition
+                            key={this.keyCurrent}
+                            classNames="transition"
+                            timeout={{
+                                appear: 200,
+                                exit: 200,
+                            }}
+                        >
                             {this.renderContent(true)}
-                        </MainHeaderPortal>
-                    </CSSTransition>
-                }
-            </TransitionGroup>
+                        </CSSTransition>
+                    }
+                </TransitionGroup>
+            </MainHeaderPortal>
         )
     }
 }
 
-class MainHeaderPortal extends React.Component {
-    // constructor() {
-    //     super()
-    //     this.state = {
-    //         waiting: true
-    //     }
-    // }
-    // componentDidMount() {
-    //     this.setState({
-    //         waiting: false
-    //     })
-    // }
+export default MainHeader
 
-    render() {
-        // if (this.state.waiting) return null
-        return ReactDOM.createPortal(
-            this.props.children,
-            document.getElementById('main-mask'),
-        )
-    }
-}
+const MainHeaderPortal = ({ children }) =>
+    ReactDOM.createPortal(
+        children,
+        document.getElementById('main-mask'),
+    )
+// class MainHeaderPortal extends React.Component {
+//     // constructor() {
+//     //     super()
+//     //     this.state = {
+//     //         waiting: true
+//     //     }
+//     // }
+//     // componentDidMount() {
+//     //     this.setState({
+//     //         waiting: false
+//     //     })
+//     // }
+
+//     render() {
+//         // if (this.state.waiting) return null
+//         return ReactDOM.createPortal(
+//             this.props.children,
+//             document.getElementById('main-mask'),
+//         )
+//     }
+// }
 
 // class MainHeaderPortal extends React.Component {
 //     componentWillReceiveProps(newProps) {
