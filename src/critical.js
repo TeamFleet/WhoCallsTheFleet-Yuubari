@@ -3,7 +3,6 @@ import {
     handlerBeforeReact as beforeinstallpromptHandlerBeforeReact
 } from '@utils/install-app'
 
-if (__DEV__) console.warn('TODO: [critical] use `history` from global')
 require('./critical.g.less')
 
 // this.isAppReady = false
@@ -68,7 +67,7 @@ const doCricital = () => {
   | | | | | |  __/ | |   | |  __/  __/ |_ 
   \\_/ |_| |_|\\___| \\_|   |_|\\___|\\___|\\__|
 
-            `)
+`)
 
             document.body.classList.add('is-ready')
 
@@ -158,37 +157,6 @@ const doCricital = () => {
     if (platform)
         self._html.classList.add('platform-' + platform)
 
-    // 检查客户端兼容性，如果需要，载入兼容性扩展脚本
-    new Promise(resolve => {
-        if (typeof Object.assign !== 'function') {
-            if (__DEV__) console.log('🚨 Old browser detected. Importing compatibility extend file(s)...')
-            self.importJS(
-                typeof self.__CRITICAL_EXTRA_OLD_IE_FILENAME__ == 'undefined'
-                    ? "/client/critical-extra-old-ie.js"
-                    : self.__CRITICAL_EXTRA_OLD_IE_FILENAME__
-            ).then(() => {
-                if (__DEV__) console.log('   ✔ Imported!')
-                resolve()
-            }).catch(() => {
-                if (__DEV__) console.log('   ❌ Importe failed!')
-                throw new Error('Importing compatibility extend file(s) failed')
-            })
-        } else
-            resolve()
-    }).then(() => {
-        // [nw.js] show and focus window
-        if (self.nw && self.nw.win) {
-            self.nw.win.show()
-            self.nw.win.focus()
-        }
-        // self.__LATHPATHNAME__
-    })
-        .then(() => {
-            if (__DEV__) console.log('🚨 Complete: critical process!')
-        })
-        .catch(err => self.onInitError(err))
-    // .then(() => self.importJS(self.__CLIENT_FILENAME__))
-
     // DOM ready 时
     document.addEventListener("DOMContentLoaded", function () {
         // let boatLoader = document.createElement('div')
@@ -269,6 +237,37 @@ const doCricital = () => {
 
     // 安装 PWA 事件: 如果在 React 渲染前触发
     window.addEventListener('beforeinstallprompt', beforeinstallpromptHandlerBeforeReact)
+
+    // 检查客户端兼容性，如果需要，载入兼容性扩展脚本
+    new Promise(resolve => {
+        if (typeof Object.assign !== 'function') {
+            if (__DEV__) console.log('🚨 Old browser detected. Importing compatibility extend file(s)...')
+            self.importJS(
+                typeof self.__CRITICAL_EXTRA_OLD_IE_FILENAME__ == 'undefined'
+                    ? "/client/critical-extra-old-ie.js"
+                    : self.__CRITICAL_EXTRA_OLD_IE_FILENAME__
+            ).then(() => {
+                if (__DEV__) console.log('   ✔ Imported!')
+                resolve()
+            }).catch(() => {
+                if (__DEV__) console.log('   ❌ Importe failed!')
+                throw new Error('Importing compatibility extend file(s) failed')
+            })
+        } else
+            resolve()
+    }).then(() => {
+        // [nw.js] show and focus window
+        if (self.nw && self.nw.win) {
+            self.nw.win.show()
+            self.nw.win.focus()
+        }
+        // self.__LATHPATHNAME__
+    })
+        .then(() => {
+            if (__DEV__) console.log('🚨 Complete: critical process!')
+        })
+        .catch(err => self.onInitError(err))
+    // .then(() => self.importJS(self.__CLIENT_FILENAME__))
 }
 
 doCricital()

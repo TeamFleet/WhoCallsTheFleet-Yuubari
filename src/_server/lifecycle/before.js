@@ -1,12 +1,7 @@
 const path = require('path')
 const getDistPath = require('koot/utils/get-dist-path')
 
-import { init as dbInit } from '@database'
-
 export default async (app) => {
-
-    // 初始化 database
-    await dbInit()
 
     // 静态目录: 图片资源
     {

@@ -1,17 +1,17 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import routerReplace from '@utils/router-replace'
 
 import MainHeader from '@ui/components/main-header'
 import Title from '@ui/components/title'
 
-// @connect()
-@ImportStyle(require('./styles.less'))
-export default class MainHeaderInfos extends React.Component {
+@extend({
+    styles: require('./styles.less')
+})
+class MainHeaderInfos extends React.Component {
     /* props
      * currentIndex
      * urlBase
@@ -149,3 +149,5 @@ export default class MainHeaderInfos extends React.Component {
         )
     }
 }
+
+export default MainHeaderInfos

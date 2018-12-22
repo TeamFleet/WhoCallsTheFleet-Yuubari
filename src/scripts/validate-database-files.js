@@ -11,6 +11,7 @@ const {
 
 const dbpath = path.resolve(process.cwd(), 'node_modules', 'whocallsthefleet-database', 'db')
 const topath = path.resolve(pathApp, 'database', 'db')
+const topathJson = path.resolve(pathApp, 'database', 'json')
 
 /**
  * 预处理所有 .nedb database 文件
@@ -23,6 +24,8 @@ module.exports = async () => {
     // ensure and empty target dir
     fs.ensureDirSync(topath)
     fs.emptyDirSync(topath)
+    fs.ensureDirSync(topathJson)
+    fs.emptyDirSync(topathJson)
 
     fs.readdirSync(dbpath).forEach(file => {
         let content = fs.readFileSync(path.resolve(dbpath, file), 'utf8')
@@ -57,8 +60,8 @@ module.exports = async () => {
     })
 
     const stepCollections = spinner('Creating collections...')
-    await require('./database/ship-collections.js')(dbpath, topath)
-    await require('./database/equipment-collections.js')(dbpath, topath)
+    await require('./database/ship-collections.js')(dbpath, topathJson)
+    await require('./database/equipment-collections.js')(dbpath, topathJson)
     stepCollections.succeed()
 }
 

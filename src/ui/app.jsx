@@ -1,14 +1,13 @@
 import React from 'react'
 import classNames from 'classnames'
 import { extend, history } from 'koot'
-if (__DEV__) console.warn('TODO: [App] use `history` from global')
+// import { localeId, history } from 'koot'
 
 import {
     updateAppReady,
     setInstallPWAEvent,
 } from '@api/app/api'
 import { swipedFromLeftEdge } from '@api/side-menu/api'
-import { updateLocale as updateDbLocale } from '@database'
 import {
     handlerBeforeReact as beforeinstallpromptHandlerBeforeReact,
     eventPromptBeforeReact as beforeinstallpromptEventPromptBeforeReact
@@ -44,19 +43,19 @@ class App extends React.Component {
 
     constructor(props) {
         super(props)
-        // console.log('QA:', typeof __QA__ === 'undefined' ? 'undefined' : __QA__)
-        if (__CLIENT__) {
-            // 确定 database 语言
-            updateDbLocale({ localeId: props.localeId })
 
-            // 将 history 中的 state.ui 清空
-            history.replace({
-                ...history.getCurrentLocation(),
-                state: {}
+        if (__CLIENT__) {
+            const kckit = require('kckit')
+            console.log('_', {
+                kckit,
+                locale: kckit.locale,
+                sample: kckit.db.ships[20]._name
+            })
+            const db = require('@database')
+            console.log('=', {
+                sample: db.ships[20]._name
             })
         }
-        if (typeof document !== 'undefined' && document.documentElement)
-            document.documentElement.classList.add('is-react-ready')
     }
 
     checkAppReady(timeout = 10) {
@@ -119,6 +118,9 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        if (typeof document !== 'undefined' && document.documentElement)
+            document.documentElement.classList.add('is-react-ready')
+
         const {
             query = {}
         } = history.getCurrentLocation()

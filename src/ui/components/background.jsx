@@ -1,24 +1,22 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { extend } from 'koot'
 
 import getStyles from '@utils/background-styles.js'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './background.less'
+const Background = extend({
+    connect: state => ({
+        currentBg: state.bgimg.current
+    }),
+    styles: require('./background.less')
+})(
+    ({ className, currentBg, type }) => (
+        <div className={className}>
+            <div
+                className="background"
+                style={getStyles(currentBg, type)}
+            />
+        </div>
+    )
+)
 
-@connect(state => ({
-    currentBg: state.bgimg.current
-}))
-@ImportStyle(style)
-export default class extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                <div
-                    className="background"
-                    style={getStyles(this.props.currentBg, this.props.type)}
-                />
-            </div>
-        )
-    }
-}
+export default Background

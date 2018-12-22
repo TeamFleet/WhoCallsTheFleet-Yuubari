@@ -1,141 +1,59 @@
-import kckit, { register, parseRaw } from 'kckit'
+import { register } from 'kckit'
+import { store, localeId } from 'koot'
 
-import shipCollections from './db/ship_collections.json'
-import equipmentCollections from './db/equipment_collections.json'
+import parseLocaleId from './parse-locale-id'
 
-import db, { locale } from './'
+/**
+ * 初始化 KCKit
+ * - 服务器端: 仅针对本次请求
+ * @param {String} newLocaleId 
+ * @void
+ */
+const initKCKit = (newLocaleId = localeId) => {
 
-const LZString = __CLIENT__ && require('lz-string')
+    const { database } = store
+    const newKCKitLocale = parseLocaleId(newLocaleId)
 
-const requireDb = (name) => {
-    if (__SERVER__) return require(`whocallsthefleet-database/db/${name}.nedb`)
-    let compressed = require(`./db/${name}.nedb`)
-    return LZString.decompressFromEncodedURIComponent(compressed)
-}
+    console.log('initKCKit', {
+        newLocaleId,
+        newKCKitLocale,
+        register,
+    })
 
-let isInited = false
-
-export default () => {
-    if (isInited) return
-
-    parseRaw({
-        ships: requireDb('ships'),
-        shipTypes: requireDb('ship_types'),
-        shipClasses: requireDb('ship_classes'),
-        shipNamesuffix: requireDb('ship_namesuffix'),
-        shipSeries: requireDb('ship_series'),
-
-        exillusts: requireDb('exillusts'),
-        exillustTypes: requireDb('exillust_types'),
-
-        equipments: requireDb('items'),
-        equipmentTypes: requireDb('item_types'),
-
-        entities: requireDb('entities'),
-
-        consumables: requireDb('consumables'),
-
-        arsenalAll: requireDb('arsenal_all'),
-        // arsenalDays: requireDb('arsenal_weekday').replace(/"weekday":([0-9])/g, '"weekday":$1,"id":$1'),
-        arsenalDays: requireDb('arsenal_weekday').replace(/"weekday":([0-9])/g, '"weekday":$1,"id":$1'),
-    }, db)
-
-    // shipCollections
-    db.shipsSpecial = {}
-    let shipIndex = 0
-    shipCollections.forEach(collection => {
-        collection.names = { ...collection.name }
-        collection.list.forEach(list => {
-            list.ships.forEach((arrShips, index) => {
-                list.ships[index] = arrShips.map(shipId => {
-                    const ship = db.ships[shipId]
-                    Object.assign(ship, {
-                        type_display: list.type,
-                        order: shipIndex++
-                    })
-                    if (!db.shipsSpecial[list.type]) db.shipsSpecial[list.type] = []
-                    if (!db.shipsSpecial[list.type].includes(shipId) && (
-                        (Array.isArray(ship.additional_item_types) && ship.additional_item_types.length)
-                        || (Array.isArray(ship.additional_disable_item_types) && ship.additional_disable_item_types.length))
-                    ) {
-                        db.shipsSpecial[list.type].push(shipId)
-                    }
-                    return ship
-                })
-            })
-        })
+    database.shipCollections.forEach(collection => {
         Object.defineProperty(collection, 'name', {
             get: function () {
-                return this.names[locale]
+                return this.names[newKCKitLocale]
             }
         })
     })
-    db.shipCollections = shipCollections
-
-    // equipment collections
-    let equipmentTypeIndex = 0
-    let equipmentIndex = 0
-    equipmentCollections.forEach(collection => {
-        collection.names = { ...collection.name }
-        collection.list.forEach(list => {
-            Object.assign(db.equipmentTypes[list.type], {
-                order: equipmentTypeIndex++
-            })
-            list.equipments = list.equipments.map(equipmentId => {
-                Object.assign(db.equipments[equipmentId], {
-                    order: equipmentIndex++
-                })
-                return db.equipments[equipmentId]
-            })
-        })
+    database.equipmentCollections.forEach(collection => {
         Object.defineProperty(collection, 'name', {
             get: function () {
-                return this.names[locale]
+                return this.names[newKCKitLocale]
             }
         })
     })
-    db.equipmentCollections = equipmentCollections
-
-    // equipment types
-    db.equipmentTypesExclude = []
-    const cache = []
-    for (let id in db.equipmentTypes) {
-        const type = db.equipmentTypes[id]
-        if (type.id === 59) continue
-        if (cache.includes(type.id_ingame)) {
-            db.equipmentTypesExclude.push(type.id)
-        } else {
-            cache.push(type.id_ingame)
-        }
-    }
-
-    // arsenal-all
-    {
-        const arsenalAll = []
-        for (const id in db.arsenalAll) {
-            arsenalAll.push(db.arsenalAll[id])
-        }
-        arsenalAll.sort((a, b) => a.sort - b.sort)
-        db.arsenalAll = arsenalAll.map(obj => obj.id)
-    }
-
-    // arsenal-days
-    {
-        const days = []
-        for (const id in db.arsenalDays) {
-            days[db.arsenalDays[id].weekday] = db.arsenalDays[id].improvements
-        }
-        db.arsenalDays = days
-    }
-
-    if (__CLIENT__ && __DEV__) console.log('📦 Database inited.', db)
 
     register({
-        db
+        db: database,
+        locale: newKCKitLocale
     })
 
-    if (__CLIENT__ && __DEV__)
-        console.log('🔌 KCKit inited.', kckit)
+    if (__CLIENT__ && __DEV__) {
+        console.log('📦 Database inited.', database)
+        console.log('🔌 KCKit inited.', require('kckit'))
+    }
 
-    isInited = true
+    if (__CLIENT__) {
+        const kckit = require('kckit')
+        console.log('after register', {
+            kckit,
+            locale: kckit.locale,
+            sample: kckit.db.ships[20]._name
+        })
+    }
+
 }
+
+export default initKCKit

@@ -53,8 +53,6 @@ node_modules/
 /_.cmd
 .eslintrc.full
 /game_data
-/apps/app/client/logic/database/db
-/src/client/logic/database/db
-/src/app/api/database/db
 /src/database/db
+/src/database/json
 .koot.config.tmp.*.js

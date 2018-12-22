@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import Cookies from 'js-cookie'
 
@@ -21,11 +20,13 @@ const setCookieSessionBackgroundIndex = index => {
  * main background image beneath App view
  * bgimg controls UI
  */
-@connect(state => ({
-    isModeBackground: (state.uiMode.mode == 'background')
-}))
-@ImportStyle(require('./styles.less'))
-export default class Bgimg extends React.Component {
+@extend({
+    connect: state => ({
+        isModeBackground: (state.uiMode.mode == 'background')
+    }),
+    styles: require('./styles.less')
+})
+class Bgimg extends React.Component {
     constructor(props) {
         super(props)
 
@@ -65,20 +66,21 @@ export default class Bgimg extends React.Component {
         )
     }
 }
+export default Bgimg
 
-@ImportStyle(require('./styles-main-blured.less'))
-class BackgroundMainBlured extends React.Component {
-    render() {
-        return (
-            <div className={classNames([
-                this.props.className,
-                this.props.type
-            ])}>
-                <Background className="bg-container" type="blured" />
-            </div>
-        )
-    }
-}
+
+//
+
+
+const BackgroundMainBlured = extend({
+    styles: require('./styles-main-blured.less')
+})(
+    ({ className, type }) => (
+        <div className={classNames([className, type])}>
+            <Background className="bg-container" type="blured" />
+        </div>
+    )
+)
 
 
 /* main background image beneath App view. animation/transition process
@@ -90,10 +92,12 @@ class BackgroundMainBlured extends React.Component {
    1. delete blured container element
    2. dispatch LOADED_MAIN_BGIMG
  */
-@connect(state => ({
-    currentBg: state.bgimg.current
-}))
-@ImportStyle(require('./styles-main.less'))
+@extend({
+    connect: state => ({
+        currentBg: state.bgimg.current
+    }),
+    styles: require('./styles-main.less')
+})
 class BackgroundMain extends React.Component {
     state = {
         stylesOriginal: false,
@@ -331,53 +335,65 @@ class BgMain extends React.Component {
 }
 */
 
-@connect(
-    undefined,
-    dispatch => ({
-        leaveAppModeBackground: () => dispatch(
-            leaveUIMode()
-        )
-    })
+
+//
+
+
+const BackgroundPanels = extend({
+    connect: [
+        undefined,
+        dispatch => ({
+            leaveAppModeBackground: () => dispatch(
+                leaveUIMode()
+            )
+        })
+    ],
+    styles: require('./styles-panels.less')
+})(
+    ({ className, leaveAppModeBackground }) => (
+        <div className={className}>
+            <button
+                type="button"
+                className="back"
+                onClick={leaveAppModeBackground}
+            >[PH] BACK</button>
+            <BackgroundPanelsImg className="panel" />
+            <BackgroundPanelsList className="panel" />
+        </div>
+    )
 )
-@ImportStyle(require('./styles-panels.less'))
-class BackgroundPanels extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                <button
-                    type="button"
-                    className="back"
-                    onClick={this.props.leaveAppModeBackground}
-                >[PH] BACK</button>
-                <BackgroundPanelsImg className="panel" />
-                <BackgroundPanelsList className="panel" />
-            </div>
-        )
-    }
-}
 
-@connect(state => ({
-    currentBgPath: __CLIENT__ && state.bgimg.current && state.bgimg.current.getPath(),
-}))
-@ImportStyle(require('./styles-panels-img.less'))
-class BackgroundPanelsImg extends React.Component {
-    render() {
-        return (
-            <div
-                className={this.props.className}
-                style={{
-                    backgroundImage: `url(${this.props.currentBgPath})`,
-                }}
-            />
-        )
-    }
-}
 
-@connect(state => ({
-    list: state.bgimg.list,
-    index: state.bgimg.current && state.bgimg.current.index
-}))
-@ImportStyle(require('./styles-panels-list.less'))
+//
+
+
+const BackgroundPanelsImg = extend({
+    connect: state => ({
+        currentBgPath: __CLIENT__ && state.bgimg.current && state.bgimg.current.getPath(),
+    }),
+    styles: require('./styles-panels-img.less')
+})(
+    ({ className, currentBgPath }) => (
+        <div
+            className={className}
+            style={{
+                backgroundImage: `url(${currentBgPath})`,
+            }}
+        />
+    )
+)
+
+
+//
+
+
+@extend({
+    connect: state => ({
+        list: state.bgimg.list,
+        index: state.bgimg.current && state.bgimg.current.index
+    }),
+    styles: require('./styles-panels-list.less')
+})
 class BackgroundPanelsList extends React.Component {
     change(obj) {
         setCookieSessionBackgroundIndex(obj.index)

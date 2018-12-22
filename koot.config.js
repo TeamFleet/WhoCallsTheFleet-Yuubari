@@ -45,7 +45,8 @@ module.exports = {
      * @property {Pathname} [store] 使用自创建的 store，而非 koot 创建的 store。如果提供，会忽略 combineReducers 属性。详细使用方法请参阅 [文档](https://koot.js.org/react/create-store)
      */
     redux: {
-        combineReducers: './src/redux/reducers',
+        // combineReducers: './src/redux/reducers',
+        store: './src/redux/factory-store',
     },
 
     /**
@@ -59,10 +60,10 @@ module.exports = {
      */
     client: {
         history: 'browser',
-        before: './src/lifecycle/before',
-        after: './src/lifecycle/after',
-        onRouterUpdate: './src/lifecycle/on-router-update',
-        onHistoryUpdate: './src/lifecycle/on-history-update',
+        before: './src/_client/before',
+        after: './src/_client/after',
+        onRouterUpdate: './src/_client/on-router-update',
+        onHistoryUpdate: './src/_client/on-history-update',
     },
 
     /** 
@@ -95,11 +96,11 @@ module.exports = {
         proxyRequestOrigin: {
             protocol: 'https',
         },
-        // reducers: './server/reducers',
-        inject: './server/inject',
-        before: './server/lifecycle/before',
-        after: './server/lifecycle/after',
-        onRender: './server/lifecycle/on-render',
+        // reducers: './src/_server/reducers',
+        inject: './src/_server/inject',
+        before: './src/_server/lifecycle/before',
+        after: './src/_server/lifecycle/after',
+        onRender: './src/_server/lifecycle/on-render'
     },
 
     /** 
