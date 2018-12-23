@@ -1,6 +1,4 @@
 import getPublicPath from 'koot/utils/get-public-dir'
-import Ship from 'kckit/src/class/ship.js'
-import Entity from 'kckit/src/class/entity.js'
 
 import db from '@database'
 
@@ -8,13 +6,21 @@ const publicPath = __DEV__ ? '/' : getPublicPath()
 const ext = __CLIENT__ && self._html && self._html.classList.contains('webp') ? '.webp' : '.png'
 
 const getUri = (type, id, file, revision) => {
+
+    const sampleShip = db.ships[1]
+    const sampleEntity = db.entities[1]
+
     if (typeof type === 'object') {
-        if (type instanceof Ship)
+        if (type.constructor === sampleShip.constructor)
             return getUri('ship', type.id, id)
-        if (type instanceof Entity)
+        if (type.constructor === sampleEntity.constructor)
             return getUri('entity', type.id, id)
     }
 
+    // console.log('\n\n')
+    // console.log({ type, Ship })
+    // console.log({ 'type instanceof Ship': type instanceof Ship })
+    // console.log({ id, file })
     if (typeof id !== 'undefined' && typeof file === 'undefined') {
         const arr = id.split('/')
         if (arr.length > 1)
@@ -57,7 +63,7 @@ const getUri = (type, id, file, revision) => {
 }
 
 export default (type, id, file) => {
-    if (__SERVER__) return ''
+    // if (__SERVER__) return ''
 
     const filepath = getUri(type, id, file)
 

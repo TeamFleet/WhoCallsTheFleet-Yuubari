@@ -64,10 +64,12 @@ class ShipDetailsComponentIllust extends React.Component {
         ids.forEach(id => {
             illustIds.forEach(illustId => {
                 this.pics.push(
-                    id === '_' ? getPic(props.ship, illustId) : (
-                        getExtraIllustPic(props.ship, id, illustId)
-                        + '?' + (db.exillustTypes[db.exillusts[id].type].revision || 1)
-                    )
+                    id === '_'
+                        ? getPic(props.ship, illustId)
+                        : (
+                            getExtraIllustPic(props.ship, id, illustId)
+                            + '?' + (db.exillustTypes[db.exillusts[id].type].revision || 1)
+                        )
                 )
             })
         })

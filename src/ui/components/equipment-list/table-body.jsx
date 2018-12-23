@@ -12,7 +12,6 @@ import getFromState from '@api/equipment-list/get-from-state.js'
 import arrStats from '@const/equipment-stats'
 import routerPush from '@utils/router-push'
 import getLink from '@utils/get-link'
-// import DataTableFlex, { Row, Cell } from '@ui/components/datatable-flex'
 
 import { ImportStyle } from 'sp-css-import'
 import { observerItem } from '@ui/hoc/observer'

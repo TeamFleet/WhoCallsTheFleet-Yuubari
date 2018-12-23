@@ -1,10 +1,10 @@
 import React from 'react'
+import { extend } from 'koot'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './datatable.less'
-
-@ImportStyle(style)
-export default class DataTable extends React.Component {
+@extend({
+    styles: require('./datatable.less')
+})
+class DataTable extends React.Component {
     componentDidUpdate(/*prevProps*/) {
         // console.log(prevProps.scrollLeft, this.props.scrollLeft, this._table, this._table.scrollLeft)
         if (!this._table || typeof this.props.scrollLeft === 'undefined' || this._table.scrollLeft === this.props.scrollLeft)
@@ -94,3 +94,4 @@ export default class DataTable extends React.Component {
         )
     }
 }
+export default DataTable

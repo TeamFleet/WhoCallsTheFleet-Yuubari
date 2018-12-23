@@ -1,19 +1,18 @@
 import React from 'react'
-
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import Title from '@ui/components/title'
 import MainHeader from '@ui/components/main-header'
 
-@ImportStyle(require('./header.less'))
-export default class extends React.Component {
-    render() {
-        return (
-            <MainHeader>
-                <div className={this.props.className}>
-                    <Title component="h2">@ui/components/main-header</Title>
-                </div>
-            </MainHeader>
-        )
-    }
-}
+const DevHeader = extend({
+    styles: require('./header.less')
+})(
+    ({ className }) => (
+        <MainHeader>
+            <div className={className}>
+                <Title component="h2">@ui/components/main-header</Title>
+            </div>
+        </MainHeader>
+    )
+)
+export default DevHeader

@@ -1,3 +1,6 @@
+import shipCollections from './json/ship_collections.json'
+import equipmentCollections from './json/equipment_collections.json'
+
 import { register, parseRaw } from 'kckit'
 
 import parseLocaleId from './parse-locale-id'
@@ -14,8 +17,8 @@ const initKCKit = ({ localeId, store }) => {
 
     const {
         rawNeDB,
-        shipCollections,
-        equipmentCollections
+        // shipCollections,
+        // equipmentCollections
     } = store
 
     const db = parseRaw(rawNeDB)
@@ -24,67 +27,67 @@ const initKCKit = ({ localeId, store }) => {
     {
         db.shipsSpecial = {}
 
-        if (!shipCollections.transformed) {
-            let shipIndex = 0
-            shipCollections.forEach(collection => {
+        let shipIndex = 0
+        shipCollections.forEach(collection => {
+            if (typeof collection.name === 'object') {
                 collection.names = { ...collection.name }
-                collection.list.forEach(list => {
-                    list.ships.forEach((arrShips, index) => {
-                        list.ships[index] = arrShips.map(shipId => {
-                            const ship = db.ships[shipId]
-                            Object.assign(ship, {
-                                type_display: list.type,
-                                order: shipIndex++
-                            })
-                            if (!db.shipsSpecial[list.type]) db.shipsSpecial[list.type] = []
-                            if (!db.shipsSpecial[list.type].includes(shipId) && (
-                                (Array.isArray(ship.additional_item_types) && ship.additional_item_types.length)
-                                || (Array.isArray(ship.additional_disable_item_types) && ship.additional_disable_item_types.length))
-                            ) {
-                                db.shipsSpecial[list.type].push(shipId)
-                            }
-                            return ship
+                // Object.defineProperty(collection, 'name', {
+                //     get: function () {
+                //         return this.names[locale]
+                //     }
+                // })
+            }
+            collection.name = collection.names[locale]
+            collection.list.forEach(list => {
+                list.ships.forEach((arrShips, index) => {
+                    list.ships[index] = arrShips.map(shipId => {
+                        const ship = db.ships[shipId]
+                        Object.assign(ship, {
+                            type_display: list.type,
+                            order: shipIndex++
                         })
+                        if (!db.shipsSpecial[list.type]) db.shipsSpecial[list.type] = []
+                        if (!db.shipsSpecial[list.type].includes(shipId) && (
+                            (Array.isArray(ship.additional_item_types) && ship.additional_item_types.length)
+                            || (Array.isArray(ship.additional_disable_item_types) && ship.additional_disable_item_types.length))
+                        ) {
+                            db.shipsSpecial[list.type].push(shipId)
+                        }
+                        return ship
                     })
                 })
-                Object.defineProperty(collection, 'name', {
-                    get: function () {
-                        return this.names[locale]
-                    }
-                })
             })
-            shipCollections.transformed = true
-        }
+        })
 
         db.shipCollections = shipCollections
     }
 
     // equipment collections
     {
-        if (!equipmentCollections.transformed) {
-            let equipmentTypeIndex = 0
-            let equipmentIndex = 0
-            equipmentCollections.forEach(collection => {
+        let equipmentTypeIndex = 0
+        let equipmentIndex = 0
+        equipmentCollections.forEach(collection => {
+            if (typeof collection.name === 'object') {
                 collection.names = { ...collection.name }
-                collection.list.forEach(list => {
-                    Object.assign(db.equipmentTypes[list.type], {
-                        order: equipmentTypeIndex++
-                    })
-                    list.equipments = list.equipments.map(equipmentId => {
-                        Object.assign(db.equipments[equipmentId], {
-                            order: equipmentIndex++
-                        })
-                        return db.equipments[equipmentId]
-                    })
+                // Object.defineProperty(collection, 'name', {
+                //     get: function () {
+                //         return this.names[locale]
+                //     }
+                // })
+            }
+            collection.name = collection.names[locale]
+            collection.list.forEach(list => {
+                Object.assign(db.equipmentTypes[list.type], {
+                    order: equipmentTypeIndex++
                 })
-                Object.defineProperty(collection, 'name', {
-                    get: function () {
-                        return this.names[locale]
-                    }
+                list.equipments = list.equipments.map(equipmentId => {
+                    Object.assign(db.equipments[equipmentId], {
+                        order: equipmentIndex++
+                    })
+                    return db.equipments[equipmentId]
                 })
             })
-            equipmentCollections.transformed = true
-        }
+        })
 
         db.equipmentCollections = equipmentCollections
     }

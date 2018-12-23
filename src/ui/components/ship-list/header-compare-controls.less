@@ -32,28 +32,31 @@
         margin-right:1rem;
         line-height:inherit;
         padding:    0;
+        transition-property: color;
         .icon{
             margin-right: 6px;
             vertical-align: text-top;
-            fill:   @color-base;
+            // fill: currentColor;
+            // fill:   @color-base;
+            // transition-property: fill;
         }
         .is-hover({
             color:  #fff;
-            .icon{
-                fill:   #fff;
-            }
+            // .icon{
+            //     fill:   #fff;
+            // }
             &:active{
                 color:  @color-active;
-                .icon{
-                    fill:   @color-active;
-                }
+                // .icon{
+                //     fill:   @color-active;
+                // }
             }
         });
         &:active{
             color:  @color-active;
-            .icon{
-                fill:   @color-active;
-            }
+            // .icon{
+            //     fill:   @color-active;
+            // }
         }
         &:focus{
             outline: 0;

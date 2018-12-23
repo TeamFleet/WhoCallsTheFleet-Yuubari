@@ -1,13 +1,15 @@
 @import '../base.less';
 
-.hover() {
-    &:after{
-        content:    "";
-        .style-table-highlight();
-    }
-}
-
 .component{
+
+    .hover() {
+        color: #800;
+        &:after{
+            content:    "";
+            .style-table-highlight();
+        }
+    }
+
     overflow-y:     hidden;
     // .row + .row{
         // border-top: 1px solid @color-border;
@@ -28,13 +30,36 @@
     .body{
         // overflow:   hidden;
         // margin-top:     -1px;
+        border-bottom: 1px solid @color-border;
         .row{
             border-top: 1px solid @color-border;
         }
         .cell{
+        //     font-style: italic;
+        //     &:hover{
+        //         font-weight: bolder;
+        //     }
             .is-hover({
-                .hover();
+                // font-weight: bolder;
+                &:after{
+                    content:    "";
+                    .style-table-highlight();
+                }
             });
+        }
+    }
+
+    &.flex{
+        display:    block;
+        .row{
+            display:    flex;
+            flex-flow:  row nowrap;
+            width:      100%;
+            align-items:stretch;
+        }
+        .cell{
+            display:    block;
+            flex:       1 1 auto;
         }
     }
 }
@@ -44,17 +69,3 @@
 //         .hover();
 //     }
 // }
-
-.component.flex{
-    display:    block;
-    .row{
-        display:    flex;
-        flex-flow:  row nowrap;
-        width:      100%;
-        align-items:stretch;
-    }
-    .cell{
-        display:    block;
-        flex:       1 1 auto;
-    }
-}

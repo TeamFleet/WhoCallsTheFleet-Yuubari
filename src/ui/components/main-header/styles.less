@@ -11,17 +11,35 @@
     box-shadow: 0 10px 20px -10px fade(#000, 20%);
     
     transition: inherit;
-    animation: fadein (@duration-main-transition * 1) ease-out;
     
     @supports(backdrop-filter: blur(20px)) {
         box-shadow: 0 10px 20px -10px fade(#000, 30%);
     }
 
-    &.mod-transition-exit{
-        transition-property: opacity;
+    &.mod-transition-enter, &.mod-transition-exit{
         transition-duration: (@duration-main-transition * 1);
         transition-delay: 0s;
+    }
+    &.mod-transition-enter{
+        transition-property: none;
         opacity: 0;
+        @supports(backdrop-filter: blur(1px)){
+            transform: translateY(-100%);
+        }
+        &.mod-transition-enter-active{
+            transition-property: opacity, transform;
+            opacity: 1;
+            @supports(backdrop-filter: blur(1px)){
+                transform: none;
+            }
+        }
+    }
+    &.mod-transition-exit{
+        transition-property: opacity;
+        opacity: 0;
+        // @supports(backdrop-filter: blur(1px)){
+        //     transform: translateY(100%);
+        // }
     }
 
     // opacity:    0;

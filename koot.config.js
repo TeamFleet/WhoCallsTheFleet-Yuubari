@@ -164,6 +164,7 @@ module.exports = {
             'react-router',
             'react-router-redux',
             'koot',
+            'swiper',
         ]
     },
 

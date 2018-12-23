@@ -21,10 +21,6 @@ const defaults = {
 })
 class SwiperComponent extends React.Component {
     componentDidMount() {
-        // if (typeof window !== 'undefined')
-        //     require('swiper/dist/css/swiper.min.css')
-        // if (typeof window !== 'undefined')
-        //     require('./swiper.g.less')
         if (Swiper && !this._init) {
             let thisSwiper
 
@@ -93,12 +89,14 @@ class SwiperComponent extends React.Component {
 
             // console.log('swiper init', props)
 
-            thisSwiper = new Swiper(
-                this._container,
-                Object.assign(defaults, props)
-            )
-
-            this._init = true
+            setTimeout(() => {
+                thisSwiper = new Swiper(
+                    this._container,
+                    Object.assign(defaults, props)
+                )
+    
+                this._init = true
+            })
         }
     }
 

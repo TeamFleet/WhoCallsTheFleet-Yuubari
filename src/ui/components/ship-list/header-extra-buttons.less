@@ -16,7 +16,8 @@
         margin-left:    @gutter;
         border-bottom:  2px solid transparent;
         .icon{
-            fill:   @color-fade;
+            // fill: currentColor;
+            // fill:   @color-fade;
             // fill:   @color-base;
             // fill:   @color-base-dimmed;
             vertical-align: text-top;
@@ -25,9 +26,9 @@
         .is-hover({
             // color:  @color-base;
             color:  #fff;
-            .icon{
-                fill:   #fff;
-            }
+            // .icon{
+            //     fill:   #fff;
+            // }
             &:active{
                 color:  @color-active;
                 .icon{
@@ -37,9 +38,9 @@
         });
         &:active{
             color:  @color-active;
-            .icon{
-                fill:   @color-active;
-            }
+            // .icon{
+            //     fill:   @color-active;
+            // }
         }
         &.on{
             color:  #fff;

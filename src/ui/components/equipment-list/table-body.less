@@ -2,7 +2,7 @@
 
 .component{
     // margin-top:     -21px;
-    border-bottom:  1px solid @color-border;
+    // border-bottom:  1px solid @color-border;
 
     &.flex{
         .table();
@@ -45,9 +45,11 @@
             .cell[data-stat]{
                 // color:  @theme-grey-300;
                 font-size:  13px;
+                .screen-tablet({
+                    border-left:1px solid @color-border;
+                });
                 .screen-phone({
                     font-size:  12px;
-                    border-left:1px solid @color-border;
                 });
             }
         }
@@ -86,11 +88,14 @@
         overflow: visible;
         .row{
             border-top-color:   transparent;
-            .screen-phone({
+            .screen-tablet({
                 // border-top-color:@color-border;
                 .cell[data-stat]{
                     border-left-color: transparent;
                 }
+            });
+            .screen-phone({
+                // border-top-color:@color-border;
                 .cell[data-stat]:not(:empty){
                     white-space: nowrap;
                     transform:  rotate(-30deg);
@@ -100,9 +105,9 @@
     }
 }
 
-.last .component{
-    border-bottom: 0;
-}
+// .last .component{
+//     border-bottom: 0;
+// }
 
 .stat-highlight-loop(@n, @i: 0) when (@i =< @n) {
     @nth: (@i + 2);

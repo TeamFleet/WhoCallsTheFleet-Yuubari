@@ -1,5 +1,5 @@
-import shipCollections from './json/ship_collections.json'
-import equipmentCollections from './json/equipment_collections.json'
+// import shipCollections from './json/ship_collections.json'
+// import equipmentCollections from './json/equipment_collections.json'
 
 const LZString = __CLIENT__ ? require('lz-string') : {}
 const getDataObject = (name) => {
@@ -45,8 +45,8 @@ const create = () => {
 
     result = {
         rawNeDB: raw,
-        shipCollections,
-        equipmentCollections
+        // shipCollections,
+        // equipmentCollections
     }
 
     return result

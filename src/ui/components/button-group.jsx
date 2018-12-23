@@ -1,18 +1,16 @@
 import React from 'react'
 // import { Link } from 'react-router'
+import { extend } from 'koot'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './button-group.less'
-
-@ImportStyle(style)
-export default class extends React.Component {
-    render() {
-        return (
-            <span
-                className={this.props.className}
-            >
-                {this.props.children}
-            </span>
-        )
-    }
-}
+const ButtonGroup = extend({
+    styles: require('./button-group.less')
+})(
+    ({ className, children }) => (
+        <span
+            className={className}
+        >
+            {children}
+        </span>
+    )
+)
+export default ButtonGroup

@@ -1,53 +1,57 @@
 import React from 'react'
+import { extend } from 'koot'
 
 import { stats } from './table-body'
 import DataTableFlex, { Row, Cell } from '@ui/components/datatable-flex'
 
-import { ImportStyle } from 'sp-css-import'
 
-@ImportStyle(require('./table-body-header-interceptor.less'))
-export default class EquipmentListTableBodyHeaderInterceptor extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                <EquipmentListTableBodyHeaderInterceptorBody />
-            </div>
-        )
-    }
-}
+//
 
-@ImportStyle(require('./table-body.less'))
-class EquipmentListTableBodyHeaderInterceptorBody extends React.Component {
-    renderCellStat(stat) {
-        if (this.props.collection === 2 && stat === 'range')
-            stat = 'distance'
 
-        let content = null
+const EquipmentListTableBodyHeaderInterceptor = extend({
+    styles: require('./table-body-header-interceptor.less')
+})(
+    ({ className }) => (
+        <div className={className}>
+            <Body />
+        </div>
+    )
+)
+export default EquipmentListTableBodyHeaderInterceptor
 
-        if (stat === 'hit')
-            content = __('stat.antibomber')
-        else if (stat === 'evasion')
-            content = __('stat.interception')
 
-        return (
-            <Cell
-                key={stat}
-                className={`cell stat-${stat}`}
-                data-stat={stat.replace(/^equipment\./, '') || undefined}
-            >
-                {content}
-            </Cell>
-        )
-    }
+//
 
-    render() {
-        return (
-            <DataTableFlex className={this.props.className + ' flex is-header'}>
-                <Row className="row">
-                    <Cell className="cell cell-name" />
-                    {stats.map(this.renderCellStat.bind(this))}
-                </Row>
-            </DataTableFlex>
-        )
-    }
-}
+
+const Body = extend({
+    styles: require('./table-body.less')
+})(
+    ({ className, collection }) => (
+        <DataTableFlex className={className + ' flex is-header'}>
+            <Row className="row">
+                <Cell className="cell cell-name" />
+                {stats.map((stat) => {
+                    if (collection === 2 && stat === 'range')
+                        stat = 'distance'
+
+                    let content = null
+
+                    if (stat === 'hit')
+                        content = __('stat.antibomber')
+                    else if (stat === 'evasion')
+                        content = __('stat.interception')
+
+                    return (
+                        <Cell
+                            key={stat}
+                            className={`cell stat-${stat}`}
+                            data-stat={stat.replace(/^equipment\./, '') || undefined}
+                        >
+                            {content}
+                        </Cell>
+                    )
+                })}
+            </Row>
+        </DataTableFlex>
+    )
+)

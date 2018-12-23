@@ -1,37 +1,43 @@
 import React from 'react'
 import { get } from 'kckit'
+import { extend } from 'koot'
 
 import Icon from '@ui/components/icon'
 import Link from '@ui/components/link'
 import IconEquipment from '@ui/components/icon-equipment'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './equipment.less'
-
-@ImportStyle(styles)
-export default class CalculatorEquipment extends React.Component {
-    render() {
-        const equipment = get.equipment(this.props.equipment)
-        const isRequired = this.props.className.includes('is-required')
+const CalculatorEquipment = extend({
+    styles: require('./equipment.less')
+})(
+    ({
+        equipment: _equipment,
+        className,
+        isNotLink,
+        displayName,
+        componentInput
+    }) => {
+        const equipment = get.equipment(_equipment)
+        const isRequired = className.includes('is-required')
         return (
-            <div className={this.props.className} data-equipment-id={equipment.id}>
+            <div className={className} data-equipment-id={equipment.id}>
                 <span className="equipment">
-                    {this.props.isNotLink &&
+                    {isNotLink &&
                         <span className="name">
                             <IconEquipment className="icon" icon={equipment._icon} />
-                            {this.props.displayName || equipment._name}
+                            {displayName || equipment._name}
                         </span>
                     }
-                    {!this.props.isNotLink &&
+                    {!isNotLink &&
                         <Link className="name" to={`/equipments/${equipment.id}`}>
                             <IconEquipment className="icon" icon={equipment._icon} />
-                            {this.props.displayName || equipment._name}
+                            {displayName || equipment._name}
                         </Link>
                     }
                 </span>
                 {isRequired && <Icon className="icon-required" icon="warning2" />}
-                {this.props.componentInput}
+                {componentInput}
             </div>
         )
     }
-}
+)
+export default CalculatorEquipment

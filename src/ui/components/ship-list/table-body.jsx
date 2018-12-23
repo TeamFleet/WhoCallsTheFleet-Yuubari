@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { extend } from 'koot'
 // import { browserHistory } from '@app/client/router/history'
 
 import LinkShip from '../link/ship.jsx'
@@ -10,7 +11,6 @@ import {
 import routerPush from '@utils/router-push'
 import getLink from '@utils/get-link'
 
-import { ImportStyle } from 'sp-css-import'
 import style from './table-body.less'
 
 const stats = [
@@ -41,13 +41,15 @@ const extractValue = (obj) => {
     return -1000
 }
 
-@ImportStyle(style)
-@connect((state, ownProps) => ({
-    sortType: state.shipList[ownProps.id].compareSort[0],
-    sortOrder: state.shipList[ownProps.id].compareSort[1],
-    scrollLeft: state.shipList[ownProps.id].compareScrollLeft
-}))
-export default class ShipListTableBody extends React.Component {
+@extend({
+    connect: (state, ownProps) => ({
+        sortType: state.shipList[ownProps.id].compareSort[0],
+        sortOrder: state.shipList[ownProps.id].compareSort[1],
+        scrollLeft: state.shipList[ownProps.id].compareScrollLeft
+    }),
+    styles: require('./table-body.less')
+})
+class ShipListTableBody extends React.Component {
     getData() {
         if (!Array.isArray(this.props.ships)) return []
         // console.log(this.props.ships)
@@ -79,7 +81,7 @@ export default class ShipListTableBody extends React.Component {
             stats.forEach(stat => {
                 const value = ship.getAttribute(stat, 99)
                 let content = value
-                let className = 'stat-' + stat
+                let className = 'stat stat-' + stat
                 let trueValue
 
                 if (value === false) {
@@ -112,7 +114,7 @@ export default class ShipListTableBody extends React.Component {
                 cells.push([
                     content,
                     {
-                        className: className,
+                        className,
                         value: trueValue
                     }
                 ])
@@ -175,3 +177,4 @@ export default class ShipListTableBody extends React.Component {
         )
     }
 }
+export default ShipListTableBody

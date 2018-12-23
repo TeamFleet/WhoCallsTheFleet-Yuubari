@@ -15,8 +15,6 @@ import {
 import Header from './details/commons/header.jsx'
 import InfosPageContainer from '@ui/containers/infos-page'
 
-// import { ImportStyle } from 'sp-css-import'
-
 
 
 

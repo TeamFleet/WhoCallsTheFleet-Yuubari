@@ -5,7 +5,7 @@ import operations from './operations'
 import data from './data'
 const dev = __DEV__ ? require('./dev').default : []
 
-if (__DEV__) console.log('routes-dev', dev)
+// if (__DEV__) console.log('routes-dev', dev)
 
 // 检查当前URL与路由配置路径是否相匹配，如果否，则不予渲染组件
 // 通常在网络连接情况较差的情况下，容易出现不匹配的情况

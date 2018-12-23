@@ -1,82 +1,51 @@
 import React from 'react'
+import { extend } from 'koot'
 
-import { ImportStyle } from 'sp-css-import'
 
-@ImportStyle(require('./styles.less'))
-export default class DataTableFlex extends React.Component {
-    render() {
-        const {
-            TagName,
-            children,
-            ...props
-        } = this.props
-
-        const Component = TagName || 'div'
-
-        return (
-            <Component
-                ref={el => this._table = el}
-                {...props}
-            >
-                {children}
-            </Component>
-        )
-    }
+const Base = ({ tag, element, component, ...props }) => {
+    const Component = tag || element || component || 'div'
+    return (
+        <Component {...props} />
+    )
 }
 
-@ImportStyle(require('./styles-body.less'))
-export class Body extends React.Component {
-    render() {
-        const {
-            TagName,
-            children,
-            ...props
-        } = this.props
 
-        const Component = TagName || 'div'
+//
 
-        return (
-            <Component {...props}>
-                {children}
-            </Component>
-        )
-    }
-}
 
-@ImportStyle(require('./styles-row.less'))
-export class Row extends React.Component {
-    render() {
-        const {
-            TagName,
-            children,
-            ...props
-        } = this.props
+const DataTableFlex = extend({
+    styles: require('./styles.less')
+})(
+    (props) => <Base {...props} />
+)
+export default DataTableFlex
 
-        const Component = TagName || 'div'
 
-        return (
-            <Component {...props}>
-                {children}
-            </Component>
-        )
-    }
-}
+//
 
-@ImportStyle(require('./styles-cell.less'))
-export class Cell extends React.Component {
-    render() {
-        const {
-            TagName,
-            children,
-            ...props
-        } = this.props
 
-        const Component = TagName || 'div'
+export const Body = extend({
+    styles: require('./styles-body.less')
+})(
+    (props) => <Base {...props} />
+)
 
-        return (
-            <Component {...props}>
-                {children}
-            </Component>
-        )
-    }
-}
+
+//
+
+
+export const Row = extend({
+    styles: require('./styles-row.less')
+})(
+    (props) => <Base {...props} />
+)
+
+
+//
+
+
+export const Cell = extend({
+    styles: require('./styles-cell.less')
+})(
+    (props) => <Base {...props} />
+)

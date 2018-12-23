@@ -1,23 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { ImportStyle } from 'sp-css-import'
+import classNames from 'classnames'
+import { extend } from 'koot'
 
-@ImportStyle(require('./button.less'))
-export default class extends React.Component {
-    render() {
-        let {
-            className,
-            children,
-            tag, component,
-            href, link,
-            to,
-            type,
-            color,
-            size,
-            state,
-            onClick,
-            ...props
-        } = this.props
+const Button = extend({
+    styles: require('./button.less')
+})(
+    ({
+        className,
+        children,
+        tag, component,
+        href, link,
+        to,
+        type,
+        color,
+        size,
+        state,
+        onClick,
+        ...props
+    }) => {
 
         let Component
         if (tag) Component = tag
@@ -26,25 +27,17 @@ export default class extends React.Component {
         else if (href || link) Component = 'a'
         else Component = 'button'
 
-        let disabled
-
+        const disabled = (state === 'disable' || state === 'disabled')
         const buttonType = type || (Component === 'button' ? 'button' : undefined)
         const linkUrl = href || link || undefined
 
-        if (color)
-            className += ' mod-color-' + color
-
-        if (size)
-            className += ' mod-size-' + size
-
-        if (state === 'disable' || state === 'disabled')
-            disabled = true
-        else if (state)
-            className += ' is-state-' + state
-
         return (
             <Component
-                className={'button ' + className}
+                className={classNames(['button', className], {
+                    [`mod-color-${color}`]: color,
+                    [`mod-size-${size}`]: size,
+                    [`is-state-${state}`]: !disabled && state,
+                })}
                 href={linkUrl}
                 to={to}
                 type={buttonType}
@@ -60,4 +53,5 @@ export default class extends React.Component {
             </Component>
         )
     }
-}
+)
+export default Button

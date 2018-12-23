@@ -15,6 +15,24 @@ import Background from '@ui/components/background.jsx'
     styles: require('./styles.less')
 })
 class MainHeader extends React.Component {
+    state = {
+        enter: true,
+        enterActive: false,
+    }
+
+    componentDidMount() {
+        // setTimeout(() => {
+        //     this.setState({
+        //         enter: true
+        //     })
+        // })
+        setTimeout(() => {
+            this.setState({
+                enterActive: true
+            })
+        })
+    }
+
     renderContent(isPortal) {
         const {
             className,
@@ -26,14 +44,34 @@ class MainHeader extends React.Component {
         // delete props.appReady
         delete props.dispatch
 
+        // console.log(this.state)
+
         return (
             <div
                 className={classNames({
                     [className]: true,
                     'main-header': true,
                     'wrapper': isPortal,
+                    'mod-transition-enter': this.state.enter,
+                    'mod-transition-enter-active': this.state.enterActive,
                     'mod-transition-exit': this.keyCurrent !== mainKey
                 })}
+                onTransitionEnd={evt => {
+                    // console.log(
+                    //     evt.target === evt.currentTarget,
+                    //     evt.target.classList.contains('mod-transition-enter-active'),
+                    //     parseFloat(getComputedStyle(evt.target).opacity)
+                    // )
+                    if (evt.target === evt.currentTarget &&
+                        evt.target.classList.contains('mod-transition-enter-active') &&
+                        parseFloat(getComputedStyle(evt.target).opacity) >= 0.9
+                    ) {
+                        this.setState({
+                            enter: false,
+                            enterActive: false,
+                        })
+                    }
+                }}
                 {...props}
             >
                 {children}

@@ -1,29 +1,34 @@
 import React from 'react'
+import { extend } from 'koot'
 
 import Icon from '@ui/components/icon'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
-
-// @connect()
-@ImportStyle(styles)
-export default class Bullet extends React.Component {
-    render() {
-        let level = this.props.level
-        if (typeof level === 'undefined')
-            level = this.props.bullet
+const Bullet = extend({
+    styles: require('./styles.less')
+})(
+    ({
+        level, bullet,
+        className,
+        title,
+        children
+    }) => {
+        let theLevel = level
+        if (typeof theLevel === 'undefined')
+            theLevel = bullet
         return (
             <div
-                className={this.props.className}
-                data-level={level || 0}
+                className={className}
+                data-level={theLevel || 0}
             >
-                {level === -1 && <Icon className="icon" icon="question6" />}
-                {level === 0 && <Icon className="icon" icon="cross" />}
-                {this.props.title}
-                {this.props.children && <span className="des">
-                    {this.props.children}
+                {theLevel === -1 && <Icon className="icon" icon="question6" />}
+                {theLevel === 0 && <Icon className="icon" icon="cross" />}
+                {title}
+                {children && <span className="des">
+                    {children}
                 </span>}
             </div>
         )
     }
-}
+)
+
+export default Bullet
