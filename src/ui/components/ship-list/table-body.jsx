@@ -75,7 +75,12 @@ class ShipListTableBody extends React.Component {
 
         let results = this.props.ships.map(ship => {
             let cells = [
-                <LinkShip ship={ship} />
+                [
+                    <LinkShip ship={ship} />,
+                    {
+                        className: 'ship'
+                    }
+                ]
             ]
 
             stats.forEach(stat => {
