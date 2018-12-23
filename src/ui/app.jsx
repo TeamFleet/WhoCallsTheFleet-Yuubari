@@ -1,7 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
 import { extend, history } from 'koot'
-// import { localeId, history } from 'koot'
 
 import {
     updateAppReady,

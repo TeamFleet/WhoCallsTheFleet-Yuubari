@@ -3,7 +3,7 @@ import initDatabase from '@database/init'
 
 // console.log('===')
 
-export default async ({ ctx, localeId, store }) => {
+export default async ({ /*ctx,*/ localeId, store }) => {
 
     // console.log('\nNew request')
     // console.log(ctx.url)

@@ -123,15 +123,15 @@ const initKCKit = ({ localeId, store }) => {
         db.arsenalDays = days
     }
 
-    console.log('registering...')
+    // console.log('registering...')
 
     register({
         db, locale
     })
 
-    console.log('register OK', {
-        locale
-    })
+    // console.log('register OK', {
+    //     locale
+    // })
 
     if (__CLIENT__ && __DEV__) {
         console.log('📦 Database inited.', db)
