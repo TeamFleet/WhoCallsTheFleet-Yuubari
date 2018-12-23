@@ -23,7 +23,7 @@ module.exports = Object.assign({}, base, {
             'classnames',
             'js-cookie',
 
-            'kckit',
+            // 'kckit',
         ],
         // database: glob.sync(path.resolve(__dirname, '../../src/database/**/*'), { nodir: true }),
         ...base.entry,

@@ -2,7 +2,7 @@ import initDatabase from '@database/init'
 import prefs from '@api/preferences'
 
 export default ({
-    localeId, history
+    localeId, history, store
 }) => {
 
     if (__DEV__) {
@@ -11,7 +11,7 @@ export default ({
     }
 
     // 初始化 database
-    initDatabase(localeId)
+    initDatabase({ localeId, store })
 
     // 将 history 中的 state.ui 清空
     history.replace({

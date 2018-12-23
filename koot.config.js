@@ -131,9 +131,9 @@ module.exports = {
             return {}
         },
         beforeBuild: async (...args) => {
-            await require('./src/build/webapp/before')(...args)
             if (process.env.WEBPACK_BUILD_STAGE === 'client') {
                 console.log(' ')
+                await require('./src/build/webapp/before')(...args)
                 if (process.env.WEBPACK_BUILD_ENV === 'prod') {
                     await require('./src/scripts/clean-dist')(...args)
                 }

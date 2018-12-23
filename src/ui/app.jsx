@@ -41,22 +41,23 @@ class App extends React.Component {
      */
     startSwipeAtLeftBorder = false
 
-    constructor(props) {
-        super(props)
+    // constructor(props) {
+    //     super(props)
 
-        if (__CLIENT__) {
-            const kckit = require('kckit')
-            console.log('_', {
-                kckit,
-                locale: kckit.locale,
-                sample: kckit.db.ships[20]._name
-            })
-            const db = require('@database')
-            console.log('=', {
-                sample: db.ships[20]._name
-            })
-        }
-    }
+    //     // if (__CLIENT__) {
+    //     console.log('! locale', props.localeId)
+    //     const kckit = require('kckit')
+    //     console.log('_', {
+    //         // kckit,
+    //         locale: kckit.locale,
+    //         sample: kckit.db.ships[20]._name
+    //     })
+    //     const db = require('@database').default
+    //     console.log('=', {
+    //         sample: db.ships[20]._name
+    //     })
+    //     // }
+    // }
 
     checkAppReady(timeout = 10) {
         if (__CLIENT__ && this.props.isMainBgimgLoaded && !self.isAppReady) {
@@ -128,7 +129,6 @@ class App extends React.Component {
         // 检查是否需要显示“安装App”按钮
         if (__DEV__) {
             this.props.dispatch(setInstallPWAEvent({}))
-            // window.History = history
         } else {
             if (query.utm_source !== 'web_app_manifest') {
                 // console.log('🎯 not via app')

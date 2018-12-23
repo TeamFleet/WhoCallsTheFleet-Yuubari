@@ -11,9 +11,6 @@
     box-shadow: 0 10px 20px -10px fade(#000, 20%);
     
     transition: inherit;
-    transition-property: opacity;
-    transition-duration: (@duration-main-transition * 1);
-    transition-delay: 0s;
     animation: fadein (@duration-main-transition * 1) ease-out;
     
     @supports(backdrop-filter: blur(20px)) {
@@ -21,6 +18,9 @@
     }
 
     &.mod-transition-exit{
+        transition-property: opacity;
+        transition-duration: (@duration-main-transition * 1);
+        transition-delay: 0s;
         opacity: 0;
     }
 
