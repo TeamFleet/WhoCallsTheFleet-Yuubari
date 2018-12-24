@@ -1,8 +1,10 @@
 import React from 'react'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
-export default ImportStyle(require('./styles.less'))(
-    (props) => (
-        <span {...props} />
-    )
+const LoaderFairyOoyodo2 = extend({
+    styles: require('./styles.less')
+})(
+    (props) => <span {...props} />
 )
+
+export default LoaderFairyOoyodo2

@@ -1,33 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
+
 import routerReplace from '@utils/router-replace'
 
-@ImportStyle(require('./_normal.less'))
-export default class LinkTypeNormal extends React.Component {
-    renderName(name, extra) {
-        if (typeof name === 'string') {
-            return (
-                <span className="name">
-                    {name}
-                    {typeof extra !== 'undefined' && <small className="name-extra">{extra}</small>}
-                </span>
-            )
-        }
-        return React.cloneElement(name, {
-            className: 'name'
-        })
+const renderName = (name, extra) => {
+    if (typeof name === 'string') {
+        return (
+            <span className="name">
+                {name}
+                {typeof extra !== 'undefined' && <small className="name-extra">{extra}</small>}
+            </span>
+        )
     }
+    return React.cloneElement(name, {
+        className: 'name'
+    })
+}
 
-    render() {
-        const {
-            pic, avatar, image, src, picture, img,
-            name, title, text, nameExtra,
-            to: _to, href, link,
-            replace = false,
-            ...props
-        } = this.props
-
+const LinkDefault = extend({
+    styles: require('./_normal.less')
+})(
+    ({
+        pic, avatar, image, src, picture, img,
+        name, title, text, nameExtra,
+        to: _to, href, link,
+        replace = false,
+        children,
+        ...props
+    }) => {
         const thisPic = pic || avatar || image || src || picture || img
         const thisName = name || title || text || null
 
@@ -44,18 +45,20 @@ export default class LinkTypeNormal extends React.Component {
             props.to = to
 
         return (
-            <Component
-                {...props}
-            >
-                {thisPic && <span
-                    className="pic"
-                    style={{
-                        backgroundImage: `url(${thisPic})`
-                    }}
-                />}
-                {thisName && this.renderName(thisName, nameExtra)}
-                {this.props.children}
+            <Component {...props} >
+                {thisPic && (
+                    <span
+                        className="pic"
+                        style={{
+                            backgroundImage: `url(${thisPic})`
+                        }}
+                    />
+                )}
+                {thisName && renderName(thisName, nameExtra)}
+                {children}
             </Component>
         )
     }
-}
+)
+
+export default LinkDefault

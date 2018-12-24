@@ -1,23 +1,24 @@
 import React from 'react'
+import { extend } from 'koot'
 
 import times from '@utils/times'
-import { ImportStyle } from 'sp-css-import'
 
-export const placeholders = []
 export const itemClassName = 'flex-item'
-times(10)(index => placeholders.push(
-    <span className={`${itemClassName} placeholder`} key={index}></span>
-))
+export const placeholders = (() => {
+    const arr = []
+    times(10)(index => arr.push(
+        <span className={`${itemClassName} placeholder`} key={index}></span>
+    ))
+    return arr
+})()
 
-@ImportStyle(require('./styles.less'))
-export default class FlexContainer extends React.Component {
-    render() {
-        const { children, noPlaceholder, ...props } = this.props
-        return (
-            <div {...props}>
-                {children}
-                {!noPlaceholder && placeholders}
-            </div>
-        )
-    }
-}
+const FlexContainer = extend({
+    styles: require('./styles.less')
+})(
+    ({ children, noPlaceholder, ...props }) =>
+        <div {...props}>
+            {children}
+            {!noPlaceholder && placeholders}
+        </div>
+)
+export default FlexContainer

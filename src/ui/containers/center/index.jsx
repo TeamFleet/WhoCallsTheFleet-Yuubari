@@ -1,17 +1,14 @@
 import React from 'react'
+import { extend } from 'koot'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './styles.less'
+const CenterContainer = extend({
+    styles: require('./styles.less')
+})(
+    ({ className, children }) =>
+        <div
+            className={className}
+            children={children}
+        />
+)
 
-@ImportStyle(style)
-export default class CenterContainer extends React.Component {
-    render() {
-        return (
-            <div
-                className={this.props.className}
-            >
-                {this.props.children}
-            </div>
-        )
-    }
-}
+export default CenterContainer

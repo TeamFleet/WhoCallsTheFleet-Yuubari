@@ -1,9 +1,11 @@
 import React from 'react'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
-@ImportStyle(require('./styles.less'))
-export default class Image extends React.Component {
+@extend({
+    styles: require('./styles.less')
+})
+class Image extends React.Component {
     state = {
         isLoading: true,
         isLoaded: false,
@@ -64,3 +66,5 @@ export default class Image extends React.Component {
         )
     }
 }
+
+export default Image

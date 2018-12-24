@@ -1,33 +1,33 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import MainHeader from '@ui/components/main-header'
 
 export const tabClassName = 'main-header-tab-item'
 
-// @connect()
-@ImportStyle(require('./styles.less'))
-export default class MainHeaderTabs extends React.Component {
-    render() {
+const MainHeaderTabs = extend({
+    styles: require('./styles.less')
+})(
+    ({
+        className,
+        tabs = [],
+        children,
+        ...props
+    }) => {
         const isPortal = __CLIENT__
         // const Component = isPortal ? MainHeader : 'div'
 
-        const {
-            className,
-            tabs = [],
-            children,
-            ...props
-        } = this.props;
-
         return (
-            <MainHeader className={classNames([
-                className, {
-                    'is-portal': isPortal,
-                    // 'has-options': !!(tabs),
-                }
-            ])} {...props}>
+            <MainHeader
+                className={classNames([
+                    className, {
+                        'is-portal': isPortal,
+                        // 'has-options': !!(tabs),
+                    }
+                ])}
+                {...props}
+            >
 
                 <div className="tabs">
                     {tabs}
@@ -37,4 +37,5 @@ export default class MainHeaderTabs extends React.Component {
             </MainHeader>
         )
     }
-}
+)
+export default MainHeaderTabs

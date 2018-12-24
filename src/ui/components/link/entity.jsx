@@ -1,30 +1,29 @@
 import React from 'react'
-import Link from './_normal.jsx'
+import { extend } from 'koot'
+
+import LinkDefault from './_normal'
 
 import getEntity from '@utils/get-entity.js'
 import getPic from '@utils/get-pic.js'
 import getLink from '@utils/get-link.js'
 
-import { ImportStyle } from 'sp-css-import'
-
 const checkShow = value => (value || typeof value === 'undefined')
 
-@ImportStyle(require('./entity.less'))
-export default class LinkEntity extends React.Component {
-    render() {
-        const {
-            entity: _entity, id,
-            pic,
-            name,
-            children,
-            count,
-            ...props
-        } = this.props
-
+const LinkEntity = extend({
+    styles: require('./entity.less')
+})(
+    ({
+        entity: _entity, id,
+        pic,
+        name,
+        children,
+        count,
+        ...props
+    }) => {
         const entity = getEntity(_entity || id)
 
         return (
-            <Link
+            <LinkDefault
                 to={getLink('entity', entity.id)}
                 pic={checkShow(pic) ? getPic(entity, '0-2') : null}
                 name={checkShow(name) ? entity._name : null}
@@ -32,7 +31,9 @@ export default class LinkEntity extends React.Component {
                 {...props}
             >
                 {children}
-            </Link>
+            </LinkDefault>
         )
     }
-}
+)
+
+export default LinkEntity

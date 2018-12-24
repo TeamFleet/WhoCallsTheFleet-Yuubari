@@ -134,6 +134,7 @@ module.exports = {
             if (process.env.WEBPACK_BUILD_STAGE === 'client') {
                 console.log(' ')
                 await require('./src/build/webapp/before')(...args)
+                    .catch(err => console.error(err))
                 if (process.env.WEBPACK_BUILD_ENV === 'prod') {
                     await require('./src/scripts/clean-dist')(...args)
                 }
