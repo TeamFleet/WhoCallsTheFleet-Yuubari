@@ -139,7 +139,7 @@ module.exports = {
                 }
                 await require('./src/scripts/validate-database-files')()
                 await require('./src/scripts/validate-less-variables')()
-                await require('./src/scripts/copyfiles')(...args)
+                await require('./src/scripts/copyfiles')()
                 await require('./src/scripts/copyfiles-web')()
                 console.log(' ')
             }
@@ -163,7 +163,7 @@ module.exports = {
             'react-redux',
             'react-router',
             'react-router-redux',
-            'koot',
+            // 'koot',
             'swiper',
         ]
     },
