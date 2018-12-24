@@ -163,7 +163,7 @@ module.exports = {
             'react-redux',
             'react-router',
             'react-router-redux',
-            // 'koot',
+            'koot',
             'swiper',
         ]
     },
