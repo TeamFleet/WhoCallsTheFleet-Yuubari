@@ -1,7 +1,7 @@
 import React from 'react'
 import { extend } from 'koot'
 
-import getStyles from '@utils/background-styles.js'
+import getStyles from '@utils/background-styles'
 
 const Background = extend({
     connect: state => ({

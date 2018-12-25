@@ -1,7 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import Button from '@ui/components/button'
 
@@ -10,9 +9,10 @@ const getValue = prop =>
         ? parseInt(prop)
         : undefined
 
-// @connect()
-@ImportStyle(require('./styles.less'))
-export default class InputCounter extends React.Component {
+@extend({
+    styles: require('./styles.less')
+})
+class InputCounter extends React.Component {
     constructor(props) {
         super(props)
 
@@ -181,3 +181,4 @@ export default class InputCounter extends React.Component {
         )
     }
 }
+export default InputCounter

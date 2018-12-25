@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 // import checkCssProp from 'check-css-prop'
 
-import Background from '@ui/components/background.jsx'
+import Background from '@ui/components/background'
 
 @extend({
     connect: state => ({
@@ -56,15 +56,25 @@ class MainHeader extends React.Component {
                     'mod-transition-enter-active': this.state.enterActive,
                     'mod-transition-exit': this.keyCurrent !== mainKey
                 })}
-                onTransitionEnd={evt => {
-                    // console.log(
-                    //     evt.target === evt.currentTarget,
-                    //     evt.target.classList.contains('mod-transition-enter-active'),
-                    //     parseFloat(getComputedStyle(evt.target).opacity)
-                    // )
+                // onTransitionEnd={evt => {
+                //     // console.log(
+                //     //     evt.target === evt.currentTarget,
+                //     //     evt.target.classList.contains('mod-transition-enter-active'),
+                //     //     parseFloat(getComputedStyle(evt.target).opacity)
+                //     // )
+                //     if (evt.target === evt.currentTarget &&
+                //         evt.target.classList.contains('mod-transition-enter-active') &&
+                //         parseFloat(getComputedStyle(evt.target).opacity) >= 0.9
+                //     ) {
+                //         this.setState({
+                //             enter: false,
+                //             enterActive: false,
+                //         })
+                //     }
+                // }}
+                onAnimationEnd={evt => {
                     if (evt.target === evt.currentTarget &&
-                        evt.target.classList.contains('mod-transition-enter-active') &&
-                        parseFloat(getComputedStyle(evt.target).opacity) >= 0.9
+                        evt.nativeEvent.animationName === 'fadein'
                     ) {
                         this.setState({
                             enter: false,

@@ -1,16 +1,14 @@
 import React from 'react'
+import { extend } from 'koot'
+
+import getEquipment from '@utils/get-equipment'
 
 import LinkEquipment from '@ui/components/link/equipment'
-import getEquipment from '@utils/get-equipment.js'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
-
-// @connect()
-@ImportStyle(styles)
-export default class ListShips extends React.Component {
-    render() {
-        const { className, list, array, ...props } = this.props
+const ListEquipments = extend({
+    styles: require('./styles.less')
+})(
+    ({ className, list, array, children, ...props }) => {
         const _list = list || array || []
         const hasItem = _list.length ? true : false
         delete props.type
@@ -28,8 +26,9 @@ export default class ListShips extends React.Component {
                         {...props}
                     />
                 ))}
-                {this.props.children}
+                {children}
             </div>
         )
     }
-}
+)
+export default ListEquipments

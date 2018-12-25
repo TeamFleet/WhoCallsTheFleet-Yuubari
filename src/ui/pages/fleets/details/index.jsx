@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import {
     init, editBuild,
@@ -23,11 +22,16 @@ import Header from './header'
 import Fleet from './fleet'
 import Bases from './bases'
 
-@connect()
-@pageinfo((state) => htmlHead(state, {
-    title: __('nav.fleets')
-}))
-export default class PageFleetDetails extends React.Component {
+
+//
+
+
+@extend({
+    pageinfo: (state) => htmlHead(state, {
+        title: __('nav.fleets')
+    })
+})
+class PageFleetDetails extends React.Component {
 
     shouldComponentUpdate(newProps) {
         if (
@@ -50,33 +54,40 @@ export default class PageFleetDetails extends React.Component {
         )
     }
 }
+export default PageFleetDetails
 
-@connect((state, ownProps) => {
-    if (
-        typeof state.fleets !== 'object' ||
-        !Array.isArray(state.fleets.builds)
-    ) return {
-        status: 'no-nedb'
-    }
 
-    if (
-        typeof state.fleets.current === 'object' &&
-        ownProps.id === state.fleets.current._id
-    ) return {
-        status: 'is-current'
-    }
+//
 
-    if (
-        state.fleets.builds.some(build => build._id === ownProps.id)
-    ) return {
-        status: 'build-stored-not-current'
-    }
 
-    return {
-        status: 'build-not-stored'
-    }
+@extend({
+    connect: (state, ownProps) => {
+        if (
+            typeof state.fleets !== 'object' ||
+            !Array.isArray(state.fleets.builds)
+        ) return {
+            status: 'no-nedb'
+        }
+    
+        if (
+            typeof state.fleets.current === 'object' &&
+            ownProps.id === state.fleets.current._id
+        ) return {
+            status: 'is-current'
+        }
+    
+        if (
+            state.fleets.builds.some(build => build._id === ownProps.id)
+        ) return {
+            status: 'build-stored-not-current'
+        }
+    
+        return {
+            status: 'build-not-stored'
+        }
+    },
+    styles: require('./styles.less')
 })
-@ImportStyle(require('./styles.less'))
 class PageFleetDetailsBody extends React.Component {
     state = {
         ready: false,

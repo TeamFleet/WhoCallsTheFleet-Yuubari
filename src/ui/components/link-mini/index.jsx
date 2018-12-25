@@ -1,35 +1,33 @@
 import React from 'react'
 import classNames from 'classnames'
+import { extend } from 'koot'
 
 import Link from '@ui/components/link'
 
-import getShip from '@utils/get-ship.js'
-import getEquipment from '@utils/get-equipment.js'
-import getEntity from '@utils/get-entity.js'
-import getPic from '@utils/get-pic.js'
-import getLink from '@utils/get-link.js'
+import getShip from '@utils/get-ship'
+import getEquipment from '@utils/get-equipment'
+import getEntity from '@utils/get-entity'
+import getPic from '@utils/get-pic'
+import getLink from '@utils/get-link'
 
-import { ImportStyle } from 'sp-css-import'
+const LinkMini = extend({
+    styles: require('./styles.less')
+})(
+    ({
+        ship: _ship,
+        equipment: _equipment,
+        entity: _entity,
+        id: _id,
 
-@ImportStyle(require('./styles.less'))
-export default class LinkMini extends React.Component {
-    render() {
-        const {
-            ship: _ship,
-            equipment: _equipment,
-            entity: _entity,
-            id: _id,
+        to: _to,
+        href: _href,
 
-            to: _to,
-            href: _href,
+        className: _className,
+        badge,
 
-            className: _className,
-            badge,
-
-            children,
-            ...props
-        } = this.props
-
+        children,
+        ...props
+    }) => {
         const to = _to || _href || undefined
         const ship = getShip(_ship || _id)
         const className = classNames({
@@ -100,4 +98,6 @@ export default class LinkMini extends React.Component {
             </span>
         )
     }
-}
+)
+
+export default LinkMini

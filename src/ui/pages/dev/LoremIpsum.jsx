@@ -1,7 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
@@ -10,12 +8,13 @@ import CenterContainer from '@ui/containers/center'
 
 import Title from '@ui/components/title'
 
-@connect()
-@pageinfo((state) => htmlHead(state, {
-    title: 'Dev (lorem ipsum)'
-}))
-@ImportStyle(require('./LoremIpsum.less'))
-export default class extends React.Component {
+@extend({
+    connect: (state) => htmlHead(state, {
+        title: 'Dev (lorem ipsum)'
+    }),
+    styles: require('./LoremIpsum.less')
+})
+class PageDevLorem extends React.Component {
     render() {
         return (
             <Page className={this.props.className}>
@@ -192,3 +191,5 @@ probare?</pre>
         )
     }
 }
+
+export default PageDevLorem

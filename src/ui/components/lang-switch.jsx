@@ -1,11 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Cookies from 'js-cookie'
+import { extend } from 'koot'
 
 import availableLocales from '@src/locales'
-
-import { ImportStyle } from 'sp-css-import'
-import style from './lang-switch.less'
 
 const langName = {
     en: 'EN',
@@ -13,12 +10,14 @@ const langName = {
     zh: '简'
 }
 
-@connect(state => ({
-    localeId: state.localeId,
-    location: state.routing && state.routing.locationBeforeTransitions
-}))
-@ImportStyle(style)
-export default class extends React.Component {
+@extend({
+    connect: state => ({
+        localeId: state.localeId,
+        location: state.routing && state.routing.locationBeforeTransitions
+    }),
+    styles: require('./lang-switch.less')
+})
+class LangSwitch extends React.Component {
 
     currentUrl(thisLocaleId) {
         let search = '',
@@ -76,3 +75,4 @@ export default class extends React.Component {
         )
     }
 }
+export default LangSwitch

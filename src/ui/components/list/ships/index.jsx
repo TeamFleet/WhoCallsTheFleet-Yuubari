@@ -10,32 +10,29 @@ import ListContainer from '@ui/containers/list'
 import LinkShip from '@ui/components/link/ship'
 import LinkMini from '@ui/components/link-mini'
 
-@extend({
+const ListShips = extend({
     styles: require('./styles.less')
-})
-class ListShips extends React.Component {
-    render() {
-        const {
-            className,
-            classNameItem,
+})(
+    ({
+        className,
+        classNameItem,
 
-            list: _list,
-            array: _array,
-            ships: _ships,
+        list: _list,
+        array: _array,
+        ships: _ships,
 
-            empty,
+        empty,
 
-            grid = true,
-            size,
-            gutter,
+        grid = true,
+        size,
+        gutter,
 
-            type,
-            sort = true,
+        type,
+        sort = true,
 
-            children,
-            ...props
-        } = this.props
-
+        children,
+        ...props
+    }) => {
         const list = _list || _array || _ships || []
         const hasItem = Array.isArray(list) && list.length ? true : false
         const listSorted = hasItem
@@ -87,5 +84,6 @@ class ListShips extends React.Component {
             </ListContainer>
         )
     }
-}
+)
+
 export default ListShips

@@ -32,35 +32,34 @@ const markdownRenderers = {
     }
 }
 
-@extend({
+const getMD = (localeId) => {
+    if (localeId === 'en')
+        return require(`@docs/updates/1.0.0/en.md`)
+    if (localeId === 'ja')
+        return require(`@docs/updates/1.0.0/ja.md`)
+    return require(`@docs/updates/1.0.0/zh.md`)
+}
+
+const PageHome = extend({
     connect: state => ({
         localeId: state.localeId
     }),
     pageinfo: (state) => htmlHead(state),
     styles: require('./styles.less')
-})
-export default class Home extends React.Component {
+})(
+    ({ className, localeId }) => (
+        <Page className={className}>
+            <CenterContainer>
+                <Markdown
+                    source={getMD(localeId)}
+                    renderers={markdownRenderers}
+                    childAfter={
+                        <span className="end-of-doc"></span>
+                    }
+                />
+            </CenterContainer>
+        </Page>
+    )
+)
 
-    getMD() {
-        if (this.props.localeId === 'en')
-            return require(`@docs/updates/1.0.0/en.md`)
-        if (this.props.localeId === 'ja')
-            return require(`@docs/updates/1.0.0/ja.md`)
-        return require(`@docs/updates/1.0.0/zh.md`)
-    }
-    render() {
-        return (
-            <Page className={this.props.className}>
-                <CenterContainer>
-                    <Markdown
-                        source={this.getMD()}
-                        renderers={markdownRenderers}
-                        childAfter={
-                            <span className="end-of-doc"></span>
-                        }
-                    />
-                </CenterContainer>
-            </Page>
-        )
-    }
-}
+export default PageHome

@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { extend } from 'koot'
 
 const lastScrollY = {}
 
@@ -9,10 +9,12 @@ const lastScrollY = {}
  * @prop {string} pathname Pathname for this page, can be extracted from a react-router component's `this.props.location.pathname`.
  * @prop {boolean} [rendering=false] Flag for wheather this page component is currently rendering or loading data. When this prop change from `true` to `false`, last scroll position will be restored.
  */
-@connect(state => ({
-    locationBeforeTransitions: state.routing.locationBeforeTransitions
-}))
-export default class extends React.Component {
+@extend({
+    connect: state => ({
+        locationBeforeTransitions: state.routing.locationBeforeTransitions
+    })
+})
+class ContainerPage extends React.Component {
     updating = false
 
     restoreScrollY() {
@@ -99,3 +101,5 @@ export default class extends React.Component {
         )
     }
 }
+
+export default ContainerPage

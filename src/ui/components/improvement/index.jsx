@@ -23,12 +23,16 @@ const days = [
     "Saturday"
 ]
 
-class Improvement extends React.Component {
-    render() {
-        return null
-    }
-}
+
+//
+
+
+const Improvement = () => null
 export default Improvement
+
+
+//
+
 
 @extend({
     styles: require('./styles-dayandship.less')
@@ -211,5 +215,4 @@ class Resources extends _Resources {
 }
 export { Resources }
 
-import Star from './star'
-export { Star }
+export { default as Star } from './star'

@@ -8,21 +8,18 @@ import ImprovementStar from '@ui/components/improvement/star'
 import getEquipment from '@utils/get-equipment'
 import getLink from '@utils/get-link'
 
-@extend({
+const LinkEquipment = extend({
     styles: require('./styles.less')
-})
-class LinkEquipment extends React.Component {
-    render() {
-        const {
-            className,
-            tag, component,
-            equipment, equipmentName,
-            children,
-            iconSize,
-            star,
-            ...props
-        } = this.props
-
+})(
+    ({
+        className,
+        tag, component,
+        equipment, equipmentName,
+        children,
+        iconSize,
+        star,
+        ...props
+    }) => {
         const theTag = tag || component
         const Component = theTag ? theTag : Link
         const _equipment = getEquipment(equipment)
@@ -43,6 +40,6 @@ class LinkEquipment extends React.Component {
             </Component>
         )
     }
-}
+)
 
 export default LinkEquipment

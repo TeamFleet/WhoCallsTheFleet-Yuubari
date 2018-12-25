@@ -1,7 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
 
@@ -11,12 +9,13 @@ import MainHeader from '@ui/components/main-header'
 import Icon from '@ui/components/icon'
 import Title from '@ui/components/title'
 
-@connect()
-@pageinfo((state) => htmlHead(state, {
-    title: 'Dev (Icons)'
-}))
-@ImportStyle(require('./icons.less'))
-export default class extends React.Component {
+@extend({
+    pageinfo: (state) => htmlHead(state, {
+        title: 'Dev (Icons)'
+    }),
+    styles: require('./icons.less')
+})
+class PageDevIcons extends React.Component {
 
     getIcons() {
         if (__SERVER__) return []
@@ -50,6 +49,8 @@ export default class extends React.Component {
         )
     }
 }
+
+export default PageDevIcons
 
 class IconSample extends React.Component {
     render() {

@@ -1,40 +1,48 @@
 import React from 'react'
+import { extend } from 'koot'
 
 import IconStat from '@ui/components/icon-stat'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
-
-// @connect()
-@ImportStyle(styles)
-export default class Stat extends React.Component {
-    render() {
-        const type = this.props.type || this.props.title
-        const Component = this.props.stat ? IconStat : 'dl'
+const Stat = extend({
+    styles: require('./styles.less')
+})(
+    ({
+        className,
+        type,
+        title,
+        stat,
+        value,
+        max,
+        disableResourceColor,
+        children,
+    }) => {
+        const statType = type || title
+        const Component = stat ? IconStat : 'dl'
 
         let componentProps = {
-            className: this.props.className
+            className: className
         }
 
-        if (this.props.stat) {
+        if (stat) {
             componentProps.tag = "dl"
-            componentProps.stat = this.props.stat
-            componentProps.disableResourceColor = this.props.disableResourceColor
+            componentProps.stat = stat
+            componentProps.disableResourceColor = disableResourceColor
         }
 
-        if (typeof this.props.value !== 'undefined' && this.props.value < 0) {
+        if (typeof value !== 'undefined' && value < 0) {
             componentProps.className += ' is-negative'
         }
 
         return (
             <Component {...componentProps}>
-                {type && <dt className="type">{type}</dt>}
+                {statType && <dt className="type">{statType}</dt>}
                 <dd className="value">
-                    {this.props.value}
-                    {this.props.children}
-                    {this.props.max && <sup className="value-max">{this.props.max}</sup>}
+                    {value}
+                    {children}
+                    {max && <sup className="value-max">{max}</sup>}
                 </dd>
             </Component>
         )
     }
-}
+)
+export default Stat

@@ -1,25 +1,23 @@
 import React from 'react'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import ListContainer from '@ui/containers/list'
 import LinkMini from '@ui/components/link-mini'
 
 import getEntity from '@utils/get-entity'
 
-// @connect()
-@ImportStyle(require('./styles.less'))
-export default class ListCasters extends React.Component {
-    render() {
-        const {
-            className,
-            list: _list,
-            array: _array,
-            empty,
-            children,
-            count,
-            ...props
-        } = this.props
-
+const ListCasters = extend({
+    styles: require('./styles.less')
+})(
+    ({
+        className,
+        list: _list,
+        array: _array,
+        empty,
+        children,
+        count,
+        ...props
+    }) => {
         const list = _list || _array || []
         const hasItem = list.length ? true : false
 
@@ -42,4 +40,5 @@ export default class ListCasters extends React.Component {
             </ListContainer>
         )
     }
-}
+)
+export default ListCasters

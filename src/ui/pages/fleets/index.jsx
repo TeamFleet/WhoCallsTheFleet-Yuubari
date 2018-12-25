@@ -1,8 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
-import { pageinfo } from 'koot'
+import { extend } from 'koot'
 
 import {
     init,
@@ -11,9 +9,7 @@ import {
     newBuild,
     // editBuild,
 } from '@api/fleets'
-
 import htmlHead from '@utils/html-head'
-// import routerPush from '@utils/router-push'
 
 import Page from '@ui/containers/page'
 import Center from '@ui/containers/center'
@@ -24,22 +20,31 @@ import Title from '@ui/components/title'
 import LoaderFairyOoyodo2 from '@ui/components/loader/fairy-ooyodo-2'
 import Header from '@ui/components/main-header/main-options'
 
-@connect()
-@pageinfo((state) => htmlHead(state, {
-    title: __('nav.fleets')
-}))
-export default class PageFleets extends React.Component {
-    render() {
-        return (
-            <Page>
-                <PageFleetsBody />
-            </Page>
-        )
-    }
-}
 
-@connect()
-@ImportStyle(require('./styles.less'))
+//
+
+
+const PageFleets = extend({
+    pageinfo: (state) => htmlHead(state, {
+        title: __('nav.fleets')
+    })
+})(
+    () => (
+        <Page>
+            <PageFleetsBody />
+        </Page>
+    )
+)
+export default PageFleets
+
+
+//
+
+
+@extend({
+    connect: true,
+    styles: require('./styles.less')
+})
 class PageFleetsBody extends React.Component {
     state = {
         ready: false,
@@ -92,11 +97,14 @@ class PageFleetsBody extends React.Component {
     }
 }
 
-const PageFleetsHeader = connect()(({
-    className,
-    dispatch,
-}) => {
-    return (
+
+//
+
+
+const PageFleetsHeader = extend({
+    connect: true
+})(
+    ({ className, dispatch }) => (
         <Header
             className={className}
             main={
@@ -110,45 +118,50 @@ const PageFleetsHeader = connect()(({
             }
         />
     )
-})
+)
 
-const PageFleetsList = connect(state => ({
-    builds: state.fleets.builds
-}))(({
-    // className,
-    builds,
-    dispatch,
-}) => {
-    builds = builds
-        .filter(build => {
-            if (!isBuildValid(build)) {
-                if (__DEV__)
-                    console.warn('INVALID BUILD', build)
-                return false
-            }
-            return true
-        })
-    const hasData = Array.isArray(builds) && builds.length > 0
-    return (
-        <React.Fragment>
-            <Title component="h2" children={__('under_construction')} />
-            {hasData && builds.map(build => (
-                <div
-                    key={build._id}
-                >
-                    <Link to={getBuildUrl(build)}>
-                        {build._id}
-                    </Link>
-                </div>
-            ))}
-            {!hasData &&
-                <div>
-                    <Button
-                        children="NEW BUILD"
-                        onClick={() => dispatch(newBuild(true))}
-                    />
-                </div>
-            }
-        </React.Fragment>
-    )
-})
+
+//
+
+
+const PageFleetsList = extend({
+    connect: state => ({
+        builds: state.fleets.builds
+    })
+})(
+    ({ builds, dispatch }) => {
+        builds = builds
+            .filter(build => {
+                if (!isBuildValid(build)) {
+                    if (__DEV__)
+                        console.warn('INVALID BUILD', build)
+                    return false
+                }
+                return true
+            })
+
+        const hasData = Array.isArray(builds) && builds.length > 0
+        return (
+            <React.Fragment>
+                <Title component="h2" children={__('under_construction')} />
+                {hasData && builds.map(build => (
+                    <div
+                        key={build._id}
+                    >
+                        <Link to={getBuildUrl(build)}>
+                            {build._id}
+                        </Link>
+                    </div>
+                ))}
+                {!hasData &&
+                    <div>
+                        <Button
+                            children="NEW BUILD"
+                            onClick={() => dispatch(newBuild(true))}
+                        />
+                    </div>
+                }
+            </React.Fragment>
+        )
+    }
+)
