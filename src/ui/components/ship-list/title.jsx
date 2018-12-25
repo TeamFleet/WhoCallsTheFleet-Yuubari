@@ -1,14 +1,11 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import { extend } from 'koot'
-
-// import { ImportStyle } from 'sp-css-import'
 
 import db, { locale as dbLocaleId } from '@database'
 import {
     compareAdd,
     compareRemove
-} from '@api/ship-list/api.js'
+} from '@api/ship-list/api'
 
 import Icon from '@ui/components/icon'
 import Title from '@ui/components/title'
@@ -57,7 +54,7 @@ const getChecked = (ownList, selectedList) => {
 
 
 
-@extend({
+const ShipListTitle = extend({
     connect: (state, ownProps) => ({
         checked: ownProps.id
             ? state.shipList[ownProps.id].isModeCompare
@@ -66,66 +63,68 @@ const getChecked = (ownList, selectedList) => {
             : undefined
     }),
     styles: require('./title.less')
-})
-class ShipListTitle extends React.Component {
-    toggle() {
-        if (typeof this.props.checked === 'undefined') return false
+})(
+    ({
+        className,
+        id,
+        ships,
+        type: typeId,
+        checked,
+        class: shipClassId,
+        dispatch,
+    }) => {
 
-        switch (this.props.checked) {
-            case true:
-                return this.props.dispatch(
-                    compareRemove(this.props.id, this.props.ships)
-                )
-
-            case 'indeterminate':
-            case false:
-                return this.props.dispatch(
-                    compareAdd(this.props.id, this.props.ships)
-                )
+        const toggle = () => {
+            if (typeof checked === 'undefined') return false
+    
+            switch (checked) {
+                case true:
+                    return dispatch(compareRemove(id, ships))
+    
+                case 'indeterminate':
+                case false:
+                    return dispatch(compareAdd(id, ships))
+            }
         }
-    }
 
-    renderCheckmark() {
-        if (typeof this.props.checked === 'undefined') return null
-        return (
-            <Icon className="icon" icon="checkbox-checked" />
-        )
-    }
-
-    render() {
-        if (this.props.type) {
-            const type = db.shipTypes[this.props.type]
+        if (typeId) {
+            const type = db.shipTypes[typeId]
             return (
                 <div
-                    className={this.props.className}
-                    data-checked={this.props.checked}
-                    onClick={this.toggle.bind(this)}
+                    className={className}
+                    data-checked={checked}
+                    onClick={toggle}
                 >
-                    {this.renderCheckmark()}
+                    <Checkmark checked={checked} />
                     <Title
                         component="h4"
-                        className={this.props.className + '-title'}
+                        className={className + '-title'}
                         children={type.name[dbLocaleId] || type.name.ja_jp}
                     />
                     {type.code && (<small className="code">[{type.code}]</small>)}
                 </div>
             )
-        } else if (this.props.class) {
-            const _class = db.shipClasses[this.props.class]._name
-            const strShipClass = __("shipclass", {
-                "class": _class
-            })
+        } else if (shipClassId) {
             return (
-                <h5 className={this.props.className + ' is-sub'} data-checked={this.props.checked} onClick={this.toggle.bind(this)}>
-                    {this.renderCheckmark()}
-                    {strShipClass}
+                <h5 className={className + ' is-sub'} data-checked={checked} onClick={toggle}>
+                    <Checkmark checked={checked} />
+                    {__("shipclass", {
+                        "class": db.shipClasses[shipClassId]._name
+                    })}
                 </h5>
             )
         } else
             return (
-                <h4 className={this.props.className} disabled>--</h4>
+                <h4 className={className} disabled>--</h4>
             )
     }
+)
+
+const Checkmark = ({ checked }) => {
+    if (typeof checked === 'undefined') return null
+    return (
+        <Icon className="icon" icon="checkbox-checked" />
+    )
 }
 
 

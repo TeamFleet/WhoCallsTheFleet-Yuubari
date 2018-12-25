@@ -1,40 +1,25 @@
 import React from 'react'
-// import { connect } from 'react-redux'
-// import classNames from 'classnames'
-
-// import {
-//     compareAdd,
-//     compareRemove
-// } from '@api/ship-list/api.js'
-// import getShip from '@utils/get-ship.js'
+import { extend } from 'koot'
 
 import ListShips from '@ui/components/list/ships'
-// import LinkShip from '@ui/components/link/ship.jsx'
 import ListItem from './list-item'
 
-import { ImportStyle } from 'sp-css-import'
-import styleList from './list.less'
+const ShipListList = extend({
+    styles: require('./list.less')
+})(
+    ({ className, ships, id, onCompareSelect }) => (
+        <ListShips className={className}>
+            {ships.map((ship, index) => (
+                <ListItem
+                    shipListId={id}
+                    ship={ship}
+                    key={index}
 
-@ImportStyle(styleList)
-export default class ShipListList extends React.Component {
-    renderItem(ship, index) {
-        return (
-            <ListItem
-                shipListId={this.props.id}
-                ship={ship}
-                key={index}
+                    onCompareSelect={onCompareSelect}
+                />
+            ))}
+        </ListShips>
+    )
+)
 
-                onCompareSelect={this.props.onCompareSelect}
-            />
-        )
-    }
-
-    render() {
-        // console.log(this.props.ships)
-        return (
-            <ListShips className={this.props.className}>
-                {this.props.ships.map(this.renderItem.bind(this))}
-            </ListShips>
-        )
-    }
-}
+export default ShipListList

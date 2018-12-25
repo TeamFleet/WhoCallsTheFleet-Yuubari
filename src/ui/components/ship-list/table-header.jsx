@@ -1,16 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { extend } from 'koot'
 
-import DataTable from '../datatable.jsx'
 import {
     compareScroll,
     compareSort
-} from '@api/ship-list/api.js'
+} from '@api/ship-list/api'
 
-// import IconStat from '@ui/components/icon-stat.jsx'
-
-import { ImportStyle } from 'sp-css-import'
-import style from './table-header.less'
+import DataTable from '@ui/components/datatable'
 
 const headers = [
     '',
@@ -31,13 +27,15 @@ const headers = [
     'consum.ammo'
 ]
 
-@ImportStyle(style)
-@connect((state, ownProps) => ({
-    sortType: state.shipList[ownProps.id].compareSort[0],
-    sortOrder: state.shipList[ownProps.id].compareSort[1],
-    scrollLeft: state.shipList[ownProps.id].compareScrollLeft
-}))
-export default class ShipListTableHeader extends React.Component {
+@extend({
+    connect: (state, ownProps) => ({
+        sortType: state.shipList[ownProps.id].compareSort[0],
+        sortOrder: state.shipList[ownProps.id].compareSort[1],
+        scrollLeft: state.shipList[ownProps.id].compareScrollLeft
+    }),
+    styles: require('./table-header.less')
+})
+class ShipListTableHeader extends React.Component {
     sort(type) {
         this.props.dispatch(
             compareSort(
@@ -94,3 +92,5 @@ export default class ShipListTableHeader extends React.Component {
         )
     }
 }
+
+export default ShipListTableHeader

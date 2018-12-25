@@ -1,7 +1,6 @@
 import React from 'react'
+import { extend } from 'koot'
 
-import { ImportStyle } from 'sp-css-import'
-import style from './icon-stat.less'
 import arrResources from '@const/resources'
 
 const stats = [
@@ -31,33 +30,42 @@ const stats = [
     'screw'
 ]
 
-@ImportStyle(style)
-export default class extends React.Component {
-    render() {
-        const TagName = this.props.tag || 'span'
-        const isResource = !this.props.disableResourceColor && arrResources.includes(this.props.stat)
+const IconStat = extend({
+    styles: require('./icon-stat.less')
+})(
+    ({
+        className,
+        component, tag,
+        disableResourceColor,
+        stat,
+        children
+    }) => {
+        const Component = component || tag || 'span'
+        const isResource = !disableResourceColor && arrResources.includes(stat)
 
-        let stat = this.props.stat
+        let thisStat = stat
         switch (stat) {
             case 'distance':
-                stat = 'range'
+                thisStat = 'range'
                 break
             case 'antibomber':
-                stat = 'hit'
+                thisStat = 'hit'
                 break
             case 'interception':
-                stat = 'evasion'
+                thisStat = 'evasion'
                 break
         }
 
         return (
-            <TagName
-                className={this.props.className}
-                data-stat={stats.indexOf(stat)}
-                data-resource={isResource ? this.props.stat : undefined}
+            <Component
+                className={className}
+                data-stat={stats.indexOf(thisStat)}
+                data-resource={isResource ? stat : undefined}
             >
-                {this.props.children}
-            </TagName>
+                {children}
+            </Component>
         )
     }
-}
+)
+
+export default IconStat

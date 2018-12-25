@@ -20,7 +20,6 @@ export default MainMask
 
 // import { connect } from 'react-redux'
 // // import bindEvent from 'bind-event'
-// import { ImportStyle } from 'sp-css-import'
 
 // // @connect(/*state => ({
 // //     realtimeLocation: state.location

@@ -1,25 +1,28 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
+import { extend } from 'koot'
 
 import {
     compareAdd,
     compareRemove,
     compareEnter
-} from '@api/ship-list/api.js'
+} from '@api/ship-list/api'
 
-import LinkShip from '@ui/components/link/ship.jsx'
-import Icon from '@ui/components/icon.jsx'
+import LinkShip from '@ui/components/link/ship'
+import Icon from '@ui/components/icon'
 
-import { ImportStyle } from 'sp-css-import'
-import styleItem from './list-item.less'
 
-@connect((state, ownProps) => ({
-    isModeCompare: state.shipList[ownProps.shipListId].isModeCompare,
-    compareList: state.shipList[ownProps.shipListId].compareList
-}))
-@ImportStyle(styleItem)
-export default class ShipListItem extends React.Component {
+//
+
+
+@extend({
+    connect: (state, ownProps) => ({
+        isModeCompare: state.shipList[ownProps.shipListId].isModeCompare,
+        compareList: state.shipList[ownProps.shipListId].compareList
+    }),
+    styles: require('./list-item.less')
+})
+class ShipListItem extends React.Component {
     onClick(evt, isSelected) {
         if (this.props.isModeCompare) {
             evt.preventDefault()
@@ -83,11 +86,14 @@ export default class ShipListItem extends React.Component {
         )
     }
 }
+export default ShipListItem
 
-class ShipListItemCheckbox extends React.Component {
-    render() {
-        if (this.props.isSelected)
-            return <Icon className="icon" icon="checkbox-checked" />
-        return null
-    }
+
+//
+
+
+const ShipListItemCheckbox = ({ isSelected }) => {
+    if (isSelected)
+        return <Icon className="icon" icon="checkbox-checked" />
+    return null
 }

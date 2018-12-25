@@ -1,16 +1,18 @@
 import metas from 'metas'
 import { store } from 'koot'
-if (__DEV__) console.warn('TODO: [@utils/html-head] use `store` from global')
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'
 
 import { update as updatePageTitle } from '@api/page-title/api.js'
 
-export default (state = store.getState(), infos = {}) => {
-    if(typeof state !== 'object') return {}
+const htmlHead = (state, infos) => {
 
-    // const state = store.getState()
+    if (typeof state === 'object' && typeof infos === 'undefined')
+        return htmlHead(store.getState(), state)
+
+    if (typeof state !== 'object') return {}
+
     const localeId = state.localeId
     const siteName = __('title') + (__DEV__ ? ' (DEV)' : '')
     let origin = state.server.origin
@@ -163,3 +165,5 @@ export default (state = store.getState(), infos = {}) => {
     //     })
     // }
 }
+
+export default htmlHead

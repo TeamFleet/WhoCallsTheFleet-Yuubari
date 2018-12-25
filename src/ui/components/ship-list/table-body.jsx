@@ -1,17 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { extend } from 'koot'
-// import { browserHistory } from '@app/client/router/history'
 
-import LinkShip from '../link/ship.jsx'
-import DataTable from '../datatable.jsx'
-import {
-    compareScroll
-} from '@api/ship-list/api.js'
+import { compareScroll } from '@api/ship-list/api'
 import routerPush from '@utils/router-push'
 import getLink from '@utils/get-link'
 
-import style from './table-body.less'
+import LinkShip from '@ui/components/link/ship'
+import DataTable from '@ui/components/datatable'
+
 
 const stats = [
     'fire',
