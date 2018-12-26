@@ -49,7 +49,6 @@
     },
     "dependencies": {
         "koot": "0.8.0-alpha.12",
-        "sp-css-import": "4.0.0",
         "kckit": "1.21.14",
         "whocallsthefleet-database": "2018.12.22",
         "whocallsthefleet-backgrounds": "1.3.2",

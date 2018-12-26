@@ -1,23 +1,25 @@
 import React from 'react'
-import { connect } from 'react-redux'
 // import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import {
     maxBaseCount,
     maxSquadronInBaseCount,
 } from '@api/fleets'
 
-export default connect(state => {
-    // console.log(state)
-    if (
-        !state.fleets.current ||
-        state.fleets.current.currentTab !== 'base'
-    ) return {}
-    return {
-        id: state.fleets.current._id,
-    }
-})(ImportStyle(require('./styles.less'))(
+const FleetDetailsBases = extend({
+    connect: state => {
+        // console.log(state)
+        if (
+            !state.fleets.current ||
+            state.fleets.current.currentTab !== 'base'
+        ) return {}
+        return {
+            id: state.fleets.current._id,
+        }
+    },
+    styles: require('./styles.less')
+})(
     ({
         id,
         className,
@@ -53,4 +55,6 @@ export default connect(state => {
             </div>
         )
     }
-))
+)
+
+export default FleetDetailsBases

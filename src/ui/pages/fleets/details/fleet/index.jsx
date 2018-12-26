@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 // import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import {
     defaultShipInFleetCount,
@@ -10,22 +9,25 @@ import selectShip from '@actions/select-ship'
 
 import Button from '@ui/components/button'
 
-export default connect(state => {
-    // console.log(state)
-    if (
-        !state.fleets.current ||
-        typeof state.fleets.current.currentTab !== 'number'
-    ) return {}
-    const index = state.fleets.current.currentTab
-    return {
-        id: state.fleets.current._id,
-        index,
-        count: Math.max(
-            defaultShipInFleetCount,
-            (state.fleets.current.fleets[index] || []).length
-        )
-    }
-})(ImportStyle(require('./styles.less'))(
+const FleetDetailsSubfleet = extend({
+    connect: state => {
+        // console.log(state)
+        if (
+            !state.fleets.current ||
+            typeof state.fleets.current.currentTab !== 'number'
+        ) return {}
+        const index = state.fleets.current.currentTab
+        return {
+            id: state.fleets.current._id,
+            index,
+            count: Math.max(
+                defaultShipInFleetCount,
+                (state.fleets.current.fleets[index] || []).length
+            )
+        }
+    },
+    styles: require('./styles.less')
+})(
     ({
         index,
         count,
@@ -55,4 +57,6 @@ export default connect(state => {
             </div>
         )
     }
-))
+)
+
+export default FleetDetailsSubfleet

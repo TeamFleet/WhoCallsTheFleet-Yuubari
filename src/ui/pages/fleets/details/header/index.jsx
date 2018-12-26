@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 // import classNames from 'classnames'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import {
     maxSubFleetCount,
@@ -18,26 +17,28 @@ for (let i = 0; i < maxSubFleetCount; i++) {
 }
 tabs.push(__('land_bases'))
 
-@connect(state => {
-    // console.log(state)
-    if (!state.fleets.current) return {}
-    if (__DEV__ && __CLIENT__)
-        console.log(state.fleets.current)
-    const {
-        name,
-        hq_lv,
-        // currentTab,
-        _id: id,
-    } = state.fleets.current
-    return {
-        name,
-        hq_lv,
-        // currentTab,
-        id
-    }
+@extend({
+    connect: state => {
+        // console.log(state)
+        if (!state.fleets.current) return {}
+        if (__DEV__ && __CLIENT__)
+            console.log(state.fleets.current)
+        const {
+            name,
+            hq_lv,
+            // currentTab,
+            _id: id,
+        } = state.fleets.current
+        return {
+            name,
+            hq_lv,
+            // currentTab,
+            id
+        }
+    },
+    styles: require('./styles.less')
 })
-@ImportStyle(require('./styles.less'))
-export default class Header extends React.Component {
+class Header extends React.Component {
     // mounted = false
     onNameUpdate() {
         if (!this.mounted) return
@@ -80,3 +81,5 @@ export default class Header extends React.Component {
         )
     }
 }
+
+export default Header
