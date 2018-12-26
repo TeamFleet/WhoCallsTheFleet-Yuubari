@@ -1,21 +1,19 @@
 import React from 'react'
+import { extend } from 'koot'
+
+import getPic from '@utils/get-pic'
 
 import Image from '@ui/components/image'
 import ComponentContainer from '@ui/containers/infos-component'
 
-import getPic from '@utils/get-pic.js'
+const EquipmentDetailsComponentIllust = extend({
+    styles: require('./styles.less')
+})(
+    ({ className, equipment }) => (
+        <ComponentContainer className={className}>
+            <Image className="illust" src={getPic('equipment', equipment.id, 'card')} />
+        </ComponentContainer>
+    )
+)
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
-
-// @connect()
-@ImportStyle(styles)
-export default class EquipmentDetailsComponentIllust extends React.Component {
-    render() {
-        return (
-            <ComponentContainer className={this.props.className}>
-                <Image className="illust" src={getPic('equipment', this.props.equipment.id, 'card')} />
-            </ComponentContainer>
-        )
-    }
-}
+export default EquipmentDetailsComponentIllust

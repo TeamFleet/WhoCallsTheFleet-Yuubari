@@ -1,38 +1,34 @@
 import React from 'react'
 import classNames from 'classnames'
-
-import ComponentContainer from '@ui/containers/infos-component'
-import Stat from '@ui/components/stat'
+import { extend } from 'koot'
 
 import arrResources from '@const/resources'
 import getValue from '@utils/get-value'
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './styles.less'
+import ComponentContainer from '@ui/containers/infos-component'
+import Stat from '@ui/components/stat'
 
-// @connect()
-@ImportStyle(styles)
-export default class EquipmentDetailsComponentScrap extends React.Component {
-    render() {
-        return (
-            <ComponentContainer className={this.props.className} title={__("equipment_details.scrap")}>
-                {arrResources.map((resource, index) => {
-                    const value = getValue(this.props.equipment.dismantle[index])
-                    return (
-                        <Stat
-                            className={
-                                classNames(['item', {
-                                    disabled: !value
-                                }])
-                            }
-                            key={index}
-                            stat={resource}
-                        >
-                            {value}
-                        </Stat>
-                    )
-                })}
-            </ComponentContainer>
-        )
-    }
-}
+const EquipmentDetailsComponentScrap = extend({
+    styles: require('./styles.less')
+})(
+    ({ className, equipment }) =>
+        <ComponentContainer className={className} title={__("equipment_details.scrap")}>
+            {arrResources.map((resource, index) => {
+                const value = getValue(equipment.dismantle[index])
+                return (
+                    <Stat
+                        className={
+                            classNames(['item', {
+                                disabled: !value
+                            }])
+                        }
+                        key={index}
+                        stat={resource}
+                    >
+                        {value}
+                    </Stat>
+                )
+            })}
+        </ComponentContainer>
+)
+export default EquipmentDetailsComponentScrap

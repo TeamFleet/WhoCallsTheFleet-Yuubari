@@ -1,18 +1,15 @@
 import React from 'react'
-// import { Link } from 'react-router'
+import { extend } from 'koot'
 
 import Reffitable from './components/refittable'
 
-import { ImportStyle } from 'sp-css-import'
+const EquipmentDetailsRefittable = extend({
+    styles: require('./refittable.less')
+})(
+    ({ className, equipment }) =>
+        <div className={className}>
+            <Reffitable equipment={equipment} />
+        </div>
+)
 
-// @connect()
-@ImportStyle(require('./refittable.less'))
-export default class EquipmentDetailsRefittable extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className}>
-                <Reffitable equipment={this.props.equipment} />
-            </div>
-        )
-    }
-}
+export default EquipmentDetailsRefittable

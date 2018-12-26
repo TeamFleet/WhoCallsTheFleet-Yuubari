@@ -1,8 +1,7 @@
 import React from 'react'
+import { extend } from 'koot'
 
-import { ImportStyle } from 'sp-css-import'
-
-import getShip from '@utils/get-ship.js'
+import getShip from '@utils/get-ship'
 // import sortShips from '@utils/sort-ships'
 
 import ComponentContainer from '@ui/containers/infos-component'
@@ -10,34 +9,36 @@ import ListEquipments from '@ui/components/list/equipments'
 import ListShips from '@ui/components/list/ships'
 // import LinkMini from '@ui/components/link-mini'
 
-// @connect()
-@ImportStyle(require('./styles.less'))
-export default class EquipmentDetailsComponentAcquisition extends React.Component {
-    listUpgradeFrom = this.props.equipment.upgrade_from || []
-    listStocked = this.props.equipment.default_equipped_on || []
-
-    render() {
-        // console.log(this.listUpgradeFrom, this.listStocked)
-        const classNameThis = this.props.className.split([' '])[0]
+const EquipmentDetailsComponentAcquisition = extend({
+    styles: require('./styles.less')
+})(
+    ({ className, equipment }) => {
+        const classNameThis = className.split([' '])[0]
+        const {
+            upgrade_from: listUpgradeFrom = [],
+            default_equipped_on: listStocked = []
+        } = equipment
         return (
             <ComponentContainer title={__("equipment_details.acquisition")}>
-                <dl className={this.props.className}>
+                <dl className={className}>
                     <List
                         title={__("equipment_details.upgrade_from")}
                         list={
-                            this.listUpgradeFrom.length
-                                ? <ListEquipments list={this.listUpgradeFrom} />
+                            listUpgradeFrom.length
+                                ? <ListEquipments list={listUpgradeFrom} />
                                 : undefined
                         }
                     />
                     <List
                         title={__("equipment_details.stocked")}
                         list={
-                            this.listStocked.length
-                                ? <ListStockedBody
-                                    className={classNameThis + "-stocked"}
-                                    list={this.listStocked}
-                                />
+                            listStocked.length
+                                ? (
+                                    <ListStockedBody
+                                        className={classNameThis + "-stocked"}
+                                        list={listStocked}
+                                    />
+                                )
                                 : undefined
                         }
                     />
@@ -45,22 +46,19 @@ export default class EquipmentDetailsComponentAcquisition extends React.Componen
             </ComponentContainer>
         )
     }
-}
+)
+export default EquipmentDetailsComponentAcquisition
 
 const List = ({
     title,
     list,
-}) => {
-    const _list = !list
-        ? <dd className="empty">{__("none")}</dd>
-        : <dd>{list}</dd>
-    return (
-        <React.Fragment>
-            <dt>{title}</dt>
-            {_list}
-        </React.Fragment>
-    )
-}
+}) =>
+    <React.Fragment>
+        <dt>{title}</dt>
+        {!list
+            ? <dd className="empty">{__("none")}</dd>
+            : <dd>{list}</dd>}
+    </React.Fragment>
 
 const ListStockedBody = ({ list: arrShipId, className }) => {
     const list = {}

@@ -1,5 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
+import { extend } from 'koot'
+
+import sortShips from '@utils/sort-ships'
+import { db } from 'kckit'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import Bullet from '@ui/components/bullet'
@@ -7,9 +11,6 @@ import Bullet from '@ui/components/bullet'
 import LinkMini from '@ui/components/link-mini'
 // import times from '@utils/times'
 
-import sortShips from '@utils/sort-ships'
-
-import { db } from 'kckit'
 const {
     equipmentTypes,
     shipCollections,
@@ -17,15 +18,17 @@ const {
     // ships
 } = db
 
-import { ImportStyle } from 'sp-css-import'
 
-// @connect()
-@ImportStyle(require('./styles.less'))
-export default class EquipmentDetailsComponentRefittable extends React.Component {
-    render() {
-        const type = equipmentTypes[this.props.equipment.type] || {}
-        const typeName = this.props.equipment.getType()
-        const isEquipableExSlot = this.props.equipment.isEquipableExSlot()
+//
+
+
+const EquipmentDetailsComponentRefittable = extend({
+    styles: require('./styles.less')
+})(
+    ({ className, equipment }) => {
+        const type = equipmentTypes[equipment.type] || {}
+        const typeName = equipment.getType()
+        const isEquipableExSlot = equipment.isEquipableExSlot()
 
         const {
             equipable_on_type: availableShipTypes = [],
@@ -40,13 +43,13 @@ export default class EquipmentDetailsComponentRefittable extends React.Component
                 availableShipTypes: availableShipTypes.join(', '),
                 availableExtraShips: availableExtraShips.join(', ')
             }/*, [
-                `[${this.props.equipment.id}]`
+                `[${equipment.id}]`
             ]*/)
             console.log('type', type)
         }
 
         return (
-            <ComponentContainer className={this.props.className}>
+            <ComponentContainer className={className}>
                 <Legends />
 
                 {shipCollections.map((shipCollection, index) => (
@@ -59,43 +62,49 @@ export default class EquipmentDetailsComponentRefittable extends React.Component
                 ))}
 
                 <ExSlot
-                    isEquipableExSlot={this.props.equipment.isEquipableExSlot()}
-                    listExSlotShips={this.props.equipment.exslot_on_ship}
+                    isEquipableExSlot={equipment.isEquipableExSlot()}
+                    listExSlotShips={equipment.exslot_on_ship}
                 />
             </ComponentContainer>
         )
     }
-}
+)
+export default EquipmentDetailsComponentRefittable
 
-@ImportStyle(require('./styles-shipcollection.less'))
-class Legends extends React.Component {
-    render() {
-        return (
-            <div className={this.props.className + ' legends'}>
-                <div className="list types">
-                    <LinkMini className="item off">
-                        {__("equipment_details.refittable_legend_no")}
-                    </LinkMini>
-                    <LinkMini className="item on">
-                        {__("equipment_details.refittable_legend_yes")}
-                    </LinkMini>
-                </div>
+
+//
+
+
+const Legends = extend({
+    styles: require('./styles-shipcollection.less')
+})(
+    ({ className }) =>
+        <div className={className + ' legends'}>
+            <div className="list types">
+                <LinkMini className="item off">
+                    {__("equipment_details.refittable_legend_no")}
+                </LinkMini>
+                <LinkMini className="item on">
+                    {__("equipment_details.refittable_legend_yes")}
+                </LinkMini>
             </div>
-        )
-    }
-}
+        </div>
+)
 
-@ImportStyle(require('./styles-shipcollection.less'))
-class ShipCollection extends React.Component {
-    render() {
-        const {
-            className,
-            data,
-            availableShipTypes,
-            availableExtraShips,
-            ...props
-        } = this.props
 
+//
+
+
+const ShipCollection = extend({
+    styles: require('./styles-shipcollection.less')
+})(
+    ({
+        className,
+        data,
+        availableShipTypes,
+        availableExtraShips,
+        ...props
+    }) => {
         const cachedTypes = []
         // const cachedShips = []
 
@@ -170,43 +179,39 @@ class ShipCollection extends React.Component {
             </ComponentContainer>
         )
     }
-}
+)
 
-@ImportStyle(require('./styles-shiptypetag.less'))
-class ShipTypeTag extends React.Component {
-    render() {
-        return (
-            <LinkMini className={classNames({
-                [this.props.className]: true,
-                'item': true,
-                'on': !!(this.props.on),
-                'off': !this.props.on
-            })}>
-                {this.props.name} <small className="code">[{this.props.code}]</small>
-            </LinkMini>
-        )
-        // return (
-        //     <span className={classNames({
-        //         [this.props.className]: true,
-        //         'item': true,
-        //         'on': this.props.on
-        //     })}>
-        //         {this.props.name} <small className="code">[{this.props.code}]</small>
-        //     </span>
-        // )
-    }
-}
 
-@ImportStyle(require('./styles-shipcollection.less'))
-class ExSlot extends React.Component {
-    render() {
-        const {
-            className,
-            isEquipableExSlot,
-            listExSlotShips,
-            ...props
-        } = this.props
+//
 
+
+const ShipTypeTag = extend({
+    styles: require('./styles-shiptypetag.less')
+})(
+    ({ className, on, name, code }) =>
+        <LinkMini className={classNames({
+            [className]: true,
+            'item': true,
+            'on': !!(on),
+            'off': !on
+        })}>
+            {name} <small className="code">[{code}]</small>
+        </LinkMini>
+)
+
+
+//
+
+
+const ExSlot = extend({
+    styles: require('./styles-shipcollection.less')
+})(
+    ({
+        className,
+        isEquipableExSlot,
+        listExSlotShips,
+        ...props
+    }) => {
         const list = sortShips(listExSlotShips || [])
 
         return (
@@ -243,4 +248,4 @@ class ExSlot extends React.Component {
             </ComponentContainer>
         )
     }
-}
+)

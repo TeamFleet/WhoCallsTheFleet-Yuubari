@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import Illust from './components/illust'
 import Facts from './components/facts'
@@ -11,17 +11,14 @@ import UpgradeFrom from './components/upgrade-from'
 import Stocked from './components/stocked'
 // import Acquisition from './components/acquisition'
 
-// @connect()
-@ImportStyle(require('./infos.less'))
-export default class EquipmentDetailsContentInfos extends React.Component {
-    getInfoClassName(type) {
-        const name = this.props.className + '-info'
-        return name + (type ? ` ${name}-${type}` : null)
-    }
-    render() {
-        if (!this.props.equipment) return null
+const EquipmentDetailsContentInfos = extend({
+    styles: require('./infos.less')
+})(
+    ({className, equipment}) => {
+        if (!equipment) return null
+        const classNameInfo = className + '-info'
         return (
-            <div className={this.props.className}>
+            <div className={className}>
                 {[
                     [Illust, 'illust'],
                     [Facts, 'facts'],
@@ -36,12 +33,14 @@ export default class EquipmentDetailsContentInfos extends React.Component {
                     return (
                         <Component
                             key={index}
-                            equipment={this.props.equipment}
-                            className={this.getInfoClassName(name)}
+                            equipment={equipment}
+                            className={classNameInfo + (name ? ` ${classNameInfo}-${name}` : '')}
                         />
                     )
                 })}
             </div>
         )
     }
-}
+)
+
+export default EquipmentDetailsContentInfos

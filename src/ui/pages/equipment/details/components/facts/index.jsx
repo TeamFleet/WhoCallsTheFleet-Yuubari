@@ -1,6 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-// import { ImportStyle } from 'sp-css-import'
 import { extend } from 'koot'
 
 import ComponentContainer from '@ui/containers/infos-component'

@@ -10,10 +10,7 @@ import db from '@database'
 // } from '@api/pages'
 
 import InfosPageContainer from '@ui/containers/infos-page'
-import Header from './details/commons/header.jsx'
-
-// import { ImportStyle } from 'sp-css-import'
-// import style from './details.less'
+import Header from './details/commons/header'
 
 
 
@@ -51,9 +48,7 @@ tabsAvailable.forEach((tab, index) => {
 
 
 
-// @connect((state, ownProps) => state.pages[getInfosId(ownProps.params.id)] || {})
-// @ImportStyle(style)
-@extend({
+const PageEquipmentDetails = extend({
     connect: true,
     pageinfo: (state, renderProps) => {
         const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
@@ -83,53 +78,40 @@ tabsAvailable.forEach((tab, index) => {
             ),
         })
     }
-})
-class PageEquipmentDetails extends React.Component {
+})(
+    ({
+        params = {},
+        className,
+        children
+    }) => {
+        if (!params.id) return null
 
-    get equipment() {
-        if (!this._data && this.props.params.id)
-            this._data = db.equipments[this.props.params.id]
-        return this._data || undefined
-    }
-
-    onTabChange(/*newTab, newTabIndex*/) {
-        // if (newTabIndex !== this.props.tabIndex) {
-        // console.log(newTabIndex, this.props.tabIndex)
-        // this.props.dispatch(
-        //     shipDetailsChangeTab(this.props.params.id, newTabIndex)
-        // )
-        window.scrollTo(undefined, 0)
-        // }
-    }
-
-    render() {
-        if (!this.equipment) return null
-
-        const currentTab = this.props.params.tab || 'index'
+        const thisEquipment = db.equipments[params.id]
+        const currentTab = params.tab || 'index'
 
         if (__CLIENT__ && __DEV__)
-            console.log('thisEquipment', currentTab, this.equipment)
+            console.log('thisEquipment', currentTab, thisEquipment)
 
         return (
-            <InfosPageContainer className={this.props.className}>
+            <InfosPageContainer className={className}>
                 <Header
-                    equipment={this.equipment}
+                    equipment={thisEquipment}
                     tabs={tabsAvailable}
                     defaultTabIndex={tabsAvailable.indexOf(
-                        this.props.params && this.props.params.tab ? this.props.params.tab : tabsAvailable[0]
+                        params.tab ? params.tab : tabsAvailable[0]
                     )}
-                    onTabChange={__CLIENT__ ? this.onTabChange.bind(this) : undefined}
+                    onTabChange={() => window.scrollTo(undefined, 0)}
                 />
                 <PageEquipmentDetailsBody
-                    equipment={this.equipment}
+                    equipment={thisEquipment}
                     tab={currentTab}
                 >
-                    {this.props.children}
+                    {children}
                 </PageEquipmentDetailsBody>
             </InfosPageContainer>
         )
     }
-}
+)
 
 
 
