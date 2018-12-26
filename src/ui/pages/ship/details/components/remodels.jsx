@@ -1,22 +1,33 @@
 import React from 'react'
 import classNames from 'classnames'
 import checkCssProp from 'check-css-prop'
+import { extend } from 'koot'
 
-import LinkShip from '@ui/components/link/ship.jsx'
+import getShip from '@utils/get-ship'
+import getPic from '@utils/get-pic'
+
+import LinkShip from '@ui/components/link/ship'
 import Icon from '@ui/components/icon'
 import ComponentContainer from '@ui/containers/infos-component'
 
-import getShip from '@utils/get-ship.js'
-import getPic from '@utils/get-pic.js'
+const ShipDetailsComponentRemodels = extend({
+    styles: require('./remodels.less')
+})(
+    ({ className, ship }) =>
+        <ComponentContainer className={className} title={__("ship_details.remodels")}>
+            <div className="container">
+                {ship._series.map((current, index, series) => (
+                    <Series key={index} ship={ship} current={current} index={index} series={series} />
+                ))}
+            </div>
+        </ComponentContainer>
+)
 
-import { ImportStyle } from 'sp-css-import'
-import styles from './remodels.less'
+export default ShipDetailsComponentRemodels
 
-// @connect()
-@ImportStyle(styles)
-export default class ShipDetailsComponentRemodels extends React.Component {
-    renderSeries(current, index, series) {
-        const ship = getShip(current.id)
+const Series =
+    ({ current, index, series, ship }) => {
+        const thisShip = getShip(current.id)
         const hasIcon = index > 0 && (
             series[index - 1].next_blueprint === 'on'
             || series[index - 1].next_catapult === 'on'
@@ -24,13 +35,12 @@ export default class ShipDetailsComponentRemodels extends React.Component {
         return (
             <span
                 className={classNames(['item', {
-                    'on': current.id === this.props.ship.id,
+                    'on': current.id === ship.id,
                     'is-has-icon': hasIcon,
                     'is-switchable': index > 0 && series[index - 1].next_loop === 'on',
                     'is-need-blueprint': index > 0 && series[index - 1].next_blueprint === 'on',
                     'is-need-catapult': index > 0 && series[index - 1].next_catapult === 'on'
                 }])}
-                key={index}
             >
                 <span className={classNames(['lvl', {
                     'is-initial': index <= 0
@@ -42,7 +52,7 @@ export default class ShipDetailsComponentRemodels extends React.Component {
                 <LinkShip
                     className="ship"
                     // to={`/ships/${current.id}`}
-                    ship={ship}
+                    ship={thisShip}
                     navy={true}
                     name={false}
                     pic={false}
@@ -50,21 +60,10 @@ export default class ShipDetailsComponentRemodels extends React.Component {
                     replace={true}
                 >
                     <span className="pic" style={{
-                        backgroundImage: `url(${getPic(ship, checkCssProp('mask') ? '0' : '0-1')})`
+                        backgroundImage: `url(${getPic(thisShip, checkCssProp('mask') ? '0' : '0-1')})`
                     }} />
                     {index > 0 && series[index - 1].next_loop === 'on' && <Icon icon="loop" className="icon-switchable" />}
                 </LinkShip>
             </span>
         )
     }
-
-    render() {
-        return (
-            <ComponentContainer className={this.props.className} title={__("ship_details.remodels")}>
-                <div className="container">
-                    {this.props.ship._series.map(this.renderSeries.bind(this))}
-                </div>
-            </ComponentContainer>
-        )
-    }
-}

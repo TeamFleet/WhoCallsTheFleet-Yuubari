@@ -1,9 +1,8 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 // import classNames from 'classnames'
-
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 import kckit from 'kckit'
+
 // const checkShip = kckit.check.ship
 const checkAACI = kckit.check.aaci
 const checkOASW = kckit.check.oasw
@@ -25,11 +24,14 @@ const shipTypeRangeNormal = {
     DD: 1,
 }
 
-export default ImportStyle(require('./combat-special.less'))(
-    ({
-        ship,
-        className
-    }) =>
+
+//
+
+
+const CombatSpecial = extend({
+    styles: require('./combat-special.less')
+})(
+    ({ className, ship }) =>
         <ComponentContainer
             className={className}
             title={__("ship_details.combat_special")}
@@ -46,6 +48,11 @@ export default ImportStyle(require('./combat-special.less'))(
             <CapabilityNoNightBattle ship={ship} />
         </ComponentContainer>
 )
+export default CombatSpecial
+
+
+//
+
 
 const CapabilityJetAssult = ({ ship }) => {
     const isCarrier = ship.isType('carrier')

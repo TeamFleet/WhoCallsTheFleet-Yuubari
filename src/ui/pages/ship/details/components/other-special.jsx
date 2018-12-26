@@ -7,18 +7,13 @@ import equipmentTypes from 'kckit/src/types/equipments'
 import ComponentContainer from '@ui/containers/infos-component'
 import Bullet from '@ui/components/bullet'
 
-// import { ImportStyle } from 'sp-css-import'
-// import styles from './combat-special.less'
-
-// @connect()
-// @ImportStyle(styles)
-export default class ShipDetailsSpecialOther extends React.Component {
-    render() {
+const ShipDetailsSpecialOther =
+    ({ className, ship }) => {
         const {
             count_as_landing_craft
-        } = this.props.ship.getCapability()
+        } = ship.getCapability()
         return (
-            <ComponentContainer className={this.props.className} title={__("ship_details.other_special")}>
+            <ComponentContainer className={className} title={__("ship_details.other_special")}>
                 {count_as_landing_craft && <Bullet
                     title={__("ship_details.tp_bonus", {
                         bonus: count_as_landing_craft * dataTP.equipmentType[equipmentTypes.LandingCraft]
@@ -46,4 +41,5 @@ export default class ShipDetailsSpecialOther extends React.Component {
             </ComponentContainer>
         )
     }
-}
+
+export default ShipDetailsSpecialOther

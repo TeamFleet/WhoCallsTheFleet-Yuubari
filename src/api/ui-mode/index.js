@@ -5,7 +5,6 @@ import {
     UIMODE_ANIMATION_END
 } from '@redux/action-types.js'
 // import { history } from 'koot'
-// if (__DEV__) console.warn('TODO: [@actions/select-ship] use `history` from global')
 
 
 //

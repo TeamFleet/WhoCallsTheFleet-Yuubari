@@ -1,9 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 // import bindEvent from 'bind-event'
-
 import { maxShipLv } from 'kckit'
-import { ImportStyle } from 'sp-css-import'
+import { extend } from 'koot'
 
 import prefs from '@api/preferences'
 
@@ -32,9 +31,10 @@ const stats = [
 
 const percentage = (number, max) => (number / max * 100) + '%'
 
-// @connect()
-@ImportStyle(require('./stats.less'))
-export default class ShipDetailsComponentStats extends React.Component {
+@extend({
+    styles: require('./stats.less')
+})
+class ShipDetailsComponentStats extends React.Component {
     constructor(props) {
         super(props)
 
@@ -210,3 +210,4 @@ export default class ShipDetailsComponentStats extends React.Component {
         )
     }
 }
+export default ShipDetailsComponentStats

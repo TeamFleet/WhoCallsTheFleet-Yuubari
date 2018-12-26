@@ -1,12 +1,10 @@
 import React from 'react'
 import classNames from 'classnames'
+import { extend } from 'koot'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import Stat from '@ui/components/stat'
 import getValue from '@utils/get-value'
-
-import { ImportStyle } from 'sp-css-import'
-import styles from './modernization.less'
 
 const stats = [
     'fire',
@@ -15,11 +13,29 @@ const stats = [
     'armor'
 ]
 
-// @connect()
-@ImportStyle(styles)
-export default class ShipDetailsComponentModernization extends React.Component {
-    renderItem(stat, index, value) {
-        if (Array.isArray(value)) value = getValue(this.props.ship.modernization[index])
+const ShipDetailsComponentModernization = extend({
+    styles: require('./modernization.less')
+})(
+    ({ className, ship }) => {
+        const hasModernization = Array.isArray(ship.modernization)
+        return (
+            <ComponentContainer className={className} title={__("ship_details.modernization")}>
+                {!hasModernization && __("none")}
+                {hasModernization && stats.map((stat, index, value) => (
+                    <Item key={index} ship={ship} stat={stat} index={index} value={value} />
+                ))}
+                {ship.id === 163 && <Item ship={ship} stat='luck' value={1.2} />}
+                {ship.id === 402 && <Item ship={ship} stat='luck' value={1.6} />}
+            </ComponentContainer>
+        )
+    }
+)
+
+export default ShipDetailsComponentModernization
+
+const Item =
+    ({ stat, index, value, ship }) => {
+        if (Array.isArray(value)) value = getValue(ship.modernization[index])
         return (
             <Stat
                 className={
@@ -27,22 +43,9 @@ export default class ShipDetailsComponentModernization extends React.Component {
                         disabled: !value
                     }])
                 }
-                key={index}
                 stat={stat}
             >
                 +{value}
             </Stat>
         )
     }
-    render() {
-        const hasModernization = Array.isArray(this.props.ship.modernization)
-        return (
-            <ComponentContainer className={this.props.className} title={__("ship_details.modernization")}>
-                {!hasModernization && __("none")}
-                {hasModernization && stats.map(this.renderItem.bind(this))}
-                {this.props.ship.id === 163 && this.renderItem('luck', undefined, 1.2)}
-                {this.props.ship.id === 402 && this.renderItem('luck', undefined, 1.6)}
-            </ComponentContainer>
-        )
-    }
-}
