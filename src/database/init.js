@@ -36,27 +36,28 @@ const initKCKit = ({ localeId, store }) => {
                 //         return this.names[locale]
                 //     }
                 // })
-            }
-            collection.name = collection.names[locale]
-            collection.list.forEach(list => {
-                list.ships.forEach((arrShips, index) => {
-                    list.ships[index] = arrShips.map(shipId => {
-                        const ship = db.ships[shipId]
-                        Object.assign(ship, {
-                            type_display: list.type,
-                            order: shipIndex++
+                collection.name = collection.names[locale]
+                collection.list.forEach(list => {
+                    list.ships.forEach((arrShips, index) => {
+                        list.ships[index] = arrShips.map(shipId => {
+                            const ship = db.ships[shipId]
+                            // if (!ship) return
+                            Object.assign(ship, {
+                                type_display: list.type,
+                                order: shipIndex++
+                            })
+                            if (!db.shipsSpecial[list.type]) db.shipsSpecial[list.type] = []
+                            if (!db.shipsSpecial[list.type].includes(shipId) && (
+                                (Array.isArray(ship.additional_item_types) && ship.additional_item_types.length)
+                                || (Array.isArray(ship.additional_disable_item_types) && ship.additional_disable_item_types.length))
+                            ) {
+                                db.shipsSpecial[list.type].push(shipId)
+                            }
+                            return ship
                         })
-                        if (!db.shipsSpecial[list.type]) db.shipsSpecial[list.type] = []
-                        if (!db.shipsSpecial[list.type].includes(shipId) && (
-                            (Array.isArray(ship.additional_item_types) && ship.additional_item_types.length)
-                            || (Array.isArray(ship.additional_disable_item_types) && ship.additional_disable_item_types.length))
-                        ) {
-                            db.shipsSpecial[list.type].push(shipId)
-                        }
-                        return ship
                     })
                 })
-            })
+            }
         })
 
         db.shipCollections = shipCollections
@@ -74,19 +75,20 @@ const initKCKit = ({ localeId, store }) => {
                 //         return this.names[locale]
                 //     }
                 // })
-            }
-            collection.name = collection.names[locale]
-            collection.list.forEach(list => {
-                Object.assign(db.equipmentTypes[list.type], {
-                    order: equipmentTypeIndex++
-                })
-                list.equipments = list.equipments.map(equipmentId => {
-                    Object.assign(db.equipments[equipmentId], {
-                        order: equipmentIndex++
+                collection.name = collection.names[locale]
+                collection.list.forEach(list => {
+                    Object.assign(db.equipmentTypes[list.type], {
+                        order: equipmentTypeIndex++
                     })
-                    return db.equipments[equipmentId]
+                    list.equipments = list.equipments.map(equipmentId => {
+                        // if (!db.equipments[equipmentId]) return {}
+                        Object.assign(db.equipments[equipmentId], {
+                            order: equipmentIndex++
+                        })
+                        return db.equipments[equipmentId]
+                    })
                 })
-            })
+            }
         })
 
         db.equipmentCollections = equipmentCollections

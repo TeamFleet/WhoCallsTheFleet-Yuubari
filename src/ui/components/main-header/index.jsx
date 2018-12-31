@@ -38,6 +38,7 @@ class MainHeader extends React.Component {
             className,
             children,
             mainKey,
+            onAnimationEnd,
             ...props
         } = this.props
 
@@ -73,6 +74,7 @@ class MainHeader extends React.Component {
                 //     }
                 // }}
                 onAnimationEnd={evt => {
+                    // console.log(evt.target, evt.currentTarget, evt.animationName)
                     if (evt.target === evt.currentTarget &&
                         evt.nativeEvent.animationName === 'fadein'
                     ) {
@@ -81,6 +83,8 @@ class MainHeader extends React.Component {
                             enterActive: false,
                         })
                     }
+                    if (typeof onAnimationEnd === 'function')
+                        return onAnimationEnd(evt)
                 }}
                 {...props}
             >
