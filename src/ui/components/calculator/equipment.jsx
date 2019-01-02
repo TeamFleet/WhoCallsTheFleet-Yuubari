@@ -28,7 +28,7 @@ const CalculatorEquipment = extend({
                         </span>
                     }
                     {!isNotLink &&
-                        <Link className="name" to={`/equipments/${equipment.id}`}>
+                        <Link className="name color-alt" to={`/equipments/${equipment.id}`}>
                             <IconEquipment className="icon" icon={equipment._icon} />
                             {displayName || equipment._name}
                         </Link>

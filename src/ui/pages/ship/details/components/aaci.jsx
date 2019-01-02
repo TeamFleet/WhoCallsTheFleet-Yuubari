@@ -10,6 +10,7 @@ import ComponentContainer from '@ui/containers/infos-component'
 import IconEquipment from '@ui/components/icon-equipment'
 // import Icon from '@ui/components/icon'
 import Bullet from '@ui/components/bullet'
+import AACITable from '@ui/components/aaci-table'
 
 const ShipDetailsAACI = extend({
     styles: require('./aaci.less')
@@ -19,13 +20,18 @@ const ShipDetailsAACI = extend({
 }) => {
     const aaciTypes = getShip(ship).getAACI()
     const ableToAACI = (Array.isArray(aaciTypes) && aaciTypes.length) ? true : false
-    if (__DEV__ && __CLIENT__) console.log('thisShip > AACI', aaciTypes)
     return (
         <ComponentContainer className={className} title={__("ship_details.aaci")}>
-            {!ableToAACI && <Bullet
-                title={__("ship_details.aaci_unable")}
-                level={0}
-            />}
+            <AACITable
+                className="aaci-table"
+                ship={ship}
+                unable={(
+                    <Bullet
+                        title={__("ship_details.aaci_unable")}
+                        level={0}
+                    />
+                )}
+            />
             {ableToAACI && <dl className="item header">
                 <dt className="id" />
                 <dd className="icons" />
