@@ -32,6 +32,10 @@ const ShipDetailsAACI = extend({
                     />
                 )}
             />
+            {!ableToAACI && <Bullet
+                title={__("ship_details.aaci_unable")}
+                level={0}
+            />}
             {ableToAACI && <dl className="item header">
                 <dt className="id" />
                 <dd className="icons" />

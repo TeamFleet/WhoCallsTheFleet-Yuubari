@@ -6,6 +6,7 @@ import OtherSpecial from './components/other-special.jsx'
 import AACI from './components/aaci.jsx'
 import OASWCalculator from './components/oasw-calculator.jsx'
 import SpeedUpCalculator from './components/speedup-calculator.jsx'
+import UnderConstruction from '@ui/components/under-construction'
 
 // import CenterContainer from '@ui/containers/center'
 
@@ -16,6 +17,7 @@ const ShipDetailsContentCapabilities = extend({
 })(
     (props) => (
         <div className={props.className}>
+            <UnderConstruction />
             <div className="wrapper">
                 <CombatSpecial ship={props.ship} className="shipinfo shipinfo-combat" />
                 <OtherSpecial ship={props.ship} className="shipinfo shipinfo-special" />

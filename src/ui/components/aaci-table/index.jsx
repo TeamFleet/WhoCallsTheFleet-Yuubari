@@ -7,7 +7,15 @@ import getShip from '@utils/get-ship'
 import LinkEquipment from '@ui/components/link/equipment'
 import Icon from '@ui/components/icon'
 
-const AACITable = extend({
+const Row = ({ className, ...props }) => (
+    <dl className={classNames('row', className)} {...props} />
+)
+
+const Cell = ({ className, ...props }) => (
+    <dd className={classNames('cell', className)} {...props} />
+)
+
+export default extend({
     styles: require('./styles.less')
 })(
     ({
@@ -45,13 +53,3 @@ const AACITable = extend({
         )
     }
 )
-
-const Row = ({ className, ...props }) => (
-    <dl className={classNames('row', className)} {...props} />
-)
-
-const Cell = ({ className, ...props }) => (
-    <dd className={classNames('cell', className)} {...props} />
-)
-
-export default AACITable
