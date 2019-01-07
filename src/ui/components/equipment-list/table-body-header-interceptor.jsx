@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { extend } from 'koot'
 
 import { stats } from './table-body'
@@ -36,7 +37,15 @@ const Body = extend({
 
                     let content = null
 
-                    if (stat === 'hit')
+                    if (stat === 'aa') {
+                        content = (
+                            <React.Fragment>
+                                {__('stat.aa')}
+                                <sup>{__('stat.aa_interceptor_sortie')}</sup>
+                                <sub>{__('stat.aa_interceptor_defense')}</sub>
+                            </React.Fragment>
+                        )
+                    } else if (stat === 'hit')
                         content = __('stat.antibomber')
                     else if (stat === 'evasion')
                         content = __('stat.interception')
@@ -44,7 +53,9 @@ const Body = extend({
                     return (
                         <Cell
                             key={stat}
-                            className={`cell stat-${stat}`}
+                            className={classNames(['cell', `stat-${stat}`], {
+                                'stat-aa-interceptor': stat === 'aa'
+                            })}
                             data-stat={stat.replace(/^equipment\./, '') || undefined}
                         >
                             {content}

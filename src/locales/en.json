@@ -69,6 +69,8 @@
         "torpedo": "TPD",
         "night": "Night",
         "aa": "AA",
+        "aa_interceptor_sortie": "Sortie",
+        "aa_interceptor_defense": "Defense",
         "asw": "ASW",
         "hp": "HP",
         "armor": "Armor",

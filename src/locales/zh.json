@@ -69,6 +69,8 @@
         "torpedo": "雷装",
         "night": "夜战",
         "aa": "对空",
+        "aa_interceptor_sortie": "出击",
+        "aa_interceptor_defense": "防空",
         "asw": "对潜",
         "hp": "耐久",
         "armor": "装甲",

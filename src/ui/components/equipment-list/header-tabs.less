@@ -84,24 +84,33 @@
         .loop-icon-position(@count);
     }
 
+    // .screen-t1({
+    //     font-size:      12px;
+    //     margin-left:    (0 - @gutter);
+    //     .item{
+    //         margin-left:    @gutter;
+    //     }
+    // });
+
     .screen-t1({
-        font-size:      12px;
-        margin-left:    (0 - @gutter);
+        font-size: 12px;
+        display:    flex;
+        flex-flow:  row nowrap;
+        margin:     0 0 -1px -10px;
         .item{
-            margin-left:    @gutter;
+            margin-left: 10px;
+            float: none;
+            flex: 1 1 auto;
         }
     });
 
     .screen-tablet({
-        display:    flex;
-        flex-flow:  row nowrap;
-        margin:     0 0 -1px 0;
+        margin-left: 0;
         .item{
-            margin:     0;
-            float:      none;
-            flex:       1;
-            padding:    0;
-            &:before{
+            flex: 1;
+            margin: 0;
+            padding: 0;
+            &::before{
                 left:       50%;
                 margin-left:(0 - @size-icon / 2);
             }

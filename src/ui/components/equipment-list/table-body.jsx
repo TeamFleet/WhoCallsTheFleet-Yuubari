@@ -1,6 +1,7 @@
 import React from 'react'
 import { extend } from 'koot'
 import { get } from 'kckit'
+import equipmentTypes from 'kckit/src/types/equipments'
 
 import { highlightColumn } from '@api/equipment-list/api'
 import getFromState from '@api/equipment-list/get-from-state'
@@ -22,29 +23,29 @@ const getData = (props) => {
     if (!Array.isArray(props.equipments)) return []
     // console.log(props.equipments)
 
-    let results = props.equipments.map(equipment => {
-        let cells = [
-            [<Link to={getLink('equipment', equipment.id)}>{equipment._name}</Link>, {
-                className: 'cell-name'
-            }]
-        ]
+    return props.equipments.map(equipment => {
+        const cells = [{
+            className: 'cell-name',
+            children: <Link to={getLink('equipment', equipment.id)}>{equipment._name}</Link>
+        }]
+        const isInterceptor = equipmentTypes.Interceptors.includes(equipment.type)
 
         stats.forEach((stat, indexStat) => {
             if (props.collection === 2 && stat === 'range')
                 stat = 'distance'
 
             const value = equipment.stat[stat]
-            let content = value
+            let children = value
             let className = 'stat-' + stat
-            let trueValue
+            let trueValue = value
 
             if (stat.indexOf('equipment.') > -1) {
                 const type = stat.substr('equipment.'.length)
                 if (equipment[type]) {
-                    content = '✓'
+                    children = '✓'
                     trueValue = 1
                 } else {
-                    content = '-'
+                    children = '-'
                     trueValue = 0
                     className += ' empty'
                 }
@@ -52,12 +53,19 @@ const getData = (props) => {
                 className += ' negative'
             } else if (!value) {
                 className += ' empty'
-                content = '-'
-            } else {
-                if (stat === 'range' || stat === 'speed') {
-                    trueValue = value
-                    content = get[stat](trueValue)
-                }
+                children = '-'
+            } else if (stat === 'range' || stat === 'speed') {
+                trueValue = value
+                children = get[stat](value)
+            } else if (isInterceptor && stat === 'aa') {
+                className += ' stat-aa-interceptor'
+                children = (
+                    <React.Fragment>
+                        {value}
+                        <sup>{value + (equipment.stat.evasion * 1.5 || 0)}</sup>
+                        <sub>{value + (equipment.stat.evasion || 0) + (equipment.stat.hit * 2 || 0)}</sub>
+                    </React.Fragment>
+                )
             }
 
             if (props.sortType === stat)
@@ -66,34 +74,34 @@ const getData = (props) => {
             // if (!index && props.columnHighlight === stat)
             //     className += ' is-hover'
 
-            cells.push([
-                content,
-                {
-                    className: className,
-                    "data-stat": stat.replace(/^equipment\./, '') || undefined,
-                    value: trueValue,
-                    onMouseEnter: () => {
-                        // this.getContainer(evt.target).setAttribute('data-highlighting', indexStat)
-                        props.dispatch(
-                            highlightColumn(props.id, indexStat, stat)
-                            // highlightColumn(props.id, indexStat)
-                            // highlightColumn(props.id, stat)
-                        )
-                    },
-                    onMouseLeave: () => {
-                        // this.getContainer(evt.target).removeAttribute('data-highlighting')
-                        props.dispatch(
-                            highlightColumn(props.id, undefined, undefined)
-                        )
-                    }
+            cells.push({
+                className,
+                children,
+                "data-stat": stat.replace(/^equipment\./, '') || undefined,
+                // "data-value": trueValue,
+                value: trueValue,
+                onMouseEnter: () => {
+                    // this.getContainer(evt.target).setAttribute('data-highlighting', indexStat)
+                    props.dispatch(
+                        highlightColumn(props.id, indexStat, stat)
+                        // highlightColumn(props.id, indexStat)
+                        // highlightColumn(props.id, stat)
+                    )
+                },
+                onMouseLeave: () => {
+                    // this.getContainer(evt.target).removeAttribute('data-highlighting')
+                    props.dispatch(
+                        highlightColumn(props.id, undefined, undefined)
+                    )
                 }
-            ])
+            })
         })
 
         return {
             key: equipment.id,
             cells,
             props: {
+                className: isInterceptor ? 'mod-interceptor' : null,
                 onClick: () => {
                     if (__CLIENT__)
                         routerPush(getLink('equipment', equipment.id));
@@ -101,8 +109,6 @@ const getData = (props) => {
             }
         }
     })
-
-    return results
 }
 
 const EquipmentListTableBody = extend({

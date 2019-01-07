@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { extend } from 'koot'
 
 @extend({
@@ -37,22 +38,27 @@ class DataTable extends React.Component {
     }
 
     renderRow(data, index = 0, props = {}) {
-        const TagName = this.props.tag || 'tr'
+        const Component = this.props.tag || 'tr'
+        const { className, ...thisProps } = props
         return (
-            <TagName className="row" key={index} {...props}>
+            <Component className={classNames(['row', className])} key={index} {...thisProps}>
                 {data.map((children, index2) => this.renderCell(children, index, index2))}
-            </TagName>
+            </Component>
         )
     }
 
     renderCell(data, indexRow, indexCell) {
-        const TagName = this.props.tag || 'td'
-        let content = data
+        const Component = this.props.tag || 'td'
+
         let props = {}
 
         if (Array.isArray(data)) {
-            content = data[0]
             props = data[1]
+            props.children = data[0]
+        } else if (typeof data === 'object') {
+            props = data
+        } else {
+            props.children = data
         }
 
         if (props.className)
@@ -61,9 +67,7 @@ class DataTable extends React.Component {
             props.className = 'cell'
 
         return (
-            <TagName key={indexRow + '-' + indexCell} {...props}>
-                {content}
-            </TagName>
+            <Component key={indexRow + '-' + indexCell} {...props} />
         )
     }
 
