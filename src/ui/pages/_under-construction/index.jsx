@@ -5,6 +5,7 @@ import htmlHead from '@utils/html-head'
 
 import Page from '@ui/containers/page'
 import Title from '@ui/components/title'
+import UnderConstruction from '@ui/components/under-construction'
 
 const ViewUnderConstruction = extend({
     pageinfo: (state, props) => htmlHead(state, {
@@ -17,7 +18,7 @@ const ViewUnderConstruction = extend({
             className={className}
         >
             <Title component="h2" children={title} />
-            <p><i>{__('under_construction')}...</i></p>
+            <UnderConstruction />
         </Page>
     )
 )

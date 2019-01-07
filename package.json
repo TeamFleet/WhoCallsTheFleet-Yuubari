@@ -48,7 +48,7 @@
         "analyze": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js"
     },
     "dependencies": {
-        "koot": "0.8.0-alpha.16",
+        "koot": "0.8.0-alpha.17",
         "kckit": "1.21.17",
         "whocallsthefleet-database": "20190107.0.0",
         "whocallsthefleet-backgrounds": "1.3.2",
