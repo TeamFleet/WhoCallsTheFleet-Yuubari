@@ -184,7 +184,9 @@
         "based_on_area": "Based on area battle at, each of this equipment provide...",
         "based_on_nothing": "Each of this equipment provide...",
         "based_set": "加算ボーナス...",
-        "based_set_accumulate": "Accumulated set bonus..."
+        "based_set_accumulate": "Accumulated set bonus...",
+        "note_hybrid_radar": "Equipment(s) below treated as both Surface and AA Radar(s)",
+        "note_hybrid_radar_this_equipment": "This equipment is treated as both Surface and AA Radar"
     },
 
     "area": {

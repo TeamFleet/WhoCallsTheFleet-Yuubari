@@ -1,7 +1,94 @@
 @import '~base.less';
 
-.component-bonuses{
+.component {
+    .note-hybrid-radar{
+        @this-border-color: fade(@color-equipment-radar, 25%);
+
+        border-right: 10px solid transparent;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        position: relative;
+        display: inline-block;
+
+        .note{
+            padding-left: 32px;
+            padding-right: 1em;
+            color: @color-equipment-radar;
+            margin: 0;
+            position: relative;
+            .icon{
+                // fill: @color-badge-blue-border;
+                position: absolute;
+                top: 3px;
+                left: 7px;
+                width: 16px;
+                height: 16px;
+            }
+        }
+        .list{
+            padding-left: 32px;
+            margin-top: 0px;
+            font-size: 14px;
+            border-bottom: 10px solid transparent;
+            border-right: 14px solid transparent;
+        }
+
+        &.has-list{
+            & > .wrapper{
+                border-right: 20px solid transparent;
+                overflow: hidden;
+                .note{
+                    display: inline-block;
+                }
+            }
+            &::before, &::after, .note::before{
+                content: "";
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
+            &::before{
+                top: 30px;
+                left: 14px;
+                border-left: 2px solid @this-border-color;
+                border-right: 2px solid @this-border-color;
+                border-bottom: 2px solid @this-border-color;
+                border-radius: 0 0 5px 5px;
+            }
+            &::after{
+                top: 10px;
+                bottom: auto;
+                height: 20px;
+                left: 100%;
+                margin-left: -20px;
+                border-right: 2px solid @this-border-color;
+                border-top: 2px solid @this-border-color;
+                border-radius: 0 5px 0 0;
+            }
+            .note::before{
+                top: 10px;
+                left: 100%;
+                width: 100vw;
+                height: 2px;
+                margin-left: -5px;
+                background: @this-border-color;
+            }
+            // &::after{
+            //     left: 34px;
+            //     height: 2px;
+            //     width: 100%;
+            //     // background: @this-border-color;
+            //     // width: 50vw;
+            //     // background: linear-gradient(to right, @this-border-color, transparent);
+            //     // .screen-phone({
+            //     //     width: 75vw;
+            //     // })
+            // }
+        }
+    }
 }
+// .component-bonuses{
+// }
 
 .component-list{
     margin-top: 20px;

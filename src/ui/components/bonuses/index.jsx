@@ -2,8 +2,13 @@ import React from 'react'
 import { extend } from 'koot'
 import classNames from 'classnames'
 
-import bonusIsSet from './bonus-is-set'
+import getHybridRadars from '@utils/get-hybrid-radars'
+import getEquipment from '@utils/get-equipment'
+
 import ComponentContainer from '@ui/containers/infos-component'
+import Icon from '@ui/components/icon'
+import ListEquipments from '@ui/components/list/equipments'
+import bonusIsSet from './bonus-is-set'
 import BonusSingle from './bonus-single'
 import BonusSet from './bonus-set'
 
@@ -19,12 +24,22 @@ export default extend({
 
     const single = []
     const set = []
+
+    let setHasSurfaceRadar = false
+    let setHasAARadar = false
+
     bonuses.forEach(bonus => {
-        if (bonusIsSet(bonus))
+        if (bonusIsSet(bonus)) {
+            if (!setHasSurfaceRadar)
+                setHasSurfaceRadar = Boolean(bonus.equipments && bonus.equipments.hasSurfaceRadar)
+            if (!setHasAARadar)
+                setHasAARadar = Boolean(bonus.equipments && bonus.equipments.hasAARadar)
             set.push(bonus)
-        else
+        } else
             single.push(bonus)
     })
+
+    const setHasHybridRadar = setHasSurfaceRadar && setHasAARadar
 
     // 检查所有套装加成
     // 如果 list 为 Number[]，检查是否是其他某个套装加成的子集
@@ -89,6 +104,45 @@ export default extend({
                 title={__("bonuses.sets")}
                 titleType="line-append"
             >
+                {!equipment && ship && setHasHybridRadar
+                    ? (
+                        <div className="note-hybrid-radar has-list">
+                            <div className="wrapper">
+                                <p className="note">
+                                    <Icon icon="warning2" className="icon" />
+                                    {__('bonuses.note_hybrid_radar')}
+                                </p>
+                            </div>
+                            <ListEquipments className="list" list={getHybridRadars(ship)} />
+                        </div>
+                    )
+                    : null
+                }
+                {equipment && !ship && setHasHybridRadar
+                    ? (
+                        getEquipment(equipment).isType('SurfaceRadar') && getEquipment(equipment).isType('AARadar')
+                            ? (
+                                <div className="note-hybrid-radar">
+                                    <p className="note">
+                                        <Icon icon="warning2" className="icon" />
+                                        {__('bonuses.note_hybrid_radar_this_equipment')}
+                                    </p>
+                                </div>
+                            )
+                            : (
+                                <div className="note-hybrid-radar has-list">
+                                    <div className="wrapper">
+                                        <p className="note">
+                                            <Icon icon="warning2" className="icon" />
+                                            {__('bonuses.note_hybrid_radar')}
+                                        </p>
+                                    </div>
+                                    <ListEquipments className="list" list={getHybridRadars()} />
+                                </div>
+                            )
+                    )
+                    : null
+                }
                 {set.length
                     ? (
                         <div className={classNames({
