@@ -1,5 +1,40 @@
 @import '~base.less';
 
 .component {
-    // font-weight: bolder;
+    font-size: 14px;
+    line-height: 1.5;
+
+    .row{
+        display: flex;
+        flex-flow: row nowrap;
+        & + .row{
+            border-top: 1px solid @color-border;
+        }
+    }
+    dl.row{
+        padding: 0;
+        margin: 0;
+    }
+
+    .cell{
+        display: block;
+        flex: 1 0 40px;
+        &[data-cell-type="equipments"]{
+            flex-grow: 5;
+            flex-basis: 150px;
+        }
+        &[data-cell-type="fixed"],
+        &[data-cell-type="modifier"]{
+            flex-grow: 2.5;
+            flex-basis: 30px;
+        }
+    }
+    dt.cell, dd.cell{
+        padding: 0;
+        margin: 0;
+    }
+
+    .equipment{
+        display: block;
+    }
 }

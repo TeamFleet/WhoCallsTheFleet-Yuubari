@@ -7,15 +7,11 @@ import getShip from '@utils/get-ship'
 import LinkEquipment from '@ui/components/link/equipment'
 import Icon from '@ui/components/icon'
 
-const Row = ({ className, ...props }) => (
-    <dl className={classNames('row', className)} {...props} />
-)
 
-const Cell = ({ className, ...props }) => (
-    <dd className={classNames('cell', className)} {...props} />
-)
+// ============================================================================
 
-export default extend({
+
+const AACITable = extend({
     styles: require('./styles.less')
 })(
     ({
@@ -44,12 +40,53 @@ export default extend({
         return (
             <Component className={className}>
                 <Row className="header">
-                    <dt className="id" />
-                    <Cell className="equipments" />
-                    <Cell className="fixed" children={__("aaci.fixed")} />
-                    <Cell className="modifier" children={'123' + __("aaci.modifier")} />
+                    <dt className="cell" />
+                    <Cell type="equipments" />
+                    <Cell type="fixed" children={__("aaci.fixed")} />
+                    <Cell type="modifier" children={__("aaci.modifier")} />
                 </Row>
+                {listAACI.map((aaci, index) => (
+                    <Row key={index} className="row-aaci">
+                        <dt className="cell">#{aaci.id}</dt>
+                        <Cell type="equipments">
+                            <Equipments icons={aaci.icons} />
+                        </Cell>
+                        <Cell type="fixed" children={`+${aaci.fixed}`} />
+                        <Cell type="modifier" children={`x${aaci.modifier}`} />
+                    </Row>
+                ))}
             </Component>
         )
     }
+)
+export default AACITable
+
+
+// ============================================================================
+
+
+const Row = ({ className, ...props }) => (
+    <dl className={classNames('row', className)} {...props} />
+)
+
+const Cell = ({ className, type, ...props }) => (
+    <dd className={classNames('cell', className)} data-cell-type={type} {...props} />
+)
+
+
+// ============================================================================
+
+
+const Equipments = ({ icons }) => {
+    if (!Array.isArray(icons)) return null
+    if (!icons.length) return null
+    return icons.map((item, index) => (
+        <Equipment key={index} icon={item} />
+    ))
+}
+const Equipment = ({ className, icon, children, ...props }) => (
+    <span className={classNames('equipment', className)} {...props}>
+        {icon}
+        {children}
+    </span>
 )
