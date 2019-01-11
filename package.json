@@ -67,7 +67,7 @@
         "cssnano": "4.1.8",
         "json-pretty": "0.0.1",
         "nedb-promise": "2.0.1",
-        "image-size": "0.6.3",
+        "image-size": "0.7.1",
         "camelcase": "5.0.0",
         "raw-loader": "1.0.0",
         "svg-url-loader": "2.3.2"
