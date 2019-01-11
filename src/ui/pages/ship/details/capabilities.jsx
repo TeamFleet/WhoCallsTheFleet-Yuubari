@@ -1,6 +1,7 @@
 import React from 'react'
 import { extend } from 'koot'
 
+import SpecialCapability from './components/special-capability'
 import CombatSpecial from './components/combat-special'
 import OtherSpecial from './components/other-special'
 import AACI from './components/aaci'
@@ -21,6 +22,7 @@ const ShipDetailsContentCapabilities = extend({
                 <div className="under-construction">
                     <UnderConstruction component="div" />
                 </div>
+                <SpecialCapability ship={props.ship} className="shipinfo shipinfo-special-capability" />
                 <CombatSpecial ship={props.ship} className="shipinfo shipinfo-combat" />
                 <OtherSpecial ship={props.ship} className="shipinfo shipinfo-special" />
                 <AACI ship={props.ship} className="shipinfo shipinfo-aaci" />
