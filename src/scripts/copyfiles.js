@@ -1,5 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
+const md5File = require('md5-file')
 // const ncp = require('ncp').ncp
 // const getDistPath = require('super-project/utils/get-dist-path')
 
@@ -55,8 +56,9 @@ module.exports = async () => {
         total: copy.length
     })
 
-    for (let o of copy) {
-        await fs.copy(o.from, o.to)
+    for (let { from, to } of copy) {
+        if (!fs.existsSync(to) || md5File.sync(from) !== md5File.sync(to))
+            await fs.copy(from, to)
         // await new Promise((resolve, reject) => {
         //     console.log(' ')
         //     console.log(o.from)
@@ -99,7 +101,7 @@ const getPics = async () => {
         ships: [
             '0',
             '0-1',
-            '0-2'
+            '0-2',
         ],
         shipsExtra: ['8', '9'],
         equipments: ['card']
@@ -129,13 +131,20 @@ const getPics = async () => {
         })
     }
 
-    const checkDo = async (type, id, listBasename) => {
-        for (let file of await readdir(path.join(dirPics, type, id))) {
-            if (typeof listBasename === 'undefined' || listBasename.indexOf(path.basename(file, path.extname(file))) > -1) {
-                if (!fs.existsSync(path.join(dirTarget, type, id, file)))
-                    resultAdd(type, id, file)
-            }
-        }
+    const checkAndCopy = async (type, id, listBasename) => {
+        const dir = path.join(dirPics, type, id)
+        const files = await readdir(dir)
+        files.forEach(filename => {
+            const extname = path.extname(filename)
+            const basename = path.basename(filename, extname)
+
+            if (Array.isArray(listBasename) && !listBasename.includes(basename))
+                return
+
+            // const target = path.join(dirTarget, type, id, filename)
+            // if (!fs.existsSync(target))
+            resultAdd(type, id, filename)
+        })
     }
 
     const resultAdd = (type, id, file) => {
@@ -161,24 +170,25 @@ const getPics = async () => {
                     }
                     if (ships[id] && ships[id].illust_same_as_prev) {
                         // console.log(id, ships[id].name.ja_jp)
-                        await checkDo(type, id, filelist.ships)
+                        await checkAndCopy(type, id, filelist.ships)
                     } else
-                        await checkDo(type, id, [
+                        await checkAndCopy(type, id, [
                             ...filelist.ships,
                             '8',
                             '9',
-                            '10'
+                            '10',
+                            'special'
                         ])
                     break
                 }
                 case 'ships-extra':
-                    await checkDo(type, id, filelist.shipsExtra)
+                    await checkAndCopy(type, id, filelist.shipsExtra)
                     break
                 case 'equipments':
-                    await checkDo(type, id, filelist.equipments)
+                    await checkAndCopy(type, id, filelist.equipments)
                     break
                 default:
-                    await checkDo(type, id)
+                    await checkAndCopy(type, id)
                     break
             }
         }
