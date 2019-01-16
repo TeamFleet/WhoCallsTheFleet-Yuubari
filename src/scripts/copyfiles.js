@@ -33,7 +33,7 @@ module.exports = async () => {
     // console.log(dirDist)
     // console.log(dirBgimgs)
 
-    const copy = [
+    const list = [
         {
             from: dirBgimgs,
             to: '../bgimgs'
@@ -44,20 +44,27 @@ module.exports = async () => {
         }
     ]
 
-    if (ENV === 'prod') copy.push(...await getPics())
+    if (ENV === 'prod') list.push(...await getPics())
 
-    copy.forEach(o => {
+    list.forEach(o => {
         o.to = path.resolve(dirIncludes, o.to)
     })
 
     waiting.stop()
     const bar = new Progress({
         title,
-        total: copy.length
+        total: list.length
     })
 
-    for (let { from, to } of copy) {
-        if (!fs.existsSync(to) || md5File.sync(from) !== md5File.sync(to))
+    for (let { from, to } of list) {
+        if (!fs.existsSync(from))
+            continue
+
+        else if (!fs.existsSync(to))
+            await fs.copy(from, to)
+        else if (fs.lstatSync(from).isDirectory() || fs.lstatSync(to).isDirectory())
+            await fs.copy(from, to)
+        else if (md5File.sync(from) !== md5File.sync(to))
             await fs.copy(from, to)
         // await new Promise((resolve, reject) => {
         //     console.log(' ')
