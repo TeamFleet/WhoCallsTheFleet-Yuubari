@@ -244,6 +244,9 @@ class Filter extends React.Component {
                     onInput={this.onInput.bind(this)}
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
+                    // onKeyDown={evt => {
+                    //     console.log(evt.key, evt.keyCode, evt.charCode)
+                    // }}
                     defaultValue={this.defaultInput}
                     ref={(c) => this.el = c}
                 />
