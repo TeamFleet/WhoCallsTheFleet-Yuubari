@@ -56,16 +56,20 @@
             color:      @color-accent;
         }
     }
+    
+    .checkbox-hover-styles() {
+        opacity:    1;
+        &:after{
+            border-color:   @color-accent;
+        }
+    }
     .checkbox-show() {
         .checkbox{
             opacity:    1;
             z-index:    100;
             pointer-events: all;
             &:hover{
-                opacity:    1;
-                &:after{
-                    border-color:   @color-accent;
-                }
+                .checkbox-hover-styles();
             }
         }
     }
@@ -103,6 +107,11 @@
     &.is-compare,
     &.is-selected{
         .checkbox-show();
+        .is-hover({
+            .checkbox{
+                .checkbox-hover-styles();
+            }
+        });
     }
     .is-hover({
         .checkbox-show();

@@ -68,6 +68,8 @@ class LinkShip extends React.Component {
             navy,
             "min-level": minLv = false,
 
+            onClick,
+
             // replace = false,
             children,
 
@@ -111,6 +113,11 @@ class LinkShip extends React.Component {
                 className={className}
                 pic={this.checkShow(pic) ? getPic(this.ship, '0-2') : null}
                 name={this.checkShow(name) ? this.renderName(type) : null}
+                onClick={evt => {
+                    evt.currentTarget.blur()
+                    if (typeof onClick === 'function')
+                        return onClick(evt)
+                }}
                 {...props}
             >
                 {extraIllust && this.ship.hasExtraIllust() &&

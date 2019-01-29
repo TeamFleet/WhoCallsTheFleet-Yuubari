@@ -19,10 +19,12 @@
     }
 
     &.mod-grid{
-        display:    flex;
-        flex-flow:  row wrap;
-        .item{
-            flex:   1 0 (@ship-link-width + 0);
-        }
+        // display:    flex;
+        // flex-flow:  row wrap;
+        // .item{
+        //     flex:   1 0 (@ship-link-width + 0);
+        // }
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(@ship-link-width , 1fr));
     }
 }
