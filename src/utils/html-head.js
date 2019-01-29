@@ -1,5 +1,5 @@
 import metas from 'metas'
-import { getStore } from 'koot'
+import { store } from 'koot'
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'
@@ -9,7 +9,7 @@ import { update as updatePageTitle } from '@api/page-title/api.js'
 const htmlHead = (state, infos) => {
 
     if (typeof state === 'object' && typeof infos === 'undefined') {
-        return htmlHead(getStore().getState(), state)
+        return htmlHead(store.getState(), state)
     }
 
     if (typeof state !== 'object') return {}
@@ -44,7 +44,7 @@ const htmlHead = (state, infos) => {
         const titleMain = Array.isArray(title) && title.length ? title[0] : title
         title = Array.isArray(title) ? title.join(' / ') : title
 
-        const store = getStore()
+        // const store = getStore()
         if (typeof subtitle !== 'undefined')
             store.dispatch(updatePageTitle({
                 main: titleMain,
