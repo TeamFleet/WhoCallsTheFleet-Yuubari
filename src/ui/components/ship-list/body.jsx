@@ -3,7 +3,9 @@ import TransitionGroup from 'react-transition-group/TransitionGroup'
 import CSSTransition from 'react-transition-group/CSSTransition'
 import classNames from 'classnames'
 import { extend } from 'koot'
+const hotkeys = __CLIENT__ ? require('hotkeys-js').default : undefined
 
+import { KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE } from '@const/hotkey-scopes'
 import db from '@database'
 import shipListFilter from '@database/list-ships-filter.js'
 import {
@@ -71,6 +73,10 @@ class ShipListView extends React.Component {
                 shipListInit(props.id)
             )
         }
+    }
+
+    componentWillUnmount() {
+        hotkeys.setScope('all')
     }
 
     render() {
@@ -253,8 +259,8 @@ class Body extends React.Component {
                     extraButtons={this.getExtraButtons()}
                 />}
 
-                {<BodyCompare show={showType === 'compare'} id={this.props.id} />}
-                {<BodyFiltered show={showType === 'filtered'} id={this.props.id} />}
+                <BodyCompare show={showType === 'compare'} id={this.props.id} />
+                <BodyFiltered show={showType === 'filtered'} id={this.props.id} />
                 {__CLIENT__ && <BodyCollections show={showType === 'collection'} id={this.props.id} />}
                 {__SERVER__ && (
                     db.shipCollections.map((collection, index) => (
@@ -321,17 +327,65 @@ const BodyCompare = extend({
     })
 })
 class BodyFiltered extends React.Component {
-    componentDidUpdate(prevProps/*, prevState*/) {
-        if (prevProps.filterInput !== this.props.filterInput)
-            window.scrollTo(undefined, 0)
-    }
-    render() {
-        const show = (
+    get show() {
+        return Boolean(
             this.props.show &&
             typeof this.props.filterInput !== 'undefined' &&
             this.props.filterInput !== ''
         )
+    }
 
+    updateKeyScope() {
+        if (this.show) {
+            hotkeys.setScope(KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE)
+        } else {
+            hotkeys.setScope('all')
+        }
+    }
+    focusItem(direction = 1) {
+        const items = Array.from(this._list.querySelectorAll('.item'))
+        const active = document.activeElement
+        const activeIndex = items.indexOf(active)
+        let newIndex
+
+        if (activeIndex > -1) {
+            newIndex = activeIndex + (direction > 0 ? 1 : -1)
+        } else {
+            if (direction > 0) newIndex = 0
+            else newIndex = items.length - 1
+        }
+
+        if (newIndex < 0) newIndex = items.length - 1
+        if (newIndex >= items.length) newIndex = 0
+        items[newIndex].focus()
+    }
+
+    componentDidMount() {
+        hotkeys('down, right', {
+            scope: KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE
+        }, () => {
+            this.focusItem(1)
+            return false
+        })
+        hotkeys('up, left', {
+            scope: KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE
+        }, () => {
+            this.focusItem(-1)
+            return false
+        })
+        this.updateKeyScope()
+    }
+    componentDidUpdate(prevProps/*, prevState*/) {
+        this.updateKeyScope()
+        if (prevProps.filterInput !== this.props.filterInput)
+            window.scrollTo(undefined, 0)
+    }
+    componentWillUnmount() {
+        hotkeys.deleteScope(KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE)
+    }
+
+    render() {
+        const show = this.show
         let text, list
 
         if (show) {
@@ -358,7 +412,7 @@ class BodyFiltered extends React.Component {
             <CSSTransitionGroup>
                 {show &&
                     <CSSTransitionComponent key="filterd">
-                        <div className="results">
+                        <div className="results" ref={el => this._list = el}>
                             <p className="results-text">{text}</p>
                             {<List
                                 id={this.props.id}

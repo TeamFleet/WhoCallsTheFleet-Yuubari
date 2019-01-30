@@ -215,10 +215,38 @@ class Filter extends React.Component {
     }
 
     onBlur(evt) {
-        if (evt.target.value === '')
+        if (evt.target.value === '') {
             this.props.dispatch(
                 filterLeave(this.props.id)
             )
+        }
+    }
+
+    onKeyDown(evt) {
+        // const d = {}
+        // const a = ['detail', 'eventPhase', 'charCode', 'key', 'keyCode', 'which']
+        // a.forEach(k => {
+        //     d[k] = evt[k]
+        // })
+        // console.log(d)
+        switch (evt.key) {
+            case 'ArrowUp':
+            case 'ArrowDown': {
+                if (evt.target.value !== '') {
+                    evt.preventDefault()
+                    evt.target.blur()
+                    document.body.dispatchEvent(new KeyboardEvent('keydown', {
+                        bubbles: true,
+                        keyCode: evt.keyCode
+                    }))
+                }
+                break
+            }
+            case 'Escape': {
+                evt.target.blur()
+                break
+            }
+        }
     }
 
     onCloseClick(/*evt*/) {
@@ -244,9 +272,7 @@ class Filter extends React.Component {
                     onInput={this.onInput.bind(this)}
                     onFocus={this.onFocus.bind(this)}
                     onBlur={this.onBlur.bind(this)}
-                    // onKeyDown={evt => {
-                    //     console.log(evt.key, evt.keyCode, evt.charCode)
-                    // }}
+                    onKeyDown={this.onKeyDown.bind(this)}
                     defaultValue={this.defaultInput}
                     ref={(c) => this.el = c}
                 />
