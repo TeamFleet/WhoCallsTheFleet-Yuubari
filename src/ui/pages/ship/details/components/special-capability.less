@@ -8,13 +8,36 @@
         & > .image{
             flex: 1 0 50%;
         }
+        .screen-t1({
+            flex-flow: row wrap;
+            & > .description,
+            & > .image{
+                flex-basis: 100%;
+            }
+        });
     }
 
-    .img{
-        display: block;
-        width: auto;
-        height: auto;
-        max-width: 100%;
-        margin: 0 auto;
+    .description{
+        .screen-t1({
+            order: 2;
+        });
+    }
+
+    .image{
+        max-width: 500px;
+        .img{
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .screen-t1({
+            max-width: none;
+            order: 1;
+            .img{
+                width: @screen-phone-small;
+            }
+        });
     }
 }

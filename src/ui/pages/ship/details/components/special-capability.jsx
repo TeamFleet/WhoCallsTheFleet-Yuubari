@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import kckit from 'kckit'
 import { extend } from 'koot'
+import Markdown from 'react-markdown'
 
 import getShip from '@utils/get-ship'
 import getPic from '@utils/get-pic.js'
@@ -26,10 +27,23 @@ const SpecialCapability = extend({
             return false
         })
         if (specialAttack) {
+            const { requirement, effect } = __(`special_attack["${specialAttack.name}"]`)
+            // console.log(__("special_attack", specialAttack.name.replace(/ /g, '')))
+            // console.log({ requirement, effect })
+            const source = `#### ${__('ship_details.special_attack.requirements')}`
+                + `\n\n`
+                + requirement.join('\n')
+                + `\n\n`
+                + `#### ${__('ship_details.special_attack.effects')}`
+                + `\n\n`
+                + effect.join('\n\n')
             return (
                 <ComponentContainer className={classNames([className, 'special-attack'])} title={specialAttack.name}>
                     <div className="wrapper">
-                        <div className="description">123</div>
+                        <Markdown
+                            className="description"
+                            source={source}
+                        />
                         <Image className="image" src={getPic(thisShip, 'special')} />
                     </div>
                 </ComponentContainer>
