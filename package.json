@@ -48,7 +48,7 @@
         "analyze": "cross-env WEBPACK_BUILD_ENV=prod WEBPACK_BUILD_STAGE=client WEBPACK_ANALYZE=true node ./super.build.js"
     },
     "dependencies": {
-        "koot": "0.8.0-beta.19",
+        "koot": "0.8.0",
         "kckit": "1.21.23",
         "whocallsthefleet-database": "20190312.0.0",
         "whocallsthefleet-backgrounds": "1.3.2",
@@ -62,7 +62,7 @@
         "metas": "1.0.1",
         "swiper": "4.5.0",
         "camelcase": "5.2.0",
-        "hotkeys-js": "3.4.4"
+        "hotkeys-js": "3.5.0"
     },
     "devDependencies": {
         "autoprefixer": "9.5.0",
@@ -72,7 +72,7 @@
         "progress": "2.0.3",
         "cli-spinners": "2.0.0",
         "jest": "24.5.0",
-        "eslint": "5.15.2",
+        "eslint": "5.15.3",
         "eslint-plugin-react": "7.12.4",
         "babel-eslint": "10.0.1",
         "simple-git": "1.107.0",
@@ -81,7 +81,7 @@
         "postcss-easing-gradients": "3.0.1",
         "postcss-pxtorem": "4.0.1",
         "cssnano": "4.1.10",
-        "raw-loader": "1.0.0",
+        "raw-loader": "2.0.0",
         "svg-url-loader": "2.3.2",
         "json-pretty": "0.0.1",
         "nedb-promise": "2.0.1",

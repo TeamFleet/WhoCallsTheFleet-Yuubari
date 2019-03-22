@@ -33,10 +33,10 @@ const markdownRenderers = {
 
 const getMD = (localeId) => {
     if (localeId === 'en')
-        return require(`@docs/updates/1.0.0/en.md`)
+        return require(`@docs/updates/1.0.0/en.md`).default
     if (localeId === 'ja')
-        return require(`@docs/updates/1.0.0/ja.md`)
-    return require(`@docs/updates/1.0.0/zh.md`)
+        return require(`@docs/updates/1.0.0/ja.md`).default
+    return require(`@docs/updates/1.0.0/zh.md`).default
 }
 
 const PageHome = extend({

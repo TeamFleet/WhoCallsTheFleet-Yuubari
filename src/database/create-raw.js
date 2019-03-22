@@ -4,11 +4,11 @@
 const LZString = __CLIENT__ ? require('lz-string') : {}
 const getDataObject = (name) => {
     if (__SERVER__)
-        return require(`whocallsthefleet-database/db/${name}.nedb`)
+        return require(`whocallsthefleet-database/db/${name}.nedb`).default
 
     if (__CLIENT__)
         return LZString.decompressFromEncodedURIComponent(
-            require(`./db/${name}.nedb`)
+            require(`./db/${name}.nedb`).default
         )
 }
 
