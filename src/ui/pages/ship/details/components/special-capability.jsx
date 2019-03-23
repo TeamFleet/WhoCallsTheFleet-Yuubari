@@ -2,11 +2,11 @@ import React from 'react'
 import classNames from 'classnames'
 import kckit from 'kckit'
 import { extend } from 'koot'
-import Markdown from 'react-markdown'
 
 import getShip from '@utils/get-ship'
 import getPic from '@utils/get-pic.js'
 
+import Markdown from '@ui/components/markdown'
 import ComponentContainer from '@ui/containers/infos-component'
 import Image from '@ui/components/image'
 
@@ -36,7 +36,9 @@ const SpecialCapability = extend({
                 + `\n\n`
                 + `#### ${__('ship_details.special_attack.effects')}`
                 + `\n\n`
-                + effect.join('\n\n')
+                + effect.map(line => (
+                    /^[ -]+/.test(line) ? line : `\n${line}`
+                )).join('\n')
             return (
                 <ComponentContainer className={classNames([className, 'special-attack'])} title={specialAttack.name}>
                     <div className="wrapper">
