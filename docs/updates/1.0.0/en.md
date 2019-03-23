@@ -1,6 +1,6 @@
 ## Help us for English language support!
 
-If you want help us for English translation, you can submit your changes [HERE](https://github.com/Diablohu/WhoCallsTheFleet-Yuubari/tree/master/locales/en.json)
+If you want help us for English translation, you can submit your changes [HERE](https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari/blob/master/src/locales/en.json)
 
 ## New Features & Major Changes
 

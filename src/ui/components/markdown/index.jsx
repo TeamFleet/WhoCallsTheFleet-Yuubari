@@ -46,7 +46,6 @@ const Markdown = extend({
         if (typeof renderers === 'object')
             Object.assign(props.renderers, renderers)
 
-        console.log(props.source)
         return (
             <ReactMarkdown {...props} />
         )
