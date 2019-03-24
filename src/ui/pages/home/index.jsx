@@ -5,10 +5,13 @@ import htmlHead from '@utils/html-head'
 
 import Page from '@ui/containers/page'
 import CenterContainer from '@ui/containers/center'
-
 import Markdown from '@ui/components/markdown'
 
 const getMD = (localeId) => {
+
+    // TODO: write a webpack plugin to include docs
+    // DOC('updates/1.0.0')
+
     if (localeId === 'en')
         return require(`@docs/updates/1.0.0/en.md`).default
     if (localeId === 'ja')

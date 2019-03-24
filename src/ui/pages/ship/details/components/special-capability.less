@@ -1,29 +1,32 @@
 @import "~base.less";
 
 .component.special-attack{
-    & > .wrapper{
-        display: flex;
-        flex-flow: row nowrap;
-        & > .description,
-        & > .image{
-            flex: 1 0 50%;
-        }
-        .screen-t1({
-            flex-flow: row wrap;
-            & > .description,
-            & > .image{
-                flex-basis: 100%;
-            }
-        });
+
+    & > .title{
+        font-size: 24px;
+        line-height: 1.5em;
+        margin-bottom: 20px;
     }
 
     .description{
-        .screen-t1({
-            order: 2;
-        });
+        @margin: 14px;
+        & > h4{
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: @margin;
+        }
+        & > p,
+        & > ul{
+            // font-size: 16px;
+            // line-height: 1.5em;
+            margin-top: @margin;
+            margin-bottom: @margin;
+        }
     }
 
     .image{
+        float: right;
+        width: 50%;
         max-width: 500px;
         .img{
             display: block;
@@ -34,10 +37,12 @@
         }
         .screen-t1({
             max-width: none;
-            order: 1;
+            width: 100%;
+            float: none;
             .img{
                 width: @screen-phone-small;
             }
         });
     }
+
 }

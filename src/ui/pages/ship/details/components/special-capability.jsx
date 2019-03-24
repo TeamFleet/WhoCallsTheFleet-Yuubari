@@ -41,13 +41,17 @@ const SpecialCapability = extend({
                 )).join('\n')
             return (
                 <ComponentContainer className={classNames([className, 'special-attack'])} title={specialAttack.name}>
-                    <div className="wrapper">
-                        <Markdown
-                            className="description"
-                            source={source}
-                        />
-                        <Image className="image" src={getPic(thisShip, 'special')} />
-                    </div>
+                    <Image className="image" src={getPic(thisShip, 'special')} />
+                    <Markdown
+                        className="description"
+                        source={source}
+                        renderers={{
+                            heading: ({ level, ...props }) => {
+                                const Component = `h${level}`
+                                return <Component {...props} />
+                            }
+                        }}
+                    />
                 </ComponentContainer>
             )
         }
