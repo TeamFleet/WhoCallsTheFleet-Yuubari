@@ -1,5 +1,5 @@
-import shipCollections from './json/ship_collections.json'
-import equipmentCollections from './json/equipment_collections.json'
+import ShipCollections from './json/ship_collections.json'
+import EquipmentCollections from './json/equipment_collections.json'
 
 import { register, parseRaw } from 'kckit'
 
@@ -12,6 +12,18 @@ import parseLocaleId from './parse-locale-id'
  * @void
  */
 const initKCKit = ({ localeId, store }) => {
+
+    const requireCollection = (type, defaults) => {
+        if (__DEV__ && __SERVER__)
+            return require('fs-extra').readJsonSync(
+                require('path').resolve(__dirname, `./json/${type}_collections.json`)
+            )
+        return defaults
+    }
+    const shipCollections = requireCollection('ship', ShipCollections)
+    const equipmentCollections = requireCollection('equipment', EquipmentCollections)
+
+    if (__CLIENT__) console.log({ shipCollections })
 
     const locale = parseLocaleId(localeId)
 
