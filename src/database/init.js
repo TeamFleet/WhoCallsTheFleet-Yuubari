@@ -23,8 +23,6 @@ const initKCKit = ({ localeId, store }) => {
     const shipCollections = requireCollection('ship', ShipCollections)
     const equipmentCollections = requireCollection('equipment', EquipmentCollections)
 
-    if (__CLIENT__) console.log({ shipCollections })
-
     const locale = parseLocaleId(localeId)
 
     const {

@@ -23,162 +23,44 @@ const path = require('path')
 
 module.exports = {
 
-    /** @type {String} 项目名称 */
+    /**************************************************************************
+     * 项目信息
+     *************************************************************************/
+
     name: 'The Fleet (Yuubari)',
-
-    /**
-     * @type {String} 项目类型
-     * @default react 默认为 React 同构项目
-     */
-    type: 'react',
-
-    /** @type {Pathname} HTML 模板 */
-    template: './src/template.ejs',
-
-    /** @type {Pathname} React 路由 */
-    router: './src/router',
-
-    /**
-     * @type {Object} Redux 配置
-     * @namespace
-     * @property {Pathname} [combineReducers] reducer，与 combineReducers 参数语法相同
-     * @property {Pathname} [store] 使用自创建的 store，而非 koot 创建的 store。如果提供，会忽略 combineReducers 属性。详细使用方法请参阅 [文档](https://koot.js.org/react/create-store)
-     */
-    redux: {
-        // combineReducers: './src/redux/reducers',
-        store: './src/redux/factory-store',
-    },
-
-    /**
-     * @type {Object} 客户端/浏览器端相关配置
-     * @namespace
-     * @property {String} [history=(browser|hash)] - 路由历史类型，支持 'browser' 'hash' 'memory'。同构时默认为 'browser'，其他情况默认为 'hash'
-     * @property {Pathname} [before] - 回调函数：在 React 初始化前
-     * @property {Pathname} [after] - 回调函数：在 React 初始化完成后
-     * @property {Pathname} [onRouterUpdate] - 回调函数：在路由发生改变时
-     * @property {Pathname} [onHistoryUpdate] - 回调函数：在浏览器历史发生改变时时
-     */
-    client: {
-        history: 'browser',
-        before: './src/_client/before',
-        after: './src/_client/after',
-        onRouterUpdate: './src/_client/on-router-update',
-        onHistoryUpdate: './src/_client/on-history-update',
-    },
-
-    /** 
-     * @type {(Object)} 服务器端端相关配置
-     * @namespace
-     * @property {Object} [koaStatic] - KOA 静态资源服务器扩展配置
-     * @property {Object} [renderCache] - 同构渲染缓存设置 (开发模式下禁用)
-     * @property {Number} [renderCache.maxAge=1000] - 同构渲染缓存最大存在时间 (单位: ms)
-     * @property {Number} [renderCache.maxCount=50] - 同构渲染缓存最多缓存的 URL 的数量
-     * @property {cacheGet} [renderCache.get] - 自定义缓存检查与吐出方法。存在时, maxAge 和 maxCount 设置将被忽略
-     * @property {cacheSet} [renderCache.set] - 自定义缓存存储方法。存在时, maxAge 和 maxCount 设置将被忽略
-     * @property {Pathname} [reducers] - 服务器端专用 Reducer，与 combineReducers 参数语法相同。会整合到 redux.combineReducers 中
-     * @property {Pathname} [inject] - 注入内容
-     * @property {Pathname} [before] - 回调：在服务器启动前
-     * @property {Pathname} [after] - 回调：在服务器启动完成
-     * @property {Pathname} [onRender] - 回调：在页面渲染时
-     */
-    server: {
-        koaStatic: {
-            maxage: 0,
-            hidden: true,
-            index: 'index.html',
-            defer: false,
-            gzip: true,
-            extensions: false
-        },
-        renderCache: {
-            maxAge: 10 * 1000,
-        },
-        proxyRequestOrigin: {
-            protocol: 'https',
-        },
-        // reducers: './src/_server/reducers',
-        inject: './src/_server/inject',
-        before: './src/_server/lifecycle/before',
-        after: './src/_server/lifecycle/after',
-        onRender: './src/_server/lifecycle/on-render'
-    },
-
-    /** 
-     * @type {String} 打包目标目录
-     * 默认会在该目录下建立 public 和 server 目录，分别对应 web 服务器和服务器执行代码
-     * 注：如果为相对路径，请确保第一个字符为 '.'
-     */
     dist: (() => {
         if (process.env.WEBPACK_BUILD_ENV === 'dev')
             return './dev-webapp/'
         return './dist-webapp/'
     })(),
 
-    /** 
-     * @type {Object} Webpack 相关配置
-     * @namespace
-     * @property {Object|Function} config Webpack 配置对象或生成方法，可为异步方法
-     * @property {Function} beforeBuild 在 Webpack 打包执行前运行的方法，可为异步
-     * @property {Function} afterBuild 在 Webpack 打包完成后运行的方法，可为异步
-     * @property {Object} defines 扩展 webpack.DefinePlugin 的内容
-     * @property {String[]} dll [仅开发模式] 供 webpack.DllPlugin 使用。webpack 的监控不会处理这些库/library，以期提高开发模式的打包更新速度
-     */
-    webpack: {
-        config: async () => {
-            const ENV = process.env.WEBPACK_BUILD_ENV
-            if (ENV === 'dev') return await require('./config/webpack/dev')
-            if (ENV === 'prod') return await require('./config/webpack/prod')
-            return {}
-        },
-        beforeBuild: async (...args) => {
-            if (process.env.WEBPACK_BUILD_STAGE === 'client') {
-                console.log(' ')
-                await require('./src/build/webapp/before')(...args)
-                    .catch(err => console.error(err))
-                if (process.env.WEBPACK_BUILD_ENV === 'prod') {
-                    await require('./src/scripts/clean-dist')(...args)
-                }
-                await require('./src/scripts/validate-database-files')()
-                await require('./src/scripts/validate-less-variables')()
-                await require('./src/scripts/copyfiles')()
-                await require('./src/scripts/copyfiles-web')()
-                console.log(' ')
-            }
-            return
-        },
-        afterBuild: async () => {
-            if (process.env.WEBPACK_BUILD_STAGE === 'client' &&
-                process.env.WEBPACK_BUILD_ENV === 'prod'
-            ) {
-                await require('./src/scripts/clean-web-sourcemap')()
-            }
-            await require('./src/build/webapp/after-server')()
-            return
-        },
-        defines: require('./src/defines'),
-        dll: [
-            'react',
-            'react-dom',
-            'redux',
-            'redux-thunk',
-            'react-redux',
-            'react-router',
-            'react-router-redux',
-            'koot',
-            'swiper',
+    template: './src/template.ejs',
+    templateInject: './src/_server/inject.js',
+
+    routes: './src/router',
+
+    store: './src/redux/factory-store',
+
+    // i18n: {
+    //     // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
+    //     type: 'redux',
+    //     // expr: '__',
+    //     locales: require('./src/locales')
+    //         .map(l => ([l, `./src/locales/${l}.json`]))
+    //     // cookieKey: 'fleetLocaleId',
+    //     // domain: '127.0.0.1',
+    // },
+    i18n: require('./src/locales').map(l => ([l, `./src/locales/${l}.json`])),
+
+    pwa: {
+        auto: false,
+        initialCacheIgonre: [
+            '/bgimgs/**/*',
+            '/pics/**/*',
+            '/dev-*',
         ]
     },
 
-    /** 
-     * @type {Object}
-     * 目录或文件别名
-     * 
-     * 在项目内的 JavaScript 和 CSS/LESS/SASS 中的引用方法均可直接使用这些别名，如
-     *      - JavaScript: require('@app/create.js')
-     *      - LESS:       @import "~base.less"
-     * 
-     * 建议使用绝对路径
-     */
     aliases: {
         '@src': path.resolve('./src'),
         '@docs': path.resolve('./docs'),
@@ -200,71 +82,101 @@ module.exports = {
         "~/": path.resolve('./src/ui')
     },
 
-    /**
-     * @type {Object} CSS 打包相关设置
-     * @namespace
-     * @property {Object} fileBasename 文件名规则 (不包含扩展名部分)。规则会自动应用到 `.less` `.sass` 和 `.scss` 文件上
-     * @property {RegExp} fileBasename.normal 标准 CSS 文件，在打包时不会被 koot 定制的 css-loader 处理
-     * @property {RegExp} fileBasename.component 组件 CSS 文件，在打包时会被 koot 定制的 css-loader 处理
-     * @property {Array} extract 这些文件在打包时会拆成独立文件
-     */
-    css: {
-        fileBasename: {
-            normal: /\.g/,
-            component: /^((?!\.g\.).)*/,
-        },
+    defines: require('./src/defines'),
+
+    /**************************************************************************
+     * 客户端生命周期
+     *************************************************************************/
+
+    before: './src/_client/before',
+    after: './src/_client/after',
+    onHistoryUpdate: './src/_client/on-history-update',
+    onRouterUpdate: './src/_client/on-router-update',
+
+    /**************************************************************************
+     * 服务器端设置 & 生命周期
+     *************************************************************************/
+
+    port: 8080,
+    renderCache: {
+        maxAge: 10 * 1000,
     },
-
-    /** @type {(Number|Object|String)} 服务器运行端口 */
-    // port: 3080,
-    port: {
-        dev: 8703,
-        prod: 8080,
+    proxyRequestOrigin: {
+        protocol: 'https',
     },
-
-    /** @type {(Boolean|Array[]|Object)} 多语言配置 */
-    i18n: {
-        // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
-        type: 'redux',
-        // expr: '__',
-        locales: require('./src/locales')
-            .map(l => ([l, `./src/locales/${l}.json`]))
-        // cookieKey: 'fleetLocaleId',
-        // domain: '127.0.0.1',
+    koaStatic: {
+        maxage: 0,
+        hidden: true,
+        index: 'index.html',
+        defer: false,
+        gzip: true,
+        extensions: false
     },
+    serverBefore: './src/_server/lifecycle/before',
+    serverAfter: './src/_server/lifecycle/after',
+    serverOnRender: './src/_server/lifecycle/on-render',
 
-    /** 
-     * @type {(Object|boolean)}
-     * PWA相关设置，仅在生产环境(ENV:prod)下生效
-     * 默认启用
-     * 
-     * @namespace
-     * @property {Boolean} [auto=true] - 是否自动注册 service-worker
-     * @property {String} [pathname="/service-worker.js"] - service-worker 文件输出路径
-     * @property {String} [template] - 自定义 service-worker 模板文件路径
-     * @property {String} [initialCache] - 初始缓存文件路径 glob
-     * @property {String[]} [initialCacheAppend] - 追加初始缓存 URL
-     * @property {String[]} [initialCacheIgonre] - 初始缓存列表中的忽略项
-     */
-    pwa: {
-        auto: false,
-        initialCacheIgonre: [
-            '/bgimgs/**/*',
-            '/pics/**/*',
-            '/dev-*',
-        ]
+    /**************************************************************************
+     * Webpack 相关
+     *************************************************************************/
+
+    webpackConfig: async () => {
+        const ENV = process.env.WEBPACK_BUILD_ENV
+        if (ENV === 'dev') return await require('./config/webpack/dev')
+        if (ENV === 'prod') return await require('./config/webpack/prod')
+        return {}
     },
+    webpackBefore: async (kootConfig) => {
+        if (process.env.WEBPACK_BUILD_STAGE === 'client') {
+            console.log(' ')
+            await require('./src/build/webapp/before')(kootConfig)
+                .catch(err => console.error(err))
+            if (process.env.WEBPACK_BUILD_ENV === 'prod') {
+                await require('./src/scripts/clean-dist')(kootConfig)
+            }
+            await require('./src/scripts/validate-database-files')()
+            await require('./src/scripts/validate-less-variables')()
+            await require('./src/scripts/copyfiles')()
+            await require('./src/scripts/copyfiles-web')()
+            console.log(' ')
+        }
+        return
+    },
+    webpackAfter: async () => {
+        if (process.env.WEBPACK_BUILD_STAGE === 'client' &&
+            process.env.WEBPACK_BUILD_ENV === 'prod'
+        ) {
+            await require('./src/scripts/clean-web-sourcemap')()
+        }
+        await require('./src/build/webapp/after-server')()
+        return
+    },
+    moduleCssFilenameTest: /^((?!\.g\.).)*/,
 
-    /** 
-     * webpack-dev-server 配置，仅在开发环境(ENV:dev)下生效
-     * @type {Object}
-     */
-    devServer: {},
+    /**************************************************************************
+     * 开发环境
+     *************************************************************************/
 
-    /** 
-     * @type {String}
-     * 静态资源文件存放路径，打包时会自动复制该目录下的所有文件到打包目录下，方便直接使用
-     */
-    // staticAssets: path.resolve(__dirname, './public'),
+    devPort: 8703,
+    devDll: [
+        'react',
+        'react-dom',
+        'redux',
+        'redux-thunk',
+        'react-redux',
+        'react-router',
+        'react-router-redux',
+        'react-transition-group',
+        'react-markdown',
+        'koot',
+        'swiper',
+        'metas',
+        'lz-string',
+        'bind-event',
+        'check-css-prop',
+        'classnames',
+        'camelcase',
+        'hotkeys-js'
+    ]
 
 }
