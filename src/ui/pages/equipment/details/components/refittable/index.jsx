@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { extend } from 'koot'
 
 import sortShips from '@utils/sort-ships'
-import { db } from 'kckit'
+import db from '@database'
 
 import ComponentContainer from '@ui/containers/infos-component'
 import Bullet from '@ui/components/bullet'
@@ -11,12 +11,6 @@ import Bullet from '@ui/components/bullet'
 import LinkMini from '@ui/components/link-mini'
 // import times from '@utils/times'
 
-const {
-    equipmentTypes,
-    shipCollections,
-    shipTypes,
-    // ships
-} = db
 
 
 //
@@ -26,6 +20,7 @@ const EquipmentDetailsComponentRefittable = extend({
     styles: require('./styles.less')
 })(
     ({ className, equipment }) => {
+        const { equipmentTypes, shipCollections } = db
         const type = equipmentTypes[equipment.type] || {}
         const typeName = equipment.getType()
         const isEquipableExSlot = equipment.isEquipableExSlot()
@@ -105,6 +100,7 @@ const ShipCollection = extend({
         availableExtraShips,
         ...props
     }) => {
+        const { shipTypes } = db
         const cachedTypes = []
         // const cachedShips = []
 

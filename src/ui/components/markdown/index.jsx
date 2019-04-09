@@ -1,5 +1,6 @@
 import React from 'react'
 import { extend } from 'koot'
+import visit from 'unist-util-visit'
 
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router'
@@ -36,6 +37,7 @@ const Markdown = extend({
     ({
         content, markdown, md,
         renderers,
+        plugins = [],
         ...props
     }) => {
 
@@ -45,6 +47,15 @@ const Markdown = extend({
         props.renderers = { ...markdownRenderers }
         if (typeof renderers === 'object')
             Object.assign(props.renderers, renderers)
+
+        props.plugins = [
+            ...plugins,
+            () => (tree) => {
+                visit(tree, (node) => {
+                    console.log(node)
+                })
+            }
+        ]
 
         return (
             <ReactMarkdown {...props} />

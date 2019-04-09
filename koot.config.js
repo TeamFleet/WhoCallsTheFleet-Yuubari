@@ -21,6 +21,16 @@
 
 const path = require('path')
 
+/** @type {Boolean} 判断当前是否是生产环境 */
+const isEnvProd = Boolean(process.env.WEBPACK_BUILD_ENV === 'prod')
+/** @type {Boolean} 判断当前是否是开发环境 */
+const isEnvDev = Boolean(process.env.WEBPACK_BUILD_ENV === 'dev')
+
+/** @type {Boolean} 判断当前是否是客户端 */
+const isStageClient = Boolean(process.env.WEBPACK_BUILD_STAGE === 'client')
+/** @type {Boolean} 判断当前是否是服务器端 */
+const isStageServer = Boolean(process.env.WEBPACK_BUILD_STAGE === 'server')
+
 module.exports = {
 
     /**************************************************************************
@@ -29,7 +39,7 @@ module.exports = {
 
     name: 'The Fleet (Yuubari)',
     dist: (() => {
-        if (process.env.WEBPACK_BUILD_ENV === 'dev')
+        if (isEnvDev)
             return './dev-webapp/'
         return './dist-webapp/'
     })(),
@@ -102,7 +112,7 @@ module.exports = {
         maxAge: 10 * 1000,
     },
     proxyRequestOrigin: {
-        protocol: 'https',
+        protocol: isEnvProd ? 'https' : undefined,
     },
     koaStatic: {
         maxage: 0,
@@ -121,17 +131,16 @@ module.exports = {
      *************************************************************************/
 
     webpackConfig: async () => {
-        const ENV = process.env.WEBPACK_BUILD_ENV
-        if (ENV === 'dev') return await require('./config/webpack/dev')
-        if (ENV === 'prod') return await require('./config/webpack/prod')
+        if (isEnvDev) return await require('./config/webpack/dev')
+        if (isEnvProd) return await require('./config/webpack/prod')
         return {}
     },
     webpackBefore: async (kootConfig) => {
-        if (process.env.WEBPACK_BUILD_STAGE === 'client') {
+        if (isStageClient) {
             console.log(' ')
             await require('./src/build/webapp/before')(kootConfig)
                 .catch(err => console.error(err))
-            if (process.env.WEBPACK_BUILD_ENV === 'prod') {
+            if (isEnvProd) {
                 await require('./src/scripts/clean-dist')(kootConfig)
             }
             await require('./src/scripts/validate-database-files')()
@@ -143,9 +152,7 @@ module.exports = {
         return
     },
     webpackAfter: async () => {
-        if (process.env.WEBPACK_BUILD_STAGE === 'client' &&
-            process.env.WEBPACK_BUILD_ENV === 'prod'
-        ) {
+        if (isStageClient && isEnvProd) {
             await require('./src/scripts/clean-web-sourcemap')()
         }
         await require('./src/build/webapp/after-server')()

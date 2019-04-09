@@ -49,7 +49,7 @@ tabsAvailable.forEach((tab, index) => {
 
 
 const PageEquipmentDetails = extend({
-    connect: true,
+    // connect: true,
     pageinfo: (state, renderProps) => {
         const id = typeof renderProps.params === 'object' ? renderProps.params.id : undefined
         const tab = typeof renderProps.params === 'object' ? renderProps.params.tab : undefined
@@ -84,7 +84,7 @@ const PageEquipmentDetails = extend({
         className,
         children
     }) => {
-        if (!params.id) return null
+        if (!params || !params.id) return null
 
         const thisEquipment = db.equipments[params.id]
         const currentTab = params.tab || 'index'
