@@ -22,14 +22,14 @@
 const path = require('path')
 
 /** @type {Boolean} 判断当前是否是生产环境 */
-const isEnvProd = Boolean(process.env.WEBPACK_BUILD_ENV === 'prod')
+// const isEnvProd = Boolean(process.env.WEBPACK_BUILD_ENV === 'prod')
 /** @type {Boolean} 判断当前是否是开发环境 */
-const isEnvDev = Boolean(process.env.WEBPACK_BUILD_ENV === 'dev')
+// const isEnvDev = Boolean(process.env.WEBPACK_BUILD_ENV === 'dev')
 
 /** @type {Boolean} 判断当前是否是客户端 */
-const isStageClient = Boolean(process.env.WEBPACK_BUILD_STAGE === 'client')
+// const isStageClient = Boolean(process.env.WEBPACK_BUILD_STAGE === 'client')
 /** @type {Boolean} 判断当前是否是服务器端 */
-const isStageServer = Boolean(process.env.WEBPACK_BUILD_STAGE === 'server')
+// const isStageServer = Boolean(process.env.WEBPACK_BUILD_STAGE === 'server')
 
 module.exports = {
 
@@ -39,7 +39,7 @@ module.exports = {
 
     name: 'The Fleet (Yuubari)',
     dist: (() => {
-        if (isEnvDev)
+        if (process.env.WEBPACK_BUILD_ENV === 'dev')
             return './dev-webapp/'
         return './dist-webapp/'
     })(),
@@ -51,16 +51,16 @@ module.exports = {
 
     store: './src/redux/factory-store',
 
-    // i18n: {
-    //     // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
-    //     type: 'redux',
-    //     // expr: '__',
-    //     locales: require('./src/locales')
-    //         .map(l => ([l, `./src/locales/${l}.json`]))
-    //     // cookieKey: 'fleetLocaleId',
-    //     // domain: '127.0.0.1',
-    // },
-    i18n: require('./src/locales').map(l => ([l, `./src/locales/${l}.json`])),
+    i18n: {
+        // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
+        type: 'redux',
+        // expr: '__',
+        locales: require('./src/locales')
+            .map(l => ([l, `./src/locales/${l}.json`]))
+        // cookieKey: 'fleetLocaleId',
+        // domain: '127.0.0.1',
+    },
+    // i18n: require('./src/locales').map(l => ([l, `./src/locales/${l}.json`])),
 
     pwa: {
         auto: false,
@@ -112,7 +112,7 @@ module.exports = {
         maxAge: 10 * 1000,
     },
     proxyRequestOrigin: {
-        protocol: isEnvProd ? 'https' : undefined,
+        protocol: process.env.WEBPACK_BUILD_ENV === 'prod' ? 'https' : undefined,
     },
     koaStatic: {
         maxage: 0,
@@ -131,16 +131,18 @@ module.exports = {
      *************************************************************************/
 
     webpackConfig: async () => {
-        if (isEnvDev) return await require('./config/webpack/dev')
-        if (isEnvProd) return await require('./config/webpack/prod')
+        if (process.env.WEBPACK_BUILD_ENV === 'dev')
+            return await require('./config/webpack/dev')
+        if (process.env.WEBPACK_BUILD_ENV === 'prod')
+            return await require('./config/webpack/prod')
         return {}
     },
     webpackBefore: async (kootConfig) => {
-        if (isStageClient) {
+        if (process.env.WEBPACK_BUILD_STAGE === 'client') {
             console.log(' ')
             await require('./src/build/webapp/before')(kootConfig)
                 .catch(err => console.error(err))
-            if (isEnvProd) {
+            if (process.env.WEBPACK_BUILD_ENV === 'prod') {
                 await require('./src/scripts/clean-dist')(kootConfig)
             }
             await require('./src/scripts/validate-database-files')()
@@ -152,7 +154,8 @@ module.exports = {
         return
     },
     webpackAfter: async () => {
-        if (isStageClient && isEnvProd) {
+        if (process.env.WEBPACK_BUILD_STAGE === 'client'
+            && process.env.WEBPACK_BUILD_ENV === 'prod') {
             await require('./src/scripts/clean-web-sourcemap')()
         }
         await require('./src/build/webapp/after-server')()

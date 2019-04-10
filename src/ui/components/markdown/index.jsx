@@ -1,10 +1,17 @@
 import React from 'react'
 import { extend } from 'koot'
-import visit from 'unist-util-visit'
+
+// import pluginLink from './plugin-link'
 
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router'
 import Title from '@ui/components/title'
+import LinkMini from '@ui/components/link-mini'
+import LinkShip from '@ui/components/link/ship'
+
+const regex = {
+    Ship: /ship:([0-9]+):*([a-z]*)/i
+}
 
 const markdownRenderers = {
     heading: (props) => {
@@ -23,7 +30,37 @@ const markdownRenderers = {
                     : <a href={props.href} target="_blank">{props.children}</a>
                 )
                 : <Link to={props.href}>{props.children}</Link>
-        );
+        )
+    },
+    // text: (props) => {
+    //     if (/\{ship:[0-9]+:*[a-z]*\}/i.test(props.children)) {
+    //         console.log('text', props)
+    //         return 'aaa'
+    //     }
+    //     return props.children
+    // },
+    linkReference: (props) => {
+        if (Array.isArray(props.children) && props.children.length === 1) {
+            const [child] = props.children
+            let transformed
+            Object.keys(regex).some(type => {
+                const match = regex[type].exec(child.props.children)
+                if (!Array.isArray(match) || !match.length) return false
+                const [input, shipId, nodeType = ''] = match
+                switch (nodeType.toLowerCase()) {
+                    case 'mini': {
+                        transformed = <LinkMini ship={shipId} />
+                        break
+                    }
+                    default: {
+
+                    }
+                }
+                return true
+            })
+            if (transformed) return transformed
+        }
+        return <a href={props.href}>{props.children}</a>
     }
 }
 
@@ -37,7 +74,7 @@ const Markdown = extend({
     ({
         content, markdown, md,
         renderers,
-        plugins = [],
+        // plugins = [],
         ...props
     }) => {
 
@@ -48,14 +85,9 @@ const Markdown = extend({
         if (typeof renderers === 'object')
             Object.assign(props.renderers, renderers)
 
-        props.plugins = [
-            ...plugins,
-            () => (tree) => {
-                visit(tree, (node) => {
-                    console.log(node)
-                })
-            }
-        ]
+        // if (!Array.isArray(props.astPlugins))
+        //     props.astPlugins = []
+        // props.astPlugins.push(pluginLink)
 
         return (
             <ReactMarkdown {...props} />

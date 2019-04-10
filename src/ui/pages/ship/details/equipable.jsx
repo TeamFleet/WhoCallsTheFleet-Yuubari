@@ -11,7 +11,6 @@ import LinkMini from '@ui/components/link-mini'
 import getLink from '@utils/get-link'
 import db from '@database'
 
-const { equipmentTypesExclude } = db
 // const equipmentTypeIdExclude = [
 //     2,  // 小口径高角主炮
 //     3,  // 小口径高角主炮 (AAFD)
@@ -38,7 +37,7 @@ class ShipDetailsContentEquipable extends React.Component {
             >
                 <ShipDetailsContentEquipableListContainer>
                     {collection.list
-                        .filter(list => !equipmentTypesExclude.includes(list.type))
+                        .filter(list => !db.equipmentTypesExclude.includes(list.type))
                         .map((list, listIndex) => (
                             <ShipDetailsContentEquipableItem
                                 className="item"
@@ -58,7 +57,7 @@ class ShipDetailsContentEquipable extends React.Component {
             >
                 <ShipDetailsContentEquipableListContainer className="is-exslot">
                     {this.props.ship.getExSlotEquipmentTypes()
-                        .filter(typeID => !equipmentTypesExclude.includes(typeID) && this.props.ship.canEquip(typeID))
+                        .filter(typeID => !db.equipmentTypesExclude.includes(typeID) && this.props.ship.canEquip(typeID))
                         .sort((a, b) => db.equipmentTypes[a].order - db.equipmentTypes[b].order)
                         .map((typeID, index) => (
                             <ShipDetailsContentEquipableItem
