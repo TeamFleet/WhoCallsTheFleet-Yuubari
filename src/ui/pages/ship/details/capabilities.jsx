@@ -3,7 +3,6 @@ import { extend } from 'koot'
 
 import SpecialCapability from './components/special-capability'
 import CombatSpecial from './components/combat-special'
-import OtherSpecial from './components/other-special'
 import AACI from './components/aaci'
 import OASWCalculator from './components/oasw-calculator'
 import SpeedUpCalculator from './components/speedup-calculator'
@@ -24,10 +23,9 @@ const ShipDetailsContentCapabilities = extend({
                 </div>
                 <SpecialCapability ship={props.ship} className="shipinfo shipinfo-special-capability" />
                 <CombatSpecial ship={props.ship} className="shipinfo shipinfo-combat" />
-                <OtherSpecial ship={props.ship} className="shipinfo shipinfo-special" />
                 <AACI ship={props.ship} className="shipinfo shipinfo-aaci" />
-                <SpeedUpCalculator ship={props.ship} className="shipinfo shipinfo-speedup" />
                 <OASWCalculator ship={props.ship} className="shipinfo shipinfo-oasw" />
+                <SpeedUpCalculator ship={props.ship} className="shipinfo shipinfo-speedup" />
             </div>
         </div>
     )

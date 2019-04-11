@@ -43,7 +43,6 @@ const CombatSpecial = extend({
             <CapabilityOASW ship={ship} />
             <CapabilityOTS ship={ship} />
             <CapabilityTorpedo ship={ship} />
-            <CapabilitySkipSS ship={ship} />
             <CapabilityNightAirAssult ship={ship} />
             <CapabilityNoNightBattle ship={ship} />
         </ComponentContainer>
@@ -300,21 +299,6 @@ const CapabilityTorpedo = ({ ship }) => {
             title={__("combat_phases.torpedo")}
             level={2}
         />
-    )
-}
-
-const CapabilitySkipSS = ({ ship }) => {
-    if (
-        ship.type != 30 &&
-        !ship.getCapability('attack_surface_ship_prioritised')
-    ) return null
-    return (
-        <Bullet
-            title={__("ship_details.light_attack_carrier_asw_title")}
-            level={2}
-        >
-            {__("ship_details.light_attack_carrier_asw_note")}
-        </Bullet>
     )
 }
 

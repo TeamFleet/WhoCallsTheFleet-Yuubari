@@ -198,6 +198,12 @@
         }
     },
 
+    "ship_specials": {
+        "transportation": {
+            "title": "Transportation Specialized"
+        }
+    },
+
     "nav": {
         "sub": {
             "base": "Naval Base",

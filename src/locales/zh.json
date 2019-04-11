@@ -201,6 +201,12 @@
         }
     },
 
+    "ship_specials": {
+        "transportation": {
+            "title": "强化运输"
+        }
+    },
+
     "nav": {
         "sub": {
             "base": "海军基地",
