@@ -1,5 +1,8 @@
 @import "../../base.less";
 
+@link-mini-img-height: 20px;
+@link-mini-img-width: (@link-mini-img-height + 10 + 2);
+
 .component{
     @height:    20px;
 
@@ -13,6 +16,7 @@
     border-radius: ((@height + 2) / 2);
     padding:    0 @link-mini-horizontal;
     position:   relative;
+    vertical-align: baseline;
 
     // color:              @color-badge-off;
     // border-color:       @color-badge-off-border;
@@ -21,12 +25,12 @@
     .avatar{
         display:    block;
         float:      left;
-        height:     (@height + 2);
+        height:     (@link-mini-img-height + 2);
         overflow:   hidden;
-        border-radius: ((@height + 2) / 2);
+        border-radius: ((@link-mini-img-height + 2) / 2);
         background-size: cover;
         z-index:    -1;
-        width:      (@height + 10 + 2);
+        width:      @link-mini-img-width;
         margin:     -1px 5px -1px (0 - @link-mini-horizontal - 1);
         background-position: 60% 0%;
         // width:      (@height + 10 + 8);
@@ -62,19 +66,37 @@ a.component,
     }
 }
 
-a.component.mod-in-markdown{
-    .style-link();
-    border-color: fade(#000, 15%);
-    background-color: fade(#000, 15%);
+.component.mod-inline{
+    font-size: unset;
+    padding-left: (@link-mini-img-width + 2);
+    padding-right: 0;
     .is-hover({
-        color:              @color-badge-blue-hover-text;
-        border-color:       @color-badge-blue-hover-border;
-        background-color:   @color-badge-blue-hover-background;
+        border-color: transparent;
+        background-color: transparent;
     }; {
-        color:              @color-badge-blue-active-text;
-        border-color:       @color-badge-blue-active-border;
-        background-color:   @color-badge-blue-active-background;
+        border-color: transparent;
+        background-color: transparent;
     });
+    .avatar{
+        position: absolute;
+        top: 50%;
+        margin: (0 - (@link-mini-img-height + 2) / 2) auto 0 0;
+        left: 0;
+    }
+}
+a.component.mod-inline{
+    .style-link();
+    // border-color: fade(#000, 15%);
+    // background-color: fade(#000, 15%);
+    // .is-hover({
+    //     color:              @color-badge-blue-hover-text;
+    //     border-color:       @color-badge-blue-hover-border;
+    //     background-color:   @color-badge-blue-hover-background;
+    // }; {
+    //     color:              @color-badge-blue-active-text;
+    //     border-color:       @color-badge-blue-active-border;
+    //     background-color:   @color-badge-blue-active-background;
+    // });
 }
 
 .component.mod-badge{

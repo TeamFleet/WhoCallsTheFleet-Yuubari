@@ -48,7 +48,7 @@ const markdownRenderers = {
                 const [input, shipId, nodeType = ''] = match
                 switch (nodeType.toLowerCase()) {
                     case 'mini': {
-                        transformed = <LinkMini className="mod-in-markdown" ship={shipId} />
+                        transformed = <LinkMini className="mod-inline" ship={shipId} />
                         break
                     }
                     default: {
