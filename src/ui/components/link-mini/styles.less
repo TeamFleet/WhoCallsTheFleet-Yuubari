@@ -62,6 +62,21 @@ a.component,
     }
 }
 
+a.component.mod-in-markdown{
+    .style-link();
+    border-color: fade(#000, 15%);
+    background-color: fade(#000, 15%);
+    .is-hover({
+        color:              @color-badge-blue-hover-text;
+        border-color:       @color-badge-blue-hover-border;
+        background-color:   @color-badge-blue-hover-background;
+    }; {
+        color:              @color-badge-blue-active-text;
+        border-color:       @color-badge-blue-active-border;
+        background-color:   @color-badge-blue-active-background;
+    });
+}
+
 .component.mod-badge{
     color:              @color-badge-blue-text;
     border-color:       @color-badge-blue-border;

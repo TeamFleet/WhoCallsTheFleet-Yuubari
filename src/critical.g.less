@@ -137,7 +137,6 @@ a{
 }
 
 a, .link{
-	color: 		@color-accent;
 	transition-property: 	background-color,
 							background-size,
 							background-position,
@@ -149,20 +148,7 @@ a, .link{
 							outline,
 							transform,
 							filter;
-	.is-hover({
-		color: 	#fff;
-	}; {
-		color:  @color-link-active;
-	});
-	// &:hover{
-	// 	color: 	#fff;
-	// }
-	&:active{
-		color:  @color-link-active;
-	}
-	.sku-webapp({
-		cursor:     pointer;
-	});
+	.style-link();
 
 	&.color-base{
 		// color: 	@color-base;

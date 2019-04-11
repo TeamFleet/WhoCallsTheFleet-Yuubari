@@ -15,7 +15,6 @@ const regex = {
 
 const markdownRenderers = {
     heading: (props) => {
-        // console.log(props)
         let type
         if (props.level == 2) {
             type = "line-append"
@@ -49,7 +48,7 @@ const markdownRenderers = {
                 const [input, shipId, nodeType = ''] = match
                 switch (nodeType.toLowerCase()) {
                     case 'mini': {
-                        transformed = <LinkMini ship={shipId} />
+                        transformed = <LinkMini className="mod-in-markdown" ship={shipId} />
                         break
                     }
                     default: {

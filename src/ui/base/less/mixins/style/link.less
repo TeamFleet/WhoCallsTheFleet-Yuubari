@@ -1,0 +1,17 @@
+.style-link() {
+	color: @color-accent;
+	.is-hover({
+		color:	#fff;
+	}; {
+		color: @color-link-active;
+	});
+	// &:hover{
+	// 	color: 	#fff;
+	// }
+	&:active{
+		color: @color-link-active;
+	}
+	.sku-webapp({
+		cursor: pointer;
+	});
+}
