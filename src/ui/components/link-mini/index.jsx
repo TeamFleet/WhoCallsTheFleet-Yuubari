@@ -14,89 +14,78 @@ const LinkMini = extend({
     styles: require('./styles.less')
 })(
     ({
-        ship: _ship,
-        equipment: _equipment,
-        entity: _entity,
-        id: _id,
+        ship,
+        equipment,
+        entity,
+        id,
 
         to: _to,
         href: _href,
+        noLink = false,
 
-        className: _className,
+        className,
         badge,
 
+        name,
         children,
         ...props
     }) => {
+
         const to = _to || _href || undefined
-        const ship = getShip(_ship || _id)
-        const className = classNames({
-            [_className]: true,
+        let Component = 'span'
+
+        props.className = classNames({
+            [className]: true,
             'mod-badge': !!badge
         })
+        props.children = children
 
-        if (ship)
-            return (
-                <Link
-                    className={className}
-                    to={to || getLink('ship', ship.id)}
-                    {...props}
-                >
+        if (ship || id) {
+            const thisShip = getShip(ship || id)
+            props.children = (
+                <React.Fragment>
                     <span className="avatar" style={{
-                        backgroundImage: `url(${getPic('ship', ship.id, '0-2')})`
+                        backgroundImage: `url(${getPic('ship', thisShip.id, '0-2')})`
                     }} />
-                    {ship._name}
+                    {name || thisShip._name}
                     {children}
-                </Link>
+                </React.Fragment>
             )
-
-        if (_equipment) {
-            const equipment = getEquipment(_equipment)
-            return (
-                <Link
-                    className={className}
-                    to={to || getLink('equipment', equipment.id)}
-                    {...props}
-                >
-                    {equipment._name}
+            if (!noLink) {
+                Component = Link
+                props.to = to || getLink('ship', thisShip.id)
+            }
+        } else if (equipment) {
+            const thisEquipment = getEquipment(equipment)
+            props.children = (
+                <React.Fragment>
+                    {name || thisEquipment._name}
                     {children}
-                </Link>
+                </React.Fragment>
             )
+            if (!noLink) {
+                Component = Link
+                props.to = to || getLink('equipment', thisEquipment.id)
+            }
+        } else if (entity) {
+            const thisEntity = getEquipment(entity)
+            props.children = (
+                <React.Fragment>
+                    {name || thisEntity._name}
+                    {children}
+                </React.Fragment>
+            )
+            if (!noLink) {
+                Component = Link
+                props.to = to || getLink('entity', thisEntity.id)
+            }
+        } else if (to) {
+            Component = Link
+            props.to = to
         }
 
-        if (_entity) {
-            const entity = getEntity(_entity)
-            return (
-                <Link
-                    className={className}
-                    to={to || getLink('entity', entity.id)}
-                    {...props}
-                >
-                    {entity._name}
-                    {children}
-                </Link>
-            )
-        }
+        return <Component {...props} />
 
-        if (to)
-            return (
-                <Link
-                    className={className}
-                    to={to}
-                    {...props}
-                >
-                    {children}
-                </Link>
-            )
-
-        return (
-            <span
-                className={className}
-                {...props}
-            >
-                {children}
-            </span>
-        )
     }
 )
 

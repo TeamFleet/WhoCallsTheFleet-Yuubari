@@ -10,7 +10,7 @@ import LinkMini from '@ui/components/link-mini'
 import LinkShip from '@ui/components/link/ship'
 
 const regex = {
-    Ship: /ship:([0-9]+):*([a-z]*)/i
+    Ship: /ship:([0-9]+):*([:a-z]*)/i
 }
 
 const markdownRenderers = {
@@ -45,16 +45,17 @@ const markdownRenderers = {
             Object.keys(regex).some(type => {
                 const match = regex[type].exec(child.props.children)
                 if (!Array.isArray(match) || !match.length) return false
-                const [input, shipId, nodeType = ''] = match
-                switch (nodeType.toLowerCase()) {
-                    case 'mini': {
-                        transformed = <LinkMini className="mod-inline" ship={shipId} />
-                        break
-                    }
-                    default: {
 
-                    }
+                const [input, shipId, nodeTypes] = match
+                const nodeType = {}
+                nodeTypes.split(':').forEach(type => {
+                    nodeType[type] = true
+                })
+
+                if (nodeType.mini) {
+                    transformed = <LinkMini className="mod-inline" ship={shipId} noLink={nodeType.text} />
                 }
+
                 return true
             })
             if (transformed) return transformed
