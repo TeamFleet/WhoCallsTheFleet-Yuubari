@@ -11,7 +11,7 @@ const EquipmentDetailsComponentIllust = extend({
 })(
     ({ className, equipment }) => (
         <ComponentContainer className={className}>
-            <Image className="illust" src={getPic('equipment', equipment.id, 'card')} />
+            <Image className="illust" src={getPic('equipment', equipment.id, 'card', equipment.illust_version)} />
         </ComponentContainer>
     )
 )

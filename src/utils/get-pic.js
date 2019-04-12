@@ -62,10 +62,10 @@ const getUri = (type, id, file, revision) => {
     }
 }
 
-export default (type, id, file) => {
+export default (type, id, file, revision) => {
     // if (__SERVER__) return ''
 
-    const filepath = getUri(type, id, file)
+    const filepath = getUri(type, id, file, revision)
 
     // if (__ELECTRON__)
     //     return require('electron').remote.getGlobal('__path_pics') + filepath
