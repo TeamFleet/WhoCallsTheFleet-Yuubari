@@ -38,24 +38,22 @@
         }
     }
 
-    &:before{
-        content:    "";
-        display:    block;
+    &::before,
+    .icon{
         position:   absolute;
-        top:        0;
+        top:        -1px;
         left:       0;
         width:      @size-indicator;
         height:     @size-indicator;
+    }
+    &::before{
+        content:    "";
+        display:    block;
         background: currentColor;
         border-radius: 50%;
     }
 
     .icon{
-        position:   absolute;
-        top:        0;
-        left:       0;
-        width:      @size-indicator;
-        height:     @size-indicator;
     }
 
     .equipment{
@@ -72,22 +70,37 @@
     }
 
     &[data-level="-1"],
+    &[data-level="0"],
+    &[data-level="true"]{
+        &::before{
+            display: none;
+        }
+    }
+
+    &[data-level="-1"],
     &[data-level="0"]{
-        color:      @color-fade;
-        &:before{
-            display:    none;
+        color: @color-fade;
+    }
+
+    &[data-level="true"],
+    &[data-level="1"],
+    &[data-level="2"]{
+        color: #fff;
+    }
+
+    &[data-level="true"]{
+        .icon{
+            fill: @color-positive;
         }
     }
 
     &[data-level="1"]{
-        color:      #fff;
         &:before{
             background: @color-accent;
         }
     }
 
     &[data-level="2"]{
-        color:      #fff;
         &:before{
             // background: @theme-green-a200;
             background: @color-positive;

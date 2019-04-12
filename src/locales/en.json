@@ -314,7 +314,7 @@
         },
         "aaci_unable": "Unable to perform",
 
-        "combat_special": "Special Combat Capabilities",
+        "combat_capabilities": "Combat Capabilities",
         "can_always_perform": "Can always perform",
         "see_below_for_required_equipment_types": "See below for required equipment types",
         "meet_one_requirements_below": "Meet one of the requirements below",

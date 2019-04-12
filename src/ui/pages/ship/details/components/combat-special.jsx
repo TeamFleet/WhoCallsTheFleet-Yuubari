@@ -34,7 +34,7 @@ const CombatSpecial = extend({
     ({ className, ship }) =>
         <ComponentContainer
             className={className}
-            title={__("ship_details.combat_special")}
+            title={__("ship_details.combat_capabilities")}
         >
             <CapabilityJetAssult ship={ship} />
             <CapabilityAACI ship={ship} />
@@ -54,15 +54,11 @@ export default CombatSpecial
 
 
 const CapabilityJetAssult = ({ ship }) => {
-    const isCarrier = ship.isType('carrier')
-    if (!isCarrier) return null
-
-    const able = ship.canEquip('Jets')
-
+    const able = ship.isType('carrier') && ship.canEquip('Jets')
     return (
         <Bullet
             title={__("combat_phases.jet")}
-            level={able ? 1 : 0}
+            level={able ? true : 0}
         >
             {able && __("require.equipment", { type: "" })}
             {able &&
@@ -81,9 +77,9 @@ const CapabilityAACI = ({ ship }) => {
     return (
         <Bullet
             title={__("aaci.title")}
-            level={able ? 1 : 0}
+            level={able ? true : 0}
         >
-            {able && __("ship_details.see_below_for_required_equipment_types")}
+            {/* {able && __("ship_details.see_below_for_required_equipment_types")} */}
         </Bullet>
     )
 }

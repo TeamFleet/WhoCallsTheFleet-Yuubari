@@ -21,7 +21,8 @@ const Bullet = extend({
                 data-level={theLevel || 0}
             >
                 {theLevel === -1 && <Icon className="icon" icon="question6" />}
-                {theLevel === 0 && <Icon className="icon" icon="cross" />}
+                {(theLevel === 0 || theLevel === false) && <Icon className="icon" icon="cross" />}
+                {theLevel === true && <Icon className="icon" icon="checkmark4" />}
                 {title}
                 {children && <span className="des">
                     {children}
