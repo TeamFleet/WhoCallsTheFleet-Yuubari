@@ -1,6 +1,5 @@
 import React from 'react'
-import TransitionGroup from 'react-transition-group/TransitionGroup'
-import CSSTransition from 'react-transition-group/CSSTransition'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { extend } from 'koot'
 
 import ComponentContainer from '@ui/containers/infos-component'

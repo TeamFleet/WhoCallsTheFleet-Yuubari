@@ -169,9 +169,10 @@ const doCricital = () => {
         bindEvent(
             boatLoader,
             'transitionend',
-            function (evt) {
+            evt => {
                 // console.log(evt, evt.target.style.opacity)
-                if (evt.propertyName == 'opacity' && !evt.target.style.opacity)
+                if (evt.target !== boatLoader) return
+                if (evt.propertyName == 'opacity' && !parseInt(window.getComputedStyle(boatLoader).opacity))
                     evt.target.parentNode.removeChild(evt.target)
             }
         )

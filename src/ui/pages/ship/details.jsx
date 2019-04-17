@@ -1,7 +1,6 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-// import TransitionGroup from 'react-transition-group/TransitionGroup'
-// import CSSTransition from 'react-transition-group/CSSTransition'
+// import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { extend } from 'koot'
 
 import htmlHead from '@utils/html-head'
