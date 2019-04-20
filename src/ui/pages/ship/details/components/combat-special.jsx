@@ -36,13 +36,25 @@ const CombatSpecial = extend({
             className={className}
             title={__("ship_details.combat_capabilities")}
         >
+            {/* <h4>航空战</h4> */}
+            {/* 参与航空战 */}
+            {/* - 需装备 */}
             <CapabilityJetAssult ship={ship} />
+            {/* 空袭 */}
+            {/* - 需装备 */}
+            {/* <h4>防空</h4> */}
             <CapabilityAACI ship={ship} />
             <CapabilityAARocketBarrage ship={ship} />
-            <CapabilitySpecialRange ship={ship} />
+            {/* <h4>昼战</h4> */}
             <CapabilityOASW ship={ship} />
             <CapabilityOTS ship={ship} />
+            {/* 参与炮击战 */}
+            {/* - 射程 */}
+            <CapabilitySpecialRange ship={ship} />
+            {/* 参与雷击战 */}
             <CapabilityTorpedo ship={ship} />
+            {/* <h4>夜战</h4> */}
+            {/* 参与夜战 */}
             <CapabilityNightAirAssult ship={ship} />
             <CapabilityNoNightBattle ship={ship} />
         </ComponentContainer>
