@@ -162,6 +162,8 @@ module.exports = {
         return
     },
     moduleCssFilenameTest: /^((?!\.g\.).)*/,
+    classNameHashLength: 8,
+    bundleVersionsKeep: false,
 
     /**************************************************************************
      * 开发环境
