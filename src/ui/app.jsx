@@ -1,36 +1,33 @@
-import React from 'react'
-import classNames from 'classnames'
-import { extend, history } from 'koot'
+import React from 'react';
+import classNames from 'classnames';
+import { extend, history } from 'koot';
 
-import {
-    updateAppReady,
-    setInstallPWAEvent,
-} from '@api/app/api'
-import { swipedFromLeftEdge } from '@api/side-menu/api'
+import { updateAppReady, setInstallPWAEvent } from '@api/app/api';
+import { swipedFromLeftEdge } from '@api/side-menu/api';
 import {
     handlerBeforeReact as beforeinstallpromptHandlerBeforeReact,
     eventPromptBeforeReact as beforeinstallpromptEventPromptBeforeReact
-} from '@utils/install-app'
+} from '@utils/install-app';
 
-import Main from './layout/main'
-import MainMask from './layout/main-mask'
-import Nav from './layout/nav'
-import Bgimg from './layout/bgimg'
+import Main from './layout/main';
+import MainMask from './layout/main-mask';
+import Nav from './layout/nav';
+import Bgimg from './layout/bgimg';
 
 @extend({
     connect: state => {
-        if (__CLIENT__ && __DEV__ && !self.reduxLogShowed) {
-            console.log('Redux connected', state)
-            self.reduxLogShowed = true
+        if (__CLIENT__ && __DEV__ && !window.reduxLogShowed) {
+            console.log('Redux connected', state);
+            window.reduxLogShowed = true;
         }
         return {
             isMainBgimgLoaded: state.bgimg.isMainLoaded,
             uiMode: __CLIENT__
                 ? state.uiMode
-                // ? state.routing.locationBeforeTransitions.state.uiMode || {}
-                : {},
-            localeId: state.localeId,
-        }
+                : // ? state.routing.locationBeforeTransitions.state.uiMode || {}
+                  {},
+            localeId: state.localeId
+        };
     },
     styles: require('./app.less')
 })
@@ -38,7 +35,7 @@ class App extends React.Component {
     /*
      * this.isAppReady      是否已初始化
      */
-    startSwipeAtLeftBorder = false
+    startSwipeAtLeftBorder = false;
 
     // constructor(props) {
     //     super(props)
@@ -59,58 +56,64 @@ class App extends React.Component {
     // }
 
     checkAppReady(timeout = 10) {
-        if (__CLIENT__ && this.props.isMainBgimgLoaded && !self.isAppReady) {
-            self.appReady()
+        if (__CLIENT__ && this.props.isMainBgimgLoaded && !window.isAppReady) {
+            window.appReady();
             setTimeout(() => {
-                this.props.dispatch(
-                    updateAppReady(true)
-                )
-            }, timeout)
+                this.props.dispatch(updateAppReady(true));
+            }, timeout);
         }
     }
 
-    onTouchStart = (evt) => {
+    onTouchStart = evt => {
         // if (!__CLIENT__) return
-        if (self.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
+        if (window.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
             this.startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
                 y: evt.nativeEvent.touches[0].screenY,
                 timestamp: Date.now()
-            }
-        else
-            this.startSwipeAtLeftBorder = false
-    }
+            };
+        else this.startSwipeAtLeftBorder = false;
+    };
 
-    onTouchMove = (evt) => {
+    onTouchMove = evt => {
         if (this.startSwipeAtLeftBorder) {
-            const deltaX = evt.nativeEvent.touches[0].screenX - this.startSwipeAtLeftBorder.x
-            const deltaY = evt.nativeEvent.touches[0].screenY - this.startSwipeAtLeftBorder.y
-            const elapseTime = Date.now() - this.startSwipeAtLeftBorder.timestamp
+            const deltaX =
+                evt.nativeEvent.touches[0].screenX -
+                this.startSwipeAtLeftBorder.x;
+            const deltaY =
+                evt.nativeEvent.touches[0].screenY -
+                this.startSwipeAtLeftBorder.y;
+            const elapseTime =
+                Date.now() - this.startSwipeAtLeftBorder.timestamp;
 
             if (elapseTime > 200) {
-                this.startSwipeAtLeftBorder = false
-                return
+                this.startSwipeAtLeftBorder = false;
+                return;
             }
 
             if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) > 10) {
-                if (deltaX > 10 && deltaX >= Math.abs(deltaY) && deltaX / elapseTime > (10 / 200)) {
-                    this.props.dispatch(swipedFromLeftEdge())
+                if (
+                    deltaX > 10 &&
+                    deltaX >= Math.abs(deltaY) &&
+                    deltaX / elapseTime > 10 / 200
+                ) {
+                    this.props.dispatch(swipedFromLeftEdge());
                 }
-                this.startSwipeAtLeftBorder = false
+                this.startSwipeAtLeftBorder = false;
             }
         }
-    }
+    };
 
     onTouchEnd() {
-        if (this.startSwipeAtLeftBorder) this.startSwipeAtLeftBorder = false
+        if (this.startSwipeAtLeftBorder) this.startSwipeAtLeftBorder = false;
     }
 
     onTouchCancel() {
-        if (this.startSwipeAtLeftBorder) this.startSwipeAtLeftBorder = false
+        if (this.startSwipeAtLeftBorder) this.startSwipeAtLeftBorder = false;
     }
 
     componentDidCatch(error, info) {
-        console.log('React ERROR', error, info)
+        console.log('React ERROR', error, info);
         // Display fallback UI
         // this.setState({ hasError: true })
         // You can also log the error to an error reporting service
@@ -119,41 +122,46 @@ class App extends React.Component {
 
     componentDidMount() {
         if (typeof document !== 'undefined' && document.documentElement)
-            document.documentElement.classList.add('is-react-ready')
+            document.documentElement.classList.add('is-react-ready');
 
-        const {
-            query = {}
-        } = history.getCurrentLocation()
+        const { query = {} } = history.getCurrentLocation();
 
         // 检查是否需要显示“安装App”按钮
         if (__DEV__) {
-            this.props.dispatch(setInstallPWAEvent({}))
+            this.props.dispatch(setInstallPWAEvent({}));
         } else {
             if (query.utm_source !== 'web_app_manifest') {
                 // console.log('🎯 not via app')
                 // https://developers.google.com/web/fundamentals/app-install-banners/
                 if (beforeinstallpromptEventPromptBeforeReact) {
-                    this.props.dispatch(setInstallPWAEvent(beforeinstallpromptEventPromptBeforeReact))
+                    this.props.dispatch(
+                        setInstallPWAEvent(
+                            beforeinstallpromptEventPromptBeforeReact
+                        )
+                    );
                 } else {
-                    window.addEventListener('beforeinstallprompt', (evt) => {
+                    window.addEventListener('beforeinstallprompt', evt => {
                         // console.log('🎯 beforeinstallprompt Event fired')
-                        evt.preventDefault()
-                        this.props.dispatch(setInstallPWAEvent(evt))
-                        return false
-                    })
+                        evt.preventDefault();
+                        this.props.dispatch(setInstallPWAEvent(evt));
+                        return false;
+                    });
                 }
-                window.removeEventListener('beforeinstallprompt', beforeinstallpromptHandlerBeforeReact)
+                window.removeEventListener(
+                    'beforeinstallprompt',
+                    beforeinstallpromptHandlerBeforeReact
+                );
             } else {
-                this.props.dispatch(setInstallPWAEvent(false))
+                this.props.dispatch(setInstallPWAEvent(false));
             }
         }
 
         // 检查 App 是否已准备就绪
-        this.checkAppReady()
+        this.checkAppReady();
     }
 
     componentDidUpdate() {
-        this.checkAppReady()
+        this.checkAppReady();
     }
 
     render() {
@@ -168,9 +176,9 @@ class App extends React.Component {
         const {
             mode: uiMode,
             leaving: uiModeIsLeaving,
-            animation: uiModeAnimation,
-        } = this.props.uiMode
-        const hasMode = (__CLIENT__ && self.isAppReady && uiMode)
+            animation: uiModeAnimation
+        } = this.props.uiMode;
+        const hasMode = __CLIENT__ && window.isAppReady && uiMode;
 
         return (
             <React.StrictMode>
@@ -179,8 +187,10 @@ class App extends React.Component {
                     className={classNames({
                         [this.props.className]: true,
                         [`is-mode-${uiMode}`]: hasMode,
-                        [`is-mode-${uiMode}-entering`]: (hasMode && !uiModeIsLeaving && uiModeAnimation),
-                        [`is-mode-${uiMode}-leaving`]: (hasMode && uiModeIsLeaving),
+                        [`is-mode-${uiMode}-entering`]:
+                            hasMode && !uiModeIsLeaving && uiModeAnimation,
+                        [`is-mode-${uiMode}-leaving`]:
+                            hasMode && uiModeIsLeaving
                     })}
                     onTouchStart={this.onTouchStart.bind(this)}
                     onTouchMove={this.onTouchMove.bind(this)}
@@ -195,8 +205,8 @@ class App extends React.Component {
                     <Bgimg />
                 </div>
             </React.StrictMode>
-        )
+        );
     }
 }
 
-export default App
+export default App;

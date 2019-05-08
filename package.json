@@ -71,7 +71,7 @@
         "cli-spinners": "2.1.0",
         "cssnano": "4.1.10",
         "eslint": "5.16.0",
-        "eslint-plugin-react": "7.13.0",
+        "eslint-config-koot": "0.0.1",
         "glob": "7.1.4",
         "image-size": "0.7.4",
         "jest": "24.8.0",

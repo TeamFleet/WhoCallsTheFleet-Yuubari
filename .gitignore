@@ -47,7 +47,6 @@ node_modules/
 # Personal code
 
 .DS_Store
-.vscode
 /.cmder
 /_.bat
 /_.cmd

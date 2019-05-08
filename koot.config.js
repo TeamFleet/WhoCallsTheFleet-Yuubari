@@ -15,11 +15,11 @@
 /**
  * @callback cacheSet
  * 缓存存储方法
- * @param {String} url 
- * @param {String} html 
+ * @param {String} url
+ * @param {String} html
  */
 
-const path = require('path')
+const path = require('path');
 
 /** @type {Boolean} 判断当前是否是生产环境 */
 // const isEnvProd = Boolean(process.env.WEBPACK_BUILD_ENV === 'prod')
@@ -32,16 +32,14 @@ const path = require('path')
 // const isStageServer = Boolean(process.env.WEBPACK_BUILD_STAGE === 'server')
 
 module.exports = {
-
     /**************************************************************************
      * 项目信息
      *************************************************************************/
 
     name: 'The Fleet (Yuubari)',
     dist: (() => {
-        if (process.env.WEBPACK_BUILD_ENV === 'dev')
-            return './dev-webapp/'
-        return './dist-webapp/'
+        if (process.env.WEBPACK_BUILD_ENV === 'dev') return './dev-webapp/';
+        return './dist-webapp/';
     })(),
 
     template: './src/template.ejs',
@@ -55,8 +53,10 @@ module.exports = {
         // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
         type: 'redux',
         // expr: '__',
-        locales: require('./src/locales')
-            .map(l => ([l, `./src/locales/${l}.json`]))
+        locales: require('./src/locales/index').map(l => [
+            l,
+            `./src/locales/${l}.json`
+        ])
         // cookieKey: 'fleetLocaleId',
         // domain: '127.0.0.1',
     },
@@ -64,11 +64,7 @@ module.exports = {
 
     pwa: {
         auto: false,
-        initialCacheIgonre: [
-            '/bgimgs/**/*',
-            '/pics/**/*',
-            '/dev-*',
-        ]
+        initialCacheIgonre: ['/bgimgs/**/*', '/pics/**/*', '/dev-*']
     },
 
     aliases: {
@@ -81,15 +77,15 @@ module.exports = {
         '@utils': path.resolve('./src/utils'),
         '@ui': path.resolve('./src/ui'),
         '@api': path.resolve('./src/api'),
-        "@const": path.resolve('./src/constants'),
-        "@redux": path.resolve('./src/redux'),
+        '@const': path.resolve('./src/constants'),
+        '@redux': path.resolve('./src/redux'),
         '@actions': path.resolve('./src/api/actions'),
         '@db': path.resolve('./src/database'),
         '@database': path.resolve('./src/database'),
 
-        "~base.less": path.resolve('./src/ui/base.less'),
-        "~Assets": path.resolve('./src/assets'),
-        "~/": path.resolve('./src/ui')
+        '~base.less': path.resolve('./src/ui/base.less'),
+        '~Assets': path.resolve('./src/assets'),
+        '~/': path.resolve('./src/ui')
     },
 
     defines: require('./src/defines'),
@@ -109,10 +105,10 @@ module.exports = {
 
     port: 8080,
     renderCache: {
-        maxAge: 10 * 1000,
+        maxAge: 10 * 1000
     },
     proxyRequestOrigin: {
-        protocol: process.env.WEBPACK_BUILD_ENV === 'prod' ? 'https' : undefined,
+        protocol: process.env.WEBPACK_BUILD_ENV === 'prod' ? 'https' : undefined
     },
     koaStatic: {
         maxage: 0,
@@ -132,34 +128,37 @@ module.exports = {
 
     webpackConfig: async () => {
         if (process.env.WEBPACK_BUILD_ENV === 'dev')
-            return await require('./config/webpack/dev')
+            return await require('./config/webpack/dev');
         if (process.env.WEBPACK_BUILD_ENV === 'prod')
-            return await require('./config/webpack/prod')
-        return {}
+            return await require('./config/webpack/prod');
+        return {};
     },
-    webpackBefore: async (kootConfig) => {
+    webpackBefore: async kootConfig => {
         if (process.env.WEBPACK_BUILD_STAGE === 'client') {
-            console.log(' ')
-            await require('./src/build/webapp/before')(kootConfig)
-                .catch(err => console.error(err))
+            console.log(' ');
+            await require('./src/build/webapp/before')(kootConfig).catch(err =>
+                console.error(err)
+            );
             if (process.env.WEBPACK_BUILD_ENV === 'prod') {
-                await require('./src/scripts/clean-dist')(kootConfig)
+                await require('./src/scripts/clean-dist')(kootConfig);
             }
-            await require('./src/scripts/validate-database-files')()
-            await require('./src/scripts/validate-less-variables')()
-            await require('./src/scripts/copyfiles')()
-            await require('./src/scripts/copyfiles-web')()
-            console.log(' ')
+            await require('./src/scripts/validate-database-files')();
+            await require('./src/scripts/validate-less-variables')();
+            await require('./src/scripts/copyfiles')();
+            await require('./src/scripts/copyfiles-web')();
+            console.log(' ');
         }
-        return
+        return;
     },
     webpackAfter: async () => {
-        if (process.env.WEBPACK_BUILD_STAGE === 'client'
-            && process.env.WEBPACK_BUILD_ENV === 'prod') {
-            await require('./src/scripts/clean-web-sourcemap')()
+        if (
+            process.env.WEBPACK_BUILD_STAGE === 'client' &&
+            process.env.WEBPACK_BUILD_ENV === 'prod'
+        ) {
+            await require('./src/scripts/clean-web-sourcemap')();
         }
-        await require('./src/build/webapp/after-server')()
-        return
+        await require('./src/build/webapp/after-server')();
+        return;
     },
     moduleCssFilenameTest: /^((?!\.g\.).)*/,
     classNameHashLength: 8,
@@ -190,5 +189,4 @@ module.exports = {
         'camelcase',
         'hotkeys-js'
     ]
-
-}
+};
