@@ -85,7 +85,7 @@
         "postcss-pxtorem": "4.0.1",
         "progress": "2.0.3",
         "raw-loader": "2.0.0",
-        "simple-git": "1.112.0",
+        "simple-git": "1.113.0",
         "svg-url-loader": "2.3.2"
     },
     "optionalDependencies": {},
