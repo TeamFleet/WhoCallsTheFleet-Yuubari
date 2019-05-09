@@ -53,7 +53,7 @@
         "camelcase": "5.3.1",
         "check-css-prop": "1.0.1",
         "classnames": "2.2.6",
-        "hotkeys-js": "3.6.6",
+        "hotkeys-js": "3.6.7",
         "kckit": "1.21.31",
         "koot": "0.9.0-beta.7",
         "localforage": "1.7.3",
@@ -71,18 +71,21 @@
         "cli-spinners": "2.1.0",
         "cssnano": "4.1.10",
         "eslint": "5.16.0",
-        "eslint-config-koot": "0.0.1",
+        "eslint-config-koot": "0.0.2",
         "glob": "7.1.4",
+        "husky": "^2.2.0",
         "image-size": "0.7.4",
         "jest": "24.8.0",
         "json-pretty": "0.0.1",
         "jsonfile": "5.0.0",
+        "lint-staged": "^8.1.6",
         "nedb-promise": "2.0.1",
         "node-notifier": "5.4.0",
         "normalize.css": "8.0.1",
         "ora": "3.4.0",
         "postcss-easing-gradients": "3.0.1",
         "postcss-pxtorem": "4.0.1",
+        "prettier": "^1.17.0",
         "progress": "2.0.3",
         "raw-loader": "2.0.0",
         "simple-git": "1.113.0",
@@ -91,5 +94,16 @@
     "optionalDependencies": {},
     "engines": {
         "node": ">=8.0.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,json,md}": [
+            "prettier --write",
+            "git add"
+        ]
     }
 }
