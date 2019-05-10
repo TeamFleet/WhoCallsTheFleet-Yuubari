@@ -1,114 +1,98 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-export const observer = (options = {}) => (WrappedComponent) => (
-
+export const observer = (options = {}) => WrappedComponent =>
     class Observer extends Component {
-
         constructor(props) {
-            super(props)
+            super(props);
 
-            if (__CLIENT__ &&
+            if (
+                __CLIENT__ &&
                 'IntersectionObserver' in window &&
                 'IntersectionObserverEntry' in window &&
-                'intersectionRatio' in window.IntersectionObserverEntry.prototype
+                'intersectionRatio' in
+                    window.IntersectionObserverEntry.prototype
             ) {
-
                 const {
                     root = null,
-                    rootMargin = "0px",
+                    rootMargin = '0px',
                     threshold = [0, 1],
                     classNameInView = 'is-inview'
-                } = options
+                } = options;
 
                 const settings = {
                     root,
                     rootMargin,
                     threshold
-                }
+                };
 
-                const handleIntersect = (entries/*, observer*/) => {
+                const handleIntersect = (entries /*, observer*/) => {
                     entries.forEach(entry => {
                         if (entry.intersectionRatio <= 0) {
                             // out of view
-                            entry.target.classList.remove(classNameInView)
+                            entry.target.classList.remove(classNameInView);
                         } else {
-                            entry.target.classList.add(classNameInView)
+                            entry.target.classList.add(classNameInView);
                         }
-                    })
-                }
+                    });
+                };
 
-                this.observer = new IntersectionObserver(handleIntersect, settings)
+                this.observer = new IntersectionObserver(
+                    handleIntersect,
+                    settings
+                );
             } else {
-                this.observer = undefined
+                this.observer = undefined;
             }
         }
 
         componentWillUnmount() {
-            if (this.observer)
-                this.observer.disconnect()
+            if (this.observer) this.observer.disconnect();
         }
 
         render() {
             const props = {
                 ...this.props,
                 ...this.state
-            }
+            };
 
             return (
-                <WrappedComponent
-                    observer={this.observer}
-                    {...props}
-                >
+                <WrappedComponent observer={this.observer} {...props}>
                     {this.props.children}
                 </WrappedComponent>
-            )
+            );
         }
-    }
+    };
 
-)
-
-export const observerItem = () => (WrappedComponent) => {
-
+export const observerItem = () => WrappedComponent => {
     class ObserverItem extends Component {
-
         componentDidMount() {
             if (!this._item && typeof document !== 'undefined') {
                 // console.log('observerItem this', this)
-                const { findDOMNode } = require('react-dom')
-                this._item = findDOMNode(this)
+                const { findDOMNode } = require('react-dom');
+                this._item = findDOMNode(this);
             }
             // console.log('componentDidMount', this.observer, this._item)
-            if (this.observer && this._item)
-                this.observer.observe(this._item)
+            if (this.observer && this._item) this.observer.observe(this._item);
         }
         componentWillUnmount() {
             if (this.observer && this._item)
-                this.observer.unobserve(this._item)
+                this.observer.unobserve(this._item);
         }
 
         render() {
-            const {
-                children,
-                observer,
-                forwardedRef,
-                ...props
-            } = this.props
+            const { children, observer, forwardedRef, ...props } = this.props;
 
-            this.observer = observer
+            this.observer = observer;
 
             return (
-                <WrappedComponent
-                    ref={forwardedRef}
-                    {...props}
-                    {...this.state}
-                >
+                <WrappedComponent ref={forwardedRef} {...props} {...this.state}>
                     {children}
                 </WrappedComponent>
-            )
+            );
         }
     }
 
     return React.forwardRef((props, ref) => {
-        return <ObserverItem {...props} forwardedRef={ref} />
-    })
-}
+        return <ObserverItem {...props} forwardedRef={ref} />;
+    });
+};
