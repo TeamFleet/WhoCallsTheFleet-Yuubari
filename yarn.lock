@@ -3628,10 +3628,10 @@ escodegen@1.x.x, escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-koot@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/eslint-config-koot/-/eslint-config-koot-0.0.3.tgz#fbf55b3d1423af69eb9e3d1fd6650d42418be0ca"
-  integrity sha512-UlY+ng3r0zbzPAMfbaJWUggsgzSrFBhOh6ruENUFf5pQE7Kh4/n2YEOYhLyKa0EknkW3ZA4WMr/FB1fsk62KsA==
+eslint-config-koot@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-koot/-/eslint-config-koot-0.1.0.tgz#0d8bf2c5ad7832c8f69e4599557561502a8a82a5"
+  integrity sha512-w2VIhJEpMkxjisznnT+j4W2zSEZieXmG2xHxAVEM5QGdzXOIAdEJs3GfujtJ8OS86i5cQOcsN7og9VV9z+9RhA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.7.0"
     "@typescript-eslint/parser" "^1.7.0"

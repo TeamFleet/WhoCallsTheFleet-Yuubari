@@ -71,7 +71,7 @@
         "cli-spinners": "2.1.0",
         "cssnano": "4.1.10",
         "eslint": "5.16.0",
-        "eslint-config-koot": "0.0.3",
+        "eslint-config-koot": "0.1.0",
         "glob": "7.1.4",
         "husky": "^2.2.0",
         "image-size": "0.7.4",
@@ -95,13 +95,21 @@
     "engines": {
         "node": ">=8.0.0"
     },
+    "eslintIgnore": [
+        "node_modules/**/*"
+    ],
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged"
         }
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx,json,md}": [
+        "*.{js,jsx,ts,tsx}": [
+            "eslint --fix",
+            "prettier --write",
+            "git add"
+        ],
+        "*.{json,md}": [
             "prettier --write",
             "git add"
         ]
