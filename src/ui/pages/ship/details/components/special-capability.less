@@ -1,56 +1,46 @@
-@import "~base.less";
+@import '~base.less';
 
-.component{
-
-    & > h2.title{
+.component {
+    & > h2.title {
         font-size: 24px;
         line-height: 1.5em;
         margin-bottom: 20px;
     }
 
-    .description{
+    .description {
         @margin: 14px;
-        & > h4{
+        & > h4 {
             font-size: 16px;
             margin-top: 20px;
             margin-bottom: @margin;
         }
         & > p,
-        & > ul{
+        & > ul {
             // font-size: 16px;
             // line-height: 1.5em;
             margin-top: @margin;
             margin-bottom: @margin;
         }
     }
-
 }
 
-.component.special-attack{
-
-    .image{
+.component.special-attack {
+    .image {
         float: right;
         width: 50%;
         max-width: 500px;
         margin-left: 10px;
         margin-bottom: 10px;
-        .img{
+        .img {
             display: block;
             width: auto;
             height: auto;
             max-width: 100%;
             margin: 0 auto;
         }
-        .screen-t1({
-            max-width: none;
-            width: 100%;
-            float: none;
-            margin-left: auto;
-            margin-bottom: 0;
-            .img{
-                width: @screen-phone-small;
-            }
-        });
+        .screen-t1(
+            {max-width: none; width: 100%; float: none; margin-left: auto; margin-bottom:
+                0; .img{width: @screen-phone-small;}}
+        );
     }
-
 }

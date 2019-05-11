@@ -1,16 +1,14 @@
 @import './_.less';
 
-.component{
-    overflow-x:     hidden;
+.component {
+    overflow-x: hidden;
 
-    & > .wrapper{
-        display:        flex;
-        flex-flow:      row wrap;
-        margin-right:   -40px;
+    & > .wrapper {
+        display: flex;
+        flex-flow: row wrap;
+        margin-right: -40px;
         // align-content:  space-between;
-        .screen-phone({
-            display:    block;
-        });
+        .screen-phone({display: block;});
         // &:after{
         //     content:    "";
         //     flex:       1 0 33.3333%;
@@ -18,37 +16,35 @@
         // }
     }
 
-    .under-construction{
+    .under-construction {
         flex: 1 0 100%;
         border-top: 40px solid transparent;
         border-right: 40px solid transparent;
     }
 
-    .shipinfo{
-        flex:       1 0 50%;
-        min-width:  320px;
+    .shipinfo {
+        flex: 1 0 50%;
+        min-width: 320px;
         border-right: 40px solid transparent;
-        .screen-phone({
-            min-width:  0;
-        });
+        .screen-phone({min-width: 0;});
     }
-        .shipinfo-special-capability{
-            flex-basis: 100%;
-        }
-        // .shipinfo-oasw{
-        //     flex-basis: 66.6666%;
-        // }
-        // .shipinfo-speedup{
-        //     flex-basis: 33.3333%;
-        // }
-        // .shipinfo-combat,
-        // .shipinfo-special{
-        //     flex-basis:     50%;
-        // }
-        // .shipinfo-special,
-        // .shipinfo-aaci,
-        // .shipinfo-oasw,
-        // .shipinfo-speedup{
-        //     flex-basis:     33.3333%;
-        // }
+    .shipinfo-special-capability {
+        flex-basis: 100%;
+    }
+    // .shipinfo-oasw{
+    //     flex-basis: 66.6666%;
+    // }
+    // .shipinfo-speedup{
+    //     flex-basis: 33.3333%;
+    // }
+    // .shipinfo-combat,
+    // .shipinfo-special{
+    //     flex-basis:     50%;
+    // }
+    // .shipinfo-special,
+    // .shipinfo-aaci,
+    // .shipinfo-oasw,
+    // .shipinfo-speedup{
+    //     flex-basis:     33.3333%;
+    // }
 }
