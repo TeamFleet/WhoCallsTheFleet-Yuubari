@@ -1,6 +1,6 @@
-const fs = require('fs-extra')
-const path = require('path')
-const md5File = require('md5-file')
+const fs = require('fs-extra');
+const path = require('path');
+const md5File = require('md5-file');
 // const ncp = require('ncp').ncp
 // const getDistPath = require('super-project/utils/get-dist-path')
 
@@ -10,25 +10,25 @@ const {
     pics: dirPics,
     bgimgs: dirBgimgs,
     // getDistPublic,
-    getDistIncludes,
+    getDistIncludes
     // dist: {
     //     includes: dirIncludes,
     // }
-} = require('../directories')
-const channel = require('../channel')
-const spinner = require('./commons/spinner')
-const Progress = require('./commons/progress')
+} = require('../directories');
+const channel = require('../channel');
+const spinner = require('./commons/spinner');
+const Progress = require('./commons/progress');
 
 module.exports = async () => {
-    const dirIncludes = getDistIncludes()
+    const dirIncludes = getDistIncludes();
 
-    const title = 'Copying files...'
-    const waiting = spinner(title)
+    const title = 'Copying files...';
+    const waiting = spinner(title);
 
     const {
-        WEBPACK_BUILD_ENV: ENV,
+        WEBPACK_BUILD_ENV: ENV
         // WEBPACK_BUILD_STAGE: STAGE,
-    } = process.env
+    } = process.env;
 
     // console.log(dirDist)
     // console.log(dirBgimgs)
@@ -42,30 +42,31 @@ module.exports = async () => {
             from: path.resolve(dirAssets, `logos/${channel}/32.ico`),
             to: '../favicon.ico'
         }
-    ]
+    ];
 
-    if (ENV === 'prod') list.push(...await getPics())
+    if (ENV === 'prod' && !process.env.quickStart)
+        list.push(...(await getPics()));
 
     list.forEach(o => {
-        o.to = path.resolve(dirIncludes, o.to)
-    })
+        o.to = path.resolve(dirIncludes, o.to);
+    });
 
-    waiting.stop()
+    waiting.stop();
     const bar = new Progress({
         title,
         total: list.length
-    })
+    });
 
     for (let { from, to } of list) {
-        if (!fs.existsSync(from))
-            continue
-
-        else if (!fs.existsSync(to))
-            await fs.copy(from, to)
-        else if (fs.lstatSync(from).isDirectory() || fs.lstatSync(to).isDirectory())
-            await fs.copy(from, to)
+        if (!fs.existsSync(from)) continue;
+        else if (!fs.existsSync(to)) await fs.copy(from, to);
+        else if (
+            fs.lstatSync(from).isDirectory() ||
+            fs.lstatSync(to).isDirectory()
+        )
+            await fs.copy(from, to);
         else if (md5File.sync(from) !== md5File.sync(to))
-            await fs.copy(from, to)
+            await fs.copy(from, to);
         // await new Promise((resolve, reject) => {
         //     console.log(' ')
         //     console.log(o.from)
@@ -83,76 +84,79 @@ module.exports = async () => {
         //         resolve()
         //     }, 1000)
         // })
-        bar.tick()
+        bar.tick();
     }
 
-    bar.complete()
-}
+    bar.complete();
+};
 
 const getPics = async () => {
     // TODO: check version to overwrite
 
-    const dirIncludes = getDistIncludes()
+    // const dirIncludes = getDistIncludes();
 
-    const dirTo = '../../pics'
-    const dirTarget = path.resolve(
-        dirIncludes,
-        // getDistPublic(),
-        `./${dirTo}`
-    )
+    const dirTo = '../../pics';
+    // const dirTarget = path.resolve(
+    //     dirIncludes,
+    //     // getDistPublic(),
+    //     `./${dirTo}`
+    // );
 
-    let results = []
-    let ships
+    let results = [];
+    let ships;
 
     const filelist = {
-        ships: [
-            '0',
-            '0-1',
-            '0-2',
-        ],
+        ships: ['0', '0-1', '0-2'],
         shipsExtra: ['8', '9'],
         equipments: ['card']
-    }
+    };
 
-    const getDb = async (dbname) => {
-        let arr = []
+    const getDb = async dbname => {
+        let arr = [];
         await new Promise((resolve, reject) => {
-            fs.readFile(path.resolve(dirRoot, `./node_modules/whocallsthefleet-database/db/${dbname}.nedb`), 'utf-8', (err, data) => {
-                if (err) reject(err)
-                data.split(/\r?\n/).forEach(item => {
-                    if (!item) return
-                    arr.push(JSON.parse(item))
-                })
-                resolve()
-            })
-        })
-        return arr
-    }
+            fs.readFile(
+                path.resolve(
+                    dirRoot,
+                    `./node_modules/whocallsthefleet-database/db/${dbname}.nedb`
+                ),
+                'utf-8',
+                (err, data) => {
+                    if (err) reject(err);
+                    data.split(/\r?\n/).forEach(item => {
+                        if (!item) return;
+                        arr.push(JSON.parse(item));
+                    });
+                    resolve();
+                }
+            );
+        });
+        return arr;
+    };
 
-    const readdir = async (dir) => {
+    const readdir = async dir => {
         return new Promise((resolve, reject) => {
             fs.readdir(dir, (err, files) => {
-                if (err) reject(err)
-                resolve(files)
-            })
-        })
-    }
+                if (err) reject(err);
+                resolve(files);
+            });
+        });
+    };
 
     const checkAndCopy = async (type, id, listBasename) => {
-        const dir = path.join(dirPics, type, id)
-        const files = await readdir(dir)
+        const dir = path.join(dirPics, type, id);
+        const files = await readdir(dir);
         files.forEach(filename => {
-            const extname = path.extname(filename)
-            const basename = path.basename(filename, extname)
+            const extname = path.extname(filename);
+            const basename = path.basename(filename, extname);
 
             if (Array.isArray(listBasename) && !listBasename.includes(basename))
-                return
+                return;
 
             // const target = path.join(dirTarget, type, id, filename)
             // if (!fs.existsSync(target))
-            resultAdd(type, id, filename)
-        })
-    }
+            resultAdd(type, id, filename);
+        });
+    };
 
     const resultAdd = (type, id, file) => {
         // console.log(type, id, file)
@@ -161,23 +165,23 @@ const getPics = async () => {
             // from: `${type}/${id}/${file}`,
             from: path.resolve(dirPics, type, id, file),
             to: `${dirTo}/${type}/${id}/${file}`
-        })
-    }
+        });
+    };
 
     for (let type of await readdir(dirPics)) {
-        const dirType = path.join(dirPics, type)
+        const dirType = path.join(dirPics, type);
         for (let id of await readdir(dirType)) {
             switch (type) {
                 case 'ships': {
                     if (!ships) {
-                        ships = {}
+                        ships = {};
                         for (let ship of await getDb('ships')) {
-                            ships[ship.id] = ship
+                            ships[ship.id] = ship;
                         }
                     }
                     if (ships[id] && ships[id].illust_same_as_prev) {
                         // console.log(id, ships[id].name.ja_jp)
-                        await checkAndCopy(type, id, filelist.ships)
+                        await checkAndCopy(type, id, filelist.ships);
                     } else
                         await checkAndCopy(type, id, [
                             ...filelist.ships,
@@ -185,18 +189,18 @@ const getPics = async () => {
                             '9',
                             '10',
                             'special'
-                        ])
-                    break
+                        ]);
+                    break;
                 }
                 case 'ships-extra':
-                    await checkAndCopy(type, id, filelist.shipsExtra)
-                    break
+                    await checkAndCopy(type, id, filelist.shipsExtra);
+                    break;
                 case 'equipments':
-                    await checkAndCopy(type, id, filelist.equipments)
-                    break
+                    await checkAndCopy(type, id, filelist.equipments);
+                    break;
                 default:
-                    await checkAndCopy(type, id)
-                    break
+                    await checkAndCopy(type, id);
+                    break;
             }
         }
     }
@@ -205,5 +209,5 @@ const getPics = async () => {
 
     // console.log(results)
 
-    return results
-}
+    return results;
+};

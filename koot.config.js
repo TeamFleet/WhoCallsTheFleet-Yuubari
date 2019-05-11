@@ -37,10 +37,7 @@ module.exports = {
      *************************************************************************/
 
     name: 'The Fleet (Yuubari)',
-    dist: (() => {
-        if (process.env.WEBPACK_BUILD_ENV === 'dev') return './dev-webapp/';
-        return './dist-webapp/';
-    })(),
+    dist: './dist-webapp/',
 
     template: './src/template.ejs',
     templateInject: './src/_server/inject.js',
