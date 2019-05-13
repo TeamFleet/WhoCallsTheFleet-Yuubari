@@ -133,6 +133,7 @@ module.exports = {
     webpackBefore: async kootConfig => {
         if (process.env.WEBPACK_BUILD_STAGE === 'client') {
             console.log(' ');
+
             await require('./src/build/webapp/before')(kootConfig).catch(err =>
                 console.error(err)
             );
