@@ -5,9 +5,7 @@
     },
 
     "title": "是谁呼叫舰队",
-    "translators": [
-        "Diablohu"
-    ],
+    "translators": ["Diablohu"],
 
     "under_construction": "建设中",
     "no_javascript_warning": "本应用需要开启 JavaScript 功能。",
@@ -26,7 +24,7 @@
     "equipment_series": "${equipment}系列",
     "tp": "TP",
     "land_bases": "基地航空队",
-    
+
     "seiyuu": "声优",
     "seiyuus": "声优",
     "artist": "画师",
@@ -362,7 +360,7 @@
 
         "bonus_stat": "额外收益",
         "bonus_note_max_value": "如果舰娘满足了多个需求，额外收益取最大值",
-        
+
         "scrap": "废弃获得资源",
 
         "improvements": "改修选项",
@@ -371,7 +369,7 @@
 
         "upgrade_to": "可升级为",
         "upgrade_from": "可由以下装备升级获得",
-        
+
         "stocked": "初始装备于以下舰娘",
         "stocked_list_empty": "暂无初始配置该装备的舰娘...",
 

@@ -5,9 +5,7 @@
     },
 
     "title": "Who Calls the Fleet",
-    "translators": [
-        "Diablohu"
-    ],
+    "translators": ["Diablohu"],
 
     "under_construction": "Under Construction",
     "no_javascript_warning": "This app requires JavaScript enabled.",
@@ -342,7 +340,6 @@
             "effects": "Effects"
         }
     },
-
 
     "equipment_details": {
         "infos": "Infos",

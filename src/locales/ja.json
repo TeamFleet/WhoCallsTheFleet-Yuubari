@@ -5,10 +5,7 @@
     },
 
     "title": "Who Calls the Fleet",
-    "translators": [
-        "taurus911",
-        "Diablohu"
-    ],
+    "translators": ["taurus911", "Diablohu"],
 
     "under_construction": "工事中",
     "no_javascript_warning": "This app requires JavaScript enabled.",
@@ -27,7 +24,7 @@
     "equipment_series": "${equipment}-series",
     "tp": "TP",
     "land_bases": "基地航空隊",
-    
+
     "seiyuu": "CV",
     "seiyuus": "CV",
     "artist": "イラストレーター",
@@ -360,7 +357,7 @@
 
         "bonus_stat": "ボーナス",
         "bonus_note_max_value": "If a ship meets multiple requirements, use the highest value",
-        
+
         "scrap": "廢棄",
 
         "improvements": "Improvement Options",
