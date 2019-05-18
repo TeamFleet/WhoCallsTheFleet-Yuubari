@@ -23,7 +23,7 @@
         "build:client": "koot-build --client",
         "build:server": "koot-build --server",
         "build:spa": "koot-build --client --type react-spa --config ./koot.config.spa.js",
-        "dev": "koot-dev --no-open",
+        "dev": "node ./src/scripts/dev.js",
         "dev:client": "koot-dev --client",
         "dev:server": "koot-dev --server",
         "dev:spa": "koot-dev --config ./koot.config.spa.js",
@@ -105,12 +105,12 @@
         }
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx}": [
+        "*.{js,jsx,ts,tsx,cjs,mjs}": [
             "eslint --fix",
             "prettier --write",
             "git add"
         ],
-        "*.{json,md}": [
+        "*.{json,md,css,less,sass,scss}": [
             "prettier --write",
             "git add"
         ]
