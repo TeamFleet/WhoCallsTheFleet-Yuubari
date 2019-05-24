@@ -13,12 +13,15 @@ import Markdown from '@ui/components/markdown';
 import ComponentContainer from '@ui/containers/infos-component';
 import Image from '@ui/components/image';
 import Bullet from '@ui/components/bullet';
+import IconEquipment from '@ui/components/icon-equipment';
 
 const SpecialCapability = extend({
     styles: require('./special-capability.less')
-})(({ className, ship }) => {
+})(({ className: _className, ship, 'data-class-name': dataClassName }) => {
     const thisShip = getShip(ship);
     if (!thisShip) return null;
+
+    const className = `${_className} ${dataClassName}-ship-special`;
 
     // 特殊攻击
     let specialAttack;
@@ -67,8 +70,10 @@ const SpecialCapability = extend({
 
     const {
         count_as_landing_craft,
+        count_as_night_operation_aviation_personnel,
         attack_surface_ship_prioritised
     } = thisShip.getCapability();
+    const thisShipIsCV = ship.isType('cv');
 
     // 运输舰
     if (count_as_landing_craft) {
@@ -103,8 +108,38 @@ const SpecialCapability = extend({
         );
     }
 
+    // 夜间作战航空母舰
+    if (thisShipIsCV && count_as_night_operation_aviation_personnel) {
+        const description = __(
+            'ship_specials.night_operation_carrier.description'
+        ).split('[NightOperationAviationPersonnel]');
+        const equipment = db.equipments[258]; // 夜間作戦航空要員
+        return (
+            <ComponentContainer
+                className={classNames([className, 'night-operation-carrier'])}
+                title={__('ship_specials.night_operation_carrier.title')}
+            >
+                <Bullet
+                    title={
+                        <React.Fragment>
+                            {description[0]}
+                            <IconEquipment
+                                className="equipment"
+                                icon={equipment._icon}
+                            >
+                                {equipment._name}
+                            </IconEquipment>
+                            {description[1]}
+                        </React.Fragment>
+                    }
+                    level={2}
+                />
+            </ComponentContainer>
+        );
+    }
+
     // 攻击航母
-    if (ship.isType('cv') && attack_surface_ship_prioritised) {
+    if (thisShipIsCV && attack_surface_ship_prioritised) {
         return (
             <ComponentContainer
                 className={classNames([

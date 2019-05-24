@@ -199,6 +199,10 @@
     "ship_specials": {
         "transportation": {
             "title": "Transportation Specialized"
+        },
+        "night_operation_carrier": {
+            "title": "Night Operation Aircraft Carrier",
+            "description": "Do not need [NightOperationAviationPersonnel] to perform Night Air Assault"
         }
     },
 

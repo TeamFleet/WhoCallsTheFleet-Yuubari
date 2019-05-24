@@ -202,6 +202,10 @@
     "ship_specials": {
         "transportation": {
             "title": "强化运输"
+        },
+        "night_operation_carrier": {
+            "title": "夜间作战航空母舰",
+            "description": "无需装备 [NightOperationAviationPersonnel] 即可发动夜间航空打击"
         }
     },
 

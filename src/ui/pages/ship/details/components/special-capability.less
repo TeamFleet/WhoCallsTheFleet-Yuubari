@@ -1,12 +1,6 @@
 @import '~base.less';
 
 .component {
-    & > h2.title {
-        font-size: 24px;
-        line-height: 1.5em;
-        margin-bottom: 20px;
-    }
-
     .description {
         @margin: 14px;
         & > h4 {
@@ -22,6 +16,11 @@
             margin-bottom: @margin;
         }
     }
+}
+.component.component-ship-special > h2.title {
+    font-size: 24px;
+    line-height: 1.5em;
+    margin-bottom: 20px;
 }
 
 .component.special-attack {
