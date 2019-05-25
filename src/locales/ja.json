@@ -137,15 +137,15 @@
                 "- Did not trigger before once a sortie (May only trigger once per sortie)",
                 "- Use Double Line Formation. For Combined Fleet: Cruising Formation 2 (Forward)",
                 "- (Main) Fleet:",
-                "  - Nelson Kai must be Flagship",
-                "  - Nelson Kai must not be at Chuuha or Taiha state",
+                "  - _Nelson Kai_ must be Flagship",
+                "  - _Nelson Kai_ must not be at Chuuha or Taiha state",
                 "  - Has 6 ships",
                 "  - No submarines in fleet",
                 "  - No carriers in 3rd or 5th position"
             ],
             "effect": [
-                "When Nelson Kai attempts to attack in shelling phase or night battle, there's a chance that triggers a special attack.",
-                "When triggerd, Nelson and 2 other ships in the 3rd & 5th position will perform a single shelling attack severally. Each attack will hit a random enemy.",
+                "When _Nelson Kai_ attempts to attack in shelling phase or night battle, there's a chance that triggers a special attack.",
+                "When triggerd, _Nelson_ and 2 other ships in the 3rd & 5th position will perform a single shelling attack severally. Each attack will hit a random enemy.",
                 "There's a damage buff for each attack.",
                 "- For Red T Disadvantage, the buff will be more powerful"
             ]
@@ -156,20 +156,20 @@
                 "- Did not trigger before once a sortie (May only trigger once per sortie)",
                 "- Use Echelon Formation. For Combined Fleet: Cruising Formation 2 (Forward)",
                 "- (Main) Fleet:",
-                "  - Nagato Kai Ni must be Flagship",
-                "  - Nagato Kai Ni must not be at Chuuha or Taiha state",
+                "  - _Nagato Kai Ni_ must be Flagship",
+                "  - _Nagato Kai Ni_ must not be at Chuuha or Taiha state",
                 "  - The 2nd ship of the fleet must be a Battleship"
             ],
             "effect": [
-                "When Nagato Kai Ni attempts to attack in shelling phase or night battle, there's a chance that triggers a special attack.",
-                "When triggerd, Nagato and the ship in the 2nd position will perform 3 single shelling attacks. Nagato will perform the first two attacks, while the 2nd ship will perform the third attack. Each attack will hit a random enemy.",
+                "When _Nagato Kai Ni_ attempts to attack in shelling phase or night battle, there's a chance that triggers a special attack.",
+                "When triggerd, _Nagato_ and the ship in the 2nd position will perform 3 single shelling attacks. _Nagato_ will perform the first two attacks, while the 2nd ship will perform the third attack. Each attack will hit a random enemy.",
                 "There's a damage buff for each attack.",
-                "- Nagato has a more powerful buff",
+                "- _Nagato_ has a more powerful buff",
                 "- If the 2nd ship is one of Big Seven, the buff for both ships will be more powerful",
-                "    - Currently implemented Big Seven: Nagato, Mutsu, Nelson",
+                "    - Currently implemented other Big Sevens: [ship:573:mini|Mutsu], [ship:576:mini|Nelson], [ship:1496:mini|Colorado]",
                 "- If an AP Shell equipped, the buff for the ship that equips will be more powerful",
                 "- If a Surface Radar (LOS ≥ 5) equipped, the buff for the ship that equips will be more powerful",
-                "This special attack is actually the same as Mutsu Kai Ni's."
+                "This special attack is actually the same as [ship:573:mini]'s."
             ]
         },
         "長門、いい？ いくわよ！ 主砲一斉射ッ！": {
@@ -178,21 +178,25 @@
                 "- Did not trigger before once a sortie (May only trigger once per sortie)",
                 "- Use Echelon Formation. For Combined Fleet: Cruising Formation 2 (Forward)",
                 "- (Main) Fleet:",
-                "  - Mutsu Kai Ni must be Flagship",
-                "  - Mutsu Kai Ni must not be at Chuuha or Taiha state",
+                "  - _Mutsu Kai Ni_ must be Flagship",
+                "  - _Mutsu Kai Ni_ must not be at Chuuha or Taiha state",
                 "  - The 2nd ship of the fleet must be a Battleship"
             ],
             "effect": [
-                "When Mutsu Kai Ni attempts to attack in shelling phase or night battle, there's a chance that triggers a special attack.",
-                "When triggerd, Mutsu and the ship in the 2nd position will perform 3 single shelling attacks. Mutsu will perform the first two attacks, while the 2nd ship will perform the third attack. Each attack will hit a random enemy.",
+                "When _Mutsu Kai Ni_ attempts to attack in shelling phase or night battle, there's a chance that triggers a special attack.",
+                "When triggerd, _Mutsu_ and the ship in the 2nd position will perform 3 single shelling attacks. _Mutsu_ will perform the first two attacks, while the 2nd ship will perform the third attack. Each attack will hit a random enemy.",
                 "There's a damage buff for each attack.",
-                "- Mutsu has a more powerful buff",
+                "- _Mutsu_ has a more powerful buff",
                 "- If the 2nd ship is one of Big Seven, the buff for both ships will be more powerful",
-                "    - Currently implemented Big Seven: Nagato, Mutsu, Nelson",
+                "    - Currently implemented other Big Sevens: [ship:541:mini|Nagato], [ship:576:mini|Nelson], [ship:1496:mini|Colorado]",
                 "- If an AP Shell equipped, the buff for the ship that equips will be more powerful",
                 "- If a Surface Radar (LOS ≥ 5) equipped, the buff for the ship that equips will be more powerful",
                 "This special attack is actually the same as [ship:541:mini]'s."
             ]
+        },
+        "Colorado Special Attack": {
+            "requirement": [],
+            "effect": []
         }
     },
 

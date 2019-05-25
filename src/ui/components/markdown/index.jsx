@@ -1,35 +1,38 @@
-import React from 'react'
-import { extend } from 'koot'
+import React from 'react';
+import { extend } from 'koot';
 
 // import pluginLink from './plugin-link'
 
-import ReactMarkdown from 'react-markdown'
-import { Link } from 'react-router'
-import Title from '@ui/components/title'
-import LinkMini from '@ui/components/link-mini'
-import LinkShip from '@ui/components/link/ship'
+import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router';
+import Title from '@ui/components/title';
+import LinkMini from '@ui/components/link-mini';
+import LinkShip from '@ui/components/link/ship';
 
 const regex = {
-    Ship: /ship:([0-9]+):*([:a-z]*)/i
-}
+    Ship: /ship:([0-9]+):*([:a-z]*)\|*([^|^:]*)/i
+};
 
 const markdownRenderers = {
-    heading: (props) => {
-        let type
+    heading: props => {
+        let type;
         if (props.level == 2) {
-            type = "line-append"
+            type = 'line-append';
         }
-        return <Title type={type} {...props} />
+        return <Title type={type} {...props} />;
     },
-    link: (props) => {
-        return (
-            props.href.match(/^(https?:)?\/\//)
-                ? (props.href.indexOf('://') < 0
-                    ? <a href={props.href}>{props.children}</a>
-                    : <a href={props.href} target="_blank">{props.children}</a>
-                )
-                : <Link to={props.href}>{props.children}</Link>
-        )
+    link: props => {
+        return props.href.match(/^(https?:)?\/\//) ? (
+            props.href.indexOf('://') < 0 ? (
+                <a href={props.href}>{props.children}</a>
+            ) : (
+                <a href={props.href} target="_blank" rel="noopener noreferrer">
+                    {props.children}
+                </a>
+            )
+        ) : (
+            <Link to={props.href}>{props.children}</Link>
+        );
     },
     // text: (props) => {
     //     if (/\{ship:[0-9]+:*[a-z]*\}/i.test(props.children)) {
@@ -38,61 +41,56 @@ const markdownRenderers = {
     //     }
     //     return props.children
     // },
-    linkReference: (props) => {
+    linkReference: props => {
         if (Array.isArray(props.children) && props.children.length === 1) {
-            const [child] = props.children
-            let transformed
+            const [child] = props.children;
+            let transformed;
             Object.keys(regex).some(type => {
-                const match = regex[type].exec(child.props.children)
-                if (!Array.isArray(match) || !match.length) return false
+                const match = regex[type].exec(child.props.children);
+                if (!Array.isArray(match) || !match.length) return false;
 
-                const [input, shipId, nodeTypes] = match
-                const nodeType = {}
+                const [input, shipId, nodeTypes, name] = match;
+                const nodeType = {};
                 nodeTypes.split(':').forEach(type => {
-                    nodeType[type] = true
-                })
+                    nodeType[type] = true;
+                });
+
+                const p = {
+                    className: 'mod-inline',
+                    ship: shipId,
+                    noLink: nodeType.text
+                };
+                if (name) p.name = name;
 
                 if (nodeType.mini) {
-                    transformed = <LinkMini className="mod-inline" ship={shipId} noLink={nodeType.text} />
+                    transformed = <LinkMini {...p} />;
                 }
 
-                return true
-            })
-            if (transformed) return transformed
+                return true;
+            });
+            if (transformed) return transformed;
         }
-        return <a href={props.href}>{props.children}</a>
+        return <a href={props.href}>{props.children}</a>;
     }
-}
-
+};
 
 // ============================================================================
 
-
 const Markdown = extend({
     styles: require('./styles.less')
-})(
-    ({
-        content, markdown, md,
-        renderers,
-        // plugins = [],
-        ...props
-    }) => {
+})(({ content, markdown, md, renderers, ...props }) => {
+    // plugins = [],
+    if (typeof props.source === 'undefined')
+        props.source = content || markdown || md;
 
-        if (typeof props.source === 'undefined')
-            props.source = content || markdown || md
+    props.renderers = { ...markdownRenderers };
+    if (typeof renderers === 'object')
+        Object.assign(props.renderers, renderers);
 
-        props.renderers = { ...markdownRenderers }
-        if (typeof renderers === 'object')
-            Object.assign(props.renderers, renderers)
+    // if (!Array.isArray(props.astPlugins))
+    //     props.astPlugins = []
+    // props.astPlugins.push(pluginLink)
 
-        // if (!Array.isArray(props.astPlugins))
-        //     props.astPlugins = []
-        // props.astPlugins.push(pluginLink)
-
-        return (
-            <ReactMarkdown {...props} />
-        )
-
-    }
-)
-export default Markdown
+    return <ReactMarkdown {...props} />;
+});
+export default Markdown;

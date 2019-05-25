@@ -166,7 +166,7 @@
                 "There's a damage buff for each attack.",
                 "- _Nagato_ has a more powerful buff",
                 "- If the 2nd ship is one of Big Seven, the buff for both ships will be more powerful",
-                "    - Currently implemented Big Seven: _Nagato_, _Mutsu_, _Nelson_",
+                "    - Currently implemented other Big Sevens: [ship:573:mini|Mutsu], [ship:576:mini|Nelson], [ship:1496:mini|Colorado]",
                 "- If an AP Shell equipped, the buff for the ship that equips will be more powerful",
                 "- If a Surface Radar (LOS ≥ 5) equipped, the buff for the ship that equips will be more powerful",
                 "This special attack is actually the same as [ship:573:mini]'s."
@@ -188,10 +188,29 @@
                 "There's a damage buff for each attack.",
                 "- _Mutsu_ has a more powerful buff",
                 "- If the 2nd ship is one of Big Seven, the buff for both ships will be more powerful",
-                "    - Currently implemented Big Seven: _Nagato_, _Mutsu_, _Nelson_",
+                "    - Currently implemented other Big Sevens: [ship:541:mini|Nagato], [ship:576:mini|Nelson], [ship:1496:mini|Colorado]",
                 "- If an AP Shell equipped, the buff for the ship that equips will be more powerful",
                 "- If a Surface Radar (LOS ≥ 5) equipped, the buff for the ship that equips will be more powerful",
                 "This special attack is actually the same as [ship:541:mini]'s."
+            ]
+        },
+        "Colorado Special Attack": {
+            "requirement": [
+                "- Does not require AS/AS+",
+                "- Did not trigger before once a sortie (May only trigger once per sortie)",
+                "- Use Echelon Formation. For Combined Fleet: Cruising Formation 2 (Forward)",
+                "- (Main) Fleet:",
+                "  - _Colorado Kai_ must be Flagship",
+                "  - _Colorado Kai_ must not be at Chuuha or Taiha state",
+                "  - The 2nd and 3rd ship of the fleet must be a Battleship"
+            ],
+            "effect": [
+                "When _Colorado Kai_ attempts to attack in shelling phase or night battle, there's a chance that triggers a special attack.",
+                "When triggerd, _Colorado_ and the ships in the 2nd and 3rd position will perform 3 single shelling attacks that each attack will hit a random enemy.",
+                "There's a damage buff for each attack.",
+                "- _Colorado_ has a more powerful buff",
+                "- If the 2nd and 3rd ship is one of Big Seven, the buff for both ships will be more powerful",
+                "    - Currently implemented other Big Sevens: [ship:541:mini|Nagato], [ship:573:mini|Mutsu], [ship:576:mini|Nelson]"
             ]
         }
     },
