@@ -37,8 +37,8 @@
         "check-css-prop": "1.0.1",
         "classnames": "2.2.6",
         "hotkeys-js": "3.6.11",
-        "kckit": "1.21.37",
-        "koot": "^0.9.4",
+        "kckit": "1.21.38",
+        "koot": "^0.9.9",
         "localforage": "1.7.3",
         "lz-string": "1.4.4",
         "metas": "1.0.1",
@@ -50,7 +50,7 @@
     },
     "devDependencies": {
         "autoprefixer": "9.6.0",
-        "babel-eslint": "10.0.1",
+        "babel-eslint": "10.0.2",
         "cli-spinners": "2.1.0",
         "cssnano": "4.1.10",
         "eslint": "5.16.0",
@@ -61,7 +61,7 @@
         "jest": "24.8.0",
         "json-pretty": "0.0.1",
         "jsonfile": "5.0.0",
-        "lint-staged": "^8.2.0",
+        "lint-staged": "^8.2.1",
         "nedb-promise": "2.0.1",
         "node-notifier": "5.4.0",
         "normalize.css": "8.0.1",
@@ -71,8 +71,8 @@
         "prettier": "^1.18.2",
         "progress": "2.0.3",
         "raw-loader": "3.0.0",
-        "simple-git": "1.113.0",
-        "svg-url-loader": "2.3.2"
+        "simple-git": "1.116.0",
+        "svg-url-loader": "2.3.3"
     },
     "optionalDependencies": {},
     "engines": {

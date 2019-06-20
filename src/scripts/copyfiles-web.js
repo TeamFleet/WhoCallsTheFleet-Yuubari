@@ -1,34 +1,31 @@
-const fs = require('fs-extra')
-const path = require('path')
+const fs = require('fs-extra');
+const path = require('path');
 // const getDistPath = require('super-project/utils/get-dist-path')
 // const packageJson = fs.readJSONSync(path.resolve(process.cwd(), 'package.json'))
 
-const {
-    getDistPublic,
-} = require('../directories')
-const spinner = require('./commons/spinner')
+const spinner = require('./commons/spinner');
 
-module.exports = async () => {
-    const pathPublic = getDistPublic()
+module.exports = async (kootConfig = {}) => {
+    const { __CLIENT_ROOT_PATH } = kootConfig;
 
-    const title = 'Copying other files...'
-    const waiting = spinner(title)
+    const title = 'Copying other files...';
+    const waiting = spinner(title);
 
-    await fs.ensureDir(pathPublic)
+    // await fs.ensureDir(__CLIENT_ROOT_PATH);
 
     if (require('../channel') === 'yuubari') {
         // Yuubari channel
         await fs.copy(
             path.resolve(process.cwd(), 'src/assets/public', 'yuubari'),
-            path.resolve(pathPublic)
-        )
+            path.resolve(__CLIENT_ROOT_PATH)
+        );
     } else {
         // Stable channel
         await fs.copy(
             path.resolve(process.cwd(), 'src/assets/public', 'stable'),
-            path.resolve(pathPublic)
-        )
+            path.resolve(__CLIENT_ROOT_PATH)
+        );
     }
 
-    waiting.succeed()
-}
+    waiting.succeed();
+};

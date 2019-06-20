@@ -373,14 +373,16 @@
         "availability": "获取方式",
         "bonuses": "属性加成",
 
-        "facts_craftable": "可开发",
-        "facts_uncraftable": "不可开发",
-        "facts_improvable": "可改修",
-        "facts_unimprovable": "不可改修",
-        "facts_upgradable": "可升级",
-        "facts_unupgradable": "不可升级",
-        "facts_rankupgradable": "可提升熟练度",
-        "facts_unrankupgradable": "不可提升熟练度",
+        "facts": {
+            "craftable": "可开发",
+            "uncraftable": "不可开发",
+            "improvable": "可改修",
+            "unimprovable": "不可改修",
+            "upgradable": "可升级",
+            "unupgradable": "不可升级",
+            "rankupgradable": "可提升熟练度",
+            "unrankupgradable": "不可提升熟练度"
+        },
 
         "bonus_stat": "额外收益",
         "bonus_note_max_value": "如果舰娘满足了多个需求，额外收益取最大值",

@@ -46,18 +46,18 @@ module.exports = {
 
     store: './src/redux/factory-store',
 
-    i18n: {
-        // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
-        type: 'redux',
-        // expr: '__',
-        locales: require('./src/locales/index').map(l => [
-            l,
-            `./src/locales/${l}.json`
-        ])
-        // cookieKey: 'fleetLocaleId',
-        // domain: '127.0.0.1',
-    },
-    // i18n: require('./src/locales').map(l => ([l, `./src/locales/${l}.json`])),
+    // i18n: {
+    //     // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
+    //     type: 'redux',
+    //     // expr: '__',
+    //     locales: require('./src/locales/index').map(l => [
+    //         l,
+    //         `./src/locales/${l}.json`
+    //     ])
+    //     // cookieKey: 'fleetLocaleId',
+    //     // domain: '127.0.0.1',
+    // },
+    i18n: require('./src/locales').map(l => [l, `./src/locales/${l}.json`]),
 
     pwa: {
         auto: false,
@@ -134,33 +134,36 @@ module.exports = {
         if (process.env.WEBPACK_BUILD_STAGE === 'client') {
             console.log(' ');
 
-            await require('./src/build/webapp/before')(kootConfig).catch(err =>
-                console.error(err)
-            );
-            if (process.env.WEBPACK_BUILD_ENV === 'prod') {
-                await require('./src/scripts/clean-dist')(kootConfig);
+            if (!kootConfig.analyze)
+                await require('./src/build/webapp/before')(kootConfig).catch(
+                    err => console.error(err)
+                );
+            // if (process.env.WEBPACK_BUILD_ENV === 'prod') {
+            //     await require('./src/scripts/clean-dist')(kootConfig);
+            // }
+            await require('./src/scripts/validate-database-files')(kootConfig);
+            await require('./src/scripts/validate-less-variables')(kootConfig);
+            if (!kootConfig.analyze) {
+                await require('./src/scripts/copyfiles')(kootConfig);
+                await require('./src/scripts/copyfiles-web')(kootConfig);
             }
-            await require('./src/scripts/validate-database-files')();
-            await require('./src/scripts/validate-less-variables')();
-            await require('./src/scripts/copyfiles')();
-            await require('./src/scripts/copyfiles-web')();
             console.log(' ');
         }
         return;
     },
-    webpackAfter: async () => {
+    webpackAfter: async kootConfig => {
         if (
             process.env.WEBPACK_BUILD_STAGE === 'client' &&
-            process.env.WEBPACK_BUILD_ENV === 'prod'
+            process.env.WEBPACK_BUILD_ENV === 'prod' &&
+            !kootConfig.analyze
         ) {
-            await require('./src/scripts/clean-web-sourcemap')();
+            await require('./src/scripts/clean-web-sourcemap')(kootConfig);
         }
         await require('./src/build/webapp/after-server')();
         return;
     },
     moduleCssFilenameTest: /^((?!\.g\.).)*/,
     classNameHashLength: 8,
-    bundleVersionsKeep: false,
 
     /**************************************************************************
      * 开发环境
@@ -185,6 +188,7 @@ module.exports = {
         'check-css-prop',
         'classnames',
         'camelcase',
-        'hotkeys-js'
+        'hotkeys-js',
+        'nedb'
     ]
 };

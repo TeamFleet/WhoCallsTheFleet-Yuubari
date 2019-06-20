@@ -1,6 +1,6 @@
-const base = require('./_base')
-// const path = require('path')
-// const glob = require('glob')
+const base = require('./_base');
+// const path = require('path');
+// const glob = require('glob');
 
 module.exports = Object.assign({}, base, {
     entry: {
@@ -21,12 +21,14 @@ module.exports = Object.assign({}, base, {
             'lz-string',
             'metas',
             'classnames',
-            'js-cookie',
+            'js-cookie'
 
             // 'kckit',
         ],
-        // database: glob.sync(path.resolve(__dirname, '../../src/database/**/*'), { nodir: true }),
-        ...base.entry,
+        // database: glob.sync(
+        //     path.resolve(__dirname, '../../src/database/db', '*.nedb')
+        // ),
+        ...base.entry
     },
 
     // output: {
@@ -34,19 +36,22 @@ module.exports = Object.assign({}, base, {
     //     chunkFilename: `chunk.[chunkhash].js`,
     // },
 
-    plugins: [
-        ...base.plugins,
-    ],
+    plugins: [...base.plugins],
 
     optimization: {
         splitChunks: {
             cacheGroups: {
                 commons: {
-                    name: "commons",
-                    chunks: "initial",
+                    name: 'commons',
+                    chunks: 'initial',
                     minChunks: 2
                 }
+                // database: {
+                //     test: /\.nedb$/,
+                //     name: 'database',
+                //     chunks: 'all'
+                // }
             }
         }
     }
-})
+});

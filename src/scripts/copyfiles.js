@@ -2,15 +2,13 @@ const fs = require('fs-extra');
 const path = require('path');
 const md5File = require('md5-file');
 // const ncp = require('ncp').ncp
-// const getDistPath = require('super-project/utils/get-dist-path')
+const getDistPath = require('koot/utils/get-dist-path');
 
 const {
     root: dirRoot,
     assets: dirAssets,
     pics: dirPics,
-    bgimgs: dirBgimgs,
-    // getDistPublic,
-    getDistIncludes
+    bgimgs: dirBgimgs
     // dist: {
     //     includes: dirIncludes,
     // }
@@ -19,8 +17,8 @@ const channel = require('../channel');
 const spinner = require('./commons/spinner');
 const Progress = require('./commons/progress');
 
-module.exports = async () => {
-    const dirIncludes = getDistIncludes();
+module.exports = async (kootConfig = {}) => {
+    // const dirIncludes = getDistIncludes();
 
     const title = 'Copying files...';
     const waiting = spinner(title);
@@ -33,22 +31,24 @@ module.exports = async () => {
     // console.log(dirDist)
     // console.log(dirBgimgs)
 
+    const { __CLIENT_ROOT_PATH } = kootConfig;
+
     const list = [
         {
             from: dirBgimgs,
-            to: '../bgimgs'
+            to: 'bgimgs'
         },
         {
             from: path.resolve(dirAssets, `logos/${channel}/32.ico`),
-            to: '../favicon.ico'
+            to: 'favicon.ico'
         }
     ];
 
     if (ENV === 'prod' && !process.env.quickStart)
-        list.push(...(await getPics()));
+        list.push(...(await getPics(kootConfig)));
 
     list.forEach(o => {
-        o.to = path.resolve(dirIncludes, o.to);
+        o.to = path.resolve(__CLIENT_ROOT_PATH, o.to);
     });
 
     waiting.stop();
@@ -90,17 +90,11 @@ module.exports = async () => {
     bar.complete();
 };
 
-const getPics = async () => {
+const getPics = async (kootConfig = {}) => {
     // TODO: check version to overwrite
 
-    // const dirIncludes = getDistIncludes();
-
-    const dirTo = '../../pics';
-    // const dirTarget = path.resolve(
-    //     dirIncludes,
-    //     // getDistPublic(),
-    //     `./${dirTo}`
-    // );
+    // const dirTo = '../../pics';
+    const dirTo = path.resolve(getDistPath(), 'pics');
 
     let results = [];
     let ships;

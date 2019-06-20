@@ -354,14 +354,16 @@
         "availability": "入手情報",
         "bonuses": "ボーナス",
 
-        "facts_craftable": "開発可能",
-        "facts_uncraftable": "開発不可",
-        "facts_improvable": "改修可能",
-        "facts_unimprovable": "改修不可",
-        "facts_upgradable": "更新可能",
-        "facts_unupgradable": "更新不可",
-        "facts_rankupgradable": "熟練度が上が可能",
-        "facts_unrankupgradable": "熟練度が上がらない",
+        "facts": {
+            "craftable": "開発可能",
+            "uncraftable": "開発不可",
+            "improvable": "改修可能",
+            "unimprovable": "改修不可",
+            "upgradable": "更新可能",
+            "unupgradable": "更新不可",
+            "rankupgradable": "熟練度が上が可能",
+            "unrankupgradable": "熟練度が上がらない"
+        },
 
         "bonus_stat": "ボーナス",
         "bonus_note_max_value": "If a ship meets multiple requirements, use the highest value",

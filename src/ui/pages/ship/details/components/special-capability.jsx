@@ -33,9 +33,8 @@ const SpecialCapability = extend({
         return false;
     });
     if (specialAttack) {
-        const { requirement, effect } = __(
-            `special_attack["${specialAttack.name}"]`
-        );
+        const { requirement = [], effect = [] } =
+            __(`special_attack`, specialAttack.name) || {};
         // console.log(__("special_attack", specialAttack.name.replace(/ /g, '')))
         // console.log({ requirement, effect })
         const source =

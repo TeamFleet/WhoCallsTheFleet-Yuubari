@@ -370,14 +370,16 @@
         "availability": "Availability",
         "bonuses": "Stat Bonuses",
 
-        "facts_craftable": "Craftable",
-        "facts_uncraftable": "Uncraftable",
-        "facts_improvable": "Improvable",
-        "facts_unimprovable": "Unimprovable",
-        "facts_upgradable": "Upgradable",
-        "facts_unupgradable": "Unupgradable",
-        "facts_rankupgradable": "Rank-upgradable",
-        "facts_unrankupgradable": "Un-rank-upgradable",
+        "facts": {
+            "craftable": "Craftable",
+            "uncraftable": "Uncraftable",
+            "improvable": "Improvable",
+            "unimprovable": "Unimprovable",
+            "upgradable": "Upgradable",
+            "unupgradable": "Unupgradable",
+            "rankupgradable": "Rank-upgradable",
+            "unrankupgradable": "Un-rank-upgradable"
+        },
 
         "bonus_stat": "Bonus",
         "bonus_note_max_value": "If a ship meets multiple requirements, use the highest value",

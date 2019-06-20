@@ -1,9 +1,9 @@
-const getDistPath = require('koot/utils/get-dist-path')
+const getDistPath = require('koot/utils/get-dist-path');
 
-const path = require('path')
+const path = require('path');
 
-const pathRoot = path.resolve(__dirname, '../')
-const pathSrc = path.resolve(pathRoot, './src')
+const pathRoot = path.resolve(__dirname, '../');
+const pathSrc = path.resolve(pathRoot, './src');
 
 module.exports = {
     root: pathRoot,
@@ -11,20 +11,23 @@ module.exports = {
     assets: path.resolve(pathSrc, './assets'),
     pics: path.resolve(pathRoot, './pics'),
     nodeModules: path.resolve(pathRoot, './node_modules'),
-    bgimgs: path.resolve(pathRoot, './node_modules/whocallsthefleet-backgrounds/output'),
+    bgimgs: path.resolve(
+        pathRoot,
+        './node_modules/whocallsthefleet-backgrounds/output'
+    ),
 
     src: {
         _: pathSrc,
-        ui: path.resolve(pathSrc, './ui'),
-    },
+        ui: path.resolve(pathSrc, './ui')
+    }
 
-    getDist: () => getDistPath(),
-    getDistPublic: () => path.resolve(getDistPath(), 'public'),
-    getDistIncludes: () => path.resolve(getDistPath(), 'public/includes'),
+    // getDist: () => getDistPath(),
+    // getDistPublic: () => path.resolve(getDistPath(), 'public')
+    // getDistIncludes: () => path.resolve(getDistPath(), 'public/includes'),
 
     // dist: {
     //     _: pathDist,
     //     public: path.resolve(pathDist, './public'),
     //     includes: path.resolve(pathDist, './public/includes'),
     // }
-}
+};
