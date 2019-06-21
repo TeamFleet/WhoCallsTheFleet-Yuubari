@@ -45,6 +45,10 @@ module.exports = {
     routes: './src/router',
 
     store: './src/redux/factory-store',
+    sessionStore: {
+        equipmentList: true,
+        shipList: true
+    },
 
     // i18n: {
     //     // type: ENV === 'dev' ? 'redux' : 'default', // default | redux
