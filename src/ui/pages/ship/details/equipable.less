@@ -1,14 +1,23 @@
 @import './_.less';
 
-.component{
-    .legends{
-        margin-top:     -1em;
-        overflow-x:     hidden;
-        & > .wrapper{
-            margin-right:   -1.25em;
+.component {
+    .legends {
+        margin-top: -1em;
+        overflow-x: hidden;
+        & > .wrapper {
+            margin-right: -1.25em;
         }
     }
-    .and{
-        margin:     .5em 0;
+    .and {
+        margin: 0.5em 0;
+    }
+
+    .additional,
+    .exslots {
+        border-top-width: 60px;
+        & > .title[data-title-tag='h2'] {
+            font-size: 22px;
+            line-height: unit(1.1 / 0.9, em);
+        }
     }
 }

@@ -1208,10 +1208,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@7.1.0":
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.0.tgz#ed2c90ff192433251bd8a264195529f3613d53e2"
-  integrity sha512-SBJd6oNACDU/taMcDzFfj0mbVa+OI42L8WNvgPsCWiWUNIavPLeX5oA22V64tYIDUc7cGmJjDyLlWeCrqpZu1w==
+"@types/react-redux@7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.1.tgz#eb01e89cf71cad77df9f442b819d5db692b997cb"
+  integrity sha512-owqNahzE8en/jR4NtrUJDJya3tKru7CIEGSRL/pVS84LtSCdSoT7qZTkrbBd3S4Lp11sAp+7LsvxIeONJVKMnw==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
@@ -6314,10 +6314,10 @@ jsx-ast-utils@^2.0.1, jsx-ast-utils@^2.1.0:
   dependencies:
     array-includes "^3.0.3"
 
-kckit@1.21.40:
-  version "1.21.40"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.21.40.tgz#b0a8e37b92c7e9c5042b3a4f1a69f99cd5e47730"
-  integrity sha512-dE9/w2LPK8UTwqgmCPnCeEU5Q/bx3CXMQqWMgBxZktlddVPrHaxiVHlNwFYtieZUsjsFUmRQtNREhGDAaDFMcQ==
+kckit@1.21.41:
+  version "1.21.41"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.21.41.tgz#ae0dea28c44bfd05b3afc851a2c735029c371f0d"
+  integrity sha512-JaBSR+t1MNA1cMShdJR5zW2XUKnmL6rIg2O+k9vu9XS4q50JBQefzpJVh2dzOquXUfh8xG8bTxCAugL2XEA6sg==
   dependencies:
     camelcase "5.3.1"
 
@@ -6489,15 +6489,15 @@ koa@2.7.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.10.0-alpha.2:
-  version "0.10.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.10.0-alpha.2.tgz#fc33bb3cfac89475adb611b80f837565a09d5c64"
-  integrity sha512-/6FktA95Nbh5ZU6sLZ3VfrP0cA9WDwPezUTwKQx+MUi9wqbTqB/1aDK/7jZapZF2SxngeGPeaZQaj9NoZ5JkpQ==
+koot-webpack@^0.10.0-alpha.3:
+  version "0.10.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.10.0-alpha.3.tgz#c979692f9612e213f9380cb2f30b4792d61a1252"
+  integrity sha512-o8IRcouUey2e+++G5LGJsE01Yg6zO5teZCXWxvLJzrc0ez5aP6dtExu4ZBdUcLQFkjTDwrJ8v7RlbiHuwgEA3Q==
 
-koot@^0.10.0-alpha.2:
-  version "0.10.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.10.0-alpha.2.tgz#4c261ba55ec2dc98f20dc9d5798b894460d28019"
-  integrity sha512-edLFd/+x30P/Z8l1ciJ+accJP46uY6fmW4hyXPZ85AmXdI8FQ0mSEYmmdXqcJwvqU1H3gbVPzOStwFYQT5m6Rg==
+koot@^0.10.0-alpha.3:
+  version "0.10.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.10.0-alpha.3.tgz#049190cd7b00c2e41463b2cc665ebbada5427287"
+  integrity sha512-PaEsd7X2RcJUT9oYHdZnjWD2u4zsWhbpHzuhCl7WCMA6V6GUjkoGJVT2GA9uEQRm6Y2RTWzps+cv2ED20N4r0A==
   dependencies:
     "@babel/core" "7.4.5"
     "@babel/plugin-proposal-class-properties" "7.4.4"
@@ -6515,7 +6515,7 @@ koot@^0.10.0-alpha.2:
     "@types/node" "12.0.10"
     "@types/react" "16.8.22"
     "@types/react-dom" "16.8.4"
-    "@types/react-redux" "7.1.0"
+    "@types/react-redux" "7.1.1"
     "@types/react-router" "3.0.8"
     acorn "6.1.1"
     babel-loader "8.0.6"
@@ -6551,7 +6551,7 @@ koot@^0.10.0-alpha.2:
     koa-proxies "0.8.1"
     koa-router "7.4.0"
     koa-static "5.0.0"
-    koot-webpack "^0.10.0-alpha.2"
+    koot-webpack "^0.10.0-alpha.3"
     less "3.9.0"
     less-loader "5.0.0"
     lodash "4.17.11"
@@ -9110,10 +9110,10 @@ react-router@3.2.1:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react-transition-group@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.1.1.tgz#16efe9ac8c68306f6bef59c7da5a96b4dfd9fb32"
-  integrity sha512-K/N1wqJ2GRP2yj3WBqEUYa0KV5fiaAWpUfU9SpHOHefeKvyrO+VrnMBML21M19QZoVbDZKmuQFHZYoMMi1xuJA==
+react-transition-group@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.2.0.tgz#cb1df235e128276def06617b72a9ab135d01955a"
+  integrity sha512-EKfLKbqdrbrTQFxCOFCJ+wW+d461QhPJTLbARN5WKrNz3jxTnom4cPsq4xaBagQAF/7Qs5+XpG4zrtDRJH0bpA==
   dependencies:
     "@babel/runtime" "^7.4.5"
     dom-helpers "^3.4.0"
@@ -11360,10 +11360,10 @@ whocallsthefleet-backgrounds@1.3.2:
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.3.2.tgz#ea434851b7d362b30ba7c1eb86ac86e22fcd45e2"
   integrity sha512-3vQRvNciB3Dq1jlbZHXdujPIwEeDazHTfyZLAzuw7YA6f7JGGPgKHTqQpqQApRCel5DH75umEtdAZldjen3gUA==
 
-whocallsthefleet-database@20190629.0.0:
-  version "20190629.0.0"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20190629.0.0.tgz#02f45d077d52f3109c804463c6b656574b6bcdd6"
-  integrity sha512-u6BpprSI4+UVJTdQOBH/YgFZIk2KFEDZGq0eYkWALbSo/oE/NKvSBBnbYw0vymHjbho2vAAfaWgfd8/QVhKmIw==
+whocallsthefleet-database@20190629.1.0:
+  version "20190629.1.0"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20190629.1.0.tgz#4df2cad8c99a6d707ae2b10f7666bab08c2233e2"
+  integrity sha512-ldkWJ5RFVep4fSDjlpGWsQveGlih7j1hhNeuo0D8Qk0VSZUKxpbIQUfZjs8jhO9s6SDNaA8YVAwUhjTpszRt9g==
 
 wide-align@^1.1.0:
   version "1.1.3"

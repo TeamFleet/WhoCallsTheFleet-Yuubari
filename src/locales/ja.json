@@ -336,6 +336,7 @@
         "expedition_bonus_daihatsu_description": "Count as a ${daihatsu}.",
         "expedition_bonus_daihatsu_description2": "Therefor equip 3 ${daihatsu}s will cap max bonus.",
 
+        "equipable_additional": "Other equipables",
         "equipable_exslot": "Equipable in Ex-Slot",
         "equipable_exslot_and": "And...",
         "equipable_legend_no": "Not equipable",
