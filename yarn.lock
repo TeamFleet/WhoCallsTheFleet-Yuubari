@@ -10369,10 +10369,10 @@ supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
-svg-url-loader@2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/svg-url-loader/-/svg-url-loader-2.3.3.tgz#4b111f6047472f815f9c1fd780c6faa413a8efab"
-  integrity sha512-dFXrXCrtyEucN6dWdvDGMipbVwPPez4OVVYUpxJwLJ5WuaPLYY9RmpOjUparDNs1+sPEXrsdDGIOCOK8NOy5VQ==
+svg-url-loader@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/svg-url-loader/-/svg-url-loader-3.0.0.tgz#366e5982da8fad5e4be4d405349cc58d68cd119b"
+  integrity sha512-z50VtJLRPoZKUW8gv/YP4ld3QUknK4Vzi2q9dHWYW9iFfOeOMLbBo5x61YLD8O+BrzOk1rVB7ZNCFdX83DTgFg==
   dependencies:
     file-loader "4.0.0"
     loader-utils "1.2.3"
@@ -11360,10 +11360,10 @@ whocallsthefleet-backgrounds@1.3.2:
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.3.2.tgz#ea434851b7d362b30ba7c1eb86ac86e22fcd45e2"
   integrity sha512-3vQRvNciB3Dq1jlbZHXdujPIwEeDazHTfyZLAzuw7YA6f7JGGPgKHTqQpqQApRCel5DH75umEtdAZldjen3gUA==
 
-whocallsthefleet-database@20190629.1.0:
-  version "20190629.1.0"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20190629.1.0.tgz#4df2cad8c99a6d707ae2b10f7666bab08c2233e2"
-  integrity sha512-ldkWJ5RFVep4fSDjlpGWsQveGlih7j1hhNeuo0D8Qk0VSZUKxpbIQUfZjs8jhO9s6SDNaA8YVAwUhjTpszRt9g==
+whocallsthefleet-database@20190630.0.0:
+  version "20190630.0.0"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20190630.0.0.tgz#7f6ba3ac341b7f6a53f461cbe0e6821c765d9520"
+  integrity sha512-doBfiCFxCF8dgYKaglZ7/2nrW1QSzdun/y8mmXmx9QxeV4e45Lg3zrHIdnQkf9bSXuvzOc542zT9GkHUKQr/SQ==
 
 wide-align@^1.1.0:
   version "1.1.3"
