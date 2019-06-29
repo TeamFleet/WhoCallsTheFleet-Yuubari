@@ -197,13 +197,14 @@ const ExSlot = extend({
         <ComponentContainer
             className={className + ' exslot'}
             title={__('exslot')}
+            titleType="line-append"
             {...props}
         >
             {!!isEquipableExSlot && (
                 <Bullet
                     className="bullet"
                     title={__(`equipment_details.can_equip_in_ex_slot`)}
-                    level={2}
+                    level={true}
                 />
             )}
 
