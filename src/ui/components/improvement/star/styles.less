@@ -1,34 +1,34 @@
-@import "~base.less";
+@import '~base.less';
 
-.component{
+.component {
     color: @color-improvement-star;
     display: inline-block;
     border: 1px solid currentColor;
     line-height: @improvement-star-line-height;
-    padding: .1em .35em .025em .25em;
+    padding: 0.1em 0.35em 0.025em 0.25em;
     border-radius: 1em;
     font-size: 12px;
     vertical-align: text-bottom;
     top: -1px;
-    margin-left: .5em;
+    margin-left: 0.5em;
     position: relative;
     background: fade(darken(@color-improvement-star, 25%), 25%);
     font-weight: normal;
 
-    &[data-star="0"]{
+    &[data-star='0'] {
         color: @color-fade;
         background: fade(darken(@color-fade, 25%), 15%);
     }
 
-    &[data-star="10"]{
+    &[data-star='10'] {
         color: transparent;
         background: none transparent;
         border-color: transparent;
         // overflow: hidden;
         width: 32.67px;
         position: relative;
-        &::before{
-            content: "";
+        &::before {
+            content: '';
             background: url(~Assets/improve-max.svg) no-repeat 50% 50%;
             background-size: contain;
             width: 100%;
