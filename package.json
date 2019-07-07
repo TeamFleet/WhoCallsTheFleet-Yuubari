@@ -38,8 +38,8 @@
         "check-css-prop": "1.0.1",
         "classnames": "2.2.6",
         "hotkeys-js": "3.6.11",
-        "kckit": "1.21.41",
-        "koot": "^0.10.0-alpha.3",
+        "kckit": "1.22.0",
+        "koot": "^0.10.2",
         "localforage": "1.7.3",
         "lz-string": "1.4.4",
         "metas": "1.0.1",
@@ -50,7 +50,7 @@
         "whocallsthefleet-database": "20190701.0.1"
     },
     "devDependencies": {
-        "autoprefixer": "9.6.0",
+        "autoprefixer": "9.6.1",
         "babel-eslint": "10.0.2",
         "cli-spinners": "2.2.0",
         "cssnano": "4.1.10",
@@ -62,7 +62,7 @@
         "jest": "24.8.0",
         "json-pretty": "0.0.1",
         "jsonfile": "5.0.0",
-        "lint-staged": "^9.0.2",
+        "lint-staged": "^9.1.0",
         "nedb-promise": "2.0.1",
         "node-notifier": "5.4.0",
         "normalize.css": "8.0.1",

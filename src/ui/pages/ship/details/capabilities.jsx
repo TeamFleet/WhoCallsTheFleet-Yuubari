@@ -3,7 +3,7 @@ import { extend } from 'koot';
 
 import UnderConstruction from '@ui/components/under-construction';
 import SpecialCapability from './components/special-capability';
-import CombatSpecial from './components/combat-special';
+import Combat from './components/combat';
 import AACI from './components/aaci';
 import OASWCalculator from './components/oasw-calculator';
 import SpeedUpCalculator from './components/speedup-calculator';
@@ -24,10 +24,7 @@ const ShipDetailsContentCapabilities = extend({
                 ship={props.ship}
                 className="shipinfo shipinfo-special-capability"
             />
-            <CombatSpecial
-                ship={props.ship}
-                className="shipinfo shipinfo-combat"
-            />
+            <Combat ship={props.ship} className="shipinfo shipinfo-combat" />
             <AACI ship={props.ship} className="shipinfo shipinfo-aaci" />
             <OASWCalculator
                 ship={props.ship}

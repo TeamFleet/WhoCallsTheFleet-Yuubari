@@ -11,52 +11,67 @@ import Bullet from '@ui/components/bullet';
 import IconEquipment from '@ui/components/icon-equipment';
 import LinkEquipment from '@ui/components/link/equipment';
 
+import styles from './index.less';
+
+import CombatRange from './range';
+
 // const checkShip = kckit.check.ship
 const checkAACI = kckit.check.aaci;
 const checkOASW = kckit.check.oasw;
 const checkOTS = kckit.check.ots;
 
-const shipTypeRangeNormal = {
-    BB: 3,
-    CV: 1,
-    CL: 2,
-    CA: 2,
-    DD: 1
-};
+const { wrapper: moduleClassName } = styles;
 
 //
 
-const CombatSpecial = extend({
-    styles: require('./combat-special.less')
+const Combat = extend({
+    styles
 })(({ className, ship }) => (
     <ComponentContainer
         className={className}
         title={__('ship_details.combat_capabilities')}
     >
+        <CombatRange ship={ship} />
+        <Section title={__('combat_phases.jet')}>
+            <CapabilityJetAssult ship={ship} />
+        </Section>
+        <Section title={__('combat_phases.aerial')}>
+            <CapabilityAACI ship={ship} />
+            <CapabilityAARocketBarrage ship={ship} />
+        </Section>
+        <Section title={__('combat_phases.day')}>
+            <CapabilityOASW ship={ship} />
+            <CapabilityOTS ship={ship} />
+            <CapabilityTorpedo ship={ship} />
+        </Section>
+        <Section title={__('combat_phases.night')}>
+            <CapabilityNightAirAssult ship={ship} />
+            <CapabilityNoNightBattle ship={ship} />
+        </Section>
+
         {/* <h4>航空战</h4> */}
         {/* 参与航空战 */}
         {/* - 需装备 */}
-        <CapabilityJetAssult ship={ship} />
         {/* 空袭 */}
         {/* - 需装备 */}
-        {/* <h4>防空</h4> */}
-        <CapabilityAACI ship={ship} />
-        <CapabilityAARocketBarrage ship={ship} />
         {/* <h4>昼战</h4> */}
-        <CapabilityOASW ship={ship} />
-        <CapabilityOTS ship={ship} />
         {/* 参与炮击战 */}
         {/* - 射程 */}
-        <CapabilitySpecialRange ship={ship} />
         {/* 参与雷击战 */}
-        <CapabilityTorpedo ship={ship} />
         {/* <h4>夜战</h4> */}
         {/* 参与夜战 */}
-        <CapabilityNightAirAssult ship={ship} />
-        <CapabilityNoNightBattle ship={ship} />
     </ComponentContainer>
 ));
-export default CombatSpecial;
+export default Combat;
+
+//
+
+const Section = ({ title, children }) => (
+    <div className={`${moduleClassName}-section`}>
+        <h4 className="title">{title}</h4>
+        <div className="content">{children}</div>
+    </div>
+);
 
 //
 
@@ -112,37 +127,6 @@ const CapabilityAARocketBarrage = ({ ship }) => {
                     equipment={274}
                 />
             )}
-        </Bullet>
-    );
-};
-
-const CapabilitySpecialRange = ({ ship }) => {
-    let defaultRange;
-
-    Object.keys(shipTypeRangeNormal).some(type => {
-        if (
-            ship.isType(type) &&
-            ship.stat.range !== shipTypeRangeNormal[type]
-        ) {
-            defaultRange = shipTypeRangeNormal[type];
-            return true;
-        }
-        return false;
-    });
-
-    if (typeof defaultRange === 'undefined') return null;
-
-    return (
-        <Bullet
-            title={__('ship_details.range_different_title', {
-                range: ship._range
-            })}
-            level={ship.stat.range > defaultRange ? 2 : 1}
-        >
-            {__('ship_details.range_different_note', {
-                range: kckit.get.range(defaultRange),
-                type: db.shipTypes[ship.type_display]._name
-            })}
         </Bullet>
     );
 };
