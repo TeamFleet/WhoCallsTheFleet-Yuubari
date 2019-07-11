@@ -120,11 +120,15 @@
         },
         "anti_air_rocket_barrage": "对空喷进弹幕",
         "support": "支援舰队攻击",
+        "day": {
+            "title": "昼炮雷击战"
+        },
         "oasw": "先制对潜攻击",
         "ots": "先制雷击",
-        "day": "昼炮雷击战",
         "torpedo": "雷击战",
-        "night": "夜战",
+        "night": {
+            "title": "夜战"
+        },
         "night_air_assault": "夜间航空打击"
     },
 

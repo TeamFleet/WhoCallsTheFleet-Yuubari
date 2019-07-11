@@ -17,8 +17,6 @@ import Legend from './legend';
 import CombatRange from './range';
 import JetAssult from './jet-assult';
 
-// const checkShip = kckit.check.ship
-const checkAACI = kckit.check.aaci;
 const checkOASW = kckit.check.oasw;
 const checkOTS = kckit.check.ots;
 
@@ -42,14 +40,13 @@ const Combat = extend({
         </Section>
 
         <Section title={__('combat_phases.aerial.title')}>
-            {/* 迎击 */}
+            {/* 空中迎击 */}
             {/* 空袭 */}
             {/* 防空弹幕 */}
-            <CapabilityAACI ship={ship} />
             <CapabilityAARocketBarrage ship={ship} />
         </Section>
 
-        <Section title={__('combat_phases.day')}>
+        <Section title={__('combat_phases.day.title')}>
             {/* 先制对潜 */}
             {/* 开幕雷击 */}
             {/* 炮击 */}
@@ -60,7 +57,7 @@ const Combat = extend({
             <CapabilityTorpedo ship={ship} />
         </Section>
 
-        <Section title={__('combat_phases.night')}>
+        <Section title={__('combat_phases.night.title')}>
             {/* 参与夜战 */}
             <CapabilityNightAirAssult ship={ship} />
             <CapabilityNoNightBattle ship={ship} />
@@ -79,17 +76,6 @@ const Section = ({ title, children }) => (
 );
 
 //
-
-const CapabilityAACI = ({ ship }) => {
-    const aaciTypes = checkAACI(ship.id);
-    const able = Array.isArray(aaciTypes) && aaciTypes.length ? true : false;
-
-    return (
-        <Bullet title={__('aaci.title')} level={able ? true : 0}>
-            {/* {able && __("ship_details.see_below_for_required_equipment_types")} */}
-        </Bullet>
-    );
-};
 
 const CapabilityAARocketBarrage = ({ ship }) => {
     let level = ship.getCapability('anti_air_rocket_barrage');
