@@ -39,8 +39,8 @@ export default ({ ship }) => {
 
     return (
         <Bullet
-            title={__('ship_details.range_different_title', {
-                range: ship._range
+            titleHtml={__('ship_details.range_different_title', {
+                range: `<strong class="color-positive">${ship._range}</strong>`
             })}
             stat="range"
         >

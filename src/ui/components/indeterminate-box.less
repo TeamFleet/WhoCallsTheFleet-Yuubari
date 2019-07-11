@@ -1,0 +1,38 @@
+@import '~base.less';
+
+.component {
+    display: inline-block;
+    position: relative;
+
+    // border: 1px solid @color-base-dimmed;
+    // border: 1px solid @color-base-dimmed;
+    // border-radius: 2px;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+    }
+
+    &::before {
+        @margin: 4px;
+        top: @margin;
+        bottom: @margin;
+        left: @margin;
+        right: @margin;
+        background: currentColor;
+        border-radius: 1px;
+        // transform: scale(0.75);
+    }
+
+    &::after {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: 1px solid currentColor;
+        border-radius: 2px;
+        opacity: 0.5;
+        box-shadow: inset 0 0 6px 0 currentColor;
+    }
+}

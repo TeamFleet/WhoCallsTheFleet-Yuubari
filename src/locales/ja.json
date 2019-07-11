@@ -109,10 +109,15 @@
     "combat_phases": {
         "preemptive": "開幕",
         "detection": "索敵",
-        "jetLBAS": "基地航空隊噴式強襲",
-        "jet": "噴式強襲",
+        "jet": {
+            "title": "噴式強襲",
+            "lbas": "基地航空隊噴式強襲",
+            "cv": "空母噴式強襲"
+        },
         "lbas": "基地航空隊航空戦",
-        "aerial": "航空戦",
+        "aerial": {
+            "title": "航空戦"
+        },
         "anti_air_rocket_barrage": "対空噴進弾幕",
         "support": "支援艦隊攻撃",
         "oasw": "先制対潜攻撃",
@@ -320,6 +325,8 @@
         "aaci_unable": "実行することができません",
 
         "combat_capabilities": "Combat Capabilities",
+        "unable_to_perform": "Unable to perform",
+        "can_perform_when_meet_requirements": "Can perform when meet requirements",
         "can_always_perform": "Can always perform",
         "see_below_for_required_equipment_types": "See below for required equipment types",
         "meet_one_requirements_below": "Meet one of the requirements below",

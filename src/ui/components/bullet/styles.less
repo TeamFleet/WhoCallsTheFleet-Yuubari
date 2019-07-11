@@ -1,36 +1,36 @@
-@import "../../base.less";
+@import '../../base.less';
 
-.component{
-    @size-indicator:16px;
-    @size-equipment-icon:26px;
+.component {
+    @size-indicator: 16px;
+    @size-equipment-icon: 26px;
 
-    font-size:  16px;
-    line-height:16px;
-    display:    block;
-    margin:     20px 0;
-    padding:    ((@size-indicator - 16) / 2) 0 0 (@size-indicator + 10);
-    position:   relative;
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    margin: 20px 0;
+    padding: ((@size-indicator - 16) / 2) 0 0 (@size-indicator + 10);
+    position: relative;
     min-height: @size-indicator;
-    &:first-child{
-        margin-top:     0;
+    &:first-child {
+        margin-top: 0;
     }
-    &:last-child{
-        margin-bottom:  0;
+    &:last-child {
+        margin-bottom: 0;
     }
 
-    .des{
-        display:    block;
+    .des {
+        display: block;
         margin-top: 5px;
-        font-size:  14px;
-        line-height:18px;
-        .requirement{
+        font-size: 14px;
+        line-height: 18px;
+        .requirement {
             margin: 5px 0 0 0;
-            padding:0;
-            li{
+            padding: 0;
+            li {
                 margin: 0 0 0 1.5em;
             }
-            &:first-of-type:last-of-type{
-                li{
+            &:first-of-type:last-of-type {
+                li {
                     margin-left: 0;
                     list-style: none;
                 }
@@ -39,69 +39,82 @@
     }
 
     &::before,
-    .icon{
-        position:   absolute;
-        top:        -1px;
-        left:       0;
-        width:      @size-indicator;
-        height:     @size-indicator;
+    .icon {
+        position: absolute;
+        // top: -1px;
+        top: 0;
+        left: 0;
+        width: @size-indicator;
+        height: @size-indicator;
     }
-    &::before{
-        content:    "";
-        display:    block;
+    &::before {
+        content: '';
+        display: block;
         background: currentColor;
         border-radius: 50%;
     }
 
-    .icon{
-    }
+    // .icon {
+    // }
 
-    .equipment{
-        padding-left:   (@size-equipment-icon - 4);
-        &:before{
-            position:   absolute;
-            float:      none;
-            width:      @size-equipment-icon;
-            height:     @size-equipment-icon;
-            left:       -4px;
-            top:        50%;
+    .equipment {
+        padding-left: (@size-equipment-icon - 4);
+        &:before {
+            position: absolute;
+            float: none;
+            width: @size-equipment-icon;
+            height: @size-equipment-icon;
+            left: -4px;
+            top: 50%;
             margin-top: (0 - @size-equipment-icon / 2);
         }
     }
 
-    &[data-level="-1"],
-    &[data-level="0"],
-    &[data-level="true"]{
-        &::before{
+    &[data-level='-1'],
+    &[data-level='0'],
+    &[data-level='true'],
+    &[data-level='indeterminate'] {
+        &::before {
             display: none;
         }
     }
 
-    &[data-level="-1"],
-    &[data-level="0"]{
+    &[data-level='-1'],
+    &[data-level='0'] {
         color: @color-fade;
+        .icon {
+            fill: @color-fade;
+        }
     }
 
-    &[data-level="true"],
-    &[data-level="1"],
-    &[data-level="2"]{
+    &[data-level='true'],
+    &[data-level='indeterminate'],
+    &[data-level='1'],
+    &[data-level='2'] {
         color: #fff;
     }
 
-    &[data-level="true"]{
-        .icon{
+    &[data-level='true'] {
+        .icon {
             fill: @color-positive;
         }
     }
 
-    &[data-level="1"]{
-        &:before{
+    &[data-level='indeterminate'] {
+        .icon {
+            // color: @color-accent;
+            color: @color-positive;
+        }
+    }
+
+    &[data-level='1'] {
+        &:before {
             background: @color-accent;
         }
     }
 
-    &[data-level="2"]{
-        &:before{
+    &[data-level='2'] {
+        &:before {
             // background: @theme-green-a200;
             background: @color-positive;
         }

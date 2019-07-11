@@ -109,10 +109,15 @@
     "combat_phases": {
         "preemptive": "开幕",
         "detection": "索敌",
-        "jetLBAS": "基地航空队喷气机突袭",
-        "jet": "喷气机突袭",
+        "jet": {
+            "title": "喷气机突袭",
+            "lbas": "基地航空队喷气机突袭",
+            "cv": "航母喷气机突袭"
+        },
         "lbas": "基地航空队空战",
-        "aerial": "航空战",
+        "aerial": {
+            "title": "航空战"
+        },
         "anti_air_rocket_barrage": "对空喷进弹幕",
         "support": "支援舰队攻击",
         "oasw": "先制对潜攻击",
@@ -339,6 +344,8 @@
         "aaci_unable": "无法施展该能力",
 
         "combat_capabilities": "作战能力",
+        "unable_to_perform": "无法施展",
+        "can_perform_when_meet_requirements": "满足条件后可施展",
         "can_always_perform": "可无条件施展",
         "see_below_for_required_equipment_types": "所需装备类型见下表",
         "meet_one_requirements_below": "需要满足以下需求之一",

@@ -13,7 +13,9 @@ import LinkEquipment from '@ui/components/link/equipment';
 
 import styles from './index.less';
 
+import Legend from './legend';
 import CombatRange from './range';
+import JetAssult from './jet-assult';
 
 // const checkShip = kckit.check.ship
 const checkAACI = kckit.check.aaci;
@@ -31,35 +33,38 @@ const Combat = extend({
         className={className}
         title={__('ship_details.combat_capabilities')}
     >
+        <Legend />
+
         <CombatRange ship={ship} />
-        <Section title={__('combat_phases.jet')}>
-            <CapabilityJetAssult ship={ship} />
+
+        <Section title={__('combat_phases.jet.title')}>
+            <JetAssult ship={ship} />
         </Section>
-        <Section title={__('combat_phases.aerial')}>
+
+        <Section title={__('combat_phases.aerial.title')}>
+            {/* 迎击 */}
+            {/* 空袭 */}
+            {/* 防空弹幕 */}
             <CapabilityAACI ship={ship} />
             <CapabilityAARocketBarrage ship={ship} />
         </Section>
+
         <Section title={__('combat_phases.day')}>
+            {/* 先制对潜 */}
+            {/* 开幕雷击 */}
+            {/* 炮击 */}
+            {/* 解锁第二轮炮击 */}
+            {/* 雷击 */}
             <CapabilityOASW ship={ship} />
             <CapabilityOTS ship={ship} />
             <CapabilityTorpedo ship={ship} />
         </Section>
+
         <Section title={__('combat_phases.night')}>
+            {/* 参与夜战 */}
             <CapabilityNightAirAssult ship={ship} />
             <CapabilityNoNightBattle ship={ship} />
         </Section>
-
-        {/* <h4>航空战</h4> */}
-        {/* 参与航空战 */}
-        {/* - 需装备 */}
-        {/* 空袭 */}
-        {/* - 需装备 */}
-        {/* <h4>昼战</h4> */}
-        {/* 参与炮击战 */}
-        {/* - 射程 */}
-        {/* 参与雷击战 */}
-        {/* <h4>夜战</h4> */}
-        {/* 参与夜战 */}
     </ComponentContainer>
 ));
 export default Combat;
@@ -74,20 +79,6 @@ const Section = ({ title, children }) => (
 );
 
 //
-
-const CapabilityJetAssult = ({ ship }) => {
-    const able = ship.isType('carrier') && ship.canEquip('Jets');
-    return (
-        <Bullet title={__('combat_phases.jet')} level={able ? true : 0}>
-            {able && __('require.equipment', { type: '' })}
-            {able && (
-                <IconEquipment className="equipment" icon={39}>
-                    {__('equipment_types.jet')}
-                </IconEquipment>
-            )}
-        </Bullet>
-    );
-};
 
 const CapabilityAACI = ({ ship }) => {
     const aaciTypes = checkAACI(ship.id);
