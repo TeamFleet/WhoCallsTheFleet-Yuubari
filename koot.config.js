@@ -61,7 +61,9 @@ module.exports = {
     //     // cookieKey: 'fleetLocaleId',
     //     // domain: '127.0.0.1',
     // },
-    i18n: require('./src/locales').map(l => [l, `./src/locales/${l}.json`]),
+    i18n: process.env.quickStart
+        ? [['zh', `./src/locales/zh.json`]]
+        : require('./src/locales').map(l => [l, `./src/locales/${l}.json`]),
 
     pwa: {
         auto: false,
@@ -127,45 +129,9 @@ module.exports = {
      * Webpack 相关
      *************************************************************************/
 
-    webpackConfig: async () => {
-        if (process.env.WEBPACK_BUILD_ENV === 'dev')
-            return await require('./config/webpack/dev');
-        if (process.env.WEBPACK_BUILD_ENV === 'prod')
-            return await require('./config/webpack/prod');
-        return {};
-    },
-    webpackBefore: async kootConfig => {
-        if (process.env.WEBPACK_BUILD_STAGE === 'client') {
-            console.log(' ');
-
-            if (!kootConfig.analyze)
-                await require('./src/build/webapp/before')(kootConfig).catch(
-                    err => console.error(err)
-                );
-            // if (process.env.WEBPACK_BUILD_ENV === 'prod') {
-            //     await require('./src/scripts/clean-dist')(kootConfig);
-            // }
-            await require('./src/scripts/validate-database-files')(kootConfig);
-            await require('./src/scripts/validate-less-variables')(kootConfig);
-            if (!kootConfig.analyze) {
-                await require('./src/scripts/copyfiles')(kootConfig);
-                await require('./src/scripts/copyfiles-web')(kootConfig);
-            }
-            console.log(' ');
-        }
-        return;
-    },
-    webpackAfter: async kootConfig => {
-        if (
-            process.env.WEBPACK_BUILD_STAGE === 'client' &&
-            process.env.WEBPACK_BUILD_ENV === 'prod' &&
-            !kootConfig.analyze
-        ) {
-            await require('./src/scripts/clean-web-sourcemap')(kootConfig);
-        }
-        await require('./src/build/webapp/after-server')();
-        return;
-    },
+    webpackConfig: require('./config/webpack'),
+    webpackBefore: require('./config/webpack/before'),
+    webpackAfter: require('./config/webpack/after'),
     moduleCssFilenameTest: /^((?!\.g\.).)*/,
     classNameHashLength: 8,
 
