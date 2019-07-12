@@ -54,6 +54,7 @@
         "level": "需要等级：${level}",
         "min_possible_level": "可能的最低等级：${level}",
         "equipment": "需要装备：${type}",
+        "equipment_at_least_one": "需要装备（至少一个）：${type}",
         "equipment_no_need": "无需装备：${type}",
         "equipment_type": "需要装备类型：${type}",
         "equipment_type_no_need": "无需装备类型：${type}",
@@ -116,7 +117,9 @@
         },
         "lbas": "基地航空队空战",
         "aerial": {
-            "title": "航空战"
+            "title": "航空战",
+            "fighter": "空中迎击",
+            "bombing": "轰炸"
         },
         "anti_air_rocket_barrage": "对空喷进弹幕",
         "support": "支援舰队攻击",

@@ -54,6 +54,7 @@
         "level": "Require level: ${level}",
         "min_possible_level": "Minimum possible level: ${level}",
         "equipment": "Require equipment: ${type}",
+        "equipment_at_least_one": "Require equipment (at least one): ${type}",
         "equipment_no_need": "No need for equipment: ${type}",
         "equipment_type": "Require equipment type: ${type}",
         "equipment_type_no_need": "No need for equipment type: ${type}",
@@ -116,7 +117,9 @@
         },
         "lbas": "基地航空隊航空戦",
         "aerial": {
-            "title": "航空戦"
+            "title": "航空戦",
+            "fighter": "Fighter Combat",
+            "bombing": "Bombing"
         },
         "anti_air_rocket_barrage": "対空噴進弾幕",
         "support": "支援艦隊攻撃",

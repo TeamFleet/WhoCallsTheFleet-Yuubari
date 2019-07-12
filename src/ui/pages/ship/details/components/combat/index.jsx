@@ -16,6 +16,8 @@ import styles from './index.less';
 import Legend from './legend';
 import CombatRange from './range';
 import JetAssult from './jet-assult';
+import AerialFighter from './aerial-fighter';
+import AerialBombing from './aerial-bombing';
 
 const checkOASW = kckit.check.oasw;
 const checkOTS = kckit.check.ots;
@@ -40,8 +42,8 @@ const Combat = extend({
         </Section>
 
         <Section title={__('combat_phases.aerial.title')}>
-            {/* 空中迎击 */}
-            {/* 空袭 */}
+            <AerialFighter ship={ship} />
+            <AerialBombing ship={ship} />
             {/* 防空弹幕 */}
             <CapabilityAARocketBarrage ship={ship} />
         </Section>
@@ -125,7 +127,7 @@ const CapabilityOASW = ({ ship }) => {
     return (
         <Bullet
             title={__('combat_phases.oasw')}
-            level={canOASW ? (canAlways ? 2 : 1) : 0}
+            level={canOASW ? (canAlways ? true : 'indeterminate') : 0}
         >
             {canOASW && canAlways && __('ship_details.can_always_perform')}
             {canOASW &&
@@ -294,7 +296,7 @@ const CapabilityOTS = ({ ship }) => {
     return (
         <Bullet
             title={__('combat_phases.ots')}
-            level={canOTS ? (canAlways ? 2 : 1) : 0}
+            level={canOTS ? (canAlways ? true : 'indeterminate') : 0}
         >
             {canOTS && canAlways && __('ship_details.can_always_perform')}
             {canOTS &&
@@ -345,7 +347,7 @@ const CapabilityTorpedo = ({ ship }) => {
     const isBattleship = ship.isType('battleship');
     const statTorpedo99 = ship.getAttribute('torpedo', 99);
     if (!isBattleship || statTorpedo99 === false) return null;
-    return <Bullet title={__('combat_phases.torpedo')} level={2} />;
+    return <Bullet title={__('combat_phases.torpedo')} level={true} />;
 };
 
 const CapabilityNightAirAssult = ({ ship }) => {
@@ -360,7 +362,7 @@ const CapabilityNightAirAssult = ({ ship }) => {
     if (count_as_night_operation_aviation_personnel) {
         const equipment = db.equipments[258]; // 夜間作戦航空要員
         return (
-            <Bullet title={__('combat_phases.night_air_assault')} level={2}>
+            <Bullet title={__('combat_phases.night_air_assault')} level={true}>
                 {__('require.equipment_no_need', { type: '' })}
                 <IconEquipment className="equipment" icon={equipment._icon}>
                     {equipment._name}
@@ -371,7 +373,7 @@ const CapabilityNightAirAssult = ({ ship }) => {
 
     if (ship.stat.fire || ship.stat.torpedo) {
         return (
-            <Bullet title={__('combat_phases.night')} level={1}>
+            <Bullet title={__('combat_phases.night.title')} level={true}>
                 {__('ship_details.carrier_default_night_battle')}
             </Bullet>
         );
@@ -380,7 +382,10 @@ const CapabilityNightAirAssult = ({ ship }) => {
     if (participate_night_battle_when_equip_swordfish) {
         const equipment = db.equipments[242]; // Swordfish
         return (
-            <Bullet title={__('combat_phases.night')} level={1}>
+            <Bullet
+                title={__('combat_phases.night.title')}
+                level="indeterminate"
+            >
                 {__('ship_details.carrier_swordfish_night_battle')}
                 <br />
                 {__('require.equipment', { type: '' })}
@@ -399,7 +404,7 @@ const CapabilityNightAirAssult = ({ ship }) => {
 const CapabilityNoNightBattle = ({ ship }) => {
     const isCarrier = ship.isType('carrier');
     if (isCarrier || ship.stat.fire + ship.stat.torpedo > 0) return null;
-    return <Bullet title={__('combat_phases.night')} level={0} />;
+    return <Bullet title={__('combat_phases.night.title')} level={0} />;
 };
 
 // const Capability = ({ ship }) => {

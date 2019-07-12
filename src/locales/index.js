@@ -1,5 +1,5 @@
 module.exports = [
     'zh',
-    'en',
-    'ja'
-]
+    'en'
+    // 'ja'
+];
