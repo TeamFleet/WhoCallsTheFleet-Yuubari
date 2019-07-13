@@ -1,5 +1,1 @@
-module.exports = [
-    'zh',
-    'en'
-    // 'ja'
-];
+module.exports = ['zh', 'en', 'ja'];

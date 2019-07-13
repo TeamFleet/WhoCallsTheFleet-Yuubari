@@ -61,9 +61,10 @@ module.exports = {
     //     // cookieKey: 'fleetLocaleId',
     //     // domain: '127.0.0.1',
     // },
-    i18n: process.env.quickStart
-        ? [['zh', `./src/locales/zh.json`]]
-        : require('./src/locales').map(l => [l, `./src/locales/${l}.json`]),
+    i18n:
+        process.env.quickStart && !process.env.quickStartAllLocales
+            ? [['zh', `./src/locales/zh.json`]]
+            : require('./src/locales').map(l => [l, `./src/locales/${l}.json`]),
 
     pwa: {
         auto: false,
