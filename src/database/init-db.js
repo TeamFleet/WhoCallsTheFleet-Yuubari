@@ -57,7 +57,8 @@ export default store => {
         shipCollections.forEach(collection => {
             collection.names = { ...collection.name };
             Object.defineProperty(collection, 'name', {
-                get: () => collection.names[parseLocaleId(store.getState())]
+                get: () =>
+                    collection.names[parseLocaleId(store.getState().localeId)]
             });
             collection.list.forEach(list => {
                 list.ships.forEach((arrShips, index) => {
@@ -97,7 +98,8 @@ export default store => {
         equipmentCollections.forEach(collection => {
             collection.names = { ...collection.name };
             Object.defineProperty(collection, 'name', {
-                get: () => collection.names[parseLocaleId(store.getState())]
+                get: () =>
+                    collection.names[parseLocaleId(store.getState().localeId)]
             });
             collection.list.forEach(list => {
                 Object.assign(db.equipmentTypes[list.type], {
