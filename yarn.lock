@@ -5115,10 +5115,10 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.7.1.tgz#97f236977bd6e125408930ff6de3eec6281ec047"
   integrity sha512-7T/BxH19zbcCTa8XkMlbK5lTo1WtgkFi3GvdWEyNuc4Vex7/9Dqbnpsf4JMydcfj9HCg4zUWFTL3Za6lapg5/w==
 
-hotkeys-js@3.6.11:
-  version "3.6.11"
-  resolved "https://registry.yarnpkg.com/hotkeys-js/-/hotkeys-js-3.6.11.tgz#fbedbda3005f3f4a2f36c20c4e1b4f1ede999f94"
-  integrity sha512-CQiE9t0OFTL1sEH4UAPpCwWYCVOBIBePeRjNeNMndsLdZyXal5jR0rDv8Y+GLMcztN2Gudvuy+V0v3oUFWV5QQ==
+hotkeys-js@3.6.12:
+  version "3.6.12"
+  resolved "https://registry.yarnpkg.com/hotkeys-js/-/hotkeys-js-3.6.12.tgz#316a312dc6864f0cd5dae2b26f443d53b38490c0"
+  integrity sha512-M5HLqgE1NAh67v+4dOIL/mGY8t8oLXtJG5wu60c3NVHCpHQZdznxKS0BswSz7pgA4tEiYvh8dZFF9am3L3PFgg==
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -6702,15 +6702,15 @@ koa@2.7.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.11.0-alpha.0:
-  version "0.11.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.11.0-alpha.0.tgz#cd5faffa8b50d136727fe691db9b10a9bf72e915"
-  integrity sha512-t2YN1zbu9dpwalgRGVbLtOCX+ftJd6zXSYfe9K0LbeEa79awwUvoReRyj689WTPEOiW/Nph9yxiIpRG63mh7BQ==
+koot-webpack@^0.11.0-alpha.1:
+  version "0.11.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.11.0-alpha.1.tgz#e669ba9fceb0a1b43aab0d97bf4c5c7d607dd84e"
+  integrity sha512-RfnKZa+oPHY7lOwbkB2+GFBuj9vHNDyvsqs3v7DFk975RnljNr+nreVNwC90Dhvo8Urv3dSS9Jc8BMCCouAU+w==
 
-koot@^0.11.0-alpha.0:
-  version "0.11.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.11.0-alpha.0.tgz#07bf5a4605399763c3afc284758a1ae7f85f7966"
-  integrity sha512-09Z282Nm+9XEwVdhADhXXj9uL3W4lZJTzy8tpiWzrYWloZvVYEF5op46LMq286YY1iPulmGcFIAZKT3wayoQVA==
+koot@^0.11.0-alpha.1:
+  version "0.11.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.11.0-alpha.1.tgz#b4636a5bb1284df73b9b9201cc46eac67e35ce0d"
+  integrity sha512-HtuFOG2vfwaFmOOy/3uLudjn6eWXaAOPl5j4jkzXHowdRR0IE/0VZHiqivOPwJILm/PvM5vU4Y5fhvubXuuAlQ==
   dependencies:
     "@babel/core" "7.5.4"
     "@babel/plugin-proposal-class-properties" "7.5.0"
@@ -6766,7 +6766,7 @@ koot@^0.11.0-alpha.0:
     koa-proxies "0.8.1"
     koa-router "7.4.0"
     koa-static "5.0.0"
-    koot-webpack "^0.11.0-alpha.0"
+    koot-webpack "^0.11.0-alpha.1"
     less "3.9.0"
     less-loader "5.0.0"
     lodash "4.17.14"
@@ -10088,10 +10088,10 @@ signal-exit@3.0.2, signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-simple-git@1.120.0:
-  version "1.120.0"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.120.0.tgz#3323a763ee88f9733bd928a65cb6eb2982f64c53"
-  integrity sha512-caF3eLrUSrL6d5fBVU85bmY0lpbMpbkWze1W2Tg946kN75s/WWvKqpc4Agn3DLHyzXEeiWfv8yPULiCKumuIQg==
+simple-git@1.121.0:
+  version "1.121.0"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.121.0.tgz#4bdf0828cd1b0bb3cb7ed9bead2771982ef5876a"
+  integrity sha512-LyYri/nuAX8+cx9nZw38mWO6oHNi//CmiPlkBL7aVjZIsdldve7eeDwXu9L4wP/74MpNHucXkXc/BOuIQShhPg==
   dependencies:
     debug "^4.0.1"
 
