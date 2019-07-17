@@ -1,13 +1,5 @@
-/* global
-    __KOOT_SSR__:false
-*/
-
+import { getCache } from 'koot';
 import initDatabase from '__FLEET_INIT_DATABASE_ONLY_SERVER__';
-
-const cache = (() => {
-    if (__CLIENT__) return { templateInject: {} };
-    return __DEV__ ? global.__KOOT_SSR__ : __KOOT_SSR__;
-})();
 
 /**
  * _仅针对服务器端_
@@ -21,10 +13,10 @@ const databaseEnhancer = createStore => (reducer, preloadedState, enhancer) => {
     const store = createStore(reducer, preloadedState, enhancer);
 
     if (__SERVER__) {
+        const cache = getCache();
         // TODO: 更改缓存空间的使用方式
-        if (!cache.templateInject.__database)
-            cache.templateInject.__database = initDatabase(store).db;
-        store.__database = cache.templateInject.__database;
+        if (!cache.__database) cache.__database = initDatabase(store).db;
+        store.__database = cache.__database;
     }
 
     return store;

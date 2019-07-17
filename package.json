@@ -40,7 +40,7 @@
         "classnames": "2.2.6",
         "hotkeys-js": "3.6.12",
         "kckit": "1.22.0",
-        "koot": "^0.11.0-alpha.1",
+        "koot": "^0.11.0-alpha.4",
         "localforage": "1.7.3",
         "lz-string": "1.4.4",
         "metas": "1.0.1",
@@ -48,7 +48,7 @@
         "react-transition-group": "4.2.1",
         "swiper": "4.5.0",
         "whocallsthefleet-backgrounds": "1.3.2",
-        "whocallsthefleet-database": "20190701.0.1"
+        "whocallsthefleet-database": "20190718.0.0"
     },
     "devDependencies": {
         "autoprefixer": "9.6.1",

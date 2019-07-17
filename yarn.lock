@@ -1270,10 +1270,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.2.tgz#3452a24edf9fea138b48fad4a0a028a683da1e40"
   integrity sha512-5tabW/i+9mhrfEOUcLDu2xBPsHJ+X5Orqy9FKpale3SjDA17j5AEpYq5vfy3oAeAHGcvANRCO3NV3d2D6q3NiA==
 
-"@types/node@12.6.2":
-  version "12.6.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.2.tgz#a5ccec6abb6060d5f20d256fb03ed743e9774999"
-  integrity sha512-gojym4tX0FWeV2gsW4Xmzo5wxGjXGm550oVUII7f7G5o4BV6c7DBdiG1RRQd+y1bvqRyYtPfMK85UM95vsapqQ==
+"@types/node@12.6.3":
+  version "12.6.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.3.tgz#44d507c5634f85e7164707ca36bba21b5213d487"
+  integrity sha512-7TEYTQT1/6PP53NftXXabIZDaZfaoBdeBm8Md/i7zsWRoBe0YwOXguyK8vhHs8ehgB/w9U4K/6EWuTyp0W6nIA==
 
 "@types/node@^10.0.3":
   version "10.14.7"
@@ -2107,7 +2107,7 @@ blessed@^0.1.81:
   resolved "https://registry.yarnpkg.com/blessed/-/blessed-0.1.81.tgz#f962d687ec2c369570ae71af843256e6d0ca1129"
   integrity sha1-+WLWh+wsNpVwrnGvhDJW5tDKESk=
 
-bluebird@^3.1.1, bluebird@^3.3.5, bluebird@^3.5.1, bluebird@^3.5.3:
+bluebird@^3.1.1, bluebird@^3.3.5, bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5:
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
   integrity sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==
@@ -2330,6 +2330,26 @@ bytes@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
+
+cacache@^11.2.0:
+  version "11.3.3"
+  resolved "https://registry.yarnpkg.com/cacache/-/cacache-11.3.3.tgz#8bd29df8c6a718a6ebd2d010da4d7972ae3bbadc"
+  integrity sha512-p8WcneCytvzPxhDvYp31PD039vi77I12W+/KfR9S8AZbaiARFBCpsPJS+9uhWfeBfeAtW7o/4vt3MUqLkbY6nA==
+  dependencies:
+    bluebird "^3.5.5"
+    chownr "^1.1.1"
+    figgy-pudding "^3.5.1"
+    glob "^7.1.4"
+    graceful-fs "^4.1.15"
+    lru-cache "^5.1.1"
+    mississippi "^3.0.0"
+    mkdirp "^0.5.1"
+    move-concurrently "^1.0.1"
+    promise-inflight "^1.0.1"
+    rimraf "^2.6.3"
+    ssri "^6.0.1"
+    unique-filename "^1.1.1"
+    y18n "^4.0.0"
 
 cacache@^11.3.2:
   version "11.3.2"
@@ -2799,6 +2819,18 @@ compressible@~2.0.16:
   integrity sha512-BGHeLCK1GV7j1bSmQQAi26X+GgWcTjLr/0tzSvMCl3LH1w1IJ4PFSPoV5316b30cneTziC+B1a+3OjoSUcQYmw==
   dependencies:
     mime-db ">= 1.40.0 < 2"
+
+compression-webpack-plugin@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/compression-webpack-plugin/-/compression-webpack-plugin-3.0.0.tgz#097d2e4d95c3a14cb5c8ed20899009ab5b9bbca0"
+  integrity sha512-ls+oKw4eRbvaSv/hj9NmctihhBcR26j76JxV0bLRLcWhrUBdQFgd06z/Kgg7exyQvtWWP484wZxs0gIUX3NO0Q==
+  dependencies:
+    cacache "^11.2.0"
+    find-cache-dir "^3.0.0"
+    neo-async "^2.5.0"
+    schema-utils "^1.0.0"
+    serialize-javascript "^1.4.0"
+    webpack-sources "^1.0.1"
 
 compression@^1.7.4:
   version "1.7.4"
@@ -4842,7 +4874,7 @@ glob-promise@3.4.0:
   dependencies:
     "@types/glob" "*"
 
-glob@7.1.4, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3:
+glob@7.1.4, glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4:
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.4.tgz#aa608a2f6c577ad357e1ae5a5c26d9a8d1969255"
   integrity sha512-hkLPepehmnKk41pUGm3sYxoFs/umurYfYJCerbXEyFIWcAzvpipAgVkBqqT9RBKMGjnq6kMuyYwha6csxbiM1A==
@@ -6702,15 +6734,15 @@ koa@2.7.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.11.0-alpha.1:
-  version "0.11.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.11.0-alpha.1.tgz#e669ba9fceb0a1b43aab0d97bf4c5c7d607dd84e"
-  integrity sha512-RfnKZa+oPHY7lOwbkB2+GFBuj9vHNDyvsqs3v7DFk975RnljNr+nreVNwC90Dhvo8Urv3dSS9Jc8BMCCouAU+w==
+koot-webpack@^0.11.0-alpha.4:
+  version "0.11.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.11.0-alpha.4.tgz#b97a5fa45317a378b3614d1c2b043c1ac77526cc"
+  integrity sha512-a6h9vhVYPNk94Xs2Xj/jYZr80zMJxpgIgms2ddDSzj8i1EwaUEPmsTy98IhupZs8BZb+aZ9ks9+ycLRkqD/jPw==
 
-koot@^0.11.0-alpha.1:
-  version "0.11.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.11.0-alpha.1.tgz#b4636a5bb1284df73b9b9201cc46eac67e35ce0d"
-  integrity sha512-HtuFOG2vfwaFmOOy/3uLudjn6eWXaAOPl5j4jkzXHowdRR0IE/0VZHiqivOPwJILm/PvM5vU4Y5fhvubXuuAlQ==
+koot@^0.11.0-alpha.4:
+  version "0.11.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.11.0-alpha.4.tgz#8c2df7746645c89cbfc46c9dd7d7aad37d924237"
+  integrity sha512-haS2j1W7cKb+n6Bw1ClPxr8qlfTeWubfbW1i4XOgYtdEugAJKJOGh1SRrRTvBmMXfnlxgLqMok0hiM9E+2W68g==
   dependencies:
     "@babel/core" "7.5.4"
     "@babel/plugin-proposal-class-properties" "7.5.0"
@@ -6726,7 +6758,7 @@ koot@^0.11.0-alpha.1:
     "@babel/preset-typescript" "7.3.3"
     "@babel/register" "7.4.4"
     "@hot-loader/react-dom" "16.8.6"
-    "@types/node" "12.6.2"
+    "@types/node" "12.6.3"
     "@types/react" "16.8.23"
     "@types/react-dom" "16.8.4"
     "@types/react-redux" "7.1.1"
@@ -6737,6 +6769,7 @@ koot@^0.11.0-alpha.1:
     classlist-polyfill "1.2.0"
     cli-spinners "2.2.0"
     commander "2.20.0"
+    compression-webpack-plugin "3.0.0"
     cookie "0.4.0"
     copy-webpack-plugin "5.0.3"
     copyfiles "2.1.1"
@@ -6766,7 +6799,7 @@ koot@^0.11.0-alpha.1:
     koa-proxies "0.8.1"
     koa-router "7.4.0"
     koa-static "5.0.0"
-    koot-webpack "^0.11.0-alpha.1"
+    koot-webpack "^0.11.0-alpha.4"
     less "3.9.0"
     less-loader "5.0.0"
     lodash "4.17.14"
@@ -6778,7 +6811,7 @@ koot@^0.11.0-alpha.1:
     ora "3.4.0"
     os-locale "4.0.0"
     pm2 "3.5.1"
-    portfinder "1.0.20"
+    portfinder "1.0.21"
     postcss "7.0.17"
     postcss-loader "3.0.0"
     react "16.8.6"
@@ -6806,7 +6839,7 @@ koot@^0.11.0-alpha.1:
     webpack-dev-server "3.7.2"
     webpack-hot-middleware "2.25.0"
     xmlify "1.1.0"
-    yargs "13.2.4"
+    yargs "13.3.0"
 
 lazy@~1.0.11:
   version "1.0.11"
@@ -8562,7 +8595,16 @@ pn@^1.1.0:
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
   integrity sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==
 
-portfinder@1.0.20, portfinder@^1.0.20:
+portfinder@1.0.21:
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.21.tgz#60e1397b95ac170749db70034ece306b9a27e324"
+  integrity sha512-ESabpDCzmBS3ekHbmpAIiESq3udRsCBGiBZLsC+HgBKv2ezb0R4oG+7RnYEVZ/ZCfhel5Tx3UzdNWA0Lox2QCA==
+  dependencies:
+    async "^1.5.2"
+    debug "^2.2.0"
+    mkdirp "0.5.x"
+
+portfinder@^1.0.20:
   version "1.0.20"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.20.tgz#bea68632e54b2e13ab7b0c4775e9b41bf270e44a"
   integrity sha512-Yxe4mTyDzTd59PZJY4ojZR8F+E5e97iq2ZOHPz3HDgSvYC5siNad2tLooQ5y5QHyQhc3xVqvyk/eNA3wuoa7Sw==
@@ -9952,7 +9994,7 @@ send@0.17.1:
     range-parser "~1.2.1"
     statuses "~1.5.0"
 
-serialize-javascript@^1.7.0:
+serialize-javascript@^1.4.0, serialize-javascript@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.7.0.tgz#d6e0dfb2a3832a8c94468e6eb1db97e55a192a65"
   integrity sha512-ke8UG8ulpFOxO8f8gRYabHQe/ZntKlcig2Mp+8+URDP1D8vJZ0KUt7LYo07q25Z/+JVSgpr/cui9PIp5H6/+nA==
@@ -11486,7 +11528,7 @@ webpack-log@^2.0.0:
     ansi-colors "^3.0.0"
     uuid "^3.3.2"
 
-webpack-sources@^1.1.0, webpack-sources@^1.3.0:
+webpack-sources@^1.0.1, webpack-sources@^1.1.0, webpack-sources@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.3.0.tgz#2a28dcb9f1f45fe960d8f1493252b5ee6530fa85"
   integrity sha512-OiVgSrbGu7NEnEvQJJgdSFPl2qWKkWq5lHMhgiToIiN9w34EBnjYzSYs+VbL5KoYiLNtFFa7BZIKxRED3I32pA==
@@ -11588,10 +11630,10 @@ whocallsthefleet-backgrounds@1.3.2:
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.3.2.tgz#ea434851b7d362b30ba7c1eb86ac86e22fcd45e2"
   integrity sha512-3vQRvNciB3Dq1jlbZHXdujPIwEeDazHTfyZLAzuw7YA6f7JGGPgKHTqQpqQApRCel5DH75umEtdAZldjen3gUA==
 
-whocallsthefleet-database@20190701.0.1:
-  version "20190701.0.1"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20190701.0.1.tgz#ea8d781e1b427c113e793d890c4ba497eccc5be9"
-  integrity sha512-/0Z5sBsEy6WEtbIcs/ZVUa6m5eGPGOp2pq0r6X2HAm6W9L6EgZO3HVXvNhv9Z0yen/lQg1B2lwLE1tvS3Y6tqQ==
+whocallsthefleet-database@20190718.0.0:
+  version "20190718.0.0"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20190718.0.0.tgz#a0d0594c8e03b48439f2b510057a46945ae05a2c"
+  integrity sha512-6rp2ZwSQa54/F12UtAWcEpsdns6ykf0BQdhr92kXGEnK45zwHAJbJtkpLIlwK2ahXy/OcYpMWZWYFNzbMegrcg==
 
 wide-align@^1.1.0:
   version "1.1.3"
@@ -11775,6 +11817,14 @@ yargs-parser@^13.1.0:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
+yargs-parser@^13.1.1:
+  version "13.1.1"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-13.1.1.tgz#d26058532aa06d365fe091f6a1fc06b2f7e5eca0"
+  integrity sha512-oVAVsHz6uFrg3XQheFII8ESO2ssAf9luWuAd6Wexsu4F3OtIW0o8IribPXYrD4WC24LWtPrJlGy87y5udK+dxQ==
+  dependencies:
+    camelcase "^5.0.0"
+    decamelize "^1.2.0"
+
 yargs-parser@^8.0.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-8.1.0.tgz#f1376a33b6629a5d063782944da732631e966950"
@@ -11800,7 +11850,23 @@ yargs@12.0.5, yargs@^12.0.2:
     y18n "^3.2.1 || ^4.0.0"
     yargs-parser "^11.1.1"
 
-yargs@13.2.4, yargs@^13.2.4:
+yargs@13.3.0:
+  version "13.3.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-13.3.0.tgz#4c657a55e07e5f2cf947f8a366567c04a0dedc83"
+  integrity sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
+  dependencies:
+    cliui "^5.0.0"
+    find-up "^3.0.0"
+    get-caller-file "^2.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^2.0.0"
+    set-blocking "^2.0.0"
+    string-width "^3.0.0"
+    which-module "^2.0.0"
+    y18n "^4.0.0"
+    yargs-parser "^13.1.1"
+
+yargs@^13.2.4:
   version "13.2.4"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-13.2.4.tgz#0b562b794016eb9651b98bd37acf364aa5d6dc83"
   integrity sha512-HG/DWAJa1PAnHT9JAhNa8AbAv3FPaiLzioSjCcmuXXhP8MlpHO5vwls4g4j6n30Z74GVQj8Xa62dWVx1QCGklg==
