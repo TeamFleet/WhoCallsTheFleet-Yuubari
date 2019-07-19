@@ -14,7 +14,6 @@ const databaseEnhancer = createStore => (reducer, preloadedState, enhancer) => {
 
     if (__SERVER__) {
         const cache = getCache();
-        // TODO: 更改缓存空间的使用方式
         if (!cache.__database) cache.__database = initDatabase(store).db;
         store.__database = cache.__database;
     }
