@@ -30,6 +30,11 @@
     "artist": "Artist",
     "artists": "Artists",
 
+    "activation_chance_tobe": "Activation chance: ${chance}",
+    "chance": {
+        "high": "High"
+    },
+
     "day_full": {
         "Sunday": "Sunday",
         "Monday": "Monday",
@@ -119,9 +124,9 @@
         "aerial": {
             "title": "Aerial Combat",
             "fighter": "Fighter Combat",
-            "bombing": "Bombing"
+            "bombing": "Bombing",
+            "anti_air_propellant_barrage": "Anti-Air Propellant Barrage"
         },
-        "anti_air_rocket_barrage": "Anti-Air Rocket Barrage",
         "support": "Support Expedition",
         "day": {
             "title": "Day Combat"

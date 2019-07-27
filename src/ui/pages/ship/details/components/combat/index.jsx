@@ -18,6 +18,7 @@ import CombatRange from './range';
 import JetAssult from './jet-assult';
 import AerialFighter from './aerial-fighter';
 import AerialBombing from './aerial-bombing';
+import AAPropellantBarrage from './anti-air-propellant-barrage';
 
 const checkOASW = kckit.check.oasw;
 const checkOTS = kckit.check.ots;
@@ -44,8 +45,7 @@ const Combat = extend({
         <Section title={__('combat_phases.aerial.title')}>
             <AerialFighter ship={ship} />
             <AerialBombing ship={ship} />
-            {/* 防空弹幕 */}
-            <CapabilityAARocketBarrage ship={ship} />
+            <AAPropellantBarrage ship={ship} />
         </Section>
 
         <Section title={__('combat_phases.day.title')}>
@@ -78,37 +78,6 @@ const Section = ({ title, children }) => (
 );
 
 //
-
-const CapabilityAARocketBarrage = ({ ship }) => {
-    let level = ship.getCapability('anti_air_rocket_barrage');
-    switch (level) {
-        case true: {
-            level = 1;
-            break;
-        }
-        case 'high': {
-            level = 2;
-            break;
-        }
-        default: {
-        }
-    }
-    const able = level ? true : false;
-    return (
-        <Bullet
-            title={__('combat_phases.anti_air_rocket_barrage')}
-            level={level || 0}
-        >
-            {able && __('require.equipment', { type: '' })}
-            {able && (
-                <LinkEquipment
-                    className="color-alt link-equipment"
-                    equipment={274}
-                />
-            )}
-        </Bullet>
-    );
-};
 
 const CapabilityOASW = ({ ship }) => {
     const statASW99 = ship.getAttribute('asw', 99);

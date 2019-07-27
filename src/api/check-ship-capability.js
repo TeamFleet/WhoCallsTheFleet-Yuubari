@@ -19,10 +19,27 @@ const checkShipCapability = (_ship, capability, equipments) => {
 
     if (__DEV__ || typeof capabilities[capability] === 'undefined') {
         switch (capability) {
+            case 'AAPropellantBarrage': {
+                const level = ship.getCapability('anti_air_rocket_barrage');
+                if (level) {
+                    capabilities[capability] = {
+                        equipments: ['_274']
+                    };
+                    if (level === 'high')
+                        capabilities[capability].chance = 'high';
+                } else {
+                    capabilities[capability] = false;
+                }
+                break;
+            }
             default: {
                 if (equipments) {
                     const req = filterEquipmentTypes(ship, equipments);
-                    capabilities[capability] = req.length ? req : false;
+                    capabilities[capability] = req.length
+                        ? {
+                              equipments: req
+                          }
+                        : false;
                 } else {
                     capabilities[capability] = false;
                 }

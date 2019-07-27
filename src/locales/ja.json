@@ -30,6 +30,11 @@
     "artist": "イラストレーター",
     "artists": "イラストレーター",
 
+    "activation_chance_tobe": "発動成功率：${chance}",
+    "chance": {
+        "high": "高い"
+    },
+
     "day_full": {
         "Sunday": "日曜日",
         "Monday": "月曜日",
@@ -119,9 +124,9 @@
         "aerial": {
             "title": "航空戦",
             "fighter": "Fighter Combat",
-            "bombing": "Bombing"
+            "bombing": "Bombing",
+            "anti_air_propellant_barrage": "対空噴進弾幕"
         },
-        "anti_air_rocket_barrage": "対空噴進弾幕",
         "support": "支援艦隊攻撃",
         "day": {
             "title": "昼砲雷撃戦"

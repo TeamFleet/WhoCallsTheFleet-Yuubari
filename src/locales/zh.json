@@ -30,6 +30,11 @@
     "artist": "画师",
     "artists": "画师",
 
+    "activation_chance_tobe": "触发几率：${chance}",
+    "chance": {
+        "high": "高"
+    },
+
     "day_full": {
         "Sunday": "星期日",
         "Monday": "星期一",
@@ -119,9 +124,9 @@
         "aerial": {
             "title": "航空战",
             "fighter": "空中迎击",
-            "bombing": "轰炸"
+            "bombing": "轰炸",
+            "anti_air_propellant_barrage": "对空喷进弹幕"
         },
-        "anti_air_rocket_barrage": "对空喷进弹幕",
         "support": "支援舰队攻击",
         "day": {
             "title": "昼炮雷击战"
