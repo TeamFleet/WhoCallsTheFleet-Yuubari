@@ -9,7 +9,6 @@ import getEquipmentTypesFromCondition from '@utils/get-equipment-types-from-cond
 import ComponentContainer from '@ui/containers/infos-component';
 import Bullet from '@ui/components/bullet';
 import IconEquipment from '@ui/components/icon-equipment';
-import LinkEquipment from '@ui/components/link/equipment';
 
 import styles from './index.less';
 
