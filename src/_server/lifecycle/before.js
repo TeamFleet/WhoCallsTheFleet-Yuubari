@@ -29,7 +29,7 @@ export default async app => {
     // /.well-known
     {
         const staticWellKnown = new Koa();
-        const dir = path.resolve(getDistPath(), '.well-known');
+        const dir = path.resolve(getDistPath(), 'public/.well-known');
         staticWellKnown.use(
             koaStatic(dir, {
                 hidden: true
