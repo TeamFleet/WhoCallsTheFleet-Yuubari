@@ -1,10 +1,9 @@
-import initDatabase from '@database/init'
+import initDatabase from '@database/init';
 // import kckit from 'kckit'
 
 // console.log('===')
 
 export default async ({ /*ctx,*/ localeId, store }) => {
-
     // console.log('\nNew request')
     // console.log(ctx.url)
 
@@ -14,7 +13,7 @@ export default async ({ /*ctx,*/ localeId, store }) => {
     //     )
     // }
 
-    await initDatabase({ localeId, store })
+    await initDatabase({ localeId, store });
 
     // if (localeId === 'en') {
     //     await new Promise(resolve =>
@@ -26,5 +25,4 @@ export default async ({ /*ctx,*/ localeId, store }) => {
     //     locale: kckit.locale,
     //     sample: kckit.db.ships[20]._name
     // })
-
-}
+};

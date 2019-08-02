@@ -1,26 +1,27 @@
 @import '~base.less';
 
-.component{
-    position:   absolute;
-    overflow:   hidden;
-    left:       0;
-    right:      0;
-    padding:    0 @main-margin;
+.component {
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    padding: 0 @main-margin;
     z-index: 1;
 
     box-shadow: 0 10px 20px -10px fade(#000, 20%);
-    
+
     transition: inherit;
-    
-    @supports(backdrop-filter: blur(20px)) {
+
+    @supports (backdrop-filter: blur(20px)) {
         box-shadow: 0 10px 20px -10px fade(#000, 30%);
+        backdrop-filter: blur(20px);
     }
 
     // &.mod-transition-enter, &.mod-transition-exit{
     //     transition-duration: (@duration-main-transition * 1);
     //     transition-delay: 0s;
     // }
-    &.mod-transition-enter{
+    &.mod-transition-enter {
         // transition-property: transform;
         // opacity: 0;
         // @supports(backdrop-filter: blur(1px)){
@@ -29,14 +30,14 @@
         animation: fadein @duration-main-transition ease-out;
         animation-fill-mode: both;
         // &.mod-transition-enter-active{
-            // transition-property: opacity, transform;
-            // opacity: 1;
-            // @supports(backdrop-filter: blur(1px)){
-            //     transform: transform;
-            // }
+        // transition-property: opacity, transform;
+        // opacity: 1;
+        // @supports(backdrop-filter: blur(1px)){
+        //     transform: transform;
+        // }
         // }
     }
-    &.mod-transition-exit{
+    &.mod-transition-exit {
         transition-duration: (@duration-main-transition * 1);
         transition-delay: 0s;
         transition-property: opacity, transform;
@@ -50,28 +51,26 @@
     // animation: 	fadein @duration-main-transition ease-out;
     // animation-fill-mode: both;
 
-    .screen-tablet({
-        padding-left:   @main-margin-tablet;
-        padding-right:  @main-margin-tablet;
-    });
-    .screen-phone({
-        padding-left:   @main-margin-phone;
-        padding-right:  @main-margin-phone;
-    });
+    .screen-tablet(
+        {padding-left: @main-margin-tablet; padding-right: @main-margin-tablet;}
+    );
+    .screen-phone(
+        {padding-left: @main-margin-phone; padding-right: @main-margin-phone;}
+    );
 
-    .bg-container{
-        z-index:    -2;
+    .bg-container {
+        z-index: -2;
         // right:      (0 - @main-margin) !important;
     }
 
-    &:after{
-        content:    "";
-        position:   absolute;
-        bottom:     1px;
-        height:     1px;
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 1px;
+        height: 1px;
         background: @color-border;
-        left:       0;
-        right:      0;
+        left: 0;
+        right: 0;
         // left:       @main-margin;
         // right:      @main-margin;
         // .screen-tablet({

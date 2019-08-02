@@ -1,15 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { extend } from 'koot'
-import classNames from 'classnames'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { extend } from 'koot';
+import classNames from 'classnames';
 
-// import checkCssProp from 'check-css-prop'
+// import checkCssProp from 'check-css-prop';
 
-import Background from '@ui/components/background'
+import Background from '@ui/components/background';
+
+// const cssBackdropFilter = __CLIENT__ && checkCssProp('backdrop-filter');
 
 @extend({
     connect: state => ({
-        mainKey: state.app.mainKey,
+        mainKey: state.app.mainKey
         // appReady: state.app.ready,
     }),
     styles: require('./styles.less')
@@ -17,8 +19,8 @@ import Background from '@ui/components/background'
 class MainHeader extends React.Component {
     state = {
         enter: true,
-        enterActive: false,
-    }
+        enterActive: false
+    };
 
     componentDidMount() {
         // setTimeout(() => {
@@ -29,8 +31,8 @@ class MainHeader extends React.Component {
         setTimeout(() => {
             this.setState({
                 enterActive: true
-            })
-        })
+            });
+        });
     }
 
     renderContent(isPortal) {
@@ -40,10 +42,10 @@ class MainHeader extends React.Component {
             mainKey,
             onAnimationEnd,
             ...props
-        } = this.props
+        } = this.props;
 
         // delete props.appReady
-        delete props.dispatch
+        delete props.dispatch;
 
         // console.log(this.state)
 
@@ -52,7 +54,7 @@ class MainHeader extends React.Component {
                 className={classNames({
                     [className]: true,
                     'main-header': true,
-                    'wrapper': isPortal,
+                    wrapper: isPortal,
                     'mod-transition-enter': this.state.enter,
                     'mod-transition-enter-active': this.state.enterActive,
                     'mod-transition-exit': this.keyCurrent !== mainKey
@@ -75,34 +77,34 @@ class MainHeader extends React.Component {
                 // }}
                 onAnimationEnd={evt => {
                     // console.log(evt.target, evt.currentTarget, evt.animationName)
-                    if (evt.target === evt.currentTarget &&
+                    if (
+                        evt.target === evt.currentTarget &&
                         evt.nativeEvent.animationName === 'fadein'
                     ) {
                         this.setState({
                             enter: false,
-                            enterActive: false,
-                        })
+                            enterActive: false
+                        });
                     }
                     if (typeof onAnimationEnd === 'function')
-                        return onAnimationEnd(evt)
+                        return onAnimationEnd(evt);
                 }}
                 {...props}
             >
                 {children}
-                {__CLIENT__ && <Background className="bg-container" type="blured" />}
+                {__CLIENT__ && (
+                    <Background className="bg-container" type="blured" />
+                )}
             </div>
-        )
+        );
     }
 
     render() {
-        if (__SERVER__)
-            return this.renderContent()
+        if (__SERVER__) return this.renderContent();
 
-        if (!this.props.mainKey)
-            return null
+        if (!this.props.mainKey) return null;
 
-        if (!this.keyCurrent)
-            this.keyCurrent = this.props.mainKey
+        if (!this.keyCurrent) this.keyCurrent = this.props.mainKey;
 
         // if (__DEV__) console.log('MainHeader', { current: this.keyCurrent, main: this.props.mainKey })
 
@@ -110,7 +112,7 @@ class MainHeader extends React.Component {
             <MainHeaderPortal key={this.keyCurrent}>
                 {this.renderContent(true)}
             </MainHeaderPortal>
-        )
+        );
         // return (
         //     <MainHeaderPortal>
         //         <TransitionGroup
@@ -139,13 +141,10 @@ class MainHeader extends React.Component {
     }
 }
 
-export default MainHeader
+export default MainHeader;
 
 const MainHeaderPortal = ({ children }) =>
-    ReactDOM.createPortal(
-        children,
-        document.getElementById('main-mask'),
-    )
+    ReactDOM.createPortal(children, document.getElementById('main-mask'));
 // class MainHeaderPortal extends React.Component {
 //     // constructor() {
 //     //     super()

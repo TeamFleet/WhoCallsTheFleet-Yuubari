@@ -124,7 +124,9 @@ module.exports = {
     },
     serverBefore: './src/_server/lifecycle/before',
     serverAfter: './src/_server/lifecycle/after',
-    serverOnRender: './src/_server/lifecycle/on-render',
+    serverOnRender: {
+        beforePreRender: './src/_server/lifecycle/before-pre-render'
+    },
 
     /**************************************************************************
      * Webpack 相关

@@ -34,13 +34,13 @@
         "update": "yarn upgrade-interactive --latest"
     },
     "dependencies": {
-        "bind-event": "1.0.5",
+        "bind-event": "1.1.2",
         "camelcase": "5.3.1",
         "check-css-prop": "1.0.1",
         "classnames": "2.2.6",
         "hotkeys-js": "3.6.13",
         "kckit": "1.22.0",
-        "koot": "^0.11.0-alpha.5",
+        "koot": "^0.11.0-alpha.9",
         "localforage": "1.7.3",
         "lz-string": "1.4.4",
         "metas": "1.0.1",

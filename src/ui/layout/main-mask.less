@@ -1,24 +1,20 @@
 @import '../base.less';
 
-.component{
+.component {
     .mainframe();
-    position:   fixed;
-    z-index:    3;
-    top:        0;
-    left:       @nav-width;
-    right:      0;
-    overflow:   visible;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: @nav-width;
+    right: 0;
+    overflow: visible;
 
-    transform:  translateX(100%);
+    transform: translateX(100%);
     // .is-ready({
     //     transform:  none;
     // });
-    .is-mode-background({
-        transform:  translateX(100%);
-    });
-    .is-mode-background-leaving({
-        transform:  none;
-    });
+    .is-mode-background({transform: translateX(100%) ;});
+    .is-mode-background-leaving({transform: none;});
 
     // & > .wrapper:not([data-enter="true"]){
     //     transition: inherit;
@@ -28,89 +24,80 @@
     //     opacity:    0;
     // }
 
-    .bg-container{
+    .bg-container {
         transition: inherit;
-        left:       0;
-        right:      0;
-        transform:  translateX(-100%);
+        left: 0;
+        right: 0;
+        transform: translateX(-100%);
         // opacity:    .95;
-        
+
         &,
         &:before,
-        .background{
-            position:   absolute;
-            top:        0;
-            bottom:     0;
-            overflow:   hidden;
+        .background {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            overflow: hidden;
         }
-        .background{
-            z-index:    1;
-            width:      100vw;
-            height:     100vh;
+        .background {
+            z-index: 1;
+            width: 100vw;
+            height: 100vh;
             background-attachment: initial;
-            left:   auto;
-            right:  0;
+            left: auto;
+            right: 0;
         }
-        &:before{
-            content:    "";
-            z-index:    2;
-            left:       0;
-            right:      0;
+        &:before {
+            content: '';
+            z-index: 2;
+            left: 0;
+            right: 0;
             background: @color-background-main;
         }
-        .is-ready({
-            transform:  none;
-        });
-        .is-mode-background({
-            transform:  translateX(-100%);
-        });
-        .is-mode-background-leaving({
-            transform:  none;
-        });
+        .is-ready({transform: none;});
+        .is-mode-background({transform: translateX(-100%) ;});
+        .is-mode-background-leaving({transform: none;});
 
-        @supports(backdrop-filter: blur(20px)) {
-            opacity: .5;
+        @supports (backdrop-filter: blur(20px)) {
+            opacity: 0.5;
             // backdrop-filter: blur(10px) brightness(0.8);
-            backdrop-filter: blur(20px) brightness(0.9);
+            // backdrop-filter: blur(20px) brightness(0.9);
             // .background, &:before{
             //     display:    none;
             // }
         }
     }
 
-    .screen-t1({
-        left:       @nav-width-t1;
-    });
+    .screen-t1({left: @nav-width-t1;});
 
-    .screen-tablet({
-        top:        @nav-height-tablet;
-        left:       0;
-        transform:  translate(0%, calc(~"100vh - @{nav-height-tablet}"));
-        .is-mode-background({
-            transform:  translate(0%, calc(~"100vh - @{nav-height-tablet}"));
-        });
-        .bg-container{
-            transform:  translate(0%, calc(~"-100vh + @{nav-height-tablet}"));
-            .background{
-                top:    (0 - @nav-height-tablet);
-            }
-            .is-mode-background({
-                transform:  translate(0%, calc(~"-100vh + @{nav-height-tablet}"));
-            });
-        }
-    });
+    .screen-tablet(
+        {top: @nav-height-tablet; left: 0; transform: translate(
+                0%,
+                calc(~'100vh - @{nav-height-tablet}')
+            ) ; .is-mode-background(
+                {transform: translate(0%, calc(~'100vh - @{nav-height-tablet}'))
+                    ;}
+            ) ; .bg-container{transform: translate(
+                0%,
+                calc(~'-100vh + @{nav-height-tablet}')
+            ) ; .background{top: (0 - @nav-height-tablet) ;}
+            .is-mode-background(
+                {transform: translate(
+                        0%,
+                        calc(~'-100vh + @{nav-height-tablet}')
+                    ) ;}
+            )
+            ;}}
+    );
 
-    .screen-phone({
-        top:        @nav-height-phone;
-        .bg-container{
-            .background{
-                top:    (0 - @nav-height-phone);
-            }
-        }
-    });
+    .screen-phone(
+        {top: @nav-height-phone; .bg-container{.background{top: (
+                0 - @nav-height-phone
+            ) ;}}}
+    );
 
-    .fadeout{
-        animation:  fadeout @duration-main-transition ease-out;
+    .fadeout {
+        animation: fadeout @duration-main-transition ease-out;
         // animation:  fadeout 0.00000001s ease-out;
     }
 }
