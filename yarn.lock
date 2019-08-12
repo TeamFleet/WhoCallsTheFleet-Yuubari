@@ -6680,10 +6680,10 @@ jsx-ast-utils@^2.0.1, jsx-ast-utils@^2.1.0:
   dependencies:
     array-includes "^3.0.3"
 
-kckit@1.22.0:
-  version "1.22.0"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.22.0.tgz#cd88453575b65200e7f04e3bf4b0992c99c15579"
-  integrity sha512-UBdzz0e6rKOBZSkHCesC1VoP8VzLK6AUUI54HQXpn+f7QPjmd5T7nS195Dw3RuIvKF4yWsQZ2Wq14X/Ca44jpw==
+kckit@1.22.1:
+  version "1.22.1"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.22.1.tgz#03204f6ca3fb5343e6a5e8131d91c63af856857c"
+  integrity sha512-lJ2XYYBuRmcqM0Q4xGIq+Tv7KR6f6bqBBkQv1CuD5slWVvsAEiImw2fLLdN05gTVBV8et4k7YXBHMjq69QMPLA==
   dependencies:
     camelcase "5.3.1"
 

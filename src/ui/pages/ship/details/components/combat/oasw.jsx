@@ -65,7 +65,7 @@ export default ({ ship }) => {
                                 )
                             };
                         }
-                        return getEquipmentRequirement(condition);
+                        return getEquipmentRequirement(condition, value);
                     }
                 );
 
