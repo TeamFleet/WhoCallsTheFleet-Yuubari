@@ -18,8 +18,8 @@ import JetAssult from './jet-assult';
 import AerialFighter from './aerial-fighter';
 import AerialBombing from './aerial-bombing';
 import AAPropellantBarrage from './anti-air-propellant-barrage';
+import OASW from './oasw';
 
-const checkOASW = kckit.check.oasw;
 const checkOTS = kckit.check.ots;
 
 const { wrapper: moduleClassName } = styles;
@@ -48,12 +48,11 @@ const Combat = extend({
         </Section>
 
         <Section title={__('combat_phases.day.title')}>
-            {/* 先制对潜 */}
+            <OASW ship={ship} />
             {/* 开幕雷击 */}
             {/* 炮击 */}
             {/* 解锁第二轮炮击 */}
             {/* 雷击 */}
-            <CapabilityOASW ship={ship} />
             <CapabilityOTS ship={ship} />
             <CapabilityTorpedo ship={ship} />
         </Section>
@@ -77,179 +76,6 @@ const Section = ({ title, children }) => (
 );
 
 //
-
-const CapabilityOASW = ({ ship }) => {
-    const statASW99 = ship.getAttribute('asw', 99);
-
-    if (statASW99 === false) return null;
-    if (statASW99 === undefined)
-        return <Bullet title={__('combat_phases.oasw')} level={-1} />;
-
-    const oaswTable = checkOASW(ship.id) || [];
-    const canAlways = oaswTable === true;
-    const canOASW =
-        canAlways || (Array.isArray(oaswTable) && oaswTable.length)
-            ? true
-            : false;
-
-    return (
-        <Bullet
-            title={__('combat_phases.oasw')}
-            level={canOASW ? (canAlways ? true : 'indeterminate') : 0}
-        >
-            {canOASW && canAlways && __('ship_details.can_always_perform')}
-            {canOASW &&
-                !canAlways &&
-                oaswTable.length > 1 &&
-                __('ship_details.meet_one_requirements_below')}
-            {canOASW &&
-                !canAlways &&
-                oaswTable.map((OASW, index) => {
-                    const statsWithEquipments = [];
-                    let equipmentRequired = [];
-                    if (
-                        OASW.shipWithEquipments &&
-                        OASW.shipWithEquipments.hasStat
-                    ) {
-                        for (let stat in OASW.shipWithEquipments.hasStat) {
-                            if (
-                                ship.getAttribute(stat, ship._minLv) <
-                                OASW.shipWithEquipments.hasStat[stat]
-                            )
-                                statsWithEquipments.push([
-                                    stat,
-                                    OASW.shipWithEquipments.hasStat[stat]
-                                ]);
-                        }
-                    }
-                    if (OASW.equipments) {
-                        const equipments = Object.assign({}, OASW.equipments);
-                        for (let condition in equipments) {
-                            if (
-                                typeof equipments[condition] === 'object' &&
-                                equipments[condition].hasStat
-                            ) {
-                                let stat = [];
-                                for (let key in equipments[condition].hasStat) {
-                                    stat[0] = key;
-                                    stat[1] =
-                                        equipments[condition].hasStat[key];
-                                }
-                                const eType = __(
-                                    'equipment_types',
-                                    condition.substr(3).toLocaleLowerCase()
-                                );
-                                if (condition.substr(0, 3) === 'has' && eType) {
-                                    equipmentRequired.push([eType, stat]);
-                                } else {
-                                    equipmentRequired.push([
-                                        getEquipmentTypesFromCondition({
-                                            [condition]: true
-                                        })[0],
-                                        stat
-                                    ]);
-                                }
-                                delete equipments[condition];
-                            }
-                        }
-                        equipmentRequired = equipmentRequired.concat(
-                            getEquipmentTypesFromCondition(equipments)
-                        );
-                        if (OASW.equipments.hasNameOf === '九三一空')
-                            equipmentRequired.push('九三一空');
-                    }
-                    return (
-                        <ul key={index} className="requirement">
-                            {oaswTable.length > 1 && `#${index + 1}`}
-                            {statsWithEquipments.map((stat, indexStat) => (
-                                <li key={`${index}-${indexStat}`}>
-                                    {__('require.ship_stat_with_equipments', {
-                                        stat: __(`stat`, stat[0]),
-                                        value: stat[1]
-                                    })}
-                                </li>
-                            ))}
-                            {equipmentRequired.map((type, indexType) => {
-                                if (type === '九三一空')
-                                    return (
-                                        <li key={`${index}-${indexType}`}>
-                                            {__('require.equipment', {
-                                                type: ''
-                                            })}
-                                            <IconEquipment
-                                                className="equipment"
-                                                icon={8}
-                                            >
-                                                九三一空
-                                            </IconEquipment>
-                                        </li>
-                                    );
-                                else if (Array.isArray(type)) {
-                                    // console.log(type)
-                                    return (
-                                        <li key={`${index}-${indexType}`}>
-                                            {__('require.equipment', {
-                                                type: ''
-                                            })}
-                                            {typeof type[0] === 'number' && (
-                                                <IconEquipment
-                                                    className="equipment"
-                                                    icon={
-                                                        db.equipmentTypes[
-                                                            type[0]
-                                                        ].icon
-                                                    }
-                                                >
-                                                    {
-                                                        db.equipmentTypes[
-                                                            type[0]
-                                                        ]._name
-                                                    }
-                                                </IconEquipment>
-                                            )}
-                                            {typeof type[0] === 'string' &&
-                                                type[0]}
-                                            {' (' +
-                                                __('require.has_stat', {
-                                                    stat: __(
-                                                        `stat`,
-                                                        type[1][0]
-                                                    ),
-                                                    value: type[1][1]
-                                                }) +
-                                                ')'}
-                                        </li>
-                                    );
-                                } else
-                                    return (
-                                        <li key={`${index}-${indexType}`}>
-                                            {__('require.equipment_type', {
-                                                type: ''
-                                            })}
-                                            <IconEquipment
-                                                className="equipment"
-                                                icon={
-                                                    db.equipmentTypes[type].icon
-                                                }
-                                            >
-                                                {db.equipmentTypes[type]._name}
-                                            </IconEquipment>
-                                        </li>
-                                    );
-                            })}
-                            {OASW.minLv && (
-                                <li>
-                                    {__('require.min_possible_level', {
-                                        level: OASW.minLv || ship._minLv
-                                    })}
-                                </li>
-                            )}
-                        </ul>
-                    );
-                })}
-        </Bullet>
-    );
-};
 
 const CapabilityOTS = ({ ship }) => {
     const statTorpedo99 = ship.getAttribute('torpedo', 99);

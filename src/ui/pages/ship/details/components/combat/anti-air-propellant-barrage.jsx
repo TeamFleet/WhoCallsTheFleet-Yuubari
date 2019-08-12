@@ -6,23 +6,24 @@ import ReqE from './_req-equipments';
 
 export default ({ ship }) => {
     const able = checkShipCapability(ship, 'AAPropellantBarrage');
+    const { chance = 'normal' } = able;
     return (
         <Bullet
             title={__('combat_phases.aerial.anti_air_propellant_barrage')}
             level={able ? 'indeterminate' : 0}
         >
             {able && <ReqE requirements={able.equipments} />}
-            {able && able.chance && (
+            {able && chance && (
                 <span
                     dangerouslySetInnerHTML={{
                         __html: __('activation_chance_tobe', {
                             chance: `<strong${
-                                able.chance === 'high'
+                                chance === 'high'
                                     ? ' class="color-positive"'
-                                    : able.chance === 'low'
+                                    : chance === 'low'
                                     ? ' class="color-negative"'
                                     : ''
-                            }>${__('chance', able.chance)}</strong>`
+                            }>${__('chance', chance)}</strong>`
                         })
                     }}
                 ></span>

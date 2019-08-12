@@ -10,6 +10,8 @@ const Bullet = extend({
 })(({ level, bullet, stat, className, title, titleHtml, html, children }) => {
     let theLevel = level;
     if (typeof theLevel === 'undefined') theLevel = bullet;
+    if (level === 'unknown') theLevel = -1;
+    if (level === 'always') theLevel = true;
 
     let theTitle = title;
     if (titleHtml || html)

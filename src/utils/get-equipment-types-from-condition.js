@@ -1,18 +1,24 @@
-import equipmentTypes from 'kckit/src/types/equipments'
+import equipmentTypes from 'kckit/src/types/equipments';
 
 export default conditionEquipments => {
-    let equipmentTypesRequired = []
-    for (let key in conditionEquipments) {
+    for (const key in conditionEquipments) {
+        let typeName;
         if (key.substr(0, 3) === 'has') {
-            let typeName = key.substr(3)
-            if (typeName === 'HAMountAAFD') {
-                equipmentTypesRequired = equipmentTypesRequired.concat(equipmentTypes['HAMountsAAFD'])
-            } else if (typeName in equipmentTypes) {
-                equipmentTypesRequired = equipmentTypesRequired.concat(equipmentTypes[typeName])
-            } else if (typeName + 's' in equipmentTypes) {
-                equipmentTypesRequired = equipmentTypesRequired.concat(equipmentTypes[typeName + 's'])
-            }
+            typeName = key.substr(3);
+        } else if (key.substr(0, 2) === 'is') {
+            typeName = key.substr(2);
         }
+
+        if (typeName === 'HAMountAAFD')
+            return getArr(equipmentTypes['HAMountsAAFD']);
+
+        if (typeName in equipmentTypes) return getArr(equipmentTypes[typeName]);
+
+        if (typeName + 's' in equipmentTypes)
+            return getArr(equipmentTypes[typeName + 's']);
     }
-    return equipmentTypesRequired
-}
+
+    return [];
+};
+
+const getArr = v => (Array.isArray(v) ? v : [v]);

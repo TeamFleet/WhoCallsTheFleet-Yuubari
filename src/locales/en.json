@@ -32,6 +32,7 @@
 
     "activation_chance_tobe": "Activation chance: ${chance}",
     "chance": {
+        "normal": "Normal",
         "high": "High"
     },
 
@@ -59,6 +60,7 @@
         "level": "Require level: ${level}",
         "min_possible_level": "Minimum possible level: ${level}",
         "equipment": "Require equipment: ${type}",
+        "equipment_all": "Require equipment (all): ${type}",
         "equipment_at_least_one": "Require equipment (at least one): ${type}",
         "equipment_no_need": "No need for equipment: ${type}",
         "equipment_type": "Require equipment type: ${type}",

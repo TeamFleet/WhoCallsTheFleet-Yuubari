@@ -8,7 +8,7 @@ const getEquipment = kckit.get.equipment;
  * @param {Number|Ship} ship
  * @param {String} capability
  * @param {Array} [equipments]
- * @returns {Boolean|Array} 是否有该项能力，如果有，结果有可能是 Array，其内包含需要的装备类型和额外装备
+ * @returns {boolean|'unknown'|'always'|Object} 是否有该项能力，如果有，结果有可能是 Array，其内包含需要的装备类型和额外装备
  */
 const checkShipCapability = (_ship, capability, equipments) => {
     const ship = getShip(_ship);
@@ -29,6 +29,25 @@ const checkShipCapability = (_ship, capability, equipments) => {
                         capabilities[capability].chance = 'high';
                 } else {
                     capabilities[capability] = false;
+                }
+                break;
+            }
+            case 'OASW': {
+                /** 99级时的对潜属性 */
+                const statASW99 = ship.getAttribute('asw', 99);
+                if (statASW99 === false) {
+                    capabilities[capability] = false;
+                } else if (statASW99 === undefined) {
+                    capabilities[capability] = 'unknown';
+                } else {
+                    const oaswTable = kckit.check.oasw(ship.id) || [];
+                    if (oaswTable === true) {
+                        capabilities[capability] = 'always';
+                    } else if (!Array.isArray(oaswTable) || !oaswTable.length) {
+                        capabilities[capability] = false;
+                    } else {
+                        capabilities[capability] = oaswTable;
+                    }
                 }
                 break;
             }
