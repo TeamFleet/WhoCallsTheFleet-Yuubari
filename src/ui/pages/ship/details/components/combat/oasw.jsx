@@ -168,6 +168,6 @@ const EquipmentRequirementItem = ({ type, hasStat, count }) => (
                     })
                 )
                 .join(', ')})`}
-        {typeof count === 'number' && ` x${count}`}
+        {typeof count === 'number' && ` x ${count}`}
     </React.Fragment>
 );
