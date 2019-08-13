@@ -131,11 +131,13 @@
         },
         "support": "Support Expedition",
         "day": {
-            "title": "Day Combat"
+            "title": "Day Combat",
+            "oasw": "Opening Anti-Submarine Warfare",
+            "ots": "Opening Torpedo Salvo",
+            "shelling": "Shelling",
+            "unlock_2nd_round": "Unlock 2nd Round of Shelling",
+            "torpedo": "Torpedo Salvo"
         },
-        "oasw": "Opening Anti-Submarine Warfare",
-        "ots": "Opening Torpedo Salvo",
-        "torpedo": "Torpedo Salvo",
         "night": {
             "title": "Night Battle"
         },

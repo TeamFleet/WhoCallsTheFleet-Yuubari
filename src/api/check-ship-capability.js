@@ -51,6 +51,46 @@ const checkShipCapability = (_ship, capability, equipments) => {
                 }
                 break;
             }
+            case 'OTS': {
+                /** 99级时的雷击属性 */
+                const statTorpedo99 = ship.getAttribute('torpedo', 99);
+                if (statTorpedo99 === false) {
+                    capabilities[capability] = false;
+                } else if (statTorpedo99 === undefined) {
+                    capabilities[capability] = 'unknown';
+                } else {
+                    const otsTable = kckit.check.ots(ship.id) || [];
+                    if (otsTable === true) {
+                        capabilities[capability] = 'always';
+                    } else if (!Array.isArray(otsTable) || !otsTable.length) {
+                        capabilities[capability] = false;
+                    } else {
+                        capabilities[capability] = otsTable;
+                    }
+                }
+                break;
+            }
+            case 'shelling': {
+                if (ship.isType('cv')) {
+                    capabilities[capability] = {
+                        equipments: ['DiveBomber', 'TorpedoBomber']
+                    };
+                } else if (
+                    [
+                        'SmallCaliber',
+                        'MediumCaliber',
+                        'LargeCaliber',
+                        'SuperCaliber'
+                    ].some(type =>
+                        ship.slot.some((slot, slotIndex) =>
+                            ship.canEquip(type, slotIndex)
+                        )
+                    )
+                ) {
+                    capabilities[capability] = true;
+                }
+                break;
+            }
             default: {
                 if (equipments) {
                     const req = filterEquipmentTypes(ship, equipments);

@@ -131,11 +131,13 @@
         },
         "support": "支援艦隊攻撃",
         "day": {
-            "title": "昼砲雷撃戦"
+            "title": "昼砲雷撃戦",
+            "oasw": "先制対潜攻撃",
+            "ots": "開幕雷撃",
+            "shelling": "砲撃",
+            "unlock_2nd_round": "Unlock 2nd Round of Shelling",
+            "torpedo": "雷撃"
         },
-        "oasw": "先制対潜攻撃",
-        "ots": "開幕雷撃",
-        "torpedo": "雷撃戦",
         "night": {
             "title": "夜戦"
         },

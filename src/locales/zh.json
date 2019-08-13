@@ -131,11 +131,13 @@
         },
         "support": "支援舰队攻击",
         "day": {
-            "title": "昼炮雷击战"
+            "title": "昼炮雷击战",
+            "oasw": "先制对潜攻击",
+            "ots": "先制雷击",
+            "shelling": "炮击",
+            "unlock_2nd_round": "解锁第二轮炮击",
+            "torpedo": "雷击"
         },
-        "oasw": "先制对潜攻击",
-        "ots": "先制雷击",
-        "torpedo": "雷击战",
         "night": {
             "title": "夜战"
         },

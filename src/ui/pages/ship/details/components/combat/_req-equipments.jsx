@@ -9,6 +9,7 @@ import { wrapper as moduleClassName } from './index.less';
 
 const getEquipmentType = kckit.get.equipmentType;
 
+/** 简化的装备需求表 */
 export default ({ requirements = [] }) => {
     if (Array.isArray(requirements) && requirements.length === 1)
         requirements = requirements[0];

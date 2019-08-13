@@ -5,8 +5,8 @@ import Bullet from '@ui/components/bullet';
 import Requirements from './_requirements';
 
 export default ({ ship }) => {
-    const requirements = checkShipCapability(ship, 'OASW');
-    const title = __('combat_phases.day.oasw');
+    const requirements = checkShipCapability(ship, 'OTS');
+    const title = __('combat_phases.day.ots');
 
     if (requirements === false) return <Bullet title={title} level={0} />;
     if (requirements === 'unknown')
