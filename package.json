@@ -40,7 +40,7 @@
         "classnames": "2.2.6",
         "hotkeys-js": "3.6.14",
         "kckit": "1.22.1",
-        "koot": "^0.11.0-alpha.10",
+        "koot": "^0.11.0-beta.0",
         "localforage": "1.7.3",
         "lz-string": "1.4.4",
         "metas": "1.0.1",
@@ -58,14 +58,14 @@
         "eslint": "5.16.0",
         "eslint-config-koot": "0.2.0",
         "glob": "7.1.4",
-        "husky": "^3.0.3",
+        "husky": "^3.0.4",
         "image-size": "0.7.4",
-        "jest": "24.8.0",
+        "jest": "24.9.0",
         "json-pretty": "0.0.1",
         "jsonfile": "5.0.0",
-        "lint-staged": "^9.2.1",
+        "lint-staged": "^9.2.3",
         "nedb-promise": "2.0.1",
-        "node-notifier": "5.4.1",
+        "node-notifier": "5.4.3",
         "normalize.css": "8.0.1",
         "ora": "3.4.0",
         "postcss-easing-gradients": "3.0.1",
@@ -98,5 +98,8 @@
             "prettier --write",
             "git add"
         ]
+    },
+    "koot": {
+        "version": "0.11.0-beta.0"
     }
 }

@@ -5,8 +5,8 @@ const getEquipment = kckit.get.equipment;
 
 /**
  * 检查给定舰娘是否有某项能力
- * @param {Number|Ship} ship
- * @param {String} capability
+ * @param {number|Ship} ship
+ * @param {string} capability
  * @param {Array} [equipments]
  * @returns {boolean|'unknown'|'always'|Object} 是否有该项能力，如果有，结果有可能是 Array，其内包含需要的装备类型和额外装备
  */
