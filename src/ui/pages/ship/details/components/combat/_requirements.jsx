@@ -207,7 +207,6 @@ const EquipmentRequirement = ({
     }
 
     if (Array.isArray(oneOf) && oneOf.length) {
-        console.log({ oneOf });
         return (
             <React.Fragment>
                 {__('require.equipment_at_least_one', { type: '' })}
