@@ -1,3 +1,7 @@
+/**
+ * @typedef {"aerialBombing" | "aerialFighter" | "AAPropellantBarrage" | "jetAssult"  | "OASW" | "OTS" | "shelling" | "unlock2ndRoundShelling" | "torpedoSalvo"} ShipCapability
+ */
+
 import kckit from 'kckit';
 
 const getShip = kckit.get.ship;
@@ -6,7 +10,7 @@ const getEquipment = kckit.get.equipment;
 /**
  * 检查给定舰娘是否有某项能力
  * @param {number|Ship} ship
- * @param {string} capability
+ * @param {ShipCapability} capability
  * @param {Array} [equipments]
  * @returns {boolean|'unknown'|'always'|Object} 是否有该项能力，如果有，结果有可能是 Array，其内包含需要的装备类型和额外装备
  */
@@ -89,6 +93,17 @@ const checkShipCapability = (_ship, capability, equipments) => {
                 ) {
                     capabilities[capability] = true;
                 }
+                break;
+            }
+            case 'unlock2ndRoundShelling': {
+                capabilities[capability] = ship.isType('bb');
+                break;
+            }
+            case 'torpedoSalvo': {
+                const statTorpedo99 = ship.getAttribute('torpedo', 99);
+                capabilities[capability] =
+                    !ship.isType('cv') &&
+                    (!!statTorpedo99 || statTorpedo99 === 0);
                 break;
             }
             default: {

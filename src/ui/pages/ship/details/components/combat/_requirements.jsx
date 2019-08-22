@@ -1,9 +1,14 @@
 import React from 'react';
+import kckit from 'kckit';
+import equipmentTypes from 'kckit/src/types/equipments';
 
 import db from '@database';
 import getEquipmentTypesFromCondition from '@utils/get-equipment-types-from-condition';
 
 import IconEquipment from '@ui/components/icon-equipment';
+import LinkEquipment from '@ui/components/link/equipment';
+
+const getEquipmentType = kckit.get.equipmentType;
 
 /** 完整需求 */
 const Requirements = ({ requirements = [], ship }) => {
@@ -32,43 +37,58 @@ const Requirements = ({ requirements = [], ship }) => {
                     );
 
                 /** 需要的特定装备和/或装备类型 */
-                const equipmentsRequired = Object.entries(equipments).map(
-                    ([condition, value]) => {
-                        const getEquipmentRequirement = (condition, value) => {
-                            const o = {};
-                            const types = getEquipmentTypesFromCondition({
-                                [condition]: value
-                            });
-                            if (Array.isArray(types)) {
-                                if (types.length > 1) o.types = types;
-                                else if (types.length) o.type = types[0];
-                            }
-                            if (
-                                typeof value === 'object' &&
-                                typeof value.hasStat === 'object'
-                            ) {
-                                o.hasStat = value.hasStat;
-                            } else if (typeof value === 'number') {
-                                o.count = value;
-                            }
-                            return o;
-                        };
-                        if (
-                            condition === 'hasOneOf' &&
-                            Array.isArray(value) &&
-                            value.length
-                        ) {
-                            return {
-                                oneOf: value.map(e =>
-                                    getEquipmentRequirement(
-                                        ...Object.entries(e)[0]
-                                    )
-                                )
-                            };
-                        }
-                        return getEquipmentRequirement(condition, value);
-                    }
-                );
+                const equipmentsRequired = Array.isArray(equipments)
+                    ? equipments.length > 1
+                        ? [
+                              {
+                                  oneOf: [...equipments]
+                              }
+                          ]
+                        : [
+                              {
+                                  is: equipments[0]
+                              }
+                          ]
+                    : Object.entries(equipments).map(([condition, value]) => {
+                          const getEquipmentRequirement = (
+                              condition,
+                              value
+                          ) => {
+                              const o = {};
+                              const types = getEquipmentTypesFromCondition({
+                                  [condition]: value
+                              });
+                              if (Array.isArray(types)) {
+                                  if (types.length > 1) o.types = types;
+                                  else if (types.length) o.type = types[0];
+                              }
+                              if (
+                                  typeof value === 'object' &&
+                                  typeof value.hasStat === 'object'
+                              ) {
+                                  o.hasStat = value.hasStat;
+                              } else if (typeof value === 'number') {
+                                  o.count = value;
+                              }
+                              return o;
+                          };
+                          if (
+                              condition === 'hasOneOf' &&
+                              Array.isArray(value) &&
+                              value.length
+                          ) {
+                              return {
+                                  oneOf: value.map(e =>
+                                      typeof e === 'object'
+                                          ? getEquipmentRequirement(
+                                                ...Object.entries(e)[0]
+                                            )
+                                          : e
+                                  )
+                              };
+                          }
+                          return getEquipmentRequirement(condition, value);
+                      });
 
                 return (
                     <ul
@@ -122,7 +142,47 @@ export default Requirements;
 
 //
 
-const EquipmentRequirement = ({ type, types, oneOf, ...props }) => {
+const EquipmentRequirement = ({
+    equipment,
+    type,
+    types,
+    oneOf,
+    is,
+    ...props
+}) => {
+    if (/^_[0-9]+$/.test(equipment)) {
+        return (
+            <LinkEquipment
+                className="color-alt-lighter link-equipment"
+                equipment={equipment.substr(1)}
+            />
+        );
+    } else if (!isNaN(equipment)) {
+        type = getEquipmentType(equipment);
+    } else if (equipment) {
+        const t = equipmentTypes[equipment];
+        if (Array.isArray(t)) {
+            const t0 = getEquipmentType(t[0]);
+            const types = __('equipment_types');
+            let name = types[equipment];
+            if (equipment === 'Jets') name = types.jet;
+            return (
+                <IconEquipment className="equipment" icon={t0.icon}>
+                    {name}
+                </IconEquipment>
+            );
+        }
+
+        if (!isNaN(t)) {
+            const tt = getEquipmentType(t);
+            return (
+                <IconEquipment className="equipment" icon={tt.icon}>
+                    {tt._name}
+                </IconEquipment>
+            );
+        }
+    }
+
     if (!!type) {
         return (
             <React.Fragment>
@@ -147,15 +207,29 @@ const EquipmentRequirement = ({ type, types, oneOf, ...props }) => {
     }
 
     if (Array.isArray(oneOf) && oneOf.length) {
+        console.log({ oneOf });
         return (
             <React.Fragment>
                 {__('require.equipment_at_least_one', { type: '' })}
                 {oneOf.map((props, index) => (
                     <React.Fragment key={index}>
                         <br />
-                        <EquipmentRequirementItem {...props} />
+                        {typeof props === 'string' ? (
+                            <EquipmentRequirement equipment={props} />
+                        ) : (
+                            <EquipmentRequirementItem {...props} />
+                        )}
                     </React.Fragment>
                 ))}
+            </React.Fragment>
+        );
+    }
+
+    if (is) {
+        return (
+            <React.Fragment>
+                {__('require.equipment', { type: '' })}
+                <EquipmentRequirement equipment={is} />
             </React.Fragment>
         );
     }

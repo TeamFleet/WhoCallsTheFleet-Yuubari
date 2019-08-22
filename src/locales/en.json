@@ -139,7 +139,10 @@
             "torpedo": "Torpedo Salvo"
         },
         "night": {
-            "title": "Night Battle"
+            "title": "Night Battle",
+            "participate": "Participate in Night Battle",
+            "night_air_assault": "Night Air Assault",
+            "night_swordfish_assault": "Night Swordfish Assault"
         },
         "night_air_assault": "Night Air Assault"
     },

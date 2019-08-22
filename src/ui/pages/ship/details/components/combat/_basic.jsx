@@ -2,7 +2,7 @@ import React from 'react';
 
 import checkShipCapability from '@api/check-ship-capability';
 import Bullet from '@ui/components/bullet';
-import ReqE from './_req-equipments';
+import Requirements from './_requirements';
 
 export default ({
     ship,
@@ -21,7 +21,7 @@ export default ({
     return (
         <Bullet title={capabilityName} level={level}>
             {level === 'indeterminate' && able && (
-                <ReqE requirements={able.equipments} />
+                <Requirements requirements={able} ship={ship} />
             )}
             {children}
         </Bullet>

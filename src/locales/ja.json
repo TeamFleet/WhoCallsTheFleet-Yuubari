@@ -139,7 +139,10 @@
             "torpedo": "雷撃"
         },
         "night": {
-            "title": "夜戦"
+            "title": "夜戦",
+            "participate": "Participate in Night Battle",
+            "night_air_assault": "夜間航空攻撃",
+            "night_swordfish_assault": "Night Swordfish Assault"
         },
         "night_air_assault": "夜間航空攻撃"
     },

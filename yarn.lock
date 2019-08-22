@@ -6990,15 +6990,15 @@ koa@2.8.1:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.11.0-beta.0:
-  version "0.11.0-beta.0"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.11.0-beta.0.tgz#8e5e7f87c883eb5f4cc52361d81e9f1d53b0bce8"
-  integrity sha512-0pVAs7TocWC9RX/u2WfIGfDOtY2MJ/1K4HE+HNsvbX1NnPJD+G4Cm27g6KCxxWqfjzBr5kXVXMU+TzJ7zZVNNg==
+koot-webpack@^0.11.0-beta.1:
+  version "0.11.0-beta.1"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.11.0-beta.1.tgz#a3511cbc1d21a652f666de58fea86021a804ffc3"
+  integrity sha512-RN25f+e+kixv1UjzTJzrl3bIzAjPy+aCafNocbU8Sm0G488AvmV2zJzSCOzSjGC/KutV17smKGlH/J5arH2wmg==
 
-koot@^0.11.0-beta.0:
-  version "0.11.0-beta.0"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.11.0-beta.0.tgz#1d423b3a882f3985ca546bf6134d709cc6bf031d"
-  integrity sha512-TVu4ejMdIOv2EKvbJ9v0ZDbN1TdW21I7Tfkvd4gplI5TeNlLSyOfwZsWMAPFlYhSB9vfWcULyyHL12prwnR5UA==
+koot@^0.11.0-beta.1:
+  version "0.11.0-beta.1"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.11.0-beta.1.tgz#67c211380b7305eadc9a12f4b198f43c66c513d5"
+  integrity sha512-EHv5mOc9sZFkVLdUAmO51aSe+sNIrni2NpUU/uuW5C8cUxLL531XbUhkyBnmvYVyp6ZhJ+CzUs/NiZ64gCEcxQ==
   dependencies:
     "@babel/core" "7.5.5"
     "@babel/plugin-proposal-class-properties" "7.5.5"
@@ -7056,8 +7056,8 @@ koot@^0.11.0-beta.0:
     koa-proxies "0.8.1"
     koa-router "7.4.0"
     koa-static "5.0.0"
-    koot-webpack "^0.11.0-beta.0"
-    less "3.10.1"
+    koot-webpack "^0.11.0-beta.1"
+    less "3.10.2"
     less-loader "5.0.0"
     lodash "4.17.15"
     md5 "2.2.1"
@@ -7080,7 +7080,7 @@ koot@^0.11.0-beta.0:
     redux "4.0.4"
     redux-thunk "2.3.0"
     rimraf "3.0.0"
-    sass-loader "7.2.0"
+    sass-loader "7.3.1"
     sp-koa-views "1.0.1"
     style-loader "1.0.0"
     sync-request "6.1.0"
@@ -7131,10 +7131,10 @@ less-loader@5.0.0:
     loader-utils "^1.1.0"
     pify "^4.0.1"
 
-less@3.10.1:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/less/-/less-3.10.1.tgz#a1c97e3436acdfd1757916333b9906f3af7d559e"
-  integrity sha512-xlPx6vt5nAm1DGDnuv06SNQba4WnMKY5vZkgCrnyKXkDbs09kl9cc2nSS7OMufLT60IWsxUSnwr1Rkh4rkMFcg==
+less@3.10.2:
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/less/-/less-3.10.2.tgz#49b94da22e18ed112d9500bdb2340969dafee57f"
+  integrity sha512-crOb5r8AnIYkWss6sJNccgb20UqvDfdZhopuDG9LGfcSQY+fAKIA/W4as5+ELnfUxnDruqC7iYyeDZmC44nMnw==
   dependencies:
     clone "^2.1.2"
   optionalDependencies:
@@ -10201,16 +10201,16 @@ sane@^4.0.3:
     minimist "^1.1.1"
     walker "~1.0.5"
 
-sass-loader@7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-7.2.0.tgz#e34115239309d15b2527cb62b5dfefb62a96ff7f"
-  integrity sha512-h8yUWaWtsbuIiOCgR9fd9c2lRXZ2uG+h8Dzg/AGNj+Hg/3TO8+BBAW9mEP+mh8ei+qBKqSJ0F1FLlYjNBc61OA==
+sass-loader@7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-7.3.1.tgz#a5bf68a04bcea1c13ff842d747150f7ab7d0d23f"
+  integrity sha512-tuU7+zm0pTCynKYHpdqaPpe+MMTQ76I9TPZ7i4/5dZsigE350shQWe5EZNl5dBidM49TPET75tNqRbcsUZWeNA==
   dependencies:
     clone-deep "^4.0.1"
     loader-utils "^1.0.1"
     neo-async "^2.5.0"
     pify "^4.0.1"
-    semver "^5.5.0"
+    semver "^6.3.0"
 
 sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
