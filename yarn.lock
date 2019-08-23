@@ -6990,15 +6990,15 @@ koa@2.8.1:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.11.0-beta.1:
-  version "0.11.0-beta.1"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.11.0-beta.1.tgz#a3511cbc1d21a652f666de58fea86021a804ffc3"
-  integrity sha512-RN25f+e+kixv1UjzTJzrl3bIzAjPy+aCafNocbU8Sm0G488AvmV2zJzSCOzSjGC/KutV17smKGlH/J5arH2wmg==
+koot-webpack@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.11.0.tgz#103a74dec6597a013832b64825be9949eca37f4d"
+  integrity sha512-5RvO40zmYiJ45/H2dCA6RyyLzvfT1U1E3HLH+L2O2t+iXJ9CyAg+ZhfWumlHn9tOVUPRDqVNWLWUIC98uWfuYA==
 
-koot@^0.11.0-beta.1:
-  version "0.11.0-beta.1"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.11.0-beta.1.tgz#67c211380b7305eadc9a12f4b198f43c66c513d5"
-  integrity sha512-EHv5mOc9sZFkVLdUAmO51aSe+sNIrni2NpUU/uuW5C8cUxLL531XbUhkyBnmvYVyp6ZhJ+CzUs/NiZ64gCEcxQ==
+koot@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.11.0.tgz#d93fe77965a46e261914f7686b038f6258d4c464"
+  integrity sha512-QlqCd3/56lNTTt8AL0GkbQhyKWD2zBLDQNthHbQnCcOTcFs5jkwsoLQJaFRlM4c7VzXEoCk/kHQa2rWM8frMxw==
   dependencies:
     "@babel/core" "7.5.5"
     "@babel/plugin-proposal-class-properties" "7.5.5"
@@ -7056,8 +7056,8 @@ koot@^0.11.0-beta.1:
     koa-proxies "0.8.1"
     koa-router "7.4.0"
     koa-static "5.0.0"
-    koot-webpack "^0.11.0-beta.1"
-    less "3.10.2"
+    koot-webpack "^0.11.0"
+    less "3.10.3"
     less-loader "5.0.0"
     lodash "4.17.15"
     md5 "2.2.1"
@@ -7131,10 +7131,10 @@ less-loader@5.0.0:
     loader-utils "^1.1.0"
     pify "^4.0.1"
 
-less@3.10.2:
-  version "3.10.2"
-  resolved "https://registry.yarnpkg.com/less/-/less-3.10.2.tgz#49b94da22e18ed112d9500bdb2340969dafee57f"
-  integrity sha512-crOb5r8AnIYkWss6sJNccgb20UqvDfdZhopuDG9LGfcSQY+fAKIA/W4as5+ELnfUxnDruqC7iYyeDZmC44nMnw==
+less@3.10.3:
+  version "3.10.3"
+  resolved "https://registry.yarnpkg.com/less/-/less-3.10.3.tgz#417a0975d5eeecc52cff4bcfa3c09d35781e6792"
+  integrity sha512-vz32vqfgmoxF1h3K4J+yKCtajH0PWmjkIFgbs5d78E/c/e+UQTnI+lWK+1eQRE95PXM2mC3rJlLSSP9VQHnaow==
   dependencies:
     clone "^2.1.2"
   optionalDependencies:
