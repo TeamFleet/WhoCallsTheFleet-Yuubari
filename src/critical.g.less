@@ -129,6 +129,10 @@ body {
 
 a {
     text-decoration: none;
+    &.mod-underline {
+        text-decoration: underline;
+        .is-hover({text-decoration: none;});
+    }
 }
 
 a,

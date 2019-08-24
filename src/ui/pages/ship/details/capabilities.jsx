@@ -1,7 +1,7 @@
 import React from 'react';
 import { extend } from 'koot';
 
-import UnderConstruction from '@ui/components/under-construction';
+// import UnderConstruction from '@ui/components/under-construction';
 import SpecialCapability from './components/special-capability';
 import Combat from './components/combat';
 import AACI from './components/aaci';
@@ -17,9 +17,9 @@ const ShipDetailsContentCapabilities = extend({
 })(props => (
     <div className={props.className}>
         <div className="wrapper">
-            <div className="under-construction">
+            {/* <div className="under-construction">
                 <UnderConstruction component="div" />
-            </div>
+            </div> */}
             <SpecialCapability
                 ship={props.ship}
                 className="shipinfo shipinfo-special-capability"

@@ -2,7 +2,7 @@ import React from 'react';
 
 import checkShipCapability from '@api/check-ship-capability';
 import Bullet from '@ui/components/bullet';
-import ReqE from './_req-equipments';
+import Requirements from './_requirements';
 
 export default ({ ship }) => {
     const able = checkShipCapability(ship, 'AAPropellantBarrage');
@@ -12,7 +12,7 @@ export default ({ ship }) => {
             title={__('combat_phases.aerial.anti_air_propellant_barrage')}
             level={able ? 'indeterminate' : 0}
         >
-            {able && <ReqE requirements={able.equipments} />}
+            {able && <Requirements requirements={able} ship={ship} />}
             {able && chance && (
                 <span
                     dangerouslySetInnerHTML={{

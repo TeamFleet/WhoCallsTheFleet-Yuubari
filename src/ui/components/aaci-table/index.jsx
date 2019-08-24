@@ -128,7 +128,7 @@ const Equipment = ({ className, show, children, ...props }) => {
 
     const theProps = {
         equipment: id,
-        className: 'equipment color-alt-lighter'
+        className: 'equipment color-alt-lighter mod-underline'
         // iconSize: 'large'
     };
 

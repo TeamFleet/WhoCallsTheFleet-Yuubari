@@ -153,7 +153,7 @@ const EquipmentRequirement = ({
     if (/^_[0-9]+$/.test(equipment)) {
         return (
             <LinkEquipment
-                className="color-alt-lighter link-equipment"
+                className="color-alt-lighter mod-underline"
                 equipment={equipment.substr(1)}
             />
         );
