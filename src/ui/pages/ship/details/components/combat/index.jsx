@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { extend } from 'koot';
 
 import ComponentContainer from '@ui/containers/infos-component';
@@ -24,38 +24,40 @@ const { wrapper: moduleClassName } = styles;
 
 const Combat = extend({
     styles
-})(({ className, ship }) => (
-    <ComponentContainer
-        className={className}
-        title={__('ship_details.combat_capabilities')}
-    >
-        <Legend />
+})(
+    memo(({ className, ship }) => (
+        <ComponentContainer
+            className={className}
+            title={__('ship_details.combat_capabilities')}
+        >
+            <Legend />
 
-        <CombatRange ship={ship} />
+            <CombatRange ship={ship} />
 
-        <Section title={__('combat_phases.jet.title')}>
-            <JetAssult ship={ship} />
-        </Section>
+            <Section title={__('combat_phases.jet.title')}>
+                <JetAssult ship={ship} />
+            </Section>
 
-        <Section title={__('combat_phases.aerial.title')}>
-            <AerialFighter ship={ship} />
-            <AerialBombing ship={ship} />
-            <AAPropellantBarrage ship={ship} />
-        </Section>
+            <Section title={__('combat_phases.aerial.title')}>
+                <AerialFighter ship={ship} />
+                <AerialBombing ship={ship} />
+                <AAPropellantBarrage ship={ship} />
+            </Section>
 
-        <Section title={__('combat_phases.day.title')}>
-            <OASW ship={ship} />
-            <OTS ship={ship} />
-            <Shelling ship={ship} />
-            <Unlock2ndRoundShelling ship={ship} />
-            <TorpedoSalvo ship={ship} />
-        </Section>
+            <Section title={__('combat_phases.day.title')}>
+                <OASW ship={ship} />
+                <OTS ship={ship} />
+                <Shelling ship={ship} />
+                <Unlock2ndRoundShelling ship={ship} />
+                <TorpedoSalvo ship={ship} />
+            </Section>
 
-        <Section title={__('combat_phases.night.title')}>
-            <NightBattle ship={ship} />
-        </Section>
-    </ComponentContainer>
-));
+            <Section title={__('combat_phases.night.title')}>
+                <NightBattle ship={ship} />
+            </Section>
+        </ComponentContainer>
+    ))
+);
 export default Combat;
 
 //
