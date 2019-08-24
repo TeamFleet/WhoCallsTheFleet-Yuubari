@@ -24,6 +24,8 @@
             "@utils/*": ["./src/utils/*"],
             "@ui": ["./src/ui"],
             "@ui/*": ["./src/ui/*"],
+            "@components": ["./src/ui/components"],
+            "@components/*": ["./src/ui/components/*"],
             "@api": ["./src/api"],
             "@api/*": ["./src/api/*"],
             "@const": ["./src/constants"],

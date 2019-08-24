@@ -80,6 +80,7 @@ module.exports = {
         '@app': path.resolve('./src'),
         '@utils': path.resolve('./src/utils'),
         '@ui': path.resolve('./src/ui'),
+        '@components': path.resolve('./src/ui/components'),
         '@api': path.resolve('./src/api'),
         '@const': path.resolve('./src/constants'),
         '@redux': path.resolve('./src/redux'),

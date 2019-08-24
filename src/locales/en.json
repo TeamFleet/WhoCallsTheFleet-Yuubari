@@ -105,7 +105,8 @@
         "aircraft": "Aircraft",
         "jet": "Jets",
         "surface_radar": "Surface Radar",
-        "aa_radar": "AA Radar"
+        "aa_radar": "AA Radar",
+        "ha_mount": "High-Angle Gun"
     },
 
     "improvement": {

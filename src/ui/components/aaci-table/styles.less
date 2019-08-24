@@ -2,39 +2,72 @@
 
 .component {
     font-size: 14px;
-    line-height: 1.5;
+    line-height: @equipmenticon-size;
 
-    .row{
+    .row {
         display: flex;
         flex-flow: row nowrap;
-        & + .row{
+        & + .row {
             border-top: 1px solid @color-border;
         }
     }
-    dl.row{
+    dl.row {
         padding: 0;
         margin: 0;
+        &.row-aaci {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
     }
 
-    .cell{
+    .cell {
         display: block;
-        flex: 1 0 40px;
-        &[data-cell-type="equipments"]{
-            flex-grow: 5;
+        flex: 0 0 40px;
+        &[data-cell-type='equipments'] {
+            flex-grow: 9;
             flex-basis: 150px;
+            color: @theme-grey-50;
+            line-height: 1.2em;
+            .equipment {
+                min-height: @equipmenticon-size;
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                padding-top: 6px;
+                padding-bottom: 6px;
+                .icon {
+                    top: 0;
+                }
+                sup {
+                    font-size: 12px;
+                    color: @color-positive;
+                    display: inline-block;
+                    margin-left: 5px;
+                    top: -4px;
+                    &::before {
+                        content: '[';
+                        padding-right: 2px;
+                    }
+                    &::after {
+                        content: ']';
+                        padding-left: 2px;
+                    }
+                }
+            }
         }
-        &[data-cell-type="fixed"],
-        &[data-cell-type="modifier"]{
-            flex-grow: 2.5;
+        &[data-cell-type='fixed'],
+        &[data-cell-type='modifier'] {
+            flex-grow: 3;
             flex-basis: 30px;
         }
     }
-    dt.cell, dd.cell{
+    dt.cell,
+    dd.cell {
         padding: 0;
         margin: 0;
     }
 
-    .equipment{
+    .equipment {
         display: block;
     }
 }

@@ -105,7 +105,8 @@
         "aircraft": "飞行器",
         "jet": "喷气机",
         "surface_radar": "对水面电探/雷达",
-        "aa_radar": "对空电探/雷达"
+        "aa_radar": "对空电探/雷达",
+        "ha_mount": "高角炮"
     },
 
     "improvement": {

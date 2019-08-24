@@ -105,7 +105,8 @@
         "aircraft": "Aircraft",
         "jet": "噴式機",
         "surface_radar": "水上電探",
-        "aa_radar": "対空電探"
+        "aa_radar": "対空電探",
+        "ha_mount": "高角砲"
     },
 
     "improvement": {
