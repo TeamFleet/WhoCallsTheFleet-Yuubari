@@ -4,7 +4,7 @@ import { extend } from 'koot';
 
 // import kckit from 'kckit'
 // const checkAACI = kckit.check.aaci
-import getShip from '@utils/get-ship';
+// import getShip from '@utils/get-ship';
 
 import ComponentContainer from '@ui/containers/infos-component';
 // import IconEquipment from '@ui/components/icon-equipment';
@@ -16,9 +16,9 @@ const ShipDetailsAACI = extend({
     styles: require('./aaci.less')
 })(
     memo(({ className, ship }) => {
-        const aaciTypes = getShip(ship).getAACI();
-        const ableToAACI =
-            Array.isArray(aaciTypes) && aaciTypes.length ? true : false;
+        // const aaciTypes = getShip(ship).getAACI();
+        // const ableToAACI =
+        //     Array.isArray(aaciTypes) && aaciTypes.length ? true : false;
         return (
             <ComponentContainer
                 className={className}
