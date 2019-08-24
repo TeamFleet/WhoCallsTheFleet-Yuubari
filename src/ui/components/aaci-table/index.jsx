@@ -128,8 +128,8 @@ const Equipment = ({ className, show, children, ...props }) => {
 
     const theProps = {
         equipment: id,
-        className: 'equipment color-alt-lighter',
-        iconSize: 'large'
+        className: 'equipment color-alt-lighter'
+        // iconSize: 'large'
     };
 
     if (!id) {
