@@ -1,52 +1,86 @@
-import React from 'react'
-import classNames from 'classnames'
+import React from 'react';
+import classNames from 'classnames';
+import shipTypes from 'kckit/src/types/ships';
 
-import db from '@database'
-import ensureArray from '@utils/ensure-array'
+import db from '@database';
+import ensureArray from '@utils/ensure-array';
+import parseShipTypes from '@utils/parse-ship-types';
 
-import ListShips from '@ui/components/list/ships'
-import Icon from '@ui/components/icon'
+import ListShips from '@ui/components/list/ships';
+import Icon from '@ui/components/icon';
 
-export default ({
-    className,
-    condition = {}
-}) => {
-    const components = []
+export default ({ className, condition = {} }) => {
+    const components = [];
 
     if (condition.isType || condition.isNotType) {
-        const isAt = condition.isType ? true : false
+        const isAt = condition.isType ? true : false;
+
+        let types = parseShipTypes(condition.isType || condition.isNotType);
+        if (isMatchMajorType(types, 'Destroyers')) {
+            types = [1];
+        }
+
+        if (isMatchMajorType(types, 'Carriers')) {
+            types = [];
+            db.shipCollections.some(collection => {
+                if (collection.names.en_us === 'Carriers') {
+                    types.push(collection.name);
+                    return true;
+                }
+                return false;
+            });
+        }
+
         components.push(
-            <div key="conditionType" className={classNames([isAt ? "at" : 'exclude', 'mod-need-sep'])}>
+            <div
+                key="conditionType"
+                className={classNames([
+                    isAt ? 'at' : 'exclude',
+                    'mod-need-sep'
+                ])}
+            >
                 {isAt ? SymbolAt : SymbolExclude}
-                {ensureArray(condition.isType || condition.isNotType).map((typeId, index) => {
-                    const type = db.shipTypes[typeId]
-                    return (
-                        <ConditionItem children={type._name} key={index} />
-                    )
-                })}
+                {types.map((typeId, index) => (
+                    <ConditionItem
+                        children={
+                            db.shipTypes[typeId]
+                                ? db.shipTypes[typeId]._name
+                                : typeId
+                        }
+                        key={index}
+                    />
+                ))}
             </div>
-        )
+        );
     }
     if (condition.isClass || condition.isNotClass) {
-        const isAt = condition.isClass ? true : false
+        const isAt = condition.isClass ? true : false;
         components.push(
-            <div key="conditionClass" className={classNames([isAt ? "at" : 'exclude', 'mod-need-sep'])}>
+            <div
+                key="conditionClass"
+                className={classNames([
+                    isAt ? 'at' : 'exclude',
+                    'mod-need-sep'
+                ])}
+            >
                 {isAt ? SymbolAt : SymbolExclude}
-                {ensureArray(condition.isClass || condition.isNotClass).map((classId, index) => {
-                    const cl = db.shipClasses[classId]
-                    const type = db.shipTypes[cl.ship_type_id]
-                    return (
-                        <ConditionItem
-                            children={__('shiptypeclass', {
-                                'class': cl._name,
-                                'type': type._name,
-                            })}
-                            key={index}
-                        />
-                    )
-                })}
+                {ensureArray(condition.isClass || condition.isNotClass).map(
+                    (classId, index) => {
+                        const cl = db.shipClasses[classId];
+                        const type = db.shipTypes[cl.ship_type_id];
+                        return (
+                            <ConditionItem
+                                children={__('shiptypeclass', {
+                                    class: cl._name,
+                                    type: type._name
+                                })}
+                                key={index}
+                            />
+                        );
+                    }
+                )}
             </div>
-        )
+        );
     }
     if (condition.isID) {
         components.push(
@@ -59,7 +93,7 @@ export default ({
                 key="conditionID"
                 children={SymbolAt}
             />
-        )
+        );
     }
     if (condition.isNotID) {
         components.push(
@@ -68,25 +102,44 @@ export default ({
                 {ensureArray(condition.isNotID).map((shipId, index) => {
                     return (
                         <ConditionItem
-                            children={db.ships[shipId].getName(__('shipname_dash_none'))}
+                            children={db.ships[shipId].getName(
+                                __('shipname_dash_none')
+                            )}
                             key={index}
                         />
-                    )
+                    );
                 })}
             </div>
-        )
+        );
     }
 
     return (
-        <div key="conditions" className={classNames("condition", "mod-ship", className)}>
+        <div
+            key="conditions"
+            className={classNames('condition', 'mod-ship', className)}
+        >
             {components}
         </div>
-    )
-}
+    );
+};
+
+//
 
 const ConditionItem = ({ children }) => (
     <span className="item" children={children} />
-)
+);
 
-const SymbolAt = <Icon className="symbol is-at" icon="at-sign" />
-const SymbolExclude = <Icon className="symbol is-exclude" icon="cross" />
+const SymbolAt = <Icon className="symbol is-at" icon="at-sign" />;
+const SymbolExclude = <Icon className="symbol is-exclude" icon="cross" />;
+
+//
+
+/**
+ * 给定类型列表是否满足对应的全部类型
+ * @param {number[]} types
+ * @param {string} majorType
+ */
+const isMatchMajorType = (types = [], majorType = '') =>
+    shipTypes[majorType] &&
+    shipTypes[majorType].length === types.length &&
+    shipTypes[majorType].every(id => types.includes(id));
