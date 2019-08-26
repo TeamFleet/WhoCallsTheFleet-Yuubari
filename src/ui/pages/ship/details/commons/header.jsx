@@ -1,38 +1,16 @@
 import React from 'react';
 import { extend } from 'koot';
 
-import db from '@database';
 // import {
 //     changeTab as shipDetailsChangeTab,
 //     TABINDEX
 // } from '@api/pages'
 // import { getInfosId } from '../../details'
 import getLink from '@utils/get-link';
+import getShipTypeName from '@utils/get-ship-type-name';
+import getShipClassNameAndNumber from '@utils/get-ship-class-name-and-number';
 
 import Header from '@ui/components/main-header/infos';
-
-const getShipType = ship => {
-    if (ship.type && ship.type_display && ship.type !== ship.type_display)
-        // return db.shipTypes[ship.type_display]._name + ' (' + ship._type + ')'
-        return db.shipTypes[ship.type_display]._name;
-    if (ship.type) return ship._type;
-    return '';
-};
-
-const getStrShipClass = ship => {
-    if (ship.class_no) {
-        if (isNaN(ship.class_no)) {
-            return (
-                __('shipclass', { class: ship._class }) + ' ' + ship.class_no
-            );
-        }
-        return __('shipclass_number', {
-            class: ship._class,
-            number: ship.class_no
-        });
-    }
-    return __('shipclass', { class: ship._class });
-};
 
 // @connect((state, ownProps) => state.pages[getInfosId(ownProps.ship.id)] || {})
 const ShipDetailsHeader = extend({
@@ -44,7 +22,7 @@ const ShipDetailsHeader = extend({
         <Header
             className={className}
             title={ship._name}
-            subtitle={getShipType(ship)}
+            subtitle={getShipTypeName(ship)}
             tabs={(() => {
                 if (!Array.isArray(tabs)) return [];
                 return tabs.map(tabId => ({
@@ -64,7 +42,7 @@ const ShipDetailsHeader = extend({
         >
             <span className="shipclassnumber">No.{ship.getNo()}</span>
             <br />
-            {getStrShipClass(ship)}
+            {getShipClassNameAndNumber(ship)}
             {/*
                 {localeId === 'ja' && <br />}
                 {ship.class_no

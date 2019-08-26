@@ -1,84 +1,94 @@
-import metas from 'metas'
-import { store } from 'koot'
+import metas from 'metas';
+import { store } from 'koot';
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'
 
-import { update as updatePageTitle } from '@api/page-title/api.js'
+import { update as updatePageTitle } from '@api/page-title/api.js';
 
 const htmlHead = (state, infos) => {
-
     if (typeof state === 'object' && typeof infos === 'undefined') {
-        return htmlHead(store.getState(), state)
+        return htmlHead(store.getState(), state);
     }
 
-    if (typeof state !== 'object') return {}
+    if (typeof state !== 'object') return {};
 
-    const localeId = state.localeId
-    const siteName = __('title') + (__DEV__ ? ' (DEV)' : '')
-    let origin = state.server.origin
+    const localeId = state.localeId;
+    const siteName = __('title') + (__DEV__ ? ' (DEV)' : '');
+    let origin = state.server.origin;
 
     let {
+        // eslint-disable-next-line no-restricted-globals
         uri = typeof location !== 'undefined' ? location.pathname : undefined,
         title = siteName,
         subtitle,
         description,
         image
-    } = Object.assign({
-        uri: '',
-        "twitter:card": "summary_large_image",
-    }, infos)
+    } = Object.assign(
+        {
+            uri: '',
+            'twitter:card': 'summary_large_image'
+        },
+        infos
+    );
 
     if (typeof uri === 'object') {
-        uri = uri.pathname
+        uri = uri.pathname;
         // const pathname = uri.pathname
         // const query = uri.query || {}
         // fb_locale = query.fb_locale
     }
-    if (uri.substr(0, 1) == '/') uri = uri.substr(1)
+    if (uri.substr(0, 1) === '/') uri = uri.substr(1);
 
     if (title) {
         if (Array.isArray(title))
-            title = title.filter(str => typeof str !== 'undefined' && str !== '')
+            title = title.filter(
+                str => typeof str !== 'undefined' && str !== ''
+            );
 
-        const titleMain = Array.isArray(title) && title.length ? title[0] : title
-        title = Array.isArray(title) ? title.join(' / ') : title
+        const titleMain =
+            Array.isArray(title) && title.length ? title[0] : title;
+        title = Array.isArray(title) ? title.join(' / ') : title;
 
         // const store = getStore()
         if (typeof subtitle !== 'undefined')
-            store.dispatch(updatePageTitle({
-                main: titleMain,
-                sub: subtitle
-            }))
-        else
-            store.dispatch(updatePageTitle(titleMain))
+            store.dispatch(
+                updatePageTitle({
+                    main: titleMain,
+                    sub: subtitle
+                })
+            );
+        else store.dispatch(updatePageTitle(titleMain));
 
         if (title !== siteName)
-            title = title.replace(/\n/g, '') + ' - ' + siteName
+            title = title.replace(/\n/g, '') + ' - ' + siteName;
     }
 
-    if (description) description = description.replace(/\n/g, '')
+    if (description) description = description.replace(/\n/g, '');
 
-    if (origin.substr(origin.length - 1, 1) !== '/') origin += '/'
+    if (origin.substr(origin.length - 1, 1) !== '/') origin += '/';
 
     return {
         title,
-        metas: metas({
-            title,
-            description,
-            image: image || (origin + 'launcher.jpg'),
-            url: origin + uri,
-            type: "website",
-            locale: localeId,
+        metas: metas(
+            {
+                title,
+                description,
+                image: image || origin + 'launcher.jpg',
+                url: origin + uri,
+                type: 'website',
+                locale: localeId,
 
-            siteName,
+                siteName,
 
-            twitter: {
-                card: "summary",
-                siteCreator: "Diablohu"
-            }
-        }, true)
-    }
+                twitter: {
+                    card: 'summary',
+                    siteCreator: 'Diablohu'
+                }
+            },
+            true
+        )
+    };
     /*
     const meta = [
         // Schema.org markup for Google+
@@ -166,6 +176,6 @@ const htmlHead = (state, infos) => {
     //         })
     //     })
     // }
-}
+};
 
-export default htmlHead
+export default htmlHead;

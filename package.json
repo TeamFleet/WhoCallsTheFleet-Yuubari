@@ -40,7 +40,7 @@
         "classnames": "2.2.6",
         "hotkeys-js": "3.7.1",
         "kckit": "1.22.1",
-        "koot": "^0.11.0",
+        "koot": "^0.11.1",
         "localforage": "1.7.3",
         "lz-string": "1.4.4",
         "metas": "1.0.1",
@@ -100,6 +100,6 @@
         ]
     },
     "koot": {
-        "version": "0.11.0"
+        "version": "0.11.1"
     }
 }
