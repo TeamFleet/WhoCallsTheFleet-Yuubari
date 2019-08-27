@@ -71,6 +71,7 @@
         "postcss-easing-gradients": "3.0.1",
         "postcss-pxtorem": "4.0.1",
         "prettier": "^1.18.2",
+        "prettier-eslint": "^9.0.0",
         "progress": "2.0.3",
         "raw-loader": "3.1.0",
         "simple-git": "1.124.0",
