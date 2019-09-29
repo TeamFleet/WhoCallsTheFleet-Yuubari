@@ -1,18 +1,27 @@
 @import '../../base.less';
 
-.component{
-    height:     100%;
+.component {
+    height: 100%;
 
     .swiper-button-prev,
-    .swiper-button-next{
-        &:not(:empty){
-            background:     none transparent;
+    .swiper-button-next {
+        &:not(:empty) {
+            background: none transparent;
+            &::after {
+                display: none;
+            }
         }
     }
-        .swiper-button-prev{
-            text-align: left;
+    .swiper-button-prev {
+        text-align: left;
+    }
+    .swiper-button-next {
+        text-align: right;
+    }
+
+    .swiper-controls {
+        :active {
+            outline: 0;
         }
-        .swiper-button-next{
-            text-align: right;
-        }
+    }
 }

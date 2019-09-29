@@ -55,6 +55,9 @@ export default ({ className, condition = {} }) => {
     }
     if (condition.isClass || condition.isNotClass) {
         const isAt = condition.isClass ? true : false;
+        const classIdList = ensureArray(
+            condition.isClass || condition.isNotClass
+        );
         components.push(
             <div
                 key="conditionClass"
@@ -64,10 +67,18 @@ export default ({ className, condition = {} }) => {
                 ])}
             >
                 {isAt ? SymbolAt : SymbolExclude}
-                {ensureArray(condition.isClass || condition.isNotClass).map(
-                    (classId, index) => {
+                {classIdList
+                    .filter(classId => {
+                        if (classId === 96 && classIdList.includes(97))
+                            return false;
+                        return true;
+                    })
+                    .map((classId, index) => {
                         const cl = db.shipClasses[classId];
-                        const type = db.shipTypes[cl.ship_type_id];
+                        const type =
+                            db.shipTypes[
+                                cl.ship_type_id === 32 ? 9 : cl.ship_type_id
+                            ];
                         return (
                             <ConditionItem
                                 children={__('shiptypeclass', {
@@ -77,8 +88,7 @@ export default ({ className, condition = {} }) => {
                                 key={index}
                             />
                         );
-                    }
-                )}
+                    })}
             </div>
         );
     }
@@ -97,7 +107,7 @@ export default ({ className, condition = {} }) => {
     }
     if (condition.isNotID) {
         components.push(
-            <div key="conditionNotID" className={'exclude mod-need-sep'}>
+            <div key="conditionNotID" className="exclude mod-need-sep">
                 {SymbolExclude}
                 {ensureArray(condition.isNotID).map((shipId, index) => {
                     return (
