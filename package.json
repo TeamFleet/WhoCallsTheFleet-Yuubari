@@ -56,7 +56,7 @@
         "cli-spinners": "^2.2.0",
         "cssnano": "^4.1.10",
         "eslint": "^6.7.2",
-        "eslint-config-koot": "^1.5.0",
+        "eslint-config-koot": "^1.6.0",
         "glob": "^7.1.6",
         "husky": "^3.1.0",
         "image-size": "^0.8.3",
@@ -74,7 +74,7 @@
         "prettier-eslint": "^9.0.1",
         "progress": "^2.0.3",
         "raw-loader": "^4.0.0",
-        "simple-git": "^1.128.0",
+        "simple-git": "^1.129.0",
         "svg-url-loader": "^3.0.3"
     },
     "optionalDependencies": {},
