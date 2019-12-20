@@ -7304,10 +7304,10 @@ jsx-ast-utils@^2.2.3:
     array-includes "^3.0.3"
     object.assign "^4.1.0"
 
-kckit@^1.27.0:
-  version "1.27.0"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.27.0.tgz#6976bfc2f595eed56045f60f851f56ad51257749"
-  integrity sha512-BYpAPbjzQWzNe3tKxzF2EVViQEiwH1Sn/QL0PDdfrwll+AkOxORge/hAO93oDVLvnnHIAyYIS2URvAPEjPmTcw==
+kckit@^1.28.0:
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.28.0.tgz#e96d5b86b8b0e7c81a2bbf270f357a702028c4b3"
+  integrity sha512-qFt57SToJFTdZafacHF3M8xb7GVM/UVh5XX0tsGIjD6BM0MWld7qjVwRJzBuyEgvxWjCWQPJsiY83QvIBjAMow==
   dependencies:
     camelcase "5.3.1"
 
@@ -12919,10 +12919,10 @@ whocallsthefleet-backgrounds@^1.3.2:
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.3.2.tgz#ea434851b7d362b30ba7c1eb86ac86e22fcd45e2"
   integrity sha512-3vQRvNciB3Dq1jlbZHXdujPIwEeDazHTfyZLAzuw7YA6f7JGGPgKHTqQpqQApRCel5DH75umEtdAZldjen3gUA==
 
-whocallsthefleet-database@^20191208.0.0:
-  version "20191208.0.0"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20191208.0.0.tgz#e386deb0080159b4abb03b95b0be79ecfade3bfe"
-  integrity sha512-b05wpD8M0JgvG8nht/ySOQWU2njGlULth+nYMFW/F0C5DSlVY6R/F30qghSPCp7t0NrS7QSlavXX1ucxSI+KAQ==
+whocallsthefleet-database@^20191221.0.0:
+  version "20191221.0.0"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20191221.0.0.tgz#f8b19bea7ca2d75726df7ce9854932ad2302aedd"
+  integrity sha512-pXJt3rhvHRfAMVYjRWPPWiYAU4JT79IC+mOhWSWafPoTXP/uMOsVpZABtXGhTSA+JqjO3+/4uqurGs1mjtqamA==
 
 wide-align@^1.1.0:
   version "1.1.3"
