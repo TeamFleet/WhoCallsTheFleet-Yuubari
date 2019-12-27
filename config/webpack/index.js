@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const webpackOptimizationProd = require('koot/utils/webpack-optimization-prod');
 
 module.exports = async () => {
     /** @type {Object} 基础配置 */
@@ -76,36 +77,6 @@ module.exports = async () => {
     // `entry` 项仅针对：客户端
     return {
         ...configBase,
-        entry: {
-            commons: [
-                'react',
-                'react-dom',
-                'redux',
-                'redux-thunk',
-                'react-redux',
-                'react-router',
-                'react-router-redux',
-                'react-transition-group',
-                // 'localforage',
-                'lz-string',
-                'metas',
-                'classnames',
-                'js-cookie'
-                // 'kckit'
-            ],
-            ...configBase.entry
-        },
-        optimization: {
-            splitChunks: {
-                cacheGroups: {
-                    commons: {
-                        name: 'commons',
-                        chunks: 'initial',
-                        minChunks: 2,
-                        reuseExistingChunk: true
-                    }
-                }
-            }
-        }
+        optimization: webpackOptimizationProd()
     };
 };
