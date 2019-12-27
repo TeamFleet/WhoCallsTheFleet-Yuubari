@@ -39,7 +39,7 @@
         "check-css-prop": "^1.0.1",
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.7.3",
-        "kckit": "^1.28.0",
+        "kckit": "^1.29.0",
         "koot": "^0.12.0-beta.0",
         "localforage": "^1.7.3",
         "lz-string": "^1.4.4",
@@ -48,7 +48,7 @@
         "react-transition-group": "^4.3.0",
         "swiper": "^5.2.1",
         "whocallsthefleet-backgrounds": "^1.3.2",
-        "whocallsthefleet-database": "^20191221.0.0"
+        "whocallsthefleet-database": "^20191228.0.0"
     },
     "devDependencies": {
         "autoprefixer": "^9.7.3",
