@@ -7315,10 +7315,10 @@ jsx-ast-utils@^2.2.3:
     array-includes "^3.0.3"
     object.assign "^4.1.0"
 
-kckit@^1.29.0:
-  version "1.29.0"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.29.0.tgz#4c3de4bdaa5bad944fcc1a04ae0204ae07b97639"
-  integrity sha512-bkOxwVM8jA+kIwDNSx7uqOiki1UUm61aKcUfQ8oafZEqs1HhIkEvnXf4SqdOpwkSfNOsEao2soaHT9YmvR/mcQ==
+kckit@^1.30.0:
+  version "1.30.0"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.30.0.tgz#8b43520f74b3fc072995b2ccb60ce54103e385a2"
+  integrity sha512-EGySMGW8btjnfm4jc0EWqINDSO1WlP6Z0Mh0QQll74clKbWibPH8YmVh1I9mKP0y+Avfdmqq1OAlzYMAX9k1oA==
   dependencies:
     camelcase "5.3.1"
 
@@ -7494,10 +7494,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.12.0-beta.1:
-  version "0.12.0-beta.1"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.12.0-beta.1.tgz#1f4d46725cc250b5e44905258245bfd394d2aba8"
-  integrity sha512-YESbFJoWKbv2RcpvUl90VrdsMQaFdeCzIXQiyNov6uUbIh0lGf+z/88EQxFJfDU/5nFXJUofI9c+XpS8xt5F0w==
+koot-webpack@^0.12.0-beta.2:
+  version "0.12.0-beta.2"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.12.0-beta.2.tgz#56b7ace93e2cbba281131ddba4473046a78eedbf"
+  integrity sha512-2UpBM1mZxHiPefZwst6c2DGLlDAsf/1w+pKPzQZhsXPaMMLmGjxWEC+jg1UFLARbpbSqlEWQapCpzJHnwRhb1g==
   dependencies:
     "@babel/core" "^7.7.7"
     "@babel/plugin-proposal-class-properties" "^7.7.4"
@@ -7538,10 +7538,10 @@ koot-webpack@^0.12.0-beta.1:
   optionalDependencies:
     node-sass "^4.13.0"
 
-koot@^0.12.0-beta.1:
-  version "0.12.0-beta.1"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.12.0-beta.1.tgz#6977f444eb5432c413febb78eceaefbfa0a9f407"
-  integrity sha512-Hl6E/dZ2jlIlu9M/ogqzrgbCrdvCZiuQKSRsDdK17F1RXmD9M54z90pgdeLQ1zDGjyD4RhWSbvsnd8NpDoOeVA==
+koot@^0.12.0-beta.2:
+  version "0.12.0-beta.2"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.12.0-beta.2.tgz#8e2919f500d2a702d1b2282d685045ae5e660193"
+  integrity sha512-EiqDZdglX0FRw2O1inVBI5yQN++NgENjBzejGUoi8LVfDUcxjTetmJnYtwYYXDRDPSbJn5dathP1zARduMGjxA==
   dependencies:
     "@types/node" "^13.1.2"
     "@types/react" "^16.9.17"
@@ -7575,7 +7575,7 @@ koot@^0.12.0-beta.1:
     koa-proxies "^0.9.0"
     koa-router "^7.4.0"
     koa-static "^5.0.0"
-    koot-webpack "^0.12.0-beta.1"
+    koot-webpack "^0.12.0-beta.2"
     less "^3.10.3"
     lodash "^4.17.15"
     md5 "^2.2.1"
@@ -10362,10 +10362,10 @@ react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-markdown@^4.1.0:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-4.2.2.tgz#b378774fcffb354653db8749153fc8740f9ed2f1"
-  integrity sha512-/STJiRFmJuAIUdeBPp/VyO5bcenTIqP3LXuC3gYvregmYGKjnszGiFc2Ph0LsWC17Un3y/CT8TfxnwJT7v9EJw==
+react-markdown@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-4.3.0.tgz#9575a1d93bff138022689ebc809c7d463cb8ec63"
+  integrity sha512-DGecgkhonJRakIDqT7Q0SYdD7rkHpLOESl5XyoWW0KMj1eyu0VkNbFL0HVLwgr5sgjFBnX5DUZcq2e79tcABag==
   dependencies:
     html-to-react "^1.3.4"
     mdast-add-list-metadata "1.0.1"
@@ -12947,10 +12947,10 @@ whocallsthefleet-backgrounds@^1.3.2:
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.3.2.tgz#ea434851b7d362b30ba7c1eb86ac86e22fcd45e2"
   integrity sha512-3vQRvNciB3Dq1jlbZHXdujPIwEeDazHTfyZLAzuw7YA6f7JGGPgKHTqQpqQApRCel5DH75umEtdAZldjen3gUA==
 
-whocallsthefleet-database@^20191228.0.0:
-  version "20191228.0.0"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20191228.0.0.tgz#52455d1c4d15f2f91bbb44cd7d542f0a374d47b0"
-  integrity sha512-7B3yPgAmcCOaKgjQl1iezqhMJLeODnr5keAGb/UmCqaMqFXx01AwalOeiISkhYKvnHseK/7LWzqZN19h7Wy6uA==
+whocallsthefleet-database@^20200105.0.0:
+  version "20200105.0.0"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20200105.0.0.tgz#38a89cb17a668a3114130e6866b38ee1f80f16ff"
+  integrity sha512-oGbN8nbFkO6hFv4try6dHpyT+kaPe5hNSLY5tvHFOmkmtOpFA7JBnrwfvM0+8i6QWbeNogcoite1X1v4z8LHHQ==
 
 wide-align@^1.1.0:
   version "1.1.3"
