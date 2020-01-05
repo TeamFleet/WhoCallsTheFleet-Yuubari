@@ -71,7 +71,14 @@ body {
 }
 
 html {
-    font-family: @font-family-sans;
+    font-family: Roboto, 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue',
+        'Helvetica', 'Arial', 'Microsoft YaHei UI', 'Microsoft YaHei',
+        'Hiragino Sans GB', sans-serif;
+    &[lang^='ja'] {
+        font-family: 'Noto Sans JP', 'Lucida Grande',
+            'Hiragino Kaku Gothic ProN', Meiryo, Roboto, sans-serif;
+    }
+
     background: @color-background;
     color: @color-base;
     font-size: @root-font-size;
