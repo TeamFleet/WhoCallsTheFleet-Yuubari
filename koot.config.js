@@ -66,9 +66,9 @@ module.exports = {
             ? [['zh', `./src/locales/zh.json`]]
             : require('./src/locales').map(l => [l, `./src/locales/${l}.json`]),
 
-    pwa: {
+    serviceWorker: {
         auto: false,
-        initialCacheIgonre: ['/bgimgs/**/*', '/pics/**/*', '/dev-*']
+        exclude: ['/bgimgs/**/*', '/pics/**/*', '/dev-*']
     },
 
     aliases: {

@@ -33,6 +33,9 @@
 
     <meta name="copyright" content="Copyright (c) 2018 fleet.moe">
 
+    <!-- Polyfill for legacy browsers -->
+    <script nomodule type="text/javascript" src="<%- pathname('polyfill.js') %>"></script>
+
     <%- inject.metas -%>
     <%- inject.styles -%>
     <%- inject.definePath -%>
@@ -45,7 +48,7 @@
 
     <script type="text/javascript"><%- content('critical.js') %></script>
     <%- inject.scripts %>
-    
+
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

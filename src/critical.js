@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import bindEvent from 'bind-event';
 import { handlerBeforeReact as beforeinstallpromptHandlerBeforeReact } from '@utils/install-app';
 
@@ -242,6 +243,7 @@ const doCricital = () => {
     );
 
     // 检查客户端兼容性，如果需要，载入兼容性扩展脚本
+    /*
     new Promise(resolve => {
         if (typeof Object.assign !== 'function') {
             if (__DEV__)
@@ -280,6 +282,8 @@ const doCricital = () => {
         })
         .catch(err => window.onInitError(err));
     // .then(() => window.importJS(window.__CLIENT_FILENAME__))
+    */
+    if (__DEV__) console.log('🚨 Complete: critical process!');
 };
 
 doCricital();

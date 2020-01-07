@@ -29,10 +29,10 @@ export default {
 
     definePath: (template, state) =>
         `<script>` +
-        `window.__CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getClientFilePath(
-            'polyfill.js',
-            state.localeId
-        )}";` +
+        // `window.__CRITICAL_EXTRA_OLD_IE_FILENAME__ = "${getClientFilePath(
+        //     'polyfill.js',
+        //     state.localeId
+        // )}";` +
         `window.__SERVICE_WORKER_FILENAME__ = "${getClientFilePath(
             'service-worker.js',
             state.localeId
