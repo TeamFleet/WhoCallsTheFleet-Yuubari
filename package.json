@@ -40,7 +40,7 @@
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.7.3",
         "kckit": "^1.30.0",
-        "koot": "^0.12.0-beta.4",
+        "koot": "^0.12.0-beta.7",
         "localforage": "^1.7.3",
         "lz-string": "^1.4.4",
         "metas": "^1.0.1",
@@ -58,7 +58,7 @@
         "eslint": "^6.8.0",
         "eslint-config-koot": "^1.6.0",
         "glob": "^7.1.6",
-        "husky": "^4.0.0",
+        "husky": "^4.0.3",
         "image-size": "^0.8.3",
         "jest": "^24.9.0",
         "json-pretty": "^0.0.1",
@@ -102,6 +102,6 @@
         ]
     },
     "koot": {
-        "version": "0.12.0-beta.4"
+        "version": "0.12.0-beta.7"
     }
 }

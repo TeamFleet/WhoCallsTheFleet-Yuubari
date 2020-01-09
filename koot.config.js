@@ -143,26 +143,5 @@ module.exports = {
      * 开发环境
      *************************************************************************/
 
-    devPort: 8703,
-    devDll: [
-        'react',
-        'react-dom',
-        'redux',
-        'redux-thunk',
-        'react-redux',
-        'react-router',
-        'react-router-redux',
-        'react-transition-group',
-        'react-markdown',
-        'koot',
-        'swiper',
-        'metas',
-        'lz-string',
-        'bind-event',
-        'check-css-prop',
-        'classnames',
-        'camelcase',
-        'hotkeys-js',
-        'nedb'
-    ]
+    devPort: 8703
 };

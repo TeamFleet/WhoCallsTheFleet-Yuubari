@@ -1285,7 +1285,7 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/node@*", "@types/node@^13.1.4":
+"@types/node@*":
   version "13.1.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.4.tgz#4cfd90175a200ee9b02bd6b1cd19bc349741607e"
   integrity sha512-Lue/mlp2egZJoHXZr4LndxDAd7i/7SQYhV0EjWfb/a4/OZ6tuVwMCVPiwkU5nsEipxEf7hmkSU7Em5VQ8P5NGA==
@@ -1294,6 +1294,11 @@
   version "10.17.13"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.13.tgz#ccebcdb990bd6139cd16e84c39dc2fb1023ca90c"
   integrity sha512-pMCcqU2zT4TjqYFrWtYHKal7Sl30Ims6ulZ4UFXxI4xbtQqK/qqKwkDoBFCfooRqqmRu9vY3xaJRwxSh673aYg==
+
+"@types/node@^13.1.5":
+  version "13.1.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.5.tgz#4d5efc52a1d3e45d13e5ec9f911cbc5b089ccaec"
+  integrity sha512-wupvfmtbqRJzjCm1H2diy7wo31Gn1OzvqoxCfQuKM9eSecogzP0WTlrjdq7cf7jgSO2ZX6hxwgRPR8Wt7FA22g==
 
 "@types/node@^8.0.0":
   version "8.10.59"
@@ -1384,10 +1389,10 @@
     "@types/source-list-map" "*"
     source-map "^0.6.1"
 
-"@types/webpack@^4.41.1":
-  version "4.41.1"
-  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.1.tgz#571f0e137ce698710dd2637f7d222811eb83e274"
-  integrity sha512-n9fP8UrMxOi1wiM3oM+vMZHMJJ7WoQohqd63C20cmKOFkNEy9Q8hyZyDR6PWdvSYt3V3A7cwDq/kWxHlRYYZEg==
+"@types/webpack@^4.41.2":
+  version "4.41.2"
+  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.2.tgz#c6faf0111de27afdffe1158dac559e447c273516"
+  integrity sha512-DNMQOfEvwzWRRyp6Wy9QVCgJ3gkelZsuBE2KUD318dg95s9DKGiT5CszmmV58hq8jk89I9NClre48AEy1MWAJA==
   dependencies:
     "@types/anymatch" "*"
     "@types/node" "*"
@@ -3024,10 +3029,10 @@ commander@^2.11.0, commander@^2.18.0, commander@^2.20.0, commander@~2.20.3:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
 
-commander@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-4.0.1.tgz#b67622721785993182e807f4883633e6401ba53c"
-  integrity sha512-IPF4ouhCP+qdlcmCedhxX4xiGBPyigb8v5NeUp+0LyhwLgxMqyp3S0vl7TAPfS/hiP7FC3caI/PB9lTmP8r1NA==
+commander@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.0.tgz#545983a0603fe425bc672d66c9e3c89c42121a83"
+  integrity sha512-NIQrwvv9V39FHgGFm36+U9SMQzbiHvU79k+iADraJTpmrFFfx7Ds0IvDoAdZsDrknlkRk14OYoWXb57uTh7/sw==
 
 common-tags@^1.4.0, common-tags@^1.8.0:
   version "1.8.0"
@@ -5765,10 +5770,10 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-husky@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-4.0.0.tgz#654a72ecd7d59565de5360365a7d78a7bbb05286"
-  integrity sha512-h9kcWWpZgpGLrhlaBBtbMtA9Tsqu0yrfKSCU9ax6vulTvMSvVWEmFOsBehiLD38vJZVeFyrif5AcpcoiM0LJmw==
+husky@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-4.0.3.tgz#8a082455f8c76a602ec00f9a6a6f9f458860f49e"
+  integrity sha512-pI4e5iC8hFkPAjOdJGdBubVdjKGhoZq0l0kkHpqGN1uf3U1Iq0wLloBm26R5OhdWYqhuBYRdRjRAclDg59+c5A==
   dependencies:
     chalk "^3.0.0"
     ci-info "^2.0.0"
@@ -5954,10 +5959,10 @@ ini@^1.3.4:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
 
-inquirer@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.0.1.tgz#13f7980eedc73c689feff3994b109c4e799c6ebb"
-  integrity sha512-V1FFQ3TIO15det8PijPLFR9M9baSlnRs9nL7zWu1MNVA2T9YVl9ZbrHJhYs7e9X8jeMZ3lr2JH/rdHFgNCBdYw==
+inquirer@7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-7.0.3.tgz#f9b4cd2dff58b9f73e8d43759436ace15bed4567"
+  integrity sha512-+OiOVeVydu4hnCGLCSX+wedovR/Yzskv9BFqUNNKq9uU2qg7LCcCo3R86S2E7WLo0y/x2pnEZfZe1CoYnORUAw==
   dependencies:
     ansi-escapes "^4.2.1"
     chalk "^2.4.2"
@@ -7242,10 +7247,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.12.0-beta.4:
-  version "0.12.0-beta.4"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.12.0-beta.4.tgz#d727cf69e65a4dab482262988faf14bb7f8f4f6a"
-  integrity sha512-L9SDdUnfdnkYABapCIPH+McanOKcUh4/oEAANpdcWMlEwtTFrmvCk+mSSuVY8L4eqoQ15PSYUMbGz5lZ64v+Sg==
+koot-webpack@^0.12.0-beta.7:
+  version "0.12.0-beta.7"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.12.0-beta.7.tgz#7cfc73874a3c699c2bf05e88d303e2b40ed7fe97"
+  integrity sha512-wqlvKGMy5RoT586twyZ8/TIQNqoWLu6UGci0xGzHDV21QX9M2pSI22AZdNFmVYNeBk22MG1SDiA6WHdw7CQO+A==
   dependencies:
     "@babel/core" "^7.7.7"
     "@babel/plugin-proposal-class-properties" "^7.7.4"
@@ -7261,7 +7266,7 @@ koot-webpack@^0.12.0-beta.4:
     "@babel/preset-typescript" "^7.7.7"
     "@babel/register" "^7.7.7"
     "@hot-loader/react-dom" "^16.11.0"
-    "@types/webpack" "^4.41.1"
+    "@types/webpack" "^4.41.2"
     babel-loader "^8.0.6"
     compression-webpack-plugin "^3.0.1"
     copy-webpack-plugin "^5.1.1"
@@ -7286,13 +7291,13 @@ koot-webpack@^0.12.0-beta.4:
   optionalDependencies:
     node-sass "^4.13.0"
 
-koot@^0.12.0-beta.4:
-  version "0.12.0-beta.4"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.12.0-beta.4.tgz#5cc1b3214cbe99fa370a253ddd2f4c2d3573ce5e"
-  integrity sha512-XXDx8CuEM9IZB3mzFSIqhTmwLjCyrkTBaruHgdLCvBZ7/ewJsaQPz6qUm2E5H0ikTTfm569NUVbt+hqZO2jfFg==
+koot@^0.12.0-beta.7:
+  version "0.12.0-beta.7"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.12.0-beta.7.tgz#e6fa7262a14bc15e7fce0eefd7936f82711aa29c"
+  integrity sha512-QbIbAoy9z9m7YSm3Xh+T0J+5EseGA+kfOIw8mLH+JNU4ktWAcrQKeTIP8bf6+U2fiq4/ROv5UPJnYvBfknx58g==
   dependencies:
     "@types/lodash" "^4.14.149"
-    "@types/node" "^13.1.4"
+    "@types/node" "^13.1.5"
     "@types/react" "^16.9.17"
     "@types/react-dom" "^16.9.4"
     "@types/react-redux" "^7.1.5"
@@ -7300,7 +7305,7 @@ koot@^0.12.0-beta.4:
     chalk "^3.0.0"
     classlist-polyfill "^1.2.0"
     cli-spinners "^2.2.0"
-    commander "^4.0.1"
+    commander "^4.1.0"
     cookie "^0.4.0"
     copyfiles "^2.1.1"
     debug "^4.1.1"
@@ -7310,7 +7315,7 @@ koot@^0.12.0-beta.4:
     fs-extra "^8.1.0"
     glob "^7.1.6"
     glob-promise "^3.4.0"
-    inquirer "7.0.1"
+    inquirer "7.0.3"
     is-port-reachable "^3.0.0"
     is-url "^1.2.4"
     isomorphic-fetch "^2.2.1"
@@ -7324,7 +7329,7 @@ koot@^0.12.0-beta.4:
     koa-proxies "^0.9.0"
     koa-router "^7.4.0"
     koa-static "^5.0.0"
-    koot-webpack "^0.12.0-beta.4"
+    koot-webpack "^0.12.0-beta.7"
     less "^3.10.3"
     lodash "^4.17.15"
     md5 "^2.2.1"
@@ -12090,6 +12095,15 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
+
+url-loader@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-3.0.0.tgz#9f1f11b371acf6e51ed15a50db635e02eec18368"
+  integrity sha512-a84JJbIA5xTFTWyjjcPdnsu+41o/SNE8SpXMdUvXs6Q+LuhCD9E2+0VCiuDWqgo3GGXVlFHzArDmBpj9PgWn4A==
+  dependencies:
+    loader-utils "^1.2.3"
+    mime "^2.4.4"
+    schema-utils "^2.5.0"
 
 url-parse@^1.4.3:
   version "1.4.7"
