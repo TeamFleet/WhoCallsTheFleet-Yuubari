@@ -1295,10 +1295,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.13.tgz#ccebcdb990bd6139cd16e84c39dc2fb1023ca90c"
   integrity sha512-pMCcqU2zT4TjqYFrWtYHKal7Sl30Ims6ulZ4UFXxI4xbtQqK/qqKwkDoBFCfooRqqmRu9vY3xaJRwxSh673aYg==
 
-"@types/node@^13.1.5":
-  version "13.1.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.5.tgz#4d5efc52a1d3e45d13e5ec9f911cbc5b089ccaec"
-  integrity sha512-wupvfmtbqRJzjCm1H2diy7wo31Gn1OzvqoxCfQuKM9eSecogzP0WTlrjdq7cf7jgSO2ZX6hxwgRPR8Wt7FA22g==
+"@types/node@^13.1.6":
+  version "13.1.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.6.tgz#076028d0b0400be8105b89a0a55550c86684ffec"
+  integrity sha512-Jg1F+bmxcpENHP23sVKkNuU3uaxPnsBMW0cLjleiikFKomJQbsn0Cqk2yDvQArqzZN6ABfBkZ0To7pQ8sLdWDg==
 
 "@types/node@^8.0.0":
   version "8.10.59"
@@ -3056,10 +3056,10 @@ compressible@~2.0.16:
   dependencies:
     mime-db ">= 1.40.0 < 2"
 
-compression-webpack-plugin@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/compression-webpack-plugin/-/compression-webpack-plugin-3.0.1.tgz#be7a343e6dfbccbd64a77c5fbe29627d140fc321"
-  integrity sha512-FOwoBVzDiwSdJDnZTKXDpAjJU90k8SbChgxnoiYwTo15xjIDJkSC8wFKuc13DymXjgasPEqzS5+2RUgSKXdKKA==
+compression-webpack-plugin@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/compression-webpack-plugin/-/compression-webpack-plugin-3.1.0.tgz#9f510172a7b5fae5aad3b670652e8bd7997aeeca"
+  integrity sha512-iqTHj3rADN4yHwXMBrQa/xrncex/uEQy8QHlaTKxGchT/hC0SdlJlmL/5eRqffmWq2ep0/Romw6Ld39JjTR/ug==
   dependencies:
     cacache "^13.0.1"
     find-cache-dir "^3.0.0"
@@ -5770,10 +5770,10 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-husky@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-4.0.3.tgz#8a082455f8c76a602ec00f9a6a6f9f458860f49e"
-  integrity sha512-pI4e5iC8hFkPAjOdJGdBubVdjKGhoZq0l0kkHpqGN1uf3U1Iq0wLloBm26R5OhdWYqhuBYRdRjRAclDg59+c5A==
+husky@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-4.0.6.tgz#b64206220ab940f091cb5f1c75672453eb39fc9f"
+  integrity sha512-OxsXXQXu/FYauV5GGhNpyN1yhQPQoDFUJwzHoshYc3wO//gC0PB9YNYLgBxKckfEce0FGEbzb498UecR3jNdZw==
   dependencies:
     chalk "^3.0.0"
     ci-info "^2.0.0"
@@ -7247,10 +7247,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.12.0-beta.7:
-  version "0.12.0-beta.7"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.12.0-beta.7.tgz#7cfc73874a3c699c2bf05e88d303e2b40ed7fe97"
-  integrity sha512-wqlvKGMy5RoT586twyZ8/TIQNqoWLu6UGci0xGzHDV21QX9M2pSI22AZdNFmVYNeBk22MG1SDiA6WHdw7CQO+A==
+koot-webpack@^0.12.0-beta.8:
+  version "0.12.0-beta.8"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.12.0-beta.8.tgz#dcb478fe30c3aecbc7eb80ddf7bd347c9d94b54f"
+  integrity sha512-5tcxuoYzm8231ClmqoHW9U2HfG/rdVnB7BL8bJrJPXPcljCkjIsbnuVXE8q5qwRoTqH59Y0ksFf+KEGs6CmHnQ==
   dependencies:
     "@babel/core" "^7.7.7"
     "@babel/plugin-proposal-class-properties" "^7.7.4"
@@ -7268,7 +7268,7 @@ koot-webpack@^0.12.0-beta.7:
     "@hot-loader/react-dom" "^16.11.0"
     "@types/webpack" "^4.41.2"
     babel-loader "^8.0.6"
-    compression-webpack-plugin "^3.0.1"
+    compression-webpack-plugin "^3.1.0"
     copy-webpack-plugin "^5.1.1"
     css-loader "^3.4.1"
     extract-hoc "^0.0.5"
@@ -7291,13 +7291,13 @@ koot-webpack@^0.12.0-beta.7:
   optionalDependencies:
     node-sass "^4.13.0"
 
-koot@^0.12.0-beta.7:
-  version "0.12.0-beta.7"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.12.0-beta.7.tgz#e6fa7262a14bc15e7fce0eefd7936f82711aa29c"
-  integrity sha512-QbIbAoy9z9m7YSm3Xh+T0J+5EseGA+kfOIw8mLH+JNU4ktWAcrQKeTIP8bf6+U2fiq4/ROv5UPJnYvBfknx58g==
+koot@^0.12.0-beta.8:
+  version "0.12.0-beta.8"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.12.0-beta.8.tgz#8cb82f302f97c44e923a23c5b4acdb4ad94948ee"
+  integrity sha512-i3p2YhK3qVXEGvVuns61JRxSNx61VmgJ8aF/88VLrxNEkzjse+1O9c2cdR3uYvaDOnVq2CQdwPaVRsvAsfCFbQ==
   dependencies:
     "@types/lodash" "^4.14.149"
-    "@types/node" "^13.1.5"
+    "@types/node" "^13.1.6"
     "@types/react" "^16.9.17"
     "@types/react-dom" "^16.9.4"
     "@types/react-redux" "^7.1.5"
@@ -7329,7 +7329,7 @@ koot@^0.12.0-beta.7:
     koa-proxies "^0.9.0"
     koa-router "^7.4.0"
     koa-static "^5.0.0"
-    koot-webpack "^0.12.0-beta.7"
+    koot-webpack "^0.12.0-beta.8"
     less "^3.10.3"
     lodash "^4.17.15"
     md5 "^2.2.1"
