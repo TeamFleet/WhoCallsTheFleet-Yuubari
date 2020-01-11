@@ -12,9 +12,9 @@
 
     transition: inherit;
 
-    @supports (backdrop-filter: blur(20px)) {
+    @supports (backdrop-filter: @base-backdrop-filter) {
         box-shadow: 0 10px 20px -10px fade(#000, 30%);
-        backdrop-filter: blur(20px);
+        backdrop-filter: @base-backdrop-filter;
     }
 
     // &.mod-transition-enter, &.mod-transition-exit{

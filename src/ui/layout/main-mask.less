@@ -58,7 +58,7 @@
         .is-mode-background({transform: translateX(-100%) ;});
         .is-mode-background-leaving({transform: none;});
 
-        @supports (backdrop-filter: blur(20px)) {
+        @supports (backdrop-filter: @base-backdrop-filter) {
             opacity: 0.5;
             // backdrop-filter: blur(10px) brightness(0.8);
             // backdrop-filter: blur(20px) brightness(0.9);
