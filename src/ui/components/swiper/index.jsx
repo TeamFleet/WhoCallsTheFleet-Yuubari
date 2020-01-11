@@ -1,169 +1,168 @@
-import React from 'react'
-import { extend } from 'koot'
-import './swiper.g.less'
+import React from 'react';
+import { extend } from 'koot';
+import './swiper.g.less';
 
-const Swiper = typeof window !== 'undefined' && require('swiper').default
-// if (typeof document !== 'undefined' && !document.getElementById('__swiper')) {
-//     const style = document.createElement('style')
-//     style.id = '__swiper'
-//     style.type = "text/css"
-//     style.innerHTML = __SWIPER_CSS__
-//     document.getElementsByTagName('head')[0].appendChild(style)
-// }
+const Swiper = typeof window !== 'undefined' && require('swiper').default;
 
 const defaults = {
     // speed: 400,
     // spaceBetween: 100
-}
+};
 
 @extend({
     styles: require('./styles.less')
 })
 class SwiperComponent extends React.Component {
+    // swiper
+    ContainerRef = React.createRef();
+    PrevButtonRef = React.createRef();
+    NextButtonRef = React.createRef();
+
     componentDidMount() {
-        if (Swiper && !this._init) {
-            let thisSwiper
+        if (
+            Swiper &&
+            !this.swiper &&
+            this.ContainerRef &&
+            this.ContainerRef.current
+        ) {
+            const { ...settings } = this.props;
 
-            const {
-                ...props
-            } = this.props
+            delete settings.className;
+            delete settings.children;
+            delete settings.slides;
 
-            delete props.className
-            delete props.children
-            delete props.slides;
-
-            if (this.props.pagination === true) {
-                // props.pagination = '.swiper-pagination'
-                // props.paginationClickable = true
-                props.pagination = {
+            if (settings.pagination === true) {
+                settings.pagination = {
                     el: '.swiper-pagination',
                     clickable: true
-                }
+                };
             }
 
-            [
-                'prevButton',
-                'nextButton',
-            ].forEach(key => {
-                if (this.props[key] === true || React.isValidElement(props[key])) {
-                    if (typeof props.navigation !== 'object')
-                        props.navigation = {}
-                    // props[key] = this['_' + key]
+            ['prevButton', 'nextButton'].forEach(key => {
+                if (
+                    settings[key] === true ||
+                    React.isValidElement(settings[key])
+                ) {
+                    if (typeof settings.navigation !== 'object')
+                        settings.navigation = {};
 
                     if (key === 'prevButton')
-                        props.navigation.prevEl = this['_' + key]
+                        settings.navigation.prevEl = this.PrevButtonRef.current;
                     if (key === 'nextButton')
-                        props.navigation.nextEl = this['_' + key]
+                        settings.navigation.nextEl = this.NextButtonRef.current;
 
-                    delete props[key]
+                    delete settings[key];
                 }
             });
 
-            [
-                'prevButton',
-                'nextButton',
-                'scrollbar'
-            ].forEach(key => {
-                if (typeof props[key] === 'boolean') delete props[key]
+            ['prevButton', 'nextButton', 'scrollbar'].forEach(key => {
+                if (typeof settings[key] === 'boolean') delete settings[key];
             });
 
-            [
-                'controlsWrapper'
-            ].forEach(key => {
-                delete props[key]
+            ['controlsWrapper'].forEach(key => {
+                delete settings[key];
             });
 
-            if (typeof props.on === 'object') {
-                for (const event in props.on) {
-                    if (typeof props.on[event] === 'function') {
-                        const cb = props.on[event]
-                        props.on[event] = (...args) => {
-                            setTimeout(() => {
-                                // console.log(event, thisSwiper, ...args)
-                                cb(thisSwiper, ...args)
-                            })
-                        }
+            if (typeof settings.on === 'object') {
+                const createEventHandler = eventName => (...args) => {
+                    setTimeout(() => {
+                        // console.log(eventName, this.swiper, ...args)
+                        settings.on[eventName](this.swiper, ...args);
+                    });
+                };
+                for (const eventName of Object.keys(settings.on)) {
+                    if (typeof settings.on[eventName] === 'function') {
+                        settings.on[eventName] = createEventHandler(eventName);
                     }
                 }
             }
 
-            // console.log('swiper init', props)
+            // console.log('swiper init', settings)
 
             setTimeout(() => {
-                thisSwiper = new Swiper(
-                    this._container,
-                    Object.assign(defaults, props)
-                )
-    
-                this._init = true
-            })
+                this.swiper = new Swiper(this.ContainerRef.current, {
+                    ...defaults,
+                    ...settings
+                });
+
+                this._init = true;
+            });
         }
     }
 
     renderButtonPrev(prevButton = this.props.prevButton) {
         if (
-            typeof prevButton !== 'undefined'
-            && prevButton !== false
-            && prevButton !== null
+            typeof prevButton !== 'undefined' &&
+            prevButton !== false &&
+            prevButton !== null
         )
             return (
-                <div
-                    className="swiper-button-prev"
-                    ref={el => this._prevButton = el}
-                >
+                <div className="swiper-button-prev" ref={this.PrevButtonRef}>
                     {prevButton !== true && prevButton}
                 </div>
-            )
+            );
 
-        return undefined
+        return undefined;
     }
 
     renderButtonNext(nextButton = this.props.nextButton) {
         if (
-            typeof nextButton !== 'undefined'
-            && nextButton !== false
-            && nextButton !== null
+            typeof nextButton !== 'undefined' &&
+            nextButton !== false &&
+            nextButton !== null
         )
             return (
-                <div
-                    className="swiper-button-next"
-                    ref={el => this._nextButton = el}
-                >
+                <div className="swiper-button-next" ref={this.NextButtonRef}>
                     {nextButton !== true && nextButton}
                 </div>
-            )
+            );
 
-        return undefined
+        return undefined;
     }
 
     render() {
         return (
-            <div className={"swiper-container " + this.props.className} ref={el => this._container = el}>
+            <div
+                className={'swiper-container ' + this.props.className}
+                ref={this.ContainerRef}
+            >
                 <div className="swiper-wrapper">
                     {this.props.slides.map((el, index) => (
                         <div className="swiper-slide" key={index}>
                             {el}
-                            {this.props.lazy && <div className="swiper-lazy-preloader"></div>}
+                            {this.props.lazy && (
+                                <div className="swiper-lazy-preloader"></div>
+                            )}
                         </div>
                     ))}
                 </div>
 
-                {this.props.controlsWrapper && <div className="swiper-controls">
-                    {this.props.pagination === true && <div className="swiper-pagination"></div>}
-                    {this.renderButtonPrev()}
-                    {this.renderButtonNext()}
-                    {React.isValidElement(this.props.controlsWrapper) && this.props.controlsWrapper}
-                </div>}
+                {this.props.controlsWrapper && (
+                    <div className="swiper-controls">
+                        {this.props.pagination === true && (
+                            <div className="swiper-pagination"></div>
+                        )}
+                        {this.renderButtonPrev()}
+                        {this.renderButtonNext()}
+                        {React.isValidElement(this.props.controlsWrapper) &&
+                            this.props.controlsWrapper}
+                    </div>
+                )}
 
-                {!this.props.controlsWrapper && this.props.pagination === true && <div className="swiper-pagination"></div>}
+                {!this.props.controlsWrapper &&
+                    this.props.pagination === true && (
+                        <div className="swiper-pagination"></div>
+                    )}
                 {!this.props.controlsWrapper && this.renderButtonPrev()}
                 {!this.props.controlsWrapper && this.renderButtonNext()}
 
-                {this.props.scrollbar === true && <div className="swiper-scrollbar"></div>}
+                {this.props.scrollbar === true && (
+                    <div className="swiper-scrollbar"></div>
+                )}
 
                 {this.props.children}
             </div>
-        )
+        );
     }
 }
-export default SwiperComponent
+export default SwiperComponent;
