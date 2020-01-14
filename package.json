@@ -39,7 +39,7 @@
         "check-css-prop": "^1.0.1",
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.7.3",
-        "kckit": "^1.30.0",
+        "kckit": "^1.31.0",
         "koot": "^0.12.0",
         "localforage": "^1.7.3",
         "lz-string": "^1.4.4",
@@ -48,7 +48,7 @@
         "react-transition-group": "^4.3.0",
         "swiper": "^5.3.0",
         "whocallsthefleet-backgrounds": "^1.3.2",
-        "whocallsthefleet-database": "^20200105.0.0"
+        "whocallsthefleet-database": "^20200114.1.0"
     },
     "devDependencies": {
         "autoprefixer": "^9.7.3",
@@ -58,7 +58,7 @@
         "eslint": "^6.8.0",
         "eslint-config-koot": "^1.6.0",
         "glob": "^7.1.6",
-        "husky": "^4.0.7",
+        "husky": "^4.0.9",
         "image-size": "^0.8.3",
         "jest": "^24.9.0",
         "json-pretty": "^0.0.1",
