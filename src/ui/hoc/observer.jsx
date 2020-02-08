@@ -63,13 +63,25 @@ export const observer = (options = {}) => WrappedComponent =>
         }
     };
 
-export const observerItem = () => WrappedComponent => {
+export const observerItem = WrappedComponent => {
     class ObserverItem extends Component {
+        Ref = React.createRef();
+
         componentDidMount() {
             if (!this._item && typeof document !== 'undefined') {
+                if (!this.Ref.current) {
+                    if (!observerItem.warnedNoForwardedRef) {
+                        console.warn(
+                            'Please use `forwardedRef` prop in @observerItem component'
+                        );
+                        observerItem.warnedNoForwardedRef = true;
+                    }
+                } else {
+                    this._item = this.Ref.current;
+                }
                 // console.log('observerItem this', this)
-                const { findDOMNode } = require('react-dom');
-                this._item = findDOMNode(this);
+                // const { findDOMNode } = require('react-dom');
+                // this._item = findDOMNode(this);
             }
             // console.log('componentDidMount', this.observer, this._item)
             if (this.observer && this._item) this.observer.observe(this._item);
@@ -80,12 +92,16 @@ export const observerItem = () => WrappedComponent => {
         }
 
         render() {
-            const { children, observer, forwardedRef, ...props } = this.props;
+            const { children, observer, ...props } = this.props;
 
             this.observer = observer;
 
             return (
-                <WrappedComponent ref={forwardedRef} {...props} {...this.state}>
+                <WrappedComponent
+                    forwardedRef={this.Ref}
+                    {...props}
+                    // {...this.state}
+                >
                     {children}
                 </WrappedComponent>
             );
@@ -93,6 +109,7 @@ export const observerItem = () => WrappedComponent => {
     }
 
     return React.forwardRef((props, ref) => {
-        return <ObserverItem {...props} forwardedRef={ref} />;
+        if (ref) return <ObserverItem {...props} forwardedRef={ref} />;
+        return <ObserverItem {...props} />;
     });
 };

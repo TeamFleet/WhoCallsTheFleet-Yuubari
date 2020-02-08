@@ -45,6 +45,8 @@ class ShipDetailsComponentIllust extends React.Component {
             swiperIndex: this.props.defaultIndex || 0
         };
 
+        this.onSlideChangeEnd = this.onSlideChangeEnd.bind(this);
+
         // console.log(db.exillusts, db.exillustTypes)
         // this.swiper
 
@@ -117,7 +119,7 @@ class ShipDetailsComponentIllust extends React.Component {
             <CSSTransition key={type} classNames="transition" timeout={200}>
                 <span className="illust-name">
                     {name}
-                    {time && time != name && <small>({time})</small>}
+                    {time && time !== name && <small>({time})</small>}
                 </span>
             </CSSTransition>
         );
@@ -141,7 +143,7 @@ class ShipDetailsComponentIllust extends React.Component {
             <ComponentContainer className={this.props.className}>
                 <Swiper
                     slides={this.pics.map(url => (
-                        <img data-src={url} className="swiper-lazy" />
+                        <img data-src={url} className="swiper-lazy" alt="" />
                     ))}
                     initialSlide={this.props.defaultIndex || 0}
                     slidesPerView={1}
@@ -177,7 +179,7 @@ class ShipDetailsComponentIllust extends React.Component {
                         }
                     }}
                     on={{
-                        slideChange: this.onSlideChangeEnd.bind(this)
+                        slideChange: this.onSlideChangeEnd
                     }}
                 >
                     <TransitionGroup

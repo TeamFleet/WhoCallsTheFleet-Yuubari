@@ -64,15 +64,21 @@ class SwiperComponent extends React.Component {
             });
 
             if (typeof settings.on === 'object') {
-                const createEventHandler = eventName => (...args) => {
+                const createEventHandler = (eventName, handler) => (
+                    ...args
+                ) => {
                     setTimeout(() => {
                         // console.log(eventName, this.swiper, ...args)
-                        settings.on[eventName](this.swiper, ...args);
+                        handler(this.swiper, ...args);
                     });
                 };
                 for (const eventName of Object.keys(settings.on)) {
                     if (typeof settings.on[eventName] === 'function') {
-                        settings.on[eventName] = createEventHandler(eventName);
+                        const handler = settings.on[eventName];
+                        settings.on[eventName] = createEventHandler(
+                            eventName,
+                            handler
+                        );
                     }
                 }
             }

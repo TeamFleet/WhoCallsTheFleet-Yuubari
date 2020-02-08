@@ -1,0 +1,735 @@
+{
+    "header": {
+        "reportVersion": 1,
+        "event": "Allocation failed - JavaScript heap out of memory",
+        "trigger": "FatalError",
+        "filename": "report.20200209.064049.27352.0.001.json",
+        "dumpEventTime": "2020-02-09T06:40:49Z",
+        "dumpEventTimeStamp": "1581201649777",
+        "processId": 27352,
+        "cwd": "L:\\Projects\\WhoCallsTheFleet\\yuubari",
+        "commandLine": [
+            "node",
+            "L:\\Projects\\WhoCallsTheFleet\\yuubari\\node_modules\\pm2\\lib\\ProcessContainerFork.js"
+        ],
+        "nodejsVersion": "v12.13.0",
+        "wordSize": 64,
+        "arch": "x64",
+        "platform": "win32",
+        "componentVersions": {
+            "node": "12.13.0",
+            "v8": "7.7.299.13-node.12",
+            "uv": "1.32.0",
+            "zlib": "1.2.11",
+            "brotli": "1.0.7",
+            "ares": "1.15.0",
+            "modules": "72",
+            "nghttp2": "1.39.2",
+            "napi": "5",
+            "llhttp": "1.1.4",
+            "http_parser": "2.8.0",
+            "openssl": "1.1.1d",
+            "cldr": "35.1",
+            "icu": "64.2",
+            "tz": "2019a",
+            "unicode": "12.1"
+        },
+        "release": {
+            "name": "node",
+            "lts": "Erbium",
+            "headersUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0-headers.tar.gz",
+            "sourceUrl": "https://nodejs.org/download/release/v12.13.0/node-v12.13.0.tar.gz",
+            "libUrl": "https://nodejs.org/download/release/v12.13.0/win-x64/node.lib"
+        },
+        "osName": "Windows_NT",
+        "osRelease": "10.0.18363",
+        "osVersion": "Windows 10 Pro",
+        "osMachine": "x86_64",
+        "cpus": [
+            {
+                "model": "Intel(R) Xeon(R) CPU E3-1230 V2 @ 3.30GHz",
+                "speed": 3293,
+                "user": 43155671,
+                "nice": 0,
+                "sys": 31596984,
+                "idle": 314136765,
+                "irq": 8753828
+            },
+            {
+                "model": "Intel(R) Xeon(R) CPU E3-1230 V2 @ 3.30GHz",
+                "speed": 3293,
+                "user": 28688531,
+                "nice": 0,
+                "sys": 9828406,
+                "idle": 350372171,
+                "irq": 326765
+            },
+            {
+                "model": "Intel(R) Xeon(R) CPU E3-1230 V2 @ 3.30GHz",
+                "speed": 3293,
+                "user": 56213078,
+                "nice": 0,
+                "sys": 18989671,
+                "idle": 313686359,
+                "irq": 344828
+            },
+            {
+                "model": "Intel(R) Xeon(R) CPU E3-1230 V2 @ 3.30GHz",
+                "speed": 3293,
+                "user": 31425671,
+                "nice": 0,
+                "sys": 11484687,
+                "idle": 345978750,
+                "irq": 261937
+            },
+            {
+                "model": "Intel(R) Xeon(R) CPU E3-1230 V2 @ 3.30GHz",
+                "speed": 3293,
+                "user": 49924343,
+                "nice": 0,
+                "sys": 18416984,
+                "idle": 320547781,
+                "irq": 329875
+            },
+            {
+                "model": "Intel(R) Xeon(R) CPU E3-1230 V2 @ 3.30GHz",
+                "speed": 3293,
+                "user": 32743359,
+                "nice": 0,
+                "sys": 11772859,
+                "idle": 344372875,
+                "irq": 241375
+            },
+            {
+                "model": "Intel(R) Xeon(R) CPU E3-1230 V2 @ 3.30GHz",
+                "speed": 3293,
+                "user": 45470921,
+                "nice": 0,
+                "sys": 15866031,
+                "idle": 327552156,
+                "irq": 310171
+            },
+            {
+                "model": "Intel(R) Xeon(R) CPU E3-1230 V2 @ 3.30GHz",
+                "speed": 3293,
+                "user": 35092359,
+                "nice": 0,
+                "sys": 11282125,
+                "idle": 342514609,
+                "irq": 204812
+            }
+        ],
+        "networkInterfaces": [
+            {
+                "name": "网口（下）",
+                "internal": false,
+                "mac": "94:de:80:6b:27:8c",
+                "address": "192.168.50.136",
+                "netmask": "255.255.255.0",
+                "family": "IPv4"
+            },
+            {
+                "name": "Loopback Pseudo-Interface 1",
+                "internal": true,
+                "mac": "00:00:00:00:00:00",
+                "address": "::1",
+                "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+                "family": "IPv6",
+                "scopeid": 0
+            },
+            {
+                "name": "Loopback Pseudo-Interface 1",
+                "internal": true,
+                "mac": "00:00:00:00:00:00",
+                "address": "127.0.0.1",
+                "netmask": "255.0.0.0",
+                "family": "IPv4"
+            }
+        ],
+        "host": "Diablohu-Home"
+    },
+    "javascriptStack": {
+        "message": "No stack.",
+        "stack": ["Unavailable."]
+    },
+    "nativeStack": [
+        {
+            "pc": "0x00007ff6443b1389",
+            "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+10873"
+        },
+        {
+            "pc": "0x00007ff6443b57cc",
+            "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+28348"
+        },
+        {
+            "pc": "0x00007ff6443b4778",
+            "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24168"
+        },
+        {
+            "pc": "0x00007ff6444a332b",
+            "symbol": "v8::base::CPU::has_sse+37723"
+        },
+        {
+            "pc": "0x00007ff644ca6f4e",
+            "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+        },
+        {
+            "pc": "0x00007ff644c8ef91",
+            "symbol": "v8::SharedArrayBuffer::Externalize+833"
+        },
+        {
+            "pc": "0x00007ff644b5c85c",
+            "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+        },
+        {
+            "pc": "0x00007ff644b58890",
+            "symbol": "v8::internal::Heap::AddRetainedMap+2608"
+        },
+        {
+            "pc": "0x00007ff644b80787",
+            "symbol": "v8::internal::Factory::NewRawTwoByteString+87"
+        },
+        {
+            "pc": "0x00007ff6449a797c",
+            "symbol": "v8::internal::String::SlowFlatten+492"
+        },
+        {
+            "pc": "0x00007ff64487110f",
+            "symbol": "unibrow::Utf8::EncodeOneByte+687"
+        },
+        {
+            "pc": "0x00007ff6449a59ee",
+            "symbol": "v8::Name::GetIdentityHash+558"
+        },
+        {
+            "pc": "0x00007ff6448ab72a",
+            "symbol": "v8::internal::StubCache::value_reference+11658"
+        },
+        {
+            "pc": "0x00007ff6450d2c6d",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+567949"
+        },
+        {
+            "pc": "0x00007ff645051523",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+37699"
+        },
+        {
+            "pc": "0x00007ff6450ad99c",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+415676"
+        },
+        {
+            "pc": "0x00007ff64510e414",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+811572"
+        },
+        {
+            "pc": "0x00007ff6450bf815",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+489013"
+        },
+        {
+            "pc": "0x00007ff6450527fc",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42524"
+        },
+        {
+            "pc": "0x00007ff6450527fc",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42524"
+        },
+        {
+            "pc": "0x00007ff6450a1a62",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+366722"
+        },
+        {
+            "pc": "0x00007ff64506f2cb",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+159979"
+        },
+        {
+            "pc": "0x00007ff64504fc9c",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+31420"
+        },
+        {
+            "pc": "0x00007ff644bb4fd0",
+            "symbol": "v8::internal::Execution::CallWasm+1536"
+        },
+        {
+            "pc": "0x00007ff644bb50c3",
+            "symbol": "v8::internal::Execution::CallWasm+1779"
+        },
+        {
+            "pc": "0x00007ff644bb54a2",
+            "symbol": "v8::internal::Execution::TryCall+354"
+        },
+        {
+            "pc": "0x00007ff644b98cd5",
+            "symbol": "v8::internal::MicrotaskQueue::RunMicrotasks+517"
+        },
+        {
+            "pc": "0x00007ff644c5b150",
+            "symbol": "v8::internal::Builtins::builtin_handle+325536"
+        },
+        {
+            "pc": "0x00007ff644c5a697",
+            "symbol": "v8::internal::Builtins::builtin_handle+322791"
+        },
+        {
+            "pc": "0x00007ff644c5a9d8",
+            "symbol": "v8::internal::Builtins::builtin_handle+323624"
+        },
+        {
+            "pc": "0x00007ff644c5a7de",
+            "symbol": "v8::internal::Builtins::builtin_handle+323118"
+        },
+        {
+            "pc": "0x00007ff6450d2d6d",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+568205"
+        },
+        {
+            "pc": "0x00007ff6450527fc",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42524"
+        },
+        {
+            "pc": "0x00007ff64504fdb1",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+31697"
+        },
+        {
+            "pc": "0x00007ff64504f99c",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+30652"
+        },
+        {
+            "pc": "0x00007ff644bb4f43",
+            "symbol": "v8::internal::Execution::CallWasm+1395"
+        },
+        {
+            "pc": "0x00007ff644bb48c6",
+            "symbol": "v8::internal::Execution::Call+182"
+        },
+        {
+            "pc": "0x00007ff644c85b3b",
+            "symbol": "v8::Function::Call+603"
+        },
+        {
+            "pc": "0x00007ff64451c79d",
+            "symbol": "node::CallbackScope::~CallbackScope+749"
+        },
+        {
+            "pc": "0x00007ff64451ca61",
+            "symbol": "node::CallbackScope::~CallbackScope+1457"
+        },
+        {
+            "pc": "0x00007ff644515fe3",
+            "symbol": "v8::internal::interpreter::BytecodeNode::operand_scale+179"
+        },
+        {
+            "pc": "0x00007ff64441ec00",
+            "symbol": "v8::internal::LookupIterator::index+19008"
+        },
+        {
+            "pc": "0x00007ff64441f3fc",
+            "symbol": "v8::internal::LookupIterator::index+21052"
+        },
+        {
+            "pc": "0x00007ff64441a605",
+            "symbol": "v8::internal::LookupIterator::index+1093"
+        },
+        {
+            "pc": "0x00007ff6445341fb",
+            "symbol": "uv_tty_set_mode+9659"
+        },
+        {
+            "pc": "0x00007ff6445490dc",
+            "symbol": "uv_loop_init+844"
+        },
+        {
+            "pc": "0x00007ff644549414",
+            "symbol": "uv_run+244"
+        },
+        {
+            "pc": "0x00007ff64446b892",
+            "symbol": "EVP_CIPHER_CTX_buf_noconst+30946"
+        },
+        {
+            "pc": "0x00007ff6444c9263",
+            "symbol": "node::Start+275"
+        },
+        {
+            "pc": "0x00007ff64438666c",
+            "symbol": "RC4_options+339308"
+        },
+        {
+            "pc": "0x00007ff645185d58",
+            "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+1301368"
+        },
+        {
+            "pc": "0x00007fffa1037bd4",
+            "symbol": "BaseThreadInitThunk+20"
+        },
+        {
+            "pc": "0x00007fffa192ced1",
+            "symbol": "RtlUserThreadStart+33"
+        }
+    ],
+    "javascriptHeap": {
+        "totalMemory": 13516800,
+        "totalCommittedMemory": 13516800,
+        "usedMemory": 10579792,
+        "availableMemory": 2187597256,
+        "memoryLimit": 2197815296,
+        "heapSpaces": {
+            "read_only_space": {
+                "memorySize": 262144,
+                "committedMemory": 262144,
+                "capacity": 261872,
+                "used": 32296,
+                "available": 229576
+            },
+            "new_space": {
+                "memorySize": 1048576,
+                "committedMemory": 1048576,
+                "capacity": 1047488,
+                "used": 0,
+                "available": 1047488
+            },
+            "old_space": {
+                "memorySize": 6139904,
+                "committedMemory": 6139904,
+                "capacity": 6131400,
+                "used": 5157192,
+                "available": 974208
+            },
+            "code_space": {
+                "memorySize": 688128,
+                "committedMemory": 688128,
+                "capacity": 417152,
+                "used": 417152,
+                "available": 0
+            },
+            "map_space": {
+                "memorySize": 790528,
+                "committedMemory": 790528,
+                "capacity": 442400,
+                "used": 442400,
+                "available": 0
+            },
+            "large_object_space": {
+                "memorySize": 4538368,
+                "committedMemory": 4538368,
+                "capacity": 4527200,
+                "used": 4527200,
+                "available": 0
+            },
+            "code_large_object_space": {
+                "memorySize": 49152,
+                "committedMemory": 49152,
+                "capacity": 3552,
+                "used": 3552,
+                "available": 0
+            },
+            "new_large_object_space": {
+                "memorySize": 0,
+                "committedMemory": 0,
+                "capacity": 1047488,
+                "used": 0,
+                "available": 1047488
+            }
+        }
+    },
+    "resourceUsage": {
+        "userCpuSeconds": 5.593,
+        "kernelCpuSeconds": 2.828,
+        "cpuConsumptionPercent": 0.681862,
+        "maxRss": 71680000,
+        "pageFaults": {
+            "IORequired": 268690,
+            "IONotRequired": 0
+        },
+        "fsActivity": {
+            "reads": 295,
+            "writes": 1346
+        }
+    },
+    "libuv": [],
+    "environmentVariables": {
+        "": "C:=C:\\",
+        "ALLUSERSPROFILE": "C:\\ProgramData",
+        "APPDATA": "C:\\Users\\Diablohu\\AppData\\Roaming",
+        "automation": "true",
+        "autorestart": "true",
+        "axm_actions": "",
+        "axm_dynamic": "[object Object]",
+        "axm_monitor": "[object Object]",
+        "axm_options": "[object Object]",
+        "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+        "ChocolateyLastPathUpdate": "周三 8月 29 21:38:03 2018",
+        "CommonProgramFiles": "C:\\Program Files\\Common Files",
+        "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+        "CommonProgramW6432": "C:\\Program Files\\Common Files",
+        "COMPUTERNAME": "DIABLOHU-HOME",
+        "ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+        "created_at": "1581200413938",
+        "cwd": "L:\\Projects\\WhoCallsTheFleet\\yuubari",
+        "DO_WEBPACK": "false",
+        "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+        "env": "[object Object]",
+        "exec_interpreter": "node",
+        "exec_mode": "fork_mode",
+        "FP_NO_HOST_CHECK": "NO",
+        "GIT_LFS_PATH": "N:\\Program Files\\Git LFS",
+        "HOMEDRIVE": "C:",
+        "HOMEPATH": "\\Users\\Diablohu",
+        "INIT_CWD": "L:\\Projects\\WhoCallsTheFleet\\yuubari",
+        "instances": "1",
+        "instance_var": "NODE_APP_INSTANCE",
+        "kill_retry_time": "100",
+        "km_link": "false",
+        "KOOT_CLIENT_BUNDLE_SUBFOLDER": "",
+        "KOOT_CUSTOM_ENV_KEYS": "[]",
+        "KOOT_DEVELOPMENT_MODE": "false",
+        "KOOT_DEV_DLL_FILE_CLIENT": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\logs\\dev\\dll\\client\\.dll.js",
+        "KOOT_DEV_DLL_FILE_SERVER": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\logs\\dev\\dll\\server\\.dll.js",
+        "KOOT_DEV_START_TIME": "1581200236053",
+        "KOOT_DEV_WDS_EXTEND_CONFIG": "{}",
+        "KOOT_DIST_DIR": "logs\\dev\\.build",
+        "KOOT_HISTORY_TYPE": "memoryHistory",
+        "KOOT_HTML_TEMPLATE": "<!DOCTYPE html>\r\n<html <%- inject.htmlLang -%>>\r\n<head>\r\n    <meta charset=\"utf-8\">\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n\r\n    <title><%= inject.title -%></title>\r\n\r\n    <base target=\"_self\">\r\n\r\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no\">\r\n    <meta name=\"format-detection\" content=\"telephone=no,email=no,address=no\">\r\n    <meta name=\"format-detection\" content=\"email=no\">\r\n    <meta name=\"format-detection\" content=\"address=no\">\r\n    <meta name=\"format-detection\" content=\"telephone=no\">\r\n    <meta name=\"HandheldFriendly\" content=\"true\">\r\n    <meta name=\"mobile-web-app-capable\" content=\"yes\">\r\n\r\n    <link rel=\"shortcut icon\" href=\"/favicon.ico\" type=\"image/x-icon\">\r\n    <link rel=\"icon\" href=\"/icon-256.png\" type=\"image/png\" sizes=\"256x256\">\r\n    <link rel=\"icon\" href=\"/icon-128.png\" type=\"image/png\" sizes=\"128x128\">\r\n    <%- inject.manifest -%>\r\n\r\n    <meta name=\"theme-color\" content=\"#263238\" />\r\n\r\n    <!-- IE/Edge -->\r\n    <meta name=\"renderer\" content=\"webkit\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n\r\n    <!-- iOS -->\r\n    <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\r\n    <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\r\n\r\n    <meta name=\"copyright\" content=\"Copyright (c) 2020 fleet.moe\">\r\n\r\n    <!-- Polyfill for legacy browsers -->\r\n    <script nomodule type=\"text/javascript\" src=\"<%- pathname('polyfill.js') %>\"></script>\r\n\r\n    <%- inject.metas -%>\r\n    <%- inject.styles -%>\r\n    <%- inject.definePath -%>\r\n</head>\r\n<body>\r\n    <div id=\"boat-loader\">LOADING...</div>\r\n    <div id=\"root\"><%- inject.react %></div>\r\n\r\n    <%- inject.svgIcons %>\r\n\r\n    <script type=\"text/javascript\"><%- content('critical.js') %></script>\r\n    <%- inject.scripts %>\r\n\r\n    <script>\r\n        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\r\n        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\n        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\n        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');\r\n\r\n        ga('create', 'UA-63582858-4', 'auto');\r\n        ga('send', 'pageview');\r\n    </script>\r\n</body>\r\n</html>\r\n\n<!-- rendered by using koot.js 0.12.3 -->",
+        "KOOT_I18N": "true",
+        "KOOT_I18N_COOKIE_KEY": "spLocaleId",
+        "KOOT_I18N_LOCALES": "[[\"zh\",{},\"L:\\\\Projects\\\\WhoCallsTheFleet\\\\yuubari\\\\src\\\\locales\\\\zh.json\",\"./locales/zh.json\"],[\"en\",{},\"L:\\\\Projects\\\\WhoCallsTheFleet\\\\yuubari\\\\src\\\\locales\\\\en.json\",\"./locales/en.json\"],[\"ja\",{},\"L:\\\\Projects\\\\WhoCallsTheFleet\\\\yuubari\\\\src\\\\locales\\\\ja.json\",\"./locales/ja.json\"]]",
+        "KOOT_I18N_TYPE": "\"store\"",
+        "KOOT_I18N_URL_USE": "undefined",
+        "KOOT_PROJECT_CONFIG_FULL_PATHNAME": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\logs\\tmp\\config\\full.1581200236030.js",
+        "KOOT_PROJECT_CONFIG_PORTION_CLIENT_PATHNAME": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\logs\\tmp\\config\\portion.client.1581200236030.js",
+        "KOOT_PROJECT_CONFIG_PORTION_OTHER_CLIENT_PATHNAME": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\logs\\tmp\\config\\portion.client-other.1581200236030.js",
+        "KOOT_PROJECT_CONFIG_PORTION_SERVER_PATHNAME": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\logs\\tmp\\config\\portion.server.1581200236030.js",
+        "KOOT_PROJECT_NAME": "The Fleet (Yuubari)",
+        "KOOT_PROJECT_TYPE": "ReactApp",
+        "KOOT_PWA_AUTO_REGISTER": "false",
+        "KOOT_PWA_PATHNAME": "\"/service-worker.js\"",
+        "KOOT_SESSION_STORE": "{\"equipmentList\":true,\"shipList\":true}",
+        "KOOT_TEST_MODE": "false",
+        "KOOT_VERSION": "0.12.3",
+        "LOCALAPPDATA": "C:\\Users\\Diablohu\\AppData\\Local",
+        "LOGONSERVER": "\\\\DIABLOHU-HOME",
+        "main-whocallsthefleet-yuubari": "{}",
+        "merge_logs": "true",
+        "name": "main-whocallsthefleet-yuubari",
+        "namespace": "default",
+        "NODE": "N:\\Program Files\\nodejs\\node.exe",
+        "NODE_APP_INSTANCE": "0",
+        "node_args": "",
+        "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"dev\"],\"original\":[\"dev\"]}",
+        "npm_config_bin_links": "true",
+        "npm_config_email": "Diablohu@users.noreply.github.com",
+        "npm_config_ignore_optional": "",
+        "npm_config_ignore_scripts": "",
+        "npm_config_init_author_email": "diablohudream@gmail.com",
+        "npm_config_init_author_name": "diablohu",
+        "npm_config_init_author_url": "http://diablohu.com",
+        "npm_config_init_license": "MIT",
+        "npm_config_init_version": "1.0.0",
+        "npm_config_registry": "https://registry.yarnpkg.com",
+        "npm_config_save_prefix": "^",
+        "npm_config_strict_ssl": "true",
+        "npm_config_username": "diablohu",
+        "npm_config_user_agent": "yarn/1.21.1 npm/? node/v12.13.0 win32 x64",
+        "npm_config_version_commit_hooks": "true",
+        "npm_config_version_git_message": "v%s",
+        "npm_config_version_git_sign": "",
+        "npm_config_version_git_tag": "true",
+        "npm_config_version_tag_prefix": "v",
+        "npm_execpath": "N:\\Program Files (x86)\\Yarn\\bin\\yarn.js",
+        "npm_lifecycle_event": "dev",
+        "npm_lifecycle_script": "node ./scripts/dev.js",
+        "npm_node_execpath": "N:\\Program Files\\nodejs\\node.exe",
+        "npm_package_author_email": "diablohudream@gmail.com",
+        "npm_package_author_name": "Diablohu",
+        "npm_package_author_url": "http://diablohu.com",
+        "npm_package_dependencies_bind_event": "1.1.2",
+        "npm_package_dependencies_camelcase": "^5.3.1",
+        "npm_package_dependencies_check_css_prop": "^1.0.1",
+        "npm_package_dependencies_classnames": "^2.2.6",
+        "npm_package_dependencies_hotkeys_js": "^3.7.3",
+        "npm_package_dependencies_kckit": "^1.32.0",
+        "npm_package_dependencies_koot": "^0.12.3",
+        "npm_package_dependencies_localforage": "^1.7.3",
+        "npm_package_dependencies_lz_string": "^1.4.4",
+        "npm_package_dependencies_metas": "^1.0.1",
+        "npm_package_dependencies_react_markdown": "^4.3.1",
+        "npm_package_dependencies_react_transition_group": "^4.3.0",
+        "npm_package_dependencies_swiper": "^5.3.1",
+        "npm_package_dependencies_whocallsthefleet_backgrounds": "^1.3.2",
+        "npm_package_dependencies_whocallsthefleet_database": "^20200209.3.0",
+        "npm_package_description": "Yuubari (Dev) Channel for Who Calls the Fleet (https://yuubari.fleet.moe)",
+        "npm_package_devDependencies_autoprefixer": "^9.7.4",
+        "npm_package_devDependencies_babel_eslint": "^10.0.3",
+        "npm_package_devDependencies_cli_spinners": "^2.2.0",
+        "npm_package_devDependencies_cssnano": "^4.1.10",
+        "npm_package_devDependencies_eslint": "^6.8.0",
+        "npm_package_devDependencies_eslint_config_koot": "^1.6.0",
+        "npm_package_devDependencies_glob": "^7.1.6",
+        "npm_package_devDependencies_husky": "^4.2.1",
+        "npm_package_devDependencies_image_size": "^0.8.3",
+        "npm_package_devDependencies_jest": "^25.1.0",
+        "npm_package_devDependencies_jsonfile": "^5.0.0",
+        "npm_package_devDependencies_json_pretty": "^0.0.1",
+        "npm_package_devDependencies_lint_staged": "^10.0.7",
+        "npm_package_devDependencies_nedb_promise": "^2.0.1",
+        "npm_package_devDependencies_node_notifier": "^6.0.0",
+        "npm_package_devDependencies_normalize_css": "^8.0.1",
+        "npm_package_devDependencies_ora": "^4.0.3",
+        "npm_package_devDependencies_postcss_easing_gradients": "^3.0.1",
+        "npm_package_devDependencies_postcss_pxtorem": "^4.0.1",
+        "npm_package_devDependencies_prettier": "^1.19.1",
+        "npm_package_devDependencies_prettier_eslint": "^9.0.1",
+        "npm_package_devDependencies_progress": "^2.0.3",
+        "npm_package_devDependencies_raw_loader": "^4.0.0",
+        "npm_package_devDependencies_simple_git": "^1.131.0",
+        "npm_package_devDependencies_svg_url_loader": "^4.0.0",
+        "npm_package_devDependencies_url_loader": "^3.0.0",
+        "npm_package_engines_node": ">=8.0.0",
+        "npm_package_eslintIgnore_0": "node_modules/**/*",
+        "npm_package_husky_hooks_pre_commit": "lint-staged",
+        "npm_package_koot_version": "0.12.3",
+        "npm_package_license": "MIT",
+        "npm_package_lint_staged____json_md_css_less_sass_scss__0": "prettier --write",
+        "npm_package_lint_staged____js_jsx_ts_tsx_cjs_mjs__0": "eslint --fix",
+        "npm_package_lint_staged____js_jsx_ts_tsx_cjs_mjs__1": "prettier --write",
+        "npm_package_name": "whocallsthefleet-yuubari",
+        "npm_package_readmeFilename": "README.md",
+        "npm_package_repository_type": "git",
+        "npm_package_repository_url": "https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari",
+        "npm_package_scripts_analyze": "koot-analyze",
+        "npm_package_scripts_build": "koot-build",
+        "npm_package_scripts_build_client": "koot-build --client",
+        "npm_package_scripts_build_server": "koot-build --server",
+        "npm_package_scripts_build_spa": "koot-build --client --type react-spa --config ./koot.config.spa.js",
+        "npm_package_scripts_deploy": "git pull && node ./deploy",
+        "npm_package_scripts_dev": "node ./scripts/dev.js",
+        "npm_package_scripts_eslint": "eslint \"!(node_modules|logs|dist|dist*)/**/*.+(js|jsx)\"",
+        "npm_package_scripts_publish_webapp": "node ./src/scripts/publish/webapp/index.js",
+        "npm_package_scripts_quickstart": "koot-start -- quickStart=true",
+        "npm_package_scripts_quickstart_locales": "koot-start -- quickStart=true -- quickStartAllLocales=true",
+        "npm_package_scripts_start": "npm run publish:webapp && koot-start --no-build",
+        "npm_package_scripts_start_original": "koot-start",
+        "npm_package_scripts_start_server": "koot-start --no-build",
+        "npm_package_scripts_start_server_pm2": "pm2 restart pm2.json --only yuubari",
+        "npm_package_scripts_start_spa": "koot-start --type react-spa --config ./koot.config.spa.js",
+        "npm_package_scripts_test_server": "npm run build:server && npm run start:server",
+        "npm_package_scripts_test_server_port": "cross-env SERVER_PORT=4000 koot-start --no-build",
+        "npm_package_scripts_up": "yarn upgrade-interactive --latest",
+        "npm_package_version": "1.0.0",
+        "NUMBER_OF_PROCESSORS": "8",
+        "NVTOOLSEXT_PATH": "C:\\Program Files\\NVIDIA Corporation\\NvToolsExt\\",
+        "OneDrive": "N:\\OneDrive",
+        "OneDriveConsumer": "N:\\OneDrive",
+        "OS": "Windows_NT",
+        "Path": "N:\\Temp\\yarn--1581200229841-0.49735633326594386;L:\\Projects\\WhoCallsTheFleet\\yuubari\\node_modules\\.bin;C:\\Users\\Diablohu\\AppData\\Local\\Yarn\\Data\\link\\node_modules\\.bin;N:\\Program Files\\libexec\\lib\\node_modules\\npm\\bin\\node-gyp-bin;N:\\Program Files\\lib\\node_modules\\npm\\bin\\node-gyp-bin;N:\\Program Files\\nodejs\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Program Files (x86)\\Razer Chroma SDK\\bin;C:\\Program Files\\Razer Chroma SDK\\bin;N:\\Program Files\\ImageMagick;n:\\program files\\graphicsmagick;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\ATI Technologies\\ATI.ACE\\Core-Static;G:\\Server\\PHP;G:\\Server\\PHP\\ext;E:\\Program Files\\TortoiseSVN\\bin;E:\\Program Files\\ADT Bundle\\sdk\\platform-tools;G:\\Server\\Python27;G:\\Server\\Python27\\Scripts;C:\\Program Files (x86)\\Windows Live\\Shared;L:\\Server\\MinGW\\bin;N:\\Program Files\\ATI Technologies\\ATI.ACE\\Core-Static;C:\\Program Files\\Microsoft SQL Server\\110\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SDKs\\TypeScript\\1.0\\;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;N:\\Program Files (x86)\\SWFTools;N:\\Program Files (x86)\\Git\\cmd;N:\\Commands;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Users\\Diablohu\\AppData\\Roaming\\npm;N:\\Program Files (x86)\\cmder;N:\\Program Files\\PuTTY\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\System32\\OpenSSH\\;N:\\Program Files\\Git LFS;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;N;N:\\Program Files\\nodejs\\;N:\\Program Files (x86)\\WinSCP\\;E:\\Program Files\\TortoiseGit\\bin;N:\\Program Files (x86)\\Yarn\\bin\\;G:\\Server\\PHP\\;N:\\Program Files\\P;C:\\Users\\Diablohu\\AppData\\Local\\hyper\\app-2.0.0\\resources\\bin;C:\\Users\\Diablohu\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Diablohu\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Diablohu\\AppData\\Local\\Yarn\\bin",
+        "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC;.CPL",
+        "PM2_HOME": "C:\\Users\\Diablohu\\.pm2",
+        "PM2_INTERACTOR_PROCESSING": "true",
+        "PM2_JSON_PROCESSING": "true",
+        "PM2_PROGRAMMATIC": "true",
+        "pmx": "true",
+        "pm_cwd": "L:\\Projects\\WhoCallsTheFleet\\yuubari",
+        "pm_err_log_path": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\logs\\dev\\main-error.log",
+        "pm_exec_path": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\node_modules\\koot\\ReactApp\\server\\index-dev.js",
+        "pm_id": "3",
+        "pm_out_log_path": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\logs\\dev\\main.log",
+        "pm_pid_path": "C:\\Users\\Diablohu\\.pm2\\pids\\main-whocallsthefleet-yuubari-3.pid",
+        "pm_uptime": "1581200413938",
+        "PROCESSOR_ARCHITECTURE": "AMD64",
+        "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
+        "PROCESSOR_LEVEL": "6",
+        "PROCESSOR_REVISION": "3a09",
+        "ProgramData": "C:\\ProgramData",
+        "ProgramFiles": "C:\\Program Files",
+        "ProgramFiles(x86)": "C:\\Program Files (x86)",
+        "ProgramW6432": "C:\\Program Files",
+        "PROMPT": "$P$G",
+        "PSModulePath": "L:\\My Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules\\;C:\\Program Files\\Microsoft Application Virtualization\\Client\\",
+        "PUBLIC": "C:\\Users\\Public",
+        "PWD": "L:\\Projects\\WhoCallsTheFleet\\yuubari",
+        "restart_time": "0",
+        "SERVER_PORT": "8703",
+        "SERVER_PORT_DEV_MAIN": "3000",
+        "SP_CONN_STR": "mysql://root@localhost/stormplay",
+        "SP_MONGO_STR": "mongodb://localhost:27017/stormplay",
+        "status": "launching",
+        "SystemDrive": "C:",
+        "SystemRoot": "C:\\WINDOWS",
+        "TEMP": "N:\\Temp",
+        "TMP": "N:\\Temp",
+        "treekill": "true",
+        "unique_id": "5c4ef1eb-2dc4-40c8-aa49-f7e745307919",
+        "unstable_restarts": "0",
+        "USERDOMAIN": "DIABLOHU-HOME",
+        "USERDOMAIN_ROAMINGPROFILE": "DIABLOHU-HOME",
+        "USERNAME": "Diablohu",
+        "username": "Diablohu",
+        "USERPROFILE": "C:\\Users\\Diablohu",
+        "VFRAME_PROFILE_PATH": "E:\\Imagination\\PowerVR_Graphics\\PowerVR_Tools/PVRVFrame/Profiles",
+        "vizion": "true",
+        "vizion_running": "false",
+        "VS110COMNTOOLS": "C:\\Program Files (x86)\\Microsoft Visual Studio 11.0\\Common7\\Tools\\",
+        "VS120COMNTOOLS": "N:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\Common7\\Tools\\",
+        "VS140COMNTOOLS": "N:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools\\",
+        "watch": "L:\\Projects\\WhoCallsTheFleet\\yuubari\\node_modules\\koot\\ReactApp\\server",
+        "WEBPACK_ANALYZE": "false",
+        "WEBPACK_BUILD_ENV": "dev",
+        "WEBPACK_BUILD_STAGE": "client",
+        "WEBPACK_BUILD_TYPE": "isomorphic",
+        "WEBPACK_CHUNKMAP": "",
+        "WEBPACK_DEV_SERVER": "true",
+        "WEBPACK_DEV_SERVER_PORT": "3001",
+        "windir": "C:\\WINDOWS",
+        "windowsHide": "true",
+        "WSLENV": "WT_SESSION:",
+        "WT_SESSION": "66e0fdb8-0342-4ea1-a2e8-d609a2000e37",
+        "YARN_WRAP_OUTPUT": "false"
+    },
+    "sharedObjects": [
+        "N:\\Program Files\\nodejs\\node.exe",
+        "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+        "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+        "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+        "C:\\WINDOWS\\System32\\WS2_32.dll",
+        "C:\\WINDOWS\\System32\\RPCRT4.dll",
+        "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+        "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+        "C:\\WINDOWS\\System32\\ucrtbase.dll",
+        "C:\\WINDOWS\\System32\\msvcrt.dll",
+        "C:\\WINDOWS\\System32\\sechost.dll",
+        "C:\\WINDOWS\\System32\\USER32.dll",
+        "C:\\WINDOWS\\System32\\win32u.dll",
+        "C:\\WINDOWS\\System32\\GDI32.dll",
+        "C:\\WINDOWS\\System32\\gdi32full.dll",
+        "C:\\WINDOWS\\System32\\msvcp_win.dll",
+        "C:\\WINDOWS\\System32\\PSAPI.DLL",
+        "C:\\WINDOWS\\System32\\CRYPT32.dll",
+        "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+        "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+        "C:\\WINDOWS\\System32\\MSASN1.dll",
+        "C:\\WINDOWS\\System32\\profapi.dll",
+        "C:\\WINDOWS\\System32\\bcrypt.dll",
+        "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+        "C:\\WINDOWS\\SYSTEM32\\WINMMBASE.dll",
+        "C:\\WINDOWS\\System32\\cfgmgr32.dll",
+        "C:\\WINDOWS\\System32\\bcryptPrimitives.dll",
+        "C:\\WINDOWS\\System32\\IMM32.DLL",
+        "C:\\WINDOWS\\System32\\powrprof.dll",
+        "C:\\WINDOWS\\System32\\UMPDC.dll",
+        "C:\\WINDOWS\\system32\\uxtheme.dll",
+        "C:\\WINDOWS\\System32\\combase.dll",
+        "C:\\WINDOWS\\system32\\mswsock.dll",
+        "C:\\WINDOWS\\System32\\kernel.appcore.dll",
+        "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+        "C:\\WINDOWS\\System32\\NSI.dll",
+        "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+        "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+        "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+        "C:\\WINDOWS\\system32\\napinsp.dll",
+        "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+        "C:\\WINDOWS\\System32\\winrnr.dll",
+        "C:\\WINDOWS\\system32\\NLAapi.dll",
+        "C:\\WINDOWS\\system32\\wshbth.dll",
+        "C:\\Windows\\System32\\rasadhlp.dll",
+        "C:\\WINDOWS\\System32\\fwpuclnt.dll"
+    ]
+}

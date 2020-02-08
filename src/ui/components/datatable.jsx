@@ -1,74 +1,89 @@
-import React from 'react'
-import classNames from 'classnames'
-import { extend } from 'koot'
+import React from 'react';
+import classNames from 'classnames';
+import { extend } from 'koot';
 
 @extend({
     styles: require('./datatable.less')
 })
 class DataTable extends React.Component {
+    ContainerRef = React.createRef();
+    // _scrollLeft
+
     componentDidUpdate(/*prevProps*/) {
+        const Ref = this.props.forwardedRef || this.ContainerRef;
         // console.log(prevProps.scrollLeft, this.props.scrollLeft, this._table, this._table.scrollLeft)
-        if (!this._table || typeof this.props.scrollLeft === 'undefined' || this._table.scrollLeft === this.props.scrollLeft)
-            return
-        this._table.scrollLeft = this.props.scrollLeft
+        if (
+            !Ref ||
+            !Ref.current ||
+            typeof this.props.scrollLeft === 'undefined' ||
+            Ref.current.scrollLeft === this.props.scrollLeft
+        )
+            return;
+        Ref.current.scrollLeft = this.props.scrollLeft;
     }
 
     renderHeader() {
-        if (!this.props.headers) return null
-        const TagName = this.props.tag || 'thead'
+        if (!this.props.headers) return null;
+        const TagName = this.props.tag || 'thead';
         return (
             <TagName className="header">
                 {this.renderRow(this.props.headers)}
             </TagName>
-        )
+        );
     }
 
     renderBody() {
-        if (!this.props.data) return null
-        const TagName = this.props.tag || 'tbody'
+        if (!this.props.data) return null;
+        const TagName = this.props.tag || 'tbody';
         return (
             <TagName className="body">
                 {this.props.data.map((row, index) => {
                     if (typeof row === 'object' && row.cells)
-                        return this.renderRow(row.cells, row.key || index, row.props)
-                    return this.renderRow(row, index)
+                        return this.renderRow(
+                            row.cells,
+                            row.key || index,
+                            row.props
+                        );
+                    return this.renderRow(row, index);
                 })}
             </TagName>
-        )
+        );
     }
 
     renderRow(data, index = 0, props = {}) {
-        const Component = this.props.tag || 'tr'
-        const { className, ...thisProps } = props
+        const Component = this.props.tag || 'tr';
+        const { className, ...thisProps } = props;
         return (
-            <Component className={classNames(['row', className])} key={index} {...thisProps}>
-                {data.map((children, index2) => this.renderCell(children, index, index2))}
+            <Component
+                className={classNames(['row', className])}
+                key={index}
+                {...thisProps}
+            >
+                {data.map((children, index2) =>
+                    this.renderCell(children, index, index2)
+                )}
             </Component>
-        )
+        );
     }
 
     renderCell(data, indexRow, indexCell) {
-        const Component = this.props.tag || 'td'
+        const Component = this.props.tag || 'td';
 
-        let props = {}
+        let props = {};
 
         if (Array.isArray(data)) {
-            props = data[1]
-            props.children = data[0]
+            props = data[1];
+            props.children = data[0];
         } else if (typeof data === 'object') {
-            props = data
+            props = data;
         } else {
-            props.children = data
+            props.children = data;
         }
 
-        if (props.className)
-            props.className = 'cell ' + props.className
-        else
-            props.className = 'cell'
+        if (props.className) props.className = 'cell ' + props.className;
+        else props.className = 'cell';
 
-        return (
-            <Component key={indexRow + '-' + indexCell} {...props} />
-        )
+        return <Component key={indexRow + '-' + indexCell} {...props} />;
     }
 
     render() {
@@ -82,20 +97,20 @@ class DataTable extends React.Component {
         //     ...props
         // } = this.props
 
-        const TagName = this.props.tag || 'table'
+        const TagName = this.props.tag || 'table';
 
         return (
             <TagName
-                className={this.props.className
-                    + (TagName !== 'table' ? ' flex' : '')
+                className={
+                    this.props.className + (TagName !== 'table' ? ' flex' : '')
                 }
                 onScroll={this.props.onScroll}
-                ref={el => this._table = el}
+                ref={this.props.forwardedRef || this.ContainerRef}
             >
                 {this.renderHeader()}
                 {this.renderBody()}
             </TagName>
-        )
+        );
     }
 }
-export default DataTable
+export default DataTable;
