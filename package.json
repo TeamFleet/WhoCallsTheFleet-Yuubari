@@ -24,6 +24,7 @@
         "build:client": "koot-build --client",
         "build:server": "koot-build --server",
         "build:spa": "koot-build --client --type react-spa --config ./koot.config.spa.js",
+        "build:quick:full": "koot-build -- quickStart=true -- quickStartAllLocales=true",
         "dev": "node ./scripts/dev.js",
         "analyze": "koot-analyze",
         "deploy": "git pull && node ./deploy",
