@@ -6,14 +6,11 @@ const getDistPath = require('koot/utils/get-dist-path');
 
 const {
     root: dirRoot,
-    assets: dirAssets,
-    pics: dirPics,
-    bgimgs: dirBgimgs
+    pics: dirPics
     // dist: {
     //     includes: dirIncludes,
     // }
 } = require('../directories');
-const channel = require('../channel');
 const spinner = require('./commons/spinner');
 const Progress = require('./commons/progress');
 
@@ -33,16 +30,7 @@ module.exports = async (kootConfig = {}) => {
 
     const { __CLIENT_ROOT_PATH } = kootConfig;
 
-    const list = [
-        {
-            from: dirBgimgs,
-            to: 'bgimgs'
-        },
-        {
-            from: path.resolve(dirAssets, `logos/${channel}/32.ico`),
-            to: 'favicon.ico'
-        }
-    ];
+    const list = [];
 
     if (ENV === 'prod' && !process.env.quickStart)
         list.push(...(await getPics(kootConfig)));
@@ -52,12 +40,15 @@ module.exports = async (kootConfig = {}) => {
     });
 
     waiting.stop();
+
+    if (!list.length) return;
+
     const bar = new Progress({
         title,
         total: list.length
     });
 
-    for (let { from, to } of list) {
+    for (const { from, to } of list) {
         if (!fs.existsSync(from)) continue;
         else if (!fs.existsSync(to)) await fs.copy(from, to);
         else if (
@@ -96,7 +87,7 @@ const getPics = async (kootConfig = {}) => {
     // const dirTo = '../../pics';
     const dirTo = path.resolve(getDistPath(), 'pics');
 
-    let results = [];
+    const results = [];
     let ships;
 
     const filelist = {
@@ -106,7 +97,7 @@ const getPics = async (kootConfig = {}) => {
     };
 
     const getDb = async dbname => {
-        let arr = [];
+        const arr = [];
         await new Promise((resolve, reject) => {
             fs.readFile(
                 path.resolve(
@@ -162,14 +153,14 @@ const getPics = async (kootConfig = {}) => {
         });
     };
 
-    for (let type of await readdir(dirPics)) {
+    for (const type of await readdir(dirPics)) {
         const dirType = path.join(dirPics, type);
-        for (let id of await readdir(dirType)) {
+        for (const id of await readdir(dirType)) {
             switch (type) {
                 case 'ships': {
                     if (!ships) {
                         ships = {};
-                        for (let ship of await getDb('ships')) {
+                        for (const ship of await getDb('ships')) {
                             ships[ship.id] = ship;
                         }
                     }

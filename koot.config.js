@@ -21,6 +21,8 @@
 
 const path = require('path');
 
+const { static: dirStatic } = require('./src/directories');
+
 /** @type {Boolean} 判断当前是否是生产环境 */
 // const isEnvProd = Boolean(process.env.WEBPACK_BUILD_ENV === 'prod')
 /** @type {Boolean} 判断当前是否是开发环境 */
@@ -68,7 +70,8 @@ module.exports = {
 
     serviceWorker: {
         auto: false,
-        exclude: ['/bgimgs/**/*', '/pics/**/*', '/dev-*']
+        exclude: ['/bgimgs/**/*', '/pics/**/*', '/dev-*'],
+        cacheFirst: ['/bgimgs/', '/pics/']
     },
 
     aliases: {
@@ -94,6 +97,8 @@ module.exports = {
     },
 
     defines: require('./src/defines'),
+
+    staticCopyFrom: [dirStatic],
 
     /**************************************************************************
      * 客户端生命周期

@@ -41,7 +41,7 @@
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.7.3",
         "kckit": "^1.33.0",
-        "koot": "^0.12.7-alpha.1",
+        "koot": "^0.13.0-alpha.1",
         "localforage": "^1.7.3",
         "lz-string": "^1.4.4",
         "metas": "^1.0.1",
@@ -102,6 +102,6 @@
         ]
     },
     "koot": {
-        "version": "0.12.7-alpha.1"
+        "version": "0.13.0-alpha.1"
     }
 }

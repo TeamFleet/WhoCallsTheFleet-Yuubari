@@ -1,4 +1,4 @@
-const getDistPath = require('koot/utils/get-dist-path');
+// const getDistPath = require('koot/utils/get-dist-path');
 
 const path = require('path');
 
@@ -15,6 +15,7 @@ module.exports = {
         pathRoot,
         './node_modules/whocallsthefleet-backgrounds/output'
     ),
+    static: path.resolve(__dirname, '../.static'),
 
     src: {
         _: pathSrc,
