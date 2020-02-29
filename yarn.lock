@@ -12098,10 +12098,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swiper@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-5.3.1.tgz#05a8e989daec0bf2841779f4f0d6fce9db259b9e"
-  integrity sha512-H44Wf9hu1o1xtexSqjP+toGwAapUyQMt1hy/77ZRFURdWI1oOwGUCUdZCc8a1Zuh1Ud16u3Th+NdFJI3HIRNrw==
+swiper@^5.3.6:
+  version "5.3.6"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-5.3.6.tgz#102b7f8145d734ec4c30e04602160382356b5948"
+  integrity sha512-FUz50g6RuvGAuXQWmR5lRPoA129leRUZ/p57ckr8+P5kR7VktElVQ47JGmWD86mOJCFfvMhUf0hinyC5UFL5iw==
   dependencies:
     dom7 "^2.1.3"
     ssr-window "^1.0.1"
@@ -13168,10 +13168,10 @@ whocallsthefleet-backgrounds@^1.3.2:
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.3.2.tgz#ea434851b7d362b30ba7c1eb86ac86e22fcd45e2"
   integrity sha512-3vQRvNciB3Dq1jlbZHXdujPIwEeDazHTfyZLAzuw7YA6f7JGGPgKHTqQpqQApRCel5DH75umEtdAZldjen3gUA==
 
-whocallsthefleet-database@^20200216.0.0:
-  version "20200216.0.0"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20200216.0.0.tgz#bf737b1fb0ee4ff127b0e180733f2fd6133de0d5"
-  integrity sha512-UN5Xdv8QDjQKU+OsRiCewq575fqbcSaREMVVSE4rEF/iPgNpMiuQNsSs9rnC65QUG7iXtyuPw2aUntrbZ9NUFQ==
+whocallsthefleet-database@^20200301.0.0:
+  version "20200301.0.0"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20200301.0.0.tgz#2851666bdd1f7f2880dacae9eee89ac5ec69ddea"
+  integrity sha512-QAeFFHikyDK1thIM5mAB+OQZzL65y05hxzsfxEyhl1owbOCT6ZiyYOfJeQpKmVKPbV6UGjF1Q6miaHd/7nXs5Q==
 
 wide-align@^1.1.0:
   version "1.1.3"
