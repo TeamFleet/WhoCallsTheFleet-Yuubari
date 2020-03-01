@@ -7726,10 +7726,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.13.0-alpha.1:
-  version "0.13.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.13.0-alpha.1.tgz#3b44495c64d53999c0f4ff440585656dfdac063d"
-  integrity sha512-3B+3hfRitkv9elS1cVAXgYuzg1+q2C9dq+h+85mxOhKJfoGwmFI8wBBkkFSvn8wF0PNnAl6Hyk84W5fzFqH+zg==
+koot-webpack@^0.13.0-beta.0:
+  version "0.13.0-beta.0"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.13.0-beta.0.tgz#895730eb6ec56b337006d94fceaf803ab98d5e0b"
+  integrity sha512-b7bJ94+2kpn4Jl0d/smOhKR2CYpgbcpGxyLyU7PkT5zTkB36SRJta1z9hFRYFdJ14jOM4FaFVtrwDbicRKuYSw==
   dependencies:
     "@babel/core" "^7.8.6"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -7775,10 +7775,10 @@ koot-webpack@^0.13.0-alpha.1:
   optionalDependencies:
     node-sass "^4.13.1"
 
-koot@^0.13.0-alpha.1:
-  version "0.13.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.13.0-alpha.1.tgz#8755641bc32cc71a797bcd429ca0e31d8ceb29c8"
-  integrity sha512-pZtwd86zr1UHw7O3nm5SchNX48bH4QVIzG01kBdEufmBZTOb5Kea3//A26kzxepAyV9pE3CfNGHqe9lAiv/fZg==
+koot@^0.13.0-beta.0:
+  version "0.13.0-beta.0"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.13.0-beta.0.tgz#b2e44ee54f3a7b92f4e27c5310dae7fd03445737"
+  integrity sha512-74w5Zun0bDpjXfVPwo5PLw0R9uaok5stvUtqzG9rZfwvxHKffaVhsOKb1SieqmLcdEd2M1cW02S/PnLSw3BFQw==
   dependencies:
     "@types/lodash" "^4.14.149"
     "@types/node" "^13.7.6"
@@ -7814,7 +7814,7 @@ koot@^0.13.0-alpha.1:
     koa-proxies "^0.11.0"
     koa-router "^8.0.8"
     koa-static "^5.0.0"
-    koot-webpack "^0.13.0-alpha.1"
+    koot-webpack "^0.13.0-beta.0"
     lodash "^4.17.15"
     md5 "^2.2.1"
     md5-file "^4.0.0"
