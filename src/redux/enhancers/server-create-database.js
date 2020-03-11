@@ -15,6 +15,7 @@ const databaseEnhancer = createStore => (reducer, preloadedState, enhancer) => {
     if (__SERVER__) {
         const cache = getCache();
         if (!cache.__database) cache.__database = initDatabase(store).db;
+        // console.log({ cache });
         store.__database = cache.__database;
     }
 
