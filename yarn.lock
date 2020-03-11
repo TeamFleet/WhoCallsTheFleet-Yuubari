@@ -7590,12 +7590,12 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonfile@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-6.0.0.tgz#14c51dd6fceb667d3beeba1d164a23aad619bb51"
-  integrity sha512-M4yexIvXXRwOw3TQILHJSxJa6i+efkRRIGmCYJoXy2sH91EovJihfIcryUzCG3uHgrcx9n3O/Hm8oY/uTdR59A==
+jsonfile@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-6.0.1.tgz#98966cba214378c8c84b82e085907b40bf614179"
+  integrity sha512-jR2b5v7d2vIOust+w3wtFKZIfpC2pnRmFAhAC/BuweZFQR8qZzxH1OyrQ10HmdVYiXWkYUqPVsz91cG7EL2FBg==
   dependencies:
-    universalify "^0.2.0"
+    universalify "^1.0.0"
   optionalDependencies:
     graceful-fs "^4.1.6"
 
@@ -7796,10 +7796,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.13.0.tgz#3a5d0f16bc01b20ebd6cbeabc81e13ea03fc99ea"
-  integrity sha512-YoKnZwsgLqKXtp9fcC3hU2lMI0SgXdj8WjShjMRCu7SC+N82rQxfQdrzO6Qt26bDsNn6ZY9h8KmT6x29Cps7vw==
+koot-webpack@^0.13.3:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.13.3.tgz#3112618cf2e040575cb96b2920ecd6a4cd368d2e"
+  integrity sha512-XfryyPKEG6fDZ5oKRESaVrHjSX+wsW0dnKn+0g7e0xOTvr+8r6x9/+rpviW/E2qR5+QcmOoj8DWIWliKJBFYPA==
   dependencies:
     "@babel/core" "^7.8.7"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -7845,10 +7845,10 @@ koot-webpack@^0.13.0:
   optionalDependencies:
     node-sass "^4.13.1"
 
-koot@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.13.0.tgz#3388da054468f60bfa28f4e76cccf262946953f1"
-  integrity sha512-S78LXKcOyqCp/oU03jeuQtPR7Gfxi3SRzv/yz4/pwxuHX96yn0HjtVIgudBsSxZJNQa0NzKpFczx2h1PnMdmKA==
+koot@^0.13.3:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.13.3.tgz#de8c723a8b7f06d3a09a6cb620efbe2ed4f5755c"
+  integrity sha512-9kFfcCa5eRVD5KWopkBp/XXh0cWXaoQdzJnLiRAKipRtKmUQZy5vQkfFSW/AwazJSkzyndtveQpW6vhMWXooTg==
   dependencies:
     "@types/lodash" "^4.14.149"
     "@types/node" "^13.7.7"
@@ -7884,7 +7884,7 @@ koot@^0.13.0:
     koa-proxies "^0.11.0"
     koa-router "^8.0.8"
     koa-static "^5.0.0"
-    koot-webpack "^0.13.0"
+    koot-webpack "^0.13.3"
     lodash "^4.17.15"
     md5 "^2.2.1"
     md5-file "^4.0.0"
@@ -12769,10 +12769,10 @@ universalify@^0.1.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
 
-universalify@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.2.0.tgz#6451760566fa857534745ab1dde952d1b1761be0"
-  integrity sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==
+universalify@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/universalify/-/universalify-1.0.0.tgz#b61a1da173e8435b2fe3c67d29b9adf8594bd16d"
+  integrity sha512-rb6X1W158d7pRQBg5gkR8uPaSfiids68LTJQYOtEUhoJUWBdaQHsuT/EUduxXYxcrt4r5PJ4fuHW1MHT6p0qug==
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
