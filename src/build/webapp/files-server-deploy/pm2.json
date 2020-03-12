@@ -4,7 +4,6 @@
             "name": "yuubari-server",
             "script": "start.js",
             "max_memory_restart": "500M",
-            "exec_mode": "cluster_mode",
             "out_file": "logs/server.log",
             "error_file": "logs/server-error.log"
         }

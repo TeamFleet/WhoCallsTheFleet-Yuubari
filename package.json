@@ -24,6 +24,7 @@
         "build:client": "koot-build --client",
         "build:server": "koot-build --server",
         "build:spa": "koot-build --client --type react-spa --config ./koot.config.spa.js",
+        "build:quick": "koot-build -- quickStart=true",
         "build:quick:full": "koot-build -- quickStart=true -- quickStartAllLocales=true",
         "dev": "node ./scripts/dev.js",
         "analyze": "koot-analyze",
@@ -41,7 +42,7 @@
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.7.3",
         "kckit": "^1.33.0",
-        "koot": "^0.13.3",
+        "koot": "^0.13.4",
         "localforage": "^1.7.3",
         "lz-string": "^1.4.4",
         "metas": "^1.0.1",
@@ -76,7 +77,7 @@
         "prettier-eslint": "^9.0.1",
         "progress": "^2.0.3",
         "raw-loader": "^4.0.0",
-        "simple-git": "^1.131.0",
+        "simple-git": "^1.132.0",
         "svg-url-loader": "^4.0.0",
         "url-loader": "^3.0.0"
     },
@@ -102,6 +103,6 @@
         ]
     },
     "koot": {
-        "version": "0.13.3"
+        "version": "0.13.4"
     }
 }

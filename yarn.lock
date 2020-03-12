@@ -7796,10 +7796,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.13.3:
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.13.3.tgz#3112618cf2e040575cb96b2920ecd6a4cd368d2e"
-  integrity sha512-XfryyPKEG6fDZ5oKRESaVrHjSX+wsW0dnKn+0g7e0xOTvr+8r6x9/+rpviW/E2qR5+QcmOoj8DWIWliKJBFYPA==
+koot-webpack@^0.13.4:
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.13.4.tgz#485fa365ddd025bc619529c2eda7e28beb02a8d6"
+  integrity sha512-ZH+S2vTkjM6QUHqqyxPHh1lnLgJR7JJDMsfWNd0GgvyRWhXP6dSiQv00GKT2L9iHj85AOyP7E+nxn2NCSPGr4w==
   dependencies:
     "@babel/core" "^7.8.7"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -7845,10 +7845,10 @@ koot-webpack@^0.13.3:
   optionalDependencies:
     node-sass "^4.13.1"
 
-koot@^0.13.3:
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.13.3.tgz#de8c723a8b7f06d3a09a6cb620efbe2ed4f5755c"
-  integrity sha512-9kFfcCa5eRVD5KWopkBp/XXh0cWXaoQdzJnLiRAKipRtKmUQZy5vQkfFSW/AwazJSkzyndtveQpW6vhMWXooTg==
+koot@^0.13.4:
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.13.4.tgz#e0786d998dada62e3bcdd2fa462b4c684945ef33"
+  integrity sha512-LGF2YKmkKnYZp9YJVFFZXwrGa3voFI4eGTRUBbfo999HVuiAGHHD+pZlOORCQVj9+bR2EtbUnGMJLtPGybnpcw==
   dependencies:
     "@types/lodash" "^4.14.149"
     "@types/node" "^13.7.7"
@@ -7884,7 +7884,7 @@ koot@^0.13.3:
     koa-proxies "^0.11.0"
     koa-router "^8.0.8"
     koa-static "^5.0.0"
-    koot-webpack "^0.13.3"
+    koot-webpack "^0.13.4"
     lodash "^4.17.15"
     md5 "^2.2.1"
     md5-file "^4.0.0"
@@ -11528,10 +11528,10 @@ signal-exit@3.0.2, signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
-simple-git@^1.131.0:
-  version "1.131.0"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.131.0.tgz#68d85bf6a706e418b8a92cae765d2ad358781e21"
-  integrity sha512-z/art7YYtmPnnLItT/j+nKwJt6ap6nHZ4D8sYo9PdCKK/ug56SN6m/evfxJk7uDV3e9JuCa8qIyDU2P3cxmiNQ==
+simple-git@^1.132.0:
+  version "1.132.0"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.132.0.tgz#53ac4c5ec9e74e37c2fd461e23309f22fcdf09b1"
+  integrity sha512-xauHm1YqCTom1sC9eOjfq3/9RKiUA9iPnxBbrY2DdL8l4ADMu0jjM5l5lphQP5YWNqAL2aXC/OeuQ76vHtW5fg==
   dependencies:
     debug "^4.0.1"
 

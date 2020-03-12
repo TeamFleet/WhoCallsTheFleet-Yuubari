@@ -69,5 +69,13 @@ module.exports = async () => {
         ]
     };
 
+    if (
+        process.env.WEBPACK_BUILD_ENV === 'prod' &&
+        process.env.WEBPACK_BUILD_STAGE === 'server'
+    ) {
+        if (typeof config.externals !== 'object') config.externals = {};
+        config.externals['any-promise'] = 'commonjs any-promise';
+    }
+
     return config;
 };
