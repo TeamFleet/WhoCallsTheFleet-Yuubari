@@ -58,6 +58,7 @@ class NavLangSwitch extends React.Component {
         showMenu: false
     };
     timeoutHideMenu = undefined;
+    mounted = false;
 
     getUrl(thisLocaleId) {
         let search = '';
@@ -75,13 +76,19 @@ class NavLangSwitch extends React.Component {
     }
 
     componentDidMount() {
+        this.mounted = true;
         bindEvent(document.body, 'click', () => {
             this.timeoutHideMenu = setTimeout(() => {
-                this.setState({
-                    showMenu: false
-                });
+                if (this.mounted)
+                    this.setState({
+                        showMenu: false
+                    });
             }, 10);
         });
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
     }
 
     render() {

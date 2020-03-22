@@ -22,17 +22,25 @@ class MainHeader extends React.Component {
         enterActive: false
     };
 
+    mounted = false;
+
     componentDidMount() {
+        this.mounted = true;
         // setTimeout(() => {
         //     this.setState({
         //         enter: true
         //     })
         // })
         setTimeout(() => {
+            if (!this.mounted) return;
             this.setState({
                 enterActive: true
             });
         });
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
     }
 
     renderContent(isPortal) {

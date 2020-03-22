@@ -17,7 +17,7 @@ import Bgimg from './layout/bgimg';
 @extend({
     connect: state => {
         if (__CLIENT__ && __DEV__ && !window.reduxLogShowed) {
-            console.log('Redux connected', state);
+            console.warn('Redux connected', state);
             window.reduxLogShowed = true;
         }
         return {
@@ -37,23 +37,29 @@ class App extends React.Component {
      */
     startSwipeAtLeftBorder = false;
 
-    // constructor(props) {
-    //     super(props)
+    constructor(props) {
+        super(props);
 
-    //     // if (__CLIENT__) {
-    //     console.log('! locale', props.localeId)
-    //     const kckit = require('kckit')
-    //     console.log('_', {
-    //         // kckit,
-    //         locale: kckit.locale,
-    //         sample: kckit.db.ships[20]._name
-    //     })
-    //     const db = require('@database').default
-    //     console.log('=', {
-    //         sample: db.ships[20]._name
-    //     })
-    //     // }
-    // }
+        ['onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'].forEach(
+            e => {
+                this[e] = this[e].bind(this);
+            }
+        );
+
+        //     // if (__CLIENT__) {
+        //     console.log('! locale', props.localeId)
+        //     const kckit = require('kckit')
+        //     console.log('_', {
+        //         // kckit,
+        //         locale: kckit.locale,
+        //         sample: kckit.db.ships[20]._name
+        //     })
+        //     const db = require('@database').default
+        //     console.log('=', {
+        //         sample: db.ships[20]._name
+        //     })
+        //     // }
+    }
 
     checkAppReady(timeout = 10) {
         if (__CLIENT__ && this.props.isMainBgimgLoaded && !window.isAppReady) {
@@ -64,7 +70,7 @@ class App extends React.Component {
         }
     }
 
-    onTouchStart = evt => {
+    onTouchStart(evt) {
         // if (!__CLIENT__) return
         if (window.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
             this.startSwipeAtLeftBorder = {
@@ -73,9 +79,9 @@ class App extends React.Component {
                 timestamp: Date.now()
             };
         else this.startSwipeAtLeftBorder = false;
-    };
+    }
 
-    onTouchMove = evt => {
+    onTouchMove(evt) {
         if (this.startSwipeAtLeftBorder) {
             const deltaX =
                 evt.nativeEvent.touches[0].screenX -
@@ -102,7 +108,7 @@ class App extends React.Component {
                 this.startSwipeAtLeftBorder = false;
             }
         }
-    };
+    }
 
     onTouchEnd() {
         if (this.startSwipeAtLeftBorder) this.startSwipeAtLeftBorder = false;
@@ -113,7 +119,13 @@ class App extends React.Component {
     }
 
     componentDidCatch(error, info) {
-        console.log('React ERROR', error, info);
+        // eslint-disable-next-line no-console
+        console.group('React ERROR');
+        console.error(error);
+        console.warn(info);
+        // eslint-disable-next-line no-console
+        console.groupEnd();
+        // console.warn('React ERROR', error, info);
         // Display fallback UI
         // this.setState({ hasError: true })
         // You can also log the error to an error reporting service
@@ -158,6 +170,7 @@ class App extends React.Component {
 
         // 检查 App 是否已准备就绪
         this.checkAppReady();
+        console.warn('App mounted');
     }
 
     componentDidUpdate() {
@@ -192,17 +205,17 @@ class App extends React.Component {
                         [`is-mode-${uiMode}-leaving`]:
                             hasMode && uiModeIsLeaving
                     })}
-                    onTouchStart={this.onTouchStart.bind(this)}
-                    onTouchMove={this.onTouchMove.bind(this)}
-                    onTouchEnd={this.onTouchEnd.bind(this)}
-                    onTouchCancel={this.onTouchCancel.bind(this)}
+                    onTouchStart={this.onTouchStart}
+                    onTouchMove={this.onTouchMove}
+                    onTouchEnd={this.onTouchEnd}
+                    onTouchCancel={this.onTouchCancel}
                 >
                     <Nav location={this.props.location} />
                     <MainMask pathname={this.props.location.pathname} />
                     <Main location={this.props.location}>
                         {this.props.children}
                     </Main>
-                    <Bgimg />
+                    <Bgimg key="bgimg" />
                 </div>
             </React.StrictMode>
         );
