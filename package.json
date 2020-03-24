@@ -42,7 +42,7 @@
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.7.4",
         "kckit": "^1.36.1",
-        "koot": "^0.14.0-alpha.2",
+        "koot": "^0.14.0-alpha.3",
         "localforage": "^1.7.3",
         "lz-string": "^1.4.4",
         "metas": "^1.0.1",
