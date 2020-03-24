@@ -6,7 +6,7 @@ import { updateAppReady, setInstallPWAEvent } from '@api/app/api';
 import { swipedFromLeftEdge } from '@api/side-menu/api';
 import {
     handlerBeforeReact as beforeinstallpromptHandlerBeforeReact,
-    eventPromptBeforeReact as beforeinstallpromptEventPromptBeforeReact
+    eventPromptBeforeReact as beforeinstallpromptEventPromptBeforeReact,
 } from '@utils/install-app';
 
 import Main from './layout/main';
@@ -15,7 +15,7 @@ import Nav from './layout/nav';
 import Bgimg from './layout/bgimg';
 
 @extend({
-    connect: state => {
+    connect: (state) => {
         if (__CLIENT__ && __DEV__ && !window.reduxLogShowed) {
             console.warn('Redux connected', state);
             window.reduxLogShowed = true;
@@ -26,10 +26,10 @@ import Bgimg from './layout/bgimg';
                 ? state.uiMode
                 : // ? state.routing.locationBeforeTransitions.state.uiMode || {}
                   {},
-            localeId: state.localeId
+            localeId: state.localeId,
         };
     },
-    styles: require('./app.less')
+    styles: require('./app.less'),
 })
 class App extends React.Component {
     /*
@@ -41,7 +41,7 @@ class App extends React.Component {
         super(props);
 
         ['onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'].forEach(
-            e => {
+            (e) => {
                 this[e] = this[e].bind(this);
             }
         );
@@ -76,7 +76,7 @@ class App extends React.Component {
             this.startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
                 y: evt.nativeEvent.touches[0].screenY,
-                timestamp: Date.now()
+                timestamp: Date.now(),
             };
         else this.startSwipeAtLeftBorder = false;
     }
@@ -152,7 +152,7 @@ class App extends React.Component {
                         )
                     );
                 } else {
-                    window.addEventListener('beforeinstallprompt', evt => {
+                    window.addEventListener('beforeinstallprompt', (evt) => {
                         // console.log('🎯 beforeinstallprompt Event fired')
                         evt.preventDefault();
                         this.props.dispatch(setInstallPWAEvent(evt));
@@ -170,7 +170,7 @@ class App extends React.Component {
 
         // 检查 App 是否已准备就绪
         this.checkAppReady();
-        console.warn('App mounted');
+        if (__DEV__) console.warn('App mounted');
     }
 
     componentDidUpdate() {
@@ -189,7 +189,7 @@ class App extends React.Component {
         const {
             mode: uiMode,
             leaving: uiModeIsLeaving,
-            animation: uiModeAnimation
+            animation: uiModeAnimation,
         } = this.props.uiMode;
         const hasMode = __CLIENT__ && window.isAppReady && uiMode;
 
@@ -203,7 +203,7 @@ class App extends React.Component {
                         [`is-mode-${uiMode}-entering`]:
                             hasMode && !uiModeIsLeaving && uiModeAnimation,
                         [`is-mode-${uiMode}-leaving`]:
-                            hasMode && uiModeIsLeaving
+                            hasMode && uiModeIsLeaving,
                     })}
                     onTouchStart={this.onTouchStart}
                     onTouchMove={this.onTouchMove}

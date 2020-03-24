@@ -12,7 +12,7 @@ import getStyles from '@utils/background-styles.js';
 
 import Background from '@ui/components/background.jsx';
 
-const setCookieSessionBackgroundIndex = index => {
+const setCookieSessionBackgroundIndex = (index) => {
     Cookies.set('session_background_index', index);
 };
 
@@ -22,7 +22,7 @@ const setCookieSessionBackgroundIndex = index => {
  */
 @extend({
     connect: true,
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })
 class Bgimg extends React.PureComponent {
     constructor(props) {
@@ -74,7 +74,7 @@ export default Bgimg;
 //
 
 const BackgroundMainBlured = extend({
-    styles: require('./styles-main-blured.less')
+    styles: require('./styles-main-blured.less'),
 })(
     React.memo(({ className, type }) => (
         <div className={classNames([className, type])}>
@@ -93,16 +93,16 @@ const BackgroundMainBlured = extend({
    2. dispatch LOADED_MAIN_BGIMG
  */
 @extend({
-    connect: state => ({
+    connect: (state) => ({
         currentBg: state.bgimg.current,
-        isMainLoaded: state.bgimg.isMainLoaded
+        isMainLoaded: state.bgimg.isMainLoaded,
     }),
-    styles: require('./styles-main.less')
+    styles: require('./styles-main.less'),
 })
 class BackgroundMain extends React.Component {
     state = {
         stylesOriginal: false,
-        showOriginal: false
+        showOriginal: false,
     };
 
     OriginalRef = React.createRef();
@@ -116,8 +116,8 @@ class BackgroundMain extends React.Component {
             'originalTransitionEnd',
             'originalLoaded',
             'bluredTransitionEnd',
-            'bluredLoaded'
-        ].forEach(key => {
+            'bluredLoaded',
+        ].forEach((key) => {
             this[key] = this[key].bind(this);
         });
     }
@@ -129,8 +129,10 @@ class BackgroundMain extends React.Component {
 
     componentDidMount() {
         this.mounted = true;
-        if (__DEV__ && !this.props.isMainLoaded)
-            this.props.dispatch(bgimgApi.mainImgLoaded());
+        setTimeout(() => {
+            if (__DEV__ && this.mounted && !this.props.isMainLoaded)
+                this.props.dispatch(bgimgApi.mainImgLoaded());
+        }, 200);
         if (!this.isBluredLoaded) {
             setTimeout(() => {
                 if (this.mounted && !this.isBluredLoaded) {
@@ -152,7 +154,7 @@ class BackgroundMain extends React.Component {
         this.isOriginalLoaded = true;
         this.props.currentBg.onLoaded(evt);
         this.setState({
-            stylesOriginal: getStyles(this.props.currentBg)
+            stylesOriginal: getStyles(this.props.currentBg),
         });
         setTimeout(() => {
             if (!this.isOriginalTransitionEnd)
@@ -172,7 +174,7 @@ class BackgroundMain extends React.Component {
         this.isBluredLoaded = true;
         this.props.currentBg.onLoaded(evt);
         this.setState({
-            stylesBlured: getStyles(this.props.currentBg, 'blured')
+            stylesBlured: getStyles(this.props.currentBg, 'blured'),
         });
         setTimeout(() => {
             if (this.mounted && !this.state.showOriginal)
@@ -187,7 +189,7 @@ class BackgroundMain extends React.Component {
             (isForce || evt.propertyName === 'opacity')
         ) {
             this.setState({
-                showOriginal: true
+                showOriginal: true,
             });
             setTimeout(() => {
                 if (!this.mounted) return;
@@ -376,14 +378,14 @@ class BgMain extends React.Component {
 
 const BackgroundPanels = extend({
     connect: [
-        state => ({
-            isModeBackground: state.uiMode.mode === 'background'
+        (state) => ({
+            isModeBackground: state.uiMode.mode === 'background',
         }),
-        dispatch => ({
-            leaveAppModeBackground: () => dispatch(leaveUIMode())
-        })
+        (dispatch) => ({
+            leaveAppModeBackground: () => dispatch(leaveUIMode()),
+        }),
     ],
-    styles: require('./styles-panels.less')
+    styles: require('./styles-panels.less'),
 })(
     React.memo(({ className, isModeBackground, leaveAppModeBackground }) => {
         if (!isModeBackground) return null;
@@ -406,16 +408,16 @@ const BackgroundPanels = extend({
 //
 
 const BackgroundPanelsImg = extend({
-    connect: state => ({
+    connect: (state) => ({
         currentBgPath:
-            __CLIENT__ && state.bgimg.current && state.bgimg.current.getPath()
+            __CLIENT__ && state.bgimg.current && state.bgimg.current.getPath(),
     }),
-    styles: require('./styles-panels-img.less')
+    styles: require('./styles-panels-img.less'),
 })(({ className, currentBgPath }) => (
     <div
         className={className}
         style={{
-            backgroundImage: `url(${currentBgPath})`
+            backgroundImage: `url(${currentBgPath})`,
         }}
     />
 ));
@@ -423,11 +425,11 @@ const BackgroundPanelsImg = extend({
 //
 
 @extend({
-    connect: state => ({
+    connect: (state) => ({
         list: state.bgimg.list,
-        index: state.bgimg.current && state.bgimg.current.index
+        index: state.bgimg.current && state.bgimg.current.index,
     }),
-    styles: require('./styles-panels-list.less')
+    styles: require('./styles-panels-list.less'),
 })
 class BackgroundPanelsList extends React.Component {
     change(obj) {
@@ -438,26 +440,13 @@ class BackgroundPanelsList extends React.Component {
     renderList(type) {
         return (
             <div className={`list-${type}`}>
-                {this.props.list[type].map((obj, index) => {
-                    return (
-                        <div
-                            key={index}
-                            className={`background-thumbnail${
-                                obj.index === this.props.index ? ' on' : ''
-                            }`}
-                            onClick={() => this.change(obj)}
-                        >
-                            <span
-                                className="ratio"
-                                style={{
-                                    backgroundImage: `url(${obj.getPath(
-                                        'thumbnail'
-                                    )})`
-                                }}
-                            />
-                        </div>
-                    );
-                })}
+                {this.props.list[type].map((obj, index) => (
+                    <BackgroundPanelsListItem
+                        bgimg={obj}
+                        index={index}
+                        key={index}
+                    />
+                ))}
             </div>
         );
     }
@@ -470,5 +459,38 @@ class BackgroundPanelsList extends React.Component {
             </div>
         );
         // return <div></div>
+    }
+}
+
+@extend({
+    connect: true,
+})
+class BackgroundPanelsListItem extends React.PureComponent {
+    constructor() {
+        super();
+        this.change = this.change.bind(this);
+    }
+    change() {
+        setCookieSessionBackgroundIndex(this.props.bgimg.index);
+        this.props.dispatch(bgimgApi.change(this.props.bgimg));
+    }
+    render() {
+        return (
+            <div
+                className={`background-thumbnail${
+                    this.props.bgimg.index === this.props.index ? ' on' : ''
+                }`}
+                onClick={this.change}
+            >
+                <span
+                    className="ratio"
+                    style={{
+                        backgroundImage: `url(${this.props.bgimg.getPath(
+                            'thumbnail'
+                        )})`,
+                    }}
+                />
+            </div>
+        );
     }
 }

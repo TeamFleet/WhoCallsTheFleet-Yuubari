@@ -40,9 +40,9 @@
         "camelcase": "^5.3.1",
         "check-css-prop": "^1.0.1",
         "classnames": "^2.2.6",
-        "hotkeys-js": "^3.7.3",
+        "hotkeys-js": "^3.7.4",
         "kckit": "^1.36.1",
-        "koot": "^0.13.8",
+        "koot": "^0.14.0-alpha.2",
         "localforage": "^1.7.3",
         "lz-string": "^1.4.4",
         "metas": "^1.0.1",
@@ -53,7 +53,7 @@
         "whocallsthefleet-database": "^20200320.0.0"
     },
     "devDependencies": {
-        "autoprefixer": "^9.7.4",
+        "autoprefixer": "^9.7.5",
         "babel-eslint": "^10.1.0",
         "cache-loader": "^4.1.0",
         "cli-spinners": "^2.2.0",
@@ -66,14 +66,14 @@
         "jest": "^25.1.0",
         "json-pretty": "^0.0.1",
         "jsonfile": "^6.0.1",
-        "lint-staged": "^10.0.8",
+        "lint-staged": "^10.0.9",
         "nedb-promise": "^2.0.1",
         "node-notifier": "^6.0.0",
         "normalize.css": "^8.0.1",
         "ora": "^4.0.3",
         "postcss-easing-gradients": "^3.0.1",
         "postcss-pxtorem": "^5.1.1",
-        "prettier": "^1.19.1",
+        "prettier": "^2.0.2",
         "prettier-eslint": "^9.0.1",
         "progress": "^2.0.3",
         "raw-loader": "^4.0.0",
@@ -103,6 +103,6 @@
         ]
     },
     "koot": {
-        "version": "0.13.8"
+        "version": "0.14.0-alpha.2"
     }
 }
