@@ -4,7 +4,7 @@ const { portAkigumo, devPortAkigumo } = require('../../../koot.config');
 
 export default async (app) => {
     app.use(
-        proxy(/\/pics\//, {
+        proxy('/pics', {
             target: __DEV__
                 ? `http://localhost:${devPortAkigumo}`
                 : process.env.YUUBARI_LOCAL_RUN
