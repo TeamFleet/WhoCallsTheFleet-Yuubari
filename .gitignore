@@ -56,3 +56,4 @@ node_modules/
 /src/database/json
 .koot.config.tmp.*.js
 /.static
+/report.*

@@ -12,15 +12,31 @@ import Icon from '@ui/components/icon';
 @extend({
     connect: (state, ownProps) => ({
         isModeCompare: state.shipList[ownProps.shipListId].isModeCompare,
-        compareList: state.shipList[ownProps.shipListId].compareList
+        compareList: state.shipList[ownProps.shipListId].compareList,
     }),
-    styles: require('./list-item.less')
+    styles: require('./list-item.less'),
 })
 class ShipListItem extends React.Component {
-    onClick(evt, isSelected) {
+    constructor(props) {
+        super(props);
+
+        ['onClick', 'onClickCheckbox'].forEach((e) => {
+            this[e] = this[e].bind(this);
+        });
+    }
+
+    get isSelected() {
+        return __CLIENT__ &&
+            this.props.isModeCompare &&
+            this.props.compareList.indexOf(this.props.ship.id) > -1
+            ? true
+            : false;
+    }
+
+    onClick(evt) {
         if (this.props.isModeCompare) {
             evt.preventDefault();
-            if (isSelected) {
+            if (this.isSelected) {
                 this.props.dispatch(
                     compareRemove(this.props.shipListId, this.props.ship)
                 );
@@ -55,12 +71,6 @@ class ShipListItem extends React.Component {
     }
 
     render() {
-        const isSelected =
-            __CLIENT__ &&
-            this.props.isModeCompare &&
-            this.props.compareList.indexOf(this.props.ship.id) > -1
-                ? true
-                : false;
         const showCheckbox = __CLIENT__;
         // const className =
         //     "item"
@@ -74,22 +84,19 @@ class ShipListItem extends React.Component {
                     'item',
                     {
                         'is-compare': this.props.isModeCompare,
-                        'is-selected': isSelected
-                    }
+                        'is-selected': this.isSelected,
+                    },
                 ])}
                 ship={this.props.ship}
                 navy={true}
                 name={true}
                 pic={true}
                 extraIllust={true}
-                onClick={evt => this.onClick(evt, isSelected)}
+                onClick={this.onClick}
             >
                 {showCheckbox && (
-                    <span
-                        className="checkbox"
-                        onClick={this.onClickCheckbox.bind(this)}
-                    >
-                        <ShipListItemCheckbox isSelected={isSelected} />
+                    <span className="checkbox" onClick={this.onClickCheckbox}>
+                        <ShipListItemCheckbox isSelected={this.isSelected} />
                     </span>
                 )}
             </LinkShip>

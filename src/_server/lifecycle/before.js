@@ -1,40 +1,18 @@
-const path = require('path');
-const getDistPath = require('koot/utils/get-dist-path');
+const proxy = require('koa-proxies');
 
-const Koa = require('koa');
-const mount = require('koa-mount');
-const koaStatic = require('koa-static');
+const { portAkigumo, devPortAkigumo } = require('../../../koot.config');
 
-export default async app => {
-    // 静态目录: 图片资源
-    {
-        const staticPicsServer = new Koa();
-        const dirPics = (() => {
-            if (process.env.WEBPACK_BUILD_ENV === 'dev')
-                return path.resolve(process.cwd(), 'pics');
-            return path.resolve(getDistPath(), 'pics');
-        })();
-        staticPicsServer.use(
-            koaStatic(dirPics, {
-                maxage: 30 * 24 * 60 * 60 * 1000,
-                hidden: false,
-                defer: false,
-                gzip: true,
-                extensions: false
-            })
-        );
-        app.use(mount(`/pics`, staticPicsServer));
-    }
-
-    // /.well-known
-    {
-        const staticWellKnown = new Koa();
-        const dir = path.resolve(getDistPath(), 'public/.well-known');
-        staticWellKnown.use(
-            koaStatic(dir, {
-                hidden: true
-            })
-        );
-        app.use(mount(`/.well-known`, staticWellKnown));
-    }
+export default async (app) => {
+    app.use(
+        proxy(/\/pics\//, {
+            target: __DEV__
+                ? `http://localhost:${devPortAkigumo}`
+                : process.env.YUUBARI_LOCAL_RUN
+                ? `https://akigumo.fleet.moe`
+                : `http://localhost:${portAkigumo}`,
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/pics\//, '/'),
+            logs: false,
+        })
+    );
 };

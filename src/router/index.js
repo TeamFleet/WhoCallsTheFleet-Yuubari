@@ -22,10 +22,10 @@ export default {
             import(
                 /* webpackChunkName: "Home Page" */
                 '@ui/pages/home'
-            ).then(module => {
+            ).then((module) => {
                 if (routeCheck(nextState)) cb(null, module.default);
             });
-        }
+        },
     },
 
     childRoutes: [
@@ -40,12 +40,12 @@ export default {
                 import(
                     /* webpackChunkName: "About Page" */
                     '@ui/pages/about'
-                ).then(module => {
+                ).then((module) => {
                     if (routeCheck(nextState)) cb(null, module.default);
                 });
-            }
+            },
         },
 
-        ...dev
-    ].filter(r => !!r)
+        ...dev,
+    ].filter((r) => !!r),
 };

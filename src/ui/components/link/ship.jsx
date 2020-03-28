@@ -1,44 +1,54 @@
-import React from 'react'
-import { extend } from 'koot'
+import React from 'react';
+import { extend } from 'koot';
 
-import db from '@database'
+import db from '@database';
 
-import getShip from '@utils/get-ship.js'
-import getPic from '@utils/get-pic.js'
+import getShip from '@utils/get-ship.js';
+import getPic from '@utils/get-pic.js';
 // import routerReplace from '@utils/router-replace'
 
-import Link from './_normal.jsx'
-import Icon from '@ui/components/icon.jsx'
-import FlagNavy from '@ui/components/flag-navy.jsx'
+import Icon from '@ui/components/icon.jsx';
+import FlagNavy from '@ui/components/flag-navy.jsx';
+import Link from './_normal.jsx';
 
 @extend({
-    styles: require('./ship.less')
+    styles: require('./ship.less'),
 })
 class LinkShip extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(evt) {
+        evt.currentTarget.blur();
+        if (typeof this.props.onClick === 'function')
+            return this.props.onClick(evt);
+    }
+
     checkShow(value) {
-        return (value || typeof value === 'undefined')
+        return value || typeof value === 'undefined';
     }
 
     renderName(type = this.props.type) {
         if (type === 'names') {
-            const names = []
-            this.ship._series.forEach(obj => {
-                const thisShip = getShip(obj.id)
+            const names = [];
+            this.ship._series.forEach((obj) => {
+                const thisShip = getShip(obj.id);
                 // console.log(thisShip)
-                const baseName = thisShip.getNameNoSuffix()
-                if (!names.includes(baseName))
-                    names.push(baseName)
-            })
-            return (
-                <span>
-                    {names.join(' / ')}
-                </span>
-            )
+                const baseName = thisShip.getNameNoSuffix();
+                if (!names.includes(baseName)) names.push(baseName);
+            });
+            return <span>{names.join(' / ')}</span>;
         }
         if (type) {
-            const type = (this.ship.type && this.ship.type_display && this.ship.type !== this.ship.type_display)
-                ? this.ship.type_display
-                : this.ship.type
+            const type =
+                this.ship.type &&
+                this.ship.type_display &&
+                this.ship.type !== this.ship.type_display
+                    ? this.ship.type_display
+                    : this.ship.type;
             return (
                 <span>
                     <small className="name-type">
@@ -46,14 +56,18 @@ class LinkShip extends React.Component {
                     </small>
                     {this.ship._name}
                 </span>
-            )
+            );
         }
         return (
             <span>
                 {this.ship.getNameNoSuffix()}
-                {this.ship.name.suffix && (<small className="name-suffix">{this.ship.getSuffix()}</small>)}
+                {this.ship.name.suffix && (
+                    <small className="name-suffix">
+                        {this.ship.getSuffix()}
+                    </small>
+                )}
             </span>
-        )
+        );
     }
 
     render() {
@@ -66,7 +80,7 @@ class LinkShip extends React.Component {
             pic,
             name,
             navy,
-            "min-level": minLv = false,
+            'min-level': minLv = false,
 
             onClick,
 
@@ -74,9 +88,9 @@ class LinkShip extends React.Component {
             children,
 
             ...props
-        } = this.props
+        } = this.props;
 
-        this.ship = getShip(ship)
+        this.ship = getShip(ship);
 
         // const props = { ...this.props };
         // [
@@ -105,7 +119,7 @@ class LinkShip extends React.Component {
         // } else
         //     props.to = to
 
-        const classNameHash = className.split(' ')[0]
+        const classNameHash = className.split(' ')[0];
 
         return (
             <Link
@@ -113,26 +127,30 @@ class LinkShip extends React.Component {
                 className={className}
                 pic={this.checkShow(pic) ? getPic(this.ship, '0-2') : null}
                 name={this.checkShow(name) ? this.renderName(type) : null}
-                onClick={evt => {
-                    evt.currentTarget.blur()
-                    if (typeof onClick === 'function')
-                        return onClick(evt)
-                }}
+                onClick={this.onClick}
+                alt={this.ship._name}
                 {...props}
             >
-                {extraIllust && this.ship.hasExtraIllust() &&
+                {extraIllust && this.ship.hasExtraIllust() && (
                     <Icon className="icon-has-extra-illust" icon="hanger" />
-                }
-                {this.checkShow(navy) && this.ship._navy !== 'ijn' &&
-                    <FlagNavy className="flag-navy" navy={this.ship._navy} shadow={true} />
-                }
-                {minLv && ship._minLv > 1 &&
-                    <span className={classNameHash + '-min-level'} children={ship._minLv} />
-                }
+                )}
+                {this.checkShow(navy) && this.ship._navy !== 'ijn' && (
+                    <FlagNavy
+                        className="flag-navy"
+                        navy={this.ship._navy}
+                        shadow={true}
+                    />
+                )}
+                {minLv && ship._minLv > 1 && (
+                    <span
+                        className={classNameHash + '-min-level'}
+                        children={ship._minLv}
+                    />
+                )}
                 {children}
             </Link>
-        )
+        );
     }
 }
 
-export default LinkShip
+export default LinkShip;

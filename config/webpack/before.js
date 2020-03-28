@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-module.exports = async kootConfig => {
+module.exports = async (kootConfig) => {
     if (process.env.WEBPACK_BUILD_STAGE === 'client') {
         console.log(' ');
 
@@ -8,7 +8,7 @@ module.exports = async kootConfig => {
             await require('../../scripts/build/prepare-static')(kootConfig);
             await require('../../src/build/webapp/before')(
                 kootConfig
-            ).catch(err => console.error(err));
+            ).catch((err) => console.error(err));
         }
         // if (process.env.WEBPACK_BUILD_ENV === 'prod') {
         //     await require('../../src/scripts/clean-dist')(kootConfig);
@@ -20,5 +20,6 @@ module.exports = async kootConfig => {
         }
         console.log(' ');
     }
+
     return;
 };

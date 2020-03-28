@@ -49,7 +49,7 @@ module.exports = {
     store: './src/redux/factory-store',
     sessionStore: {
         equipmentList: true,
-        shipList: true
+        shipList: true,
     },
 
     // i18n: {
@@ -66,12 +66,15 @@ module.exports = {
     i18n:
         process.env.quickStart && !process.env.quickStartAllLocales
             ? [['zh', `./src/locales/zh.json`]]
-            : require('./src/locales').map(l => [l, `./src/locales/${l}.json`]),
+            : require('./src/locales').map((l) => [
+                  l,
+                  `./src/locales/${l}.json`,
+              ]),
 
     serviceWorker: {
         auto: false,
         exclude: ['/bgimgs/**/*', '/pics/**/*', '/dev-*'],
-        cacheFirst: ['/bgimgs/', '/pics/']
+        cacheFirst: ['/bgimgs/', '/pics/'],
     },
 
     aliases: {
@@ -93,7 +96,7 @@ module.exports = {
 
         '~base.less': path.resolve('./src/ui/base.less'),
         '~Assets': path.resolve('./src/assets'),
-        '~/': path.resolve('./src/ui')
+        '~/': path.resolve('./src/ui'),
     },
 
     defines: require('./src/defines'),
@@ -114,11 +117,13 @@ module.exports = {
      *************************************************************************/
 
     port: 8080,
-    renderCache: {
-        maxAge: 10 * 1000
-    },
+    // renderCache: {
+    //     maxAge: 10 * 1000,
+    // },
+    renderCache: false,
     proxyRequestOrigin: {
-        protocol: process.env.WEBPACK_BUILD_ENV === 'prod' ? 'https' : undefined
+        protocol:
+            process.env.WEBPACK_BUILD_ENV === 'prod' ? 'https' : undefined,
     },
     koaStatic: {
         maxage: 0,
@@ -126,12 +131,12 @@ module.exports = {
         index: 'index.html',
         defer: false,
         gzip: true,
-        extensions: false
+        extensions: false,
     },
     serverBefore: './src/_server/lifecycle/before',
     serverAfter: './src/_server/lifecycle/after',
     serverOnRender: {
-        beforePreRender: './src/_server/lifecycle/before-pre-render'
+        beforePreRender: './src/_server/lifecycle/before-pre-render',
     },
 
     /**************************************************************************
@@ -149,5 +154,11 @@ module.exports = {
      *************************************************************************/
 
     devPort: 8703,
-    devMemoryAllocation: 2048
+    devMemoryAllocation: 2048,
+
+    /**************************************************************************
+     * Project Specific
+     *************************************************************************/
+    portAkigumo: 8081,
+    devPortAkigumo: 8702,
 };

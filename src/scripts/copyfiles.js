@@ -6,7 +6,7 @@ const getDistPath = require('koot/utils/get-dist-path');
 
 const {
     root: dirRoot,
-    pics: dirPics
+    pics: dirPics,
     // dist: {
     //     includes: dirIncludes,
     // }
@@ -21,7 +21,7 @@ module.exports = async (kootConfig = {}) => {
     const waiting = spinner(title);
 
     const {
-        WEBPACK_BUILD_ENV: ENV
+        WEBPACK_BUILD_ENV: ENV,
         // WEBPACK_BUILD_STAGE: STAGE,
     } = process.env;
 
@@ -32,10 +32,10 @@ module.exports = async (kootConfig = {}) => {
 
     const list = [];
 
-    if (ENV === 'prod' && !process.env.quickStart)
-        list.push(...(await getPics(kootConfig)));
+    // if (ENV === 'prod' && !process.env.quickStart)
+    //     list.push(...(await getPics(kootConfig)));
 
-    list.forEach(o => {
+    list.forEach((o) => {
         o.to = path.resolve(__CLIENT_ROOT_PATH, o.to);
     });
 
@@ -45,7 +45,7 @@ module.exports = async (kootConfig = {}) => {
 
     const bar = new Progress({
         title,
-        total: list.length
+        total: list.length,
     });
 
     for (const { from, to } of list) {
@@ -93,10 +93,10 @@ const getPics = async (kootConfig = {}) => {
     const filelist = {
         ships: ['0', '0-1', '0-2'],
         shipsExtra: ['8', '9'],
-        equipments: ['card']
+        equipments: ['card'],
     };
 
-    const getDb = async dbname => {
+    const getDb = async (dbname) => {
         const arr = [];
         await new Promise((resolve, reject) => {
             fs.readFile(
@@ -107,7 +107,7 @@ const getPics = async (kootConfig = {}) => {
                 'utf-8',
                 (err, data) => {
                     if (err) reject(err);
-                    data.split(/\r?\n/).forEach(item => {
+                    data.split(/\r?\n/).forEach((item) => {
                         if (!item) return;
                         arr.push(JSON.parse(item));
                     });
@@ -118,7 +118,7 @@ const getPics = async (kootConfig = {}) => {
         return arr;
     };
 
-    const readdir = async dir => {
+    const readdir = async (dir) => {
         return new Promise((resolve, reject) => {
             fs.readdir(dir, (err, files) => {
                 if (err) reject(err);
@@ -130,7 +130,7 @@ const getPics = async (kootConfig = {}) => {
     const checkAndCopy = async (type, id, listBasename) => {
         const dir = path.join(dirPics, type, id);
         const files = await readdir(dir);
-        files.forEach(filename => {
+        files.forEach((filename) => {
             const extname = path.extname(filename);
             const basename = path.basename(filename, extname);
 
@@ -149,7 +149,7 @@ const getPics = async (kootConfig = {}) => {
             // context: path.resolve(dirPics),
             // from: `${type}/${id}/${file}`,
             from: path.resolve(dirPics, type, id, file),
-            to: `${dirTo}/${type}/${id}/${file}`
+            to: `${dirTo}/${type}/${id}/${file}`,
         });
     };
 
@@ -173,7 +173,7 @@ const getPics = async (kootConfig = {}) => {
                             '8',
                             '9',
                             '10',
-                            'special'
+                            'special',
                         ]);
                     break;
                 }

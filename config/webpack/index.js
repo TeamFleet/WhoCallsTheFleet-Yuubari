@@ -15,29 +15,24 @@ module.exports = async () => {
                     loader: 'url-loader',
                     options: {
                         limit: 1 * 1024,
-                        context: 'static',
-                        name: 'assets/[hash:32].[ext]',
-                        emitFile: Boolean(
-                            process.env.WEBPACK_BUILD_STAGE === 'client'
-                        )
-                    }
+                    },
                     // exclude: /node_modules/
                 },
                 {
                     test: /\.svg$/,
                     loader: 'svg-url-loader',
-                    exclude: /node_modules/
+                    exclude: /node_modules/,
                 },
                 {
-                    test: /\.nedb$/,
-                    loader: 'raw-loader'
+                    test: /\.(nedb|json-compressed)$/,
+                    loader: 'raw-loader',
                 },
                 {
                     test: /\.md$/,
                     include: [/docs/],
-                    loader: 'raw-loader'
-                }
-            ]
+                    loader: 'raw-loader',
+                },
+            ],
         },
 
         plugins: [
@@ -65,8 +60,8 @@ module.exports = async () => {
                     __dirname,
                     `../../src/database/get-nedb-${process.env.WEBPACK_BUILD_STAGE}.js`
                 )
-            )
-        ]
+            ),
+        ],
     };
 
     if (

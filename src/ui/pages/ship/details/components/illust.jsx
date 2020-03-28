@@ -12,7 +12,7 @@ import {
     // init as shipDetailsInit,
     // reset as shipDetailsReset,
     // changeTab as shipDetailsChangeTab,
-    update as shipDetailsUpdate
+    update as shipDetailsUpdate,
 } from '@api/pages';
 import { getInfosId } from '../../details';
 
@@ -33,16 +33,16 @@ const getExtraIllustPic = (ship, id, illustId) => {
         // ...state.pages[getInfosId(ownProps.ship.id)]
         defaultIndex: state.pages[getInfosId(ownProps.ship.id)]
             ? state.pages[getInfosId(ownProps.ship.id)][ILLUSTINDEX]
-            : undefined
+            : undefined,
     }),
-    styles: require('./illust.less')
+    styles: require('./illust.less'),
 })
 class ShipDetailsComponentIllust extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            swiperIndex: this.props.defaultIndex || 0
+            swiperIndex: this.props.defaultIndex || 0,
         };
 
         this.onSlideChangeEnd = this.onSlideChangeEnd.bind(this);
@@ -52,7 +52,7 @@ class ShipDetailsComponentIllust extends React.Component {
 
         this.pics = [];
         this.extraIllusts = Array.isArray(props.ship._extraIllust)
-            ? props.ship._extraIllust.filter(id => !!db.exillusts[id])
+            ? props.ship._extraIllust.filter((id) => !!db.exillusts[id])
             : undefined;
         const illustIds = [8, 9];
         let ids = ['_'];
@@ -69,8 +69,8 @@ class ShipDetailsComponentIllust extends React.Component {
                 })
             );
 
-        ids.forEach(id => {
-            illustIds.forEach(illustId => {
+        ids.forEach((id) => {
+            illustIds.forEach((illustId) => {
                 this.pics.push(
                     id === '_'
                         ? getPic(props.ship, illustId)
@@ -100,7 +100,7 @@ class ShipDetailsComponentIllust extends React.Component {
     onSlideChangeEnd(swiper) {
         // console.log('onSlideChangeEnd', swiper)
         this.setState({
-            swiperIndex: swiper.realIndex
+            swiperIndex: swiper.realIndex,
         });
         if (typeof this.props.onIndexChange === 'function')
             this.props.onIndexChange(swiper.realIndex);
@@ -129,7 +129,7 @@ class ShipDetailsComponentIllust extends React.Component {
         setTimeout(() => {
             this.props.dispatch(
                 shipDetailsUpdate(getInfosId(this.props.ship.id), {
-                    [ILLUSTINDEX]: this.state.swiperIndex
+                    [ILLUSTINDEX]: this.state.swiperIndex,
                 })
             );
         }, 10);
@@ -142,7 +142,7 @@ class ShipDetailsComponentIllust extends React.Component {
         return (
             <ComponentContainer className={this.props.className}>
                 <Swiper
-                    slides={this.pics.map(url => (
+                    slides={this.pics.map((url) => (
                         <img data-src={url} className="swiper-lazy" alt="" />
                     ))}
                     initialSlide={this.props.defaultIndex || 0}
@@ -156,30 +156,30 @@ class ShipDetailsComponentIllust extends React.Component {
                     grabCursor={true}
                     touchReleaseOnEdges={true}
                     mousewheel={{
-                        releaseOnEdges: true
+                        releaseOnEdges: true,
                     }}
                     preloadImages={false}
                     lazy={{
                         loadPrevNext: true,
                         loadPrevNextAmount: 2,
-                        loadOnTransitionStart: true
+                        loadOnTransitionStart: true,
                     }}
                     breakpoints={{
                         481: {
                             slidesPerView: 2,
-                            slidesPerGroup: 2
+                            slidesPerGroup: 2,
                         },
                         1153: {
                             slidesPerView: 1,
-                            slidesPerGroup: 1
+                            slidesPerGroup: 1,
                         },
                         1441: {
                             slidesPerView: 2,
-                            slidesPerGroup: 2
-                        }
+                            slidesPerGroup: 2,
+                        },
                     }}
                     on={{
-                        slideChange: this.onSlideChangeEnd
+                        slideChange: this.onSlideChangeEnd,
                     }}
                 >
                     <TransitionGroup

@@ -5,7 +5,7 @@ import ShipCollections from './json/ship_collections.json';
 import EquipmentCollections from './json/equipment_collections.json';
 import parseLocaleId from './parse-locale-id';
 
-export default store => {
+export default (store) => {
     const raw = {
         ships: getNeDB('ships'),
         shipTypes: getNeDB('ship_types'),
@@ -27,7 +27,7 @@ export default store => {
         arsenalDays: getNeDB('arsenal_weekday').replace(
             /"weekday":([0-9])/g,
             '"weekday":$1,"id":$1'
-        )
+        ),
     };
 
     const db = parseRaw(raw);
@@ -54,20 +54,20 @@ export default store => {
         db.shipsSpecial = {};
 
         let shipIndex = 0;
-        shipCollections.forEach(collection => {
+        shipCollections.forEach((collection) => {
             collection.names = { ...collection.name };
             Object.defineProperty(collection, 'name', {
                 get: () =>
-                    collection.names[parseLocaleId(store.getState().localeId)]
+                    collection.names[parseLocaleId(store.getState().localeId)],
             });
-            collection.list.forEach(list => {
+            collection.list.forEach((list) => {
                 list.ships.forEach((arrShips, index) => {
-                    list.ships[index] = arrShips.map(shipId => {
+                    list.ships[index] = arrShips.map((shipId) => {
                         const ship = db.ships[shipId];
                         // if (!ship) return
                         Object.assign(ship, {
                             type_display: list.type,
-                            order: shipIndex++
+                            order: shipIndex++,
                         });
                         if (!db.shipsSpecial[list.type])
                             db.shipsSpecial[list.type] = [];
@@ -95,20 +95,20 @@ export default store => {
     {
         let equipmentTypeIndex = 0;
         let equipmentIndex = 0;
-        equipmentCollections.forEach(collection => {
+        equipmentCollections.forEach((collection) => {
             collection.names = { ...collection.name };
             Object.defineProperty(collection, 'name', {
                 get: () =>
-                    collection.names[parseLocaleId(store.getState().localeId)]
+                    collection.names[parseLocaleId(store.getState().localeId)],
             });
-            collection.list.forEach(list => {
+            collection.list.forEach((list) => {
                 Object.assign(db.equipmentTypes[list.type], {
-                    order: equipmentTypeIndex++
+                    order: equipmentTypeIndex++,
                 });
-                list.equipments = list.equipments.map(equipmentId => {
+                list.equipments = list.equipments.map((equipmentId) => {
                     // if (!db.equipments[equipmentId]) return {}
                     Object.assign(db.equipments[equipmentId], {
-                        order: equipmentIndex++
+                        order: equipmentIndex++,
                     });
                     return db.equipments[equipmentId];
                 });
@@ -122,7 +122,7 @@ export default store => {
     {
         db.equipmentTypesExclude = [];
         const cache = [];
-        for (let id in db.equipmentTypes) {
+        for (const id in db.equipmentTypes) {
             const type = db.equipmentTypes[id];
             if (type.id === 59) continue; // 陸軍戦闘機
             if (cache.includes(type.id_ingame)) {
@@ -140,7 +140,7 @@ export default store => {
             arsenalAll.push(db.arsenalAll[id]);
         }
         arsenalAll.sort((a, b) => a.sort - b.sort);
-        db.arsenalAll = arsenalAll.map(obj => obj.id);
+        db.arsenalAll = arsenalAll.map((obj) => obj.id);
     }
 
     // arsenal-days
@@ -152,8 +152,16 @@ export default store => {
         db.arsenalDays = days;
     }
 
+    // CG Maps ================================================================
+    db.cgmaps = {
+        entities: getNeDB('map_entities', 'json'),
+        equipments: getNeDB('map_equipments', 'json'),
+        shipsExtra: getNeDB('map_ships_extra', 'json'),
+        ships: getNeDB('map_ships', 'json'),
+    };
+
     return {
         raw,
-        db
+        db,
     };
 };
