@@ -14,6 +14,7 @@
     },
     "scripts": {
         "start": "npm run publish:webapp && cross-env YUUBARI_LOCAL_RUN=true koot-start --no-build",
+        "start:server:local": "cross-env YUUBARI_LOCAL_RUN=true node dist-webapp/server/index.js",
         "start:server:pm2": "pm2 restart pm2.json --only yuubari",
         "start:spa": "koot-start --type react-spa --config ./koot.config.spa.js",
         "quickstart": "cross-env YUUBARI_LOCAL_RUN=true koot-start -- quickStart=true -- quickStartAllLocales=true",
