@@ -22,6 +22,7 @@
 const path = require('path');
 
 const { static: dirStatic } = require('./src/directories');
+const configAkigumo = require('./config/akigumo');
 
 /** @type {Boolean} 判断当前是否是生产环境 */
 // const isEnvProd = Boolean(process.env.WEBPACK_BUILD_ENV === 'prod')
@@ -159,6 +160,5 @@ module.exports = {
     /**************************************************************************
      * Project Specific
      *************************************************************************/
-    portAkigumo: 8081,
-    devPortAkigumo: 8702,
+    ...configAkigumo,
 };

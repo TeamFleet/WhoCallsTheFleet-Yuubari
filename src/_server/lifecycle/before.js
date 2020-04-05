@@ -1,6 +1,6 @@
 const proxy = require('koa-proxies');
 
-const { portAkigumo, devPortAkigumo } = require('../../../koot.config');
+const { portAkigumo, devPortAkigumo } = require('../../../config/akigumo');
 
 export default async (app) => {
     app.use(
