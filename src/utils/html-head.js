@@ -1,5 +1,5 @@
 import metas from 'metas';
-import { store } from 'koot';
+import { getStore } from 'koot';
 
 // import { origin as siteOrigin } from '@appConfig/site.js'
 // import { availableLocalesFb } from '@appConfig/i18n.js'
@@ -8,7 +8,7 @@ import { update as updatePageTitle } from '@api/page-title/api.js';
 
 const htmlHead = (state, infos) => {
     if (typeof state === 'object' && typeof infos === 'undefined') {
-        return htmlHead(store.getState(), state);
+        return htmlHead(getStore().getState(), state);
     }
 
     if (typeof state !== 'object') return {};
@@ -23,11 +23,11 @@ const htmlHead = (state, infos) => {
         title = siteName,
         subtitle,
         description,
-        image
+        image,
     } = Object.assign(
         {
             uri: '',
-            'twitter:card': 'summary_large_image'
+            'twitter:card': 'summary_large_image',
         },
         infos
     );
@@ -43,7 +43,7 @@ const htmlHead = (state, infos) => {
     if (title) {
         if (Array.isArray(title))
             title = title.filter(
-                str => typeof str !== 'undefined' && str !== ''
+                (str) => typeof str !== 'undefined' && str !== ''
             );
 
         const titleMain =
@@ -52,13 +52,13 @@ const htmlHead = (state, infos) => {
 
         // const store = getStore()
         if (typeof subtitle !== 'undefined')
-            store.dispatch(
+            getStore().dispatch(
                 updatePageTitle({
                     main: titleMain,
-                    sub: subtitle
+                    sub: subtitle,
                 })
             );
-        else store.dispatch(updatePageTitle(titleMain));
+        else getStore().dispatch(updatePageTitle(titleMain));
 
         if (title !== siteName)
             title = title.replace(/\n/g, '') + ' - ' + siteName;
@@ -83,11 +83,11 @@ const htmlHead = (state, infos) => {
 
                 twitter: {
                     card: 'summary',
-                    siteCreator: 'Diablohu'
-                }
+                    siteCreator: 'Diablohu',
+                },
             },
             true
-        )
+        ),
     };
     /*
     const meta = [

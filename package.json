@@ -14,7 +14,7 @@
     },
     "scripts": {
         "start": "npm run publish:webapp && cross-env YUUBARI_LOCAL_RUN=true koot-start --no-build",
-        "start:local": "cross-env YUUBARI_LOCAL_RUN=true node --inspect dist-webapp/server/index.js",
+        "start:local": "npm run build && cross-env YUUBARI_LOCAL_RUN=true node --inspect dist-webapp/server/index.js",
         "start:server:pm2": "pm2 restart pm2.json --only yuubari",
         "start:spa": "koot-start --type react-spa --config ./koot.config.spa.js",
         "quickstart": "cross-env YUUBARI_LOCAL_RUN=true koot-start -- quickStart=true -- quickStartAllLocales=true",
@@ -101,6 +101,6 @@
         ]
     },
     "koot": {
-        "version": "0.14.0-alpha.8"
+        "version": "0.14.0-alpha.9"
     }
 }
