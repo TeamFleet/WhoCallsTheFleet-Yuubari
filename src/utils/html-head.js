@@ -6,6 +6,11 @@ import { getStore } from 'koot';
 
 import { update as updatePageTitle } from '@api/page-title/api.js';
 
+const infosDefault = {
+    uri: '',
+    'twitter:card': 'summary_large_image',
+};
+
 const htmlHead = (state, infos) => {
     if (typeof state === 'object' && typeof infos === 'undefined') {
         return htmlHead(getStore().getState(), state);
@@ -21,16 +26,12 @@ const htmlHead = (state, infos) => {
         // eslint-disable-next-line no-restricted-globals
         uri = typeof location !== 'undefined' ? location.pathname : undefined,
         title = siteName,
-        subtitle,
         description,
-        image,
-    } = Object.assign(
-        {
-            uri: '',
-            'twitter:card': 'summary_large_image',
-        },
-        infos
-    );
+    } = {
+        ...infosDefault,
+        ...infos,
+    };
+    const { subtitle, image } = infos;
 
     if (typeof uri === 'object') {
         uri = uri.pathname;

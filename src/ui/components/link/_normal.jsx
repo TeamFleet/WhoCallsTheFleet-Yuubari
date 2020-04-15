@@ -40,6 +40,7 @@ const LinkDefault = extend({
         link,
         replace = false,
         children,
+        type,
         ...props
     }) => {
         const thisPic = pic || avatar || image || src || picture || img;
@@ -56,6 +57,15 @@ const LinkDefault = extend({
             };
         } else props.to = to;
 
+        const imgProps = {};
+        if (type === 'ship') {
+            imgProps.width = '240';
+            imgProps.height = '60';
+        } else if (type === 'entity') {
+            imgProps.width = '160';
+            imgProps.height = '40';
+        }
+
         return (
             <Component {...props}>
                 {thisPic && (
@@ -71,6 +81,7 @@ const LinkDefault = extend({
                         src={__CLIENT__ ? thisPic : undefined}
                         loading="lazy"
                         alt={alt}
+                        {...imgProps}
                     />
                 )}
                 {thisName && renderName(thisName, nameExtra)}

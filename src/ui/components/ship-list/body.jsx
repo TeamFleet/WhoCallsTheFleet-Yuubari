@@ -7,7 +7,7 @@ import { KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE } from '@const/hotkey-scopes';
 import db from '@database';
 import shipListFilter from '@database/list-ships-filter.js';
 import {
-    init as shipListInit
+    init as shipListInit,
     // reset as shipListReset,
     // filterLeave,
     // compareReset
@@ -25,15 +25,15 @@ const hotkeys = __CLIENT__ ? require('hotkeys-js').default : undefined;
 
 const filterSelectMax = 100;
 
-const getShipList = list => {
-    let result = [];
+const getShipList = (list) => {
+    const result = [];
 
     const checkLastRemodelLoop = (ships, index) => {
         while (ships[index].remodel && ships[index].remodel.next_loop) index++;
         return index === ships.length - 1;
     };
 
-    list.forEach(ships => {
+    list.forEach((ships) => {
         if (Array.isArray(ships))
             return ships.forEach((ship, index2) => {
                 if (
@@ -55,9 +55,9 @@ const getShipList = list => {
 @extend({
     connect: (state, ownProps) => ({
         // ...state.shipList[ownProps.id],
-        isInit: typeof state.shipList[ownProps.id] !== 'undefined'
+        isInit: typeof state.shipList[ownProps.id] !== 'undefined',
         // location: state[REALTIME_LOCATION_REDUCER_NAME]
-    })
+    }),
 })
 class ShipListView extends React.Component {
     // componentWillMount() {
@@ -99,7 +99,7 @@ export default ShipListView;
             isModeFilter,
             filterInput,
             isModeCompare,
-            compareState
+            compareState,
             // compareList,
         } = state.shipList[ownProps.id] || {};
         return {
@@ -112,13 +112,13 @@ export default ShipListView;
                     : false,
 
             isModeCompare,
-            compareState
+            compareState,
             // compareList,
             // compareSort,
             // compareScrollLeft,
         };
     },
-    styles: require('./body.less')
+    styles: require('./body.less'),
 })
 class Body extends React.Component {
     getExtraButtons() {
@@ -232,9 +232,11 @@ class Body extends React.Component {
     render() {
         if (__CLIENT__ && __DEV__) {
             // if (__DEV__) {
+            // eslint-disable-next-line no-console
             console.log('shipList', this.props);
             const t0 = performance.now();
             setTimeout(() => {
+                // eslint-disable-next-line no-console
                 console.log(
                     'Rendering ship-list took ' +
                         (performance.now() - t0) +
@@ -256,7 +258,7 @@ class Body extends React.Component {
                     [this.props.className]: true,
                     'is-compare': this.props.isModeCompare,
                     [`is-compare-${this.props.compareState}`]: this.props
-                        .isModeCompare
+                        .isModeCompare,
                 })}
             >
                 {__CLIENT__ && (
@@ -290,7 +292,7 @@ class Body extends React.Component {
     }
 }
 
-const CSSTransitionGroup = props => (
+const CSSTransitionGroup = (props) => (
     <TransitionGroup
         component={React.Fragment}
         // className="wrapper"
@@ -298,7 +300,7 @@ const CSSTransitionGroup = props => (
     />
 );
 
-const CSSTransitionComponent = props => (
+const CSSTransitionComponent = (props) => (
     <CSSTransition
         {...props}
         classNames="transition"
@@ -313,16 +315,16 @@ const BodyCompare = extend({
             state.shipList[ownProps.id] || {};
         return {
             compareState,
-            compareList
+            compareList,
         };
-    }
+    },
 })(({ show, compareState, id, compareList }) => (
     <CSSTransitionGroup>
         {show && compareState === 'comparing' ? (
             <CSSTransitionComponent key="compare">
                 <TableBody
                     id={id}
-                    ships={compareList.map(shipId => db.ships[shipId])}
+                    ships={compareList.map((shipId) => db.ships[shipId])}
                 />
             </CSSTransitionComponent>
         ) : null}
@@ -333,10 +335,12 @@ const BodyCompare = extend({
     connect: (state, ownProps) => ({
         filterInput: state.shipList[ownProps.id]
             ? state.shipList[ownProps.id].filterInput
-            : undefined
-    })
+            : undefined,
+    }),
 })
 class BodyFiltered extends React.Component {
+    ListRef = React.createRef();
+
     get show() {
         return Boolean(
             this.props.show &&
@@ -353,7 +357,11 @@ class BodyFiltered extends React.Component {
         }
     }
     focusItem(direction = 1) {
-        const items = Array.from(this._list.querySelectorAll('.item'));
+        if (!this.ListRef.current) return;
+
+        const items = Array.from(
+            this.ListRef.current.querySelectorAll('.item')
+        );
         const active = document.activeElement;
         const activeIndex = items.indexOf(active);
         let newIndex;
@@ -374,7 +382,7 @@ class BodyFiltered extends React.Component {
         hotkeys(
             'down, right',
             {
-                scope: KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE
+                scope: KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE,
             },
             () => {
                 this.focusItem(1);
@@ -384,7 +392,7 @@ class BodyFiltered extends React.Component {
         hotkeys(
             'up, left',
             {
-                scope: KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE
+                scope: KEY_SHIPLIST_SEARCH_RESULT_NAVIGATE,
             },
             () => {
                 this.focusItem(-1);
@@ -412,12 +420,12 @@ class BodyFiltered extends React.Component {
                 list = result.slice(0, filterSelectMax);
                 text = __('ship_list.filter.results_count_too_many', {
                     count: result.length,
-                    showing: filterSelectMax
+                    showing: filterSelectMax,
                 });
             } else if (result.length > 0) {
                 list = result;
                 text = __('ship_list.filter.results_count', {
-                    count: result.length
+                    count: result.length,
                 });
             } else if (!list || !list.length) {
                 list = result;
@@ -435,9 +443,13 @@ class BodyFiltered extends React.Component {
             <CSSTransitionGroup>
                 {show && (
                     <CSSTransitionComponent key="filterd">
-                        <div className="results" ref={el => (this._list = el)}>
+                        <div className="results" ref={this.ListRef}>
                             <p className="results-text">{text}</p>
-                            {<List id={this.props.id} ships={list} />}
+                            <List
+                                id={this.props.id}
+                                ships={list}
+                                key={this.props.id}
+                            />
                         </div>
                     </CSSTransitionComponent>
                 )}
@@ -450,9 +462,9 @@ class BodyFiltered extends React.Component {
     connect: (state, ownProps) => {
         const { collection } = state.shipList[ownProps.id] || {};
         return {
-            collection
+            collection,
         };
-    }
+    },
 })
 class BodyCollections extends React.Component {
     componentDidUpdate(prevProps /*, prevState*/) {
@@ -460,11 +472,11 @@ class BodyCollections extends React.Component {
             window.scrollTo(undefined, 0);
     }
     render() {
-        let { collection, show } = this.props;
+        let { collection } = this.props;
 
         if (__SERVER__) {
             collection = db.shipCollections[this.props.index];
-        } else if (typeof collection === 'undefined' || !show) {
+        } else if (typeof collection === 'undefined' || !this.props.show) {
             collection = { list: [] };
         } else if (typeof collection !== 'object') {
             collection = db.shipCollections[collection];
@@ -482,7 +494,7 @@ class BodyCollections extends React.Component {
                         typeof listType === 'undefined'
                     ) {
                         listType = [];
-                        collection.list.forEach(type => {
+                        collection.list.forEach((type) => {
                             listType = listType.concat(getShipList(type.ships));
                         });
                     }
@@ -495,7 +507,7 @@ class BodyCollections extends React.Component {
                                 className={classNames({
                                     first: index2 === 0,
                                     last: index2 === collection.list.length - 1,
-                                    'is-unselectable': !type.type
+                                    'is-unselectable': !type.type,
                                 })}
                             >
                                 {type.type && (!type.class || !index2) ? (

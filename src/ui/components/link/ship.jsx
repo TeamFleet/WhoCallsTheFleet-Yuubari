@@ -129,6 +129,7 @@ class LinkShip extends React.Component {
                 name={this.checkShow(name) ? this.renderName(type) : null}
                 onClick={this.onClick}
                 alt={this.ship._name}
+                type="ship"
                 {...props}
             >
                 {extraIllust && this.ship.hasExtraIllust() && (

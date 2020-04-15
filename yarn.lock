@@ -1619,7 +1619,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.17.tgz#7a183163a9e6ff720d86502db23ba4aade5999b8"
   integrity sha512-gpNnRnZP3VWzzj5k3qrpRC6Rk3H/uclhAVo1aIvwzK5p5cOrs9yEyQ8H/HBsBY0u5rrWxXEiVPQ0dEB6pkjE8Q==
 
-"@types/node@^13.11.0":
+"@types/node@^13.11.1":
   version "13.11.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.11.1.tgz#49a2a83df9d26daacead30d0ccc8762b128d53c7"
   integrity sha512-eWQGP3qtxwL8FGneRrC5DwrJLGN4/dH1clNTuLfN81HCrxVtxRjygDTUoZJ5ASlDEeo0ppYFQjQIlXhtXpOn6g==
@@ -1687,10 +1687,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/react@^16.9.32":
-  version "16.9.33"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.33.tgz#a5274520f0d28cbbb73c8652ddd48646fd4bcae5"
-  integrity sha512-ovgoy7p9999HDzwv8Sewhl8GJjn/r0GRsFrM9UMwp1uodh0kQ0pwIHLQ6LNfqGSyjNzJ8II/HIg0BL7Yn/B9yA==
+"@types/react@^16.9.34":
+  version "16.9.34"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.34.tgz#f7d5e331c468f53affed17a8a4d488cd44ea9349"
+  integrity sha512-8AJlYMOfPe1KGLKyHpflCg5z46n0b5DbRfqDksxBLBTUpB75ypDBAO9eCUcjNwE6LCUslwTz00yyG/X9gaVtow==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -7662,10 +7662,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.14.0-alpha.9:
-  version "0.14.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.14.0-alpha.9.tgz#35b1b0c9d176b25835f4286bef0657ccc2e9f4ee"
-  integrity sha512-k6mEoErjSshKicT9cROF1T+awsETgKktC9m+cQSk1bo2MSGW+ZdplLTQPsj3K+Wh96Vo9n/1pwZnknzPuI3I6A==
+koot-webpack@^0.14.0-alpha.11:
+  version "0.14.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.14.0-alpha.10.tgz#60dc8bae2f3c81b3c12db1885f159de4330fed46"
+  integrity sha512-rcFOGAnvR8QlxBNmTj+kegiuAJVA0ypl/pV5sWRaJ7ATgkVn9GWDcbW0+xCj8MobaFrN2hbkB7c2DH2R3ILY/A==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -7711,15 +7711,15 @@ koot-webpack@^0.14.0-alpha.9:
   optionalDependencies:
     node-sass "^4.13.1"
 
-koot@^0.14.0-alpha.9:
-  version "0.14.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.14.0-alpha.9.tgz#3656d0510ff51bfa5ae99a227b8035d4a4f12c0e"
-  integrity sha512-A7aogN4QIUsS2YZ9cApZuQUyuSIaszRvuV8q4qqAReC/oNLYDh4ebGw1RuUK+QcpLaLsxa75aJqVtpC3fCyEpw==
+koot@^0.14.0-alpha.11:
+  version "0.14.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.14.0-alpha.11.tgz#49fc0d6f7f931cffcdc3c20253afeb126dcf5cf5"
+  integrity sha512-1nuOHqyVJo8kb95Z56XrpSeGzarQ0nWTpzpmF0TmVqDeLWvkjI3bKkS3gWBGyqglzBpS7rmWTjDswZ1apF7BmA==
   dependencies:
     "@types/inquirer" "^6.5.0"
     "@types/lodash" "^4.14.149"
-    "@types/node" "^13.11.0"
-    "@types/react" "^16.9.32"
+    "@types/node" "^13.11.1"
+    "@types/react" "^16.9.34"
     "@types/react-dom" "^16.9.6"
     "@types/react-redux" "^7.1.7"
     "@types/react-router" "^3.0.8"
@@ -7751,7 +7751,7 @@ koot@^0.14.0-alpha.9:
     koa-proxies "^0.11.0"
     koa-router "^8.0.8"
     koa-static "^5.0.0"
-    koot-webpack "^0.14.0-alpha.9"
+    koot-webpack "^0.14.0-alpha.11"
     lodash "^4.17.15"
     md5 "^2.2.1"
     npm-run-script "^0.0.4"
@@ -10388,13 +10388,13 @@ raw-body@^2.2.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-raw-loader@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-4.0.0.tgz#d639c40fb9d72b5c7f8abc1fb2ddb25b29d3d540"
-  integrity sha512-iINUOYvl1cGEmfoaLjnZXt4bKfT2LJnZZib5N/LLyAphC+Dd11vNP9CNVb38j+SAJpFI1uo8j9frmih53ASy7Q==
+raw-loader@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-4.0.1.tgz#14e1f726a359b68437e183d5a5b7d33a3eba6933"
+  integrity sha512-baolhQBSi3iNh1cglJjA0mYzga+wePk7vdEX//1dTFd+v4TsQlQE0jitJSNF1OIP82rdYulH7otaVmdlDaJ64A==
   dependencies:
-    loader-utils "^1.2.3"
-    schema-utils "^2.5.0"
+    loader-utils "^2.0.0"
+    schema-utils "^2.6.5"
 
 react-dom@^16.13.1:
   version "16.13.1"
@@ -11113,7 +11113,7 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
-schema-utils@^2.0.0, schema-utils@^2.5.0, schema-utils@^2.6.1, schema-utils@^2.6.4, schema-utils@^2.6.5:
+schema-utils@^2.0.0, schema-utils@^2.6.1, schema-utils@^2.6.4, schema-utils@^2.6.5:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-2.6.5.tgz#c758f0a7e624263073d396e29cd40aa101152d8a"
   integrity sha512-5KXuwKziQrTVHh8j/Uxz+QUbxkaLW9X/86NBlx/gnKgtsZA2GIVMUn17qWhRFwF8jdYb3Dig5hRO/W5mZqy6SQ==

@@ -9,11 +9,12 @@ import parseLocaleId from './parse-locale-id';
  * @void
  */
 const initKCKit = ({ localeId, store }) => {
+    // console.log({ store });
     const db = store.__database || initDatabase(store).db;
 
     register({
         db,
-        locale: parseLocaleId(localeId)
+        locale: parseLocaleId(localeId),
     });
 
     if (__CLIENT__ && __DEV__) {
