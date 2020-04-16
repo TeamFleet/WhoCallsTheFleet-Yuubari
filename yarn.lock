@@ -7662,10 +7662,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.14.0-alpha.12:
-  version "0.14.0-alpha.12"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.14.0-alpha.12.tgz#0c780a62167554261c0a35d88306f3d5c47af1a1"
-  integrity sha512-GjBYRS1tT0KidA5TjyUZHTx8ibANgCUcaz6MJda9zPh0+ANtSIcsyOnIyRpcC/uZS8NpJ2gRpn1IyT/sY9EYeA==
+koot-webpack@^0.14.0-alpha.13:
+  version "0.14.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.14.0-alpha.13.tgz#eecff624bd76b75b4fca160f53d63d4704073457"
+  integrity sha512-xOg5bZPgA7YzhFZATo4frm3PJ1t1FOc/peA8NembmLHzTieB0p9tVO43NpcEr0HvYCBaFLJ1w0A3pVaoqqu42Q==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -7711,10 +7711,10 @@ koot-webpack@^0.14.0-alpha.12:
   optionalDependencies:
     node-sass "^4.13.1"
 
-koot@^0.14.0-alpha.12:
-  version "0.14.0-alpha.12"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.14.0-alpha.12.tgz#d4132a867a0a553b242463352f1cebf6ee58d96c"
-  integrity sha512-0+oC4osr5UjsvWI7L4NNR68ac93Cutl00Pryz8g3W8GgabKUEhAR6AdVbjG2hnrHC/6+j41gG/Yyai92urMPrg==
+koot@^0.14.0-alpha.13:
+  version "0.14.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.14.0-alpha.13.tgz#0eb9291dcb1e4d3ae2c87b4007048290d08a6f72"
+  integrity sha512-KnhJ0DPI7WPLh7RHyxC+ellO+hEIVRta2Km4hjOTPxjq4MKcN49zcv2fQg5x7sZRCUd9y7sXtnExA50l6jz1jQ==
   dependencies:
     "@types/inquirer" "^6.5.0"
     "@types/lodash" "^4.14.149"
@@ -7751,7 +7751,7 @@ koot@^0.14.0-alpha.12:
     koa-proxies "^0.11.0"
     koa-router "^8.0.8"
     koa-static "^5.0.0"
-    koot-webpack "^0.14.0-alpha.12"
+    koot-webpack "^0.14.0-alpha.13"
     lodash "^4.17.15"
     md5 "^2.2.1"
     npm-run-script "^0.0.4"
