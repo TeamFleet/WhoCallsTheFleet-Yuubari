@@ -7662,10 +7662,10 @@ koa@^2.11.0:
     type-is "^1.6.16"
     vary "^1.1.2"
 
-koot-webpack@^0.14.0-alpha.13:
-  version "0.14.0-alpha.13"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.14.0-alpha.13.tgz#eecff624bd76b75b4fca160f53d63d4704073457"
-  integrity sha512-xOg5bZPgA7YzhFZATo4frm3PJ1t1FOc/peA8NembmLHzTieB0p9tVO43NpcEr0HvYCBaFLJ1w0A3pVaoqqu42Q==
+koot-webpack@^0.14.0-alpha.14:
+  version "0.14.0-alpha.14"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.14.0-alpha.14.tgz#a5545ca419c9e289be390e062d3f52d01f0dbc3d"
+  integrity sha512-ol0eq84BkEwv14AiFBls8yYBefj2tYevyQwWDWwHpd6I7W9NBVI94h2KPEgOx7oJS4XWg+oLdfZXZiKGKxiTSw==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
@@ -7711,10 +7711,10 @@ koot-webpack@^0.14.0-alpha.13:
   optionalDependencies:
     node-sass "^4.13.1"
 
-koot@^0.14.0-alpha.13:
-  version "0.14.0-alpha.13"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.14.0-alpha.13.tgz#0eb9291dcb1e4d3ae2c87b4007048290d08a6f72"
-  integrity sha512-KnhJ0DPI7WPLh7RHyxC+ellO+hEIVRta2Km4hjOTPxjq4MKcN49zcv2fQg5x7sZRCUd9y7sXtnExA50l6jz1jQ==
+koot@^0.14.0-alpha.14:
+  version "0.14.0-alpha.14"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.14.0-alpha.14.tgz#a33838cad3e0da550d56f855fdd5ebd971de6404"
+  integrity sha512-RDlERj9LFhSV2fAhcYMTxLJwa9xobIQPjBWA7tBRsdomYLj76DdneBJXoYoXSTw/3F3LTBAOndjpsLVhqAT36A==
   dependencies:
     "@types/inquirer" "^6.5.0"
     "@types/lodash" "^4.14.149"
@@ -7751,7 +7751,7 @@ koot@^0.14.0-alpha.13:
     koa-proxies "^0.11.0"
     koa-router "^8.0.8"
     koa-static "^5.0.0"
-    koot-webpack "^0.14.0-alpha.13"
+    koot-webpack "^0.14.0-alpha.14"
     lodash "^4.17.15"
     md5 "^2.2.1"
     npm-run-script "^0.0.4"
@@ -7861,10 +7861,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-lint-staged@^10.1.3:
-  version "10.1.3"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-10.1.3.tgz#da27713d3ac519da305381b4de87d5f866b1d2f1"
-  integrity sha512-o2OkLxgVns5RwSC5QF7waeAjJA5nz5gnUfqL311LkZcFipKV7TztrSlhNUK5nQX9H0E5NELAdduMQ+M/JPT7RQ==
+lint-staged@^10.1.4:
+  version "10.1.4"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-10.1.4.tgz#c0e0930ed5568ada2a7fbd9d300318c87803a4b0"
+  integrity sha512-bFfQE6U8LASGKANl+JSN8nfL9Id6vq2YmWMgkynvmicMVQFR11OFU8lqcnI1y0fsPr3PwHa6xeMCh+SWB8TPkg==
   dependencies:
     chalk "^3.0.0"
     commander "^4.0.1"
