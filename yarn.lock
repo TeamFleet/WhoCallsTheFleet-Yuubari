@@ -12935,10 +12935,10 @@ whocallsthefleet-backgrounds@^1.3.2:
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.3.2.tgz#ea434851b7d362b30ba7c1eb86ac86e22fcd45e2"
   integrity sha512-3vQRvNciB3Dq1jlbZHXdujPIwEeDazHTfyZLAzuw7YA6f7JGGPgKHTqQpqQApRCel5DH75umEtdAZldjen3gUA==
 
-whocallsthefleet-database@^20200426.1.0:
-  version "20200426.1.0"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20200426.1.0.tgz#9e4b35e7ab8a0c75ff5a47b0926cec23b178be1e"
-  integrity sha512-AM72lS5OfVQsdVFtcYXsxQGteAIiEH6t2ak7Yg84oSmsx1XsXs+SyhMhOQYgbDqUxeLSHX5R5CdNdEG0X86ULg==
+whocallsthefleet-database@^20200427.1.0:
+  version "20200427.1.0"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20200427.1.0.tgz#dfc1f129b465d4fbb47787e97d89a63bc810518e"
+  integrity sha512-bvyU2JTato/C9eRQaURxKZRpcRrvJpn64tFA/XLYpEfkcDhCplQN+g9CBL5iBgZA969sfwAee8D5bTauHbuiGA==
 
 wide-align@^1.1.0:
   version "1.1.3"
