@@ -38,7 +38,7 @@
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.7.6",
         "kckit": "^1.39.0",
-        "koot": "^0.14.0-alpha.14",
+        "koot": "^0.14.0-alpha.15",
         "localforage": "^1.7.3",
         "lz-string": "^1.4.4",
         "md5-file": "^5.0.0",
@@ -61,7 +61,7 @@
         "glob": "^7.1.6",
         "husky": "^4.2.5",
         "image-size": "^0.8.3",
-        "jest": "^25.4.0",
+        "jest": "^25.5.1",
         "json-pretty": "^0.0.1",
         "jsonfile": "^6.0.1",
         "lint-staged": "^10.2.0",
@@ -101,6 +101,6 @@
         ]
     },
     "koot": {
-        "version": "0.14.0-alpha.14"
+        "version": "0.14.0-alpha.15"
     }
 }
