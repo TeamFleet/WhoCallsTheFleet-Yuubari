@@ -10,11 +10,12 @@ const defaults = {
 };
 
 @extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })
 class SwiperComponent extends React.Component {
     // swiper
     ContainerRef = React.createRef();
+    PaginationRef = React.createRef();
     PrevButtonRef = React.createRef();
     NextButtonRef = React.createRef();
 
@@ -30,15 +31,16 @@ class SwiperComponent extends React.Component {
             delete settings.className;
             delete settings.children;
             delete settings.slides;
+            delete settings['data-class-name'];
 
             if (settings.pagination === true) {
                 settings.pagination = {
-                    el: '.swiper-pagination',
-                    clickable: true
+                    el: this.PaginationRef.current,
+                    clickable: true,
                 };
             }
 
-            ['prevButton', 'nextButton'].forEach(key => {
+            ['prevButton', 'nextButton'].forEach((key) => {
                 if (
                     settings[key] === true ||
                     React.isValidElement(settings[key])
@@ -55,11 +57,11 @@ class SwiperComponent extends React.Component {
                 }
             });
 
-            ['prevButton', 'nextButton', 'scrollbar'].forEach(key => {
+            ['prevButton', 'nextButton', 'scrollbar'].forEach((key) => {
                 if (typeof settings[key] === 'boolean') delete settings[key];
             });
 
-            ['controlsWrapper'].forEach(key => {
+            ['controlsWrapper'].forEach((key) => {
                 delete settings[key];
             });
 
@@ -81,15 +83,23 @@ class SwiperComponent extends React.Component {
                         );
                     }
                 }
+            } else {
+                settings.on = {};
             }
+            const _init = settings.on.init;
+            settings.on.init = function (...args) {
+                if (__DEV__) console.warn('Swiper inited', ...args);
+                if (typeof _init === 'function') _init(...args);
+            };
 
             // console.log('swiper init', settings)
 
             setTimeout(() => {
-                this.swiper = new Swiper(this.ContainerRef.current, {
+                const config = {
                     ...defaults,
-                    ...settings
-                });
+                    ...settings,
+                };
+                this.swiper = new Swiper(this.ContainerRef.current, config);
 
                 this._init = true;
             });
@@ -146,7 +156,10 @@ class SwiperComponent extends React.Component {
                 {this.props.controlsWrapper && (
                     <div className="swiper-controls">
                         {this.props.pagination === true && (
-                            <div className="swiper-pagination"></div>
+                            <div
+                                className="swiper-pagination"
+                                ref={this.PaginationRef}
+                            ></div>
                         )}
                         {this.renderButtonPrev()}
                         {this.renderButtonNext()}
