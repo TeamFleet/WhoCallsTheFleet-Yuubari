@@ -246,7 +246,11 @@
         },
         "night_operation_carrier": {
             "title": "Night Operation Aircraft Carrier",
-            "description": "Do not need [NightOperationAviationPersonnel] to perform Night Air Assault"
+            "description": "Do not need [NightOperationAviationPersonnel] to perform Night Air Assault."
+        },
+        "cve": {
+            "title": "Escort Carrier",
+            "description": "Has high ASW stat. Can be deployed into Transportation Combined Fleet."
         }
     },
 

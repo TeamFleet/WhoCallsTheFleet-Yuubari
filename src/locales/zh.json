@@ -250,7 +250,11 @@
         },
         "night_operation_carrier": {
             "title": "夜间作战航空母舰",
-            "description": "无需装备 [NightOperationAviationPersonnel] 即可发动夜间航空打击"
+            "description": "无需装备 [NightOperationAviationPersonnel] 即可发动夜间航空打击。"
+        },
+        "cve": {
+            "title": "护航航空母舰",
+            "description": "拥有较高的对潜属性。可编入运输联合舰队。"
         }
     },
 

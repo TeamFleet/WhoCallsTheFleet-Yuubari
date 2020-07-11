@@ -246,7 +246,11 @@
         },
         "night_operation_carrier": {
             "title": "夜間作戦航空母艦",
-            "description": "Do not need [NightOperationAviationPersonnel] to perform Night Air Assault"
+            "description": "Do not need [NightOperationAviationPersonnel] to perform Night Air Assault."
+        },
+        "cve": {
+            "title": "護衛空母",
+            "description": "Has high ASW stat. Can be deployed into Transportation Combined Fleet."
         }
     },
 

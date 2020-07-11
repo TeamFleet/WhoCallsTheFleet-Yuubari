@@ -16,7 +16,7 @@ import Bullet from '@ui/components/bullet';
 import IconEquipment from '@ui/components/icon-equipment';
 
 const SpecialCapability = extend({
-    styles: require('./special-capability.less')
+    styles: require('./special-capability.less'),
 })(({ className: _className, ship, 'data-class-name': dataClassName }) => {
     const thisShip = getShip(ship);
     if (!thisShip) return null;
@@ -25,7 +25,7 @@ const SpecialCapability = extend({
 
     // 特殊攻击
     let specialAttack;
-    kckit.data.specialAttack.some(sa => {
+    kckit.data.specialAttack.some((sa) => {
         if (kckit.check.ship(thisShip, sa.ship || {})) {
             specialAttack = sa;
             return true;
@@ -45,7 +45,7 @@ const SpecialCapability = extend({
             `#### ${__('ship_details.special_attack.effects')}` +
             `\n\n` +
             effect
-                .map(line => (/^[ -]+/.test(line) ? line : `\n${line}`))
+                .map((line) => (/^[ -]+/.test(line) ? line : `\n${line}`))
                 .join('\n');
         return (
             <ComponentContainer
@@ -60,7 +60,7 @@ const SpecialCapability = extend({
                         heading: ({ level, ...props }) => {
                             const Component = `h${level}`;
                             return <Component {...props} />;
-                        }
+                        },
                     }}
                 />
             </ComponentContainer>
@@ -70,7 +70,7 @@ const SpecialCapability = extend({
     const {
         count_as_landing_craft,
         count_as_night_operation_aviation_personnel,
-        attack_surface_ship_prioritised
+        attack_surface_ship_prioritised,
     } = thisShip.getCapability();
     const thisShipIsCV = ship.isType('cv');
 
@@ -85,22 +85,22 @@ const SpecialCapability = extend({
                     title={__('ship_details.tp_bonus', {
                         bonus:
                             count_as_landing_craft *
-                            dataTP.equipmentType[equipmentTypes.LandingCraft]
+                            dataTP.equipmentType[equipmentTypes.LandingCraft],
                     })}
                     level={2}
                 />
                 <Bullet
                     title={__('ship_details.expedition_bonus', {
-                        bonus: `${5 * count_as_landing_craft}%`
+                        bonus: `${5 * count_as_landing_craft}%`,
                     })}
                     level={2}
                 >
                     {__('ship_details.expedition_bonus_daihatsu_description', {
-                        daihatsu: db.equipments[68]._name
+                        daihatsu: db.equipments[68]._name,
                     })}
                     <br />
                     {__('ship_details.expedition_bonus_daihatsu_description2', {
-                        daihatsu: db.equipments[68]._name
+                        daihatsu: db.equipments[68]._name,
                     })}
                 </Bullet>
             </ComponentContainer>
@@ -143,7 +143,7 @@ const SpecialCapability = extend({
             <ComponentContainer
                 className={classNames([
                     className,
-                    'attack-surface-ship-prioritised'
+                    'attack-surface-ship-prioritised',
                 ])}
                 title={db.shipTypes[30]._name}
             >
@@ -153,6 +153,18 @@ const SpecialCapability = extend({
                 >
                     {__('ship_details.light_attack_carrier_asw_note')}
                 </Bullet>
+            </ComponentContainer>
+        );
+    }
+
+    // 护卫航母
+    if (thisShipIsCV && thisShip.getStat('asw') > 0) {
+        return (
+            <ComponentContainer
+                className={classNames([className, 'cve'])}
+                title={__('ship_specials.cve.title')}
+            >
+                <Bullet title={__('ship_specials.cve.description')} level={2} />
             </ComponentContainer>
         );
     }
