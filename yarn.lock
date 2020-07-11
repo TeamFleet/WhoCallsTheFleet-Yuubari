@@ -3101,13 +3101,13 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-autoprefixer@^9.8.4:
-  version "9.8.4"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.8.4.tgz#736f1012673a70fa3464671d78d41abd54512863"
-  integrity sha512-84aYfXlpUe45lvmS+HoAWKCkirI/sw4JK0/bTeeqgHYco3dcsOn0NqdejISjptsYwNji/21dnkDri9PsYKk89A==
+autoprefixer@^9.8.5:
+  version "9.8.5"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.8.5.tgz#2c225de229ddafe1d1424c02791d0c3e10ccccaa"
+  integrity sha512-C2p5KkumJlsTHoNv9w31NrBRgXhf6eCMteJuHZi2xhkgC+5Vm40MEtCKPhc0qdgAOhox0YPy1SQHTAky05UoKg==
   dependencies:
     browserslist "^4.12.0"
-    caniuse-lite "^1.0.30001087"
+    caniuse-lite "^1.0.30001097"
     colorette "^1.2.0"
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
@@ -3337,7 +3337,7 @@ binary-search-tree@0.2.5:
   dependencies:
     underscore "~1.4.4"
 
-bind-event@1.1.2:
+bind-event@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/bind-event/-/bind-event-1.1.2.tgz#5ecd5880efc602679e0929c7bd9eba7403dd7d55"
   integrity sha512-InxjM0/p3ZUfyQZswM4b1SPaWMp9zNUI+sqAY8/Ev/g8bQgzfkEQsBwGDWO6w1Zoq6ArZo4n83IaRMRxVmDt1Q==
@@ -3763,10 +3763,10 @@ caniuse-lite@^1.0.30001043:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001064.tgz#a0f49689119ba08943b09968e118faf3f645add0"
   integrity sha512-hdBcQMFvJIrOhkpAZiRXz04Cmetwc9NekeuNl0qZfHOugxOhJKxsjF1RmISMPFjIF4PPx1reliIzbfN42EiQ5A==
 
-caniuse-lite@^1.0.30001087:
-  version "1.0.30001088"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001088.tgz#23a6b9e192106107458528858f2c0e0dba0d9073"
-  integrity sha512-6eYUrlShRYveyqKG58HcyOfPgh3zb2xqs7NvT2VVtP3hEUeeWvc3lqhpeMTxYWBBeeaT9A4bKsrtjATm66BTHg==
+caniuse-lite@^1.0.30001097:
+  version "1.0.30001097"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001097.tgz#1129c40c9f5ee3282158da08fd915d301f4a9bd8"
+  integrity sha512-TeuSleKt/vWXaPkLVFqGDnbweYfq4IaZ6rUugFf3rWY6dlII8StUZ8Ddin0PkADfgYZ4wRqCdO2ORl4Rn5eZIA==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -8266,10 +8266,10 @@ jsx-ast-utils@^2.2.1, jsx-ast-utils@^2.2.3:
     array-includes "^3.0.3"
     object.assign "^4.1.0"
 
-kckit@^1.45.0:
-  version "1.45.0"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.45.0.tgz#19ca7c694d4b5096e66bd7a7e037700b989ba633"
-  integrity sha512-3eixvfGneX1XpUgis5LpuZ1/OK9oP0voLvdUTpZ4WFrs/PVJYrj3kELSFjVFhQl2/2uLEKSs6Zh8pYzvlUOo9w==
+kckit@^1.47.0:
+  version "1.47.0"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.47.0.tgz#fb5092696c5689077706089c7e58057a8ed9eb23"
+  integrity sha512-ZicbGTdbBsvjz+WtTcXBBDMJOuLc7j8X63v1Myd61xauaYORQngYbxnxwo9aHxhB8MTecy6HaSVFnbCs+pUZcQ==
   dependencies:
     camelcase "6.0.0"
 
@@ -12200,10 +12200,10 @@ simple-get@^4.0.0:
     once "^1.3.1"
     simple-concat "^1.0.0"
 
-simple-git@^2.11.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.11.0.tgz#5bd99fe3465dcbcb82f0eb23ab3c1615cb947374"
-  integrity sha512-wFePCEQYY6BzVOg/BuUVEhr3jZPF/cPG/BN2UXgax6NHc3bJ9UrDc5AME281gs2C7J1UZ6BGRJYT64khx9T+ng==
+simple-git@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-2.12.0.tgz#b5978ec12cd56883185ef1475ec62e9207c1e1dc"
+  integrity sha512-64YrHYqHskWDumxM4thMGCkAd7rek4FEnxcugnpKzJZH6vCkietblsp7TUNdt9qU0pHAnJAanAmjyyQLE46k/Q==
   dependencies:
     "@kwsites/file-exists" "^1.1.1"
     "@kwsites/promise-deferred" "^1.0.1"
@@ -12898,7 +12898,7 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swiper@5.4.5:
+swiper@^5.4.5:
   version "5.4.5"
   resolved "https://registry.yarnpkg.com/swiper/-/swiper-5.4.5.tgz#a350f654bf68426dbb651793824925512d223c0f"
   integrity sha512-7QjA0XpdOmiMoClfaZ2lYN6ICHcMm72LXiY+NF4fQLFidigameaofvpjEEiTQuw3xm5eksG5hzkaRsjQX57vtA==
@@ -13996,10 +13996,10 @@ whocallsthefleet-backgrounds@^1.3.2:
   resolved "https://registry.yarnpkg.com/whocallsthefleet-backgrounds/-/whocallsthefleet-backgrounds-1.3.2.tgz#ea434851b7d362b30ba7c1eb86ac86e22fcd45e2"
   integrity sha512-3vQRvNciB3Dq1jlbZHXdujPIwEeDazHTfyZLAzuw7YA6f7JGGPgKHTqQpqQApRCel5DH75umEtdAZldjen3gUA==
 
-whocallsthefleet-database@^20200704.0.0:
-  version "20200704.0.0"
-  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20200704.0.0.tgz#1b079ee3cc72b4346e231f37060840dd2a48de7b"
-  integrity sha512-kbBx7ACZlvMZGf30kztNIW4qJgHrmOOg2ZQAud8weLHcSuMFCT2gmyUd1ZQsIHF5G5XA/7LyBVNkJCluLyXMWA==
+whocallsthefleet-database@^20200712.0.0:
+  version "20200712.0.0"
+  resolved "https://registry.yarnpkg.com/whocallsthefleet-database/-/whocallsthefleet-database-20200712.0.0.tgz#4dd8f831f611be1f9a7e5eaa348fb03f441e1cb5"
+  integrity sha512-QrsMRWYGGxbvAn+BwIUMuwKYBznmoAm0MczFN5duPxBEIgKStKUI2/PXyWngbUHVFfldrra9ET9Uvw8OnzG8jA==
 
 wide-align@1.1.3, wide-align@^1.1.0:
   version "1.1.3"
