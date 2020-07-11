@@ -249,7 +249,7 @@
             "description": "Do not need [NightOperationAviationPersonnel] to perform Night Air Assault."
         },
         "cve": {
-            "title": "護衛空母",
+            "title": "護衛空母 (CVE)",
             "description": "Has high ASW stat. Can be deployed into Transportation Combined Fleet."
         }
     },

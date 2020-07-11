@@ -249,7 +249,7 @@
             "description": "Do not need [NightOperationAviationPersonnel] to perform Night Air Assault."
         },
         "cve": {
-            "title": "Escort Carrier",
+            "title": "Escort Carrier (CVE)",
             "description": "Has high ASW stat. Can be deployed into Transportation Combined Fleet."
         }
     },
