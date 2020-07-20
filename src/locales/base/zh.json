@@ -1,0 +1,146 @@
+{
+    "name": {
+        "short": "简",
+        "full": "简体中文"
+    },
+
+    "title": "是谁呼叫舰队",
+    "translators": ["Diablohu"],
+
+    "under_construction": "建设中",
+    "no_javascript_warning": "本应用需要开启 JavaScript 功能。",
+    "cancel": "取消",
+    "ok": "确认",
+    "none": "无",
+
+    "ship_type": "舰种",
+    "equipment_type": "装备类型",
+    "shiptypeclass": "${class}级${type}",
+    "shipclass": "${class}级",
+    "shipclass_number": "${class}级 ${number} 号舰",
+    "other_ships_of_type": "其他${type}",
+    "shipname_dash_none": "",
+    "exslot": "补强增设栏位",
+    "equipment_series": "${equipment}系列",
+    "tp": "TP",
+    "land_bases": "基地航空队",
+
+    "seiyuu": "声优",
+    "seiyuus": "声优",
+    "artist": "画师",
+    "artists": "画师",
+
+    "activation_chance_tobe": "触发几率：${chance}",
+    "chance": {
+        "normal": "标准",
+        "high": "高"
+    },
+
+    "day_full": {
+        "Sunday": "星期日",
+        "Monday": "星期一",
+        "Tuesday": "星期二",
+        "Wednesday": "星期三",
+        "Thurday": "星期四",
+        "Friday": "星期五",
+        "Saturday": "星期六"
+    },
+
+    "day_abbr": {
+        "Sunday": "日",
+        "Monday": "一",
+        "Tuesday": "二",
+        "Wednesday": "三",
+        "Thurday": "四",
+        "Friday": "五",
+        "Saturday": "六"
+    },
+
+    "require": {
+        "level": "需要等级：${level}",
+        "min_possible_level": "可能的最低等级：${level}",
+        "equipment": "需要装备：${type}",
+        "equipment_all": "需要装备（全部）：${type}",
+        "equipment_at_least_one": "需要装备（至少一个）：${type}",
+        "equipment_no_need": "无需装备：${type}",
+        "equipment_type": "需要装备类型：${type}",
+        "equipment_type_no_need": "无需装备类型：${type}",
+        "equipment_has_stat": "需要装备：${type} (${stat}至少为${value})",
+        "ship_stat_with_equipments": "需要${stat}属性：${value} (计算装备)",
+        "has_stat": "${stat}至少为${value}"
+    },
+
+    "stat": {
+        "fire": "火力",
+        "torpedo": "雷装",
+        "night": "夜战",
+        "aa": "对空",
+        "aa_interceptor_sortie": "出击",
+        "aa_interceptor_defense": "防空",
+        "asw": "对潜",
+        "hp": "耐久",
+        "armor": "装甲",
+        "evasion": "回避",
+        "carry": "搭载",
+        "speed": "航速",
+        "range": "射程",
+        "los": "索敌",
+        "luck": "运",
+        "bomb": "爆装",
+        "hit": "命中",
+        "distance": "航程",
+        "antibomber": "对爆",
+        "interception": "迎击",
+        "consum": {
+            "fuel": "燃耗",
+            "ammo": "弹耗"
+        },
+        "equipment": {
+            "craftable": "开发",
+            "improvable": "改修"
+        }
+    },
+
+    "nav": {
+        "sub": {
+            "base": "海军基地",
+            "archive": "档案馆",
+            "dev": "研发中心"
+        },
+        "home": "首页",
+        "fleets": "舰队模拟",
+        "academy": "海军兵学校",
+        "calctp": "TP计算",
+        "sorties": "出击海域",
+        "expeditions": "远征",
+        "ships": "舰娘",
+        "equipments": "装备",
+        "arsenal": "改修工厂",
+        "entities": "声优 & 画师",
+        "excgs": "限定图鉴",
+        "about": "关于",
+        "languageSwitch": "切换语言",
+        "backgroundSwitch": "切换背景图",
+        "install": "安装 App"
+    },
+
+    "bonuses": {
+        "single": "装备属性加成",
+        "sets": "套装加成",
+        "info_prefix_when_equipped": "装备于以上舰娘时，",
+        "range_increase": "射程提高一档",
+        "stat_donot_stack": "该属性不叠加",
+        "based_on_number": "根据该装备的装备数量提供... (超额部分不提供加成)",
+        "based_on_star": "每个该装备根据改修星级提供...",
+        "based_on_area": "根据所处作战海域，每个该装备提供...",
+        "based_on_nothing": "每个该装备提供...",
+        "based_set": "额外加成...",
+        "based_set_accumulate": "累计套装加成...",
+        "note_hybrid_radar": "以下装备同时算作对水面和对空电探/雷达",
+        "note_hybrid_radar_this_equipment": "本装备同时算作对水面和对空电探/雷达"
+    },
+
+    "area": {
+        "north": "北方"
+    }
+}

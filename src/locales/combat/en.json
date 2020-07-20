@@ -1,0 +1,41 @@
+{
+    "combat_phases": {
+        "preemptive": "Preemptive",
+        "detection": "Detection",
+        "jet": {
+            "title": "Jet Assault",
+            "lbas": "Jet Assault (LBAS)",
+            "cv": "Jet Assault (Carrier)"
+        },
+        "lbas": "LBAS",
+        "aerial": {
+            "title": "Aerial Combat",
+            "fighter": "Fighter Combat",
+            "bombing": "Bombing",
+            "anti_air_propellant_barrage": "Anti-Air Propellant Barrage"
+        },
+        "support": "Support Expedition",
+        "day": {
+            "title": "Day Combat",
+            "oasw": "Opening Anti-Submarine Warfare",
+            "ots": "Opening Torpedo Salvo",
+            "shelling": "Shelling",
+            "unlock_2nd_round": "Unlock 2nd Round of Shelling",
+            "torpedo": "Torpedo Salvo"
+        },
+        "night": {
+            "title": "Night Battle",
+            "participate": "Participate in Night Battle",
+            "night_air_assault": "Night Air Assault",
+            "night_swordfish_assault": "Night Swordfish Assault"
+        },
+        "night_air_assault": "Night Air Assault"
+    },
+
+    "aaci": {
+        "title": "Anti-Air Cut-In (AACI)",
+        "fixed_shoot_down_bonus": "Fixed shoot down bonus",
+        "fixed": "Fixed",
+        "modifier": "Modifier"
+    }
+}

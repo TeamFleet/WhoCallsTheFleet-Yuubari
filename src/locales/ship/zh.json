@@ -1,0 +1,185 @@
+{
+    "special_attack": {
+        "Nelson Touch": {
+            "requirement": [
+                "- 不需要航空优势",
+                "- 本次出击仍未触发过（即一次出击只能触发一次）",
+                "- 使用复纵阵（联合舰队第二阵型/前方警戒）",
+                "- （主）舰队：",
+                "  - _纳尔逊改_ 为旗舰",
+                "  - _纳尔逊改_ 不能为大破或中破",
+                "  - 有 6 船",
+                "  - 不能包含潜艇",
+                "  - 第 3 和第 5 号舰不能为航母"
+            ],
+            "effect": [
+                "当 _纳尔逊改_ 在昼战炮雷击战或夜战进行攻击时，有一定几率触发特殊攻击。",
+                "触发时，_纳尔逊改_ 和第 3 以及第 5 号舰依次、顺序的各进行 1 次单发炮击，每发攻击都会随机选择目标。",
+                "这些炮击的伤害会高于通常的单发伤害。",
+                "- T字不利时，伤害会有更高的加成",
+                "更详细的说明可参阅[舰娘百科](https://zh.kcwiki.org/wiki/%E7%BA%B3%E5%B0%94%E9%80%8A#.E5.85.B3.E4.BA.8ENelson_Touch)。"
+            ]
+        },
+        "一斉射かッ…胸が熱いな！": {
+            "requirement": [
+                "- 不需要航空优势",
+                "- 本次出击仍未触发过（即一次出击只能触发一次）",
+                "- 使用梯形阵（联合舰队第二阵型/前方警戒）",
+                "- （主）舰队：",
+                "  - _长门改二_ 为旗舰",
+                "  - _长门改二_ 不能为大破或中破",
+                "  - 第 2 号舰需为战列舰"
+            ],
+            "effect": [
+                "当 _长门改二_ 在昼战炮雷击战或夜战进行攻击时，有一定几率触发特殊攻击。",
+                "触发时，_长门改二_ 和 2 号舰会一齐攻击，长门改二会进行 2 次单发炮击，2 号舰会进行 1 次单发炮击，每发攻击都会随机选择目标。",
+                "这些炮击的伤害会高于通常的单发伤害。",
+                "- _长门改二_ 的伤害加成要高于 2 号舰的加成",
+                "- 如果 2 号舰为 Big7，双方的伤害加成都会提高",
+                "    - 游戏中已实装其他的 Big7：[ship:573:mini|陆奥]、[ship:576:mini|纳尔逊]、[ship:1496:mini|科罗拉多]",
+                "- 装备有穿甲弹的舰娘会获得更高的伤害加成",
+                "- 装备有对水面电探/雷达（索敌≥5）的舰娘会获得更高的伤害加成",
+                "该特殊攻击实际上与 [ship:573:mini] 相同。",
+                "更详细的说明可参阅[舰娘百科](https://zh.kcwiki.org/wiki/%E9%95%BF%E9%97%A8#.E9.95.BF.E9.97.A8.E6.94.B9.E4.BA.8C.E7.89.B9.E6.AE.8A.E6.94.BB.E5.87.BB)。"
+            ]
+        },
+        "長門、いい？ いくわよ！ 主砲一斉射ッ！": {
+            "requirement": [
+                "- 不需要航空优势",
+                "- 本次出击仍未触发过（即一次出击只能触发一次）",
+                "- 使用梯形阵（联合舰队第二阵型/前方警戒）",
+                "- （主）舰队：",
+                "  - _陆奥改二_ 为旗舰",
+                "  - _陆奥改二_ 不能为大破或中破",
+                "  - 第 2 号舰需为战列舰"
+            ],
+            "effect": [
+                "当 _陆奥改二_ 在昼战炮雷击战或夜战进行攻击时，有一定几率触发特殊攻击。",
+                "触发时，_陆奥改二_ 和 2 号舰会一齐攻击，陆奥改二会进行 2 次单发炮击，2 号舰会进行 1 次单发炮击，每发攻击都会随机选择目标。",
+                "这些炮击的伤害会高于通常的单发伤害。",
+                "- _陆奥改二_ 的伤害加成要高于 2 号舰的加成",
+                "- 如果 2 号舰为 Big7，双方的伤害加成都会提高",
+                "    - 游戏中已实装其他的 Big7：[ship:541:mini|长门]、[ship:576:mini|纳尔逊]、[ship:1496:mini|科罗拉多]",
+                "- 装备有穿甲弹的舰娘会获得更高的伤害加成",
+                "- 装备有对水面电探/雷达（索敌≥5）的舰娘会获得更高的伤害加成",
+                "该特殊攻击实际上与 [ship:541:mini] 相同。",
+                "更详细的说明可参阅[舰娘百科](https://zh.kcwiki.org/wiki/%E9%99%86%E5%A5%A5)。"
+            ]
+        },
+        "Colorado Special Attack": {
+            "requirement": [
+                "- 不需要航空优势",
+                "- 本次出击仍未触发过（即一次出击只能触发一次）",
+                "- 使用梯形阵（联合舰队第二阵型/前方警戒）",
+                "- （主）舰队：",
+                "  - _科罗拉多改_ 为旗舰",
+                "  - _科罗拉多改_ 不能为大破或中破",
+                "  - 第 2 号和 3 号舰需为战列舰"
+            ],
+            "effect": [
+                "当 _科罗拉多改_ 在昼战炮雷击战或夜战进行攻击时，有一定几率触发特殊攻击。",
+                "触发时，_科罗拉多改_ 与 2 号和 3 号舰会一齐攻击，分别进行 1 次单发炮击，每发攻击都会随机选择目标。",
+                "这些炮击的伤害会高于通常的单发伤害。",
+                "- _科罗拉多改_ 的伤害加成要高于其他两舰舰的加成",
+                "- 如果 2 号舰为 Big7，双方的伤害加成都会提高",
+                "    - 游戏中已实装其他的 Big7：[ship:541:mini|长门]、[ship:573:mini|陆奥]、[ship:576:mini|纳尔逊]",
+                "更详细的说明可参阅[舰娘百科](https://zh.kcwiki.org/wiki/%E7%A7%91%E7%BD%97%E6%8B%89%E5%A4%9A)。"
+            ]
+        }
+    },
+
+    "ship_specials": {
+        "transportation": {
+            "title": "强化运输"
+        },
+        "night_operation_carrier": {
+            "title": "夜间作战航空母舰",
+            "description": "无需装备 [NightOperationAviationPersonnel] 即可发动夜间航空打击。"
+        },
+        "cve": {
+            "title": "护航航空母舰 (CVE)",
+            "description": "拥有较高的对潜属性。可编入运输联合舰队。"
+        }
+    },
+
+    "ship_list": {
+        "filter": {
+            "placeholder": "搜索舰名...",
+            "results_count": "已找到 ${count} 条结果...",
+            "results_count_too_many": "已找到 ${count} 条结果。条目过多，仅显示 ${showing} 条...",
+            "no_result": "未找到任何结果。请尝试输入其他内容...",
+            "no_result_show_previous": "未找到任何结果。显示上次结果..."
+        },
+        "compare": {
+            "button": "对比",
+            "wait_for_selection": "选择舰娘以开始对比...",
+            "selected_to_start": "已选择（${count}）。点击开始对比...",
+            "quit": "结束对比",
+            "add_remove": "修改选择"
+        }
+    },
+
+    "ship_details": {
+        "infos": "信息 & 图鉴",
+        "equipable": "可装备...",
+        "voicelines": "语音 & 台词",
+        "availability": "获取方式",
+        "capabilities": "功能 & 作战能力",
+        "bonuses": "装备属性加成",
+
+        "remodels": "改造系谱",
+        "remodel_initial": "初始",
+
+        "quickfacts": "小知识",
+        "navy": "海军",
+
+        "stats": "基础属性",
+
+        "slot_equipments": "搭载量 & 初始装备",
+        "emptyslot": "未装备",
+        "noslot": "不可装备",
+
+        "modernization": "合成提供属性",
+
+        "dismantle": "解体获得资源",
+
+        "aaci": "特殊对空迎击 (AACI)",
+        "aaci_req": {
+            "ship": "该舰娘",
+            "class": "该舰级",
+            "type": "该舰种"
+        },
+        "aaci_unable": "无法施展该能力",
+
+        "combat_capabilities": "作战能力",
+        "unable_to_perform": "无法施展",
+        "can_perform_when_meet_requirements": "满足条件后可施展",
+        "can_always_perform": "可无条件施展",
+        "see_below_for_required_equipment_types": "所需装备类型见下表",
+        "meet_one_requirements_below": "需要满足下述条件之一",
+        "light_attack_carrier_asw_title": "优先攻击水面舰",
+        "light_attack_carrier_asw_note": "即使可以攻击潜艇而且敌方存在潜艇",
+        "range_different_title": "特殊射程：${range}",
+        "range_different_note": "其他大多数${type}的射程：${range}",
+        "carrier_default_night_battle": "即使没有达到夜间航空打击的装备需求，也可以参与夜战，但伤害偏低。",
+        "carrier_swordfish_night_battle": "即使没有达到夜间航空打击的装备需求，只要装备有剑鱼系列鱼雷机，也可以参与夜战，但伤害偏低。",
+
+        "other_special": "其他特殊能力",
+        "tp_bonus": "运输作战TP加成：+${bonus}",
+        "expedition_bonus": "远征收益加成：+${bonus}",
+        "expedition_bonus_daihatsu_description": "算作${daihatsu}。",
+        "expedition_bonus_daihatsu_description2": "因此携带3栏${daihatsu}即可达到额外收益上限。",
+
+        "equipable_additional": "可配置的特定装备",
+        "equipable_exslot": "可配置于补强增设栏位",
+        "equipable_exslot_and": "以及……",
+        "equipable_legend_no": "不可装备",
+        "equipable_legend_yes": "可装备",
+        "equipable_legend_yes_extra": "其他${type}不可",
+
+        "special_attack": {
+            "requirements": "触发条件",
+            "effects": "攻击效果"
+        }
+    }
+}

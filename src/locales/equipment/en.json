@@ -1,0 +1,54 @@
+{
+    "equipment_types": {
+        "aircraft": "Aircraft",
+        "jet": "Jets",
+        "surface_radar": "Surface Radar",
+        "aa_radar": "AA Radar",
+        "ha_mount": "High-Angle Gun"
+    },
+
+    "improvement": {
+        "any_2nd_ship": "Any 2nd Ship",
+        "resources": "Resources",
+        "upgrading": "Upgrading"
+    },
+
+    "equipment_details": {
+        "infos": "Infos",
+        "refittable": "Refittable...",
+        "availability": "Availability",
+        "bonuses": "Stat Bonuses",
+
+        "facts": {
+            "craftable": "Craftable",
+            "uncraftable": "Uncraftable",
+            "improvable": "Improvable",
+            "unimprovable": "Unimprovable",
+            "upgradable": "Upgradable",
+            "unupgradable": "Unupgradable",
+            "rankupgradable": "Rank-upgradable",
+            "unrankupgradable": "Un-rank-upgradable"
+        },
+
+        "bonus_stat": "Bonus",
+        "bonus_note_max_value": "If a ship meets multiple requirements, use the highest value",
+
+        "scrap": "Scrap Value",
+
+        "improvements": "Improvement Options",
+
+        "required_for_improvements": "Required for other Improvements",
+
+        "upgrade_to": "Upgrade to",
+        "upgrade_from": "Can be upgraded from...",
+
+        "stocked": "Stock-equipped on...",
+        "stocked_list_empty": "There's no ship that stock-equip this equipment...",
+
+        "refittable_legend_no": "Not refittable",
+        "refittable_legend_yes": "Refittable",
+        "can_equip_in_ex_slot": "Can be equipped in ex-slot",
+        "cannot_equip_in_ex_slot_but_ex_ships": "Cannot be equipped in ex-slot for most ships but following ships...",
+        "cannot_equip_in_ex_slot": "Cannot be equipped in ex-slot"
+    }
+}

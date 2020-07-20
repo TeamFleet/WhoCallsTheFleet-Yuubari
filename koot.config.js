@@ -24,6 +24,23 @@ const path = require('path');
 const { static: dirStatic } = require('./src/directories');
 const configAkigumo = require('./config/akigumo');
 
+// ============================================================================
+
+const configI18n = (() => {
+    const createLocaleJson = require('./src/locales/create');
+    const availableLocales = require('./src/locales');
+    const locales =
+        process.env.quickStart && !process.env.quickStartAllLocales
+            ? [availableLocales[0]]
+            : [...availableLocales];
+    return locales.map((localeId) => {
+        const file = createLocaleJson(localeId);
+        return [localeId, file];
+    });
+})();
+
+// ============================================================================
+
 /** @type {Boolean} 判断当前是否是生产环境 */
 // const isEnvProd = Boolean(process.env.WEBPACK_BUILD_ENV === 'prod')
 /** @type {Boolean} 判断当前是否是开发环境 */
@@ -64,13 +81,7 @@ module.exports = {
     //     // cookieKey: 'fleetLocaleId',
     //     // domain: '127.0.0.1',
     // },
-    i18n:
-        process.env.quickStart && !process.env.quickStartAllLocales
-            ? [['zh', `./src/locales/zh.json`]]
-            : require('./src/locales').map((l) => [
-                  l,
-                  `./src/locales/${l}.json`,
-              ]),
+    i18n: configI18n,
 
     serviceWorker: {
         auto: false,

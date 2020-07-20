@@ -10,22 +10,19 @@ import Page from '@ui/containers/page';
 import CenterContainer from '@ui/containers/center';
 import Markdown from '@ui/components/markdown';
 
-const getMD = (localeId) => {
-    if (__CLIENT__ && !__DEV__) return __HOME_MARKDOWN__;
-    return __HOME_MARKDOWN__[localeId];
-};
+// const getMD = (localeId) => {
+//     if (__CLIENT__ && !__DEV__) return __HOME_MARKDOWN__;
+//     return __HOME_MARKDOWN__[localeId];
+// };
 
 const PageHome = extend({
-    connect: (state) => ({
-        localeId: state.localeId,
-    }),
     pageinfo: (state) => htmlHead(state),
     styles: require('./styles.less'),
-})(({ className, localeId }) => (
+})(({ className }) => (
     <Page className={className}>
         <CenterContainer>
             <Markdown
-                source={getMD(localeId)}
+                source={__('home_page_markdown')}
                 childAfter={<span className="end-of-doc"></span>}
             />
         </CenterContainer>

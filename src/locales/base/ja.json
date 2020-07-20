@@ -1,0 +1,146 @@
+{
+    "name": {
+        "short": "日",
+        "full": "日本語"
+    },
+
+    "title": "Who Calls the Fleet",
+    "translators": ["taurus911", "Diablohu"],
+
+    "under_construction": "工事中",
+    "no_javascript_warning": "This app requires JavaScript enabled.",
+    "cancel": "キャンセル",
+    "ok": "OK",
+    "none": "None",
+
+    "ship_type": "Ship Type",
+    "equipment_type": "Equipment Type",
+    "shiptypeclass": "${class}型${type}",
+    "shipclass": "${class}型",
+    "shipclass_number": "${class}型 ${number} 番艦",
+    "other_ships_of_type": "Other ${type}s",
+    "shipname_dash_none": "",
+    "exslot": "補強増設スロットへ",
+    "equipment_series": "${equipment}-series",
+    "tp": "TP",
+    "land_bases": "基地航空隊",
+
+    "seiyuu": "CV",
+    "seiyuus": "CV",
+    "artist": "イラストレーター",
+    "artists": "イラストレーター",
+
+    "activation_chance_tobe": "発動成功率：${chance}",
+    "chance": {
+        "normal": "Normal",
+        "high": "高い"
+    },
+
+    "day_full": {
+        "Sunday": "日曜日",
+        "Monday": "月曜日",
+        "Tuesday": "火曜日",
+        "Wednesday": "水曜日",
+        "Thurday": "木曜日",
+        "Friday": "金曜日",
+        "Saturday": "土曜日"
+    },
+
+    "day_abbr": {
+        "Sunday": "日",
+        "Monday": "月",
+        "Tuesday": "火",
+        "Wednesday": "水",
+        "Thurday": "木",
+        "Friday": "金",
+        "Saturday": "土"
+    },
+
+    "require": {
+        "level": "Require level: ${level}",
+        "min_possible_level": "Minimum possible level: ${level}",
+        "equipment": "Require equipment: ${type}",
+        "equipment_all": "Require equipment (all): ${type}",
+        "equipment_at_least_one": "Require equipment (at least one): ${type}",
+        "equipment_no_need": "No need for equipment: ${type}",
+        "equipment_type": "Require equipment type: ${type}",
+        "equipment_type_no_need": "No need for equipment type: ${type}",
+        "equipment_has_stat": "Require equipment: ${type} (${stat} at least ${value})",
+        "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)",
+        "has_stat": "${stat} at least ${value}"
+    },
+
+    "stat": {
+        "fire": "火力",
+        "torpedo": "雷装",
+        "night": "夜戦",
+        "aa": "対空",
+        "aa_interceptor_sortie": "出撃",
+        "aa_interceptor_defense": "防空",
+        "asw": "対潜",
+        "hp": "耐久",
+        "armor": "装甲",
+        "evasion": "回避",
+        "carry": "搭載",
+        "speed": "速力",
+        "range": "射程",
+        "los": "索敵",
+        "luck": "運",
+        "bomb": "爆装",
+        "hit": "命中",
+        "distance": "半径",
+        "antibomber": "対爆",
+        "interception": "迎撃",
+        "consum": {
+            "fuel": "燃費",
+            "ammo": "弾費"
+        },
+        "equipment": {
+            "craftable": "開発",
+            "improvable": "改修"
+        }
+    },
+
+    "nav": {
+        "sub": {
+            "base": "海軍基地",
+            "archive": "アーカイブ",
+            "dev": "開発センター"
+        },
+        "home": "ホーム",
+        "fleets": "艦隊ビルダー",
+        "academy": "海軍兵学校",
+        "calctp": "TPカルキュレーター",
+        "ships": "艦娘",
+        "equipments": "装備",
+        "arsenal": "明石の改修工廠",
+        "entities": "CV・イラストレーター",
+        "excgs": "期間限定図鑑",
+        "sorties": "出击",
+        "expeditions": "遠征",
+        "about": "アバウト",
+        "languageSwitch": "Change Language",
+        "backgroundSwitch": "Change Background",
+        "install": "インストール"
+    },
+
+    "bonuses": {
+        "single": "単体ボーナス",
+        "sets": "相互シナジーボーナス",
+        "info_prefix_when_equipped": "When equipped, ",
+        "range_increase": "Range increased by 1",
+        "stat_donot_stack": "Donot stack",
+        "based_on_number": "Based on number of this equipment, provide...",
+        "based_on_star": "Based on star level, Each of this equipment provide...",
+        "based_on_area": "Based on area battle at, each of this equipment provide...",
+        "based_on_nothing": "Each of this equipment provide...",
+        "based_set": "加算ボーナス...",
+        "based_set_accumulate": "Accumulated set bonus...",
+        "note_hybrid_radar": "Equipment(s) below treated as both Surface and AA Radar(s)",
+        "note_hybrid_radar_this_equipment": "This equipment is treated as both Surface and AA Radar"
+    },
+
+    "area": {
+        "north": "北方"
+    }
+}

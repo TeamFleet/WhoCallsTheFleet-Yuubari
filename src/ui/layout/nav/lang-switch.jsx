@@ -1,53 +1,62 @@
-import React from 'react'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import bindEvent from 'bind-event'
-import classNames from 'classnames'
-import { extend } from 'koot'
+import React from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import bindEvent from 'bind-event';
+import classNames from 'classnames';
+import { extend } from 'koot';
 
-import availableLocales from '@src/locales'
+import availableLocales from '@src/locales';
 
 const langName = {
     en: ['EN', 'English'],
     ja: ['日', '日本語'],
     zh: ['简', '简体中文'],
-}
+};
 
 @extend({
-    connect: state => ({
+    connect: (state) => ({
         localeId: state.localeId,
         location: state.routing && state.routing.locationBeforeTransitions,
     }),
-    styles: require('./lang-switch.less')
+    styles: require('./lang-switch.less'),
 })
 class NavLangSwitch extends React.Component {
     state = {
-        showMenu: false
-    }
-    timeoutHideMenu = undefined
+        showMenu: false,
+    };
+    timeoutHideMenu = undefined;
+
+    toggleMenu = this.toggleMenu.bind(this);
 
     getUrl(thisLocaleId) {
-        let search = ''
-        let query = { ...this.props.location.query }
+        let search = '';
+        const query = { ...this.props.location.query };
 
-        query.hl = thisLocaleId
+        query.hl = thisLocaleId;
 
-        for (let key in query) {
-            if (!search) search = '?'
-            else search += '&'
-            search += `${key}=${query[key]}`
+        for (const key in query) {
+            if (!search) search = '?';
+            else search += '&';
+            search += `${key}=${query[key]}`;
         }
 
-        return this.props.location.pathname + search
+        return this.props.location.pathname + search;
     }
 
     componentDidMount() {
         bindEvent(document.body, 'click', () => {
             this.timeoutHideMenu = setTimeout(() => {
                 this.setState({
-                    showMenu: false
-                })
-            }, 10)
-        })
+                    showMenu: false,
+                });
+            }, 10);
+        });
+    }
+
+    toggleMenu() {
+        this.setState((prevState) => ({
+            showMenu: !prevState.showMenu,
+        }));
+        clearTimeout(this.timeoutHideMenu);
     }
 
     render() {
@@ -57,37 +66,29 @@ class NavLangSwitch extends React.Component {
                     className="link"
                     children={__('nav.languageSwitch')}
                     data-current-locale-abbr={langName[this.props.localeId][0]}
-                    onClick={() => {
-                        this.setState({
-                            showMenu: !this.state.showMenu
-                        })
-                        clearTimeout(this.timeoutHideMenu)
-                    }}
+                    onClick={this.toggleMenu}
                 />
                 <TransitionGroup component={React.Fragment}>
-                    {this.state.showMenu &&
-                        <CSSTransition
-                            classNames="transition"
-                            timeout={200}
-                        >
+                    {this.state.showMenu && (
+                        <CSSTransition classNames="transition" timeout={200}>
                             <div className="menu">
-                                {availableLocales.map(l => (
+                                {availableLocales.map((l) => (
                                     <a
                                         href={this.getUrl(l)}
                                         key={l}
                                         children={langName[l][1]}
                                         className={classNames({
                                             'link-lang': true,
-                                            'on': l === this.props.localeId
+                                            on: l === this.props.localeId,
                                         })}
                                     />
                                 ))}
                             </div>
                         </CSSTransition>
-                    }
+                    )}
                 </TransitionGroup>
-            </div >
-        )
+            </div>
+        );
     }
 }
-export default NavLangSwitch
+export default NavLangSwitch;

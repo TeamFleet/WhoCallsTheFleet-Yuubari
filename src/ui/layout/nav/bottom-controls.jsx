@@ -13,25 +13,30 @@ import Icon from '@ui/components/icon';
 const langName = {
     en: ['EN', 'English'],
     ja: ['日', '日本語'],
-    zh: ['简', '简体中文']
+    zh: ['简', '简体中文'],
 };
 
 //
 
 const NavBottomControls = extend({
     connect: true,
-    styles: require('./bottom-controls.less')
-})(({ className, dispatch }) => (
-    <div className={className}>
-        <NavInstall />
-        <NavBottomItem
-            onClick={() => dispatch(enterUIModeBackground())}
-            icon="image-compare"
-            children={__('nav.backgroundSwitch')}
-        />
-        <NavLangSwitch />
-    </div>
-));
+    styles: require('./bottom-controls.less'),
+})(({ className, dispatch }) => {
+    function bottomOnClick() {
+        dispatch(enterUIModeBackground());
+    }
+    return (
+        <div className={className}>
+            <NavInstall />
+            <NavBottomItem
+                onClick={bottomOnClick}
+                icon="image-compare"
+                children={__('nav.backgroundSwitch')}
+            />
+            <NavLangSwitch />
+        </div>
+    );
+});
 export default NavBottomControls;
 
 //
@@ -48,17 +53,19 @@ const NavBottomItem = ({ className, icon, children, ...props }) => {
 //
 
 @extend({
-    connect: state => ({
+    connect: (state) => ({
         localeId: state.localeId,
-        location: state.routing && state.routing.locationBeforeTransitions
-    })
+        location: state.routing && state.routing.locationBeforeTransitions,
+    }),
 })
 class NavLangSwitch extends React.Component {
     state = {
-        showMenu: false
+        showMenu: false,
     };
     timeoutHideMenu = undefined;
     mounted = false;
+
+    toggleMenu = this.toggleMenu.bind(this);
 
     getUrl(thisLocaleId) {
         let search = '';
@@ -81,7 +88,7 @@ class NavLangSwitch extends React.Component {
             this.timeoutHideMenu = setTimeout(() => {
                 if (this.mounted)
                     this.setState({
-                        showMenu: false
+                        showMenu: false,
                     });
             }, 10);
         });
@@ -91,35 +98,37 @@ class NavLangSwitch extends React.Component {
         this.mounted = false;
     }
 
+    toggleMenu() {
+        this.setState((prevState) => ({
+            showMenu: !prevState.showMenu,
+        }));
+        clearTimeout(this.timeoutHideMenu);
+    }
+
     render() {
         return (
             <div className="lang-switch">
                 <span
                     className={classNames({
                         link: true,
-                        on: this.state.showMenu
+                        on: this.state.showMenu,
                     })}
                     children={__('nav.languageSwitch')}
                     data-current-locale-abbr={langName[this.props.localeId][0]}
-                    onClick={() => {
-                        this.setState(prevState => ({
-                            showMenu: !prevState.showMenu
-                        }));
-                        clearTimeout(this.timeoutHideMenu);
-                    }}
+                    onClick={this.toggleMenu}
                 />
                 <TransitionGroup component={React.Fragment}>
                     {this.state.showMenu && (
                         <CSSTransition classNames="transition" timeout={200}>
                             <div className="lang-switch-menu">
-                                {availableLocales.map(l => (
+                                {availableLocales.map((l) => (
                                     <a
                                         href={this.getUrl(l)}
                                         key={l}
                                         children={langName[l][1]}
                                         className={classNames({
                                             'link-lang': true,
-                                            on: l === this.props.localeId
+                                            on: l === this.props.localeId,
                                         })}
                                     />
                                 ))}
@@ -135,14 +144,17 @@ class NavLangSwitch extends React.Component {
 //
 
 const NavInstall = extend({
-    connect: state => ({
-        evt: state.app.eventInstallPWA
-    })
+    connect: (state) => ({
+        evt: state.app.eventInstallPWA,
+    }),
 })(({ evt, dispatch }) => {
     if (!evt) return null;
+    function doInstallPWA() {
+        installPWA(evt, dispatch);
+    }
     return (
         <NavBottomItem
-            onClick={() => installPWA(evt, dispatch)}
+            onClick={doInstallPWA}
             icon="download5"
             children={__('nav.install')}
         />

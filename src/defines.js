@@ -57,31 +57,6 @@ const defines = {
                 }));
         })()
     ),
-
-    __HOME_MARKDOWN__: ({ localeId }) => {
-        const getMD = (localeId) =>
-            fs.readFileSync(
-                path.resolve(
-                    __dirname,
-                    '../docs/updates/1.0.0',
-                    `${localeId}.md`
-                ),
-                'utf-8'
-            );
-
-        if (
-            process.env.WEBPACK_BUILD_STAGE === 'client' &&
-            process.env.WEBPACK_BUILD_ENV === 'prod'
-        )
-            return JSON.stringify(getMD(localeId));
-
-        return JSON.stringify(
-            require('./locales').reduce((r, localeId) => {
-                r[localeId] = getMD(localeId);
-                return r;
-            }, {})
-        );
-    },
 };
 
 // ============================================================================

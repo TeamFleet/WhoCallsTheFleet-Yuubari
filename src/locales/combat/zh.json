@@ -1,0 +1,41 @@
+{
+    "combat_phases": {
+        "preemptive": "开幕",
+        "detection": "索敌",
+        "jet": {
+            "title": "喷气机突袭",
+            "lbas": "基地航空队喷气机突袭",
+            "cv": "航母喷气机突袭"
+        },
+        "lbas": "基地航空队空战",
+        "aerial": {
+            "title": "航空战",
+            "fighter": "空中迎击",
+            "bombing": "轰炸",
+            "anti_air_propellant_barrage": "对空喷进弹幕"
+        },
+        "support": "支援舰队攻击",
+        "day": {
+            "title": "昼炮雷击战",
+            "oasw": "先制对潜攻击",
+            "ots": "先制雷击",
+            "shelling": "炮击",
+            "unlock_2nd_round": "解锁第二轮炮击",
+            "torpedo": "雷击"
+        },
+        "night": {
+            "title": "夜战",
+            "participate": "参与夜战",
+            "night_air_assault": "夜间航空打击",
+            "night_swordfish_assault": "夜间剑鱼打击"
+        },
+        "night_air_assault": "夜间航空打击"
+    },
+
+    "aaci": {
+        "title": "特殊对空迎击 (AACI)",
+        "fixed_shoot_down_bonus": "固定额外击坠数",
+        "fixed": "固定",
+        "modifier": "系数"
+    }
+}

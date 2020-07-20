@@ -1,0 +1,147 @@
+{
+    "name": {
+        "short": "EN",
+        "full": "English"
+    },
+
+    "title": "Who Calls the Fleet",
+    "translators": ["Diablohu"],
+
+    "under_construction": "Under Construction",
+    "no_javascript_warning": "This app requires JavaScript enabled.",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "none": "None",
+
+    "ship_type": "Ship Type",
+    "equipment_type": "Equipment Type",
+    "shiptypeclass": "${class} Class ${type}",
+    "shipclass": "${class} Class",
+    "shipclass_number": "${class} Class (#${number})",
+    "other_ships_of_type": "Other ${type}s",
+    "shipname_dash_none": " ",
+    "exslot": "Expansion Slot",
+    "equipment_series": "${equipment}-series",
+    "tp": "TP",
+    "land_bases": "Land Bases",
+
+    "seiyuu": "Seiyuu",
+    "seiyuus": "Seiyuus",
+    "artist": "Artist",
+    "artists": "Artists",
+
+    "activation_chance_tobe": "Activation chance: ${chance}",
+    "chance": {
+        "normal": "Normal",
+        "high": "High"
+    },
+
+    "day_full": {
+        "Sunday": "Sunday",
+        "Monday": "Monday",
+        "Tuesday": "Tuesday",
+        "Wednesday": "Wednesday",
+        "Thurday": "Thurday",
+        "Friday": "Friday",
+        "Saturday": "Saturday"
+    },
+
+    "day_abbr": {
+        "Sunday": "S",
+        "Monday": "M",
+        "Tuesday": "Tu",
+        "Wednesday": "W",
+        "Thurday": "Th",
+        "Friday": "F",
+        "Saturday": "S"
+    },
+
+    "require": {
+        "level": "Require level: ${level}",
+        "min_possible_level": "Minimum possible level: ${level}",
+        "equipment": "Require equipment: ${type}",
+        "equipment_all": "Require equipment (all): ${type}",
+        "equipment_at_least_one": "Require equipment (at least one): ${type}",
+        "equipment_no_need": "No need for equipment: ${type}",
+        "equipment_type": "Require equipment type: ${type}",
+        "equipment_type_no_need": "No need for equipment type: ${type}",
+        "equipment_has_stat": "Require equipment: ${type} (${stat} at least ${value})",
+        "ship_stat_with_equipments": "Require stat ${stat}: ${value} (w/ equip.)",
+        "has_stat": "${stat} at least ${value}"
+    },
+
+    "stat": {
+        "fire": "FP",
+        "torpedo": "TPD",
+        "night": "Night",
+        "aa": "AA",
+        "aa_interceptor_sortie": "Sortie",
+        "aa_interceptor_defense": "Defense",
+        "asw": "ASW",
+        "hp": "HP",
+        "armor": "Armor",
+        "evasion": "Evasion",
+        "carry": "Carry",
+        "speed": "Speed",
+        "range": "Range",
+        "los": "LOS",
+        "luck": "Luck",
+        "bomb": "Bomb",
+        "hit": "Hit",
+        "distance": "Radius",
+        "antibomber": "Anti-B",
+        "interception": "Intercpt",
+        "consum": {
+            "fuel": "Fuel",
+            "ammo": "Ammo"
+        },
+        "equipment": {
+            "craftable": "Craft",
+            "improvable": "Improve"
+        }
+    },
+
+    "nav": {
+        "sub": {
+            "base": "Naval Base",
+            "archive": "Archive",
+            "dev": "Dev. Center"
+        },
+        "home": "Home",
+        "tools": "Tools",
+        "fleets": "Fleet Builder",
+        "academy": "Naval Academy",
+        "calctp": "TP Calculator",
+        "ships": "Ships",
+        "equipments": "Equipments",
+        "arsenal": "Akashi's Arsenal",
+        "entities": "CV & Illustrators",
+        "excgs": "Limited CGs",
+        "sorties": "Sories",
+        "expeditions": "Expeditions",
+        "about": "About",
+        "languageSwitch": "Change Language",
+        "backgroundSwitch": "Change Background",
+        "install": "Install App"
+    },
+
+    "bonuses": {
+        "single": "Equipment Stat Bonus",
+        "sets": "Set Bonus",
+        "info_prefix_when_equipped": "When equipped, ",
+        "range_increase": "Range increased by 1",
+        "stat_donot_stack": "Donot stack",
+        "based_on_number": "Based on number of this equipment, provide...",
+        "based_on_star": "Based on star level, each of this equipment provide...",
+        "based_on_area": "Based on area battle at, each of this equipment provide...",
+        "based_on_nothing": "Each of this equipment provide...",
+        "based_set": "Additional bonus...",
+        "based_set_accumulate": "Accumulated set bonus...",
+        "note_hybrid_radar": "Equipment(s) below treated as both Surface and AA Radar(s)",
+        "note_hybrid_radar_this_equipment": "This equipment is treated as both Surface and AA Radar"
+    },
+
+    "area": {
+        "north": "North"
+    }
+}

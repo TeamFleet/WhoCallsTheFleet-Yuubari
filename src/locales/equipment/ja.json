@@ -1,0 +1,54 @@
+{
+    "equipment_types": {
+        "aircraft": "Aircraft",
+        "jet": "噴式機",
+        "surface_radar": "水上電探",
+        "aa_radar": "対空電探",
+        "ha_mount": "高角砲"
+    },
+
+    "improvement": {
+        "any_2nd_ship": "任意二番艦",
+        "resources": "必要資材",
+        "upgrading": "更新"
+    },
+
+    "equipment_details": {
+        "infos": "情報",
+        "refittable": "装備可能艦...",
+        "availability": "入手情報",
+        "bonuses": "ボーナス",
+
+        "facts": {
+            "craftable": "開発可能",
+            "uncraftable": "開発不可",
+            "improvable": "改修可能",
+            "unimprovable": "改修不可",
+            "upgradable": "更新可能",
+            "unupgradable": "更新不可",
+            "rankupgradable": "熟練度が上が可能",
+            "unrankupgradable": "熟練度が上がらない"
+        },
+
+        "bonus_stat": "ボーナス",
+        "bonus_note_max_value": "If a ship meets multiple requirements, use the highest value",
+
+        "scrap": "廢棄",
+
+        "improvements": "Improvement Options",
+
+        "required_for_improvements": "Required for other Improvements",
+
+        "upgrade_to": "Upgrade to",
+        "upgrade_from": "Can be upgraded from...",
+
+        "stocked": "初期装備の艦娘...",
+        "stocked_list_empty": "There's no ship that stock-equip this equipment...",
+
+        "refittable_legend_no": "Not refittable",
+        "refittable_legend_yes": "Refittable",
+        "can_equip_in_ex_slot": "Can be equipped in ex-slot",
+        "cannot_equip_in_ex_slot_but_ex_ships": "Cannot be equipped in ex-slot for most ships but following ships...",
+        "cannot_equip_in_ex_slot": "Cannot be equipped in ex-slot"
+    }
+}

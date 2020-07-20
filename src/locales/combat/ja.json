@@ -1,0 +1,41 @@
+{
+    "combat_phases": {
+        "preemptive": "開幕",
+        "detection": "索敵",
+        "jet": {
+            "title": "噴式強襲",
+            "lbas": "基地航空隊噴式強襲",
+            "cv": "空母噴式強襲"
+        },
+        "lbas": "基地航空隊航空戦",
+        "aerial": {
+            "title": "航空戦",
+            "fighter": "Fighter Combat",
+            "bombing": "Bombing",
+            "anti_air_propellant_barrage": "対空噴進弾幕"
+        },
+        "support": "支援艦隊攻撃",
+        "day": {
+            "title": "昼砲雷撃戦",
+            "oasw": "先制対潜攻撃",
+            "ots": "開幕雷撃",
+            "shelling": "砲撃",
+            "unlock_2nd_round": "Unlock 2nd Round of Shelling",
+            "torpedo": "雷撃"
+        },
+        "night": {
+            "title": "夜戦",
+            "participate": "Participate in Night Battle",
+            "night_air_assault": "夜間航空攻撃",
+            "night_swordfish_assault": "Night Swordfish Assault"
+        },
+        "night_air_assault": "夜間航空攻撃"
+    },
+
+    "aaci": {
+        "title": "対空カットイン射撃",
+        "fixed_shoot_down_bonus": "固定撃墜数ボーナス",
+        "fixed": "固定",
+        "modifier": "補正"
+    }
+}

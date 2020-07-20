@@ -1,0 +1,54 @@
+{
+    "equipment_types": {
+        "aircraft": "飞行器",
+        "jet": "喷气机",
+        "surface_radar": "对水面电探/雷达",
+        "aa_radar": "对空电探/雷达",
+        "ha_mount": "高角炮"
+    },
+
+    "improvement": {
+        "any_2nd_ship": "任意秘书舰",
+        "resources": "资材消耗",
+        "upgrading": "升级"
+    },
+
+    "equipment_details": {
+        "infos": "信息",
+        "refittable": "可装备于...",
+        "availability": "获取方式",
+        "bonuses": "属性加成",
+
+        "facts": {
+            "craftable": "可开发",
+            "uncraftable": "不可开发",
+            "improvable": "可改修",
+            "unimprovable": "不可改修",
+            "upgradable": "可升级",
+            "unupgradable": "不可升级",
+            "rankupgradable": "可提升熟练度",
+            "unrankupgradable": "不可提升熟练度"
+        },
+
+        "bonus_stat": "额外收益",
+        "bonus_note_max_value": "如果舰娘满足了多个需求，额外收益取最大值",
+
+        "scrap": "废弃获得资源",
+
+        "improvements": "改修选项",
+
+        "required_for_improvements": "可用于改修其他装备",
+
+        "upgrade_to": "可升级为",
+        "upgrade_from": "可由以下装备升级获得",
+
+        "stocked": "初始装备于以下舰娘",
+        "stocked_list_empty": "暂无初始配置该装备的舰娘...",
+
+        "refittable_legend_no": "不可装备",
+        "refittable_legend_yes": "可装备",
+        "can_equip_in_ex_slot": "可装备于补强增设栏位",
+        "cannot_equip_in_ex_slot_but_ex_ships": "不可装备于大多数舰娘的补强增设栏位，但以下舰娘例外……",
+        "cannot_equip_in_ex_slot": "不可装备于补强增设栏位"
+    }
+}
