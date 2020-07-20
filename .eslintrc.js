@@ -12,9 +12,10 @@ module.exports = {
         __webpack_public_path__: 'writable',
         _hmt: 'readonly',
         Nedb: 'readonly',
-        ga: 'readonly'
+        ga: 'readonly',
+        __HOME_MARKDOWN__: 'readonly',
     },
     settings: {
-        'import/ignore': ['node_modules', 'dist', 'dist*']
-    }
+        'import/ignore': ['node_modules', 'dist', 'dist*'],
+    },
 };
