@@ -24,4 +24,18 @@
             outline: 0;
         }
     }
+
+    .swiper-slide {
+        img {
+            width: calc(~'100% - 4px');
+            height: 100%;
+            transform: none;
+            object-fit: contain;
+            position: absolute;
+            border: 0;
+            &:not([src]) {
+                opacity: 0;
+            }
+        }
+    }
 }
