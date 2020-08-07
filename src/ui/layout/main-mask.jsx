@@ -5,7 +5,7 @@ const MainMask = extend({
     // connect: state => ({
     //     currentBg: state.bgimg.current,
     // }),
-    styles: require('./main-mask.less')
+    styles: require('./main-mask.less'),
 })(({ className, children }) => (
     <div id="main-mask" className={className}>
         {children}

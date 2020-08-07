@@ -8,19 +8,18 @@ require('./critical.g.less');
 
 // Critical 过程
 const doCricital = () => {
-    if (!__CLIENT__) return;
+    if (typeof window === 'undefined') return;
     if (window && window.isCriticalInit) return true;
+
     if (__DEV__) console.log('🚨 Initializing: critical process...');
 
     window.isCriticalInit = true;
-
-    window._html = document.documentElement;
 
     // 内置背景图列表
     window.__BGIMG_LIST__ = __BGIMG_LIST__ || [];
 
     // 利用 Promise 语法写入 script 标签
-    window.importJS = uri =>
+    window.importJS = (uri) =>
         new Promise((resolve, reject) => {
             const script = document.createElement('script');
             script.onerror = () => reject();
@@ -43,12 +42,12 @@ const doCricital = () => {
             // console.log('Service Worker SUPPORTED')
             navigator.serviceWorker
                 .register(window.__SERVICE_WORKER_FILENAME__, {
-                    scope: '/'
+                    scope: '/',
                 })
                 .then((/*reg*/) => {
                     // console.log('👩‍💻 Service Worker REGISTER', reg)
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log('👩‍💻 Service Worker SUPPORTED. ERROR', err);
                 });
         } else {
@@ -82,7 +81,7 @@ const doCricital = () => {
     window.onInitError = () => {};
 
     // 在 console 中 log 一行 ==========
-    window.logHr = function() {
+    window.logHr = function () {
         console.log('========================================');
     };
 
@@ -95,7 +94,7 @@ const doCricital = () => {
             return [
                 parseInt(v[1], 10),
                 parseInt(v[2], 10),
-                parseInt(v[3] || 0, 10)
+                parseInt(v[3] || 0, 10),
             ];
         }
     };
@@ -158,7 +157,16 @@ const doCricital = () => {
         document.documentElement.classList.add('platform-' + platform);
 
     // DOM ready 时
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
+        // TODO 检查必要的支持的技术，如果存在不支持的，渲染错误信息
+        /**
+         * 检查的信息
+         * - **CSS**
+         *     - position: sticky
+         * - **JS**
+         *     - Object.assign()
+         */
+
         // let boatLoader = document.createElement('div')
         const boatLoader = document.getElementById('boat-loader');
         window.isMobile = false;
@@ -166,7 +174,7 @@ const doCricital = () => {
 
         // boatLoader.id = 'boat-loader'
         // document.body.appendChild(boatLoader)
-        bindEvent(boatLoader, 'transitionend', evt => {
+        bindEvent(boatLoader, 'transitionend', (evt) => {
             // console.log(evt, evt.target.style.opacity)
             if (evt.target !== boatLoader) return;
             if (
@@ -216,7 +224,7 @@ const doCricital = () => {
         // 利用 pointer event 判断当前是否为 hover
         if (window.PointerEvent) {
             document.documentElement.classList.add('is-hover');
-            document.documentElement.addEventListener('pointerenter', evt => {
+            document.documentElement.addEventListener('pointerenter', (evt) => {
                 if (evt.pointerType === 'mouse' || evt.pointerType === 'pen')
                     document.documentElement.classList.add('is-hover');
                 else document.documentElement.classList.remove('is-hover');
@@ -242,47 +250,6 @@ const doCricital = () => {
         beforeinstallpromptHandlerBeforeReact
     );
 
-    // 检查客户端兼容性，如果需要，载入兼容性扩展脚本
-    /*
-    new Promise(resolve => {
-        if (typeof Object.assign !== 'function') {
-            if (__DEV__)
-                console.log(
-                    '🚨 Old browser detected. Importing compatibility extend file(s)...'
-                );
-            window
-                .importJS(
-                    typeof window.__CRITICAL_EXTRA_OLD_IE_FILENAME__ ==
-                        'undefined'
-                        ? '/client/critical-extra-old-ie.js'
-                        : window.__CRITICAL_EXTRA_OLD_IE_FILENAME__
-                )
-                .then(() => {
-                    if (__DEV__) console.log('   ✔ Imported!');
-                    resolve();
-                })
-                .catch(() => {
-                    if (__DEV__) console.log('   ❌ Importe failed!');
-                    throw new Error(
-                        'Importing compatibility extend file(s) failed'
-                    );
-                });
-        } else resolve();
-    })
-        .then(() => {
-            // [nw.js] show and focus window
-            if (window.nw && window.nw.win) {
-                window.nw.win.show();
-                window.nw.win.focus();
-            }
-            // window.__LATHPATHNAME__
-        })
-        .then(() => {
-            if (__DEV__) console.log('🚨 Complete: critical process!');
-        })
-        .catch(err => window.onInitError(err));
-    // .then(() => window.importJS(window.__CLIENT_FILENAME__))
-    */
     if (__DEV__) console.log('🚨 Complete: critical process!');
 };
 

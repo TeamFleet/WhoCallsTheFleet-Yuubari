@@ -4,7 +4,7 @@ import db from '@database';
 
 // const publicPath = __DEV__ ? '/' : getPublicPath();
 // const ext =
-//     __CLIENT__ && window._html && window._html.classList.contains('webp')
+//     __CLIENT__ && document.documentElement.classList.contains('webp')
 //         ? 'webp'
 //         : 'png';
 const ext = 'png';

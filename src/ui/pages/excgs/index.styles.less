@@ -1,0 +1,35 @@
+@import '~base.less';
+
+.component {
+    .tabs {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        margin-left: (0 - @main-margin);
+        margin-right: (0 - @main-margin);
+        padding: (@main-margin / 2) @main-margin;
+        border-bottom: 1px solid @color-border;
+        margin-bottom: @main-margin;
+        @supports (backdrop-filter: @base-backdrop-filter-alt) {
+            box-shadow: 0 10px 20px -10px fade(#000, 30%);
+            backdrop-filter: @base-backdrop-filter-alt;
+        }
+        & > .wrapper {
+            margin-right: -10px;
+            overflow: hidden;
+        }
+    }
+    .tab {
+        display: block;
+        float: left;
+        margin-right: 10px;
+        padding: 0.2em 0.5em;
+        font-size: smaller;
+        line-height: 1.2em;
+        text-shadow: 1px 1px 3px fade(#000, 75%);
+        &.on {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+    }
+}

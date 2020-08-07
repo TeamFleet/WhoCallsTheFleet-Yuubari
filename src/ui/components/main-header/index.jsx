@@ -10,16 +10,16 @@ import Background from '@ui/components/background';
 // const cssBackdropFilter = __CLIENT__ && checkCssProp('backdrop-filter');
 
 @extend({
-    connect: state => ({
-        mainKey: state.app.mainKey
+    connect: (state) => ({
+        mainKey: state.app.mainKey,
         // appReady: state.app.ready,
     }),
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })
 class MainHeader extends React.Component {
     state = {
         enter: true,
-        enterActive: false
+        enterActive: false,
     };
 
     mounted = false;
@@ -34,7 +34,7 @@ class MainHeader extends React.Component {
         setTimeout(() => {
             if (!this.mounted) return;
             this.setState({
-                enterActive: true
+                enterActive: true,
             });
         });
     }
@@ -65,7 +65,7 @@ class MainHeader extends React.Component {
                     wrapper: isPortal,
                     'mod-transition-enter': this.state.enter,
                     'mod-transition-enter-active': this.state.enterActive,
-                    'mod-transition-exit': this.keyCurrent !== mainKey
+                    'mod-transition-exit': this.keyCurrent !== mainKey,
                 })}
                 // onTransitionEnd={evt => {
                 //     // console.log(
@@ -83,7 +83,7 @@ class MainHeader extends React.Component {
                 //         })
                 //     }
                 // }}
-                onAnimationEnd={evt => {
+                onAnimationEnd={(evt) => {
                     // console.log(evt.target, evt.currentTarget, evt.animationName)
                     if (
                         evt.target === evt.currentTarget &&
@@ -91,7 +91,7 @@ class MainHeader extends React.Component {
                     ) {
                         this.setState({
                             enter: false,
-                            enterActive: false
+                            enterActive: false,
                         });
                     }
                     if (typeof onAnimationEnd === 'function')
