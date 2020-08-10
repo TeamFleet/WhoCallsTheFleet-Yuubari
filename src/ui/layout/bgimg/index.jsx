@@ -8,6 +8,8 @@ import { leave as leaveUIMode } from '@api/ui-mode';
 import modeBackgroundOnAnimationEnd from '@api/ui-mode/mode-background.js';
 import * as bgimgApi from '@api/bgimg/api.js';
 
+import backgroundImages from '@const/background-images';
+
 import getStyles from '@utils/background-styles.js';
 
 import Background from '@ui/components/background.jsx';
@@ -33,7 +35,7 @@ class Bgimg extends React.PureComponent {
             const initialIndex =
                 Cookies.get('session_background_index') ||
                 'default-' +
-                    Math.floor(Math.random() * window.__BGIMG_LIST__.length);
+                    Math.floor(Math.random() * backgroundImages.length);
             this.props.dispatch(bgimgApi.initList(initialIndex));
             setCookieSessionBackgroundIndex(initialIndex);
         }

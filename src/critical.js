@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import bindEvent from 'bind-event';
+
 import { handlerBeforeReact as beforeinstallpromptHandlerBeforeReact } from '@utils/install-app';
 
 require('./critical.g.less');
@@ -14,9 +15,6 @@ const doCricital = () => {
     if (__DEV__) console.log('🚨 Initializing: critical process...');
 
     window.isCriticalInit = true;
-
-    // 内置背景图列表
-    window.__BGIMG_LIST__ = __BGIMG_LIST__ || [];
 
     // 利用 Promise 语法写入 script 标签
     window.importJS = (uri) =>

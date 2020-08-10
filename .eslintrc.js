@@ -2,7 +2,6 @@ module.exports = {
     root: true,
     extends: ['koot'],
     globals: {
-        __BGIMG_LIST__: 'readonly',
         __CHANNEL__: 'readonly',
         __ELECTRON__: 'readonly',
         __ICONSVG__: 'readonly',

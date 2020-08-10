@@ -1,5 +1,7 @@
-import * as actions from './actions.js'
-import Background from './class.js'
+import backgroundImages from '@const/background-images';
+
+import * as actions from './actions.js';
+import Background from './class.js';
 
 // const getObj = (indexString) => {
 /*
@@ -12,11 +14,12 @@ return store.getState().bgimgState.list[type][index]
 // }
 
 const getListInitial = (type) => {
-    let list = []
+    let list = [];
 
     if (type === 'default') {
-        const __list = (__CLIENT__ ? self.__BGIMG_LIST__ : __BGIMG_LIST__) || []
-        list = __list.map((filename, index) => new Background(filename, type + '-' + index))
+        list = backgroundImages.map(
+            (filename, index) => new Background(filename, type + '-' + index)
+        );
     }
 
     /*
@@ -58,19 +61,17 @@ const getListInitial = (type) => {
     }
     */
 
-    return list
-}
-
-
-
-
+    return list;
+};
 
 export const initList = (currentIndex = 'default-0') => {
-    const listDefault = getListInitial('default')
-    const listCustom = getListInitial('custom')
+    const listDefault = getListInitial('default');
+    const listCustom = getListInitial('custom');
 
-    const [type, index] = currentIndex.split('-')
-    const current = eval('list' + type.substr(0, 1).toUpperCase() + type.substr(1))[index]
+    const [type, index] = currentIndex.split('-');
+    const current = eval(
+        'list' + type.substr(0, 1).toUpperCase() + type.substr(1)
+    )[index];
     // const currentPath = current ? {
     //     original: current.getPath(),
     //     blured: current.getPath('blured')
@@ -81,32 +82,24 @@ export const initList = (currentIndex = 'default-0') => {
             actions.init({
                 list: {
                     default: listDefault,
-                    custom: listCustom
+                    custom: listCustom,
                 },
-                current//,
+                current, //,
                 // currentIndex,
                 // currentPath
             })
-        )
-    }
-}
+        );
+    };
+};
 
-export const add = (/*filename*/) => {
+export const add = (/*filename*/) => {};
 
-}
-
-export const remove = (/*indexCustom*/) => {
-
-}
+export const remove = (/*indexCustom*/) => {};
 
 export const change = (obj) => {
     return (dispatch) => {
-        dispatch(
-            actions.change(obj)
-        )
-    }
-}
+        dispatch(actions.change(obj));
+    };
+};
 
-export const mainImgLoaded = () => (dispatch) => dispatch(
-    actions.mainLoaded()
-)
+export const mainImgLoaded = () => (dispatch) => dispatch(actions.mainLoaded());
