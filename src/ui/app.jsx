@@ -32,9 +32,7 @@ import Bgimg from './layout/bgimg';
     styles: require('./app.less'),
 })
 class App extends React.Component {
-    /*
-     * this.isAppReady      是否已初始化
-     */
+    isAppReady = false;
     startSwipeAtLeftBorder = false;
 
     constructor(props) {
@@ -63,7 +61,54 @@ class App extends React.Component {
 
     checkAppReady(timeout = 10) {
         if (__CLIENT__ && this.props.isMainBgimgLoaded && !window.isAppReady) {
-            window.appReady();
+            if (this.isAppReady) return true;
+
+            this.isAppReady = true;
+
+            // 注册 service-worker
+            if (__DEV__) {
+                // eslint-disable-next-line no-console
+                console.log('👩‍💻 No Service Worker for DEV mode.');
+            } else if ('serviceWorker' in navigator) {
+                // console.log('Service Worker SUPPORTED')
+                navigator.serviceWorker
+                    .register(window.__SERVICE_WORKER_FILENAME__, {
+                        scope: '/',
+                    })
+                    .then((/*reg*/) => {
+                        // console.log('👩‍💻 Service Worker REGISTER', reg)
+                    })
+                    .catch((err) => {
+                        console.warn('👩‍💻 Service Worker SUPPORTED. ERROR!');
+                        console.error(err);
+                    });
+            } else {
+                console.warn('👩‍💻 Service Worker not supported!');
+            }
+
+            setTimeout(() => {
+                if (__DEV__) window.logHr();
+                // eslint-disable-next-line no-console
+                if (__DEV__) console.log('🚀 App ready');
+                if (__DEV__) window.logHr();
+
+                // eslint-disable-next-line no-console
+                console.log(`
+     _____ _           ______ _           _
+    |_   _| |          |  ___| |         | |
+      | | | |__   ___  | |_  | | ___  ___| |_
+      | | | '_ \\ / _ \\ |  _| | |/ _ \\/ _ \\ __|
+      | | | | | |  __/ | |   | |  __/  __/ |_
+      \\_/ |_| |_|\\___| \\_|   |_|\\___|\\___|\\__|
+
+    `);
+
+                document.body.classList.add('is-ready');
+
+                setTimeout(() => {
+                    window.isAppReadyFull = true;
+                }, 1000);
+            });
             setTimeout(() => {
                 this.props.dispatch(updateAppReady(true));
             }, timeout);

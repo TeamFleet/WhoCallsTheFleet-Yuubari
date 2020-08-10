@@ -1,82 +1,20 @@
 /* eslint-disable no-console */
+
 import bindEvent from 'bind-event';
-
 import { handlerBeforeReact as beforeinstallpromptHandlerBeforeReact } from '@utils/install-app';
+import './critical.g.less';
 
-require('./critical.g.less');
-
-// this.isAppReady = false
+/** Critical 流程是否已运行过 */
+let isInit = false;
 
 // Critical 过程
 const doCricital = () => {
     if (typeof window === 'undefined') return;
-    if (window && window.isCriticalInit) return true;
+    if (isInit) return true;
 
     if (__DEV__) console.log('🚨 Initializing: critical process...');
 
-    window.isCriticalInit = true;
-
-    // 利用 Promise 语法写入 script 标签
-    window.importJS = (uri) =>
-        new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.onerror = () => reject();
-            script.onload = () => resolve();
-            document.getElementsByTagName('head')[0].appendChild(script);
-            script.src = uri;
-            script.type = 'text/javascript';
-            script.async = false;
-        });
-
-    // App 初始化成功
-    window.appReady = () => {
-        if (window.isAppReady) return true;
-
-        window.isAppReady = true;
-
-        // 注册 service-worker
-        if (__DEV__) console.log('👩‍💻 No Service Worker for DEV mode.');
-        else if ('serviceWorker' in navigator) {
-            // console.log('Service Worker SUPPORTED')
-            navigator.serviceWorker
-                .register(window.__SERVICE_WORKER_FILENAME__, {
-                    scope: '/',
-                })
-                .then((/*reg*/) => {
-                    // console.log('👩‍💻 Service Worker REGISTER', reg)
-                })
-                .catch((err) => {
-                    console.log('👩‍💻 Service Worker SUPPORTED. ERROR', err);
-                });
-        } else {
-            console.log('👩‍💻 Service Worker not supported!');
-        }
-
-        setTimeout(() => {
-            if (__DEV__) window.logHr();
-            if (__DEV__) console.log('🚀 App ready');
-            if (__DEV__) window.logHr();
-
-            console.log(`
- _____ _           ______ _           _
-|_   _| |          |  ___| |         | |
-  | | | |__   ___  | |_  | | ___  ___| |_
-  | | | '_ \\ / _ \\ |  _| | |/ _ \\/ _ \\ __|
-  | | | | | |  __/ | |   | |  __/  __/ |_
-  \\_/ |_| |_|\\___| \\_|   |_|\\___|\\___|\\__|
-
-`);
-
-            document.body.classList.add('is-ready');
-
-            setTimeout(() => {
-                window.isAppReadyFull = true;
-            }, 1000);
-        });
-    };
-
-    // App 初始化失败
-    window.onInitError = () => {};
+    isInit = true;
 
     // 在 console 中 log 一行 ==========
     window.logHr = function () {
@@ -145,10 +83,8 @@ const doCricital = () => {
     }
 
     // 根据 UA / 客户端环境 添加基础class
-    if (__CLIENT__) {
-        document.documentElement.classList.add('is-webapp');
-        document.documentElement.classList.add('is-critical-ready');
-    }
+    document.documentElement.classList.add('is-webapp');
+    document.documentElement.classList.add('is-critical-ready');
     if (__DEV__) document.documentElement.classList.add('is-dev');
     if (window.isMobile) document.documentElement.classList.add('is-mobile');
     if (platform)
@@ -161,13 +97,15 @@ const doCricital = () => {
          * 检查的信息
          * - **CSS**
          *     - position: sticky
+         *     - display: grid
          * - **JS**
          *     - Object.assign()
          */
 
+        window.isMobile = false;
+
         // let boatLoader = document.createElement('div')
         const boatLoader = document.getElementById('boat-loader');
-        window.isMobile = false;
         // let platform = 'not-specified'
 
         // boatLoader.id = 'boat-loader'
@@ -181,6 +119,8 @@ const doCricital = () => {
             )
                 evt.target.parentNode.removeChild(evt.target);
         });
+        // if (!parseInt(window.getComputedStyle(boatLoader).opacity))
+        //     boatLoader.parentNode.removeChild(boatLoader);
 
         // 检查 WebP 支持
         const canUseWebP = () => {
