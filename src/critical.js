@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import bindEvent from 'bind-event';
 import { handlerBeforeReact as beforeinstallpromptHandlerBeforeReact } from '@utils/install-app';
 import { setBoatLoader } from './constants/doms';
@@ -15,12 +13,14 @@ const doCricital = () => {
     if (typeof window === 'undefined') return;
     if (isInit) return true;
 
+    // eslint-disable-next-line no-console
     if (__DEV__) console.log('🚨 Initializing: critical process...');
 
     isInit = true;
 
     // 在 console 中 log 一行 ==========
     window.logHr = function () {
+        // eslint-disable-next-line no-console
         console.log('========================================');
     };
 
@@ -181,6 +181,7 @@ const doCricital = () => {
         beforeinstallpromptHandlerBeforeReact
     );
 
+    // eslint-disable-next-line no-console
     if (__DEV__) console.log('🚨 Complete: critical process!');
 };
 
@@ -217,7 +218,7 @@ function doCompatibilityCheck() {
 
     document.body.removeChild(el);
 
-    console.log({ result });
+    // console.log({ result });
 
     return result;
 }
