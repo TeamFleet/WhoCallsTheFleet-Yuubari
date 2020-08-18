@@ -2,6 +2,9 @@
 
 import bindEvent from 'bind-event';
 import { handlerBeforeReact as beforeinstallpromptHandlerBeforeReact } from '@utils/install-app';
+import { setBoatLoader } from './constants/doms';
+import { clientCompatible } from './constants/client-globals';
+
 import './critical.g.less';
 
 /** Critical 流程是否已运行过 */
@@ -92,24 +95,14 @@ const doCricital = () => {
 
     // DOM ready 时
     document.addEventListener('DOMContentLoaded', function () {
-        // TODO 检查必要的支持的技术，如果存在不支持的，渲染错误信息
-        /**
-         * 检查的信息
-         * - **CSS**
-         *     - position: sticky
-         *     - display: grid
-         * - **JS**
-         *     - Object.assign()
-         */
+        // window.isMobile = false;
 
-        window.isMobile = false;
+        doCompatibilityCheck();
 
         // let boatLoader = document.createElement('div')
-        const boatLoader = document.getElementById('boat-loader');
         // let platform = 'not-specified'
 
-        // boatLoader.id = 'boat-loader'
-        // document.body.appendChild(boatLoader)
+        const boatLoader = setBoatLoader();
         bindEvent(boatLoader, 'transitionend', (evt) => {
             // console.log(evt, evt.target.style.opacity)
             if (evt.target !== boatLoader) return;
@@ -192,3 +185,39 @@ const doCricital = () => {
 };
 
 doCricital();
+
+// ============================================================================
+
+/**
+ * 检查必要的支持的技术，如果存在不支持的，渲染错误信息
+ *
+ * 检查的信息
+ * - **CSS**
+ *     - position: sticky
+ *     - display: grid
+ * - **JS**
+ *     - Object.assign()
+ */
+function doCompatibilityCheck() {
+    const css = {
+        position: 'sticky',
+        display: 'grid',
+    };
+
+    const el = document.createElement('div');
+    for (const [prop, value] of Object.entries(css)) el.style[prop] = value;
+    document.body.appendChild(el);
+    const styles = window.getComputedStyle(el);
+
+    const result = Boolean(
+        typeof Object.assign === 'function' &&
+            Object.entries(css).every(([prop, value]) => styles[prop] === value)
+    );
+    window[clientCompatible] = result;
+
+    document.body.removeChild(el);
+
+    console.log({ result });
+
+    return result;
+}

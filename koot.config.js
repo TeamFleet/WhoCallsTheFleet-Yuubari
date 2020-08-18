@@ -60,7 +60,7 @@ module.exports = {
     dist: './dist-webapp/',
 
     template: './src/template.ejs',
-    templateInject: './src/_server/inject.js',
+    templateInject: './src/template.inject.js',
 
     routes: './src/router',
 

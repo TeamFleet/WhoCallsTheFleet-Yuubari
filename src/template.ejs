@@ -40,13 +40,18 @@
     <%- inject.styles -%>
     <%- inject.definePath -%>
 </head>
+
 <body>
+
     <div id="boat-loader">LOADING...</div>
+    <noscript><%- inject.noScriptWarningText %></noscript>
+
     <div id="root"><%- inject.react %></div>
 
     <%- inject.svgIcons %>
 
     <script type="text/javascript"><%- content('critical.js') %></script>
+
     <%- inject.scripts %>
 
     <script>
@@ -59,4 +64,5 @@
         ga('send', 'pageview');
     </script>
 </body>
+
 </html>

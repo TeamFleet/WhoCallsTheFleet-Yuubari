@@ -7,7 +7,7 @@ import { extend } from 'koot';
 import isRouteChanging from '@api/from-state/is-route-changing';
 import {
     lock as lockWindowScroll,
-    restore as restoreWindowScroll
+    restore as restoreWindowScroll,
 } from '@utils/toggle-window-scroll';
 
 import Icon from '@ui/components/icon';
@@ -19,7 +19,7 @@ import Logo from './logo';
 /** @type {DOM} 控制导航显示的开关 */
 const NavSwitchRef = React.createRef();
 const idNavSwitch = 'nav-switch';
-const changeNavSwitch = changeTo => {
+const changeNavSwitch = (changeTo) => {
     if (!NavSwitchRef || !NavSwitchRef.current) return;
     NavSwitchRef.current.checked = changeTo;
     const event = new Event('change');
@@ -34,13 +34,13 @@ const changeNavSwitch = changeTo => {
         isRouteChanging: isRouteChanging(state, ownProps),
         isAppHasUiMode:
             typeof state.uiMode === 'object' &&
-            typeof state.uiMode.mode !== 'undefined'
+            typeof state.uiMode.mode !== 'undefined',
     }),
-    styles: require('./nav.less')
+    styles: require('./nav.less'),
 })
 class Nav extends React.Component {
     state = {
-        showBackButton: false
+        showBackButton: false,
     };
 
     constructor() {
@@ -69,9 +69,10 @@ class Nav extends React.Component {
         return null;
     }
 
-    onChange() {
+    onChange(evt) {
         if (checkCssProp('overscroll-behavior')) return;
-        if (NavSwitchRef.current.checked) return lockWindowScroll();
+        // if (NavSwitchRef.current.checked) return lockWindowScroll();
+        if (evt.currentTarget.checked) return lockWindowScroll();
         return restoreWindowScroll();
     }
 
@@ -81,7 +82,7 @@ class Nav extends React.Component {
                 id="nav"
                 className={classNames({
                     [this.props.className]: true,
-                    'is-loading': this.props.isRouteChanging
+                    'is-loading': this.props.isRouteChanging,
                     // 'is-loading': true,
                 })}
             >

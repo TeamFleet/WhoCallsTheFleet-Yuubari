@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import classNames from 'classnames';
 import { extend, history } from 'koot';
 
@@ -8,11 +8,18 @@ import {
     handlerBeforeReact as beforeinstallpromptHandlerBeforeReact,
     eventPromptBeforeReact as beforeinstallpromptEventPromptBeforeReact,
 } from '@utils/install-app';
+import { clientCompatible } from '@const/client-globals';
 
 import Main from './layout/main';
 import MainMask from './layout/main-mask';
 import Nav from './layout/nav';
 import Bgimg from './layout/bgimg';
+
+// ============================================================================
+
+export const AppRef = createRef();
+
+// ============================================================================
 
 @extend({
     connect: (state) => {
@@ -60,9 +67,11 @@ class App extends React.Component {
     }
 
     checkAppReady(timeout = 10) {
-        if (__CLIENT__ && this.props.isMainBgimgLoaded && !window.isAppReady) {
-            if (this.isAppReady) return true;
-
+        if (
+            __CLIENT__ &&
+            ((this.props.isMainBgimgLoaded && !this.isAppReady) ||
+                !window[clientCompatible])
+        ) {
             this.isAppReady = true;
 
             // 注册 service-worker
@@ -178,8 +187,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        if (typeof document !== 'undefined' && document.documentElement)
-            document.documentElement.classList.add('is-react-ready');
+        document.documentElement.classList.add('is-react-ready');
 
         const { query = {} } = history.getCurrentLocation();
 
@@ -223,6 +231,7 @@ class App extends React.Component {
     }
 
     render() {
+        if (__CLIENT__ && !window[clientCompatible]) return null;
         // if (__SERVER__) {
         //     return null
         //     await new Promise(resolve => {
@@ -236,7 +245,7 @@ class App extends React.Component {
             leaving: uiModeIsLeaving,
             animation: uiModeAnimation,
         } = this.props.uiMode;
-        const hasMode = __CLIENT__ && window.isAppReady && uiMode;
+        const hasMode = __CLIENT__ && this.isAppReady && uiMode;
 
         return (
             <React.StrictMode>
@@ -254,6 +263,7 @@ class App extends React.Component {
                     onTouchMove={this.onTouchMove}
                     onTouchEnd={this.onTouchEnd}
                     onTouchCancel={this.onTouchCancel}
+                    ref={AppRef}
                 >
                     <Nav location={this.props.location} />
                     <MainMask pathname={this.props.location.pathname} />

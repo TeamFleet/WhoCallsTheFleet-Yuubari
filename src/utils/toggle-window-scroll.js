@@ -1,35 +1,25 @@
+import { AppRef } from '@ui/app';
+import { MainRef } from '@ui/layout/main';
 import getScrollTop from './get-scroll-top';
 
 const lastScroll = {
     left: 0,
-    top: 0
-};
-
-let _app;
-let _main;
-
-const prepareDoms = () => {
-    if (__SERVER__) return;
-    if (!_app) _app = document.getElementById('app');
-    if (!_main) _main = document.getElementById('main');
+    top: 0,
 };
 
 export const lock = () => {
-    prepareDoms();
     lastScroll.top = getScrollTop();
     document.documentElement.style.overflow = 'hidden';
-    _app.classList.add('mod-scroll-locking');
-    _main.style.marginTop = `${0 - lastScroll.top}px`;
+    if (AppRef && AppRef.current)
+        AppRef.current.classList.add('mod-scroll-locking');
+    if (MainRef && MainRef.current)
+        MainRef.current.style.marginTop = `${0 - lastScroll.top}px`;
 };
 
 export const restore = (toX = lastScroll.left, toY = lastScroll.top) => {
-    prepareDoms();
     document.documentElement.style.overflow = '';
-    _app.classList.remove('mod-scroll-locking');
-    if (_main) _main.style.marginTop = ``;
+    if (AppRef && AppRef.current)
+        AppRef.current.classList.remove('mod-scroll-locking');
+    if (MainRef && MainRef.current) MainRef.current.style.marginTop = ``;
     window.scrollTo(toX, toY);
-};
-
-export default () => {
-    prepareDoms();
 };

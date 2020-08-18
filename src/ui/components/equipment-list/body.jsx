@@ -1,79 +1,63 @@
-import React from 'react'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import classNames from 'classnames'
-import { extend } from 'koot'
+import React from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import classNames from 'classnames';
+import { extend } from 'koot';
 
-import db from '@database'
+import db from '@database';
 import {
     init as listInit,
     observer as listObserver,
     highlightColumn as listHighlightColumn,
     // reset as listReset
-} from '@api/equipment-list/api.js'
-import equipmentTypes from 'kckit/src/types/equipments'
+} from '@api/equipment-list/api.js';
+import equipmentTypes from 'kckit/src/types/equipments';
 
-import Title from './title.jsx'
+import { observer } from '@ui/hoc/observer';
+
+import Title from './title.jsx';
 // import List from './list.jsx'
-import Header from './header.jsx'
-import TableBody from './table-body'
-import TableBodyHeaderInterceptor from './table-body-header-interceptor'
-
-import { observer } from '@ui/hoc/observer'
-
+import Header from './header.jsx';
+import TableBody from './table-body';
+import TableBodyHeaderInterceptor from './table-body-header-interceptor';
 
 // --------------------------------------------------
-
 
 @extend({
     connect: (state, ownProps) => ({
         // ...state.shipList[ownProps.id],
         isInit: state.equipmentList[ownProps.id] ? true : false,
         // location: state[REALTIME_LOCATION_REDUCER_NAME]
-    })
+    }),
 })
 @observer({
-    rootMargin: "50px 0px"
+    rootMargin: '50px 0px',
 })
 class EquipmentList extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         if (!props.isInit) {
-            props.dispatch(
-                listInit(props.id)
-            )
+            props.dispatch(listInit(props.id));
         }
-        props.dispatch(
-            listHighlightColumn(
-                props.id,
-                undefined, undefined
-            )
-        )
+        props.dispatch(listHighlightColumn(props.id, undefined, undefined));
     }
 
     render() {
-        const {
-            observer,
-            ...props
-        } = this.props
+        const { observer, ...props } = this.props;
 
         if (!this.props.isInit) {
-            if (__CLIENT__) return null
+            if (__CLIENT__) return null;
         }
 
         if (__CLIENT__) {
-            this.props.dispatch(
-                listObserver(this.props.id, observer)
-            )
+            this.props.dispatch(listObserver(this.props.id, observer));
         }
 
-        return <EquipmentListBody {...props} />
+        return <EquipmentListBody {...props} />;
     }
 }
-export default EquipmentList
-
+export default EquipmentList;
 
 // --------------------------------------------------
-
 
 // @connect((state, ownProps) => ({
 //     ...state.equipmentList[ownProps.id],
@@ -87,22 +71,17 @@ export default EquipmentList
 // })
 @extend({
     connect: (state, ownProps) => {
-        const {
-            collection
-        } = state.equipmentList[ownProps.id] || {}
+        const { collection } = state.equipmentList[ownProps.id] || {};
         return {
-            collection
-        }
+            collection,
+        };
     },
-    styles: require('./body.less')
+    styles: require('./body.less'),
 })
 class EquipmentListBody extends React.Component {
-
     renderCollection(collection, index) {
-        if (typeof index !== 'undefined')
-            index = index + '-'
-        else
-            index = ''
+        if (typeof index !== 'undefined') index = index + '-';
+        else index = '';
         return collection.list.map((type, typeIndex) => {
             return (
                 <CSSTransitionComponent key={index + typeIndex}>
@@ -117,65 +96,71 @@ class EquipmentListBody extends React.Component {
                         isLast={typeIndex === collection.list.length - 1}
                     />
                 </CSSTransitionComponent>
-            )
-        })
+            );
+        });
     }
 
     renderBody() {
         // console.log(db)
         if (__CLIENT__) {
             // if (__DEV__) console.log(this.props.collection, db.equipmentCollections[this.props.collection])
-            return this.renderCollection(db.equipmentCollections[this.props.collection], 'c-' + this.props.collection)
+            return this.renderCollection(
+                db.equipmentCollections[this.props.collection],
+                'c-' + this.props.collection
+            );
         } else {
-            return db.equipmentCollections.map(this.renderCollection.bind(this))
+            return db.equipmentCollections.map(
+                this.renderCollection.bind(this)
+            );
         }
     }
 
-    componentDidUpdate(prevProps/*, prevState*/) {
+    componentDidUpdate(prevProps /*, prevState*/) {
         if (prevProps.collection !== this.props.collection)
-            window.scrollTo(undefined, 0)
+            window.scrollTo(undefined, 0);
     }
 
     render() {
         if (__CLIENT__ && __DEV__) {
             // if (__DEV__) {
-            console.log('equipmentList', this.props)
-            const t0 = performance.now()
+            // eslint-disable-next-line no-console
+            console.log('equipmentList', this.props);
+            const t0 = performance.now();
             setTimeout(() => {
-                console.log("Rendering equipment-list took " + (performance.now() - t0) + " milliseconds.")
-            })
+                // eslint-disable-next-line no-console
+                console.log(
+                    'Rendering equipment-list took ' +
+                        (performance.now() - t0) +
+                        ' milliseconds.'
+                );
+            });
         }
 
         return (
-            <div className={this.props.className}
+            <div
+                className={this.props.className}
                 data-equipmentlist-id={this.props.id}
             >
                 {__CLIENT__ && <Header id={this.props.id} />}
 
                 <EquipmentListBodyDataHost id={this.props.id} />
 
-                <TransitionGroup
-                    component="div"
-                    className="wrapper"
-                >
+                <TransitionGroup component="div" className="wrapper">
                     {this.renderBody()}
                 </TransitionGroup>
-
             </div>
-        )
+        );
     }
 }
 
-
 // --------------------------------------------------
-
 
 @extend({
     connect: (state, ownProps) => ({
         highlightingIndex: state.equipmentList[ownProps.id].highlightingIndex,
-        highlightingStat: state.equipmentList[ownProps.id].highlightingStat
+        highlightingStat: state.equipmentList[ownProps.id].highlightingStat,
     }),
-    styles: require('./body-datahost.less')
+    styles: require('./body-datahost.less'),
 })
 class EquipmentListBodyDataHost extends React.Component {
     render() {
@@ -185,107 +170,41 @@ class EquipmentListBodyDataHost extends React.Component {
                 data-highlight-index={this.props.highlightingIndex}
                 data-highlight-stat={this.props.highlightingStat}
             />
-        )
+        );
     }
 }
 
 const EquipmentListBodyList = ({
     id,
-    type, equipments,
-    className, isFirst, isLast,
-}) =>
-    (
-        <div className={classNames({
+    type,
+    equipments,
+    className,
+    isFirst,
+    isLast,
+}) => (
+    <div
+        className={classNames({
             [className]: true,
-            'first': isFirst,
-            'last': isLast
-        })} >
-            <Title id={id} type={type} />
-            {equipmentTypes.Interceptors.includes(type) && (
-                <TableBodyHeaderInterceptor />
-            )}
-            <TableBody id={id} equipments={equipments} />
-        </div>
-    )
-// class EquipmentListBodyList extends React.Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-//             render: __SERVER__ || (props.index === 0) || (__CLIENT__ && !self.isAppReady),
-//             // show: false
-//         }
-//     }
-//     componentWillMount() {
-//         if (!this.state.render)
-//             setTimeout(() => {
-//                 this.setState({
-//                     render: true
-//                 })
-//                 if (typeof this.props.onRender === 'function')
-//                     this.props.onRender(this)
-//             }, 10 * (this.props.index || 0))
-//         else if (typeof this.props.onRender === 'function')
-//             this.props.onRender(this)
-//     }
-//     render() {
-//         if (!this.state.render) return <div />
-//         const {
-//             id,
-
-//             type,
-//             equipments,
-
-//             className,
-//             isFirst,
-//             isLast,
-//         } = this.props
-//         return (
-//             <div className={classNames({
-//                 [className]: true,
-//                 'first': isFirst,
-//                 'last': isLast
-//             })} >
-//                 <Title id={id} type={type} />
-//                 {equipmentTypes.Interceptors.includes(type) && (
-//                     <TableBodyHeaderInterceptor />
-//                 )}
-//                 <TableBody id={id} equipments={equipments} />
-//             </div>
-//         )
-//     }
-// }
-
+            first: isFirst,
+            last: isLast,
+        })}
+    >
+        <Title id={id} type={type} />
+        {equipmentTypes.Interceptors.includes(type) && (
+            <TableBodyHeaderInterceptor />
+        )}
+        <TableBody id={id} equipments={equipments} />
+    </div>
+);
 
 // --------------------------------------------------
-
-
-// @connect((state, ownProps) => ({
-//     ...state.equipmentList[ownProps.id],
-//     // location: state.location
-// }))
-// @connect()
-// @ImportStyle(style)
-// class EquipmentListBodyList extends React.Component {
-//     render() {
-//         return (
-//             <div className={this.props.className}>
-//                 <Title id={this.props.id} type={this.props.type} />
-//                 {this.props.children}
-//             </div>
-//         )
-//     }
-// }
-
-
-// --------------------------------------------------
-
 
 const CSSTransitionComponent = (props) => (
     <CSSTransition
         {...props}
         classNames="transition"
         timeout={{
-            enter: 200
+            enter: 200,
         }}
         exit={false}
     />

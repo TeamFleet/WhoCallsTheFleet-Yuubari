@@ -38,7 +38,7 @@
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.8.1",
         "kckit": "^1.48.0",
-        "koot": "^0.14.0-alpha.25",
+        "koot": "^0.14.2",
         "localforage": "^1.9.0",
         "lz-string": "^1.4.4",
         "md5-file": "^5.0.0",
@@ -56,17 +56,17 @@
         "cli-spinners": "^2.4.0",
         "cross-env": "^7.0.2",
         "cssnano": "^4.1.10",
-        "eslint": "^7.6.0",
+        "eslint": "^7.7.0",
         "eslint-config-koot": "^1.7.1",
         "glob": "^7.1.6",
         "husky": "^4.2.5",
         "image-size": "^0.8.3",
-        "jest": "^26.3.0",
+        "jest": "^26.4.0",
         "json-pretty": "^0.0.1",
         "jsonfile": "^6.0.1",
         "lint-staged": "^10.2.11",
         "nedb-promise": "^2.0.1",
-        "node-notifier": "^7.0.2",
+        "node-notifier": "^8.0.0",
         "normalize.css": "^8.0.1",
         "ora": "^5.0.0",
         "postcss-easing-gradients": "^3.0.1",
@@ -101,6 +101,6 @@
         ]
     },
     "koot": {
-        "version": "0.14.0-alpha.25"
+        "version": "0.14.2"
     }
 }
