@@ -197,7 +197,7 @@ doCricital();
 function doCompatibilityCheck() {
     const css = {
         position: 'sticky',
-        display: 'grid1',
+        display: 'grid',
     };
 
     /** 用以进行判断的元素 */
@@ -218,12 +218,33 @@ function doCompatibilityCheck() {
     // console.log({ result });
 
     if (!result) {
-        const notCompatible = document.createElement('div');
-        document.body.appendChild(notCompatible);
-        notCompatible.setAttribute('class', 'not-compatible');
+        setTimeout(() => {
+            const notCompatible = document.createElement('div');
+            const [title, ...texts] = __('not_compatible');
+            const lastLine = texts.pop();
+            const browsers = [
+                [__('browsers.chrome'), 'https://www.google.com/chrome/'],
+                [__('browsers.firefox'), 'https://www.mozilla.org/firefox/'],
+                [__('browsers.edge'), 'https://www.microsoft.com/edge/'],
+            ];
+            notCompatible.setAttribute('class', 'not-compatible');
+            notCompatible.innerHTML =
+                `<h2>${title}</h2>` +
+                texts.map((t) => `<p>${t}</p>`).join('') +
+                `<p>${lastLine}${browsers
+                    .map(
+                        ([name, link]) =>
+                            `<a href=${link} target="_blank">${name}</a>`
+                    )
+                    .join(' | ')}</p>`;
+            document.body.insertBefore(notCompatible, document.body.firstChild);
 
-        const boatLoader = setBoatLoader();
-        if (boatLoader) boatLoader.parentElement.removeChild(boatLoader);
+            const root = document.getElementById('root');
+            if (root) root.parentElement.removeChild(root);
+
+            const boatLoader = setBoatLoader();
+            if (boatLoader) boatLoader.parentElement.removeChild(boatLoader);
+        });
     }
 
     return result;

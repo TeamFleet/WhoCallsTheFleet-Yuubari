@@ -9,9 +9,21 @@
 
     "under_construction": "工事中",
     "no_javascript_warning": "This app requires JavaScript enabled.",
+    "not_compatible": [
+        "Your browser is out-of-date.",
+        "We do not support your browser.",
+        "For a better experience and your own online-safety, please update your browser or install a modern web browser.",
+        "Recommended: "
+    ],
     "cancel": "キャンセル",
     "ok": "OK",
     "none": "None",
+
+    "browsers": {
+        "chrome": "Google Chrome",
+        "firefox": "Firefox",
+        "edge": "Microsoft Edge"
+    },
 
     "ship_type": "Ship Type",
     "equipment_type": "Equipment Type",
