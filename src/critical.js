@@ -1,22 +1,17 @@
 import bindEvent from 'bind-event';
 import { handlerBeforeReact as beforeinstallpromptHandlerBeforeReact } from '@utils/install-app';
 import { setBoatLoader } from './constants/doms';
-import { clientCompatible } from './constants/client-globals';
+import { didCritical, clientCompatible } from './constants/client-globals';
 
 import './critical.g.less';
-
-/** Critical 流程是否已运行过 */
-let isInit = false;
 
 // Critical 过程
 const doCricital = () => {
     if (typeof window === 'undefined') return;
-    if (isInit) return true;
+    if (window[didCritical]) return true;
 
     // eslint-disable-next-line no-console
     if (__DEV__) console.log('🚨 Initializing: critical process...');
-
-    isInit = true;
 
     // 在 console 中 log 一行 ==========
     window.logHr = function () {
@@ -92,6 +87,12 @@ const doCricital = () => {
     if (window.isMobile) document.documentElement.classList.add('is-mobile');
     if (platform)
         document.documentElement.classList.add('platform-' + platform);
+
+    // 安装 PWA 事件: 如果在 React 渲染前触发
+    window.addEventListener(
+        'beforeinstallprompt',
+        beforeinstallpromptHandlerBeforeReact
+    );
 
     // DOM ready 时
     document.addEventListener('DOMContentLoaded', function () {
@@ -172,17 +173,11 @@ const doCricital = () => {
             });
         }
 
-        // document.documentElement = tagHtml
+        window[didCritical] = true;
+
+        // eslint-disable-next-line no-console
+        if (__DEV__) console.log('🚨 Complete: critical process!');
     });
-
-    // 安装 PWA 事件: 如果在 React 渲染前触发
-    window.addEventListener(
-        'beforeinstallprompt',
-        beforeinstallpromptHandlerBeforeReact
-    );
-
-    // eslint-disable-next-line no-console
-    if (__DEV__) console.log('🚨 Complete: critical process!');
 };
 
 doCricital();
@@ -202,14 +197,16 @@ doCricital();
 function doCompatibilityCheck() {
     const css = {
         position: 'sticky',
-        display: 'grid',
+        display: 'grid1',
     };
 
+    /** 用以进行判断的元素 */
     const el = document.createElement('div');
     for (const [prop, value] of Object.entries(css)) el.style[prop] = value;
     document.body.appendChild(el);
     const styles = window.getComputedStyle(el);
 
+    /** 判断结果 */
     const result = Boolean(
         typeof Object.assign === 'function' &&
             Object.entries(css).every(([prop, value]) => styles[prop] === value)
@@ -219,6 +216,15 @@ function doCompatibilityCheck() {
     document.body.removeChild(el);
 
     // console.log({ result });
+
+    if (!result) {
+        const notCompatible = document.createElement('div');
+        document.body.appendChild(notCompatible);
+        notCompatible.setAttribute('class', 'not-compatible');
+
+        const boatLoader = setBoatLoader();
+        if (boatLoader) boatLoader.parentElement.removeChild(boatLoader);
+    }
 
     return result;
 }

@@ -1,13 +1,10 @@
 import {
     SHIPLIST_INIT,
     SHIPLIST_RESET,
-
     SHIPLIST_CHANGE_COLLECTION,
-
     SHIPLIST_FILTER_ENTER,
     SHIPLIST_FILTER_LEAVE,
     SHIPLIST_FILTER_INPUT,
-
     SHIPLIST_COMPARE_ENTER,
     SHIPLIST_COMPARE_LEAVE,
     SHIPLIST_COMPARE_RESET,
@@ -16,93 +13,93 @@ import {
     SHIPLIST_COMPARE_ADD,
     SHIPLIST_COMPARE_REMOVE,
     SHIPLIST_COMPARE_SORT,
-    SHIPLIST_COMPARE_SCROLL
-} from '@redux/action-types.js'
+    SHIPLIST_COMPARE_SCROLL,
+} from '@redux/action-types';
 
 export const init = (id, initialState) => ({
     type: SHIPLIST_INIT,
     id,
-    initialState
-})
+    initialState,
+});
 
 export const reset = (id, initialState) => ({
     type: SHIPLIST_RESET,
     id,
-    initialState
-})
+    initialState,
+});
 
 export const changeCollection = (id, collection) => ({
     type: SHIPLIST_CHANGE_COLLECTION,
     id,
-    collection
-})
+    collection,
+});
 
 export const filterEnter = (id) => ({
     type: SHIPLIST_FILTER_ENTER,
-    id
-})
+    id,
+});
 
 export const filterLeave = (id) => ({
     type: SHIPLIST_FILTER_LEAVE,
-    id
-})
+    id,
+});
 
 export const filterInput = (id, input) => ({
     type: SHIPLIST_FILTER_INPUT,
     id,
-    input
-})
+    input,
+});
 
 export const compareEnter = (id) => ({
     type: SHIPLIST_COMPARE_ENTER,
-    id
-})
+    id,
+});
 
 export const compareLeave = (id, remove) => ({
     type: SHIPLIST_COMPARE_LEAVE,
     id,
-    remove
-})
+    remove,
+});
 
 export const compareReset = (id, remove) => ({
     type: SHIPLIST_COMPARE_RESET,
     id,
-    remove
-})
+    remove,
+});
 
 export const compareChangeState = (id, state) => ({
     type: SHIPLIST_COMPARE_CHANGE_STATE,
     id,
-    state
-})
+    state,
+});
 
 export const compareUpdateList = (id, list) => ({
     type: SHIPLIST_COMPARE_UPDATE_LIST,
     id,
-    list
-})
+    list,
+});
 
 export const compareAdd = (id, item) => ({
     type: SHIPLIST_COMPARE_ADD,
     id,
-    item
-})
+    item,
+});
 
 export const compareRemove = (id, item) => ({
     type: SHIPLIST_COMPARE_REMOVE,
     id,
-    item
-})
+    item,
+});
 
 export const compareSort = (id, sorttype, order) => ({
     type: SHIPLIST_COMPARE_SORT,
     id,
     sorttype,
-    order
-})
+    order,
+});
 
 export const compareScroll = (id, scrollLeft) => ({
     type: SHIPLIST_COMPARE_SCROLL,
     id,
-    scrollLeft
-})
+    scrollLeft,
+});

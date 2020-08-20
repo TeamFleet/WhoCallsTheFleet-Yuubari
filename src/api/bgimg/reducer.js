@@ -3,15 +3,15 @@ import {
     ADD_BGIMG,
     REMOVE_BGIMG,
     CHANGE_BGIMG,
-    LOADED_MAIN_BGIMG
-} from '@redux/action-types.js';
+    LOADED_MAIN_BGIMG,
+} from '@redux/action-types';
 
 const initialState = {
     isMainLoaded: false,
     list: {
         default: [],
-        custom: []
-    }
+        custom: [],
+    },
     // current: null,
     // currentIndex: 'default-0',
     // currentPath: {
@@ -20,7 +20,7 @@ const initialState = {
     // }
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case INIT_BGIMG:
             // return Object.assign({}, state, action.state)
@@ -30,8 +30,8 @@ export default function(state = initialState, action) {
             // new obj - action.items
             return Object.assign({}, state, {
                 list: Object.assign({}, state.list, {
-                    custom: state.list.custom.concat(action.items)
-                }) //,
+                    custom: state.list.custom.concat(action.items),
+                }), //,
                 // current: Object.assign({}, state.current, {})
             });
 
@@ -41,13 +41,13 @@ export default function(state = initialState, action) {
         case CHANGE_BGIMG:
             action.changeToObj.active();
             return Object.assign({}, state, {
-                current: action.changeToObj
+                current: action.changeToObj,
             });
 
         case LOADED_MAIN_BGIMG: {
             if (state.isMainLoaded) return state;
             return Object.assign({}, state, {
-                isMainLoaded: true
+                isMainLoaded: true,
             });
         }
 

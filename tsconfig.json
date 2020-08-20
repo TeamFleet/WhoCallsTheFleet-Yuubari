@@ -46,7 +46,9 @@
             "@database": ["./src/database"],
             "@database/*": ["./src/database/*"],
             "~Assets/*": ["./src/assets/*"],
-            "~/*": ["./src/ui/*"]
+            "~/*": ["./src/ui/*"],
+            "@types": ["./types"],
+            "@types/*": ["./types/*"]
         }
     },
     "include": ["src", "types/**/*.ts"]

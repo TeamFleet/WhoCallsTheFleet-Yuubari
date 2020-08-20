@@ -13,8 +13,8 @@ import {
     SHIPLIST_COMPARE_ADD,
     SHIPLIST_COMPARE_REMOVE,
     SHIPLIST_COMPARE_SORT,
-    SHIPLIST_COMPARE_SCROLL
-} from '@redux/action-types.js';
+    SHIPLIST_COMPARE_SCROLL,
+} from '@redux/action-types';
 
 const initialState = {};
 const initialStateSingle = {
@@ -27,15 +27,15 @@ const initialStateSingle = {
     compareState: 'selecting', // selecting || comparing
     compareList: [],
     compareSort: ['fire', 'desc'],
-    compareScrollLeft: 0
+    compareScrollLeft: 0,
 };
 
 const updateState = (fullState, id, state) =>
     Object.assign({}, fullState, {
-        [id]: Object.assign({}, fullState[id] || initialStateSingle, state)
+        [id]: Object.assign({}, fullState[id] || initialStateSingle, state),
     });
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case SHIPLIST_INIT:
             return Object.assign({}, state, {
@@ -48,10 +48,10 @@ export default function(state = initialState, action) {
                               initialState: Object.assign(
                                   {},
                                   action.initialState
-                              )
+                              ),
                           }
                         : {}
-                )
+                ),
             });
 
         case SHIPLIST_RESET:
@@ -67,33 +67,33 @@ export default function(state = initialState, action) {
 
         case SHIPLIST_CHANGE_COLLECTION:
             return updateState(state, action.id, {
-                collection: action.collection
+                collection: action.collection,
             });
 
         case SHIPLIST_FILTER_ENTER:
             return updateState(state, action.id, {
-                isModeFilter: true
+                isModeFilter: true,
             });
 
         case SHIPLIST_FILTER_LEAVE:
             return updateState(state, action.id, {
                 isModeFilter: false,
-                filterInput: undefined
+                filterInput: undefined,
             });
 
         case SHIPLIST_FILTER_INPUT:
             return updateState(state, action.id, {
-                filterInput: action.input
+                filterInput: action.input,
             });
 
         case SHIPLIST_COMPARE_ENTER:
             return updateState(state, action.id, {
-                isModeCompare: true
+                isModeCompare: true,
             });
 
         case SHIPLIST_COMPARE_LEAVE:
             return updateState(state, action.id, {
-                isModeCompare: action.remove ? undefined : false
+                isModeCompare: action.remove ? undefined : false,
             });
 
         case SHIPLIST_COMPARE_RESET:
@@ -101,34 +101,34 @@ export default function(state = initialState, action) {
                 isModeCompare: action.remove ? undefined : false,
                 compareState: initialStateSingle.compareState,
                 compareList: [],
-                compareSort: [...initialStateSingle.compareSort]
+                compareSort: [...initialStateSingle.compareSort],
             });
 
         case SHIPLIST_COMPARE_CHANGE_STATE:
             return updateState(state, action.id, {
-                compareState: action.state
+                compareState: action.state,
             });
 
         case SHIPLIST_COMPARE_UPDATE_LIST:
             return updateState(state, action.id, {
-                compareList: action.list
+                compareList: action.list,
             });
 
         case SHIPLIST_COMPARE_ADD: {
             const list = state[action.id].compareList;
             if (Array.isArray(action.item)) {
                 const shipsToAdd = action.item
-                    .filter(ship => !list.includes(ship.id))
-                    .map(ship => ship.id);
+                    .filter((ship) => !list.includes(ship.id))
+                    .map((ship) => ship.id);
                 if (shipsToAdd.length) {
                     return updateState(state, action.id, {
-                        compareList: list.concat(shipsToAdd)
+                        compareList: list.concat(shipsToAdd),
                     });
                 }
             } else {
                 if (!list.includes(action.item.id)) {
                     return updateState(state, action.id, {
-                        compareList: list.concat(action.item.id)
+                        compareList: list.concat(action.item.id),
                     });
                 }
             }
@@ -139,19 +139,19 @@ export default function(state = initialState, action) {
             const list = state[action.id].compareList;
             if (Array.isArray(action.item)) {
                 const newList = [...list];
-                action.item.forEach(ship => {
+                action.item.forEach((ship) => {
                     newList.splice(newList.indexOf(ship.id), 1);
                 });
                 return updateState(state, action.id, {
-                    compareList: newList
+                    compareList: newList,
                 });
             } else {
                 const index = list.indexOf(action.item.id);
                 if (index > -1) {
-                    let newList = [...list];
+                    const newList = [...list];
                     newList.splice(index, 1);
                     return updateState(state, action.id, {
-                        compareList: newList
+                        compareList: newList,
                     });
                 }
             }
@@ -161,7 +161,7 @@ export default function(state = initialState, action) {
         case SHIPLIST_COMPARE_SORT: {
             if (!action.sorttype)
                 return updateState(state, action.id, {
-                    compareSort: [...initialStateSingle.compareSort]
+                    compareSort: [...initialStateSingle.compareSort],
                 });
             else if (
                 !action.order &&
@@ -172,21 +172,21 @@ export default function(state = initialState, action) {
                         action.sorttype,
                         state[action.id].compareSort[1] === 'desc'
                             ? 'asc'
-                            : 'desc'
-                    ]
+                            : 'desc',
+                    ],
                 });
             else
                 return updateState(state, action.id, {
                     compareSort: [
                         action.sorttype,
-                        action.order || initialStateSingle.compareSort[1]
-                    ]
+                        action.order || initialStateSingle.compareSort[1],
+                    ],
                 });
         }
 
         case SHIPLIST_COMPARE_SCROLL: {
             return updateState(state, action.id, {
-                compareScrollLeft: action.scrollLeft
+                compareScrollLeft: action.scrollLeft,
             });
         }
 

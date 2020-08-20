@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
+import { Link } from 'react-router';
 
 import {
     init,
@@ -10,11 +11,11 @@ import {
     // editBuild,
 } from '@api/fleets';
 import htmlHead from '@utils/html-head';
+import { appReady } from '@const/client-globals';
 
 import Page from '@ui/containers/page';
 import Center from '@ui/containers/center';
 
-import { Link } from 'react-router';
 import Button from '@ui/components/button';
 import Title from '@ui/components/title';
 import LoaderFairyOoyodo2 from '@ui/components/loader/fairy-ooyodo-2';
@@ -50,7 +51,7 @@ class PageFleetsBody extends React.Component {
         Promise.all([
             this.props.dispatch(init()),
             new Promise((resolve) =>
-                setTimeout(() => resolve(), window.isAppReadyFull ? 0 : 2000)
+                setTimeout(() => resolve(), window[appReady] ? 0 : 2000)
             ),
         ]).then(() => {
             this.setState({

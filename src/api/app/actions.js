@@ -1,14 +1,11 @@
-import {
-    APP_READY_UPDATE,
-    MAIN_KEY_UPDATE,
-} from '@redux/action-types.js'
+import { APP_READY_UPDATE, MAIN_KEY_UPDATE } from '@redux/action-types';
 
-export const updateAppReady = ready => ({
+export const updateAppReady = (ready) => ({
     type: APP_READY_UPDATE,
-    ready
-})
+    ready,
+});
 
-export const updateMainKey = key => ({
+export const updateMainKey = (key) => ({
     type: MAIN_KEY_UPDATE,
-    key
-})
+    key,
+});

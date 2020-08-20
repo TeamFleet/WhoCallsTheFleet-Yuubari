@@ -3,13 +3,14 @@ import classNames from 'classnames';
 import { extend } from 'koot';
 import qs from 'qs';
 
-import { updateAppReady, setInstallPWAEvent } from '@api/app/api';
+import { setInstallPWAEvent } from '@api/app/api';
 import { swipedFromLeftEdge } from '@api/side-menu/api';
+import setAppReady from '@utils/set-app-ready';
 import {
     handlerBeforeReact as beforeinstallpromptHandlerBeforeReact,
     eventPromptBeforeReact as beforeinstallpromptEventPromptBeforeReact,
 } from '@utils/install-app';
-import { clientCompatible } from '@const/client-globals';
+import { didCritical, clientCompatible, appReady } from '@const/client-globals';
 
 import Main from './layout/main';
 import MainMask from './layout/main-mask';
@@ -40,7 +41,6 @@ export const AppRef = createRef();
     styles: require('./app.less'),
 })
 class App extends React.Component {
-    isAppReady = false;
     startSwipeAtLeftBorder = false;
 
     constructor(props) {
@@ -68,13 +68,7 @@ class App extends React.Component {
     }
 
     checkAppReady(timeout = 10) {
-        if (
-            __CLIENT__ &&
-            ((this.props.isMainBgimgLoaded && !this.isAppReady) ||
-                !window[clientCompatible])
-        ) {
-            this.isAppReady = true;
-
+        if (__CLIENT__ && window[didCritical] && this.props.isMainBgimgLoaded) {
             // 注册 service-worker
             if (__DEV__) {
                 // eslint-disable-next-line no-console
@@ -96,38 +90,17 @@ class App extends React.Component {
                 console.warn('👩‍💻 Service Worker not supported!');
             }
 
+            setAppReady(this.props.dispatch);
+        } else {
             setTimeout(() => {
-                if (__DEV__) window.logHr();
-                // eslint-disable-next-line no-console
-                if (__DEV__) console.log('🚀 App ready');
-                if (__DEV__) window.logHr();
-
-                // eslint-disable-next-line no-console
-                console.log(`
-     _____ _           ______ _           _
-    |_   _| |          |  ___| |         | |
-      | | | |__   ___  | |_  | | ___  ___| |_
-      | | | '_ \\ / _ \\ |  _| | |/ _ \\/ _ \\ __|
-      | | | | | |  __/ | |   | |  __/  __/ |_
-      \\_/ |_| |_|\\___| \\_|   |_|\\___|\\___|\\__|
-
-    `);
-
-                document.body.classList.add('is-ready');
-
-                setTimeout(() => {
-                    window.isAppReadyFull = true;
-                }, 1000);
-            });
-            setTimeout(() => {
-                this.props.dispatch(updateAppReady(true));
-            }, timeout);
+                this.checkAppReady(timeout);
+            }, 10);
         }
     }
 
     onTouchStart(evt) {
         // if (!__CLIENT__) return
-        if (window.isAppReadyFull && evt.nativeEvent.touches[0].pageX < 25)
+        if (window[appReady] && evt.nativeEvent.touches[0].pageX < 25)
             this.startSwipeAtLeftBorder = {
                 x: evt.nativeEvent.touches[0].screenX,
                 y: evt.nativeEvent.touches[0].screenY,
@@ -230,9 +203,9 @@ class App extends React.Component {
         if (__DEV__) console.warn('App mounted');
     }
 
-    componentDidUpdate() {
-        this.checkAppReady();
-    }
+    // componentDidUpdate() {
+    //     this.checkAppReady();
+    // }
 
     render() {
         if (__CLIENT__ && !window[clientCompatible]) return null;
@@ -249,7 +222,7 @@ class App extends React.Component {
             leaving: uiModeIsLeaving,
             animation: uiModeAnimation,
         } = this.props.uiMode;
-        const hasMode = __CLIENT__ && this.isAppReady && uiMode;
+        const hasMode = __CLIENT__ && uiMode;
 
         return (
             <React.StrictMode>

@@ -38,7 +38,7 @@
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.8.1",
         "kckit": "^1.48.0",
-        "koot": "^0.14.2",
+        "koot": "^0.14.3",
         "localforage": "^1.9.0",
         "lz-string": "^1.4.4",
         "md5-file": "^5.0.0",
@@ -51,6 +51,7 @@
         "whocallsthefleet-database": "^20200808.1.0"
     },
     "devDependencies": {
+        "@types/md5": "^2.2.0",
         "autoprefixer": "^9.8.6",
         "babel-eslint": "^10.1.0",
         "cache-loader": "^4.1.0",
@@ -102,6 +103,6 @@
         ]
     },
     "koot": {
-        "version": "0.14.2"
+        "version": "0.14.3"
     }
 }
