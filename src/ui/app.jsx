@@ -1,6 +1,7 @@
 import React, { createRef } from 'react';
 import classNames from 'classnames';
-import { extend, history } from 'koot';
+import { extend } from 'koot';
+import qs from 'qs';
 
 import { updateAppReady, setInstallPWAEvent } from '@api/app/api';
 import { swipedFromLeftEdge } from '@api/side-menu/api';
@@ -189,7 +190,10 @@ class App extends React.Component {
     componentDidMount() {
         document.documentElement.classList.add('is-react-ready');
 
-        const { query = {} } = history.getCurrentLocation();
+        // const { query = {} } = history.getCurrentLocation();
+        const query = qs.parse(this.props.router.getCurrentLocation().search, {
+            ignoreQueryPrefix: true,
+        });
 
         // 检查是否需要显示“安装App”按钮
         if (__DEV__) {
