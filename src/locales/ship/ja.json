@@ -1,4 +1,11 @@
 {
+    "ship_sub_types": {
+        "NightCarrier": "夜間作戦航空母艦",
+        "ModernizedCarrier": "近代化航空母艦",
+        "EscortCarrier": "護衛空母",
+        "AssultCarrier": "攻撃型軽空母"
+    },
+
     "special_attack": {
         "Nelson Touch": {
             "requirement": [

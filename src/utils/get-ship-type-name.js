@@ -1,5 +1,6 @@
 import { get } from 'kckit';
 import db from '@database';
+import getShipSubType from '@api/get-ship-sub-type';
 
 /**
  * @typedef {Object} Ship
@@ -12,12 +13,15 @@ import db from '@database';
  * @param {Ship} ship
  * @returns {string}
  */
-const getShipTypeName = ship => {
+const getShipTypeName = (ship) => {
     if (!ship) return '';
 
     ship = get.ship(ship);
 
     if (!ship) return '';
+
+    const subType = getShipSubType(ship);
+    if (subType) return __('ship_sub_types', subType);
 
     // if (ship.type && ship.type_display && ship.type !== ship.type_display)
     //     return db.shipTypes[ship.type_display]._name + ' (' + ship._type + ')'

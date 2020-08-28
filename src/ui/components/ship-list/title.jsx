@@ -18,7 +18,7 @@ import Title from '@ui/components/title';
 const getChecked = (ownShipList, selectedList) => {
     let matched = 0;
 
-    const check = ship => {
+    const check = (ship) => {
         if (selectedList.includes(ship.id)) matched++;
     };
 
@@ -40,9 +40,9 @@ const ShipListTitle = extend({
                       ownProps.id ? state.shipList[ownProps.id].compareList : []
                   )
                 : undefined
-            : undefined
+            : undefined,
     }),
-    styles: require('./title.less')
+    styles: require('./title.less'),
 })(
     ({
         className,
@@ -51,9 +51,10 @@ const ShipListTitle = extend({
         type: typeId,
         checked,
         class: shipClassId,
-        dispatch
+        dispatch,
+        name,
     }) => {
-        const toggle = () => {
+        function toggle() {
             if (typeof checked === 'undefined') return false;
 
             switch (checked) {
@@ -67,7 +68,7 @@ const ShipListTitle = extend({
                 default: {
                 }
             }
-        };
+        }
 
         if (typeId) {
             const type = db.shipTypes[typeId];
@@ -81,7 +82,11 @@ const ShipListTitle = extend({
                     <Title
                         component="h4"
                         className={className + '-title'}
-                        children={type.name[dbLocaleId] || type.name.ja_jp}
+                        children={
+                            typeof name === 'object' && name[dbLocaleId]
+                                ? name[dbLocaleId]
+                                : type.name[dbLocaleId] || type.name.ja_jp
+                        }
                     />
                     {type.code && <small className="code">[{type.code}]</small>}
                 </div>
@@ -95,7 +100,7 @@ const ShipListTitle = extend({
                 >
                     <Checkmark checked={checked} />
                     {__('shipclass', {
-                        class: db.shipClasses[shipClassId]._name
+                        class: db.shipClasses[shipClassId]._name,
                     })}
                 </h5>
             );

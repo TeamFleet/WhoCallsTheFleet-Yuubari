@@ -4,6 +4,7 @@ import kckit from 'kckit';
 import { extend } from 'koot';
 
 import db from '@database';
+import getShipSubType from '@api/get-ship-sub-type';
 import dataTP from 'kckit/src/data/tp';
 import equipmentTypes from 'kckit/src/types/equipments';
 import getShip from '@utils/get-ship';
@@ -21,6 +22,7 @@ const SpecialCapability = extend({
     const thisShip = getShip(ship);
     if (!thisShip) return null;
 
+    const subType = getShipSubType(ship);
     const className = `${_className} ${dataClassName}-ship-special`;
 
     // 特殊攻击
@@ -67,12 +69,7 @@ const SpecialCapability = extend({
         );
     }
 
-    const {
-        count_as_landing_craft,
-        count_as_night_operation_aviation_personnel,
-        attack_surface_ship_prioritised,
-    } = thisShip.getCapability();
-    const thisShipIsCV = ship.isType('cv');
+    const { count_as_landing_craft } = thisShip.getCapability();
 
     // 运输舰
     if (count_as_landing_craft) {
@@ -108,7 +105,7 @@ const SpecialCapability = extend({
     }
 
     // 夜间作战航空母舰
-    if (thisShipIsCV && count_as_night_operation_aviation_personnel) {
+    if (subType === 'NightCarrier') {
         const description = __(
             'ship_specials.night_operation_carrier.description'
         ).split('[NightOperationAviationPersonnel]');
@@ -138,7 +135,7 @@ const SpecialCapability = extend({
     }
 
     // 攻击航母
-    if (thisShipIsCV && attack_surface_ship_prioritised) {
+    if (subType === 'AssultCarrier') {
         return (
             <ComponentContainer
                 className={classNames([
@@ -158,7 +155,7 @@ const SpecialCapability = extend({
     }
 
     // 护卫航母
-    if (thisShipIsCV && thisShip.getStat('asw') > 0) {
+    if (subType === 'EscortCarrier') {
         return (
             <ComponentContainer
                 className={classNames([className, 'cve'])}

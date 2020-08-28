@@ -27,7 +27,7 @@ const checkShipCapability = (_ship, capability, equipments) => {
                 const level = ship.getCapability('anti_air_rocket_barrage');
                 if (level) {
                     capabilities[capability] = {
-                        equipments: ['_274']
+                        equipments: ['_274'],
                     };
                     if (level === 'high')
                         capabilities[capability].chance = 'high';
@@ -77,15 +77,15 @@ const checkShipCapability = (_ship, capability, equipments) => {
             case 'shelling': {
                 if (ship.isType('cv')) {
                     capabilities[capability] = {
-                        equipments: ['DiveBomber', 'TorpedoBomber']
+                        equipments: ['DiveBomber', 'TorpedoBomber'],
                     };
                 } else if (
                     [
                         'SmallCaliber',
                         'MediumCaliber',
                         'LargeCaliber',
-                        'SuperCaliber'
-                    ].some(type =>
+                        'SuperCaliber',
+                    ].some((type) =>
                         ship.slot.some((slot, slotIndex) =>
                             ship.canEquip(type, slotIndex)
                         )
@@ -111,7 +111,7 @@ const checkShipCapability = (_ship, capability, equipments) => {
                     const req = filterEquipmentTypes(ship, equipments);
                     capabilities[capability] = req.length
                         ? {
-                              equipments: req
+                              equipments: req,
                           }
                         : false;
                 } else {
@@ -135,14 +135,14 @@ const filterEquipmentTypes = (_ship, equipmentTypes) => {
     if (!Array.isArray(equipmentTypes)) equipmentTypes = [equipmentTypes];
 
     // 过滤目标装备类型，保留给定舰娘可装备的
-    const result = equipmentTypes.filter(t => ship.canEquip(t, true));
+    const result = equipmentTypes.filter((t) => ship.canEquip(t, true));
 
     // 检查额外可配置的装备，如果有目标装备类型的，追加到结果中
     const { additional_items: extra = [] } = ship;
-    extra.forEach(e => {
+    extra.forEach((e) => {
         const equipment = getEquipment(e);
         if (
-            equipmentTypes.some(t => {
+            equipmentTypes.some((t) => {
                 if (isNaN(t)) return equipment.isType(t);
                 return equipment.type === t;
             })

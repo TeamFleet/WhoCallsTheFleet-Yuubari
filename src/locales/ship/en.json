@@ -1,4 +1,11 @@
 {
+    "ship_sub_types": {
+        "NightCarrier": "Night Operation Aircraft Carrier",
+        "ModernizedCarrier": "Modernized Aircraft Carrier",
+        "EscortCarrier": "Escort Carrier",
+        "AssultCarrier": "Assult Light Aircraft Carrier"
+    },
+
     "special_attack": {
         "Nelson Touch": {
             "requirement": [

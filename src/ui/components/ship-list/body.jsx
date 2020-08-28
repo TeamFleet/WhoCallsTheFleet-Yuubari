@@ -513,6 +513,7 @@ class BodyCollections extends React.Component {
                                 {type.type && (!type.class || !index2) ? (
                                     <Title
                                         type={type.type}
+                                        name={type.name}
                                         id={this.props.id}
                                         ships={listType || list}
                                     />
