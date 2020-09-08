@@ -1,1 +1,99 @@
+@import '~base.less';
 
+.component {
+    hr {
+        border: 0;
+        height: 2px;
+        background: @color-border;
+        z-index: -2;
+    }
+}
+
+.component-title {
+    padding: 1em 0;
+    position: relative;
+
+    .title {
+        font-size: 50px;
+        margin-bottom: 0;
+        background: linear-gradient(
+            to bottom,
+            @theme-orange-200 0,
+            @theme-orange-a100 14%,
+            #fff 40%,
+            @theme-orange-a200 62%,
+            @theme-orange-a100 77%,
+            @theme-orange-200 100%
+        );
+    }
+    .sub-title {
+        margin-top: 0.5em;
+        background: none;
+        -webkit-background-clip: unset !important;
+        -webkit-text-fill-color: unset;
+        color: @theme-orange-100;
+        &[data-text] {
+            &::before {
+                content: unset;
+            }
+        }
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: -2em;
+        bottom: -2em;
+        right: -1em;
+        width: 100%;
+        z-index: -1;
+        background: url(~Assets/fairies/375.png) no-repeat 100% 0%;
+        background-size: contain;
+    }
+}
+
+.component-article,
+.component-footer {
+    display: flex;
+    flex-flow: row wrap;
+    .styles-screen-phone() {
+        display: block;
+    }
+    .screen-phone(.styles-screen-phone());
+}
+.component-block {
+    flex: 1;
+    .styles-screen-phone() {
+        margin-bottom: 3em;
+        line-height: 2em;
+    }
+    .screen-phone(.styles-screen-phone());
+}
+
+.component-article {
+    & > .main {
+        flex: 2;
+    }
+    & + hr {
+        .styles-screen-phone() {
+            display: none;
+        }
+        .screen-phone(.styles-screen-phone());
+    }
+
+    .list {
+        color: @color-base-dimmed;
+        list-style: none;
+        padding-left: 0;
+        a {
+            // color: inherit;
+            font-style: italic;
+        }
+        span {
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+    }
+}
+
+.component-footer {
+}

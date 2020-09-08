@@ -26,7 +26,7 @@ const htmlHead = (state, infos) => {
         // eslint-disable-next-line no-restricted-globals
         uri = typeof location !== 'undefined' ? location.pathname : undefined,
         title = siteName,
-        description,
+        description = '',
     } = {
         ...infosDefault,
         ...infos,
@@ -65,7 +65,8 @@ const htmlHead = (state, infos) => {
             title = title.replace(/\n/g, '') + ' - ' + siteName;
     }
 
-    if (description) description = description.replace(/\n/g, '');
+    if (description) description = description.replace(/\n/g, '') + ' | ';
+    description += __('description');
 
     if (origin.substr(origin.length - 1, 1) !== '/') origin += '/';
 

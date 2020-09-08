@@ -7,11 +7,12 @@ import htmlHead from '@utils/html-head';
 import db from '@database';
 import {
     init as shipDetailsInit,
-    reset as shipDetailsReset
+    reset as shipDetailsReset,
     //     TABINDEX
 } from '@api/pages';
 import getShipTypeName from '@utils/get-ship-type-name';
 import getShipClassNameAndNumber from '@utils/get-ship-class-name-and-number';
+import getPic from '@utils/get-pic.js';
 
 import InfosPageContainer from '@ui/containers/infos-page';
 
@@ -23,7 +24,7 @@ const tabsAvailable = [
     'infos',
     'capabilities',
     'bonuses',
-    'equipable'
+    'equipable',
     // 'voicelines',
     // 'availability'
 ];
@@ -35,7 +36,7 @@ tabsAvailable.forEach((tab, index) => {
     ] = require(`./details/${tab}.jsx`).default;
 });
 
-const getDescription = ship => {
+const getDescription = (ship) => {
     return (
         ship._name +
         // 舰级 & 舰种
@@ -51,7 +52,7 @@ const getDescription = ship => {
     );
 };
 
-export const getInfosId = id => `SHIP_${id}`;
+export const getInfosId = (id) => `SHIP_${id}`;
 
 // ============================================================================
 
@@ -80,15 +81,16 @@ export const getInfosId = id => `SHIP_${id}`;
                 ship._name,
                 typeof tab === 'undefined' || tab === tabsAvailable[0]
                     ? undefined
-                    : __('ship_details', tab)
+                    : __('ship_details', tab),
             ],
             subtitle:
                 getShipTypeName(ship) +
                 (ship.class || ship.class_no ? ' / ' : '') +
                 getShipClassNameAndNumber(ship),
-            description: getDescription(ship)
+            description: getDescription(ship),
+            image: state.server.origin + getPic(ship, '8'),
         });
-    }
+    },
 })
 class PageShipDetails extends React.Component {
     constructor(props) {
@@ -113,6 +115,7 @@ class PageShipDetails extends React.Component {
         window.scrollTo(undefined, 0);
         // }
     }
+    onTabChange = this.onTabChange.bind(this);
 
     componentDidMount() {
         this.props.dispatch(
@@ -128,6 +131,7 @@ class PageShipDetails extends React.Component {
         const currentTab = this.props.params.tab || 'index';
 
         if (__CLIENT__ && __DEV__)
+            // eslint-disable-next-line no-console
             console.log('thisShip', currentTab, this.ship);
 
         return (
@@ -144,9 +148,7 @@ class PageShipDetails extends React.Component {
                             ? this.props.params.tab
                             : tabsAvailable[0]
                     )}
-                    onTabChange={
-                        __CLIENT__ ? this.onTabChange.bind(this) : undefined
-                    }
+                    onTabChange={__CLIENT__ ? this.onTabChange : undefined}
                 />
                 <PageShipDetailsBody ship={this.ship} tab={currentTab}>
                     {this.props.children}
@@ -161,7 +163,7 @@ class PageShipDetails extends React.Component {
 const PageShipDetailsBody = ({ tab, ship }) => {
     if (!tab) return null;
     return React.createElement(contentComponents[tab], {
-        ship: ship
+        ship: ship,
     });
 
     // if (!this.props.children) return null
