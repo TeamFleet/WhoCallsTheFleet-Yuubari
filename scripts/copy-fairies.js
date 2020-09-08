@@ -12,9 +12,9 @@ const glob = require('glob-promise');
     const filenames = await glob('**/item_character.png', {
         cwd,
     });
-    const ids = filenames
-        .map((filename) => parseInt(filename.replace(/^([0-9]+).+$/, '$1')))
-        .sort((a, b) => a - b);
+    const ids = filenames.map((filename) =>
+        filename.replace(/^([0-9]+).+$/, '$1')
+    );
     const files = filenames.map((filename) => path.resolve(cwd, filename));
 
     let index = 0;
