@@ -331,9 +331,22 @@ module.exports = async (dbpath, topath) => {
     function addSubType(
         searchForCollectionName,
         searchForTypeId,
-        subTypeName,
+        subType,
         filterShip
     ) {
+        function getSubTypeNameObject(subType) {
+            const obj = {};
+            for (const [localeId, strings] of Object.entries(subTypes)) {
+                obj[localeId] = strings[subType];
+            }
+            return obj;
+        }
+
+        const subTypeName = getSubTypeNameObject(subType);
+
+        if (typeof filterShip !== 'function')
+            filterShip = (ship) => getShipSubType(ship) === subType;
+
         shipCollections.some(({ name, list }) => {
             if (
                 Object.values(name).every(
@@ -376,37 +389,10 @@ module.exports = async (dbpath, topath) => {
             });
         });
     }
-    function getSubTypeNameObject(subType) {
-        const obj = {};
-        for (const [localeId, strings] of Object.entries(subTypes)) {
-            obj[localeId] = strings[subType];
-        }
-        return obj;
-    }
-    addSubType(
-        '航空母舰',
-        10,
-        getSubTypeNameObject('ModernizedCarrier'),
-        (ship) => getShipSubType(ship) === 'ModernizedCarrier'
-    );
-    addSubType(
-        '航空母舰',
-        10,
-        getSubTypeNameObject('NightCarrier'),
-        (ship) => getShipSubType(ship) === 'NightCarrier'
-    );
-    addSubType(
-        '航空母舰',
-        9,
-        getSubTypeNameObject('EscortCarrier'),
-        (ship) => getShipSubType(ship) === 'EscortCarrier'
-    );
-    addSubType(
-        '航空母舰',
-        9,
-        getSubTypeNameObject('AssultCarrier'),
-        (ship) => getShipSubType(ship) === 'AssultCarrier'
-    );
+    addSubType('航空母舰', 10, 'ModernizedCarrier');
+    addSubType('航空母舰', 10, 'NightCarrier');
+    addSubType('航空母舰', 9, 'EscortCarrier');
+    addSubType('航空母舰', 9, 'AssultCarrier');
 
     // 遍历全部collection，将ship object替换为shipId，并生成可读版
     shipCollections.forEach((collection, indexCollection) => {
