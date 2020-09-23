@@ -38,7 +38,7 @@
         "classnames": "^2.2.6",
         "hotkeys-js": "^3.8.1",
         "kckit": "^1.50.0",
-        "koot": "^0.14.6",
+        "koot": "^0.14.8",
         "localforage": "^1.9.0",
         "lz-string": "^1.4.4",
         "md5-file": "^5.0.0",
@@ -48,7 +48,7 @@
         "react-transition-group": "^4.4.1",
         "swiper": "^5.4.5",
         "whocallsthefleet-backgrounds": "^1.3.2",
-        "whocallsthefleet-database": "^20200918.1.0"
+        "whocallsthefleet-database": "^20200924.0.0"
     },
     "devDependencies": {
         "@types/md5": "^2.2.0",
@@ -103,6 +103,6 @@
         ]
     },
     "koot": {
-        "version": "0.14.6"
+        "version": "0.14.8"
     }
 }
