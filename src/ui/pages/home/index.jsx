@@ -63,7 +63,7 @@ const PageHome = extend({
                                 pkgKoot.version,
                             ],
                         ].map(([name, url, version]) => (
-                            <li>
+                            <li key={name}>
                                 <a
                                     className="color-alt"
                                     href={url}
