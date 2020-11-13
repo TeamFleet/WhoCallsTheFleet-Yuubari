@@ -12,10 +12,11 @@ const navies = [
     'vmf', // 苏联海军
     'sm', // 瑞典海军
     'ran', // 澳大利亚皇家海军
-    'rnln' // 荷兰皇家海军
+    'rnln', // 荷兰皇家海军
+    'rocn', // 中华民国海军
 ];
 
-const getNavyIndex = navy => {
+const getNavyIndex = (navy) => {
     return navies.indexOf(navy);
     // switch (navy) {
     //     case 'ran': {
@@ -29,7 +30,7 @@ const getNavyIndex = navy => {
 };
 
 const FlagNavy = extend({
-    styles: require('./flag-navy.less')
+    styles: require('./flag-navy.less'),
 })(({ tag, component, element, className, shadow, navy, ...props }) => {
     const Component = tag || component || element || 'span';
     return (
@@ -37,7 +38,7 @@ const FlagNavy = extend({
             {...props}
             className={classNames({
                 [className]: true,
-                'has-shadow': !!shadow
+                'has-shadow': !!shadow,
             })}
             data-navy-id={getNavyIndex(navy)}
         />
