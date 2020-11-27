@@ -9,7 +9,7 @@ import getEquipment from '@utils/get-equipment';
 import getLink from '@utils/get-link';
 
 const LinkEquipment = extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })(
     memo(
         ({
@@ -27,6 +27,7 @@ const LinkEquipment = extend({
             const theTag = tag || component;
             const Component = theTag ? theTag : Link;
             const _equipment = getEquipment(equipment) || {};
+            console.log({ star });
 
             return (
                 <Component

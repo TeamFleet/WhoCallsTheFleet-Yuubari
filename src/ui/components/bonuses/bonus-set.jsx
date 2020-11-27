@@ -13,6 +13,8 @@ import ConditionShip from './condition-ship';
 export default ({ className, bonus, thisShip, thisEquipment }) => {
     if (!bonusIsSet(bonus)) return null;
 
+    const { listStar: stars = [] } = bonus;
+
     let condition = null;
     const getPropsEquipment = (id, o = {}) => {
         const { star, isCurrent: _isCurrent = false } = o;
@@ -23,9 +25,9 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
             iconSize: 'large',
             className: classNames(['equipment'], {
                 'is-current': isCurrent,
-                'color-alt': !isCurrent
+                'color-alt': !isCurrent,
             }),
-            star
+            star,
         };
     };
 
@@ -45,7 +47,9 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                             <Item
                                 index={index}
                                 key={index}
-                                {...getPropsEquipment(item)}
+                                {...getPropsEquipment(item, {
+                                    star: stars[index],
+                                })}
                             />
                         );
                     if (Array.isArray(item)) {
@@ -53,7 +57,9 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                             <Item
                                 index={index}
                                 key={index + '-' + index2}
-                                {...getPropsEquipment(item)}
+                                {...getPropsEquipment(item, {
+                                    star: stars[index],
+                                })}
                             />
                         ));
                     }
@@ -63,7 +69,7 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                 index={index}
                                 key={index}
                                 {...getPropsEquipment(item.id, {
-                                    star: item.star
+                                    star: item.star,
                                 })}
                             />
                         );
@@ -79,9 +85,9 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                             isCurrent: checkEquipment(
                                                 thisEquipment,
                                                 {
-                                                    isSurfaceRadar: true
+                                                    isSurfaceRadar: true,
                                                 }
-                                            )
+                                            ),
                                         })}
                                         component="span"
                                         equipmentName={__(
@@ -102,9 +108,9 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                             isCurrent: checkEquipment(
                                                 thisEquipment,
                                                 {
-                                                    isAARadar: true
+                                                    isAARadar: true,
                                                 }
-                                            )
+                                            ),
                                         })}
                                         component="span"
                                         equipmentName={__(
