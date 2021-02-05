@@ -6,11 +6,15 @@ import equipmentStats from '@const/equipment-stats';
 import Stat from '@ui/components/stat';
 import ImprovementStar from '@ui/components/improvement/star';
 
-export default ({ bonus }) => {
+export default ({ bonus, isOneOf = false }) => {
     if (typeof bonus !== 'object') return null;
 
     const isSet = typeof bonus.equipments === 'object';
-    let infoText = isSet ? __('bonuses.based_set') : '';
+    let infoText = isSet
+        ? isOneOf
+            ? __('bonuses.based_set_one_of')
+            : __('bonuses.based_set')
+        : '';
     let stats = null;
     let statsAccumulate = null;
 
@@ -18,7 +22,7 @@ export default ({ bonus }) => {
         if (!isSet) infoText = __('bonuses.based_on_number');
         stats = Object.keys(bonus.bonusCount)
             .sort((a, b) => parseInt(a) - parseInt(b))
-            .map(count => (
+            .map((count) => (
                 <div className="stats-line stats-has-extra" key={count}>
                     <div className="extra extra-type-count" data-count={count}>
                         {count}
@@ -30,7 +34,7 @@ export default ({ bonus }) => {
         if (!isSet) infoText = __('bonuses.based_on_star');
         stats = Object.keys(bonus.bonusImprove)
             .sort((a, b) => parseInt(a) - parseInt(b))
-            .map(star => (
+            .map((star) => (
                 <div className="stats-line stats-has-extra" key={star}>
                     {/* <div className="extra extra-type-star" data-star={star}>{star}</div> */}
                     <ImprovementStar
@@ -42,7 +46,7 @@ export default ({ bonus }) => {
             ));
     } else if (typeof bonus.bonusArea === 'object') {
         if (!isSet) infoText = __('bonuses.based_on_area');
-        stats = Object.keys(bonus.bonusArea).map(area => (
+        stats = Object.keys(bonus.bonusArea).map((area) => (
             <div className="stats-line stats-has-extra" key={area}>
                 <div className="extra extra-type-area" data-area={area}>
                     {__(`area`, area.toLowerCase())}
@@ -82,7 +86,7 @@ const BonusStats = ({ stats }) => {
     return (
         <div className="stats">
             {equipmentStats
-                .filter(stat => !isNaN(stats[stat]) && stats[stat])
+                .filter((stat) => !isNaN(stats[stat]) && stats[stat])
                 .map((stat, index) => {
                     const value = stats[stat];
                     let text = '';

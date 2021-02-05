@@ -1,8 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
+import { get } from 'kckit';
 import checkEquipment from 'kckit/src/check/equipment';
+import equipmentTypes from 'kckit/src/types/equipments';
 
 import LinkEquipment from '@ui/components/link/equipment';
+import ListEquipments from '@ui/components/list/equipments';
 import Icon from '@ui/components/icon';
 
 import bonusIsSet from './bonus-is-set';
@@ -36,6 +39,8 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
     } else if (typeof thisEquipment === 'object') {
         condition = <ConditionShip condition={bonus.ship} />;
     }
+
+    const isOneOf = Array.isArray(bonus.equipments?.hasOneOf);
 
     return (
         <div className={classNames([className, 'is-set'])}>
@@ -124,14 +129,51 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                 );
                             }
                             default: {
+                                if (equipmentTypes[item]) {
+                                    // console.log(item);
+                                    // console.log(equipmentTypes[item]);
+                                    // console.log(
+                                    //     get.equipmentType(equipmentTypes[item])
+                                    // );
+                                    const eType = get.equipmentType(
+                                        equipmentTypes[item]
+                                    );
+                                    return (
+                                        <Item
+                                            index={index}
+                                            key={index}
+                                            {...getPropsEquipment(1, {
+                                                isCurrent: checkEquipment(
+                                                    thisEquipment,
+                                                    {
+                                                        isAARadar: true,
+                                                    }
+                                                ),
+                                            })}
+                                            component="span"
+                                            equipmentName={eType._name}
+                                            icon={eType.icon}
+                                        />
+                                    );
+                                }
                                 return null;
                             }
                         }
                     }
                     return null;
                 })}
+                {isOneOf && (
+                    <div className="one-of">
+                        <ListEquipments
+                            className="list"
+                            list={bonus.equipments.hasOneOf.map(
+                                ({ isID }) => isID
+                            )}
+                        />
+                    </div>
+                )}
             </div>
-            <Stats bonus={bonus} />
+            <Stats bonus={bonus} isOneOf={isOneOf} />
         </div>
     );
 };
