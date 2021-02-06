@@ -6,12 +6,14 @@
     @offset-title-height: 6px;
     @offset-title-height-2: 4px;
 
-    padding-top: @main-margin-top;
-    .screen-tablet({
+    &.mod-infos {
+        padding-top: @main-margin-top;
+        .screen-tablet({
             padding-top:0;
         });
-    @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max) {
-        padding-top: (@main-margin-top - 5);
+        @media all and (min-width: (@screen-tablet + 1)) and (max-height: @layout-height-max) {
+            padding-top: (@main-margin-top - 5);
+        }
     }
 
     .infos {

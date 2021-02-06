@@ -127,6 +127,7 @@ class MainHeaderInfos extends React.Component {
                         'has-only-title': !children,
                     },
                 ])}
+                type="infos"
                 {...props}
             >
                 <div className="infos">

@@ -1,15 +1,16 @@
-@import "~base.less";
+@import '~base.less';
 
-.component{
-    & > .tabs{
-        line-height:@infos-tab-height;
+.component {
+    & > .tabs {
+        line-height: @infos-tab-height;
         position: relative;
         z-index: 5;
     }
-    .main-header-tab-item{
+
+    .main-header-tab-item {
         .style-tab();
         height: (@infos-tab-height - 1);
-        & + .main-header-tab-item{
+        & + .main-header-tab-item {
             margin-left: 20px;
         }
     }

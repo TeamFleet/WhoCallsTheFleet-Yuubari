@@ -49,6 +49,7 @@ class MainHeader extends React.Component {
             children,
             mainKey,
             onAnimationEnd,
+            type,
             ...props
         } = this.props;
 
@@ -62,6 +63,7 @@ class MainHeader extends React.Component {
                 className={classNames({
                     [className]: true,
                     'main-header': true,
+                    [`mod-${type}`]: !!type,
                     // wrapper: isPortal,
                     // 'mod-transition-enter': this.state.enter,
                     // 'mod-transition-enter-active': this.state.enterActive,
