@@ -9318,10 +9318,10 @@ jsx-ast-utils@^2.4.1:
     array-includes "^3.1.1"
     object.assign "^4.1.1"
 
-kckit@^1.59.0:
-  version "1.59.0"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.59.0.tgz#73d64c62d59e1730b3b81ba6f881cca34b62030d"
-  integrity sha512-75vDMCsWcnE5/w7ofC1bRRSE5G9pKHOKMusEyg6fxaxfL5JT5hqvtjNgFi15r9Vl/RTfj/Ib7eu6uy0Ev+RPGw==
+kckit@^1.59.1:
+  version "1.59.1"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.59.1.tgz#aaeb7c8d9f561a26eb87a5fd5c169f2c132dbfd5"
+  integrity sha512-S/pf9LEa9W1rr5tpFkY+wux6c6LclAmXLi+vV8T4tkDojwKjlwgosolP1OSWWUstwR0449pPCAZjJeHHAaipXA==
   dependencies:
     camelcase "6.2.0"
 

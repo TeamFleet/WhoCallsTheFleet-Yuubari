@@ -52,6 +52,7 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                             <Item
                                 index={index}
                                 key={index}
+                                // className="mod-underline"
                                 {...getPropsEquipment(item, {
                                     star: stars[index],
                                 })}
@@ -62,6 +63,7 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                             <Item
                                 index={index}
                                 key={index + '-' + index2}
+                                // className="mod-underline"
                                 {...getPropsEquipment(item, {
                                     star: stars[index],
                                 })}
@@ -73,6 +75,7 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                             <Item
                                 index={index}
                                 key={index}
+                                // className="mod-underline"
                                 {...getPropsEquipment(item.id, {
                                     star: item.star,
                                 })}
@@ -146,7 +149,7 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                                 isCurrent: checkEquipment(
                                                     thisEquipment,
                                                     {
-                                                        isAARadar: true,
+                                                        [`is${item}`]: true,
                                                     }
                                                 ),
                                             })}
@@ -166,9 +169,11 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                     <div className="one-of">
                         <ListEquipments
                             className="list"
+                            // classNameLink="mod-underline"
                             list={bonus.equipments.hasOneOf.map(
                                 ({ isID }) => isID
                             )}
+                            highlight={[thisEquipment?.id]}
                         />
                     </div>
                 )}
