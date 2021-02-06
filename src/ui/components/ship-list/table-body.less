@@ -153,4 +153,24 @@
             border: 1px solid fade(#fff, 10%);
         }
     }
+
+    // ******************************************
+
+    .body {
+        .stat-color(@stat, @color){
+            @selector: ~".cell.stat-@{stat}";
+            @{selector}{
+                .is-hover({
+                    &:after{
+                        background-color:	@color;
+                    }
+                });
+            }
+        }
+        .stat-color(fire, fade(@color-stat-fire, 20%));
+        .stat-color(torpedo, fade(@color-stat-torpedo, 20%));
+        .stat-color(night, fade(@color-stat-night, 40%));
+        .stat-color(aa, fade(@color-stat-aa, 20%));
+        .stat-color(armor, fade(@color-stat-armor, 20%));
+    }
 }

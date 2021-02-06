@@ -90,20 +90,6 @@
     "eslintIgnore": [
         "node_modules/**/*"
     ],
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.{js,jsx,ts,tsx,cjs,mjs}": [
-            "eslint --fix",
-            "prettier --write"
-        ],
-        "*.{json,md,css,less,sass,scss}": [
-            "prettier --write"
-        ]
-    },
     "koot": {
         "version": "0.14.12"
     }
