@@ -1,50 +1,52 @@
 @import './equipable.less';
 
-.component{
-    @height:    (@equipmenticon-size - 0);
+.component {
+    @height: (@equipmenticon-size - 0);
 
-    display:    inline-block;
-    height:     @height;
-    margin:     1em 1.25em ((@equipmenticon-size - @height) / 2) 0;
-    line-height:1.05em;
-    position:   relative;
-    padding:    0 15px;
-    border-radius:  (@height / 2);
+    display: inline-block;
+    height: @height;
+    margin: 1em 1.25em ((@equipmenticon-size - @height) / 2) 0;
+    line-height: 1.05em;
+    position: relative;
+    padding: 0 15px;
+    border-radius: (@height / 2);
+    border: 1px solid transparent;
 
-    &:after{
-        content:    "";
-        display:    inline-block;
+    &:after {
+        content: '';
+        display: inline-block;
         vertical-align: middle;
-        width:      0;
-        height:     100%;
-        overflow:   hidden;
+        width: 0;
+        height: 100%;
+        overflow: hidden;
     }
 
-    .wrapper{
-        display:    inline-block;
-        max-width:  100%;
+    .wrapper {
+        display: inline-block;
+        max-width: 100%;
         max-height: 100%;
         vertical-align: middle;
         transition-property: none;
-        small{
-            display:    block;
+        small {
+            display: block;
             // font-size:  14px;
         }
     }
 
-    &.on{
-        color:              @color-on;
-        background-color:   @color-on-border;
+    &.on {
+        color: @color-on;
+        background-color: @color-on-border;
     }
 
-    &.off{
-        color:              @color-off;
-        background-color:   @color-off-background;
+    &.off {
+        color: @color-off;
+        background-color: @color-off-background;
+        border-color: @color-badge-off-border;
         // opacity:        .5;
     }
 
-    &.is-special{
-        color:              @color-special;
-        background-color:   @color-special-border;
+    &.is-special {
+        color: @color-special;
+        background-color: @color-special-border;
     }
 }

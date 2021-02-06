@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { extend } from 'koot';
 import classNames from 'classnames';
 
 // import checkCssProp from 'check-css-prop';
 
-import Background from '@ui/components/background';
+// import Background from '@ui/components/background';
 
 // const cssBackdropFilter = __CLIENT__ && checkCssProp('backdrop-filter');
 
@@ -17,10 +17,10 @@ import Background from '@ui/components/background';
     styles: require('./styles.less'),
 })
 class MainHeader extends React.Component {
-    state = {
-        enter: true,
-        enterActive: false,
-    };
+    // state = {
+    //     enter: true,
+    //     enterActive: false,
+    // };
 
     mounted = false;
 
@@ -33,9 +33,9 @@ class MainHeader extends React.Component {
         // })
         setTimeout(() => {
             if (!this.mounted) return;
-            this.setState({
-                enterActive: true,
-            });
+            // this.setState({
+            //     enterActive: true,
+            // });
         });
     }
 
@@ -62,10 +62,10 @@ class MainHeader extends React.Component {
                 className={classNames({
                     [className]: true,
                     'main-header': true,
-                    wrapper: isPortal,
-                    'mod-transition-enter': this.state.enter,
-                    'mod-transition-enter-active': this.state.enterActive,
-                    'mod-transition-exit': this.keyCurrent !== mainKey,
+                    // wrapper: isPortal,
+                    // 'mod-transition-enter': this.state.enter,
+                    // 'mod-transition-enter-active': this.state.enterActive,
+                    // 'mod-transition-exit': this.keyCurrent !== mainKey,
                 })}
                 // onTransitionEnd={evt => {
                 //     // console.log(
@@ -83,44 +83,49 @@ class MainHeader extends React.Component {
                 //         })
                 //     }
                 // }}
-                onAnimationEnd={(evt) => {
-                    // console.log(evt.target, evt.currentTarget, evt.animationName)
-                    if (
-                        evt.target === evt.currentTarget &&
-                        evt.nativeEvent.animationName === 'fadein'
-                    ) {
-                        this.setState({
-                            enter: false,
-                            enterActive: false,
-                        });
-                    }
-                    if (typeof onAnimationEnd === 'function')
-                        return onAnimationEnd(evt);
-                }}
+                // onAnimationEnd={(evt) => {
+                //     // console.log(evt.target, evt.currentTarget, evt.animationName)
+                //     if (
+                //         evt.target === evt.currentTarget &&
+                //         evt.nativeEvent.animationName === 'fadein'
+                //     ) {
+                //         this.setState({
+                //             enter: false,
+                //             enterActive: false,
+                //         });
+                //     }
+                //     if (typeof onAnimationEnd === 'function')
+                //         return onAnimationEnd(evt);
+                // }}
                 {...props}
             >
                 {children}
-                {__CLIENT__ && (
-                    <Background className="bg-container" type="blured" />
-                )}
+                {/* {__CLIENT__ && (
+                    <Background
+                        className="main-mask bg-container"
+                        type="blured"
+                    />
+                )} */}
             </div>
         );
     }
 
     render() {
-        if (__SERVER__) return this.renderContent();
+        return this.renderContent(true);
+        // if (__SERVER__) return this.renderContent();
 
-        if (!this.props.mainKey) return null;
+        // if (!this.props.mainKey) return null;
 
-        if (!this.keyCurrent) this.keyCurrent = this.props.mainKey;
+        // if (!this.keyCurrent) this.keyCurrent = this.props.mainKey;
 
         // if (__DEV__) console.log('MainHeader', { current: this.keyCurrent, main: this.props.mainKey })
 
-        return (
-            <MainHeaderPortal key={this.keyCurrent}>
-                {this.renderContent(true)}
-            </MainHeaderPortal>
-        );
+        // return this.renderContent(true);
+        // return (
+        //     <MainHeaderPortal key={this.keyCurrent}>
+        //         {this.renderContent(true)}
+        //     </MainHeaderPortal>
+        // );
         // return (
         //     <MainHeaderPortal>
         //         <TransitionGroup
@@ -151,8 +156,8 @@ class MainHeader extends React.Component {
 
 export default MainHeader;
 
-const MainHeaderPortal = ({ children }) =>
-    ReactDOM.createPortal(children, document.getElementById('main-mask'));
+// const MainHeaderPortal = ({ children }) =>
+//     ReactDOM.createPortal(children, document.getElementById('main-mask'));
 // class MainHeaderPortal extends React.Component {
 //     // constructor() {
 //     //     super()

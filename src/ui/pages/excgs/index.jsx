@@ -18,6 +18,7 @@ import Page from '@ui/containers/page';
 import Title from '@ui/components/title';
 import Image from '@ui/components/image';
 import UnderConstruction from '@ui/components/under-construction';
+import MainHeader from '@ui/components/main-header/main-options';
 
 import styles from './index.styles.less';
 
@@ -107,22 +108,32 @@ class PageExCGs extends React.Component {
 
         return (
             <Page className={this.props.className}>
-                <UnderConstruction />
+                <MainHeader
+                    title={__('nav.excgs')}
+                    className="header"
+                    main={
+                        <>
+                            <UnderConstruction />
 
-                <div className="tabs">
-                    <div className="wrapper">
-                        {this.types.map((obj, index) => (
-                            <Tab
-                                key={index}
-                                index={index}
-                                name={obj._name}
-                                count={obj.list.length}
-                                isOn={index === this.props[TABINDEX]}
-                                cbChangeTab={this.props.changeTab}
-                            />
-                        ))}
-                    </div>
-                </div>
+                            <div className="tabs">
+                                <div className="wrapper">
+                                    {this.types.map((obj, index) => (
+                                        <Tab
+                                            key={index}
+                                            index={index}
+                                            name={obj._name}
+                                            count={obj.list.length}
+                                            isOn={
+                                                index === this.props[TABINDEX]
+                                            }
+                                            cbChangeTab={this.props.changeTab}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    }
+                />
 
                 <div>
                     <div className="title">

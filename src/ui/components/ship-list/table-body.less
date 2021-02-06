@@ -1,17 +1,17 @@
 @import './_.less';
 
-.component{
-    margin-top:     -21px;
+.component {
+    // margin-top:     -21px;
 
-    &.flex{
+    &.flex {
         .table();
-        .row{
+        .row {
             // padding:    5px 0;
             // height:     (@ship-link-height + 0);
             // position: relative;
-            .cell{
-                &:nth-child(n+2){
-                    line-height:1.2em;
+            .cell {
+                &:nth-child(n + 2) {
+                    line-height: 1.2em;
                 }
             }
             .is-hover({
@@ -29,13 +29,13 @@
                     background: @color-border;
                     left:       (0 - @main-margin-tablet);
                     right:      (0 - @main-margin-tablet);
-                    // margin-top: (0 - @ship-link-height / 2 - 6); 
+                    // margin-top: (0 - @ship-link-height / 2 - 6);
                     // top:        -1px;
                     transition: none;
                     z-index:    -1;
                 }
                 // &:last-child::after{
-                //     content:    "";
+                //     content:      ;
                 //     position:   absolute;
                 //     height:     1px;
                 //     background: @color-border;
@@ -58,23 +58,23 @@
             });
         }
         .cell.ship,
-        .cell.stat{
-            padding:    5px 0;
-            height:     (@ship-link-height + 10px);
-            display:    flex;
-            flex-flow:  column wrap;
+        .cell.stat {
+            padding: 5px 0;
+            height: (@ship-link-height + 10px);
+            display: flex;
+            flex-flow: column wrap;
             justify-content: center;
         }
 
         // ******************************************
 
+        margin-top: -1px;
         .screen-max({
             margin-left:    -20px;
             margin-right:   -15px;
         });
 
         .screen-t1({
-            margin-top:     -22px;
             margin-left:    -35px;
             margin-right:   -25px;
             .body{
@@ -84,7 +84,7 @@
 
         .screen-tablet({
             padding-left:   0;
-            margin-top:     -22px;
+            margin-top:     -2px;
             margin-left:    (0 - @main-margin-tablet);
             margin-right:   (0 - @main-margin-tablet);
             .body{
@@ -105,11 +105,11 @@
 
     // ******************************************
 
-    sup{
-        padding-left: .1rem;
-        position:   absolute;
-        top:        auto;
-        margin-top: .15rem;
+    sup {
+        padding-left: 0.1rem;
+        position: absolute;
+        top: auto;
+        margin-top: 0.15rem;
         .screen-t1({
             font-size: 12px;
             transform: scale((10 / 12));
@@ -117,58 +117,40 @@
         });
     }
 
-    .stat-luck{
+    .stat-luck {
         padding-right: 1em;
     }
 
     // ******************************************
 
-    .top-first, .top-second{
-        &:before{
-            @height:    (@ship-link-height + 2);
-            content:    "";
-            position:   absolute;
-            top:        50%;
+    .top-first,
+    .top-second {
+        &:before {
+            @height: (@ship-link-height + 2);
+            content: '';
+            position: absolute;
+            top: 50%;
             margin-top: (0 - @height / 2);
-            height:     @height;
-            z-index:    -1;
-            left:       1px;
-            right:      1px;
+            height: @height;
+            z-index: -1;
+            left: 1px;
+            right: 1px;
         }
     }
 
-    .top-first{
-        color:      #fff;
-        &:before{
-            background:     fade(#fff, 20%);
-            border:         1px solid fade(#fff, 15%);
+    .top-first {
+        color: #fff;
+        &:before {
+            background: fade(#fff, 20%);
+            border: 1px solid fade(#fff, 15%);
         }
     }
 
-    .top-second{
-        color:      #fff;
-        &:before{
-            background:     fade(#fff, 7.5%);
-            border:         1px solid fade(#fff, 10%);
+    .top-second {
+        color: #fff;
+        &:before {
+            background: fade(#fff, 7.5%);
+            border: 1px solid fade(#fff, 10%);
         }
-    }
-
-    // ******************************************
-
-    .body{
-        .stat-color(@stat, @color){
-            .cell.stat-@{stat}{
-                .is-hover({
-                    &:after{
-                        background-color:	@color;
-                    }
-                });
-            }
-        }
-        .stat-color(fire, fade(@color-stat-fire, 20%));
-        .stat-color(torpedo, fade(@color-stat-torpedo, 20%));
-        .stat-color(night, fade(@color-stat-night, 40%));
-        .stat-color(aa, fade(@color-stat-aa, 20%));
-        .stat-color(armor, fade(@color-stat-armor, 20%));
     }
 }

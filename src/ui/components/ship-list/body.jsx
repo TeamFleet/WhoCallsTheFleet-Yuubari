@@ -261,12 +261,10 @@ class Body extends React.Component {
                         .isModeCompare,
                 })}
             >
-                {__CLIENT__ && (
-                    <Header
-                        id={this.props.id}
-                        extraButtons={this.getExtraButtons()}
-                    />
-                )}
+                <Header
+                    id={this.props.id}
+                    extraButtons={this.getExtraButtons()}
+                />
 
                 <BodyCompare show={showType === 'compare'} id={this.props.id} />
                 <BodyFiltered

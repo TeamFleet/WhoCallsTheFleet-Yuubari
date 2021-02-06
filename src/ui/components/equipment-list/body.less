@@ -1,21 +1,21 @@
 @import './_.less';
 
-.component{
-    padding-top:    @header-height;
-    .screen-phone({
-        padding-top:@header-height-phone;
-    });
+// .component{
+//     padding-top:    @header-height;
+//     .screen-phone({
+//         padding-top:@header-height-phone;
+//     });
 
-}
+// }
 
-.component-list{
-    @transition-duration:   (@duration-main-transition / 3 * 2);
+.component-list {
+    @transition-duration: (@duration-main-transition / 3 * 2);
     @transition-duration-enter: @transition-duration;
-    @transition-delay:      (@transition-duration / 3);
+    @transition-delay: (@transition-duration / 3);
 
     &.transition-enter {
-        opacity:    0.01 !important;
-        transform:  translateY(-1rem);
+        opacity: 0.01 !important;
+        transform: translateY(-1rem);
         transition-property: opacity, transform;
 
         .screen-phone({
@@ -24,8 +24,8 @@
         });
 
         &.transition-enter-active {
-            opacity:    1 !important;
-            transform:  none;
+            opacity: 1 !important;
+            transform: none;
             transition-duration: @transition-duration-enter;
             // transition-timing-function: ease-in;
         }
@@ -33,18 +33,18 @@
         .delays(10);
         .delays(@n, @i: 1) when (@i =< @n) {
             & + .transition-enter {
-                transition-delay:   (@transition-delay * @i);
+                transition-delay: (@transition-delay * @i);
                 .delays(@n, (@i + 1));
             }
         }
 
-        &.results{
-            transform:  none;
+        &.results {
+            transform: none;
         }
     }
-//     opacity: 0.01;
-//     animation: fadein @base-transition-duration @base-transition-timing-function;
-//     animation-fill-mode: both;
+    //     opacity: 0.01;
+    //     animation: fadein @base-transition-duration @base-transition-timing-function;
+    //     animation-fill-mode: both;
 }
 
 // .highlighting(@n, @i: 0) when (@i =< @n) {

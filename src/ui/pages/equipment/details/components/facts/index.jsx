@@ -23,7 +23,7 @@ import { get } from 'kckit';
 
 const EquipmentDetailsComponentFacts = extend({
     // connect: true,
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })(({ className, equipment }) => (
     <ComponentContainer className={className}>
         <EquipmentDetailsComponentFactsFacts equipment={equipment} />
@@ -35,21 +35,21 @@ const EquipmentDetailsComponentFacts = extend({
 // ============================================================================
 
 const EquipmentDetailsComponentFactsContainer = extend({
-    styles: require('./styles-container.less')
+    styles: require('./styles-container.less'),
 })(({ className, children }) => <div className={className}>{children}</div>);
 
 // ============================================================================
 
 const EquipmentDetailsComponentFactsFacts = extend({
-    styles: require('./styles-facts.less')
+    styles: require('./styles-facts.less'),
 })(({ equipment, className }) => {
     const items = [
         ['craftable', !!equipment.craftable],
         ['improvable', !!equipment.improvable],
         [
             'upgradable',
-            Array.isArray(equipment.upgrade_to) && equipment.upgrade_to.length
-        ]
+            Array.isArray(equipment.upgrade_to) && equipment.upgrade_to.length,
+        ],
     ];
 
     if (equipment.isType('Aircraft'))
@@ -57,7 +57,7 @@ const EquipmentDetailsComponentFactsFacts = extend({
 
     return (
         <EquipmentDetailsComponentFactsContainer className={className}>
-            {items.map(pair => (
+            {items.map((pair) => (
                 <Bullet
                     className="item"
                     title={__(
@@ -75,7 +75,7 @@ const EquipmentDetailsComponentFactsFacts = extend({
 // ============================================================================
 
 const EquipmentDetailsComponentFactsStats = extend({
-    styles: require('./styles-stats.less')
+    styles: require('./styles-stats.less'),
 })(({ equipment, className }) => {
     const stats = [...arrStats];
     const isInterceptor = equipment.isType('Interceptor');
@@ -85,7 +85,7 @@ const EquipmentDetailsComponentFactsStats = extend({
 
     return (
         <EquipmentDetailsComponentFactsContainer className={className}>
-            {stats.map(stat => {
+            {stats.map((stat) => {
                 const value =
                     stat === 'range'
                         ? get.range(equipment.stat[stat])
@@ -96,9 +96,6 @@ const EquipmentDetailsComponentFactsStats = extend({
                     else if (stat === 'evasion') stat = 'interception';
                 }
 
-                {
-                    /* if (!value) return null */
-                }
                 return (
                     <StatValue
                         key={stat}
@@ -133,8 +130,8 @@ const StatValue = ({ stat, value, className, hideTitle }) => (
                 'is-negative': value < 0,
                 'is-positive':
                     value > 0 && stat !== 'range' && stat !== 'distance',
-                disabled: !value
-            }
+                disabled: !value,
+            },
         ])}
         stat={stat}
     >
@@ -147,7 +144,7 @@ const StatValue = ({ stat, value, className, hideTitle }) => (
 // ============================================================================
 
 const Scrap = extend({
-    styles: require('./styles-stats-scrap.less')
+    styles: require('./styles-stats-scrap.less'),
 })(({ scrap }) => (
     <Stat
         type={__(`equipment_details.scrap`)}
@@ -161,8 +158,8 @@ const Scrap = extend({
                     className={classNames([
                         'scrap-resource',
                         {
-                            disabled: !value
-                        }
+                            disabled: !value,
+                        },
                     ])}
                     key={index}
                     stat={resource}
@@ -180,14 +177,14 @@ const getStrShipClass = (shipTypeId, shipClass) => {
     if (shipTypeId)
         return __('shiptypeclass', {
             type: get.shipType(shipTypeId)._name,
-            class: shipClass._name
+            class: shipClass._name,
         });
     return __('shipclass', {
-        class: shipClass._name
+        class: shipClass._name,
     });
 };
 const BonusStat = extend({
-    styles: require('./styles-stats-bonus.less')
+    styles: require('./styles-stats-bonus.less'),
 })(({ bonus, className }) => {
     if (!Array.isArray(bonus) || !bonus.length) return null;
 
@@ -202,7 +199,7 @@ const BonusStat = extend({
                     if (o.bonus[key])
                         stats.push({
                             stat: key,
-                            value: o.bonus[key]
+                            value: o.bonus[key],
                         });
                 }
                 return (
@@ -228,7 +225,7 @@ const BonusStat = extend({
                         )}
                         {hasShips && (
                             <div className="ships">
-                                {o.ships.map(ship => (
+                                {o.ships.map((ship) => (
                                     <LinkMini
                                         className="ship"
                                         ship={ship}
@@ -241,7 +238,7 @@ const BonusStat = extend({
                             <span className="title">
                                 {__(`equipment_details.bonus_stat`)}
                             </span>
-                            {stats.map(o => (
+                            {stats.map((o) => (
                                 <StatValue
                                     key={o.stat}
                                     className="stat"

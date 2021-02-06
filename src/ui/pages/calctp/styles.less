@@ -1,100 +1,101 @@
-@import "~base.less";
+@import '~base.less';
 
 @counter-width: 220px;
 
-.component{
-    border-top: (@main-header-height + @main-header-options-height) solid transparent;
-}
+// .component{
+//     border-top: (@main-header-height + @main-header-options-height) solid transparent;
+// }
 
 // .component-header{
 //     height: @infos-tab-height;
 // }
-    .component-header-title{
-        line-height: @main-header-height;
+.component-header-title {
+    line-height: @main-header-height;
+}
+.component-header-result {
+    line-height: @main-header-options-height;
+    color: @color-base-dimmed;
+    font-size: 20px;
+    strong,
+    span {
+        display: inline-block;
     }
-    .component-header-result{
-        line-height: @main-header-options-height;
-        color: @color-base-dimmed;
-        font-size: 20px;
-        strong, span{
-            display: inline-block;
-        }
-        strong{
-            color: @theme-amber-a100;
-        }
-        span{
-            color: @theme-red-a100;
-            margin-left: 1em;
-        }
+    strong {
+        color: @theme-amber-a100;
     }
+    span {
+        color: @theme-red-a100;
+        margin-left: 1em;
+    }
+}
 
 // .component-body{
 // }
-    .component-body-set{
-        overflow: hidden;
-    }
-    .component-body-title:first-child{
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-        .component-body-set ~ .component-body-set .component-body-title{
-            margin-top: 30px;
-        }
-    .component-body-grid{
-        margin-left: -5px;
-        margin-right: -6px;
-        display: grid;
-        grid-gap: 0;
-        grid-template-columns: repeat(auto-fill, minmax(@counter-width, 1fr) );
-        // border-left: 1px solid @color-border;
-        border-top: 1px solid @color-border;
-        .screen-phone({
+.component-body-set {
+    overflow: hidden;
+}
+.component-body-title:first-child {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.component-body-set ~ .component-body-set .component-body-title {
+    margin-top: 30px;
+}
+.component-body-grid {
+    margin-left: -5px;
+    margin-right: -6px;
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: repeat(auto-fill, minmax(@counter-width, 1fr));
+    // border-left: 1px solid @color-border;
+    border-top: 1px solid @color-border;
+    .screen-phone({
             display: block;
         });
-    }
-    .component-body-counter{
-        @height: (@equipmenticon-size + 5 + 5 + 1);
+}
+.component-body-counter {
+    @height: (@equipmenticon-size + 5 + 5 + 1);
 
-        position: relative;
-        height: @height;
-        padding: (5px + 1) (@input-counter-width + 10) 5px 5px;
-        border-right: 1px solid @color-border;
-        border-bottom: 1px solid @color-border;
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
+    position: relative;
+    height: @height;
+    padding: (5px + 1) (@input-counter-width + 10) 5px 5px;
+    border-right: 1px solid @color-border;
+    border-bottom: 1px solid @color-border;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 
-        // &:nth-child(even){
-        //     background: fade(#fff, 5%);
-        // }
+    // &:nth-child(even){
+    //     background: fade(#fff, 5%);
+    // }
 
-        .component-body-counter-name{
-            color: @color-alt;
-            font-size: 14px;
-            line-height: 1.2em;
-            padding-left: 5px;
-            small{
-                font-size:  12px;
-                margin-left:10px;
-                font-weight:normal;
-                color:      @color-base-dimmed;
-                // color:      @color-base;
-                vertical-align: bottom;
-            }
-            &[data-icon]{
-                padding-left: (@equipmenticon-size - 5);
-                position: static;
-                &::before{
-                    position: absolute;
-                    top: 50%;
-                    margin-top: (0 - @equipmenticon-size / 2);
-                    left: 0;
-                }
+    .component-body-counter-name {
+        color: @color-alt;
+        font-size: 14px;
+        line-height: 1.2em;
+        padding-left: 5px;
+        small {
+            font-size: 12px;
+            margin-left: 10px;
+            font-weight: normal;
+            color: @color-base-dimmed;
+            // color:      @color-base;
+            vertical-align: bottom;
+        }
+        &[data-icon] {
+            padding-left: (@equipmenticon-size - 5);
+            position: static;
+            &::before {
+                position: absolute;
+                top: 50%;
+                margin-top: (0 - @equipmenticon-size / 2);
+                left: 0;
             }
         }
-        .component-body-counter-counter{
-            position: absolute;
-            top: ((@height - @input-counter-height) / 2);
-            right: 5px;
-        }
     }
+    .component-body-counter-counter {
+        position: absolute;
+        top: ((@height - @input-counter-height) / 2);
+        right: 5px;
+    }
+}
