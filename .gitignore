@@ -57,3 +57,4 @@ node_modules/
 .koot.config.tmp.*.js
 /.static
 /report.*
+.husky
