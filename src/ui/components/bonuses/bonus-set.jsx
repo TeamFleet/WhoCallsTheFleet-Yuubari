@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classNames from 'classnames';
 import { get } from 'kckit';
 import checkEquipment from 'kckit/src/check/equipment';
@@ -40,7 +40,7 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
         condition = <ConditionShip condition={bonus.ship} />;
     }
 
-    const isOneOf = Array.isArray(bonus.equipments?.hasOneOf);
+    let isOneOf = Array.isArray(bonus.equipments?.hasOneOf);
 
     return (
         <div className={classNames([className, 'is-set'])}>
@@ -83,7 +83,17 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                         );
                     }
                     if (typeof item === 'string') {
-                        switch (item) {
+                        let type = item;
+                        let ids;
+                        const matches = /([a-zA-Z0-9]+)\[([0-9,]+)\]/.exec(
+                            item
+                        );
+                        if (Array.isArray(matches) && matches.length > 2) {
+                            type = matches[1];
+                            ids = matches[2].split(',');
+                            isOneOf = false;
+                        }
+                        switch (type) {
                             case 'SurfaceRadar':
                                 return (
                                     <Item
@@ -101,6 +111,8 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                         equipmentName={__(
                                             'equipment_types.surface_radar'
                                         )}
+                                        ids={ids}
+                                        thisEquipment={thisEquipment}
                                     >
                                         <span className="equipment-type-explain">
                                             {__('stat.los')} ≥ 5
@@ -124,6 +136,8 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                         equipmentName={__(
                                             'equipment_types.aa_radar'
                                         )}
+                                        ids={ids}
+                                        thisEquipment={thisEquipment}
                                     >
                                         <span className="equipment-type-explain">
                                             {__('stat.aa')} ≥ 1
@@ -156,6 +170,8 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                             component="span"
                                             equipmentName={eType._name}
                                             icon={eType.icon}
+                                            ids={ids}
+                                            thisEquipment={thisEquipment}
                                         />
                                     );
                                 }
@@ -166,26 +182,50 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                     return null;
                 })}
                 {isOneOf && (
-                    <div className="one-of">
-                        <ListEquipments
-                            className="list"
-                            // classNameLink="mod-underline"
-                            list={bonus.equipments.hasOneOf.map(
-                                ({ isID }) => isID
-                            )}
-                            highlight={[thisEquipment?.id]}
-                        />
-                    </div>
+                    <OneOfList
+                        list={bonus.equipments.hasOneOf.map(({ isID }) => isID)}
+                        thisEquipment={thisEquipment}
+                    />
                 )}
             </div>
-            <Stats bonus={bonus} isOneOf={isOneOf} />
+            <Stats
+                bonus={bonus}
+                // isOneOf={isOneOf}
+            />
         </div>
     );
 };
 
-const Item = ({ index, children, ...props }) => (
-    <LinkEquipment {...props}>
-        <Icon icon={!index ? 'hammer-wrench' : 'plus3'} className="symbol" />
-        {children}
-    </LinkEquipment>
+const Item = ({ index, children, ids, thisEquipment, ...props }) => (
+    <>
+        <LinkEquipment {...props}>
+            <Icon
+                icon={!index ? 'hammer-wrench' : 'plus3'}
+                className="symbol"
+            />
+            {children}
+        </LinkEquipment>
+        <OneOfList list={ids} thisEquipment={thisEquipment} />
+    </>
+);
+
+const OneOfList = memo(
+    ({ list, thisEquipment }) =>
+        Array.isArray(list) &&
+        list.length > 0 && (
+            <div className="one-of">
+                <div className="wrapper">
+                    <span
+                        className="only"
+                        data-text={__('bonuses.based_set_one_of_only')}
+                    />
+                    <ListEquipments
+                        className="list"
+                        // classNameLink="mod-underline"
+                        list={list}
+                        highlight={[thisEquipment?.id]}
+                    />
+                </div>
+            </div>
+        )
 );

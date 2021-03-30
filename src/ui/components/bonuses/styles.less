@@ -292,21 +292,51 @@
             }
             & > .one-of {
                 clear: both;
-                margin-top: 30px;
+                // margin-top: 30px;
                 margin-left: @size-icon;
-                border: 2px solid @color-border;
-                border-radius: 5px;
-                font-size: 14px;
-                padding: 0 10px 6px 10px;
-                background: @color-border-2;
-                & > .list {
-                    margin-top: 0;
-                    line-height: 24px;
-                    .mod-highlight {
-                        color: @color-golden;
-                        pointer-events: none;
-                        text-decoration: none;
-                        font-weight: 600;
+                & > .wrapper {
+                    @only-width: 24px;
+                    display: inline-block;
+                    margin-top: 4px;
+                    border: 2px solid @color-border;
+                    border-radius: 5px;
+                    font-size: 14px;
+                    background: @color-border-2;
+                    position: relative;
+                    padding: 0 10px 6px (8px + @only-width);
+                    & > .only {
+                        color: @color-active;
+                        background: @color-border;
+                        display: block;
+                        position: absolute;
+                        width: @only-width;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        &::before {
+                            content: attr(data-text);
+                            text-align: right;
+                            white-space: nowrap;
+                            width: 0;
+                            height: 0;
+                            line-height: 0;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            margin-top: 50%;
+                            transform-origin: 0% 50%;
+                            transform: rotate(-90deg);
+                        }
+                    }
+                    & > .list {
+                        margin-top: 0;
+                        line-height: 24px;
+                        .mod-highlight {
+                            color: @color-golden;
+                            pointer-events: none;
+                            text-decoration: none;
+                            font-weight: 600;
+                        }
                     }
                 }
             }

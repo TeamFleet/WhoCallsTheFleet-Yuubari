@@ -149,6 +149,7 @@
         "based_on_nothing": "每个该装备提供...",
         "based_set": "额外加成...",
         "based_set_one_of": "当拥有以上任意装备时，提供额外加成...",
+        "based_set_one_of_only": "仅限",
         "based_set_accumulate": "累计套装加成...",
         "note_hybrid_radar": "以下装备同时算作对水面和对空电探/雷达",
         "note_hybrid_radar_this_equipment": "本装备同时算作对水面和对空电探/雷达"
