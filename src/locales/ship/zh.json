@@ -3,7 +3,9 @@
         "NightCarrier": "夜间作战航空母舰",
         "ModernizedCarrier": "近代化航空母舰",
         "EscortCarrier": "护航航母",
-        "AssultCarrier": "攻击型轻航母"
+        "AssultCarrier": "攻击型轻航母",
+        "SpecialRevisedAviationCruiser": "特殊改装航空巡洋舰",
+        "HeavyRevisedLightCruiser": "重改装轻巡洋舰"
     },
 
     "special_attack": {

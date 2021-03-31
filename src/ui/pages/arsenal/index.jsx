@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { createContext, useState, useContext, memo } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
 import db from '@database';
-// import pref from '@api/preferences'
+import pref from '@api/preferences';
 
 import htmlHead from '@utils/html-head';
 import getTimeJST from '@utils/get-time-jst';
@@ -26,6 +26,9 @@ import {
     Resources as ImprovementResources,
 } from '@ui/components/improvement';
 import ImprovementStar from '@ui/components/improvement/star';
+import Icon from '@components/icon';
+
+// ============================================================================
 
 const daysArr = [
     'Sunday',
@@ -37,7 +40,9 @@ const daysArr = [
     'Saturday',
 ];
 
-//
+const ArsenalContext = createContext();
+
+// ============================================================================
 
 @extend({
     connect: true,
@@ -60,13 +65,28 @@ const daysArr = [
 class PageArsenal extends React.Component {
     state = {
         rendering: true,
+        watchList: pref.arsenalWatchList,
+        collectionShow: db.equipmentCollections
+            .map((c) => c.name)
+            .reduce((r, cName) => {
+                r[cName] =
+                    !Array.isArray(pref.arsenalWatchList) ||
+                    !pref.arsenalWatchList.length;
+                return r;
+            }, {}),
     };
 
-    componentDidUpdate(prevProps /*, prevState*/) {
+    componentDidMount() {
+        // get watchList, update collectionShow
+    }
+
+    componentDidUpdate(prevProps, prevState) {
         // const prevParams = prevProps.params || {}
         // const params = this.props.params || {}
         if (prevProps.params.day !== this.props.params.day)
             window.scrollTo(undefined, 0);
+        if (prevState.watchList !== this.state.watchList)
+            pref.arsenalWatchList = this.state.watchList;
     }
 
     onRender() {
@@ -77,6 +97,33 @@ class PageArsenal extends React.Component {
     }
     onRender = this.onRender.bind(this);
 
+    watchAdd(equipmentId, improvementIndex) {
+        // console.log('WatchList: add', equipmentId, improvementIndex);
+        const value = `${equipmentId}-${improvementIndex}`;
+        this.setState((state) => ({
+            watchList: Array.isArray(state.watchList)
+                ? [...state.watchList, value]
+                : [value],
+        }));
+    }
+    watchAdd = this.watchAdd.bind(this);
+    watchRemove(equipmentId, improvementIndex) {
+        if (!Array.isArray(this.state.watchList)) return;
+        const value = `${equipmentId}-${improvementIndex}`;
+        this.setState((state) => {
+            const index = state.watchList.indexOf(value);
+            if (index < 0) return {};
+            if (state.watchList.length === 1)
+                return {
+                    watchList: false,
+                };
+            return {
+                watchList: [...state.watchList.splice(index, 1)],
+            };
+        });
+    }
+    watchRemove = this.watchRemove.bind(this);
+
     render() {
         const day =
             typeof this.props.params === 'object' &&
@@ -86,29 +133,43 @@ class PageArsenal extends React.Component {
         // console.log(db)
         // console.log('[PageArsenal] render')
         return (
-            <Page
-                className={this.props.className}
-                pathname={this.props.location.pathname}
-                rendering={this.state.rendering}
-                // location={this.props.location}
-                // params={this.props.params}
-                // route={this.props.route}
-                // routeParams={this.props.routeParams}
-                // router={this.props.router}
-                // routes={this.props.routes}
+            <ArsenalContext.Provider
+                value={{
+                    watchList: this.state.watchList,
+                    watchAdd: this.watchAdd,
+                    watchRemove: this.watchRemove,
+                    collectionShow: this.state.collectionShow,
+                }}
             >
-                <PageArsenalHeader
-                    isDay={
-                        typeof this.props.params === 'object' &&
-                        typeof this.props.params.day !== 'undefined'
-                    }
-                />
+                <Page
+                    className={this.props.className}
+                    pathname={this.props.location.pathname}
+                    rendering={this.state.rendering}
+                    // location={this.props.location}
+                    // params={this.props.params}
+                    // route={this.props.route}
+                    // routeParams={this.props.routeParams}
+                    // router={this.props.router}
+                    // routes={this.props.routes}
+                >
+                    <PageArsenalHeader
+                        isDay={
+                            typeof this.props.params === 'object' &&
+                            typeof this.props.params.day !== 'undefined'
+                        }
+                    />
 
-                {day > -1 && (
-                    <PageArsenalListDay day={day} onRender={this.onRender} />
-                )}
-                {day === -1 && <PageArsenalListAll onRender={this.onRender} />}
-            </Page>
+                    {day > -1 && (
+                        <PageArsenalListDay
+                            day={day}
+                            onRender={this.onRender}
+                        />
+                    )}
+                    {day === -1 && (
+                        <PageArsenalListAll onRender={this.onRender} />
+                    )}
+                </Page>
+            </ArsenalContext.Provider>
         );
     }
 }
@@ -191,29 +252,41 @@ PageArsenalHeaderAkashi.getAnimation = () => Math.floor(Math.random() * 3 + 1);
 
 //
 
-const PageArsenalList = (props) =>
-    props.collections.map((collection, index) => {
-        function onRender() {
-            if (
-                typeof props.onRender === 'function' &&
-                index >= props.collections.length - 1
-            )
-                props.onRender(this);
-        }
-        return (
-            <PageArsenalCollection
-                key={`collection-${collection.title}`}
-                title={collection.title}
-                index={index}
-                onRender={onRender}
-            >
-                {collection.list}
-            </PageArsenalCollection>
-        );
-    });
+const PageArsenalList = memo(({ onRender, collections, day }) => {
+    const { collectionShow } = useContext(ArsenalContext);
+    return (
+        <>
+            <PageArsenalListWatching
+                key="collection-WATCH"
+                day={day}
+                index={-1}
+            />
+            {collections.map((collection, index) => {
+                function _onRender() {
+                    if (
+                        typeof onRender === 'function' &&
+                        index >= collections.length - 1
+                    )
+                        onRender(this);
+                }
+                return (
+                    <PageArsenalCollection
+                        key={`collection-${collection.title}`}
+                        title={collection.title}
+                        index={index}
+                        onRender={_onRender}
+                        defaultShow={collectionShow[collection.title]}
+                    >
+                        {collection.list}
+                    </PageArsenalCollection>
+                );
+            })}
+        </>
+    );
+});
 //
 
-const PageArsenalListDay = (props) => {
+const PageArsenalListDay = memo((props) => {
     // console.log('[PageArsenalListDay] render')
 
     let lastCollection = -1;
@@ -264,17 +337,18 @@ const PageArsenalListDay = (props) => {
                 equipment={equipment}
                 improvementIndex={improvementIndex}
                 requirements={item[2]}
+                rawData={item}
                 index={_index}
             />
         );
     });
 
     return <PageArsenalList collections={collections} {...props} />;
-};
+});
 
 //
 
-const PageArsenalListAll = (props) => {
+const PageArsenalListAll = memo((props) => {
     // console.log('[PageArsenalListAll] render')
 
     let lastCollection = -1;
@@ -324,6 +398,7 @@ const PageArsenalListAll = (props) => {
                     key={item + '-' + _index}
                     equipment={equipment}
                     improvementIndex={_index}
+                    rawData={item}
                     index={_index}
                 />
             );
@@ -331,7 +406,42 @@ const PageArsenalListAll = (props) => {
     });
 
     return <PageArsenalList collections={collections} {...props} />;
-};
+});
+
+//
+
+const PageArsenalListWatching = memo(({ index, day }) => {
+    const { watchList } = useContext(ArsenalContext);
+    const isEmpty = !(Array.isArray(watchList) && watchList.length > 0);
+    return (
+        <PageArsenalCollection
+            key="collection-WATCH"
+            title={__('arsenal.watch_list')}
+            index={index}
+            defaultShow={true}
+            isEmpty={isEmpty}
+        >
+            {isEmpty ? (
+                <div className="empty">
+                    <Icon icon="heart4" className="heart" />
+                    <span>{__('arsenal.watch_list_start_info')}</span>
+                </div>
+            ) : (
+                watchList.map((value) => {
+                    const [equipmentId, improvementIndex] = value.split('-');
+                    return (
+                        <PageArsenalListItem
+                            key={value}
+                            equipment={getEquipment(equipmentId)}
+                            improvementIndex={improvementIndex}
+                            day={day}
+                        />
+                    );
+                })
+            )}
+        </PageArsenalCollection>
+    );
+});
 
 //
 
@@ -351,7 +461,7 @@ class PageArsenalCollection extends React.Component {
             __SERVER__ || props.index === 0 || (__CLIENT__ && !props.ready);
         this.state = {
             render,
-            // show: false
+            show: this.props.defaultShow,
         };
         if (!render) {
             setTimeout(() => {
@@ -374,44 +484,57 @@ class PageArsenalCollection extends React.Component {
         this.mounted = false;
     }
 
+    toggle() {
+        this.setState((prevState) => ({
+            show: !prevState.show,
+        }));
+    }
+    toggle = this.toggle.bind(this);
+
     render() {
         if (!this.state.render) return null;
         // console.log(this.props.index, this.state.render)
         return (
-            <div className={this.props.className}>
+            <div
+                className={classNames([
+                    this.props.className,
+                    {
+                        on: this.state.show,
+                        'mod-empty': this.props.isEmpty,
+                    },
+                ])}
+            >
                 <Title
                     component="h2"
                     type="line-append"
-                    className={`${this.props.className}-title`}
+                    className={classNames([
+                        `${this.props.className}-title`,
+                        {
+                            on: this.state.show,
+                        },
+                    ])}
+                    classNameInner={`${this.props.className}-title-inner`}
                     inherit={true}
-                    /*
-                    className={classNames({
-                        [`${this.props.className}-title`]: true,
-                        'on': this.state.show
-                    })}
-                    onClick={() => {
-                        this.setState({
-                            show: !this.state.show
-                        })
-                    }}
-                    */
+                    onClick={this.toggle}
                     key={`${this.props.title}-title`}
                     children={this.props.title.split('&').join(' & ')}
                 />
-                <div
-                    /*
+                {this.state.show && (
+                    <div
+                        /*
                     className={classNames({
                         [`${this.props.className}-list`]: true,
                         'on': this.state.show
                     })}
                     children={this.state.show && this.props.children}
                     */
-                    className={`${this.props.className}-list`}
-                    children={
-                        this.state.render ? this.props.children : undefined
-                    }
-                    key={`${this.props.title}-list`}
-                />
+                        className={`${this.props.className}-list`}
+                        children={
+                            this.state.render ? this.props.children : undefined
+                        }
+                        key={`${this.props.title}-list`}
+                    />
+                )}
             </div>
         );
     }
@@ -419,12 +542,156 @@ class PageArsenalCollection extends React.Component {
 
 //
 
+// const PageArsenalListItem = extend({
+//     styles: require('./styles-item.less'),
+// })(
+//     memo(
+//         ({
+//             className,
+//             equipment,
+//             improvementIndex,
+//             requirements,
+//             rawData,
+//             defaultExpand = false,
+//         }) => {
+//             const { watchList, watchAdd, watchRemove } = useContext(
+//                 ArsenalContext
+//             );
+//             const [expand, setExpand] = useState(defaultExpand);
+
+//             function toggle() {
+//                 setExpand(!expand);
+//             }
+//             function watch() {
+//                 console.log(watchList, rawData);
+//             }
+
+//             // componentWillMount() {
+//             //     if (!this.state.render)
+//             //         setTimeout(() => {
+//             //             this.setState({
+//             //                 render: true
+//             //             })
+//             //         }, 1 * (this.props.index || 0))
+//             // }
+//             // if (!this.state.render) return null
+
+//             const reqShips = [];
+//             const data = equipment.improvement[improvementIndex];
+//             const hasUpgrade =
+//                 Array.isArray(data.upgrade) && data.upgrade.length;
+//             const showReqShips = Array.isArray(requirements);
+
+//             if (showReqShips) {
+//                 requirements.forEach((index) => {
+//                     if (
+//                         !Array.isArray(data.req) ||
+//                         !data.req[index] ||
+//                         !Array.isArray(data.req[index][1])
+//                     )
+//                         return;
+//                     data.req[index][1].forEach((id) => reqShips.push(id));
+//                 });
+//             }
+//             const hasReqShips = reqShips.length ? true : false;
+//             const showStar = hasUpgrade && data.upgrade[1] ? true : false;
+
+//             return (
+//                 <div className={className}>
+//                     <span
+//                         className={classNames({
+//                             [className + '-equipment']: true,
+//                             'has-upgrade': hasUpgrade,
+//                         })}
+//                     >
+//                         <LinkEquipment
+//                             className={`${className}-name color-alt-lighter`}
+//                             equipment={equipment}
+//                         />
+//                     </span>
+//                     {hasUpgrade && (
+//                         <span className={className + '-equipment'}>
+//                             <LinkEquipment
+//                                 className={`${className}-name color-alt-lighter`}
+//                                 equipment={data.upgrade[0]}
+//                                 children={
+//                                     showStar ? (
+//                                         <ImprovementStar
+//                                             className={
+//                                                 className + '-equipment-star'
+//                                             }
+//                                             star={data.upgrade[1]}
+//                                         />
+//                                     ) : undefined
+//                                 }
+//                             />
+//                         </span>
+//                     )}
+
+//                     {showReqShips && (
+//                         <div className={className + '-ships'}>
+//                             {hasReqShips &&
+//                                 sortShips(reqShips).map((ship) => {
+//                                     ship = getShip(ship);
+//                                     return (
+//                                         <Link
+//                                             className={`${className}-ships-ship color-alt`}
+//                                             key={ship.id}
+//                                             to={getLink('ship', ship.id)}
+//                                             children={ship.getName(
+//                                                 __('shipname_dash_none')
+//                                             )}
+//                                         />
+//                                     );
+//                                 })}
+//                             {!hasReqShips && __('improvement.any_2nd_ship')}
+//                         </div>
+//                     )}
+
+//                     {!showReqShips && (
+//                         <ImprovementDayAndShip
+//                             className={className + '-day-and-ships'}
+//                             data={data}
+//                         />
+//                     )}
+
+//                     <div className={className + '-resources'}>
+//                         <Button
+//                             className={classNames({
+//                                 [className + '-resources-toggle']: true,
+//                                 'is-expand': expand,
+//                             })}
+//                             onClick={toggle}
+//                             //children={!expand ? __('arsenal.resources_toggle') : undefined}
+//                             children={!expand ? '...' : undefined}
+//                             data-role="toggle"
+//                         />
+//                         {expand && <ImprovementResources data={data} />}
+//                     </div>
+
+//                     <button
+//                         type="button"
+//                         className={classNames([`${className}-btn-watch`])}
+//                         onClick={watch}
+//                     >
+//                         <Icon icon="heart4" className="heart" />
+//                     </button>
+//                 </div>
+//             );
+//         }
+//     )
+// );
+
+//
+
 @extend({
     styles: require('./styles-item.less'),
 })
-class PageArsenalListItem extends React.Component {
+class PageArsenalListItem extends React.PureComponent {
+    static contextType = ArsenalContext;
+
     state = {
-        expand: false,
+        expand: this.props.defaultExpand || false,
     };
 
     toggle() {
@@ -433,6 +700,25 @@ class PageArsenalListItem extends React.Component {
         }));
     }
     toggle = this.toggle.bind(this);
+
+    watch() {
+        const functionName = this.isWatching ? 'watchRemove' : 'watchAdd';
+        this.context[functionName](
+            this.props.equipment.id, // equipment ID
+            this.props.improvementIndex // improvement index for this equipment
+        );
+        // console.log(this.context, this.props.rawData);
+    }
+    watch = this.watch.bind(this);
+
+    get isWatching() {
+        return (
+            Array.isArray(this.context.watchList) &&
+            this.context.watchList.includes(
+                `${this.props.equipment.id}-${this.props.improvementIndex}`
+            )
+        );
+    }
 
     // componentWillMount() {
     //     if (!this.state.render)
@@ -527,6 +813,7 @@ class PageArsenalListItem extends React.Component {
                     <ImprovementDayAndShip
                         className={className + '-day-and-ships'}
                         data={data}
+                        day={this.props.day}
                     />
                 )}
 
@@ -543,6 +830,22 @@ class PageArsenalListItem extends React.Component {
                     />
                     {this.state.expand && <ImprovementResources data={data} />}
                 </div>
+
+                <button
+                    type="button"
+                    className={classNames([
+                        `${className}-btn-watch`,
+                        {
+                            'is-watching': this.isWatching,
+                        },
+                    ])}
+                    onClick={this.watch}
+                >
+                    <Icon
+                        icon={this.isWatching ? 'heart3' : 'heart4'}
+                        className="heart"
+                    />
+                </button>
             </div>
         );
     }

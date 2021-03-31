@@ -21,7 +21,7 @@ const days = [
     'Wednesday',
     'Thurday',
     'Friday',
-    'Saturday'
+    'Saturday',
 ];
 
 //
@@ -32,14 +32,14 @@ export default Improvement;
 //
 
 @extend({
-    styles: require('./styles-dayandship.less')
+    styles: require('./styles-dayandship.less'),
 })
 class DayAndShip extends React.Component {
     renderItem(data, index) {
         let [dataDays, dataShips] = data;
         if (dataShips)
             dataShips = sortShips(
-                dataShips.map(shipId => getShip(shipId))
+                dataShips.map((shipId) => getShip(shipId))
             ); /*.sort((a, b) => a.order - b.order)*/
         return (
             <div className="item" key={index}>
@@ -77,7 +77,7 @@ class DayAndShip extends React.Component {
         return (
             <div
                 className={this.props.className}
-                data-day={getTimeJST().getDay()}
+                data-day={this.props.day ?? getTimeJST().getDay()}
             >
                 {data.map(this.renderItem.bind(this))}
             </div>
@@ -86,8 +86,8 @@ class DayAndShip extends React.Component {
 }
 export { DayAndShip };
 
-const isUndefined = value => typeof value === 'undefined' || value === -1;
-const getValue = value => {
+const isUndefined = (value) => typeof value === 'undefined' || value === -1;
+const getValue = (value) => {
     if (isUndefined(value)) value = undefined;
     return _getValue(value);
 };
@@ -115,7 +115,7 @@ class _Resources extends React.Component {
 }
 
 @extend({
-    styles: require('./styles-resources.less')
+    styles: require('./styles-resources.less'),
 })
 class Resources extends _Resources {
     renderCategory(category, data) {
@@ -166,21 +166,21 @@ class Resources extends _Resources {
                             <span className="guaranteed">
                                 ({getValue(data[3])})
                             </span>
-                        </Stat>
+                        </Stat>,
                     ];
                 }
             }
 
             // equipments
             const list = Array.isArray(data[4])
-                ? data[4].filter(item => item[1] !== 0)
+                ? data[4].filter((item) => item[1] !== 0)
                 : data[4]
                 ? [[data[4], data[5]]]
                 : [];
             if (list.length) {
                 equipments = (
                     <span className="equipments">
-                        {list.map(arr => {
+                        {list.map((arr) => {
                             if (isNaN(arr[0])) {
                                 const id = parseInt(
                                     arr[0].substr(arr[0].indexOf('_') + 1)
@@ -238,7 +238,7 @@ class Resources extends _Resources {
                         undefined,
                         undefined,
                         undefined,
-                        undefined
+                        undefined,
                     ]
                 )}
                 {this.renderCategory(
@@ -248,7 +248,7 @@ class Resources extends _Resources {
                         undefined,
                         undefined,
                         undefined,
-                        undefined
+                        undefined,
                     ]
                 )}
                 {this.upgradable &&

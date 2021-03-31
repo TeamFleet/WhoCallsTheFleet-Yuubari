@@ -3,7 +3,9 @@
         "NightCarrier": "Night Operation Aircraft Carrier",
         "ModernizedCarrier": "Modernized Aircraft Carrier",
         "EscortCarrier": "Escort Carrier",
-        "AssultCarrier": "Assult Light Aircraft Carrier"
+        "AssultCarrier": "Assult Light Aircraft Carrier",
+        "SpecialRevisedAviationCruiser": "Special-Revised Aviation Cruiser",
+        "HeavyRevisedLightCruiser": "Mass-Revised Light Cruiser"
     },
 
     "special_attack": {

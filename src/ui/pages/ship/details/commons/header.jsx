@@ -14,10 +14,16 @@ import Header from '@ui/components/main-header/infos';
 
 // @connect((state, ownProps) => state.pages[getInfosId(ownProps.ship.id)] || {})
 const ShipDetailsHeader = extend({
-    styles: require('./header.less')
+    styles: require('./header.less'),
 })(({ className, ship, tabs, defaultTabIndex, onTabChange }) => {
     // dispatch
     if (!ship) return null;
+    function _onTabChange(tabId, tabIndex) {
+        if (typeof onTabChange === 'function') onTabChange(tabId, tabIndex);
+        // dispatch(
+        //     shipDetailsChangeTab(getInfosId(ship.id), tabIndex)
+        // )
+    }
     return (
         <Header
             className={className}
@@ -25,20 +31,14 @@ const ShipDetailsHeader = extend({
             subtitle={getShipTypeName(ship)}
             tabs={(() => {
                 if (!Array.isArray(tabs)) return [];
-                return tabs.map(tabId => ({
+                return tabs.map((tabId) => ({
                     tabId,
-                    tabName: __('ship_details', tabId)
+                    tabName: __('ship_details', tabId),
                 }));
             })()}
             urlBase={getLink('ship', ship.id)}
             defaultIndex={defaultTabIndex}
-            onTabChange={(tabId, tabIndex) => {
-                if (typeof onTabChange === 'function')
-                    onTabChange(tabId, tabIndex);
-                // dispatch(
-                //     shipDetailsChangeTab(getInfosId(ship.id), tabIndex)
-                // )
-            }}
+            onTabChange={_onTabChange}
         >
             <span className="shipclassnumber">No.{ship.getNo()}</span>
             <br />

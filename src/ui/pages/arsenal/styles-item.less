@@ -1,12 +1,14 @@
 @import '~base.less';
+@import './_.less';
 
-.component{
-
+.component {
+    position: relative;
+    padding-left: @item-left-padding;
 }
 
-.component-equipment{
+.component-equipment {
     display: inline-block;
-    &.has-upgrade{
+    &.has-upgrade {
         // &:after{
         //     content: "⇨";
         //     display: inline-block;
@@ -18,22 +20,23 @@
         @size: 10px;
         padding-right: (@size * 3.5);
         position: relative;
-        &:before, &:after{
-            content: "";
+        &:before,
+        &:after {
+            content: '';
             position: absolute;
             top: 50%;
             z-index: -1;
         }
-        &:before{
-            @height: floor(@size * .4);
+        &:before {
+            @height: floor(@size * 0.4);
             width: @size;
             height: @height;
             margin-top: (floor(0 - @height / 2) - 1);
             right: (@size * 1.5);
             background: @color-improvement-star;
         }
-        &:after{
-            @height: floor(@size * .6);
+        &:after {
+            @height: floor(@size * 0.6);
             width: 0;
             height: 0;
             border-left: @size solid @color-improvement-star;
@@ -41,44 +44,44 @@
             border-top: @height solid transparent;
             border-bottom: @height solid transparent;
             margin-top: (0 - @height - 1);
-            right: (@size * .5);
+            right: (@size * 0.5);
         }
     }
 }
-    // .component-equipment-star{
-    //     display: inline-block;
-    //     color: @color-improvement-star;
-    // }
+// .component-equipment-star{
+//     display: inline-block;
+//     color: @color-improvement-star;
+// }
 
-.component-ships{
+.component-ships {
     padding: 2px 0 2px @link-equipment-padding-left;
     line-height: (@imporivement-shipname-height - 4);
-    font-size:  @imporivement-shipname-font-size;
+    font-size: @imporivement-shipname-font-size;
     color: @color-fade;
     .screen-tablet({
         position: relative;
         z-index: -1;
     });
 }
-    .component-ships-ship{
-        // margin-right:   12px;
+.component-ships-ship {
+    // margin-right:   12px;
+    display: inline-block;
+    // color: @color-base-dimmed;
+    &:after {
+        content: '/';
         display: inline-block;
-        // color: @color-base-dimmed;
-        &:after{
-            content:    '/';
-            display:    inline-block;
-            margin:     0 4px;
-            z-index:    -1;
-            // position:   absolute;
-            // color:      @color-base;
-            color:      @color-base-dimmed;
-        }
-        &:last-child:after{
-            content:    initial;
-        }
+        margin: 0 4px;
+        z-index: -1;
+        // position:   absolute;
+        // color:      @color-base;
+        color: @color-base-dimmed;
     }
+    &:last-child:after {
+        content: initial;
+    }
+}
 
-.component-day-and-ships{
+.component-day-and-ships {
     margin-top: 8px;
     margin-left: @link-equipment-padding-left;
     margin-bottom: 8px;
@@ -88,59 +91,90 @@
     });
 }
 
-.component-resources{
+.component-resources {
     // border-top: 2px solid transparent;
     padding-top: 4px;
     padding-left: @link-equipment-padding-left;
     position: relative;
 }
-    .component-resources-toggle[data-role="toggle"]{
-        display: block;
-        // font-size: 12px;
-        // line-height: 1em;
-        // padding: .2em .5em .1em .5em;
-        border-radius: 1em;
-        font-size: 14px;
-        line-height: 0;
-        // padding-top: 4px;
-        // padding-bottom: 12px;
-        padding: 4px 8px 12px 8px;
-        font-weight: 600;
-        letter-spacing: .1em;
-        border-color: @color-border;
-        // margin-top: 2px;
-        .screen-tablet({
+.component-resources-toggle[data-role='toggle'] {
+    display: block;
+    // font-size: 12px;
+    // line-height: 1em;
+    // padding: .2em .5em .1em .5em;
+    border-radius: 1em;
+    font-size: 14px;
+    line-height: 0;
+    // padding-top: 4px;
+    // padding-bottom: 12px;
+    padding: 4px 8px 12px 8px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    border-color: @color-border;
+    // margin-top: 2px;
+    .screen-tablet({
             padding: 9px 10px 15px 10px;
         });
 
-        &.is-expand{
-            @size: (@link-equipment-padding-left - 4);
+    &.is-expand {
+        @size: (@link-equipment-padding-left - 4);
+        position: absolute;
+        padding: 0;
+        width: @size;
+        height: @size;
+        top: 2px;
+        left: 0;
+        &:before,
+        &:after {
+            @size-arrow: 8px;
+            content: '';
             position: absolute;
-            padding: 0;
-            width: @size;
-            height: @size;
-            top: 2px;
-            left: 0;
-            &:before, &:after{
-                @size-arrow: 8px;
-                content: "";
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin-left: (0 - @size-arrow / 2);
-                width: @size-arrow;
-                height: @size-arrow;
-                transform: rotate(45deg);
-                border-top: 1px solid currentColor;
-                border-left: 1px solid currentColor;
-            }
-            &:before{
-                margin-top: -5px;
-            }
-            &:after{
-                margin-top: 0px;
-                // border-top-width: 1px;
-                // border-left-width: 1px;
-            }
+            left: 50%;
+            top: 50%;
+            margin-left: (0 - @size-arrow / 2);
+            width: @size-arrow;
+            height: @size-arrow;
+            transform: rotate(45deg);
+            border-top: 1px solid currentColor;
+            border-left: 1px solid currentColor;
+        }
+        &:before {
+            margin-top: -5px;
+        }
+        &:after {
+            margin-top: 0px;
+            // border-top-width: 1px;
+            // border-left-width: 1px;
         }
     }
+}
+
+.component-btn-watch {
+    // background: fade(#000, 50%);
+    background: none;
+    border: 0;
+    outline: 0;
+    color: @color-fade;
+    position: absolute;
+    z-index: 10;
+    top: -3px;
+    left: -6px;
+    width: 36px;
+    height: 36px;
+    transition: color @base-transition-duration @base-transition-timing-function;
+    .sku-webapp({
+        cursor: pointer;
+    });
+    .styles-hover() {
+        color: @color-fade-2;
+    }
+    .styles-active() {
+        color: @color-fade;
+    }
+    .is-hover(.styles-hover();
+    .styles-active());
+
+    &.is-watching {
+        color: @color-accent-2;
+    }
+}

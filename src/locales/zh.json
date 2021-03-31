@@ -25,6 +25,8 @@
     "arsenal": {
         "filter_by_day": "每日改修",
         "all": "全部改修",
-        "resources_toggle": "查看改修消耗..."
+        "resources_toggle": "查看改修消耗...",
+        "watch_list": "关注列表",
+        "watch_list_start_info": "点按心型图标可添加到关注列表"
     }
 }

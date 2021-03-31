@@ -25,6 +25,8 @@
     "arsenal": {
         "filter_by_day": "Filter by day",
         "all": "All",
-        "resources_toggle": "Show cost details..."
+        "resources_toggle": "Show cost details...",
+        "watch_list": "Watch List",
+        "watch_list_start_info": "Add to Watch List by Clicking/Tapping Heart Icon"
     }
 }

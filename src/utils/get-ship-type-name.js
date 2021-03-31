@@ -21,6 +21,7 @@ const getShipTypeName = (ship) => {
     if (!ship) return '';
 
     const subType = getShipSubType(ship);
+    // console.log({ subType });
     if (subType) return __('ship_sub_types', subType);
 
     // if (ship.type && ship.type_display && ship.type !== ship.type_display)

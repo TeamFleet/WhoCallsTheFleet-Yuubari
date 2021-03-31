@@ -3,4 +3,5 @@ export default {
     shipDetailsStatLevel: 99,
 
     arsenalResourcesDetails: false,
-}
+    arsenalWatchList: false,
+};
