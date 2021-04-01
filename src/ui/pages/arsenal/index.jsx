@@ -117,8 +117,9 @@ class PageArsenal extends React.Component {
                 return {
                     watchList: false,
                 };
+            state.watchList.splice(index, 1);
             return {
-                watchList: [...state.watchList.splice(index, 1)],
+                watchList: [...state.watchList],
             };
         });
     }
