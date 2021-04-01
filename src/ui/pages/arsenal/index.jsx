@@ -428,17 +428,51 @@ const PageArsenalListWatching = memo(({ index, day }) => {
                     <span>{__('arsenal.watch_list_start_info')}</span>
                 </div>
             ) : (
-                watchList.map((value) => {
-                    const [equipmentId, improvementIndex] = value.split('-');
-                    return (
-                        <PageArsenalListItem
-                            key={value}
-                            equipment={getEquipment(equipmentId)}
-                            improvementIndex={improvementIndex}
-                            day={day}
-                        />
-                    );
-                })
+                watchList
+                    .map((value) => {
+                        const [equipmentId, improvementIndex] = value.split(
+                            '-'
+                        );
+                        const equipment = getEquipment(equipmentId);
+                        const requirements =
+                            typeof day === 'undefined' ? undefined : [];
+                        if (Array.isArray(requirements)) {
+                            const { req } = equipment.improvement[
+                                improvementIndex
+                            ];
+                            req.forEach(([days], index) => {
+                                if (days[day] === true)
+                                    requirements.push(index);
+                            });
+                        }
+                        return {
+                            equipment: getEquipment(equipmentId),
+                            improvementIndex,
+                            requirements,
+                            value,
+                        };
+                    })
+                    .filter(({ requirements }) => {
+                        if (Array.isArray(requirements))
+                            return requirements.length > 0;
+                        return true;
+                    })
+                    .map(
+                        ({
+                            equipment,
+                            improvementIndex,
+                            requirements,
+                            value,
+                        }) => (
+                            <PageArsenalListItem
+                                key={value}
+                                equipment={equipment}
+                                improvementIndex={improvementIndex}
+                                requirements={requirements}
+                                day={day}
+                            />
+                        )
+                    )
             )}
         </PageArsenalCollection>
     );
