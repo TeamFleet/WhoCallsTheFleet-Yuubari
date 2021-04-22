@@ -1,15 +1,13 @@
-import React from 'react'
-import { extend } from 'koot'
+import { extend } from 'koot';
 
-import Reffitable from './components/refittable'
+import Reffitable from './components/refittable';
 
 const EquipmentDetailsRefittable = extend({
-    styles: require('./refittable.less')
-})(
-    ({ className, equipment }) =>
-        <div className={className}>
-            <Reffitable equipment={equipment} />
-        </div>
-)
+    styles: require('./refittable.less'),
+})(({ className, equipment }) => (
+    <div className={className}>
+        <Reffitable equipment={equipment} />
+    </div>
+));
 
-export default EquipmentDetailsRefittable
+export default EquipmentDetailsRefittable;

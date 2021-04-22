@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import { extend } from 'koot';
 import { get } from 'kckit';
 import equipmentTypes from 'kckit/src/types/equipments';
@@ -16,14 +16,14 @@ import { observerItem } from '@ui/hoc/observer';
 export const stats = [
     ...arrStats,
     'equipment.craftable',
-    'equipment.improvable'
+    'equipment.improvable',
 ];
 
-const getData = props => {
+const getData = (props) => {
     if (!Array.isArray(props.equipments)) return [];
     // console.log(props.equipments)
 
-    return props.equipments.map(equipment => {
+    return props.equipments.map((equipment) => {
         const cells = [
             {
                 className: 'cell-name',
@@ -31,8 +31,8 @@ const getData = props => {
                     <Link to={getLink('equipment', equipment.id)}>
                         {equipment._name}
                     </Link>
-                )
-            }
+                ),
+            },
         ];
         const isInterceptor = equipmentTypes.Interceptors.includes(
             equipment.type
@@ -67,7 +67,7 @@ const getData = props => {
             } else if (isInterceptor && stat === 'aa') {
                 className += ' stat-aa-interceptor';
                 children = (
-                    <React.Fragment>
+                    <Fragment>
                         {value}
                         <sup>{value + (equipment.stat.evasion * 1.5 || 0)}</sup>
                         <sub>
@@ -75,7 +75,7 @@ const getData = props => {
                                 (equipment.stat.evasion || 0) +
                                 (equipment.stat.hit * 2 || 0)}
                         </sub>
-                    </React.Fragment>
+                    </Fragment>
                 );
             }
 
@@ -103,7 +103,7 @@ const getData = props => {
                     props.dispatch(
                         highlightColumn(props.id, undefined, undefined)
                     );
-                }
+                },
             });
         });
 
@@ -115,8 +115,8 @@ const getData = props => {
                 onClick: () => {
                     if (__CLIENT__)
                         routerPush(getLink('equipment', equipment.id));
-                }
-            }
+                },
+            },
         };
     });
 };
@@ -124,10 +124,10 @@ const getData = props => {
 const EquipmentListTableBody = extend({
     connect: (state, ownProps) => ({
         collection: getFromState(state, ownProps).collection,
-        observer: getFromState(state, ownProps).observer
+        observer: getFromState(state, ownProps).observer,
         // columnHighlight: state.equipmentList[ownProps.id].column
     }),
-    styles: require('./table-body.less')
+    styles: require('./table-body.less'),
 })(
     observerItem(({ className, forwardedRef, ...props }) => {
         // console.log({ forwardedRef });

@@ -1,4 +1,4 @@
-import React from 'react';
+import { cloneElement } from 'react';
 import { Link } from 'react-router';
 import { extend } from 'koot';
 
@@ -15,7 +15,7 @@ const renderName = (name, extra) => {
             </span>
         );
     }
-    return React.cloneElement(name, {
+    return cloneElement(name, {
         className: 'name',
     });
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { extend } from 'koot';
 
 import db from '@database';
@@ -14,7 +14,7 @@ import Link from './_normal.jsx';
 @extend({
     styles: require('./ship.less'),
 })
-class LinkShip extends React.Component {
+class LinkShip extends Component {
     constructor(props) {
         super(props);
 

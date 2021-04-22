@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -27,7 +27,7 @@ import Bases from './bases';
             title: __('nav.fleets'),
         }),
 })
-class PageFleetDetails extends React.Component {
+class PageFleetDetails extends Component {
     shouldComponentUpdate(newProps) {
         if (
             typeof newProps.params === 'object' &&
@@ -82,7 +82,7 @@ export default PageFleetDetails;
     },
     styles: require('./styles.less'),
 })
-class PageFleetDetailsBody extends React.Component {
+class PageFleetDetailsBody extends Component {
     state = {
         ready: false,
     };

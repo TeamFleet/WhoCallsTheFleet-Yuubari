@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, createElement } from 'react';
 // import { connect } from 'react-redux'
 // import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { extend } from 'koot';
@@ -92,7 +92,7 @@ export const getInfosId = (id) => `SHIP_${id}`;
         });
     },
 })
-class PageShipDetails extends React.Component {
+class PageShipDetails extends Component {
     constructor(props) {
         super(props);
 
@@ -162,12 +162,12 @@ class PageShipDetails extends React.Component {
 
 const PageShipDetailsBody = ({ tab, ship }) => {
     if (!tab) return null;
-    return React.createElement(contentComponents[tab], {
+    return createElement(contentComponents[tab], {
         ship: ship,
     });
 
     // if (!this.props.children) return null
-    // return React.cloneElement(this.props.children, {
+    // return cloneElement(this.props.children, {
     //     ship: this.props.ship
     // })
 };

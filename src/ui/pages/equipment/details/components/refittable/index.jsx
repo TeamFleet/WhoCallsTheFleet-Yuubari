@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -14,7 +13,7 @@ import LinkMini from '@ui/components/link-mini';
 //
 
 const EquipmentDetailsComponentRefittable = extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })(({ className, equipment }) => {
     const { equipmentTypes, shipCollections } = db;
     const type = equipmentTypes[equipment.type] || {};
@@ -23,28 +22,30 @@ const EquipmentDetailsComponentRefittable = extend({
 
     const {
         equipable_on_type: availableShipTypes = [],
-        equipable_extra_ship: availableExtraShips = []
+        equipable_extra_ship: availableExtraShips = [],
     } = type;
 
     if (Array.isArray(equipment.equipable_extra_ship)) {
-        equipment.equipable_extra_ship.forEach(shipId => {
+        equipment.equipable_extra_ship.forEach((shipId) => {
             if (!availableExtraShips.includes(shipId))
                 availableExtraShips.push(shipId);
         });
     }
 
     if (__DEV__ && __CLIENT__) {
+        // eslint-disable-next-line no-console
         console.table(
             {
                 typeName,
                 // type,
                 isEquipableExSlot,
                 availableShipTypes: availableShipTypes.join(', '),
-                availableExtraShips: availableExtraShips.join(', ')
+                availableExtraShips: availableExtraShips.join(', '),
             } /*, [
                 `[${equipment.id}]`
             ]*/
         );
+        // eslint-disable-next-line no-console
         console.log('type', type);
     }
 
@@ -73,7 +74,7 @@ export default EquipmentDetailsComponentRefittable;
 //
 
 const Legends = extend({
-    styles: require('./styles-shipcollection.less')
+    styles: require('./styles-shipcollection.less'),
 })(({ className }) => (
     <div className={className + ' legends'}>
         <div className="list types">
@@ -90,20 +91,20 @@ const Legends = extend({
 //
 
 const ShipCollection = extend({
-    styles: require('./styles-shipcollection.less')
+    styles: require('./styles-shipcollection.less'),
 })(({ className, data, availableShipTypes, availableExtraShips, ...props }) => {
     const { shipTypes } = db;
     const cachedTypes = [];
     // const cachedShips = []
 
-    let extraShips = [];
+    const extraShips = [];
     const types = data.list
-        .map(thisType => {
+        .map((thisType) => {
             const id = thisType.type;
             if (!id) return undefined;
 
-            thisType.ships.forEach(series => {
-                series.forEach(ship => {
+            thisType.ships.forEach((series) => {
+                series.forEach((ship) => {
                     if (
                         (ship.type_display &&
                             ship.type_display !== ship.type &&
@@ -121,10 +122,10 @@ const ShipCollection = extend({
             return {
                 name: shipTypes[id]._name,
                 code: shipTypes[id].code,
-                on: availableShipTypes.includes(id)
+                on: availableShipTypes.includes(id),
             };
         })
-        .filter(obj => {
+        .filter((obj) => {
             if (!obj) return false;
             if (cachedTypes.includes(obj.name)) return false;
             cachedTypes.push(obj.name);
@@ -155,7 +156,7 @@ const ShipCollection = extend({
             </div>
             {!!extraShips.length && (
                 <div className="list ships">
-                    {sortShips(extraShips).map(ship => (
+                    {sortShips(extraShips).map((ship) => (
                         <LinkMini
                             className="item"
                             ship={ship}
@@ -172,14 +173,14 @@ const ShipCollection = extend({
 //
 
 const ShipTypeTag = extend({
-    styles: require('./styles-shiptypetag.less')
+    styles: require('./styles-shiptypetag.less'),
 })(({ className, on, name, code }) => (
     <LinkMini
         className={classNames({
             [className]: true,
             item: true,
             on: !!on,
-            off: !on
+            off: !on,
         })}
     >
         {name} <small className="code">[{code}]</small>
@@ -189,7 +190,7 @@ const ShipTypeTag = extend({
 //
 
 const ExSlot = extend({
-    styles: require('./styles-shipcollection.less')
+    styles: require('./styles-shipcollection.less'),
 })(({ className, isEquipableExSlot, listExSlotShips, ...props }) => {
     const list = sortShips(listExSlotShips || []);
 
@@ -228,7 +229,7 @@ const ExSlot = extend({
 
             {!!list.length && (
                 <div className="list ships">
-                    {list.map(shipId => (
+                    {list.map((shipId) => (
                         <LinkMini className="item" ship={shipId} key={shipId} />
                     ))}
                 </div>

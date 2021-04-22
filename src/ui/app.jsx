@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import { Component, StrictMode, createRef } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 import qs from 'qs';
@@ -40,7 +40,7 @@ export const AppRef = createRef();
     },
     styles: require('./app.less'),
 })
-class App extends React.Component {
+class App extends Component {
     startSwipeAtLeftBorder = false;
 
     constructor(props) {
@@ -225,7 +225,7 @@ class App extends React.Component {
         const hasMode = __CLIENT__ && uiMode;
 
         return (
-            <React.StrictMode>
+            <StrictMode>
                 <div
                     id="app"
                     className={classNames({
@@ -249,7 +249,7 @@ class App extends React.Component {
                     </Main>
                     <Bgimg key="bgimg" />
                 </div>
-            </React.StrictMode>
+            </StrictMode>
         );
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { extend } from 'koot';
 
@@ -37,7 +37,7 @@ const getExtraIllustPic = (ship, id, illustId) => {
     }),
     styles: require('./illust.less'),
 })
-class ShipDetailsComponentIllust extends React.Component {
+class ShipDetailsComponentIllust extends Component {
     constructor(props) {
         super(props);
 

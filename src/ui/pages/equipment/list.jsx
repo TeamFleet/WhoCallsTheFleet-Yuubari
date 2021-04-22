@@ -1,45 +1,45 @@
-import React from 'react'
-import { extend } from 'koot'
+import { Component } from 'react';
+import { extend } from 'koot';
 
-import htmlHead from '@utils/html-head'
+import htmlHead from '@utils/html-head';
 
-import db from '@database'
-import {
-    reset as equipmentListReset
-} from '@api/equipment-list/api.js'
+import db from '@database';
+import { reset as equipmentListReset } from '@api/equipment-list/api.js';
 
-import Page from '@ui/containers/page'
+import Page from '@ui/containers/page';
 
 // import Link from '@ui/components/link'
-import EquipmentList from '@ui/components/equipment-list'
+import EquipmentList from '@ui/components/equipment-list';
 
-const equipmentListId = 'pageEquipmentList'
+const equipmentListId = 'pageEquipmentList';
 
 //
 
 @extend({
     connect: true,
-    pageinfo: (state) => htmlHead(state, {
-        title: __('nav.equipments')
-    }),
-    styles: require('./list.less')
+    pageinfo: (state) =>
+        htmlHead(state, {
+            title: __('nav.equipments'),
+        }),
+    styles: require('./list.less'),
 })
-class PageEquipmentList extends React.Component {
-
+class PageEquipmentList extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         if (props.location.action === 'PUSH')
-            props.dispatch(equipmentListReset(equipmentListId))
+            props.dispatch(equipmentListReset(equipmentListId));
     }
 
     render() {
-        if (__DEV__ && __CLIENT__) console.log('Equipment Collections', db.equipmentCollections)
+        if (__DEV__ && __CLIENT__)
+            // eslint-disable-next-line no-console
+            console.log('Equipment Collections', db.equipmentCollections);
         return (
-            <Page className={this.props.className} >
+            <Page className={this.props.className}>
                 <EquipmentList id={equipmentListId} />
             </Page>
-        )
+        );
         // return (
         //     <PageContainer
         //         className={this.props.className}
@@ -70,4 +70,4 @@ class PageEquipmentList extends React.Component {
         // )
     }
 }
-export default PageEquipmentList
+export default PageEquipmentList;

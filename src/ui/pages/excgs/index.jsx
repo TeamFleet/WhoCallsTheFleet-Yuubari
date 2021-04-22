@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, memo } from 'react';
 import { extend } from 'koot';
 import classNames from 'classnames';
 
@@ -27,7 +27,7 @@ const illustIds = [8, 9];
 
 // @connect()
 // // @ImportStyle(style)
-// export default class extends React.Component {
+// export default class extends Component {
 //     static onServerRenderHtmlExtend({ htmlTool: ext, store }) {
 //         const head = htmlHead({
 //             store,
@@ -71,7 +71,7 @@ const illustIds = [8, 9];
         }),
     styles,
 })
-class PageExCGs extends React.Component {
+class PageExCGs extends Component {
     constructor() {
         super();
 
@@ -214,7 +214,7 @@ export default PageExCGs;
 
 // ============================================================================
 
-const Tab = React.memo(({ index, name, count, isOn, cbChangeTab }) => {
+const Tab = memo(({ index, name, count, isOn, cbChangeTab }) => {
     function onClick() {
         cbChangeTab(index);
     }

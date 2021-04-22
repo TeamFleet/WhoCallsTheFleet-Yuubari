@@ -1,12 +1,12 @@
-import React from 'react';
+import { Component, createRef } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
 @extend({
-    styles: require('./datatable.less')
+    styles: require('./datatable.less'),
 })
-class DataTable extends React.Component {
-    ContainerRef = React.createRef();
+class DataTable extends Component {
+    ContainerRef = createRef();
     // _scrollLeft
 
     componentDidUpdate(/*prevProps*/) {

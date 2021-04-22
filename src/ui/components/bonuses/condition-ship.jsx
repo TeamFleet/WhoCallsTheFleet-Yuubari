@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import classNames from 'classnames';
 import shipTypes from 'kckit/src/types/ships';
 
@@ -9,7 +9,7 @@ import parseShipTypes from '@utils/parse-ship-types';
 import ListShips from '@ui/components/list/ships';
 import Icon from '@ui/components/icon';
 
-export default ({ className, condition = {} }) => {
+export default memo(({ className, condition = {} }) => {
     const components = [];
 
     if (condition.isType || condition.isNotType) {
@@ -22,7 +22,7 @@ export default ({ className, condition = {} }) => {
 
         if (isMatchMajorType(types, 'Carriers')) {
             types = [];
-            db.shipCollections.some(collection => {
+            db.shipCollections.some((collection) => {
                 if (collection.names.en_us === 'Carriers') {
                     types.push(collection.name);
                     return true;
@@ -36,7 +36,7 @@ export default ({ className, condition = {} }) => {
                 key="conditionType"
                 className={classNames([
                     isAt ? 'at' : 'exclude',
-                    'mod-need-sep'
+                    'mod-need-sep',
                 ])}
             >
                 {isAt ? SymbolAt : SymbolExclude}
@@ -63,12 +63,12 @@ export default ({ className, condition = {} }) => {
                 key="conditionClass"
                 className={classNames([
                     isAt ? 'at' : 'exclude',
-                    'mod-need-sep'
+                    'mod-need-sep',
                 ])}
             >
                 {isAt ? SymbolAt : SymbolExclude}
                 {classIdList
-                    .filter(classId => {
+                    .filter((classId) => {
                         if (classId === 96 && classIdList.includes(97))
                             return false;
                         return true;
@@ -83,7 +83,7 @@ export default ({ className, condition = {} }) => {
                             <ConditionItem
                                 children={__('shiptypeclass', {
                                     class: cl._name,
-                                    type: type._name
+                                    type: type._name,
                                 })}
                                 key={index}
                             />
@@ -131,13 +131,13 @@ export default ({ className, condition = {} }) => {
             {components}
         </div>
     );
-};
+});
 
 //
 
-const ConditionItem = ({ children }) => (
+const ConditionItem = memo(({ children }) => (
     <span className="item" children={children} />
-);
+));
 
 const SymbolAt = <Icon className="symbol is-at" icon="at-sign" />;
 const SymbolExclude = <Icon className="symbol is-exclude" icon="cross" />;
@@ -152,4 +152,4 @@ const SymbolExclude = <Icon className="symbol is-exclude" icon="cross" />;
 const isMatchMajorType = (types = [], majorType = '') =>
     shipTypes[majorType] &&
     shipTypes[majorType].length === types.length &&
-    shipTypes[majorType].every(id => types.includes(id));
+    shipTypes[majorType].every((id) => types.includes(id));

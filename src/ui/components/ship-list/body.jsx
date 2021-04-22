@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, Fragment, createRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
 import { extend } from 'koot';
@@ -59,7 +59,7 @@ const getShipList = (list) => {
         // location: state[REALTIME_LOCATION_REDUCER_NAME]
     }),
 })
-class ShipListView extends React.Component {
+class ShipListView extends Component {
     // componentWillMount() {
     //     if (this.props.isInit && this.props.location && this.props.location.action === 'PUSH'){
     //         console.log('reset')
@@ -120,7 +120,7 @@ export default ShipListView;
     },
     styles: require('./body.less'),
 })
-class Body extends React.Component {
+class Body extends Component {
     getExtraButtons() {
         if (__SERVER__) return null;
 
@@ -292,7 +292,7 @@ class Body extends React.Component {
 
 const CSSTransitionGroup = (props) => (
     <TransitionGroup
-        component={React.Fragment}
+        component={Fragment}
         // className="wrapper"
         {...props}
     />
@@ -336,8 +336,8 @@ const BodyCompare = extend({
             : undefined,
     }),
 })
-class BodyFiltered extends React.Component {
-    ListRef = React.createRef();
+class BodyFiltered extends Component {
+    ListRef = createRef();
 
     get show() {
         return Boolean(
@@ -464,7 +464,7 @@ class BodyFiltered extends React.Component {
         };
     },
 })
-class BodyCollections extends React.Component {
+class BodyCollections extends Component {
     componentDidUpdate(prevProps /*, prevState*/) {
         if (prevProps.collection !== this.props.collection)
             window.scrollTo(undefined, 0);
@@ -512,6 +512,7 @@ class BodyCollections extends React.Component {
                                     <Title
                                         type={type.type}
                                         name={type.name}
+                                        isSubType={type.isSubType}
                                         id={this.props.id}
                                         ships={listType || list}
                                     />

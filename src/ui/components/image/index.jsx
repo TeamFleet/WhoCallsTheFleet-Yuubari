@@ -1,11 +1,11 @@
-import React from 'react';
+import { Component } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
 @extend({
     styles: require('./styles.less'),
 })
-class Image extends React.Component {
+class Image extends Component {
     state = {
         isLoading: true,
         isLoaded: false,
@@ -18,6 +18,7 @@ class Image extends React.Component {
             isLoaded: true,
         });
     }
+    onLoad = this.onLoad.bind(this);
 
     onError(/*evt*/) {
         this.setState({
@@ -25,6 +26,7 @@ class Image extends React.Component {
             isError: true,
         });
     }
+    onError = this.onError.bind(this);
 
     render() {
         const {
@@ -60,10 +62,11 @@ class Image extends React.Component {
                 <img
                     className={classNames(['img', classNameImg])}
                     src={src}
-                    onLoad={this.onLoad.bind(this)}
-                    onError={this.onError.bind(this)}
+                    onLoad={this.onLoad}
+                    onError={this.onError}
                     style={styleImg}
                     loading="lazy"
+                    alt={tag}
                 />
                 {children}
             </Component>

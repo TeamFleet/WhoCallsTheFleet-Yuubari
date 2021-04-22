@@ -1,5 +1,3 @@
-import React from 'react';
-
 import checkShipCapability from '@api/check-ship-capability';
 import Bullet from '@ui/components/bullet';
 import Requirements from './_requirements';

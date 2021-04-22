@@ -1,5 +1,3 @@
-import React from 'react';
-
 import checkShipCapability from '@api/check-ship-capability';
 import Bullet from '@ui/components/bullet';
 import Requirements from './_requirements';
@@ -9,7 +7,7 @@ export default ({
     capabilityName,
     capabilityKey,
     equipments,
-    children
+    children,
 }) => {
     const able = checkShipCapability(ship, capabilityKey, equipments);
     let level = 0;

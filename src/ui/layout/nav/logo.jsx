@@ -1,10 +1,10 @@
-import React from 'react';
+import { memo } from 'react';
 import classNames from 'classnames';
 import { IndexLink } from 'react-router';
 
 import logoYuubari from '@assets/logos/yuubari/128.png';
 
-const NavLogo = ({ className, showBackButton, onBackButtonClick }) => (
+const NavLogo = memo(({ className, showBackButton, onBackButtonClick }) => (
     <div className={classNames([className, 'logo'])}>
         {__SPA__ && (
             <button
@@ -21,7 +21,7 @@ const NavLogo = ({ className, showBackButton, onBackButtonClick }) => (
             style={
                 __CHANNEL__ === 'yuubari'
                     ? {
-                          backgroundImage: `url(${logoYuubari})`
+                          backgroundImage: `url(${logoYuubari})`,
                       }
                     : {}
             }
@@ -32,6 +32,6 @@ const NavLogo = ({ className, showBackButton, onBackButtonClick }) => (
             )}
         </IndexLink>
     </div>
-);
+));
 
 export default NavLogo;

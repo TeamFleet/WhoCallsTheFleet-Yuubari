@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { extend } from 'koot';
 
 import { compareScroll } from '@api/ship-list/api';
@@ -23,10 +23,10 @@ const stats = [
     'los',
     'luck',
     'fuel',
-    'ammo'
+    'ammo',
 ];
 
-const extractValue = obj => {
+const extractValue = (obj) => {
     if (typeof obj[1] === 'object' && typeof obj[1].value === 'number')
         return obj[1].value;
     if (obj[0] === '?') return -1;
@@ -38,22 +38,22 @@ const extractValue = obj => {
     connect: (state, ownProps) => ({
         sortType: state.shipList[ownProps.id].compareSort[0],
         sortOrder: state.shipList[ownProps.id].compareSort[1],
-        scrollLeft: state.shipList[ownProps.id].compareScrollLeft
+        scrollLeft: state.shipList[ownProps.id].compareScrollLeft,
     }),
-    styles: require('./table-body.less')
+    styles: require('./table-body.less'),
 })
-class ShipListTableBody extends React.Component {
+class ShipListTableBody extends Component {
     getData() {
         if (!Array.isArray(this.props.ships)) return [];
         // console.log(this.props.ships)
 
-        let statSort = {};
+        const statSort = {};
 
-        stats.forEach(stat => {
+        stats.forEach((stat) => {
             if (stat === 'speed' || stat === 'range') return;
             if (!statSort[stat]) statSort[stat] = [];
 
-            this.props.ships.forEach(ship => {
+            this.props.ships.forEach((ship) => {
                 const value = ship.getAttribute(stat, 99) || -1;
                 if (statSort[stat].indexOf(value) > -1) return;
                 statSort[stat].push(value);
@@ -65,17 +65,17 @@ class ShipListTableBody extends React.Component {
             });
         });
 
-        let results = this.props.ships.map(ship => {
-            let cells = [
+        const results = this.props.ships.map((ship) => {
+            const cells = [
                 [
                     <LinkShip ship={ship} />,
                     {
-                        className: 'ship'
-                    }
-                ]
+                        className: 'ship',
+                    },
+                ],
             ];
 
-            stats.forEach(stat => {
+            stats.forEach((stat) => {
                 const value = ship.getAttribute(stat, 99);
                 let content = value;
                 let className = 'stat stat-' + stat;
@@ -119,8 +119,8 @@ class ShipListTableBody extends React.Component {
                     content,
                     {
                         className,
-                        value: trueValue
-                    }
+                        value: trueValue,
+                    },
                 ]);
             });
 
@@ -132,8 +132,8 @@ class ShipListTableBody extends React.Component {
                         if (__CLIENT__)
                             // browserHistory.push(location.pathname + '/' + ship.id);
                             routerPush(getLink('ship', ship.id));
-                    }
-                }
+                    },
+                },
             };
         });
 
@@ -159,6 +159,7 @@ class ShipListTableBody extends React.Component {
         });
         this.props.dispatch(compareScroll(this.props.id, this.scrollLeft));
     }
+    onScroll = this.onScroll.bind(this);
 
     shouldComponentUpdate(nextProps) {
         if (this.scrolling && nextProps.scrollLeft === this.scrollLeft)
@@ -173,7 +174,7 @@ class ShipListTableBody extends React.Component {
                 className={this.props.className + ' comparetable'}
                 tag="div"
                 data={this.getData()}
-                onScroll={this.onScroll.bind(this)}
+                onScroll={this.onScroll}
                 scrollLeft={this.props.scrollLeft}
             />
         );

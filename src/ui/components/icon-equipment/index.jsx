@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { extend } from 'koot';
 
 import db from '@database';
@@ -8,7 +8,7 @@ import getLink from '@utils/get-link';
 import { Link } from 'react-router';
 
 const IconEquipment = extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })(
     memo(({ tag, icon, type, equipment, children, ...props }) => {
         let Component = tag || 'span';

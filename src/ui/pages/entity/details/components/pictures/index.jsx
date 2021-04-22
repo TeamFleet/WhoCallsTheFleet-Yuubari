@@ -1,19 +1,19 @@
-import React from 'react'
-import { extend } from 'koot'
+import { memo } from 'react';
+import { extend } from 'koot';
 
-import Image from '@ui/components/image'
-import ComponentContainer from '@ui/containers/infos-component'
+import Image from '@ui/components/image';
+import ComponentContainer from '@ui/containers/infos-component';
 
-import getPic from '@utils/get-pic'
+import getPic from '@utils/get-pic';
 
 const EntityDetailsComponentPictures = extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })(
-    ({ className, entity }) => (
+    memo(({ className, entity }) => (
         <ComponentContainer className={className}>
             <Image className="picture" src={getPic('entity', entity.id, '2')} />
         </ComponentContainer>
-    )
-)
+    ))
+);
 
-export default EntityDetailsComponentPictures
+export default EntityDetailsComponentPictures;

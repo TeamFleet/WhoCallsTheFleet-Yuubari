@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Basic from './_basic';
 
 export default ({ ship }) => (
@@ -13,7 +11,7 @@ export default ({ ship }) => (
             'CarrierFighter',
             'DiveBomber',
             'TorpedoBomber',
-            'Jets'
+            'Jets',
         ]}
     />
 );

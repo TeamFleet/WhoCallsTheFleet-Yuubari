@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, createRef, isValidElement } from 'react';
 import { extend } from 'koot';
 import './swiper.g.less';
 
@@ -12,12 +12,12 @@ const defaults = {
 @extend({
     styles: require('./styles.less'),
 })
-class SwiperComponent extends React.Component {
+class SwiperComponent extends Component {
     // swiper
-    ContainerRef = React.createRef();
-    PaginationRef = React.createRef();
-    PrevButtonRef = React.createRef();
-    NextButtonRef = React.createRef();
+    ContainerRef = createRef();
+    PaginationRef = createRef();
+    PrevButtonRef = createRef();
+    NextButtonRef = createRef();
 
     componentDidMount() {
         if (
@@ -41,10 +41,7 @@ class SwiperComponent extends React.Component {
             }
 
             ['prevButton', 'nextButton'].forEach((key) => {
-                if (
-                    settings[key] === true ||
-                    React.isValidElement(settings[key])
-                ) {
+                if (settings[key] === true || isValidElement(settings[key])) {
                     if (typeof settings.navigation !== 'object')
                         settings.navigation = {};
 
@@ -163,7 +160,7 @@ class SwiperComponent extends React.Component {
                         )}
                         {this.renderButtonPrev()}
                         {this.renderButtonNext()}
-                        {React.isValidElement(this.props.controlsWrapper) &&
+                        {isValidElement(this.props.controlsWrapper) &&
                             this.props.controlsWrapper}
                     </div>
                 )}

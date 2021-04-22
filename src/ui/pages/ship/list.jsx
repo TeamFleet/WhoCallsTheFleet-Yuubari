@@ -1,46 +1,41 @@
-import React from 'react'
-import { extend } from 'koot'
+import { Component } from 'react';
+import { extend } from 'koot';
 
-import htmlHead from '@utils/html-head'
-import {
-    reset as shipListReset
-} from '@api/ship-list/api'
+import htmlHead from '@utils/html-head';
+import { reset as shipListReset } from '@api/ship-list/api';
 
-import Page from '@ui/containers/page'
+import Page from '@ui/containers/page';
 
-import ShipList from '@ui/components/ship-list'
+import ShipList from '@ui/components/ship-list';
 
-const shipListId = 'pageShipList'
+const shipListId = 'pageShipList';
 
 // @connect(state => ({
 //     isShipListInit: (typeof state.shipList[shipListId] !== 'undefined')
 // }))
 @extend({
     connect: true,
-    pageinfo: (state) => htmlHead(state, {
-        title: __('nav.ships')
-    }),
-    styles: require('./list.less')
+    pageinfo: (state) =>
+        htmlHead(state, {
+            title: __('nav.ships'),
+        }),
+    styles: require('./list.less'),
 })
-class PageShipList extends React.Component {
-
+class PageShipList extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         if (props.location.action === 'PUSH')
-            props.dispatch(shipListReset(shipListId))
+            props.dispatch(shipListReset(shipListId));
     }
 
     render() {
         return (
-            <Page className={this.props.className} >
-                <ShipList
-                    id={shipListId}
-                    extraButton='compare'
-                />
+            <Page className={this.props.className}>
+                <ShipList id={shipListId} extraButton="compare" />
             </Page>
-        )
+        );
     }
 }
 
-export default PageShipList
+export default PageShipList;

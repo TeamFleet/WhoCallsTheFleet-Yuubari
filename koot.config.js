@@ -19,6 +19,7 @@
  * @param {String} html
  */
 
+require('koot/typedef');
 const path = require('path');
 
 const { static: dirStatic } = require('./src/directories');
@@ -51,6 +52,7 @@ const configI18n = (() => {
 /** @type {Boolean} 判断当前是否是服务器端 */
 // const isStageServer = Boolean(process.env.WEBPACK_BUILD_STAGE === 'server')
 
+/** @type {AppConfig} */
 module.exports = {
     /**************************************************************************
      * 项目信息
@@ -160,6 +162,21 @@ module.exports = {
     webpackAfter: require('./config/webpack/after'),
     moduleCssFilenameTest: /^((?!\.g\.).)*/,
     classNameHashLength: 8,
+    internalLoaderOptions: {
+        'less-loader': {
+            lessOptions: {
+                /**************************************************************
+                 * Koot.js 在 0.15 之后采用 Less.js v4，其默认的数值计算行为方式有变化。
+                 * 以下设置将其强制改回 Less.js v3 的默认方式。同时这也是我们团队内部更加习惯的方式。
+                 *
+                 * 如果想使用 Less.js v4 的默认方式，只需要将这一行配置移除。
+                 *
+                 * 有关详情，请查阅 Less.js 官方文档: http://lesscss.org/usage/#less-options-math
+                 *************************************************************/
+                math: 'always',
+            },
+        },
+    },
 
     /**************************************************************************
      * 开发环境

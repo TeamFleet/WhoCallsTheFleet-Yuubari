@@ -1,23 +1,19 @@
-import React from 'react'
-import { extend } from 'koot'
+import { memo } from 'react';
+import { extend } from 'koot';
 
-import getSubtitle from '../get-subtitle'
+import Header from '@ui/components/main-header/infos';
+
+import getSubtitle from '../get-subtitle';
 // import db from '@database'
 
-import Header from '@ui/components/main-header/infos'
-
 const EntityDetailsHeader = extend({
-    connect: state => ({
-        localeId: state.localeId
+    connect: (state) => ({
+        localeId: state.localeId,
     }),
-    styles: require('./header.less')
+    styles: require('./header.less'),
 })(
-    ({
-        className,
-        entity,
-        localeId,
-    }) => {
-        if (!entity) return null
+    memo(({ className, entity, localeId }) => {
+        if (!entity) return null;
         return (
             <Header
                 className={className}
@@ -28,8 +24,8 @@ const EntityDetailsHeader = extend({
                     <span className="name-ja">{entity.getName('ja_jp')}</span>
                 )}
             </Header>
-        )
-    }
-)
+        );
+    })
+);
 
-export default EntityDetailsHeader
+export default EntityDetailsHeader;

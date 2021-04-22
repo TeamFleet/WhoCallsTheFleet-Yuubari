@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -26,16 +26,16 @@ import db from '@database';
 
 // @connect()
 @extend({
-    styles: require('./equipable.less')
+    styles: require('./equipable.less'),
 })
-class ShipDetailsContentEquipable extends React.Component {
+class ShipDetailsContentEquipable extends Component {
     renderCollection(collection, collectionIndex) {
         return (
             <ComponentContainer key={collectionIndex} title={collection.name}>
                 <ShipDetailsContentEquipableListContainer>
                     {collection.list
                         .filter(
-                            list =>
+                            (list) =>
                                 !db.equipmentTypesExclude.includes(list.type)
                         )
                         .map((list, listIndex) => (
@@ -86,7 +86,7 @@ class ShipDetailsContentEquipable extends React.Component {
                     {this.props.ship
                         .getExSlotEquipmentTypes()
                         .filter(
-                            typeID =>
+                            (typeID) =>
                                 !db.equipmentTypesExclude.includes(typeID) &&
                                 this.props.ship.canEquip(typeID)
                         )
@@ -128,6 +128,7 @@ class ShipDetailsContentEquipable extends React.Component {
     }
     render() {
         if (__CLIENT__ && __DEV__)
+            // eslint-disable-next-line no-console
             console.log(
                 'thisShip equipable',
                 this.props.ship.getEquipmentTypes()
@@ -153,7 +154,7 @@ class ShipDetailsContentEquipable extends React.Component {
                                     type:
                                         db.shipTypes[
                                             this.props.ship.type_display
-                                        ]._name
+                                        ]._name,
                                 }
                             )}
                         />
@@ -168,12 +169,12 @@ class ShipDetailsContentEquipable extends React.Component {
 }
 
 @extend({
-    styles: require('./components/equipable-list.less')
+    styles: require('./components/equipable-list.less'),
 })
-class ShipDetailsContentEquipableListContainer extends React.Component {
+class ShipDetailsContentEquipableListContainer extends Component {
     insertPlaceHolders() {
         let i = 0;
-        let arr = [];
+        const arr = [];
         while (i++ < 10)
             arr.push(<span className="item placeholder" key={i}></span>);
         return arr;
@@ -190,9 +191,9 @@ class ShipDetailsContentEquipableListContainer extends React.Component {
 }
 
 @extend({
-    styles: require('./components/equipable-item.less')
+    styles: require('./components/equipable-item.less'),
 })
-class ShipDetailsContentEquipableItem extends React.Component {
+class ShipDetailsContentEquipableItem extends Component {
     render() {
         if (this.props.equipment)
             return (
@@ -231,14 +232,14 @@ class ShipDetailsContentEquipableItem extends React.Component {
                 ? db.shipsSpecial[this.props.ship.type_display] || []
                 : [];
         specialList = specialList.filter(
-            shipId =>
+            (shipId) =>
                 shipId !== this.props.ship.id &&
                 // && !remodels.includes(shipId)
                 canEquipShipType !==
                     db.ships[shipId].canEquip(this.props.type.id)
         );
 
-        let spCount =
+        const spCount =
             specialList.length + (canEquip !== canEquipShipType ? 1 : 0);
 
         return (
@@ -249,8 +250,8 @@ class ShipDetailsContentEquipableItem extends React.Component {
                         on: canEquip === true,
                         off: canEquip === false,
                         'is-special':
-                            /*isNotAV && */ canEquip && !canEquipShipType
-                    }
+                            /*isNotAV && */ canEquip && !canEquipShipType,
+                    },
                 ])}
                 icon={this.props.type.icon}
                 data-special-count={spCount > 0 ? spCount : undefined}
@@ -277,14 +278,14 @@ class ShipDetailsContentEquipableItem extends React.Component {
                                 'other',
                                 {
                                     on: canEquipShipType,
-                                    off: !canEquipShipType
-                                }
+                                    off: !canEquipShipType,
+                                },
                             ])}
                         >
                             {__('other_ships_of_type', {
                                 type:
                                     db.shipTypes[this.props.ship.type_display]
-                                        ._name
+                                        ._name,
                             })}
                         </LinkMini>
                     </span>
@@ -295,7 +296,7 @@ class ShipDetailsContentEquipableItem extends React.Component {
 }
 
 const ShipDetailsContentEquipableLegend = extend({
-    styles: require('./components/equipable-legend.less')
+    styles: require('./components/equipable-legend.less'),
 })(({ className, text, textSmall }) => (
     <span className={className}>
         <span className="wrapper">

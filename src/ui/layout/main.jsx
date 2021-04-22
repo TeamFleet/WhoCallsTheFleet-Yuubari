@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import { Component, createRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { extend } from 'koot';
 
@@ -24,7 +24,7 @@ export const MainRef = createRef();
     connect: true,
     styles: require('./main.less'),
 })
-class Main extends React.Component {
+class Main extends Component {
     // onAnimationStart(evt) {
     //     switch (evt.nativeEvent.animationName) {
     //         case 'main-transition-enter':

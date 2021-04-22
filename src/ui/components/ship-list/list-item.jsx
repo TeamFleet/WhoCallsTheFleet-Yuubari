@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -16,7 +16,7 @@ import Icon from '@ui/components/icon';
     }),
     styles: require('./list-item.less'),
 })
-class ShipListItem extends React.Component {
+class ShipListItem extends Component {
     constructor(props) {
         super(props);
 

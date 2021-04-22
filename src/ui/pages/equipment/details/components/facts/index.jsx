@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -264,7 +263,7 @@ const BonusStat = extend({
 
 // import stylesScrap from './styles-scrap.less'
 // @ImportStyle(stylesScrap)
-// class EquipmentDetailsComponentFactsScrap extends React.Component {
+// class EquipmentDetailsComponentFactsScrap extends Component {
 //     render() {
 //         return (
 //             <ComponentContainer className={this.props.className} title={__("equipment_details.scrap")}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import { extend } from 'koot';
 import classNames from 'classnames';
@@ -16,7 +16,7 @@ import classNames from 'classnames';
     }),
     styles: require('./styles.less'),
 })
-class MainHeader extends React.Component {
+class MainHeader extends Component {
     // state = {
     //     enter: true,
     //     enterActive: false,
@@ -48,7 +48,7 @@ class MainHeader extends React.Component {
             className,
             children,
             mainKey,
-            onAnimationEnd,
+            // onAnimationEnd,
             type,
             ...props
         } = this.props;

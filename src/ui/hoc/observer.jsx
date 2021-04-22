@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import { Component, createRef, forwardRef } from 'react';
 
-export const observer = (options = {}) => WrappedComponent =>
+export const observer = (options = {}) => (WrappedComponent) =>
     class Observer extends Component {
         constructor(props) {
             super(props);
@@ -16,17 +16,17 @@ export const observer = (options = {}) => WrappedComponent =>
                     root = null,
                     rootMargin = '0px',
                     threshold = [0, 1],
-                    classNameInView = 'is-inview'
+                    classNameInView = 'is-inview',
                 } = options;
 
                 const settings = {
                     root,
                     rootMargin,
-                    threshold
+                    threshold,
                 };
 
                 const handleIntersect = (entries /*, observer*/) => {
-                    entries.forEach(entry => {
+                    entries.forEach((entry) => {
                         if (entry.intersectionRatio <= 0) {
                             // out of view
                             entry.target.classList.remove(classNameInView);
@@ -52,7 +52,7 @@ export const observer = (options = {}) => WrappedComponent =>
         render() {
             const props = {
                 ...this.props,
-                ...this.state
+                ...this.state,
             };
 
             return (
@@ -63,9 +63,9 @@ export const observer = (options = {}) => WrappedComponent =>
         }
     };
 
-export const observerItem = WrappedComponent => {
+export const observerItem = (WrappedComponent) => {
     class ObserverItem extends Component {
-        Ref = React.createRef();
+        Ref = createRef();
 
         componentDidMount() {
             if (!this._item && typeof document !== 'undefined') {
@@ -108,7 +108,7 @@ export const observerItem = WrappedComponent => {
         }
     }
 
-    return React.forwardRef((props, ref) => {
+    return forwardRef((props, ref) => {
         if (ref) return <ObserverItem {...props} forwardedRef={ref} />;
         return <ObserverItem {...props} />;
     });

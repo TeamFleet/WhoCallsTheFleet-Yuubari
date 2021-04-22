@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Bullet from '@ui/components/bullet';
 import { wrapper as moduleClassName } from './index.less';
 

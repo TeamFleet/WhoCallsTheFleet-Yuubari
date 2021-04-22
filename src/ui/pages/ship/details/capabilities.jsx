@@ -1,4 +1,3 @@
-import React from 'react';
 import { extend } from 'koot';
 
 // import UnderConstruction from '@ui/components/under-construction';
@@ -13,8 +12,8 @@ import SpeedUpCalculator from './components/speedup-calculator';
 // import db from '@database'
 
 const ShipDetailsContentCapabilities = extend({
-    styles: require('./capabilities.less')
-})(props => (
+    styles: require('./capabilities.less'),
+})((props) => (
     <div className={props.className}>
         <div className="wrapper">
             {/* <div className="under-construction">

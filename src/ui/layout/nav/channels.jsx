@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, IndexLink } from 'react-router';
 import classNames from 'classnames';
 import { extend } from 'koot';

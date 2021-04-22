@@ -1,16 +1,12 @@
-import React from 'react'
-// import { Link } from 'react-router'
-import { extend } from 'koot'
+import { memo } from 'react';
+import { extend } from 'koot';
 
 const ButtonGroup = extend({
-    styles: require('./button-group.less')
+    styles: require('./button-group.less'),
 })(
-    ({ className, children }) => (
-        <span
-            className={className}
-        >
-            {children}
-        </span>
-    )
-)
-export default ButtonGroup
+    memo(({ className, children }) => (
+        <span className={className}>{children}</span>
+    ))
+);
+
+export default ButtonGroup;

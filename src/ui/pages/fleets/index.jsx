@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, Fragment } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 import { Link } from 'react-router';
@@ -41,7 +41,7 @@ export default PageFleets;
     connect: true,
     styles: require('./styles.less'),
 })
-class PageFleetsBody extends React.Component {
+class PageFleetsBody extends Component {
     state = {
         ready: false,
     };
@@ -79,12 +79,12 @@ class PageFleetsBody extends React.Component {
         const { className } = this.props;
 
         return (
-            <React.Fragment>
+            <Fragment>
                 <PageFleetsHeader className={className + '-header'} />
                 <div className={className}>
                     <PageFleetsList className={className + '-list'} />
                 </div>
-            </React.Fragment>
+            </Fragment>
         );
     }
 }
@@ -93,20 +93,22 @@ class PageFleetsBody extends React.Component {
 
 const PageFleetsHeader = extend({
     connect: true,
-})(({ className, dispatch }) => (
-    <Header
-        className={className}
-        main={
-            <React.Fragment>
-                {__('under_construction')}
-                <Button
-                    children="NEW BUILD"
-                    onClick={() => dispatch(newBuild(true))}
-                />
-            </React.Fragment>
-        }
-    />
-));
+})(({ className, dispatch }) => {
+    function onClick() {
+        dispatch(newBuild(true));
+    }
+    return (
+        <Header
+            className={className}
+            main={
+                <Fragment>
+                    {__('under_construction')}
+                    <Button children="NEW BUILD" onClick={onClick} />
+                </Fragment>
+            }
+        />
+    );
+});
 
 //
 
@@ -124,8 +126,12 @@ const PageFleetsList = extend({
     });
 
     const hasData = Array.isArray(builds) && builds.length > 0;
+    function onClick() {
+        dispatch(newBuild(true));
+    }
+
     return (
-        <React.Fragment>
+        <Fragment>
             <Title component="h2" children={__('under_construction')} />
             {hasData &&
                 builds.map((build) => (
@@ -135,12 +141,9 @@ const PageFleetsList = extend({
                 ))}
             {!hasData && (
                 <div>
-                    <Button
-                        children="NEW BUILD"
-                        onClick={() => dispatch(newBuild(true))}
-                    />
+                    <Button children="NEW BUILD" onClick={onClick} />
                 </div>
             )}
-        </React.Fragment>
+        </Fragment>
     );
 });

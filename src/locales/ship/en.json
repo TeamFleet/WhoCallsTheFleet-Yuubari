@@ -1,6 +1,7 @@
 {
     "ship_sub_types": {
         "NightCarrier": "Night Operation Aircraft Carrier",
+        "LightNightCarrier": "Night Operation Light Aircraft Carrier",
         "ModernizedCarrier": "Modernized Aircraft Carrier",
         "EscortCarrier": "Escort Carrier",
         "AssultCarrier": "Assult Light Aircraft Carrier",

@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo, Fragment } from 'react';
 import classNames from 'classnames';
 
 import equipmentStats from '@const/equipment-stats';
@@ -6,7 +6,7 @@ import equipmentStats from '@const/equipment-stats';
 import Stat from '@ui/components/stat';
 import ImprovementStar from '@ui/components/improvement/star';
 
-export default ({ bonus, isOneOf = false }) => {
+export default memo(({ bonus, isOneOf = false }) => {
     if (typeof bonus !== 'object') return null;
 
     const isSet = typeof bonus.equipments === 'object';
@@ -61,26 +61,26 @@ export default ({ bonus, isOneOf = false }) => {
 
     if (typeof bonus.bonusAccumulate === 'object') {
         statsAccumulate = (
-            <React.Fragment>
+            <Fragment>
                 <div
                     className="infos"
                     children={__('bonuses.based_set_accumulate')}
                 />
                 <BonusStats stats={bonus.bonusAccumulate} />
-            </React.Fragment>
+            </Fragment>
         );
     }
 
     return (
-        <React.Fragment>
+        <Fragment>
             {infoText ? <div className="infos" children={infoText} /> : null}
             {stats}
             {statsAccumulate}
-        </React.Fragment>
+        </Fragment>
     );
-};
+});
 
-const BonusStats = ({ stats }) => {
+const BonusStats = memo(({ stats }) => {
     if (typeof stats !== 'object') return null;
 
     return (
@@ -117,7 +117,7 @@ const BonusStats = ({ stats }) => {
                     return (
                         <Stat
                             key={index}
-                            type={undefined}
+                            // type={undefined}
                             className={classNames(classes)}
                             stat={stat}
                             children={text}
@@ -129,4 +129,4 @@ const BonusStats = ({ stats }) => {
                 })}
         </div>
     );
-};
+});

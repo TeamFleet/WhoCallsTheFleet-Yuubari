@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import React from 'react';
+import { Component, createRef } from 'react';
 import classNames from 'classnames';
 import checkCssProp from 'check-css-prop';
 import { extend } from 'koot';
@@ -17,7 +17,7 @@ import AppBar from './appbar';
 import Logo from './logo';
 
 /** @type {DOM} 控制导航显示的开关 */
-const NavSwitchRef = React.createRef();
+const NavSwitchRef = createRef();
 const idNavSwitch = 'nav-switch';
 const changeNavSwitch = (changeTo) => {
     if (!NavSwitchRef || !NavSwitchRef.current) return;
@@ -38,7 +38,7 @@ const changeNavSwitch = (changeTo) => {
     }),
     styles: require('./nav.less'),
 })
-class Nav extends React.Component {
+class Nav extends Component {
     state = {
         showBackButton: false,
     };

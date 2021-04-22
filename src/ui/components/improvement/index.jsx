@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { extend } from 'koot';
 
 import Link from '@ui/components/link';
@@ -34,7 +34,7 @@ export default Improvement;
 @extend({
     styles: require('./styles-dayandship.less'),
 })
-class DayAndShip extends React.Component {
+class DayAndShip extends Component {
     renderItem(data, index) {
         let [dataDays, dataShips] = data;
         if (dataShips)
@@ -92,7 +92,7 @@ const getValue = (value) => {
     return _getValue(value);
 };
 
-class _Resources extends React.Component {
+class _Resources extends Component {
     constructor(props) {
         super(props);
 

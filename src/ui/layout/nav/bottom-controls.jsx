@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, memo, Fragment } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import bindEvent from 'bind-event';
 import classNames from 'classnames';
@@ -21,22 +21,24 @@ const langName = {
 const NavBottomControls = extend({
     connect: true,
     styles: require('./bottom-controls.less'),
-})(({ className, dispatch }) => {
-    function bottomOnClick() {
-        dispatch(enterUIModeBackground());
-    }
-    return (
-        <div className={className}>
-            <NavInstall />
-            <NavBottomItem
-                onClick={bottomOnClick}
-                icon="image-compare"
-                children={__('nav.backgroundSwitch')}
-            />
-            <NavLangSwitch />
-        </div>
-    );
-});
+})(
+    memo(({ className, dispatch }) => {
+        function bottomOnClick() {
+            dispatch(enterUIModeBackground());
+        }
+        return (
+            <div className={className}>
+                <NavInstall />
+                <NavBottomItem
+                    onClick={bottomOnClick}
+                    icon="image-compare"
+                    children={__('nav.backgroundSwitch')}
+                />
+                <NavLangSwitch />
+            </div>
+        );
+    })
+);
 export default NavBottomControls;
 
 //
@@ -58,7 +60,7 @@ const NavBottomItem = ({ className, icon, children, ...props }) => {
         location: state.routing && state.routing.locationBeforeTransitions,
     }),
 })
-class NavLangSwitch extends React.Component {
+class NavLangSwitch extends Component {
     state = {
         showMenu: false,
     };
@@ -117,7 +119,7 @@ class NavLangSwitch extends React.Component {
                     data-current-locale-abbr={langName[this.props.localeId][0]}
                     onClick={this.toggleMenu}
                 />
-                <TransitionGroup component={React.Fragment}>
+                <TransitionGroup component={Fragment}>
                     {this.state.showMenu && (
                         <CSSTransition classNames="transition" timeout={200}>
                             <div className="lang-switch-menu">

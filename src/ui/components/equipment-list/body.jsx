@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
 import { extend } from 'koot';
@@ -32,7 +32,7 @@ import TableBodyHeaderInterceptor from './table-body-header-interceptor';
 @observer({
     rootMargin: '50px 0px',
 })
-class EquipmentList extends React.Component {
+class EquipmentList extends Component {
     constructor(props) {
         super(props);
         if (!props.isInit) {
@@ -78,7 +78,7 @@ export default EquipmentList;
     },
     styles: require('./body.less'),
 })
-class EquipmentListBody extends React.Component {
+class EquipmentListBody extends Component {
     renderCollection(collection, index) {
         if (typeof index !== 'undefined') index = index + '-';
         else index = '';
@@ -162,7 +162,7 @@ class EquipmentListBody extends React.Component {
     }),
     styles: require('./body-datahost.less'),
 })
-class EquipmentListBodyDataHost extends React.Component {
+class EquipmentListBodyDataHost extends Component {
     render() {
         return (
             <div

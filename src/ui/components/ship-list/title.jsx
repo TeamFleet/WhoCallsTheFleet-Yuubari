@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { extend } from 'koot';
 
 import db, { locale as dbLocaleId } from '@database';
@@ -44,79 +44,86 @@ const ShipListTitle = extend({
     }),
     styles: require('./title.less'),
 })(
-    ({
-        className,
-        id,
-        ships,
-        type: typeId,
-        checked,
-        class: shipClassId,
-        dispatch,
-        name,
-    }) => {
-        function toggle() {
-            if (typeof checked === 'undefined') return false;
+    memo(
+        ({
+            className,
+            id,
+            ships,
+            type: typeId,
+            checked,
+            class: shipClassId,
+            dispatch,
+            name,
+            isSubType = false,
+        }) => {
+            function toggle() {
+                if (typeof checked === 'undefined') return false;
 
-            switch (checked) {
-                case true:
-                    return dispatch(compareRemove(id, ships));
+                switch (checked) {
+                    case true:
+                        return dispatch(compareRemove(id, ships));
 
-                case 'indeterminate':
-                case false:
-                    return dispatch(compareAdd(id, ships));
+                    case 'indeterminate':
+                    case false:
+                        return dispatch(compareAdd(id, ships));
 
-                default: {
+                    default: {
+                    }
                 }
             }
-        }
 
-        if (typeId) {
-            const type = db.shipTypes[typeId];
-            return (
-                <div
-                    className={className}
-                    data-checked={checked}
-                    onClick={toggle}
-                >
-                    <Checkmark checked={checked} />
-                    <Title
-                        component="h4"
-                        className={className + '-title'}
-                        children={
-                            typeof name === 'object' && name[dbLocaleId]
-                                ? name[dbLocaleId]
-                                : type.name[dbLocaleId] || type.name.ja_jp
-                        }
-                    />
-                    {type.code && <small className="code">[{type.code}]</small>}
-                </div>
-            );
-        } else if (shipClassId) {
-            return (
-                <h5
-                    className={className + ' is-sub'}
-                    data-checked={checked}
-                    onClick={toggle}
-                >
-                    <Checkmark checked={checked} />
-                    {__('shipclass', {
-                        class: db.shipClasses[shipClassId]._name,
-                    })}
-                </h5>
-            );
-        } else
-            return (
-                <h4 className={className} disabled>
-                    --
-                </h4>
-            );
-    }
+            if (typeId) {
+                const type = db.shipTypes[typeId];
+                const typeName = type.name[dbLocaleId] || type.name.ja_jp;
+                return (
+                    <div
+                        className={className}
+                        data-checked={checked}
+                        onClick={toggle}
+                    >
+                        <Checkmark checked={checked} />
+                        <Title
+                            component="h4"
+                            className={className + '-title'}
+                            children={
+                                // (isSubType ? `${typeName} / ` : '') +
+                                typeof name === 'object' && name[dbLocaleId]
+                                    ? name[dbLocaleId]
+                                    : typeName
+                            }
+                        />
+                        {type.code && (
+                            <small className="code">[{type.code}]</small>
+                        )}
+                    </div>
+                );
+            } else if (shipClassId) {
+                return (
+                    <h5
+                        className={className + ' is-sub'}
+                        data-checked={checked}
+                        onClick={toggle}
+                    >
+                        <Checkmark checked={checked} />
+                        {__('shipclass', {
+                            class: db.shipClasses[shipClassId]._name,
+                        })}
+                    </h5>
+                );
+            } else
+                return (
+                    <h4 className={className} disabled>
+                        --
+                    </h4>
+                );
+        }
+    )
 );
 
-const Checkmark = ({ checked }) => {
+const Checkmark = memo(({ checked }) => {
     if (typeof checked === 'undefined') return null;
     return <Icon className="icon" icon="checkbox-checked" />;
-};
+});
 
 // ============================================================================
 

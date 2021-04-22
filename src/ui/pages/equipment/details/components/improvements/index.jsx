@@ -1,4 +1,3 @@
-import React from 'react';
 import { extend } from 'koot';
 
 import ComponentContainer from '@ui/containers/infos-component';
@@ -8,7 +7,7 @@ import Bullet from '@ui/components/bullet';
 import LinkEquipment from '@ui/components/link/equipment';
 
 const EquipmentDetailsComponentImprovements = extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })(({ className, equipment }) => {
     const list = equipment.improvement || [];
     const hasItem = !!list.length;
@@ -39,7 +38,7 @@ const EquipmentDetailsComponentImprovements = extend({
 export default EquipmentDetailsComponentImprovements;
 
 const EquipmentDetailsComponentImprovementsImprovement = extend({
-    styles: require('./styles-improvement.less')
+    styles: require('./styles-improvement.less'),
 })(({ className, upgradable, data: { upgrade, req, resource } }) => (
     <div className={className}>
         <Bullet className="upgradability" level={upgrade ? 2 : 0}>

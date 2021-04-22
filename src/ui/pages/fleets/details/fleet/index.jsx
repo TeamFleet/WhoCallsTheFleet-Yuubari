@@ -1,4 +1,3 @@
-import React from 'react';
 // import classNames from 'classnames'
 import { extend } from 'koot';
 
@@ -30,13 +29,17 @@ const FleetDetailsSubfleet = extend({
     if (typeof index !== 'number') return null;
 
     const ships = [];
+    function onClick() {
+        selectShip();
+    }
+
     for (let i = 0; i < count; i++) {
         ships.push(
             <div
                 key={i}
                 data-ship-index={i}
                 data-fleet-index={index}
-                onClick={() => selectShip()}
+                onClick={onClick}
             >
                 Fleet #{index + 1} | Ship #{i + 1}
             </div>

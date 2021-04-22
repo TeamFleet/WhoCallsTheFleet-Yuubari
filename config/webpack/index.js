@@ -62,6 +62,13 @@ module.exports = async () => {
                 )
             ),
         ],
+
+        resolve: {
+            fallback: {
+                util: require.resolve('util/'),
+                path: require.resolve('path-browserify'),
+            },
+        },
     };
 
     if (

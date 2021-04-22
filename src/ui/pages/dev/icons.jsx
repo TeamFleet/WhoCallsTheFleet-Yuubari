@@ -1,42 +1,45 @@
-import React from 'react'
-import { extend } from 'koot'
+import { Component } from 'react';
+import { extend } from 'koot';
 
-import htmlHead from '@utils/html-head'
+import htmlHead from '@utils/html-head';
 
-import Page from '@ui/containers/page'
+import Page from '@ui/containers/page';
 
-import MainHeader from '@ui/components/main-header'
-import Icon from '@ui/components/icon'
-import Title from '@ui/components/title'
+import MainHeader from '@ui/components/main-header';
+import Icon from '@ui/components/icon';
+import Title from '@ui/components/title';
 
 @extend({
-    pageinfo: (state) => htmlHead(state, {
-        title: 'Dev (Icons)'
-    }),
-    styles: require('./icons.less')
+    pageinfo: (state) =>
+        htmlHead(state, {
+            title: 'Dev (Icons)',
+        }),
+    styles: require('./icons.less'),
 })
-class PageDevIcons extends React.Component {
-
+class PageDevIcons extends Component {
     getIcons() {
-        if (__SERVER__) return []
+        if (__SERVER__) return [];
 
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(__SVG_SYMBOLS__, "image/svg+xml")
-        let icons = []
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(__SVG_SYMBOLS__, 'image/svg+xml');
+        const icons = [];
 
-        for (let symbol of doc.querySelectorAll('symbol[id]')) {
-            icons.push(symbol.getAttribute('id').replace(/^icon-/, ''))
+        for (const symbol of doc.querySelectorAll('symbol[id]')) {
+            icons.push(symbol.getAttribute('id').replace(/^icon-/, ''));
         }
 
-        return icons
+        return icons;
     }
 
     render() {
-        this.getIcons()
+        this.getIcons();
         return (
             <Page className={this.props.className}>
                 <MainHeader>
-                    <div className="header" style={{ height: "100px", paddingTop: "20px" }}>
+                    <div
+                        className="header"
+                        style={{ height: '100px', paddingTop: '20px' }}
+                    >
                         <Title component="h1">Icons</Title>
                     </div>
                 </MainHeader>
@@ -46,13 +49,13 @@ class PageDevIcons extends React.Component {
                     ))}
                 </div>
             </Page>
-        )
+        );
     }
 }
 
-export default PageDevIcons
+export default PageDevIcons;
 
-class IconSample extends React.Component {
+class IconSample extends Component {
     render() {
         return (
             <label className="icon-sample">
@@ -60,12 +63,12 @@ class IconSample extends React.Component {
                     type="text"
                     value={this.props.icon}
                     readOnly
-                    onFocus={evt => {
-                        evt.target.select()
+                    onFocus={(evt) => {
+                        evt.target.select();
                     }}
                 />
                 <Icon icon={this.props.icon} className="icon" />
             </label>
-        )
+        );
     }
 }

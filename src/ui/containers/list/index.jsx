@@ -1,6 +1,5 @@
-import React from 'react'
-import classNames from 'classnames'
-import { extend } from 'koot'
+import classNames from 'classnames';
+import { extend } from 'koot';
 
 // import times from '@utils/times'
 
@@ -13,23 +12,17 @@ import { extend } from 'koot'
 // })()
 
 const ListContainer = extend({
-    styles: require('./styles.less')
-})(
-    ({
-        className,
-        grid = true,
-        children,
-        ...props
-    }) =>
-        <div
-            className={classNames({
-                [className]: true,
-                'mod-grid': !!grid,
-            })}
-            {...props}
-        >
-            {children}
-            {/* {grid && placeholders} */}
-        </div>
-)
-export default ListContainer
+    styles: require('./styles.less'),
+})(({ className, grid = true, children, ...props }) => (
+    <div
+        className={classNames({
+            [className]: true,
+            'mod-grid': !!grid,
+        })}
+        {...props}
+    >
+        {children}
+        {/* {grid && placeholders} */}
+    </div>
+));
+export default ListContainer;

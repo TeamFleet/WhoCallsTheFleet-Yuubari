@@ -1,7 +1,7 @@
-import React from 'react'
-import { extend } from 'koot'
+import { Component, createRef } from 'react';
+import { extend } from 'koot';
 
-import db from '@database'
+import db from '@database';
 // import bindEvent from 'bind-event'
 import {
     changeCollection,
@@ -13,36 +13,33 @@ import {
     compareReset,
     compareChangeState,
     // compareSort
-} from '@api/ship-list/api.js'
-import classNames from 'classnames'
+} from '@api/ship-list/api.js';
+import classNames from 'classnames';
 
-import MainHeader from '@ui/components/main-header'
-import Icon from '@ui/components/icon'
+import MainHeader from '@ui/components/main-header';
+import Icon from '@ui/components/icon';
 // import Button from '@ui/components/button'
 // import ButtonGroup from '@ui/components/button-group'
-import TableHeader from './table-header'
+import TableHeader from './table-header';
 
 //
 
 @extend({
     connect: (state, ownProps) => {
-        const {
-            isModeCompare,
-            isModeFilter,
-            compareState
-        } = state.shipList[ownProps.id] || {}
+        const { isModeCompare, isModeFilter, compareState } =
+            state.shipList[ownProps.id] || {};
         return {
             isModeCompare,
             isModeFilter,
-            compareState
-        }
+            compareState,
+        };
     },
-    styles: require('./header.less')
+    styles: require('./header.less'),
 })
-class ShipListHeader extends React.Component {
+class ShipListHeader extends Component {
     state = {
-        isClassCompare: false
-    }
+        isClassCompare: false,
+    };
 
     // componentDidMount() {
     //     bindEvent(
@@ -59,38 +56,47 @@ class ShipListHeader extends React.Component {
     // }
 
     renderExtraButtons() {
-        if (!Array.isArray(this.props.extraButtons)) return null
+        if (!Array.isArray(this.props.extraButtons)) return null;
         return this.props.extraButtons.map((button, index) => {
             switch (button) {
                 case 'compare':
                     return (
                         <span
-                            className={"link item btn-toggle-compare" + (this.props.isModeCompare ? ' on' : '')}
+                            className={
+                                'link item btn-toggle-compare' +
+                                (this.props.isModeCompare ? ' on' : '')
+                            }
                             key={index}
                             onClick={() => {
                                 if (this.props.isModeCompare)
-                                    return this.props.dispatch(compareReset(this.props.id))
-                                return this.props.dispatch(compareEnter(this.props.id))
+                                    return this.props.dispatch(
+                                        compareReset(this.props.id)
+                                    );
+                                return this.props.dispatch(
+                                    compareEnter(this.props.id)
+                                );
                             }}
                         >
-                            <Icon className="icon icon-compare" icon="paragraph-left" />
-                            {__("ship_list.compare.button")}
+                            <Icon
+                                className="icon icon-compare"
+                                icon="paragraph-left"
+                            />
+                            {__('ship_list.compare.button')}
                             <Icon className="icon-close" icon="cross" />
                         </span>
-                    )
+                    );
                 default:
-                    return button
+                    return button;
             }
-        })
+        });
     }
 
     onAnimationEnd(evt) {
         if (evt.animationName === 'ship-list-header-compare-leave') {
-            this.props.dispatch(
-                compareLeave(this.props.id, true)
-            )
+            this.props.dispatch(compareLeave(this.props.id, true));
         }
     }
+    onAnimationEnd = this.onAnimationEnd.bind(this);
 
     render() {
         return (
@@ -100,83 +106,96 @@ class ShipListHeader extends React.Component {
                         ? this.props.compareState
                         : null
                 }
-                className={classNames(
-                    this.props.className,
-                    {
-                        'is-filtering': this.props.isModeFilter,
-                        'is-compare': typeof this.props.isModeCompare !== 'undefined',
-                        'is-compare-leaving': this.props.isModeCompare === false
-                    }
-                )}
-                onAnimationEnd={this.onAnimationEnd.bind(this)}
+                className={classNames(this.props.className, {
+                    'is-filtering': this.props.isModeFilter,
+                    'is-compare':
+                        typeof this.props.isModeCompare !== 'undefined',
+                    'is-compare-leaving': this.props.isModeCompare === false,
+                })}
+                onAnimationEnd={this.onAnimationEnd}
             >
-                <div className="wrapper" ref={el => this._wrapper = el}>
+                <div
+                    className="wrapper"
+                    // ref={(el) => (this._wrapper = el)}
+                >
                     <div className="body">
                         <Filter id={this.props.id} />
                         <Tabs id={this.props.id} />
-                        {this.props.extraButtons && <ExtraButtons>{this.renderExtraButtons()}</ExtraButtons>}
+                        {this.props.extraButtons && (
+                            <ExtraButtons>
+                                {this.renderExtraButtons()}
+                            </ExtraButtons>
+                        )}
                     </div>
-                    {typeof this.props.isModeCompare !== 'undefined' && <CompareControls id={this.props.id} />}
-                    {typeof this.props.isModeCompare !== 'undefined' && <Compare id={this.props.id} />}
+                    {typeof this.props.isModeCompare !== 'undefined' && (
+                        <CompareControls id={this.props.id} />
+                    )}
+                    {typeof this.props.isModeCompare !== 'undefined' && (
+                        <Compare id={this.props.id} />
+                    )}
                 </div>
             </MainHeader>
-        )
+        );
     }
 }
-export default ShipListHeader
+export default ShipListHeader;
 
 //
 
 @extend({
     connect: (state, ownProps) => ({
-        collection: state.shipList[ownProps.id].collection
+        collection: state.shipList[ownProps.id].collection,
     }),
-    styles: require('./header-tabs.less')
+    styles: require('./header-tabs.less'),
 })
-class Tabs extends React.Component {
+class Tabs extends Component {
     onTabClick(collection) {
-        this.props.dispatch(
-            changeCollection(this.props.id, collection)
-        )
+        this.props.dispatch(changeCollection(this.props.id, collection));
     }
     onSelectChange(evt) {
         this.props.dispatch(
             changeCollection(this.props.id, parseInt(evt.target.value))
-        )
+        );
     }
+    onSelectChange = this.onSelectChange.bind(this);
     render() {
         return (
             <div className={this.props.className}>
                 <label className="select">
-                    <select className="select-select" onChange={this.onSelectChange.bind(this)} value={this.props.collection}>
+                    <select
+                        className="select-select"
+                        onChange={this.onSelectChange}
+                        value={this.props.collection}
+                    >
                         {db.shipCollections.map((collection, index) => (
-                            <option
-                                key={index}
-                                value={index}
-                            >
+                            <option key={index} value={index}>
                                 {collection.name}
                             </option>
                         ))}
                     </select>
-                    {this.props.collection > -1 && db.shipCollections[this.props.collection].name}
+                    {this.props.collection > -1 &&
+                        db.shipCollections[this.props.collection].name}
                 </label>
                 {db.shipCollections.map((collection, index) => (
                     <span
                         key={index}
-                        className={'link item' + (this.props.collection === index ? ' on' : '')}
+                        className={
+                            'link item' +
+                            (this.props.collection === index ? ' on' : '')
+                        }
                         onClick={() => {
-                            this.onTabClick(index)
+                            this.onTabClick(index);
                         }}
                     >
                         {collection.name}
                     </span>
                 ))}
             </div>
-        )
+        );
     }
 }
 
-// class TabItem extends React.Component {
+// class TabItem extends Component {
 //     render() {
 //         return (
 //             <span
@@ -193,34 +212,34 @@ class Tabs extends React.Component {
 
 @extend({
     connect: (state, ownProps) => ({
-        filterInput: state.shipList[ownProps.id].filterInput
+        filterInput: state.shipList[ownProps.id].filterInput,
     }),
-    styles: require('./header-filter.less')
+    styles: require('./header-filter.less'),
 })
-class Filter extends React.Component {
+class Filter extends Component {
+    InputRef = createRef();
+
     onInput(evt) {
-        if (typeof this.debounceInput !== 'undefined') clearTimeout(this.debounceInput)
-        let value = evt.target.value
+        if (typeof this.debounceInput !== 'undefined')
+            clearTimeout(this.debounceInput);
+        const value = evt.target.value;
         this.debounceInput = setTimeout(() => {
-            this.props.dispatch(
-                filterInput(this.props.id, value)
-            )
-        }, 100)
+            this.props.dispatch(filterInput(this.props.id, value));
+        }, 100);
     }
+    onInput = this.onInput.bind(this);
 
     onFocus() {
-        this.props.dispatch(
-            filterEnter(this.props.id)
-        )
+        this.props.dispatch(filterEnter(this.props.id));
     }
+    onFocus = this.onFocus.bind(this);
 
     onBlur(evt) {
         if (evt.target.value === '') {
-            this.props.dispatch(
-                filterLeave(this.props.id)
-            )
+            this.props.dispatch(filterLeave(this.props.id));
         }
     }
+    onBlur = this.onBlur.bind(this);
 
     onKeyDown(evt) {
         // const d = {}
@@ -233,66 +252,71 @@ class Filter extends React.Component {
             case 'ArrowUp':
             case 'ArrowDown': {
                 if (evt.target.value !== '') {
-                    evt.preventDefault()
-                    evt.target.blur()
-                    document.body.dispatchEvent(new KeyboardEvent('keydown', {
-                        bubbles: true,
-                        keyCode: evt.keyCode
-                    }))
+                    evt.preventDefault();
+                    evt.target.blur();
+                    document.body.dispatchEvent(
+                        new KeyboardEvent('keydown', {
+                            bubbles: true,
+                            keyCode: evt.keyCode,
+                        })
+                    );
                 }
-                break
+                break;
             }
             case 'Escape': {
-                evt.target.blur()
-                break
+                evt.target.blur();
+                break;
+            }
+            default: {
             }
         }
     }
+    onKeyDown = this.onKeyDown.bind(this);
 
     onCloseClick(/*evt*/) {
-        this.el.value = ""
-        this.el.dispatchEvent(new Event('input', { bubbles: true }))
-        this.el.dispatchEvent(new Event('blur', { bubbles: true }))
+        const input = this.InputRef.current;
+        input.value = '';
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('blur', { bubbles: true }));
         // evt.currentTarget.dispatchEvent(new Event('blur', { bubbles: true }))
     }
+    onCloseClick = this.onCloseClick.bind(this);
 
     render() {
         if (typeof this.defaultInput === 'undefined')
-            this.defaultInput = this.props.filterInput
+            this.defaultInput = this.props.filterInput;
         return (
             <div className={this.props.className}>
                 <Icon className="icon-search" icon="search" />
-                <span className="btn-close" onClick={this.onCloseClick.bind(this)}>
+                <span className="btn-close" onClick={this.onCloseClick}>
                     <Icon className="icon-close" icon="cross" />
                 </span>
                 <input
                     className="input"
                     type="text"
                     placeholder={__('ship_list.filter.placeholder')}
-                    onInput={this.onInput.bind(this)}
-                    onFocus={this.onFocus.bind(this)}
-                    onBlur={this.onBlur.bind(this)}
-                    onKeyDown={this.onKeyDown.bind(this)}
+                    onInput={this.onInput}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                    onKeyDown={this.onKeyDown}
                     defaultValue={this.defaultInput}
-                    ref={(c) => this.el = c}
+                    ref={this.InputRef}
                 />
             </div>
-        )
+        );
     }
 }
 
 //
 
 @extend({
-    styles: require('./header-extra-buttons.less')
+    styles: require('./header-extra-buttons.less'),
 })
-class ExtraButtons extends React.Component {
+class ExtraButtons extends Component {
     render() {
         return (
-            <div className={this.props.className}>
-                {this.props.children}
-            </div>
-        )
+            <div className={this.props.className}>{this.props.children}</div>
+        );
     }
 }
 
@@ -302,22 +326,18 @@ class ExtraButtons extends React.Component {
     connect: (state, ownProps) => ({
         // isModeCompare: state.shipList[ownProps.id].isModeCompare,
         compareState: state.shipList[ownProps.id].compareState,
-        count: state.shipList[ownProps.id].compareList.length
+        count: state.shipList[ownProps.id].compareList.length,
     }),
-    styles: require('./header-compare-header.less')
+    styles: require('./header-compare-header.less'),
 })
-class Compare extends React.Component {
+class Compare extends Component {
     compareStart() {
-        if (__CLIENT__)
-            window.scrollTo(undefined, 0)
-        this.props.dispatch(
-            compareChangeState(this.props.id, 'comparing')
-        )
+        if (__CLIENT__) window.scrollTo(undefined, 0);
+        this.props.dispatch(compareChangeState(this.props.id, 'comparing'));
     }
+    compareStart = this.compareStart.bind(this);
     compareReset() {
-        this.props.dispatch(
-            compareReset(this.props.id)
-        )
+        this.props.dispatch(compareReset(this.props.id));
     }
     render() {
         // <button
@@ -336,12 +356,13 @@ class Compare extends React.Component {
                             type="button"
                             className="btn-start-compare"
                             disabled={!this.props.count}
-                            onClick={this.compareStart.bind(this)}
+                            onClick={this.compareStart}
                         >
                             {this.props.count
-                                ? __("ship_list.compare.selected_to_start", { count: this.props.count })
-                                : __("ship_list.compare.wait_for_selection")
-                            }
+                                ? __('ship_list.compare.selected_to_start', {
+                                      count: this.props.count,
+                                  })
+                                : __('ship_list.compare.wait_for_selection')}
                         </button>
                     </div>
                 </div>
@@ -351,7 +372,7 @@ class Compare extends React.Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -359,25 +380,21 @@ class Compare extends React.Component {
 
 @extend({
     connect: (state, ownProps) => ({
-        compareSortType: state.shipList[ownProps.id].compareSort[0]
+        compareSortType: state.shipList[ownProps.id].compareSort[0],
     }),
-    styles: require('./header-compare-controls.less')
+    styles: require('./header-compare-controls.less'),
 })
-class CompareControls extends React.Component {
+class CompareControls extends Component {
     compareReset() {
-        if (__CLIENT__)
-            window.scrollTo(undefined, 0)
-        this.props.dispatch(
-            compareReset(this.props.id)
-        )
+        if (__CLIENT__) window.scrollTo(undefined, 0);
+        this.props.dispatch(compareReset(this.props.id));
     }
+    compareReset = this.compareReset.bind(this);
     compareAddRemove() {
-        if (__CLIENT__)
-            window.scrollTo(undefined, 0)
-        this.props.dispatch(
-            compareChangeState(this.props.id, 'selecting')
-        )
+        if (__CLIENT__) window.scrollTo(undefined, 0);
+        this.props.dispatch(compareChangeState(this.props.id, 'selecting'));
     }
+    compareAddRemove = this.compareAddRemove.bind(this);
     // compareResetSort() {
     //     this.props.dispatch(
     //         compareSort(this.props.id, false)
@@ -390,22 +407,22 @@ class CompareControls extends React.Component {
                     <button
                         type="button"
                         className="btn btn-reset"
-                        onClick={this.compareReset.bind(this)}
+                        onClick={this.compareReset}
                     >
                         <Icon className="icon" icon="cross" />
-                        {__("ship_list.compare.quit")}
+                        {__('ship_list.compare.quit')}
                     </button>
                     <button
                         type="button"
                         className="btn btn-modify"
-                        onClick={this.compareAddRemove.bind(this)}
+                        onClick={this.compareAddRemove}
                     >
                         <Icon className="icon" icon="stack-check" />
-                        {__("ship_list.compare.add_remove")}
+                        {__('ship_list.compare.add_remove')}
                     </button>
                 </div>
             </div>
-        )
+        );
         /* button: sort tip / reset sort
                     <button
                         type="button"

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import classNames from 'classnames';
 import kckit from 'kckit';
 import { extend } from 'koot';
@@ -117,7 +117,7 @@ const SpecialCapability = extend({
             >
                 <Bullet
                     title={
-                        <React.Fragment>
+                        <Fragment>
                             {description[0]}
                             <IconEquipment
                                 className="equipment"
@@ -126,7 +126,7 @@ const SpecialCapability = extend({
                                 {equipment._name}
                             </IconEquipment>
                             {description[1]}
-                        </React.Fragment>
+                        </Fragment>
                     }
                     level={2}
                 />

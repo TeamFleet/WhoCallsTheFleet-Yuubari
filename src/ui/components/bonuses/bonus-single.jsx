@@ -1,19 +1,15 @@
-import React from 'react'
-import classNames from 'classnames'
+import { memo } from 'react';
+import classNames from 'classnames';
 
-import LinkEquipment from '@ui/components/link/equipment'
+import LinkEquipment from '@ui/components/link/equipment';
 
-import Stats from './stats'
-import ConditionShip from './condition-ship'
+import Stats from './stats';
+import ConditionShip from './condition-ship';
 
-export default ({
-    className,
-    bonus,
-    thisShip, thisEquipment,
-}) => {
-    if (typeof bonus !== 'object') return null
+export default memo(({ className, bonus, thisShip, thisEquipment }) => {
+    if (typeof bonus !== 'object') return null;
 
-    let condition = null
+    let condition = null;
 
     // 条件
     if (typeof thisShip === 'object') {
@@ -23,9 +19,9 @@ export default ({
                 iconSize="large"
                 className="condition mod-equipment color-alt"
             />
-        )
+        );
     } else if (typeof thisEquipment === 'object') {
-        condition = <ConditionShip condition={bonus.ship} />
+        condition = <ConditionShip condition={bonus.ship} />;
     }
 
     return (
@@ -33,5 +29,5 @@ export default ({
             {condition}
             <Stats bonus={bonus} />
         </div>
-    )
-}
+    );
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 import classNames from 'classnames';
 import { extend } from 'koot';
@@ -11,7 +11,7 @@ import Title from '@ui/components/title';
 @extend({
     styles: require('./styles.less'),
 })
-class MainHeaderInfos extends React.Component {
+class MainHeaderInfos extends Component {
     /* props
      * currentIndex
      * urlBase

@@ -1,16 +1,14 @@
-import React from 'react'
+import { Component } from 'react';
 // import classNames from 'classnames'
-import { extend } from 'koot'
+import { extend } from 'koot';
 
 @extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })
-class Ship extends React.Component {
+class Ship extends Component {
     render() {
-        return (
-            <div />
-        )
+        return <div />;
     }
 }
 
-export default Ship
+export default Ship;

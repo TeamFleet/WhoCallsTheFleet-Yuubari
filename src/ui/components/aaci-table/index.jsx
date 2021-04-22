@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { extend } from 'koot';
 import classNames from 'classnames';
 
@@ -10,9 +10,9 @@ import LinkEquipment from '@ui/components/link/equipment';
 // ============================================================================
 
 const AACITable = extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })(
-    React.memo(
+    memo(
         ({
             className,
             component,
@@ -20,7 +20,7 @@ const AACITable = extend({
             element,
             ship: _ship,
             empty,
-            unable
+            unable,
         }) => {
             if (!_ship) return null;
 
@@ -42,6 +42,7 @@ const AACITable = extend({
                 );
             }
 
+            // eslint-disable-next-line no-console
             if (__DEV__ && __CLIENT__) console.log('thisShip > AACI', listAACI);
 
             return (
@@ -97,7 +98,7 @@ const Equipment = ({ className, show, children, ...props }) => {
     let [, icon, , id, , atLeast, , atMost] =
         /^(.+?)(:(\d+))*(\[(\d)*(,(\d*))*\])*$/.exec(show) || [];
     let name;
-    let stat = 'aa';
+    const stat = 'aa';
 
     switch (icon) {
         case '15+': {
@@ -128,7 +129,7 @@ const Equipment = ({ className, show, children, ...props }) => {
 
     const theProps = {
         equipment: id,
-        className: 'equipment color-alt-lighter mod-underline'
+        className: 'equipment color-alt-lighter mod-underline',
         // iconSize: 'large'
     };
 
@@ -137,7 +138,7 @@ const Equipment = ({ className, show, children, ...props }) => {
         theProps.icon = icon;
 
         if (!name)
-            Object.values(db.equipmentTypes).some(type => {
+            Object.values(db.equipmentTypes).some((type) => {
                 if (type.icon === parseInt(icon)) {
                     name = type._name;
                     return true;

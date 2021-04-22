@@ -328,21 +328,23 @@ module.exports = async (dbpath, topath) => {
     });
 
     // 处理子舰种
-    function addSubType(
+    async function addSubType(
         searchForCollectionName,
         searchForTypeId,
         subType,
+        nameType,
         filterShip
     ) {
         function getSubTypeNameObject(subType) {
             const obj = {};
             for (const [localeId, strings] of Object.entries(subTypes)) {
-                obj[localeId] = strings[subType];
+                obj[localeId] = strings[nameType ?? subType];
             }
             return obj;
         }
 
         const subTypeName = getSubTypeNameObject(subType);
+        // const typeName = await db.shipTypes.find({ id: searchForTypeId }).name;
 
         if (typeof filterShip !== 'function')
             filterShip = (ship) => getShipSubType(ship) === subType;
@@ -389,10 +391,11 @@ module.exports = async (dbpath, topath) => {
             });
         });
     }
-    addSubType('航空母舰', 10, 'ModernizedCarrier');
-    addSubType('航空母舰', 10, 'NightCarrier');
-    addSubType('航空母舰', 9, 'EscortCarrier');
-    addSubType('航空母舰', 9, 'AssultCarrier');
+    await addSubType('航空母舰', 10, 'ModernizedCarrier');
+    await addSubType('航空母舰', 10, 'NightCarrier');
+    await addSubType('航空母舰', 9, 'EscortCarrier');
+    await addSubType('航空母舰', 9, 'AssultCarrier');
+    await addSubType('航空母舰', 9, 'NightCarrier', 'LightNightCarrier');
 
     // 遍历全部collection，将ship object替换为shipId，并生成可读版
     shipCollections.forEach((collection, indexCollection) => {

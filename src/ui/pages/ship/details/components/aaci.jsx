@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 // import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -13,7 +13,7 @@ import Bullet from '@ui/components/bullet';
 import AACITable from '@components/aaci-table';
 
 const ShipDetailsAACI = extend({
-    styles: require('./aaci.less')
+    styles: require('./aaci.less'),
 })(
     memo(({ className, ship }) => {
         // const aaciTypes = getShip(ship).getAACI();

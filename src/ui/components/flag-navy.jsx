@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -31,17 +31,20 @@ const getNavyIndex = (navy) => {
 
 const FlagNavy = extend({
     styles: require('./flag-navy.less'),
-})(({ tag, component, element, className, shadow, navy, ...props }) => {
-    const Component = tag || component || element || 'span';
-    return (
-        <Component
-            {...props}
-            className={classNames({
-                [className]: true,
-                'has-shadow': !!shadow,
-            })}
-            data-navy-id={getNavyIndex(navy)}
-        />
-    );
-});
+})(
+    memo(({ tag, component, element, className, shadow, navy, ...props }) => {
+        const Component = tag || component || element || 'span';
+        return (
+            <Component
+                {...props}
+                className={classNames({
+                    [className]: true,
+                    'has-shadow': !!shadow,
+                })}
+                data-navy-id={getNavyIndex(navy)}
+            />
+        );
+    })
+);
+
 export default FlagNavy;

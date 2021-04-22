@@ -1,14 +1,7 @@
-import React from 'react'
-import { extend } from 'koot'
+import { extend } from 'koot';
 
-const DevButton = extend({
+const DevButton = extend({})(() => {
+    return <div>Button</div>;
+});
 
-})(
-    () => {
-        return (
-            <div>Button</div>
-        )
-    }
-)
-
-export default DevButton
+export default DevButton;

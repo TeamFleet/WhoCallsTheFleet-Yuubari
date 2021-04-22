@@ -1,24 +1,26 @@
-import React from 'react'
-import { extend } from 'koot'
+import { Component } from 'react';
+import { extend } from 'koot';
 
-import htmlHead from '@utils/html-head'
+import htmlHead from '@utils/html-head';
 
-import Page from '@ui/containers/page'
+import Page from '@ui/containers/page';
+import Title from '@ui/components/title';
+// import DevHeader from '@ui/components/dev/header'
+import Button from '@ui/components/button';
+import ButtonGroup from '@ui/components/button-group';
+import InputCounter from '@ui/components/input/counter';
+import LoaderFairyOoyodo2 from '@ui/components/loader/fairy-ooyodo-2';
 
-import Title from '@ui/components/title'
-import Header from './header'
-import DevHeader from '@ui/components/dev/header'
-import Button from '@ui/components/button'
-import ButtonGroup from '@ui/components/button-group'
-import InputCounter from '@ui/components/input/counter'
+import Header from './header';
 
 @extend({
-    pageinfo: (state) => htmlHead(state, {
-        title: 'Dev (Components)'
-    }),
-    styles: require('./index.less')
+    pageinfo: (state) =>
+        htmlHead(state, {
+            title: 'Dev (Components)',
+        }),
+    styles: require('./index.less'),
 })
-class DevComponents extends React.Component {
+class DevComponents extends Component {
     render() {
         return (
             <Page className={this.props.className}>
@@ -30,22 +32,20 @@ class DevComponents extends React.Component {
                 <SamplesLoaders />
                 <SamplesList /> */}
             </Page>
-        )
+        );
     }
 }
 
-export default DevComponents
+export default DevComponents;
 
 const Samples = ({ className, ...props }) => (
     <div
-        className={
-            ['dev-sample-container', className]
-                .filter(c => !!c)
-                .join(' ')
-        }
+        className={['dev-sample-container', className]
+            .filter((c) => !!c)
+            .join(' ')}
         {...props}
     />
-)
+);
 
 const SamplesButton = () => (
     <Samples>
@@ -79,7 +79,7 @@ const SamplesButton = () => (
             <Button state="active">Active</Button>
         </p>
     </Samples>
-)
+);
 
 const SamplesButtonGroup = () => (
     <Samples>
@@ -93,7 +93,7 @@ const SamplesButtonGroup = () => (
             </ButtonGroup>
         </p>
     </Samples>
-)
+);
 
 const SamplesInput = () => (
     <Samples>
@@ -103,9 +103,8 @@ const SamplesInput = () => (
             <InputCounter defaultValue="10" max="20" min="-5" />
         </p>
     </Samples>
-)
+);
 
-import LoaderFairyOoyodo2 from '@ui/components/loader/fairy-ooyodo-2'
 const SamplesLoaders = () => (
     <Samples>
         <Title component="h2">loader / fairy-ooyodo-2</Title>
@@ -113,4 +112,4 @@ const SamplesLoaders = () => (
             <LoaderFairyOoyodo2 />
         </p>
     </Samples>
-)
+);

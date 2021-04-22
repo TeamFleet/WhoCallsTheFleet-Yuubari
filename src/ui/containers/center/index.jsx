@@ -1,14 +1,9 @@
-import React from 'react'
-import { extend } from 'koot'
+import { extend } from 'koot';
 
 const CenterContainer = extend({
-    styles: require('./styles.less')
-})(
-    ({ className, children }) =>
-        <div
-            className={className}
-            children={children}
-        />
-)
+    styles: require('./styles.less'),
+})(({ className, children }) => (
+    <div className={className} children={children} />
+));
 
-export default CenterContainer
+export default CenterContainer;

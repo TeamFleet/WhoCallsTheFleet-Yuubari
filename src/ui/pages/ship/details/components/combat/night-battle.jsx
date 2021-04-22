@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 
 import db from '@database';
 
@@ -10,13 +10,13 @@ export default ({ ship }) => {
     if (ship.isType('carrier')) {
         const {
             count_as_night_operation_aviation_personnel,
-            participate_night_battle_when_equip_swordfish
+            participate_night_battle_when_equip_swordfish,
         } = ship.getCapability();
         const equipmentSwordfish = db.equipments[242];
         const equipmentNightOperationAviationPersonnel = db.equipments[258];
 
         return (
-            <React.Fragment>
+            <Fragment>
                 {ship.stat.fire || ship.stat.torpedo ? (
                     <Bullet
                         title={__('combat_phases.night.participate')}
@@ -40,7 +40,7 @@ export default ({ ship }) => {
                             icon={equipmentSwordfish._icon}
                         >
                             {__('equipment_series', {
-                                equipment: equipmentSwordfish._name
+                                equipment: equipmentSwordfish._name,
                             })}
                         </IconEquipment>
                     </Bullet>
@@ -68,15 +68,15 @@ export default ({ ship }) => {
                                 equipments: {
                                     hasOneOf: [
                                         'CarrierFighterNight',
-                                        'TorpedoBomberNight'
-                                    ]
-                                }
+                                        'TorpedoBomberNight',
+                                    ],
+                                },
                             }}
                             ship={ship}
                         />
                     </span>
                 </Bullet>
-            </React.Fragment>
+            </Fragment>
         );
     } else {
         return (

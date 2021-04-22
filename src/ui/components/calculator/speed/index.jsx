@@ -1,56 +1,63 @@
-import React from 'react'
-import classNames from 'classnames'
-import kckit from 'kckit'
-import { extend } from 'koot'
+import { Component } from 'react';
+import classNames from 'classnames';
+import kckit from 'kckit';
+import { extend } from 'koot';
 
-import Equipment from '../equipment'
+import InputCounter from '@ui/components/input/counter';
+
+import Equipment from '../equipment';
 // import InputNumber from '../input-number'
-import InputCounter from '@ui/components/input/counter'
 
-const calculateSpeed = kckit.calculate.ship.speed
-const maxSlots = 4
+const calculateSpeed = kckit.calculate.ship.speed;
+const maxSlots = 4;
 
 @extend({
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })
-class CalculatorSpeed extends React.Component {
+class CalculatorSpeed extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
-            [33]: 1, // 改良型艦本式タービン
-            [34]: 0, // 強化型艦本式缶
-            [87]: 0, // 新型高温高圧缶
+            33: 1, // 改良型艦本式タービン
+            34: 0, // 強化型艦本式缶
+            87: 0, // 新型高温高圧缶
             speedId: props.ship.stat.speed,
-            speed: props.ship.getSpeed()
-        }
+            speed: props.ship.getSpeed(),
+        };
 
-        this.slotsCount = props.ship.slot.length
+        this.slotsCount = props.ship.slot.length;
     }
 
     update(id, count) {
         if (this.state[id] !== count) {
             this.setState((prevState, props) => {
                 // const newState = { ...prevState }
-                prevState[id] = count
-                let {
-                    34: count34,
-                    87: count87
-                } = prevState
-                count34 = isNaN(count34) ? 0 : count34
-                count87 = isNaN(count87) ? 0 : count87
-                const equipments = Array(Math.min(maxSlots, count87)).fill(87)
-                    .concat(Array(Math.min(count34, maxSlots - Math.min(maxSlots, count87))).fill(34))
+                prevState[id] = count;
+                let { 34: count34, 87: count87 } = prevState;
+                count34 = isNaN(count34) ? 0 : count34;
+                count87 = isNaN(count87) ? 0 : count87;
+                const equipments = Array(Math.min(maxSlots, count87))
+                    .fill(87)
+                    .concat(
+                        Array(
+                            Math.min(
+                                count34,
+                                maxSlots - Math.min(maxSlots, count87)
+                            )
+                        ).fill(34)
+                    )
                     .concat(Array(Math.max(maxSlots - count34 - count87, 0)))
-                    .concat(33)
-                const result = calculateSpeed(props.ship, equipments)
-                if (__DEV__) console.log(equipments, result)
+                    .concat(33);
+                const result = calculateSpeed(props.ship, equipments);
+                // eslint-disable-next-line no-console
+                if (__DEV__) console.log(equipments, result);
                 return {
                     [id]: count,
                     speedId: result,
-                    speed: kckit.get.speed(result)
-                }
-            })
+                    speed: kckit.get.speed(result),
+                };
+            });
         }
     }
 
@@ -58,12 +65,13 @@ class CalculatorSpeed extends React.Component {
     //     const countOther = (curID === 34 ? this.state[87] : this.state[34])
     //     return this.slotsCount - countOther + (countOther ? 1 : 0)
     // }
-    componentDidMount(){
+    componentDidMount() {
         if (__DEV__ && __CLIENT__)
+            // eslint-disable-next-line no-console
             console.log('thisShip > Speed', {
                 speed: this.props.ship.stat.speed,
-                rule: this.props.ship.getSpeedRule()
-            })
+                rule: this.props.ship.getSpeedRule(),
+            });
     }
 
     renderEquipment(id) {
@@ -71,37 +79,34 @@ class CalculatorSpeed extends React.Component {
             <Equipment
                 equipment={id}
                 className={classNames({
-                    'has-note': id === 33
+                    'has-note': id === 33,
                 })}
-                componentInput={
-                    this.renderInput(id)
-                }
+                componentInput={this.renderInput(id)}
             />
-        )
+        );
     }
     renderInput(id) {
         if (id === 33) {
             return (
                 <div className="note">
-                    {__("speed_calculator.equipment_33_note_1")}
+                    {__('speed_calculator.equipment_33_note_1')}
                     <br />
-                    {__("speed_calculator.equipment_33_note_2")}
+                    {__('speed_calculator.equipment_33_note_2')}
                 </div>
-            )
+            );
         }
         return (
             <InputCounter
                 className="input"
-
                 defaultValue={this.state[id]}
                 min={0}
-                max={/*this.getSlotsRemain(id)*/this.slotsCount}
-                onUpdate={newValue => this.update(id, newValue)}
+                max={/*this.getSlotsRemain(id)*/ this.slotsCount}
+                onUpdate={(newValue) => this.update(id, newValue)}
             />
-        )
+        );
     }
     render() {
-        if(__SERVER__) return <div>{__("no_javascript_warning")}</div>
+        if (__SERVER__) return <div>{__('no_javascript_warning')}</div>;
         return (
             <div className={this.props.className}>
                 <div className="area-requirement">
@@ -113,16 +118,20 @@ class CalculatorSpeed extends React.Component {
                 </div>
                 <div className="area-result">
                     <div className="base">
-                        {__("speed_calculator.base_speed")}
-                        <strong data-speed-id={this.props.ship.stat.speed}>{this.props.ship.getSpeed()}</strong>
+                        {__('speed_calculator.base_speed')}
+                        <strong data-speed-id={this.props.ship.stat.speed}>
+                            {this.props.ship.getSpeed()}
+                        </strong>
                     </div>
                     <div className="result">
-                        {__("speed_calculator.result")}
-                        <strong data-speed-id={this.state.speedId}>{this.state.speed}</strong>
+                        {__('speed_calculator.result')}
+                        <strong data-speed-id={this.state.speedId}>
+                            {this.state.speed}
+                        </strong>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
-export default CalculatorSpeed
+export default CalculatorSpeed;

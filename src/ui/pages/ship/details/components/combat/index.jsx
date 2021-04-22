@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { extend } from 'koot';
 
 import ComponentContainer from '@ui/containers/infos-component';
@@ -23,7 +23,7 @@ const { wrapper: moduleClassName } = styles;
 //
 
 const Combat = extend({
-    styles
+    styles,
 })(
     memo(({ className, ship }) => (
         <ComponentContainer

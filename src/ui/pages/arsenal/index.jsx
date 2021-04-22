@@ -1,4 +1,11 @@
-import React, { createContext, useState, useContext, memo } from 'react';
+import {
+    Component,
+    PureComponent,
+    createContext,
+    useState,
+    useContext,
+    memo,
+} from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -62,7 +69,7 @@ const ArsenalContext = createContext();
     },
     styles: require('./styles.less'),
 })
-class PageArsenal extends React.Component {
+class PageArsenal extends Component {
     state = {
         rendering: true,
         watchList: pref.arsenalWatchList,
@@ -234,7 +241,7 @@ const PageArsenalHeader = extend({
 
 //
 
-const PageArsenalHeaderAkashi = React.memo(({ className }) => {
+const PageArsenalHeaderAkashi = memo(({ className }) => {
     const [animation, setAnimation] = useState(
         PageArsenalHeaderAkashi.getAnimation()
     );
@@ -486,7 +493,7 @@ const PageArsenalListWatching = memo(({ index, day }) => {
     }),
     styles: require('./styles-collection.less'),
 })
-class PageArsenalCollection extends React.Component {
+class PageArsenalCollection extends Component {
     // rendered = false
     // mouted = false
 
@@ -722,7 +729,7 @@ class PageArsenalCollection extends React.Component {
 @extend({
     styles: require('./styles-item.less'),
 })
-class PageArsenalListItem extends React.PureComponent {
+class PageArsenalListItem extends PureComponent {
     static contextType = ArsenalContext;
 
     state = {

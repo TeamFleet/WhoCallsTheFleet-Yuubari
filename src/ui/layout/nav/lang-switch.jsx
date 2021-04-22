@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, Fragment } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import bindEvent from 'bind-event';
 import classNames from 'classnames';
@@ -19,7 +19,7 @@ const langName = {
     }),
     styles: require('./lang-switch.less'),
 })
-class NavLangSwitch extends React.Component {
+class NavLangSwitch extends Component {
     state = {
         showMenu: false,
     };
@@ -68,7 +68,7 @@ class NavLangSwitch extends React.Component {
                     data-current-locale-abbr={langName[this.props.localeId][0]}
                     onClick={this.toggleMenu}
                 />
-                <TransitionGroup component={React.Fragment}>
+                <TransitionGroup component={Fragment}>
                     {this.state.showMenu && (
                         <CSSTransition classNames="transition" timeout={200}>
                             <div className="menu">

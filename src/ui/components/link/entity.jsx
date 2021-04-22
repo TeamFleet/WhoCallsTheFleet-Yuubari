@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { extend } from 'koot';
 
 import getEntity from '@utils/get-entity.js';
@@ -11,21 +11,25 @@ const checkShow = (value) => value || typeof value === 'undefined';
 
 const LinkEntity = extend({
     styles: require('./entity.less'),
-})(({ entity: _entity, id, pic, name, children, count, ...props }) => {
-    const entity = getEntity(_entity || id);
+})(
+    memo(({ entity: _entity, id, pic, name, children, count, ...props }) => {
+        const entity = getEntity(_entity || id);
 
-    return (
-        <LinkDefault
-            to={getLink('entity', entity.id)}
-            pic={checkShow(pic) ? getPic(entity, '0-2') : null}
-            name={checkShow(name) ? entity._name : null}
-            nameExtra={count ? `(${entity.relation[count].length})` : undefined}
-            type="entity"
-            {...props}
-        >
-            {children}
-        </LinkDefault>
-    );
-});
+        return (
+            <LinkDefault
+                to={getLink('entity', entity.id)}
+                pic={checkShow(pic) ? getPic(entity, '0-2') : null}
+                name={checkShow(name) ? entity._name : null}
+                nameExtra={
+                    count ? `(${entity.relation[count].length})` : undefined
+                }
+                type="entity"
+                {...props}
+            >
+                {children}
+            </LinkDefault>
+        );
+    })
+);
 
 export default LinkEntity;

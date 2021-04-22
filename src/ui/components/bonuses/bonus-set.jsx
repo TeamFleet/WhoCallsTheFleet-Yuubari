@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import classNames from 'classnames';
 import { get } from 'kckit';
 import checkEquipment from 'kckit/src/check/equipment';

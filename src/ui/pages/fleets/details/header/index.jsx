@@ -1,71 +1,67 @@
-import React from 'react'
+import { Component } from 'react';
 // import classNames from 'classnames'
-import { extend } from 'koot'
+import { extend } from 'koot';
 
-import {
-    maxSubFleetCount,
-    currentChangeTab,
-} from '@api/fleets'
+import { maxSubFleetCount, currentChangeTab } from '@api/fleets';
 
-import htmlHead from '@utils/html-head'
+import htmlHead from '@utils/html-head';
 
-import MainHeader from '@ui/components/main-header/infos'
+import MainHeader from '@ui/components/main-header/infos';
 
-const tabs = []
+const tabs = [];
 for (let i = 0; i < maxSubFleetCount; i++) {
-    tabs.push(`#${i + 1}`)
+    tabs.push(`#${i + 1}`);
 }
-tabs.push(__('land_bases'))
+tabs.push(__('land_bases'));
 
 @extend({
-    connect: state => {
+    connect: (state) => {
         // console.log(state)
-        if (!state.fleets.current) return {}
+        if (!state.fleets.current) return {};
         if (__DEV__ && __CLIENT__)
-            console.log(state.fleets.current)
+            // eslint-disable-next-line no-console
+            console.log(state.fleets.current);
         const {
             name,
             hq_lv,
             // currentTab,
             _id: id,
-        } = state.fleets.current
+        } = state.fleets.current;
         return {
             name,
             hq_lv,
             // currentTab,
-            id
-        }
+            id,
+        };
     },
-    styles: require('./styles.less')
+    styles: require('./styles.less'),
 })
-class Header extends React.Component {
+class Header extends Component {
     // mounted = false
     onNameUpdate() {
-        if (!this.mounted) return
-        if (this.lastName === this.props.name) return
+        if (!this.mounted) return;
+        if (this.lastName === this.props.name) return;
         htmlHead(undefined, {
             title: `FLEET: ${this.props.name}`,
             dispatch: this.props.dispatch,
-        })
-        this.lastName = this.props.name
+        });
+        this.lastName = this.props.name;
     }
-    onTabChange = tabIndex => {
-        this.props.dispatch(currentChangeTab(
-            tabIndex >= maxSubFleetCount
-                ? 'base'
-                : tabIndex
-        ))
-    }
+    onTabChange = (tabIndex) => {
+        this.props.dispatch(
+            currentChangeTab(tabIndex >= maxSubFleetCount ? 'base' : tabIndex)
+        );
+    };
 
     componentDidMount() {
-        this.mounted = true
-        this.onNameUpdate()
+        this.mounted = true;
+        this.onNameUpdate();
     }
     componentDidUpdate() {
-        this.onNameUpdate()
+        this.onNameUpdate();
     }
     componentWillUnmount() {
-        this.mounted = false
+        this.mounted = false;
     }
 
     render() {
@@ -78,8 +74,8 @@ class Header extends React.Component {
                 defaultIndex={0}
                 onTabChange={this.onTabChange}
             />
-        )
+        );
     }
 }
 
-export default Header
+export default Header;

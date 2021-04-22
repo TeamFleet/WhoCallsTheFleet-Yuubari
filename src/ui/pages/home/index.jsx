@@ -1,4 +1,3 @@
-import React from 'react';
 import { extend } from 'koot';
 
 import pkgDatabase from 'whocallsthefleet-database/package.json';

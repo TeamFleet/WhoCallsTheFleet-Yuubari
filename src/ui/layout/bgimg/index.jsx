@@ -1,4 +1,4 @@
-import React from 'react';
+import { PureComponent, Component, createRef, memo } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
@@ -26,7 +26,7 @@ const setCookieSessionBackgroundIndex = (index) => {
     connect: true,
     styles: require('./styles.less'),
 })
-class Bgimg extends React.PureComponent {
+class Bgimg extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -78,7 +78,7 @@ export default Bgimg;
 const BackgroundMainBlured = extend({
     styles: require('./styles-main-blured.less'),
 })(
-    React.memo(({ className, type }) => (
+    memo(({ className, type }) => (
         <div className={classNames([className, type])}>
             <Background className="bg-container" type="blured" />
         </div>
@@ -101,13 +101,13 @@ const BackgroundMainBlured = extend({
     }),
     styles: require('./styles-main.less'),
 })
-class BackgroundMain extends React.Component {
+class BackgroundMain extends Component {
     state = {
         stylesOriginal: false,
         showOriginal: false,
     };
 
-    OriginalRef = React.createRef();
+    OriginalRef = createRef();
 
     mounted = false;
 
@@ -245,7 +245,7 @@ class BackgroundMain extends React.Component {
     }
 }
 /* only original
-class BgMain extends React.Component {
+class BgMain extends Component {
     constructor(props) {
         super(props)
 
@@ -284,7 +284,7 @@ class BgMain extends React.Component {
 }
 */
 /* rev:1
-class BgMain extends React.Component {
+class BgMain extends Component {
     constructor(props) {
         super(props)
 
@@ -389,7 +389,7 @@ const BackgroundPanels = extend({
     ],
     styles: require('./styles-panels.less'),
 })(
-    React.memo(({ className, isModeBackground, leaveAppModeBackground }) => {
+    memo(({ className, isModeBackground, leaveAppModeBackground }) => {
         if (!isModeBackground) return null;
         return (
             <div className={className}>
@@ -433,7 +433,7 @@ const BackgroundPanelsImg = extend({
     }),
     styles: require('./styles-panels-list.less'),
 })
-class BackgroundPanelsList extends React.Component {
+class BackgroundPanelsList extends Component {
     change(obj) {
         setCookieSessionBackgroundIndex(obj.index);
         this.props.dispatch(bgimgApi.change(obj));
@@ -467,7 +467,7 @@ class BackgroundPanelsList extends React.Component {
 @extend({
     connect: true,
 })
-class BackgroundPanelsListItem extends React.PureComponent {
+class BackgroundPanelsListItem extends PureComponent {
     constructor() {
         super();
         this.change = this.change.bind(this);

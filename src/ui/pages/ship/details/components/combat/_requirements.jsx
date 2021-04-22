@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import kckit from 'kckit';
 import equipmentTypes from 'kckit/src/types/equipments';
 
@@ -17,13 +17,13 @@ const Requirements = ({ requirements = [], ship }) => {
         : [requirements];
 
     return (
-        <React.Fragment>
+        <Fragment>
             {arrRequirements.length > 1 &&
                 __('ship_details.meet_one_requirements_below')}
             {arrRequirements.map((requirement, index) => {
                 const {
                     shipWithEquipments = {},
-                    equipments = {}
+                    equipments = {},
                 } = requirement;
 
                 /** 需要达到的属性值 (计算装备) */
@@ -41,13 +41,13 @@ const Requirements = ({ requirements = [], ship }) => {
                     ? equipments.length > 1
                         ? [
                               {
-                                  oneOf: [...equipments]
-                              }
+                                  oneOf: [...equipments],
+                              },
                           ]
                         : [
                               {
-                                  is: equipments[0]
-                              }
+                                  is: equipments[0],
+                              },
                           ]
                     : Object.entries(equipments).map(([condition, value]) => {
                           const getEquipmentRequirement = (
@@ -56,7 +56,7 @@ const Requirements = ({ requirements = [], ship }) => {
                           ) => {
                               const o = {};
                               const types = getEquipmentTypesFromCondition({
-                                  [condition]: value
+                                  [condition]: value,
                               });
                               if (Array.isArray(types)) {
                                   if (types.length > 1) o.types = types;
@@ -78,13 +78,13 @@ const Requirements = ({ requirements = [], ship }) => {
                               value.length
                           ) {
                               return {
-                                  oneOf: value.map(e =>
+                                  oneOf: value.map((e) =>
                                       typeof e === 'object'
                                           ? getEquipmentRequirement(
                                                 ...Object.entries(e)[0]
                                             )
                                           : e
-                                  )
+                                  ),
                               };
                           }
                           return getEquipmentRequirement(condition, value);
@@ -103,7 +103,7 @@ const Requirements = ({ requirements = [], ship }) => {
                                 <li key={`${index}-${indexStat}`}>
                                     {__('require.ship_stat_with_equipments', {
                                         stat: __(`stat`, stat),
-                                        value
+                                        value,
                                     })}
                                 </li>
                             )
@@ -118,7 +118,7 @@ const Requirements = ({ requirements = [], ship }) => {
                         {requirement.minLv && (
                             <li>
                                 {__('require.min_possible_level', {
-                                    level: requirement.minLv || ship._minLv
+                                    level: requirement.minLv || ship._minLv,
                                 })}
                             </li>
                         )}
@@ -127,14 +127,14 @@ const Requirements = ({ requirements = [], ship }) => {
                             requirement.ship.minLevel > ship._minLv && (
                                 <li>
                                     {__('require.level', {
-                                        level: requirement.ship.minLevel
+                                        level: requirement.ship.minLevel,
                                     })}
                                 </li>
                             )}
                     </ul>
                 );
             })}
-        </React.Fragment>
+        </Fragment>
     );
 };
 
@@ -185,51 +185,51 @@ const EquipmentRequirement = ({
 
     if (!!type) {
         return (
-            <React.Fragment>
+            <Fragment>
                 {__('require.equipment', { type: '' })}
                 <EquipmentRequirementItem type={type} {...props} />
-            </React.Fragment>
+            </Fragment>
         );
     }
 
     if (Array.isArray(types) && types.length) {
         return (
-            <React.Fragment>
+            <Fragment>
                 {__('require.equipment_at_least_one', { type: '' })}
                 {types.map((type, index) => (
-                    <React.Fragment key={index}>
+                    <Fragment key={index}>
                         <br />
                         <EquipmentRequirementItem type={type} {...props} />
-                    </React.Fragment>
+                    </Fragment>
                 ))}
-            </React.Fragment>
+            </Fragment>
         );
     }
 
     if (Array.isArray(oneOf) && oneOf.length) {
         return (
-            <React.Fragment>
+            <Fragment>
                 {__('require.equipment_at_least_one', { type: '' })}
                 {oneOf.map((props, index) => (
-                    <React.Fragment key={index}>
+                    <Fragment key={index}>
                         <br />
                         {typeof props === 'string' ? (
                             <EquipmentRequirement equipment={props} />
                         ) : (
                             <EquipmentRequirementItem {...props} />
                         )}
-                    </React.Fragment>
+                    </Fragment>
                 ))}
-            </React.Fragment>
+            </Fragment>
         );
     }
 
     if (is) {
         return (
-            <React.Fragment>
+            <Fragment>
                 {__('require.equipment', { type: '' })}
                 <EquipmentRequirement equipment={is} />
-            </React.Fragment>
+            </Fragment>
         );
     }
 
@@ -237,7 +237,7 @@ const EquipmentRequirement = ({
 };
 
 const EquipmentRequirementItem = ({ type, hasStat, count }) => (
-    <React.Fragment>
+    <Fragment>
         {typeof type === 'number' && (
             <IconEquipment
                 className="equipment"
@@ -252,10 +252,10 @@ const EquipmentRequirementItem = ({ type, hasStat, count }) => (
                 .map(([stat, value]) =>
                     __('require.has_stat', {
                         stat: __(`stat`, stat),
-                        value
+                        value,
                     })
                 )
                 .join(', ')})`}
         {typeof count === 'number' && ` x ${count}`}
-    </React.Fragment>
+    </Fragment>
 );

@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { extend } from 'koot';
 
 // import pluginLink from './plugin-link'
@@ -7,21 +7,21 @@ import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router';
 import Title from '@ui/components/title';
 import LinkMini from '@ui/components/link-mini';
-import LinkShip from '@ui/components/link/ship';
+// import LinkShip from '@ui/components/link/ship';
 
 const regex = {
-    Ship: /ship:([0-9]+):*([:a-z]*)\|*([^|^:]*)/i
+    Ship: /ship:([0-9]+):*([:a-z]*)\|*([^|^:]*)/i,
 };
 
 const markdownRenderers = {
-    heading: props => {
+    heading: (props) => {
         let type;
-        if (props.level == 2) {
+        if (props.level === 2) {
             type = 'line-append';
         }
         return <Title type={type} {...props} />;
     },
-    link: props => {
+    link: (props) => {
         return props.href.match(/^(https?:)?\/\//) ? (
             props.href.indexOf('://') < 0 ? (
                 <a href={props.href}>{props.children}</a>
@@ -41,24 +41,24 @@ const markdownRenderers = {
     //     }
     //     return props.children
     // },
-    linkReference: props => {
+    linkReference: (props) => {
         if (Array.isArray(props.children) && props.children.length === 1) {
             const [child] = props.children;
             let transformed;
-            Object.keys(regex).some(type => {
+            Object.keys(regex).some((type) => {
                 const match = regex[type].exec(child.props.children);
                 if (!Array.isArray(match) || !match.length) return false;
 
-                const [input, shipId, nodeTypes, name] = match;
+                const [, shipId, nodeTypes, name] = match;
                 const nodeType = {};
-                nodeTypes.split(':').forEach(type => {
+                nodeTypes.split(':').forEach((type) => {
                     nodeType[type] = true;
                 });
 
                 const p = {
                     className: 'mod-inline',
                     ship: shipId,
-                    noLink: nodeType.text
+                    noLink: nodeType.text,
                 };
                 if (name) p.name = name;
 
@@ -71,26 +71,29 @@ const markdownRenderers = {
             if (transformed) return transformed;
         }
         return <a href={props.href}>{props.children}</a>;
-    }
+    },
 };
 
 // ============================================================================
 
 const Markdown = extend({
-    styles: require('./styles.less')
-})(({ content, markdown, md, renderers, ...props }) => {
-    // plugins = [],
-    if (typeof props.source === 'undefined')
-        props.source = content || markdown || md;
+    styles: require('./styles.less'),
+})(
+    memo(({ content, markdown, md, renderers, ...props }) => {
+        // plugins = [],
+        if (typeof props.source === 'undefined')
+            props.source = content || markdown || md;
 
-    props.renderers = { ...markdownRenderers };
-    if (typeof renderers === 'object')
-        Object.assign(props.renderers, renderers);
+        props.renderers = { ...markdownRenderers };
+        if (typeof renderers === 'object')
+            Object.assign(props.renderers, renderers);
 
-    // if (!Array.isArray(props.astPlugins))
-    //     props.astPlugins = []
-    // props.astPlugins.push(pluginLink)
+        // if (!Array.isArray(props.astPlugins))
+        //     props.astPlugins = []
+        // props.astPlugins.push(pluginLink)
 
-    return <ReactMarkdown {...props} />;
-});
+        return <ReactMarkdown {...props} />;
+    })
+);
+
 export default Markdown;
