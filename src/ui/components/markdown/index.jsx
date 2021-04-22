@@ -21,7 +21,26 @@ const markdownRenderers = {
         }
         return <Title type={type} {...props} />;
     },
-    link: (props) => {
+    a: (props) => {
+        const linkRegExp = /^([a-z]+?):([0-9]+):([a-z]+)$/;
+        const exec = linkRegExp.exec(props.node?.properties?.href);
+        if (Array.isArray(exec) && exec.length) {
+            const [, type, id, style] = exec;
+            const firstChildren = props.children[0];
+            // console.log({ type, id, style });
+            const thisProps = {
+                className: 'mod-inline',
+                ship: id,
+                noLink: firstChildren === '__',
+            };
+            if (firstChildren && firstChildren !== '__')
+                thisProps.name = props.children[0];
+
+            if (style === 'mini') {
+                return <LinkMini {...thisProps} />;
+            }
+        }
+        // if(props.node?.properties?.href)
         return props.href.match(/^(https?:)?\/\//) ? (
             props.href.indexOf('://') < 0 ? (
                 <a href={props.href}>{props.children}</a>
@@ -79,21 +98,34 @@ const markdownRenderers = {
 const Markdown = extend({
     styles: require('./styles.less'),
 })(
-    memo(({ content, markdown, md, renderers, ...props }) => {
-        // plugins = [],
-        if (typeof props.source === 'undefined')
-            props.source = content || markdown || md;
+    memo(
+        ({
+            content,
+            markdown,
+            md,
+            children,
+            source,
+            components,
+            renderers,
+            ...props
+        }) => {
+            // plugins = [],
+            if (typeof props.children === 'undefined')
+                props.children =
+                    children ?? source ?? content ?? markdown ?? md;
 
-        props.renderers = { ...markdownRenderers };
-        if (typeof renderers === 'object')
-            Object.assign(props.renderers, renderers);
+            props.components = { ...markdownRenderers };
+            const thisComponents = components ?? renderers;
+            if (typeof thisComponents === 'object')
+                Object.assign(props.components, thisComponents);
 
-        // if (!Array.isArray(props.astPlugins))
-        //     props.astPlugins = []
-        // props.astPlugins.push(pluginLink)
+            // if (!Array.isArray(props.astPlugins))
+            //     props.astPlugins = []
+            // props.astPlugins.push(pluginLink)
 
-        return <ReactMarkdown {...props} />;
-    })
+            return <ReactMarkdown {...props} />;
+        }
+    )
 );
 
 export default Markdown;
