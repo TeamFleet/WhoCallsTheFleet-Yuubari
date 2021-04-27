@@ -1,7 +1,7 @@
-import { history } from 'koot'
+import { getHistory } from 'koot';
 
 export default (uri) => {
-    if (__SERVER__) return
+    if (__SERVER__) return;
 
     // console.log(
     //     (__SPA__ ? '' : location.pathname)
@@ -9,8 +9,5 @@ export default (uri) => {
     //     + uri
     // )
 
-    history.push(
-        (uri.substr(0, 1) !== '/' ? '/' : '')
-        + uri
-    );
-}
+    getHistory().push((uri.substr(0, 1) !== '/' ? '/' : '') + uri);
+};

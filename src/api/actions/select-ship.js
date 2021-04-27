@@ -1,10 +1,9 @@
-import { history } from 'koot'
+import { getHistory } from 'koot';
 
 export default () => {
+    if (__SERVER__) return;
 
-    if (__SERVER__) return
-
-    console.log(history)
+    console.log(getHistory());
 
     // TODO:
-}
+};

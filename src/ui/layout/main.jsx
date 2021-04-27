@@ -5,6 +5,8 @@ import { extend } from 'koot';
 import { updateMainKey } from '@api/app/api';
 import getKey from '@utils/get-main-key';
 
+import styles from './main.less';
+
 // import lastScroll from '@utils/last-scroll.js'
 
 // ============================================================================
@@ -22,7 +24,7 @@ export const MainRef = createRef();
 // })
 @extend({
     connect: true,
-    styles: require('./main.less'),
+    styles,
 })
 class Main extends Component {
     // onAnimationStart(evt) {
