@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const inquirer = require('inquirer');
 
 /**
@@ -5,12 +6,12 @@ const inquirer = require('inquirer');
  * @async
  * @param {String} cmd 命令内容
  */
-const runScript = async cmd => {
+const runScript = async (cmd) => {
     const chunks = cmd.split(' ');
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
         const child = require('child_process').spawn(chunks.shift(), chunks, {
             stdio: 'inherit',
-            shell: true
+            shell: true,
         });
         child.on('close', () => {
             resolve();
@@ -29,25 +30,25 @@ const runScript = async cmd => {
             {
                 name: '完整开发环境',
                 value: '',
-                short: '完整'
+                short: '完整',
             },
             {
                 name: '完整开发环境 (不自动打开页面)',
                 value: '--no-open',
-                short: '完整 (不自动打开页面)'
+                short: '完整 (不自动打开页面)',
             },
             new inquirer.Separator(),
             {
                 name: '仅启动客户端开发服务器',
                 value: '-c',
-                short: '仅客户端'
+                short: '仅客户端',
             },
             {
                 name: '仅启动服务器端开发服务器',
                 value: '-s',
-                short: '仅服务器端'
-            }
-        ]
+                short: '仅服务器端',
+            },
+        ],
     });
     console.log('💥 Koot.js 开发环境启动中...');
     const cmd = `koot-dev` + (arg ? ` ${arg}` : '');

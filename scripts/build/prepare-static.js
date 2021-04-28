@@ -5,16 +5,18 @@ const md5File = require('md5-file');
 const {
     assets: dirAssets,
     bgimgs: dirBgimgs,
-    static: dirStatic
+    static: dirStatic,
 } = require('../../src/directories');
 const channel = require('../../src/channel');
-const spinner = require('../../src/scripts/commons/spinner');
-const Progress = require('../../src/scripts/commons/progress');
+const spinner = require('../utils/spinner');
+const Progress = require('../utils/progress');
 
 /**
  * 准备静态资源目录，用以直接复制到打包目录
  */
-module.exports = async (kootConfig = {}) => {
+module.exports = async (appConfig = {}) => {
+    if (appConfig.analyze) return;
+
     const title = 'Preparing static files...';
     const waiting = spinner(title);
 
@@ -23,26 +25,26 @@ module.exports = async (kootConfig = {}) => {
     const list = [
         {
             from: dirBgimgs,
-            to: 'bgimgs'
+            to: 'bgimgs',
         },
         {
             from: path.resolve(dirAssets, `logos`, channel, `32.ico`),
-            to: 'favicon.ico'
+            to: 'favicon.ico',
         },
         {
             from: path.resolve(__dirname, '../../src/assets/public', channel),
-            to: ''
-        }
+            to: '',
+        },
     ];
 
-    list.forEach(o => {
+    list.forEach((o) => {
         o.to = path.resolve(dirStatic, o.to);
     });
 
     waiting.stop();
     const bar = new Progress({
         title,
-        total: list.length
+        total: list.length,
     });
 
     for (const { from, to } of list) {

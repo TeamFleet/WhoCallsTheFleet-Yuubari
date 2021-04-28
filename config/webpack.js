@@ -1,10 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
 
+/**
+ * 生成 Webpack 基础配置
+ *
+ * 注: 该配置对象会被 Koot.js 封装，自动添加必要的入口、Loader、插件等配置
+ *
+ * @returns {Promise<Object>}
+ */
 module.exports = async () => {
+    const root = path.resolve(__dirname, '../');
+
     const config = {
         entry: ['critical', 'polyfill'].reduce((result, entry) => {
-            result[entry] = path.resolve(__dirname, `../../src/${entry}.js`);
+            result[entry] = path.resolve(root, `src/${entry}.js`);
             return result;
         }, {}),
 
@@ -39,26 +48,20 @@ module.exports = async () => {
             new webpack.NormalModuleReplacementPlugin(
                 /^__FLEET_INIT_DATABASE_ONLY_CLIENT__$/,
                 process.env.WEBPACK_BUILD_STAGE === 'client'
-                    ? path.resolve(__dirname, '../../src/database/init-db.js')
-                    : path.resolve(
-                          __dirname,
-                          '../../src/database/init-db-fake.js'
-                      )
+                    ? path.resolve(root, 'src/database/init-db.js')
+                    : path.resolve(root, 'src/database/init-db-fake.js')
             ),
             new webpack.NormalModuleReplacementPlugin(
                 /^__FLEET_INIT_DATABASE_ONLY_SERVER__$/,
                 process.env.WEBPACK_BUILD_STAGE === 'server'
-                    ? path.resolve(__dirname, '../../src/database/init-db.js')
-                    : path.resolve(
-                          __dirname,
-                          '../../src/database/init-db-fake.js'
-                      )
+                    ? path.resolve(root, 'src/database/init-db.js')
+                    : path.resolve(root, 'src/database/init-db-fake.js')
             ),
             new webpack.NormalModuleReplacementPlugin(
                 /^__FLEET_GET_NEDB__$/,
                 path.resolve(
-                    __dirname,
-                    `../../src/database/get-nedb-${process.env.WEBPACK_BUILD_STAGE}.js`
+                    root,
+                    `src/database/get-nedb-${process.env.WEBPACK_BUILD_STAGE}.js`
                 )
             ),
         ],

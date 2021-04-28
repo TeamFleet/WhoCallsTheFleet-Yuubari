@@ -1,17 +1,17 @@
+const fs = require('fs-extra');
+const path = require('path');
 const jsonPretty = require('json-pretty');
 const Datastore = require('nedb-promise');
-const path = require('path');
-const fs = require('fs-extra');
 const kckit = require('kckit');
 const Ship = require('kckit/src/class/ship');
 const camelCase = require('camelcase');
 
-const getShipSubType = require('../../../src/api/get-ship-sub-type');
+const getShipSubType = require('../../src/api/get-ship-sub-type');
 
 const subTypes = {
-    en_us: require('../../../src/locales/ship/en.json').ship_sub_types,
-    ja_jp: require('../../../src/locales/ship/ja.json').ship_sub_types,
-    zh_cn: require('../../../src/locales/ship/zh.json').ship_sub_types,
+    en_us: require('../../src/locales/ship/en.json').ship_sub_types,
+    ja_jp: require('../../src/locales/ship/ja.json').ship_sub_types,
+    zh_cn: require('../../src/locales/ship/zh.json').ship_sub_types,
 };
 
 const db = {};

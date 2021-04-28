@@ -1,13 +1,15 @@
+/* eslint-disable no-console */
+
 const path = require('path');
 const fs = require('fs-extra');
 const kckit = require('kckit');
 const sizeOf = require('image-size');
-const spinner = require('./commons/spinner');
+const spinner = require('../utils/spinner');
 
 const {
     assets: pathAssets,
-    src: { _: pathApp, ui: pathAppUI },
-} = require('../directories');
+    src: { _: pathSrc, ui: pathAppUI },
+} = require('../../src/directories');
 
 // const pathAssets = path.resolve(process.cwd(), 'src/app/client/assets/')
 const pathfile = path.resolve(pathAppUI, './base/less/variables.less');
@@ -45,8 +47,8 @@ module.exports = async () => {
     // equipment list stat columns count
     {
         const stats = require(path.resolve(
-            __dirname,
-            '../constants/equipment-stats.js'
+            pathSrc,
+            'constants/equipment-stats.js'
         ));
         // path.resolve(pathApp, 'constants/', 'equipment-stats')
         content = content.replace(

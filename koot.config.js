@@ -157,9 +157,9 @@ module.exports = {
      * Webpack 相关
      *************************************************************************/
 
+    beforeBuild: require('./config/lifecycle-build-before'),
+    afterBuild: require('./config/lifecycle-build-after'),
     webpackConfig: require('./config/webpack'),
-    webpackBefore: require('./config/webpack/before'),
-    webpackAfter: require('./config/webpack/after'),
     moduleCssFilenameTest: /^((?!\.g\.).)*/,
     classNameHashLength: 8,
     internalLoaderOptions: {

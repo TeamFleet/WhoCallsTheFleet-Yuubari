@@ -1,20 +1,20 @@
-const ora = require('ora')
-const {
-    spinner
-} = require('./consts')
+const ora = require('ora');
+const spinner = require('cli-spinners').dots;
 
 module.exports = (options = {}) => {
     const waiting = ora(
         Object.assign(
             {
                 spinner,
-                color: 'cyan'
+                color: 'cyan',
             },
-            typeof options === 'string' ? {
-                text: options
-            } : options
+            typeof options === 'string'
+                ? {
+                      text: options,
+                  }
+                : options
         )
-    ).start()
+    ).start();
 
     // waiting.finish = (options = {}) => {
     //     waiting.stopAndPersist(Object.assign({
@@ -22,7 +22,7 @@ module.exports = (options = {}) => {
     //     }, options))
     //     // waiting.color = 'green'
     // }
-    waiting.finish = waiting.succeed
+    waiting.finish = waiting.succeed;
 
-    return waiting
-}
+    return waiting;
+};

@@ -13,19 +13,16 @@
         "url": "https://github.com/TeamFleet/WhoCallsTheFleet-Yuubari"
     },
     "scripts": {
-        "start": "npm run publish:webapp && cross-env YUUBARI_LOCAL_RUN=true koot-start --no-build",
+        "start": "node ./scripts/start.js",
         "start:local": "npm run build && cross-env YUUBARI_LOCAL_RUN=true node --inspect dist-webapp/server/index.js",
-        "start:server:pm2": "pm2 restart pm2.json --only yuubari",
-        "start:spa": "koot-start --type react-spa --config ./koot.config.spa.js",
         "quickstart": "cross-env YUUBARI_LOCAL_RUN=true koot-start -- quickStart=true -- quickStartAllLocales=true",
         "build": "koot-build",
         "build:client": "koot-build --client",
         "build:server": "koot-build --server",
-        "build:spa": "koot-build --client --type react-spa --config ./koot.config.spa.js",
-        "dev": "node ./scripts/dev.js",
+        "dev": "koot-dev",
+        "dev:custom": "node ./scripts/dev.js",
         "analyze": "koot-analyze",
-        "deploy": "git pull && node ./deploy",
-        "publish:webapp": "node ./src/scripts/publish/webapp/index.js",
+        "deploy": "node ./scripts/deploy.js",
         "test:server": "npm run build:server && npm run start:server",
         "test:server:port": "cross-env SERVER_PORT=4000 koot-start --no-build",
         "eslint": "eslint \"!(node_modules|logs|dist|dist*)/**/*.+(js|jsx)\"",
@@ -39,7 +36,7 @@
         "classnames": "^2.3.1",
         "hotkeys-js": "^3.8.3",
         "kckit": "^1.63.1",
-        "koot": "^0.15.0-beta.16",
+        "koot": "^0.15.0-beta.18",
         "localforage": "^1.9.0",
         "lz-string": "^1.4.4",
         "md5-file": "^5.0.0",
@@ -108,6 +105,6 @@
         ]
     },
     "koot": {
-        "version": "0.15.0-beta.16"
+        "version": "0.15.0-beta.17"
     }
 }

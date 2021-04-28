@@ -1,19 +1,21 @@
 const fs = require('fs-extra');
 const path = require('path');
-const spinner = require('../../scripts/commons/spinner');
+const spinner = require('../utils/spinner');
 
 /** @type {Boolean} 标记流程是否已运行 */
 let complete = false;
 
-const webappBefore = async (data = {}) => {
-    let { dist } = data;
+/** 准备 WebApp 相关 */
+const prepareWebApp = async (appConfig = {}) => {
+    if (appConfig.analyze) return;
+
+    let { dist } = appConfig;
+
     if (!dist) {
         dist = (() => {
-            const { dist } = require('../../../koot.config');
-
+            const { dist } = require('../../koot.config');
             if (path.isAbsolute(dist)) return dist;
-
-            return path.resolve(__dirname, '../../../', dist);
+            return path.resolve(__dirname, '../../', dist);
         })();
     }
 
@@ -23,7 +25,7 @@ const webappBefore = async (data = {}) => {
         return;
     }
 
-    const channel = require('../../channel');
+    const channel = require('../../src/channel');
     const repoPath = (() => {
         if (channel === 'yuubari')
             return 'git@github.com:TeamFleet/yuubari-server.git';
@@ -31,7 +33,7 @@ const webappBefore = async (data = {}) => {
     })();
     const isDistRepo =
         fs.existsSync(dist) && fs.existsSync(path.resolve(dist, '.git'));
-    const step = '准备打包结果目录';
+    const step = 'Preparing dist folder';
     const waiting = spinner(step + '...');
 
     // 如果目标路径存在但不是 git 项目，删除，git clone
@@ -50,13 +52,15 @@ const webappBefore = async (data = {}) => {
     const hasGitAccess = await (async () => {
         let err;
 
-        git.silent(true);
+        // git.silent(true);
+        process.env.DEBUG = JSON.stringify(false);
 
         await git.push('origin', 'master').catch((e) => {
             err = e;
         });
 
-        git.silent(false);
+        // git.silent(false);
+        process.env.DEBUG = JSON.stringify(true);
 
         if (err instanceof Error) err = err.message;
         if (typeof err === 'string') return !/permission.+denied/i.test(err);
@@ -66,16 +70,22 @@ const webappBefore = async (data = {}) => {
 
     if (hasGitAccess) {
         // 如果有操作权限，git pull
-        await git.reset('hard');
-        await git.clean('f');
-        await git.pull();
+        try {
+            await git.reset('hard');
+            await git.clean('f');
+            await git.pull();
+        } catch (err) {
+            throw err;
+        }
     }
 
-    waiting.stop();
+    waiting.succeed();
     // spinner(step).succeed()
     complete = true;
 };
 
 if (!module || !module.parent)
-    webappBefore({ dist: path.resolve(__dirname, '../../../', 'dist-webapp') });
-else module.exports = webappBefore;
+    prepareWebApp({
+        dist: path.resolve(__dirname, '../../', 'dist-webapp'),
+    });
+else module.exports = prepareWebApp;
