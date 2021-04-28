@@ -393,9 +393,9 @@ module.exports = async (dbpath, topath) => {
     }
     await addSubType('航空母舰', 10, 'ModernizedCarrier');
     await addSubType('航空母舰', 10, 'NightCarrier');
+    await addSubType('航空母舰', 9, 'NightCarrier', 'LightNightCarrier');
     await addSubType('航空母舰', 9, 'EscortCarrier');
     await addSubType('航空母舰', 9, 'AssultCarrier');
-    await addSubType('航空母舰', 9, 'NightCarrier', 'LightNightCarrier');
 
     // 遍历全部collection，将ship object替换为shipId，并生成可读版
     shipCollections.forEach((collection, indexCollection) => {
