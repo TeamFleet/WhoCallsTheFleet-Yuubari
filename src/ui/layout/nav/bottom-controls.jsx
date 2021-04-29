@@ -105,6 +105,9 @@ class NavLangSwitch extends Component {
             showMenu: !prevState.showMenu,
         }));
         clearTimeout(this.timeoutHideMenu);
+        setTimeout(() => {
+            clearTimeout(this.timeoutHideMenu);
+        });
     }
 
     render() {

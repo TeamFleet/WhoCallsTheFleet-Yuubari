@@ -1,15 +1,15 @@
 @import './base.less';
 
-.component{
+.component {
     // position:   absolute;
     // z-index:    1;
     // width:      100%;
     // height:     100%;
-    overflow:   hidden;
-    height:     100%;
-    width:      100%;
-    position:   absolute;
-    padding:    0 0 0 @nav-width;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    padding: 0 0 0 @nav-width;
 
     .screen-t1({
         padding-left:   @nav-width-t1;
@@ -23,16 +23,16 @@
     });
 }
 
-body.is-ready .component{
-    overflow:   visible;
-    height:     auto;
-    width:      auto;
-    position:   relative;
+body.is-ready .component {
+    overflow: visible;
+    height: auto;
+    width: auto;
+    position: relative;
     &.is-mode-background:not(.is-mode-background-entering),
-    &.mod-scroll-locking{
-        overflow:   hidden;
-        height:     100%;
-        width:      100%;
-        position:   absolute;
+    &.mod-scroll-locking {
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        position: absolute;
     }
 }

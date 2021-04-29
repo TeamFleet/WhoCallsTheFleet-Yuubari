@@ -17,6 +17,8 @@ import MainMask from './layout/main-mask';
 import Nav from './layout/nav';
 import Bgimg from './layout/bgimg';
 
+import styles from './app.less';
+
 // ============================================================================
 
 export const AppRef = createRef();
@@ -38,7 +40,7 @@ export const AppRef = createRef();
             localeId: state.localeId,
         };
     },
-    styles: require('./app.less'),
+    styles,
 })
 class App extends Component {
     startSwipeAtLeftBorder = false;

@@ -1,4 +1,4 @@
-@import "~base.less";
+@import '~base.less';
 
 .component {
     border: 2px solid fade(@color-negative, 50%);
@@ -10,10 +10,16 @@
     color: @color-negative;
     font-size: 20px;
     display: block;
-    .icon{
+    .icon {
         vertical-align: text-bottom;
         margin-right: 5px;
         width: 20px;
         height: 20px;
+    }
+}
+
+[lang^='ja'] .component {
+    .icon {
+        vertical-align: top;
     }
 }
