@@ -10,6 +10,7 @@ module.exports = async (appConfig) => {
         !process.env.YUUBARI_LOCAL_AKIGUMO
     ) {
         const file = path.resolve(__dirname, '../../Akigumo-dev/start.js');
+        // console.log(file, fs.existsSync(file));
         if (fs.existsSync(file)) {
             const child = require('child_process').fork(
                 file,
@@ -53,7 +54,7 @@ module.exports = async (appConfig) => {
             //     child.start();
             //
             // }
-            console.warn({ file, port: appConfig.devPortAkigumo, child });
+            // console.warn({ file, port: appConfig.devPortAkigumo, child });
             process.env.YUUBARI_LOCAL_AKIGUMO = JSON.stringify(true);
         }
     }

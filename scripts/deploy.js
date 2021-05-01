@@ -9,7 +9,8 @@ const spinner = require('./utils/spinner');
 
 async function run() {
     let spinnerDeploying,
-        deDeploy = false;
+        deDeploy = false,
+        procServer;
 
     if (
         await confirmTimeout(
@@ -35,16 +36,19 @@ async function run() {
     {
         let prompt;
         const waiting = spinner('Starting local server...');
-        const child = require('child_process').spawn(
+        procServer = require('child_process').spawn(
             'npx',
             ['koot-start', '--no-build'],
             {
                 // stdio: 'inherit',
                 shell: true,
                 cwd: process.cwd(),
+                env: {
+                    YUUBARI_LOCAL_RUN: 'true',
+                },
             }
         );
-        child.stdout.on('data', (data) => {
+        procServer.stdout.on('data', (data) => {
             const r = /listening.+?port.+?([0-9]*m*)([0-9]+).*?/.exec(data);
             if (Array.isArray(r)) {
                 waiting.succeed();
@@ -63,15 +67,15 @@ async function run() {
                 prompt.then(({ deploy }) => {
                     deDeploy = deploy;
                     if (deploy) spinnerDeploying = spinner('Deploying...');
-                    terminate(child.pid);
+                    terminate(procServer.pid);
                 });
             }
         });
-        child.stderr.on('data', (data) => {
+        procServer.stderr.on('data', (data) => {
             waiting.fail();
             throw new Error(data);
         });
-        child.on('close', async (code) => {
+        procServer.on('close', async (code) => {
             // console.log(`child process exited with code ${code}`);
             if (!deDeploy) return;
 
@@ -96,6 +100,22 @@ async function run() {
     }
 
     // console.log(child);
+    const exitHandler = async (options = {}) => {
+        try {
+            terminate(procServer.pid);
+        } catch (e) {}
+    };
+    // 在脚本进程关闭/结束时，同时关闭打开的 PM2 进程
+    process.stdin.resume();
+    // do something when app is closing
+    process.on('exit', exitHandler);
+    // catches ctrl+c event
+    process.on('SIGINT', exitHandler);
+    // catches "kill pid" (for example: nodemon restart)
+    process.on('SIGUSR1', exitHandler);
+    process.on('SIGUSR2', exitHandler);
+    // catches uncaught exceptions
+    process.on('uncaughtException', exitHandler);
 }
 
 run().catch(console.trace);
