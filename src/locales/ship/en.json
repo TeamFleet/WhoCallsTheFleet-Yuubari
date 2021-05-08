@@ -91,6 +91,21 @@
                 "- If the 2nd and 3rd ship is one of Big Seven, the buff for both ships will be more powerful",
                 "    - Currently implemented other Big Sevens: [Nagato](ship:541:mini), [Mutsu](ship:573:mini), [Nelson](ship:576:mini)"
             ]
+        },
+        "潜水艦隊攻撃": {
+            "requirement": [
+                "- Use Echelon Formation or Line Abreast Formation",
+                "- During one sortie, when triggering this attack at a 2nd time, one \"潜艇补给物资\" will be cost",
+                "- Fleet:",
+                "  - _AS_ must be Flagship",
+                "  - _Flagship_ must not be at Chuuha or Taiha state",
+                "  - The 2nd and 3rd ship of the fleet must be a Submarine"
+            ],
+            "effect": [
+                "When _AS the flagship_ attempts to attack in shelling phase, there's a chance that triggers this special attack.",
+                "When triggerd, _AS_ will command the submarines in the 2nd, 3rd and 4th (if exists) position to each perform a single torpedo attacks that each attack will hit a random enemy.",
+                "- If the 4th ship is Submarine, this attack will has a higher chance to trigger"
+            ]
         }
     },
 

@@ -12,13 +12,13 @@ export default async (app) => {
             ? `https://akigumo.fleet.moe`
             : `http://localhost:${portAkigumo}`;
 
-    console.log({
-        target,
-        devPortAkigumo,
-        portAkigumo,
-        'process.env.YUUBARI_LOCAL_AKIGUMO': process.env.YUUBARI_LOCAL_AKIGUMO,
-        'process.env.YUUBARI_LOCAL_RUN': process.env.YUUBARI_LOCAL_RUN,
-    });
+    // console.log({
+    //     target,
+    //     devPortAkigumo,
+    //     portAkigumo,
+    //     'process.env.YUUBARI_LOCAL_AKIGUMO': process.env.YUUBARI_LOCAL_AKIGUMO,
+    //     'process.env.YUUBARI_LOCAL_RUN': process.env.YUUBARI_LOCAL_RUN,
+    // });
 
     app.use(
         proxy('/pics', {
