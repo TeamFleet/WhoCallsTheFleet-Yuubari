@@ -95,7 +95,7 @@
         "潜水艦隊攻撃": {
             "requirement": [
                 "- Use Echelon Formation or Line Abreast Formation",
-                "- During one sortie, when triggering this attack at a 2nd time, one \"潜艇补给物资\" will be cost",
+                "- When triggering this attack, one \"潜艇补给物资\" will be cost",
                 "- Fleet:",
                 "  - _AS_ must be Flagship",
                 "  - _Flagship_ must not be at Chuuha or Taiha state",

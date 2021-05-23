@@ -1,8 +1,10 @@
 import { Component, createRef, isValidElement } from 'react';
 import { extend } from 'koot';
+import Swiper from 'swiper/bundle';
+
 import './swiper.g.less';
 
-const Swiper = typeof window !== 'undefined' && require('swiper').default;
+// const Swiper = typeof window !== 'undefined' && require('swiper').default;
 
 const defaults = {
     // speed: 400,
@@ -85,7 +87,11 @@ class SwiperComponent extends Component {
             }
             const _init = settings.on.init;
             settings.on.init = function (...args) {
-                if (__DEV__) console.warn('Swiper inited', ...args);
+                if (__DEV__)
+                    console.warn('Swiper inited', {
+                        ___settings: settings,
+                        ...args,
+                    });
                 if (typeof _init === 'function') _init(...args);
             };
 

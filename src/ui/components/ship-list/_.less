@@ -1,18 +1,19 @@
 @import '../../base.less';
 
-@margin:        20px;
-@gutter:        20px;
-@line-height:   20px;
+@margin: 20px;
+@gutter: 20px;
+@line-height: 20px;
 
-@height:        (@line-height + @margin * 2);
-@height-phone:  (@height * 0.75);
+@height: (@line-height + @margin * 2);
+@height-phone: (@height * 0.75);
 
-@height-compare-thead:  40px;
+@height-compare-thead: 40px;
 
-@width-filter:      9em;
-@width-filter-focus:20em;
+@width-filter: 140px;
+// @width-filter: 9em;
+@width-filter-focus: 20em;
 
-@size-checkbox:     16px;
+@size-checkbox: 16px;
 
 .table() {
     overflow-x: visible;
@@ -23,26 +24,26 @@
     margin-left: -5px;
     padding-left: 5px;
 
-    .row{
+    .row {
         .screen-tablet({
             &:after{
                 flex:       0 0 10px;
-                content:    "";
+                content:    '';
                 order:      100;
                 height:     1px;
             }
         });
 
-        &:first-child{
+        &:first-child {
             border-top-color: transparent;
         }
 
-        .cell{
-            flex:   1 0 40px;
-            &:first-of-type{
-                flex:       5 0 (@ship-link-width + 0);
+        .cell {
+            flex: 1 0 40px;
+            &:first-of-type {
+                flex: 5 0 (@ship-link-width + 0);
                 text-align: left;
-                z-index:    -1;
+                z-index: -1;
                 pointer-events: none;
                 .screen-tablet({
                     order:          1;
@@ -51,9 +52,9 @@
                     z-index: initial;
                 }
             }
-            &:nth-child(n+2){
+            &:nth-child(n + 2) {
                 text-align: center;
-                font-size:  14px;
+                font-size: 14px;
                 .screen-max({
                     font-size:  13px;
                 });

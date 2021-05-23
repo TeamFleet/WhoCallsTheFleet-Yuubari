@@ -71,7 +71,10 @@ const appendCollection = async (index, name, types, expandClass) => {
                     }
                 }
 
-                // console.log(name.zh_cn, type, expandClass, index, thisSubIndex)
+                // const thisExpandClass = expandClass || type === 31;
+                const thisExpandClass = expandClass;
+
+                // console.log(name.zh_cn, type, thisExpandClass, index, thisSubIndex)
 
                 const ships = await db.ships
                     .cfind({ type: type })
@@ -88,7 +91,7 @@ const appendCollection = async (index, name, types, expandClass) => {
                     .exec();
 
                 if (!shipClassInited[index]) shipClassInited[index] = [];
-                // if (expandClass) thisSubIndex = -1
+                // if (thisExpandClass) thisSubIndex = -1
 
                 // console.log(ships.map(ship => ship._navy))
                 try {
@@ -113,7 +116,7 @@ const appendCollection = async (index, name, types, expandClass) => {
                             let listSeries;
 
                             if (
-                                expandClass &&
+                                thisExpandClass &&
                                 shipClassInited[index].indexOf(ship.class) < 0
                             ) {
                                 // console.log(ship.class)

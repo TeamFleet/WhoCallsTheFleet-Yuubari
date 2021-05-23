@@ -1,23 +1,23 @@
-.locale( @localeId, @rules ){
-    [data-locale=~"@{localeId}"] &{
+.locale( @localeId, @rules ) {
+    html[lang=~'@{localeId}'] & {
         @rules();
     }
 }
 
-.locale-en( @rules ){
-    [data-locale="en"] &{
+.locale-en( @rules ) {
+    html[lang='en'] & {
         @rules();
     }
 }
 
-.locale-zh( @rules ){
-    [data-locale="zh"] &{
+.locale-zh( @rules ) {
+    html[lang='zh'] & {
         @rules();
     }
 }
 
-.locale-ja( @rules ){
-    [data-locale="ja"] &{
+.locale-ja( @rules ) {
+    html[lang='ja'] & {
         @rules();
     }
 }
