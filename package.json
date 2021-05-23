@@ -36,7 +36,7 @@
         "check-css-prop": "^1.0.1",
         "classnames": "^2.3.1",
         "hotkeys-js": "^3.8.5",
-        "kckit": "^1.66.0",
+        "kckit": "^1.66.1",
         "koot": "^0.15.0-beta.20",
         "localforage": "^1.9.0",
         "lz-string": "^1.4.4",
@@ -47,7 +47,7 @@
         "react-transition-group": "^4.4.1",
         "swiper": "^6.6.2",
         "whocallsthefleet-backgrounds": "^1.3.2",
-        "whocallsthefleet-database": "^20210523.0.0"
+        "whocallsthefleet-database": "^20210523.0.1"
     },
     "devDependencies": {
         "@babel/plugin-proposal-nullish-coalescing-operator": "^7.14.2",
