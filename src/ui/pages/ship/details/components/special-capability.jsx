@@ -35,8 +35,11 @@ const SpecialCapability = extend({
         return false;
     });
     if (specialAttack) {
-        const { requirement = [], effect = [], title = specialAttack.name } =
-            __(`special_attack`, specialAttack.name) || {};
+        const {
+            requirement = [],
+            effect = [],
+            title = specialAttack.name,
+        } = __(`special_attack`, specialAttack.name) || {};
         // console.log(__("special_attack", specialAttack.name.replace(/ /g, '')))
         // console.log({ requirement, effect })
         const source =
@@ -155,7 +158,12 @@ const SpecialCapability = extend({
     }
 
     // 护卫航母
-    if (subType === 'EscortCarrier') {
+    // if (subType === 'EscortCarrier') {
+    if (
+        thisShip.canEquip(33) &&
+        typeof thisShip.stat.asw === 'number' &&
+        thisShip.stat.asw > 0
+    ) {
         return (
             <ComponentContainer
                 className={classNames([className, 'cve'])}

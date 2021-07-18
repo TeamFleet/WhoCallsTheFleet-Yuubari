@@ -21,7 +21,7 @@ export default ({ ship }) => {
                                     : chance === 'low'
                                     ? ' class="color-negative"'
                                     : ''
-                            }>${__('chance', chance)}</strong>`,
+                            }>${__('chance')[chance]}</strong>`,
                         }),
                     }}
                 ></span>

@@ -21,10 +21,8 @@ const Requirements = ({ requirements = [], ship }) => {
             {arrRequirements.length > 1 &&
                 __('ship_details.meet_one_requirements_below')}
             {arrRequirements.map((requirement, index) => {
-                const {
-                    shipWithEquipments = {},
-                    equipments = {},
-                } = requirement;
+                const { shipWithEquipments = {}, equipments = {} } =
+                    requirement;
 
                 /** 需要达到的属性值 (计算装备) */
                 const statsRequired = {};
@@ -102,7 +100,7 @@ const Requirements = ({ requirements = [], ship }) => {
                             ([stat, value], indexStat) => (
                                 <li key={`${index}-${indexStat}`}>
                                     {__('require.ship_stat_with_equipments', {
-                                        stat: __(`stat`, stat),
+                                        stat: __(`stat`)[stat],
                                         value,
                                     })}
                                 </li>
@@ -251,7 +249,7 @@ const EquipmentRequirementItem = ({ type, hasStat, count }) => (
             ` (${Object.entries(hasStat)
                 .map(([stat, value]) =>
                     __('require.has_stat', {
-                        stat: __(`stat`, stat),
+                        stat: __(`stat`)[stat],
                         value,
                     })
                 )

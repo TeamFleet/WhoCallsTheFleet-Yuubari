@@ -128,9 +128,8 @@ const appendCollection = async (index, name, types, expandClass) => {
                                     class: ship.class,
                                     ships: [],
                                 };
-                                shipSeriesInCollection[index][
-                                    thisSubIndex
-                                ] = {};
+                                shipSeriesInCollection[index][thisSubIndex] =
+                                    {};
                                 shipClassInited[index].push(ship.class);
                             }
 
@@ -161,9 +160,8 @@ const appendCollection = async (index, name, types, expandClass) => {
                                     ];
                             }
 
-                            listSeries[
-                                shipSeries[series].indexOf(ship.id)
-                            ] = ship;
+                            listSeries[shipSeries[series].indexOf(ship.id)] =
+                                ship;
 
                             // console.log(listSeries)
                         });
@@ -397,6 +395,7 @@ module.exports = async (dbpath, topath) => {
     await addSubType('航空母舰', 10, 'ModernizedCarrier');
     await addSubType('航空母舰', 10, 'NightCarrier');
     await addSubType('航空母舰', 9, 'NightCarrier', 'LightNightCarrier');
+    await addSubType('航空母舰', 9, 'SpecialRevisedCarrier');
     await addSubType('航空母舰', 9, 'EscortCarrier');
     await addSubType('航空母舰', 9, 'AssultCarrier');
 
