@@ -27,6 +27,10 @@ module.exports = async () => {
                             maxSize: 1 * 1024, // 2kb
                         },
                     },
+                    // loader: 'url-loader',
+                    // options: {
+                    //     limit: 1 * 1024,
+                    // },
                     // exclude: /node_modules/
                 },
                 {
