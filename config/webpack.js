@@ -21,9 +21,11 @@ module.exports = async () => {
             rules: [
                 {
                     test: /\.(ico|gif|jpg|jpeg|png|webp)$/,
-                    loader: 'url-loader',
-                    options: {
-                        limit: 1 * 1024,
+                    type: 'asset',
+                    parser: {
+                        dataUrlCondition: {
+                            maxSize: 1 * 1024, // 2kb
+                        },
                     },
                     // exclude: /node_modules/
                 },
