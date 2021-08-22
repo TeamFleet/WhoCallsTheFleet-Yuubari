@@ -267,7 +267,7 @@ const PageArsenalList = memo(({ onRender, collections, day }) => {
             <PageArsenalListWatching
                 key="collection-WATCH"
                 day={day}
-                index={-1}
+                index={0}
             />
             {collections.map((collection, index) => {
                 function _onRender() {
@@ -437,16 +437,14 @@ const PageArsenalListWatching = memo(({ index, day }) => {
             ) : (
                 watchList
                     .map((value) => {
-                        const [equipmentId, improvementIndex] = value.split(
-                            '-'
-                        );
+                        const [equipmentId, improvementIndex] =
+                            value.split('-');
                         const equipment = getEquipment(equipmentId);
                         const requirements =
                             typeof day === 'undefined' ? undefined : [];
                         if (Array.isArray(requirements)) {
-                            const { req } = equipment.improvement[
-                                improvementIndex
-                            ];
+                            const { req } =
+                                equipment.improvement[improvementIndex];
                             req.forEach(([days], index) => {
                                 if (days[day] === true)
                                     requirements.push(index);
@@ -773,12 +771,8 @@ class PageArsenalListItem extends PureComponent {
     render() {
         // if (!this.state.render) return null
 
-        const {
-            className,
-            equipment,
-            improvementIndex,
-            requirements,
-        } = this.props;
+        const { className, equipment, improvementIndex, requirements } =
+            this.props;
 
         const reqShips = [];
         const data = equipment.improvement[improvementIndex];

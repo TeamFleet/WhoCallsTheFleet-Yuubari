@@ -69,6 +69,8 @@ class Nav extends Component {
         return null;
     }
 
+    componentDidUpdate() {}
+
     onChange(evt) {
         if (checkCssProp('overscroll-behavior')) return;
         // if (NavSwitchRef.current.checked) return lockWindowScroll();
