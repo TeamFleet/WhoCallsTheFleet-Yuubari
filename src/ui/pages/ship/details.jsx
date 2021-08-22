@@ -31,9 +31,8 @@ const tabsAvailable = [
 
 const contentComponents = {};
 tabsAvailable.forEach((tab, index) => {
-    contentComponents[
-        !index ? 'index' : tab
-    ] = require(`./details/${tab}.jsx`).default;
+    contentComponents[!index ? 'index' : tab] =
+        require(`./details/${tab}.jsx`).default;
 });
 
 const getDescription = (ship) => {
