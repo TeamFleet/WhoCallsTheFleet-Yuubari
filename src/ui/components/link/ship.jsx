@@ -80,6 +80,7 @@ class LinkShip extends Component {
             pic,
             name,
             navy,
+            antiInstallation = false,
             'min-level': minLv = false,
 
             onClick,
@@ -146,6 +147,18 @@ class LinkShip extends Component {
                     <span
                         className={classNameHash + '-min-level'}
                         children={ship._minLv}
+                    />
+                )}
+                {antiInstallation && this.ship.canEquip('LandingCraft') && (
+                    <span
+                        className="icon-anti-installation"
+                        type="landing-craft"
+                    />
+                )}
+                {antiInstallation && this.ship.canEquip('AmphibiousCraft') && (
+                    <span
+                        className="icon-anti-installation"
+                        type="amphibious-craft"
                     />
                 )}
                 {children}

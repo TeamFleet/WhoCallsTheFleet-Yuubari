@@ -68,7 +68,7 @@ class ShipListTableBody extends Component {
         const results = this.props.ships.map((ship) => {
             const cells = [
                 [
-                    <LinkShip ship={ship} />,
+                    <LinkShip antiInstallation ship={ship} />,
                     {
                         className: 'ship',
                     },

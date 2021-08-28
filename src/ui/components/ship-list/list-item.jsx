@@ -88,10 +88,11 @@ class ShipListItem extends Component {
                     },
                 ])}
                 ship={this.props.ship}
-                navy={true}
-                name={true}
-                pic={true}
-                extraIllust={true}
+                navy
+                name
+                pic
+                antiInstallation
+                // extraIllust={true}
                 onClick={this.onClick}
             >
                 {showCheckbox && (

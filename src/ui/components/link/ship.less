@@ -1,39 +1,62 @@
 @import '../../base.less';
 
-.component{
-    padding-left:   87px;
+.component {
+    padding-left: 87px;
     border-radius: 5px;
 
-    .icon-has-extra-illust{
-        @size:      20px;
-        position:   absolute;
-        width:      @size;
-        height:     @size;
-        fill:       #fff;
-        transform:  rotate(15deg);
-        top:        50%;
-        left:       70px;
-        z-index:    10;
+    .icon-has-extra-illust {
+        @size: 20px;
+        position: absolute;
+        width: @size;
+        height: @size;
+        fill: #fff;
+        transform: rotate(15deg);
+        top: 50%;
+        left: 70px;
+        z-index: 10;
         margin-top: (0 - @size / 2);
     }
 
-    .flag-navy{
+    .flag-navy {
         // @width:     20px;
         // @height:    20px;
-        position:   absolute;
+        position: absolute;
         // width:      @width;
         // height:     @height;
-        top:        50%;
-        left:       65px;
+        top: 50%;
+        left: 65px;
         margin-top: (0 - @navy-flag-height / 2 - 14);
-        z-index:    1;
+        z-index: 1;
         pointer-events: none;
         // background-color: red;
-        transform:  rotate(10deg);
+        transform: rotate(10deg);
         // filter:     drop-shadow(-1px 1px 1px fade(#000, 75%));
     }
 
-    &:focus:not(:active){
+    .icon-anti-installation {
+        @width: 48px;
+        @height: 15px;
+        @scale: 0.7;
+        position: absolute;
+        left: 55px;
+        bottom: 2px;
+        width: floor(@width * @scale);
+        height: floor(@height * @scale);
+        background: url(~'~Assets/ship-anti-installation.png') no-repeat 50%
+            (@height * 10);
+        background-size: 100% auto;
+        &[type='landing-craft'] {
+            background-position: 50% (0 - (@height * 1) * @scale);
+        }
+        &[type='amphibious-craft'] {
+            background-position: 50% (0 - (@height * 0) * @scale);
+        }
+        & + .icon-anti-installation {
+            bottom: (2px + 1px + floor(@height * @scale));
+        }
+    }
+
+    &:focus:not(:active) {
         // outline: 1px solid @color-border;
         // filter: drop-shadow(0 0 2px #000);
         outline: 0;
@@ -43,7 +66,7 @@
     }
 }
 
-.component-min-level{
+.component-min-level {
     @height: 12px;
     @lv-width: 15px;
     @lv-height: 10px;
@@ -106,8 +129,8 @@
     //     width: @lv-width;
     //     background: @color-light;
     // }
-    &::before{
-        content: "Lv";
+    &::before {
+        content: 'Lv';
         position: absolute;
         display: block;
         top: -1px;
@@ -123,8 +146,8 @@
         transform: scale((12 / 12), (8 / 12));
         transform-origin: 50% 0%;
     }
-    &::after{
-        content: "";
+    &::after {
+        content: '';
         position: absolute;
         display: block;
         z-index: 1;
