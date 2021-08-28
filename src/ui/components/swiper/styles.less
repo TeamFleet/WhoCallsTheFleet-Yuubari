@@ -2,6 +2,7 @@
 
 .component {
     height: 100%;
+    overflow: hidden;
 
     .swiper-button-prev,
     .swiper-button-next {
@@ -37,5 +38,10 @@
                 opacity: 0;
             }
         }
+    }
+
+    .swiper-pagination.swiper-pagination-bullets {
+        bottom: auto;
+        width: auto;
     }
 }

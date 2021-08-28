@@ -3,6 +3,7 @@ import { extend } from 'koot';
 import Swiper from 'swiper/bundle';
 
 import './swiper.g.less';
+// import 'swiper/css/bundle';
 
 // const Swiper = typeof window !== 'undefined' && require('swiper').default;
 
@@ -65,14 +66,14 @@ class SwiperComponent extends Component {
             });
 
             if (typeof settings.on === 'object') {
-                const createEventHandler = (eventName, handler) => (
-                    ...args
-                ) => {
-                    setTimeout(() => {
-                        // console.log(eventName, this.swiper, ...args)
-                        handler(this.swiper, ...args);
-                    });
-                };
+                const createEventHandler =
+                    (eventName, handler) =>
+                    (...args) => {
+                        setTimeout(() => {
+                            // console.log(eventName, this.swiper, ...args)
+                            handler(this.swiper, ...args);
+                        });
+                    };
                 for (const eventName of Object.keys(settings.on)) {
                     if (typeof settings.on[eventName] === 'function') {
                         const handler = settings.on[eventName];
