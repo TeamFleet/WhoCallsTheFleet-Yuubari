@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { extend } from 'koot';
 import qs from 'qs';
 
-import { setInstallPWAEvent } from '@api/app/api';
+import { setInstallPWAEvent, setAppType } from '@api/app/api';
 import { swipedFromLeftEdge } from '@api/side-menu/api';
 import setAppReady from '@utils/set-app-ready';
 import {
@@ -32,12 +32,14 @@ export const AppRef = createRef();
             window.reduxLogShowed = true;
         }
         return {
+            appType: state.app.type,
             isMainBgimgLoaded: state.bgimg.isMainLoaded,
             uiMode: __CLIENT__
                 ? state.uiMode
                 : // ? state.routing.locationBeforeTransitions.state.uiMode || {}
                   {},
             localeId: state.localeId,
+            serverHref: state.server.href,
         };
     },
     styles,
@@ -53,6 +55,16 @@ class App extends Component {
                 this[e] = this[e].bind(this);
             }
         );
+
+        if (
+            typeof URLSearchParams !== 'undefined' &&
+            typeof URL !== 'undefined'
+        ) {
+            const searchParams = new URLSearchParams(
+                new URL(props.serverHref).search
+            );
+            if (searchParams.has('v0')) props.dispatch(setAppType('v0-iframe'));
+        }
 
         //     // if (__CLIENT__) {
         //     console.log('! locale', props.localeId)
@@ -225,6 +237,7 @@ class App extends Component {
             animation: uiModeAnimation,
         } = this.props.uiMode;
         const hasMode = __CLIENT__ && uiMode;
+        const showNav = this.props.appType !== 'v0-iframe';
 
         return (
             <StrictMode>
@@ -232,6 +245,7 @@ class App extends Component {
                     id="app"
                     className={classNames({
                         [this.props.className]: true,
+                        'mod-no-nav': !showNav,
                         [`is-mode-${uiMode}`]: hasMode,
                         [`is-mode-${uiMode}-entering`]:
                             hasMode && !uiModeIsLeaving && uiModeAnimation,
@@ -244,7 +258,7 @@ class App extends Component {
                     onTouchCancel={this.onTouchCancel}
                     ref={AppRef}
                 >
-                    <Nav location={this.props.location} />
+                    {showNav && <Nav location={this.props.location} />}
                     <MainMask pathname={this.props.location.pathname} />
                     <Main location={this.props.location}>
                         {this.props.children}

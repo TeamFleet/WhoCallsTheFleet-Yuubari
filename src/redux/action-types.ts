@@ -1,5 +1,6 @@
 // global / app base
 export const SET_INSTALL_PWA_EVENT = 'SET_INSTALL_PWA_EVENT';
+export const SET_APP_TYPE = 'SET_APP_TYPE';
 
 // ui-mode
 export const RESET_UIMODE = 'RESET_UIMODE';

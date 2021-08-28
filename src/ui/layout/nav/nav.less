@@ -1,17 +1,17 @@
 @import './_.less';
 
-.component{
+.component {
     .mainframe();
 
-    position:   fixed;
-    z-index:    5;
-    left:       0;
-    top:        0;
-    height:     100%;
-    width:      @nav-width;
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: @nav-width;
     transition-property: transform;
 
-    transform:  translate(-100%, 0%);
+    transform: translate(-100%, 0%);
     .is-mode-background({
         transform:  translate(-100%, 0%);
     });
@@ -24,17 +24,17 @@
 
     #nav-switch,
     // .appbar,
-    label[for="nav-switch"]{
-        display:    none;
+    label[for="nav-switch"] {
+        display: none;
     }
 
-    & > .wrapper{
-        position:   absolute;
-        z-index:    5;
-        top:        0;
-        left:       0;
-        height:     100%;
-        width:      100%;
+    & > .wrapper {
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
         overflow-x: hidden;
         overflow-y: auto;
         display: flex;
@@ -42,13 +42,14 @@
         // padding-bottom: 25px;
         padding-bottom: 10px;
         transition-property: transform;
-        & > .top, & > .bot {
+        & > .top,
+        & > .bot {
             flex: 0 0 auto;
         }
         & > .mid {
             flex: 1;
         }
-        & > .bot{
+        & > .bot {
             margin-top: 40px;
         }
         .screen-tablet({
@@ -56,28 +57,34 @@
         });
     }
 
-    &:before, &:after{
-        content:    '';
-        position:   absolute;
-        top:        0;
-        bottom:     0;
-        right:      0;
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
         pointer-events: none;
         .screen-tablet({
             content: none;
         });
     }
-    &:before{
-        z-index:    10;
-        width:      1px;
+    &:before {
+        z-index: 10;
+        width: 1px;
         background: @theme-bluegrey-50;
         background: fade(@theme-bluegrey-50, 10%);
     }
-    &:after{
-        z-index:    9;
-        width:      @size-block-shadow;
-        background: linear-gradient(to left, fade(#000, 20%), @ease-out-sine, fade(#000, 0%));
-        opacity:    0;
+    &:after {
+        z-index: 9;
+        width: @size-block-shadow;
+        background: linear-gradient(
+            to left,
+            fade(#000, 20%),
+            @ease-out-sine,
+            fade(#000, 0%)
+        );
+        opacity: 0;
         transition: inherit;
         .is-ready({
             opacity:    1;
@@ -87,33 +94,34 @@
         });
     }
 
-    .logo{
-        @size:      48px;
+    .logo {
+        @size: 48px;
 
-        height:     90px;
-        position:   relative;
-        border-left:20px solid transparent;
+        height: 90px;
+        position: relative;
+        border-left: 20px solid transparent;
 
         .screen-tablet({
             border-left-width: @span-left;
         });
 
-        .btn-back, .btn-home-logo{
-            position:   absolute;
-            top:        50%;
+        .btn-back,
+        .btn-home-logo {
+            position: absolute;
+            top: 50%;
             margin-top: (0 - @size / 2);
-            height:     @size;
-            width:      @size;
+            height: @size;
+            width: @size;
             text-align: center;
             background: no-repeat 50% 50% / contain;
         }
 
-        .btn-back{
-            z-index:    1;
+        .btn-back {
+            z-index: 1;
         }
 
-        .btn-home-logo{
-            z-index:    2;
+        .btn-home-logo {
+            z-index: 2;
             background-image: url('~Assets/appicon.png');
             .is-hover({
                 filter: brightness(1.2);
@@ -121,84 +129,86 @@
                     filter: brightness(0.8);
                 }
             });
-            &:active{
+            &:active {
                 filter: brightness(0.8);
             }
-            &.on{
+            &.on {
                 pointer-events: none;
             }
-            .title{
+            .title {
                 color: transparent;
                 z-index: -1;
             }
         }
 
-        .channel{
-            position:   absolute;
-            top:        50%;
-            left:       (@size + 10px);
+        .channel {
+            position: absolute;
+            top: 50%;
+            left: (@size + 10px);
             margin-top: (0 - @size * 0.55);
-            height:     @size;
-            line-height:@size;
+            height: @size;
+            line-height: @size;
             font-style: italic;
-            font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
-            font-size:  1.4rem;
+            font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+            font-size: 1.4rem;
             // transform:  skewY(-5deg);
             .screen-t1_to_tablet({
                 left: (@size + 2px);
                 font-size: 1.2rem;
-                letter-spacing: -.05em;
+                letter-spacing: -0.05em;
             });
         }
-            .channel-yuubari{
-                color:  hsl(26, 95%, 82.5%);
-                text-shadow: 0 0 2px fade(#000, 75%);
-                &:after{
-                    content:    'the Fleet dev channel';
-                    position:   absolute;
-                    right:      0;
-                    bottom:     -.2em;
-                    line-height:1em;
-                    font-size:  12px;
-                    opacity:    .85;
-                    white-space: nowrap;
-                    letter-spacing: 0;
-                    .screen-t1_to_tablet({
+        .channel-yuubari {
+            color: hsl(26, 95%, 82.5%);
+            text-shadow: 0 0 2px fade(#000, 75%);
+            &:after {
+                content: 'the Fleet dev channel';
+                position: absolute;
+                right: 0;
+                bottom: -0.2em;
+                line-height: 1em;
+                font-size: 12px;
+                opacity: 0.85;
+                white-space: nowrap;
+                letter-spacing: 0;
+                .screen-t1_to_tablet({
                         content: 'the Fleet dev';
                     });
-                    .screen-tablet({
+                .screen-tablet({
                         right: auto;
                         left: 0;
                     });
-                }
+            }
+        }
+
+        .btn-back {
+            & ~ .btn-home-logo {
+                transform: translateX((@size + 15));
             }
 
-        .btn-back{
-            & ~ .btn-home-logo{
-                transform:  translateX((@size + 15));
-            }
-
-            &[disabled]{
-                opacity:    0;
-                & ~ .btn-home-logo{
-                    transform:  none;
+            &[disabled] {
+                opacity: 0;
+                & ~ .btn-home-logo {
+                    transform: none;
                 }
             }
         }
     }
 
-    &.is-loading{
-        .btn-home-logo{
-            animation:  opacity-pulse 2s ease-in-out infinite;
-            @keyframes  opacity-pulse{
-                0%, 5%{
-                    opacity:    1;
+    &.is-loading {
+        .btn-home-logo {
+            animation: opacity-pulse 2s ease-in-out infinite;
+            @keyframes opacity-pulse {
+                0%,
+                5% {
+                    opacity: 1;
                 }
-                50%{
-                    opacity:    0;
+                50% {
+                    opacity: 0;
                 }
-                95%, 100%{
-                    opacity:    1;
+                95%,
+                100% {
+                    opacity: 1;
                 }
             }
         }
@@ -240,7 +250,7 @@
     });
 
     .screen-tablet({
-        height:     @nav-height-tablet;
+        height:     var(@var-nav-height);
         width:      100%;
         overflow:   visible;
         color:      #fff;
@@ -263,7 +273,7 @@
             position:   static;
 
             // &:before{
-            //     content:    "☰";
+            //     content:     ☰ ;
             //     position:   absolute;
             //     z-index:    5;
             //     top:        0;
@@ -283,7 +293,7 @@
                 top:        0;
                 left:       14px;
                 width:      @size;
-                height:     @nav-height-tablet;
+                height:     var(@var-nav-height);
                 text-align: center;
                 padding-top:((@nav-height-tablet - @button-menu-size) / 2);
                 .icon-menu{
@@ -341,7 +351,7 @@
             }
         }
     });
-    
+
     // .screen-phone-small({
     //     .appbar{
     //         padding-left: 50px;

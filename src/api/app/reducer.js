@@ -2,6 +2,7 @@ import {
     APP_READY_UPDATE,
     MAIN_KEY_UPDATE,
     SET_INSTALL_PWA_EVENT,
+    SET_APP_TYPE,
 } from '@redux/action-types';
 
 const initialState = {
@@ -9,6 +10,7 @@ const initialState = {
     // mainKey: undefined,
     // showInstallPWAButton: false,
     // eventInstallPWA: undefined,
+    type: 'web',
 };
 
 export default function (state = initialState, action) {
@@ -30,7 +32,14 @@ export default function (state = initialState, action) {
                 eventInstallPWA: action.event,
             });
         }
-    }
 
-    return state;
+        case SET_APP_TYPE: {
+            return Object.assign({}, state, {
+                type: action.appType,
+            });
+        }
+
+        default:
+            return state;
+    }
 }

@@ -9,8 +9,8 @@
     transition-property: background-color, background-size, background-position,
         border-color, box-shadow,
         // color,
-            // fill,
-            opacity,
+        // fill,
+        opacity,
         outline, transform, filter;
 }
 
@@ -117,6 +117,13 @@ html {
         }
     }
 
+    &.mod-transparent {
+        &,
+        body {
+            background: none transparent;
+        }
+    }
+
     // @media all and (min-width: (@layout-width-max + 1)) and (min-height: (@layout-height-max + 1)){
     //     font-size: 		floor(@root-font-size * (18 / @base-font-size));
     // }
@@ -150,7 +157,7 @@ a,
     transition-property: background-color, background-size, background-position,
         border-color, box-shadow, color,
         // fill,
-            opacity,
+        opacity,
         outline, transform, filter;
     .style-link();
 

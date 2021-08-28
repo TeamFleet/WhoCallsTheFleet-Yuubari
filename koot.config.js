@@ -107,6 +107,7 @@ module.exports = {
         '@actions': path.resolve('./src/api/actions'),
         '@db': path.resolve('./src/database'),
         '@database': path.resolve('./src/database'),
+        '@types': path.resolve('./types'),
 
         '~base.less': path.resolve('./src/ui/base.less'),
         '~Assets': path.resolve('./src/assets'),

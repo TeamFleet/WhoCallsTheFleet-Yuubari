@@ -4,7 +4,10 @@ import { extend } from 'koot';
 
 import Cookies from 'js-cookie';
 
-import { leave as leaveUIMode } from '@api/ui-mode';
+import {
+    leave as leaveUIMode,
+    animationEnd as actionAnimationEnd,
+} from '@api/ui-mode';
 import modeBackgroundOnAnimationEnd from '@api/ui-mode/mode-background.js';
 import * as bgimgApi from '@api/bgimg/api.js';
 
@@ -23,7 +26,9 @@ const setCookieSessionBackgroundIndex = (index) => {
  * bgimg controls UI
  */
 @extend({
-    connect: true,
+    connect: (state) => ({
+        show: __SERVER__ || state.app.type !== 'v0-iframe',
+    }),
     styles: require('./styles.less'),
 })
 class Bgimg extends PureComponent {
@@ -31,7 +36,7 @@ class Bgimg extends PureComponent {
         super(props);
 
         // 确定初始背景图
-        if (__CLIENT__) {
+        if (this.props.show) {
             const initialIndex =
                 Cookies.get('session_background_index') ||
                 'default-' +
@@ -53,10 +58,15 @@ class Bgimg extends PureComponent {
 
     componentDidMount() {
         if (__DEV__) console.warn('Bgimg mounted');
+        if (!this.props.show) {
+            this.props.dispatch(actionAnimationEnd());
+            this.props.dispatch(bgimgApi.mainImgLoaded());
+        }
     }
 
     render() {
-        if (__SERVER__) return null;
+        if (!this.props.show) return null;
+
         return (
             <div
                 id="bgimg"

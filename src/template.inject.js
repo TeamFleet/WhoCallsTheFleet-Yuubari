@@ -63,4 +63,13 @@ export default {
     },
 
     noScriptWarningText,
+
+    htmlClassName: (_, { server: { href } }) => {
+        const classes = [];
+
+        const searchParams = new URLSearchParams(new URL(href).search);
+        if (searchParams.has('v0')) classes.push('mod-transparent');
+
+        return `class="${classes.join(' ')}"`;
+    },
 };

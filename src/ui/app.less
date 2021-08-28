@@ -1,6 +1,8 @@
 @import './base.less';
 
 .component {
+    @{var-nav-height}: 0px;
+
     // position:   absolute;
     // z-index:    1;
     // width:      100%;
@@ -11,15 +13,29 @@
     position: absolute;
     padding: 0 0 0 @nav-width;
 
+    &.mod-no-nav {
+        padding-left: 0;
+    }
+
     .screen-t1({
         padding-left:   @nav-width-t1;
+        &.mod-no-nav{
+            padding-left: 0;
+        }
     });
     .screen-tablet({
+        @{var-nav-height}: @nav-height-tablet;
         padding-left:   0;
-        border-top:     @nav-height-tablet solid transparent;
+        border-top:     var(@var-nav-height) solid transparent;
+        &.mod-no-nav{
+            @{var-nav-height}: 0;
+        }
     });
     .screen-phone({
-        border-top-width: @nav-height-phone;
+        @{var-nav-height}: @nav-height-phone;
+        &.mod-no-nav{
+            @{var-nav-height}: 0;
+        }
     });
 }
 
