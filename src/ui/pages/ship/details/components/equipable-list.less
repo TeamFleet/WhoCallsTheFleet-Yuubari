@@ -1,12 +1,12 @@
 @import './equipable.less';
 
-.component{
-    @item-width:    250px;
+.component {
+    @item-width: 250px;
 
-    display:    flex;
-    flex-flow:  row wrap;
-    overflow:   hidden;
-    position:   relative;
+    display: flex;
+    flex-flow: row wrap;
+    overflow: hidden;
+    position: relative;
     // border-top: 0;
     // padding-top:@component-gutter-vertical;
     // &:before{
@@ -20,12 +20,12 @@
     //     flex:   none;
     //     width:  100%;
     // }
-    .item{
-        flex:   1 0 @item-width;
+    .item {
+        flex: 1 0 @item-width;
         // margin-top:     -1px;
-        &.placeholder{
-            height:     0;
-            overflow:   hidden;
+        &.placeholder {
+            height: 0;
+            overflow: hidden;
         }
         // &.hascontent{
         //     border-top: 1px solid @color-border;
@@ -54,32 +54,37 @@
     // }
 
     @media all and (min-width: (@item-width * 2 + @main-margin-phone * 2)) {
-        @supports (display: grid){
-            &:not(.is-exslot){
-                @basis:     (@equipmenticon-size + 10);
-                @divider:   10;
-                display:    grid;
-                grid-template-columns: repeat(auto-fill, minmax(@item-width, 1fr));
+        @supports (display: grid) {
+            &:not(.is-exslot) {
+                @basis: (@equipmenticon-size + 10);
+                @divider: 10;
+                display: grid;
+                grid-template-columns: repeat(
+                    auto-fill,
+                    minmax(@item-width, 1fr)
+                );
                 grid-auto-rows: (@basis / @divider);
                 // grid-gap: 10px;
-                .item{
-                    grid-row:   span @divider;
+                .item {
+                    grid-row: span @divider;
                 }
-                .placeholder{
-                    display:    none;
+                .placeholder {
+                    display: none;
                 }
-                .item[data-special-count="1"],
-                .item[data-special-count="2"] {
-                    grid-row:   span (@divider * 2);
+                .item[data-special-count='1'],
+                .item[data-special-count='2'] {
+                    grid-row: span (@divider * 2);
                 }
                 .loop-item-spcount(@n, @i: 3) when (@i =< @n) {
-                    @span:  (ceil((@divider + ceil(@i * 5.5)) / @divider) * @divider);
-                    .item[data-special-count="@{i}"] {
-                        grid-row:   span @span;
+                    @span: (
+                        ceil((@divider + ceil(@i * 5.5)) / @divider) * @divider
+                    );
+                    .item[data-special-count='@{i}'] {
+                        grid-row: span @span;
                     }
                     .loop-item-spcount(@n, (@i + 1));
                 }
-                .loop-item-spcount(20);
+                .loop-item-spcount(30);
             }
         }
     }
