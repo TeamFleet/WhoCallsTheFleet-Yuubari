@@ -7066,10 +7066,10 @@ koot-cli-kit@^0.0.2:
   dependencies:
     ora "^4.0.4"
 
-koot-webpack@^0.15.0-rc.8:
-  version "0.15.0-rc.8"
-  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.15.0-rc.8.tgz#50daf44ceddae5356944a0bf09a7fc186a9cb137"
-  integrity sha512-DUj+e6OuerVgC92l8TTPccZbyMBf+DML2ivixEaq3rVjjpirZn6hTE0oh5cWZ8XBetOF29VIE5Z51Qk1dCsa7g==
+koot-webpack@^0.15.0-rc.9:
+  version "0.15.0-rc.9"
+  resolved "https://registry.yarnpkg.com/koot-webpack/-/koot-webpack-0.15.0-rc.9.tgz#f655b51b489cf8198c37bdf2d3383fa3a8ca2507"
+  integrity sha512-khkqis8UCJfXe/YHYj1ZBVayZyhwhXbcJrhTpjdnD0hoTBL8DwzI6ll17QM8pejS0+51QQHgb2+8TUkOFVqwmg==
   dependencies:
     "@babel/core" "^7.15.0"
     "@babel/helper-module-imports" "^7.14.5"
@@ -7117,10 +7117,10 @@ koot-webpack@^0.15.0-rc.8:
     webpack-hot-middleware "^2.25.0"
     workbox-webpack-plugin "^6.2.4"
 
-koot@^0.15.0-rc.8:
-  version "0.15.0-rc.8"
-  resolved "https://registry.yarnpkg.com/koot/-/koot-0.15.0-rc.8.tgz#cb729d4e0c6abac656181ffd50012b73f0a20be3"
-  integrity sha512-a9EJuEN16rt2BHam/WvNDOn2qw/EUb4Ai5TjRRQR06lyESeCnZzP0hLmb6tBfn0wXf5p16df/5XC5Iv/HKzPlA==
+koot@^0.15.0-rc.9:
+  version "0.15.0-rc.9"
+  resolved "https://registry.yarnpkg.com/koot/-/koot-0.15.0-rc.9.tgz#99d95d9e6bf1efb90d5a0f1c916d459088427d67"
+  integrity sha512-TH3CiTA4HRfinXmBae1ZwJeKfepjy2uF3mvr4DexhMx2Zp1AcTUi3thc1x5J2zMiJVP3UiH6qeO9i514RiwcDw==
   dependencies:
     "@types/inquirer" "^7.3.3"
     "@types/lodash" "^4.14.172"
@@ -7160,7 +7160,7 @@ koot@^0.15.0-rc.8:
     koa-router "^10.1.1"
     koa-static "^5.0.0"
     koot-cli-kit "^0.0.2"
-    koot-webpack "^0.15.0-rc.8"
+    koot-webpack "^0.15.0-rc.9"
     lodash "^4.17.21"
     md5 "^2.3.0"
     npm-run-script "^0.0.4"
