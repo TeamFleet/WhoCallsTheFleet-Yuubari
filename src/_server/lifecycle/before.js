@@ -28,4 +28,13 @@ export default async (app) => {
             logs: false,
         })
     );
+
+    app.use(async (ctx, next) => {
+        ctx.set(
+            'Content-Security-Policy',
+            'frame-src *.fleet.moe' + (__DEV__ ? ' localhost' : '')
+        );
+        ctx.set('X-Frame-Options', '');
+        await next();
+    });
 };
