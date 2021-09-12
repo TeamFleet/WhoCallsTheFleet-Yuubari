@@ -48,11 +48,23 @@ const appendCollection = async (index, name, types) => {
                 const equipmentType = (
                     await db.equipmentTypes.cfind({ id: type }).exec()
                 )[0];
+
                 // equipmentType = equipmentType[0]
+                const sort = {
+                    [`stat.${equipmentType.main_attribute || 'fire'}`]: 1,
+                };
+                switch (type) {
+                    case 53: {
+                        sort[`stat.torpedo`] = 1;
+                        break;
+                    }
+                    default: {
+                    }
+                }
                 const equipments = await db.equipments
-                    .cfind({ type: type })
+                    .cfind({ type })
                     .sort({
-                        [`stat.${equipmentType.main_attribute || 'fire'}`]: 1,
+                        ...sort,
                         rarity: 1,
                         id: 1,
                     })
