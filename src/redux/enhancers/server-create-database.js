@@ -9,18 +9,19 @@ import initDatabase from '__FLEET_INIT_DATABASE_ONLY_SERVER__';
  * @param {Function} createStore
  * @returns {Object} store
  */
-const databaseEnhancer = createStore => (reducer, preloadedState, enhancer) => {
-    const store = createStore(reducer, preloadedState, enhancer);
+const databaseEnhancer =
+    (createStore) => (reducer, preloadedState, enhancer) => {
+        const store = createStore(reducer, preloadedState, enhancer);
 
-    if (__SERVER__) {
-        const cache = getCache();
-        if (!cache.__database) cache.__database = initDatabase(store).db;
-        // console.log({ cache });
-        store.__database = cache.__database;
-    }
+        if (__SERVER__) {
+            const cache = getCache(true);
+            if (!cache.__database) cache.__database = initDatabase(store).db;
+            // console.log({ cache });
+            store.__database = cache.__database;
+        }
 
-    return store;
-};
+        return store;
+    };
 
 export default databaseEnhancer;
 

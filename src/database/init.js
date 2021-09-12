@@ -18,7 +18,9 @@ const initKCKit = ({ localeId, store }) => {
     });
 
     if (__CLIENT__ && __DEV__) {
+        // eslint-disable-next-line no-console
         console.log('📦 Database inited.', db);
+        // eslint-disable-next-line no-console
         console.log('🔌 KCKit inited.', require('kckit'));
     }
 };
