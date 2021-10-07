@@ -7415,10 +7415,10 @@ jsprim@^1.2.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
-kckit@^1.73.0:
-  version "1.73.0"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.73.0.tgz#2116fc830b1b5fe983d5410d5391946b04585821"
-  integrity sha512-hhmS3pHcH4U8EJ4gOIjzTPJtFHJAFs9aidWBz2Mk8YubwfOr+UfF+c0Pt4Ya7Ld+OVWPzycUqZBFHnRUWl8K+A==
+kckit@^1.73.1:
+  version "1.73.1"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.73.1.tgz#bcd808257576e27762feb59ef1e49147c45477cf"
+  integrity sha512-qAxn881WpDYv4peTtdwo9GcNfMPBPaFrHVJYzy9EOTjZJTAGMHuUT4jczEkexMD4UBYO1p4SC2sF/9kRTKCEqQ==
   dependencies:
     camelcase "6.2.0"
 
