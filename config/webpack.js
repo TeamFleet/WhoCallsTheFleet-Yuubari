@@ -76,6 +76,7 @@ module.exports = async () => {
             fallback: {
                 util: require.resolve('util/'),
                 path: require.resolve('path-browserify'),
+                assert: require.resolve('assert/'),
             },
         },
     };

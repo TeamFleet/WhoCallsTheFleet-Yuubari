@@ -140,7 +140,7 @@
 
     "bonuses": {
         "single": "Equipment Stat Bonus",
-        "sets": "Set Bonus",
+        "sets": "Additional Bonus",
         "info_prefix_when_equipped": "When equipped, ",
         "range_increase": "Range increased by 1",
         "stat_donot_stack": "Donot stack",

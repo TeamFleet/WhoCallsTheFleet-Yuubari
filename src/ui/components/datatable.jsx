@@ -22,6 +22,10 @@ class DataTable extends Component {
         Ref.current.scrollLeft = this.props.scrollLeft;
     }
 
+    // componentDidMount() {
+    //     console.log('____', this.props.forwardedRef, this.ContainerRef);
+    // }
+
     renderHeader() {
         if (!this.props.headers) return null;
         const TagName = this.props.tag || 'thead';

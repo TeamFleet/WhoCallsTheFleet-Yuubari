@@ -139,7 +139,7 @@
 
     "bonuses": {
         "single": "装备属性加成",
-        "sets": "套装加成",
+        "sets": "单次加成",
         "info_prefix_when_equipped": "装备于以上舰娘时，",
         "range_increase": "射程提高一档",
         "stat_donot_stack": "该属性不叠加",

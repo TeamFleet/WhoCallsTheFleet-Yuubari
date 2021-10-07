@@ -23,6 +23,25 @@ const shipSeries = {};
 const shipClassInited = {};
 let data = {};
 
+const sortDD = [
+    84, // 神風
+    12, // 睦月
+    15, // 吹雪
+    16, // 綾波
+    17, // 暁
+    18, // 初春
+    19, // 白露
+    150, // 改白露
+    20, // 朝潮
+    21, // 陽炎
+    138, // 改装陽炎
+    139, // 改陽炎
+    22, // 夕雲
+    23, // 秋月
+    24, // 島風
+    131, // 松
+];
+
 const appendCollection = async (index, name, types, expandClass) => {
     const initSublist = (type, index, subIndex) => {
         shipCollections[index].list[subIndex] = {
@@ -297,6 +316,13 @@ module.exports = async (dbpath, topath) => {
         });
         if (collection.list[0].class) {
             collection.list.sort((a, b) => {
+                const classA = a.class;
+                const classB = b.class;
+
+                if (sortDD.includes(classA) && sortDD.includes(classB)) {
+                    return sortDD.indexOf(classA) - sortDD.indexOf(classB);
+                }
+
                 const shipA = a.ships[0][0];
                 const shipB = b.ships[0][0];
                 const navyA = data.ships[shipA.id]._navy || 'ijn';

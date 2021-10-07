@@ -83,9 +83,9 @@ export default extend({
             return (
                 <div className={className}>
                     <ComponentContainer
-                        // className={classNameBonuses}
-                        title={__('bonuses.single')}
-                        titleType="line-append"
+                    // className={classNameBonuses}
+                    // title={__('bonuses.single')}
+                    // titleType="line-append"
                     >
                         {single.length ? (
                             <div
