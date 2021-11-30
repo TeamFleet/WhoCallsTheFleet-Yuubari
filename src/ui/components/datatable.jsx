@@ -1,120 +1,112 @@
-import { Component, createRef } from 'react';
+import { useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import { extend } from 'koot';
 
-@extend({
+const DataTable = extend({
     styles: require('./datatable.less'),
-})
-class DataTable extends Component {
-    ContainerRef = createRef();
-    // _scrollLeft
+})((props) => {
+    const CRef = useRef(null);
+    const TrueRef = props.ref ?? props.forwardedRef ?? CRef;
 
-    componentDidUpdate(/*prevProps*/) {
-        const Ref = this.props.forwardedRef || this.ContainerRef;
+    const C = props.tag || 'table';
+    // console.log('DataTable', props.forwardedRef, ContainerRef);
+
+    useEffect(() => {
+        // console.log('DataTable didMount', TrueRef);
+        // console.log('DataTable', this.props.forwardedRef, this.ContainerRef);
         // console.log(prevProps.scrollLeft, this.props.scrollLeft, this._table, this._table.scrollLeft)
         if (
-            !Ref ||
-            !Ref.current ||
-            typeof this.props.scrollLeft === 'undefined' ||
-            Ref.current.scrollLeft === this.props.scrollLeft
+            !TrueRef ||
+            !TrueRef.current ||
+            typeof props.scrollLeft === 'undefined' ||
+            TrueRef.current.scrollLeft === props.scrollLeft
         )
             return;
-        Ref.current.scrollLeft = this.props.scrollLeft;
-    }
+        TrueRef.current.scrollLeft = props.scrollLeft;
+    }, [TrueRef, props.scrollLeft]);
 
-    // componentDidMount() {
-    //     console.log('____', this.props.forwardedRef, this.ContainerRef);
-    // }
+    return (
+        <C
+            className={props.className + (C !== 'table' ? ' flex' : '')}
+            onScroll={props.onScroll}
+            ref={TrueRef}
+        >
+            <Header tag={props.tag} headers={props.headers} />
+            <Body tag={props.tag} data={props.data} />
+        </C>
+    );
+});
 
-    renderHeader() {
-        if (!this.props.headers) return null;
-        const TagName = this.props.tag || 'thead';
-        return (
-            <TagName className="header">
-                {this.renderRow(this.props.headers)}
-            </TagName>
-        );
-    }
-
-    renderBody() {
-        if (!this.props.data) return null;
-        const TagName = this.props.tag || 'tbody';
-        return (
-            <TagName className="body">
-                {this.props.data.map((row, index) => {
-                    if (typeof row === 'object' && row.cells)
-                        return this.renderRow(
-                            row.cells,
-                            row.key || index,
-                            row.props
-                        );
-                    return this.renderRow(row, index);
-                })}
-            </TagName>
-        );
-    }
-
-    renderRow(data, index = 0, props = {}) {
-        const Component = this.props.tag || 'tr';
-        const { className, ...thisProps } = props;
-        return (
-            <Component
-                className={classNames(['row', className])}
-                key={index}
-                {...thisProps}
-            >
-                {data.map((children, index2) =>
-                    this.renderCell(children, index, index2)
-                )}
-            </Component>
-        );
-    }
-
-    renderCell(data, indexRow, indexCell) {
-        const Component = this.props.tag || 'td';
-
-        let props = {};
-
-        if (Array.isArray(data)) {
-            props = data[1];
-            props.children = data[0];
-        } else if (typeof data === 'object') {
-            props = data;
-        } else {
-            props.children = data;
-        }
-
-        if (props.className) props.className = 'cell ' + props.className;
-        else props.className = 'cell';
-
-        return <Component key={indexRow + '-' + indexCell} {...props} />;
-    }
-
-    render() {
-        // const {
-        //     tag,
-        //     className,
-        //     headers,
-        //     data,
-        //     scrollLeft,
-        //     children,
-        //     ...props
-        // } = this.props
-
-        const TagName = this.props.tag || 'table';
-
-        return (
-            <TagName
-                className={
-                    this.props.className + (TagName !== 'table' ? ' flex' : '')
-                }
-                onScroll={this.props.onScroll}
-                ref={this.props.forwardedRef || this.ContainerRef}
-            >
-                {this.renderHeader()}
-                {this.renderBody()}
-            </TagName>
-        );
-    }
-}
 export default DataTable;
+
+// ============================================================================
+
+const Header = ({ headers, tag }) => {
+    if (!headers) return null;
+    const C = tag || 'thead';
+    return (
+        <C className="header">
+            <Rows data={headers} />
+        </C>
+    );
+};
+
+const Body = ({ data, tag }) => {
+    if (!data) return null;
+    const C = tag || 'tbody';
+    return (
+        <C className="body">
+            {data.map((row, index) => {
+                if (typeof row === 'object' && row.cells)
+                    return (
+                        <Rows
+                            key={index}
+                            tag={tag}
+                            data={row.cells}
+                            index={row.key || index}
+                            {...row.props}
+                        />
+                    );
+                return <Rows tag={tag} data={row} index={index} />;
+                // return null;
+            })}
+        </C>
+    );
+};
+
+const Rows = ({ tag, className, index, data, ...props }) => {
+    const C = tag || 'tr';
+    return (
+        <C className={classNames(['row', className])} key={index} {...props}>
+            {data.map((children, index2) => (
+                <Cell
+                    key={index2}
+                    tag={tag}
+                    data={children}
+                    indexRow={index}
+                    indexCell={index2}
+                />
+            ))}
+        </C>
+    );
+};
+
+const Cell = ({ tag, data, indexRow, indexCell }) => {
+    const C = tag || 'td';
+
+    let props = {};
+
+    if (Array.isArray(data)) {
+        props = data[1];
+        props.children = data[0];
+    } else if (typeof data === 'object') {
+        props = data;
+    } else {
+        props.children = data;
+    }
+
+    if (props.className) props.className = 'cell ' + props.className;
+    else props.className = 'cell';
+
+    return <C key={indexRow + '-' + indexCell} {...props} />;
+};

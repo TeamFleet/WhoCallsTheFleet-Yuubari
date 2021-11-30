@@ -1,4 +1,8 @@
-import { Fragment, forwardRef } from 'react';
+import {
+    Fragment,
+    useEffect,
+    // forwardRef
+} from 'react';
 import { extend } from 'koot';
 import { get } from 'kckit';
 import equipmentTypes from 'kckit/src/types/equipments';
@@ -129,18 +133,19 @@ const EquipmentListTableBody = extend({
     }),
     styles: require('./table-body.less'),
 })(
-    observerItem(
-        forwardRef(({ className, ...props }, ref) => {
-            return (
-                <DataTable
-                    className={className}
-                    forwardedRef={ref}
-                    tag="div"
-                    data={getData(props)}
-                />
-            );
-        })
-    )
+    observerItem(({ className, forwardedRef, ...props }) => {
+        useEffect(() => {
+            console.log('EquipmentListTableBody didMount', forwardedRef);
+        }, [forwardedRef]);
+        return (
+            <DataTable
+                className={className}
+                forwardedRef={forwardedRef}
+                tag="div"
+                data={getData(props)}
+            />
+        );
+    })
 );
 
 export default EquipmentListTableBody;

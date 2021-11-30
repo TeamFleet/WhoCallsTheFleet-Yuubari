@@ -1,4 +1,4 @@
-import { Component, createRef, forwardRef } from 'react';
+import { Component, createRef, forwardRef, useEffect, useRef } from 'react';
 
 export const observer =
     (options = {}) =>
@@ -66,49 +66,88 @@ export const observer =
         };
 
 export const observerItem = (WrappedComponent) => {
-    class ObserverItem extends Component {
-        Ref = createRef();
+    const ObserverItem = ({
+        children,
+        observer,
+        ref,
+        forwardedRef,
+        ...props
+    }) => {
+        const CRef = useRef(null);
+        const TrueRef = ref ?? forwardedRef ?? CRef;
 
-        componentDidMount() {
-            if (!this._item && typeof document !== 'undefined') {
-                if (!this.Ref.current) {
-                    if (!observerItem.warnedNoForwardedRef) {
-                        console.warn(
-                            'Please use `forwardedRef` prop in @observerItem component'
-                        );
-                        observerItem.warnedNoForwardedRef = true;
-                    }
-                } else {
-                    this._item = this.Ref.current;
-                }
-                // console.log('observerItem this', this)
-                // const { findDOMNode } = require('react-dom');
-                // this._item = findDOMNode(this);
-            }
-            // console.log('componentDidMount', this.observer, this._item);
-            if (this.observer && this._item) this.observer.observe(this._item);
-        }
-        componentWillUnmount() {
-            if (this.observer && this._item)
-                this.observer.unobserve(this._item);
-        }
+        useEffect(() => {
+            const el =
+                observer && TrueRef && TrueRef.current instanceof Element
+                    ? TrueRef.current
+                    : undefined;
+            if (el) observer.observe(el);
+            return () => {
+                if (el) observer.unobserve(el);
+            };
+        }, [TrueRef, observer]);
 
-        render() {
-            const { children, observer, ...props } = this.props;
+        return (
+            <WrappedComponent
+                forwardedRef={TrueRef}
+                {...props}
+                // {...this.state}
+            >
+                {children}
+            </WrappedComponent>
+        );
+    };
+    // class ObserverItem extends Component {
+    //     Ref = createRef();
 
-            this.observer = observer;
+    //     componentDidMount() {
+    //         if (!this._item && typeof document !== 'undefined') {
+    //             if (!this.Ref.current) {
+    //                 if (!observerItem.warnedNoForwardedRef) {
+    //                     console.warn(
+    //                         'Please use `forwardedRef` prop in @observerItem component'
+    //                     );
+    //                     observerItem.warnedNoForwardedRef = true;
+    //                 }
+    //             } else {
+    //                 this._item = this.Ref.current;
+    //             }
+    //             // console.log('observerItem this', this)
+    //             // const { findDOMNode } = require('react-dom');
+    //             // this._item = findDOMNode(this);
+    //         }
+    //         console.log(
+    //             'ObserverItem didMount',
+    //             this.observer,
+    //             this.Ref,
+    //             this._item,
+    //             this.props,
+    //             '\n'
+    //         );
+    //         if (this.observer && this._item && this._item instanceof Element)
+    //             this.observer.observe(this._item);
+    //     }
+    //     componentWillUnmount() {
+    //         if (this.observer && this._item)
+    //             this.observer.unobserve(this._item);
+    //     }
 
-            return (
-                <WrappedComponent
-                    ref={this.Ref}
-                    {...props}
-                    // {...this.state}
-                >
-                    {children}
-                </WrappedComponent>
-            );
-        }
-    }
+    //     render() {
+    //         const { children, observer, ...props } = this.props;
+
+    //         this.observer = observer;
+
+    //         return (
+    //             <WrappedComponent
+    //                 forwardedRef={this.Ref}
+    //                 {...props}
+    //                 // {...this.state}
+    //             >
+    //                 {children}
+    //             </WrappedComponent>
+    //         );
+    //     }
+    // }
 
     return forwardRef((props, ref) => {
         if (ref) return <ObserverItem {...props} forwardedRef={ref} />;
