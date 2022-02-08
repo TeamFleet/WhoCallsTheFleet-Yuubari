@@ -72,7 +72,8 @@ const SpecialCapability = extend({
         );
     }
 
-    const { count_as_landing_craft } = thisShip.getCapability();
+    const { count_as_landing_craft, leader_attack_pt_prioritised } =
+        thisShip.getCapability();
 
     // 运输舰
     if (count_as_landing_craft) {
@@ -160,6 +161,7 @@ const SpecialCapability = extend({
     // 护卫航母
     // if (subType === 'EscortCarrier') {
     if (
+        thisShip.isType('cv') &&
         thisShip.canEquip(33) &&
         typeof thisShip.stat.asw === 'number' &&
         thisShip.stat.asw > 0
@@ -170,6 +172,26 @@ const SpecialCapability = extend({
                 title={__('ship_specials.cve.title')}
             >
                 <Bullet title={__('ship_specials.cve.description')} level={2} />
+            </ComponentContainer>
+        );
+    }
+
+    // 对PT领队
+    if (leader_attack_pt_prioritised) {
+        return (
+            <ComponentContainer
+                className={classNames([
+                    className,
+                    'leader-attack-pt-prioritised',
+                ])}
+                title={__('ship_specials.leader_attack_pt_prioritised.title')}
+            >
+                <Bullet
+                    title={__(
+                        'ship_specials.leader_attack_pt_prioritised.description'
+                    )}
+                    level={2}
+                />
             </ComponentContainer>
         );
     }

@@ -121,6 +121,10 @@
         "cve": {
             "title": "Escort Carrier (CVE)",
             "description": "Has high ASW stat. Can be deployed into Transportation Combined Fleet."
+        },
+        "leader_attack_pt_prioritised": {
+            "title": "Anti-PT Aura: DD/DE",
+            "description": "Will attack PT-Imps prioritised and has very high hit chance. The 2 ships (DD/DE ONLY) that next to this ship also have this effect."
         }
     },
 

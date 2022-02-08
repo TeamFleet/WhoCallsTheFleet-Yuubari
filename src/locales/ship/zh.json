@@ -127,6 +127,10 @@
         "cve": {
             "title": "护航航空母舰 (CVE)",
             "description": "拥有较高的对潜属性。可编入运输联合舰队。"
+        },
+        "leader_attack_pt_prioritised": {
+            "title": "对PT炮击光环：DD/DE",
+            "description": "该舰娘与僚舰（位置上与下的2位舰娘，限 DD/DE）在炮击战中优先攻击PT小鬼群，命中高。"
         }
     },
 
