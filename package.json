@@ -79,7 +79,7 @@
         "prettier-eslint": "^13.0.0",
         "progress": "^2.0.3",
         "raw-loader": "^4.0.2",
-        "simple-git": "^2.48.0",
+        "simple-git": "^3.3.0",
         "svg-url-loader": "^7.1.1",
         "url-loader": "^4.1.1",
         "util": "^0.12.4"
