@@ -50,6 +50,7 @@ async function run() {
         );
         procServer.stdout.on('data', (data) => {
             const r = /listening.+?port.+?([0-9]*m*)([0-9]+).*?/.exec(data);
+            // console.log(r.toString());
             if (Array.isArray(r)) {
                 waiting.succeed();
                 spinner(
@@ -72,7 +73,12 @@ async function run() {
             }
         });
         procServer.stderr.on('data', (data) => {
+            if (/^npm WARN/.test(data)) return;
+            if (/^npm$/.test(data)) return;
+            if (/ WARN /.test(data)) return;
+            if (/^WARN /.test(data)) return;
             waiting.fail();
+            console.log(data.toString());
             throw new Error(data);
         });
         procServer.on('close', async (code) => {
