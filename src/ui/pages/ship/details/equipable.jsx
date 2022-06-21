@@ -111,6 +111,9 @@ class ShipDetailsContentEquipable extends Component {
                 <ShipDetailsContentEquipableListContainer className="is-exslot">
                     {this.props.ship
                         .getExSlotOtherEquipments()
+                        .filter((equipmentID) =>
+                            this.props.ship.canEquipThis(equipmentID)
+                        )
                         .sort(
                             (a, b) =>
                                 db.equipments[a].order - db.equipments[b].order
@@ -151,10 +154,9 @@ class ShipDetailsContentEquipable extends Component {
                             textSmall={__(
                                 'ship_details.equipable_legend_yes_extra',
                                 {
-                                    type:
-                                        db.shipTypes[
-                                            this.props.ship.type_display
-                                        ]._name,
+                                    type: db.shipTypes[
+                                        this.props.ship.type_display
+                                    ]._name,
                                 }
                             )}
                         />
@@ -283,9 +285,8 @@ class ShipDetailsContentEquipableItem extends Component {
                             ])}
                         >
                             {__('other_ships_of_type', {
-                                type:
-                                    db.shipTypes[this.props.ship.type_display]
-                                        ._name,
+                                type: db.shipTypes[this.props.ship.type_display]
+                                    ._name,
                             })}
                         </LinkMini>
                     </span>
