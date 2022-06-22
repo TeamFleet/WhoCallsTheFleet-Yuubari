@@ -8133,10 +8133,10 @@ jsprim@^1.2.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
-kckit@^1.80.0:
-  version "1.80.0"
-  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.80.0.tgz#c7de16e280f5b8b6cea25ab0b950e63c67647e88"
-  integrity sha512-4yEyH/ZrSPp0boHn+/iMpbWIuak0Gba8tz0q6oDSvWgSV+48nvpZiXFFKQrmFmtpxfZP9Fb8zFpidN3Yn9dtQQ==
+kckit@^1.80.1:
+  version "1.80.1"
+  resolved "https://registry.yarnpkg.com/kckit/-/kckit-1.80.1.tgz#6b418f5f25d269e843840543e76d354e20457e11"
+  integrity sha512-/y5z8lr9ZUrMvCe50AKCHUAq1NUrBeMr8LCK7ltLe8tbDXe46XYPSJ8fZ+Ix5ebisE3W0XYVwQbYylxjxnBlUg==
   dependencies:
     camelcase "6.3.0"
 
