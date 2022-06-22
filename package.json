@@ -37,7 +37,7 @@
         "check-css-prop": "^1.0.1",
         "classnames": "^2.3.1",
         "hotkeys-js": "^3.9.4",
-        "kckit": "^1.79.0",
+        "kckit": "^1.80.0",
         "koot": "^0.15.0-rc.15",
         "localforage": "^1.10.0",
         "lz-string": "^1.4.4",
