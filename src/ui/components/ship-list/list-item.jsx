@@ -91,7 +91,7 @@ class ShipListItem extends Component {
                 navy
                 name
                 pic
-                antiInstallation
+                showSpecialEquip
                 // extraIllust={true}
                 onClick={this.onClick}
             >

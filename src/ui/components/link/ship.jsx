@@ -11,8 +11,10 @@ import Icon from '@ui/components/icon.jsx';
 import FlagNavy from '@ui/components/flag-navy.jsx';
 import Link from './_normal.jsx';
 
+import styles, { wrapper as classNameModule } from './ship.less';
+
 @extend({
-    styles: require('./ship.less'),
+    styles,
 })
 class LinkShip extends Component {
     constructor(props) {
@@ -80,7 +82,7 @@ class LinkShip extends Component {
             pic,
             name,
             navy,
-            antiInstallation = false,
+            showSpecialEquip = false,
             'min-level': minLv = false,
 
             onClick,
@@ -149,17 +151,18 @@ class LinkShip extends Component {
                         children={ship._minLv}
                     />
                 )}
-                {antiInstallation && this.ship.canEquip('LandingCraft') && (
-                    <span
-                        className="icon-anti-installation"
-                        type="landing-craft"
-                    />
-                )}
-                {antiInstallation && this.ship.canEquip('AmphibiousCraft') && (
-                    <span
-                        className="icon-anti-installation"
-                        type="amphibious-craft"
-                    />
+                {showSpecialEquip && (
+                    <span className={`${classNameModule}-icons-special-equip`}>
+                        {this.ship.canEquip('LandingCraft') && (
+                            <span data-type="landing-craft" />
+                        )}
+                        {this.ship.canEquip('AmphibiousCraft') && (
+                            <span data-type="amphibious-craft" />
+                        )}
+                        {this.ship.canEquip('SeaplaneFighter') && (
+                            <span data-type="seaplane-fighter" />
+                        )}
+                    </span>
                 )}
                 {children}
             </Link>

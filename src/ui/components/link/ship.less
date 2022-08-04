@@ -1,5 +1,9 @@
 @import '../../base.less';
 
+@sp-equip-scale: 0.7;
+@sp-equip-width: 48px;
+@sp-equip-height: 18px;
+
 .component {
     padding-left: 87px;
     border-radius: 5px;
@@ -33,29 +37,6 @@
         // filter:     drop-shadow(-1px 1px 1px fade(#000, 75%));
     }
 
-    .icon-anti-installation {
-        @width: 48px;
-        @height: 15px;
-        @scale: 0.7;
-        position: absolute;
-        left: 55px;
-        bottom: 2px;
-        width: floor(@width * @scale);
-        height: floor(@height * @scale);
-        background: url(~'~Assets/ship-anti-installation.png') no-repeat 50%
-            (@height * 10);
-        background-size: 100% auto;
-        &[type='landing-craft'] {
-            background-position: 50% (0 - (@height * 1) * @scale);
-        }
-        &[type='amphibious-craft'] {
-            background-position: 50% (0 - (@height * 0) * @scale);
-        }
-        & + .icon-anti-installation {
-            bottom: (2px + 1px + floor(@height * @scale));
-        }
-    }
-
     &:focus:not(:active) {
         // outline: 1px solid @color-border;
         // filter: drop-shadow(0 0 2px #000);
@@ -63,6 +44,13 @@
         // box-shadow: 0 0 10px 0 rgba(0, 0, 0, .00001), inset 0 0 2px rgba(255,255,255, .5);
         box-shadow: inset 0 0 4px 1px fade(@color-accent, 75%);
         transition-duration: 50ms;
+    }
+
+    .flag-navy ~ .component-icons-special-equip {
+        & > span + span + span {
+            bottom: 0;
+            right: (2px + 1px + floor(@sp-equip-width * @sp-equip-scale));
+        }
     }
 }
 
@@ -156,5 +144,42 @@
         right: 0;
         height: (@lv-height - 2);
         background: @color-light;
+    }
+}
+
+.component-icons-special-equip {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 88px;
+    display: block;
+    & > span {
+        @sprite-height: 25px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: floor(@sp-equip-width * @sp-equip-scale);
+        height: floor(@sp-equip-height * @sp-equip-scale);
+        background: url(~'~Assets/ship-special-equip.png') no-repeat 50% 0%;
+        background-size: 100% auto;
+        &[data-type='landing-craft'] {
+            background-position: 50% (0 - @sprite-height * 2 + 12.5px);
+        }
+        &[data-type='amphibious-craft'] {
+            background-position: 50% 50%;
+        }
+        &[data-type='seaplane-fighter'] {
+            background-position: 50% -3px;
+            transform: translateX(3px);
+            &:first-child {
+                margin-bottom: 2px;
+            }
+        }
+        & + span {
+            bottom: (floor(@sp-equip-height * @sp-equip-scale));
+            & + span {
+                bottom: ((floor(@sp-equip-height * @sp-equip-scale)) * 2);
+            }
+        }
     }
 }
