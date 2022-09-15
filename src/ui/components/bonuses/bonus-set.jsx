@@ -40,7 +40,10 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
         condition = <ConditionShip condition={bonus.ship} />;
     }
 
-    let isOneOf = Array.isArray(bonus.equipments?.hasOneOf);
+    let isOneOf =
+        Array.isArray(bonus.equipments?.hasOneOf) ||
+        (Array.isArray(bonus.equipments) &&
+            bonus.equipments.some(({ isOneOf }) => Array.isArray(isOneOf)));
 
     return (
         <div className={classNames([className, 'is-set'])}>
@@ -181,12 +184,25 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                     }
                     return null;
                 })}
-                {isOneOf && (
-                    <OneOfList
-                        list={bonus.equipments.hasOneOf.map(({ isID }) => isID)}
-                        thisEquipment={thisEquipment}
-                    />
-                )}
+                {isOneOf &&
+                    (Array.isArray(bonus.equipments) ? (
+                        bonus.equipments
+                            .filter(({ isOneOf }) => Array.isArray(isOneOf))
+                            .map(({ isOneOf }, index) => (
+                                <OneOfList
+                                    list={isOneOf.map(({ isID }) => isID)}
+                                    thisEquipment={thisEquipment}
+                                    key={index}
+                                />
+                            ))
+                    ) : (
+                        <OneOfList
+                            list={bonus.equipments.hasOneOf.map(
+                                ({ isID }) => isID
+                            )}
+                            thisEquipment={thisEquipment}
+                        />
+                    ))}
             </div>
             <Stats
                 bonus={bonus}
