@@ -3,7 +3,7 @@
         {
             "name": "yuubari-server",
             "script": "start.js",
-            "max_memory_restart": "500M",
+            "max_memory_restart": "250M",
             "out_file": "logs/server.log",
             "error_file": "logs/server-error.log"
         }
