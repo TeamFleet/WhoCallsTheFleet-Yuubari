@@ -25,6 +25,8 @@ const SpecialCapability = extend({
     const subType = getShipSubType(ship);
     const className = `${_className} ${dataClassName}-ship-special`;
 
+    const components = [];
+
     // 特殊攻击
     let specialAttack;
     kckit.data.specialAttack.some((sa) => {
@@ -34,6 +36,7 @@ const SpecialCapability = extend({
         }
         return false;
     });
+
     if (specialAttack) {
         const {
             requirement = [],
@@ -52,7 +55,7 @@ const SpecialCapability = extend({
             effect
                 .map((line) => (/^[ -]+/.test(line) ? line : `\n${line}`))
                 .join('\n');
-        return (
+        components.push(
             <ComponentContainer
                 className={classNames([className, 'special-attack'])}
                 title={title}
@@ -77,7 +80,7 @@ const SpecialCapability = extend({
 
     // 运输舰
     if (count_as_landing_craft) {
-        return (
+        components.push(
             <ComponentContainer
                 className={classNames([className, 'count-as-landing-craft'])}
                 title={__('ship_specials.transportation.title')}
@@ -114,7 +117,7 @@ const SpecialCapability = extend({
             'ship_specials.night_operation_carrier.description'
         ).split('[NightOperationAviationPersonnel]');
         const equipment = db.equipments[258]; // 夜間作戦航空要員
-        return (
+        components.push(
             <ComponentContainer
                 className={classNames([className, 'night-operation-carrier'])}
                 title={__('ship_specials.night_operation_carrier.title')}
@@ -140,7 +143,7 @@ const SpecialCapability = extend({
 
     // 攻击航母
     if (subType === 'AssultCarrier') {
-        return (
+        components.push(
             <ComponentContainer
                 className={classNames([
                     className,
@@ -162,11 +165,11 @@ const SpecialCapability = extend({
     // if (subType === 'EscortCarrier') {
     if (
         thisShip.isType('cv') &&
-        thisShip.canEquip(33) &&
+        // thisShip.canEquip(33) &&
         typeof thisShip.stat.asw === 'number' &&
         thisShip.stat.asw > 0
     ) {
-        return (
+        components.push(
             <ComponentContainer
                 className={classNames([className, 'cve'])}
                 title={__('ship_specials.cve.title')}
@@ -178,7 +181,7 @@ const SpecialCapability = extend({
 
     // 对PT领队
     if (leader_attack_pt_prioritised) {
-        return (
+        components.push(
             <ComponentContainer
                 className={classNames([
                     className,
@@ -197,7 +200,7 @@ const SpecialCapability = extend({
     }
 
     // 无内容
-    return null;
+    return <>{components}</>;
 });
 
 export default SpecialCapability;

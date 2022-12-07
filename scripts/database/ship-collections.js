@@ -9,9 +9,9 @@ const camelCase = require('camelcase');
 const getShipSubType = require('../../src/api/get-ship-sub-type');
 
 const subTypes = {
-    en_us: require('../../src/locales/ship/en.json').ship_sub_types,
-    ja_jp: require('../../src/locales/ship/ja.json').ship_sub_types,
-    zh_cn: require('../../src/locales/ship/zh.json').ship_sub_types,
+    en_us: require('../../src/locales/ship/en.json').ship_sub_types_in_list,
+    ja_jp: require('../../src/locales/ship/ja.json').ship_sub_types_in_list,
+    zh_cn: require('../../src/locales/ship/zh.json').ship_sub_types_in_list,
 };
 
 const db = {};
@@ -421,6 +421,7 @@ module.exports = async (dbpath, topath) => {
     await addSubType('航空母舰', 10, 'ModernizedCarrier');
     await addSubType('航空母舰', 10, 'NightCarrier');
     await addSubType('航空母舰', 9, 'NightCarrier', 'LightNightCarrier');
+    await addSubType('航空母舰', 9, 'LightBattleCarrier');
     await addSubType('航空母舰', 9, 'SpecialRevisedCarrier');
     await addSubType('航空母舰', 9, 'EscortCarrier');
     await addSubType('航空母舰', 9, 'AssultCarrier');

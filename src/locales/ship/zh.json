@@ -3,9 +3,21 @@
         "NightCarrier": "夜间作战航空母舰",
         "LightNightCarrier": "夜间作战轻型航母",
         "ModernizedCarrier": "近代化航空母舰",
-        "SpecialRevisedCarrier": "改装特种/护航航母",
+        "SpecialRevisedCarrier": "改装特种护航航母",
         "EscortCarrier": "护航航母",
         "AssultCarrier": "攻击型轻航母",
+        "LightBattleCarrier": "战力投射母舰",
+        "SpecialRevisedAviationCruiser": "特殊改装航空巡洋舰",
+        "HeavyRevisedLightCruiser": "重改装轻巡洋舰"
+    },
+    "ship_sub_types_in_list": {
+        "NightCarrier": "正规航母 / 夜间作战",
+        "ModernizedCarrier": "正规航母 / 近代化",
+        "LightNightCarrier": "轻型航母 / 护航航母 / 夜间作战",
+        "SpecialRevisedCarrier": "轻型航母 / 护航航母 / 改装特种",
+        "EscortCarrier": "轻型航母 / 护航航母",
+        "AssultCarrier": "轻型航母 / 攻击型",
+        "LightBattleCarrier": "轻型航母 / 护航航母 / 战力投射",
         "SpecialRevisedAviationCruiser": "特殊改装航空巡洋舰",
         "HeavyRevisedLightCruiser": "重改装轻巡洋舰"
     },

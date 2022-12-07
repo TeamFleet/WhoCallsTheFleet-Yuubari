@@ -6,6 +6,18 @@
         "SpecialRevisedCarrier": "Special Revised Escort Carrier",
         "EscortCarrier": "Escort Carrier",
         "AssultCarrier": "Assult Light Aircraft Carrier",
+        "LightBattleCarrier": "戦力投射母艦",
+        "SpecialRevisedAviationCruiser": "Special-Revised Aviation Cruiser",
+        "HeavyRevisedLightCruiser": "Mass-Revised Light Cruiser"
+    },
+    "ship_sub_types_in_list": {
+        "NightCarrier": "Standard Aircraft Carrier / Night Operation",
+        "ModernizedCarrier": "Standard Aircraft Carrier / Modernized",
+        "LightNightCarrier": "Light Aircraft Carrier / Escort Carrier / Night Operation",
+        "SpecialRevisedCarrier": "Light Aircraft Carrier / Escort Carrier / Special Revised",
+        "EscortCarrier": "Light Aircraft Carrier / Escort Carrier",
+        "AssultCarrier": "Light Aircraft Carrier / Assult",
+        "LightBattleCarrier": "Light Aircraft Carrier / Escort Carrier / 戦力投射母艦",
         "SpecialRevisedAviationCruiser": "Special-Revised Aviation Cruiser",
         "HeavyRevisedLightCruiser": "Mass-Revised Light Cruiser"
     },
