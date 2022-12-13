@@ -1,46 +1,84 @@
-@import "../../_.less";
+@import '../../_.less';
 
-.component{
-    margin-top:     30px;
-    margin-right:   20px;
-    .upgradability{
-        margin:     0;
-        display:    flex;
-        flex-flow:  row nowrap;
-        .des{
-            display:    inline-block;
-            display:    flex;
-            flex-flow:  row nowrap;
-            margin:     0;
-            font-size:  inherit;
+.component {
+    margin-top: 30px;
+    margin-right: 20px;
+    position: relative;
+    .upgradability {
+        margin: 0;
+        display: flex;
+        flex-flow: row nowrap;
+        position: relative;
+        &::before,
+        & > .icon {
+            opacity: 0;
         }
-        .subtitle{
-            flex:       0;
-            white-space:nowrap;
+        .des {
+            display: inline-block;
+            display: flex;
+            flex-flow: row nowrap;
+            margin: 0;
+            font-size: inherit;
         }
-        .equipment{
-            @line-height:   16px;
-            @icon-size:     34px;
-            padding-left:   (@line-height + 6);
-            margin-left:    18px;
-            flex:           1;
-            .icon{
-                &:empty, &:before{
-                    width:      @icon-size;
-                    height:     @icon-size;
-                    top:        ((@line-height - @icon-size) / 2);
-                    left:       ((@line-height - @icon-size) / 2);
+        .subtitle {
+            flex: 0;
+            white-space: nowrap;
+        }
+        .equipment {
+            @line-height: 16px;
+            @icon-size: 34px;
+            padding-left: (@line-height + 6);
+            margin-left: 18px;
+            flex: 1;
+            .icon {
+                &:empty,
+                &:before {
+                    width: @icon-size;
+                    height: @icon-size;
+                    top: ((@line-height - @icon-size) / 2);
+                    left: ((@line-height - @icon-size) / 2);
                 }
             }
         }
         // .default-star{
         //     margin-left:   .25em;
         // }
+        .btn-watch {
+            flex: none;
+            // background: fade(#000, 50%);
+            background: none;
+            border: 0;
+            outline: 0;
+            color: @color-fade;
+            position: absolute;
+            z-index: 10;
+            top: -6px;
+            left: -10px;
+            width: 36px;
+            height: 36px;
+            transition: color @base-transition-duration
+                @base-transition-timing-function;
+            .sku-webapp({
+            cursor: pointer;
+        });
+            .styles-hover() {
+                color: @color-fade-2;
+            }
+            .styles-active() {
+                color: @color-fade;
+            }
+            .is-hover(.styles-hover();
+            .styles-active());
+
+            &.is-watching {
+                color: @color-accent-2;
+            }
+        }
     }
     .dayships,
-    .resources{
-        border-left:    25px solid transparent;
-        border-top:     12px solid transparent;
+    .resources {
+        border-left: 25px solid transparent;
+        border-top: 12px solid transparent;
         .screen-phone({
             // border-left-width:  10px;
             border-left-width:  0;
