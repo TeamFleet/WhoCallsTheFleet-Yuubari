@@ -4,7 +4,7 @@
 
 ```sh
 # 1. 安装依赖
-> yarn
+> npm i
 # 2. 选择环境
-> yarn start
+> npm start
 ```

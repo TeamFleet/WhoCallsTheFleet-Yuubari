@@ -24,7 +24,7 @@ const doCricital = () => {
     const iOSversion = () => {
         if (/iP(hone|od|ad)/.test(navigator.platform)) {
             // supports iOS 2.0 and later: <http://bit.ly/TJjs1V>
-            var v = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
+            const v = navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/);
             return [
                 parseInt(v[1], 10),
                 parseInt(v[2], 10),
@@ -118,7 +118,7 @@ const doCricital = () => {
 
         // 检查 WebP 支持
         const canUseWebP = () => {
-            var elem = document.createElement('canvas');
+            const elem = document.createElement('canvas');
             if (elem.getContext && elem.getContext('2d')) {
                 // was able or not to get WebP representation
                 return (
