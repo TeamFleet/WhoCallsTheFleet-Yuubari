@@ -86,15 +86,32 @@ async function run() {
             if (!deDeploy) return;
 
             const { dist } = require('../koot.config');
-            try {
-                const git = require('simple-git')(dist);
-                await git.add('./*');
-                await git.commit(`New build ${new Date().toISOString()}`);
-                await git.push('origin', 'master');
-            } catch (err) {
+
+            await spawn(
+                [
+                    'gid add .',
+                    `git commit -m "New build ${new Date().toISOString()}"`,
+                    'git push original master',
+                ].join(' && '),
+                {
+                    stdio: 'ignore',
+                    cwd: dist,
+                }
+            ).catch((err) => {
                 spinnerDeploying.fail();
+                console.error(err);
                 throw err;
-            }
+            });
+            // try {
+            //     const git = require('simple-git')(dist);
+            //     await git.add('*');
+            //     await git.commit(`New build ${new Date().toISOString()}`);
+            //     await git.push('origin', 'master');
+            // } catch (err) {
+            //     spinnerDeploying.fail();
+            //     console.error(err);
+            //     throw err;
+            // }
             spinnerDeploying.succeed();
 
             // notify
