@@ -89,9 +89,9 @@ async function run() {
 
             await spawn(
                 [
-                    'gid add .',
+                    'git add .',
                     `git commit -m "New build ${new Date().toISOString()}"`,
-                    'git push original master',
+                    'git push origin master',
                 ].join(' && '),
                 {
                     stdio: 'ignore',
