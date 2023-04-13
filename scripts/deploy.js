@@ -87,7 +87,7 @@ async function run() {
 
             const { dist } = require('../koot.config');
             try {
-                const git = require('simple-git/promise')(dist);
+                const git = require('simple-git')(dist);
                 await git.add('./*');
                 await git.commit(`New build ${new Date().toISOString()}`);
                 await git.push('origin', 'master');
