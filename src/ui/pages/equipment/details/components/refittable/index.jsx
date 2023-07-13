@@ -62,10 +62,7 @@ const EquipmentDetailsComponentRefittable = extend({
                 />
             ))}
 
-            <ExSlot
-                isEquipableExSlot={equipment.isEquipableExSlot()}
-                listExSlotShips={equipment.exslot_on_ship}
-            />
+            <ExSlot equipment={equipment} />
         </ComponentContainer>
     );
 });
@@ -191,8 +188,19 @@ const ShipTypeTag = extend({
 
 const ExSlot = extend({
     styles: require('./styles-shipcollection.less'),
-})(({ className, isEquipableExSlot, listExSlotShips, ...props }) => {
-    const list = sortShips(listExSlotShips || []);
+})(({ className, equipment, ...props }) => {
+    const { shipTypes, shipClasses } = db;
+
+    const isEquipableExSlot = equipment.isEquipableExSlot();
+
+    const listExSlotShips = sortShips(equipment.exslot_on_ship || []);
+    const listExSlotShipClasses = equipment.exslot_on_shipclass || [];
+    const listExSlotShipTypes = equipment.exslot_on_shiptype || [];
+
+    const hasExtra =
+        listExSlotShips.length > 0 ||
+        listExSlotShipClasses.length > 0 ||
+        listExSlotShipTypes.length > 0;
 
     return (
         <ComponentContainer
@@ -201,7 +209,7 @@ const ExSlot = extend({
             titleType="line-append"
             {...props}
         >
-            {!!isEquipableExSlot && (
+            {(!!isEquipableExSlot || !hasExtra) && (
                 <Bullet
                     className="bullet"
                     title={__(`equipment_details.can_equip_in_ex_slot`)}
@@ -209,7 +217,7 @@ const ExSlot = extend({
                 />
             )}
 
-            {!isEquipableExSlot && !!list.length && (
+            {hasExtra && (
                 <Bullet
                     className="bullet"
                     title={__(
@@ -219,7 +227,7 @@ const ExSlot = extend({
                 />
             )}
 
-            {!isEquipableExSlot && !list.length && (
+            {!isEquipableExSlot && !hasExtra && (
                 <Bullet
                     className="bullet"
                     title={__(`equipment_details.cannot_equip_in_ex_slot`)}
@@ -227,12 +235,43 @@ const ExSlot = extend({
                 />
             )}
 
-            {!!list.length && (
-                <div className="list ships">
-                    {list.map((shipId) => (
-                        <LinkMini className="item" ship={shipId} key={shipId} />
-                    ))}
-                </div>
+            {hasExtra && (
+                <>
+                    {listExSlotShipTypes.length > 0 && (
+                        <div className="list text">
+                            {listExSlotShipTypes.map((tid) => (
+                                <span className="item" key={tid}>
+                                    {shipTypes[tid]._name}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                    {listExSlotShipClasses.length > 0 && (
+                        <div className="list text">
+                            {listExSlotShipClasses.map((cid) => (
+                                <span className="item" key={cid}>
+                                    {__('shiptypeclass', {
+                                        class: shipClasses[cid]._name,
+                                        type: shipTypes[
+                                            shipClasses[cid].ship_type_id
+                                        ]._name,
+                                    })}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                    {listExSlotShips.length > 0 && (
+                        <div className="list ships">
+                            {listExSlotShips.map((shipId) => (
+                                <LinkMini
+                                    className="item"
+                                    ship={shipId}
+                                    key={shipId}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </>
             )}
         </ComponentContainer>
     );

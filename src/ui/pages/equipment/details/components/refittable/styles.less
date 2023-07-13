@@ -1,5 +1,31 @@
-@import "./_.less";
+@import './_.less';
 
-.component{
-    overflow:   hidden;
+.component {
+    overflow: hidden;
+
+    .exslot .list {
+        position: relative;
+        padding-left: 26px;
+        color: @color-main;
+        dd {
+            padding: 0;
+            margin: 0;
+        }
+        &.text {
+            .item {
+                margin-right: 2em;
+            }
+        }
+        .item {
+            margin-bottom: 10px;
+        }
+        &::before {
+            content: '+';
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 26px;
+            color: @color-positive;
+        }
+    }
 }

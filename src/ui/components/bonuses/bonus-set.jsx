@@ -13,6 +13,7 @@ import bonusIsSet from './bonus-is-set';
 import Stats from './stats';
 import ConditionShip from './condition-ship';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default ({ className, bonus, thisShip, thisEquipment }) => {
     if (!bonusIsSet(bonus)) return null;
 
@@ -97,6 +98,7 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                             isOneOf = false;
                         }
                         switch (type) {
+                            case 'SuperSurfaceRadar':
                             case 'SurfaceRadar':
                                 return (
                                     <Item
@@ -106,7 +108,10 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                             isCurrent: checkEquipment(
                                                 thisEquipment,
                                                 {
-                                                    isSurfaceRadar: true,
+                                                    [type ===
+                                                    'SuperSurfaceRadar'
+                                                        ? 'isSuperSurfaceRadar'
+                                                        : 'isSurfaceRadar']: true,
                                                 }
                                             ),
                                         })}
@@ -118,7 +123,11 @@ export default ({ className, bonus, thisShip, thisEquipment }) => {
                                         thisEquipment={thisEquipment}
                                     >
                                         <span className="equipment-type-explain">
-                                            {__('stat.los')} ≥ 5
+                                            {type === 'SuperSurfaceRadar' ? (
+                                                <>{__('stat.hit')} ≥ 8</>
+                                            ) : (
+                                                <>{__('stat.los')} ≥ 5</>
+                                            )}
                                         </span>
                                     </Item>
                                 );
