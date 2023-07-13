@@ -209,15 +209,13 @@ const ExSlot = extend({
             titleType="line-append"
             {...props}
         >
-            {(!!isEquipableExSlot || !hasExtra) && (
+            {!!isEquipableExSlot ? (
                 <Bullet
                     className="bullet"
                     title={__(`equipment_details.can_equip_in_ex_slot`)}
                     level={true}
                 />
-            )}
-
-            {hasExtra && (
+            ) : hasExtra ? (
                 <Bullet
                     className="bullet"
                     title={__(
@@ -225,9 +223,7 @@ const ExSlot = extend({
                     )}
                     level={1}
                 />
-            )}
-
-            {!isEquipableExSlot && !hasExtra && (
+            ) : (
                 <Bullet
                     className="bullet"
                     title={__(`equipment_details.cannot_equip_in_ex_slot`)}
