@@ -39,9 +39,7 @@ const ListShips = extend({
             const listSorted = hasItem
                 ? sort
                     ? sortShips(list.map((shipId) => getShip(shipId)))
-                    : list.map((shipId) =>
-                          getShip(shipId)
-                      ) /*.sort((a, b) => (
+                    : list.map((shipId) => getShip(shipId)) /*.sort((a, b) => (
                     a.order - b.order
                 ))*/
                 : false;
@@ -56,34 +54,36 @@ const ListShips = extend({
                     gutter={gutter}
                 >
                     {hasItem &&
-                        listSorted.map((ship) =>
-                            size === 'mini' ? (
-                                <LinkMini
-                                    ship={ship}
-                                    key={ship.id}
-                                    className={classNames([
-                                        classNameItem,
-                                        'item',
-                                    ])}
-                                    {...props}
-                                />
-                            ) : (
-                                <LinkShip
-                                    ship={ship}
-                                    key={ship.id}
-                                    className={classNames([
-                                        classNameItem,
-                                        'item',
-                                    ])}
-                                    type={
-                                        typeof type === 'undefined'
-                                            ? true
-                                            : type
-                                    }
-                                    {...props}
-                                />
-                            )
-                        )}
+                        listSorted
+                            .filter((s) => !!s)
+                            .map((ship, index) =>
+                                size === 'mini' ? (
+                                    <LinkMini
+                                        ship={ship}
+                                        key={ship?.id ?? `__${index}__`}
+                                        className={classNames([
+                                            classNameItem,
+                                            'item',
+                                        ])}
+                                        {...props}
+                                    />
+                                ) : (
+                                    <LinkShip
+                                        ship={ship}
+                                        key={ship.id}
+                                        className={classNames([
+                                            classNameItem,
+                                            'item',
+                                        ])}
+                                        type={
+                                            typeof type === 'undefined'
+                                                ? true
+                                                : type
+                                        }
+                                        {...props}
+                                    />
+                                )
+                            )}
                     {!hasItem && !!empty && (
                         <span className="list-empty">{empty}</span>
                     )}
