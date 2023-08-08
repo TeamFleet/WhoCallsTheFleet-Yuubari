@@ -31,8 +31,18 @@ export default memo(({ bonus, isOneOf = false }) => {
                 </div>
             ));
     } else if (typeof bonus.bonusImprove === 'object') {
-        if (!isSet) infoText = __('bonuses.based_on_star');
+        if (!isSet)
+            infoText = !!bonus.bonusImprove.maxCount ? (
+                <>
+                    {__('bonuses.based_on_star_maxcount_before')}
+                    <strong>{bonus.bonusImprove.maxCount}</strong>
+                    {__('bonuses.based_on_star_maxcount_after')}
+                </>
+            ) : (
+                __('bonuses.based_on_star')
+            );
         stats = Object.keys(bonus.bonusImprove)
+            .filter((star) => !isNaN(star))
             .sort((a, b) => parseInt(a) - parseInt(b))
             .map((star) => (
                 <div className="stats-line stats-has-extra" key={star}>
