@@ -88,25 +88,38 @@ export default extend({
                     // titleType="line-append"
                     >
                         {single.length ? (
-                            <div
-                                className={classNames({
-                                    [classNameList]: true,
-                                    'mod-gird': single.length > 1,
-                                    'is-single': true,
-                                    'is-ship': !!ship,
-                                    'is-equipment': !!equipment,
-                                })}
-                            >
-                                {single.map((bonus, index) => (
-                                    <BonusSingle
-                                        key={index}
-                                        className={classNameItem}
-                                        bonus={bonus}
-                                        thisShip={ship}
-                                        thisEquipment={equipment}
-                                    />
-                                ))}
-                            </div>
+                            <>
+                                <div className="note-bonus-condition">
+                                    <div className="wrapper">
+                                        <p className="note">
+                                            <Icon
+                                                icon="warning2"
+                                                className="icon"
+                                            />
+                                            {__('bonuses.note_bonus_condition')}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    className={classNames({
+                                        [classNameList]: true,
+                                        'mod-gird': single.length > 1,
+                                        'is-single': true,
+                                        'is-ship': !!ship,
+                                        'is-equipment': !!equipment,
+                                    })}
+                                >
+                                    {single.map((bonus, index) => (
+                                        <BonusSingle
+                                            key={index}
+                                            className={classNameItem}
+                                            bonus={bonus}
+                                            thisShip={ship}
+                                            thisEquipment={equipment}
+                                        />
+                                    ))}
+                                </div>
+                            </>
                         ) : (
                             <span className="disabled">{__('none')}</span>
                         )}

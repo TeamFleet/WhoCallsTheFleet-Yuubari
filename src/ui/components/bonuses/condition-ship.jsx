@@ -123,6 +123,18 @@ export default memo(({ className, condition = {} }) => {
         );
     }
 
+    if (!components.length) {
+        components.push(
+            <div
+                key="conditionType"
+                className={classNames(['at', 'mod-need-sep'])}
+            >
+                {SymbolAt}
+                {__('any_ship_can_equip_this')}
+            </div>
+        );
+    }
+
     return (
         <div
             key="conditions"
