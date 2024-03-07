@@ -40,6 +40,21 @@
         // }
     }
 
+    &.is-exslot {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(@item-width, 1fr));
+        .item.equipment {
+            line-height: 22px;
+            padding: 7px 0 7px 40px;
+            & > .icon {
+                width: 36px;
+                height: 36px;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+
     // @supports (column-span: all) {
     //     display:        block;
     //     column-width:   (@item-width - 20);
