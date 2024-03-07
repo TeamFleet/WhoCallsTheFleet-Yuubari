@@ -212,14 +212,30 @@ const ExSlot = extend({
             {!!isEquipableExSlot ? (
                 <Bullet
                     className="bullet"
-                    title={__(`equipment_details.can_equip_in_ex_slot`)}
+                    title={
+                        equipment.exslot_min_star_level
+                            ? __(
+                                  `equipment_details.can_equip_in_ex_slot_min_star_level`,
+                                  {
+                                      star: equipment.exslot_min_star_level,
+                                  }
+                              )
+                            : __(`equipment_details.can_equip_in_ex_slot`)
+                    }
                     level={true}
                 />
             ) : hasExtra ? (
                 <Bullet
                     className="bullet"
                     title={__(
-                        `equipment_details.cannot_equip_in_ex_slot_but_ex_ships`
+                        equipment.exslot_min_star_level
+                            ? __(
+                                  `equipment_details.cannot_equip_in_ex_slot_but_ex_ships_min_star_level`,
+                                  {
+                                      star: equipment.exslot_min_star_level,
+                                  }
+                              )
+                            : `equipment_details.cannot_equip_in_ex_slot_but_ex_ships`
                     )}
                     level={1}
                 />

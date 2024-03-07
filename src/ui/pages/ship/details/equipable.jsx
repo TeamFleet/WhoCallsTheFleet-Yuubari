@@ -4,11 +4,12 @@ import { extend } from 'koot';
 
 import ComponentContainer from '@ui/containers/infos-component';
 import IconEquipment from '@ui/components/icon-equipment';
-import Link from '@ui/components/link';
+// import Link from '@ui/components/link';
 import LinkMini from '@ui/components/link-mini';
+import LinkEquipment from '@ui/components/link/equipment';
 
 // import getPic from '@utils/get-pic'
-import getLink from '@utils/get-link';
+// import getLink from '@utils/get-link';
 import db from '@database';
 
 // const equipmentTypeIdExclude = [
@@ -186,7 +187,9 @@ class ShipDetailsContentEquipableListContainer extends Component {
         return (
             <div {...props}>
                 {children}
-                {this.insertPlaceHolders()}
+                {this.props.className.split(' ').includes('is-exslot')
+                    ? null
+                    : this.insertPlaceHolders()}
             </div>
         );
     }
@@ -199,21 +202,26 @@ class ShipDetailsContentEquipableItem extends Component {
     render() {
         if (this.props.equipment)
             return (
-                <Link
-                    className={this.props.className + ' equipment'}
-                    to={getLink('equipment', this.props.equipment.id)}
-                >
-                    <IconEquipment
-                        className="equipment-wrapper"
-                        icon={this.props.equipment._icon}
-                    >
-                        <span className="name">
-                            <span className="name-wrapper">
-                                {this.props.equipment._name}
-                            </span>
-                        </span>
-                    </IconEquipment>
-                </Link>
+                <LinkEquipment
+                    className={classNames([this.props.className, 'equipment'])}
+                    equipment={this.props.equipment}
+                    star={this.props.equipment.exslot_min_star_level}
+                />
+                // <Link
+                //     className={this.props.className + ' equipment'}
+                //     to={getLink('equipment', this.props.equipment.id)}
+                // >
+                //     <IconEquipment
+                //         className="equipment-wrapper"
+                //         icon={this.props.equipment._icon}
+                //     >
+                //         <span className="name">
+                //             <span className="name-wrapper">
+                //                 {this.props.equipment._name}
+                //             </span>
+                //         </span>
+                //     </IconEquipment>
+                // </Link>
             );
 
         // const isNotAV = this.props.ship && !this.props.ship.isType('AV')

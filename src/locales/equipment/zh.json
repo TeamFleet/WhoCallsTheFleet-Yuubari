@@ -47,8 +47,10 @@
 
         "refittable_legend_no": "不可装备",
         "refittable_legend_yes": "可装备",
-        "can_equip_in_ex_slot": "可装备于补强增设栏位",
-        "cannot_equip_in_ex_slot_but_ex_ships": "不可装备于大多数舰娘的补强增设栏位，但以下舰娘例外……",
+        "can_equip_in_ex_slot": "可装备于任意舰娘的补强增设栏位",
+        "can_equip_in_ex_slot_min_star_level": "改修达到 ⭐+${star} 后，可装备于任意舰娘的补强增设栏位",
+        "cannot_equip_in_ex_slot_but_ex_ships": "可装备于以下舰娘的补强增设栏位……",
+        "cannot_equip_in_ex_slot_but_ex_ships_min_star_level": "改修达到 ⭐+${star} 后，可装备于以下舰娘的补强增设栏位……",
         "cannot_equip_in_ex_slot": "不可装备于补强增设栏位"
     }
 }

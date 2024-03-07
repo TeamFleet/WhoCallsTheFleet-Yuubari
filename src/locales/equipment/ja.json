@@ -47,8 +47,10 @@
 
         "refittable_legend_no": "Not refittable",
         "refittable_legend_yes": "Refittable",
-        "can_equip_in_ex_slot": "Can be equipped in ex-slot",
-        "cannot_equip_in_ex_slot_but_ex_ships": "Cannot be equipped in ex-slot for most ships but following ships...",
+        "can_equip_in_ex_slot": "Can be equipped in ex-slot for ANY ships",
+        "can_equip_in_ex_slot_min_star_level": "Can be equipped in ex-slot for ANY ships with at least ⭐+${star} improvement",
+        "cannot_equip_in_ex_slot_but_ex_ships": "Can be equipped in ex-slot ONLY for the following ships...",
+        "cannot_equip_in_ex_slot_but_ex_ships_min_star_level": "Can be equipped in ex-slot ONLY for the following ships with at least ⭐+${star} improvement...",
         "cannot_equip_in_ex_slot": "Cannot be equipped in ex-slot"
     }
 }
